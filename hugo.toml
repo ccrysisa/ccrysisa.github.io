@@ -1,4 +1,4 @@
-title = "我的 Hugo FixIt 网站"
+title = "Xshine 的 FixIt 博客"
 baseURL = "https://loonggshine.github.io/"
 # 设置默认的语言 ["en", "zh-cn", "fr", "pl", ...]
 defaultContentLanguage = "zh-cn"
