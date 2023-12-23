@@ -60,6 +60,23 @@ $$
 \end{aligned}
 $$
 
+## 代码块
+
+```rs
+let i: i32 = 13;
+let v = vec![1, 2, 3, 4, 5, 65];
+for x in v.iter() {
+    println!("{}", x);
+}
+```
+
+```c
+typedef struct Block_t {
+    int head;
+    int data;
+} Block_t;
+```
+
 ## References
 
 - [FixIt 快速上手](https://fixit.lruihao.cn/zh-cn/documentation/getting-started/)
