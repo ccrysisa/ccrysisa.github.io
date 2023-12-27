@@ -5,9 +5,9 @@ date: 2023-12-27T20:35:45+08:00
 draft: false
 author:
   name: vanJker
-  link:
-  email:
-  avatar:
+  link: https://github.com/vanJker
+  email: cjshine@foxmail.com
+  avatar: https://avatars.githubusercontent.com/u/88960102?s=96&v=4
 description:
 keywords:
 license:
