@@ -42,7 +42,7 @@ repost:
 
 ## 安装与设定
 
-完成常用的 Git 设置：
+观看影片[][] :white_check_mark:，完成常用的 Git 设置：
 
 设置 Git 的编辑器为 vim，主要用于 `commit` 时的编辑：
 
@@ -77,6 +77,8 @@ $ git config --global alias.rst reset HEAD
 - Every commit has a *unique* hash value.
   - Calculate by SHA1
 - Hash value can indicate a commit absolutely.
+
+---
 
 可以通过 `git log` 来查看 commit 记录以及对应的 Hash 值。事实上，这个命令十分灵活，举个例子：
 

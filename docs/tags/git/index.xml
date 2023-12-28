@@ -10,7 +10,7 @@
   <pubDate>Wed, 27 Dec 2023 23:34:45 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/git/</guid>
-  <description><![CDATA[教学影片：Git 中文教学 安装与设定 完成常用的 Git 设置： 设置 Git 的编辑器为 vim，主要用于 commit 时的编辑： 1 $ git config --global core.editor vim 设置 Git 的合并解决冲突工具为 vi]]></description>
+  <description><![CDATA[教学影片：Git 中文教学 安装与设定 观看影片[][] &#x2705;，完成常用的 Git 设置： 设置 Git 的编辑器为 vim，主要用于 commit 时的编辑： 1 $ git config --global]]></description>
 </item>
 </channel>
 </rss>
