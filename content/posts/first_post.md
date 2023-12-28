@@ -4,7 +4,7 @@ subtitle:
 date: 2023-12-23T20:23:12+08:00
 draft: false
 author:
-  name: xshine
+  name: Xshine
   link: https://github.com/LoongGshine
   email: caijiaxin@dragonos.org
   avatar: https://avatars.githubusercontent.com/u/133117003?s=400&v=4
@@ -46,12 +46,15 @@ repost:
 
 公式块：
 
+{{< raw >}}
 $$
 \int_{a}^{b}x(t)dt =
 \dfrac{b - a}{N} \\
 =\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N}
 $$
+{{< /raw >}}
 
+{{< raw >}}
 $$
 \begin{aligned}
 \int_{a}^{b}x(t)dt &=
@@ -59,6 +62,7 @@ $$
 &=\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N} \\
 \end{aligned}
 $$
+{{< /raw >}}
 
 ## 代码块
 
