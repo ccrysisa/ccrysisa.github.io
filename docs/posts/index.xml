@@ -18,7 +18,7 @@
   <pubDate>Wed, 27 Dec 2023 23:34:45 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/git/</guid>
-  <description><![CDATA[教学影片：Git 中文教学 安装与设定 观看影片[][] &#x2705;，完成常用的 Git 设置： 设置 Git 的编辑器为 vim，主要用于 commit 时的编辑： 1 $ git config --global]]></description>
+  <description><![CDATA[教学影片：Git 中文教学 安装与设定 &#x2705; 观看影片 Git 教学系列 - 安装与配置，完成常用的 Git 设置。 设置 Git 的编辑器为 vim，主要用于 commit 时的编辑： 1 $ git config --global]]></description>
 </item>
 <item>
   <title>Ubuntu 22.04 配置</title>
@@ -29,7 +29,7 @@
   <description><![CDATA[Ubuntu 网络和输入法 网络代理 根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo]]></description>
 </item>
 <item>
-  <title>Math 数学开放式课程学习导航</title>
+  <title>数学开放式课程学习导航</title>
   <link>https://loonggshine.github.io/math/</link>
   <pubDate>Sat, 23 Dec 2023 21:35:47 &#43;0800</pubDate>
   <author>Xshine</author>
@@ -37,7 +37,7 @@
   <description><![CDATA[中大數學系開放式課程 台大齐震宇 - 数学潜水艇、微积分、分析 台大谢铭伦 - 线性代数]]></description>
 </item>
 <item>
-  <title>First_post</title>
+  <title>Hello, World!</title>
   <link>https://loonggshine.github.io/first_post/</link>
   <pubDate>Sat, 23 Dec 2023 20:23:12 &#43;0800</pubDate>
   <author>Xshine</author>

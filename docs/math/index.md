@@ -1,4 +1,4 @@
-# Math 数学开放式课程学习导航
+# 数学开放式课程学习导航
 
 
 - [中大數學系開放式課程](http://www.math.ncu.edu.tw/~cchsiao/OCW/)

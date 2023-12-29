@@ -1,4 +1,4 @@
-# First_post
+# Hello, World!
 
 
 博客（英语：Blog）是一种在线日记型式的个人网站，借由张帖子章、图片或视频来记录生活、抒发情感或分享信息。博客上的文章通常根据张贴时间，以倒序方式由新到旧排列。
@@ -24,6 +24,27 @@ $$
 \dfrac{b - a}{N} \\
 &=\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N} \\
 \end{aligned}
+$$
+{{< /raw >}}
+
+{{< raw >}}
+$$
+\mathrm{Integrals\ are\ numerically\ approximated\ as\ finite\ series}:\\ 
+\begin{split}
+\int_{a}^{b}x(t)dt &=
+\dfrac{b - a}{N} \\
+&=\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N}
+\end{split} \\ 
+where\ t_k = a + (b-a)\cdot k/N
+$$
+{{< /raw >}}
+
+{{< raw>}}
+$$
+\begin{align*}
+p(x) = 3x^6 + 14x^5y &+ 590x^4y^2 + 19x^3y^3 \\
+&- 12x^2y^4 - 12xy^5 + 2y^6 - a^3b^3 - a^2b - ab + c^5d^3 + c^4d^3 - cd
+\end{align*}
 $$
 {{< /raw >}}
 

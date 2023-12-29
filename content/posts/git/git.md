@@ -1,5 +1,42 @@
-# Git 学习记录
+---
+title: Git 学习记录
+subtitle:
+date: 2023-12-27T23:34:45+08:00
+draft: false
+author:
+  name: Xshine
+  link: https://github.com/LoongGshine
+  email: caijiaxin@dragonos.org
+  avatar: https://avatars.githubusercontent.com/u/133117003?s=400&v=4
+description:
+keywords:
+license:
+comment: false
+weight: 0
+tags:
+  - Git
+categories:
+  - Git
+hiddenFromHomePage: false
+hiddenFromSearch: false
+hiddenFromRss: false
+summary:
+resources:
+  - name: featured-image
+    src: featured-image.jpg
+  - name: featured-image-preview
+    src: featured-image-preview.jpg
+toc: true
+math: true
+lightgallery: true
+password:
+message:
+repost:
+  enable: true
+  url:
 
+# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
+---
 
 教学影片：[Git 中文教学][git-zh-tutorials]
 
@@ -238,10 +275,3 @@ git commit
 
 <!-- Images -->
 [amend]: /images/git/amend.svg
-
-
----
-
-> 作者: [Xshine](https://github.com/LoongGshine)  
-> URL: https://loonggshine.github.io/git/  
-

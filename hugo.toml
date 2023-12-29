@@ -172,7 +172,7 @@ theme = "FixIt"
     rss = 10
     #  最近更新文章设置
     [params.section.recentlyUpdated]
-      enable = false
+      enable = true
       rss = false
       days = 30
       maxCount = 10

@@ -1,5 +1,5 @@
 ---
-title: Math 数学开放式课程学习导航
+title: 数学开放式课程学习导航
 subtitle:
 date: 2023-12-23T21:35:47+08:00
 draft: false
