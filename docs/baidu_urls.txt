@@ -1,3 +1,4 @@
+https://loonggshine.github.io/binary-representation/
 https://loonggshine.github.io/rust-intro/
 https://loonggshine.github.io/git/
 https://loonggshine.github.io/ubuntu/

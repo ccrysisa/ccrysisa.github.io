@@ -5,42 +5,42 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>Ubuntu 22.04 配置 - Xshine&#39;s Blog</title><meta name="author" content="Xshine">
+    <title>解读计算机编码 - Xshine&#39;s Blog</title><meta name="author" content="Xshine">
 <meta name="author-link" content="https://github.com/LoongGshine">
-<meta name="description" content="Ubuntu 网络和输入法 网络代理 根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo" /><meta name="keywords" content='Linux, Ubuntu' /><meta itemprop="name" content="Ubuntu 22.04 配置">
-<meta itemprop="description" content="Ubuntu 网络和输入法 网络代理 根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo"><meta itemprop="datePublished" content="2023-12-27T20:35:45+08:00" />
-<meta itemprop="dateModified" content="2023-12-27T20:54:50+08:00" />
-<meta itemprop="wordCount" content="190"><meta itemprop="image" content="https://loonggshine.github.io/logo.png" />
-<meta itemprop="keywords" content="Linux,Ubuntu," /><meta property="og:title" content="Ubuntu 22.04 配置" />
-<meta property="og:description" content="Ubuntu 网络和输入法 网络代理 根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo" />
+<meta name="description" content="人們對數學的加減運算可輕易在腦中辨識符號並理解其結果，但電腦做任何事都受限於實體資料儲存及操作方式，換言之，電腦硬體實際只認得 0 和 1，卻不知道符號 &#43; 和 - 在數學及應用場域的意義，於是工程人員引入「補數」以便在二進位系統中，表達人們認知上的正負數。但您有沒有想過，為何「二補數」(2’s complement) 被電腦廣泛採用呢？背後的設計考量又是什麼？本文嘗試從數學觀點去解讀編碼背後的原理，並佐以資訊安全及程式碼最佳化的考量，探討二補數這樣的編碼對於程式設計有何關鍵影響。" /><meta name="keywords" content='LKI, binary' /><meta itemprop="name" content="解读计算机编码">
+<meta itemprop="description" content="人們對數學的加減運算可輕易在腦中辨識符號並理解其結果，但電腦做任何事都受限於實體資料儲存及操作方式，換言之，電腦硬體實際只認得 0 和 1，卻不知道符號 &#43; 和 - 在數學及應用場域的意義，於是工程人員引入「補數」以便在二進位系統中，表達人們認知上的正負數。但您有沒有想過，為何「二補數」(2’s complement) 被電腦廣泛採用呢？背後的設計考量又是什麼？本文嘗試從數學觀點去解讀編碼背後的原理，並佐以資訊安全及程式碼最佳化的考量，探討二補數這樣的編碼對於程式設計有何關鍵影響。"><meta itemprop="datePublished" content="2023-12-31T15:43:50+08:00" />
+<meta itemprop="dateModified" content="2024-01-01T20:44:51+08:00" />
+<meta itemprop="wordCount" content="828"><meta itemprop="image" content="https://loonggshine.github.io/logo.png" />
+<meta itemprop="keywords" content="LKI, binary," /><meta property="og:title" content="解读计算机编码" />
+<meta property="og:description" content="人們對數學的加減運算可輕易在腦中辨識符號並理解其結果，但電腦做任何事都受限於實體資料儲存及操作方式，換言之，電腦硬體實際只認得 0 和 1，卻不知道符號 &#43; 和 - 在數學及應用場域的意義，於是工程人員引入「補數」以便在二進位系統中，表達人們認知上的正負數。但您有沒有想過，為何「二補數」(2’s complement) 被電腦廣泛採用呢？背後的設計考量又是什麼？本文嘗試從數學觀點去解讀編碼背後的原理，並佐以資訊安全及程式碼最佳化的考量，探討二補數這樣的編碼對於程式設計有何關鍵影響。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://loonggshine.github.io/ubuntu/" /><meta property="og:image" content="https://loonggshine.github.io/logo.png" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2023-12-27T20:35:45+08:00" />
-<meta property="article:modified_time" content="2023-12-27T20:54:50+08:00" />
+<meta property="og:url" content="https://loonggshine.github.io/binary-representation/" /><meta property="og:image" content="https://loonggshine.github.io/logo.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-31T15:43:50+08:00" />
+<meta property="article:modified_time" content="2024-01-01T20:44:51+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://loonggshine.github.io/logo.png" /><meta name="twitter:title" content="Ubuntu 22.04 配置"/>
-<meta name="twitter:description" content="Ubuntu 网络和输入法 网络代理 根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo"/>
+<meta name="twitter:image" content="https://loonggshine.github.io/logo.png" /><meta name="twitter:title" content="解读计算机编码"/>
+<meta name="twitter:description" content="人們對數學的加減運算可輕易在腦中辨識符號並理解其結果，但電腦做任何事都受限於實體資料儲存及操作方式，換言之，電腦硬體實際只認得 0 和 1，卻不知道符號 &#43; 和 - 在數學及應用場域的意義，於是工程人員引入「補數」以便在二進位系統中，表達人們認知上的正負數。但您有沒有想過，為何「二補數」(2’s complement) 被電腦廣泛採用呢？背後的設計考量又是什麼？本文嘗試從數學觀點去解讀編碼背後的原理，並佐以資訊安全及程式碼最佳化的考量，探討二補數這樣的編碼對於程式設計有何關鍵影響。"/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://loonggshine.github.io/ubuntu/" /><link rel="prev" href="https://loonggshine.github.io/math/" /><link rel="next" href="https://loonggshine.github.io/git/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://loonggshine.github.io/binary-representation/" /><link rel="prev" href="https://loonggshine.github.io/rust-intro/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "Ubuntu 22.04 配置",
+    "headline": "解读计算机编码",
     "inLanguage": "zh-CN",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https:\/\/loonggshine.github.io\/ubuntu\/"
-    },"genre": "posts","keywords": "Linux, Ubuntu","wordcount":  190 ,
-    "url": "https:\/\/loonggshine.github.io\/ubuntu\/","datePublished": "2023-12-27T20:35:45+08:00","dateModified": "2023-12-27T20:54:50+08:00","publisher": {
+      "@id": "https:\/\/loonggshine.github.io\/binary-representation\/"
+    },"genre": "posts","keywords": "LKI, binary","wordcount":  828 ,
+    "url": "https:\/\/loonggshine.github.io\/binary-representation\/","datePublished": "2023-12-31T15:43:50+08:00","dateModified": "2024-01-01T20:44:51+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
-        "name": "vanJker"
+        "name": "Xshine"
       },"description": ""
   }
   </script></head>
@@ -147,11 +147,11 @@
     </aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Ubuntu 22.04 配置</span>
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>解读计算机编码</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" data-title="vanJker" data-alt="vanJker" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span>
-          <span class="post-category">收录于 <a href="/categories/linux/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2023-12-27 20:35:45"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-27">2023-12-27</time></span>&nbsp;<span title="更新于 2023-12-27 20:54:50"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-27">2023-12-27</time></span>&nbsp;<span title="190 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/LoongGshine" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="Xshine" data-alt="Xshine" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Xshine</a></span>
+          <span class="post-category">收录于 <a href="/categories/lki/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> LKI</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2023-12-31 15:43:50"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-31">2023-12-31</time></span>&nbsp;<span title="更新于 2024-01-01 20:44:51"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-01">2024-01-01</time></span>&nbsp;<span title="828 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -159,89 +159,131 @@
         </div>
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#网络代理">网络代理</a></li>
-    <li><a href="#搜狗输入法">搜狗输入法</a></li>
+    <li><a href="#一补数-ones-complement">一补数 (Ones’ complement)</a>
+      <ul>
+        <li><a href="#9-的补数">9 的补数</a></li>
+        <li><a href="#运算原理">运算原理</a></li>
+      </ul>
+    </li>
+    <li><a href="#二补数-twos-complement">二补数 (Two&rsquo;s complement)</a>
+      <ul>
+        <li><a href="#正负数编码表示">正负数编码表示</a></li>
+        <li><a href="#加--减法器设计">加 / 减法器设计</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><h1 id="ubuntu-网络和输入法">Ubuntu 网络和输入法</h1>
-<h2 id="网络代理">网络代理</h2>
-<p>根据项目 <a href="https://github.com/Elegybackup/clash-for-linux-backup"target="_blank" rel="external nofollow noopener noreferrer">clash-for-linux-backup</a> 来配置 Ubuntu 的网络代理。</p>
-<div class="highlight" id="id-1"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux</span></span></code></pre></td></tr></table>
+      </div><div class="content" id="content"><p>人們對數學的加減運算可輕易在腦中辨識符號並理解其結果，但電腦做任何事都受限於實體資料儲存及操作方式，換言之，電腦硬體實際只認得 0 和 1，卻不知道符號 + 和 - 在數學及應用場域的意義，於是工程人員引入「補數」以便在二進位系統中，表達人們認知上的正負數。但您有沒有想過，為何「二補數」(2’s complement) 被電腦廣泛採用呢？背後的設計考量又是什麼？本文嘗試從數學觀點去解讀編碼背後的原理，並佐以資訊安全及程式碼最佳化的考量，探討二補數這樣的編碼對於程式設計有何關鍵影響。</p>
+<h2 id="一补数-ones-complement">一补数 (Ones’ complement)</h2>
+<h3 id="9-的补数">9 的补数</h3>
+<p>&#x274c; 科普短片: <a href="https://www.youtube.com/watch?v=kRmExkQoOPY"target="_blank" rel="external nofollow noopener noreferrer">Not just counting, but saving lives: Curta</a></p>
+<h3 id="运算原理">运算原理</h3>
+<p><strong>以一补数编码形式表示的运算子，在参与运算后，运算结果符合一补数的编码：</strong></p>
+<div class="fi-row">
+$$
+[X]_{一补数} + [Y]_{一补数} = [X+Y]_{一补数}
+$$
 </div>
-</div><p>过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可：</p>
+<p>接下来进行分类讨论，以 32-bit 正数 $X$, $Y$ 为例：</p>
 <ul>
-<li><code>sudo apt install curl</code></li>
-<li><code>sudo apt install net-tools</code></li>
-</ul>
-<p>安装并启动完成后，可以通过 <code>localhost:9090/ui</code> 来访问 Dashboard。</p>
-<p>启动代理：</p>
-<div class="highlight" id="id-2"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> clash-for-linux
-</span></span><span class="line"><span class="cl">$ sudo bash start.sh
-</span></span><span class="line"><span class="cl">$ <span class="nb">source</span> /etc/profile.d/clash.sh
-</span></span><span class="line"><span class="cl">$ proxy_on</span></span></code></pre></td></tr></table>
-</div>
-</div><p>关闭代理：</p>
-<div class="highlight" id="id-3"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> clash-for-linux
-</span></span><span class="line"><span class="cl">$ sudo bash shutdown.sh
-</span></span><span class="line"><span class="cl">$ proxy_off</span></span></code></pre></td></tr></table>
-</div>
-</div><h2 id="搜狗输入法">搜狗输入法</h2>
-<p>根据 <a href="https://shurufa.sogou.com/linux/guide"target="_blank" rel="external nofollow noopener noreferrer">搜狗输入法 Linux 安装指导</a> 来安装搜狗输入法。</p>
+<li>
+<p>$X + Y = X + Y$ 显然运算子和运算结果都满足一补数编码。</p>
+</li>
+<li>
+<p>$X - Y = X + (2^{32} - 1 - Y)$</p>
 <ul>
-<li>无需卸载系统 ibus 输入法框架。</li>
-<li>通过 <code>Ctrl + space</code> 唤醒搜狗输入法。</li>
+<li>
+<p>如果 $X &gt; Y$，则运算结果应为 $X - Y$ 且为正数，其一补数编码为 $X - Y$。而此时
+$$
+2^{32} - 1 + X - Y
+$$
+显然会溢出，为了使运算结果对应一补数编码，所以此时循环进位对应 $+\ (1 - 2_{32})$。</p>
+</li>
+<li>
+<p>如果 $X &lt; Y$，则运算结果应为 $X - Y$ 且为负数，其一补数编码为
+$$
+2^{32} - 1 - （Y - X） = 2_{32} - 1 - X - Y
+$$
+而此时 $2^{32} - 1 + X - Y$ 并不会溢出，并且满足运算结果的一补数编码，所以无需进行循环进位。</p>
+</li>
+<li>
+<p>如果 $X = Y$，显然
+$$
+X - Y = X + 2^{32} - 1 - Y = 2^{32} - 1
+$$
+为 0 成立。</p>
+</li>
 </ul>
-</div><div class="post-footer" id="post-footer">
+</li>
+<li>
+<p>$-X - Y = (2^{32} - 1 - X) + (2^{32} - 1 - Y)$，显然会导致溢出。而 $-X - Y$ 的一补数编码为
+$$
+2^{32} - 1 - (X + Y) = 2^{32} - 1 - X - Y
+$$
+所以需要在溢出时循环进位 $+\ (1 - 2^{32})$ 来消除运算结果中的一个 $2^{32} - 1$。</p>
+</li>
+</ul>
+<h2 id="二补数-twos-complement">二补数 (Two&rsquo;s complement)</h2>
+<h3 id="正负数编码表示">正负数编码表示</h3>
+<p>假设有 n-bit 的二补数编码 $A$，$-A$ 的推导如下：</p>
+<ul>
+<li>格式一：</li>
+</ul>
+<div class="fi-row">
+$$
+\begin{align*}
+A + \neg A &= 2^n - 1 \\
+A + \neg A + 1 &\equiv 0 \equiv 2^n \ (\bmod 2^n) \\
+-A &= \neg A + 1 \\ 
+\end{align*}
+$$
+</div>
+<ul>
+<li>格式二：</li>
+</ul>
+<div class="fi-row">
+$$
+\begin{align*}
+A + \neg A &= 2^n - 1 \\
+A + \neg A - 1 &= 2^n - 2 \\
+A - 1 &= 2^n - 1 - (\neg A + 1) \\ 
+\neg (A - 1) &= \neg A + 1 \\
+\neg (A - 1) &= -A \\
+\end{align*}
+$$
+</div>
+<h3 id="加--减法器设计">加 / 减法器设计</h3>
+<p>&#x274c; 科普短片: <a href="https://www.youtube.com/watch?v=VBDoT8o4q00"target="_blank" rel="external nofollow noopener noreferrer">See How Computers Add Numbers In One Lesson</a></p>
+<!-- URL --></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2023-12-27 20:54:50">更新于 2023-12-27&nbsp;</span>
+        <span title="更新于 2024-01-01 20:44:51">更新于 2024-01-01&nbsp;</span>
       </div></div>
     <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/ubuntu/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-md"><span><a href="/binary-representation/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://loonggshine.github.io/ubuntu/" data-title="Ubuntu 22.04 配置" data-hashtags="Linux,Ubuntu"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://loonggshine.github.io/ubuntu/" data-hashtag="Linux"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://loonggshine.github.io/ubuntu/" data-title="Ubuntu 22.04 配置" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://loonggshine.github.io/ubuntu/" data-title="Ubuntu 22.04 配置"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://loonggshine.github.io/ubuntu/" data-title="Ubuntu 22.04 配置"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://loonggshine.github.io/ubuntu/" data-title="Ubuntu 22.04 配置" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://loonggshine.github.io/ubuntu/" data-title="Ubuntu 22.04 配置" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://loonggshine.github.io/ubuntu/" data-title="Ubuntu 22.04 配置"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://loonggshine.github.io/binary-representation/" data-title="解读计算机编码" data-hashtags="LKI, binary"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://loonggshine.github.io/binary-representation/" data-hashtag="LKI, binary"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://loonggshine.github.io/binary-representation/" data-title="解读计算机编码" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://loonggshine.github.io/binary-representation/" data-title="解读计算机编码"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://loonggshine.github.io/binary-representation/" data-title="解读计算机编码"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://loonggshine.github.io/binary-representation/" data-title="解读计算机编码" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://loonggshine.github.io/binary-representation/" data-title="解读计算机编码" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://loonggshine.github.io/binary-representation/" data-title="解读计算机编码"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
       </div>
     </div>
   </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/linux/' class="post-tag">Linux</a><a href='/tags/ubuntu/' class="post-tag">Ubuntu</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/lki-binary/' class="post-tag">LKI, binary</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
   </div>
 
-  <div class="post-nav"><a href="/math/" class="post-nav-item" rel="prev" title="数学开放式课程学习导航"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>数学开放式课程学习导航</a>
-      <a href="/git/" class="post-nav-item" rel="next" title="Git 学习记录">Git 学习记录<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  <div class="post-nav"><a href="/rust-intro/" class="post-nav-item" rel="prev" title="Rust - 进行中的未来"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Rust - 进行中的未来</a></div>
 </div>
 </article></main><footer class="footer">
     <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
