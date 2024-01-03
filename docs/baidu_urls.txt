@@ -1,7 +1,7 @@
-https://loonggshine.github.io/nthu-network/
-https://loonggshine.github.io/binary-representation/
-https://loonggshine.github.io/rust-intro/
-https://loonggshine.github.io/git/
+https://loonggshine.github.io/network/network/
+https://loonggshine.github.io/sysprog/binary-representation/
+https://loonggshine.github.io/lki/rust-intro/
+https://loonggshine.github.io/git/git/
 https://loonggshine.github.io/ubuntu/
-https://loonggshine.github.io/math/
+https://loonggshine.github.io/math/math/
 https://loonggshine.github.io/first_post/

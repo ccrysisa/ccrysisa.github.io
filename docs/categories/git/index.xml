@@ -6,10 +6,10 @@
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Wed, 27 Dec 2023 23:34:45 &#43;0800</lastBuildDate><atom:link href="https://loonggshine.github.io/categories/git/" rel="self" type="application/rss+xml" /><item>
   <title>Git 学习记录</title>
-  <link>https://loonggshine.github.io/git/</link>
+  <link>https://loonggshine.github.io/git/git/</link>
   <pubDate>Wed, 27 Dec 2023 23:34:45 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://loonggshine.github.io/git/</guid>
+  <guid>https://loonggshine.github.io/git/git/</guid>
   <description><![CDATA[教学影片：Git 中文教学 安装与设定 &#x2705; 观看影片 Git 教学系列 - 安装与配置，完成常用的 Git 设置。 设置 Git 的编辑器为 vim，主要用于 commit 时的编辑： 1 $ git config --global]]></description>
 </item>
 </channel>
