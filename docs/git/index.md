@@ -69,8 +69,7 @@ git log 4a6ebc -n1
 
 这个命令的效果是从 Hash 值为 4a6bc 的 commit 开始打印 1 条 commit 记录（没错，对应的是 `-n1`），因为 Git 十分聪明，所以 commit 对应的 Hash 值只需前 6 位即可（因为这样已经几乎不会发生 Hash 冲突）。
 
-<details>
-<summary>Examples</summary>
+{{< details "Examples" >}}
 
 打印 master 分支的最新一个 commit：
 
@@ -129,7 +128,7 @@ git log --patch README.md
 git log -S README
 ```
 
-</details>
+{{< /details >}}
 
 ### View History
 

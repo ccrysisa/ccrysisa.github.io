@@ -258,9 +258,9 @@
 </div>
 </div><p>这个命令的效果是从 Hash 值为 4a6bc 的 commit 开始打印 1 条 commit 记录（没错，对应的是 <code>-n1</code>），因为 Git 十分聪明，所以 commit 对应的 Hash 值只需前 6 位即可（因为这样已经几乎不会发生 Hash 冲突）。</p>
 <details>
-<summary>Examples</summary>
-<p>打印 master 分支的最新一个 commit：</p>
-<div class="highlight" id="id-6"><div class="chroma">
+  <summary>Examples</summary>
+  <p>打印 master 分支的最新一个 commit：</p>
+<div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -268,7 +268,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log master -n1</span></span></code></pre></td></tr></table>
 </div>
 </div><p>打印 master 分支的最新一个 commit（仅使用一行打印 commit 信息）：</p>
-<div class="highlight" id="id-7"><div class="chroma">
+<div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -276,7 +276,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log master -n1 --oneline</span></span></code></pre></td></tr></table>
 </div>
 </div><p>打印 HEAD 所指向的 commit：</p>
-<div class="highlight" id="id-8"><div class="chroma">
+<div class="highlight" id="id-17"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -284,7 +284,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log HEAD -n1 --oneline</span></span></code></pre></td></tr></table>
 </div>
 </div><p>打印 HEAD 所指向的 commit 的前一个 commit：</p>
-<div class="highlight" id="id-9"><div class="chroma">
+<div class="highlight" id="id-18"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -292,7 +292,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log HEAD^ -n1 --oneline</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>^</code> 可以持续使用，比如 <code>HEAD^^</code> 表示 HEAD 所指向的 commit 的前两个 commit。当 <code>^</code> 数量过多时，可以使用 <code>~</code> 搭配数字来达到相同效果。例如：</p>
-<div class="highlight" id="id-10"><div class="chroma">
+<div class="highlight" id="id-19"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -305,7 +305,7 @@
 <p>一般来说，使用 <code>^</code> 就已经足够了，几乎不会遇到使用 <code>~</code> 的场景，因为这种场景一般会去找图形化界面吧。&#x1f923;</p>
 </blockquote>
 <p>打印与文件 <code>README.md</code> 相关的 commits（仅使用一行显示）：</p>
-<div class="highlight" id="id-11"><div class="chroma">
+<div class="highlight" id="id-20"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -313,7 +313,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log --oneline README.md</span></span></code></pre></td></tr></table>
 </div>
 </div><p>打印与文件 <code>README.md</code> 相关的 commits（显示详细信息，包括文件内容的增减统计）：</p>
-<div class="highlight" id="id-12"><div class="chroma">
+<div class="highlight" id="id-21"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -321,7 +321,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log --stat README.md</span></span></code></pre></td></tr></table>
 </div>
 </div><p>打印与文件 <code>README.md</code> 相关的 commits（显示详细信息，包括文件内容的增减细节）：</p>
-<div class="highlight" id="id-13"><div class="chroma">
+<div class="highlight" id="id-22"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -329,16 +329,17 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log --patch README.md</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在打印的 commit 信息中抓取与 <code>README</code> 符合的信息（可以与 <code>--stat</code> 或 <code>--patch</code> 配合使用）：</p>
-<div class="highlight" id="id-14"><div class="chroma">
+<div class="highlight" id="id-23"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log -S README</span></span></code></pre></td></tr></table>
 </div>
-</div></details>
+</div>
+</details>
 <h3 id="view-history">View History</h3>
-<div class="highlight" id="id-15"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -353,7 +354,7 @@
 <li><code>-S or --grep</code>: find modification</li>
 </ul>
 <h3 id="view-commit">View Commit</h3>
-<div class="highlight" id="id-16"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -365,7 +366,7 @@
 </ul>
 <h3 id="see-difference">See Difference</h3>
 <p>查看当前的修改，可以查看已经修改但没有 staged 文件的变化：</p>
-<div class="highlight" id="id-17"><div class="chroma">
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -373,7 +374,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git diff</span></span></code></pre></td></tr></table>
 </div>
 </div><p>查看当前的修改，可以查看已经修改且 staged 文件的变化：</p>
-<div class="highlight" id="id-18"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -381,7 +382,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git diff --staged</span></span></code></pre></td></tr></table>
 </div>
 </div><p>查看当前与指定的 commit 的差异：</p>
-<div class="highlight" id="id-19"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -393,7 +394,7 @@
 </span></span><span class="line"><span class="cl">git diff master^</span></span></code></pre></td></tr></table>
 </div>
 </div><p>查两个指定的 commit 之间的差异：</p>
-<div class="highlight" id="id-20"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -408,7 +409,7 @@
 <p>&#x2705; 观看影片 <a href="https://youtu.be/3oIU7fG2UT0"target="_blank" rel="external nofollow noopener noreferrer">Git 教学系列 - Patch Add and Amend</a>，掌握 <code>git add -p</code>、<code>git checkout -p</code>、<code>git add ---amend</code> 的用法，使用 <code>add</code> 和 <code>checkout</code> 时强烈建议使用 <code>-p</code>，掌握修改 commit 的两种方法。</p>
 <hr>
 <h3 id="only-add-related">Only Add Related</h3>
-<div class="highlight" id="id-21"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -423,7 +424,7 @@
 </ul>
 <p>由于可以针对一个文件的不同 <code>section</code> 进行 review，所以在进行 <code>git add -p</code> 之后，使用 <code>git status</code> 可以发现同一个文件会同时处于两种状态。</p>
 <h3 id="checkout-also">Checkout Also</h3>
-<div class="highlight" id="id-22"><div class="chroma">
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -433,7 +434,7 @@
 </div><p>这个操作比较危险，因为这个操作的效果与 <code>git add -p</code> 相反，如果选择 <code>y</code> 的话，文件涉及的修改就会消失，如果涉及的修改没有 commit 的话，那么涉及的修改是无法救回的。但是怎么说，这个操作还是比直接使用 <code>git checkout</code> 稍微保险一点，因为会先进入 review 界面，而不是直接撤销修改。<strong>所以，请一定要使用 <code>git checkout -p</code>！</strong></p>
 <h3 id="modify-commit">Modify Commit</h3>
 <p>有两种方式来修改最新的 commit：</p>
-<div class="highlight" id="id-23"><div class="chroma">
+<div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2

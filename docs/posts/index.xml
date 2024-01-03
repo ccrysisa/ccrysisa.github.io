@@ -4,7 +4,15 @@
     <link>https://loonggshine.github.io/posts/</link>
     <description>所有文章 | Xshine&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Sun, 31 Dec 2023 15:43:50 &#43;0800</lastBuildDate><atom:link href="https://loonggshine.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Tue, 02 Jan 2024 19:44:56 &#43;0800</lastBuildDate><atom:link href="https://loonggshine.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+  <title>计算机网络</title>
+  <link>https://loonggshine.github.io/nthu-network/</link>
+  <pubDate>Tue, 02 Jan 2024 19:44:56 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://loonggshine.github.io/nthu-network/</guid>
+  <description><![CDATA[清大开放式课程 - 计算机网络 课程主页 课程资料 课程视频 Referenecs 110-1 計算機網路 (清大開放式課程)]]></description>
+</item>
+<item>
   <title>解读计算机编码</title>
   <link>https://loonggshine.github.io/binary-representation/</link>
   <pubDate>Sun, 31 Dec 2023 15:43:50 &#43;0800</pubDate>
@@ -18,7 +26,7 @@
   <pubDate>Thu, 28 Dec 2023 20:18:03 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/rust-intro/</guid>
-  <description><![CDATA[Rust in 100 Seconds 观看短片：Rust in 100 Seconds &#x2705;，了解 Rust，初步了解其安全性原理：所有权（ownership），借用（borrow）等机]]></description>
+  <description><![CDATA[Rust in 100 Seconds &#x2705; 观看短片：Rust in 100 Seconds 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut]]></description>
 </item>
 <item>
   <title>Git 学习记录</title>
