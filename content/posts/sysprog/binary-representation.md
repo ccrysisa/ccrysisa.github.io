@@ -126,7 +126,7 @@ $$
 
 也可以通过一补数和二补数，在时钟表上的对称轴偏差，来理解上述两种方式是等价的。
 
-{{< figure src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_144d52ff047bf6c796128635301c52fe.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1704257460&Signature=Qq8tLBaablrQ6JlUBB2sxJIjPRA%3D" >}}
+![](/images/git/twos_complement.png)
 
 ### 加 / 减法器设计
 

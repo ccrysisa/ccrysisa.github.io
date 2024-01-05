@@ -68,8 +68,14 @@ $ git config --global alias.st status
 $ git config --global alias.ch checkout
 $ git config --global alias.rst reset HEAD
 ```
-
 > 效果为：命令 `git st` 等价于 `git status`，其余的类似。
+
+设置 Windows 和 Mac/Linux 的换行符同步：
+
+```bash
+$ git config --global core.autocrlf true
+```
+> 效果为：提交时自动将 CRLF 转为 LF，检出代码时将 LF 转换成 CRLF。
 
 ## Add 和 Commit
 
@@ -265,7 +271,7 @@ git commit
 
 ## Branch and Merge
 
-:white_check_mark: 观看影片 [Git 教学系列 - Branch and Merge][git-zh-5]，掌握 `git add -p`、`git checkout -p`、`git add ---amend` 的用法，使用 `add` 和 `checkout` 时强烈建议使用 `-p`，掌握修改 commit 的两种方法。
+:white_check_mark: 观看影片 [Git 教学系列 - Branch and Merge][git-zh-5]，掌握创建、删除、切换分支的用法，掌握合并分支、解决冲突的方法。
 
 ### Move and Create Branch
 
@@ -323,6 +329,8 @@ git checkout main
 git branch cload
 # 2. using `git checkout -b`
 git checkout -b asmload
+# 3. create a new branch in <commit>
+git branch cload <commit>
 ```
 
 切换到任一 commit：
@@ -398,15 +406,15 @@ git merge <branch>
 **Add and Commit**
 
 ```bash
-# 1.合并分支
+# 1. 合并分支
 git merge <branch>
-# 2.检查状态，查看 unmerged 的文件
+# 2. 检查状态，查看 unmerged 的文件
 git status
-# 3.编辑 unmerged 文件，编辑冲突区域代码即可
+# 3. 编辑 unmerged 文件，编辑冲突区域代码即可
 vim <file>
-# 4.添加解决完冲突的文件
+# 4. 添加解决完冲突的文件
 git add <file>
-# 5.进行 merge commit
+# 5. 进行 merge commit
 git commit
 ```
 {{< raw >}}
@@ -421,12 +429,21 @@ git commit
 - Prevent very long development branch.
 - Split source code clearly.
 
+
+## Rebase
+
+:white_check_mark: 观看影片 [Git 教学系列 - Branch and Merge][git-zh-6]，掌握 TODO 的方法。
+
+`git rebase` 是 Git 的精华，可以让我们实现更细粒度的操作，可以说学会了 rebase 才算真正入门了 Git。
+
+
 <!-- URL -->
 [git-zh-tutorials]: https://www.youtube.com/playlist?list=PLlyOkSAh6TwcvJQ1UtvkSwhZWCaM_S07d
 [git-zh-1]: https://youtu.be/LZ4oOzZwgrk
 [git-zh-3]: https://youtu.be/SV7xK_6-Wcg
 [git-zh-4]: https://youtu.be/3oIU7fG2UT0
 [git-zh-5]: https://youtu.be/qUfT-4bNtwY
+[git-zh-6]: https://youtu.be/0nwqar3ycTY
 
 <!-- Images -->
 [amend]: /images/git/amend.svg
