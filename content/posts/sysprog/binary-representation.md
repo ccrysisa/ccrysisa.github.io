@@ -153,11 +153,17 @@ $$
 - [ ] 阅读相关论文 [Keyboard Acoustic Emanations][kbdacoustic]
 - [ ] 体验使用相关工具 [kbd-audio][kbd-audio]
 
-借由 Wikipedia 了解旁路攻击 ([Side-channel attack][side-channel-attack]) 和时序攻击 ([Timing attack][timing-attack]) 的基本概念。
-- [Black-box testing](https://en.wikipedia.org/wiki/Black-box_testing)
-- [Row hammer](https://en.wikipedia.org/wiki/Row_hammer)
-- [Cold boot attack](https://en.wikipedia.org/wiki/Cold_boot_attack)
-- [Rubber-hose cryptanalysis](https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis)
+:white_check_mark: 借由 Wikipedia 了解旁路攻击 ([Side-channel attack][side-channel-attack]) 和时序攻击 ([Timing attack][timing-attack]) 的基本概念。
+- [x] [Black-box testing](https://en.wikipedia.org/wiki/Black-box_testing)
+- [ ] [Row hammer](https://en.wikipedia.org/wiki/Row_hammer)
+- [ ] [Cold boot attack](https://en.wikipedia.org/wiki/Cold_boot_attack)
+- [ ] [Rubber-hose cryptanalysis](https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis)
+
+{{< admonition info "延伸阅读" >}}
+- [ ] [The password guessing bug in Tenex](https://www.sjoerdlangkemper.nl/2016/11/01/tenex-password-bug/)
+- [ ] [Side Channel Attack By Using Hidden Markov Model](https://www.cs.ox.ac.uk/files/271/NuffieldReport.pdf)
+- [ ] [One&Done: A Single-Decryption EM-Based Attack on OpenSSL’s Constant-Time Blinded RSA](https://www.sjoerdlangkemper.nl/2016/11/01/tenex-password-bug/)
+{{< /admonition >}}
 
 
 <!-- URL -->

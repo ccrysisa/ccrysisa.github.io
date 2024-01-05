@@ -1,5 +1,42 @@
-# Git/GitHub 学习导航
+---
+title: Git/GitHub 学习导航 
+subtitle:
+date: 2024-01-04T19:00:36+08:00
+draft: false
+# author:
+#   name:
+#   link:
+#   email:
+#   avatar:
+description:
+keywords:
+license:
+comment: false
+weight: 0
+tags:
+  - Git
+categories:
+  - Git
+hiddenFromHomePage: false
+hiddenFromSearch: false
+hiddenFromRss: false
+summary:
+resources:
+  - name: featured-image
+    src: featured-image.jpg
+  - name: featured-image-preview
+    src: featured-image-preview.jpg
+toc: true
+math: true
+lightgallery: false
+password:
+message:
+repost:
+  enable: true
+  url:
 
+# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
+---
 
 ## Git 中文教学
 
@@ -32,10 +69,3 @@
 ## References
 
 - 知乎: [动手学习GIT - 最好学习GIT的方式是从零开始做一个](https://zhuanlan.zhihu.com/p/608514754)
-
-
----
-
-> 作者: [Xshine](https://github.com/LoongGshine)  
-> URL: https://loonggshine.github.io/git/git/  
-

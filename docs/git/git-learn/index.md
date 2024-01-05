@@ -1,50 +1,11 @@
----
-title: Git 学习记录
-subtitle:
-date: 2023-12-27T23:34:45+08:00
-draft: false
-author:
-  name: Xshine
-  link: https://github.com/LoongGshine
-  email: caijiaxin@dragonos.org
-  avatar: https://avatars.githubusercontent.com/u/133117003?s=400&v=4
-description:
-keywords:
-license:
-comment: false
-weight: 0
-tags:
-  - Git
-categories:
-  - Git
-hiddenFromHomePage: false
-hiddenFromSearch: false
-hiddenFromRss: false
-summary:
-resources:
-  - name: featured-image
-    src: featured-image.jpg
-  - name: featured-image-preview
-    src: featured-image-preview.jpg
-toc: true
-math: true
-lightgallery: true
-password:
-message:
-repost:
-  enable: true
-  url:
+# Git 学习记录
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
----
 
 教学影片：[Git 中文教学][git-zh-tutorials]
 
 ## 安装与设定
 
 :white_check_mark: 观看影片 [Git 教学系列 - 安装与配置][git-zh-1]，完成常用的 Git 设置。
-
----
 
 设置 Git 的编辑器为 vim，主要用于 `commit` 时的编辑：
 
@@ -79,7 +40,9 @@ $ git config --global alias.rst reset HEAD
 
 :white_check_mark: 观看影片 [Git 教学系列 - 指定 Commit][git-zh-3]，掌握 `git log`、`git show`、`git diff` 的常用方法。
 
----
+{{< center-quote >}}
+***只要 commit 了，资料基本不可能丢失，即使误操作了也是可以补救回来的（除非把 `.git/` 文件夹也删除了）。***
+{{< /center-quote >}}
 
 ### Hash Value
 
@@ -221,8 +184,6 @@ git diff master^ master^^
 
 :white_check_mark: 观看影片 [Git 教学系列 - Patch Add and Amend][git-zh-4]，掌握 `git add -p`、`git checkout -p`、`git add ---amend` 的用法，使用 `add` 和 `checkout` 时强烈建议使用 `-p`，掌握修改 commit 的两种方法。
 
----
-
 ### Only Add Related
 
 ```bash
@@ -265,12 +226,177 @@ git commit
 
 但是注意，`git reset HEAD^` 是会撤销原先的 commit（仅限于本地 Git 存储库）。
 
+## Branch and Merge
+
+:white_check_mark: 观看影片 [Git 教学系列 - Branch and Merge][git-zh-5]，掌握 `git add -p`、`git checkout -p`、`git add ---amend` 的用法，使用 `add` 和 `checkout` 时强烈建议使用 `-p`，掌握修改 commit 的两种方法。
+
+### Move and Create Branch
+
+Checkout: move HEAD
+- `git checkout <commit>`: Move HEAD to commit
+- `git checkout <path>`: **WARNING: discard change**
+  - 可以将路径上的文件复原到之前 commit 的状态。
+
+Branch:
+- `git branch`: List branch
+- `git branch <name>`: Create branch
+  - Or just: `git checkout -b`
+
+{{< details "Examples" >}}
+修改一个文件并恢复：
+
+```bash
+# modify file load.cpp
+git status
+git checkout load.cpp
+git status
+```
+
+删除一个文件并恢复：
+
+```bash
+rm load.cpp
+git status
+git checkout load.cpp
+git status
+```
+
+> 正如上一节所说的，`git checkout` 尽量带上 `-p` 参数，因为如果一不小心输入了 `git checkout .`，那就前功尽弃了。
+
+显示分支：
+
+```bash
+# only show name
+git branch
+# show more infomation
+git branch -v
+```
+
+切换分支：
+
+```bash
+# switch to branch 'main'
+git checkout main
+```
+
+创建分支：
+
+```bash
+# 1. using `git branch`
+git branch cload
+# 2. using `git checkout -b`
+git checkout -b asmload
+```
+
+切换到任一 commit：
+
+```bash
+git checkout <commit>
+```
+
+> 直接 checkout 到任一 commit 会有警告，这是因为，当你以该 commit 为基点进行一系列的 commit，这些新的 commit 会在你切换分支后消失，因为没有 branch 来引用它们。之前可以被引用是因为 HEAD 引用，切换分支后 HEAD 不再引用这些 commit，所以就会消失。在这种情况，Git 会在发出警告的同时建议我们使用 `git branch` 来创建分支进行引用。
+{{< /details >}}
+
+### View Branch
+
+列出仓库的所有分支：
+
+```bash
+git branch
+```
+
+也可以通过 `log` 来查看分支：
+
+```bash
+git log
+```
+
+- `--decorate`: 在 log 的首行显示所有的 references（可能需要通过 `git config log.decorate auto` 来开启）
+- `--graph`: 以图形化的方式显示 branch 的关系（主要是 commit 的引用）
+
+### Delete Branch
+
+删除分支：
+
+```bash
+git branch -d <name>
+```
+
+对于有没有 merge 的 commit 的分支，Git 会警告，需要使用 `-D` 来强制删除：
+
+```bash
+git branch -D <name>
+```
+
+- for no-merge commit
+- **WARNING: Discard Commit**
+
+> Git 会发出警告的原因同样是 no-merge commit 在删除分支后就无法被引用，所以会发出警告。
+
+### Merge
+
+合并分支。默认使用 fast-forward，即如果没有冲突，直接将要合并的分支提前到被合并分支的 commit 处，而不会另外生成一个 merge commit。但这样会使得被合并的分支在合并后，没有历史痕迹。可以通过 `--no-ff` (no fast forward) 来强制生成 merge commit。**推荐使用 merge 时加上 `--no-ff` 这个参数。**
+
+```bash
+git merge <branch>
+```
+
+通常是 main/master 这类主分支合并其它分支：
+
+```bash
+git checkout main/master
+git merge <branch>
+```
+
+### Resolve Conflict
+
+**Manually resolve:**
+- {{< raw >}}Check every codes between <<<<<<<, >>>>>>>{{< /raw >}}
+- Edit code to what it should be
+
+**Use mergetool like vimdiff:**
+- It shows: local, base, remote, file to be edited
+- Edit "file ro be edited" to what is should be
+
+**Add and Commit**
+
+```bash
+# 1.合并分支
+git merge <branch>
+# 2.检查状态，查看 unmerged 的文件
+git status
+# 3.编辑 unmerged 文件，编辑冲突区域代码即可
+vim <file>
+# 4.添加解决完冲突的文件
+git add <file>
+# 5.进行 merge commit
+git commit
+```
+{{< raw >}}
+冲突区域就是 <<<<<<< 和 >>>>>>> 内的区域，在 merge 操作后，Git 已经帮我们把 unmerged 文件修改为待解决冲突的状态，直接编辑文件即可。在编辑完成后，需要手动进行 add 和 commit，此次 commit 的信息 Git 已经帮我们写好了，一般不需要修改。
+{{< /raw >}}
+
+如果使用的是 mergetool，以 vimdiff 为例，只需将第 3 步的 `vim <file>` 改为 `git mergetool` 即可。vimdiff 会提供 4 个视窗：底部视窗是我们的编辑区，顶部左边是当前合并分支的状态，顶部中间是 base (合并分支和被合并的共同父节点) 的状态，顶部右边是 remote 的状态，按需要选择、编辑。
+> vimdiff 在编辑完后会保留 *.orig 的文件，这个文件是待解决冲突的文件副本。
+
+### Merge Conflict
+
+- Prevent very long development branch.
+- Split source code clearly.
 
 <!-- URL -->
 [git-zh-tutorials]: https://www.youtube.com/playlist?list=PLlyOkSAh6TwcvJQ1UtvkSwhZWCaM_S07d
 [git-zh-1]: https://youtu.be/LZ4oOzZwgrk
 [git-zh-3]: https://youtu.be/SV7xK_6-Wcg
 [git-zh-4]: https://youtu.be/3oIU7fG2UT0
+[git-zh-5]: https://youtu.be/qUfT-4bNtwY
 
 <!-- Images -->
 [amend]: /images/git/amend.svg
+
+
+---
+
+> 作者: [Xshine](https://github.com/LoongGshine)  
+> URL: https://loonggshine.github.io/git/git-learn/  
+
