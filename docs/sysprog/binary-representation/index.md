@@ -1,15 +1,19 @@
 # 解读计算机编码
 
 
-人們對數學的加減運算可輕易在腦中辨識符號並理解其結果，但電腦做任何事都受限於實體資料儲存及操作方式，換言之，電腦硬體實際只認得 0 和 1，卻不知道符號 + 和 - 在數學及應用場域的意義，於是工程人員引入「補數」以便在二進位系統中，表達人們認知上的正負數。但您有沒有想過，為何「二補數」(2’s complement) 被電腦廣泛採用呢？背後的設計考量又是什麼？本文嘗試從數學觀點去解讀編碼背後的原理，並佐以資訊安全及程式碼最佳化的考量，探討二補數這樣的編碼對於程式設計有何關鍵影響。
+{{< admonition abstract >}}
+人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 + 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
+{{< /admonition >}}
 
 <!--more-->
+
+> 原文地址：[解讀計算機編碼](https://hackmd.io/@sysprog/binary-representation)
 
 ## 一补数 (Ones’ complement)
 
 ### 9 的补数
 
-:x: 科普短片: [Not just counting, but saving lives: Curta][not-just-counting-but-saving-lives-curta]
+:white_check_mark: 科普短片: [Not just counting, but saving lives: Curta][not-just-counting-but-saving-lives-curta]
 
 ### 运算原理
 
@@ -108,6 +112,15 @@ $$
 上述两个例子反映了群论的性质，对于对称性研究的重要性和原理依据。
 {{< /admonition >}}
 
+科普影片：从五次方程到伽罗瓦理论
+
+1. [ ] [阿贝尔和伽罗瓦的悲惨世界](https://www.youtube.com/watch?v=CdBbPkXxc3E)
+2. [ ] []()
+3. [ ] []()
+4. [ ] []()
+5. [ ] []()
+6. [ ] []()
+
 ## 旁路攻击
 
 :white_check_mark: 观看科普视频: [我听得到你打了什么字][2xCICHh4Pas]
@@ -116,7 +129,7 @@ $$
 
 :white_check_mark: 借由 Wikipedia 了解旁路攻击 ([Side-channel attack][side-channel-attack]) 和时序攻击 ([Timing attack][timing-attack]) 的基本概念。
 - [x] [Black-box testing](https://en.wikipedia.org/wiki/Black-box_testing)
-- [ ] [Row hammer](https://en.wikipedia.org/wiki/Row_hammer)
+- [x] [Row hammer](https://en.wikipedia.org/wiki/Row_hammer)
 - [ ] [Cold boot attack](https://en.wikipedia.org/wiki/Cold_boot_attack)
 - [ ] [Rubber-hose cryptanalysis](https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis)
 
@@ -124,6 +137,64 @@ $$
 - [ ] [The password guessing bug in Tenex](https://www.sjoerdlangkemper.nl/2016/11/01/tenex-password-bug/)
 - [ ] [Side Channel Attack By Using Hidden Markov Model](https://www.cs.ox.ac.uk/files/271/NuffieldReport.pdf)
 - [ ] [One&Done: A Single-Decryption EM-Based Attack on OpenSSL’s Constant-Time Blinded RSA](https://www.sjoerdlangkemper.nl/2016/11/01/tenex-password-bug/)
+{{< /admonition >}}
+
+### Constant-Time Functions
+
+比较常见的常数时间实作方法是，**消除分支**。因为不同分支的执行时间可能会不同，这会被利用进行时序攻击。
+
+#### Branchless abs
+
+方法一，原理为 $-A = \neg (A - 1)$:
+
+```c
+#include <stdint.h>
+int32_t abs(int32_t x) {
+    int32_t mask = (x >> 31);
+    return (x + mask) ^ mask;
+}
+```
+
+方法二，原理为 $-A = \neg A + 1$:
+
+```c
+#include <stdint.h>
+int32_t abs(int32_t x) {
+    int32_t mask = (x >> 31);
+    return (x ^ mask) - mask;
+}
+```
+
+#### Branchless min/max
+
+Min:
+
+```c
+#include <stdint.h>
+int32_t min(int32_t a, int32_t b) {
+    int32_t diff = (a - b);
+    return b + (diff & (diff >> 31));
+}
+```
+- 如果 `diff > 0` 即 b 小，那么 `(diff >> 31) == 0`，则 `b + (diff & (diff >> 31)) == b`
+- 如果 `diff < 0` 即 a 小，那么 `(diff >> 31) == -1`，则 `b + (diff & (diff >> 31)) == b + (a - b) == a`
+
+Max:
+
+```c
+#include <stdint.h>
+int32_t max(int32_t a, int32_t b) {
+    int32_t diff = (b - a);
+    return b - (diff & (diff >> 31));
+}
+```
+- 如果 `diff > 0` 即 b 大, 那么 `(diff >> 31) == 0`，则 `b - (diff & (diff >> 31)) == b`
+- 如果 `diff < 0` 即 a 大，那么 `(diff >> 31) == -1`，则 `b - (diff & (diff >> 31)) == b - (b - a) == a`
+
+---
+
+{{< admonition info "延伸阅读" >}}
+:x: [基于 C 语言标准研究与系统程序安全议题](https://hackmd.io/@sysprog/c-std-security)
 {{< /admonition >}}
 
 

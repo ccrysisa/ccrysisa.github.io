@@ -15,7 +15,6 @@ comment: false
 weight: 0
 tags:
   - Linux 
-  - Ubuntu
 categories:
   - Linux
 hiddenFromHomePage: false

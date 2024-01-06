@@ -1,22 +1,22 @@
 ---
-title: 数学开放式课程学习导航
+title: C 语言规格书阅读记录
 subtitle:
-date: 2023-12-23T21:35:47+08:00
+date: 2024-01-06T16:07:25+08:00
 draft: false
-author:
-  name: vanJker
-  link: https://github.com/vanJker
-  email: cjshine@foxmail.com
-  avatar: https://avatars.githubusercontent.com/u/88960102?s=96&v=4
+# author:
+#   name:
+#   link:
+#   email:
+#   avatar:
 description:
 keywords:
 license:
 comment: false
 weight: 0
 tags:
-  - Math
+  - C
 categories:
-  - Mathematics
+  - C
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -27,8 +27,8 @@ resources:
   - name: featured-image-preview
     src: featured-image-preview.jpg
 toc: true
-math: true
-lightgallery: true
+math: false
+lightgallery: false
 password:
 message:
 repost:
@@ -38,6 +38,5 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-- [中大數學系開放式課程](http://www.math.ncu.edu.tw/~cchsiao/OCW/)
-- 台大齐震宇 - 数学潜水艇、微积分、分析
-- 台大谢铭伦 - 线性代数
+C 语言规格书阅读学习记录。
+<!--more-->

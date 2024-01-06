@@ -39,10 +39,13 @@ repost:
 ---
 
 教学影片：[Git 中文教学][git-zh-tutorials]
+<!--more-->
 
 ## 安装与设定
 
-:white_check_mark: 观看影片 [Git 教学系列 - 安装与配置][git-zh-1]，完成常用的 Git 设置。
+{{< admonition >}}
+:white_check_mark: 观看影片 [Git 教学系列 - 安装与配置](http://localhost:1313/)，完成常用的 Git 设置。
+{{< /admonition >}}
 
 设置 Git 的编辑器为 vim，主要用于 `commit` 时的编辑：
 
@@ -81,7 +84,9 @@ $ git config --global core.autocrlf true
 
 ## 指定 Commit
 
-:white_check_mark: 观看影片 [Git 教学系列 - 指定 Commit][git-zh-3]，掌握 `git log`、`git show`、`git diff` 的常用方法。
+{{< admonition >}}
+:white_check_mark: 观看影片 [Git 教学系列 - 指定 Commit](http://localhost:1313/)，掌握 `git log`、`git show`、`git diff` 的常用方法。理解 Hash Value 和 commit 对于 Git 版本控制的核心作用。
+{{< /admonition >}}
 
 {{< center-quote >}}
 ***只要 commit 了，资料基本不可能丢失，即使误操作了也是可以补救回来的（除非把 `.git/` 文件夹也删除了）。***
@@ -225,7 +230,9 @@ git diff master^ master^^
 
 ## Path Add and Amend
 
-:white_check_mark: 观看影片 [Git 教学系列 - Patch Add and Amend][git-zh-4]，掌握 `git add -p`、`git checkout -p`、`git add ---amend` 的用法，使用 `add` 和 `checkout` 时强烈建议使用 `-p`，掌握修改 commit 的两种方法。
+{{< admonition >}}
+:white_check_mark: 观看影片 [Git 教学系列 - Patch Add and Amend](http://localhost:1313/)，掌握 `git add -p`、`git checkout -p`、`git add ---amend` 的用法，使用 `add` 和 `checkout` 时强烈建议使用 `-p`，掌握修改 commit 的两种方法。
+{{< /admonition >}}
 
 ### Only Add Related
 
@@ -271,7 +278,14 @@ git commit
 
 ## Branch and Merge
 
-:white_check_mark: 观看影片 [Git 教学系列 - Branch and Merge][git-zh-5]，掌握创建、删除、切换分支的用法，掌握合并分支、解决冲突的方法。
+{{< admonition >}}
+:white_check_mark: 观看影片 [Git 教学系列 - Branch and Merge](https://youtu.be/qUfT-4bNtwY)，掌握创建、删除、切换分支的用法，掌握合并分支、解决冲突的方法。
+- `git checkout <commit>`
+- `git branch <name>`
+- `git branch <name> <commit>`
+- `git branch [-d|-D] <name>`
+- `git merge <name> --no-ff`
+{{< /admonition >}}
 
 ### Move and Create Branch
 
@@ -432,18 +446,12 @@ git commit
 
 ## Rebase
 
-:white_check_mark: 观看影片 [Git 教学系列 - Branch and Merge][git-zh-6]，掌握 TODO 的方法。
-
-`git rebase` 是 Git 的精华，可以让我们实现更细粒度的操作，可以说学会了 rebase 才算真正入门了 Git。
+{{< admonition >}}
+:white_check_mark: 观看影片 [Git 教学系列 - Branch and Merge](https://youtu.be/0nwqar3ycTY)，掌握 TODO 的方法。`git rebase` 是 Git 的精华，可以让我们实现更细粒度的操作，可以说学会了 rebase 才算真正入门了 Git。
+{{< /admonition >}}
 
 
 <!-- URL -->
 [git-zh-tutorials]: https://www.youtube.com/playlist?list=PLlyOkSAh6TwcvJQ1UtvkSwhZWCaM_S07d
-[git-zh-1]: https://youtu.be/LZ4oOzZwgrk
-[git-zh-3]: https://youtu.be/SV7xK_6-Wcg
-[git-zh-4]: https://youtu.be/3oIU7fG2UT0
-[git-zh-5]: https://youtu.be/qUfT-4bNtwY
-[git-zh-6]: https://youtu.be/0nwqar3ycTY
-
 <!-- Images -->
 [amend]: /images/git/amend.svg

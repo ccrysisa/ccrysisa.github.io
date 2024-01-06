@@ -18,7 +18,7 @@
   <pubDate>Wed, 27 Dec 2023 23:34:45 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/git/git-learn/</guid>
-  <description><![CDATA[教学影片：Git 中文教学 安装与设定 &#x2705; 观看影片 Git 教学系列 - 安装与配置，完成常用的 Git 设置。 设置 Git 的编辑器为 vim，主要用于 commit 时的编辑： 1 $ git config --global]]></description>
+  <description><![CDATA[<p>教学影片：<a href="https://www.youtube.com/playlist?list=PLlyOkSAh6TwcvJQ1UtvkSwhZWCaM_S07d"target="_blank" rel="external nofollow noopener noreferrer">Git 中文教学</a></p>]]></description>
 </item>
 </channel>
 </rss>

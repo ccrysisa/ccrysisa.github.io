@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>C - 分类 - Xshine&#39;s Blog</title>
+    <link>https://loonggshine.github.io/categories/c/</link>
+    <description>C - 分类 - Xshine&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Sat, 06 Jan 2024 16:07:25 &#43;0800</lastBuildDate><atom:link href="https://loonggshine.github.io/categories/c/" rel="self" type="application/rss+xml" /><item>
+  <title>C 语言规格书阅读记录</title>
+  <link>https://loonggshine.github.io/c-specification/c-specification/</link>
+  <pubDate>Sat, 06 Jan 2024 16:07:25 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://loonggshine.github.io/c-specification/c-specification/</guid>
+  <description><![CDATA[<p>C 语言规格书阅读学习记录。</p>]]></description>
+</item>
+</channel>
+</rss>

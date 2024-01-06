@@ -1,3 +1,4 @@
+https://loonggshine.github.io/c-specification/c-specification/
 https://loonggshine.github.io/git/git/
 https://loonggshine.github.io/network/network/
 https://loonggshine.github.io/sysprog/binary-representation/
