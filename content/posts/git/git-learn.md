@@ -76,9 +76,12 @@ $ git config --global alias.rst reset HEAD
 设置 Windows 和 Mac/Linux 的换行符同步：
 
 ```bash
+# In Windows
 $ git config --global core.autocrlf true
+# In Mac/Linux
+$ git config --global core.autocrlf input
 ```
-> 效果为：提交时自动将 CRLF 转为 LF，检出代码时将 LF 转换成 CRLF。
+> 效果为：在 Windows 提交时自动将 CRLF 转为 LF，检出代码时将 LF 转换成 CRLF。在 Mac/Linux 提交时将 CRLF转为 LF，检出代码时不转换。这是因为 Windows 的换行符为 `\r\n`，而 Mac/Linux 的换行符仅为 `\n`。
 
 ## Add 和 Commit
 

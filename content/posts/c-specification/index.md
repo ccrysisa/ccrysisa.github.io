@@ -40,3 +40,5 @@ repost:
 
 C 语言规格书阅读学习记录。
 <!--more-->
+
+阅读的规格书版本为 n1256，对应的下载地址为 [C 语言规格书](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf)。

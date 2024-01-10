@@ -6,21 +6,21 @@
 新手入门推荐，对于 Git 的入门操作讲解十分友好。
 
 - [视频地址](https://youtu.be/LZ4oOzZwgrk)
-- [学习记录]({{< relref "git-learn" >}})
+- [学习记录]({{&lt; relref &#34;git-learn&#34; &gt;}})
 
 ## Git 基本原理
 
 对 Git 原理介绍比较准确，UP 主其它关于 GitHub 的合集也比较推荐。
 
 - [视频地址](https://www.bilibili.com/video/BV1TA411q75f)
-- [学习记录]({{< relref "" >}})
+- [学习记录]({{&lt; relref &#34;&#34; &gt;}})
 
 ## Learn Git Branching
 
 交互性学习 Git 的网站，可以边玩边学 Git 操作，趣味性 MAX（来自 THUer 的推荐）。
 
 - [网站地址](https://learngitbranching.js.org/)
-- [学习记录]({{< relref "" >}})
+- [学习记录]({{&lt; relref &#34;&#34; &gt;}})
 
 ## ugit
 
