@@ -40,7 +40,7 @@ $ proxy_off
 根据 [搜狗输入法 Linux 安装指导][sougou-linux-guide] 来安装搜狗输入法。
 
 - 无需卸载系统 ibus 输入法框架。
-- 通过 `Ctrl &#43; space` 唤醒搜狗输入法。
+- 通过 `Ctrl + space` 唤醒搜狗输入法。
 
 
 [cflbp]: https://github.com/Elegybackup/clash-for-linux-backup

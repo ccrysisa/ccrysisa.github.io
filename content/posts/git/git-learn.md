@@ -451,6 +451,8 @@ git commit
 
 {{< admonition >}}
 :white_check_mark: 观看影片 [Git 教学系列 - Branch and Merge](https://youtu.be/0nwqar3ycTY)，掌握 TODO 的方法。`git rebase` 是 Git 的精华，可以让我们实现更细粒度的操作，可以说学会了 rebase 才算真正入门了 Git。
+
+这个视频讲得比较乱，所以推荐配合视频给出的参考文章 [Git-rebase 小笔记](https://blog.yorkxin.org/posts/git-rebase/) 来学习。
 {{< /admonition >}}
 
 

@@ -16,7 +16,7 @@ weight: 0
 tags:
   - LKI
   - Rust
-  - Systerm
+  - Sysprog
 categories:
   - LKI
 hiddenFromHomePage: false

@@ -2,7 +2,7 @@
   <channel>
     <title>LKI - 标签 - Xshine&#39;s Blog</title>
     <link>https://loonggshine.github.io/tags/lki/</link>
-    <description>LKI - 标签 | Xshine&#39;s Blog</description>
+    <description>LKI - 标签 - Xshine&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Sun, 31 Dec 2023 15:43:50 &#43;0800</lastBuildDate><atom:link href="https://loonggshine.github.io/tags/lki/" rel="self" type="application/rss+xml" /><item>
   <title>解读计算机编码</title>
@@ -21,11 +21,19 @@
 </item>
 <item>
   <title>Rust - 进行中的未来</title>
-  <link>https://loonggshine.github.io/lki/rust-intro/</link>
+  <link>https://loonggshine.github.io/sysprog/rust-introduction/</link>
   <pubDate>Thu, 28 Dec 2023 20:18:03 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://loonggshine.github.io/lki/rust-intro/</guid>
-  <description><![CDATA[Rust in 100 Seconds&#x2705; 观看短片：Rust in 100 Seconds 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello]]></description>
+  <guid>https://loonggshine.github.io/sysprog/rust-introduction/</guid>
+  <description><![CDATA[Rust in 100 Seconds &#x2705; 观看短片：Rust in 100 Seconds 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut]]></description>
+</item>
+<item>
+  <title>GNU/Linux 开发工具</title>
+  <link>https://loonggshine.github.io/sysprog/gnu-linux-dev/</link>
+  <pubDate>Mon, 25 Dec 2023 15:43:50 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://loonggshine.github.io/sysprog/gnu-linux-dev/</guid>
+  <description><![CDATA[GNU/Linux 开发工具 原文地址 安装 Windows / Ubuntu 双系统 因为有些操作必须在物理硬件上才能执行。 Markdown 文本标记语言 速览 LaTeX 语法示例一节，作为工具书册，在需要使用时知道如何]]></description>
 </item>
 </channel>
 </rss>

@@ -5,6 +5,22 @@
     <description>所有文章 | Xshine&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><atom:link href="https://loonggshine.github.io/posts/c-specification/" rel="self" type="application/rss+xml" /><item>
+  <title>C99 Standard 6. Language 阅读记录</title>
+  <link>https://loonggshine.github.io/c-specification/ch6/</link>
+  <pubDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://loonggshine.github.io/c-specification/ch6/</guid>
+  <description><![CDATA[<p>C 语言规格书 Chapter 6 - Language 阅读记录。</p>]]></description>
+</item>
+<item>
+  <title>C99 Standard 7. Library 阅读记录</title>
+  <link>https://loonggshine.github.io/c-specification/ch7/</link>
+  <pubDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://loonggshine.github.io/c-specification/ch7/</guid>
+  <description><![CDATA[<p>C 语言规格书 Chapter 7 - Library 阅读记录。</p>]]></description>
+</item>
+<item>
   <title>C 语言规格书阅读记录</title>
   <link>https://loonggshine.github.io/c-specification/c-specification/</link>
   <pubDate>Sat, 06 Jan 2024 16:07:25 &#43;0800</pubDate>

@@ -2,13 +2,13 @@
 
 
 教学影片：[Git 中文教学][git-zh-tutorials]
-&lt;!--more--&gt;
+<!--more-->
 
 ## 安装与设定
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 :white_check_mark: 观看影片 [Git 教学系列 - 安装与配置](http://localhost:1313/)，完成常用的 Git 设置。
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 设置 Git 的编辑器为 vim，主要用于 `commit` 时的编辑：
 
@@ -34,7 +34,7 @@ $ git config --global alias.st status
 $ git config --global alias.ch checkout
 $ git config --global alias.rst reset HEAD
 ```
-&gt; 效果为：命令 `git st` 等价于 `git status`，其余的类似。
+> 效果为：命令 `git st` 等价于 `git status`，其余的类似。
 
 设置 Windows 和 Mac/Linux 的换行符同步：
 
@@ -44,19 +44,19 @@ $ git config --global core.autocrlf true
 # In Mac/Linux
 $ git config --global core.autocrlf input
 ```
-&gt; 效果为：在 Windows 提交时自动将 CRLF 转为 LF，检出代码时将 LF 转换成 CRLF。在 Mac/Linux 提交时将 CRLF转为 LF，检出代码时不转换。这是因为 Windows 的换行符为 `\r\n`，而 Mac/Linux 的换行符仅为 `\n`。
+> 效果为：在 Windows 提交时自动将 CRLF 转为 LF，检出代码时将 LF 转换成 CRLF。在 Mac/Linux 提交时将 CRLF转为 LF，检出代码时不转换。这是因为 Windows 的换行符为 `\r\n`，而 Mac/Linux 的换行符仅为 `\n`。
 
 ## Add 和 Commit
 
 ## 指定 Commit
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 :white_check_mark: 观看影片 [Git 教学系列 - 指定 Commit](http://localhost:1313/)，掌握 `git log`、`git show`、`git diff` 的常用方法。理解 Hash Value 和 commit 对于 Git 版本控制的核心作用。
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
-{{&lt; center-quote &gt;}}
+{{< center-quote >}}
 ***只要 commit 了，资料基本不可能丢失，即使误操作了也是可以补救回来的（除非把 `.git/` 文件夹也删除了）。***
-{{&lt; /center-quote &gt;}}
+{{< /center-quote >}}
 
 ### Hash Value
 
@@ -83,7 +83,7 @@ git log 4a6ebc -n1
 
 这个命令的效果是从 Hash 值为 4a6bc 的 commit 开始打印 1 条 commit 记录（没错，对应的是 `-n1`），因为 Git 十分聪明，所以 commit 对应的 Hash 值只需前 6 位即可（因为这样已经几乎不会发生 Hash 冲突）。
 
-{{&lt; details &#34;Examples&#34; &gt;}}
+{{< details "Examples" >}}
 
 打印 master 分支的最新一个 commit：
 
@@ -116,7 +116,7 @@ git log HEAD^^^^^ -n1 --oneline
 git log HEAD~5 -n1 --oneline
 ```
 
-&gt; 一般来说，使用 `^` 就已经足够了，几乎不会遇到使用 `~` 的场景，因为这种场景一般会去找图形化界面吧。:rofl:
+> 一般来说，使用 `^` 就已经足够了，几乎不会遇到使用 `~` 的场景，因为这种场景一般会去找图形化界面吧。:rofl:
 
 打印与文件 `README.md` 相关的 commits（仅使用一行显示）：
 
@@ -142,12 +142,12 @@ git log --patch README.md
 git log -S README
 ```
 
-{{&lt; /details &gt;}}
+{{< /details >}}
 
 ### View History
 
 ```bash
-git log &lt;path&gt;|&lt;commit&gt;
+git log <path>|<commit>
 ```
 
 - `-n`: limit number
@@ -159,7 +159,7 @@ git log &lt;path&gt;|&lt;commit&gt;
 ### View Commit
 
 ```bash
-git show &lt;commit&gt;
+git show <commit>
 ```
 
 - Equal to `log -n1`
@@ -181,7 +181,7 @@ git diff --staged
 查看当前与指定的 commit 的差异：
 
 ```bash
-git diff &lt;commit&gt;
+git diff <commit>
 # e.g. 
 git diff master^
 ```
@@ -189,16 +189,16 @@ git diff master^
 查两个指定的 commit 之间的差异：
 
 ```bash
-git diff &lt;commit&gt; &lt;commit&gt;
+git diff <commit> <commit>
 # e.g. 
 git diff master^ master^^
 ```
 
 ## Path Add and Amend
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 :white_check_mark: 观看影片 [Git 教学系列 - Patch Add and Amend](http://localhost:1313/)，掌握 `git add -p`、`git checkout -p`、`git add ---amend` 的用法，使用 `add` 和 `checkout` 时强烈建议使用 `-p`，掌握修改 commit 的两种方法。
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ### Only Add Related
 
@@ -236,7 +236,7 @@ git add -p
 git commit
 ```
 
-`git commit --amend` 并不是直接替换原有的 commit，而是创建了一个新的 commit 并重新设置了 HEAD 的指向。所以，新旧两个 commit 的 Hash Value 并不相同，事实上，如果你拥有旧 commit 的 Hash Value，是可以通过 `git checkout &lt;commit&gt;` 切换到那个 commit 的。其原理如下图：
+`git commit --amend` 并不是直接替换原有的 commit，而是创建了一个新的 commit 并重新设置了 HEAD 的指向。所以，新旧两个 commit 的 Hash Value 并不相同，事实上，如果你拥有旧 commit 的 Hash Value，是可以通过 `git checkout <commit>` 切换到那个 commit 的。其原理如下图：
 
 ![amend][amend]
 
@@ -244,28 +244,28 @@ git commit
 
 ## Branch and Merge
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 :white_check_mark: 观看影片 [Git 教学系列 - Branch and Merge](https://youtu.be/qUfT-4bNtwY)，掌握创建、删除、切换分支的用法，掌握合并分支、解决冲突的方法。
-- `git checkout &lt;commit&gt;`
-- `git branch &lt;name&gt;`
-- `git branch &lt;name&gt; &lt;commit&gt;`
-- `git branch [-d|-D] &lt;name&gt;`
-- `git merge &lt;name&gt; --no-ff`
-{{&lt; /admonition &gt;}}
+- `git checkout <commit>`
+- `git branch <name>`
+- `git branch <name> <commit>`
+- `git branch [-d|-D] <name>`
+- `git merge <name> --no-ff`
+{{< /admonition >}}
 
 ### Move and Create Branch
 
 Checkout: move HEAD
-- `git checkout &lt;commit&gt;`: Move HEAD to commit
-- `git checkout &lt;path&gt;`: **WARNING: discard change**
+- `git checkout <commit>`: Move HEAD to commit
+- `git checkout <path>`: **WARNING: discard change**
   - 可以将路径上的文件复原到之前 commit 的状态。
 
 Branch:
 - `git branch`: List branch
-- `git branch &lt;name&gt;`: Create branch
+- `git branch <name>`: Create branch
   - Or just: `git checkout -b`
 
-{{&lt; details &#34;Examples&#34; &gt;}}
+{{< details "Examples" >}}
 修改一个文件并恢复：
 
 ```bash
@@ -284,7 +284,7 @@ git checkout load.cpp
 git status
 ```
 
-&gt; 正如上一节所说的，`git checkout` 尽量带上 `-p` 参数，因为如果一不小心输入了 `git checkout .`，那就前功尽弃了。
+> 正如上一节所说的，`git checkout` 尽量带上 `-p` 参数，因为如果一不小心输入了 `git checkout .`，那就前功尽弃了。
 
 显示分支：
 
@@ -298,7 +298,7 @@ git branch -v
 切换分支：
 
 ```bash
-# switch to branch &#39;main&#39;
+# switch to branch 'main'
 git checkout main
 ```
 
@@ -309,18 +309,18 @@ git checkout main
 git branch cload
 # 2. using `git checkout -b`
 git checkout -b asmload
-# 3. create a new branch in &lt;commit&gt;
-git branch cload &lt;commit&gt;
+# 3. create a new branch in <commit>
+git branch cload <commit>
 ```
 
 切换到任一 commit：
 
 ```bash
-git checkout &lt;commit&gt;
+git checkout <commit>
 ```
 
-&gt; 直接 checkout 到任一 commit 会有警告，这是因为，当你以该 commit 为基点进行一系列的 commit，这些新的 commit 会在你切换分支后消失，因为没有 branch 来引用它们。之前可以被引用是因为 HEAD 引用，切换分支后 HEAD 不再引用这些 commit，所以就会消失。在这种情况，Git 会在发出警告的同时建议我们使用 `git branch` 来创建分支进行引用。
-{{&lt; /details &gt;}}
+> 直接 checkout 到任一 commit 会有警告，这是因为，当你以该 commit 为基点进行一系列的 commit，这些新的 commit 会在你切换分支后消失，因为没有 branch 来引用它们。之前可以被引用是因为 HEAD 引用，切换分支后 HEAD 不再引用这些 commit，所以就会消失。在这种情况，Git 会在发出警告的同时建议我们使用 `git branch` 来创建分支进行引用。
+{{< /details >}}
 
 ### View Branch
 
@@ -344,65 +344,65 @@ git log
 删除分支：
 
 ```bash
-git branch -d &lt;name&gt;
+git branch -d <name>
 ```
 
 对于有没有 merge 的 commit 的分支，Git 会警告，需要使用 `-D` 来强制删除：
 
 ```bash
-git branch -D &lt;name&gt;
+git branch -D <name>
 ```
 
 - for no-merge commit
 - **WARNING: Discard Commit**
 
-&gt; Git 会发出警告的原因同样是 no-merge commit 在删除分支后就无法被引用，所以会发出警告。
+> Git 会发出警告的原因同样是 no-merge commit 在删除分支后就无法被引用，所以会发出警告。
 
 ### Merge
 
 合并分支。默认使用 fast-forward，即如果没有冲突，直接将要合并的分支提前到被合并分支的 commit 处，而不会另外生成一个 merge commit。但这样会使得被合并的分支在合并后，没有历史痕迹。可以通过 `--no-ff` (no fast forward) 来强制生成 merge commit。**推荐使用 merge 时加上 `--no-ff` 这个参数。**
 
 ```bash
-git merge &lt;branch&gt;
+git merge <branch>
 ```
 
 通常是 main/master 这类主分支合并其它分支：
 
 ```bash
 git checkout main/master
-git merge &lt;branch&gt;
+git merge <branch>
 ```
 
 ### Resolve Conflict
 
 **Manually resolve:**
-- {{&lt; raw &gt;}}Check every codes between &lt;&lt;&lt;&lt;&lt;&lt;&lt;, &gt;&gt;&gt;&gt;&gt;&gt;&gt;{{&lt; /raw &gt;}}
+- {{< raw >}}Check every codes between <<<<<<<, >>>>>>>{{< /raw >}}
 - Edit code to what it should be
 
 **Use mergetool like vimdiff:**
 - It shows: local, base, remote, file to be edited
-- Edit &#34;file ro be edited&#34; to what is should be
+- Edit "file ro be edited" to what is should be
 
 **Add and Commit**
 
 ```bash
 # 1. 合并分支
-git merge &lt;branch&gt;
+git merge <branch>
 # 2. 检查状态，查看 unmerged 的文件
 git status
 # 3. 编辑 unmerged 文件，编辑冲突区域代码即可
-vim &lt;file&gt;
+vim <file>
 # 4. 添加解决完冲突的文件
-git add &lt;file&gt;
+git add <file>
 # 5. 进行 merge commit
 git commit
 ```
-{{&lt; raw &gt;}}
-冲突区域就是 &lt;&lt;&lt;&lt;&lt;&lt;&lt; 和 &gt;&gt;&gt;&gt;&gt;&gt;&gt; 内的区域，在 merge 操作后，Git 已经帮我们把 unmerged 文件修改为待解决冲突的状态，直接编辑文件即可。在编辑完成后，需要手动进行 add 和 commit，此次 commit 的信息 Git 已经帮我们写好了，一般不需要修改。
-{{&lt; /raw &gt;}}
+{{< raw >}}
+冲突区域就是 <<<<<<< 和 >>>>>>> 内的区域，在 merge 操作后，Git 已经帮我们把 unmerged 文件修改为待解决冲突的状态，直接编辑文件即可。在编辑完成后，需要手动进行 add 和 commit，此次 commit 的信息 Git 已经帮我们写好了，一般不需要修改。
+{{< /raw >}}
 
-如果使用的是 mergetool，以 vimdiff 为例，只需将第 3 步的 `vim &lt;file&gt;` 改为 `git mergetool` 即可。vimdiff 会提供 4 个视窗：底部视窗是我们的编辑区，顶部左边是当前合并分支的状态，顶部中间是 base (合并分支和被合并的共同父节点) 的状态，顶部右边是 remote 的状态，按需要选择、编辑。
-&gt; vimdiff 在编辑完后会保留 *.orig 的文件，这个文件是待解决冲突的文件副本。
+如果使用的是 mergetool，以 vimdiff 为例，只需将第 3 步的 `vim <file>` 改为 `git mergetool` 即可。vimdiff 会提供 4 个视窗：底部视窗是我们的编辑区，顶部左边是当前合并分支的状态，顶部中间是 base (合并分支和被合并的共同父节点) 的状态，顶部右边是 remote 的状态，按需要选择、编辑。
+> vimdiff 在编辑完后会保留 *.orig 的文件，这个文件是待解决冲突的文件副本。
 
 ### Merge Conflict
 
@@ -412,14 +412,16 @@ git commit
 
 ## Rebase
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 :white_check_mark: 观看影片 [Git 教学系列 - Branch and Merge](https://youtu.be/0nwqar3ycTY)，掌握 TODO 的方法。`git rebase` 是 Git 的精华，可以让我们实现更细粒度的操作，可以说学会了 rebase 才算真正入门了 Git。
-{{&lt; /admonition &gt;}}
+
+这个视频讲得比较乱，所以推荐配合视频给出的参考文章 [Git-rebase 小笔记](https://blog.yorkxin.org/posts/git-rebase/) 来学习。
+{{< /admonition >}}
 
 
-&lt;!-- URL --&gt;
+<!-- URL -->
 [git-zh-tutorials]: https://www.youtube.com/playlist?list=PLlyOkSAh6TwcvJQ1UtvkSwhZWCaM_S07d
-&lt;!-- Images --&gt;
+<!-- Images -->
 [amend]: /images/git/amend.svg
 
 
