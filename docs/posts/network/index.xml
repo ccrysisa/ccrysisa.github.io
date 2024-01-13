@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>所有文章 - Xshine&#39;s Blog</title>
+    <title>所有Network - Xshine&#39;s Blog</title>
     <link>https://loonggshine.github.io/posts/network/</link>
-    <description>所有文章 | Xshine&#39;s Blog</description>
+    <description>所有Network | Xshine&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><atom:link href="https://loonggshine.github.io/posts/network/" rel="self" type="application/rss+xml" /><item>
   <title>计算机网络学习导航</title>

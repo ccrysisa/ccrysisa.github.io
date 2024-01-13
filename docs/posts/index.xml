@@ -21,7 +21,7 @@
   <description><![CDATA[博客（英语：Blog）是一种在线日记型式的个人网站，借由张帖子章、图片或视频来记录生活、抒发情感或分享信息。博客上的文章通常根据张贴时间，以]]></description>
 </item>
 <item>
-  <title></title>
+  <title>C Standard</title>
   <link>https://loonggshine.github.io/posts/c-specification/</link>
   <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
   <author>Xshine</author>
@@ -29,7 +29,7 @@
   <description><![CDATA[]]></description>
 </item>
 <item>
-  <title></title>
+  <title>Git</title>
   <link>https://loonggshine.github.io/posts/git/</link>
   <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
   <author>Xshine</author>
@@ -37,7 +37,7 @@
   <description><![CDATA[]]></description>
 </item>
 <item>
-  <title></title>
+  <title>Linux Kernel Internals</title>
   <link>https://loonggshine.github.io/posts/lki/</link>
   <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
   <author>Xshine</author>
@@ -45,7 +45,7 @@
   <description><![CDATA[]]></description>
 </item>
 <item>
-  <title></title>
+  <title>Mathematics</title>
   <link>https://loonggshine.github.io/posts/math/</link>
   <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
   <author>Xshine</author>
@@ -53,7 +53,7 @@
   <description><![CDATA[]]></description>
 </item>
 <item>
-  <title></title>
+  <title>Network</title>
   <link>https://loonggshine.github.io/posts/network/</link>
   <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
   <author>Xshine</author>
@@ -61,7 +61,7 @@
   <description><![CDATA[]]></description>
 </item>
 <item>
-  <title></title>
+  <title>Systerm Programming</title>
   <link>https://loonggshine.github.io/posts/sysprog/</link>
   <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
   <author>Xshine</author>

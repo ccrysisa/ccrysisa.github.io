@@ -57,7 +57,14 @@
   <pubDate>Mon, 25 Dec 2023 15:43:50 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/sysprog/gnu-linux-dev/</guid>
-  <description><![CDATA[GNU/Linux 开发工具 原文地址 安装 Windows / Ubuntu 双系统 因为有些操作必须在物理硬件上才能执行。 Markdown 与 LaTeX 速览 LaTeX 语法示例一节，作为工具书册，在需要使用时知道如何查询。 速]]></description>
+  <description><![CDATA[<div class="details admonition abstract open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而上提供各类触及“灵魂”的学习案例，让所有课程从纸上谈兵转变成沙场实战，会极大地提升工程实践的效率和技能。</div>
+    </div>
+  </div>]]></description>
 </item>
 </channel>
 </rss>

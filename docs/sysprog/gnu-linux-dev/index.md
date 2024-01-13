@@ -1,9 +1,13 @@
 # GNU/Linux 开发工具
 
 
-# GNU/Linux 开发工具
+{{< admonition abstract >}}
+GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而上提供各类触及“灵魂”的学习案例，让所有课程从纸上谈兵转变成沙场实战，会极大地提升工程实践的效率和技能。
+{{< /admonition >}}
 
-[原文地址][source]
+<!--more-->
+
+> 原文地址：[GNU/Linux 开发工具][source]
 
 ## 安装 Windows / Ubuntu 双系统
 
