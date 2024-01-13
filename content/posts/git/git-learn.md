@@ -17,6 +17,7 @@ tags:
   - Git
 categories:
   - Git
+  - LKI
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

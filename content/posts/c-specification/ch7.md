@@ -1,5 +1,5 @@
 ---
-title: C99 Standard 7. Library 阅读记录
+title: C Standard - 7. Library 阅读记录
 subtitle:
 date: 2024-01-11T23:23:48+08:00
 draft: false
@@ -15,6 +15,7 @@ comment: false
 weight: 0
 tags:
   - C/C++
+  - Sysprog
 categories:
   - C
 hiddenFromHomePage: false

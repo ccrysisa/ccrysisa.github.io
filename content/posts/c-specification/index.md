@@ -15,6 +15,7 @@ comment: false
 weight: 0
 tags:
   - C/C++
+  - Sysprog
 categories:
   - C
 hiddenFromHomePage: false

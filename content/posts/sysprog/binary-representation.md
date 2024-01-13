@@ -14,7 +14,6 @@ license:
 comment: false
 weight: 0
 tags:
-  - LKI
   - Sysprog
 categories:
   - LKI

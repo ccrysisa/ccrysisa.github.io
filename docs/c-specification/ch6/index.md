@@ -1,4 +1,4 @@
-# C99 Standard 6. Language 阅读记录
+# C Standard - 6. Language 阅读记录
 
 
 C 语言规格书 Chapter 6 - Language 阅读记录。

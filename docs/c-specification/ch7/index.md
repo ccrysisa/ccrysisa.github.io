@@ -1,4 +1,4 @@
-# C99 Standard 7. Library 阅读记录
+# C Standard - 7. Library 阅读记录
 
 
 C 语言规格书 Chapter 7 - Library 阅读记录。

@@ -38,8 +38,6 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-# Ubuntu 网络和输入法
-
 ## 网络代理
 
 根据项目 [clash-for-linux-backup][cflbp] 来配置 Ubuntu 的网络代理。
@@ -78,6 +76,43 @@ $ proxy_off
 
 - 无需卸载系统 ibus 输入法框架。
 - 通过 `Ctrl + space` 唤醒搜狗输入法。
+
+## 快捷键
+
+新建终端：
+- `Ctrl + Alt + T`
+
+锁屏：
+- `Super + L`：锁定屏幕并熄屏。
+
+显示桌面：
+- `Super + d` 或者 `Ctrl + Alt + d` 最小化所有运行的窗口并显示桌面，再次键入则重新打开之前的窗口。
+
+显示所有的应用程序：
+- `Super + a` 
+- 可以通过 `ESC` 来退出该显示。
+
+显示当前运行的所有应用程序：
+- `Super`
+
+移动窗口位置：
+- `Super + 左箭头`：当前窗口移动到屏幕左半边区域
+- `Super + 右箭头`：当前窗口移动到屏幕右半边区域
+- `Super + 上箭头`：当前窗口最大化
+- `Super + 下箭头`：当前窗口恢复正常
+
+隐藏当前窗口到任务栏：
+- `Super + h`
+
+切换当前的应用程序：
+- `Super + Tab`：以应用程序为粒度显示切换选项
+- `Alt + Tab`：以窗口为粒度显示切换选项
+
+切换虚拟桌面/工作区：
+- `Ctrl + Alt + 左/右方向键`
+
+自定义键盘快捷键：
+- **Settings -> Keyboard -> Keyboard Shortcus | View and Customize Shortcuts -> Custom Shortcuts**
 
 
 [cflbp]: https://github.com/Elegybackup/clash-for-linux-backup

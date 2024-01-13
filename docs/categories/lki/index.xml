@@ -28,12 +28,20 @@
   <description><![CDATA[Rust in 100 Seconds &#x2705; 观看短片：Rust in 100 Seconds 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut]]></description>
 </item>
 <item>
+  <title>Git 学习记录</title>
+  <link>https://loonggshine.github.io/git/git-learn/</link>
+  <pubDate>Wed, 27 Dec 2023 23:34:45 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://loonggshine.github.io/git/git-learn/</guid>
+  <description><![CDATA[<p>教学影片：<a href="https://www.youtube.com/playlist?list=PLlyOkSAh6TwcvJQ1UtvkSwhZWCaM_S07d"target="_blank" rel="external nofollow noopener noreferrer">Git 中文教学</a></p>]]></description>
+</item>
+<item>
   <title>GNU/Linux 开发工具</title>
   <link>https://loonggshine.github.io/sysprog/gnu-linux-dev/</link>
   <pubDate>Mon, 25 Dec 2023 15:43:50 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/sysprog/gnu-linux-dev/</guid>
-  <description><![CDATA[GNU/Linux 开发工具 原文地址 安装 Windows / Ubuntu 双系统 因为有些操作必须在物理硬件上才能执行。 Markdown 文本标记语言 速览 LaTeX 语法示例一节，作为工具书册，在需要使用时知道如何]]></description>
+  <description><![CDATA[GNU/Linux 开发工具 原文地址 安装 Windows / Ubuntu 双系统 因为有些操作必须在物理硬件上才能执行。 Markdown 与 LaTeX 速览 LaTeX 语法示例一节，作为工具书册，在需要使用时知道如何查询。 速]]></description>
 </item>
 </channel>
 </rss>

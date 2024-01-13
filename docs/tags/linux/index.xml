@@ -10,7 +10,7 @@
   <pubDate>Wed, 27 Dec 2023 20:35:45 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/ubuntu/</guid>
-  <description><![CDATA[Ubuntu 网络和输入法 网络代理 根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo]]></description>
+  <description><![CDATA[网络代理 根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo apt install net-tools 安装并启]]></description>
 </item>
 </channel>
 </rss>

@@ -2,37 +2,36 @@
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
   ><url>
-      <loc>https://loonggshine.github.io/categories/c/</loc><lastmod>2024-01-12T16:39:30&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/c-specification/ch6/</loc><lastmod>2024-01-12T16:39:30&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/c-specification/ch7/</loc><lastmod>2024-01-12T16:39:21&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/categories/</loc><lastmod>2024-01-12T17:23:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/posts/</loc><lastmod>2024-01-12T17:23:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/</loc><lastmod>2024-01-12T17:23:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/c-specification/c-specification/</loc><lastmod>2024-01-11T00:18:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/tags/git/</loc><lastmod>2024-01-11T00:18:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/categories/git/</loc><lastmod>2024-01-11T00:18:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/git/git/</loc><lastmod>2024-01-05T21:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/tags/</loc><lastmod>2024-01-12T17:23:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/tags/network/</loc><lastmod>2024-01-05T21:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/categories/network/</loc><lastmod>2024-01-05T21:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/network/network/</loc><lastmod>2024-01-05T21:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/tags/lki/</loc><lastmod>2024-01-12T17:23:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/categories/lki/</loc><lastmod>2024-01-12T17:23:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/tags/sysprog/</loc><lastmod>2024-01-12T17:23:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/sysprog/binary-representation/</loc><lastmod>2024-01-06T20:33:15&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/tags/rust/</loc><lastmod>2024-01-11T23:21:13&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/sysprog/rust-introduction/</loc><lastmod>2024-01-11T23:21:13&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/git/git-learn/</loc><lastmod>2024-01-11T00:18:57&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/categories/c/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/c-specification/ch6/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/c-specification/ch7/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/categories/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/posts/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/tags/sysprog/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/tags/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/c-specification/c-specification/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/tags/git/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/categories/git/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/git/git/</loc><lastmod>2024-01-05T21:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://loonggshine.github.io/tags/network/</loc><lastmod>2024-01-05T21:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://loonggshine.github.io/categories/network/</loc><lastmod>2024-01-05T21:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://loonggshine.github.io/network/network/</loc><lastmod>2024-01-05T21:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://loonggshine.github.io/categories/lki/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/sysprog/binary-representation/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/tags/rust/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/sysprog/rust-introduction/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/git/git-learn/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://loonggshine.github.io/tags/linux/</loc><lastmod>2024-01-06T20:33:15&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://loonggshine.github.io/categories/linux/</loc><lastmod>2024-01-06T20:33:15&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://loonggshine.github.io/ubuntu/</loc><lastmod>2024-01-06T20:33:15&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/sysprog/gnu-linux-dev/</loc><lastmod>2024-01-12T17:23:43&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/sysprog/gnu-linux-dev/</loc><lastmod>2024-01-12T17:26:53&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://loonggshine.github.io/tags/math/</loc><lastmod>2024-01-06T20:33:15&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://loonggshine.github.io/categories/mathematics/</loc><lastmod>2024-01-06T20:33:15&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://loonggshine.github.io/math/math/</loc><lastmod>2024-01-06T20:33:15&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/tags/draft/</loc><lastmod>2024-01-05T21:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/categories/draft/</loc><lastmod>2024-01-05T21:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://loonggshine.github.io/first_post/</loc><lastmod>2024-01-05T21:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://loonggshine.github.io/tags/draft/</loc><lastmod>2024-01-05T21:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://loonggshine.github.io/categories/draft/</loc><lastmod>2024-01-05T21:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
+      <loc>https://loonggshine.github.io/first_post/</loc><lastmod>2024-01-05T21:08:58&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://loonggshine.github.io/posts/c-specification/</loc><lastmod>2024-01-06T20:33:15&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://loonggshine.github.io/posts/git/</loc><lastmod>2024-01-03T20:41:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://loonggshine.github.io/posts/lki/</loc><lastmod>2024-01-03T20:41:34&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
