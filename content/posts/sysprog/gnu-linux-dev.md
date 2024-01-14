@@ -87,7 +87,7 @@ $ alias='xclip -sel c'
 ```
 {{< /admonition >}}
 
-## 编辑器：Visual Studio Code
+## 编辑器: Visual Studio Code
 
 认真阅读，跟随教学文档进行安装、设置。重点阅读 ***设定、除错（调试）*** 这两部分。更新 VS Code 部分作为手册，在需要时进行参考。
 
@@ -127,7 +127,7 @@ VS Code 控制台使用说明：
 - 使用 `F5` 键来呼入/呼出文件树(nerdtree)，在文件树恻通过 `ENTER` 键来访问目录/文件。
 - 使用 `Ctrl-w-h`/`Ctrl-w-l` 切换到 文件树/编辑区。
 - 自动补全时使用 `ENTER` 键来选中，使用方向键或 `Ctrl-N`/`Ctrl-U`/`Ctrl-P` 来上下选择。
-- 在 Vim 中可以通过 `:setpaste`，并在 insert 模式下，将粘贴板的内容通过 `Ctrl-Shift-V` 进行粘贴。
+- 在 Vim 中可以通过 `:set paste`，并在 insert 模式下，将粘贴板的内容通过 `Ctrl-Shift-V` 进行粘贴。
 {{< /admonition >}}
 
 ***推荐观看影片 [How to Do 90% of What Plugins Do (With Just Vim)][how-to-do-90%-of-what-plugins-do] 来扩展 Vim 插件的使用姿势。***
@@ -145,7 +145,7 @@ gcc 的 `-MMD` 和 `-MF` 参数对我们编写 Makefile 是一个巨大利器。
 
 - [x] 对之前的 test-stopwatch.c 编写了一个 [Makefile](https://github.com/LoongGshine/LKI/blob/main/debug/test-stopwatch.c) 来自动化管理。
 
-## Linux 性能分析工具：Perf
+## Linux 性能分析工具: Perf
 
 认真阅读，复现教学文档中的所有例子，初步体验 perf 在性能分析上的强大。
 
@@ -188,6 +188,14 @@ Available samples
 - `perf stat` 是对某一个要优化的程序进行性能分析，对该程序涉及的一系列 events 进行取样检查。
 - `perf record` 的精度比 `perf stat` 更高，可以对取样的 events 进行函数粒度的分析。
 {{< /admonition >}}
+
+## Linux 绘图工具: gnuplot
+
+安装 gnuplot:
+
+```bash
+$ sudo apt-get install gnuplot
+```
 
 
 ## 学习记录
