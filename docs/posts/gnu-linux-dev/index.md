@@ -193,5 +193,5 @@ $ sudo apt-get install gnuplot
 ---
 
 > 作者: [Xshine](https://github.com/LoongGshine)  
-> URL: https://loonggshine.github.io/posts/sysprog/gnu-linux-dev/  
+> URL: https://loonggshine.github.io/posts/gnu-linux-dev/  
 

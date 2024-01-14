@@ -7,12 +7,15 @@
     <meta name="robots" content="noodp" />
     <title>C 语言规格书阅读记录 - Xshine&#39;s Blog</title><meta name="author" content="Xshine">
 <meta name="author-link" content="https://github.com/LoongGshine">
-<meta name="description" content="C 语言规格书阅读学习记录。" /><meta name="keywords" content='C/C&#43;&#43;, Sysprog' /><meta itemprop="name" content="C 语言规格书阅读记录">
-<meta itemprop="description" content="C 语言规格书阅读学习记录。"><meta itemprop="datePublished" content="2024-01-06T16:07:25+08:00" />
+<meta name="description" content="C 语言规格书阅读学习记录。规格书版本为 n1256，对应的下载地址为 C 语言规格书。
+阅读规格书需要一定的体系结构、编译原理的相关知识，但不需要很高的程度。请善用检索工具，在阅读规格书时遇到术语时，请先在规格书中进行检索，因为极大可能是规格书自己定义的术语。" /><meta name="keywords" content='C/C&#43;&#43;, Sysprog' /><meta itemprop="name" content="C 语言规格书阅读记录">
+<meta itemprop="description" content="C 语言规格书阅读学习记录。规格书版本为 n1256，对应的下载地址为 C 语言规格书。
+阅读规格书需要一定的体系结构、编译原理的相关知识，但不需要很高的程度。请善用检索工具，在阅读规格书时遇到术语时，请先在规格书中进行检索，因为极大可能是规格书自己定义的术语。"><meta itemprop="datePublished" content="2024-01-06T16:07:25+08:00" />
 <meta itemprop="dateModified" content="2024-01-13T13:19:30+08:00" />
-<meta itemprop="wordCount" content="78"><meta itemprop="image" content="https://loonggshine.github.io/logo.png" />
+<meta itemprop="wordCount" content="161"><meta itemprop="image" content="https://loonggshine.github.io/logo.png" />
 <meta itemprop="keywords" content="C/C&#43;&#43;,Sysprog," /><meta property="og:title" content="C 语言规格书阅读记录" />
-<meta property="og:description" content="C 语言规格书阅读学习记录。" />
+<meta property="og:description" content="C 语言规格书阅读学习记录。规格书版本为 n1256，对应的下载地址为 C 语言规格书。
+阅读规格书需要一定的体系结构、编译原理的相关知识，但不需要很高的程度。请善用检索工具，在阅读规格书时遇到术语时，请先在规格书中进行检索，因为极大可能是规格书自己定义的术语。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://loonggshine.github.io/posts/c-specification/c-specification/" /><meta property="og:image" content="https://loonggshine.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-01-06T16:07:25+08:00" />
@@ -20,7 +23,8 @@
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://loonggshine.github.io/logo.png" /><meta name="twitter:title" content="C 语言规格书阅读记录"/>
-<meta name="twitter:description" content="C 语言规格书阅读学习记录。"/>
+<meta name="twitter:description" content="C 语言规格书阅读学习记录。规格书版本为 n1256，对应的下载地址为 C 语言规格书。
+阅读规格书需要一定的体系结构、编译原理的相关知识，但不需要很高的程度。请善用检索工具，在阅读规格书时遇到术语时，请先在规格书中进行检索，因为极大可能是规格书自己定义的术语。"/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -35,7 +39,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/loonggshine.github.io\/posts\/c-specification\/c-specification\/"
-    },"genre": "posts","keywords": "C\/C\u002b\u002b, Sysprog","wordcount":  78 ,
+    },"genre": "posts","keywords": "C\/C\u002b\u002b, Sysprog","wordcount":  161 ,
     "url": "https:\/\/loonggshine.github.io\/posts\/c-specification\/c-specification\/","datePublished": "2024-01-06T16:07:25+08:00","dateModified": "2024-01-13T13:19:30+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -151,7 +155,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/LoongGshine" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="Xshine" data-alt="Xshine" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Xshine</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-01-06 16:07:25"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-06">2024-01-06</time></span>&nbsp;<span title="更新于 2024-01-13 13:19:30"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-13">2024-01-13</time></span>&nbsp;<span title="78 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-01-06 16:07:25"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-06">2024-01-06</time></span>&nbsp;<span title="更新于 2024-01-13 13:19:30"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-13">2024-01-13</time></span>&nbsp;<span title="161 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -163,8 +167,8 @@
     <li><a href="#7-library">7. Library</a></li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><p>C 语言规格书阅读学习记录。</p>
-<p>阅读的规格书版本为 n1256，对应的下载地址为 <a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf"target="_blank" rel="external nofollow noopener noreferrer">C 语言规格书</a>。</p>
+      </div><div class="content" id="content"><p>C 语言规格书阅读学习记录。规格书版本为 n1256，对应的下载地址为 <a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf"target="_blank" rel="external nofollow noopener noreferrer">C 语言规格书</a>。
+阅读规格书需要一定的体系结构、编译原理的相关知识，但不需要很高的程度。请善用检索工具，在阅读规格书时遇到术语时，请先在规格书中进行检索，因为极大可能是规格书自己定义的术语。</p>
 <h2 id="6-language">6. Language</h2>
 <p>详见 <a href="/posts/c-specification/ch6/">阅读记录 6. Language</a>。</p>
 <h2 id="7-library">7. Library</h2>

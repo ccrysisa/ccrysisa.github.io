@@ -13,20 +13,51 @@
   <description><![CDATA[]]></description>
 </item>
 <item>
-  <title>Git</title>
+  <title>Git/GitHub 学习指引</title>
   <link>https://loonggshine.github.io/posts/git/</link>
   <pubDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/posts/git/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[Git 中文教学 新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 基本原理 对 Git 原理介绍比较准确，UP 主其它关于 GitHub 的合集也比较推荐。 视频]]></description>
 </item>
 <item>
-  <title>网络</title>
+  <title>计算机网络学习指引</title>
   <link>https://loonggshine.github.io/posts/network/</link>
   <pubDate>Tue, 02 Jan 2024 19:44:56 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/posts/network/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[清大开放式课程 - 计算机网络 课程主页 课程资料 课程视频 Referenecs 110-1 計算機網路 (清大開放式課程)]]></description>
+</item>
+<item>
+  <title>解读计算机编码</title>
+  <link>https://loonggshine.github.io/posts/binary-representation/</link>
+  <pubDate>Sun, 31 Dec 2023 15:43:50 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://loonggshine.github.io/posts/binary-representation/</guid>
+  <description><![CDATA[<div class="details admonition abstract open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 + 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。</div>
+    </div>
+  </div>]]></description>
+</item>
+<item>
+  <title>Rust - 进行中的未来</title>
+  <link>https://loonggshine.github.io/posts/rust-introduction/</link>
+  <pubDate>Thu, 28 Dec 2023 20:18:03 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://loonggshine.github.io/posts/rust-introduction/</guid>
+  <description><![CDATA[Rust in 100 Seconds &#x2705; 观看短片：Rust in 100 Seconds 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut]]></description>
+</item>
+<item>
+  <title>Git 学习记录</title>
+  <link>https://loonggshine.github.io/posts/git-learn/</link>
+  <pubDate>Wed, 27 Dec 2023 23:34:45 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://loonggshine.github.io/posts/git-learn/</guid>
+  <description><![CDATA[<p>教学影片：<a href="https://www.youtube.com/playlist?list=PLlyOkSAh6TwcvJQ1UtvkSwhZWCaM_S07d"target="_blank" rel="external nofollow noopener noreferrer">Git 中文教学</a></p>]]></description>
 </item>
 <item>
   <title>Ubuntu 22.04 配置</title>
@@ -37,20 +68,27 @@
   <description><![CDATA[网络代理 根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo apt install net-tools 安装并启]]></description>
 </item>
 <item>
-  <title>系统编程</title>
-  <link>https://loonggshine.github.io/posts/sysprog/</link>
+  <title>GNU/Linux 开发工具</title>
+  <link>https://loonggshine.github.io/posts/gnu-linux-dev/</link>
   <pubDate>Mon, 25 Dec 2023 15:43:50 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://loonggshine.github.io/posts/sysprog/</guid>
-  <description><![CDATA[]]></description>
+  <guid>https://loonggshine.github.io/posts/gnu-linux-dev/</guid>
+  <description><![CDATA[<div class="details admonition abstract open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而上提供各类触及“灵魂”的学习案例，让所有课程从纸上谈兵转变成沙场实战，会极大地提升工程实践的效率和技能。</div>
+    </div>
+  </div>]]></description>
 </item>
 <item>
-  <title>数学</title>
+  <title>数学开放式课程学习指引</title>
   <link>https://loonggshine.github.io/posts/math/</link>
   <pubDate>Sat, 23 Dec 2023 21:35:47 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/posts/math/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[中大數學系開放式課程 台大齐震宇 - 数学潜水艇、微积分、分析 台大谢铭伦 - 线性代数 概率统计 阳明交通大学 陈临安老师，开设了两学期的统计课程，分别是上]]></description>
 </item>
 <item>
   <title>Hello, World</title>
@@ -59,14 +97,6 @@
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/posts/hello_world/</guid>
   <description><![CDATA[博客（英语：Blog）是一种在线日记型式的个人网站，借由张帖子章、图片或视频来记录生活、抒发情感或分享信息。博客上的文章通常根据张贴时间，以]]></description>
-</item>
-<item>
-  <title>Linux 核心设计/实作</title>
-  <link>https://loonggshine.github.io/posts/linux-kernel-internals/</link>
-  <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
-  <author>Xshine</author>
-  <guid>https://loonggshine.github.io/posts/linux-kernel-internals/</guid>
-  <description><![CDATA[]]></description>
 </item>
 </channel>
 </rss>

@@ -24,5 +24,5 @@
 ---
 
 > 作者: [Xshine](https://github.com/LoongGshine)  
-> URL: https://loonggshine.github.io/posts/sysprog/rust-introduction/  
+> URL: https://loonggshine.github.io/posts/rust-introduction/  
 

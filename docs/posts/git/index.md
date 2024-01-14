@@ -1,4 +1,4 @@
-# Git/GitHub 学习导航
+# Git/GitHub 学习指引
 
 
 ## Git 中文教学
@@ -37,5 +37,5 @@
 ---
 
 > 作者: [Xshine](https://github.com/LoongGshine)  
-> URL: https://loonggshine.github.io/posts/git/git/  
+> URL: https://loonggshine.github.io/posts/git/  
 

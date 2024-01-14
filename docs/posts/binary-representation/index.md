@@ -214,5 +214,5 @@ int32_t max(int32_t a, int32_t b) {
 ---
 
 > 作者: [Xshine](https://github.com/LoongGshine)  
-> URL: https://loonggshine.github.io/posts/sysprog/binary-representation/  
+> URL: https://loonggshine.github.io/posts/binary-representation/  
 

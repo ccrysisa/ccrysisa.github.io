@@ -428,5 +428,5 @@ git commit
 ---
 
 > 作者: [Xshine](https://github.com/LoongGshine)  
-> URL: https://loonggshine.github.io/posts/git/git-learn/  
+> URL: https://loonggshine.github.io/posts/git-learn/  
 

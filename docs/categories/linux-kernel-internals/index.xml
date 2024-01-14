@@ -6,10 +6,10 @@
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Sun, 31 Dec 2023 15:43:50 &#43;0800</lastBuildDate><atom:link href="https://loonggshine.github.io/categories/linux-kernel-internals/" rel="self" type="application/rss+xml" /><item>
   <title>解读计算机编码</title>
-  <link>https://loonggshine.github.io/posts/sysprog/binary-representation/</link>
+  <link>https://loonggshine.github.io/posts/binary-representation/</link>
   <pubDate>Sun, 31 Dec 2023 15:43:50 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://loonggshine.github.io/posts/sysprog/binary-representation/</guid>
+  <guid>https://loonggshine.github.io/posts/binary-representation/</guid>
   <description><![CDATA[<div class="details admonition abstract open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -21,26 +21,26 @@
 </item>
 <item>
   <title>Rust - 进行中的未来</title>
-  <link>https://loonggshine.github.io/posts/sysprog/rust-introduction/</link>
+  <link>https://loonggshine.github.io/posts/rust-introduction/</link>
   <pubDate>Thu, 28 Dec 2023 20:18:03 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://loonggshine.github.io/posts/sysprog/rust-introduction/</guid>
+  <guid>https://loonggshine.github.io/posts/rust-introduction/</guid>
   <description><![CDATA[Rust in 100 Seconds &#x2705; 观看短片：Rust in 100 Seconds 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut]]></description>
 </item>
 <item>
   <title>Git 学习记录</title>
-  <link>https://loonggshine.github.io/posts/git/git-learn/</link>
+  <link>https://loonggshine.github.io/posts/git-learn/</link>
   <pubDate>Wed, 27 Dec 2023 23:34:45 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://loonggshine.github.io/posts/git/git-learn/</guid>
+  <guid>https://loonggshine.github.io/posts/git-learn/</guid>
   <description><![CDATA[<p>教学影片：<a href="https://www.youtube.com/playlist?list=PLlyOkSAh6TwcvJQ1UtvkSwhZWCaM_S07d"target="_blank" rel="external nofollow noopener noreferrer">Git 中文教学</a></p>]]></description>
 </item>
 <item>
   <title>GNU/Linux 开发工具</title>
-  <link>https://loonggshine.github.io/posts/sysprog/gnu-linux-dev/</link>
+  <link>https://loonggshine.github.io/posts/gnu-linux-dev/</link>
   <pubDate>Mon, 25 Dec 2023 15:43:50 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://loonggshine.github.io/posts/sysprog/gnu-linux-dev/</guid>
+  <guid>https://loonggshine.github.io/posts/gnu-linux-dev/</guid>
   <description><![CDATA[<div class="details admonition abstract open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>

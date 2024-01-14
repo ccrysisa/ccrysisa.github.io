@@ -1,5 +1,5 @@
 ---
-title: Git/GitHub 学习导航 
+title: Git/GitHub 学习指引
 subtitle:
 date: 2024-01-04T19:00:36+08:00
 draft: false
