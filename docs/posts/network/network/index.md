@@ -3,8 +3,8 @@
 
 ## 清大开放式课程 - 计算机网络
 
-- [课程主页](https://ocw.nthu.edu.tw/ocw/index.php?page=course&amp;cid=291&amp;)
-- [课程资料](https://ocw.nthu.edu.tw/ocw/index.php?page=course_news_content&amp;cid=291&amp;id=1015)
+- [课程主页](https://ocw.nthu.edu.tw/ocw/index.php?page=course&cid=291&)
+- [课程资料](https://ocw.nthu.edu.tw/ocw/index.php?page=course_news_content&cid=291&id=1015)
 - [课程视频](https://www.youtube.com/playlist?list=PLS0SUwlYe8cxktXNovos9xleroaWyb-z5)
 
 ## Referenecs
