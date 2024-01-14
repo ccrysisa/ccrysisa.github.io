@@ -14,7 +14,7 @@ license:
 comment: false
 weight: 0
 tags:
-  - Git
+  - Git/GitHub
 categories:
   - Git
 hiddenFromHomePage: false

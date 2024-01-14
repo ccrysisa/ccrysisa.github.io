@@ -5,25 +5,9 @@
     <description>所有文章 | Xshine&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</lastBuildDate><atom:link href="https://loonggshine.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-  <title>Ubuntu 22.04 配置</title>
-  <link>https://loonggshine.github.io/ubuntu/</link>
-  <pubDate>Wed, 27 Dec 2023 20:35:45 &#43;0800</pubDate>
-  <author>Xshine</author>
-  <guid>https://loonggshine.github.io/ubuntu/</guid>
-  <description><![CDATA[网络代理 根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo apt install net-tools 安装并启]]></description>
-</item>
-<item>
-  <title>Hello, World!</title>
-  <link>https://loonggshine.github.io/first_post/</link>
-  <pubDate>Sat, 23 Dec 2023 20:23:12 &#43;0800</pubDate>
-  <author>Xshine</author>
-  <guid>https://loonggshine.github.io/first_post/</guid>
-  <description><![CDATA[博客（英语：Blog）是一种在线日记型式的个人网站，借由张帖子章、图片或视频来记录生活、抒发情感或分享信息。博客上的文章通常根据张贴时间，以]]></description>
-</item>
-<item>
-  <title>C Standard</title>
+  <title>C 语言规格书</title>
   <link>https://loonggshine.github.io/posts/c-specification/</link>
-  <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+  <pubDate>Sat, 06 Jan 2024 16:07:25 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/posts/c-specification/</guid>
   <description><![CDATA[]]></description>
@@ -31,41 +15,57 @@
 <item>
   <title>Git</title>
   <link>https://loonggshine.github.io/posts/git/</link>
-  <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+  <pubDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/posts/git/</guid>
   <description><![CDATA[]]></description>
 </item>
 <item>
-  <title>Linux Kernel Internals</title>
-  <link>https://loonggshine.github.io/posts/lki/</link>
-  <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
-  <author>Xshine</author>
-  <guid>https://loonggshine.github.io/posts/lki/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>Mathematics</title>
-  <link>https://loonggshine.github.io/posts/math/</link>
-  <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
-  <author>Xshine</author>
-  <guid>https://loonggshine.github.io/posts/math/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>Network</title>
+  <title>网络</title>
   <link>https://loonggshine.github.io/posts/network/</link>
-  <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+  <pubDate>Tue, 02 Jan 2024 19:44:56 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/posts/network/</guid>
   <description><![CDATA[]]></description>
 </item>
 <item>
-  <title>Systerm Programming</title>
+  <title>Ubuntu 22.04 配置</title>
+  <link>https://loonggshine.github.io/posts/ubuntu/</link>
+  <pubDate>Wed, 27 Dec 2023 20:35:45 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://loonggshine.github.io/posts/ubuntu/</guid>
+  <description><![CDATA[网络代理根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo apt install net-tools 安装并启]]></description>
+</item>
+<item>
+  <title>系统编程</title>
   <link>https://loonggshine.github.io/posts/sysprog/</link>
-  <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+  <pubDate>Mon, 25 Dec 2023 15:43:50 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/posts/sysprog/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
+  <title>数学</title>
+  <link>https://loonggshine.github.io/posts/math/</link>
+  <pubDate>Sat, 23 Dec 2023 21:35:47 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://loonggshine.github.io/posts/math/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
+  <title>Hello, World</title>
+  <link>https://loonggshine.github.io/posts/hello_world/</link>
+  <pubDate>Sat, 23 Dec 2023 20:23:12 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://loonggshine.github.io/posts/hello_world/</guid>
+  <description><![CDATA[博客（英语：Blog）是一种在线日记型式的个人网站，借由张帖子章、图片或视频来记录生活、抒发情感或分享信息。博客上的文章通常根据张贴时间，以]]></description>
+</item>
+<item>
+  <title>Linux 核心设计/实作</title>
+  <link>https://loonggshine.github.io/posts/linux-kernel-internals/</link>
+  <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate>
+  <author>Xshine</author>
+  <guid>https://loonggshine.github.io/posts/linux-kernel-internals/</guid>
   <description><![CDATA[]]></description>
 </item>
 </channel>

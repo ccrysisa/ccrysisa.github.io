@@ -1,15 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>所有Network - Xshine&#39;s Blog</title>
+    <title>所有网络 - Xshine&#39;s Blog</title>
     <link>https://loonggshine.github.io/posts/network/</link>
-    <description>所有Network | Xshine&#39;s Blog</description>
+    <description>所有网络 | Xshine&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><atom:link href="https://loonggshine.github.io/posts/network/" rel="self" type="application/rss+xml" /><item>
-  <title>计算机网络学习导航</title>
-  <link>https://loonggshine.github.io/network/network/</link>
+      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Tue, 02 Jan 2024 19:44:56 &#43;0800</lastBuildDate><atom:link href="https://loonggshine.github.io/posts/network/" rel="self" type="application/rss+xml" /><item>
+  <title>计算机网络学习指引</title>
+  <link>https://loonggshine.github.io/posts/network/network/</link>
   <pubDate>Tue, 02 Jan 2024 19:44:56 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://loonggshine.github.io/network/network/</guid>
+  <guid>https://loonggshine.github.io/posts/network/network/</guid>
   <description><![CDATA[清大开放式课程 - 计算机网络 课程主页 课程资料 课程视频 Referenecs 110-1 計算機網路 (清大開放式課程)]]></description>
 </item>
 </channel>

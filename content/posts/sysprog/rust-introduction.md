@@ -17,7 +17,7 @@ tags:
   - Rust
   - Sysprog
 categories:
-  - LKI
+  - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

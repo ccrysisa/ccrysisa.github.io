@@ -14,10 +14,10 @@ license:
 comment: false
 weight: 0
 tags:
-  - Git
+  - Git/GitHub
 categories:
   - Git
-  - LKI
+  - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

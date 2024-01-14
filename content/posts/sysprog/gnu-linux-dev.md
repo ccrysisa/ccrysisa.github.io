@@ -16,7 +16,7 @@ weight: 0
 tags:
   - Sysprog
 categories:
-  - LKI
+  - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

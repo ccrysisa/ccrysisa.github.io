@@ -2,38 +2,38 @@
   <channel>
     <title>Sysprog - 标签 - Xshine&#39;s Blog</title>
     <link>https://loonggshine.github.io/tags/sysprog/</link>
-    <description>Sysprog - 标签 - Xshine&#39;s Blog</description>
+    <description>Sysprog - 标签 | Xshine&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</lastBuildDate><atom:link href="https://loonggshine.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
-  <title>C Standard - 6. Language 阅读记录</title>
-  <link>https://loonggshine.github.io/c-specification/ch6/</link>
+  <title>C 规格第 6 章阅读记录</title>
+  <link>https://loonggshine.github.io/posts/c-specification/ch6/</link>
   <pubDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://loonggshine.github.io/c-specification/ch6/</guid>
+  <guid>https://loonggshine.github.io/posts/c-specification/ch6/</guid>
   <description><![CDATA[<p>C 语言规格书 Chapter 6 - Language 阅读记录。</p>]]></description>
 </item>
 <item>
-  <title>C Standard - 7. Library 阅读记录</title>
-  <link>https://loonggshine.github.io/c-specification/ch7/</link>
+  <title>C 规格第 7 章阅读记录</title>
+  <link>https://loonggshine.github.io/posts/c-specification/ch7/</link>
   <pubDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://loonggshine.github.io/c-specification/ch7/</guid>
+  <guid>https://loonggshine.github.io/posts/c-specification/ch7/</guid>
   <description><![CDATA[<p>C 语言规格书 Chapter 7 - Library 阅读记录。</p>]]></description>
 </item>
 <item>
   <title>C 语言规格书阅读记录</title>
-  <link>https://loonggshine.github.io/c-specification/c-specification/</link>
+  <link>https://loonggshine.github.io/posts/c-specification/c-specification/</link>
   <pubDate>Sat, 06 Jan 2024 16:07:25 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://loonggshine.github.io/c-specification/c-specification/</guid>
+  <guid>https://loonggshine.github.io/posts/c-specification/c-specification/</guid>
   <description><![CDATA[<p>C 语言规格书阅读学习记录。</p>]]></description>
 </item>
 <item>
   <title>解读计算机编码</title>
-  <link>https://loonggshine.github.io/sysprog/binary-representation/</link>
+  <link>https://loonggshine.github.io/posts/sysprog/binary-representation/</link>
   <pubDate>Sun, 31 Dec 2023 15:43:50 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://loonggshine.github.io/sysprog/binary-representation/</guid>
+  <guid>https://loonggshine.github.io/posts/sysprog/binary-representation/</guid>
   <description><![CDATA[<div class="details admonition abstract open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -45,18 +45,18 @@
 </item>
 <item>
   <title>Rust - 进行中的未来</title>
-  <link>https://loonggshine.github.io/sysprog/rust-introduction/</link>
+  <link>https://loonggshine.github.io/posts/sysprog/rust-introduction/</link>
   <pubDate>Thu, 28 Dec 2023 20:18:03 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://loonggshine.github.io/sysprog/rust-introduction/</guid>
-  <description><![CDATA[Rust in 100 Seconds &#x2705; 观看短片：Rust in 100 Seconds 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut]]></description>
+  <guid>https://loonggshine.github.io/posts/sysprog/rust-introduction/</guid>
+  <description><![CDATA[Rust in 100 Seconds&#x2705; 观看短片：Rust in 100 Seconds 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello]]></description>
 </item>
 <item>
   <title>GNU/Linux 开发工具</title>
-  <link>https://loonggshine.github.io/sysprog/gnu-linux-dev/</link>
+  <link>https://loonggshine.github.io/posts/sysprog/gnu-linux-dev/</link>
   <pubDate>Mon, 25 Dec 2023 15:43:50 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://loonggshine.github.io/sysprog/gnu-linux-dev/</guid>
+  <guid>https://loonggshine.github.io/posts/sysprog/gnu-linux-dev/</guid>
   <description><![CDATA[<div class="details admonition abstract open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
