@@ -7,7 +7,7 @@ GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而�
 
 <!--more-->
 
-> 原文地址：[GNU/Linux 开发工具][source]
+> {{< link href="https://hackmd.io/@sysprog/gnu-linux-dev/" content=原文地址 external-icon=true >}}
 
 ## 安装 Windows / Ubuntu 双系统
 
@@ -36,9 +36,8 @@ GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而�
 
 以下资源作为自学资源，用于补充自己不熟悉的操作，或者作为以上资料的补充工具手册。
 
-- [Git 中文教学（视频）][git-tutorials-zh] 
-    - [学习记录]({{< relref "../git/git-learn.md" >}})
-- [30 天精通 Git 版本控制（文本）][learn-git-in-30-days]
+- [Git 中文教学 - YouTube][git-tutorials-zh] ([学习记录]({{< relref "../tools/git-learn.md" >}}))
+- [30 天精通 Git 版本控制 - GitHub][learn-git-in-30-days]
 
 {{< admonition warning >}}
 原文档中的将公钥复制到 clipboard 中使用了 `clip` 命令，但是这个命令在 Ubuntu 中并没有对应的命令。可以使用 `xclip` + `alias` 达到近似效果。
@@ -61,7 +60,7 @@ $ alias='xclip -sel c'
 - [x] 完成 SSH key 的生成。
 - [x] 完成 VS Code 的设置。
 - [x] 安装 Git History 插件。
-- [x] 安装 Native Debug 插件，并进行 Debug ([test-stopwatch.c](https://github.com/LoongGshine/LKI/blob/main/debug/test-stopwatch.c)) 操作。
+- [x] 安装 Native Debug 插件，并进行 Debug ([test-stopwatch.c](https://github.com/ccrysisa/LKI/blob/main/debug/test-stopwatch.c)) 操作。
 - [x] 安装 VSCode Great Icons 文件图标主题，另外推荐两款颜色主题：One Dark Pro, Learn with Sumit。
 
 VS Code 控制台使用说明：
@@ -91,6 +90,11 @@ VS Code 控制台使用说明：
 - 使用 `Ctrl-w-h`/`Ctrl-w-l` 切换到 文件树/编辑区。
 - 自动补全时使用 `ENTER` 键来选中，使用方向键或 `Ctrl-N`/`Ctrl-U`/`Ctrl-P` 来上下选择。
 - 在 Vim 中可以通过 `:set paste`，并在 insert 模式下，将粘贴板的内容通过 `Ctrl-Shift-V` 进行粘贴。
+- byobu 使用说明：
+    - 在终端输入 `byobu`
+    - `F2` 新增 Terminial 分页。`F3`, `F4` 在 Terminial 分页中切换。`Ctrl +F6` 删除当前 Terminial 分页。
+    - `Shift + F2` 水平切割 Terminial。`Ctrl +F2` 垂直切割 Terminial。`Shift + 方向键` 切换。
+    - 在 byobu 中暂时无法使用之前设置的 `F4` 或 `F5` 快捷键，但是可以直接通过命令 `:set norelative` 来关闭相对行数。
 {{< /admonition >}}
 
 ***推荐观看影片 [How to Do 90% of What Plugins Do (With Just Vim)][how-to-do-90%-of-what-plugins-do] 来扩展 Vim 插件的使用姿势。***
@@ -106,7 +110,7 @@ VS Code 控制台使用说明：
 
 gcc 的 `-MMD` 和 `-MF` 参数对我们编写 Makefile 是一个巨大利器。理解 Makefile 的各种变量定义的原理。
 
-- [x] 对之前的 test-stopwatch.c 编写了一个 [Makefile](https://github.com/LoongGshine/LKI/blob/main/debug/test-stopwatch.c) 来自动化管理。
+- [x] 对之前的 test-stopwatch.c 编写了一个 [Makefile](https://github.com/ccrysisa/LKI/blob/main/debug/test-stopwatch.c) 来自动化管理。
 
 ## Linux 性能分析工具: Perf
 
@@ -121,7 +125,7 @@ gcc 的 `-MMD` 和 `-MF` 参数对我们编写 Makefile 是一个巨大利器。
 - [x] 动手使用 perf_stat_cache_miss.c，体验 `perf stat` 的作用。（原文的结果有些不直观，务必亲自动手验证）
 - [x] 动手使用 perf_record_example.c，体验 `perf record` 的作用。（原文的操作不是很详细，可以参考下面的 Success）
 
-[源程序地址](https://github.com/LoongGshine/LKI/blob/main/perf)
+{{< link href="https://github.com/ccrysisa/LKI/blob/main/perf" content=Source external-icon=true >}}
 
 {{< admonition type=success open=false >}}
 ```bash
@@ -154,35 +158,95 @@ Available samples
 
 ## Linux 绘图工具: gnuplot
 
+阅读教程，搭配教学影片 [轻轻松松学 gnuplot](https://www.youtube.com/watch?v=MVflaIIhtZw)，使用 gnuplot 完成所给例子相应图像的绘制。
+
+- [x] 使用 runtime.gp 完成 runtime.png 的绘制生成。
+- [x] 使用 statistic.gp 完成降雨量折线图 statistic.png 的绘制生成。
+
+{{< admonition >}}
+原文所给的 `statistic.gp` 是使用 Times_New_Roman 来显示中文的，但笔者的 Ubuntu 中并没有这个字体，所以会显示乱码。可以通过 `fc-list :lang=zh` 命令来查询当前系统中的已安装的中文字体。
+{{< /admonition >}}
+
+{{< link href="https://github.com/ccrysisa/LKI/blob/main/gnuplot" content=Source external-icon=true >}}
+
 安装 gnuplot:
 
 ```bash
 $ sudo apt-get install gnuplot
 ```
 
+gnuplot script 的使用流程：
 
-## 学习记录
+```bash
+# 创建并编写一个后缀名为 .gp 的文件
+$ vim script.gp
+# 根据 script 内的指令进行绘图
+$ gnuplot script.gp
+# 根据 script 指定的图片保存路径打开图片
+$ eog [name of picture]
+```
 
-### GDB 调试
+下面以一个 script 进行常用指令的说明：
 
-观看教学视频 [拯救資工系學生的基本素養—使用 GDB 除錯基本教學](gdb-basics) 和搭配博文 ==[How to debug Rust/C/C++ via GDB][debug-gdb]==，学习 GDB 的基本操作和熟悉使用 GDB 调试 Rust/C/C++ 程序。
+```bash
+reset
+set ylabel 'time(sec)'
+set style fill solid
+set title 'performance comparison'
+set term png enhanced font 'Verdana,10'
+set output 'runtime.png'
 
-- 掌握 `run/r`, `break/b`, `print/p`, `continue/c`, `step/s` `info/i`, `delete/d`, `backtrace/bt`, `frame/f`, `up`/`down`, `exit/q` 等命令的用法。以及 GBD 的一些特性，例如 GDB 会将空白行的断点自动下移到下一代码行；使用 `break` 命令时可以输入源文件路径，也可以只输入源文件名称。
+plot [:][:0.100]'output.txt' using 2:xtic(1) with histogram title 'original', \
+'' using ($0-0.06):($2+0.001):2 with labels title ' ', \
+'' using 3:xtic(1) with histogram title 'optimized'  , \
+'' using 4:xtic(1) with histogram title 'hash'  , \
+'' using ($0+0.3):($3+0.0015):3 with labels title ' ', \
+'' using ($0+0.4):($4+0.0015):4 with labels title ' '
+```
 
-相关的测试文件：
+- `reset` 指令的作用为，将之前 `set` 指令设置过的内容全部重置。
+- `set style fill solid` 将绘制出的柱形或区域使用实心方式填充。
+- `set term png enhanced font 'Verdana,10'`
+    - `term png` 生成的图像以 png 格式进行保存。(`term` 是 `terminial` 的缩写)
+    - `enhanced` 启用增强文本模式，允许在标签和注释中使用特殊的文本格式，如上下标、斜体、下划线等。
+    - `font 'Verdana,10'` 指定所使用的字体为 Verdana，字号为10。可进行自定义设置。
+- 其它指令查询原文或手册即可。
 
-- [test.c](https://github.com/LoongGshine/LKI/blob/main/debug/test.c)
-- [hello_cargo/](https://github.com/LoongGshine/LKI/tree/main/debug/hello_cargo) 
+`$0` 在 gnuplot 中表示伪列，可以简单理解为行号，以下为相应图示：
+
+原始数据集：
+```
+append() 0.048240 0.040298 0.057908 
+findName() 0.006495 0.002938 0.000001 
+```
+
+（人为）增加了 *伪列* 表示的数据集（最左边 0, 1 即为伪列）：
+```
+0 append() 0.048240 0.040298 0.057908 
+1 findName() 0.006495 0.002938 0.000001 
+```
+
+{{< admonition tip >}}
+- gnuplot 在绘制生成图像时是安装指令的顺序进行的，并且和一般的画图软件类似，在最上层进行绘制。所以在编写 script 的指令时需要注意顺序，否则生成图像的部分可能并不像预期一样位于最上层。（思考上面 script 的 3, 4 列的 label 的绘制顺序）
+
+- gnuplot script 中的字符串可以使用 `''` 或者 `""` 来包裹，同样类似于 Python。
+
+- 直接在终端输入 `gnuplot` 会进入交互式的命令界面，也可以使用 gnulpot 指令来绘图（类似与 Python）。在这种交互式界面环境中，如果需要在输入完指令后立即显示图像到新窗口，而不是保存图像再打开，只需输入进行指令：
+`set term wxt ehanced persist raise`
+    - `term wxt` 将图形终端类型设置为WXT，这会在新窗口中显示绘图。
+    - `ersist` 该选项使绘图窗口保持打开状态，即使脚本执行完毕也不会自动关闭。
+    - `raise` 该选项将绘图窗口置于其他窗口的前面，以确保它在屏幕上的可见性。
+{{< /admonition >}}
+
+一些额外的教程：
+
+- [Youtube - gnuplot Tutorlal](https://youtu.be/9k-l_ol9jok) 这个教程有五部影片，到发布者的主页搜寻即可。
 
 
-
-[source]: https://hackmd.io/@sysprog/gnu-linux-dev/
 [learn-git-branching]: https://learngitbranching.js.org/
 [git-tutorials-zh]: https://www.youtube.com/playlist?list=PLlyOkSAh6TwcvJQ1UtvkSwhZWCaM_S07d
 [learn-git-in-30-days]: https://github.com/doggy8088/Learn-Git-in-30-days 
 [learn-vscode-happily]: https://www.youtube.com/playlist?list=PL6S9AqLQkFpph4LOfSjtD-s4WB3pNh5M3
-[gdb-basics]: https://www.youtube.com/watch?v=IttSz0BYZ8o
-[debug-gdb]: https://tigercosmos.xyz/post/2020/09/system/debug-gdb/
 [how-to-do-90%-of-what-plugins-do]: https://www.youtube.com/watch?v=XA2WjJbmmoM&list=WL
 [vim-cheat-sheet]: https://hackmd.io/@sysprog/gnu-linux-dev/https%3A%2F%2Fvim.rtorr.com%2F
 [bash-cheat-sheet]: https://hackmd.io/@sysprog/gnu-linux-dev/https%3A%2F%2Fkapeli.com%2Fcheat_sheets%2FBash_Shortcuts.docset%2FContents%2FResources%2FDocuments%2Findex
@@ -192,6 +256,6 @@ $ sudo apt-get install gnuplot
 
 ---
 
-> 作者: [Xshine](https://github.com/LoongGshine)  
-> URL: https://loonggshine.github.io/posts/gnu-linux-dev/  
+> 作者: [Xshine](https://github.com/ccrysisa)  
+> URL: https://ccrysisa.github.io/posts/gnu-linux-dev/  
 

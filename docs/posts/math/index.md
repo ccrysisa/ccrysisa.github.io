@@ -31,5 +31,5 @@
 ---
 
 > 作者: [vanJker](https://github.com/vanJker)  
-> URL: https://loonggshine.github.io/posts/math/  
+> URL: https://ccrysisa.github.io/posts/math/  
 

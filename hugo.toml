@@ -1,5 +1,5 @@
 title = "Xshine's Blog"
-baseURL = "https://loonggshine.github.io/"
+baseURL = "https://ccrysisa.github.io/"
 # 设置默认的语言 ["en", "zh-cn", "fr", "pl", ...]
 defaultContentLanguage = "zh-cn"
 # 网站语言，仅在这里 CN 大写 ["en", "zh-CN", "fr", "pl", ...]
@@ -94,7 +94,7 @@ enableEmoji = true
   # 作者配置
   [params.author]
     name = "Xshine"
-    link = "https://github.com/LoongGshine"
+    link = "https://github.com/ccrysisa"
     email = "caijiaxin@dragonos.org"
     avatar = "https://avatars.githubusercontent.com/u/133117003?s=400&v=4"
 
@@ -279,7 +279,7 @@ enableEmoji = true
 
   #  作者的社交信息设置
   [params.social]
-    GitHub = "LoongGshine"
+    GitHub = "ccrysisa"
     Linkedin = ""
     Twitter = ""
     Instagram = ""
@@ -883,7 +883,7 @@ enableEmoji = true
   # 目录设置
   [markup.tableOfContents]
     startLevel = 2
-    endLevel = 3
+    endLevel = 6
 
 # 网站地图配置
 [sitemap]

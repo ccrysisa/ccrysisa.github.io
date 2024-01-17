@@ -65,4 +65,4 @@ Disallow: /
 User-agent: ZoominfoBot
 Disallow: /
 
-Sitemap: https://loonggshine.github.io/sitemap.xml
+Sitemap: https://ccrysisa.github.io/sitemap.xml

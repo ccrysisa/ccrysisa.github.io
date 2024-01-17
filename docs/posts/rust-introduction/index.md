@@ -23,6 +23,6 @@
 
 ---
 
-> 作者: [Xshine](https://github.com/LoongGshine)  
-> URL: https://loonggshine.github.io/posts/rust-introduction/  
+> 作者: [Xshine](https://github.com/ccrysisa)  
+> URL: https://ccrysisa.github.io/posts/rust-introduction/  
 

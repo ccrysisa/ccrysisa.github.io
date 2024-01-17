@@ -102,6 +102,6 @@ typedef struct Block_t {
 
 ---
 
-> 作者: [Xshine](https://github.com/LoongGshine)  
-> URL: https://loonggshine.github.io/posts/hello_world/  
+> 作者: [Xshine](https://github.com/ccrysisa)  
+> URL: https://ccrysisa.github.io/posts/hello_world/  
 

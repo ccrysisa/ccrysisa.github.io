@@ -61,28 +61,29 @@ unary-operator: one of
 
 ### 6.5.3 Unary operators
 
-{{< admonition info >}}
-C99 [6.2.5] **Types**
+{{< admonition >}}
+C99 [6.2.5] ***Types***
 
-- There are three real floating types, designated as `float`, `double`, and `long double`.
+- There are three *real floating types*, designated as `float`, `double`, and `long double`.
 
-- The real floating and complex types are collectively called the floating types.
+- The real floating and complex types are collectively called the *floating types*.
 
-- The integer and real floating types are collectively called real types.
+- The integer and real floating types are collectively called *real types*.
 
-- Integer and floating types are collectively called arithmetic types.
+- Integer and floating types are collectively called *arithmetic types*.
 
-- A function type describes a function with specified return type. A function type is
+- A *function type* describes a function with specified return type. A function type is
 characterized by its return type and the number and types of its parameters. A
 function type is said to be derived from its return type, and if its return type is T, the
-function type is sometimes called ''function returning T''.
+function type is sometimes called ''function returning T''. The construction of a
+function type from a return type is called ‘‘function type derivation’’.
 
-- Arithmetic types and pointer types are collectively called scalar types.
+- Arithmetic types and pointer types are collectively called *scalar types*.
 
-C99 [6.3.2.1] **Lvalues, arrays, and function designators**
+C99 [6.3.2.1] ***Lvalues, arrays, and function designators***
 
-- A function designator is an expression that has function type. Except when it is the
-operand of the sizeof operator or the unary & operator,afunction designator with
+- A *function designator* is an expression that has function type. Except when it is the
+operand of the `sizeof` operator or the unary `&` operator, a function designator with
 type ‘‘function returning type’’ is converted to an expression that has type ‘‘pointer to
 function returning type’’.
 {{< /admonition >}}

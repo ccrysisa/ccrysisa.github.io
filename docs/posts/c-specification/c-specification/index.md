@@ -19,6 +19,6 @@ C 语言规格书阅读学习记录。
 
 ---
 
-> 作者: [Xshine](https://github.com/LoongGshine)  
-> URL: https://loonggshine.github.io/posts/c-specification/c-specification/  
+> 作者: [Xshine](https://github.com/ccrysisa)  
+> URL: https://ccrysisa.github.io/posts/c-specification/c-specification/  
 
