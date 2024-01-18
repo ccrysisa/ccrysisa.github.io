@@ -1,13 +1,13 @@
 # GNU/Linux 开发工具
 
 
-{{< admonition abstract >}}
+{{&lt; admonition abstract &gt;}}
 GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而上提供各类触及“灵魂”的学习案例，让所有课程从纸上谈兵转变成沙场实战，会极大地提升工程实践的效率和技能。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-<!--more-->
+&lt;!--more--&gt;
 
-> 原文地址：[GNU/Linux 开发工具][source]
+&gt; 原文地址：[GNU/Linux 开发工具][source]
 
 ## 安装 Windows / Ubuntu 双系统
 
@@ -19,12 +19,12 @@ GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而�
 
 速览 Markdown 语法示例一节，作为工具书册，在需要使用时知道如何查询。
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 编写 Markdown 文本以及 LaTeX 语法表示的数学式可以通过：
 
-- Hugo + FixIt :white_check_mark:
-- VS Code + Markdown Preview Enhanced
-{{< /admonition >}}
+- Hugo &#43; FixIt :white_check_mark:
+- VS Code &#43; Markdown Preview Enhanced
+{{&lt; /admonition &gt;}}
 
 
 ## Git 和 Github
@@ -37,18 +37,18 @@ GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而�
 以下资源作为自学资源，用于补充自己不熟悉的操作，或者作为以上资料的补充工具手册。
 
 - [Git 中文教学（视频）][git-tutorials-zh] 
-    - [学习记录]({{< relref "../git/git-learn.md" >}})
+    - [学习记录]({{&lt; relref &#34;../git/git-learn.md&#34; &gt;}})
 - [30 天精通 Git 版本控制（文本）][learn-git-in-30-days]
 
-{{< admonition warning >}}
-原文档中的将公钥复制到 clipboard 中使用了 `clip` 命令，但是这个命令在 Ubuntu 中并没有对应的命令。可以使用 `xclip` + `alias` 达到近似效果。
+{{&lt; admonition warning &gt;}}
+原文档中的将公钥复制到 clipboard 中使用了 `clip` 命令，但是这个命令在 Ubuntu 中并没有对应的命令。可以使用 `xclip` &#43; `alias` 达到近似效果。
 
 ```bash
 $ sudo apt install xclip
 # using alias to implement clip, you can add this to bashrc
-$ alias='xclip -sel c'
+$ alias=&#39;xclip -sel c&#39;
 ```
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ## 编辑器: Visual Studio Code
 
@@ -67,13 +67,13 @@ $ alias='xclip -sel c'
 VS Code 控制台使用说明：
 
 - 可以在面板的输出，点击 GIT 选项显示 VS Code 背后执行的 git 命令。
-- 可以使用 `ctrl + shift + P` 呼出命令区，然后通过输入 Git branch 和 Git checkout 等并选择对应选项，来达到创建分支、切换分支等功能。
+- 可以使用 `ctrl &#43; shift &#43; P` 呼出命令区，然后通过输入 Git branch 和 Git checkout 等并选择对应选项，来达到创建分支、切换分支等功能。
 
-{{< admonition tip >}}
+{{&lt; admonition tip &gt;}}
 - 在 VS Code 设置中，需要在设置中打开 **Open Default Settings** 选项才能在左侧面板观察到预设值。键位绑定同理。
 - 要想进行调试，需要在使用 gcc 生成目标文件时，加入 `-g` 参数来生产调试信息。
 - 原文档中的 **GDB 教学链接-除错程式-gdb** 已失效，这是目前的[有效链接](https://frdm.cyut.edu.tw/~ckhung/b/c/gdb.php)。也可通过该影片 [拯救资工系学生的基本素养-使用 GDB 除错基本教学](https://www.youtube.com/watch?v=IttSz0BYZ8o) 来补充学习 GDB 的操作。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ## 终端和 Vim 
 
@@ -84,14 +84,14 @@ VS Code 控制台使用说明：
 - [x] 安装并使用 Minial Vim Plugin Manager 来管理 Vim 插件 (neocomplcache, nerdtree)
 - [x] 安装并使用 byobu 来管理多个终端视图。
 
-{{< admonition tip >}}
+{{&lt; admonition tip &gt;}}
 - 在 .vimrc 中增加插件后，打开 vim，执行 `:PlugInstall` 来安装插件，完成后在 vim 执行 `:source ~/.vimrc`。（可以通过 `:PlugStatus` 来查看插件安装状态）
 - 使用 `F4` 键来[显示/不显示][行数/相对行数]。
 - 使用 `F5` 键来呼入/呼出文件树(nerdtree)，在文件树恻通过 `ENTER` 键来访问目录/文件。
 - 使用 `Ctrl-w-h`/`Ctrl-w-l` 切换到 文件树/编辑区。
 - 自动补全时使用 `ENTER` 键来选中，使用方向键或 `Ctrl-N`/`Ctrl-U`/`Ctrl-P` 来上下选择。
 - 在 Vim 中可以通过 `:set paste`，并在 insert 模式下，将粘贴板的内容通过 `Ctrl-Shift-V` 进行粘贴。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ***推荐观看影片 [How to Do 90% of What Plugins Do (With Just Vim)][how-to-do-90%-of-what-plugins-do] 来扩展 Vim 插件的使用姿势。***
 
@@ -123,7 +123,7 @@ gcc 的 `-MMD` 和 `-MF` 参数对我们编写 Makefile 是一个巨大利器。
 
 [源程序地址](https://github.com/LoongGshine/LKI/blob/main/perf)
 
-{{< admonition type=success open=false >}}
+{{&lt; admonition type=success open=false &gt;}}
 ```bash
 $ perf record -e branch-misses:u,branch-instructions:u ./perf_record_example
 [ perf record: Woken up 1 times to write data ]
@@ -141,16 +141,16 @@ Available samples
 5 branch-misses:u
 89 branch-instructions:u
 ```
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< admonition tip >}}
+{{&lt; admonition tip &gt;}}
 - perf 需要在 root 下进行性能分析。
 - `perf top` 是对于哪个程序是性能瓶颈没有头绪时使用，可以查看哪个程序（以及程序的哪个部分）是热度点。
     - 在 `perf top` 时可以通过 `h` 键呼出帮助列表。
     - 可以通过方向键选择需要进一步分析的部分，并通过 `a` 键来查看指令级别粒度的热点。
 - `perf stat` 是对某一个要优化的程序进行性能分析，对该程序涉及的一系列 events 进行取样检查。
 - `perf record` 的精度比 `perf stat` 更高，可以对取样的 events 进行函数粒度的分析。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ## Linux 绘图工具: gnuplot
 
@@ -165,7 +165,7 @@ $ sudo apt-get install gnuplot
 
 ### GDB 调试
 
-观看教学视频 [拯救資工系學生的基本素養—使用 GDB 除錯基本教學](gdb-basics) 和搭配博文 ==[How to debug Rust/C/C++ via GDB][debug-gdb]==，学习 GDB 的基本操作和熟悉使用 GDB 调试 Rust/C/C++ 程序。
+观看教学视频 [拯救資工系學生的基本素養—使用 GDB 除錯基本教學](gdb-basics) 和搭配博文 ==[How to debug Rust/C/C&#43;&#43; via GDB][debug-gdb]==，学习 GDB 的基本操作和熟悉使用 GDB 调试 Rust/C/C&#43;&#43; 程序。
 
 - 掌握 `run/r`, `break/b`, `print/p`, `continue/c`, `step/s` `info/i`, `delete/d`, `backtrace/bt`, `frame/f`, `up`/`down`, `exit/q` 等命令的用法。以及 GBD 的一些特性，例如 GDB 会将空白行的断点自动下移到下一代码行；使用 `break` 命令时可以输入源文件路径，也可以只输入源文件名称。
 
@@ -183,7 +183,7 @@ $ sudo apt-get install gnuplot
 [learn-vscode-happily]: https://www.youtube.com/playlist?list=PL6S9AqLQkFpph4LOfSjtD-s4WB3pNh5M3
 [gdb-basics]: https://www.youtube.com/watch?v=IttSz0BYZ8o
 [debug-gdb]: https://tigercosmos.xyz/post/2020/09/system/debug-gdb/
-[how-to-do-90%-of-what-plugins-do]: https://www.youtube.com/watch?v=XA2WjJbmmoM&list=WL
+[how-to-do-90%-of-what-plugins-do]: https://www.youtube.com/watch?v=XA2WjJbmmoM&amp;list=WL
 [vim-cheat-sheet]: https://hackmd.io/@sysprog/gnu-linux-dev/https%3A%2F%2Fvim.rtorr.com%2F
 [bash-cheat-sheet]: https://hackmd.io/@sysprog/gnu-linux-dev/https%3A%2F%2Fkapeli.com%2Fcheat_sheets%2FBash_Shortcuts.docset%2FContents%2FResources%2FDocuments%2Findex
 [learn-vim-happily]: https://youtu.be/Y3Libi0SEp8

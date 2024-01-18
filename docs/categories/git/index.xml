@@ -2,7 +2,7 @@
   <channel>
     <title>Git - 分类 - Xshine&#39;s Blog</title>
     <link>https://loonggshine.github.io/categories/git/</link>
-    <description>Git - 分类 - Xshine&#39;s Blog</description>
+    <description>Git - 分类 | Xshine&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</lastBuildDate><atom:link href="https://loonggshine.github.io/categories/git/" rel="self" type="application/rss+xml" /><item>
   <title>Git/GitHub 学习指引</title>
@@ -10,7 +10,7 @@
   <pubDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://loonggshine.github.io/posts/git/</guid>
-  <description><![CDATA[Git 中文教学 新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 基本原理 对 Git 原理介绍比较准确，UP 主其它关于 GitHub 的合集也比较推荐。 视频]]></description>
+  <description><![CDATA[Git 中文教学新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 基本原理对 Git 原理介绍比较准确，UP 主其它关于 GitHub 的合集也比较推荐。 视频]]></description>
 </item>
 <item>
   <title>Git 学习记录</title>
