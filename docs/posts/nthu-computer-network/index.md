@@ -41,18 +41,24 @@
 ### Network Architecture
 
 {{&lt; image src=&#34;/images/network/L1-22.png&#34; caption=&#34;Foundation - 22&#34; &gt;}}
+{{&lt; image src=&#34;/images/network/L1-30.png&#34; caption=&#34;Foundation - 30&#34; &gt;}}
+{{&lt; image src=&#34;/images/network/L1-31.png&#34; caption=&#34;Foundation - 31&#34; &gt;}}
 
-**Physical Layer:** 如何将原始资料在 link 上传输，例如不同介质、信息编码（具体见 P25）
+**Physical Layer:** 如何将原始资料在 link 上传输，例如不同介质、信息编码。(P25)
 
-**Data Link Layer:** 在 Physical Layer 基础上，如何将 frame 传给直接相连的主机或设备，核心是通过 *Media Access Control Protocol* 解决 Multiple access 产生的碰撞问题。(具体见 P26)
+**Data Link Layer:** 在 Physical Layer 基础上，如何将 frame 传给直接相连的主机或设备，核心是通过 *Media Access Control Protocol* 解决 Multiple access 产生的碰撞问题。这一层交换的数据被称为 *frame*。(P26)
 
-**Network Layer:** 在 Data Link Layer 基础上，如何将 packet 通过 Internet 送给目的地主机，核心是通过 *Routing Protocols* 动态转发 packet。(具体见 P27)
+**Network Layer:** 在 Data Link Layer 基础上，如何将 packet 通过 Internet 送给目的地主机。核心是通过 *Routing Protocols* 动态转发 packet。这一层交换的数据被称为 *packet*。(P27)
 
-**Transport:** 在 Network 基础上，为两台 Host 提供可靠 / 不可靠传输服务。
+**Transport Layer:** 在 Network Layer 基础上，提供不同主机 processes 之间的资料传送。由于 Networkd Layer 是主机间进行资料传送，所以在 Transport Layer 不论是可靠还是不可靠的传输协议，都必须要实现最基本的机制：主机与 process 之间数据的复用和分解。这一层交换的数据被称为 *message*。(P28)
 
 {{&lt; admonition &gt;}}
 Switch 一般处于 L2 Layer，Router 一般处于 L3 Layer。L4 Layer 及以上的 layers 通常只存在于 hosts，switches 和 routers 内部一般不具有这些 layers。
+
+Internet Architecture 的核心是 IP 协议，它作为沙漏形状的中心位置，为处于其上层的协议与处于其下层协议之间提供了一个映射关系。
 {{&lt; /admonition &gt;}}
+
+### Network Performance
 
 [courseinfo]: https://ocw.nthu.edu.tw/ocw/index.php?page=course&amp;cid=291&amp;
 [slides&amp;hws]: https://ocw.nthu.edu.tw/ocw/index.php?page=course_news_content&amp;cid=291&amp;id=1015
