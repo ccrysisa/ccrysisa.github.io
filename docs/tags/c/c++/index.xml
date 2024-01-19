@@ -20,31 +20,19 @@
   </div>]]></description>
 </item>
 <item>
-  <title>C 规格第 6 章阅读记录</title>
-  <link>https://ccrysisa.github.io/posts/c-specification/ch6/</link>
-  <pubDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</pubDate>
+  <title>GDB 调试入门</title>
+  <link>https://ccrysisa.github.io/posts/debug-gdb/</link>
+  <pubDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://ccrysisa.github.io/posts/c-specification/ch6/</guid>
-  <description><![CDATA[<p>C 语言规格书 Chapter 6 - Language 阅读记录。</p>]]></description>
-</item>
-<item>
-  <title>C 规格第 7 章阅读记录</title>
-  <link>https://ccrysisa.github.io/posts/c-specification/ch7/</link>
-  <pubDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</pubDate>
-  <author>Xshine</author>
-  <guid>https://ccrysisa.github.io/posts/c-specification/ch7/</guid>
-  <description><![CDATA[<p>C 语言规格书 Chapter 7 - Library 阅读记录。</p>]]></description>
-</item>
-<item>
-  <title>C 语言规格书阅读记录</title>
-  <link>https://ccrysisa.github.io/posts/c-specification/c-specification/</link>
-  <pubDate>Sat, 06 Jan 2024 16:07:25 &#43;0800</pubDate>
-  <author>Xshine</author>
-  <guid>https://ccrysisa.github.io/posts/c-specification/c-specification/</guid>
-  <description><![CDATA[<p>C 语言规格书阅读学习记录。
-规格书版本为 n1256，对应 C99 标准，对应的 <a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf"target="_blank" rel="external nofollow noopener noreferrer">PDF 下载地址</a>。
-也配合 C11 标准来阅读，版本 n1570，对应的 <a href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1570.pdf"target="_blank" rel="external nofollow noopener noreferrer">PDF 下载地址</a>。
-阅读规格书需要一定的体系结构、编译原理的相关知识，但不需要很高的程度。请善用检索工具，在阅读规格书时遇到术语时，请先在规格书中进行检索，因为极大可能是规格书自己定义的术语。</p>]]></description>
+  <guid>https://ccrysisa.github.io/posts/debug-gdb/</guid>
+  <description><![CDATA[<div class="details admonition abstract open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">大型开源项目的规模十分庞大，例如使用 Rust 编写的 Servo 浏览器，这个项目有近十万行代码。在开发规模如此庞大的项目时，了解如何通过正确的方式进行调试非常重要，因为这样可以帮助开发者快速地找到瓶颈。</div>
+    </div>
+  </div>]]></description>
 </item>
 </channel>
 </rss>

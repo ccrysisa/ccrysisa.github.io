@@ -14,7 +14,7 @@ license:
 comment: false
 weight: 0
 tags:
-  - C/C++
+  - C
   - Sysprog
 categories:
   - C

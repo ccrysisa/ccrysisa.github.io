@@ -5,6 +5,53 @@ C 语言规格书 Chapter 6 - Language 阅读记录。
 
 <!--more-->
 
+## 6.2 Concepts
+
+### 6.2.2 Linkages of identifiers
+
+linkage:
+- external
+- internal
+- none
+
+一个拥有 file scope 并且关于 object 或 function 的 identifier 声明，如果使用 `static` 修饰，则该 identifer 有 internal linkage，e.g.
+
+```c
+// file scope
+static int a;
+static void f();
+
+int main() {}
+```
+
+一个 scope 内使用 `static` 修饰的 identifier 声明，如果在同一 scope 内已存在该 identifier 声明，则该 identifier 的 linkage 取决于先前的 identifier 声明。如果该 identifier 不存在先前声明或者先前声明 no linkage，则该 identifier 是 external linkage，e.g.
+
+```c
+// Example 1
+static int a; // a is internal linkage
+extern int a; // linkage is the same as prior
+
+// Example 2
+extern int b; // no prior, a is external linkage
+extern int b; // linkage is the same as prior
+```
+
+如果一个 function identifier 声明没有 storage-class 修饰符，则其 linkage 等价于加上 `extern` 修饰的声明的 linkage，e.g.
+
+```c
+int func(int a, int b);
+// equal to `extern int func(int a. int b);`
+// and then no prior, it is external linkage
+```
+
+如果一个 object identifier 声明没有 storage-class 修饰符，且拥有 file scope，则其拥有 external linkage，e.g.
+
+```c
+// file scope
+int a; // external linkage
+int main() {}
+```
+
 ## 6.5 Expressions
 
 **Syntax**
@@ -23,7 +70,7 @@ unary-operator: one of
 
 ### 6.5.3 Unary operators
 
-{{< admonition >}}
+{{< admonition open=false >}}
 C99 [6.2.5] ***Types***
 
 - There are three *real floating types*, designated as `float`, `double`, and `long double`.
