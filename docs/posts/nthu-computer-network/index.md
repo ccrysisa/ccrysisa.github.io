@@ -41,8 +41,6 @@
 ### Network Architecture
 
 {{&lt; image src=&#34;/images/network/L1-22.png&#34; caption=&#34;Foundation - 22&#34; &gt;}}
-{{&lt; image src=&#34;/images/network/L1-30.png&#34; caption=&#34;Foundation - 30&#34; &gt;}}
-{{&lt; image src=&#34;/images/network/L1-31.png&#34; caption=&#34;Foundation - 31&#34; &gt;}}
 
 **Physical Layer:** 如何将原始资料在 link 上传输，例如不同介质、信息编码。(P25)
 
@@ -53,12 +51,26 @@
 **Transport Layer:** 在 Network Layer 基础上，提供不同主机 processes 之间的资料传送。由于 Networkd Layer 是主机间进行资料传送，所以在 Transport Layer 不论是可靠还是不可靠的传输协议，都必须要实现最基本的机制：主机与 process 之间数据的复用和分解。这一层交换的数据被称为 *message*。(P28)
 
 {{&lt; admonition &gt;}}
-Switch 一般处于 L2 Layer，Router 一般处于 L3 Layer。L4 Layer 及以上的 layers 通常只存在于 hosts，switches 和 routers 内部一般不具有这些 layers。
+Switch 一般处于 L2 Layer，Router 一般处于 L3 Layer。L4 Layer 及以上的 layers 通常只存在于 hosts，switches 和 routers 内部一般不具有这些 layers。(P29)
 
-Internet Architecture 的核心是 IP 协议，它作为沙漏形状的中心位置，为处于其上层的协议与处于其下层协议之间提供了一个映射关系。
+Internet Architecture 的层级并不是严格的，Host 可以略过 Application Layer 而直接使用 Transport Layer、Network Layer 中的协议。(P30)
+
+Internet Architecture 的核心是 IP 协议，它作为沙漏形状的中心位置，为处于其上层的协议与处于其下层协议之间提供了一个映射关系。(P31)
 {{&lt; /admonition &gt;}}
 
 ### Network Performance
+
+{{&lt; image src=&#34;/images/network/L1-36.png&#34; caption=&#34;Foundation - 36&#34; &gt;}}
+{{&lt; image src=&#34;/images/network/L1-37.png&#34; caption=&#34;Foundation - 37&#34; &gt;}}
+
+**Bandwidth:** Number of bits per second (P34) 
+
+**Delay** 可以近似理解为 Propagation time。有效利用 network 的标志是在接收对方的回应之前，发送方传送的资料充满了 pipe，即发送了 Delay $\times$ Bandwitdh bits 的资料量。(P39)
+
+{{&lt; image src=&#34;/images/network/L1-40.png&#34; caption=&#34;Foundation - 40&#34; &gt;}}
+
+**RTT** 可以近似理解为 2 $\times$ Propagation time，因为一个来回需要从 sender 到 reciever，再从 reciever 到 sender。
+
 
 [courseinfo]: https://ocw.nthu.edu.tw/ocw/index.php?page=course&amp;cid=291&amp;
 [slides&amp;hws]: https://ocw.nthu.edu.tw/ocw/index.php?page=course_news_content&amp;cid=291&amp;id=1015
