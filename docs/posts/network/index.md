@@ -3,13 +3,7 @@
 
 整理一些计算机网络相关的资源
 
-<<<<<<< HEAD
-- [课程主页](https://ocw.nthu.edu.tw/ocw/index.php?page=course&amp;cid=291&amp;)
-- [课程资料](https://ocw.nthu.edu.tw/ocw/index.php?page=course_news_content&amp;cid=291&amp;id=1015)
-- [课程视频](https://www.youtube.com/playlist?list=PLS0SUwlYe8cxktXNovos9xleroaWyb-z5)
-=======
 &lt;!--more--&gt;
->>>>>>> network
 
 ## Referenecs
 

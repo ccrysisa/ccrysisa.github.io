@@ -1,4 +1,4 @@
-# C 规格第 7 章阅读记录
+# C 规格第 7 章 Library
 
 
 C 语言规格书 Chapter 7 - Library 阅读记录。

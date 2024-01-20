@@ -24,7 +24,7 @@
     
   "><meta itemprop="datePublished" content="2024-01-16T17:15:46+08:00" />
 <meta itemprop="dateModified" content="2024-01-17T23:34:07+08:00" />
-<meta itemprop="wordCount" content="2365"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="2798"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Debug,GDB,Rust,C/C&#43;&#43;,Sysprog," /><meta property="og:title" content="GDB 调试入门" />
 <meta property="og:description" content="
     
@@ -63,7 +63,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/debug-gdb\/"
-    },"genre": "posts","keywords": "Debug, GDB, Rust, C\/C\u002b\u002b, Sysprog","wordcount":  2365 ,
+    },"genre": "posts","keywords": "Debug, GDB, Rust, C\/C\u002b\u002b, Sysprog","wordcount":  2798 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/debug-gdb\/","datePublished": "2024-01-16T17:15:46+08:00","dateModified": "2024-01-17T23:34:07+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -173,7 +173,7 @@
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>GDB 调试入门</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="Xshine" data-title="Xshine" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Xshine</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-01-16 17:15:46"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-16">2024-01-16</time></span>&nbsp;<span title="更新于 2024-01-17 23:34:07"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-17">2024-01-17</time></span>&nbsp;<span title="2365 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="Xshine" data-title="Xshine" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Xshine</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-01-16 17:15:46"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-16">2024-01-16</time></span>&nbsp;<span title="更新于 2024-01-17 23:34:07"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-17">2024-01-17</time></span>&nbsp;<span title="2798 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 6 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -198,6 +198,9 @@
         <li><a href="#info">info</a></li>
         <li><a href="#delete">delete</a></li>
         <li><a href="#quit">quit</a></li>
+        <li><a href="#list">list</a></li>
+        <li><a href="#whatis">whatis</a></li>
+        <li><a href="#x">x</a></li>
         <li><a href="#其他">其他</a></li>
       </ul>
     </li>
@@ -241,19 +244,20 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install gdb</span></span></code></pre></td></tr></table>
 </div>
-</div><blockquote>
+</div><p>启动 GDB 时可以加入 <code>-q</code> 参数 (quite)，表示减少或不输出一些提示或信息。</p>
+<blockquote>
 <p>LLDB 与 GDB 的命令类似，本文也可用于 LLDB 的入门学习。</p>
 </blockquote>
 <h2 id="gdb-调试-cc" class="heading-element">
-  <a href="#gdb-%e8%b0%83%e8%af%95-cc" class="heading-mark"></a>GDB 调试 C/C++</h2><p>要使用 GDB 来调试 C/C++，需要在编译时加上 <code>-g</code> 参数，例如：</p>
+  <a href="#gdb-%e8%b0%83%e8%af%95-cc" class="heading-mark"></a>GDB 调试 C/C++</h2><p>要使用 GDB 来调试 C/C++，需要在编译时加上 <code>-g</code> 参数（必需），也可以使用 <code>-Og</code> 参数来对 debug 进行优化（建议），例如：</p>
 <div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gcc test.c -g -o <span class="nb">test</span>
-</span></span><span class="line"><span class="cl">$ gdb ./test</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gcc test.c -Og -g -o <span class="nb">test</span>
+</span></span><span class="line"><span class="cl">$ gdb -q ./test</span></span></code></pre></td></tr></table>
 </div>
 </div><a href="https://github.com/ccrysisa/LKI/tree/main/debug/test.c"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 <h2 id="gdb-调试-rust" class="heading-element">
@@ -265,7 +269,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cargo build
-</span></span><span class="line"><span class="cl">$ gdb ./target/debug/&lt;package name&gt;</span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">$ gdb -q ./target/debug/&lt;package name&gt;</span></span></code></pre></td></tr></table>
 </div>
 </div><p>但是如果是使用 <code>cargo build --release</code> 构建的 release 目标文件（即位于 target/release 目录下的目标文件），则无法使用 GDB 进行调试，因为 release 目标未包含任何调试信息，类似于未使用 <code>-g</code> 参数编译 C/C++ 源代码。</p>
 <a href="https://github.com/ccrysisa/LKI/tree/main/debug/hello_cargo"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
@@ -344,13 +348,27 @@
 </span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> print x + y
 </span></span><span class="line"><span class="cl"><span class="nv">$2</span> <span class="o">=</span> <span class="m">7</span></span></span></code></pre></td></tr></table>
 </div>
+</div><p>使用 <code>p</code> 命令打印变量值时，会在左侧显示一个 <code>$&lt;number&gt;</code>，这个可以理解成临时变量，后续也可以通过这个标志来复用这些值。例如在上面的例子中：</p>
+<div class="highlight" id="id-8"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> print <span class="nv">$1</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$3</span> <span class="o">=</span> <span class="m">3</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> print <span class="nv">$1</span> + <span class="nv">$3</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$4</span> <span class="o">=</span> <span class="m">4</span></span></span></code></pre></td></tr></table>
+</div>
 </div><h3 id="backtrace" class="heading-element">
   <a href="#backtrace" class="heading-mark"></a>backtrace</h3><p><code>backtrace (bt)</code> 命令用于打印当前调用栈的信息，也称为堆栈回溯 (backtrace)。它显示了程序在执行过程中经过的函数调用序列，以及每个函数调用的位置和参数，即可以获取以下信息：</p>
 <ul>
 <li><em>函数调用序列</em>：显示程序当前的函数调用序列，以及每个函数的名称和所在的源代码文件。</li>
 <li><em>栈帧信息</em>：对于每个函数调用，显示该函数的栈帧信息，包括栈帧的地址和栈帧的大小。</li>
 </ul>
-<div class="highlight" id="id-8"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -374,7 +392,7 @@
 <h3 id="frame" class="heading-element">
   <a href="#frame" class="heading-mark"></a>frame</h3><p><code>frame (f)</code> 命令用于选择特定的栈帧 (stack frame)，从而切换到不同的函数调用上下文，每个栈帧对应于程序中的一个函数调用。</p>
 <p>接着上一个例子，切换到 <code>main</code> 函数所在的栈帧：</p>
-<div class="highlight" id="id-9"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -395,7 +413,7 @@
 <p>这两个命令需要开发者对应函数调用堆栈的布局有一定程度的了解。</p>
 </blockquote>
 <p>接着上一个例子：</p>
-<div class="highlight" id="id-10"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -425,7 +443,7 @@
 <li><code>info frame</code> 显示当前栈帧 (stack frame) 的信息，包括函数名称、参数、局部变量等。</li>
 <li><code>info program</code> 显示被调试程序的相关信息，例如程序入口地址、程序的加载地址等。</li>
 </ul>
-<div class="highlight" id="id-11"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -443,7 +461,7 @@
 <p>可以通过指定 <em>断点 / 观察点</em> 的编号或使用 <code>delete</code> 命令相关的参数，来删除已设置的断点 / 观察点。断点 / 观察点编号可以在使用 <code>info breakpoints</code> / <code>info watchpoints</code> 命令时获得。</p>
 <h3 id="quit" class="heading-element">
   <a href="#quit" class="heading-mark"></a>quit</h3><p><code>quit (q)</code> 命令用于退出 GDB，返回终端页面。</p>
-<div class="highlight" id="id-12"><div class="chroma">
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -452,9 +470,34 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> quit
 </span></span><span class="line"><span class="cl">$ <span class="c1"># Now, in the terminial</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="其他" class="heading-element">
+</div><h3 id="list" class="heading-element">
+  <a href="#list" class="heading-mark"></a>list</h3><p><code>list</code> 命令用于显示当前位置的代码片段，默认情况下，它会显示当前位置的前后10行代码。</p>
+<p><code>list</code> 命令也可以显示指定范围的代码，使用 <code>list &lt;start&gt;,&lt;end&gt;</code> 命令将显示从 start 行到 end 行的源代码。</p>
+<h3 id="whatis" class="heading-element">
+  <a href="#whatis" class="heading-mark"></a>whatis</h3><p><code>whatis</code> 命令用于获取给定标识符（如变量、函数或类型）的类型信息。</p>
+<div class="highlight" id="id-14"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">// in <span class="nb">source</span> code
+</span></span><span class="line"><span class="cl">int calendar<span class="o">[</span>12<span class="o">][</span>31<span class="o">]</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">// in gdb
+</span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> whatis calendar
+</span></span><span class="line"><span class="cl"><span class="nb">type</span> <span class="o">=</span> int <span class="o">[</span>12<span class="o">][</span>31<span class="o">]</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="x" class="heading-element">
+  <a href="#x" class="heading-mark"></a>x</h3><p><code>x</code> 命令用于查看内存中的数据，使用 x 命令搭配不同的格式来显示内存中的数据，也可以搭配 <code>/</code> 后跟数字来指定要显示的内存单元数量。例如，<code>x/4 &lt;address&gt;</code> 表示显示地址 address 开始的连续 4 个内存单元的内容。</p>
+<h3 id="其他" class="heading-element">
   <a href="#%e5%85%b6%e4%bb%96" class="heading-mark"></a>其他</h3><p>如果被调试程序正处于运行态（即已经通过 <code>run</code> 命令来运行程序），此时可以通过 <code>Ctrl+C</code> 来中断 GDB，程序将被立即中断，并在中断时所运行到的地方暂停。这种方式被称为 <strong>手动断点</strong>，手动断点可以理解为一个临时断点，只会在该处暂停一次。</p>
-<p>GDB 会将空白行的断点自动下移到下一非空的代码行。</p></div><div class="post-footer" id="post-footer">
+<p>GDB 会将空白行的断点自动下移到下一非空的代码行。</p>
+<p><code>set print pretty</code> 命令可以以更易读和格式化的方式显示结构化数据，以更友好的方式输出结构体、类、数组等复杂类型的数据，更易于阅读和理解。</p></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">

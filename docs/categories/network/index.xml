@@ -1,21 +1,15 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>Network - 分类 - Xshine&#39;s Blog</title>
-<<<<<<< HEAD
     <link>https://ccrysisa.github.io/categories/network/</link>
     <description>Network - 分类 | Xshine&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Tue, 02 Jan 2024 19:44:56 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/network/" rel="self" type="application/rss+xml" /><item>
-=======
-    <link>https://loonggshine.github.io/categories/network/</link>
-    <description>Network - 分类 | Xshine&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Sun, 14 Jan 2024 12:09:38 &#43;0800</lastBuildDate><atom:link href="https://loonggshine.github.io/categories/network/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Sun, 14 Jan 2024 12:09:38 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/network/" rel="self" type="application/rss+xml" /><item>
   <title>清大计算机网络重点提示</title>
-  <link>https://loonggshine.github.io/posts/nthu-computer-network/</link>
+  <link>https://ccrysisa.github.io/posts/nthu-computer-network/</link>
   <pubDate>Sun, 14 Jan 2024 12:09:38 &#43;0800</pubDate>
   <author>Xshine</author>
-  <guid>https://loonggshine.github.io/posts/nthu-computer-network/</guid>
+  <guid>https://ccrysisa.github.io/posts/nthu-computer-network/</guid>
   <description><![CDATA[<div class="details admonition abstract open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -27,18 +21,12 @@
   </div>]]></description>
 </item>
 <item>
->>>>>>> network
   <title>计算机网络学习指引</title>
   <link>https://ccrysisa.github.io/posts/network/</link>
   <pubDate>Tue, 02 Jan 2024 19:44:56 &#43;0800</pubDate>
   <author>Xshine</author>
-<<<<<<< HEAD
   <guid>https://ccrysisa.github.io/posts/network/</guid>
-  <description><![CDATA[清大开放式课程 - 计算机网络 课程主页 课程资料 课程视频 Referenecs 110-1 計算機網路 (清大開放式課程)]]></description>
-=======
-  <guid>https://loonggshine.github.io/posts/network/</guid>
   <description><![CDATA[<p>整理一些计算机网络相关的资源</p>]]></description>
->>>>>>> network
 </item>
 </channel>
 </rss>

@@ -24,7 +24,7 @@
     
   "><meta itemprop="datePublished" content="2024-01-14T22:41:38+08:00" />
 <meta itemprop="dateModified" content="2024-01-19T20:25:53+08:00" />
-<meta itemprop="wordCount" content="1298"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1641"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C," /><meta property="og:title" content="你所不知道的 C 语言: 指针篇" />
 <meta property="og:description" content="
     
@@ -52,7 +52,7 @@
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/c-pointer/" /><link rel="prev" href="https://ccrysisa.github.io/posts/c-specification/ch6/" /><link rel="next" href="https://ccrysisa.github.io/posts/debug-gdb/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/c-pointer/" /><link rel="prev" href="https://ccrysisa.github.io/posts/nthu-computer-network/" /><link rel="next" href="https://ccrysisa.github.io/posts/debug-gdb/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -63,7 +63,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-pointer\/"
-    },"genre": "posts","keywords": "Sysprog, C","wordcount":  1298 ,
+    },"genre": "posts","keywords": "Sysprog, C","wordcount":  1641 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-pointer\/","datePublished": "2024-01-14T22:41:38+08:00","dateModified": "2024-01-19T20:25:53+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -173,7 +173,7 @@
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>你所不知道的 C 语言: 指针篇</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="Xshine" data-title="Xshine" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Xshine</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-01-14 22:41:38"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-14">2024-01-14</time></span>&nbsp;<span title="更新于 2024-01-19 20:25:53"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-19">2024-01-19</time></span>&nbsp;<span title="1298 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="Xshine" data-title="Xshine" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Xshine</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-01-14 22:41:38"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-14">2024-01-14</time></span>&nbsp;<span title="更新于 2024-01-19 20:25:53"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-19">2024-01-19</time></span>&nbsp;<span title="1641 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -184,6 +184,7 @@
     <li><a href="#前言杂谈">前言杂谈</a></li>
     <li><a href="#阅读-c-语言规格书">阅读 C 语言规格书</a></li>
     <li><a href="#void--void-">void &amp; void *</a></li>
+    <li><a href="#pointers-vs-arrays">Pointers vs. Arrays</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><div class="details admonition quote open">
@@ -289,6 +290,10 @@
   <a href="#%e9%98%85%e8%af%bb-c-%e8%af%ad%e8%a8%80%e8%a7%84%e6%a0%bc%e4%b9%a6" class="heading-mark"></a>阅读 C 语言规格书</h2><p>一手资料的重要性毋庸置疑，对于 C 语言中的核心概念 <em><strong>指针</strong></em>，借助官方规格书清晰概念是非常重要的。</p>
 <p>C99 [6.2.5] <em><strong>Types</strong></em></p>
 <blockquote>
+<p>An array type of unknown size is an incomplete type. It is completed, for an identifier of that type, by specifying the size in a later declaration (with internal or external linkage). A structure or union type of unknown content is an incomplete type. It is completed, for all declarations of that type, by declaring the same structure or union tag with its defining content later in the same scope.</p>
+</blockquote>
+<p><em>incomplete type</em> 和 <em>linkage</em> 配合可以进行 forward declaration，如果搭配 pointer 则可以进一步，在无需知道 object 内部细节即可进行程序开发。</p>
+<blockquote>
 <p>Array, function, and pointer types are collectively called derived declarator types. A declarator type derivation from a type T is the construction of a derived declarator type from T by the application of an array-type, a function-type, or a pointer-type derivation to T.</p>
 </blockquote>
 <p><em>derived declarator types</em>  表示衍生的声明类型，因为 array, function, pointer 本质都是地址，所以可以使用这些所谓的 <em>derived declarator types</em> 来提前声明 object，表示在某个地址会存储一个 object，这也是为什么这些类型被规格书定义为 <em>derived declarator types</em>。</p>
@@ -353,6 +358,50 @@
 </ul>
 </div>
     </div>
+  </div>
+<p>C99 [6.3.2.3] <em><strong>Pointers</strong></em></p>
+<blockquote>
+<p>A pointer to a function of one type may be converted to a pointer to a function of another
+type and back again; the result shall compare equal to the original pointer. Ifaconverted
+pointer is used to call a function whose type is not compatible with the pointed-to type,
+the behavior is undefined.</p>
+</blockquote>
+<p>C11 [6.3.2.3] <em><strong>Pointers</strong></em></p>
+<blockquote>
+<p>A pointer to a function of one type may be converted to a pointer to a function of another
+type and back again; the result shall compare equal to the original pointer. If a converted
+pointer is used to call a function whose type is not compatible with the referenced type,
+the behavior is undefined.</p>
+</blockquote>
+<p>C99 和 C11 都不保证 pointers (whose type is not compatible with the <em>pointed-to / referenced</em> type) 之间的转换是正确的。</p>
+<h2 id="pointers-vs-arrays" class="heading-element">
+  <a href="#pointers-vs-arrays" class="heading-mark"></a>Pointers vs. Arrays</h2><div class="details admonition warning open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-exclamation-triangle fa-fw" aria-hidden="true"></i>警告<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>在 GDB 中使用 <code>memcpy</code> 后直接打印可能会出现以下错误：</p>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> p memcpy<span class="o">(</span>calendar, b, sizeof<span class="o">(</span>b<span class="o">[</span>0<span class="o">]))</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;memcpy&#39;</span> has unknown <span class="k">return</span> type<span class="p">;</span> cast the call to its declared <span class="k">return</span> type</span></span></code></pre></td></tr></table>
+</div>
+</div><p>只需加入 <code>void *</code> 进行类型转换即可解决该问题：</p>
+<div class="highlight" id="id-6"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> p <span class="o">(</span>void *<span class="o">)</span> memcpy<span class="o">(</span>calendar, b, sizeof<span class="o">(</span>b<span class="o">[</span>0<span class="o">]))</span>
+</span></span><span class="line"><span class="cl">...</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+    </div>
   </div></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
@@ -380,7 +429,7 @@
     </section>
   </div>
 
-  <div class="post-nav"><a href="/posts/c-specification/ch6/" class="post-nav-item" rel="prev" title="C 规格第 6 章阅读记录"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>C 规格第 6 章阅读记录</a>
+  <div class="post-nav"><a href="/posts/nthu-computer-network/" class="post-nav-item" rel="prev" title="清大计算机网络重点提示"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>清大计算机网络重点提示</a>
       <a href="/posts/debug-gdb/" class="post-nav-item" rel="next" title="GDB 调试入门">GDB 调试入门<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article>

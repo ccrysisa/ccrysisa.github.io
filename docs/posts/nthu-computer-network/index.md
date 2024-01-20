@@ -80,5 +80,5 @@ Internet Architecture 的核心是 IP 协议，它作为沙漏形状的中心位
 ---
 
 > 作者: [vanJker](https://github.com/vanJker)  
-> URL: https://loonggshine.github.io/posts/nthu-computer-network/  
+> URL: https://ccrysisa.github.io/posts/nthu-computer-network/  
 

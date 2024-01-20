@@ -1,11 +1,7 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>Rust - 标签 - Xshine&#39;s Blog</title>
-<<<<<<< HEAD
     <link>https://ccrysisa.github.io/tags/rust/</link>
-=======
-    <link>https://loonggshine.github.io/tags/rust/</link>
->>>>>>> network
     <description>Rust - 标签 | Xshine&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/rust/" rel="self" type="application/rss+xml" /><item>
@@ -28,11 +24,7 @@
   <link>https://ccrysisa.github.io/posts/rust-introduction/</link>
   <pubDate>Thu, 28 Dec 2023 20:18:03 &#43;0800</pubDate>
   <author>Xshine</author>
-<<<<<<< HEAD
   <guid>https://ccrysisa.github.io/posts/rust-introduction/</guid>
-=======
-  <guid>https://loonggshine.github.io/posts/rust-introduction/</guid>
->>>>>>> network
   <description><![CDATA[Rust in 100 Seconds&#x2705; 观看短片：Rust in 100 Seconds 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello]]></description>
 </item>
 </channel>

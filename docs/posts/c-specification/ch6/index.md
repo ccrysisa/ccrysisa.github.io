@@ -1,10 +1,9 @@
-# C 规格第 6 章阅读记录
+# C 规格第 6 章 Language
 
 
 C 语言规格书 Chapter 6 - Language 阅读记录。
 
 &lt;!--more--&gt;
-<<<<<<< HEAD
 
 ## 6.2 Concepts
 
@@ -52,8 +51,6 @@ int func(int a, int b);
 int a; // external linkage
 int main() {}
 ```
-=======
->>>>>>> network
 
 ## 6.5 Expressions
 
@@ -73,13 +70,8 @@ unary-operator: one of
 
 ### 6.5.3 Unary operators
 
-<<<<<<< HEAD
 {{&lt; admonition open=false &gt;}}
 C99 [6.2.5] ***Types***
-=======
-{{&lt; admonition info &gt;}}
-C99 [6.2.5] **Types**
->>>>>>> network
 
 - There are three *real floating types*, designated as `float`, `double`, and `long double`.
 
@@ -92,24 +84,15 @@ C99 [6.2.5] **Types**
 - A *function type* describes a function with specified return type. A function type is
 characterized by its return type and the number and types of its parameters. A
 function type is said to be derived from its return type, and if its return type is T, the
-<<<<<<< HEAD
 function type is sometimes called &#39;&#39;function returning T&#39;&#39;. The construction of a
 function type from a return type is called ‘‘function type derivation’’.
-=======
-function type is sometimes called &#39;&#39;function returning T&#39;&#39;.
->>>>>>> network
 
 - Arithmetic types and pointer types are collectively called *scalar types*.
 
 C99 [6.3.2.1] ***Lvalues, arrays, and function designators***
 
-<<<<<<< HEAD
 - A *function designator* is an expression that has function type. Except when it is the
 operand of the `sizeof` operator or the unary `&amp;` operator, a function designator with
-=======
-- A function designator is an expression that has function type. Except when it is the
-operand of the sizeof operator or the unary &amp; operator,afunction designator with
->>>>>>> network
 type ‘‘function returning type’’ is converted to an expression that has type ‘‘pointer to
 function returning type’’.
 {{&lt; /admonition &gt;}}

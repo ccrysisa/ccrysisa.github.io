@@ -1,11 +1,7 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>Linux - 分类 - Xshine&#39;s Blog</title>
-<<<<<<< HEAD
     <link>https://ccrysisa.github.io/categories/linux/</link>
-=======
-    <link>https://loonggshine.github.io/categories/linux/</link>
->>>>>>> network
     <description>Linux - 分类 | Xshine&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Wed, 27 Dec 2023 20:35:45 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/linux/" rel="self" type="application/rss+xml" /><item>
@@ -13,11 +9,7 @@
   <link>https://ccrysisa.github.io/posts/ubuntu/</link>
   <pubDate>Wed, 27 Dec 2023 20:35:45 &#43;0800</pubDate>
   <author>Xshine</author>
-<<<<<<< HEAD
   <guid>https://ccrysisa.github.io/posts/ubuntu/</guid>
-=======
-  <guid>https://loonggshine.github.io/posts/ubuntu/</guid>
->>>>>>> network
   <description><![CDATA[网络代理根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo apt install net-tools 安装并启]]></description>
 </item>
 </channel>
