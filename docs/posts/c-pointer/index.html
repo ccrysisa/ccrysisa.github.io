@@ -24,7 +24,7 @@
     
   "><meta itemprop="datePublished" content="2024-01-14T22:41:38+08:00" />
 <meta itemprop="dateModified" content="2024-01-19T20:25:53+08:00" />
-<meta itemprop="wordCount" content="1298"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1642"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C," /><meta property="og:title" content="你所不知道的 C 语言: 指针篇" />
 <meta property="og:description" content="
     
@@ -52,7 +52,7 @@
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/c-pointer/" /><link rel="prev" href="https://ccrysisa.github.io/posts/c-specification/ch6/" /><link rel="next" href="https://ccrysisa.github.io/posts/debug-gdb/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/c-pointer/" /><link rel="prev" href="https://ccrysisa.github.io/posts/git/" /><link rel="next" href="https://ccrysisa.github.io/posts/debug-gdb/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -63,7 +63,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-pointer\/"
-    },"genre": "posts","keywords": "Sysprog, C","wordcount":  1298 ,
+    },"genre": "posts","keywords": "Sysprog, C","wordcount":  1642 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-pointer\/","datePublished": "2024-01-14T22:41:38+08:00","dateModified": "2024-01-19T20:25:53+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -75,7 +75,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="Xshine&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="Xshine&#39;s Blog" data-title="Xshine&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">Xshine&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="Xshine&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="Xshine&#39;s Blog" data-alt="Xshine&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">Xshine&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -115,7 +115,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="Xshine&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">Xshine&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="Xshine&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">Xshine&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -168,12 +168,18 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>你所不知道的 C 语言: 指针篇</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="Xshine" data-title="Xshine" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Xshine</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-01-14 22:41:38"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-14">2024-01-14</time></span>&nbsp;<span title="更新于 2024-01-19 20:25:53"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-19">2024-01-19</time></span>&nbsp;<span title="1298 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="Xshine" data-alt="Xshine" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Xshine</a></span>
+          <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-01-14 22:41:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-14">2024-01-14</time></span>&nbsp;<span title="更新于 2024-01-19 20:25:53"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-19">2024-01-19</time></span>&nbsp;<span title="1642 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -184,6 +190,7 @@
     <li><a href="#前言杂谈">前言杂谈</a></li>
     <li><a href="#阅读-c-语言规格书">阅读 C 语言规格书</a></li>
     <li><a href="#void--void-">void &amp; void *</a></li>
+    <li><a href="#pointers-vs-arrays">Pointers vs. Arrays</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><div class="details admonition quote open">
@@ -199,8 +206,8 @@
 <a href="https://youtu.be/G7vERppua9o"target="_blank" rel="external nofollow noopener noreferrer">直播录影(上)<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a><br>
 <a href="https://youtu.be/Owxols1RTAg"target="_blank" rel="external nofollow noopener noreferrer">直播录影(下)<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></p>
 </blockquote>
-<h2 id="前言杂谈" class="heading-element">
-  <a href="#%e5%89%8d%e8%a8%80%e6%9d%82%e8%b0%88" class="heading-mark"></a>前言杂谈</h2><p><a href="https://www.youtube.com/watch?v=l5Mp_DEn4bs"target="_blank" rel="external nofollow noopener noreferrer">Let’s learn programming by inventing it</a> [CppCon 2018] &#x2705;</p>
+<h2 id="前言杂谈">前言杂谈</h2>
+<p><a href="https://www.youtube.com/watch?v=l5Mp_DEn4bs"target="_blank" rel="external nofollow noopener noreferrer">Let’s learn programming by inventing it</a> [CppCon 2018] &#x2705;</p>
 <div class="details admonition note">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -285,9 +292,13 @@
   </div>
 <p>Rob Pike 于 2009/10/30 的 <a href="https://talks.golang.org/2009/go_talk-20091030.pdf"target="_blank" rel="external nofollow noopener noreferrer">Golang Talk</a> [PDF]</p>
 <p>David Brailsford 教授解说影片 <a href="https://www.youtube.com/watch?v=t5NszbIerYc"target="_blank" rel="external nofollow noopener noreferrer">Essentials: Pointer Power! - Computerphile</a> [YouTube]</p>
-<h2 id="阅读-c-语言规格书" class="heading-element">
-  <a href="#%e9%98%85%e8%af%bb-c-%e8%af%ad%e8%a8%80%e8%a7%84%e6%a0%bc%e4%b9%a6" class="heading-mark"></a>阅读 C 语言规格书</h2><p>一手资料的重要性毋庸置疑，对于 C 语言中的核心概念 <em><strong>指针</strong></em>，借助官方规格书清晰概念是非常重要的。</p>
+<h2 id="阅读-c-语言规格书">阅读 C 语言规格书</h2>
+<p>一手资料的重要性毋庸置疑，对于 C 语言中的核心概念 <em><strong>指针</strong></em>，借助官方规格书清晰概念是非常重要的。</p>
 <p>C99 [6.2.5] <em><strong>Types</strong></em></p>
+<blockquote>
+<p>An array type of unknown size is an incomplete type. It is completed, for an identifier of that type, by specifying the size in a later declaration (with internal or external linkage). A structure or union type of unknown content is an incomplete type. It is completed, for all declarations of that type, by declaring the same structure or union tag with its defining content later in the same scope.</p>
+</blockquote>
+<p><em>incomplete type</em> 和 <em>linkage</em> 配合可以进行 forward declaration，如果搭配 pointer 则可以进一步，在无需知道 object 内部细节即可进行程序开发。</p>
 <blockquote>
 <p>Array, function, and pointer types are collectively called derived declarator types. A declarator type derivation from a type T is the construction of a derived declarator type from T by the application of an array-type, a function-type, or a pointer-type derivation to T.</p>
 </blockquote>
@@ -304,11 +315,11 @@
       <div class="admonition-content">C 语言里只有 <em><strong>call by value</strong></em></div>
     </div>
   </div>
-<h2 id="void--void-" class="heading-element">
-  <a href="#void--void-" class="heading-mark"></a>void &amp; void *</h2><p>C89 之前，函数如果没有标注返回类型，则默认返回类型 <code>int</code>，返回值 0。但由于这样既可以表示返回值不重要，也可以表示返回值为 0，这会造成歧义，所以引进了 <code>void</code>。</p>
+<h2 id="void--void-">void &amp; void *</h2>
+<p>C89 之前，函数如果没有标注返回类型，则默认返回类型 <code>int</code>，返回值 0。但由于这样既可以表示返回值不重要，也可以表示返回值为 0，这会造成歧义，所以引进了 <code>void</code>。</p>
 <p><code>void *</code> 只能表示地址，而不能对所指向的地址区域的内容进行操作。因为通过 <code>void *</code> 无法知道所指向区域的 size，所以无法对区域的内容进行操作，必须对 <code>void *</code> 进行 <em><strong>显示转换</strong></em> 才能操作指向的内容。（除此之外，对于指针本身的操作，<code>void *</code> 与 <code>char *</code> 是等价的）</p>
 <p><strong>Alignment</strong> 原文描述不是很清晰，<code>2-byte aligned</code> 图示如下：</p>
-<p><img loading="lazy" src="/images/c/2-byte-aligned.svg" alt="/images/c/2-byte-aligned.svg" srcset="/images/c/2-byte-aligned.svg?size=small, /images/c/2-byte-aligned.svg?size=medium 1.5x, /images/c/2-byte-aligned.svg?size=large 2x" sizes="auto" data-title="/images/c/2-byte-aligned.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></p>
+<p><img loading="lazy" src="/images/c/2-byte-aligned.svg" srcset="/images/c/2-byte-aligned.svg?size=small, /images/c/2-byte-aligned.svg?size=medium 1.5x, /images/c/2-byte-aligned.svg?size=large 2x" sizes="auto" data-title="/images/c/2-byte-aligned.svg" data-alt="/images/c/2-byte-aligned.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>如果是 2-byte aligned 且是 little-endian 的处理器，对于左边，可以直接使用 <code>*(uint16_t *) ptr</code>，但对于右边就无法这样（不符合 alignment）：</p>
 <div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -353,15 +364,60 @@
 </ul>
 </div>
     </div>
+  </div>
+<p>C99 [6.3.2.3] <em><strong>Pointers</strong></em></p>
+<blockquote>
+<p>A pointer to a function of one type may be converted to a pointer to a function of another
+type and back again; the result shall compare equal to the original pointer. Ifaconverted
+pointer is used to call a function whose type is not compatible with the pointed-to type,
+the behavior is undefined.</p>
+</blockquote>
+<p>C11 [6.3.2.3] <em><strong>Pointers</strong></em></p>
+<blockquote>
+<p>A pointer to a function of one type may be converted to a pointer to a function of another
+type and back again; the result shall compare equal to the original pointer. If a converted
+pointer is used to call a function whose type is not compatible with the referenced type,
+the behavior is undefined.</p>
+</blockquote>
+<p>C99 和 C11 都不保证 pointers (whose type is not compatible with the <em>pointed-to / referenced</em> type) 之间的转换是正确的。</p>
+<h2 id="pointers-vs-arrays">Pointers vs. Arrays</h2>
+<div class="details admonition warning open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-exclamation-triangle fa-fw" aria-hidden="true"></i>警告<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>在 GDB 中使用 <code>memcpy</code> 后直接打印可能会出现以下错误：</p>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> p memcpy<span class="o">(</span>calendar, b, sizeof<span class="o">(</span>b<span class="o">[</span>0<span class="o">]))</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;memcpy&#39;</span> has unknown <span class="k">return</span> type<span class="p">;</span> cast the call to its declared <span class="k">return</span> type</span></span></code></pre></td></tr></table>
+</div>
+</div><p>只需加入 <code>void *</code> 进行类型转换即可解决该问题：</p>
+<div class="highlight" id="id-6"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> p <span class="o">(</span>void *<span class="o">)</span> memcpy<span class="o">(</span>calendar, b, sizeof<span class="o">(</span>b<span class="o">[</span>0<span class="o">]))</span>
+</span></span><span class="line"><span class="cl">...</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+    </div>
   </div></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-01-19 20:25:53">更新于 2024-01-19&nbsp;</span>
-      </div></div><div class="post-info-line">
-        <div class="post-info-md"><span><a href="/posts/c-pointer/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-        <div class="post-info-share">
-          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-pointer/" data-title="你所不知道的 C 语言: 指针篇" data-hashtags="Sysprog,C"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/c-pointer/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-pointer/" data-title="你所不知道的 C 语言: 指针篇" data-hashtags="Sysprog,C"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/c-pointer/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-pointer/" data-title="你所不知道的 C 语言: 指针篇" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-pointer/" data-title="你所不知道的 C 语言: 指针篇"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -370,27 +426,25 @@
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-pointer/" data-title="你所不知道的 C 语言: 指针篇" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-pointer/" data-title="你所不知道的 C 语言: 指针篇"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-        </div>
-      </div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a><a href="/tags/c/" class="post-tag" title="标签 - C">C</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/c/' class="post-tag">C</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
   </div>
 
-  <div class="post-nav"><a href="/posts/c-specification/ch6/" class="post-nav-item" rel="prev" title="C 规格第 6 章阅读记录"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>C 规格第 6 章阅读记录</a>
+  <div class="post-nav"><a href="/posts/git/" class="post-nav-item" rel="prev" title="Git/GitHub 学习指引"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Git/GitHub 学习指引</a>
       <a href="/posts/debug-gdb/" class="post-nav-item" rel="next" title="GDB 调试入门">GDB 调试入门<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article>
-
-  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.1"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">Xshine</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">Xshine</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -398,5 +452,5 @@
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

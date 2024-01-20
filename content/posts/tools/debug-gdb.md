@@ -73,15 +73,17 @@ repost:
 $ sudo apt install gdb
 ```
 
+启动 GDB 时可以加入 `-q` 参数 (quite)，表示减少或不输出一些提示或信息。
+
 > LLDB 与 GDB 的命令类似，本文也可用于 LLDB 的入门学习。
 
 ## GDB 调试 C/C++
 
-要使用 GDB 来调试 C/C++，需要在编译时加上 `-g` 参数，例如：
+要使用 GDB 来调试 C/C++，需要在编译时加上 `-g` 参数（必需），也可以使用 `-Og` 参数来对 debug 进行优化（建议），例如：
 
 ```bash
-$ gcc test.c -g -o test
-$ gdb ./test
+$ gcc test.c -Og -g -o test
+$ gdb -q ./test
 ```
 
 {{< link href="https://github.com/ccrysisa/LKI/tree/main/debug/test.c" content=Source external-icon=true >}}
@@ -92,7 +94,7 @@ $ gdb ./test
 
 ```bash
 $ cargo build
-$ gdb ./target/debug/<package name>
+$ gdb -q ./target/debug/<package name>
 ```
 
 但是如果是使用 `cargo build --release` 构建的 release 目标文件（即位于 target/release 目录下的目标文件），则无法使用 GDB 进行调试，因为 release 目标未包含任何调试信息，类似于未使用 `-g` 参数编译 C/C++ 源代码。
@@ -156,6 +158,15 @@ $ gdb ./target/debug/<package name>
 $1 = 3
 (gdb) print x + y
 $2 = 7
+```
+
+使用 `p` 命令打印变量值时，会在左侧显示一个 `$<number>`，这个可以理解成临时变量，后续也可以通过这个标志来复用这些值。例如在上面的例子中：
+
+```bash
+(gdb) print $1
+$3 = 3
+(gdb) print $1 + $3
+$4 = 4
 ```
 
 ### backtrace
@@ -245,8 +256,33 @@ Num     Type           Disp Enb Address            What
 $ # Now, in the terminial
 ```
 
+### list
+
+`list` 命令用于显示当前位置的代码片段，默认情况下，它会显示当前位置的前后10行代码。
+
+`list` 命令也可以显示指定范围的代码，使用 `list <start>,<end>` 命令将显示从 start 行到 end 行的源代码。
+
+### whatis
+
+`whatis` 命令用于获取给定标识符（如变量、函数或类型）的类型信息。
+
+```bash
+// in source code
+int calendar[12][31];
+
+// in gdb
+(gdb) whatis calendar
+type = int [12][31]
+```
+
+### x
+
+`x` 命令用于查看内存中的数据，使用 x 命令搭配不同的格式来显示内存中的数据，也可以搭配 `/` 后跟数字来指定要显示的内存单元数量。例如，`x/4 <address>` 表示显示地址 address 开始的连续 4 个内存单元的内容。
+
 ### 其他
 
 如果被调试程序正处于运行态（即已经通过 `run` 命令来运行程序），此时可以通过 `Ctrl+C` 来中断 GDB，程序将被立即中断，并在中断时所运行到的地方暂停。这种方式被称为 **手动断点**，手动断点可以理解为一个临时断点，只会在该处暂停一次。
 
 GDB 会将空白行的断点自动下移到下一非空的代码行。
+
+`set print pretty` 命令可以以更易读和格式化的方式显示结构化数据，以更友好的方式输出结构体、类、数组等复杂类型的数据，更易于阅读和理解。

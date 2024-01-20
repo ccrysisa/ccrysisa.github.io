@@ -1,5 +1,5 @@
 ---
-title: C 语言规格书阅读记录
+title: C 语言规格书
 subtitle:
 date: 2024-01-06T16:07:25+08:00
 draft: false

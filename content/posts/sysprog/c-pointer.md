@@ -120,6 +120,10 @@ David Brailsford 教授解说影片 [Essentials: Pointer Power! - Computerphile]
 
 C99 [6.2.5] ***Types***
 
+> An array type of unknown size is an incomplete type. It is completed, for an identifier of that type, by specifying the size in a later declaration (with internal or external linkage). A structure or union type of unknown content is an incomplete type. It is completed, for all declarations of that type, by declaring the same structure or union tag with its defining content later in the same scope.
+
+*incomplete type* 和 *linkage* 配合可以进行 forward declaration，如果搭配 pointer 则可以进一步，在无需知道 object 内部细节即可进行程序开发。
+
 > Array, function, and pointer types are collectively called derived declarator types. A declarator type derivation from a type T is the construction of a derived declarator type from T by the application of an array-type, a function-type, or a pointer-type derivation to T.
 
 *derived declarator types*  表示衍生的声明类型，因为 array, function, pointer 本质都是地址，所以可以使用这些所谓的 *derived declarator types* 来提前声明 object，表示在某个地址会存储一个 object，这也是为什么这些类型被规格书定义为 *derived declarator types*。
@@ -164,4 +168,39 @@ uint32_t value = *(uint8_t *) ptr
 
 {{< admonition info >}}
 - [ ] [The Lost Art of Structure Packing](http://www.catb.org/esr/structure-packing/)
+{{< /admonition >}}
+
+C99 [6.3.2.3] ***Pointers***
+
+> A pointer to a function of one type may be converted to a pointer to a function of another
+type and back again; the result shall compare equal to the original pointer. Ifaconverted
+pointer is used to call a function whose type is not compatible with the pointed-to type,
+the behavior is undefined.
+
+C11 [6.3.2.3] ***Pointers***
+
+>  A pointer to a function of one type may be converted to a pointer to a function of another
+type and back again; the result shall compare equal to the original pointer. If a converted
+pointer is used to call a function whose type is not compatible with the referenced type,
+the behavior is undefined.
+
+C99 和 C11 都不保证 pointers (whose type is not compatible with the *pointed-to / referenced* type) 之间的转换是正确的。
+
+## Pointers vs. Arrays
+
+{{< admonition warning >}}
+在 GDB 中使用 `memcpy` 后直接打印可能会出现以下错误：
+
+```bash
+(gdb) p memcpy(calendar, b, sizeof(b[0]))
+'memcpy' has unknown return type; cast the call to its declared return type
+```
+
+只需加入 `void *` 进行类型转换即可解决该问题：
+
+```bash
+(gdb) p (void *) memcpy(calendar, b, sizeof(b[0]))
+...
+```
+
 {{< /admonition >}}

@@ -1,11 +1,11 @@
-# C 规格第 7 章阅读记录
+# C 规格第 7 章 Library
 
 
 C 语言规格书 Chapter 7 - Library 阅读记录。
 
-&lt;!--more--&gt;
+<!--more-->
 
-## 7.18 Integer types &lt;stdint.h&gt;
+## 7.18 Integer types <stdint.h>
 
 描述了头文件 `stdint.h` 必须定义和实现的整数类型，以及相应的宏。
 

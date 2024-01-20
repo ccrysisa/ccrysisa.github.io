@@ -2,7 +2,7 @@
   <channel>
     <title>C - 标签 - Xshine&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/c/</link>
-    <description>C - 标签 | Xshine&#39;s Blog</description>
+    <description>C - 标签 - Xshine&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/c/" rel="self" type="application/rss+xml" /><item>
   <title>你所不知道的 C 语言: 指针篇</title>
@@ -20,7 +20,7 @@
   </div>]]></description>
 </item>
 <item>
-  <title>C 规格第 6 章阅读记录</title>
+  <title>C 规格第 6 章 Language</title>
   <link>https://ccrysisa.github.io/posts/c-specification/ch6/</link>
   <pubDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</pubDate>
   <author>Xshine</author>
@@ -28,7 +28,7 @@
   <description><![CDATA[<p>C 语言规格书 Chapter 6 - Language 阅读记录。</p>]]></description>
 </item>
 <item>
-  <title>C 规格第 7 章阅读记录</title>
+  <title>C 规格第 7 章 Library</title>
   <link>https://ccrysisa.github.io/posts/c-specification/ch7/</link>
   <pubDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</pubDate>
   <author>Xshine</author>
@@ -36,7 +36,7 @@
   <description><![CDATA[<p>C 语言规格书 Chapter 7 - Library 阅读记录。</p>]]></description>
 </item>
 <item>
-  <title>C 语言规格书阅读记录</title>
+  <title>C 语言规格书</title>
   <link>https://ccrysisa.github.io/posts/c-specification/c-specification/</link>
   <pubDate>Sat, 06 Jan 2024 16:07:25 &#43;0800</pubDate>
   <author>Xshine</author>

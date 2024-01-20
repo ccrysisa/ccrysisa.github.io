@@ -1,5 +1,5 @@
 ---
-title: C 规格第 7 章阅读记录
+title: C 规格第 7 章 Library
 subtitle:
 date: 2024-01-11T23:23:48+08:00
 draft: false
