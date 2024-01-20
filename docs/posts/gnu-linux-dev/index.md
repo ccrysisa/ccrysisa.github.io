@@ -7,7 +7,11 @@ GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而�
 
 &lt;!--more--&gt;
 
+<<<<<<< HEAD
 &gt; {{&lt; link href=&#34;https://hackmd.io/@sysprog/gnu-linux-dev/&#34; content=原文地址 external-icon=true &gt;}}
+=======
+&gt; 原文地址：[GNU/Linux 开发工具][source]
+>>>>>>> network
 
 ## 安装 Windows / Ubuntu 双系统
 
@@ -36,8 +40,14 @@ GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而�
 
 以下资源作为自学资源，用于补充自己不熟悉的操作，或者作为以上资料的补充工具手册。
 
+<<<<<<< HEAD
 - [Git 中文教学 - YouTube][git-tutorials-zh] ([学习记录]({{&lt; relref &#34;../tools/git-learn.md&#34; &gt;}}))
 - [30 天精通 Git 版本控制 - GitHub][learn-git-in-30-days]
+=======
+- [Git 中文教学（视频）][git-tutorials-zh] 
+    - [学习记录]({{&lt; relref &#34;../git/git-learn.md&#34; &gt;}})
+- [30 天精通 Git 版本控制（文本）][learn-git-in-30-days]
+>>>>>>> network
 
 {{&lt; admonition warning &gt;}}
 原文档中的将公钥复制到 clipboard 中使用了 `clip` 命令，但是这个命令在 Ubuntu 中并没有对应的命令。可以使用 `xclip` &#43; `alias` 达到近似效果。
@@ -90,11 +100,14 @@ VS Code 控制台使用说明：
 - 使用 `Ctrl-w-h`/`Ctrl-w-l` 切换到 文件树/编辑区。
 - 自动补全时使用 `ENTER` 键来选中，使用方向键或 `Ctrl-N`/`Ctrl-U`/`Ctrl-P` 来上下选择。
 - 在 Vim 中可以通过 `:set paste`，并在 insert 模式下，将粘贴板的内容通过 `Ctrl-Shift-V` 进行粘贴。
+<<<<<<< HEAD
 - byobu 使用说明：
     - 在终端输入 `byobu`
     - `F2` 新增 Terminial 分页。`F3`, `F4` 在 Terminial 分页中切换。`Ctrl &#43;F6` 删除当前 Terminial 分页。
     - `Shift &#43; F2` 水平切割 Terminial。`Ctrl &#43;F2` 垂直切割 Terminial。`Shift &#43; 方向键` 切换。
     - 在 byobu 中暂时无法使用之前设置的 `F4` 或 `F5` 快捷键，但是可以直接通过命令 `:set norelative` 来关闭相对行数。
+=======
+>>>>>>> network
 {{&lt; /admonition &gt;}}
 
 ***推荐观看影片 [How to Do 90% of What Plugins Do (With Just Vim)][how-to-do-90%-of-what-plugins-do] 来扩展 Vim 插件的使用姿势。***
@@ -188,6 +201,7 @@ $ eog [name of picture]
 
 下面以一个 script 进行常用指令的说明：
 
+<<<<<<< HEAD
 ```bash
 reset
 set ylabel &#39;time(sec)&#39;
@@ -195,6 +209,9 @@ set style fill solid
 set title &#39;performance comparison&#39;
 set term png enhanced font &#39;Verdana,10&#39;
 set output &#39;runtime.png&#39;
+=======
+观看教学视频 [拯救資工系學生的基本素養—使用 GDB 除錯基本教學](gdb-basics) 和搭配博文 ==[How to debug Rust/C/C&#43;&#43; via GDB][debug-gdb]==，学习 GDB 的基本操作和熟悉使用 GDB 调试 Rust/C/C&#43;&#43; 程序。
+>>>>>>> network
 
 plot [:][:0.100]&#39;output.txt&#39; using 2:xtic(1) with histogram title &#39;original&#39;, \
 &#39;&#39; using ($0-0.06):($2&#43;0.001):2 with labels title &#39; &#39;, \
@@ -247,6 +264,11 @@ findName() 0.006495 0.002938 0.000001
 [git-tutorials-zh]: https://www.youtube.com/playlist?list=PLlyOkSAh6TwcvJQ1UtvkSwhZWCaM_S07d
 [learn-git-in-30-days]: https://github.com/doggy8088/Learn-Git-in-30-days 
 [learn-vscode-happily]: https://www.youtube.com/playlist?list=PL6S9AqLQkFpph4LOfSjtD-s4WB3pNh5M3
+<<<<<<< HEAD
+=======
+[gdb-basics]: https://www.youtube.com/watch?v=IttSz0BYZ8o
+[debug-gdb]: https://tigercosmos.xyz/post/2020/09/system/debug-gdb/
+>>>>>>> network
 [how-to-do-90%-of-what-plugins-do]: https://www.youtube.com/watch?v=XA2WjJbmmoM&amp;list=WL
 [vim-cheat-sheet]: https://hackmd.io/@sysprog/gnu-linux-dev/https%3A%2F%2Fvim.rtorr.com%2F
 [bash-cheat-sheet]: https://hackmd.io/@sysprog/gnu-linux-dev/https%3A%2F%2Fkapeli.com%2Fcheat_sheets%2FBash_Shortcuts.docset%2FContents%2FResources%2FDocuments%2Findex
@@ -256,6 +278,11 @@ findName() 0.006495 0.002938 0.000001
 
 ---
 
+<<<<<<< HEAD
 > 作者: [Xshine](https://github.com/ccrysisa)  
 > URL: https://ccrysisa.github.io/posts/gnu-linux-dev/  
+=======
+> 作者: [Xshine](https://github.com/LoongGshine)  
+> URL: https://loonggshine.github.io/posts/gnu-linux-dev/  
+>>>>>>> network
 

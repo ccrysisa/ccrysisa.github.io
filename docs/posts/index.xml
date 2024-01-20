@@ -4,17 +4,27 @@
     <link>https://ccrysisa.github.io/posts/</link>
     <description>所有文章 | Xshine&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
+<<<<<<< HEAD
       <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
   <title>GDB 调试入门</title>
   <link>https://ccrysisa.github.io/posts/debug-gdb/</link>
   <pubDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</pubDate>
   <author>Xshine</author>
   <guid>https://ccrysisa.github.io/posts/debug-gdb/</guid>
+=======
+      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Sun, 14 Jan 2024 12:09:38 &#43;0800</lastBuildDate><atom:link href="https://loonggshine.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+  <title>清大计算机网络重点提示</title>
+  <link>https://loonggshine.github.io/posts/nthu-computer-network/</link>
+  <pubDate>Sun, 14 Jan 2024 12:09:38 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://loonggshine.github.io/posts/nthu-computer-network/</guid>
+>>>>>>> network
   <description><![CDATA[<div class="details admonition abstract open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
+<<<<<<< HEAD
       <div class="admonition-content">大型开源项目的规模十分庞大，例如使用 Rust 编写的 Servo 浏览器，这个项目有近十万行代码。在开发规模如此庞大的项目时，了解如何通过正确的方式进行调试非常重要，因为这样可以帮助开发者快速地找到瓶颈。</div>
     </div>
   </div>]]></description>
@@ -31,6 +41,10 @@
     </div>
     <div class="details-content">
       <div class="admonition-content"><em>「指针」 扮演 「记忆体」 和 「物件」 之间的桥梁</em></div>
+=======
+      <div class="admonition-content">之前学校的计网理论课学得云里雾里，对于物理层和数据链路层并没有清晰的逻辑框架，而这学期的计网课设内容为数据链路层和网络层的相关内容，写起来还是云里雾里。虽然最终艰难地把课设水过去了，但是个人认为网络对于 CSer 非常重要，特别是在互联网行业，网络知识是必不可少的。
+所以决定寒假重学计网，于是在 <a href="https://hackmd.io/"target="_blank" rel="external nofollow noopener noreferrer">HackMD</a> 上冲浪寻找相关资料。然后发现了这篇笔记 <a href="https://hackmd.io/@0xff07/network/https%3A%2F%2Fhackmd.io%2F%400xff07%2FByADDQ57Y"target="_blank" rel="external nofollow noopener noreferrer">110-1 計算機網路 (清大開放式課程)</a>，里面提到清大计网主要介绍 L2 ~ L4 一些著名的协议和算法，这完美符合个人的需求，而且该篇该笔还补充了一些额外的内容，例如 IPv6，所以当即准备搭配这篇笔记来学习清大的计算机网络概论。</div>
+>>>>>>> network
     </div>
   </div>]]></description>
 </item>
@@ -47,16 +61,26 @@
   <link>https://ccrysisa.github.io/posts/git/</link>
   <pubDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</pubDate>
   <author>Xshine</author>
+<<<<<<< HEAD
   <guid>https://ccrysisa.github.io/posts/git/</guid>
   <description><![CDATA[Git 中文教学新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout网络问题导致 22 端口被禁止，]]></description>
+=======
+  <guid>https://loonggshine.github.io/posts/git/</guid>
+  <description><![CDATA[Git 中文教学新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 基本原理对 Git 原理介绍比较准确，UP 主其它关于 GitHub 的合集也比较推荐。 视频]]></description>
+>>>>>>> network
 </item>
 <item>
   <title>计算机网络学习指引</title>
   <link>https://ccrysisa.github.io/posts/network/</link>
   <pubDate>Tue, 02 Jan 2024 19:44:56 &#43;0800</pubDate>
   <author>Xshine</author>
+<<<<<<< HEAD
   <guid>https://ccrysisa.github.io/posts/network/</guid>
   <description><![CDATA[清大开放式课程 - 计算机网络 课程主页 课程资料 课程视频 Referenecs 110-1 計算機網路 (清大開放式課程)]]></description>
+=======
+  <guid>https://loonggshine.github.io/posts/network/</guid>
+  <description><![CDATA[<p>整理一些计算机网络相关的资源</p>]]></description>
+>>>>>>> network
 </item>
 <item>
   <title>解读计算机编码</title>
@@ -78,7 +102,11 @@
   <link>https://ccrysisa.github.io/posts/rust-introduction/</link>
   <pubDate>Thu, 28 Dec 2023 20:18:03 &#43;0800</pubDate>
   <author>Xshine</author>
+<<<<<<< HEAD
   <guid>https://ccrysisa.github.io/posts/rust-introduction/</guid>
+=======
+  <guid>https://loonggshine.github.io/posts/rust-introduction/</guid>
+>>>>>>> network
   <description><![CDATA[Rust in 100 Seconds&#x2705; 观看短片：Rust in 100 Seconds 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello]]></description>
 </item>
 <item>
@@ -94,7 +122,11 @@
   <link>https://ccrysisa.github.io/posts/ubuntu/</link>
   <pubDate>Wed, 27 Dec 2023 20:35:45 &#43;0800</pubDate>
   <author>Xshine</author>
+<<<<<<< HEAD
   <guid>https://ccrysisa.github.io/posts/ubuntu/</guid>
+=======
+  <guid>https://loonggshine.github.io/posts/ubuntu/</guid>
+>>>>>>> network
   <description><![CDATA[网络代理根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo apt install net-tools 安装并启]]></description>
 </item>
 <item>
@@ -112,5 +144,16 @@
     </div>
   </div>]]></description>
 </item>
+<<<<<<< HEAD
+=======
+<item>
+  <title>数学开放式课程学习指引</title>
+  <link>https://loonggshine.github.io/posts/math/</link>
+  <pubDate>Sat, 23 Dec 2023 21:35:47 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://loonggshine.github.io/posts/math/</guid>
+  <description><![CDATA[中大數學系開放式課程 台大齐震宇 - 数学潜水艇、微积分、分析 台大谢铭伦 - 线性代数 概率统计阳明交通大学 陈临安老师，开设了两学期的统计课程，分别是上]]></description>
+</item>
+>>>>>>> network
 </channel>
 </rss>
