@@ -1,5 +1,5 @@
 ---
-title: Git/GitHub 学习指引
+title: Git/GitHub 资源与问题汇总
 subtitle:
 date: 2024-01-04T19:00:36+08:00
 draft: false
@@ -56,7 +56,7 @@ $ vim ~/.ssh/config
 # In ~/.ssh/config
 Host github.com
 HostName ssh.github.com
-POrt 443
+Port 443
 ```
 
 ## References

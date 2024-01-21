@@ -1,17 +1,17 @@
 # GDB 调试入门
 
 
-{{&lt; admonition abstract &gt;}}
+{{< admonition abstract >}}
 大型开源项目的规模十分庞大，例如使用 Rust 编写的 Servo 浏览器，这个项目有近十万行代码。在开发规模如此庞大的项目时，了解如何通过正确的方式进行调试非常重要，因为这样可以帮助开发者快速地找到瓶颈。
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
-&lt;!--more--&gt;
+<!--more-->
 
-&gt; {{&lt; link href=&#34;https://tigercosmos.xyz/post/2020/09/system/debug-gdb/&#34; content=&#34;原文地址&#34; external-icon=true &gt;}} | {{&lt; link href=&#34;https://www.youtube.com/watch?v=IttSz0BYZ8o&#34; content=&#34;教学视频&#34; external-icon=true &gt;}}
+> {{< link href="https://tigercosmos.xyz/post/2020/09/system/debug-gdb/" content="原文地址" external-icon=true >}} | {{< link href="https://www.youtube.com/watch?v=IttSz0BYZ8o" content="教学视频" external-icon=true >}}
 
 ## GDB 调试
 
-观看教学视频 [拯救資工系學生的基本素養—使用 GDB 除錯基本教學](gdb-basics) 和搭配博文 ==[How to debug Rust/C/C&#43;&#43; via GDB][debug-gdb]==，学习 GDB 的基本操作和熟悉使用 GDB 调试 Rust/C/C&#43;&#43; 程序。
+观看教学视频 [拯救資工系學生的基本素養—使用 GDB 除錯基本教學](gdb-basics) 和搭配博文 ==[How to debug Rust/C/C++ via GDB][debug-gdb]==，学习 GDB 的基本操作和熟悉使用 GDB 调试 Rust/C/C++ 程序。
 
 - 掌握 `run/r`, `break/b`, `print/p`, `continue/c`, `step/s` `info/i`, `delete/d`, `backtrace/bt`, `frame/f`, `up`/`down`, `exit/q` 等命令的用法。以及 GBD 的一些特性，例如 GDB 会将空白行的断点自动下移到下一代码行；使用 `break` 命令时可以输入源文件路径，也可以只输入源文件名称。
 
@@ -22,9 +22,9 @@
 
 ## GDB 基本介绍
 
-{{&lt; admonition quote &gt;}}
-“GDB, the GNU Project debugger, allows you to see what is going on ‘inside’ another program while it executes — or what another program was doing at the moment it crashed.” — from {{&lt; link &#34;gnu.org&#34; &gt;}}
-{{&lt; /admonition &gt;}}
+{{< admonition quote >}}
+“GDB, the GNU Project debugger, allows you to see what is going on ‘inside’ another program while it executes — or what another program was doing at the moment it crashed.” — from {{< link "gnu.org" >}}
+{{< /admonition >}}
 
 安装 GDB:
 
@@ -34,18 +34,18 @@ $ sudo apt install gdb
 
 启动 GDB 时可以加入 `-q` 参数 (quite)，表示减少或不输出一些提示或信息。
 
-&gt; LLDB 与 GDB 的命令类似，本文也可用于 LLDB 的入门学习。
+> LLDB 与 GDB 的命令类似，本文也可用于 LLDB 的入门学习。
 
-## GDB 调试 C/C&#43;&#43;
+## GDB 调试 C/C++
 
-要使用 GDB 来调试 C/C&#43;&#43;，需要在编译时加上 `-g` 参数（必需），也可以使用 `-Og` 参数来对 debug 进行优化（建议），例如：
+要使用 GDB 来调试 C/C++，需要在编译时加上 `-g` 参数（必需），也可以使用 `-Og` 参数来对 debug 进行优化（建议），例如：
 
 ```bash
 $ gcc test.c -Og -g -o test
 $ gdb -q ./test
 ```
 
-{{&lt; link href=&#34;https://github.com/ccrysisa/LKI/tree/main/debug/test.c&#34; content=Source external-icon=true &gt;}}
+{{< link href="https://github.com/ccrysisa/LKI/tree/main/debug/test.c" content=Source external-icon=true >}}
 
 ## GDB 调试 Rust
 
@@ -53,12 +53,12 @@ $ gdb -q ./test
 
 ```bash
 $ cargo build
-$ gdb -q ./target/debug/&lt;package name&gt;
+$ gdb -q ./target/debug/<package name>
 ```
 
-但是如果是使用 `cargo build --release` 构建的 release 目标文件（即位于 target/release 目录下的目标文件），则无法使用 GDB 进行调试，因为 release 目标未包含任何调试信息，类似于未使用 `-g` 参数编译 C/C&#43;&#43; 源代码。
+但是如果是使用 `cargo build --release` 构建的 release 目标文件（即位于 target/release 目录下的目标文件），则无法使用 GDB 进行调试，因为 release 目标未包含任何调试信息，类似于未使用 `-g` 参数编译 C/C++ 源代码。
 
-{{&lt; link href=&#34;https://github.com/ccrysisa/LKI/tree/main/debug/hello_cargo&#34; content=Source external-icon=true &gt;}}
+{{< link href="https://github.com/ccrysisa/LKI/tree/main/debug/hello_cargo" content=Source external-icon=true >}}
 
 ## GDB 基本命令
 
@@ -70,9 +70,9 @@ $ gdb -q ./target/debug/&lt;package name&gt;
 
 `continue (c)` 命令用于从当前停止的断点位置处继续执行程序，直到遇到下一个断点或者程序结束。
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 `run` 和 `continue` 的区别在于 `run` 是将程序从头开始执行。例如如果未设置任何断点，使用 `run` 可以反复执行程序，而如果使用 `continue` 则会提示 *The program is not being run*。
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ### step
 
@@ -80,14 +80,14 @@ $ gdb -q ./target/debug/&lt;package name&gt;
 
 ```bash
 (gdb) step
-6         bar &#43;= 3;
+6         bar += 3;
 (gdb) step
-7         printf(&#34;bar = %d\n&#34;, bar);
+7         printf("bar = %d\n", bar);
 ```
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 `step` 命令与 `continue` 命令相同，只能在程序处于运行态（即停留在断点处）时才能使用。
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ### break
 
@@ -115,16 +115,16 @@ $ gdb -q ./target/debug/&lt;package name&gt;
 # Assume x: 3, y: 4
 (gdb) print x
 $1 = 3
-(gdb) print x &#43; y
+(gdb) print x + y
 $2 = 7
 ```
 
-使用 `p` 命令打印变量值时，会在左侧显示一个 `$&lt;number&gt;`，这个可以理解成临时变量，后续也可以通过这个标志来复用这些值。例如在上面的例子中：
+使用 `p` 命令打印变量值时，会在左侧显示一个 `$<number>`，这个可以理解成临时变量，后续也可以通过这个标志来复用这些值。例如在上面的例子中：
 
 ```bash
 (gdb) print $1
 $3 = 3
-(gdb) print $1 &#43; $3
+(gdb) print $1 + $3
 $4 = 4
 ```
 
@@ -142,9 +142,9 @@ $4 = 4
 #1  0x00005555555551d2 in main () at test.c:14
 ```
 
-{{&lt; admonition tip &gt;}}
+{{< admonition tip >}}
 `backtrace` 命令对于跟踪程序的执行路径、检查函数调用的顺序以及定位错误非常有用。在实际中，一般会搭配其他GDB命令（如 `up`、`down` 和 `frame`）结合使用，以查看特定栈帧的更多详细信息或切换到不同的栈帧。在上面的例子中，`#0` 和 `#1` 表示栈帧的编号，可以通过 `frame` 配合这些编号来切换栈帧。
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ### frame
 
@@ -165,7 +165,7 @@ $4 = 4
 - `up` 用于在调用栈中向上移动到较高的栈帧，即进入调用当前函数的函数。每次执行 `up` 命令，GDB 将切换到上一个（更高层次）的栈帧。这可以用于查看调用当前函数的上层函数的执行上下文。
 - `down` 用于在调用栈中向下移动到较低的栈帧，即返回到当前函数调用的函数。每次执行 `down` 命令，GDB 将切换到下一个（较低层次）的栈帧。这可以用于返回到调用当前函数的函数的执行上下文。
 
-&gt; 这两个命令需要开发者对应函数调用堆栈的布局有一定程度的了解。
+> 这两个命令需要开发者对应函数调用堆栈的布局有一定程度的了解。
 
 接着上一个例子：
 
@@ -175,7 +175,7 @@ $4 = 4
 14          int result = foo();
 (gdb) down
 #0  foo () at test.c:7
-7         printf(&#34;bar = %d\n&#34;, bar);
+7         printf("bar = %d\n", bar);
 ```
 
 ### info
@@ -219,7 +219,7 @@ $ # Now, in the terminial
 
 `list` 命令用于显示当前位置的代码片段，默认情况下，它会显示当前位置的前后10行代码。
 
-`list` 命令也可以显示指定范围的代码，使用 `list &lt;start&gt;,&lt;end&gt;` 命令将显示从 start 行到 end 行的源代码。
+`list` 命令也可以显示指定范围的代码，使用 `list <start>,<end>` 命令将显示从 start 行到 end 行的源代码。
 
 ### whatis
 
@@ -236,11 +236,11 @@ type = int [12][31]
 
 ### x
 
-`x` 命令用于查看内存中的数据，使用 x 命令搭配不同的格式来显示内存中的数据，也可以搭配 `/` 后跟数字来指定要显示的内存单元数量。例如，`x/4 &lt;address&gt;` 表示显示地址 address 开始的连续 4 个内存单元的内容。
+`x` 命令用于查看内存中的数据，使用 x 命令搭配不同的格式来显示内存中的数据，也可以搭配 `/` 后跟数字来指定要显示的内存单元数量。例如，`x/4 <address>` 表示显示地址 address 开始的连续 4 个内存单元的内容。
 
 ### 其他
 
-如果被调试程序正处于运行态（即已经通过 `run` 命令来运行程序），此时可以通过 `Ctrl&#43;C` 来中断 GDB，程序将被立即中断，并在中断时所运行到的地方暂停。这种方式被称为 **手动断点**，手动断点可以理解为一个临时断点，只会在该处暂停一次。
+如果被调试程序正处于运行态（即已经通过 `run` 命令来运行程序），此时可以通过 `Ctrl+C` 来中断 GDB，程序将被立即中断，并在中断时所运行到的地方暂停。这种方式被称为 **手动断点**，手动断点可以理解为一个临时断点，只会在该处暂停一次。
 
 GDB 会将空白行的断点自动下移到下一非空的代码行。
 

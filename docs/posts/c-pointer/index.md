@@ -1,76 +1,76 @@
 # 你所不知道的 C 语言: 指针篇
 
 
-{{&lt; admonition quote &gt;}}
+{{< admonition quote >}}
 *「指针」 扮演 「记忆体」 和 「物件」 之间的桥梁*
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
-&lt;!--more--&gt;
+<!--more-->
 
-&gt; {{&lt; link href=&#34;https://hackmd.io/@sysprog/c-pointer&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}   
-&gt; {{&lt; link href=&#34;https://youtu.be/G7vERppua9o&#34; content=&#34;直播录影(上)&#34; external-icon=true &gt;}}   
-&gt; {{&lt; link href=&#34;https://youtu.be/Owxols1RTAg&#34; content=&#34;直播录影(下)&#34; external-icon=true &gt;}}   
+> {{< link href="https://hackmd.io/@sysprog/c-pointer" content="原文地址" external-icon=true >}}   
+> {{< link href="https://youtu.be/G7vERppua9o" content="直播录影(上)" external-icon=true >}}   
+> {{< link href="https://youtu.be/Owxols1RTAg" content="直播录影(下)" external-icon=true >}}   
 
 ## 前言杂谈
 
 [Let’s learn programming by inventing it](https://www.youtube.com/watch?v=l5Mp_DEn4bs) [CppCon 2018] :white_check_mark:
 
-{{&lt; admonition open=false &gt;}}
-在 K&amp;R 一书中，直到 93 页才开始谈论 pointer，而全书总计 185 页，所以大概是在全书 $50.27\\%$ 的位置才开始讲 pointer。所以即使不学 pointer，你还是能够掌握 $~50\\%$ 的 C 语言的内容，但是 C 语言的核心正是 pointer，所以 Good Luck :rofl:
-{{&lt; /admonition &gt;}}
+{{< admonition open=false >}}
+在 K&R 一书中，直到 93 页才开始谈论 pointer，而全书总计 185 页，所以大概是在全书 $50.27\\%$ 的位置才开始讲 pointer。所以即使不学 pointer，你还是能够掌握 $~50\\%$ 的 C 语言的内容，但是 C 语言的核心正是 pointer，所以 Good Luck :rofl:
+{{< /admonition >}}
 
 [godbolt](http://gcc.godbolt.org/) 可以直接在网页上看到，源代码由各类 compiler 生成的 Assembly Code
 
 
 [How to read this prototype?]() [Stack Overflow] :white_check_mark:
 
-{{&lt; admonition open=false &gt;}}
+{{< admonition open=false >}}
 这个问题是关于 `signal` 系统调用的函数原型解读，里面的回答页给出了很多对于指针，特别是 *函数指针* 的说明，下面节选一些特别有意思的回答：
 
-&gt; The whole thing declares a function called `signal`:
-&gt;
-&gt; - `signal` takes an int and a function pointer
-&gt;   - this function pointer takes an `int` and returns `void`
-&gt; - `signal` returns a function pointer
-&gt;   - `this function pointer takes an `int` and returns a `void`
-&gt;
-&gt; That&#39;s where the last int comes in.
-&gt;
-&gt; ---
-&gt;
-&gt; You can use [the spiral rule](https://c-faq.com/decl/spiral.anderson.html) to make sense of such declarations, or the program `cdecl(1)`.
+> The whole thing declares a function called `signal`:
+>
+> - `signal` takes an int and a function pointer
+>   - this function pointer takes an `int` and returns `void`
+> - `signal` returns a function pointer
+>   - `this function pointer takes an `int` and returns a `void`
+>
+> That's where the last int comes in.
+>
+> ---
+>
+> You can use [the spiral rule](https://c-faq.com/decl/spiral.anderson.html) to make sense of such declarations, or the program `cdecl(1)`.
 
 这里面提到了 [the spiral rule](https://c-faq.com/decl/spiral.anderson.html) 这是一个用于解析 C 语言中声明 (declaration) 的方法；另外还提到了 `cdecl` 这一程序，它也有类似的作用，可以使用英文进行声明或者解释。
 
 ---
 
-&gt; Find the leftmost identifier and work your way out, remembering that `[]` and `()` bind before `*`; IOW, `*a[]` is an array of pointers, `(*a)[]` is a pointer to an array, `*f()` is a function returning a pointer, and `(*f)()` is a pointer to a function. Thus,
-&gt; 
-&gt; ```c
-&gt; void ( *signal(int sig, void (*handler)(int)) ) (int);
-&gt; ```
-&gt; 
-&gt; breaks down as
-&gt; 
-&gt; ```c
-&gt;         signal                                          -- signal
-&gt;         signal(                               )         -- is a function
-&gt;         signal(    sig                        )         -- with a parameter named sig
-&gt;         signal(int sig,                       )         --   of type int
-&gt;         signal(int sig,        handler        )         -- and a parameter named handler
-&gt;         signal(int sig,       *handler        )         --   which is a pointer
-&gt;         signal(int sig,      (*handler)(   )) )         --   to a function
-&gt;         signal(int sig,      (*handler)(int)) )         --   taking an int parameter
-&gt;         signal(int sig, void (*handler)(int)) )         --   and returning void
-&gt;        *signal(int sig, void (*handler)(int)) )         -- returning a pointer
-&gt;      ( *signal(int sig, void (*handler)(int)) )(   )    -- to a function
-&gt;      ( *signal(int sig, void (*handler)(int)) )(int)    --   taking an int parameter
-&gt; void ( *signal(int sig, void (*handler)(int)) )(int);   --   and returning void
-&gt; ```
+> Find the leftmost identifier and work your way out, remembering that `[]` and `()` bind before `*`; IOW, `*a[]` is an array of pointers, `(*a)[]` is a pointer to an array, `*f()` is a function returning a pointer, and `(*f)()` is a pointer to a function. Thus,
+> 
+> ```c
+> void ( *signal(int sig, void (*handler)(int)) ) (int);
+> ```
+> 
+> breaks down as
+> 
+> ```c
+>         signal                                          -- signal
+>         signal(                               )         -- is a function
+>         signal(    sig                        )         -- with a parameter named sig
+>         signal(int sig,                       )         --   of type int
+>         signal(int sig,        handler        )         -- and a parameter named handler
+>         signal(int sig,       *handler        )         --   which is a pointer
+>         signal(int sig,      (*handler)(   )) )         --   to a function
+>         signal(int sig,      (*handler)(int)) )         --   taking an int parameter
+>         signal(int sig, void (*handler)(int)) )         --   and returning void
+>        *signal(int sig, void (*handler)(int)) )         -- returning a pointer
+>      ( *signal(int sig, void (*handler)(int)) )(   )    -- to a function
+>      ( *signal(int sig, void (*handler)(int)) )(int)    --   taking an int parameter
+> void ( *signal(int sig, void (*handler)(int)) )(int);   --   and returning void
+> ```
 
 这一回答强调了 `*` 和 `[]`、`()` 优先级的关系，这在判断数组指针、函数指针时是个非常好用的技巧。
 
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 Rob Pike 于 2009/10/30 的 [Golang Talk](https://talks.golang.org/2009/go_talk-20091030.pdf) [PDF]
 
@@ -82,22 +82,22 @@ David Brailsford 教授解说影片 [Essentials: Pointer Power! - Computerphile]
 
 C99 [6.2.5] ***Types***
 
-&gt; An array type of unknown size is an incomplete type. It is completed, for an identifier of that type, by specifying the size in a later declaration (with internal or external linkage). A structure or union type of unknown content is an incomplete type. It is completed, for all declarations of that type, by declaring the same structure or union tag with its defining content later in the same scope.
+> An array type of unknown size is an incomplete type. It is completed, for an identifier of that type, by specifying the size in a later declaration (with internal or external linkage). A structure or union type of unknown content is an incomplete type. It is completed, for all declarations of that type, by declaring the same structure or union tag with its defining content later in the same scope.
 
 *incomplete type* 和 *linkage* 配合可以进行 forward declaration，如果搭配 pointer 则可以进一步，在无需知道 object 内部细节即可进行程序开发。
 
-&gt; Array, function, and pointer types are collectively called derived declarator types. A declarator type derivation from a type T is the construction of a derived declarator type from T by the application of an array-type, a function-type, or a pointer-type derivation to T.
+> Array, function, and pointer types are collectively called derived declarator types. A declarator type derivation from a type T is the construction of a derived declarator type from T by the application of an array-type, a function-type, or a pointer-type derivation to T.
 
 *derived declarator types*  表示衍生的声明类型，因为 array, function, pointer 本质都是地址，所以可以使用这些所谓的 *derived declarator types* 来提前声明 object，表示在某个地址会存储一个 object，这也是为什么这些类型被规格书定义为 *derived declarator types*。
 
 - **lvalue**: Location value
 - **rvalue**: Read value
 
-{{&lt; admonition danger &gt;}}
+{{< admonition danger >}}
 C 语言里只有 ***call by value***
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
-## void &amp; void *
+## void & void *
 
 C89 之前，函数如果没有标注返回类型，则默认返回类型 `int`，返回值 0。但由于这样既可以表示返回值不重要，也可以表示返回值为 0，这会造成歧义，所以引进了 `void`。
 
@@ -113,7 +113,7 @@ C89 之前，函数如果没有标注返回类型，则默认返回类型 `int`�
 /* may receive wrong value if ptr is not 2-byte aligned */
 uint16_t value = *(uint16_t *) ptr;
 /* portable way of reading a little-endian value */
-uint16_t value = *(uint8_t *) ptr | ((*(uint8_t *) (ptr &#43; 1)) &lt;&lt; 8);
+uint16_t value = *(uint8_t *) ptr | ((*(uint8_t *) (ptr + 1)) << 8);
 ```
 
 因为内存寻址的最小粒度是 Byte，所以使用 `(uint_8 *)` 不需要担心 alignment 的问题。原文并没有给出 32-bit aligned 的 portable way，我们来写一下：
@@ -123,25 +123,25 @@ uint16_t value = *(uint8_t *) ptr | ((*(uint8_t *) (ptr &#43; 1)) &lt;&lt; 8);
 uint32_t value = *(uint32_t *) ptr;
 /* portable way of reading a little-endian value */
 uint32_t value = *(uint8_t *) ptr 
-                 | ((*(uint8_t *) (ptr &#43; 1)) &lt;&lt; 8) 
-                 | ((*(uint8_t *) (ptr &#43; 2)) &lt;&lt; 16) 
-                 | ((*(uint8_t *) (ptr &#43; 3)) &lt;&lt; 24);
+                 | ((*(uint8_t *) (ptr + 1)) << 8) 
+                 | ((*(uint8_t *) (ptr + 2)) << 16) 
+                 | ((*(uint8_t *) (ptr + 3)) << 24);
 ```
 
-{{&lt; admonition info &gt;}}
+{{< admonition info >}}
 - [ ] [The Lost Art of Structure Packing](http://www.catb.org/esr/structure-packing/)
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 C99 [6.3.2.3] ***Pointers***
 
-&gt; A pointer to a function of one type may be converted to a pointer to a function of another
+> A pointer to a function of one type may be converted to a pointer to a function of another
 type and back again; the result shall compare equal to the original pointer. Ifaconverted
 pointer is used to call a function whose type is not compatible with the pointed-to type,
 the behavior is undefined.
 
 C11 [6.3.2.3] ***Pointers***
 
-&gt;  A pointer to a function of one type may be converted to a pointer to a function of another
+>  A pointer to a function of one type may be converted to a pointer to a function of another
 type and back again; the result shall compare equal to the original pointer. If a converted
 pointer is used to call a function whose type is not compatible with the referenced type,
 the behavior is undefined.
@@ -150,12 +150,12 @@ C99 和 C11 都不保证 pointers (whose type is not compatible with the *pointe
 
 ## Pointers vs. Arrays
 
-{{&lt; admonition warning &gt;}}
+{{< admonition warning >}}
 在 GDB 中使用 `memcpy` 后直接打印可能会出现以下错误：
 
 ```bash
 (gdb) p memcpy(calendar, b, sizeof(b[0]))
-&#39;memcpy&#39; has unknown return type; cast the call to its declared return type
+'memcpy' has unknown return type; cast the call to its declared return type
 ```
 
 只需加入 `void *` 进行类型转换即可解决该问题：
@@ -165,7 +165,7 @@ C99 和 C11 都不保证 pointers (whose type is not compatible with the *pointe
 ...
 ```
 
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 
 ---

@@ -1,4 +1,4 @@
-# Git/GitHub 学习指引
+# Git/GitHub 资源与问题汇总
 
 
 ## Git 中文教学
@@ -6,7 +6,7 @@
 新手入门推荐，对于 Git 的入门操作讲解十分友好。
 
 - [视频地址](https://youtu.be/LZ4oOzZwgrk)
-- [学习记录]({{&lt; relref &#34;git-learn&#34; &gt;}})
+- [学习记录]({{< relref "git-learn" >}})
 
 ## Git 常见问题及解决
 
@@ -19,7 +19,7 @@ $ vim ~/.ssh/config
 # In ~/.ssh/config
 Host github.com
 HostName ssh.github.com
-POrt 443
+Port 443
 ```
 
 ## References
