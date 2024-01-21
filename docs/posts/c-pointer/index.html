@@ -24,7 +24,7 @@
     
   "><meta itemprop="datePublished" content="2024-01-14T22:41:38+08:00" />
 <meta itemprop="dateModified" content="2024-01-20T09:26:51+08:00" />
-<meta itemprop="wordCount" content="1642"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="2334"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C," /><meta property="og:title" content="你所不知道的 C 语言: 指针篇" />
 <meta property="og:description" content="
     
@@ -63,7 +63,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-pointer\/"
-    },"genre": "posts","keywords": "Sysprog, C","wordcount":  1642 ,
+    },"genre": "posts","keywords": "Sysprog, C","wordcount":  2334 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-pointer\/","datePublished": "2024-01-14T22:41:38+08:00","dateModified": "2024-01-20T09:26:51+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -179,7 +179,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="Xshine" data-alt="Xshine" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Xshine</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-01-14 22:41:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-14">2024-01-14</time></span>&nbsp;<span title="更新于 2024-01-20 09:26:51"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-20">2024-01-20</time></span>&nbsp;<span title="1642 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-01-14 22:41:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-14">2024-01-14</time></span>&nbsp;<span title="更新于 2024-01-20 09:26:51"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-20">2024-01-20</time></span>&nbsp;<span title="2334 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -189,8 +189,17 @@
   <ul>
     <li><a href="#前言杂谈">前言杂谈</a></li>
     <li><a href="#阅读-c-语言规格书">阅读 C 语言规格书</a></li>
-    <li><a href="#void--void-">void &amp; void *</a></li>
-    <li><a href="#pointers-vs-arrays">Pointers vs. Arrays</a></li>
+    <li><a href="#void--void-">void &amp; void *</a>
+      <ul>
+        <li><a href="#alignment">Alignment</a></li>
+        <li><a href="#规格书中的-pointer">规格书中的 Pointer</a></li>
+      </ul>
+    </li>
+    <li><a href="#pointers-vs-arrays">Pointers vs. Arrays</a>
+      <ul>
+        <li><a href="#gdb-实作">GDB 实作</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><div class="details admonition quote open">
@@ -246,7 +255,7 @@
 <hr>
 <blockquote>
 <p>Find the leftmost identifier and work your way out, remembering that <code>[]</code> and <code>()</code> bind before <code>*</code>; IOW, <code>*a[]</code> is an array of pointers, <code>(*a)[]</code> is a pointer to an array, <code>*f()</code> is a function returning a pointer, and <code>(*f)()</code> is a pointer to a function. Thus,</p>
-<div class="highlight" id="id-3"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -254,7 +263,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="p">(</span> <span class="o">*</span><span class="nf">signal</span><span class="p">(</span><span class="kt">int</span> <span class="n">sig</span><span class="p">,</span> <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">handler</span><span class="p">)(</span><span class="kt">int</span><span class="p">))</span> <span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>breaks down as</p>
-<div class="highlight" id="id-4"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -317,8 +326,9 @@
   </div>
 <h2 id="void--void-">void &amp; void *</h2>
 <p>C89 之前，函数如果没有标注返回类型，则默认返回类型 <code>int</code>，返回值 0。但由于这样既可以表示返回值不重要，也可以表示返回值为 0，这会造成歧义，所以引进了 <code>void</code>。</p>
-<p><code>void *</code> 只能表示地址，而不能对所指向的地址区域的内容进行操作。因为通过 <code>void *</code> 无法知道所指向区域的 size，所以无法对区域的内容进行操作，必须对 <code>void *</code> 进行 <em><strong>显示转换</strong></em> 才能操作指向的内容。（除此之外，对于指针本身的操作，<code>void *</code> 与 <code>char *</code> 是等价的）</p>
-<p><strong>Alignment</strong> 原文描述不是很清晰，<code>2-byte aligned</code> 图示如下：</p>
+<p><code>void *</code> 只能表示地址，而不能对所指向的地址区域的内容进行操作。因为通过 <code>void *</code> 无法知道所指向区域的 size，所以无法对区域的内容进行操作，必须对 <code>void *</code> 进行 <em><strong>显示转换</strong></em> 才能操作指向的内容。（除此之外，对于指针本身的操作，<code>void *</code> 与 <code>char *</code> 是等价的，即对于 <code>+/- 1</code> 这类的操作，二者的偏移量是一致的）</p>
+<h3 id="alignment">Alignment</h3>
+<p>这部分原文描述不是很清晰，<code>2-byte aligned</code> 图示如下：</p>
 <p><img loading="lazy" src="/images/c/2-byte-aligned.svg" srcset="/images/c/2-byte-aligned.svg?size=small, /images/c/2-byte-aligned.svg?size=medium 1.5x, /images/c/2-byte-aligned.svg?size=large 2x" sizes="auto" data-title="/images/c/2-byte-aligned.svg" data-alt="/images/c/2-byte-aligned.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></p>
 <p>如果是 2-byte aligned 且是 little-endian 的处理器，对于左边，可以直接使用 <code>*(uint16_t *) ptr</code>，但对于右边就无法这样（不符合 alignment）：</p>
 <div class="highlight" id="id-1"><div class="chroma">
@@ -365,6 +375,7 @@
 </div>
     </div>
   </div>
+<h3 id="规格书中的-pointer">规格书中的 Pointer</h3>
 <p>C99 [6.3.2.3] <em><strong>Pointers</strong></em></p>
 <blockquote>
 <p>A pointer to a function of one type may be converted to a pointer to a function of another
@@ -381,13 +392,117 @@ the behavior is undefined.</p>
 </blockquote>
 <p>C99 和 C11 都不保证 pointers (whose type is not compatible with the <em>pointed-to / referenced</em> type) 之间的转换是正确的。</p>
 <h2 id="pointers-vs-arrays">Pointers vs. Arrays</h2>
+<p>Array 只有在表示其自身为数组时才不会退化为 Pointer，例如</p>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// case 1: extern declaration of array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">extern</span> <span class="kt">char</span> <span class="n">a</span><span class="p">[];</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// case 2: defintion of array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">char</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// case 3: size of array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">sizeof</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// case 4: address of array
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">&amp;</span><span class="n">a</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在其他情况则会退化为 Pointer，这时 Array 可以和 Pointer 互换进行表示或操作，例如</p>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// case 1: function parameter
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">func</span><span class="p">(</span><span class="kt">char</span> <span class="n">a</span><span class="p">[]);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">func</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// case 2: operation in expression
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这也是为什么对于一个 Array <code>a</code>，<code>&amp;a</code> 和 <code>&amp;a[0]</code> 值虽然相同，但 <code>&amp;a + 1</code> 和 <code>&amp;a[0] + 1</code> 的结果大部分时候是大不相同的，这件事乍一看是非常惊人的，但其实不然，在了解 Array 和 Pointer 之后，也就那么一回事 &#x1f923;</p>
+<h3 id="gdb-实作">GDB 实作</h3>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">char</span> <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们以上面这个例子，通过 GDB 来对 Array 和 Pointer 进行深入研究：</p>
+<div class="highlight" id="id-6"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> print <span class="p">&amp;</span>a
+</span></span><span class="line"><span class="cl"><span class="nv">$1</span> <span class="o">=</span> <span class="o">(</span>char <span class="o">(</span>*<span class="o">)[</span>10<span class="o">])</span> 0x555555558018 &lt;a&gt;
+</span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> print <span class="p">&amp;</span>a<span class="o">[</span>0<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$2</span> <span class="o">=</span> 0x555555558018 &lt;a&gt; <span class="s2">&#34;&#34;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>符合预期，<code>&amp;a</code> 和 <code>&amp;a[0]</code> 得到的值是相同的，虽然类型看起来不同，但是现在先放到一边。</p>
+<div class="highlight" id="id-7"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> print <span class="p">&amp;</span>a + <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$3</span> <span class="o">=</span> <span class="o">(</span>char <span class="o">(</span>*<span class="o">)[</span>10<span class="o">])</span> 0x555555558022
+</span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> print <span class="p">&amp;</span>a<span class="o">[</span>0<span class="o">]</span> + <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$4</span> <span class="o">=</span> 0x555555558019 &lt;a+1&gt; <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> print a + <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$5</span> <span class="o">=</span> 0x555555558019 &lt;a+1&gt; <span class="s2">&#34;&#34;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Oh! 正如我们之前所说的 <code>&amp;a + 1</code> 与 <code>&amp;a[0] + 1</code> 结果并不相同（而 <code>&amp;a[0] + 1</code> 和 <code>a + 1</code> 结果相同正是我们所提到的 Array 退化为 Pointer），虽然如此，GDB 所给的信息提示我们可能是二者 Pointer 类型不相同导致的。</p>
+<div class="highlight" id="id-8"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> whatis <span class="p">&amp;</span>a
+</span></span><span class="line"><span class="cl"><span class="nb">type</span> <span class="o">=</span> char <span class="o">(</span>*<span class="o">)[</span>10<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> whatis <span class="p">&amp;</span>a<span class="o">[</span>0<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="nb">type</span> <span class="o">=</span> char *</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Great! 果然是 Pointer 类型不同导致的，我们可以看到 <code>&amp;a</code> 的类型是 <code>char (*)[10]</code> 一个指向 Array 的指针，<code>&amp;a[0]</code> 则是 <code>char *</code>。所以这两个 Pointer 在进行 <code>+/-</code> 运算时的偏移量是不同的，<code>&amp;a[0]</code> 的偏移量为 <code>sizeof(a[0])</code> 即一个 <code>char</code> 的宽度 ($0x18 + 1 = 0x19$)，而 <code>&amp;a</code> 的偏移量为 <code>sizeof(a)</code> 即 10 个 <code>char</code> 的宽度 ($0x18 + 10 = 0x22$)。</p>
 <div class="details admonition warning open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-exclamation-triangle fa-fw" aria-hidden="true"></i>警告<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>在 GDB 中使用 <code>memcpy</code> 后直接打印可能会出现以下错误：</p>
-<div class="highlight" id="id-5"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -397,7 +512,7 @@ the behavior is undefined.</p>
 </span></span><span class="line"><span class="cl"><span class="s1">&#39;memcpy&#39;</span> has unknown <span class="k">return</span> type<span class="p">;</span> cast the call to its declared <span class="k">return</span> type</span></span></code></pre></td></tr></table>
 </div>
 </div><p>只需加入 <code>void *</code> 进行类型转换即可解决该问题：</p>
-<div class="highlight" id="id-6"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -408,7 +523,8 @@ the behavior is undefined.</p>
 </div>
 </div></div>
     </div>
-  </div></div><div class="post-footer" id="post-footer">
+  </div>
+<p>遇到陌生的函数，可以使用 <code>man</code> 来快速查阅手册，例如 <code>man strcpy</code>, <code>man strcat</code>，手册可以让我们快速查询函数的一些信息，从而进入实作。</p></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">

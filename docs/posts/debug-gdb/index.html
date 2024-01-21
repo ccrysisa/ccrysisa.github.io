@@ -24,7 +24,7 @@
     
   "><meta itemprop="datePublished" content="2024-01-16T17:15:46+08:00" />
 <meta itemprop="dateModified" content="2024-01-20T09:26:51+08:00" />
-<meta itemprop="wordCount" content="2805"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="2999"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Debug,GDB,Rust,C/C&#43;&#43;,Sysprog," /><meta property="og:title" content="GDB 调试入门" />
 <meta property="og:description" content="
     
@@ -63,7 +63,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/debug-gdb\/"
-    },"genre": "posts","keywords": "Debug, GDB, Rust, C\/C\u002b\u002b, Sysprog","wordcount":  2805 ,
+    },"genre": "posts","keywords": "Debug, GDB, Rust, C\/C\u002b\u002b, Sysprog","wordcount":  2999 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/debug-gdb\/","datePublished": "2024-01-16T17:15:46+08:00","dateModified": "2024-01-20T09:26:51+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -179,7 +179,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="Xshine" data-alt="Xshine" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Xshine</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-01-16 17:15:46"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-16">2024-01-16</time></span>&nbsp;<span title="更新于 2024-01-20 09:26:51"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-20">2024-01-20</time></span>&nbsp;<span title="2805 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 6 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-01-16 17:15:46"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-16">2024-01-16</time></span>&nbsp;<span title="更新于 2024-01-20 09:26:51"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-20">2024-01-20</time></span>&nbsp;<span title="2999 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 6 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -196,9 +196,11 @@
         <li><a href="#run">run</a></li>
         <li><a href="#continue">continue</a></li>
         <li><a href="#step">step</a></li>
+        <li><a href="#next">next</a></li>
         <li><a href="#break">break</a></li>
         <li><a href="#print">print</a></li>
         <li><a href="#backtrace">backtrace</a></li>
+        <li><a href="#where">where</a></li>
         <li><a href="#frame">frame</a></li>
         <li><a href="#updown">up/down</a></li>
         <li><a href="#info">info</a></li>
@@ -255,7 +257,7 @@
 <p>LLDB 与 GDB 的命令类似，本文也可用于 LLDB 的入门学习。</p>
 </blockquote>
 <h2 id="gdb-调试-cc">GDB 调试 C/C++</h2>
-<p>要使用 GDB 来调试 C/C++，需要在编译时加上 <code>-g</code> 参数（必需），也可以使用 <code>-Og</code> 参数来对 debug 进行优化（建议），例如：</p>
+<p>要使用 GDB 来调试 C/C++，需要在编译时加上 <code>-g</code> 参数（必需），也可以使用 <code>-Og</code> 参数来对 debug 进行优化（但使用 <code>-Og</code> 后 compiler 可能会把一些东西移除掉，所以 debug 时可能不会符合预期），例如：</p>
 <div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -315,9 +317,11 @@
       <div class="admonition-content"><code>step</code> 命令与 <code>continue</code> 命令相同，只能在程序处于运行态（即停留在断点处）时才能使用。</div>
     </div>
   </div>
+<h3 id="next">next</h3>
+<p><code>next (n)</code> 命令用于执行当前行并移动到 <strong>下一行</strong>，它用于逐行执行程序，但不会进入函数调用。</p>
 <h3 id="break">break</h3>
 <p><code>break (b)</code> 命令用于在可执行问卷对应的源程序中加入断点，可以在程序处于 <em>未运行态/运行态</em> 时加入断点（运行态是指程序停留在断点处但未执行完毕的姿态）。</p>
-<p>可以通过指定源文件对应的 <em>行数/函数名</em> 来加入断点：</p>
+<p>可以通过指定 源文件对应的 <em>行数/函数名</em> 来加入断点（源文件名可以省略）：</p>
 <div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -395,6 +399,8 @@
       <div class="admonition-content"><code>backtrace</code> 命令对于跟踪程序的执行路径、检查函数调用的顺序以及定位错误非常有用。在实际中，一般会搭配其他GDB命令（如 <code>up</code>、<code>down</code> 和 <code>frame</code>）结合使用，以查看特定栈帧的更多详细信息或切换到不同的栈帧。在上面的例子中，<code>#0</code> 和 <code>#1</code> 表示栈帧的编号，可以通过 <code>frame</code> 配合这些编号来切换栈帧。</div>
     </div>
   </div>
+<h3 id="where">where</h3>
+<p><code>where</code> 和 <code>backtrace</code> 命令都用于显示程序的调用栈信息。<code>backtrace</code> 提供更详细的调用栈信息，包括函数名称、文件名、行号、参数和局部变量的值。而 <code>where</code> 命令可以理解为 <code>backtrace</code> 的一个简化版本，它提供的是较为紧凑的调用栈信息，通常只包含函数名称、文件名和行号。</p>
 <h3 id="frame">frame</h3>
 <p><code>frame (f)</code> 命令用于选择特定的栈帧 (stack frame)，从而切换到不同的函数调用上下文，每个栈帧对应于程序中的一个函数调用。</p>
 <p>接着上一个例子，切换到 <code>main</code> 函数所在的栈帧：</p>

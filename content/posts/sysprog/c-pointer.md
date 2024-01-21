@@ -139,9 +139,11 @@ C 语言里只有 ***call by value***
 
 C89 之前，函数如果没有标注返回类型，则默认返回类型 `int`，返回值 0。但由于这样既可以表示返回值不重要，也可以表示返回值为 0，这会造成歧义，所以引进了 `void`。
 
-`void *` 只能表示地址，而不能对所指向的地址区域的内容进行操作。因为通过 `void *` 无法知道所指向区域的 size，所以无法对区域的内容进行操作，必须对 `void *` 进行 ***显示转换*** 才能操作指向的内容。（除此之外，对于指针本身的操作，`void *` 与 `char *` 是等价的）
+`void *` 只能表示地址，而不能对所指向的地址区域的内容进行操作。因为通过 `void *` 无法知道所指向区域的 size，所以无法对区域的内容进行操作，必须对 `void *` 进行 ***显示转换*** 才能操作指向的内容。（除此之外，对于指针本身的操作，`void *` 与 `char *` 是等价的，即对于 `+/- 1` 这类的操作，二者的偏移量是一致的）
 
-**Alignment** 原文描述不是很清晰，`2-byte aligned` 图示如下：
+### Alignment
+
+这部分原文描述不是很清晰，`2-byte aligned` 图示如下：
 
 ![](/images/c/2-byte-aligned.svg)
 
@@ -170,6 +172,8 @@ uint32_t value = *(uint8_t *) ptr
 - [ ] [The Lost Art of Structure Packing](http://www.catb.org/esr/structure-packing/)
 {{< /admonition >}}
 
+### 规格书中的 Pointer
+
 C99 [6.3.2.3] ***Pointers***
 
 > A pointer to a function of one type may be converted to a pointer to a function of another
@@ -188,6 +192,73 @@ C99 和 C11 都不保证 pointers (whose type is not compatible with the *pointe
 
 ## Pointers vs. Arrays
 
+Array 只有在表示其自身为数组时才不会退化为 Pointer，例如
+
+```c
+// case 1: extern declaration of array
+extern char a[];
+// case 2: defintion of array
+char a[10];
+// case 3: size of array
+sizeof(a);
+// case 4: address of array
+&a
+```
+
+在其他情况则会退化为 Pointer，这时 Array 可以和 Pointer 互换进行表示或操作，例如
+
+```c
+// case 1: function parameter
+void func(char a[]);
+void func(char *a);
+
+// case 2: operation in expression
+char c = a[2];
+char c = *(a + 2);
+```
+
+这也是为什么对于一个 Array `a`，`&a` 和 `&a[0]` 值虽然相同，但 `&a + 1` 和 `&a[0] + 1` 的结果大部分时候是大不相同的，这件事乍一看是非常惊人的，但其实不然，在了解 Array 和 Pointer 之后，也就那么一回事 :rofl:
+
+### GDB 实作
+
+```c
+char a[10];
+int main() {
+    return 0;
+};
+```
+
+我们以上面这个例子，通过 GDB 来对 Array 和 Pointer 进行深入研究：
+
+```bash
+(gdb) print &a
+$1 = (char (*)[10]) 0x555555558018 <a>
+(gdb) print &a[0]
+$2 = 0x555555558018 <a> ""
+```
+
+符合预期，`&a` 和 `&a[0]` 得到的值是相同的，虽然类型看起来不同，但是现在先放到一边。
+
+```bash
+(gdb) print &a + 1
+$3 = (char (*)[10]) 0x555555558022
+(gdb) print &a[0] + 1
+$4 = 0x555555558019 <a+1> ""
+(gdb) print a + 1
+$5 = 0x555555558019 <a+1> ""
+```
+
+Oh! 正如我们之前所说的 `&a + 1` 与 `&a[0] + 1` 结果并不相同（而 `&a[0] + 1` 和 `a + 1` 结果相同正是我们所提到的 Array 退化为 Pointer），虽然如此，GDB 所给的信息提示我们可能是二者 Pointer 类型不相同导致的。
+
+```bash
+(gdb) whatis &a
+type = char (*)[10]
+(gdb) whatis &a[0]
+type = char *
+```
+
+Great! 果然是 Pointer 类型不同导致的，我们可以看到 `&a` 的类型是 `char (*)[10]` 一个指向 Array 的指针，`&a[0]` 则是 `char *`。所以这两个 Pointer 在进行 `+/-` 运算时的偏移量是不同的，`&a[0]` 的偏移量为 `sizeof(a[0])` 即一个 `char` 的宽度 ($0x18 + 1 = 0x19$)，而 `&a` 的偏移量为 `sizeof(a)` 即 10 个 `char` 的宽度 ($0x18 + 10 = 0x22$)。
+
 {{< admonition warning >}}
 在 GDB 中使用 `memcpy` 后直接打印可能会出现以下错误：
 
@@ -204,3 +275,5 @@ C99 和 C11 都不保证 pointers (whose type is not compatible with the *pointe
 ```
 
 {{< /admonition >}}
+
+遇到陌生的函数，可以使用 `man` 来快速查阅手册，例如 `man strcpy`, `man strcat`，手册可以让我们快速查询函数的一些信息，从而进入实作。
