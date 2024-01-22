@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>DragonOS - 标签 - Xshine&#39;s Blog</title>
+    <link>https://ccrysisa.github.io/tags/dragonos/</link>
+    <description>DragonOS - 标签 - Xshine&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Mon, 22 Jan 2024 21:36:18 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/dragonos/" rel="self" type="application/rss+xml" /><item>
+  <title>Deepin 20.9 构建 DragonOS</title>
+  <link>https://ccrysisa.github.io/posts/deepin-dragonos/</link>
+  <pubDate>Mon, 22 Jan 2024 21:36:18 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://ccrysisa.github.io/posts/deepin-dragonos/</guid>
+  <description><![CDATA[<p>在 deepin 20.9 上根据 <a href="https://docs.dragonos.org/zh-cn/latest/introduction/build_system.html"target="_blank" rel="external nofollow noopener noreferrer">DragonOS 构建文档</a> 的 bootstrap.sh 的方式来构建 DragonOS 时，如果没有事先安装 Qemu 会出现 KVM 相关的依赖问题。本文记录解决这一问题的过程。</p>]]></description>
+</item>
+</channel>
+</rss>

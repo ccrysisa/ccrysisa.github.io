@@ -16,7 +16,7 @@ weight: 0
 tags:
   - Linux 
 categories:
-  - Linux
+  - Linux Distribution
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
