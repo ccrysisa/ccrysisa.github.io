@@ -4,7 +4,15 @@
     <link>https://ccrysisa.github.io/posts/</link>
     <description>所有文章 | Xshine&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Mon, 22 Jan 2024 21:36:18 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+  <title>Deepin 构建 DragonOS</title>
+  <link>https://ccrysisa.github.io/posts/deepin-dragonos/</link>
+  <pubDate>Mon, 22 Jan 2024 21:36:18 &#43;0800</pubDate>
+  <author>Xshine</author>
+  <guid>https://ccrysisa.github.io/posts/deepin-dragonos/</guid>
+  <description><![CDATA[<p>在 deepin 上根据 <a href="https://docs.dragonos.org/zh-cn/latest/introduction/build_system.html"target="_blank" rel="external nofollow noopener noreferrer">文档</a> 的 bootstrap.sh 的方式来构建 DragonOS 时，如果没有事先安装 qemu 会出现 kvm 相关的依赖问题。本文记录解决这一问题的过程。</p>]]></description>
+</item>
+<item>
   <title>GDB 调试入门</title>
   <link>https://ccrysisa.github.io/posts/debug-gdb/</link>
   <pubDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</pubDate>
@@ -104,14 +112,6 @@
   <author>Xshine</author>
   <guid>https://ccrysisa.github.io/posts/git-learn/</guid>
   <description><![CDATA[<p>教学影片：<a href="https://www.youtube.com/playlist?list=PLlyOkSAh6TwcvJQ1UtvkSwhZWCaM_S07d"target="_blank" rel="external nofollow noopener noreferrer">Git 中文教学</a></p>]]></description>
-</item>
-<item>
-  <title>Ubuntu 22.04 配置</title>
-  <link>https://ccrysisa.github.io/posts/ubuntu/</link>
-  <pubDate>Wed, 27 Dec 2023 20:35:45 &#43;0800</pubDate>
-  <author>Xshine</author>
-  <guid>https://ccrysisa.github.io/posts/ubuntu/</guid>
-  <description><![CDATA[网络代理 根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo apt install net-tools 安装并启]]></description>
 </item>
 </channel>
 </rss>

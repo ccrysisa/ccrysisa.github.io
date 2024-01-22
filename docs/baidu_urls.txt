@@ -1,3 +1,4 @@
+https://ccrysisa.github.io/posts/deepin-dragonos/
 https://ccrysisa.github.io/posts/debug-gdb/
 https://ccrysisa.github.io/posts/c-pointer/
 https://ccrysisa.github.io/posts/nthu-computer-network/
