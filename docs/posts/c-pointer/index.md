@@ -88,10 +88,12 @@ C99 [6.2.5] ***Types***
 
 > Array, function, and pointer types are collectively called derived declarator types. A declarator type derivation from a type T is the construction of a derived declarator type from T by the application of an array-type, a function-type, or a pointer-type derivation to T.
 
-*derived declarator types*  表示衍生的声明类型，因为 array, function, pointer 本质都是地址，所以可以使用这些所谓的 *derived declarator types* 来提前声明 object，表示在某个地址会存储一个 object，这也是为什么这些类型被规格书定义为 *derived declarator types*。
 
-- **lvalue**: Location value
-- **rvalue**: Read value
+{{< admonition >}}
+*derived declarator types*  表示衍生的声明类型，因为 array, function, pointer 本质都是地址，而它们的类型都是由其它类型衍生而来的，所以可以使用这些所谓的 *derived declarator types* 来提前声明 object，表示在某个地址会存储一个 object，这也是为什么这些类型被规格书定义为 *derived declarator types*。
+{{< /admonition >}}
+
+- **lvalue**: Locator value
 
 {{< admonition danger >}}
 C 语言里只有 ***call by value***
@@ -150,11 +152,14 @@ type and back again; the result shall compare equal to the original pointer. If 
 pointer is used to call a function whose type is not compatible with the referenced type,
 the behavior is undefined.
 
-C99 和 C11 都不保证 pointers (whose type is not compatible with the *pointed-to / referenced* type) 之间的转换是正确的。
+**C99 和 C11 都不保证 pointers (whose type is not compatible with the *pointed-to / referenced* type) 之间的转换是正确的。**
 
 ## Pointers vs. Arrays
 
-Array 只有在表示其自身为数组时才不会退化为 Pointer，例如
+C99 6.3.2.1
+> Except when it is the operand of the sizeof operator or the unary & operator, or is a string literal used to initialize an array, an expression that has type ‘‘array of type’’ is converted to an expression with type ‘‘pointer to type’’ that points to the initial element of the array object and is not an lvalue.
+
+Array 只有在表示其自身为数组时才不会被 converted to Pointer，例如
 
 ```c
 // case 1: extern declaration of array
@@ -167,7 +172,7 @@ sizeof(a);
 &a
 ```
 
-在其他情况则会退化为 Pointer，这时 Array 可以和 Pointer 互换进行表示或操作，例如
+在其他情况则会倍 converted to Pointer，这时 Array 可以和 Pointer 互换进行表示或操作，例如
 
 ```c
 // case 1: function parameter
@@ -238,7 +243,72 @@ Great! 果然是 Pointer 类型不同导致的，我们可以看到 `&a` 的类�
 
 {{< /admonition >}}
 
+### malloc
+
+{{< admonition tip >}}
 遇到陌生的函数，可以使用 `man` 来快速查阅手册，例如 `man strcpy`, `man strcat`，手册可以让我们快速查询函数的一些信息，从而进入实作。
+{{< /admonition >}}
+
+### Runtime Environment
+
+根据 [Zero size arrays in C ](https://news.ycombinator.com/item?id=11674374)，原文中的 `char (*argv)[0]` 在函数参数传递时会被转换成 `char **argv`。而为什么在查看地址 `((char **) argv)[0]` 开始的连续 4 个 `char *` 内容时，会打印出 `envp` 中的内容，可以参考以下的进入 `main` 函数时的栈布局：
+
+![](/images/c/argv.png)
+
+`argv` 和 `envp` 所指的字符串区域是相连的，所以在越过 `argv` 字符串区域的边界后，会继续打印 `envp` 区域的字符串。这也是为什么打印出的字符串之间地址增长于其长度相匹配。所以从地址 `(char **) argv` 开始的区域只是一个 `char *` 数组，使用 `x/4s` 对这部分进行字符串格式打印显然是看不懂的。
+
+{{< admonition >}}
+`argv` 和 `envp` 都是在 shell 进行 `exec` 系统调用之前进行传递（事实上是以 arguments 的形式传递给 `exec`）
+
+man 2 execve
+```c
+int execve(const char *pathname, char *const argv[],
+           char *const envp[]);
+```
+
+`execve` 实际上在内部调用了 `fork`，所以 `argv` 和 `envp` 的传递是在 `fork` 之前。（设想如果是在 `fork` 之后传递，可能会出现 `fork` 后 child process 先执行，这种情况 child process 显然无法获得这些被传递的信息）
+
+注意到 `execve` 只传递了 `argv` 而没有传递 `argc`，这也很容易理解，`argc` 是 `argv` 的计数，只需 `argv` 即可推导出 `argc`。
+
+{{< /admonition >}}
+
+## Function Pointer
+
+{{< admonition danger>}}
+与 Array 类似，Function 只有在表示自身时不会被 converted to Function Pointer (即除 `sizeof` 和 `&` 运算之外)，其它情况、运算时都会被 convert to Function Pointer
+
+理解 C 语言中的 Function 以及 Function Pointer 的核心在于理解 ***Function Designator*** 这个概念，函数名字必然是 Function Designator，其它的 designator 则是根据以下两条规则进行推导得来。
+{{< /admonition >}}
+
+C99 [ 6.3.2.1 ] 
+> A function designator is an expression that has function type. **Except** when it is the operand of the **sizeof** operator or the unary **&** operator, a **function designator** with type ‘‘function returning type’’ **is converted to** an expression that has type ‘‘**pointer to function returning type**’’.
+
+C99 [6.5.3.2-4] 
+> The unary * operator denotes indirection. **If the operand points to a function, the result is a function designator.**
+
+## 指针的修饰符
+
+指针 `p` 自身不能变更，既不能改变 `p` 自身所存储的地址。const 在 * 之后：
+
+```c
+char * const p;
+```
+
+指针 `p` 所指向的内容不能变更，即不能通过 `p` 来更改所指向的内容。const 在 * 之前：
+
+```c
+const char * p;
+char const * p;
+```
+指针 `p` 自身于所指向的内容都不能变更：
+
+```c
+const char * const p;
+char const * const p;
+```
+
+## 字符串
+
 
 
 ---

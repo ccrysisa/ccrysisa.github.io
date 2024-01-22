@@ -23,8 +23,8 @@
       「指针」 扮演 「记忆体」 和 「物件」 之间的桥梁
     
   "><meta itemprop="datePublished" content="2024-01-14T22:41:38+08:00" />
-<meta itemprop="dateModified" content="2024-01-20T09:26:51+08:00" />
-<meta itemprop="wordCount" content="2334"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-01-22T00:35:39+08:00" />
+<meta itemprop="wordCount" content="3181"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C," /><meta property="og:title" content="你所不知道的 C 语言: 指针篇" />
 <meta property="og:description" content="
     
@@ -37,7 +37,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-pointer/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-01-14T22:41:38+08:00" />
-<meta property="article:modified_time" content="2024-01-20T09:26:51+08:00" />
+<meta property="article:modified_time" content="2024-01-22T00:35:39+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 指针篇"/>
@@ -63,8 +63,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-pointer\/"
-    },"genre": "posts","keywords": "Sysprog, C","wordcount":  2334 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-pointer\/","datePublished": "2024-01-14T22:41:38+08:00","dateModified": "2024-01-20T09:26:51+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, C","wordcount":  3181 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-pointer\/","datePublished": "2024-01-14T22:41:38+08:00","dateModified": "2024-01-22T00:35:39+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -179,7 +179,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="Xshine" data-alt="Xshine" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;Xshine</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-01-14 22:41:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-14">2024-01-14</time></span>&nbsp;<span title="更新于 2024-01-20 09:26:51"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-20">2024-01-20</time></span>&nbsp;<span title="2334 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-01-14 22:41:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-14">2024-01-14</time></span>&nbsp;<span title="更新于 2024-01-22 00:35:39"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-22">2024-01-22</time></span>&nbsp;<span title="3181 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -198,8 +198,13 @@
     <li><a href="#pointers-vs-arrays">Pointers vs. Arrays</a>
       <ul>
         <li><a href="#gdb-实作">GDB 实作</a></li>
+        <li><a href="#malloc">malloc</a></li>
+        <li><a href="#runtime-environment">Runtime Environment</a></li>
       </ul>
     </li>
+    <li><a href="#function-pointer">Function Pointer</a></li>
+    <li><a href="#指针的修饰符">指针的修饰符</a></li>
+    <li><a href="#字符串">字符串</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><div class="details admonition quote open">
@@ -255,7 +260,7 @@
 <hr>
 <blockquote>
 <p>Find the leftmost identifier and work your way out, remembering that <code>[]</code> and <code>()</code> bind before <code>*</code>; IOW, <code>*a[]</code> is an array of pointers, <code>(*a)[]</code> is a pointer to an array, <code>*f()</code> is a function returning a pointer, and <code>(*f)()</code> is a pointer to a function. Thus,</p>
-<div class="highlight" id="id-9"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -263,7 +268,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="p">(</span> <span class="o">*</span><span class="nf">signal</span><span class="p">(</span><span class="kt">int</span> <span class="n">sig</span><span class="p">,</span> <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">handler</span><span class="p">)(</span><span class="kt">int</span><span class="p">))</span> <span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>breaks down as</p>
-<div class="highlight" id="id-10"><div class="chroma">
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -311,10 +316,16 @@
 <blockquote>
 <p>Array, function, and pointer types are collectively called derived declarator types. A declarator type derivation from a type T is the construction of a derived declarator type from T by the application of an array-type, a function-type, or a pointer-type derivation to T.</p>
 </blockquote>
-<p><em>derived declarator types</em>  表示衍生的声明类型，因为 array, function, pointer 本质都是地址，所以可以使用这些所谓的 <em>derived declarator types</em> 来提前声明 object，表示在某个地址会存储一个 object，这也是为什么这些类型被规格书定义为 <em>derived declarator types</em>。</p>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><em>derived declarator types</em>  表示衍生的声明类型，因为 array, function, pointer 本质都是地址，而它们的类型都是由其它类型衍生而来的，所以可以使用这些所谓的 <em>derived declarator types</em> 来提前声明 object，表示在某个地址会存储一个 object，这也是为什么这些类型被规格书定义为 <em>derived declarator types</em>。</div>
+    </div>
+  </div>
 <ul>
-<li><strong>lvalue</strong>: Location value</li>
-<li><strong>rvalue</strong>: Read value</li>
+<li><strong>lvalue</strong>: Locator value</li>
 </ul>
 <div class="details admonition danger open">
     <div class="details-summary admonition-title">
@@ -390,9 +401,13 @@ type and back again; the result shall compare equal to the original pointer. If 
 pointer is used to call a function whose type is not compatible with the referenced type,
 the behavior is undefined.</p>
 </blockquote>
-<p>C99 和 C11 都不保证 pointers (whose type is not compatible with the <em>pointed-to / referenced</em> type) 之间的转换是正确的。</p>
+<p><strong>C99 和 C11 都不保证 pointers (whose type is not compatible with the <em>pointed-to / referenced</em> type) 之间的转换是正确的。</strong></p>
 <h2 id="pointers-vs-arrays">Pointers vs. Arrays</h2>
-<p>Array 只有在表示其自身为数组时才不会退化为 Pointer，例如</p>
+<p>C99 6.3.2.1</p>
+<blockquote>
+<p>Except when it is the operand of the sizeof operator or the unary &amp; operator, or is a string literal used to initialize an array, an expression that has type ‘‘array of type’’ is converted to an expression with type ‘‘pointer to type’’ that points to the initial element of the array object and is not an lvalue.</p>
+</blockquote>
+<p>Array 只有在表示其自身为数组时才不会被 converted to Pointer，例如</p>
 <div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -414,7 +429,7 @@ the behavior is undefined.</p>
 </span></span><span class="line"><span class="cl"><span class="c1">// case 4: address of array
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">&amp;</span><span class="n">a</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>在其他情况则会退化为 Pointer，这时 Array 可以和 Pointer 互换进行表示或操作，例如</p>
+</div><p>在其他情况则会倍 converted to Pointer，这时 Array 可以和 Pointer 互换进行表示或操作，例如</p>
 <div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -502,7 +517,7 @@ the behavior is undefined.</p>
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>在 GDB 中使用 <code>memcpy</code> 后直接打印可能会出现以下错误：</p>
-<div class="highlight" id="id-11"><div class="chroma">
+<div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -512,7 +527,7 @@ the behavior is undefined.</p>
 </span></span><span class="line"><span class="cl"><span class="s1">&#39;memcpy&#39;</span> has unknown <span class="k">return</span> type<span class="p">;</span> cast the call to its declared <span class="k">return</span> type</span></span></code></pre></td></tr></table>
 </div>
 </div><p>只需加入 <code>void *</code> 进行类型转换即可解决该问题：</p>
-<div class="highlight" id="id-12"><div class="chroma">
+<div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -524,11 +539,93 @@ the behavior is undefined.</p>
 </div></div>
     </div>
   </div>
-<p>遇到陌生的函数，可以使用 <code>man</code> 来快速查阅手册，例如 <code>man strcpy</code>, <code>man strcat</code>，手册可以让我们快速查询函数的一些信息，从而进入实作。</p></div><div class="post-footer" id="post-footer">
+<h3 id="malloc">malloc</h3>
+<div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">遇到陌生的函数，可以使用 <code>man</code> 来快速查阅手册，例如 <code>man strcpy</code>, <code>man strcat</code>，手册可以让我们快速查询函数的一些信息，从而进入实作。</div>
+    </div>
+  </div>
+<h3 id="runtime-environment">Runtime Environment</h3>
+<p>根据 <a href="https://news.ycombinator.com/item?id=11674374"target="_blank" rel="external nofollow noopener noreferrer">Zero size arrays in C </a>，原文中的 <code>char (*argv)[0]</code> 在函数参数传递时会被转换成 <code>char **argv</code>。而为什么在查看地址 <code>((char **) argv)[0]</code> 开始的连续 4 个 <code>char *</code> 内容时，会打印出 <code>envp</code> 中的内容，可以参考以下的进入 <code>main</code> 函数时的栈布局：</p>
+<p><img loading="lazy" src="/images/c/argv.png" srcset="/images/c/argv.png?size=small, /images/c/argv.png?size=medium 1.5x, /images/c/argv.png?size=large 2x" sizes="auto" data-title="/images/c/argv.png" data-alt="/images/c/argv.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></p>
+<p><code>argv</code> 和 <code>envp</code> 所指的字符串区域是相连的，所以在越过 <code>argv</code> 字符串区域的边界后，会继续打印 <code>envp</code> 区域的字符串。这也是为什么打印出的字符串之间地址增长于其长度相匹配。所以从地址 <code>(char **) argv</code> 开始的区域只是一个 <code>char *</code> 数组，使用 <code>x/4s</code> 对这部分进行字符串格式打印显然是看不懂的。</p>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p><code>argv</code> 和 <code>envp</code> 都是在 shell 进行 <code>exec</code> 系统调用之前进行传递（事实上是以 arguments 的形式传递给 <code>exec</code>）</p>
+<p>man 2 execve</p>
+<div class="highlight" id="id-16"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">execve</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">pathname</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="n">argv</span><span class="p">[],</span>
+</span></span><span class="line"><span class="cl">           <span class="kt">char</span> <span class="o">*</span><span class="k">const</span> <span class="n">envp</span><span class="p">[]);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>execve</code> 实际上在内部调用了 <code>fork</code>，所以 <code>argv</code> 和 <code>envp</code> 的传递是在 <code>fork</code> 之前。（设想如果是在 <code>fork</code> 之后传递，可能会出现 <code>fork</code> 后 child process 先执行，这种情况 child process 显然无法获得这些被传递的信息）</p>
+<p>注意到 <code>execve</code> 只传递了 <code>argv</code> 而没有传递 <code>argc</code>，这也很容易理解，<code>argc</code> 是 <code>argv</code> 的计数，只需 <code>argv</code> 即可推导出 <code>argc</code>。</p>
+</div>
+    </div>
+  </div>
+<h2 id="function-pointer">Function Pointer</h2>
+<div class="details admonition danger open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-skull-crossbones fa-fw" aria-hidden="true"></i>危险<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>与 Array 类似，Function 只有在表示自身时不会被 converted to Function Pointer (即除 <code>sizeof</code> 和 <code>&amp;</code> 运算之外)，其它情况、运算时都会被 convert to Function Pointer</p>
+<p>理解 C 语言中的 Function 以及 Function Pointer 的核心在于理解 <em><strong>Function Designator</strong></em> 这个概念，函数名字必然是 Function Designator，其它的 designator 则是根据以下两条规则进行推导得来。</p>
+</div>
+    </div>
+  </div>
+<p>C99 [ 6.3.2.1 ]</p>
+<blockquote>
+<p>A function designator is an expression that has function type. <strong>Except</strong> when it is the operand of the <strong>sizeof</strong> operator or the unary <strong>&amp;</strong> operator, a <strong>function designator</strong> with type ‘‘function returning type’’ <strong>is converted to</strong> an expression that has type ‘‘<strong>pointer to function returning type</strong>’’.</p>
+</blockquote>
+<p>C99 [6.5.3.2-4]</p>
+<blockquote>
+<p>The unary * operator denotes indirection. <strong>If the operand points to a function, the result is a function designator.</strong></p>
+</blockquote>
+<h2 id="指针的修饰符">指针的修饰符</h2>
+<p>指针 <code>p</code> 自身不能变更，既不能改变 <code>p</code> 自身所存储的地址。const 在 * 之后：</p>
+<div class="highlight" id="id-9"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">char</span> <span class="o">*</span> <span class="k">const</span> <span class="n">p</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>指针 <code>p</code> 所指向的内容不能变更，即不能通过 <code>p</code> 来更改所指向的内容。const 在 * 之前：</p>
+<div class="highlight" id="id-10"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">char</span> <span class="k">const</span> <span class="o">*</span> <span class="n">p</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>指针 <code>p</code> 自身于所指向的内容都不能变更：</p>
+<div class="highlight" id="id-11"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="k">const</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">char</span> <span class="k">const</span> <span class="o">*</span> <span class="k">const</span> <span class="n">p</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="字符串">字符串</h2></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-01-20 09:26:51">更新于 2024-01-20&nbsp;</span>
+        <span title="更新于 2024-01-22 00:35:39">更新于 2024-01-22&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/c-pointer/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
