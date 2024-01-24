@@ -9,14 +9,14 @@
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="在 deepin 20.9 上根据 DragonOS 构建文档 的 bootstrap.sh 的方式来构建 DragonOS 时，如果没有事先安装 Qemu 会出现 KVM 相关的依赖问题。本文记录解决这一问题的过程。" /><meta name="keywords" content='Deepin, Linux, DragonOS' /><meta itemprop="name" content="在 Deepin 20.9 上构建 DragonOS">
 <meta itemprop="description" content="在 deepin 20.9 上根据 DragonOS 构建文档 的 bootstrap.sh 的方式来构建 DragonOS 时，如果没有事先安装 Qemu 会出现 KVM 相关的依赖问题。本文记录解决这一问题的过程。"><meta itemprop="datePublished" content="2024-01-22T21:36:18+08:00" />
-<meta itemprop="dateModified" content="2024-01-22T23:33:14+08:00" />
+<meta itemprop="dateModified" content="2024-01-24T19:59:11+08:00" />
 <meta itemprop="wordCount" content="434"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Deepin,Linux,DragonOS," /><meta property="og:title" content="在 Deepin 20.9 上构建 DragonOS" />
 <meta property="og:description" content="在 deepin 20.9 上根据 DragonOS 构建文档 的 bootstrap.sh 的方式来构建 DragonOS 时，如果没有事先安装 Qemu 会出现 KVM 相关的依赖问题。本文记录解决这一问题的过程。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/deepin-dragonos/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-01-22T21:36:18+08:00" />
-<meta property="article:modified_time" content="2024-01-22T23:33:14+08:00" />
+<meta property="article:modified_time" content="2024-01-24T19:59:11+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="在 Deepin 20.9 上构建 DragonOS"/>
@@ -36,7 +36,7 @@
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/deepin-dragonos\/"
     },"genre": "posts","keywords": "Deepin, Linux, DragonOS","wordcount":  434 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/deepin-dragonos\/","datePublished": "2024-01-22T21:36:18+08:00","dateModified": "2024-01-22T23:33:14+08:00","publisher": {
+    "url": "https:\/\/ccrysisa.github.io\/posts\/deepin-dragonos\/","datePublished": "2024-01-22T21:36:18+08:00","dateModified": "2024-01-24T19:59:11+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -150,7 +150,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-distribution/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Distribution</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-01-22 21:36:18"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-22">2024-01-22</time></span>&nbsp;<span title="更新于 2024-01-22 23:33:14"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-22">2024-01-22</time></span>&nbsp;<span title="434 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-01-22 21:36:18"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-22">2024-01-22</time></span>&nbsp;<span title="更新于 2024-01-24 19:59:11"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-24">2024-01-24</time></span>&nbsp;<span title="434 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
     </div><div class="content" id="content"><p>在 deepin 20.9 上根据 <a href="https://docs.dragonos.org/zh-cn/latest/introduction/build_system.html"target="_blank" rel="external nofollow noopener noreferrer">DragonOS 构建文档</a> 的 bootstrap.sh 的方式来构建 DragonOS 时，如果没有事先安装 Qemu 会出现 KVM 相关的依赖问题。本文记录解决这一问题的过程。</p>
 <p>如果事先没有安装 Qemu，在使用 bootstrap.sh 时会出现如下报错：</p>
 <div class="highlight" id="id-1"><div class="chroma">
@@ -252,7 +252,7 @@
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-01-22 23:33:14">更新于 2024-01-22&nbsp;</span>
+        <span title="更新于 2024-01-24 19:59:11">更新于 2024-01-24&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/deepin-dragonos/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
