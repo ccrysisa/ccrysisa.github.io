@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>Network - 标签 - Xshine&#39;s Blog</title>
+    <title>Network - 标签 - Ccrysisa&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/network/</link>
-    <description>Network - 标签 - Xshine&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Sun, 14 Jan 2024 12:09:38 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/network/" rel="self" type="application/rss+xml" /><item>
+    <description>Network - 标签 - Ccrysisa&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 14 Jan 2024 12:09:38 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/network/" rel="self" type="application/rss+xml" /><item>
   <title>清大计算机网络重点提示</title>
   <link>https://ccrysisa.github.io/posts/nthu-computer-network/</link>
   <pubDate>Sun, 14 Jan 2024 12:09:38 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/nthu-computer-network/</guid>
   <description><![CDATA[<div class="details admonition abstract open">
     <div class="details-summary admonition-title">
@@ -24,7 +24,7 @@
   <title>计算机网络学习指引</title>
   <link>https://ccrysisa.github.io/posts/network/</link>
   <pubDate>Tue, 02 Jan 2024 19:44:56 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/network/</guid>
   <description><![CDATA[<p>整理一些计算机网络相关的资源</p>]]></description>
 </item>

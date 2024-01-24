@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>Git/GitHub - 标签 - Xshine&#39;s Blog</title>
+    <title>Git/GitHub - 标签 - Ccrysisa&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/git/github/</link>
-    <description>Git/GitHub - 标签 - Xshine&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><atom:link href="https://ccrysisa.github.io/tags/git/github/" rel="self" type="application/rss+xml" /><item>
+    <description>Git/GitHub - 标签 - Ccrysisa&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><atom:link href="https://ccrysisa.github.io/tags/git/github/" rel="self" type="application/rss+xml" /><item>
   <title>Git/GitHub 资源与问题汇总</title>
   <link>https://ccrysisa.github.io/posts/git/</link>
   <pubDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/git/</guid>
   <description><![CDATA[Git 中文教学 新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout 网络问题导致 22 端口被禁止，无法正常使用]]></description>
 </item>
@@ -16,7 +16,7 @@
   <title>Git 学习记录</title>
   <link>https://ccrysisa.github.io/posts/git-learn/</link>
   <pubDate>Wed, 27 Dec 2023 23:34:45 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/git-learn/</guid>
   <description><![CDATA[<p>教学影片：<a href="https://www.youtube.com/playlist?list=PLlyOkSAh6TwcvJQ1UtvkSwhZWCaM_S07d"target="_blank" rel="external nofollow noopener noreferrer">Git 中文教学</a></p>]]></description>
 </item>

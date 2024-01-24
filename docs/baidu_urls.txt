@@ -1,3 +1,4 @@
+https://ccrysisa.github.io/posts/deepin20.9/
 https://ccrysisa.github.io/posts/deepin-dragonos/
 https://ccrysisa.github.io/posts/debug-gdb/
 https://ccrysisa.github.io/posts/c-pointer/
@@ -10,7 +11,7 @@ https://ccrysisa.github.io/posts/network/
 https://ccrysisa.github.io/posts/binary-representation/
 https://ccrysisa.github.io/posts/rust-introduction/
 https://ccrysisa.github.io/posts/git-learn/
-https://ccrysisa.github.io/posts/ubuntu/
+https://ccrysisa.github.io/posts/ubuntu22.04lts/
 https://ccrysisa.github.io/posts/gnu-linux-dev/
 https://ccrysisa.github.io/posts/math/
 https://ccrysisa.github.io/posts/hello_world/

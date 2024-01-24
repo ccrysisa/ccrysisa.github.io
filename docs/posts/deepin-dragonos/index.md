@@ -1,4 +1,4 @@
-# Deepin 20.9 构建 DragonOS
+# 在 Deepin 20.9 上构建 DragonOS
 
 
 
@@ -60,9 +60,15 @@ $ make run
 
 Ok 可以成功运行
 
+{{< admonition >}}
+如果需要使用 RISC-V 的 Qemu 模拟器，安装 qemu-system-misc 即可：
+```bash
+$ sudo apt install qemu-system-misc
+```
+{{< /admonition >}}
 
 ---
 
-> 作者: [Xshine](https://github.com/ccrysisa)  
+> 作者: [ccrysisa](https://github.com/ccrysisa)  
 > URL: https://ccrysisa.github.io/posts/deepin-dragonos/  
 

@@ -313,6 +313,6 @@ char const * const p;
 
 ---
 
-> 作者: [Xshine](https://github.com/ccrysisa)  
+> 作者: [ccrysisa](https://github.com/ccrysisa)  
 > URL: https://ccrysisa.github.io/posts/c-pointer/  
 

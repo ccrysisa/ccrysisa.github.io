@@ -257,6 +257,6 @@ GDB 会将空白行的断点自动下移到下一非空的代码行。
 
 ---
 
-> 作者: [Xshine](https://github.com/ccrysisa)  
+> 作者: [ccrysisa](https://github.com/ccrysisa)  
 > URL: https://ccrysisa.github.io/posts/debug-gdb/  
 

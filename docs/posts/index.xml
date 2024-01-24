@@ -1,14 +1,22 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>所有文章 - Xshine&#39;s Blog</title>
+    <title>所有文章 - Ccrysisa&#39;s Blog</title>
     <link>https://ccrysisa.github.io/posts/</link>
-    <description>所有文章 | Xshine&#39;s Blog</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Mon, 22 Jan 2024 21:36:18 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-  <title>Deepin 20.9 构建 DragonOS</title>
+    <description>所有文章 | Ccrysisa&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 24 Jan 2024 18:59:56 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+  <title>深度操作系统 Deepin 20.9 双系统安装配置</title>
+  <link>https://ccrysisa.github.io/posts/deepin20.9/</link>
+  <pubDate>Wed, 24 Jan 2024 18:59:56 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/deepin20.9/</guid>
+  <description><![CDATA[<p>记录一下折腾 Deepin 20.9 的物理机的过程与相关的配置。</p>]]></description>
+</item>
+<item>
+  <title>在 Deepin 20.9 上构建 DragonOS</title>
   <link>https://ccrysisa.github.io/posts/deepin-dragonos/</link>
   <pubDate>Mon, 22 Jan 2024 21:36:18 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/deepin-dragonos/</guid>
   <description><![CDATA[<p>在 deepin 20.9 上根据 <a href="https://docs.dragonos.org/zh-cn/latest/introduction/build_system.html"target="_blank" rel="external nofollow noopener noreferrer">DragonOS 构建文档</a> 的 bootstrap.sh 的方式来构建 DragonOS 时，如果没有事先安装 Qemu 会出现 KVM 相关的依赖问题。本文记录解决这一问题的过程。</p>]]></description>
 </item>
@@ -16,7 +24,7 @@
   <title>GDB 调试入门</title>
   <link>https://ccrysisa.github.io/posts/debug-gdb/</link>
   <pubDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/debug-gdb/</guid>
   <description><![CDATA[<div class="details admonition abstract open">
     <div class="details-summary admonition-title">
@@ -31,7 +39,7 @@
   <title>你所不知道的 C 语言: 指针篇</title>
   <link>https://ccrysisa.github.io/posts/c-pointer/</link>
   <pubDate>Sun, 14 Jan 2024 22:41:38 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-pointer/</guid>
   <description><![CDATA[<div class="details admonition quote open">
     <div class="details-summary admonition-title">
@@ -46,7 +54,7 @@
   <title>清大计算机网络重点提示</title>
   <link>https://ccrysisa.github.io/posts/nthu-computer-network/</link>
   <pubDate>Sun, 14 Jan 2024 12:09:38 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/nthu-computer-network/</guid>
   <description><![CDATA[<div class="details admonition abstract open">
     <div class="details-summary admonition-title">
@@ -62,7 +70,7 @@
   <title>C 语言规格书</title>
   <link>https://ccrysisa.github.io/posts/c-specification/</link>
   <pubDate>Sat, 06 Jan 2024 16:07:25 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-specification/</guid>
   <description><![CDATA[]]></description>
 </item>
@@ -70,7 +78,7 @@
   <title>Git/GitHub 资源与问题汇总</title>
   <link>https://ccrysisa.github.io/posts/git/</link>
   <pubDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/git/</guid>
   <description><![CDATA[Git 中文教学 新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout 网络问题导致 22 端口被禁止，无法正常使用]]></description>
 </item>
@@ -78,7 +86,7 @@
   <title>计算机网络学习指引</title>
   <link>https://ccrysisa.github.io/posts/network/</link>
   <pubDate>Tue, 02 Jan 2024 19:44:56 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/network/</guid>
   <description><![CDATA[<p>整理一些计算机网络相关的资源</p>]]></description>
 </item>
@@ -86,7 +94,7 @@
   <title>解读计算机编码</title>
   <link>https://ccrysisa.github.io/posts/binary-representation/</link>
   <pubDate>Sun, 31 Dec 2023 15:43:50 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/binary-representation/</guid>
   <description><![CDATA[<div class="details admonition abstract open">
     <div class="details-summary admonition-title">
@@ -101,17 +109,9 @@
   <title>Rust - 进行中的未来</title>
   <link>https://ccrysisa.github.io/posts/rust-introduction/</link>
   <pubDate>Thu, 28 Dec 2023 20:18:03 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/rust-introduction/</guid>
   <description><![CDATA[Rust in 100 Seconds &#x2705; 观看短片：Rust in 100 Seconds 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut]]></description>
-</item>
-<item>
-  <title>Git 学习记录</title>
-  <link>https://ccrysisa.github.io/posts/git-learn/</link>
-  <pubDate>Wed, 27 Dec 2023 23:34:45 &#43;0800</pubDate>
-  <author>Xshine</author>
-  <guid>https://ccrysisa.github.io/posts/git-learn/</guid>
-  <description><![CDATA[<p>教学影片：<a href="https://www.youtube.com/playlist?list=PLlyOkSAh6TwcvJQ1UtvkSwhZWCaM_S07d"target="_blank" rel="external nofollow noopener noreferrer">Git 中文教学</a></p>]]></description>
 </item>
 </channel>
 </rss>

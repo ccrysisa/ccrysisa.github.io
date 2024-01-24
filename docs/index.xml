@@ -1,16 +1,24 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>Xshine&#39;s Blog</title>
+    <title>Ccrysisa&#39;s Blog</title>
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (Xshine)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (Xshine)</webMaster><lastBuildDate>Mon, 22 Jan 2024 21:36:18 &#43;0800</lastBuildDate>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 24 Jan 2024 18:59:56 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-  <title>Deepin 20.9 构建 DragonOS</title>
+  <title>深度操作系统 Deepin 20.9 双系统安装配置</title>
+  <link>https://ccrysisa.github.io/posts/deepin20.9/</link>
+  <pubDate>Wed, 24 Jan 2024 18:59:56 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/deepin20.9/</guid>
+  <description><![CDATA[<p>记录一下折腾 Deepin 20.9 的物理机的过程与相关的配置。</p>]]></description>
+</item>
+<item>
+  <title>在 Deepin 20.9 上构建 DragonOS</title>
   <link>https://ccrysisa.github.io/posts/deepin-dragonos/</link>
   <pubDate>Mon, 22 Jan 2024 21:36:18 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/deepin-dragonos/</guid>
   <description><![CDATA[<p>在 deepin 20.9 上根据 <a href="https://docs.dragonos.org/zh-cn/latest/introduction/build_system.html"target="_blank" rel="external nofollow noopener noreferrer">DragonOS 构建文档</a> 的 bootstrap.sh 的方式来构建 DragonOS 时，如果没有事先安装 Qemu 会出现 KVM 相关的依赖问题。本文记录解决这一问题的过程。</p>]]></description>
 </item>
@@ -18,7 +26,7 @@
   <title>GDB 调试入门</title>
   <link>https://ccrysisa.github.io/posts/debug-gdb/</link>
   <pubDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/debug-gdb/</guid>
   <description><![CDATA[<div class="details admonition abstract open">
     <div class="details-summary admonition-title">
@@ -33,7 +41,7 @@
   <title>你所不知道的 C 语言: 指针篇</title>
   <link>https://ccrysisa.github.io/posts/c-pointer/</link>
   <pubDate>Sun, 14 Jan 2024 22:41:38 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-pointer/</guid>
   <description><![CDATA[<div class="details admonition quote open">
     <div class="details-summary admonition-title">
@@ -48,7 +56,7 @@
   <title>清大计算机网络重点提示</title>
   <link>https://ccrysisa.github.io/posts/nthu-computer-network/</link>
   <pubDate>Sun, 14 Jan 2024 12:09:38 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/nthu-computer-network/</guid>
   <description><![CDATA[<div class="details admonition abstract open">
     <div class="details-summary admonition-title">
@@ -64,7 +72,7 @@
   <title>C 规格第 6 章 Language</title>
   <link>https://ccrysisa.github.io/posts/c-specification/ch6/</link>
   <pubDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-specification/ch6/</guid>
   <description><![CDATA[<p>C 语言规格书 Chapter 6 - Language 阅读记录。</p>]]></description>
 </item>
@@ -72,7 +80,7 @@
   <title>C 规格第 7 章 Library</title>
   <link>https://ccrysisa.github.io/posts/c-specification/ch7/</link>
   <pubDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-specification/ch7/</guid>
   <description><![CDATA[<p>C 语言规格书 Chapter 7 - Library 阅读记录。</p>]]></description>
 </item>
@@ -80,7 +88,7 @@
   <title>C 语言规格书</title>
   <link>https://ccrysisa.github.io/posts/c-specification/c-specification/</link>
   <pubDate>Sat, 06 Jan 2024 16:07:25 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-specification/c-specification/</guid>
   <description><![CDATA[<p>C 语言规格书阅读学习记录。
 规格书版本为 n1256，对应 C99 标准，对应的 <a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf"target="_blank" rel="external nofollow noopener noreferrer">PDF 下载地址</a>。
@@ -91,7 +99,7 @@
   <title>Git/GitHub 资源与问题汇总</title>
   <link>https://ccrysisa.github.io/posts/git/</link>
   <pubDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/git/</guid>
   <description><![CDATA[Git 中文教学 新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout 网络问题导致 22 端口被禁止，无法正常使用]]></description>
 </item>
@@ -99,24 +107,9 @@
   <title>计算机网络学习指引</title>
   <link>https://ccrysisa.github.io/posts/network/</link>
   <pubDate>Tue, 02 Jan 2024 19:44:56 &#43;0800</pubDate>
-  <author>Xshine</author>
+  <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/network/</guid>
   <description><![CDATA[<p>整理一些计算机网络相关的资源</p>]]></description>
-</item>
-<item>
-  <title>解读计算机编码</title>
-  <link>https://ccrysisa.github.io/posts/binary-representation/</link>
-  <pubDate>Sun, 31 Dec 2023 15:43:50 &#43;0800</pubDate>
-  <author>Xshine</author>
-  <guid>https://ccrysisa.github.io/posts/binary-representation/</guid>
-  <description><![CDATA[<div class="details admonition abstract open">
-    <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content">人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 + 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。</div>
-    </div>
-  </div>]]></description>
 </item>
 </channel>
 </rss>

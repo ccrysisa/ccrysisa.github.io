@@ -1,42 +1,5 @@
----
-title: Ubuntu 22.04 配置
-subtitle:
-date: 2023-12-27T20:35:45+08:00
-draft: false
-author:
-  name: vanJker
-  link: https://github.com/vanJker
-  email: cjshine@foxmail.com
-  avatar: https://avatars.githubusercontent.com/u/88960102?s=96&v=4
-description:
-keywords:
-license:
-comment: false
-weight: 0
-tags:
-  - Linux 
-categories:
-  - Linux Distribution
-hiddenFromHomePage: false
-hiddenFromSearch: false
-hiddenFromRss: false
-summary:
-resources:
-  - name: featured-image
-    src: featured-image.jpg
-  - name: featured-image-preview
-    src: featured-image-preview.jpg
-toc: true
-math: true
-lightgallery: true
-password:
-message:
-repost:
-  enable: true
-  url:
+# Ubuntu 22.04LTS 相关配置
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
----
 
 ## 网络代理
 
@@ -117,3 +80,10 @@ $ proxy_off
 
 [cflbp]: https://github.com/Elegybackup/clash-for-linux-backup
 [sougou-linux-guide]: https://shurufa.sogou.com/linux/guide
+
+
+---
+
+> 作者: [ccrysisa](https://github.com/ccrysisa)  
+> URL: https://ccrysisa.github.io/posts/ubuntu22.04lts/  
+

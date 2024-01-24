@@ -1,5 +1,5 @@
 ---
-title: Deepin 20.9 构建 DragonOS
+title: 在 Deepin 20.9 上构建 DragonOS
 subtitle:
 date: 2024-01-22T21:36:18+08:00
 # draft: true
@@ -98,3 +98,10 @@ $ make run
 {{< image src="/images/tools/deepin-dragonos-run.png" caption="运行 DragonOS" >}}
 
 Ok 可以成功运行
+
+{{< admonition >}}
+如果需要使用 RISC-V 的 Qemu 模拟器，安装 qemu-system-misc 即可：
+```bash
+$ sudo apt install qemu-system-misc
+```
+{{< /admonition >}}
