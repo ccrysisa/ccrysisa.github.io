@@ -10,7 +10,7 @@
 <meta name="description" content="C 语言规格书 Chapter 7 - Library 阅读记录。" /><meta name="keywords" content='C, Sysprog' /><meta itemprop="name" content="C 规格第 7 章 Library">
 <meta itemprop="description" content="C 语言规格书 Chapter 7 - Library 阅读记录。"><meta itemprop="datePublished" content="2024-01-11T23:23:48+08:00" />
 <meta itemprop="dateModified" content="2024-01-20T09:26:51+08:00" />
-<meta itemprop="wordCount" content="363"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="401"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="C,Sysprog," /><meta property="og:title" content="C 规格第 7 章 Library" />
 <meta property="og:description" content="C 语言规格书 Chapter 7 - Library 阅读记录。" />
 <meta property="og:type" content="article" />
@@ -35,7 +35,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-specification\/ch7\/"
-    },"genre": "posts","keywords": "C, Sysprog","wordcount":  363 ,
+    },"genre": "posts","keywords": "C, Sysprog","wordcount":  401 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-specification\/ch7\/","datePublished": "2024-01-11T23:23:48+08:00","dateModified": "2024-01-20T09:26:51+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -47,7 +47,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="Ccrysisa&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="Ccrysisa&#39;s Blog" data-alt="Ccrysisa&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">Ccrysisa&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="Ccrysisa&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="Ccrysisa&#39;s Blog" data-title="Ccrysisa&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">Ccrysisa&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -87,7 +87,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="Ccrysisa&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">Ccrysisa&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="Ccrysisa&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">Ccrysisa&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -140,18 +140,12 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>C 规格第 7 章 Library</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-01-11 23:23:48"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-11">2024-01-11</time></span>&nbsp;<span title="更新于 2024-01-20 09:26:51"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-20">2024-01-20</time></span>&nbsp;<span title="363 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/c/" class="post-category" title="分类 - C"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a></span></div><div class="post-meta-line"><span title="发布于 2024-01-11 23:23:48"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-11">2024-01-11</time></span>&nbsp;<span title="更新于 2024-01-20 09:26:51"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-20">2024-01-20</time></span>&nbsp;<span title="401 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -175,35 +169,35 @@
   </ul>
 </nav></div>
       </div><div class="content" id="content"><p>C 语言规格书 Chapter 7 - Library 阅读记录。</p>
-<h2 id="718-integer-types-stdinth">7.18 Integer types &lt;stdint.h&gt;</h2>
-<p>描述了头文件 <code>stdint.h</code> 必须定义和实现的整数类型，以及相应的宏。</p>
-<h3 id="7181-integer-types">7.18.1 Integer types</h3>
-<h4 id="71811-exact-width-integer-types">7.18.1.1 Exact-width integer types</h4>
-<p>二补数编码，固定长度 N 的整数类型：</p>
+<h2 id="718-integer-types-stdinth" class="heading-element">
+  <a href="#718-integer-types-stdinth" class="heading-mark"></a>7.18 Integer types &lt;stdint.h&gt;</h2><p>描述了头文件 <code>stdint.h</code> 必须定义和实现的整数类型，以及相应的宏。</p>
+<h3 id="7181-integer-types" class="heading-element">
+  <a href="#7181-integer-types" class="heading-mark"></a>7.18.1 Integer types</h3><h4 id="71811-exact-width-integer-types" class="heading-element">
+  <a href="#71811-exact-width-integer-types" class="heading-mark"></a>7.18.1.1 Exact-width integer types</h4><p>二补数编码，固定长度 N 的整数类型：</p>
 <ul>
 <li>有符号数：<code>intN_t</code></li>
 <li>无符号数：<code>uintN_t</code></li>
 </ul>
-<h4 id="71812-minimum-width-integer-types">7.18.1.2 Minimum-width integer types</h4>
-<p>至少拥有长度 N 的整数类型：</p>
+<h4 id="71812-minimum-width-integer-types" class="heading-element">
+  <a href="#71812-minimum-width-integer-types" class="heading-mark"></a>7.18.1.2 Minimum-width integer types</h4><p>至少拥有长度 N 的整数类型：</p>
 <ul>
 <li>有符号数：<code>int_leastN_t</code></li>
 <li>无符号数：<code>uint_leastN_t</code></li>
 </ul>
-<h4 id="71813-fastest-minimum-width-integer-types">7.18.1.3 Fastest minimum-width integer types</h4>
-<p>至少拥有长度 N，且操作速度最快的整数类型：</p>
+<h4 id="71813-fastest-minimum-width-integer-types" class="heading-element">
+  <a href="#71813-fastest-minimum-width-integer-types" class="heading-mark"></a>7.18.1.3 Fastest minimum-width integer types</h4><p>至少拥有长度 N，且操作速度最快的整数类型：</p>
 <ul>
 <li>有符号数：<code>int_fastN_t</code></li>
 <li>无符号数：<code>uint_fastN_t</code></li>
 </ul>
-<h4 id="71814-integer-types-capable-of-holding-object-pointers">7.18.1.4 Integer types capable of holding object pointers</h4>
-<p>可以将指向 <code>void</code> 的有效指针转换成该整数类型，也可以将该整数类型转换回指向 <code>void</code> 的指针类型，并且转换结果与之前的指针值保持一致：</p>
+<h4 id="71814-integer-types-capable-of-holding-object-pointers" class="heading-element">
+  <a href="#71814-integer-types-capable-of-holding-object-pointers" class="heading-mark"></a>7.18.1.4 Integer types capable of holding object pointers</h4><p>可以将指向 <code>void</code> 的有效指针转换成该整数类型，也可以将该整数类型转换回指向 <code>void</code> 的指针类型，并且转换结果与之前的指针值保持一致：</p>
 <ul>
 <li>有符号数：<code>intptr_t</code></li>
 <li>无符号数：<code>uintptr_t</code></li>
 </ul>
-<h4 id="71815-greatest-width-integer-types">7.18.1.5 Greatest-width integer types</h4>
-<p>可以表示任意整数类型所表示的值的整数类型，即具有最大长度的整数类型：</p>
+<h4 id="71815-greatest-width-integer-types" class="heading-element">
+  <a href="#71815-greatest-width-integer-types" class="heading-mark"></a>7.18.1.5 Greatest-width integer types</h4><p>可以表示任意整数类型所表示的值的整数类型，即具有最大长度的整数类型：</p>
 <ul>
 <li>有符号数：<code>intmax_t</code></li>
 <li>无符号数：<code>uintmax_t</code></li>
@@ -212,11 +206,10 @@
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-01-20 09:26:51">更新于 2024-01-20&nbsp;</span>
-      </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/c-specification/ch7/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-specification/ch7/" data-title="C 规格第 7 章 Library" data-hashtags="C,Sysprog"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/c-specification/ch7/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-specification/ch7/" data-title="C 规格第 7 章 Library" data-hashtags="C,Sysprog"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/c-specification/ch7/" data-hashtag="C"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-specification/ch7/" data-title="C 规格第 7 章 Library" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-specification/ch7/" data-title="C 规格第 7 章 Library"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -225,12 +218,11 @@
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-specification/ch7/" data-title="C 规格第 7 章 Library" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-specification/ch7/" data-title="C 规格第 7 章 Library"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-      </div>
-    </div>
-  </div>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/c/' class="post-tag">C</a><a href='/tags/sysprog/' class="post-tag">Sysprog</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/c/" class="post-tag" title="标签 - C">C</a><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -239,16 +231,19 @@
   <div class="post-nav"><a href="/posts/c-specification/c-specification/" class="post-nav-item" rel="prev" title="C 语言规格书"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>C 语言规格书</a>
       <a href="/posts/c-specification/ch6/" class="post-nav-item" rel="next" title="C 规格第 6 章 Language">C 规格第 6 章 Language<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.1"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
         </div></div><div id="mask"></div><noscript>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

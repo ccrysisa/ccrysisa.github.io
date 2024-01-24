@@ -2,7 +2,7 @@
   <channel>
     <title>C/C&#43;&#43; - 标签 - Ccrysisa&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/c/c&#43;&#43;/</link>
-    <description>C/C&#43;&#43; - 标签 - Ccrysisa&#39;s Blog</description>
+    <description>C/C&#43;&#43; - 标签 | Ccrysisa&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><atom:link href="https://ccrysisa.github.io/tags/c/c&#43;&#43;/" rel="self" type="application/rss+xml" /><item>
   <title>GDB 调试入门</title>

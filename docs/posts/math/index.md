@@ -14,15 +14,15 @@
 | 统计学    | Statistics          | [课程资讯][stat]  | [YouTube][stat-video] |
 | 高等统计学 | Advanced Statistics | [课程资讯][astat] | [YouTube][astat-video] |
 
-{{< admonition info >}}
-这两个学期课程的作业、习题以及解答都可以在 [这里](https://ocw.nycu.edu.tw/?post_type=course_page&p=25566) 找到。
-{{< /admonition >}}
+{{&lt; admonition info &gt;}}
+这两个学期课程的作业、习题以及解答都可以在 [这里](https://ocw.nycu.edu.tw/?post_type=course_page&amp;p=25566) 找到。
+{{&lt; /admonition &gt;}}
 
 
-[stat]: https://ocw.nycu.edu.tw/?post_type=course_page&p=25566
+[stat]: https://ocw.nycu.edu.tw/?post_type=course_page&amp;p=25566
 [stat-video]: https://www.youtube.com/playlist?list=PLj6E8qlqmkFtvN44vX_D7YRxAgivkONyN
 
-[astat]: https://ocw.nycu.edu.tw/?post_type=course_page&p=25439
+[astat]: https://ocw.nycu.edu.tw/?post_type=course_page&amp;p=25439
 [astat-video]: https://www.youtube.com/playlist?list=PLj6E8qlqmkFvneoIIsf3yPr_TVPy6qimA
 
 
