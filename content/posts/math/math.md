@@ -14,7 +14,7 @@ license:
 comment: false
 weight: 0
 tags:
-  - Math
+  - Mathematics
 categories:
   - Mathematics
 hiddenFromHomePage: false

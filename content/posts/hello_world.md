@@ -85,6 +85,15 @@ p(x) = 3x^6 + 14x^5y &+ 590x^4y^2 + 19x^3y^3 \\
 $$
 {{< /raw >}}
 
+{{< raw >}}
+$$
+\begin{split}
+&(X \in B) = X^{-1}(B) = {s \in S: X(s) \in B} \subset S \\
+&\Rightarrow P(x \in B) = P({s \in S: X(s) \in B})
+\end{split}
+$$
+{{< /raw >}}
+
 ## 代码块
 
 ```rs
