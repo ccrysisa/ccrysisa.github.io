@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Lifetime - 标签 - Ccrysisa&#39;s Blog</title>
+    <link>https://ccrysisa.github.io/tags/lifetime/</link>
+    <description>Lifetime - 标签 - Ccrysisa&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 25 Jan 2024 18:40:45 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/lifetime/" rel="self" type="application/rss+xml" /><item>
+  <title>Crust of Rust: Lifetime Annotations</title>
+  <link>https://ccrysisa.github.io/posts/lifetime-annotations/</link>
+  <pubDate>Thu, 25 Jan 2024 18:40:45 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/lifetime-annotations/</guid>
+  <description><![CDATA[<p>Rust 中的 lifetime 一向是一个难点，为了更好地理解这一难点的本质，建议阅读 C 语言规格书关于 lifetime 的部分，相信你会对 Rust 的 lifetime 有不同的看法。</p>]]></description>
+</item>
+</channel>
+</rss>

@@ -4,10 +4,18 @@
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 24 Jan 2024 18:59:56 &#43;0800</lastBuildDate>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 25 Jan 2024 18:40:45 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
-  <title>深度操作系统 Deepin 20.9 双系统安装配置</title>
+  <title>Crust of Rust: Lifetime Annotations</title>
+  <link>https://ccrysisa.github.io/posts/lifetime-annotations/</link>
+  <pubDate>Thu, 25 Jan 2024 18:40:45 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/lifetime-annotations/</guid>
+  <description><![CDATA[<p>Rust 中的 lifetime 一向是一个难点，为了更好地理解这一难点的本质，建议阅读 C 语言规格书关于 lifetime 的部分，相信你会对 Rust 的 lifetime 有不同的看法。</p>]]></description>
+</item>
+<item>
+  <title>深度操作系统 Deepin 20.9 安装配置</title>
   <link>https://ccrysisa.github.io/posts/deepin20.9/</link>
   <pubDate>Wed, 24 Jan 2024 18:59:56 &#43;0800</pubDate>
   <author>ccrysisa</author>
@@ -101,15 +109,7 @@
   <pubDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/git/</guid>
-  <description><![CDATA[Git 中文教学新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout网络问题导致 22 端口被禁止，]]></description>
-</item>
-<item>
-  <title>计算机网络学习指引</title>
-  <link>https://ccrysisa.github.io/posts/network/</link>
-  <pubDate>Tue, 02 Jan 2024 19:44:56 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/network/</guid>
-  <description><![CDATA[<p>整理一些计算机网络相关的资源</p>]]></description>
+  <description><![CDATA[Git 中文教学 新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout 网络问题导致 22 端口被禁止，无法正常使用]]></description>
 </item>
 </channel>
 </rss>

@@ -4,8 +4,16 @@
     <link>https://ccrysisa.github.io/posts/</link>
     <description>所有文章 | Ccrysisa&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 24 Jan 2024 18:59:56 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
-  <title>深度操作系统 Deepin 20.9 双系统安装配置</title>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 25 Jan 2024 18:40:45 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+  <title>Crust of Rust: Lifetime Annotations</title>
+  <link>https://ccrysisa.github.io/posts/lifetime-annotations/</link>
+  <pubDate>Thu, 25 Jan 2024 18:40:45 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/lifetime-annotations/</guid>
+  <description><![CDATA[<p>Rust 中的 lifetime 一向是一个难点，为了更好地理解这一难点的本质，建议阅读 C 语言规格书关于 lifetime 的部分，相信你会对 Rust 的 lifetime 有不同的看法。</p>]]></description>
+</item>
+<item>
+  <title>深度操作系统 Deepin 20.9 安装配置</title>
   <link>https://ccrysisa.github.io/posts/deepin20.9/</link>
   <pubDate>Wed, 24 Jan 2024 18:59:56 &#43;0800</pubDate>
   <author>ccrysisa</author>
@@ -80,7 +88,7 @@
   <pubDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/git/</guid>
-  <description><![CDATA[Git 中文教学新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout网络问题导致 22 端口被禁止，]]></description>
+  <description><![CDATA[Git 中文教学 新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout 网络问题导致 22 端口被禁止，无法正常使用]]></description>
 </item>
 <item>
   <title>计算机网络学习指引</title>
@@ -104,14 +112,6 @@
       <div class="admonition-content">人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 + 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。</div>
     </div>
   </div>]]></description>
-</item>
-<item>
-  <title>Rust - 进行中的未来</title>
-  <link>https://ccrysisa.github.io/posts/rust-introduction/</link>
-  <pubDate>Thu, 28 Dec 2023 20:18:03 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/rust-introduction/</guid>
-  <description><![CDATA[Rust in 100 Seconds&#x2705; 观看短片：Rust in 100 Seconds 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello]]></description>
 </item>
 </channel>
 </rss>

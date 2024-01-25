@@ -4,7 +4,7 @@
 
 在 deepin 20.9 上根据 [DragonOS 构建文档](https://docs.dragonos.org/zh-cn/latest/introduction/build_system.html) 的 bootstrap.sh 的方式来构建 DragonOS 时，如果没有事先安装 Qemu 会出现 KVM 相关的依赖问题。本文记录解决这一问题的过程。
 
-&lt;!--more--&gt;
+<!--more-->
 
 如果事先没有安装 Qemu，在使用 bootstrap.sh 时会出现如下报错：
 
@@ -18,7 +18,7 @@ E: 无法修正错误，因为您要求某些软件包保持现状，就是它�
 
 查询 deepin 论坛上的相关内容：[qemu-kvm无法安装](https://bbs.deepin.org/zh/post/253482)，可以得知是因为 qemu-kvm 在 debian 发行版上只是一个虚包，所以对于 x86 架构的机器可以直接安装 qemu-systerm-x86
 
-{{&lt; image src=&#34;/images/tools/debian-qemu-kvm.png&#34; caption=&#34;Debian qemu-kvm&#34; &gt;}}
+{{< image src="/images/tools/debian-qemu-kvm.png" caption="Debian qemu-kvm" >}}
 
 - https://packages.debian.org/search?keywords=qemu-kvm
 
@@ -28,7 +28,7 @@ E: 无法修正错误，因为您要求某些软件包保持现状，就是它�
 $ sudo apt install qemu-systerm-x86
 $
 $ qemu-system-x86_64 --version
-QEMU emulator version 5.2.0 (Debian 1:5.2&#43;dfsg-11&#43;deb11u1)
+QEMU emulator version 5.2.0 (Debian 1:5.2+dfsg-11+deb11u1)
 Copyright (c) 2003-2020 Fabrice Bellard and the QEMU Project developers
 ```
 
@@ -56,16 +56,16 @@ $ cd DragonOS
 $ make run
 ```
 
-{{&lt; image src=&#34;/images/tools/deepin-dragonos-run.png&#34; caption=&#34;运行 DragonOS&#34; &gt;}}
+{{< image src="/images/tools/deepin-dragonos-run.png" caption="运行 DragonOS" >}}
 
 Ok 可以成功运行
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 如果需要使用 RISC-V 的 Qemu 模拟器，安装 qemu-system-misc 即可：
 ```bash
 $ sudo apt install qemu-system-misc
 ```
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ---
 

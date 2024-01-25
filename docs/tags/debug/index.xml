@@ -2,7 +2,7 @@
   <channel>
     <title>Debug - 标签 - Ccrysisa&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/debug/</link>
-    <description>Debug - 标签 | Ccrysisa&#39;s Blog</description>
+    <description>Debug - 标签 - Ccrysisa&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/debug/" rel="self" type="application/rss+xml" /><item>
   <title>GDB 调试入门</title>

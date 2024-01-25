@@ -1,5 +1,5 @@
 ---
-title: 深度操作系统 Deepin 20.9 双系统安装配置
+title: 深度操作系统 Deepin 20.9 安装配置
 subtitle:
 date: 2024-01-24T18:59:56+08:00
 # draft: true
@@ -68,13 +68,14 @@ repost:
 
 这里列举一下本人配置的插件：
 
-- Even Better TOML
-- Git History
-- Native Debug
-- rust-analyzer
-- Tokyo Night
-- Vim
-- VSCode Great Icons
+- **Even Better TOML**
+- **CodeLLDB** 用于调试 Rust
+- **Git History**
+- **Native Debug** 用于调试 C/C++
+- **rust-analyzer**
+- **Tokyo Night** 挺好看的一个主题
+- **Vim**
+- **VSCode Great Icons** 文件图标主题
 
 ## 终端和 Vim
 
