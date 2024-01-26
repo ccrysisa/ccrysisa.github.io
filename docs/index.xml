@@ -12,7 +12,7 @@
   <pubDate>Thu, 25 Jan 2024 18:40:45 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/lifetime-annotations/</guid>
-  <description><![CDATA[<p>Rust 中的 lifetime 一向是一个难点，为了更好地理解这一难点的本质，建议阅读 C 语言规格书关于 lifetime 的部分，相信你会对 Rust 的 lifetime 有不同的看法。</p>]]></description>
+  <description><![CDATA[<p>整理自 <a href="https://www.youtube.com/watch?v=rAl-9HwD858"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></p>]]></description>
 </item>
 <item>
   <title>深度操作系统 Deepin 20.9 安装配置</title>
