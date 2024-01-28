@@ -243,8 +243,6 @@ Great! 果然是 Pointer 类型不同导致的，我们可以看到 `&a` 的类�
 
 {{< /admonition >}}
 
-### malloc
-
 {{< admonition tip >}}
 遇到陌生的函数，可以使用 `man` 来快速查阅手册，例如 `man strcpy`, `man strcat`，手册可以让我们快速查询函数的一些信息，从而进入实作。
 {{< /admonition >}}
@@ -300,6 +298,7 @@ char * const p;
 const char * p;
 char const * p;
 ```
+
 指针 `p` 自身于所指向的内容都不能变更：
 
 ```c
@@ -309,6 +308,49 @@ char const * const p;
 
 ## 字符串
 
+对于函数内部的
+
+```c
+char *p  = "hello";
+char p[] = "hello";
+```
+
+这两个是不一样的，因为 string literals 是必须放在 “static storage” 中，而 char p[] 则表示将资料分配在 stack 內，所以这会造成编译器隐式地生成额外代码，在执行时 (runtime) 将 string literals 从 static storage 拷贝到 stack 中，所以此时 `return p` 会造成 UB。而 `char *p` 的情形不同，此时 `p` 只是一个指向 static storage 的指针，进行 `return p` 是合法的。
+
+在大部分情况下，null pointer 并不是一个有效的字符串，所以在 glibc 中字符相关的大部分函数也不会对 null pointer 进行特判 (特判会增加分支，从而影响程序效能)，所以在调用这些函数时需要用户自己判断是否为 null pointer，否则会造成 UB。
+
+## Linus 的“教导”
+
+[Linus 親自教你 C 語言 array argument 的使用](https://hackmd.io/@sysprog/c-array-argument)
+
+> because array arguments in C don’t actually exist. Sadly, compilers accept it for various bad historical reasons, and silently turn it into just a pointer argument. There are arguments for them, but they are from weak minds.
+
+> The “array as function argument” syntax is occasionally useful (particularly for the multi-dimensional array case), so I very much understand why it exists, I just think that in the kernel we’d be better off with the rule that it’s against our coding practices.
+
+array argument 应该只用于多维数组 (multi-dimensional arrays) 的情形，这样可以保证使用下标表示时 offset 是正确的，但对于一维数组则不应该使用数组表示作为函数参数，因为这会对函数体内的 `sizeof` 用法误解 (以为会获得数组的 size，实际上获得的只是指针的 size)。
+
+{{< admonition tip >}}
+一个常用于计算数组中元素个数的宏：
+
+```c
+#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
+```
+
+这个宏非常有用，[xv6](https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/defs.h#L189) 中使用到了这个宏。
+
+但是需要注意，使用时必须保证 `x` 是一个数组，而不是函数参数中由数组退化而来的指针，以及保证数组必须至少拥有一个元素的长度 (这个很容易满足，毕竟 `x[0]` 编译器会抛出警告)。
+{{< /admonition >}}
+
+## Lvalue & Rvalue
+
+- Lvalue: locator value
+- Rvalue: Read-only value
+
+C99 6.3.2.1 footnote
+
+> The name “lvalue” comes originally from the assignment expression E1 = E2, in which the left operand E1 is required to be a (modifiable) lvalue. It is perhaps better considered as representing an object “locator value”. What is sometimes called “rvalue” is in this International Standard described as the “value of an expression”. An obvious example of an lvalue is an identifier of an object. As a further example, if E is a unary expression that is a pointer to an object, *E is an lvalue that designates the object to which E points.
+
+即在 C 语言中 lvalue 是必须能在内存 (memory) 中可以定位 (locator) 的东西，因为可以定位 (locator) 所以才可以在表达式左边从而修改值。想像一下，在 C 语言中修改一个常数的值显然是不可能的，因为常数无法在内存 (memory) 定位 (locator) 所以常数在 C 语言中不是 lvalue。C 语言中除了 lvalue 之外的 value 都是 rvalue (这与 C++ 有些不同，C++ 的 lvalue 和 rvalue 的定义请参考 C++ 的规格书)。
 
 
 ---

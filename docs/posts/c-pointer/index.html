@@ -23,8 +23,8 @@
       「指针」 扮演 「记忆体」 和 「物件」 之间的桥梁
     
   "><meta itemprop="datePublished" content="2024-01-14T22:41:38+08:00" />
-<meta itemprop="dateModified" content="2024-01-22T12:22:13+08:00" />
-<meta itemprop="wordCount" content="3181"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-01-28T16:15:40+08:00" />
+<meta itemprop="wordCount" content="4087"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C," /><meta property="og:title" content="你所不知道的 C 语言: 指针篇" />
 <meta property="og:description" content="
     
@@ -37,7 +37,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-pointer/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-01-14T22:41:38+08:00" />
-<meta property="article:modified_time" content="2024-01-22T12:22:13+08:00" />
+<meta property="article:modified_time" content="2024-01-28T16:15:40+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 指针篇"/>
@@ -63,8 +63,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-pointer\/"
-    },"genre": "posts","keywords": "Sysprog, C","wordcount":  3181 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-pointer\/","datePublished": "2024-01-14T22:41:38+08:00","dateModified": "2024-01-22T12:22:13+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, C","wordcount":  4087 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-pointer\/","datePublished": "2024-01-14T22:41:38+08:00","dateModified": "2024-01-28T16:15:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -179,7 +179,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-01-14 22:41:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-14">2024-01-14</time></span>&nbsp;<span title="更新于 2024-01-22 12:22:13"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-22">2024-01-22</time></span>&nbsp;<span title="3181 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-01-14 22:41:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-14">2024-01-14</time></span>&nbsp;<span title="更新于 2024-01-28 16:15:40"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-28">2024-01-28</time></span>&nbsp;<span title="4087 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 4100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 9 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -198,13 +198,14 @@
     <li><a href="#pointers-vs-arrays">Pointers vs. Arrays</a>
       <ul>
         <li><a href="#gdb-实作">GDB 实作</a></li>
-        <li><a href="#malloc">malloc</a></li>
         <li><a href="#runtime-environment">Runtime Environment</a></li>
       </ul>
     </li>
     <li><a href="#function-pointer">Function Pointer</a></li>
     <li><a href="#指针的修饰符">指针的修饰符</a></li>
     <li><a href="#字符串">字符串</a></li>
+    <li><a href="#linus-的教导">Linus 的“教导”</a></li>
+    <li><a href="#lvalue--rvalue">Lvalue &amp; Rvalue</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><div class="details admonition quote open">
@@ -260,7 +261,7 @@
 <hr>
 <blockquote>
 <p>Find the leftmost identifier and work your way out, remembering that <code>[]</code> and <code>()</code> bind before <code>*</code>; IOW, <code>*a[]</code> is an array of pointers, <code>(*a)[]</code> is a pointer to an array, <code>*f()</code> is a function returning a pointer, and <code>(*f)()</code> is a pointer to a function. Thus,</p>
-<div class="highlight" id="id-12"><div class="chroma">
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -268,7 +269,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="p">(</span> <span class="o">*</span><span class="nf">signal</span><span class="p">(</span><span class="kt">int</span> <span class="n">sig</span><span class="p">,</span> <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">handler</span><span class="p">)(</span><span class="kt">int</span><span class="p">))</span> <span class="p">)</span> <span class="p">(</span><span class="kt">int</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>breaks down as</p>
-<div class="highlight" id="id-13"><div class="chroma">
+<div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -517,7 +518,7 @@ the behavior is undefined.</p>
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>在 GDB 中使用 <code>memcpy</code> 后直接打印可能会出现以下错误：</p>
-<div class="highlight" id="id-14"><div class="chroma">
+<div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -527,7 +528,7 @@ the behavior is undefined.</p>
 </span></span><span class="line"><span class="cl"><span class="s1">&#39;memcpy&#39;</span> has unknown <span class="k">return</span> type<span class="p">;</span> cast the call to its declared <span class="k">return</span> type</span></span></code></pre></td></tr></table>
 </div>
 </div><p>只需加入 <code>void *</code> 进行类型转换即可解决该问题：</p>
-<div class="highlight" id="id-15"><div class="chroma">
+<div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -539,7 +540,6 @@ the behavior is undefined.</p>
 </div></div>
     </div>
   </div>
-<h3 id="malloc">malloc</h3>
 <div class="details admonition tip open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -559,7 +559,7 @@ the behavior is undefined.</p>
     <div class="details-content">
       <div class="admonition-content"><p><code>argv</code> 和 <code>envp</code> 都是在 shell 进行 <code>exec</code> 系统调用之前进行传递（事实上是以 arguments 的形式传递给 <code>exec</code>）</p>
 <p>man 2 execve</p>
-<div class="highlight" id="id-16"><div class="chroma">
+<div class="highlight" id="id-17"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -621,11 +621,60 @@ the behavior is undefined.</p>
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="k">const</span> <span class="n">p</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="kt">char</span> <span class="k">const</span> <span class="o">*</span> <span class="k">const</span> <span class="n">p</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="字符串">字符串</h2></div><div class="post-footer" id="post-footer">
+</div><h2 id="字符串">字符串</h2>
+<p>对于函数内部的</p>
+<div class="highlight" id="id-12"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">char</span> <span class="o">*</span><span class="n">p</span>  <span class="o">=</span> <span class="s">&#34;hello&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">char</span> <span class="n">p</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&#34;hello&#34;</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这两个是不一样的，因为 string literals 是必须放在 “static storage” 中，而 char p[] 则表示将资料分配在 stack 內，所以这会造成编译器隐式地生成额外代码，在执行时 (runtime) 将 string literals 从 static storage 拷贝到 stack 中，所以此时 <code>return p</code> 会造成 UB。而 <code>char *p</code> 的情形不同，此时 <code>p</code> 只是一个指向 static storage 的指针，进行 <code>return p</code> 是合法的。</p>
+<p>在大部分情况下，null pointer 并不是一个有效的字符串，所以在 glibc 中字符相关的大部分函数也不会对 null pointer 进行特判 (特判会增加分支，从而影响程序效能)，所以在调用这些函数时需要用户自己判断是否为 null pointer，否则会造成 UB。</p>
+<h2 id="linus-的教导">Linus 的“教导”</h2>
+<p><a href="https://hackmd.io/@sysprog/c-array-argument"target="_blank" rel="external nofollow noopener noreferrer">Linus 親自教你 C 語言 array argument 的使用</a></p>
+<blockquote>
+<p>because array arguments in C don’t actually exist. Sadly, compilers accept it for various bad historical reasons, and silently turn it into just a pointer argument. There are arguments for them, but they are from weak minds.</p>
+</blockquote>
+<blockquote>
+<p>The “array as function argument” syntax is occasionally useful (particularly for the multi-dimensional array case), so I very much understand why it exists, I just think that in the kernel we’d be better off with the rule that it’s against our coding practices.</p>
+</blockquote>
+<p>array argument 应该只用于多维数组 (multi-dimensional arrays) 的情形，这样可以保证使用下标表示时 offset 是正确的，但对于一维数组则不应该使用数组表示作为函数参数，因为这会对函数体内的 <code>sizeof</code> 用法误解 (以为会获得数组的 size，实际上获得的只是指针的 size)。</p>
+<div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>一个常用于计算数组中元素个数的宏：</p>
+<div class="highlight" id="id-18"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个宏非常有用，<a href="https://github.com/mit-pdos/xv6-riscv/blob/riscv/kernel/defs.h#L189"target="_blank" rel="external nofollow noopener noreferrer">xv6</a> 中使用到了这个宏。</p>
+<p>但是需要注意，使用时必须保证 <code>x</code> 是一个数组，而不是函数参数中由数组退化而来的指针，以及保证数组必须至少拥有一个元素的长度 (这个很容易满足，毕竟 <code>x[0]</code> 编译器会抛出警告)。</p>
+</div>
+    </div>
+  </div>
+<h2 id="lvalue--rvalue">Lvalue &amp; Rvalue</h2>
+<ul>
+<li>Lvalue: locator value</li>
+<li>Rvalue: Read-only value</li>
+</ul>
+<p>C99 6.3.2.1 footnote</p>
+<blockquote>
+<p>The name “lvalue” comes originally from the assignment expression E1 = E2, in which the left operand E1 is required to be a (modifiable) lvalue. It is perhaps better considered as representing an object “locator value”. What is sometimes called “rvalue” is in this International Standard described as the “value of an expression”. An obvious example of an lvalue is an identifier of an object. As a further example, if E is a unary expression that is a pointer to an object, *E is an lvalue that designates the object to which E points.</p>
+</blockquote>
+<p>即在 C 语言中 lvalue 是必须能在内存 (memory) 中可以定位 (locator) 的东西，因为可以定位 (locator) 所以才可以在表达式左边从而修改值。想像一下，在 C 语言中修改一个常数的值显然是不可能的，因为常数无法在内存 (memory) 定位 (locator) 所以常数在 C 语言中不是 lvalue。C 语言中除了 lvalue 之外的 value 都是 rvalue (这与 C++ 有些不同，C++ 的 lvalue 和 rvalue 的定义请参考 C++ 的规格书)。</p></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-01-22 12:22:13">更新于 2024-01-22&nbsp;</span>
+        <span title="更新于 2024-01-28 16:15:40">更新于 2024-01-28&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/c-pointer/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -654,7 +703,7 @@ the behavior is undefined.</p>
       <a href="/posts/debug-gdb/" class="post-nav-item" rel="next" title="GDB 调试入门">GDB 调试入门<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
