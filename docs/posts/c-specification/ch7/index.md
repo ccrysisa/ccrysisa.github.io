@@ -3,9 +3,9 @@
 
 C 语言规格书 Chapter 7 - Library 阅读记录。
 
-<!--more-->
+&lt;!--more--&gt;
 
-## 7.18 Integer types <stdint.h>
+## 7.18 Integer types &lt;stdint.h&gt;
 
 描述了头文件 `stdint.h` 必须定义和实现的整数类型，以及相应的宏。
 

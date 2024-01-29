@@ -31,6 +31,14 @@
   <description><![CDATA[<p>在 deepin 20.9 上根据 <a href="https://docs.dragonos.org/zh-cn/latest/introduction/build_system.html"target="_blank" rel="external nofollow noopener noreferrer">DragonOS 构建文档</a> 的 bootstrap.sh 的方式来构建 DragonOS 时，如果没有事先安装 Qemu 会出现 KVM 相关的依赖问题。本文记录解决这一问题的过程。</p>]]></description>
 </item>
 <item>
+  <title>交大统计学</title>
+  <link>https://ccrysisa.github.io/posts/nycu-statistics/</link>
+  <pubDate>Sat, 20 Jan 2024 17:20:09 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/nycu-statistics/</guid>
+  <description><![CDATA[<p>随机变量 (Random Variable) 是概率 (Probability) 和统计 (Statistics) 的“灵魂”，从数学上讲，Random Variable 是连接 Probability 和 Statistics 的桥梁；从实际上讲，Random Variable 表示我们所关心、期望的东西。例如一批产品的硬度，每个产品的硬度显然是不同的、是随机的，尽管硬度是随机的，但产品的硬度遵循一定的概率规律，这种随机、但却遵循一定概率规律的东西，就是 Random Value。</p>]]></description>
+</item>
+<item>
   <title>GDB 调试入门</title>
   <link>https://ccrysisa.github.io/posts/debug-gdb/</link>
   <pubDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</pubDate>
@@ -102,14 +110,6 @@
 规格书版本为 n1256，对应 C99 标准，对应的 <a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf"target="_blank" rel="external nofollow noopener noreferrer">PDF 下载地址</a>。
 也配合 C11 标准来阅读，版本 n1570，对应的 <a href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1570.pdf"target="_blank" rel="external nofollow noopener noreferrer">PDF 下载地址</a>。
 阅读规格书需要一定的体系结构、编译原理的相关知识，但不需要很高的程度。请善用检索工具，在阅读规格书时遇到术语时，请先在规格书中进行检索，因为极大可能是规格书自己定义的术语。</p>]]></description>
-</item>
-<item>
-  <title>Git/GitHub 资源与问题汇总</title>
-  <link>https://ccrysisa.github.io/posts/git/</link>
-  <pubDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/git/</guid>
-  <description><![CDATA[Git 中文教学 新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout 网络问题导致 22 端口被禁止，无法正常使用]]></description>
 </item>
 </channel>
 </rss>

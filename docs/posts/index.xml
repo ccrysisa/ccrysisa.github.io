@@ -29,6 +29,14 @@
   <description><![CDATA[<p>在 deepin 20.9 上根据 <a href="https://docs.dragonos.org/zh-cn/latest/introduction/build_system.html"target="_blank" rel="external nofollow noopener noreferrer">DragonOS 构建文档</a> 的 bootstrap.sh 的方式来构建 DragonOS 时，如果没有事先安装 Qemu 会出现 KVM 相关的依赖问题。本文记录解决这一问题的过程。</p>]]></description>
 </item>
 <item>
+  <title>交大统计学</title>
+  <link>https://ccrysisa.github.io/posts/nycu-statistics/</link>
+  <pubDate>Sat, 20 Jan 2024 17:20:09 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/nycu-statistics/</guid>
+  <description><![CDATA[<p>随机变量 (Random Variable) 是概率 (Probability) 和统计 (Statistics) 的“灵魂”，从数学上讲，Random Variable 是连接 Probability 和 Statistics 的桥梁；从实际上讲，Random Variable 表示我们所关心、期望的东西。例如一批产品的硬度，每个产品的硬度显然是不同的、是随机的，尽管硬度是随机的，但产品的硬度遵循一定的概率规律，这种随机、但却遵循一定概率规律的东西，就是 Random Value。</p>]]></description>
+</item>
+<item>
   <title>GDB 调试入门</title>
   <link>https://ccrysisa.github.io/posts/debug-gdb/</link>
   <pubDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</pubDate>
@@ -88,7 +96,7 @@
   <pubDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/git/</guid>
-  <description><![CDATA[Git 中文教学 新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout 网络问题导致 22 端口被禁止，无法正常使用]]></description>
+  <description><![CDATA[Git 中文教学新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout网络问题导致 22 端口被禁止，]]></description>
 </item>
 <item>
   <title>计算机网络学习指引</title>
@@ -97,21 +105,6 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/network/</guid>
   <description><![CDATA[<p>整理一些计算机网络相关的资源</p>]]></description>
-</item>
-<item>
-  <title>解读计算机编码</title>
-  <link>https://ccrysisa.github.io/posts/binary-representation/</link>
-  <pubDate>Sun, 31 Dec 2023 15:43:50 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/binary-representation/</guid>
-  <description><![CDATA[<div class="details admonition abstract open">
-    <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content">人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 + 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。</div>
-    </div>
-  </div>]]></description>
 </item>
 </channel>
 </rss>
