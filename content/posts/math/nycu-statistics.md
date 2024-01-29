@@ -48,12 +48,10 @@ repost:
 <!--more-->
 
 {{< center-quote >}}
-{{< style "strong{color:#00b1ff;}" >}}
 ***学习一门课，要学习其“精神”，而不是学习其方法。***
-{{< /style >}}
 {{< /center-quote >}}
 
-## Lec01
+## Concepts
 
 {{< admonition quote >}}
 Sample space $S$: Set of possible outcomes of a ***random experiment***.

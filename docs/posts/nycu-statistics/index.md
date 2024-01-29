@@ -6,12 +6,10 @@
 &lt;!--more--&gt;
 
 {{&lt; center-quote &gt;}}
-{{&lt; style &#34;strong{color:#00b1ff;}&#34; &gt;}}
 ***学习一门课，要学习其“精神”，而不是学习其方法。***
-{{&lt; /style &gt;}}
 {{&lt; /center-quote &gt;}}
 
-## Lec01
+## Concepts
 
 {{&lt; admonition quote &gt;}}
 Sample space $S$: Set of possible outcomes of a ***random experiment***.
