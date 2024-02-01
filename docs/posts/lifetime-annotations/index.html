@@ -186,6 +186,7 @@ durations: static, thread, automatic, and allocated.</p>
 </div>
 </div><p><code>ref</code> 的作用配合 <code>if let</code> 语句体的逻辑可以体会到 pointer of pointer 的美妙之处。</p>
 <p>因为在 pattern match 中形如 <code>&amp;mut</code> 这类也是用于 pattern match 的，不能用于获取 reference，这也是为什么需要使用 <code>ref mut</code> 这类语法来获取 reference 的原因。</p>
+<hr>
 <p>影片大概 56 分时提到了</p>
 <div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -195,6 +196,7 @@ durations: static, thread, automatic, and allocated.</p>
 <pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">remainder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">remainder</span><span class="p">.</span><span class="n">as_mut</span><span class="p">()</span><span class="o">?</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>为什么使用之前所提的 <code>let remainder = &amp;mut self.remainder?;</code> 这是因为使用 <code>?</code> 运算符返回的是内部值的 copy，所以这种情况 <code>remainder</code> 里是 <code>self.remainder?</code> 返回的值 (是原有 <code>self.remainder</code> 内部值的 copy) 的 reference</p>
+<hr>
 <p>影片大概 1:03 时提到了 <code>str</code> 与 <code>String</code> 的区别，个人觉得讲的很好：</p>
 <div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -213,7 +215,9 @@ durations: static, thread, automatic, and allocated.</p>
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nb">String</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="kt">str</span> <span class="p">(</span><span class="n">cheap</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nb">AsRef</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&amp;</span><span class="kt">str</span><span class="w"> </span>-&gt; <span class="nb">String</span> <span class="p">(</span><span class="n">expensive</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="n">memcpy</span><span class="p">)</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>可以将结构体的 lifetime 的第一个 (一般为 <code>'a</code>) 视为实例的 lifetime，其它的可以表示与实例 lifetime 无关的 lifetime。由于 compiler 不够智能，所以它会将实例化时传入参数的 lifetime 中相关联的最小 lifetime 视为实例的 lifetime 约束 (即实例的 lifetime 包含于该 lifetime 内)。</p>
+</div><hr>
+<p>可以将结构体的 lifetime 的第一个 (一般为 <code>'a</code>) 视为实例的 lifetime，其它的可以表示与实例 lifetime 无关的 lifetime。由于 compiler 不够智能，所以它会将实例化时传入参数的 lifetime 中相关联的最小 lifetime 视为实例的 lifetime 约束 (即实例的 lifetime 包含于该 lifetime 内)。</p>
+<hr>
 <p>对于 <code>String</code> 使用 <code>&amp;*</code> 可以保证将其转换成 <code>&amp;str</code>，因为 <code>*</code> 会先将 <code>String</code> 转换成 <code>str</code>。当然对于函数参数的 <code>&amp;str</code>，只需传入 <code>&amp;String</code> 即可自动转换类型。</p>
 <h2 id="documentations">Documentations</h2>
 <p>这里列举视频中一些概念相关的 documentation</p>
@@ -295,7 +299,7 @@ durations: static, thread, automatic, and allocated.</p>
   </div>
 
   <div class="post-nav"><a href="/posts/deepin20.9/" class="post-nav-item" rel="prev" title="深度操作系统 Deepin 20.9 安装配置"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>深度操作系统 Deepin 20.9 安装配置</a>
-      <a href="/posts/declarative-macros/" class="post-nav-item" rel="next" title="Declarative Macros">Declarative Macros<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+      <a href="/posts/declarative-macros/" class="post-nav-item" rel="next" title="Crust of Rust: Declarative Macros">Crust of Rust: Declarative Macros<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
     <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>

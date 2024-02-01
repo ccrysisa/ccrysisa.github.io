@@ -4,7 +4,15 @@
     <link>https://ccrysisa.github.io/tags/rust/</link>
     <description>Rust - 标签 - Ccrysisa&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 25 Jan 2024 18:40:45 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/rust/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 31 Jan 2024 22:32:27 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/rust/" rel="self" type="application/rss+xml" /><item>
+  <title>Crust of Rust: Declarative Macros</title>
+  <link>https://ccrysisa.github.io/posts/declarative-macros/</link>
+  <pubDate>Wed, 31 Jan 2024 22:32:27 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/declarative-macros/</guid>
+  <description><![CDATA[<p>整理自 <a href="">John Gjengset 的影片</a></p>]]></description>
+</item>
+<item>
   <title>Crust of Rust: Lifetime Annotations</title>
   <link>https://ccrysisa.github.io/posts/lifetime-annotations/</link>
   <pubDate>Thu, 25 Jan 2024 18:40:45 &#43;0800</pubDate>

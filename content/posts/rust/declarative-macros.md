@@ -1,5 +1,5 @@
 ---
-title: Declarative Macros
+title: "Crust of Rust: Declarative Macros"
 subtitle:
 date: 2024-01-31T22:32:27+08:00
 # draft: true
@@ -14,9 +14,11 @@ license:
 comment: false
 weight: 0
 tags:
-  - draft
+  - Rust
+  - Macro
+  - Declarative Macros
 categories:
-  - draft
+  - Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -44,6 +46,108 @@ repost:
 
 ## 影片注解
 
+macro 可以使用以下 3 种分隔符来传入参数 (注意花括号 `{}` 的需要与 macro 名之间进行空格，末尾不需要分号，这是因为 `{}` 会被编译器视为一个 statement，无需使用 `;` 来进行分隔):
+
+```rs
+macro_rules! avec {
+  () => {};
+  ...
+}
+
+avec!();
+avec![];
+avec! {}
+```
+
+> macro 定义内的 `()` 和 `{}` 也都可以使用 `()`, `[]`, `{}` 之间的任意一种，并不影响调研 macro 的分隔符的使用（都是 3 任选 1 即可），不过推荐在 macro 定义内使用 `()` 和 `{}` 搭配。
+
+---
+
+cargo-expand 可以将宏展开，对于宏的除错非常方便，可以以下命令来安装:
+
+```rs
+$ cargo install cargo-expand
+```
+
+然后可以提供==通过以下命令对 macro 进行展开:
+
+```rs
+$ cargo expand
+```
+
+使用以下命令可以将 unit tests 与 cargo expand 结合起来，即展开的是 unit tests 之后的完整代码:
+
+```rs
+$ cargo expand --lib tests
+```
+
+---
+
+由于 Rust 中 macro 和 normal code 的作用域不一致，所以像 C 语言那种在 macro 中定义变量或在 macro 中直接修改已有变量是不可行的，操作这种 lvalue 的情况需要使用 macro 参数进行传入，否则无法通过编译。
+
+```rs
+// cannot compile
+macro_rules! avec {
+    () => {
+        let x = 1;
+    }
+}
+
+// cannot compile
+macro_rules! avec {
+    () => {
+      x = 42;
+    }
+}
+
+// can compile
+macro_rules! avec {
+    ($x: ident) => {
+        $x += 1;
+    }
+}
+```
+
+---
+
+在 Rust macro 中，如果需要将传入的 syntax 转换成多个 statements，需要使用 `{}` 进行包装:
+
+```rs
+() => {{
+    ...
+}}
+```
+
+其中第一对 `{}` 是 macro 语法所要求的的，第二对 `{}` 则是用于包装 statements 的 `{}`，使用 cargo expand 进行查看会更直观。
+
+---
+
+注意 macro 中传入的 syntax，其使用的类似于 `=>` 的分隔符是有限的，例如不能使用 `->` 作为分隔符，具体可以查阅手册。
+
+```rs
+($arg1:ty => $arg2:ident) => {
+    type $arg2 = $arg1;
+};
+```
+
+---
+
+如果需要在 macro 传入的 synatx 中使用正则表达式 (regex)，则需要在外面使用 `$()` 进行包装: 
+
+```rs
+($($elem:expr),* $(,)?) => {{
+    let mut v = Vec::new();
+    $(v.push($elem);)*
+    v
+}};
+```
+
+同样的，可以在 macro 体内使用 `$()*` 进行解包装，其中 `*` 也可以选择 `+` 来替代，并没有差异。`$(...)*` 会根据内部所包含的参数 `$(...)` (本例中是 `$(elem)`) 来进行自动解包装，生成对应次数的 statement。
+
+---
+
+当 declarative macros 变得复杂时，它的可读性会变得很差，这时候需要使用 procedural macros。但是 procedural macros 需要多花费一些编译周期 (compilition cycle)，因为需要先对 procedural macros 进行编译，再编译 lib/bin 对应的源文件。
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
@@ -56,6 +160,14 @@ repost:
 
 - Struct [std::vec::Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)
 
+- method [std::option::Option::take](https://doc.rust-lang.org/std/option/enum.Option.html#method.take)
+
 ## References
 
+原版的 **The Little Book of Rust Macros** 在 Rust 更新新版本后没有持续更新，另一位大牛对这本小册子进行了相应的更新:
 
+- [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)
+
+Rust语言中文社区也翻译了该小册子:
+
+- [Rust 宏小册](https://zjp-cn.github.io/tlborm/)

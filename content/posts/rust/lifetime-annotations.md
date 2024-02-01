@@ -66,6 +66,8 @@ if let Some(ref mut remainder) = self.remainder {...}
 
 因为在 pattern match 中形如 `&mut` 这类也是用于 pattern match 的，不能用于获取 reference，这也是为什么需要使用 `ref mut` 这类语法来获取 reference 的原因。
 
+---
+
 影片大概 56 分时提到了
 
 ```rs
@@ -73,6 +75,8 @@ let remainder = self.remainder.as_mut()?;
 ```
 
 为什么使用之前所提的 `let remainder = &mut self.remainder?;` 这是因为使用 `?` 运算符返回的是内部值的 copy，所以这种情况 `remainder` 里是 `self.remainder?` 返回的值 (是原有 `self.remainder` 内部值的 copy) 的 reference
+
+---
 
 影片大概 1:03 时提到了 `str` 与 `String` 的区别，个人觉得讲的很好：
 
@@ -85,7 +89,11 @@ String -> &str (cheap -- AsRef)
 &str -> String (expensive -- memcpy)
 ```
 
+---
+
 可以将结构体的 lifetime 的第一个 (一般为 `'a`) 视为实例的 lifetime，其它的可以表示与实例 lifetime 无关的 lifetime。由于 compiler 不够智能，所以它会将实例化时传入参数的 lifetime 中相关联的最小 lifetime 视为实例的 lifetime 约束 (即实例的 lifetime 包含于该 lifetime 内)。
+
+---
 
 对于 `String` 使用 `&*` 可以保证将其转换成 `&str`，因为 `*` 会先将 `String` 转换成 `str`。当然对于函数参数的 `&str`，只需传入 `&String` 即可自动转换类型。
 
