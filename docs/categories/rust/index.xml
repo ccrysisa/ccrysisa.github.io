@@ -20,5 +20,13 @@
   <guid>https://ccrysisa.github.io/posts/lifetime-annotations/</guid>
   <description><![CDATA[<p>整理自 <a href="https://www.youtube.com/watch?v=rAl-9HwD858"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></p>]]></description>
 </item>
+<item>
+  <title>Rust: 进行中的未来</title>
+  <link>https://ccrysisa.github.io/posts/rust-introduction/</link>
+  <pubDate>Thu, 28 Dec 2023 20:18:03 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/rust-introduction/</guid>
+  <description><![CDATA[Rust in 100 Seconds &#x2705; 观看短片：Rust in 100 Seconds 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut]]></description>
+</item>
 </channel>
 </rss>

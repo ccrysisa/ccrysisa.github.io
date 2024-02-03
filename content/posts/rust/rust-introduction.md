@@ -1,5 +1,5 @@
 ---
-title: Rust - 进行中的未来
+title: "Rust: 进行中的未来"
 subtitle:
 date: 2023-12-28T20:18:03+08:00
 draft: false
@@ -18,6 +18,7 @@ tags:
   - Sysprog
 categories:
   - Linux Kernel Internals
+  - Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

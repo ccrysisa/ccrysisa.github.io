@@ -1,4 +1,4 @@
-# Rust - 进行中的未来
+# Rust: 进行中的未来
 
 
 ## Rust in 100 Seconds

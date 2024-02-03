@@ -109,6 +109,41 @@ macro_rules! avec {
 
 当 declarative macros 变得复杂时，它的可读性会变得很差，这时候需要使用 procedural macros。但是 procedural macros 需要多花费一些编译周期 (compilition cycle)，因为需要先对 procedural macros 进行编译，再编译 lib/bin 对应的源文件。
 
+---
+
+编写 macro 时传入的参数如果是 expression，需要先对其进行计算，然后使用 `clone` 方法来对该计算结果进行拷贝，这样能最大限度的避免打破 Rust 所有权制度的限制。
+
+```rs
+($elem:expr; $count:expr) => {{
+    let mut v = Vec::new();
+    let x = $elem;
+    for _ in 0..$count {
+        v.push(x.clone());
+    }
+    v
+}};
+```
+
+这样传入 `y.take().unwrap()` 作为宏的 `elem` 参数就不会产生 panic。
+
+{{< admonition tip >}}
+对于会导致 compile fail 的 unit test，无法使用通常的 unit test 来测试，但是有一个技巧：可以使用 Doc-tests 的方式来构建（需要标记 `compile_fail`，如果不标记则默认需要 compile success）
+
+```rs
+/// ```compile_fail
+/// let v: Vec<u32> = vecmac::avec![42; "foo"];
+/// ```
+#[allow(dead_code)]
+struct CompileFailTest;
+```
+{{< /admonition >}}
+
+---
+
+Rust 中的 macro 无法限制传入参数的 Trait，例如不能限制参数必须实现 Clone 这个 Trait。
+
+`::std::iter` 带有前置双冒号 ``::` 的语法，是在没有显式引入 `use std::iter` 模块的情况下访问该模块的方式。在这种情况下，`::std::iter` 表示全局命名空间 (global namespace) 中的 std::iter 模块，即标准库中的 iter 模块。由于 macro 需要进行 export 建议编写 macro 时尽量使用 `::` 这类语法。
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
@@ -119,7 +154,16 @@ macro_rules! avec {
 > ---
 > 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 
+- Macro [std::vec](https://doc.rust-lang.org/std/macro.vec.html)
+
 - Struct [std::vec::Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)
+    - Method [std::vec::Vec::with_capacity](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.with_capacity)
+    - method [std::vec::Vec::extend](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.extend)
+    - method [std::vec::Vec::resize](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.resize)
+
+- Module [std::iter](https://doc.rust-lang.org/std/iter/index.html)
+    - Function [std::iter::repeat](https://doc.rust-lang.org/std/iter/fn.repeat.html)
+    - method [std::iter::Iterator::take](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.take)
 
 - method [std::option::Option::take](https://doc.rust-lang.org/std/option/enum.Option.html#method.take)
 

@@ -10,7 +10,7 @@
 <meta name="description" content="整理自 John Gjengset 的影片" /><meta name="keywords" content='Rust, Macro, Declarative Macros' /><meta itemprop="name" content="Crust of Rust: Declarative Macros">
 <meta itemprop="description" content="整理自 John Gjengset 的影片"><meta itemprop="datePublished" content="2024-01-31T22:32:27+08:00" />
 <meta itemprop="dateModified" content="2024-02-01T15:29:30+08:00" />
-<meta itemprop="wordCount" content="963"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1361"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Macro,Declarative Macros," /><meta property="og:title" content="Crust of Rust: Declarative Macros" />
 <meta property="og:description" content="整理自 John Gjengset 的影片" />
 <meta property="og:type" content="article" />
@@ -35,7 +35,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/declarative-macros\/"
-    },"genre": "posts","keywords": "Rust, Macro, Declarative Macros","wordcount":  963 ,
+    },"genre": "posts","keywords": "Rust, Macro, Declarative Macros","wordcount":  1361 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/declarative-macros\/","datePublished": "2024-01-31T22:32:27+08:00","dateModified": "2024-02-01T15:29:30+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -151,7 +151,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-01-31 22:32:27"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-31">2024-01-31</time></span>&nbsp;<span title="更新于 2024-02-01 15:29:30"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-01">2024-02-01</time></span>&nbsp;<span title="963 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-01-31 22:32:27"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-31">2024-01-31</time></span>&nbsp;<span title="更新于 2024-02-01 15:29:30"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-01">2024-02-01</time></span>&nbsp;<span title="1361 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -311,6 +311,57 @@
 </div><p>同样的，可以在 macro 体内使用 <code>$()*</code> 进行解包装，其中 <code>*</code> 也可以选择 <code>+</code> 来替代，并没有差异。<code>$(...)*</code> 会根据内部所包含的参数 <code>$(...)</code> (本例中是 <code>$(elem)</code>) 来进行自动解包装，生成对应次数的 statement。</p>
 <hr>
 <p>当 declarative macros 变得复杂时，它的可读性会变得很差，这时候需要使用 procedural macros。但是 procedural macros 需要多花费一些编译周期 (compilition cycle)，因为需要先对 procedural macros 进行编译，再编译 lib/bin 对应的源文件。</p>
+<hr>
+<p>编写 macro 时传入的参数如果是 expression，需要先对其进行计算，然后使用 <code>clone</code> 方法来对该计算结果进行拷贝，这样能最大限度的避免打破 Rust 所有权制度的限制。</p>
+<div class="highlight" id="id-9"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="p">(</span><span class="cp">$elem</span>:<span class="nc">expr</span><span class="p">;</span><span class="w"> </span><span class="cp">$count</span>:<span class="nc">expr</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Vec</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="cp">$elem</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="cp">$count</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">v</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">clone</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">v</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}};</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样传入 <code>y.take().unwrap()</code> 作为宏的 <code>elem</code> 参数就不会产生 panic。</p>
+<div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>对于会导致 compile fail 的 unit test，无法使用通常的 unit test 来测试，但是有一个技巧：可以使用 Doc-tests 的方式来构建（需要标记 <code>compile_fail</code>，如果不标记则默认需要 compile success）</p>
+<div class="highlight" id="id-10"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="sd">/// ```compile_fail
+</span></span></span><span class="line"><span class="cl"><span class="sd">/// let v: Vec&lt;u32&gt; = vecmac::avec![42; &#34;foo&#34;];
+</span></span></span><span class="line"><span class="cl"><span class="sd">/// ```
+</span></span></span><span class="line"><span class="cl"><span class="sd"></span><span class="cp">#[allow(dead_code)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">struct</span> <span class="nc">CompileFailTest</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+    </div>
+  </div>
+<hr>
+<p>Rust 中的 macro 无法限制传入参数的 Trait，例如不能限制参数必须实现 Clone 这个 Trait。</p>
+<p><code>::std::iter</code> 带有前置双冒号 ``::<code>的语法，是在没有显式引入</code>use std::iter<code> 模块的情况下访问该模块的方式。在这种情况下，</code>::std::iter<code>表示全局命名空间 (global namespace) 中的 std::iter 模块，即标准库中的 iter 模块。由于 macro 需要进行 export 建议编写 macro 时尽量使用</code>::` 这类语法。</p>
 <h2 id="documentations">Documentations</h2>
 <p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>
@@ -322,7 +373,22 @@
 </blockquote>
 <ul>
 <li>
+<p>Macro <a href="https://doc.rust-lang.org/std/macro.vec.html"target="_blank" rel="external nofollow noopener noreferrer">std::vec</a></p>
+</li>
+<li>
 <p>Struct <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"target="_blank" rel="external nofollow noopener noreferrer">std::vec::Vec</a></p>
+<ul>
+<li>Method <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.with_capacity"target="_blank" rel="external nofollow noopener noreferrer">std::vec::Vec::with_capacity</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.extend"target="_blank" rel="external nofollow noopener noreferrer">std::vec::Vec::extend</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.resize"target="_blank" rel="external nofollow noopener noreferrer">std::vec::Vec::resize</a></li>
+</ul>
+</li>
+<li>
+<p>Module <a href="https://doc.rust-lang.org/std/iter/index.html"target="_blank" rel="external nofollow noopener noreferrer">std::iter</a></p>
+<ul>
+<li>Function <a href="https://doc.rust-lang.org/std/iter/fn.repeat.html"target="_blank" rel="external nofollow noopener noreferrer">std::iter::repeat</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.take"target="_blank" rel="external nofollow noopener noreferrer">std::iter::Iterator::take</a></li>
+</ul>
 </li>
 <li>
 <p>method <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.take"target="_blank" rel="external nofollow noopener noreferrer">std::option::Option::take</a></p>
@@ -369,7 +435,7 @@
       <a href="/posts/c-linked-list/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: linked list 和非连续内存">你所不知道的 C 语言: linked list 和非连续内存<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
