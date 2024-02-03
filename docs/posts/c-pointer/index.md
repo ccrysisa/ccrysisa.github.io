@@ -1,15 +1,13 @@
 # 你所不知道的 C 语言: 指针篇
 
 
-{{< admonition quote >}}
-*「指针」 扮演 「记忆体」 和 「物件」 之间的桥梁*
-{{< /admonition >}}
+> *「指针」 扮演 「记忆体」 和 「物件」 之间的桥梁*
 
+- {{< link href="https://hackmd.io/@sysprog/c-pointer" content="原文地址" external-icon=true >}}   
 <!--more-->
+- {{< link href="https://youtu.be/G7vERppua9o" content="直播录影(上)" external-icon=true >}}   
+- {{< link href="https://youtu.be/Owxols1RTAg" content="直播录影(下)" external-icon=true >}}   
 
-> {{< link href="https://hackmd.io/@sysprog/c-pointer" content="原文地址" external-icon=true >}}   
-> {{< link href="https://youtu.be/G7vERppua9o" content="直播录影(上)" external-icon=true >}}   
-> {{< link href="https://youtu.be/Owxols1RTAg" content="直播录影(下)" external-icon=true >}}   
 
 ## 前言杂谈
 

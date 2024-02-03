@@ -4,7 +4,20 @@
     <link>https://ccrysisa.github.io/tags/sysprog/</link>
     <description>Sysprog - 标签 - Ccrysisa&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 03 Feb 2024 10:44:56 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
+  <title>你所不知道的 C 语言: linked list 和非连续内存</title>
+  <link>https://ccrysisa.github.io/posts/c-linked-list/</link>
+  <pubDate>Sat, 03 Feb 2024 10:44:56 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-linked-list/</guid>
+  <description><![CDATA[<blockquote>
+<p>无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。</p>
+</blockquote>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>]]></description>
+</item>
+<item>
   <title>GDB 调试入门</title>
   <link>https://ccrysisa.github.io/posts/debug-gdb/</link>
   <pubDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</pubDate>
@@ -25,14 +38,12 @@
   <pubDate>Sun, 14 Jan 2024 22:41:38 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-pointer/</guid>
-  <description><![CDATA[<div class="details admonition quote open">
-    <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content"><em>「指针」 扮演 「记忆体」 和 「物件」 之间的桥梁</em></div>
-    </div>
-  </div>]]></description>
+  <description><![CDATA[<blockquote>
+<p><em>「指针」 扮演 「记忆体」 和 「物件」 之间的桥梁</em></p>
+</blockquote>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/c-pointer"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>]]></description>
 </item>
 <item>
   <title>C 规格第 6 章 Language</title>

@@ -5,42 +5,62 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>计算机网络学习指引 - Ccrysisa&#39;s Blog</title><meta name="author" content="ccrysisa">
+    <title>你所不知道的 C 语言: linked list 和非连续内存 - Ccrysisa&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
-<meta name="description" content="整理一些计算机网络相关的资源" /><meta name="keywords" content='Network' /><meta itemprop="name" content="计算机网络学习指引">
-<meta itemprop="description" content="整理一些计算机网络相关的资源"><meta itemprop="datePublished" content="2024-01-02T19:44:56+08:00" />
-<meta itemprop="dateModified" content="2024-01-18T20:20:26+08:00" />
-<meta itemprop="wordCount" content="148"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="Network," /><meta property="og:title" content="计算机网络学习指引" />
-<meta property="og:description" content="整理一些计算机网络相关的资源" />
+<meta name="description" content="
+无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。
+
+
+原文地址
+" /><meta name="keywords" content='Sysprog, C' /><meta itemprop="name" content="你所不知道的 C 语言: linked list 和非连续内存">
+<meta itemprop="description" content="
+无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。
+
+
+原文地址
+"><meta itemprop="datePublished" content="2024-02-03T10:44:56+08:00" />
+<meta itemprop="dateModified" content="2024-02-03T10:56:46+08:00" />
+<meta itemprop="wordCount" content="271"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Sysprog,C," /><meta property="og:title" content="你所不知道的 C 语言: linked list 和非连续内存" />
+<meta property="og:description" content="
+无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。
+
+
+原文地址
+" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ccrysisa.github.io/posts/network/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-01-02T19:44:56+08:00" />
-<meta property="article:modified_time" content="2024-01-18T20:20:26+08:00" />
+<meta property="og:url" content="https://ccrysisa.github.io/posts/c-linked-list/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-02-03T10:44:56+08:00" />
+<meta property="article:modified_time" content="2024-02-03T10:56:46+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="计算机网络学习指引"/>
-<meta name="twitter:description" content="整理一些计算机网络相关的资源"/>
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: linked list 和非连续内存"/>
+<meta name="twitter:description" content="
+无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。
+
+
+原文地址
+"/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/network/" /><link rel="prev" href="https://ccrysisa.github.io/posts/binary-representation/" /><link rel="next" href="https://ccrysisa.github.io/posts/git/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/c-linked-list/" /><link rel="prev" href="https://ccrysisa.github.io/posts/declarative-macros/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "计算机网络学习指引",
+    "headline": "你所不知道的 C 语言: linked list 和非连续内存",
     "inLanguage": "zh-CN",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https:\/\/ccrysisa.github.io\/posts\/network\/"
-    },"genre": "posts","keywords": "Network","wordcount":  148 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/network\/","datePublished": "2024-01-02T19:44:56+08:00","dateModified": "2024-01-18T20:20:26+08:00","publisher": {
+      "@id": "https:\/\/ccrysisa.github.io\/posts\/c-linked-list\/"
+    },"genre": "posts","keywords": "Sysprog, C","wordcount":  271 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-linked-list\/","datePublished": "2024-02-03T10:44:56+08:00","dateModified": "2024-02-03T10:56:46+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
-        "name": "vanJker"
+        "name": "ccrysisa"
       },"description": ""
   }
   </script></head>
@@ -147,11 +167,11 @@
     </aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>计算机网络学习指引</span>
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>你所不知道的 C 语言: linked list 和非连续内存</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" data-title="vanJker" data-alt="vanJker" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span>
-          <span class="post-category">收录于 <a href="/categories/network/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Network</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-01-02 19:44:56"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-02">2024-01-02</time></span>&nbsp;<span title="更新于 2024-01-18 20:20:26"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-18">2024-01-18</time></span>&nbsp;<span title="148 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-02-03 10:44:56"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-03">2024-02-03</time></span>&nbsp;<span title="更新于 2024-02-03 10:56:46"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-03">2024-02-03</time></span>&nbsp;<span title="271 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -159,52 +179,84 @@
         </div>
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#referenecs">Referenecs</a></li>
+    <li><a href="#linux-核心的艺术">Linux 核心的艺术</a>
+      <ul>
+        <li><a href="#linked-list-append--remove">linked list append &amp; remove</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><p>整理一些计算机网络相关的资源</p>
-<h2 id="referenecs">Referenecs</h2>
+      </div><div class="content" id="content"><blockquote>
+<p>无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。</p>
+</blockquote>
 <ul>
-<li><a href="https://hackmd.io/@0xff07/network/https%3A%2F%2Fhackmd.io%2F%400xff07%2FByADDQ57Y"target="_blank" rel="external nofollow noopener noreferrer">110-1 計算機網路 (清大開放式課程)</a></li>
-<li><a href="https://fasionchan.com/network/"target="_blank" rel="external nofollow noopener noreferrer">小菜学网络</a></li>
-<li><a href="https://luzhixing12345.github.io/netlab/"target="_blank" rel="external nofollow noopener noreferrer">NUDT 高级计算机网络实验: 基于UDP的可靠传输</a></li>
-<li><a href="https://sunyunqiang.com/blog/reliable_udp_protocol/"target="_blank" rel="external nofollow noopener noreferrer">可靠 UDP 的实现 (KCP over UDP)</a></li>
-<li><a href="https://www.bilibili.com/video/BV1di4y1z7Mn"target="_blank" rel="external nofollow noopener noreferrer">基于UDP的可靠传输</a> [bilibili]</li>
-<li><a href="https://www.bilibili.com/video/BV12P411T78X"target="_blank" rel="external nofollow noopener noreferrer">实现基于UDP的网络文件传输器，程序员的经验大礼包项目</a> [bilibili]</li>
-<li><a href="https://www.bilibili.com/video/BV1Wd4y1b7b4"target="_blank" rel="external nofollow noopener noreferrer">ping命令但是用来通信，学习计算机网络好项目，也可能是校园网福利</a> [bilibili]</li>
-<li><a href="https://www.youtube.com/playlist?list=PLqbS7AVVErFivDY3iKAQk3_VAm8SXwt1X"target="_blank" rel="external nofollow noopener noreferrer">Implementing TCP in Rust</a> [YouTube]</li>
-<li><a href="http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/"target="_blank" rel="external nofollow noopener noreferrer">Let&rsquo;s code a TCP/IP stack</a></li>
-</ul></div><div class="post-footer" id="post-footer">
+<li><a href="https://hackmd.io/@sysprog/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>
+<ul>
+<li><a href="https://youtu.be/pTcRq__iKzI"target="_blank" rel="external nofollow noopener noreferrer">直播录影<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>
+<h2 id="linux-核心的艺术">Linux 核心的艺术</h2>
+<p><a href="https://youtu.be/o8NPllzkFhE"target="_blank" rel="external nofollow noopener noreferrer">The mind behind Linux | Linus Torvalds | TED</a> [YouTube]</p>
+<blockquote>
+<p>事实上 special case 和 indirect pointer 这两种写法在 clang 的最佳优化下效能并没有什么区别，我们可以不使用 indirect pointer 来写程序，但是我们需要学习 indirect pointer 这种思维方式，即 good taste。</p>
+</blockquote>
+<p>在 Unix-like 的操作系统中，类型名带有后缀 <code>_t</code> 表示这个类型是由 <code>typedef</code> 定义的，而不是语言原生的类型名，e.g.</p>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">list_entry</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_entry</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="kt">list_entry_t</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="linked-list-append--remove">linked list append &amp; remove</h3>
+<a href="https://github.com/ccrysisa/LKI/blob/main/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+<div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@Mes/The_mind_behind_Linux"target="_blank" rel="external nofollow noopener noreferrer">The mind behind Linux</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://grisha.org/blog/2013/04/02/linus-on-understanding-pointers/"target="_blank" rel="external nofollow noopener noreferrer">Linus on Understanding Pointers</a></li>
+</ul>
+</div>
+    </div>
+  </div></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-01-18 20:20:26">更新于 2024-01-18&nbsp;</span>
+        <span title="更新于 2024-02-03 10:56:46">更新于 2024-02-03&nbsp;</span>
       </div></div>
     <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/network/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-md"><span><a href="/posts/c-linked-list/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/network/" data-title="计算机网络学习指引" data-hashtags="Network"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/network/" data-hashtag="Network"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/network/" data-title="计算机网络学习指引" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/network/" data-title="计算机网络学习指引"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/network/" data-title="计算机网络学习指引"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/network/" data-title="计算机网络学习指引" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/network/" data-title="计算机网络学习指引" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/network/" data-title="计算机网络学习指引"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-linked-list/" data-title="你所不知道的 C 语言: linked list 和非连续内存" data-hashtags="Sysprog,C"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/c-linked-list/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-linked-list/" data-title="你所不知道的 C 语言: linked list 和非连续内存" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-linked-list/" data-title="你所不知道的 C 语言: linked list 和非连续内存"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/c-linked-list/" data-title="你所不知道的 C 语言: linked list 和非连续内存"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/c-linked-list/" data-title="你所不知道的 C 语言: linked list 和非连续内存" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-linked-list/" data-title="你所不知道的 C 语言: linked list 和非连续内存" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-linked-list/" data-title="你所不知道的 C 语言: linked list 和非连续内存"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
       </div>
     </div>
   </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/network/' class="post-tag">Network</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/c/' class="post-tag">C</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
   </div>
 
-  <div class="post-nav"><a href="/posts/binary-representation/" class="post-nav-item" rel="prev" title="解读计算机编码"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>解读计算机编码</a>
-      <a href="/posts/git/" class="post-nav-item" rel="next" title="Git/GitHub 资源与问题汇总">Git/GitHub 资源与问题汇总<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  <div class="post-nav"><a href="/posts/declarative-macros/" class="post-nav-item" rel="prev" title="Crust of Rust: Declarative Macros"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Crust of Rust: Declarative Macros</a></div>
 </div>
 </article></main><footer class="footer">
     <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>

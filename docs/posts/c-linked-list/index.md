@@ -1,43 +1,5 @@
----
-title: "你所不知道的 C 语言: linked list 和非连续内存"
-subtitle:
-date: 2024-02-03T10:44:56+08:00
-# draft: true
-# author:
-#   name:
-#   link:
-#   email:
-#   avatar:
-description:
-keywords:
-license:
-comment: false
-weight: 0
-tags:
-  - Sysprog
-  - C
-categories:
-  - Linux Kernel Internals
-hiddenFromHomePage: false
-hiddenFromSearch: false
-hiddenFromRss: false
-summary:
-resources:
-  - name: featured-image
-    src: featured-image.jpg
-  - name: featured-image-preview
-    src: featured-image-preview.jpg
-toc: true
-math: true
-lightgallery: true
-password:
-message:
-repost:
-  enable: true
-  url:
+# 你所不知道的 C 语言: linked list 和非连续内存
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
----
 
 > 无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。
 
@@ -68,3 +30,10 @@ typedef struct list_entry {
 - [ ] [The mind behind Linux](https://hackmd.io/@Mes/The_mind_behind_Linux)
 - [ ] [Linus on Understanding Pointers](https://grisha.org/blog/2013/04/02/linus-on-understanding-pointers/)
 {{< /admonition >}}
+
+
+---
+
+> 作者: [ccrysisa](https://github.com/ccrysisa)  
+> URL: https://ccrysisa.github.io/posts/c-linked-list/  
+

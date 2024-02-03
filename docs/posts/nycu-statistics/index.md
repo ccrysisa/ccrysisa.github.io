@@ -1,4 +1,4 @@
-# <交大统计学> 重点提示
+# 交大统计学 重点提示
 
 
 随机变量 (Random Variable) 是概率 (Probability) 和统计 (Statistics) 的“灵魂”，从数学上讲，Random Variable 是连接 Probability 和 Statistics 的桥梁；从实际上讲，Random Variable 表示我们所关心、期望的东西。例如一批产品的硬度，每个产品的硬度显然是不同的、是随机的，尽管硬度是随机的，但产品的硬度遵循一定的概率规律，这种随机、但却遵循一定概率规律的东西，就是 Random Value。

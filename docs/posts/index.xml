@@ -4,7 +4,20 @@
     <link>https://ccrysisa.github.io/posts/</link>
     <description>所有文章 | Ccrysisa&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 31 Jan 2024 22:32:27 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 03 Feb 2024 10:44:56 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+  <title>你所不知道的 C 语言: linked list 和非连续内存</title>
+  <link>https://ccrysisa.github.io/posts/c-linked-list/</link>
+  <pubDate>Sat, 03 Feb 2024 10:44:56 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-linked-list/</guid>
+  <description><![CDATA[<blockquote>
+<p>无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。</p>
+</blockquote>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>]]></description>
+</item>
+<item>
   <title>Crust of Rust: Declarative Macros</title>
   <link>https://ccrysisa.github.io/posts/declarative-macros/</link>
   <pubDate>Wed, 31 Jan 2024 22:32:27 &#43;0800</pubDate>
@@ -37,7 +50,7 @@
   <description><![CDATA[<p>在 deepin 20.9 上根据 <a href="https://docs.dragonos.org/zh-cn/latest/introduction/build_system.html"target="_blank" rel="external nofollow noopener noreferrer">DragonOS 构建文档</a> 的 bootstrap.sh 的方式来构建 DragonOS 时，如果没有事先安装 Qemu 会出现 KVM 相关的依赖问题。本文记录解决这一问题的过程。</p>]]></description>
 </item>
 <item>
-  <title>&lt;交大统计学&gt; 重点提示</title>
+  <title>交大统计学 重点提示</title>
   <link>https://ccrysisa.github.io/posts/nycu-statistics/</link>
   <pubDate>Sat, 20 Jan 2024 17:20:09 &#43;0800</pubDate>
   <author>ccrysisa</author>
@@ -65,17 +78,15 @@
   <pubDate>Sun, 14 Jan 2024 22:41:38 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-pointer/</guid>
-  <description><![CDATA[<div class="details admonition quote open">
-    <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content"><em>「指针」 扮演 「记忆体」 和 「物件」 之间的桥梁</em></div>
-    </div>
-  </div>]]></description>
+  <description><![CDATA[<blockquote>
+<p><em>「指针」 扮演 「记忆体」 和 「物件」 之间的桥梁</em></p>
+</blockquote>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/c-pointer"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>]]></description>
 </item>
 <item>
-  <title>&lt;清大计算机网络&gt; 重点提示</title>
+  <title>清大计算机网络 重点提示</title>
   <link>https://ccrysisa.github.io/posts/nthu-computer-network/</link>
   <pubDate>Sun, 14 Jan 2024 12:09:38 &#43;0800</pubDate>
   <author>ccrysisa</author>
@@ -97,14 +108,6 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-specification/</guid>
   <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>Git/GitHub 资源与问题汇总</title>
-  <link>https://ccrysisa.github.io/posts/git/</link>
-  <pubDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/git/</guid>
-  <description><![CDATA[Git 中文教学 新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout 网络问题导致 22 端口被禁止，无法正常使用]]></description>
 </item>
 </channel>
 </rss>

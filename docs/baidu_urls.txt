@@ -1,3 +1,4 @@
+https://ccrysisa.github.io/posts/c-linked-list/
 https://ccrysisa.github.io/posts/declarative-macros/
 https://ccrysisa.github.io/posts/lifetime-annotations/
 https://ccrysisa.github.io/posts/deepin20.9/
