@@ -9,53 +9,53 @@
 
 公式块：
 
-{{< raw >}}
+{{&lt; raw &gt;}}
 $$
 \int_{a}^{b}x(t)dt =
 \dfrac{b - a}{N} \\
 =\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N}
 $$
-{{< /raw >}}
+{{&lt; /raw &gt;}}
 
-{{< raw >}}
+{{&lt; raw &gt;}}
 $$
 \begin{aligned}
-\int_{a}^{b}x(t)dt &=
+\int_{a}^{b}x(t)dt &amp;=
 \dfrac{b - a}{N} \\
-&=\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N} \\
+&amp;=\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N} \\
 \end{aligned}
 $$
-{{< /raw >}}
+{{&lt; /raw &gt;}}
 
-{{< raw >}}
+{{&lt; raw &gt;}}
 $$
 \mathrm{Integrals\ are\ numerically\ approximated\ as\ finite\ series}:\\ 
 \begin{split}
-\int_{a}^{b}x(t)dt &=
+\int_{a}^{b}x(t)dt &amp;=
 \dfrac{b - a}{N} \\
-&=\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N}
+&amp;=\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N}
 \end{split} \\ 
-where\ t_k = a + (b-a)\cdot k/N
+where\ t_k = a &#43; (b-a)\cdot k/N
 $$
-{{< /raw >}}
+{{&lt; /raw &gt;}}
 
-{{< raw>}}
+{{&lt; raw&gt;}}
 $$
 \begin{align*}
-p(x) = 3x^6 + 14x^5y &+ 590x^4y^2 + 19x^3y^3 \\
-&- 12x^2y^4 - 12xy^5 + 2y^6 - a^3b^3 - a^2b - ab + c^5d^3 + c^4d^3 - cd
+p(x) = 3x^6 &#43; 14x^5y &amp;&#43; 590x^4y^2 &#43; 19x^3y^3 \\
+&amp;- 12x^2y^4 - 12xy^5 &#43; 2y^6 - a^3b^3 - a^2b - ab &#43; c^5d^3 &#43; c^4d^3 - cd
 \end{align*}
 $$
-{{< /raw >}}
+{{&lt; /raw &gt;}}
 
-{{< raw >}}
+{{&lt; raw &gt;}}
 $$
 \begin{split}
-&(X \in B) = X^{-1}(B) = {s \in S: X(s) \in B} \subset S \\
-&\Rightarrow P(x \in B) = P({s \in S: X(s) \in B})
+&amp;(X \in B) = X^{-1}(B) = {s \in S: X(s) \in B} \subset S \\
+&amp;\Rightarrow P(x \in B) = P({s \in S: X(s) \in B})
 \end{split}
 $$
-{{< /raw >}}
+{{&lt; /raw &gt;}}
 
 ## 代码块
 
@@ -63,7 +63,7 @@ $$
 let i: i32 = 13;
 let v = vec![1, 2, 3, 4, 5, 65];
 for x in v.iter() {
-    println!("{}", x);
+    println!(&#34;{}&#34;, x);
 }
 ```
 
@@ -76,34 +76,34 @@ typedef struct Block_t {
 
 ## Admonition
 
-{{< admonition >}} 一个 注意 横幅 {{< /admonition >}}
+{{&lt; admonition &gt;}} 一个 注意 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition abstract >}} 一个 摘要 横幅 {{< /admonition >}}
+{{&lt; admonition abstract &gt;}} 一个 摘要 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition info >}} 一个 信息 横幅 {{< /admonition >}}
+{{&lt; admonition info &gt;}} 一个 信息 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition tip >}} 一个 技巧 横幅 {{< /admonition >}}
+{{&lt; admonition tip &gt;}} 一个 技巧 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition success >}} 一个 成功 横幅 {{< /admonition >}}
+{{&lt; admonition success &gt;}} 一个 成功 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition question >}} 一个 问题 横幅 {{< /admonition >}}
+{{&lt; admonition question &gt;}} 一个 问题 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition warning >}} 一个 警告 横幅 {{< /admonition >}}
+{{&lt; admonition warning &gt;}} 一个 警告 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition failure >}} 一个 失败 横幅 {{< /admonition >}}
+{{&lt; admonition failure &gt;}} 一个 失败 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition danger >}} 一个 危险 横幅 {{< /admonition >}}
+{{&lt; admonition danger &gt;}} 一个 危险 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition bug >}} 一个 Bug 横幅 {{< /admonition >}}
+{{&lt; admonition bug &gt;}} 一个 Bug 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition example >}} 一个 示例 横幅 {{< /admonition >}}
+{{&lt; admonition example &gt;}} 一个 示例 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition quote >}} 一个 引用 横幅 {{< /admonition >}}
+{{&lt; admonition quote &gt;}} 一个 引用 横幅 {{&lt; /admonition &gt;}}
 
 ## References
 
 - [FixIt 快速上手](https://fixit.lruihao.cn/zh-cn/documentation/getting-started/)
-- [使用 Hugo + Github 搭建个人博客](https://zhuanlan.zhihu.com/p/105021100)
+- [使用 Hugo &#43; Github 搭建个人博客](https://zhuanlan.zhihu.com/p/105021100)
 - [Emoji 支持](https://fixit.lruihao.cn/zh-cn/guides/emoji-support/)
 - [扩展 Shortcodes 概述](https://fixit.lruihao.cn/zh-cn/documentation/content-management/shortcodes/extended/introduction/#admonition)
 - [URL management](https://gohugo.io/content-management/urls/#permalinks)
