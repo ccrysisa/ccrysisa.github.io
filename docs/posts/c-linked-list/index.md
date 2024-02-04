@@ -26,16 +26,29 @@ typedef struct list_entry {
 
 {{< link href="https://github.com/ccrysisa/LKI/blob/main/c-linked-list" content=Source external-icon=true >}}
 
-{{< admonition tip >}}
+{{< admonition info >}}
 - [ ] [The mind behind Linux](https://hackmd.io/@Mes/The_mind_behind_Linux)
 - [ ] [Linus on Understanding Pointers](https://grisha.org/blog/2013/04/02/linus-on-understanding-pointers/)
 {{< /admonition >}}
 
 ### LeetCode
 
-- [ ] [LeetCode 21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
-- [ ] [Leetcode 2095. Delete the Middle Node of a Linked List](https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/)
-- [ ] [LeetCode 86. Partition List](https://leetcode.com/problems/partition-list/)
+- [x] [LeetCode 21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
+- [x] [LeetCode 23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+- [x] [Leetcode 2095. Delete the Middle Node of a Linked List](https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/)
+- [x] [LeetCode 86. Partition List](https://leetcode.com/problems/partition-list/)
+
+{{< admonition >}}
+原文对于 [LeetCode 23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/) 给出了 3 种解法，其时间复杂度分别为：
+
+1. $O(m \cdot n)$
+2. $O(m \cdot n)$
+3. $O(m \cdot logn)$
+
+$n$ 为 `listsSize`，$m$ 为 merge linked list 过程中产生的 linked list 的最大长度。
+
+如果你对第 3 种解法的时间复杂度感到疑惑，请参考 Josh Hug 在 CS61B 的 [Merge Sort 复杂度讲解](https://joshhug.gitbooks.io/hug61b/content/chap8/chap83.html)。
+{{< /admonition >}}
 
 ## Circular linked list
 
