@@ -31,6 +31,26 @@ typedef struct list_entry {
 - [ ] [Linus on Understanding Pointers](https://grisha.org/blog/2013/04/02/linus-on-understanding-pointers/)
 {{< /admonition >}}
 
+### LeetCode
+
+- [ ] [LeetCode 21. Merge Two Sorted Lists](https://leetcode.com/problems/merge-two-sorted-lists/)
+- [ ] [Leetcode 2095. Delete the Middle Node of a Linked List](https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/)
+- [ ] [LeetCode 86. Partition List](https://leetcode.com/problems/partition-list/)
+
+## Circular linked list
+
+单向 linked list 相对于双向 linked list 的优势在于，一个 cache line 可以容纳更多的 list node，而且很容易进行反向查询，这弥补了反向查询时的效能差距。例如在 64 位处理器上，地址为 64 Bit 即 8 Byte，如果 list node 的数据域存放一个 2 Byte 的整数，那么一个单向的 list node 大小为 10 Byte，双向的则为 18 Byte，又因为一般的 cache line 的大小为 64 Byte，则对于单向的 node 来说，cache line 可以存放 $64 / 10 = 6$ 个 list node，但是仅能存放 $64 / 18 = 3$ 个 list node，cache 效率明显降低。
+
+> 这部分内容可以参考 jserv 的讲座 [現代處理器設計: Cache 原理和實際影響](https://hackmd.io/@sysprog/HkW3Dr1Rb)
+
+- [ ] [探索 Floyd Cycle Detection Algorithm](https://medium.com/@orionssl/%E6%8E%A2%E7%B4%A2-floyd-cycle-detection-algorithm-934cdd05beb9)
+- [ ] [LeetCode 141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
+- [ ] [LeetCode 142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/)
+- [ ] [LeetCode 146. LRU Cache](https://leetcode.com/problems/lru-cache/)
+- [ ] [金刀的算法小册子](https://github.com/glodknife/algorithm)
+
+## Merge Sort
+
 
 ---
 
