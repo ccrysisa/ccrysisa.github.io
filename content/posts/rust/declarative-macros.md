@@ -189,6 +189,15 @@ Rust 中的 macro 无法限制传入参数的 Trait，例如不能限制参数�
 
 `::std::iter` 带有前置双冒号 `::` 的语法，是在没有显式引入 `use std::iter` 模块的情况下访问该模块的方式。在这种情况下，`::std::iter` 表示全局命名空间 (global namespace) 中的 std::iter 模块，即标准库中的 iter 模块。由于 macro 需要进行 export 建议编写 macro 时尽量使用 `::` 这类语法。
 
+{{< admonition tip >}}
+计算 vector 的元素个数时使用 `()` 引用 `[()]` 进行计数是一个常见技巧，因为 `()` 是 zero size 的，所以并不会占用栈空间。其他的元素计数方法可以参考 [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) 的 2.5.2 Counting 一节。
+{{< /admonition >}}
+
+{{< admonition info >}}
+- [ ] 尝试使用 declarative macro 来实现 HashMap 的初始化语法
+- [x] 尝试阅读 `vec` macro 在 std 库的实现
+{{< /admonition >}}
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
