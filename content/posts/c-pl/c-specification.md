@@ -1,5 +1,5 @@
 ---
-title: C 语言规格书
+title: C 语言规格书 阅读记录
 subtitle:
 date: 2024-01-06T16:07:25+08:00
 draft: false
@@ -49,8 +49,8 @@ C 语言规格书阅读学习记录。
 
 ## 6. Language
 
-详见 [阅读记录 6. Language]({{< relref "ch6.md" >}})。
+详见 [阅读记录 6. Language]({{< relref "c-spec-ch6.md" >}})。
 
 ## 7. Library
 
-详见 [阅读记录 7. Library]({{< relref "ch7.md" >}})。
+详见 [阅读记录 7. Library]({{< relref "c-spec-ch7.md" >}})。

@@ -40,9 +40,11 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-整理自 [John Gjengset 的影片](https://www.youtube.com/watch?v=q6paRBbLgNw)
+> In this second Crust of Rust video, we cover declarative macros, macro_rules!, by re-implementing the vec! macro from the standard library. As part of that, we cover not only how to write these, but some of the gotchas and tricks you'll run into, and some common use-cases.
 
 <!--more-->
+
+整理自 [John Gjengset 的影片](https://www.youtube.com/watch?v=q6paRBbLgNw)
 
 ## 影片注解
 
@@ -193,10 +195,17 @@ Rust 中的 macro 无法限制传入参数的 Trait，例如不能限制参数�
 计算 vector 的元素个数时使用 `()` 引用 `[()]` 进行计数是一个常见技巧，因为 `()` 是 zero size 的，所以并不会占用栈空间。其他的元素计数方法可以参考 [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) 的 2.5.2 Counting 一节。
 {{< /admonition >}}
 
+## Homework
+
 {{< admonition info >}}
-- [ ] 尝试使用 declarative macro 来实现 HashMap 的初始化语法
-- [x] 尝试阅读 `vec` macro 在 std 库的实现
+- [x] 尝试使用 declarative macro 来实现 HashMap 的初始化语法 [My Implementation](https://github.com/ccrysisa/rusty/tree/main/hmapmac)
+- [x] 尝试阅读 `vec` macro 在 std 库的实现 [Macro std::vec](https://doc.rust-lang.org/src/alloc/macros.rs.html#42)
 {{< /admonition >}}
+
+
+作业的一些参考资料:
+
+- Struct [std::collections::HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)
 
 ## Documentations
 
@@ -223,7 +232,7 @@ Rust 中的 macro 无法限制传入参数的 Trait，例如不能限制参数�
 
 ## References
 
-原版的 **The Little Book of Rust Macros** 在 Rust 更新新版本后没有持续更新，另一位大牛对这本小册子进行了相应的更新:
+原版的 [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/index.html) 在 Rust 更新新版本后没有持续更新，另一位大牛对这本小册子进行了相应的更新:
 
 - [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)
 
