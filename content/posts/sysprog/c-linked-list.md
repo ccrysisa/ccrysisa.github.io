@@ -101,3 +101,12 @@ $n$ 为 `listsSize`，$m$ 为 merge linked list 过程中产生的 linked list �
 - [ ] [金刀的算法小册子](https://github.com/glodknife/algorithm)
 
 ## Merge Sort
+
+- [ ] [Merge Sort 与它的变化](https://hackmd.io/@lambert-wu/list-merge-sort)
+
+## Linux 核心的 linked list
+
+Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contain_of 宏，来实现自定义的 linked list node，具有强大的灵活性。
+
+- [ ] [Intrusive linked lists](https://www.data-structures-in-practice.com/intrusive-linked-lists/)
+- [ ] [List, HList, and Hash Table](https://danielmaker.github.io/blog/linux/list_hlist_hashtable.html)

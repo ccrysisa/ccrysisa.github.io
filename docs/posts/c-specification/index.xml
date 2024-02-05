@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>所有C 语言规格书 - Ccrysisa&#39;s Blog</title>
+    <title>所有C 语言规格书 - KZn&#39;s Blog</title>
     <link>https://ccrysisa.github.io/posts/c-specification/</link>
-    <description>所有C 语言规格书 | Ccrysisa&#39;s Blog</description>
+    <description>所有C 语言规格书 | KZn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 06 Jan 2024 16:07:25 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/c-specification/" rel="self" type="application/rss+xml" /><item>
   <title>C 规格第 6 章 Language</title>

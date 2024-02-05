@@ -40,7 +40,7 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-整理自 [John Gjengset 的影片]()
+整理自 [John Gjengset 的影片](https://www.youtube.com/watch?v=q6paRBbLgNw)
 
 <!--more-->
 

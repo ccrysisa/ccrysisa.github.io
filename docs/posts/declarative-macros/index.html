@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>Crust of Rust: Declarative Macros - Ccrysisa&#39;s Blog</title><meta name="author" content="ccrysisa">
+    <title>Crust of Rust: Declarative Macros - KZn&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="整理自 John Gjengset 的影片" /><meta name="keywords" content='Rust, Macro, Declarative Macros' /><meta itemprop="name" content="Crust of Rust: Declarative Macros">
 <meta itemprop="description" content="整理自 John Gjengset 的影片"><meta itemprop="datePublished" content="2024-01-31T22:32:27+08:00" />
@@ -47,7 +47,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="Ccrysisa&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="Ccrysisa&#39;s Blog" data-alt="Ccrysisa&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">Ccrysisa&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZn&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZn&#39;s Blog" data-alt="KZn&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZn&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -87,7 +87,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="Ccrysisa&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">Ccrysisa&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZn&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZn&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -175,7 +175,7 @@
     <li><a href="#references">References</a></li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><p>整理自 <a href="">John Gjengset 的影片</a></p>
+      </div><div class="content" id="content"><p>整理自 <a href="https://www.youtube.com/watch?v=q6paRBbLgNw"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></p>
 <h2 id="影片注解">影片注解</h2>
 <h3 id="regex">regex</h3>
 <p>macro 可以使用以下 3 种分隔符来传入参数 (注意花括号 <code>{}</code> 的需要与 macro 名之间进行空格，末尾不需要分号，这是因为 <code>{}</code> 会被编译器视为一个 statement，无需使用 <code>;</code> 来进行分隔):</p>

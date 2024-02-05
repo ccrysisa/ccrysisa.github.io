@@ -1,7 +1,7 @@
 # Crust of Rust: Declarative Macros
 
 
-整理自 [John Gjengset 的影片]()
+整理自 [John Gjengset 的影片](https://www.youtube.com/watch?v=q6paRBbLgNw)
 
 <!--more-->
 

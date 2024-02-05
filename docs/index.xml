@@ -1,6 +1,6 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>Ccrysisa&#39;s Blog</title>
+    <title>KZn&#39;s Blog</title>
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
@@ -25,7 +25,7 @@
   <pubDate>Wed, 31 Jan 2024 22:32:27 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/declarative-macros/</guid>
-  <description><![CDATA[<p>整理自 <a href="">John Gjengset 的影片</a></p>]]></description>
+  <description><![CDATA[<p>整理自 <a href="https://www.youtube.com/watch?v=q6paRBbLgNw"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></p>]]></description>
 </item>
 <item>
   <title>Crust of Rust: Lifetime Annotations</title>

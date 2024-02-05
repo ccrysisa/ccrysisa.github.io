@@ -242,6 +242,75 @@ findName() 0.006495 0.002938 0.000001
 
 - [Youtube - gnuplot Tutorlal](https://youtu.be/9k-l_ol9jok) 这个教程有五部影片，到发布者的主页搜寻即可。
 
+## 其它工具
+
+### cloc
+
+man 1 cloc
+
+```
+NAME
+       cloc - Count, or compute differences of, lines of source code and comments.
+
+SYNOPSIS
+       cloc [options] <FILE|DIR> ...
+
+DESCRIPTION
+       Count, or compute differences of, physical lines of source code in the given files (may be
+       archives such as compressed tarballs or zip files, or git commit hashes or branch names) and/or
+       recursively below the given directories.  It is written entirely in Perl, using only modules from
+       the standard distribution.
+```
+
+### top
+
+man 1 top
+
+```
+NAME
+       top - display Linux processes
+
+SYNOPSIS
+       top -hv|-bcEeHiOSs1 -d secs -n max -u|U user -p pids -o field -w [cols]
+
+       The traditional switches `-' and whitespace are optional.
+
+DESCRIPTION
+       The  top  program  provides  a  dynamic real-time view of a running system.  It can display system
+       summary information as well as a list of processes or threads currently being managed by the Linux
+       kernel.   The  types  of  system  summary  information  shown  and  the  types,  order and size of
+       information displayed for processes are all user configurable and that configuration can  be  made
+       persistent across restarts.
+
+       The  program  provides  a limited interactive interface for process manipulation as well as a much
+       more extensive interface  for  personal  configuration   --   encompassing  every  aspect  of  its
+       operation.   And  while  top  is  referred  to  throughout this document, you are free to name the
+       program anything you wish.  That new name, possibly an alias, will  then  be  reflected  on  top's
+       display and used when reading and writing a configuration file.
+```
+
+### htop
+
+man 1 htop
+
+```
+NAME
+       htop - interactive process viewer
+
+SYNOPSIS
+       htop [-dCFhpustvH]
+
+DESCRIPTION
+       htop is a cross-platform ncurses-based process viewer.
+
+       It  is  similar to top, but allows you to scroll vertically and horizontally, and interact using a
+       pointing device (mouse).  You can observe all processes running on the system,  along  with  their
+       command  line arguments, as well as view them in a tree format, select multiple processes and act‐
+       ing on them all at once.
+
+       Tasks related to processes (killing, renicing) can be done without entering their PIDs.
+```
+
 
 [learn-git-branching]: https://learngitbranching.js.org/
 [git-tutorials-zh]: https://www.youtube.com/playlist?list=PLlyOkSAh6TwcvJQ1UtvkSwhZWCaM_S07d
