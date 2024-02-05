@@ -50,5 +50,5 @@ C 语言规格书 Chapter 7 - Library 阅读记录。
 ---
 
 > 作者: [ccrysisa](https://github.com/ccrysisa)  
-> URL: https://ccrysisa.github.io/posts/c-specification/ch7/  
+> URL: https://ccrysisa.github.io/posts/c-spec-ch7/  
 

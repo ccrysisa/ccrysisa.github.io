@@ -7,20 +7,28 @@
     <meta name="robots" content="noodp" />
     <title>Crust of Rust: Lifetime Annotations - KZn&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
-<meta name="description" content="整理自 John Gjengset 的影片" /><meta name="keywords" content='Rust, Lifetime' /><meta itemprop="name" content="Crust of Rust: Lifetime Annotations">
-<meta itemprop="description" content="整理自 John Gjengset 的影片"><meta itemprop="datePublished" content="2024-01-25T18:40:45+08:00" />
-<meta itemprop="dateModified" content="2024-02-01T15:29:30+08:00" />
-<meta itemprop="wordCount" content="742"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta name="description" content="
+We&rsquo;re going to investigate a case where you need multiple explicit lifetime annotations. We explore why they are needed, and why we need more than one in this particular case. We also talk about some of the differences between the string types and introduce generics over a self-defined trait in the process.
+" /><meta name="keywords" content='Rust, Lifetime' /><meta itemprop="name" content="Crust of Rust: Lifetime Annotations">
+<meta itemprop="description" content="
+We&rsquo;re going to investigate a case where you need multiple explicit lifetime annotations. We explore why they are needed, and why we need more than one in this particular case. We also talk about some of the differences between the string types and introduce generics over a self-defined trait in the process.
+"><meta itemprop="datePublished" content="2024-01-25T18:40:45+08:00" />
+<meta itemprop="dateModified" content="2024-02-05T18:40:18+08:00" />
+<meta itemprop="wordCount" content="794"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Lifetime," /><meta property="og:title" content="Crust of Rust: Lifetime Annotations" />
-<meta property="og:description" content="整理自 John Gjengset 的影片" />
+<meta property="og:description" content="
+We&rsquo;re going to investigate a case where you need multiple explicit lifetime annotations. We explore why they are needed, and why we need more than one in this particular case. We also talk about some of the differences between the string types and introduce generics over a self-defined trait in the process.
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/lifetime-annotations/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-01-25T18:40:45+08:00" />
-<meta property="article:modified_time" content="2024-02-01T15:29:30+08:00" />
+<meta property="article:modified_time" content="2024-02-05T18:40:18+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Crust of Rust: Lifetime Annotations"/>
-<meta name="twitter:description" content="整理自 John Gjengset 的影片"/>
+<meta name="twitter:description" content="
+We&rsquo;re going to investigate a case where you need multiple explicit lifetime annotations. We explore why they are needed, and why we need more than one in this particular case. We also talk about some of the differences between the string types and introduce generics over a self-defined trait in the process.
+"/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -35,8 +43,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/lifetime-annotations\/"
-    },"genre": "posts","keywords": "Rust, Lifetime","wordcount":  742 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/lifetime-annotations\/","datePublished": "2024-01-25T18:40:45+08:00","dateModified": "2024-02-01T15:29:30+08:00","publisher": {
+    },"genre": "posts","keywords": "Rust, Lifetime","wordcount":  794 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/lifetime-annotations\/","datePublished": "2024-01-25T18:40:45+08:00","dateModified": "2024-02-05T18:40:18+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -151,7 +159,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-01-25 18:40:45"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-25">2024-01-25</time></span>&nbsp;<span title="更新于 2024-02-01 15:29:30"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-01">2024-02-01</time></span>&nbsp;<span title="742 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-01-25 18:40:45"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-25">2024-01-25</time></span>&nbsp;<span title="更新于 2024-02-05 18:40:18"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="794 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -165,7 +173,10 @@
     <li><a href="#crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html">std</a></a></li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><p>整理自 <a href="https://www.youtube.com/watch?v=rAl-9HwD858"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></p>
+      </div><div class="content" id="content"><blockquote>
+<p>We&rsquo;re going to investigate a case where you need multiple explicit lifetime annotations. We explore why they are needed, and why we need more than one in this particular case. We also talk about some of the differences between the string types and introduce generics over a self-defined trait in the process.</p>
+</blockquote>
+<p>整理自 <a href="https://www.youtube.com/watch?v=rAl-9HwD858"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></p>
 <h2 id="c-语言中的-lifetime">C 语言中的 lifetime</h2>
 <p>Rust 中的 lifetime 一向是一个难点，为了更好地理解这一难点的本质，建议阅读 C 语言规格书关于 lifetime 的部分，相信你会对 Rust 的 lifetime 有不同的看法。</p>
 <p>C11 [6.2.4] <strong>Storage durations of objects</strong></p>
@@ -273,7 +284,7 @@ durations: static, thread, automatic, and allocated.</p>
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-02-01 15:29:30">更新于 2024-02-01&nbsp;</span>
+        <span title="更新于 2024-02-05 18:40:18">更新于 2024-02-05&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/lifetime-annotations/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -302,7 +313,7 @@ durations: static, thread, automatic, and allocated.</p>
       <a href="/posts/declarative-macros/" class="post-nav-item" rel="next" title="Crust of Rust: Declarative Macros">Crust of Rust: Declarative Macros<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

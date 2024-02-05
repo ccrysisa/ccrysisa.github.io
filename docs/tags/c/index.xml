@@ -32,26 +32,26 @@
 </item>
 <item>
   <title>C 规格第 6 章 Language</title>
-  <link>https://ccrysisa.github.io/posts/c-specification/ch6/</link>
+  <link>https://ccrysisa.github.io/posts/c-spec-ch6/</link>
   <pubDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-specification/ch6/</guid>
+  <guid>https://ccrysisa.github.io/posts/c-spec-ch6/</guid>
   <description><![CDATA[<p>C 语言规格书 Chapter 6 - Language 阅读记录。</p>]]></description>
 </item>
 <item>
   <title>C 规格第 7 章 Library</title>
-  <link>https://ccrysisa.github.io/posts/c-specification/ch7/</link>
+  <link>https://ccrysisa.github.io/posts/c-spec-ch7/</link>
   <pubDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-specification/ch7/</guid>
+  <guid>https://ccrysisa.github.io/posts/c-spec-ch7/</guid>
   <description><![CDATA[<p>C 语言规格书 Chapter 7 - Library 阅读记录。</p>]]></description>
 </item>
 <item>
-  <title>C 语言规格书</title>
-  <link>https://ccrysisa.github.io/posts/c-specification/c-specification/</link>
+  <title>C 语言规格书 阅读记录</title>
+  <link>https://ccrysisa.github.io/posts/c-specification/</link>
   <pubDate>Sat, 06 Jan 2024 16:07:25 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-specification/c-specification/</guid>
+  <guid>https://ccrysisa.github.io/posts/c-specification/</guid>
   <description><![CDATA[<p>C 语言规格书阅读学习记录。
 规格书版本为 n1256，对应 C99 标准，对应的 <a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf"target="_blank" rel="external nofollow noopener noreferrer">PDF 下载地址</a>。
 也配合 C11 标准来阅读，版本 n1570，对应的 <a href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1570.pdf"target="_blank" rel="external nofollow noopener noreferrer">PDF 下载地址</a>。

@@ -1,43 +1,5 @@
----
-title: "Crust of Rust: Iterators"
-subtitle:
-date: 2024-02-05T17:18:34+08:00
-# draft: true
-# author:
-#   name:
-#   link:
-#   email:
-#   avatar:
-description:
-keywords:
-license:
-comment: false
-weight: 0
-tags:
-  - Rust
-  - Iterator
-categories:
-  - Rust
-hiddenFromHomePage: false
-hiddenFromSearch: false
-hiddenFromRss: false
-summary:
-resources:
-  - name: featured-image
-    src: featured-image.jpg
-  - name: featured-image-preview
-    src: featured-image-preview.jpg
-toc: true
-math: false
-lightgallery: false
-password:
-message:
-repost:
-  enable: true
-  url:
+# Crust of Rust: Iterators
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
----
 
 > In this third Crust of Rust video, we cover iterators and trait bounds, by re-implementing the "flatten" Iterator method from the standard library. As part of that, we cover some of the weirder trait bounds that are required, including what's needed to extend the implementation to support backwards iteration.
 
@@ -58,3 +20,10 @@ repost:
 - Trait [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
 
 - Trait [std::iter::IntoIterator](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html)
+
+
+---
+
+> 作者: [ccrysisa](https://github.com/ccrysisa)  
+> URL: https://ccrysisa.github.io/posts/iterators/  
+

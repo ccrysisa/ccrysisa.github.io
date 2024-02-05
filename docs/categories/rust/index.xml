@@ -4,13 +4,25 @@
     <link>https://ccrysisa.github.io/categories/rust/</link>
     <description>Rust - 分类 - KZn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 31 Jan 2024 22:32:27 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/rust/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 05 Feb 2024 17:18:34 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/rust/" rel="self" type="application/rss+xml" /><item>
+  <title>Crust of Rust: Iterators</title>
+  <link>https://ccrysisa.github.io/posts/iterators/</link>
+  <pubDate>Mon, 05 Feb 2024 17:18:34 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/iterators/</guid>
+  <description><![CDATA[<blockquote>
+<p>In this third Crust of Rust video, we cover iterators and trait bounds, by re-implementing the &ldquo;flatten&rdquo; Iterator method from the standard library. As part of that, we cover some of the weirder trait bounds that are required, including what&rsquo;s needed to extend the implementation to support backwards iteration.</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>Crust of Rust: Declarative Macros</title>
   <link>https://ccrysisa.github.io/posts/declarative-macros/</link>
   <pubDate>Wed, 31 Jan 2024 22:32:27 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/declarative-macros/</guid>
-  <description><![CDATA[<p>整理自 <a href="https://www.youtube.com/watch?v=q6paRBbLgNw"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></p>]]></description>
+  <description><![CDATA[<blockquote>
+<p>In this second Crust of Rust video, we cover declarative macros, macro_rules!, by re-implementing the vec! macro from the standard library. As part of that, we cover not only how to write these, but some of the gotchas and tricks you&rsquo;ll run into, and some common use-cases.</p>
+</blockquote>]]></description>
 </item>
 <item>
   <title>Crust of Rust: Lifetime Annotations</title>
@@ -18,7 +30,9 @@
   <pubDate>Thu, 25 Jan 2024 18:40:45 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/lifetime-annotations/</guid>
-  <description><![CDATA[<p>整理自 <a href="https://www.youtube.com/watch?v=rAl-9HwD858"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></p>]]></description>
+  <description><![CDATA[<blockquote>
+<p>We&rsquo;re going to investigate a case where you need multiple explicit lifetime annotations. We explore why they are needed, and why we need more than one in this particular case. We also talk about some of the differences between the string types and introduce generics over a self-defined trait in the process.</p>
+</blockquote>]]></description>
 </item>
 <item>
   <title>Rust: 进行中的未来</title>

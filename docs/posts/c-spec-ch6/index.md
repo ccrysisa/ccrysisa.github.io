@@ -180,5 +180,5 @@ shift-expression:
 ---
 
 > 作者: [ccrysisa](https://github.com/ccrysisa)  
-> URL: https://ccrysisa.github.io/posts/c-specification/ch6/  
+> URL: https://ccrysisa.github.io/posts/c-spec-ch6/  
 

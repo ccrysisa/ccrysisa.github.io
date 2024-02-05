@@ -10,7 +10,9 @@
   <pubDate>Thu, 25 Jan 2024 18:40:45 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/lifetime-annotations/</guid>
-  <description><![CDATA[<p>整理自 <a href="https://www.youtube.com/watch?v=rAl-9HwD858"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></p>]]></description>
+  <description><![CDATA[<blockquote>
+<p>We&rsquo;re going to investigate a case where you need multiple explicit lifetime annotations. We explore why they are needed, and why we need more than one in this particular case. We also talk about some of the differences between the string types and introduce generics over a self-defined trait in the process.</p>
+</blockquote>]]></description>
 </item>
 </channel>
 </rss>

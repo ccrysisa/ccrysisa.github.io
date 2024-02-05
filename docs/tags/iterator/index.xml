@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Iterator - 标签 - KZn&#39;s Blog</title>
+    <link>https://ccrysisa.github.io/tags/iterator/</link>
+    <description>Iterator - 标签 - KZn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 05 Feb 2024 17:18:34 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/iterator/" rel="self" type="application/rss+xml" /><item>
+  <title>Crust of Rust: Iterators</title>
+  <link>https://ccrysisa.github.io/posts/iterators/</link>
+  <pubDate>Mon, 05 Feb 2024 17:18:34 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/iterators/</guid>
+  <description><![CDATA[<blockquote>
+<p>In this third Crust of Rust video, we cover iterators and trait bounds, by re-implementing the &ldquo;flatten&rdquo; Iterator method from the standard library. As part of that, we cover some of the weirder trait bounds that are required, including what&rsquo;s needed to extend the implementation to support backwards iteration.</p>
+</blockquote>]]></description>
+</item>
+</channel>
+</rss>

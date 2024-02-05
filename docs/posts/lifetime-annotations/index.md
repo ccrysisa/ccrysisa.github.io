@@ -1,9 +1,11 @@
 # Crust of Rust: Lifetime Annotations
 
 
-整理自 [John Gjengset 的影片](https://www.youtube.com/watch?v=rAl-9HwD858)
+> We're going to investigate a case where you need multiple explicit lifetime annotations. We explore why they are needed, and why we need more than one in this particular case. We also talk about some of the differences between the string types and introduce generics over a self-defined trait in the process.
 
 <!--more-->
+
+整理自 [John Gjengset 的影片](https://www.youtube.com/watch?v=rAl-9HwD858)
 
 ## C 语言中的 lifetime
 

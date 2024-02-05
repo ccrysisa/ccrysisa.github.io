@@ -10,7 +10,9 @@
   <pubDate>Wed, 31 Jan 2024 22:32:27 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/declarative-macros/</guid>
-  <description><![CDATA[<p>整理自 <a href="https://www.youtube.com/watch?v=q6paRBbLgNw"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></p>]]></description>
+  <description><![CDATA[<blockquote>
+<p>In this second Crust of Rust video, we cover declarative macros, macro_rules!, by re-implementing the vec! macro from the standard library. As part of that, we cover not only how to write these, but some of the gotchas and tricks you&rsquo;ll run into, and some common use-cases.</p>
+</blockquote>]]></description>
 </item>
 </channel>
 </rss>
