@@ -40,10 +40,8 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-{{< admonition abstract >}}
 之前学校的计网理论课学得云里雾里，对于物理层和数据链路层并没有清晰的逻辑框架，而这学期的计网课设内容为数据链路层和网络层的相关内容，写起来还是云里雾里。虽然最终艰难地把课设水过去了，但是个人认为网络对于 CSer 非常重要，特别是在互联网行业，网络知识是必不可少的。
-所以决定寒假重学计网，于是在 [HackMD](https://hackmd.io/) 上冲浪寻找相关资料。然后发现了这篇笔记 [110-1 計算機網路 (清大開放式課程)](https://hackmd.io/@0xff07/network/https%3A%2F%2Fhackmd.io%2F%400xff07%2FByADDQ57Y)，里面提到清大计网主要介绍 L2 ~ L4 一些著名的协议和算法，这完美符合个人的需求，而且该篇该笔还补充了一些额外的内容，例如 IPv6，所以当即准备搭配这篇笔记来学习清大的计算机网络概论。
-{{< /admonition >}}
+所以决定寒假重学计网，于是在 [HackMD](https://hackmd.io/) 上冲浪寻找相关资料。然后发现了这篇笔记 [110-1 計算機網路 (清大開放式課程)](https://hackmd.io/@0xff07/network/https%3A%2F%2Fhackmd.io%2F%400xff07%2FByADDQ57Y)，里面提到清大计网主要介绍 L2 ~ L4 一些著名的协议和算法，这完美符合个人的需求，而且该笔记还补充了一些额外的内容，例如 IPv6，所以当即决定搭配这篇笔记来学习清大的计算机网络概论。
 
 <!--more-->
 
@@ -56,6 +54,13 @@ repost:
 | 國立清華大學 | [計算機網路概論][courseinfo] | [課程講義與練習題][slides&hws] | [Youtube][playlist] |
 
 ## L1 Foundation 重点提示与练习
+
+Outline:
+
+- Applications
+- Network Connectivity
+- Network Architecture
+- Network Performance
 
 ### Applications
 
@@ -109,6 +114,81 @@ Internet Architecture 的核心是 IP 协议，它作为沙漏形状的中心位
 {{< image src="/images/network/L1-40.png" caption="Foundation - 40" >}}
 
 **RTT** 可以近似理解为 2 $\times$ Propagation time，因为一个来回需要从 sender 到 reciever，再从 reciever 到 sender。
+
+## L2 IEEE 802.3 Ethernet
+
+**Outline:**
+- Introduction
+- Ethernet Topologies
+- Ethernet Frame Format
+- Ethernet MAC Protocol -- CSMA/CD
+- 802.3 Ethernet Standards
+
+**Summary:**
+- MAC Protocol -- CSMA/CD
+- Connection less, unreliable transmission
+- Topology from **Bus** to **Star (switches)**
+- Half-duplex transmission in Bus topology
+    - Work best under **lightly loaded** conditions
+    - Too much collision under **heavy load**
+- Full-duplex transmission in Switch topology (point-to-point)
+    - No more collisions !!
+    - Excellent performance (wired speed)
+
+### Introduction
+
+{{< image src="/images/network/L2-03.png" caption="Ethernet - 03" >}}
+
+Ethernet 发展过程: 传输速度从 10Mb 发展到 100Gb (P4)
+Ethernet 的特点: Unreliable, Connectionless, CSMA/CD (P5)
+
+### Ethernet Topologies
+
+{{< image src="/images/network/L2-07.png" caption="Ethernet - 07" >}}
+{{< image src="/images/network/L2-18.png" caption="Ethernet - 18" >}}
+
+- 10Base5: 10Mbps, segment up to 500m (P8)
+- 10Base2: 10Mbps, segment up to 200m (P8)
+- 10BaseT: 10Mbps, Twisted pair, segment up to 100m (P16)
+
+* Repeater, Hub 都是 physical layer 的设备，只负责 **转发信号**，无法防止 collision (P12, P16)
+* Switch 则是 data-link layer 的设备，内置芯片进行 **数据转发**，可以防止 collision (P19)
+
+**Manchester Encoding** (P11):    
+Ethernet 下层的 physical layer 使用的编码方式是 Manchester Encoding: 在一个时钟周期内，信号从低到高表示 1，从高到低表示 0
+
+{{< admonition >}}
+Manchester Encoding 发送方在进行数据传输之前需要发送一些 bits 来进行时钟同步 (例如 P22 的 Preamble 部分)，接收方完成时钟同步后，可以对一个时钟周期进行两次采样：一次前半段，一次后半段，然后可以通过两次取样电位信号的变化来获取对应的 bit (低到高表示 1，高到低表示 0)。
+
+有些读者可能会疑惑，既然都进行时钟同步了，为什么不直接使用高电位信号表示 1，低电位信号表示 0 这样直观的编码方式？这是因为如果采取这种编码方式，那么在一个时钟周期内信号不会有变化，如果接收的是一系列的 1 或 0，信号也不会变化。这样可能会导致漏采样，或者编码出错却无法及时侦测。而采用 Manchester Encoding 接收方每个时钟周期内信号都会变化，如果接收方在一次时钟周期内的两次采样，信号没有发生变化，那么可以立即侦测到出错了 (要么是漏采样了，要么是编码出错了)。
+{{< /admonition >}}
+
+### Ethernet Frame Format
+
+{{< image src="/images/network/L2-23.png" caption="Ethernet - 23" >}}
+
+除开 Preamble, SFD 之外，一个 Frame 的大小为 $64 \sim 1518$ bytes。因为 DA, SA, TYPE, FCS 占据了 $6 + 6 + 2 + 4 = 18$ bytes，所以 Data 部分的大小为 $48 ~\sim 1500$ bytes (P43)
+
+MAC Address 是 unique 并且是与 Adaptor 相关的，所以一个主机可能没有 MAC Address (没有 Adaptor)，可能有两个 MAC Address (有两个 Adaptor)。MAC Address 是由 Adaptor 的生产商来决定的。(P24)
+
+unicast address, broadcast address, multicast address (P26)
+
+### CSMA/CD
+
+{{< image src="/images/network/L2-46.png" caption="Ethernet - 46" >}}
+{{< image src="/images/network/L2-41.png" caption="Ethernet - 41" >}}
+{{< image src="/images/network/L2-45.png" caption="Ethernet - 45" >}}
+{{< image src="/images/network/L2-49.png" caption="Ethernet - 49" >}}
+
+- 关于 CSMA/CD 的详细介绍可以查看 P34 ~ P38
+- 关于 Ethernet Frame 的大小限制设计可以查看 P39 ~ P43
+- 关于 CSMA/CD Collision Handling 的策略机制可以查看 P44 ~ P45, P47 ~ P48
+
+{{< admonition >}}
+Host 在 detect collision 之后进行 backoff random delay，delay 结束后按照 1-persistent protocol (P35) 继续等待到  busy channel goes idle 后立刻进行传输。
+{{< /admonition >}}
+
+### Homework
 
 
 [courseinfo]: https://ocw.nthu.edu.tw/ocw/index.php?page=course&cid=291&
