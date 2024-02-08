@@ -1,9 +1,9 @@
 # Crust of Rust: Lifetime Annotations
 
 
-&gt; We&#39;re going to investigate a case where you need multiple explicit lifetime annotations. We explore why they are needed, and why we need more than one in this particular case. We also talk about some of the differences between the string types and introduce generics over a self-defined trait in the process.
+> We're going to investigate a case where you need multiple explicit lifetime annotations. We explore why they are needed, and why we need more than one in this particular case. We also talk about some of the differences between the string types and introduce generics over a self-defined trait in the process.
 
-&lt;!--more--&gt;
+<!--more-->
 
 整理自 [John Gjengset 的影片](https://www.youtube.com/watch?v=rAl-9HwD858)
 
@@ -13,7 +13,7 @@ Rust 中的 lifetime 一向是一个难点，为了更好地理解这一难点�
 
 C11 [6.2.4] **Storage durations of objects**
 
-&gt; An object has a storage duration that determines its lifetime. There are four storage
+> An object has a storage duration that determines its lifetime. There are four storage
 durations: static, thread, automatic, and allocated.
 
 ## 影片注解
@@ -28,7 +28,7 @@ if let Some(ref mut remainder) = self.remainder {...}
 
 `ref` 的作用配合 `if let` 语句体的逻辑可以体会到 pointer of pointer 的美妙之处。
 
-因为在 pattern match 中形如 `&amp;mut` 这类也是用于 pattern match 的，不能用于获取 reference，这也是为什么需要使用 `ref mut` 这类语法来获取 reference 的原因。
+因为在 pattern match 中形如 `&mut` 这类也是用于 pattern match 的，不能用于获取 reference，这也是为什么需要使用 `ref mut` 这类语法来获取 reference 的原因。
 
 ---
 
@@ -38,38 +38,38 @@ if let Some(ref mut remainder) = self.remainder {...}
 let remainder = self.remainder.as_mut()?;
 ```
 
-为什么使用之前所提的 `let remainder = &amp;mut self.remainder?;` 这是因为使用 `?` 运算符返回的是内部值的 copy，所以这种情况 `remainder` 里是 `self.remainder?` 返回的值 (是原有 `self.remainder` 内部值的 copy) 的 reference
+为什么使用之前所提的 `let remainder = &mut self.remainder?;` 这是因为使用 `?` 运算符返回的是内部值的 copy，所以这种情况 `remainder` 里是 `self.remainder?` 返回的值 (是原有 `self.remainder` 内部值的 copy) 的 reference
 
 ---
 
 影片大概 1:03 时提到了 `str` 与 `String` 的区别，个人觉得讲的很好：
 
 ```rs
-str -&gt; [char]
-&amp;str -&gt; &amp;[char] // fat pointer (address and size)
-String -&gt; Vec&lt;char&gt;
+str -> [char]
+&str -> &[char] // fat pointer (address and size)
+String -> Vec<char>
 
-String -&gt; &amp;str (cheap -- AsRef)
-&amp;str -&gt; String (expensive -- memcpy)
+String -> &str (cheap -- AsRef)
+&str -> String (expensive -- memcpy)
 ```
 
 ---
 
-可以将结构体的 lifetime 的第一个 (一般为 `&#39;a`) 视为实例的 lifetime，其它的可以表示与实例 lifetime 无关的 lifetime。由于 compiler 不够智能，所以它会将实例化时传入参数的 lifetime 中相关联的最小 lifetime 视为实例的 lifetime 约束 (即实例的 lifetime 包含于该 lifetime 内)。
+可以将结构体的 lifetime 的第一个 (一般为 `'a`) 视为实例的 lifetime，其它的可以表示与实例 lifetime 无关的 lifetime。由于 compiler 不够智能，所以它会将实例化时传入参数的 lifetime 中相关联的最小 lifetime 视为实例的 lifetime 约束 (即实例的 lifetime 包含于该 lifetime 内)。
 
 ---
 
-对于 `String` 使用 `&amp;*` 可以保证将其转换成 `&amp;str`，因为 `*` 会先将 `String` 转换成 `str`。当然对于函数参数的 `&amp;str`，只需传入 `&amp;String` 即可自动转换类型。
+对于 `String` 使用 `&*` 可以保证将其转换成 `&str`，因为 `*` 会先将 `String` 转换成 `str`。当然对于函数参数的 `&str`，只需传入 `&String` 即可自动转换类型。
 
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
 
-&gt; 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
+> 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
 
-&gt; Crate [std](https://doc.rust-lang.org/std/index.html) 
-&gt; ---
-&gt; 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
+> Crate [std](https://doc.rust-lang.org/std/index.html) 
+> ---
+> 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 
 - [Keywords](https://doc.rust-lang.org/std/index.html#keywords)
   - Keyword [SelfTy](https://doc.rust-lang.org/std/keyword.SelfTy.html)

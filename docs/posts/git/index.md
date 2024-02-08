@@ -6,7 +6,7 @@
 新手入门推荐，对于 Git 的入门操作讲解十分友好。
 
 - [视频地址](https://youtu.be/LZ4oOzZwgrk)
-- [学习记录]({{&lt; relref &#34;git-learn&#34; &gt;}})
+- [学习记录]({{< relref "git-learn" >}})
 
 ## Git 常见问题及解决
 
