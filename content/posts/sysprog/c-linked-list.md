@@ -101,13 +101,16 @@ $n$ 为 `listsSize`，$m$ 为 merge linked list 过程中产生的 linked list �
 
 这个“龟兔赛跑”算法保证兔子在跑两次循环圈后，一定会和刚完成一次循环圈的乌龟相遇。因为已知乌龟每次移动一步，兔子每次移动两步，可以假设在相遇点处乌龟移动的 $X$ 步，则兔子移动了 $2X$ 步，$2X$ 必为偶数，所以兔子必能在移动了 $2X$ 步后与乌龟相遇，不会出现兔子因为每次移动两步而刚好越过乌龟一步的情况。
 
+> $\lambda$ is the length of the loop to be found, $\mu$ is the index of the first element of the cycle.
+
 {{< link href="https://github.com/ccrysisa/LKI/blob/main/c-linked-list" content=Source external-icon=true >}}
 
 - [ ] [探索 Floyd Cycle Detection Algorithm](https://medium.com/@orionssl/%E6%8E%A2%E7%B4%A2-floyd-cycle-detection-algorithm-934cdd05beb9)
-- [ ] [LeetCode 141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
-- [ ] [LeetCode 142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/)
+- [x] [LeetCode 141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
+- [x] [LeetCode 142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/)
 - [ ] [LeetCode 146. LRU Cache](https://leetcode.com/problems/lru-cache/)
-- [ ] [金刀的算法小册子](https://github.com/glodknife/algorithm)
+- [金刀的算法小册子](https://github.com/glodknife/algorithm) Linked List
+    - [x] [LeetCode 206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list)
 
 ## Merge Sort
 

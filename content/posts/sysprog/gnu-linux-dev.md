@@ -44,7 +44,7 @@ GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而�
 
 <!--more-->
 
-> {{< link href="https://hackmd.io/@sysprog/gnu-linux-dev/" content=原文地址 external-icon=true >}}
+- {{< link href="https://hackmd.io/@sysprog/gnu-linux-dev/" content=原文地址 external-icon=true >}}
 
 ## 安装 Windows / Ubuntu 双系统
 
@@ -82,7 +82,8 @@ GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而�
 ```bash
 $ sudo apt install xclip
 # using alias to implement clip, you can add this to bashrc
-$ alias='xclip -sel c'
+$ alias clip='xclip -sel c'
+$ clip < ~/.ssh/id_rsa.pub
 ```
 {{< /admonition >}}
 

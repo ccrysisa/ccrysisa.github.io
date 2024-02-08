@@ -24,7 +24,7 @@
     
   "><meta itemprop="datePublished" content="2023-12-25T15:43:50+08:00" />
 <meta itemprop="dateModified" content="2024-02-05T12:14:17+08:00" />
-<meta itemprop="wordCount" content="3377"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="3383"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog," /><meta property="og:title" content="GNU/Linux 开发工具" />
 <meta property="og:description" content="
     
@@ -63,7 +63,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/gnu-linux-dev\/"
-    },"genre": "posts","keywords": "Sysprog","wordcount":  3377 ,
+    },"genre": "posts","keywords": "Sysprog","wordcount":  3383 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/gnu-linux-dev\/","datePublished": "2023-12-25T15:43:50+08:00","dateModified": "2024-02-05T12:14:17+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -179,7 +179,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2023-12-25 15:43:50"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-25">2023-12-25</time></span>&nbsp;<span title="更新于 2024-02-05 12:14:17"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="3377 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2023-12-25 15:43:50"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-25">2023-12-25</time></span>&nbsp;<span title="更新于 2024-02-05 12:14:17"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="3383 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -212,9 +212,9 @@
       <div class="admonition-content">GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而上提供各类触及“灵魂”的学习案例，让所有课程从纸上谈兵转变成沙场实战，会极大地提升工程实践的效率和技能。</div>
     </div>
   </div>
-<blockquote>
-<a href="https://hackmd.io/@sysprog/gnu-linux-dev/"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
-</blockquote>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/gnu-linux-dev/"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>
 <h2 id="安装-windows--ubuntu-双系统">安装 Windows / Ubuntu 双系统</h2>
 <p>因为有些操作必须在物理硬件上才能执行。</p>
 <h2 id="markdown-与-latex">Markdown 与 LaTeX</h2>
@@ -251,11 +251,13 @@
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
+</span><span class="lnt">4
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install xclip
 </span></span><span class="line"><span class="cl"><span class="c1"># using alias to implement clip, you can add this to bashrc</span>
-</span></span><span class="line"><span class="cl">$ <span class="nv">alias</span><span class="o">=</span><span class="s1">&#39;xclip -sel c&#39;</span></span></span></code></pre></td></tr></table>
+</span></span><span class="line"><span class="cl">$ <span class="nb">alias</span> <span class="nv">clip</span><span class="o">=</span><span class="s1">&#39;xclip -sel c&#39;</span>
+</span></span><span class="line"><span class="cl">$ clip &lt; ~/.ssh/id_rsa.pub</span></span></code></pre></td></tr></table>
 </div>
 </div></div>
     </div>
