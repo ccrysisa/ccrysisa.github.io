@@ -19,8 +19,8 @@
 
 原文地址
 "><meta itemprop="datePublished" content="2024-02-03T10:44:56+08:00" />
-<meta itemprop="dateModified" content="2024-02-08T14:40:23+08:00" />
-<meta itemprop="wordCount" content="983"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-02-09T00:17:45+08:00" />
+<meta itemprop="wordCount" content="986"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C," /><meta property="og:title" content="你所不知道的 C 语言: linked list 和非连续内存" />
 <meta property="og:description" content="
 无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。
@@ -31,7 +31,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-linked-list/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-03T10:44:56+08:00" />
-<meta property="article:modified_time" content="2024-02-08T14:40:23+08:00" />
+<meta property="article:modified_time" content="2024-02-09T00:17:45+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: linked list 和非连续内存"/>
@@ -55,8 +55,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-linked-list\/"
-    },"genre": "posts","keywords": "Sysprog, C","wordcount":  983 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-linked-list\/","datePublished": "2024-02-03T10:44:56+08:00","dateModified": "2024-02-08T14:40:23+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, C","wordcount":  986 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-linked-list\/","datePublished": "2024-02-03T10:44:56+08:00","dateModified": "2024-02-09T00:17:45+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -171,7 +171,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-03 10:44:56"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-03">2024-02-03</time></span>&nbsp;<span title="更新于 2024-02-08 14:40:23"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-08">2024-02-08</time></span>&nbsp;<span title="983 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-03 10:44:56"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-03">2024-02-03</time></span>&nbsp;<span title="更新于 2024-02-09 00:17:45"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-09">2024-02-09</time></span>&nbsp;<span title="986 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -281,6 +281,7 @@
 </li>
 </ul>
 <h2 id="merge-sort">Merge Sort</h2>
+<a href="https://github.com/ccrysisa/LKI/blob/main/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 <ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@lambert-wu/list-merge-sort"target="_blank" rel="external nofollow noopener noreferrer">Merge Sort 与它的变化</a></li>
 </ul>
@@ -289,6 +290,7 @@
 <ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://www.data-structures-in-practice.com/intrusive-linked-lists/"target="_blank" rel="external nofollow noopener noreferrer">Intrusive linked lists</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://danielmaker.github.io/blog/linux/list_hlist_hashtable.html"target="_blank" rel="external nofollow noopener noreferrer">List, HList, and Hash Table</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@ChialiangKuo/quiz6B-hash-table"target="_blank" rel="external nofollow noopener noreferrer">hash table</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/linux-macro-containerof"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心原始程式碼巨集: container_of</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://github.com/sysprog21/linux-list"target="_blank" rel="external nofollow noopener noreferrer">sysprog21/linux-list</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://alienryderflex.com/quicksort/"target="_blank" rel="external nofollow noopener noreferrer">Optimized QuickSort: C Implementation (Non-Recursive)</a></li>
@@ -296,7 +298,7 @@
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-02-08 14:40:23">更新于 2024-02-08&nbsp;</span>
+        <span title="更新于 2024-02-09 00:17:45">更新于 2024-02-09&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/c-linked-list/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>

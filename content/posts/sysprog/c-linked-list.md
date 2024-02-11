@@ -114,6 +114,8 @@ $n$ 为 `listsSize`，$m$ 为 merge linked list 过程中产生的 linked list �
 
 ## Merge Sort
 
+{{< link href="https://github.com/ccrysisa/LKI/blob/main/c-linked-list" content=Source external-icon=true >}}
+
 - [ ] [Merge Sort 与它的变化](https://hackmd.io/@lambert-wu/list-merge-sort)
 
 ## Linux 核心的 linked list
@@ -122,6 +124,7 @@ Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contai
 
 - [ ] [Intrusive linked lists](https://www.data-structures-in-practice.com/intrusive-linked-lists/)
 - [ ] [List, HList, and Hash Table](https://danielmaker.github.io/blog/linux/list_hlist_hashtable.html)
+- [ ] [hash table](https://hackmd.io/@ChialiangKuo/quiz6B-hash-table)
 - [ ] [Linux 核心原始程式碼巨集: container_of](https://hackmd.io/@sysprog/linux-macro-containerof)
 - [ ] [sysprog21/linux-list](https://github.com/sysprog21/linux-list)
 - [ ] [Optimized QuickSort: C Implementation (Non-Recursive)](https://alienryderflex.com/quicksort/)
