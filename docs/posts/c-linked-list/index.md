@@ -67,29 +67,45 @@ $n$ 为 `listsSize`，$m$ 为 merge linked list 过程中产生的 linked list �
 
 {{< link href="https://github.com/ccrysisa/LKI/blob/main/c-linked-list" content=Source external-icon=true >}}
 
-- [ ] [探索 Floyd Cycle Detection Algorithm](https://medium.com/@orionssl/%E6%8E%A2%E7%B4%A2-floyd-cycle-detection-algorithm-934cdd05beb9)
+
 - [x] [LeetCode 141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
 - [x] [LeetCode 142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/)
 - [ ] [LeetCode 146. LRU Cache](https://leetcode.com/problems/lru-cache/)
 - [金刀的算法小册子](https://github.com/glodknife/algorithm) Linked List
     - [x] [LeetCode 206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list)
 
+{{< admonition info >}}
+- [ ] [探索 Floyd Cycle Detection Algorithm](https://medium.com/@orionssl/%E6%8E%A2%E7%B4%A2-floyd-cycle-detection-algorithm-934cdd05beb9)
+{{< /admonition >}}
+
 ## Merge Sort
+
+实现了 recursion, non-recursion 的 merge sort
 
 {{< link href="https://github.com/ccrysisa/LKI/blob/main/c-linked-list" content=Source external-icon=true >}}
 
+{{< admonition info >}}
 - [ ] [Merge Sort 与它的变化](https://hackmd.io/@lambert-wu/list-merge-sort)
+{{< /admonition >}}
 
 ## Linux 核心的 linked list
 
 Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contain_of 宏，来实现自定义的 linked list node，具有强大的灵活性。
 
-- [ ] [Intrusive linked lists](https://www.data-structures-in-practice.com/intrusive-linked-lists/)
+{{< link href="https://github.com/ccrysisa/linux-list" content=Source external-icon=true >}}
+
+- [x] [Intrusive linked lists](https://www.data-structures-in-practice.com/intrusive-linked-lists/)
+> 这篇文章对于 Intrusive linked list 说明的非常好，解释了其在 memory allocations 和 cache thrashing 的优势，还搭配 Linux kernel 讲解了场景应用。
+- [ ] [Linux 核心原始程式碼巨集: container_of](https://hackmd.io/@sysprog/linux-macro-containerof)
+- [x] [sysprog21/linux-list](https://github.com/sysprog21/linux-list)
+> 这个仓库将 Linux kernel 中 linked list 部分抽离出来，并改写为 user mode 的实作。本人对该仓库进行了一些改写，对 insert sort 和 quick sort 增加了 makefile 支持。
+- [x] [Optimized QuickSort: C Implementation (Non-Recursive)](https://alienryderflex.com/quicksort/)
+> 这篇文章介绍了 non-recursion 的 quick sort 在 array 上的实作，参考该文章完成 linked list 上的 non-recursion 的 quick sort 实作。
+
+{{< admonition info >}}
 - [ ] [List, HList, and Hash Table](https://danielmaker.github.io/blog/linux/list_hlist_hashtable.html)
 - [ ] [hash table](https://hackmd.io/@ChialiangKuo/quiz6B-hash-table)
-- [ ] [Linux 核心原始程式碼巨集: container_of](https://hackmd.io/@sysprog/linux-macro-containerof)
-- [ ] [sysprog21/linux-list](https://github.com/sysprog21/linux-list)
-- [ ] [Optimized QuickSort: C Implementation (Non-Recursive)](https://alienryderflex.com/quicksort/)
+{{< /admonition >}}
 
 
 ---
