@@ -105,18 +105,24 @@ $n$ 为 `listsSize`，$m$ 为 merge linked list 过程中产生的 linked list �
 
 {{< link href="https://github.com/ccrysisa/LKI/blob/main/c-linked-list" content=Source external-icon=true >}}
 
-- [ ] [探索 Floyd Cycle Detection Algorithm](https://medium.com/@orionssl/%E6%8E%A2%E7%B4%A2-floyd-cycle-detection-algorithm-934cdd05beb9)
+
 - [x] [LeetCode 141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
 - [x] [LeetCode 142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/)
 - [ ] [LeetCode 146. LRU Cache](https://leetcode.com/problems/lru-cache/)
 - [金刀的算法小册子](https://github.com/glodknife/algorithm) Linked List
     - [x] [LeetCode 206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list)
 
+{{< admonition info >}}
+- [ ] [探索 Floyd Cycle Detection Algorithm](https://medium.com/@orionssl/%E6%8E%A2%E7%B4%A2-floyd-cycle-detection-algorithm-934cdd05beb9)
+{{< /admonition >}}
+
 ## Merge Sort
 
 {{< link href="https://github.com/ccrysisa/LKI/blob/main/c-linked-list" content=Source external-icon=true >}}
 
+{{< admonition info >}}
 - [ ] [Merge Sort 与它的变化](https://hackmd.io/@lambert-wu/list-merge-sort)
+{{< /admonition >}}
 
 ## Linux 核心的 linked list
 
@@ -126,5 +132,5 @@ Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contai
 - [ ] [List, HList, and Hash Table](https://danielmaker.github.io/blog/linux/list_hlist_hashtable.html)
 - [ ] [hash table](https://hackmd.io/@ChialiangKuo/quiz6B-hash-table)
 - [ ] [Linux 核心原始程式碼巨集: container_of](https://hackmd.io/@sysprog/linux-macro-containerof)
-- [ ] [sysprog21/linux-list](https://github.com/sysprog21/linux-list)
+- [x] [sysprog21/linux-list](https://github.com/sysprog21/linux-list)
 - [ ] [Optimized QuickSort: C Implementation (Non-Recursive)](https://alienryderflex.com/quicksort/)
