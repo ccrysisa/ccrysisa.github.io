@@ -92,6 +92,10 @@ $n$ 为 `listsSize`，$m$ 为 merge linked list 过程中产生的 linked list �
 
 Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contain_of 宏，来实现自定义的 linked list node，具有强大的灵活性。
 
+非递归的快速排序中 `if (L != R && &begin[i]->list != head) {` 其中的 `&begin[i]->list != head` 条件判断用于空链表情况，数组版本中使用的是下标比较 `L < R` 来判断，但是链表中使用 `L != R` 不足以完全表示 `L < R` 这个条件，还需要 `&begin[i]->list != head` 来判断链表是否为空。
+
+`WRITE_ONCE` 的原理简单来说是，通过 `union` 产生两个引用同一地址的引用 (即 `__val` 和 `__c`)，然后因为对同一地址有多个引用，所以编译器进行最佳化时不会过于激进的重排序，从而达到顺序执行效果。
+
 {{< link href="https://github.com/ccrysisa/linux-list" content=Source external-icon=true >}}
 
 - [x] [Intrusive linked lists](https://www.data-structures-in-practice.com/intrusive-linked-lists/)
@@ -105,6 +109,10 @@ Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contai
 {{< admonition info >}}
 - [ ] [List, HList, and Hash Table](https://danielmaker.github.io/blog/linux/list_hlist_hashtable.html)
 - [ ] [hash table](https://hackmd.io/@ChialiangKuo/quiz6B-hash-table)
+- [ ] [What is the strict aliasing rule?](https://stackoverflow.com/questions/98650/what-is-the-strict-aliasing-rule) [Stack Overflow]
+- [ ] [Unions and type-punning](https://stackoverflow.com/questions/25664848/unions-and-type-punning) [Stack Overflow]
+- [ ] [Nine ways to break your systems code using volatile](https://blog.regehr.org/archives/28) [Stack Overflow]
+- [ ] [WRITE_ONCE in linux kernel lists](https://stackoverflow.com/questions/34988277/write-once-in-linux-kernel-lists) [Stack Overflow]
 {{< /admonition >}}
 
 
