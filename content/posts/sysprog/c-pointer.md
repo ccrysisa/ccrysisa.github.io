@@ -184,6 +184,8 @@ the behavior is undefined.
 
 **C99 和 C11 都不保证 pointers (whose type is not compatible with the *pointed-to / referenced* type) 之间的转换是正确的。**
 
+导致这个的原因正是之前所提的 Alignment，转换后的指针类型不一定满足原有类型的 Alignment 要求，这种情况下进行 dereference 会导致异常。例如将一个 `char *` 指针转换成 `int *` 指针，然后进行 deference 有可能会产生异常。
+
 ## Pointers vs. Arrays
 
 C99 6.3.2.1
