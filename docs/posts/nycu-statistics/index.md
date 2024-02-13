@@ -137,6 +137,6 @@ $$
 
 ---
 
-> 作者: [ccrysisa](https://github.com/ccrysisa)  
+> 作者: [vanJker](https://github.com/vanJker)  
 > URL: https://ccrysisa.github.io/posts/nycu-statistics/  
 

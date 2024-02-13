@@ -38,19 +38,16 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-{{< admonition abstract >}}
-人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 + 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
-{{< /admonition >}}
-
+> 人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 + 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
 <!--more-->
 
-> 原文地址：[解讀計算機編碼](https://hackmd.io/@sysprog/binary-representation)
+- 原文地址：[解讀計算機編碼](https://hackmd.io/@sysprog/binary-representation)
 
 ## 一补数 (Ones’ complement)
 
 ### 9 的补数
 
-:white_check_mark: 科普短片: [Not just counting, but saving lives: Curta][not-just-counting-but-saving-lives-curta]
+- [x] 科普短片: [Not just counting, but saving lives: Curta][not-just-counting-but-saving-lives-curta]
 
 ### 运算原理
 
@@ -128,11 +125,11 @@ $$
 
 也可以通过一补数和二补数，在时钟表上的对称轴偏差，来理解上述两种方式是等价的。
 
-![](/images/git/twos_complement.png)
+{{< image src="/images/git/twos_complement.png" caption="Twos' complement" >}}
 
 ### 加 / 减法器设计
 
-:white_check_mark: 科普短片: [See How Computers Add Numbers In One Lesson][see-how-computers-add-numbers-in-one-lesson]
+科普短片: [See How Computers Add Numbers In One Lesson][see-how-computers-add-numbers-in-one-lesson] :white_check_mark: 
 
 - 了解晶体管的原理
 - 了解基本逻辑门元件，例如 OR, AND 逻辑门的设计
@@ -149,22 +146,15 @@ $$
 上述两个例子反映了群论的性质，对于对称性研究的重要性和原理依据。
 {{< /admonition >}}
 
-科普影片：从五次方程到伽罗瓦理论
-
-1. [ ] [阿贝尔和伽罗瓦的悲惨世界](https://www.youtube.com/watch?v=CdBbPkXxc3E)
-2. [ ] []()
-3. [ ] []()
-4. [ ] []()
-5. [ ] []()
-6. [ ] []()
+科普影片: [从五次方程到伽罗瓦理论](https://www.youtube.com/playlist?list=PLYtoePJQbGmiq3lqkJcxSKW0eW5objmjQ)
 
 ## 旁路攻击
 
-:white_check_mark: 观看科普视频: [我听得到你打了什么字][2xCICHh4Pas]
+观看科普视频: [我听得到你打了什么字][2xCICHh4Pas] :white_check_mark: 
 - [ ] 阅读相关论文 [Keyboard Acoustic Emanations][kbdacoustic]
 - [ ] 体验使用相关工具 [kbd-audio][kbd-audio]
 
-:white_check_mark: 借由 Wikipedia 了解旁路攻击 ([Side-channel attack][side-channel-attack]) 和时序攻击 ([Timing attack][timing-attack]) 的基本概念。
+借由 Wikipedia 了解旁路攻击 ([Side-channel attack][side-channel-attack]) 和时序攻击 ([Timing attack][timing-attack]) 的基本概念 :white_check_mark: 
 - [x] [Black-box testing](https://en.wikipedia.org/wiki/Black-box_testing)
 - [x] [Row hammer](https://en.wikipedia.org/wiki/Row_hammer)
 - [ ] [Cold boot attack](https://en.wikipedia.org/wiki/Cold_boot_attack)
@@ -182,6 +172,8 @@ $$
 
 - [C99 STandard - 7.18.1.1 Exact-width integer types 阅读记录]({{< relref "../c-pl/c-spec-ch7.md#71811-exact-width-integer-types" >}})
 - [C99 Standard - 6.5.7.5 Bitwise shift operators 阅读记录]({{< relref "../c-pl/c-spec-ch6.md#657-bitwise-shift-operators" >}})
+
+{{< link href="https://github.com/ccrysisa/LKI/tree/main/constant-time" content="Source" external-icon=true >}}
 
 #### Branchless abs
 
@@ -235,7 +227,8 @@ int32_t max(int32_t a, int32_t b) {
 
 {{< admonition info >}}
 - [ ] [基于 C 语言标准研究与系统程序安全议题](https://hackmd.io/@sysprog/c-std-security)
-> 这篇文章是第二周的课程内容
+
+这篇文章是第二周的课程内容，学有余力可以先行阅读。
 {{< /admonition >}}
 
 

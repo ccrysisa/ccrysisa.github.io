@@ -4,11 +4,11 @@ subtitle:
 date: 2024-01-20T17:20:09+08:00
 slug: 7592e7c
 # draft: true
-# author:
-#   name:
-#   link:
-#   email:
-#   avatar:
+author:
+  name: vanJker
+  link: https://github.com/vanJker
+  email: cjshine@foxmail.com
+  avatar: https://avatars.githubusercontent.com/u/88960102?s=96&v=4
 description:
 keywords:
 license:

@@ -8,32 +8,17 @@
     <title>解读计算机编码 - KZn&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="
-    
-      摘要
-    
-    
-      人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 &#43; 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
-    
-  " /><meta name="keywords" content='Sysprog' /><meta itemprop="name" content="解读计算机编码">
+人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 &#43; 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
+" /><meta name="keywords" content='Sysprog' /><meta itemprop="name" content="解读计算机编码">
 <meta itemprop="description" content="
-    
-      摘要
-    
-    
-      人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 &#43; 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
-    
-  "><meta itemprop="datePublished" content="2023-12-31T15:43:50+08:00" />
+人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 &#43; 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
+"><meta itemprop="datePublished" content="2023-12-31T15:43:50+08:00" />
 <meta itemprop="dateModified" content="2024-02-05T18:40:18+08:00" />
-<meta itemprop="wordCount" content="1645"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1644"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog," /><meta property="og:title" content="解读计算机编码" />
 <meta property="og:description" content="
-    
-      摘要
-    
-    
-      人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 &#43; 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
-    
-  " />
+人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 &#43; 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/binary-representation/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-31T15:43:50+08:00" />
@@ -42,13 +27,8 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="解读计算机编码"/>
 <meta name="twitter:description" content="
-    
-      摘要
-    
-    
-      人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 &#43; 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
-    
-  "/>
+人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 &#43; 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
+"/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -63,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/binary-representation\/"
-    },"genre": "posts","keywords": "Sysprog","wordcount":  1645 ,
+    },"genre": "posts","keywords": "Sysprog","wordcount":  1644 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/binary-representation\/","datePublished": "2023-12-31T15:43:50+08:00","dateModified": "2024-02-05T18:40:18+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -179,7 +159,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2023-12-31 15:43:50"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-31">2023-12-31</time></span>&nbsp;<span title="更新于 2024-02-05 18:40:18"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="1645 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2023-12-31 15:43:50"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-31">2023-12-31</time></span>&nbsp;<span title="更新于 2024-02-05 18:40:18"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="1644 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -212,20 +192,17 @@
     </li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><div class="details admonition abstract open">
-    <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content">人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 + 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。</div>
-    </div>
-  </div>
-<blockquote>
-<p>原文地址：<a href="https://hackmd.io/@sysprog/binary-representation"target="_blank" rel="external nofollow noopener noreferrer">解讀計算機編碼</a></p>
+      </div><div class="content" id="content"><blockquote>
+<p>人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 + 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。</p>
 </blockquote>
+<ul>
+<li>原文地址：<a href="https://hackmd.io/@sysprog/binary-representation"target="_blank" rel="external nofollow noopener noreferrer">解讀計算機編碼</a></li>
+</ul>
 <h2 id="一补数-ones-complement">一补数 (Ones’ complement)</h2>
 <h3 id="9-的补数">9 的补数</h3>
-<p>&#x2705; 科普短片: <a href="https://www.youtube.com/watch?v=kRmExkQoOPY"target="_blank" rel="external nofollow noopener noreferrer">Not just counting, but saving lives: Curta</a></p>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 科普短片: <a href="https://www.youtube.com/watch?v=kRmExkQoOPY"target="_blank" rel="external nofollow noopener noreferrer">Not just counting, but saving lives: Curta</a></li>
+</ul>
 <h3 id="运算原理">运算原理</h3>
 <div class="details admonition note open">
     <div class="details-summary admonition-title">
@@ -309,9 +286,10 @@ A - 1 &= 2^n - 1 - (\neg A + 1) \\
 $$
 </div>
 <p>也可以通过一补数和二补数，在时钟表上的对称轴偏差，来理解上述两种方式是等价的。</p>
-<p><img loading="lazy" src="/images/git/twos_complement.png" srcset="/images/git/twos_complement.png?size=small, /images/git/twos_complement.png?size=medium 1.5x, /images/git/twos_complement.png?size=large 2x" sizes="auto" data-title="/images/git/twos_complement.png" data-alt="/images/git/twos_complement.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></p>
+<figure><a class="lightgallery" href="/images/git/twos_complement.png?size=large" data-thumbnail="/images/git/twos_complement.png?size=small" data-sub-html="<h2>Twos&rsquo; complement</h2>"><img loading="lazy" src="/images/git/twos_complement.png" srcset="/images/git/twos_complement.png?size=small, /images/git/twos_complement.png?size=medium 1.5x, /images/git/twos_complement.png?size=large 2x" sizes="auto" data-title="/images/git/twos_complement.png" data-alt="/images/git/twos_complement.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Twos&rsquo; complement</figcaption>
+  </figure>
 <h3 id="加--减法器设计">加 / 减法器设计</h3>
-<p>&#x2705; 科普短片: <a href="https://www.youtube.com/watch?v=VBDoT8o4q00"target="_blank" rel="external nofollow noopener noreferrer">See How Computers Add Numbers In One Lesson</a></p>
+<p>科普短片: <a href="https://www.youtube.com/watch?v=VBDoT8o4q00"target="_blank" rel="external nofollow noopener noreferrer">See How Computers Add Numbers In One Lesson</a> &#x2705;</p>
 <ul>
 <li>了解晶体管的原理</li>
 <li>了解基本逻辑门元件，例如 OR, AND 逻辑门的设计</li>
@@ -332,22 +310,14 @@ $$
 </div>
     </div>
   </div>
-<p>科普影片：从五次方程到伽罗瓦理论</p>
-<ol>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://www.youtube.com/watch?v=CdBbPkXxc3E"target="_blank" rel="external nofollow noopener noreferrer">阿贝尔和伽罗瓦的悲惨世界</a></li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href=""></a></li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href=""></a></li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href=""></a></li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href=""></a></li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href=""></a></li>
-</ol>
+<p>科普影片: <a href="https://www.youtube.com/playlist?list=PLYtoePJQbGmiq3lqkJcxSKW0eW5objmjQ"target="_blank" rel="external nofollow noopener noreferrer">从五次方程到伽罗瓦理论</a></p>
 <h2 id="旁路攻击">旁路攻击</h2>
-<p>&#x2705; 观看科普视频: <a href="https://www.youtube.com/watch?v=2xCICHh4Pas"target="_blank" rel="external nofollow noopener noreferrer">我听得到你打了什么字</a></p>
+<p>观看科普视频: <a href="https://www.youtube.com/watch?v=2xCICHh4Pas"target="_blank" rel="external nofollow noopener noreferrer">我听得到你打了什么字</a> &#x2705;</p>
 <ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 阅读相关论文 <a href="https://web.eecs.umich.edu/~genkin/teaching/fall2019/EECS598-12_files/kbdacoustic.pdf"target="_blank" rel="external nofollow noopener noreferrer">Keyboard Acoustic Emanations</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 体验使用相关工具 <a href="https://github.com/ggerganov/kbd-audio"target="_blank" rel="external nofollow noopener noreferrer">kbd-audio</a></li>
 </ul>
-<p>&#x2705; 借由 Wikipedia 了解旁路攻击 (<a href="https://en.wikipedia.org/wiki/Side-channel_attack"target="_blank" rel="external nofollow noopener noreferrer">Side-channel attack</a>) 和时序攻击 (<a href="https://en.wikipedia.org/wiki/Timing_attack"target="_blank" rel="external nofollow noopener noreferrer">Timing attack</a>) 的基本概念。</p>
+<p>借由 Wikipedia 了解旁路攻击 (<a href="https://en.wikipedia.org/wiki/Side-channel_attack"target="_blank" rel="external nofollow noopener noreferrer">Side-channel attack</a>) 和时序攻击 (<a href="https://en.wikipedia.org/wiki/Timing_attack"target="_blank" rel="external nofollow noopener noreferrer">Timing attack</a>) 的基本概念 &#x2705;</p>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://en.wikipedia.org/wiki/Black-box_testing"target="_blank" rel="external nofollow noopener noreferrer">Black-box testing</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://en.wikipedia.org/wiki/Row_hammer"target="_blank" rel="external nofollow noopener noreferrer">Row hammer</a></li>
@@ -373,6 +343,7 @@ $$
 <li><a href="/posts/c-spec-ch7/#71811-exact-width-integer-types">C99 STandard - 7.18.1.1 Exact-width integer types 阅读记录</a></li>
 <li><a href="/posts/c-spec-ch6/#657-bitwise-shift-operators">C99 Standard - 6.5.7.5 Bitwise shift operators 阅读记录</a></li>
 </ul>
+<a href="https://github.com/ccrysisa/LKI/tree/main/constant-time"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 <h4 id="branchless-abs">Branchless abs</h4>
 <p>方法一，原理为 $-A = \neg (A - 1)$:</p>
 <div class="highlight" id="id-1"><div class="chroma">
@@ -456,9 +427,7 @@ $$
       <div class="admonition-content"><ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-std-security"target="_blank" rel="external nofollow noopener noreferrer">基于 C 语言标准研究与系统程序安全议题</a></li>
 </ul>
-<blockquote>
-<p>这篇文章是第二周的课程内容</p>
-</blockquote></div>
+<p>这篇文章是第二周的课程内容，学有余力可以先行阅读。</p></div>
     </div>
   </div>
 <!-- URL --></div><div class="post-footer" id="post-footer">

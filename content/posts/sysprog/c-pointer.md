@@ -43,24 +43,19 @@ repost:
 
 - {{< link href="https://hackmd.io/@sysprog/c-pointer" content="原文地址" external-icon=true >}}   
 <!--more-->
-- {{< link href="https://youtu.be/G7vERppua9o" content="直播录影(上)" external-icon=true >}}   
-- {{< link href="https://youtu.be/Owxols1RTAg" content="直播录影(下)" external-icon=true >}}   
-
 
 ## 前言杂谈
 
 [Let’s learn programming by inventing it](https://www.youtube.com/watch?v=l5Mp_DEn4bs) [CppCon 2018] :white_check_mark:
 
-{{< admonition open=false >}}
-在 K&R 一书中，直到 93 页才开始谈论 pointer，而全书总计 185 页，所以大概是在全书 $50.27\\%$ 的位置才开始讲 pointer。所以即使不学 pointer，你还是能够掌握 $~50\\%$ 的 C 语言的内容，但是 C 语言的核心正是 pointer，所以 Good Luck :rofl:
-{{< /admonition >}}
+> 在 K&R 一书中，直到 93 页才开始谈论 pointer，而全书总计 185 页，所以大概是在全书 $50.27\\%$ 的位置才开始讲 pointer。所以即使不学 pointer，你还是能够掌握 $~50\\%$ 的 C 语言的内容，但是 C 语言的核心正是 pointer，所以 Good Luck :rofl:
+
 
 [godbolt](http://gcc.godbolt.org/) 可以直接在网页上看到，源代码由各类 compiler 生成的 Assembly Code
 
-
 [How to read this prototype?]() [Stack Overflow] :white_check_mark:
+{{< details "Note" >}}
 
-{{< admonition open=false >}}
 这个问题是关于 `signal` 系统调用的函数原型解读，里面的回答页给出了很多对于指针，特别是 *函数指针* 的说明，下面节选一些特别有意思的回答：
 
 > The whole thing declares a function called `signal`:
@@ -105,8 +100,7 @@ repost:
 > ```
 
 这一回答强调了 `*` 和 `[]`、`()` 优先级的关系，这在判断数组指针、函数指针时是个非常好用的技巧。
-
-{{< /admonition >}}
+{{< /details >}}
 
 Rob Pike 于 2009/10/30 的 [Golang Talk](https://talks.golang.org/2009/go_talk-20091030.pdf) [PDF]
 
@@ -139,13 +133,13 @@ C 语言里只有 ***call by value***
 
 C89 之前，函数如果没有标注返回类型，则默认返回类型 `int`，返回值 0。但由于这样既可以表示返回值不重要，也可以表示返回值为 0，这会造成歧义，所以引进了 `void`。
 
-`void *` 只能表示地址，而不能对所指向的地址区域的内容进行操作。因为通过 `void *` 无法知道所指向区域的 size，所以无法对区域的内容进行操作，必须对 `void *` 进行 ***显示转换*** 才能操作指向的内容。（除此之外，**针对于 GCC**，对于指针本身的操作，`void *` 与 `char *` 是等价的，即对于 `+/- 1` 这类的操作，二者的偏移量是一致的）
+`void *` 只能表示地址，而不能对所指向的地址区域的内容进行操作。因为通过 `void *` 无法知道所指向区域的 size，所以无法对区域的内容进行操作，必须对 `void *` 进行 ***显示转换*** 才能操作指向的内容。（除此之外，**针对于 GCC**，对于指针本身的操作，`void *` 与 `char *` 是等价的，即对于 `+/- 1` 这类的操作，二者的偏移量是一致的；对于其它的编译器，建议将 `void *` 转换成 `char *` 再进行指针的加减运算）
 
 ### Alignment
 
 这部分原文描述不是很清晰，`2-byte aligned` 图示如下：
 
-![](/images/c/2-byte-aligned.svg)
+{{< image src="/images/c/2-byte-aligned.svg" caption="Alignment" >}}
 
 如果是 2-byte aligned 且是 little-endian 的处理器，对于左边，可以直接使用 `*(uint16_t *) ptr`，但对于右边就无法这样（不符合 alignment）：
 
