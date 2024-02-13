@@ -115,6 +115,17 @@ Internet Architecture 的核心是 IP 协议，它作为沙漏形状的中心位
 
 **RTT** 可以近似理解为 2 $\times$ Propagation time，因为一个来回需要从 sender 到 reciever，再从 reciever 到 sender。
 
+### Homework
+
+Redis 作者 Salvatore Sanfilippo 的聊天室项目: [smallchat](https://github.com/antirez/smallchat)，通过该项目可以入门学习网络编程 (Network Programming)，请复现该项目。
+
+Salvatore Sanfilippo 在 YouTube 上对 smallchat 的讲解：
+
+- [Smallchat intro](https://www.youtube.com/watch?v=eT02gzeLmF0)
+- [smallchat client & raw line input](https://www.youtube.com/watch?v=yogoUJ2zVYY)
+
+GitHub 上也有使用 Go 和 Rust 实现该项目的仓库，如果你对 Go 或 Rust 的网络编程 (Network Programming) 感兴趣，可以参考这个[仓库](https://github.com/smallnest/smallchat)。
+
 ## L2 IEEE 802.3 Ethernet
 
 **Outline:**
