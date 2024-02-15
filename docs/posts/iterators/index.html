@@ -14,7 +14,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
 In this third Crust of Rust video, we cover iterators and trait bounds, by re-implementing the &ldquo;flatten&rdquo; Iterator method from the standard library. As part of that, we cover some of the weirder trait bounds that are required, including what&rsquo;s needed to extend the implementation to support backwards iteration.
 "><meta itemprop="datePublished" content="2024-02-05T17:18:34+08:00" />
 <meta itemprop="dateModified" content="2024-02-05T18:57:12+08:00" />
-<meta itemprop="wordCount" content="135"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="510"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Iterator," /><meta property="og:title" content="Crust of Rust: Iterators" />
 <meta property="og:description" content="
 In this third Crust of Rust video, we cover iterators and trait bounds, by re-implementing the &ldquo;flatten&rdquo; Iterator method from the standard library. As part of that, we cover some of the weirder trait bounds that are required, including what&rsquo;s needed to extend the implementation to support backwards iteration.
@@ -43,7 +43,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/iterators\/"
-    },"genre": "posts","keywords": "Rust, Iterator","wordcount":  135 ,
+    },"genre": "posts","keywords": "Rust, Iterator","wordcount":  510 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/iterators\/","datePublished": "2024-02-05T17:18:34+08:00","dateModified": "2024-02-05T18:57:12+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -159,7 +159,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-05 17:18:34"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="更新于 2024-02-05 18:57:12"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="135 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-05 17:18:34"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="更新于 2024-02-05 18:57:12"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="510 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -167,15 +167,71 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
         </div>
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#影片注解">影片注解</a></li>
+    <li><a href="#影片注解">影片注解</a>
+      <ul>
+        <li><a href="#generic-traits-vs-associated-types">Generic traits vs associated types</a></li>
+        <li><a href="#iteratorflatten">Iterator::flatten</a></li>
+      </ul>
+    </li>
     <li><a href="#documentations">Documentations</a></li>
     <li><a href="#crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html">std</a></a></li>
+    <li><a href="#references">References</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><blockquote>
 <p>In this third Crust of Rust video, we cover iterators and trait bounds, by re-implementing the &ldquo;flatten&rdquo; Iterator method from the standard library. As part of that, we cover some of the weirder trait bounds that are required, including what&rsquo;s needed to extend the implementation to support backwards iteration.</p>
 </blockquote>
+<p>整理自 <a href="https://www.youtube.com/watch?v=yozQ9C69pNs"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></p>
 <h2 id="影片注解">影片注解</h2>
+<h3 id="generic-traits-vs-associated-types">Generic traits vs associated types</h3>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">trait</span><span class="w"> </span><span class="nb">Iterator</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">type</span> <span class="nc">Item</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">next</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="bp">Self</span>::<span class="n">Item</span><span class="o">&gt;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">trait</span><span class="w"> </span><span class="nb">Iterator</span><span class="o">&lt;</span><span class="n">Item</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">next</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="bp">Self</span>::<span class="n">Item</span><span class="o">&gt;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>为什么使用上面的 associated type 而不是下面的 generic 来实现 <code>Iterator</code>？因为使用 generic 来实现的话，可以对一个类型实现多个 Iterator trait 例如 <code>Iterator&lt;i32&gt;</code>, <code>Iterator&lt;f64</code>，而从语言表达上讲，我们希望一个类型只能实现一个 Iterator trait，所以使用 associated type 来实现 Iterator trait，防止二义性。</p>
+<div class="highlight" id="id-2"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">vs</span><span class="p">.</span><span class="n">iter</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// borrow vs, &amp; to v  
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">for</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">&amp;</span><span class="n">vs</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// equivalent to vs.iter()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这两条 for 语句虽然效果一样，但是后者是使用 <code>&lt;&amp;vs&gt; into_iter</code> 讲 <code>&amp;vs</code> 转为 iterator，而不是调用 <code>iter()</code> 方法。</p>
+<h3 id="iteratorflatten">Iterator::flatten</h3>
+<blockquote>
+<p>Creates an iterator that flattens nested structure.</p>
+<p>This is useful when you have an iterator of iterators or an iterator of things that can be turned into iterators and you want to remove one level of indirection.</p>
+</blockquote>
+<p><code>flatten()</code> 的本质是将一种 Iterator 类型转换成另一种 Iterator 类型，所以调用者和返回值 <code>Flatten</code> 都满足 trait Iterator，因为都是迭代器，只是将原先的 n-level 压扁为 1-level 的 Iterator 了。录影视频里只考虑 2-level 的情况。</p>
 <h2 id="documentations">Documentations</h2>
 <p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>
@@ -188,10 +244,29 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
 <ul>
 <li>
 <p>Trait <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html"target="_blank" rel="external nofollow noopener noreferrer">std::iter::Iterator</a></p>
+<ul>
+<li>method <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flatten"target="_blank" rel="external nofollow noopener noreferrer">std::iter::Iterator::flatten</a></li>
+</ul>
 </li>
 <li>
 <p>Trait <a href="https://doc.rust-lang.org/std/iter/trait.IntoIterator.html"target="_blank" rel="external nofollow noopener noreferrer">std::iter::IntoIterator</a></p>
 </li>
+<li>
+<p>Struct <a href="https://doc.rust-lang.org/std/iter/struct.Flatten.html"target="_blank" rel="external nofollow noopener noreferrer">std::iter::Flatten</a></p>
+</li>
+<li>
+<p>method <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.and_then"target="_blank" rel="external nofollow noopener noreferrer">std::option::Option::and_then</a></p>
+</li>
+<li>
+<p>function <a href="https://doc.rust-lang.org/std/iter/fn.empty.html"target="_blank" rel="external nofollow noopener noreferrer">std::iter::empty</a></p>
+</li>
+<li>
+<p>function <a href="https://doc.rust-lang.org/std/iter/fn.once.html"target="_blank" rel="external nofollow noopener noreferrer">std::iter::once</a></p>
+</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://stackoverflow.com/questions/34733811/what-is-the-difference-between-iter-and-into-iter"target="_blank" rel="external nofollow noopener noreferrer">What is the difference between iter and into_iter?</a></li>
 </ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
@@ -225,7 +300,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
       <a href="/posts/linux-concepts/" class="post-nav-item" rel="next" title="Linux 核心设计: 操作系统术语及概念">Linux 核心设计: 操作系统术语及概念<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
