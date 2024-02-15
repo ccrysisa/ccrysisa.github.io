@@ -9,24 +9,15 @@
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="
 无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。
-
-
-原文地址
 " /><meta name="keywords" content='Sysprog, C' /><meta itemprop="name" content="你所不知道的 C 语言: linked list 和非连续内存">
 <meta itemprop="description" content="
 无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。
-
-
-原文地址
 "><meta itemprop="datePublished" content="2024-02-03T10:44:56+08:00" />
 <meta itemprop="dateModified" content="2024-02-12T20:36:47+08:00" />
-<meta itemprop="wordCount" content="1358"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1355"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C," /><meta property="og:title" content="你所不知道的 C 语言: linked list 和非连续内存" />
 <meta property="og:description" content="
 无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。
-
-
-原文地址
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-linked-list/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
@@ -37,9 +28,6 @@
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: linked list 和非连续内存"/>
 <meta name="twitter:description" content="
 无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。
-
-
-原文地址
 "/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -55,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-linked-list\/"
-    },"genre": "posts","keywords": "Sysprog, C","wordcount":  1358 ,
+    },"genre": "posts","keywords": "Sysprog, C","wordcount":  1355 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-linked-list\/","datePublished": "2024-02-03T10:44:56+08:00","dateModified": "2024-02-12T20:36:47+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -67,7 +55,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZn&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZn&#39;s Blog" data-title="KZn&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZn&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZn&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZn&#39;s Blog" data-alt="KZn&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZn&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -107,7 +95,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZn&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZn&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZn&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZn&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -160,12 +148,18 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>你所不知道的 C 语言: linked list 和非连续内存</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-02-03 10:44:56"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-03">2024-02-03</time></span>&nbsp;<span title="更新于 2024-02-12 20:36:47"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-12">2024-02-12</time></span>&nbsp;<span title="1358 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-02-03 10:44:56"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-03">2024-02-03</time></span>&nbsp;<span title="更新于 2024-02-12 20:36:47"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-12">2024-02-12</time></span>&nbsp;<span title="1355 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -194,8 +188,8 @@
 <ul>
 <li><a href="https://hackmd.io/@sysprog/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
-<h2 id="linux-核心的艺术" class="heading-element">
-  <a href="#linux-%e6%a0%b8%e5%bf%83%e7%9a%84%e8%89%ba%e6%9c%af" class="heading-mark"></a>Linux 核心的艺术</h2><p><a href="https://youtu.be/o8NPllzkFhE"target="_blank" rel="external nofollow noopener noreferrer">The mind behind Linux | Linus Torvalds | TED</a> [YouTube]</p>
+<h2 id="linux-核心的艺术">Linux 核心的艺术</h2>
+<p><a href="https://youtu.be/o8NPllzkFhE"target="_blank" rel="external nofollow noopener noreferrer">The mind behind Linux | Linus Torvalds | TED</a> [YouTube]</p>
 <blockquote>
 <p>事实上 special case 和 indirect pointer 这两种写法在 clang 的最佳优化下效能并没有什么区别，我们可以不使用 indirect pointer 来写程序，但是我们需要学习 indirect pointer 这种思维方式，即 good taste。</p>
 <p><em>把握程序的本质，即本质上是修改指针的值，所以可以使用指针的指针来实现，无需进行特判。</em></p>
@@ -214,8 +208,8 @@
 </span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_entry</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="kt">list_entry_t</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="linked-list-append--remove" class="heading-element">
-  <a href="#linked-list-append--remove" class="heading-mark"></a>linked list append &amp; remove</h3><a href="https://github.com/ccrysisa/LKI/blob/main/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+</div><h3 id="linked-list-append--remove">linked list append &amp; remove</h3>
+<a href="https://github.com/ccrysisa/LKI/blob/main/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 <div class="details admonition info open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -228,8 +222,8 @@
 </div>
     </div>
   </div>
-<h3 id="leetcode" class="heading-element">
-  <a href="#leetcode" class="heading-mark"></a>LeetCode</h3><a href="https://github.com/ccrysisa/LKI/blob/main/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+<h3 id="leetcode">LeetCode</h3>
+<a href="https://github.com/ccrysisa/LKI/blob/main/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/merge-two-sorted-lists/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 21. Merge Two Sorted Lists</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/merge-k-sorted-lists/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 23. Merge k Sorted Lists</a></li>
@@ -252,13 +246,13 @@
 </div>
     </div>
   </div>
-<h2 id="circular-linked-list" class="heading-element">
-  <a href="#circular-linked-list" class="heading-mark"></a>Circular linked list</h2><p>单向 linked list 相对于双向 linked list 的优势在于，一个 cache line 可以容纳更多的 list node，而且很容易进行反向查询，这弥补了反向查询时的效能差距。例如在 64 位处理器上，地址为 64 Bit 即 8 Byte，如果 list node 的数据域存放一个 2 Byte 的整数，那么一个单向的 list node 大小为 10 Byte，双向的则为 18 Byte，又因为一般的 cache line 的大小为 64 Byte，则对于单向的 node 来说，cache line 可以存放 $64 / 10 = 6$ 个 list node，但是仅能存放 $64 / 18 = 3$ 个 list node，cache 效率明显降低。</p>
+<h2 id="circular-linked-list">Circular linked list</h2>
+<p>单向 linked list 相对于双向 linked list 的优势在于，一个 cache line 可以容纳更多的 list node，而且很容易进行反向查询，这弥补了反向查询时的效能差距。例如在 64 位处理器上，地址为 64 Bit 即 8 Byte，如果 list node 的数据域存放一个 2 Byte 的整数，那么一个单向的 list node 大小为 10 Byte，双向的则为 18 Byte，又因为一般的 cache line 的大小为 64 Byte，则对于单向的 node 来说，cache line 可以存放 $64 / 10 = 6$ 个 list node，但是仅能存放 $64 / 18 = 3$ 个 list node，cache 效率明显降低。</p>
 <blockquote>
 <p>这部分内容可以参考 jserv 的讲座 <a href="https://hackmd.io/@sysprog/HkW3Dr1Rb"target="_blank" rel="external nofollow noopener noreferrer">&lt;現代處理器設計: Cache 原理和實際影響&gt;</a></p>
 </blockquote>
-<h3 id="floyds-cycle-detection" class="heading-element">
-  <a href="#floyds-cycle-detection" class="heading-mark"></a>Floyd&rsquo;s Cycle detection</h3><p>这个“龟兔赛跑”算法保证兔子在跑两次循环圈后，一定会和刚完成一次循环圈的乌龟相遇。因为已知乌龟每次移动一步，兔子每次移动两步，可以假设在相遇点处乌龟移动的 $X$ 步，则兔子移动了 $2X$ 步，$2X$ 必为偶数，所以兔子必能在移动了 $2X$ 步后与乌龟相遇，不会出现兔子因为每次移动两步而刚好越过乌龟一步的情况。</p>
+<h3 id="floyds-cycle-detection">Floyd&rsquo;s Cycle detection</h3>
+<p>这个“龟兔赛跑”算法保证兔子在跑两次循环圈后，一定会和刚完成一次循环圈的乌龟相遇。因为已知乌龟每次移动一步，兔子每次移动两步，可以假设在相遇点处乌龟移动的 $X$ 步，则兔子移动了 $2X$ 步，$2X$ 必为偶数，所以兔子必能在移动了 $2X$ 步后与乌龟相遇，不会出现兔子因为每次移动两步而刚好越过乌龟一步的情况。</p>
 <blockquote>
 <p>$\lambda$ is the length of the loop to be found, $\mu$ is the index of the first element of the cycle.</p>
 </blockquote>
@@ -267,7 +261,7 @@
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/linked-list-cycle/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 141. Linked List Cycle</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/linked-list-cycle-ii/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 142. Linked List Cycle II</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/lru-cache/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 146. LRU Cache</a></li>
-<li><a href="https://github.com/glodknife/algorithm"target="_blank" rel="external nofollow noopener noreferrer">金刀的算法小册子</a> Linked List
+<li><a href="https://github.com/glodknife/algorithm"target="_blank" rel="external nofollow noopener noreferrer">金刀的算法小册子</a> Linked List 专题
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/reverse-linked-list"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 206. Reverse Linked List</a></li>
 </ul>
@@ -284,8 +278,8 @@
 </div>
     </div>
   </div>
-<h2 id="merge-sort" class="heading-element">
-  <a href="#merge-sort" class="heading-mark"></a>Merge Sort</h2><p>实现了 recursion, non-recursion 的 merge sort</p>
+<h2 id="merge-sort">Merge Sort</h2>
+<p>实现了 recursion, non-recursion 的 merge sort</p>
 <a href="https://github.com/ccrysisa/LKI/blob/main/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 <div class="details admonition info open">
     <div class="details-summary admonition-title">
@@ -298,8 +292,8 @@
 </div>
     </div>
   </div>
-<h2 id="linux-核心的-linked-list" class="heading-element">
-  <a href="#linux-%e6%a0%b8%e5%bf%83%e7%9a%84-linked-list" class="heading-mark"></a>Linux 核心的 linked list</h2><p>Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contain_of 宏，来实现自定义的 linked list node，具有强大的灵活性。</p>
+<h2 id="linux-核心的-linked-list">Linux 核心的 linked list</h2>
+<p>Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contain_of 宏，来实现自定义的 linked list node，具有强大的灵活性。</p>
 <p>非递归的快速排序中 <code>if (L != R &amp;&amp; &amp;begin[i]-&gt;list != head) {</code> 其中的 <code>&amp;begin[i]-&gt;list != head</code> 条件判断用于空链表情况，数组版本中使用的是下标比较 <code>L &lt; R</code> 来判断，但是链表中使用 <code>L != R</code> 不足以完全表示 <code>L &lt; R</code> 这个条件，还需要 <code>&amp;begin[i]-&gt;list != head</code> 来判断链表是否为空。</p>
 <p><code>WRITE_ONCE</code> 的原理简单来说是，通过 <code>union</code> 产生两个引用同一地址的引用 (即 <code>__val</code> 和 <code>__c</code>)，然后因为对同一地址有多个引用，所以编译器进行最佳化时不会过于激进的重排序，从而达到顺序执行效果。</p>
 <a href="https://github.com/ccrysisa/linux-list"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
@@ -328,12 +322,13 @@
     </div>
     <div class="details-content">
       <div class="admonition-content"><ul>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://danielmaker.github.io/blog/linux/list_hlist_hashtable.html"target="_blank" rel="external nofollow noopener noreferrer">List, HList, and Hash Table</a></li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@ChialiangKuo/quiz6B-hash-table"target="_blank" rel="external nofollow noopener noreferrer">hash table</a></li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://stackoverflow.com/questions/98650/what-is-the-strict-aliasing-rule"target="_blank" rel="external nofollow noopener noreferrer">What is the strict aliasing rule?</a> [Stack Overflow]</li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://stackoverflow.com/questions/25664848/unions-and-type-punning"target="_blank" rel="external nofollow noopener noreferrer">Unions and type-punning</a> [Stack Overflow]</li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://blog.regehr.org/archives/28"target="_blank" rel="external nofollow noopener noreferrer">Nine ways to break your systems code using volatile</a> [Stack Overflow]</li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://stackoverflow.com/questions/34988277/write-once-in-linux-kernel-lists"target="_blank" rel="external nofollow noopener noreferrer">WRITE_ONCE in linux kernel lists</a> [Stack Overflow]</li>
+<li><a href="https://danielmaker.github.io/blog/linux/list_hlist_hashtable.html"target="_blank" rel="external nofollow noopener noreferrer">List, HList, and Hash Table</a></li>
+<li><a href="https://hackmd.io/@ChialiangKuo/quiz6B-hash-table"target="_blank" rel="external nofollow noopener noreferrer">hash table</a></li>
+<li><a href="https://stackoverflow.com/questions/98650/what-is-the-strict-aliasing-rule"target="_blank" rel="external nofollow noopener noreferrer">What is the strict aliasing rule?</a> [Stack Overflow]</li>
+<li><a href="https://stackoverflow.com/questions/25664848/unions-and-type-punning"target="_blank" rel="external nofollow noopener noreferrer">Unions and type-punning</a> [Stack Overflow]</li>
+<li><a href="https://blog.regehr.org/archives/28"target="_blank" rel="external nofollow noopener noreferrer">Nine ways to break your systems code using volatile</a> [Stack Overflow]</li>
+<li><a href="https://stackoverflow.com/questions/34988277/write-once-in-linux-kernel-lists"target="_blank" rel="external nofollow noopener noreferrer">WRITE_ONCE in linux kernel lists</a> [Stack Overflow]</li>
+<li><a href="https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg1957556.html"target="_blank" rel="external nofollow noopener noreferrer">lib/list_sort: Optimize number of calls to comparison function</a></li>
 </ul>
 </div>
     </div>
@@ -342,10 +337,11 @@
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-02-12 20:36:47">更新于 2024-02-12&nbsp;</span>
-      </div></div><div class="post-info-line">
-        <div class="post-info-md"><span><a href="/posts/c-linked-list/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-        <div class="post-info-share">
-          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-linked-list/" data-title="你所不知道的 C 语言: linked list 和非连续内存" data-hashtags="Sysprog,C"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/c-linked-list/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-linked-list/" data-title="你所不知道的 C 语言: linked list 和非连续内存" data-hashtags="Sysprog,C"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/c-linked-list/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-linked-list/" data-title="你所不知道的 C 语言: linked list 和非连续内存" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-linked-list/" data-title="你所不知道的 C 语言: linked list 和非连续内存"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -354,11 +350,12 @@
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-linked-list/" data-title="你所不知道的 C 语言: linked list 和非连续内存" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-linked-list/" data-title="你所不知道的 C 语言: linked list 和非连续内存"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-        </div>
-      </div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a><a href="/tags/c/" class="post-tag" title="标签 - C">C</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/c/' class="post-tag">C</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -367,14 +364,11 @@
   <div class="post-nav"><a href="/posts/declarative-macros/" class="post-nav-item" rel="prev" title="Crust of Rust: Declarative Macros"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Crust of Rust: Declarative Macros</a>
       <a href="/posts/iterators/" class="post-nav-item" rel="next" title="Crust of Rust: Iterators">Crust of Rust: Iterators<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article>
-
-  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -382,5 +376,5 @@
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

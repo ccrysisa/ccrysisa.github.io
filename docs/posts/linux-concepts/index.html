@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Linux 核心设计: 操作系统术语及概念 - KZn&#39;s Blog</title><meta name="author" content="ccrysisa">
+<meta name="author-link" content="https://github.com/ccrysisa">
+<meta name="description" content="
+面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。
+" /><meta name="keywords" content='Sysprog, Linux' /><meta itemprop="name" content="Linux 核心设计: 操作系统术语及概念">
+<meta itemprop="description" content="
+面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。
+"><meta itemprop="datePublished" content="2024-02-15T12:51:49+08:00" />
+<meta itemprop="dateModified" content="2024-02-15T16:03:02+08:00" />
+<meta itemprop="wordCount" content="653"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Sysprog,Linux," /><meta property="og:title" content="Linux 核心设计: 操作系统术语及概念" />
+<meta property="og:description" content="
+面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ccrysisa.github.io/posts/linux-concepts/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-02-15T12:51:49+08:00" />
+<meta property="article:modified_time" content="2024-02-15T16:03:02+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Linux 核心设计: 操作系统术语及概念"/>
+<meta name="twitter:description" content="
+面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。
+"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/linux-concepts/" /><link rel="prev" href="https://ccrysisa.github.io/posts/iterators/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Linux 核心设计: 操作系统术语及概念",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/ccrysisa.github.io\/posts\/linux-concepts\/"
+    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  653 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/linux-concepts\/","datePublished": "2024-02-15T12:51:49+08:00","dateModified": "2024-02-15T16:03:02+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "ccrysisa"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="KZn&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZn&#39;s Blog" data-alt="KZn&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZn&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="KZn&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZn&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Linux 核心设计: 操作系统术语及概念</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-02-15 12:51:49"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-15">2024-02-15</time></span>&nbsp;<span title="更新于 2024-02-15 16:03:02"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-15">2024-02-15</time></span>&nbsp;<span title="653 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#linux-核心发展">Linux 核心发展</a></li>
+    <li><a href="#看漫画学-linux">看漫画学 Linux</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><blockquote>
+<p>面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。</p>
+</blockquote>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/linux-concepts"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>
+<p>原文的直播录影地址尚未更新，但是 Jserv 已于 2024/2/5 对该文章进行了重新讲解，<a href="https://www.youtube.com/watch?v=iWvkoJawxQA"target="_blank" rel="external nofollow noopener noreferrer">这里</a> 看到最新的直播录影。</p>
+<h2 id="linux-核心发展">Linux 核心发展</h2>
+<p>虚拟化 (Virtualization) 技术分为 CPU 层级的虚拟化技术，例如 <a href="https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine"target="_blank" rel="external nofollow noopener noreferrer">KVM</a> 和 <a href="https://github.com/equation314/RVM-Tutorial"target="_blank" rel="external nofollow noopener noreferrer">RVM</a>，也有操作系统层级的虚拟化技术，例如 <a href="https://en.wikipedia.org/wiki/Docker_%28software%29"target="_blank" rel="external nofollow noopener noreferrer">Docker</a>。</p>
+<ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs"target="_blank" rel="external nofollow noopener noreferrer">Plan 9 from Bell Labs</a> [Wikipedia]</li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://en.wikipedia.org/wiki/LXC"target="_blank" rel="external nofollow noopener noreferrer">LXC</a> [Wikipedia]</li>
+</ul>
+<div class="details admonition info open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ul>
+<li><a href="https://hackmd.io/@sysprog/revolution-os-note"target="_blank" rel="external nofollow noopener noreferrer">從 Revolution OS 看作業系統生態變化</a></li>
+<li><a href="https://hackmd.io/@sysprog/linux-ebpf"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心設計: 透過 eBPF 觀察作業系統行為</a></li>
+</ul>
+</div>
+    </div>
+  </div>
+<h2 id="看漫画学-linux">看漫画学 Linux</h2>
+<a href="https://hackmd.io/@sysprog/linux-comic"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+<figure><a class="lightgallery" href="https://turnoff.us/image/en/inside-the-linux-kernel.png?size=large" data-thumbnail="https://turnoff.us/image/en/inside-the-linux-kernel.png?size=small" data-sub-html="<h2>inside the linux kernel</h2>"><img loading="lazy" src="https://turnoff.us/image/en/inside-the-linux-kernel.png" srcset="https://turnoff.us/image/en/inside-the-linux-kernel.png?size=small, https://turnoff.us/image/en/inside-the-linux-kernel.png?size=medium 1.5x, https://turnoff.us/image/en/inside-the-linux-kernel.png?size=large 2x" sizes="auto" data-title="https://turnoff.us/image/en/inside-the-linux-kernel.png" data-alt="https://turnoff.us/image/en/inside-the-linux-kernel.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">inside the linux kernel</figcaption>
+  </figure>
+<p>整理上图，可以得到 <strong>自底向上</strong> 的 Linux 系统结构:</p>
+<ul>
+<li>地下层:
+<ul>
+<li>文件系统 (File System)</li>
+</ul>
+</li>
+<li>中央大厅层:
+<ul>
+<li>进程表 (process table)</li>
+<li>内存管理 (memory management)</li>
+<li>信息安全 (security)</li>
+<li>看门狗 (watchdog)</li>
+</ul>
+</li>
+</ul>
+<p>comic:</p>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://turnoff.us/geek/inside-the-linux-kernel/"target="_blank" rel="external nofollow noopener noreferrer">inside the linux kernel</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://turnoff.us/geek/forked/"target="_blank" rel="external nofollow noopener noreferrer">forked!</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://turnoff.us/geek/brothers-conflict/"target="_blank" rel="external nofollow noopener noreferrer">brothers conflict (at linux kernel)</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://turnoff.us/geek/zombie-processes/"target="_blank" rel="external nofollow noopener noreferrer">zombie processes</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://turnoff.us/geek/dont-sigkill/"target="_blank" rel="external nofollow noopener noreferrer">the real reason to not use sigkill</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://turnoff.us/geek/kernel-economics/"target="_blank" rel="external nofollow noopener noreferrer">kernel economics</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://turnoff.us/geek/intel-bug/"target="_blank" rel="external nofollow noopener noreferrer">intel bug</a></li>
+</ul>
+<p>wiki:</p>
+<ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://en.wikipedia.org/wiki/Pipeline_%28Unix%29"target="_blank" rel="external nofollow noopener noreferrer">Pipeline (Unix)</a> [Wikipedia]</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://en.wikipedia.org/wiki/Process_identifier"target="_blank" rel="external nofollow noopener noreferrer">Process identifier</a> [Wikipedia]</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://linux.die.net/man/8/watchdog"target="_blank" rel="external nofollow noopener noreferrer">watchdog</a> [Linux man page]</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://en.wikipedia.org/wiki/Init"target="_blank" rel="external nofollow noopener noreferrer">init</a> [Wikipedia]</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://en.wikipedia.org/wiki/Systemd"target="_blank" rel="external nofollow noopener noreferrer">systemd</a> [Wikipedia]</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://man7.org/linux/man-pages/man2/fork.2.html"target="_blank" rel="external nofollow noopener noreferrer">fork</a> [Linux man page]</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://man7.org/linux/man-pages/man2/clone.2.html"target="_blank" rel="external nofollow noopener noreferrer">clone</a> [Linux man page]</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://en.wikipedia.org/wiki/Project_Genie"target="_blank" rel="external nofollow noopener noreferrer">Project Genie</a> [Wikipedia]</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://man7.org/linux/man-pages/man3/posix_spawn.3.html"target="_blank" rel="external nofollow noopener noreferrer">posix_spawn</a> [Linux man page]</li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://en.wikipedia.org/wiki/Native_POSIX_Thread_Library"target="_blank" rel="external nofollow noopener noreferrer">Native POSIX Thread Library</a> [Wikipedia]</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://linux.cn/article-8771-1.html"target="_blank" rel="external nofollow noopener noreferrer">极客漫画: 不要使用 SIGKILL 的原因</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://man7.org/linux/man-pages/man2/wait.2.html"target="_blank" rel="external nofollow noopener noreferrer">wait</a> [Linux man page]</li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://man7.org/linux/man-pages/man7/signal.7.html"target="_blank" rel="external nofollow noopener noreferrer">signal</a> [Linux man page]</li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/Multics"target="_blank" rel="external nofollow noopener noreferrer">Multics</a> 采用了当时背景下的几乎所有的先进技术，可以参考该系统获取系统领域的灵感。</p>
+<p>虚拟内存管理与现代银行的运行逻辑类似，通过 <code>malloc</code> 分配的有效虚拟地址并不能保证真正可用，类似于支票得去银行兑现时才知道银行真正的现金储备。但是根据统计学公式，虚拟地址和银行现金可以保证在大部分情况下，都可以满足需求，当然突发的大规模虚拟内存使用、现金兑现时就无法保证了。这部分的原理推导需要学习概率论、统计学等数理课程。</p>
+<div class="details admonition info open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ul>
+<li><a href="https://hackmd.io/@sysprog/linux-file-system"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心設計: 檔案系統概念及實作手法</a></li>
+<li><a href="https://hackmd.io/@sysprog/linux-process"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心設計: 不僅是個執行單元的 Process</a></li>
+<li><a href="https://hackmd.io/@sysprog/linux-scheduler"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心設計: 不只挑選任務的排程器</a></li>
+<li><a href="https://hackmd.io/@sysprog/unix-fork-exec"target="_blank" rel="external nofollow noopener noreferrer">UNIX 作業系統 fork/exec 系統呼叫的前世今生</a></li>
+<li><a href="https://hackmd.io/@sysprog/linux-memory"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心設計: 記憶體管理</a></li>
+</ul>
+</div>
+    </div>
+  </div></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="更新于 2024-02-15 16:03:02">更新于 2024-02-15&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/linux-concepts/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/linux-concepts/" data-title="Linux 核心设计: 操作系统术语及概念" data-hashtags="Sysprog,Linux"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/linux-concepts/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/linux-concepts/" data-title="Linux 核心设计: 操作系统术语及概念" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/linux-concepts/" data-title="Linux 核心设计: 操作系统术语及概念"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/linux-concepts/" data-title="Linux 核心设计: 操作系统术语及概念"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/linux-concepts/" data-title="Linux 核心设计: 操作系统术语及概念" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/linux-concepts/" data-title="Linux 核心设计: 操作系统术语及概念" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/linux-concepts/" data-title="Linux 核心设计: 操作系统术语及概念"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/linux/' class="post-tag">Linux</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/posts/iterators/" class="post-nav-item" rel="prev" title="Crust of Rust: Iterators"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Crust of Rust: Iterators</a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

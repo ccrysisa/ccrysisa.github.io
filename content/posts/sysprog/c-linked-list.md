@@ -41,8 +41,9 @@ repost:
 
 > 无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。
 
-- {{< link href="https://hackmd.io/@sysprog/c-linked-list" content="原文地址" external-icon=true >}}   
 <!--more-->
+
+- {{< link href="https://hackmd.io/@sysprog/c-linked-list" content="原文地址" external-icon=true >}}   
 
 ## Linux 核心的艺术
 
@@ -109,7 +110,7 @@ $n$ 为 `listsSize`，$m$ 为 merge linked list 过程中产生的 linked list �
 - [x] [LeetCode 141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
 - [x] [LeetCode 142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/)
 - [ ] [LeetCode 146. LRU Cache](https://leetcode.com/problems/lru-cache/)
-- [金刀的算法小册子](https://github.com/glodknife/algorithm) Linked List
+- [金刀的算法小册子](https://github.com/glodknife/algorithm) Linked List 专题
     - [x] [LeetCode 206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list)
 
 {{< admonition info >}}
@@ -145,10 +146,11 @@ Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contai
 > 这篇文章介绍了 non-recursion 的 quick sort 在 array 上的实作，参考该文章完成 linked list 上的 non-recursion 的 quick sort 实作。
 
 {{< admonition info >}}
-- [ ] [List, HList, and Hash Table](https://danielmaker.github.io/blog/linux/list_hlist_hashtable.html)
-- [ ] [hash table](https://hackmd.io/@ChialiangKuo/quiz6B-hash-table)
-- [ ] [What is the strict aliasing rule?](https://stackoverflow.com/questions/98650/what-is-the-strict-aliasing-rule) [Stack Overflow]
-- [ ] [Unions and type-punning](https://stackoverflow.com/questions/25664848/unions-and-type-punning) [Stack Overflow]
-- [ ] [Nine ways to break your systems code using volatile](https://blog.regehr.org/archives/28) [Stack Overflow]
-- [ ] [WRITE_ONCE in linux kernel lists](https://stackoverflow.com/questions/34988277/write-once-in-linux-kernel-lists) [Stack Overflow]
+- [List, HList, and Hash Table](https://danielmaker.github.io/blog/linux/list_hlist_hashtable.html)
+- [hash table](https://hackmd.io/@ChialiangKuo/quiz6B-hash-table)
+- [What is the strict aliasing rule?](https://stackoverflow.com/questions/98650/what-is-the-strict-aliasing-rule) [Stack Overflow]
+- [Unions and type-punning](https://stackoverflow.com/questions/25664848/unions-and-type-punning) [Stack Overflow]
+- [Nine ways to break your systems code using volatile](https://blog.regehr.org/archives/28) [Stack Overflow]
+- [WRITE_ONCE in linux kernel lists](https://stackoverflow.com/questions/34988277/write-once-in-linux-kernel-lists) [Stack Overflow]
+- [lib/list_sort: Optimize number of calls to comparison function](https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg1957556.html)
 {{< /admonition >}}
