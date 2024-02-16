@@ -99,18 +99,23 @@ for v in &vs {
 - Trait [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
   - method [std::iter::Iterator::flatten](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flatten)
   - method [std::iter::Iterator::rev](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.rev)
+  - method [std::iter::Iterator::flat_map](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flat_map)
 
 - Trait [std::iter::IntoIterator](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html)
 
 - Struct [std::iter::Flatten](https://doc.rust-lang.org/std/iter/struct.Flatten.html)
-
-- method [std::option::Option::and_then](https://doc.rust-lang.org/std/option/enum.Option.html#method.and_then)
 
 - function [std::iter::empty](https://doc.rust-lang.org/std/iter/fn.empty.html)
 
 - function [std::iter::once](https://doc.rust-lang.org/std/iter/fn.once.html)
 
 - Trait [std::iter::DoubleEndedIterator](https://doc.rust-lang.org/std/iter/trait.DoubleEndedIterator.html)
+
+- Enum [std::option::Option](https://doc.rust-lang.org/std/option/enum.Option.html#)
+  - method [std::option::Option::and_then](https://doc.rust-lang.org/std/option/enum.Option.html#method.and_then)
+  - method [std::option::Option::as_mut](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_mut)
+
+- Trait [std::marker::Sized](https://doc.rust-lang.org/std/marker/trait.Sized.html)
 
 ## References
 
