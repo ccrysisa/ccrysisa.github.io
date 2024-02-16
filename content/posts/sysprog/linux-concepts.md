@@ -74,16 +74,15 @@ repost:
     - 内存管理 (memory management)
     - 信息安全 (security)
     - 看门狗 (watchdog)
-
-comic:
-
-- [x] [inside the linux kernel](https://turnoff.us/geek/inside-the-linux-kernel/)
-- [x] [forked!](https://turnoff.us/geek/forked/)
-- [x] [brothers conflict (at linux kernel)](https://turnoff.us/geek/brothers-conflict/)
-- [x] [zombie processes](https://turnoff.us/geek/zombie-processes/)
-- [x] [the real reason to not use sigkill](https://turnoff.us/geek/dont-sigkill/)
-- [x] [kernel economics](https://turnoff.us/geek/kernel-economics/)
-- [x] [intel bug](https://turnoff.us/geek/intel-bug/)
+    - httpd
+    - cron
+    - 管道 (pipe)
+    - FTP
+    - SSH
+    - Wine
+    - GNOME
+- 最上层
+    - tty / terminal
 
 wiki:
 
@@ -100,15 +99,46 @@ wiki:
 - [x] [极客漫画: 不要使用 SIGKILL 的原因](https://linux.cn/article-8771-1.html)
 - [ ] [wait](https://man7.org/linux/man-pages/man2/wait.2.html) [Linux man page]
 - [ ] [signal](https://man7.org/linux/man-pages/man7/signal.7.html) [Linux man page]
+- [x] [TUX web server](https://en.wikipedia.org/wiki/TUX_web_server) [Wikipedia]
+ -[x] [cron](https://en.wikipedia.org/wiki/Cron)
 
 [Multics](https://en.wikipedia.org/wiki/Multics) 采用了当时背景下的几乎所有的先进技术，可以参考该系统获取系统领域的灵感。
 
 虚拟内存管理与现代银行的运行逻辑类似，通过 `malloc` 分配的有效虚拟地址并不能保证真正可用，类似于支票得去银行兑现时才知道银行真正的现金储备。但是根据统计学公式，虚拟地址和银行现金可以保证在大部分情况下，都可以满足需求，当然突发的大规模虚拟内存使用、现金兑现时就无法保证了。这部分的原理推导需要学习概率论、统计学等数理课程。
 
 {{< admonition info >}}
+Linux 核心设计:
+
 - [Linux 核心設計: 檔案系統概念及實作手法](https://hackmd.io/@sysprog/linux-file-system)
 - [Linux 核心設計: 不僅是個執行單元的 Process](https://hackmd.io/@sysprog/linux-process)
 - [Linux 核心設計: 不只挑選任務的排程器](https://hackmd.io/@sysprog/linux-scheduler)
 - [UNIX 作業系統 fork/exec 系統呼叫的前世今生](https://hackmd.io/@sysprog/unix-fork-exec)
 - [Linux 核心設計: 記憶體管理](https://hackmd.io/@sysprog/linux-memory)
+- [Linux 核心設計: 發展動態回顧](https://hackmd.io/@sysprog/linux-dev-review)
+- [Linux 核心設計: 針對事件驅動的 I/O 模型演化](https://hackmd.io/@sysprog/linux-io-model/)
+- [Linux 核心設計: Scalability 議題](https://hackmd.io/@sysprog/linux-scalability)
+- [Effective System Call Aggregation (ESCA)](https://eecheng87.github.io/ESCA/)
+- [你所不知道的 C 語言: Stream I/O, EOF 和例外處理](https://hackmd.io/@sysprog/c-stream-io)
+
+Unix-like 工具使用技巧:
+
+- [Mastering UNIX pipes, Part 1](https://www.moritz.systems/blog/mastering-unix-pipes-part-1/)
+- [Mastering UNIX pipes, Part 2](https://www.moritz.systems/blog/mastering-unix-pipes-part-2/)
 {{< /admonition >}}
+
+## 高阶观点
+
+投影片: [Linux Kernel: Introduction](https://linux-kernel-labs.github.io/refs/heads/master/lectures/intro-slides.html)
+
+- 对投影片的 [重点描述](https://linux-kernel-labs.github.io/refs/heads/master/lectures/intro.html)
+
+一些概念理解:
+
+- [ ] [1963 Timesharing: A Solution to Computer Bottlenecks](https://www.youtube.com/watch?v=Q07PhW5sCEk) [YouTube]
+- [x] [Supervisory program](https://en.wikipedia.org/wiki/Supervisory_program) [Wikipedia]
+
+MicroVM 和 Unikernel 都是使用 CPU 层级的虚拟化技术，在 Host OS 上面构建的 GuestOS:
+
+- MicroVM 会减少硬件驱动方面的初始化，从而加快启动和服务速度 (在云服务器方面很常见，服务器端并不需要进行硬件驱动)。
+
+- Unikernel 则更激进，将 programs 和 kernel 一起进行动态编译，并且限制只能运行一个 process (例如只运行一个数据库进程，这样云服务器很常见)，这样就减少了一些系统调用的呼叫，例如 fork (因为只能运行一个 process)，提升了安全性 (因为 fork 系统调用可能会造成一些漏洞)。Unikernel 又叫 [Library OS](https://en.wikipedia.org/wiki/Unikernel)，可以理解为分时多人多工操作系统的另一个对立面，拥有极高的运行速度 (因为只有一个 process)。
