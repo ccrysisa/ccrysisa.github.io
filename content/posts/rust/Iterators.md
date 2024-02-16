@@ -82,6 +82,10 @@ for v in &vs {
 
 `flatten()` 的本质是将一种 Iterator 类型转换成另一种 Iterator 类型，所以调用者和返回值 `Flatten` 都满足 trait Iterator，因为都是迭代器，只是将原先的 n-level 压扁为 1-level 的 Iterator 了。录影视频里只考虑 2-level 的情况。
 
+### DoubleEndedIterator
+
+> It is important to note that both back and forth work on the same range, and do not cross: iteration is over when they meet in the middle.
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
@@ -94,6 +98,7 @@ for v in &vs {
 
 - Trait [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
   - method [std::iter::Iterator::flatten](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flatten)
+  - method [std::iter::Iterator::rev](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.rev)
 
 - Trait [std::iter::IntoIterator](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html)
 
@@ -104,6 +109,8 @@ for v in &vs {
 - function [std::iter::empty](https://doc.rust-lang.org/std/iter/fn.empty.html)
 
 - function [std::iter::once](https://doc.rust-lang.org/std/iter/fn.once.html)
+
+- Trait [std::iter::DoubleEndedIterator](https://doc.rust-lang.org/std/iter/trait.DoubleEndedIterator.html)
 
 ## References
 
