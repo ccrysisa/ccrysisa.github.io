@@ -102,11 +102,13 @@ wiki:
 - [x] [TUX web server](https://en.wikipedia.org/wiki/TUX_web_server) [Wikipedia]
  -[x] [cron](https://en.wikipedia.org/wiki/Cron)
 
+{{< admonition tip >}}
 [Multics](https://en.wikipedia.org/wiki/Multics) 采用了当时背景下的几乎所有的先进技术，可以参考该系统获取系统领域的灵感。
+{{< /admonition >}}
 
 虚拟内存管理与现代银行的运行逻辑类似，通过 `malloc` 分配的有效虚拟地址并不能保证真正可用，类似于支票得去银行兑现时才知道银行真正的现金储备。但是根据统计学公式，虚拟地址和银行现金可以保证在大部分情况下，都可以满足需求，当然突发的大规模虚拟内存使用、现金兑现时就无法保证了。这部分的原理推导需要学习概率论、统计学等数理课程。
 
-{{< admonition info >}}
+{{< admonition type=info open=false >}}
 Linux 核心设计:
 
 - [Linux 核心設計: 檔案系統概念及實作手法](https://hackmd.io/@sysprog/linux-file-system)
@@ -128,7 +130,7 @@ Unix-like 工具使用技巧:
 
 ## 高阶观点
 
-投影片: [Linux Kernel: Introduction](https://linux-kernel-labs.github.io/refs/heads/master/lectures/intro-slides.html)
+投影片: [Linux Kernel: Introduction](https://linux-kernel-labs.github.io/refs/heads/master/lectures/intro-slides.html) :white_check_mark:
 
 - 对投影片的 [重点描述](https://linux-kernel-labs.github.io/refs/heads/master/lectures/intro.html)
 
@@ -137,8 +139,43 @@ Unix-like 工具使用技巧:
 - [ ] [1963 Timesharing: A Solution to Computer Bottlenecks](https://www.youtube.com/watch?v=Q07PhW5sCEk) [YouTube]
 - [x] [Supervisory program](https://en.wikipedia.org/wiki/Supervisory_program) [Wikipedia]
 
+### 虚拟化
+
 MicroVM 和 Unikernel 都是使用 CPU 层级的虚拟化技术，在 Host OS 上面构建的 GuestOS:
 
 - MicroVM 会减少硬件驱动方面的初始化，从而加快启动和服务速度 (在云服务器方面很常见，服务器端并不需要进行硬件驱动)。
 
 - Unikernel 则更激进，将 programs 和 kernel 一起进行动态编译，并且限制只能运行一个 process (例如只运行一个数据库进程，这样云服务器很常见)，这样就减少了一些系统调用的呼叫，例如 fork (因为只能运行一个 process)，提升了安全性 (因为 fork 系统调用可能会造成一些漏洞)。Unikernel 又叫 [Library OS](https://en.wikipedia.org/wiki/Unikernel)，可以理解为分时多人多工操作系统的另一个对立面，拥有极高的运行速度 (因为只有一个 process)。
+
+Container Sandbox 使用的是 OS 层级的虚拟化技术，即它是将一组进程隔离起来构建为容器，这样可能会导致这一组进程就耗尽了系统的资源，其他进程无法使用系统的资源。同时因为是进程级的隔离，所以安全性不及 CPU 层级的 MicroVM 和 Unikernel。
+
+{{< admonition info >}}
+相关演讲、录影:
+- YouTube: [Inside the Mac OS X Kernel](https://youtu.be/-7GMHB3Plc8)
+- YouTube: [What Are MicroVMs? And Why Should I Care?](https://youtu.be/4d0NIfuFLXc)
+- YouTube: [From the Ground Up: How We Built the Nanos Unikernel](https://youtu.be/0v21hGvCDPY)
+
+相关论文阅读:
+{{< /admonition >}}
+
+### Scalability
+
+Wikipedia: [scalability](https://en.wikipedia.org/wiki/Scalability) 
+> A system whose performance improves after adding hardware, proportionally to the capacity added, is said to be a scalable system.
+
+- lock-free
+- sequence lock
+- RCU
+- algorithm complexity
+
+## 细节切入点
+
+CPU 和 OS 的基本概念科普网站: 
+- [ ] [Putting the “You” in CPU](https://cpu.land/)
+> 相当于科普版 CSAPP
+
+{{< admonition tip >}}
+UNSW COMP9242: [Advanced Operating Systems](https://www.cse.unsw.edu.au/~cs9242/23/lectures.shtml) (2023/T3)
+
+这门课可以作为辅助材料，讲得深入浅出，可以作为进阶材料阅读。
+{{< /admonition >}}

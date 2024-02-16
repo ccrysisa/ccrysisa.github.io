@@ -4,7 +4,15 @@
     <link>https://ccrysisa.github.io/tags/sysprog/</link>
     <description>Sysprog - 标签 - KZn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 15 Feb 2024 12:51:49 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 16 Feb 2024 14:59:25 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
+  <title>Linux 核心设计: 2018 第 4 周测验题</title>
+  <link>https://ccrysisa.github.io/posts/linux2018-quiz4/</link>
+  <pubDate>Fri, 16 Feb 2024 14:59:25 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/linux2018-quiz4/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>Linux 核心设计: 操作系统术语及概念</title>
   <link>https://ccrysisa.github.io/posts/linux-concepts/</link>
   <pubDate>Thu, 15 Feb 2024 12:51:49 &#43;0800</pubDate>
@@ -89,21 +97,6 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/rust-introduction/</guid>
   <description><![CDATA[Rust in 100 Seconds 观看短片: Rust in 100 Seconds &#x2705; 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello = &quot;hi]]></description>
-</item>
-<item>
-  <title>GNU/Linux 开发工具</title>
-  <link>https://ccrysisa.github.io/posts/gnu-linux-dev/</link>
-  <pubDate>Mon, 25 Dec 2023 15:43:50 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/gnu-linux-dev/</guid>
-  <description><![CDATA[<div class="details admonition abstract open">
-    <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content">GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而上提供各类触及“灵魂”的学习案例，让所有课程从纸上谈兵转变成沙场实战，会极大地提升工程实践的效率和技能。</div>
-    </div>
-  </div>]]></description>
 </item>
 </channel>
 </rss>

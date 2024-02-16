@@ -13,8 +13,8 @@
 <meta itemprop="description" content="
 面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。
 "><meta itemprop="datePublished" content="2024-02-15T12:51:49+08:00" />
-<meta itemprop="dateModified" content="2024-02-15T16:23:42+08:00" />
-<meta itemprop="wordCount" content="653"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-02-16T20:29:31+08:00" />
+<meta itemprop="wordCount" content="1290"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux," /><meta property="og:title" content="Linux 核心设计: 操作系统术语及概念" />
 <meta property="og:description" content="
 面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。
@@ -22,7 +22,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/linux-concepts/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-15T12:51:49+08:00" />
-<meta property="article:modified_time" content="2024-02-15T16:23:42+08:00" />
+<meta property="article:modified_time" content="2024-02-16T20:29:31+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Linux 核心设计: 操作系统术语及概念"/>
@@ -32,7 +32,7 @@
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/linux-concepts/" /><link rel="prev" href="https://ccrysisa.github.io/posts/iterators/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/linux-concepts/" /><link rel="prev" href="https://ccrysisa.github.io/posts/iterators/" /><link rel="next" href="https://ccrysisa.github.io/posts/linux2018-quiz4/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -43,8 +43,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux-concepts\/"
-    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  653 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/linux-concepts\/","datePublished": "2024-02-15T12:51:49+08:00","dateModified": "2024-02-15T16:23:42+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  1290 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/linux-concepts\/","datePublished": "2024-02-15T12:51:49+08:00","dateModified": "2024-02-16T20:29:31+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -159,7 +159,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-15 12:51:49"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-15">2024-02-15</time></span>&nbsp;<span title="更新于 2024-02-15 16:23:42"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-15">2024-02-15</time></span>&nbsp;<span title="653 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-15 12:51:49"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-15">2024-02-15</time></span>&nbsp;<span title="更新于 2024-02-16 20:29:31"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-16">2024-02-16</time></span>&nbsp;<span title="1290 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -169,6 +169,13 @@
   <ul>
     <li><a href="#linux-核心发展">Linux 核心发展</a></li>
     <li><a href="#看漫画学-linux">看漫画学 Linux</a></li>
+    <li><a href="#高阶观点">高阶观点</a>
+      <ul>
+        <li><a href="#虚拟化">虚拟化</a></li>
+        <li><a href="#scalability">Scalability</a></li>
+      </ul>
+    </li>
+    <li><a href="#细节切入点">细节切入点</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><blockquote>
@@ -213,18 +220,20 @@
 <li>内存管理 (memory management)</li>
 <li>信息安全 (security)</li>
 <li>看门狗 (watchdog)</li>
+<li>httpd</li>
+<li>cron</li>
+<li>管道 (pipe)</li>
+<li>FTP</li>
+<li>SSH</li>
+<li>Wine</li>
+<li>GNOME</li>
 </ul>
 </li>
-</ul>
-<p>comic:</p>
+<li>最上层
 <ul>
-<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://turnoff.us/geek/inside-the-linux-kernel/"target="_blank" rel="external nofollow noopener noreferrer">inside the linux kernel</a></li>
-<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://turnoff.us/geek/forked/"target="_blank" rel="external nofollow noopener noreferrer">forked!</a></li>
-<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://turnoff.us/geek/brothers-conflict/"target="_blank" rel="external nofollow noopener noreferrer">brothers conflict (at linux kernel)</a></li>
-<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://turnoff.us/geek/zombie-processes/"target="_blank" rel="external nofollow noopener noreferrer">zombie processes</a></li>
-<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://turnoff.us/geek/dont-sigkill/"target="_blank" rel="external nofollow noopener noreferrer">the real reason to not use sigkill</a></li>
-<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://turnoff.us/geek/kernel-economics/"target="_blank" rel="external nofollow noopener noreferrer">kernel economics</a></li>
-<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://turnoff.us/geek/intel-bug/"target="_blank" rel="external nofollow noopener noreferrer">intel bug</a></li>
+<li>tty / terminal</li>
+</ul>
+</li>
 </ul>
 <p>wiki:</p>
 <ul>
@@ -241,28 +250,113 @@
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://linux.cn/article-8771-1.html"target="_blank" rel="external nofollow noopener noreferrer">极客漫画: 不要使用 SIGKILL 的原因</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://man7.org/linux/man-pages/man2/wait.2.html"target="_blank" rel="external nofollow noopener noreferrer">wait</a> [Linux man page]</li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://man7.org/linux/man-pages/man7/signal.7.html"target="_blank" rel="external nofollow noopener noreferrer">signal</a> [Linux man page]</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://en.wikipedia.org/wiki/TUX_web_server"target="_blank" rel="external nofollow noopener noreferrer">TUX web server</a> [Wikipedia]
+-[x] <a href="https://en.wikipedia.org/wiki/Cron"target="_blank" rel="external nofollow noopener noreferrer">cron</a></li>
 </ul>
-<p><a href="https://en.wikipedia.org/wiki/Multics"target="_blank" rel="external nofollow noopener noreferrer">Multics</a> 采用了当时背景下的几乎所有的先进技术，可以参考该系统获取系统领域的灵感。</p>
+<div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><a href="https://en.wikipedia.org/wiki/Multics"target="_blank" rel="external nofollow noopener noreferrer">Multics</a> 采用了当时背景下的几乎所有的先进技术，可以参考该系统获取系统领域的灵感。</div>
+    </div>
+  </div>
 <p>虚拟内存管理与现代银行的运行逻辑类似，通过 <code>malloc</code> 分配的有效虚拟地址并不能保证真正可用，类似于支票得去银行兑现时才知道银行真正的现金储备。但是根据统计学公式，虚拟地址和银行现金可以保证在大部分情况下，都可以满足需求，当然突发的大规模虚拟内存使用、现金兑现时就无法保证了。这部分的原理推导需要学习概率论、统计学等数理课程。</p>
-<div class="details admonition info open">
+<div class="details admonition info">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
-      <div class="admonition-content"><ul>
+      <div class="admonition-content"><p>Linux 核心设计:</p>
+<ul>
 <li><a href="https://hackmd.io/@sysprog/linux-file-system"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心設計: 檔案系統概念及實作手法</a></li>
 <li><a href="https://hackmd.io/@sysprog/linux-process"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心設計: 不僅是個執行單元的 Process</a></li>
 <li><a href="https://hackmd.io/@sysprog/linux-scheduler"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心設計: 不只挑選任務的排程器</a></li>
 <li><a href="https://hackmd.io/@sysprog/unix-fork-exec"target="_blank" rel="external nofollow noopener noreferrer">UNIX 作業系統 fork/exec 系統呼叫的前世今生</a></li>
 <li><a href="https://hackmd.io/@sysprog/linux-memory"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心設計: 記憶體管理</a></li>
+<li><a href="https://hackmd.io/@sysprog/linux-dev-review"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心設計: 發展動態回顧</a></li>
+<li><a href="https://hackmd.io/@sysprog/linux-io-model/"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心設計: 針對事件驅動的 I/O 模型演化</a></li>
+<li><a href="https://hackmd.io/@sysprog/linux-scalability"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心設計: Scalability 議題</a></li>
+<li><a href="https://eecheng87.github.io/ESCA/"target="_blank" rel="external nofollow noopener noreferrer">Effective System Call Aggregation (ESCA)</a></li>
+<li><a href="https://hackmd.io/@sysprog/c-stream-io"target="_blank" rel="external nofollow noopener noreferrer">你所不知道的 C 語言: Stream I/O, EOF 和例外處理</a></li>
 </ul>
+<p>Unix-like 工具使用技巧:</p>
+<ul>
+<li><a href="https://www.moritz.systems/blog/mastering-unix-pipes-part-1/"target="_blank" rel="external nofollow noopener noreferrer">Mastering UNIX pipes, Part 1</a></li>
+<li><a href="https://www.moritz.systems/blog/mastering-unix-pipes-part-2/"target="_blank" rel="external nofollow noopener noreferrer">Mastering UNIX pipes, Part 2</a></li>
+</ul>
+</div>
+    </div>
+  </div>
+<h2 id="高阶观点">高阶观点</h2>
+<p>投影片: <a href="https://linux-kernel-labs.github.io/refs/heads/master/lectures/intro-slides.html"target="_blank" rel="external nofollow noopener noreferrer">Linux Kernel: Introduction</a> &#x2705;</p>
+<ul>
+<li>对投影片的 <a href="https://linux-kernel-labs.github.io/refs/heads/master/lectures/intro.html"target="_blank" rel="external nofollow noopener noreferrer">重点描述</a></li>
+</ul>
+<p>一些概念理解:</p>
+<ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://www.youtube.com/watch?v=Q07PhW5sCEk"target="_blank" rel="external nofollow noopener noreferrer">1963 Timesharing: A Solution to Computer Bottlenecks</a> [YouTube]</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://en.wikipedia.org/wiki/Supervisory_program"target="_blank" rel="external nofollow noopener noreferrer">Supervisory program</a> [Wikipedia]</li>
+</ul>
+<h3 id="虚拟化">虚拟化</h3>
+<p>MicroVM 和 Unikernel 都是使用 CPU 层级的虚拟化技术，在 Host OS 上面构建的 GuestOS:</p>
+<ul>
+<li>
+<p>MicroVM 会减少硬件驱动方面的初始化，从而加快启动和服务速度 (在云服务器方面很常见，服务器端并不需要进行硬件驱动)。</p>
+</li>
+<li>
+<p>Unikernel 则更激进，将 programs 和 kernel 一起进行动态编译，并且限制只能运行一个 process (例如只运行一个数据库进程，这样云服务器很常见)，这样就减少了一些系统调用的呼叫，例如 fork (因为只能运行一个 process)，提升了安全性 (因为 fork 系统调用可能会造成一些漏洞)。Unikernel 又叫 <a href="https://en.wikipedia.org/wiki/Unikernel"target="_blank" rel="external nofollow noopener noreferrer">Library OS</a>，可以理解为分时多人多工操作系统的另一个对立面，拥有极高的运行速度 (因为只有一个 process)。</p>
+</li>
+</ul>
+<p>Container Sandbox 使用的是 OS 层级的虚拟化技术，即它是将一组进程隔离起来构建为容器，这样可能会导致这一组进程就耗尽了系统的资源，其他进程无法使用系统的资源。同时因为是进程级的隔离，所以安全性不及 CPU 层级的 MicroVM 和 Unikernel。</p>
+<div class="details admonition info open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>相关演讲、录影:</p>
+<ul>
+<li>YouTube: <a href="https://youtu.be/-7GMHB3Plc8"target="_blank" rel="external nofollow noopener noreferrer">Inside the Mac OS X Kernel</a></li>
+<li>YouTube: <a href="https://youtu.be/4d0NIfuFLXc"target="_blank" rel="external nofollow noopener noreferrer">What Are MicroVMs? And Why Should I Care?</a></li>
+<li>YouTube: <a href="https://youtu.be/0v21hGvCDPY"target="_blank" rel="external nofollow noopener noreferrer">From the Ground Up: How We Built the Nanos Unikernel</a></li>
+</ul>
+<p>相关论文阅读:</p>
+</div>
+    </div>
+  </div>
+<h3 id="scalability">Scalability</h3>
+<p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Scalability"target="_blank" rel="external nofollow noopener noreferrer">scalability</a></p>
+<blockquote>
+<p>A system whose performance improves after adding hardware, proportionally to the capacity added, is said to be a scalable system.</p>
+</blockquote>
+<ul>
+<li>lock-free</li>
+<li>sequence lock</li>
+<li>RCU</li>
+<li>algorithm complexity</li>
+</ul>
+<h2 id="细节切入点">细节切入点</h2>
+<p>CPU 和 OS 的基本概念科普网站:</p>
+<ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://cpu.land/"target="_blank" rel="external nofollow noopener noreferrer">Putting the “You” in CPU</a></li>
+</ul>
+<blockquote>
+<p>相当于科普版 CSAPP</p>
+</blockquote>
+<div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>UNSW COMP9242: <a href="https://www.cse.unsw.edu.au/~cs9242/23/lectures.shtml"target="_blank" rel="external nofollow noopener noreferrer">Advanced Operating Systems</a> (2023/T3)</p>
+<p>这门课可以作为辅助材料，讲得深入浅出，可以作为进阶材料阅读。</p>
 </div>
     </div>
   </div></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-02-15 16:23:42">更新于 2024-02-15&nbsp;</span>
+        <span title="更新于 2024-02-16 20:29:31">更新于 2024-02-16&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/linux-concepts/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -287,10 +381,11 @@
     </section>
   </div>
 
-  <div class="post-nav"><a href="/posts/iterators/" class="post-nav-item" rel="prev" title="Crust of Rust: Iterators"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Crust of Rust: Iterators</a></div>
+  <div class="post-nav"><a href="/posts/iterators/" class="post-nav-item" rel="prev" title="Crust of Rust: Iterators"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Crust of Rust: Iterators</a>
+      <a href="/posts/linux2018-quiz4/" class="post-nav-item" rel="next" title="Linux 核心设计: 2018 第 4 周测验题">Linux 核心设计: 2018 第 4 周测验题<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

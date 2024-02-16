@@ -101,11 +101,26 @@ Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contai
 
 - [x] [Intrusive linked lists](https://www.data-structures-in-practice.com/intrusive-linked-lists/)
 > 这篇文章对于 Intrusive linked list 说明的非常好，解释了其在 memory allocations 和 cache thrashing 的优势，还搭配 Linux kernel 讲解了场景应用。
+
 - [ ] [Linux 核心原始程式碼巨集: container_of](https://hackmd.io/@sysprog/linux-macro-containerof)
+
 - [x] [sysprog21/linux-list](https://github.com/sysprog21/linux-list)
 > 这个仓库将 Linux kernel 中 linked list 部分抽离出来，并改写为 user mode 的实作。本人对该仓库进行了一些改写，对 insert sort 和 quick sort 增加了 makefile 支持。
+
 - [x] [Optimized QuickSort: C Implementation (Non-Recursive)](https://alienryderflex.com/quicksort/)
 > 这篇文章介绍了 non-recursion 的 quick sort 在 array 上的实作，参考该文章完成 linked list 上的 non-recursion 的 quick sort 实作。
+
+### Linux 核心的 list_sort 实作 
+
+[linux/list_sort.c](https://github.com/torvalds/linux/blob/master/lib/list_sort.c)
+
+先将双向循环链表转换成单向链表，然后利用链表节点的 `prev` 来挂载 pending list (因为单向链表中 `prev` 没有作用，但是链表节点仍然存在 `prev` 字段，所以进行充分利用)。
+
+- 假设 `count` 对应的 `bits` 第 k 个 bit 值为 0 且 $> k$ 的 bits 都为 0，$< k$ 的 bits 都为 1，则 $< k $ 的这些 1 可以表示 pending list 中分别有 $2^{k-1}, 2^{k-2}, ..., 2^0$ 大小的 list 各一个。
+
+- 如果第 k 个 bit 值为 0 且 $> k$ 的 bits 中存在值为 1 的 bit，$< k$ 的 bits 均为 1，则只有 $< k$ 的 bits 可以表示 pending list 中分别有 $2^{k-1}, 2^{k-2}, ..., 2^0$ 大小的 list 各一个，`> k` 的 1 表示需要进行 merge 以获得对应大小的 list。
+
+这样也刚好能使得 merge 时是 $2: 1$ 的长度比例，因为 2 的指数之间的比例是 $2: 1$。
 
 {{< admonition info >}}
 - [List, HList, and Hash Table](https://danielmaker.github.io/blog/linux/list_hlist_hashtable.html)
@@ -116,6 +131,8 @@ Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contai
 - [WRITE_ONCE in linux kernel lists](https://stackoverflow.com/questions/34988277/write-once-in-linux-kernel-lists) [Stack Overflow]
 - [lib/list_sort: Optimize number of calls to comparison function](https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg1957556.html)
 {{< /admonition >}}
+
+## Fisher–Yates shuffle
 
 
 ---

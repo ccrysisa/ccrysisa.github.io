@@ -243,6 +243,18 @@ findName() 0.006495 0.002938 0.000001
 
 - [Youtube - gnuplot Tutorlal](https://youtu.be/9k-l_ol9jok) 这个教程有五部影片，到发布者的主页搜寻即可。
 
+## Graphviz
+
+[官方网站](https://graphviz.org/)
+
+安装:
+
+```bash
+$ sudo apt install graphviz
+```
+
+第一周的 linked list 专项测验题会大量使用到。
+
 ## 其它工具
 
 ### cloc

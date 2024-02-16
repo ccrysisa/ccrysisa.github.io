@@ -4,7 +4,15 @@
     <link>https://ccrysisa.github.io/categories/linux-kernel-internals/</link>
     <description>Linux Kernel Internals - 分类 - KZn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 15 Feb 2024 12:51:49 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/linux-kernel-internals/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 16 Feb 2024 14:59:25 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/linux-kernel-internals/" rel="self" type="application/rss+xml" /><item>
+  <title>Linux 核心设计: 2018 第 4 周测验题</title>
+  <link>https://ccrysisa.github.io/posts/linux2018-quiz4/</link>
+  <pubDate>Fri, 16 Feb 2024 14:59:25 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/linux2018-quiz4/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>Linux 核心设计: 操作系统术语及概念</title>
   <link>https://ccrysisa.github.io/posts/linux-concepts/</link>
   <pubDate>Thu, 15 Feb 2024 12:51:49 &#43;0800</pubDate>
