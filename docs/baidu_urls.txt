@@ -1,3 +1,4 @@
+https://ccrysisa.github.io/posts/rust-tcp/
 https://ccrysisa.github.io/posts/linux2018-quiz4/
 https://ccrysisa.github.io/posts/linux-concepts/
 https://ccrysisa.github.io/posts/iterators/

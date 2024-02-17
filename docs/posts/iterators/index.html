@@ -14,7 +14,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
 In this third Crust of Rust video, we cover iterators and trait bounds, by re-implementing the &ldquo;flatten&rdquo; Iterator method from the standard library. As part of that, we cover some of the weirder trait bounds that are required, including what&rsquo;s needed to extend the implementation to support backwards iteration.
 "><meta itemprop="datePublished" content="2024-02-05T17:18:34+08:00" />
 <meta itemprop="dateModified" content="2024-02-17T00:47:26+08:00" />
-<meta itemprop="wordCount" content="551"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="621"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Iterator," /><meta property="og:title" content="Crust of Rust: Iterators" />
 <meta property="og:description" content="
 In this third Crust of Rust video, we cover iterators and trait bounds, by re-implementing the &ldquo;flatten&rdquo; Iterator method from the standard library. As part of that, we cover some of the weirder trait bounds that are required, including what&rsquo;s needed to extend the implementation to support backwards iteration.
@@ -43,7 +43,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/iterators\/"
-    },"genre": "posts","keywords": "Rust, Iterator","wordcount":  551 ,
+    },"genre": "posts","keywords": "Rust, Iterator","wordcount":  621 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/iterators\/","datePublished": "2024-02-05T17:18:34+08:00","dateModified": "2024-02-17T00:47:26+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -159,7 +159,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-05 17:18:34"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="更新于 2024-02-17 00:47:26"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-17">2024-02-17</time></span>&nbsp;<span title="551 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-05 17:18:34"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="更新于 2024-02-17 00:47:26"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-17">2024-02-17</time></span>&nbsp;<span title="621 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -174,6 +174,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
         <li><a href="#doubleendediterator">DoubleEndedIterator</a></li>
       </ul>
     </li>
+    <li><a href="#homework">Homework</a></li>
     <li><a href="#documentations">Documentations</a></li>
     <li><a href="#crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html">std</a></a></li>
     <li><a href="#references">References</a></li>
@@ -228,15 +229,36 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
 </div>
 </div><p>这两条 for 语句虽然效果一样，但是后者是使用 <code>&lt;&amp;vs&gt; into_iter</code> 讲 <code>&amp;vs</code> 转为 iterator，而不是调用 <code>iter()</code> 方法。</p>
 <h3 id="iteratorflatten">Iterator::flatten</h3>
+<p>method <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flatten"target="_blank" rel="external nofollow noopener noreferrer">std::iter::Iterator::flatten</a></p>
 <blockquote>
 <p>Creates an iterator that flattens nested structure.</p>
 <p>This is useful when you have an iterator of iterators or an iterator of things that can be turned into iterators and you want to remove one level of indirection.</p>
 </blockquote>
 <p><code>flatten()</code> 的本质是将一种 Iterator 类型转换成另一种 Iterator 类型，所以调用者和返回值 <code>Flatten</code> 都满足 trait Iterator，因为都是迭代器，只是将原先的 n-level 压扁为 1-level 的 Iterator 了。录影视频里只考虑 2-level 的情况。</p>
 <h3 id="doubleendediterator">DoubleEndedIterator</h3>
+<p>Trait <a href="https://doc.rust-lang.org/std/iter/trait.DoubleEndedIterator.html"target="_blank" rel="external nofollow noopener noreferrer">std::iter::DoubleEndedIterator</a></p>
 <blockquote>
 <p>It is important to note that both back and forth work on the same range, and do not cross: iteration is over when they meet in the middle.</p>
 </blockquote>
+<p>也就是说，back 和 front 的迭代器类似于双指针，但是这两个迭代器并不会越过对方。</p>
+<h2 id="homework">Homework</h2>
+<div class="details admonition info open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>实作说明:</p>
+<ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 尝试实现 Iterator 的 <code>flat_map</code> 方法</li>
+</ul>
+<p>参考资料:</p>
+<ul>
+<li>method <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flat_map"target="_blank" rel="external nofollow noopener noreferrer">std::iter::Iterator::flat_map</a></li>
+<li>struct <a href="https://doc.rust-lang.org/std/iter/struct.FlatMap.html"target="_blank" rel="external nofollow noopener noreferrer">std::iter::FlatMap</a></li>
+</ul>
+</div>
+    </div>
+  </div>
 <h2 id="documentations">Documentations</h2>
 <p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>
@@ -283,7 +305,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
 </ul>
 <h2 id="references">References</h2>
 <ul>
-<li><a href="https://stackoverflow.com/questions/34733811/what-is-the-difference-between-iter-and-into-iter"target="_blank" rel="external nofollow noopener noreferrer">What is the difference between iter and into_iter?</a></li>
+<li><a href="https://stackoverflow.com/questions/34733811/what-is-the-difference-between-iter-and-into-iter"target="_blank" rel="external nofollow noopener noreferrer">What is the difference between iter and into_iter?</a> [Stack Overflow]</li>
 </ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">

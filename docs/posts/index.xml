@@ -4,7 +4,17 @@
     <link>https://ccrysisa.github.io/posts/</link>
     <description>所有文章 | KZn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 16 Feb 2024 14:59:25 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 17 Feb 2024 19:01:53 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+  <title>Implementing TCP/IP in Rust</title>
+  <link>https://ccrysisa.github.io/posts/rust-tcp/</link>
+  <pubDate>Sat, 17 Feb 2024 19:01:53 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/rust-tcp/</guid>
+  <description><![CDATA[<blockquote>
+<p>In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — <a href="https://tools.ietf.org/html/rfc793"target="_blank" rel="external nofollow noopener noreferrer">https://tools.ietf.org/html/rfc793</a> — which describes the original protocol, with the goal of being able to set up and tear down a connection with a &ldquo;real&rdquo; TCP stack at the other end (netcat in particular). We&rsquo;re writing it using a user-space networking interface (see <a href="https://www.kernel.org/doc/Documentation/networking/tuntap.txt"target="_blank" rel="external nofollow noopener noreferrer">https://www.kernel.org/doc/Documentation/networking/tuntap.txt</a> and the Rust bindings at <a href="https://docs.rs/tun-tap/%29"target="_blank" rel="external nofollow noopener noreferrer">https://docs.rs/tun-tap/)</a>.</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>Linux 核心设计: 2018 第 4 周测验题</title>
   <link>https://ccrysisa.github.io/posts/linux2018-quiz4/</link>
   <pubDate>Fri, 16 Feb 2024 14:59:25 &#43;0800</pubDate>
@@ -85,14 +95,6 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/nycu-statistics/</guid>
   <description><![CDATA[<p>随机变量 (Random Variable) 是概率 (Probability) 和统计 (Statistics) 的“灵魂”，从数学上讲，Random Variable 是连接 Probability 和 Statistics 的桥梁；从实际上讲，Random Variable 表示我们所关心、期望的东西。例如一批产品的硬度，每个产品的硬度显然是不同的、是随机的，尽管硬度是随机的，但产品的硬度遵循一定的概率规律，这种随机、但却遵循一定概率规律的东西，就是 Random Value。</p>]]></description>
-</item>
-<item>
-  <title>GDB 调试入门</title>
-  <link>https://ccrysisa.github.io/posts/debug-gdb/</link>
-  <pubDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/debug-gdb/</guid>
-  <description><![CDATA[<p>大型开源项目的规模十分庞大，例如使用 Rust 编写的 Servo 浏览器，这个项目有近十万行代码。在开发规模如此庞大的项目时，了解如何通过正确的方式进行调试非常重要，因为这样可以帮助开发者快速地找到瓶颈。</p>]]></description>
 </item>
 </channel>
 </rss>

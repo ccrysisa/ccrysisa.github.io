@@ -159,14 +159,15 @@ Rust 中的 macro 无法限制传入参数的 Trait，例如不能限制参数�
 ## Homework
 
 {{< admonition info >}}
-- [x] 尝试使用 declarative macro 来实现 HashMap 的初始化语法 [My Implementation](https://github.com/ccrysisa/rusty/tree/main/hmapmac)
+实作说明:
+
+- [x] 尝试使用 declarative macro 来实现 HashMap 的初始化语法 (Github: [My Implementation](https://github.com/ccrysisa/rusty/tree/main/hmapmac))
 - [x] 尝试阅读 `vec` macro 在 std 库的实现 [Macro std::vec](https://doc.rust-lang.org/src/alloc/macros.rs.html#42)
-{{< /admonition >}}
 
-
-作业的一些参考资料:
+参考资料:
 
 - Struct [std::collections::HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)
+{{< /admonition >}}
 
 ## Documentations
 

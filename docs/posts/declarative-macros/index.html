@@ -14,7 +14,7 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
 In this second Crust of Rust video, we cover declarative macros, macro_rules!, by re-implementing the vec! macro from the standard library. As part of that, we cover not only how to write these, but some of the gotchas and tricks you&rsquo;ll run into, and some common use-cases.
 "><meta itemprop="datePublished" content="2024-01-31T22:32:27+08:00" />
 <meta itemprop="dateModified" content="2024-02-05T18:40:18+08:00" />
-<meta itemprop="wordCount" content="1545"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1546"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Macro,Declarative Macros," /><meta property="og:title" content="Crust of Rust: Declarative Macros" />
 <meta property="og:description" content="
 In this second Crust of Rust video, we cover declarative macros, macro_rules!, by re-implementing the vec! macro from the standard library. As part of that, we cover not only how to write these, but some of the gotchas and tricks you&rsquo;ll run into, and some common use-cases.
@@ -43,7 +43,7 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/declarative-macros\/"
-    },"genre": "posts","keywords": "Rust, Macro, Declarative Macros","wordcount":  1545 ,
+    },"genre": "posts","keywords": "Rust, Macro, Declarative Macros","wordcount":  1546 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/declarative-macros\/","datePublished": "2024-01-31T22:32:27+08:00","dateModified": "2024-02-05T18:40:18+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -159,7 +159,7 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-01-31 22:32:27"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-31">2024-01-31</time></span>&nbsp;<span title="更新于 2024-02-05 18:40:18"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="1545 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-01-31 22:32:27"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-31">2024-01-31</time></span>&nbsp;<span title="更新于 2024-02-05 18:40:18"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="1546 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -412,17 +412,18 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
       <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
-      <div class="admonition-content"><ul>
-<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 尝试使用 declarative macro 来实现 HashMap 的初始化语法 <a href="https://github.com/ccrysisa/rusty/tree/main/hmapmac"target="_blank" rel="external nofollow noopener noreferrer">My Implementation</a></li>
+      <div class="admonition-content"><p>实作说明:</p>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 尝试使用 declarative macro 来实现 HashMap 的初始化语法 (Github: <a href="https://github.com/ccrysisa/rusty/tree/main/hmapmac"target="_blank" rel="external nofollow noopener noreferrer">My Implementation</a>)</li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 尝试阅读 <code>vec</code> macro 在 std 库的实现 <a href="https://doc.rust-lang.org/src/alloc/macros.rs.html#42"target="_blank" rel="external nofollow noopener noreferrer">Macro std::vec</a></li>
+</ul>
+<p>参考资料:</p>
+<ul>
+<li>Struct <a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html"target="_blank" rel="external nofollow noopener noreferrer">std::collections::HashMap</a></li>
 </ul>
 </div>
     </div>
   </div>
-<p>作业的一些参考资料:</p>
-<ul>
-<li>Struct <a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html"target="_blank" rel="external nofollow noopener noreferrer">std::collections::HashMap</a></li>
-</ul>
 <h2 id="documentations">Documentations</h2>
 <p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>

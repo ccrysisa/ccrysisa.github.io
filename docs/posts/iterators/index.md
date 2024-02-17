@@ -38,6 +38,7 @@ for v in &vs {
 
 ### Iterator::flatten
 
+method [std::iter::Iterator::flatten](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flatten)
 > Creates an iterator that flattens nested structure.
 > 
 > This is useful when you have an iterator of iterators or an iterator of things that can be turned into iterators and you want to remove one level of indirection.
@@ -46,7 +47,21 @@ for v in &vs {
 
 ### DoubleEndedIterator
 
+Trait [std::iter::DoubleEndedIterator](https://doc.rust-lang.org/std/iter/trait.DoubleEndedIterator.html)
 > It is important to note that both back and forth work on the same range, and do not cross: iteration is over when they meet in the middle.
+
+也就是说，back 和 front 的迭代器类似于双指针，但是这两个迭代器并不会越过对方。
+
+## Homework
+
+{{< admonition info >}}
+实作说明:
+- [ ] 尝试实现 Iterator 的 `flat_map` 方法
+
+参考资料:
+- method [std::iter::Iterator::flat_map](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flat_map)
+- struct [std::iter::FlatMap](https://doc.rust-lang.org/std/iter/struct.FlatMap.html)
+{{< /admonition >}}
 
 ## Documentations
 
@@ -81,7 +96,7 @@ for v in &vs {
 
 ## References
 
-- [What is the difference between iter and into_iter?](https://stackoverflow.com/questions/34733811/what-is-the-difference-between-iter-and-into-iter)
+- [What is the difference between iter and into_iter?](https://stackoverflow.com/questions/34733811/what-is-the-difference-between-iter-and-into-iter) [Stack Overflow]
 
 
 ---
