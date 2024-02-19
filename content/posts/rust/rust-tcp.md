@@ -166,6 +166,23 @@ $ sudo tshark -i tun0
 
 ### TCP
 
+[RFC 793] 3.2 Terminology
+
+> The state diagram in figure 6 illustrates only state changes, together
+with the causing events and resulting actions, but addresses neither
+error conditions nor actions which are not connected with state
+changes. 
+
+这里面提到的 Figure 6. TCP Connection State Diagram 在其中我们可以看到 TCP 的状态转换，非常有利于直观理解 TCP 建立连接时的三次握手过程。
+
+{{< admonition warning >}}
+NOTE BENE:  this diagram is only a summary and must not be taken as the total specification.
+{{< /admonition >}}
+
+[Time to live](https://en.wikipedia.org/wiki/Time_to_live#:~:text=In%20the%20IPv4%20header%2C%20TTL,recommended%20initial%20value%20is%2064.) [Wikipedia]
+> In the IPv4 header, TTL is the 9th octet of 20. In the IPv6 header, it is the 8th octet of 40. The maximum TTL value is 255, the maximum value of a single octet. A recommended initial value is 64.
+
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
@@ -197,8 +214,10 @@ $ sudo tshark -i tun0
 
 ### Crate [etherparse](https://docs.rs/etherparse/latest/etherparse/index.html)
 
-- Struct [etherparse::Ipv4Header](https://docs.rs/etherparse/latest/etherparse/struct.Ipv4Header.html)
 - Struct [etherparse::Ipv4HeaderSlice](https://docs.rs/etherparse/latest/etherparse/struct.Ipv4HeaderSlice.html)
+- Struct [etherparse::Ipv4Header](https://docs.rs/etherparse/latest/etherparse/struct.Ipv4Header.html)
+- Struct [etherparse::TcpHeaderSlice](https://docs.rs/etherparse/latest/etherparse/struct.TcpHeaderSlice.html)
+- Struct [etherparse::TcpHeader](https://docs.rs/etherparse/latest/etherparse/struct.TcpHeader.html)
 
 ## References
 

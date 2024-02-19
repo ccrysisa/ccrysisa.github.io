@@ -13,8 +13,8 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
 <meta itemprop="description" content="
 In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — https://tools.ietf.org/html/rfc793 — which describes the original protocol, with the goal of being able to set up and tear down a connection with a &ldquo;real&rdquo; TCP stack at the other end (netcat in particular). We&rsquo;re writing it using a user-space networking interface (see https://www.kernel.org/doc/Documentation/networking/tuntap.txt and the Rust bindings at https://docs.rs/tun-tap/).
 "><meta itemprop="datePublished" content="2024-02-17T19:01:53+08:00" />
-<meta itemprop="dateModified" content="2024-02-18T00:02:39+08:00" />
-<meta itemprop="wordCount" content="576"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-02-19T00:03:35+08:00" />
+<meta itemprop="wordCount" content="1469"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,TCP,Network," /><meta property="og:title" content="Implementing TCP/IP in Rust" />
 <meta property="og:description" content="
 In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — https://tools.ietf.org/html/rfc793 — which describes the original protocol, with the goal of being able to set up and tear down a connection with a &ldquo;real&rdquo; TCP stack at the other end (netcat in particular). We&rsquo;re writing it using a user-space networking interface (see https://www.kernel.org/doc/Documentation/networking/tuntap.txt and the Rust bindings at https://docs.rs/tun-tap/).
@@ -22,7 +22,7 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/rust-tcp/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-17T19:01:53+08:00" />
-<meta property="article:modified_time" content="2024-02-18T00:02:39+08:00" />
+<meta property="article:modified_time" content="2024-02-19T00:03:35+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Implementing TCP/IP in Rust"/>
@@ -43,8 +43,8 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/rust-tcp\/"
-    },"genre": "posts","keywords": "Rust, TCP, Network","wordcount":  576 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/rust-tcp\/","datePublished": "2024-02-17T19:01:53+08:00","dateModified": "2024-02-18T00:02:39+08:00","publisher": {
+    },"genre": "posts","keywords": "Rust, TCP, Network","wordcount":  1469 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/rust-tcp\/","datePublished": "2024-02-17T19:01:53+08:00","dateModified": "2024-02-19T00:03:35+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -159,7 +159,7 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-17 19:01:53"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-17">2024-02-17</time></span>&nbsp;<span title="更新于 2024-02-18 00:02:39"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-18">2024-02-18</time></span>&nbsp;<span title="576 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-17 19:01:53"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-17">2024-02-17</time></span>&nbsp;<span title="更新于 2024-02-19 00:03:35"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-19">2024-02-19</time></span>&nbsp;<span title="1469 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -170,14 +170,17 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
     <li><a href="#影片注解-part-1">影片注解 Part 1</a>
       <ul>
         <li><a href="#raw-socket-vs-tuntap-device">Raw socket vs TUN/TAP device</a></li>
+        <li><a href="#setcap">setcap</a></li>
+        <li><a href="#endianness">Endianness</a></li>
+        <li><a href="#ip">IP</a></li>
+        <li><a href="#tcp">TCP</a></li>
       </ul>
     </li>
-    <li><a href="#ip-procotol">IP procotol</a></li>
-    <li><a href="#setcap">setcap</a></li>
     <li><a href="#documentations">Documentations</a>
       <ul>
         <li><a href="#crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html">std</a></a></li>
         <li><a href="#crate-tun_taphttpsdocsrstun-taplatesttun_tap">Crate <a href="https://docs.rs/tun-tap/latest/tun_tap/">tun_tap</a></a></li>
+        <li><a href="#crate-etherparsehttpsdocsrsetherparselatestetherparseindexhtml">Crate <a href="https://docs.rs/etherparse/latest/etherparse/index.html">etherparse</a></a></li>
       </ul>
     </li>
     <li><a href="#references">References</a></li>
@@ -198,7 +201,6 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
 <li><a href="https://stackoverflow.com/questions/41343802/raw-socket-vs-tun-device"target="_blank" rel="external nofollow noopener noreferrer">Raw socket vs TUN device</a> [Stack Overflow]</li>
 <li><a href="https://www.kernel.org/doc/Documentation/networking/tuntap.txt"target="_blank" rel="external nofollow noopener noreferrer">Universal TUN/TAP device driver</a> [Linux kernel documentation]</li>
 </ul>
-<a class="lightgallery" href="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=large" data-thumbnail="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=small" data-sub-html="<h2>https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png</h2>"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png" srcset="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=small, https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=medium 1.5x, https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=large 2x" sizes="auto" data-title="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png" data-alt="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>Raw socket:</p>
 <ul>
 <li>Internet &ndash;&gt; NIC &ndash;&gt; kernel &ndash;&gt; user space</li>
@@ -215,16 +217,34 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
 <blockquote>
 <p>Kernel interact with programs in user space in the same host.</p>
 </blockquote>
-<h2 id="ip-procotol">IP procotol</h2>
-<p>因为 TUN 只是在 Network layer 的虚拟设备 (TAP 则是 Data link layer 层)，所以需要手动解析 IP 封包。</p>
-<p><a href="https://datatracker.ietf.org/doc/html/rfc791"target="_blank" rel="external nofollow noopener noreferrer">RFC 791</a> 3.1. Internet Header Format</p>
-<h2 id="setcap">setcap</h2>
+<a class="lightgallery" href="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=large" data-thumbnail="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=small" data-sub-html="<h2>https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png</h2>"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png" srcset="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=small, https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=medium 1.5x, https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=large 2x" sizes="auto" data-title="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png" data-alt="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<blockquote>
+<p>和其他物理网卡一样，用户进程创建的 TUN/TAP 设备仍然是被 kernel 所拥有的 (kernel 可以使用设备进行发送/接收)，只不过用户进程也可以像操作 <strong>管道 (pipe)</strong> 那样，操作所创建的 TUN/TAP 设备 (可以使用该设备进行发送/接收)，从而与 kernel 的物理网卡进行通信。</p>
+</blockquote>
+<p>Universal TUN/TAP device driver [Linux kernel documentation]</p>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">3.2 Frame format:   
+</span></span><span class="line"><span class="cl">If flag IFF_NO_PI is not set each frame format is:   
+</span></span><span class="line"><span class="cl">    Flags [2 bytes]   
+</span></span><span class="line"><span class="cl">    Proto [2 bytes]   
+</span></span><span class="line"><span class="cl">    Raw protocol(IP, IPv6, etc) frame.   </span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过 TUN/TAP 设备接收的封包，会拥有 Flags 和 Proto 这两个字段 (共 4 个字节，这也是 iface 的 <code>without_packet_info</code> 和 <code>recv</code> 方法所描述的 prepended packet info)，然后才是原始协议的 frame。其中的 Proto 字段是 <a href="https://en.wikipedia.org/wiki/EtherType"target="_blank" rel="external nofollow noopener noreferrer">EtherType</a> [Wikipedia]，可以根据里面的 values 来判断接受封包的协议类型 (0x0800 表示 IPv4，0x86DD 表示 IPv6)。</p>
+<h3 id="setcap">setcap</h3>
 <ul>
 <li><a href="https://man7.org/linux/man-pages/man8/setcap.8.html"target="_blank" rel="external nofollow noopener noreferrer">setcap</a> [Linux manual page]</li>
 <li><a href="https://man7.org/linux/man-pages/man3/cap_from_text.3.html"target="_blank" rel="external nofollow noopener noreferrer">cap_from_text</a> [Linux manual page]</li>
 </ul>
 <p>因为 TUN/TAP 是由 kernel 提供的，所以需要赋予我们项目的可执行文件权限，使它能访问我们创建的 TUN/TAP 设备 (为了简单起见，下面只列出 release 版本的方法，debug 版本的方法类似)。</p>
-<div class="highlight" id="id-1"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -242,16 +262,109 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
 </span></span><span class="line"><span class="cl">$ cargo run --release</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在另一终端输入命令 <code>ip addr</code> 就可以看到此时会多出一个名为 <code>tun0</code> 的设备，这正是我们创建的 TUN 设备。</p>
-<div class="highlight" id="id-2"><div class="chroma">
+<ul>
+<li><a href="https://man7.org/linux/man-pages/man8/ip-address.8.html"target="_blank" rel="external nofollow noopener noreferrer">ip-address</a> [Linux manual page]</li>
+<li><a href="https://man7.org/linux/man-pages/man8/ip-link.8.html"target="_blank" rel="external nofollow noopener noreferrer">ip-link</a> [Linux manual page]</li>
+</ul>
+<p>在另一个终端中输入:</p>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 列出当前所有的网络设备</span>
+</span></span><span class="line"><span class="cl">$ ip addr
+</span></span><span class="line"><span class="cl"><span class="c1"># 配置设备 tun0 的 IP 地址</span>
+</span></span><span class="line"><span class="cl">$ sudo ip addr add 192.168.0.1/24 dev tun0
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动设备 tun0</span>
+</span></span><span class="line"><span class="cl">$ sudo ip link <span class="nb">set</span> up dev tun0</span></span></code></pre></td></tr></table>
+</div>
+</div><p>每次编译后都需要执行一遍这个流程 (因为重新编译生成的可执行文件需要重新设置权限)，我们将这些流程的逻辑写成一个脚本 <a href="">run.sh</a>。这个脚本为了输出的美观性增加了额外逻辑，例如将 trust 放在后台执行，将脚本设置为等待 trust 执行完成后才结束执行。</p>
+<h3 id="endianness">Endianness</h3>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Endianness"target="_blank" rel="external nofollow noopener noreferrer">Endianness</a> [Wikipedia]</li>
+<li><a href="https://stackoverflow.com/questions/13514614/why-is-network-byte-order-defined-to-be-big-endian"target="_blank" rel="external nofollow noopener noreferrer">Why is network-byte-order defined to be big-endian?</a> [Stack Overflow]</li>
+</ul>
+<p>Rust 提供了 Trait <a href="https://doc.rust-lang.org/std/simd/trait.ToBytes.html#"target="_blank" rel="external nofollow noopener noreferrer">std::simd::ToBytes</a> 用于大小端字节序之间的相互转换，方法 <code>from_be_bytes</code> 是将大端字节序的一系列字节转换成对应表示的数值。</p>
+<h3 id="ip">IP</h3>
+<p>因为 TUN 只是在 Network layer 的虚拟设备 (TAP 则是 Data link layer 层)，所以需要手动解析 IP 封包。</p>
+<ul>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc791"target="_blank" rel="external nofollow noopener noreferrer">RFC 791</a> 3.1. Internet Header Format</li>
+<li><a href="https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers"target="_blank" rel="external nofollow noopener noreferrer">List of IP protocol numbers</a> [Wikipedia]</li>
+</ul>
+<p>可以按照上面的格式来解析封包头，也可以引入 Crate <a href="https://docs.rs/etherparse/latest/etherparse/index.html"target="_blank" rel="external nofollow noopener noreferrer">etherparse</a> 来解析 IP 封包头。</p>
+<p>ping 命令使用的是 Network layer 上的 ICMP 协议，可以用于测试 TUN 是否成功配置并能接收封包。</p>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ping -I tun0 192.168.0.2</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><a href="https://en.wikipedia.org/wiki/Ping_%28networking_utility%29"target="_blank" rel="external nofollow noopener noreferrer">ping (networking utility)</a> [Wikipedia]</li>
+<li><a href="https://linux.die.net/man/8/ping"target="_blank" rel="external nofollow noopener noreferrer">ping</a> [Linux man page]</li>
+</ul>
+<p>nc 命令用于发送 TCP 封包</p>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ nc 192.168.0.2 <span class="m">80</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><a href="https://linux.die.net/man/1/nc"target="_blank" rel="external nofollow noopener noreferrer">nc</a> [Linux man page]</li>
+</ul>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">ping, nc 这些命令使用的都是 kernel 的协议栈来实现，所以在创建虚拟设备 tun0 之后，使用以上 ping, nc 命令表示 kernel 发送相应的 ICMP, TCP 封包给创建 tun0 的进程 (process)。</div>
+    </div>
+  </div>
+<p>可以使用 tshark (Terminal Wireshark) 工具来抓包，配合 ping,nc 命令可以分析 tun0 的封包传送。</p>
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo ip addr add 192.168.0.1/24 dev tun0
-</span></span><span class="line"><span class="cl">$ sudo ip link <span class="nb">set</span> up dev tun0</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install tshark
+</span></span><span class="line"><span class="cl">$ sudo tshark -i tun0</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="documentations">Documentations</h2>
+</div><ul>
+<li><a href="https://en.wikipedia.org/wiki/Wireshark"target="_blank" rel="external nofollow noopener noreferrer">Wireshark</a> [Wikipedia]</li>
+<li><a href="https://www.wireshark.org/docs/man-pages/tshark.html"target="_blank" rel="external nofollow noopener noreferrer">tshark</a> [Manual Page]</li>
+</ul>
+<h3 id="tcp">TCP</h3>
+<p>[RFC 793] 3.2 Terminology</p>
+<blockquote>
+<p>The state diagram in figure 6 illustrates only state changes, together
+with the causing events and resulting actions, but addresses neither
+error conditions nor actions which are not connected with state
+changes.</p>
+</blockquote>
+<p>这里面提到的 Figure 6. TCP Connection State Diagram 在其中我们可以看到 TCP 的状态转换，非常有利于直观理解 TCP 建立连接时的三次握手过程。</p>
+<div class="details admonition warning open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-exclamation-triangle fa-fw" aria-hidden="true"></i>警告<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">NOTE BENE:  this diagram is only a summary and must not be taken as the total specification.</div>
+    </div>
+  </div>
+<p><a href="https://en.wikipedia.org/wiki/Time_to_live#:~:text=In%20the%20IPv4%20header%2C%20TTL,recommended%20initial%20value%20is%2064."target="_blank" rel="external nofollow noopener noreferrer">Time to live</a> [Wikipedia]</p>
+<blockquote>
+<p>In the IPv4 header, TTL is the 9th octet of 20. In the IPv6 header, it is the 8th octet of 40. The maximum TTL value is 255, the maximum value of a single octet. A recommended initial value is 64.</p>
+</blockquote>
+<h2 id="documentations">Documentations</h2>
 <p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>
 <p>学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料</p>
@@ -265,15 +378,38 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
 </ul>
 </li>
 <li>
+<p>Module <a href="">std::collections::hash_map</a></p>
+<ul>
+<li>method <a href="https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html#method.entry"target="_blank" rel="external nofollow noopener noreferrer">std::collections::hash_map::HashMap::entry</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/collections/hash_map/enum.Entry.html#method.or_default"target="_blank" rel="external nofollow noopener noreferrer">std::collections::hash_map::Entry::or_default</a></li>
+</ul>
+</li>
+<li>
+<p>Trait <a href="https://doc.rust-lang.org/std/default/trait.Default.html"target="_blank" rel="external nofollow noopener noreferrer">std::default::Default</a></p>
+</li>
+<li>
+<p>Module <a href="https://doc.rust-lang.org/std/net/index.html"target="_blank" rel="external nofollow noopener noreferrer">std::net</a></p>
+</li>
+<li>
 <p>Macro <a href="https://doc.rust-lang.org/std/macro.eprintln.html"target="_blank" rel="external nofollow noopener noreferrer">std::eprintln</a></p>
 </li>
 <li>
 <p>method <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.expect"target="_blank" rel="external nofollow noopener noreferrer">std::result::Result::expect</a></p>
 </li>
+<li>
+<p>method <a href="https://doc.rust-lang.org/std/primitive.u16.html#method.from_be_bytes"target="_blank" rel="external nofollow noopener noreferrer">u16::from_be_bytes</a></p>
+</li>
 </ul>
 <h3 id="crate-tun_taphttpsdocsrstun-taplatesttun_tap">Crate <a href="https://docs.rs/tun-tap/latest/tun_tap/"target="_blank" rel="external nofollow noopener noreferrer">tun_tap</a></h3>
 <ul>
 <li>Enum <a href="https://docs.rs/tun-tap/latest/tun_tap/enum.Mode.html"target="_blank" rel="external nofollow noopener noreferrer">tun_tap::Mode</a></li>
+</ul>
+<h3 id="crate-etherparsehttpsdocsrsetherparselatestetherparseindexhtml">Crate <a href="https://docs.rs/etherparse/latest/etherparse/index.html"target="_blank" rel="external nofollow noopener noreferrer">etherparse</a></h3>
+<ul>
+<li>Struct <a href="https://docs.rs/etherparse/latest/etherparse/struct.Ipv4HeaderSlice.html"target="_blank" rel="external nofollow noopener noreferrer">etherparse::Ipv4HeaderSlice</a></li>
+<li>Struct <a href="https://docs.rs/etherparse/latest/etherparse/struct.Ipv4Header.html"target="_blank" rel="external nofollow noopener noreferrer">etherparse::Ipv4Header</a></li>
+<li>Struct <a href="https://docs.rs/etherparse/latest/etherparse/struct.TcpHeaderSlice.html"target="_blank" rel="external nofollow noopener noreferrer">etherparse::TcpHeaderSlice</a></li>
+<li>Struct <a href="https://docs.rs/etherparse/latest/etherparse/struct.TcpHeader.html"target="_blank" rel="external nofollow noopener noreferrer">etherparse::TcpHeader</a></li>
 </ul>
 <h2 id="references">References</h2>
 <ul>
@@ -303,7 +439,7 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-02-18 00:02:39">更新于 2024-02-18&nbsp;</span>
+        <span title="更新于 2024-02-19 00:03:35">更新于 2024-02-19&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/rust-tcp/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
