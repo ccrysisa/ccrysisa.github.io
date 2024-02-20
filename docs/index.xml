@@ -4,9 +4,27 @@
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 17 Feb 2024 19:01:53 &#43;0800</lastBuildDate>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 20 Feb 2024 11:13:57 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+  <title>你所不知道的 C 语言: 数值系统</title>
+  <link>https://ccrysisa.github.io/posts/c-numerics/</link>
+  <pubDate>Tue, 20 Feb 2024 11:13:57 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-numerics/</guid>
+  <description><![CDATA[<blockquote>
+<p>尽管数值系统并非 C 语言所持有，但在 Linux 核心大量存在 u8/u16/u32/u64 这样通过 typedef 所定义的类型，伴随着各种 alignment 存取，如果对数值系统的认知不够充分，可能立即就被阻拦在探索 Linux 核心之外——毕竟你完全搞不清楚，为何 Linux 核心存取特定资料需要绕一大圈。</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>Linux 核心设计: Lab0</title>
+  <link>https://ccrysisa.github.io/posts/linux2023-lab0/</link>
+  <pubDate>Mon, 19 Feb 2024 16:23:01 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/linux2023-lab0/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>Implementing TCP/IP in Rust</title>
   <link>https://ccrysisa.github.io/posts/rust-tcp/</link>
   <pubDate>Sat, 17 Feb 2024 19:01:53 &#43;0800</pubDate>
@@ -17,11 +35,11 @@
 </blockquote>]]></description>
 </item>
 <item>
-  <title>Linux 核心设计: 2018 第 4 周测验题</title>
-  <link>https://ccrysisa.github.io/posts/linux2018-quiz4/</link>
+  <title>Linux 核心设计: 第 1 周测验题</title>
+  <link>https://ccrysisa.github.io/posts/linux-quiz1/</link>
   <pubDate>Fri, 16 Feb 2024 14:59:25 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/linux2018-quiz4/</guid>
+  <guid>https://ccrysisa.github.io/posts/linux-quiz1/</guid>
   <description><![CDATA[]]></description>
 </item>
 <item>
@@ -81,22 +99,6 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/deepin20.9/</guid>
   <description><![CDATA[<p>记录一下折腾 Deepin 20.9 的物理机的过程与相关的配置。</p>]]></description>
-</item>
-<item>
-  <title>在 Deepin 20.9 上构建 DragonOS</title>
-  <link>https://ccrysisa.github.io/posts/deepin-dragonos/</link>
-  <pubDate>Mon, 22 Jan 2024 21:36:18 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/deepin-dragonos/</guid>
-  <description><![CDATA[<p>在 deepin 20.9 上根据 <a href="https://docs.dragonos.org/zh-cn/latest/introduction/build_system.html"target="_blank" rel="external nofollow noopener noreferrer">DragonOS 构建文档</a> 的 bootstrap.sh 的方式来构建 DragonOS 时，如果没有事先安装 Qemu 会出现 KVM 相关的依赖问题。本文记录解决这一问题的过程。</p>]]></description>
-</item>
-<item>
-  <title>交大统计学 重点提示</title>
-  <link>https://ccrysisa.github.io/posts/nycu-statistics/</link>
-  <pubDate>Sat, 20 Jan 2024 17:20:09 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/nycu-statistics/</guid>
-  <description><![CDATA[<p>随机变量 (Random Variable) 是概率 (Probability) 和统计 (Statistics) 的“灵魂”，从数学上讲，Random Variable 是连接 Probability 和 Statistics 的桥梁；从实际上讲，Random Variable 表示我们所关心、期望的东西。例如一批产品的硬度，每个产品的硬度显然是不同的、是随机的，尽管硬度是随机的，但产品的硬度遵循一定的概率规律，这种随机、但却遵循一定概率规律的东西，就是 Random Value。</p>]]></description>
 </item>
 </channel>
 </rss>

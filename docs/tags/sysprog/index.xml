@@ -4,12 +4,30 @@
     <link>https://ccrysisa.github.io/tags/sysprog/</link>
     <description>Sysprog - 标签 - KZn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 16 Feb 2024 14:59:25 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
-  <title>Linux 核心设计: 2018 第 4 周测验题</title>
-  <link>https://ccrysisa.github.io/posts/linux2018-quiz4/</link>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 20 Feb 2024 11:13:57 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
+  <title>你所不知道的 C 语言: 数值系统</title>
+  <link>https://ccrysisa.github.io/posts/c-numerics/</link>
+  <pubDate>Tue, 20 Feb 2024 11:13:57 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-numerics/</guid>
+  <description><![CDATA[<blockquote>
+<p>尽管数值系统并非 C 语言所持有，但在 Linux 核心大量存在 u8/u16/u32/u64 这样通过 typedef 所定义的类型，伴随着各种 alignment 存取，如果对数值系统的认知不够充分，可能立即就被阻拦在探索 Linux 核心之外——毕竟你完全搞不清楚，为何 Linux 核心存取特定资料需要绕一大圈。</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>Linux 核心设计: Lab0</title>
+  <link>https://ccrysisa.github.io/posts/linux2023-lab0/</link>
+  <pubDate>Mon, 19 Feb 2024 16:23:01 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/linux2023-lab0/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
+  <title>Linux 核心设计: 第 1 周测验题</title>
+  <link>https://ccrysisa.github.io/posts/linux-quiz1/</link>
   <pubDate>Fri, 16 Feb 2024 14:59:25 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/linux2018-quiz4/</guid>
+  <guid>https://ccrysisa.github.io/posts/linux-quiz1/</guid>
   <description><![CDATA[]]></description>
 </item>
 <item>
@@ -79,24 +97,6 @@
 规格书版本为 n1256，对应 C99 标准，对应的 <a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf"target="_blank" rel="external nofollow noopener noreferrer">PDF 下载地址</a>。
 也配合 C11 标准来阅读，版本 n1570，对应的 <a href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1570.pdf"target="_blank" rel="external nofollow noopener noreferrer">PDF 下载地址</a>。
 阅读规格书需要一定的体系结构、编译原理的相关知识，但不需要很高的程度。请善用检索工具，在阅读规格书时遇到术语时，请先在规格书中进行检索，因为极大可能是规格书自己定义的术语。</p>]]></description>
-</item>
-<item>
-  <title>解读计算机编码</title>
-  <link>https://ccrysisa.github.io/posts/binary-representation/</link>
-  <pubDate>Sun, 31 Dec 2023 15:43:50 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/binary-representation/</guid>
-  <description><![CDATA[<blockquote>
-<p>人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 + 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>Rust: 进行中的未来</title>
-  <link>https://ccrysisa.github.io/posts/rust-introduction/</link>
-  <pubDate>Thu, 28 Dec 2023 20:18:03 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/rust-introduction/</guid>
-  <description><![CDATA[Rust in 100 Seconds 观看短片: Rust in 100 Seconds &#x2705; 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello = &quot;hi]]></description>
 </item>
 </channel>
 </rss>

@@ -7,8 +7,6 @@
 
 - {{< link href="https://hackmd.io/@sysprog/linux-concepts" content="原文地址" external-icon=true >}}
 
-原文的直播录影地址尚未更新，但是 Jserv 已于 2024/2/5 对该文章进行了重新讲解，[这里](https://www.youtube.com/watch?v=iWvkoJawxQA) 看到最新的直播录影。
-
 ## Linux 核心发展
 
 虚拟化 (Virtualization) 技术分为 CPU 层级的虚拟化技术，例如 [KVM](https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine) 和 [RVM](https://github.com/equation314/RVM-Tutorial)，也有操作系统层级的虚拟化技术，例如 [Docker](https://en.wikipedia.org/wiki/Docker_(software))。
