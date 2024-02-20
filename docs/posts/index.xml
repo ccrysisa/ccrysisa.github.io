@@ -4,7 +4,17 @@
     <link>https://ccrysisa.github.io/posts/</link>
     <description>所有文章 | KZn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 20 Feb 2024 11:13:57 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 20 Feb 2024 17:33:06 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+  <title>Crust of Rust: Smart Pointers and Interior Mutability</title>
+  <link>https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/</link>
+  <pubDate>Tue, 20 Feb 2024 17:33:06 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/</guid>
+  <description><![CDATA[<blockquote>
+<p>In this fourth Crust of Rust video, we cover smart pointers and interior mutability, by re-implementing the Cell, RefCell, and Rc types from the standard library. As part of that, we cover when those types are useful, how they work, and what the equivalent thread-safe versions of these types are. In the process, we go over some of the finer details of Rust&rsquo;s ownership model, and the UnsafeCell type. We also dive briefly into the Drop Check rabbit hole (<a href="https://doc.rust-lang.org/nightly/nomicon/dropck.html"target="_blank" rel="external nofollow noopener noreferrer">https://doc.rust-lang.org/nightly/nomicon/dropck.html</a>) before coming back up for air.</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>你所不知道的 C 语言: 数值系统</title>
   <link>https://ccrysisa.github.io/posts/c-numerics/</link>
   <pubDate>Tue, 20 Feb 2024 11:13:57 &#43;0800</pubDate>
@@ -89,14 +99,6 @@
   <description><![CDATA[<blockquote>
 <p>We&rsquo;re going to investigate a case where you need multiple explicit lifetime annotations. We explore why they are needed, and why we need more than one in this particular case. We also talk about some of the differences between the string types and introduce generics over a self-defined trait in the process.</p>
 </blockquote>]]></description>
-</item>
-<item>
-  <title>深度操作系统 Deepin 20.9 安装配置</title>
-  <link>https://ccrysisa.github.io/posts/deepin20.9/</link>
-  <pubDate>Wed, 24 Jan 2024 18:59:56 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/deepin20.9/</guid>
-  <description><![CDATA[<p>记录一下折腾 Deepin 20.9 的物理机的过程与相关的配置。</p>]]></description>
 </item>
 </channel>
 </rss>

@@ -5,7 +5,7 @@
 
 <!--more-->
 
-整理自 [John Gjengset 的影片](https://www.youtube.com/watch?v=yozQ9C69pNs)
+- 整理自 [John Gjengset 的影片](https://www.youtube.com/watch?v=yozQ9C69pNs)
 
 ## 影片注解
 
@@ -69,8 +69,8 @@ Trait [std::iter::DoubleEndedIterator](https://doc.rust-lang.org/std/iter/trait.
 
 > 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
 
-> Crate [std](https://doc.rust-lang.org/std/index.html) 
-> ---
+### Crate [std](https://doc.rust-lang.org/std/index.html) 
+
 > 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 
 - Trait [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)

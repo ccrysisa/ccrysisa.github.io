@@ -5,7 +5,7 @@
 
 <!--more-->
 
-整理自 [John Gjengset 的影片](https://www.youtube.com/watch?v=rAl-9HwD858)
+- 整理自 [John Gjengset 的影片](https://www.youtube.com/watch?v=rAl-9HwD858)
 
 ## C 语言中的 lifetime
 
@@ -67,8 +67,8 @@ String -> &str (cheap -- AsRef)
 
 > 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
 
-> Crate [std](https://doc.rust-lang.org/std/index.html) 
-> ---
+### Crate [std](https://doc.rust-lang.org/std/index.html) 
+
 > 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 
 - [Keywords](https://doc.rust-lang.org/std/index.html#keywords)
