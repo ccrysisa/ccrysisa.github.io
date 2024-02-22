@@ -46,7 +46,8 @@ repost:
 
 <!--more-->
 
-> {{< link href="https://tigercosmos.xyz/post/2020/09/system/debug-gdb/" content="原文地址" external-icon=true >}} | {{< link href="https://www.youtube.com/watch?v=IttSz0BYZ8o" content="教学视频" external-icon=true >}}
+- {{< link href="https://tigercosmos.xyz/post/2020/09/system/debug-gdb/" content="原文地址" external-icon=true >}} 
+| {{< link href="https://www.youtube.com/watch?v=IttSz0BYZ8o" content="教学录影" external-icon=true >}}
 
 ## GDB 调试
 

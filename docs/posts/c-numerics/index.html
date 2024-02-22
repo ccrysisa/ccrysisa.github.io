@@ -14,7 +14,7 @@
 尽管数值系统并非 C 语言所持有，但在 Linux 核心大量存在 u8/u16/u32/u64 这样通过 typedef 所定义的类型，伴随着各种 alignment 存取，如果对数值系统的认知不够充分，可能立即就被阻拦在探索 Linux 核心之外——毕竟你完全搞不清楚，为何 Linux 核心存取特定资料需要绕一大圈。
 "><meta itemprop="datePublished" content="2024-02-20T11:13:57+08:00" />
 <meta itemprop="dateModified" content="2024-02-20T17:05:58+08:00" />
-<meta itemprop="wordCount" content="1676"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="3081"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C," /><meta property="og:title" content="你所不知道的 C 语言: 数值系统" />
 <meta property="og:description" content="
 尽管数值系统并非 C 语言所持有，但在 Linux 核心大量存在 u8/u16/u32/u64 这样通过 typedef 所定义的类型，伴随着各种 alignment 存取，如果对数值系统的认知不够充分，可能立即就被阻拦在探索 Linux 核心之外——毕竟你完全搞不清楚，为何 Linux 核心存取特定资料需要绕一大圈。
@@ -43,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-numerics\/"
-    },"genre": "posts","keywords": "Sysprog, C","wordcount":  1676 ,
+    },"genre": "posts","keywords": "Sysprog, C","wordcount":  3081 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-numerics\/","datePublished": "2024-02-20T11:13:57+08:00","dateModified": "2024-02-20T17:05:58+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -159,7 +159,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-20 11:13:57"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="更新于 2024-02-20 17:05:58"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="1676 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-20 11:13:57"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="更新于 2024-02-20 17:05:58"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="3081 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -184,6 +184,9 @@
         <li><a href="#macro-direct">macro DIRECT</a></li>
       </ul>
     </li>
+    <li><a href="#count-leading-zero">Count Leading Zero</a></li>
+    <li><a href="#避免循环">避免循环</a></li>
+    <li><a href="#加解密的应用">加解密的应用</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><blockquote>
@@ -195,14 +198,20 @@
 <h2 id="balanced-ternary">Balanced ternary</h2>
 <p>balanced ternary 三进制中 -, 0, + 在数学上具备对称性质。它相对于二进制编码的优势在于，其本身就可以表示正负数 (通过 +-, 0, +)，而二进制需要考虑 unsigned 和 signed 的情况，从而决定最高位所表示的数值。</p>
 <p>相关的运算规则:</p>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">+ add - = 0
+</span></span><span class="line"><span class="cl">0 add + = +
+</span></span><span class="line"><span class="cl">0 add - = -</span></span></code></pre></td></tr></table>
+</div>
+</div><p>以上运算规则都比较直观，这也决定了 balanced ternary 在编码上的对称性 (减法等价于加上逆元，逆元非常容易获得)。但是需要注意，上面的运算规则并没有涉及到相同位运算的规则，例如 $+\ (add)\ +$，这种运算也是 balanced ternary 相对于二进制编码的劣势，可以自行推导一下这种运算的规则。</p>
 <ul>
-<li>$+\ (add)\ - = 0$</li>
-<li>$0\ (add)\ + = +$</li>
-<li>$0\ (add)\ - = -$</li>
-</ul>
-<p>以上运算规则都比较直观，这也决定了 balanced ternary 在编码上的对称性 (减法等价于加上逆元，逆元非常容易获得)。但是需要注意，上面的运算规则并没有涉及到相同位运算的规则，例如 $+\ (add)\ +$，这种运算也是 balanced ternary 相对于二进制编码的劣势，可以自行推导一下这种运算的规则。</p>
-<ul>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://dev.to/buntine/the-balanced-ternary-machines-of-soviet-russia"target="_blank" rel="external nofollow noopener noreferrer">The Balanced Ternary Machines of Soviet Russia</a></li>
+<li><a href="https://dev.to/buntine/the-balanced-ternary-machines-of-soviet-russia"target="_blank" rel="external nofollow noopener noreferrer">The Balanced Ternary Machines of Soviet Russia</a></li>
 </ul>
 <h2 id="数值编码与阿贝尔群">数值编码与阿贝尔群</h2>
 <p>阿贝尔群也用于指示为什么使用二补数编码来表示整数:</p>
@@ -212,7 +221,7 @@
 </ul>
 <p>浮点数 IEEE 754:</p>
 <ul>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://www.youtube.com/watch?v=VlX4OlKvzAk"target="_blank" rel="external nofollow noopener noreferrer">Conversión de un número binario a formato IEEE 754</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://www.youtube.com/watch?v=VlX4OlKvzAk"target="_blank" rel="external nofollow noopener noreferrer">Conversión de un número binario a formato IEEE 754</a></li>
 </ul>
 <p>单精度浮点数相对于整数 <strong>在某些情況下不满足結合律和交换律</strong>，所以不构成 <strong>阿贝尔群</strong>，在编写程序时需要注意这一点。即使编写程序时谨慎处理了单精度浮点数运算，但是编译器优化可能会将我们的处理破划掉。所以涉及到单精度浮点数，都需要注意其运算。</p>
 <div class="details admonition info open">
@@ -221,14 +230,15 @@
     </div>
     <div class="details-content">
       <div class="admonition-content"><ul>
-<li><a href="https://hackmd.io/@sysprog/c-compiler-optimization"target="_blank" rel="external nofollow noopener noreferrer">你所不知道的 C 语言: 编译器和最佳化原理篇</a></li>
+<li>你所不知道的 C 语言: <a href="https://hackmd.io/@sysprog/c-floating-point"target="_blank" rel="external nofollow noopener noreferrer">浮点数运算</a></li>
+<li>你所不知道的 C 语言: <a href="https://hackmd.io/@sysprog/c-compiler-optimization"target="_blank" rel="external nofollow noopener noreferrer">编译器和最佳化原理篇</a></li>
 </ul>
 </div>
     </div>
   </div>
 <h2 id="integer-overflow">Integer Overflow</h2>
 <h3 id="2002-年-freebsd-53">2002 年 FreeBSD [53]</h3>
-<div class="highlight" id="id-1"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -251,7 +261,7 @@
 <ul>
 <li><code>memcpy</code> 的原型声明</li>
 </ul>
-<div class="highlight" id="id-2"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -267,7 +277,7 @@
 </blockquote>
 <p>所以在 5 行中 <code>memcpy</code> 会将 <code>len</code> 这个“负“的数值按照无符号数的编码进行解释，这会导致将 <code>len</code> 解释为一个超级大的无符号数，可能远比 <code>KSIZE</code> 这个限制大。<code>copy_from_kernel</code> 这个函数是运行在 kernel 中的，这样可能会造成潜在的 kernel 信息数据泄露问题。</p>
 <h3 id="2002-年-external-data-representation-xdr-62">2002 年 External data representation (XDR) [62]</h3>
-<div class="highlight" id="id-3"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -296,7 +306,7 @@
 <ul>
 <li><code>malloc</code> 的原型声明</li>
 </ul>
-<div class="highlight" id="id-4"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -325,17 +335,22 @@
   </div>
 <h3 id="power-of-two">Power of two</h3>
 <p>通过以下程式码可以判断 x 是否为 2 的次方</p>
-<div class="highlight" id="id-5"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">x</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>通过值为 1 的最低位来进行归纳法证明，例如，对 <code>0b00000001</code>, <code>0b00000010</code>, <code>0b00000100</code>, &hellip; 来进行归纳证明 (还需要证明 x 中只能有一个 bit 为值 1，不过这个比较简单)。</p>
+</div><p>通过值为 1 的最低位来进行归纳法证明，例如，对 <code>0b00000001</code>, <code>0b00000010</code>, <code>0b00000100</code>, &hellip; 来进行归纳证明 (还需要证明 x 中只能有一个 bit 为值 1，不过这个比较简单)。另一种思路，通过 LSBO 以及 $X$ 和 $-X$ 的特性来证明。</p>
+<ul>
+<li>LSBO: Least Significant bit of value One</li>
+<li>$-X = ~(X - 1)$</li>
+<li>$-X$ 的编码等价于 $X$ 的编码中比 LSBO 更高的 bits 进行反转，LSBO 及更低的 bits 保持不变</li>
+</ul>
 <h3 id="ascii-table">ASCII table</h3>
 <p>通过 <a href="https://www.asciitable.com/"target="_blank" rel="external nofollow noopener noreferrer">ASCII table</a> 中对 ASCII 编码的分布规律，可以实现大小写转换的 constant-time function</p>
-<div class="highlight" id="id-6"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -354,7 +369,7 @@
 </div>
 </div><h3 id="xor-swap">XOR swap</h3>
 <p>通过 xor 运算符可以实现无需临时变量的，交换两个数值的程式码</p>
-<div class="highlight" id="id-7"><div class="chroma">
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -375,7 +390,7 @@
 </ul>
 <h3 id="避免-overflow">避免 overflow</h3>
 <p>整数运算 <code>(x + y) / 2</code> 可能会导致 overflow (如果 x, y 数值都接近 UINT32_MAX)，可以改写为以下不会导致 overflow 的程式码</p>
-<div class="highlight" id="id-8"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -383,7 +398,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">^</span> <span class="n">y</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用加法器来思考: 对于 <code>x + y</code>，<code>x &amp; y</code> 表示进位，<code>x ^ y</code> 表示位元和，所以 <code>x + y</code> 等价于</p>
-<div class="highlight" id="id-9"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -391,7 +406,7 @@
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">^</span> <span class="n">y</span><span class="p">)</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这个运算不会导致 overflow (因为使用了 bitwise 运算)。因此 <code>(x + y) / 2</code> 等价于</p>
-<div class="highlight" id="id-10"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -399,13 +414,227 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">  <span class="p">((</span><span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">^</span> <span class="n">y</span><span class="p">))</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
-</span></span><span class="line"><span class="cl"><span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">^</span> <span class="n">y</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">=</span> <span class="p">((</span><span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">^</span> <span class="n">y</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
 </span></span><span class="line"><span class="cl"><span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">x</span> <span class="o">^</span> <span class="n">y</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>整数满足交换律和结合律</p>
 </blockquote>
-<h3 id="macro-direct">macro DIRECT</h3></div><div class="post-footer" id="post-footer">
+<h3 id="macro-direct">macro DIRECT</h3>
+<div class="highlight" id="id-12"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#if LONG_MAX == 2147483647L
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define DETECT(X) \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    (((X) - 0x01010101) &amp; ~(X) &amp; 0x80808080)
+</span></span></span><span class="line"><span class="cl"><span class="cp">#else
+</span></span></span><span class="line"><span class="cl"><span class="cp">#if LONG_MAX == 9223372036854775807L
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define DETECT(X) \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    (((X) - 0x0101010101010101) &amp; ~(X) &amp; 0x8080808080808080)
+</span></span></span><span class="line"><span class="cl"><span class="cp">#else
+</span></span></span><span class="line"><span class="cl"><span class="cp">#error long int is not a 32bit or 64bit type.
+</span></span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp">#endif</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>DIRECT 宏的作用是侦测 32bit/64bit 中是否存在一个 Byte 为 NULL。我们以最简单的情况 1 个 Byte 时来思考这个实作的本质：</p>
+<div class="highlight" id="id-13"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">  <span class="p">((</span><span class="n">X</span><span class="p">)</span> <span class="o">-</span> <span class="mh">0x01</span><span class="p">)</span> <span class="o">&amp;</span> <span class="o">~</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x80</span>
+</span></span><span class="line"><span class="cl"><span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">~</span><span class="p">((</span><span class="n">X</span><span class="p">)</span> <span class="o">-</span> <span class="mh">0x01</span><span class="p">)</span> <span class="o">|</span> <span class="n">X</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x80</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>~((X) - 0x01)</code> 是 <code>X</code> 的取负值编码，即 <code>-X</code>，根据二补数编码中 <code>-X</code> 和 <code>X</code> 的特性，可得 <code>(~((X) - 0x01) | X)</code> 为: <code>X</code> 二补数编码中值为 1 的最低位 (后续称之为 LSBO) 及更低位保持不变，LSBO 更高位均为 1。则 <code>~(~((X) - 0x01) | X)</code> 为: <code>X</code> 二补数编码中值为 1 的最低位 (后续称之为 LSBO) 的更低位翻转，LSBO 及更高位均为 0。</p>
+<blockquote>
+<p>LSBO: Least Significant Bit with value of One</p>
+</blockquote>
+<div class="highlight" id="id-14"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">X</span>             <span class="o">=</span> <span class="mh">0x0080</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">-</span> <span class="mh">0x01</span>    <span class="o">=</span> <span class="mh">0xff80</span>
+</span></span><span class="line"><span class="cl"><span class="o">~</span><span class="p">((</span><span class="n">X</span><span class="p">)</span> <span class="o">-</span> <span class="mh">0x01</span><span class="p">)</span> <span class="o">=</span> <span class="mh">0x007f</span>
+</span></span><span class="line"><span class="cl"><span class="o">~</span><span class="p">(</span><span class="o">~</span><span class="p">((</span><span class="n">X</span><span class="p">)</span> <span class="o">-</span> <span class="mh">0x01</span><span class="p">)</span> <span class="o">|</span> <span class="n">X</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0x80</span> <span class="o">=</span> <span class="mi">0</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以自行归纳推导出: 对于任意不为 0 的数值，上述流程推导的最终值都为 0，但对于值为 0 的数值，最终值为 0x80。由此可以推导出最开始的实作 <code>DIRECT</code> 宏。</p>
+<p>这个 <code>DIRECT</code> 宏相当实用，常用于加速字符串操作，将原先的以 1-byte 为单元的操作加速为以 32bit/64bit 为单位的操作。可以阅读相关实作并寻找其中的逻辑:</p>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://github.com/eblot/newlib/blob/master/newlib/libc/string/strlen.c"target="_blank" rel="external nofollow noopener noreferrer">newlib 的 strlen</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://github.com/eblot/newlib/blob/master/newlib/libc/string/strcpy.c"target="_blank" rel="external nofollow noopener noreferrer">newlib 的 strcpy</a></li>
+</ul>
+<h2 id="count-leading-zero">Count Leading Zero</h2>
+<p>计算 $\log_2N$ 可以通过计算数值对应的编码，高位有多少连续的 0&rsquo;bits，再用 31 减去即可。可以通过 0x0001, 0x0010, 0x0002, &hellip; 等编码来进行归纳推导出该结论。</p>
+<ul>
+<li>iteration version</li>
+</ul>
+<div class="highlight" id="id-15"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">clz</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">do</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint32_t</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span> <span class="n">n</span> <span class="o">-=</span> <span class="n">c</span><span class="p">;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">y</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="n">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>binary search technique</li>
+</ul>
+<div class="highlight" id="id-16"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">clz</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">32</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mh">0x0000FFFF</span><span class="p">)</span> <span class="p">{</span> <span class="n">n</span> <span class="o">+=</span> <span class="mi">16</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;&lt;=</span> <span class="mi">16</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mh">0x00FFFFFF</span><span class="p">)</span> <span class="p">{</span> <span class="n">n</span> <span class="o">+=</span> <span class="mi">8</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;&lt;=</span> <span class="mi">8</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mh">0x0FFFFFFF</span><span class="p">)</span> <span class="p">{</span> <span class="n">n</span> <span class="o">+=</span> <span class="mi">4</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;&lt;=</span> <span class="mi">4</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mh">0x3FFFFFFF</span><span class="p">)</span> <span class="p">{</span> <span class="n">n</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;&lt;=</span> <span class="mi">2</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="mh">0x7FFFFFFF</span><span class="p">)</span> <span class="p">{</span> <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;&lt;=</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>byte-shift version</li>
+</ul>
+<div class="highlight" id="id-17"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">clz</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="mi">32</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">((</span><span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="n">n</span> <span class="o">+=</span> <span class="mi">16</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;&lt;=</span> <span class="mi">16</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">((</span><span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">24</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="n">n</span> <span class="o">+=</span> <span class="mi">8</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;&lt;=</span> <span class="mi">8</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">((</span><span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">28</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="n">n</span> <span class="o">+=</span> <span class="mi">4</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;&lt;=</span> <span class="mi">4</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">((</span><span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">30</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="n">n</span> <span class="o">+=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">x</span> <span class="o">&lt;&lt;=</span> <span class="mi">2</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">31</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在这些实作中，循环是比较直观的，但是比较低效；可以利用编码的特性，使用二分法或位运算来加速实作。</p>
+<h2 id="避免循环">避免循环</h2>
+<div class="highlight" id="id-18"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">func</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">32</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">val</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">x</span> <span class="o">&amp;</span> <span class="mh">0x1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">x</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这段程式码的作用是，对一个 32bit 的数值进行逐位元反转。这个逐位元反转功能非常实用，常实作于加密算法，例如 <a href="https://en.wikipedia.org/wiki/Data_Encryption_Standard"target="_blank" rel="external nofollow noopener noreferrer">DES</a>、<a href="https://en.wikipedia.org/wiki/Advanced_Encryption_Standard"target="_blank" rel="external nofollow noopener noreferrer">AES</a>。</p>
+<p>但是与上面的 Count Leading Zero 类似，上面程式码使用了循环，非常低效，可以通过位运算来加速。</p>
+<div class="highlight" id="id-19"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">func</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">val</span> <span class="o">=</span> <span class="n">num</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">val</span> <span class="o">=</span> <span class="p">((</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0xffff0000</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">|</span> <span class="p">((</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x0000ffff</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">val</span> <span class="o">=</span> <span class="p">((</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0xff00ff00</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span>  <span class="o">|</span> <span class="p">((</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x00ff00ff</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">val</span> <span class="o">=</span> <span class="p">((</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0xf0f0f0f0</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span><span class="p">)</span>  <span class="o">|</span> <span class="p">((</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x0f0f0f0f</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">val</span> <span class="o">=</span> <span class="p">((</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0xcccccccc</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">)</span>  <span class="o">|</span> <span class="p">((</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x33333333</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">val</span> <span class="o">=</span> <span class="p">((</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0xaaaaaaaa</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span>  <span class="o">|</span> <span class="p">((</span><span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x55555555</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><a href="https://stackoverflow.com/questions/21511533/reverse-integer-bitwise-without-using-loop"target="_blank" rel="external nofollow noopener noreferrer">Reverse integer bitwise without using loop</a> [Stack Overflow]</li>
+</ul>
+<div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">Bits Twiddling Hacks 解析: <a href="https://hackmd.io/@0xff07/ORAORAORAORA"target="_blank" rel="external nofollow noopener noreferrer">(一)</a>, <a href="https://hackmd.io/@0xff07/MUDAMUDAMUDA"target="_blank" rel="external nofollow noopener noreferrer">(二)</a>, <a href="https://hackmd.io/@0xff07/WRYYYYYYYYYY"target="_blank" rel="external nofollow noopener noreferrer">(三)</a></div>
+    </div>
+  </div>
+<h2 id="加解密的应用">加解密的应用</h2>
+<blockquote>
+<p>假設有一張黑白的相片是由很多個0 ~255 的 pixel 組成 (0 是黑色，255 是白色)，這時候可以用任意的 KEY (000000002 - 111111112) 跟原本的每個 pixel 做運算，如果使用 AND (每個 bit 有 75% 機率會變成 0)，所以圖會變暗。如果使用 OR (每個 bit 有 75% 機率會變 1)，圖就會變亮。這兩種幾乎都還是看的出原本的圖片，但若是用 XOR 的話，每個 bit 變成 0 或 1 的機率都是 50%，所以圖片就會變成看不出東西的雜訊。</p>
+</blockquote>
+<a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_Sc7AmIvN7EN_p.578574_1463033229650_13199369_1147773728576962_1986608170_o.jpg?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_Sc7AmIvN7EN_p.578574_1463033229650_13199369_1147773728576962_1986608170_o.jpg?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_Sc7AmIvN7EN_p.578574_1463033229650_13199369_1147773728576962_1986608170_o.jpg</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_Sc7AmIvN7EN_p.578574_1463033229650_13199369_1147773728576962_1986608170_o.jpg" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_Sc7AmIvN7EN_p.578574_1463033229650_13199369_1147773728576962_1986608170_o.jpg?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_Sc7AmIvN7EN_p.578574_1463033229650_13199369_1147773728576962_1986608170_o.jpg?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_Sc7AmIvN7EN_p.578574_1463033229650_13199369_1147773728576962_1986608170_o.jpg?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_Sc7AmIvN7EN_p.578574_1463033229650_13199369_1147773728576962_1986608170_o.jpg" data-alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_Sc7AmIvN7EN_p.578574_1463033229650_13199369_1147773728576962_1986608170_o.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<blockquote>
+<p>上圖左 1 是原圖，左 2 是用 AND 做運算之後，右 2 是用 OR 做運算之後，右 1 是用 XOR，可見使用 XOR 的加密效果最好。</p>
+</blockquote>
+<p>这就是在密码学领域偏爱 XOR 的原因之一。除此之外，XOR 在概率统计上的优异特性也是另一个原因，具体证明推导请查看原文的说明。</p></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
@@ -438,7 +667,7 @@
       <a href="/posts/smart-pointers-and-interior-mutability/" class="post-nav-item" rel="next" title="Crust of Rust: Smart Pointers and Interior Mutability">Crust of Rust: Smart Pointers and Interior Mutability<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

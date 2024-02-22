@@ -13,13 +13,15 @@ balanced ternary 三进制中 -, 0, + 在数学上具备对称性质。它相对
 
 相关的运算规则:
 
-- $+\ (add)\ - = 0$
-- $0\ (add)\ + = +$
-- $0\ (add)\ - = -$
+```
++ add - = 0
+0 add + = +
+0 add - = -
+```
 
 以上运算规则都比较直观，这也决定了 balanced ternary 在编码上的对称性 (减法等价于加上逆元，逆元非常容易获得)。但是需要注意，上面的运算规则并没有涉及到相同位运算的规则，例如 $+\ (add)\ +$，这种运算也是 balanced ternary 相对于二进制编码的劣势，可以自行推导一下这种运算的规则。
 
-- [ ] [The Balanced Ternary Machines of Soviet Russia](https://dev.to/buntine/the-balanced-ternary-machines-of-soviet-russia)
+- [The Balanced Ternary Machines of Soviet Russia](https://dev.to/buntine/the-balanced-ternary-machines-of-soviet-russia)
 
 ## 数值编码与阿贝尔群
 
@@ -30,12 +32,13 @@ balanced ternary 三进制中 -, 0, + 在数学上具备对称性质。它相对
 
 浮点数 IEEE 754:
 
-- [ ] [Conversión de un número binario a formato IEEE 754](https://www.youtube.com/watch?v=VlX4OlKvzAk)
+- [x] [Conversión de un número binario a formato IEEE 754](https://www.youtube.com/watch?v=VlX4OlKvzAk)
 
 单精度浮点数相对于整数 **在某些情況下不满足結合律和交换律**，所以不构成 **阿贝尔群**，在编写程序时需要注意这一点。即使编写程序时谨慎处理了单精度浮点数运算，但是编译器优化可能会将我们的处理破划掉。所以涉及到单精度浮点数，都需要注意其运算。
 
 {{< admonition info >}}
-- [你所不知道的 C 语言: 编译器和最佳化原理篇](https://hackmd.io/@sysprog/c-compiler-optimization)
+- 你所不知道的 C 语言: [浮点数运算](https://hackmd.io/@sysprog/c-floating-point)
+- 你所不知道的 C 语言: [编译器和最佳化原理篇](https://hackmd.io/@sysprog/c-compiler-optimization)
 {{< /admonition >}}
 
 ## Integer Overflow
@@ -112,7 +115,11 @@ void *malloc(size_t size);
 x & (x - 1) == 0
 ```
 
-通过值为 1 的最低位来进行归纳法证明，例如，对 `0b00000001`, `0b00000010`, `0b00000100`, ... 来进行归纳证明 (还需要证明 x 中只能有一个 bit 为值 1，不过这个比较简单)。
+通过值为 1 的最低位来进行归纳法证明，例如，对 `0b00000001`, `0b00000010`, `0b00000100`, ... 来进行归纳证明 (还需要证明 x 中只能有一个 bit 为值 1，不过这个比较简单)。另一种思路，通过 LSBO 以及 $X$ 和 $-X$ 的特性来证明。
+
+- LSBO: Least Significant bit of value One
+- $-X = ~(X - 1)$
+- $-X$ 的编码等价于 $X$ 的编码中比 LSBO 更高的 bits 进行反转，LSBO 及更低的 bits 保持不变
 
 ### ASCII table
 
@@ -160,13 +167,148 @@ void xorSwap(int *x, int *y) {
 
 ```c
   ((x & y) << 1 + (x ^ y)) >> 1
-= (x & y) << 1 >> 1 + (x ^ y) >> 1
+= ((x & y) << 1) >> 1 + (x ^ y) >> 1
 = (x & y) + (x ^ y) >> 1
 ```
 
 > 整数满足交换律和结合律
 
 ### macro DIRECT
+
+```c
+#if LONG_MAX == 2147483647L
+#define DETECT(X) \
+    (((X) - 0x01010101) & ~(X) & 0x80808080)
+#else
+#if LONG_MAX == 9223372036854775807L
+#define DETECT(X) \
+    (((X) - 0x0101010101010101) & ~(X) & 0x8080808080808080)
+#else
+#error long int is not a 32bit or 64bit type.
+#endif
+#endif
+```
+
+DIRECT 宏的作用是侦测 32bit/64bit 中是否存在一个 Byte 为 NULL。我们以最简单的情况 1 个 Byte 时来思考这个实作的本质：
+
+```c
+  ((X) - 0x01) & ~(X) & 0x80
+= ~(~((X) - 0x01) | X) & 0x80
+```
+
+`~((X) - 0x01)` 是 `X` 的取负值编码，即 `-X`，根据二补数编码中 `-X` 和 `X` 的特性，可得 `(~((X) - 0x01) | X)` 为: `X` 二补数编码中值为 1 的最低位 (后续称之为 LSBO) 及更低位保持不变，LSBO 更高位均为 1。则 `~(~((X) - 0x01) | X)` 为: `X` 二补数编码中值为 1 的最低位 (后续称之为 LSBO) 的更低位翻转，LSBO 及更高位均为 0。
+
+> LSBO: Least Significant Bit with value of One
+
+```c
+X             = 0x0080
+(X) - 0x01    = 0xff80
+~((X) - 0x01) = 0x007f
+~(~((X) - 0x01) | X) & 0x80 = 0
+```
+
+可以自行归纳推导出: 对于任意不为 0 的数值，上述流程推导的最终值都为 0，但对于值为 0 的数值，最终值为 0x80。由此可以推导出最开始的实作 `DIRECT` 宏。
+
+这个 `DIRECT` 宏相当实用，常用于加速字符串操作，将原先的以 1-byte 为单元的操作加速为以 32bit/64bit 为单位的操作。可以阅读相关实作并寻找其中的逻辑:
+
+- [x] [newlib 的 strlen](https://github.com/eblot/newlib/blob/master/newlib/libc/string/strlen.c)
+- [x] [newlib 的 strcpy](https://github.com/eblot/newlib/blob/master/newlib/libc/string/strcpy.c)
+
+## Count Leading Zero
+
+计算 $\log_2N$ 可以通过计算数值对应的编码，高位有多少连续的 0'bits，再用 31 减去即可。可以通过 0x0001, 0x0010, 0x0002, ... 等编码来进行归纳推导出该结论。
+
+- iteration version
+
+```c
+int clz(uint32_t x) {
+    int n = 32, c = 16;
+    do {
+        uint32_t y = x >> c;
+        if (y) { n -= c; x = y; }
+        c >>= 1;
+    } while (c);
+    return (n - x);
+}
+```
+
+- binary search technique
+
+```c
+int clz(uint32_t x) {
+    if (x == 0) return 32;
+    int n = 0;
+    if (x <= 0x0000FFFF) { n += 16; x <<= 16; }
+    if (x <= 0x00FFFFFF) { n += 8; x <<= 8; }
+    if (x <= 0x0FFFFFFF) { n += 4; x <<= 4; }
+    if (x <= 0x3FFFFFFF) { n += 2; x <<= 2; }
+    if (x <= 0x7FFFFFFF) { n += 1; x <<= 1; }
+    return n;
+}
+```
+
+- byte-shift version
+
+```c
+int clz(uint32_t x) {
+    if (x == 0) return 32;
+    int n = 1;
+    if ((x >> 16) == 0) { n += 16; x <<= 16; }
+    if ((x >> 24) == 0) { n += 8; x <<= 8; }
+    if ((x >> 28) == 0) { n += 4; x <<= 4; }
+    if ((x >> 30) == 0) { n += 2; x <<= 2; }
+    n = n - (x >> 31);
+    return n;
+}
+```
+
+在这些实作中，循环是比较直观的，但是比较低效；可以利用编码的特性，使用二分法或位运算来加速实作。
+
+## 避免循环
+
+```c
+int func(unsigned int x) {
+    int val = 0; int i = 0;
+    for (i = 0; i < 32; i++) {
+        val = (val << 1) | (x & 0x1);
+        x >>= 1;
+    }
+    return val;
+}
+```
+
+这段程式码的作用是，对一个 32bit 的数值进行逐位元反转。这个逐位元反转功能非常实用，常实作于加密算法，例如 [DES](https://en.wikipedia.org/wiki/Data_Encryption_Standard)、[AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)。
+
+但是与上面的 Count Leading Zero 类似，上面程式码使用了循环，非常低效，可以通过位运算来加速。
+
+```c
+int func(unsigned int x) {
+    int val = 0;
+    val = num;
+    val = ((val & 0xffff0000) >> 16) | ((val & 0x0000ffff) << 16);
+    val = ((val & 0xff00ff00) >> 8)  | ((val & 0x00ff00ff) << 8);
+    val = ((val & 0xf0f0f0f0) >> 4)  | ((val & 0x0f0f0f0f) << 4);
+    val = ((val & 0xcccccccc) >> 2)  | ((val & 0x33333333) << 2);
+    val = ((val & 0xaaaaaaaa) >> 1)  | ((val & 0x55555555) << 1);
+    return val;
+}
+```
+
+- [Reverse integer bitwise without using loop](https://stackoverflow.com/questions/21511533/reverse-integer-bitwise-without-using-loop) [Stack Overflow]
+
+{{< admonition tip >}}
+Bits Twiddling Hacks 解析: [(一)](https://hackmd.io/@0xff07/ORAORAORAORA), [(二)](https://hackmd.io/@0xff07/MUDAMUDAMUDA), [(三)](https://hackmd.io/@0xff07/WRYYYYYYYYYY)
+{{< /admonition >}}
+
+## 加解密的应用
+
+> 假設有一張黑白的相片是由很多個0 ~255 的 pixel 組成 (0 是黑色，255 是白色)，這時候可以用任意的 KEY (000000002 - 111111112) 跟原本的每個 pixel 做運算，如果使用 AND (每個 bit 有 75% 機率會變成 0)，所以圖會變暗。如果使用 OR (每個 bit 有 75% 機率會變 1)，圖就會變亮。這兩種幾乎都還是看的出原本的圖片，但若是用 XOR 的話，每個 bit 變成 0 或 1 的機率都是 50%，所以圖片就會變成看不出東西的雜訊。
+
+{{< image src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_Sc7AmIvN7EN_p.578574_1463033229650_13199369_1147773728576962_1986608170_o.jpg" >}}
+
+> 上圖左 1 是原圖，左 2 是用 AND 做運算之後，右 2 是用 OR 做運算之後，右 1 是用 XOR，可見使用 XOR 的加密效果最好。
+
+这就是在密码学领域偏爱 XOR 的原因之一。除此之外，XOR 在概率统计上的优异特性也是另一个原因，具体证明推导请查看原文的说明。
 
 
 ---

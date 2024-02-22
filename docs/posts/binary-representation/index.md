@@ -6,6 +6,12 @@
 
 - 原文地址：[解讀計算機編碼](https://hackmd.io/@sysprog/binary-representation)
 
+{{< admonition tip >}}
+为了更好的理解本文的一些数学概念，例如群，以及后续其他关于数值系统、浮点数的讲座，Jserv 强烈建议我们去修读数学系的 ***数学导论***。笔者在这里分享一下台大齐震宇老师的 2015 年的新生营讲座，这个讲座覆盖了数学导论的内容。
+
+- YouTube: [臺大 2015 數學系新生營](https://www.youtube.com/playlist?list=PLI1jQCS-KE4zommAEqi47yVzEn552BXz8)
+{{< /admonition >}}
+
 ## 一补数 (Ones’ complement)
 
 ### 9 的补数
@@ -89,6 +95,18 @@ $$
 也可以通过一补数和二补数，在时钟表上的对称轴偏差，来理解上述两种方式是等价的。
 
 {{< image src="/images/git/twos_complement.png" caption="Twos' complement" >}}
+
+{{< admonition >}}
+在二补数编码中，将一个整数转换成其逆元，也可以依据以下的方法：
+
+以 LSB 到 MSB 的顺序，寻找第一个值为 1 的 bit，将这个 bit 以及比其更低的 bits (包含该 bit) 都保持不变，将比该 bit 更高的 bits (不包括该 bit) 进行取反操作。下面是一些例子 (以 32-bit 为例)：
+
+```
+0x0080 <-> 0xff80
+0x0001 <-> 0xffff
+0x0002 <-> 0xfffe
+```
+{{< /admonition >}}
 
 ### 加 / 减法器设计
 
@@ -189,11 +207,8 @@ int32_t max(int32_t a, int32_t b) {
 ---
 
 {{< admonition info >}}
-- [ ] [基于 C 语言标准研究与系统程序安全议题](https://hackmd.io/@sysprog/c-std-security)
-
-这篇文章是第二周的课程内容，学有余力可以先行阅读。
+- [基于 C 语言标准研究与系统程序安全议题](https://hackmd.io/@sysprog/c-std-security)
 {{< /admonition >}}
-
 
 <!-- URL -->
 [not-just-counting-but-saving-lives-curta]: https://www.youtube.com/watch?v=kRmExkQoOPY
