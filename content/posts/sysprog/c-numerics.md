@@ -187,6 +187,8 @@ void xorSwap(int *x, int *y) {
 - 第 3 行的 `*y ^= *x` 的结果等价于 `*y ^ *x ^ *y`，整数满足交换律和结合律，所以结果为 `*x`
 - 第 4 行的 `*x ^= *y` 的结果等价于 `*x ^ *y ^ *x`，整数满足交换律和结合律，所以结果为 `*y`
 
+这个实作方法常用于没有额外空间的情形，例如 [Bootloader](https://en.wikipedia.org/wiki/Bootloader#:~:text=A%20bootloader%2C%20also%20spelled%20as,open%20source%20bootloader%20Windows%20bootloader)
+
 ### 避免 overflow
 
 整数运算 `(x + y) / 2` 可能会导致 overflow (如果 x, y 数值都接近 UINT32_MAX)，可以改写为以下不会导致 overflow 的程式码

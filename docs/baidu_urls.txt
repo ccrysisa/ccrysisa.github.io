@@ -1,3 +1,4 @@
+https://ccrysisa.github.io/posts/c-bitwise/
 https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/
 https://ccrysisa.github.io/posts/c-numerics/
 https://ccrysisa.github.io/posts/linux2023-lab0/

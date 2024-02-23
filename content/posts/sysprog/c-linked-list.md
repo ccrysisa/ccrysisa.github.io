@@ -47,7 +47,7 @@ repost:
 
 ## Linux 核心的艺术
 
-[The mind behind Linux | Linus Torvalds | TED](https://youtu.be/o8NPllzkFhE) [YouTube]
+- [ ] YouTube: [The mind behind Linux | Linus Torvalds | TED](https://youtu.be/o8NPllzkFhE)
 
 > 事实上 special case 和 indirect pointer 这两种写法在 clang 的最佳优化下效能并没有什么区别，我们可以不使用 indirect pointer 来写程序，但是我们需要学习 indirect pointer 这种思维方式，即 good taste。
 > 
@@ -129,24 +129,32 @@ $n$ 为 `listsSize`，$m$ 为 merge linked list 过程中产生的 linked list �
 
 ## Linux 核心的 linked list
 
-Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contain_of 宏，来实现自定义的 linked list node，具有强大的灵活性。
-
-非递归的快速排序中 `if (L != R && &begin[i]->list != head) {` 其中的 `&begin[i]->list != head` 条件判断用于空链表情况，数组版本中使用的是下标比较 `L < R` 来判断，但是链表中使用 `L != R` 不足以完全表示 `L < R` 这个条件，还需要 `&begin[i]->list != head` 来判断链表是否为空。
-
-`WRITE_ONCE` 的原理简单来说是，通过 `union` 产生两个引用同一地址的引用 (即 `__val` 和 `__c`)，然后因为对同一地址有多个引用，所以编译器进行最佳化时不会过于激进的重排序，从而达到顺序执行效果。
-
-{{< link href="https://github.com/ccrysisa/linux-list" content=Source external-icon=true >}}
-
-- [x] [Intrusive linked lists](https://www.data-structures-in-practice.com/intrusive-linked-lists/)
-> 这篇文章对于 Intrusive linked list 说明的非常好，解释了其在 memory allocations 和 cache thrashing 的优势，还搭配 Linux kernel 讲解了场景应用。
-
-- [ ] [Linux 核心原始程式碼巨集: container_of](https://hackmd.io/@sysprog/linux-macro-containerof)
+Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contain_of 宏，来实现自定义的 linked list node。
 
 - [x] [sysprog21/linux-list](https://github.com/sysprog21/linux-list)
 > 这个仓库将 Linux kernel 中 linked list 部分抽离出来，并改写为 user mode 的实作。本人对该仓库进行了一些改写，对 insert sort 和 quick sort 增加了 makefile 支持。
 
+上面的仓库与 Linux kernel 的实作差异主要在于 `WRITE_ONCE` 宏。`WRITE_ONCE` 的原理简单来说是，通过 `union` 产生两个引用同一地址的引用 (即 `__val` 和 `__c`)，然后因为对同一地址有多个引用，所以编译器进行最佳化时不会过于激进的重排序，从而达到顺序执行效果。
+
+{{< link href="https://github.com/ccrysisa/linux-list" content=Source external-icon=true >}}
+
+### Intrusive linked lists
+
+- [x] [Intrusive linked lists](https://www.data-structures-in-practice.com/intrusive-linked-lists/)
+
+这篇文章对于 Intrusive linked list 说明的非常好，解释了其在 memory allocations 和 cache thrashing 的优势，还搭配 Linux kernel 讲解了场景应用。
+
+### container_of
+
+- [ ] [Linux 核心原始程式碼巨集: container_of](https://hackmd.io/@sysprog/linux-macro-containerof)
+
+### Optimized QuickSort
+
 - [x] [Optimized QuickSort: C Implementation (Non-Recursive)](https://alienryderflex.com/quicksort/)
-> 这篇文章介绍了 non-recursion 的 quick sort 在 array 上的实作，参考该文章完成 linked list 上的 non-recursion 的 quick sort 实作。
+
+这篇文章介绍了 non-recursion 的 quick sort 在 array 上的实作，参考该文章完成 linked list 上的 non-recursion 版本的 quick sort 实作。
+
+非递归的快速排序中 `if (L != R && &begin[i]->list != head) {` 其中的 `&begin[i]->list != head` 条件判断用于空链表情况，数组版本中使用的是下标比较 `L < R` 来判断，但是链表中使用 `L != R` 不足以完全表示 `L < R` 这个条件，还需要 `&begin[i]->list != head` 来判断链表是否为空。
 
 ### Linux 核心的 list_sort 实作 
 
@@ -159,6 +167,10 @@ Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contai
 - 如果第 k 个 bit 值为 0 且 $> k$ 的 bits 中存在值为 1 的 bit，$< k$ 的 bits 均为 1，则只有 $< k$ 的 bits 可以表示 pending list 中分别有 $2^{k-1}, 2^{k-2}, ..., 2^0$ 大小的 list 各一个，`> k` 的 1 表示需要进行 merge 以获得对应大小的 list。
 
 这样也刚好能使得 merge 时是 $2: 1$ 的长度比例，因为 2 的指数之间的比例是 $2: 1$。
+
+{{< admonition tip >}}
+这部分内容在 [Lab0: Linux 核心的链表排序](https://hackmd.io/@sysprog/linux2023-lab0/%2F%40sysprog%2Flinux2023-lab0-e) 中有更详细的解释和讨论。
+{{< /admonition >}}
 
 {{< admonition info >}}
 - [List, HList, and Hash Table](https://danielmaker.github.io/blog/linux/list_hlist_hashtable.html)

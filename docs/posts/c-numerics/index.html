@@ -13,8 +13,8 @@
 <meta itemprop="description" content="
 尽管数值系统并非 C 语言所持有，但在 Linux 核心大量存在 u8/u16/u32/u64 这样通过 typedef 所定义的类型，伴随着各种 alignment 存取，如果对数值系统的认知不够充分，可能立即就被阻拦在探索 Linux 核心之外——毕竟你完全搞不清楚，为何 Linux 核心存取特定资料需要绕一大圈。
 "><meta itemprop="datePublished" content="2024-02-20T11:13:57+08:00" />
-<meta itemprop="dateModified" content="2024-02-20T17:05:58+08:00" />
-<meta itemprop="wordCount" content="3081"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-02-22T23:11:51+08:00" />
+<meta itemprop="wordCount" content="3103"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C," /><meta property="og:title" content="你所不知道的 C 语言: 数值系统" />
 <meta property="og:description" content="
 尽管数值系统并非 C 语言所持有，但在 Linux 核心大量存在 u8/u16/u32/u64 这样通过 typedef 所定义的类型，伴随着各种 alignment 存取，如果对数值系统的认知不够充分，可能立即就被阻拦在探索 Linux 核心之外——毕竟你完全搞不清楚，为何 Linux 核心存取特定资料需要绕一大圈。
@@ -22,7 +22,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-numerics/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-20T11:13:57+08:00" />
-<meta property="article:modified_time" content="2024-02-20T17:05:58+08:00" />
+<meta property="article:modified_time" content="2024-02-22T23:11:51+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 数值系统"/>
@@ -43,8 +43,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-numerics\/"
-    },"genre": "posts","keywords": "Sysprog, C","wordcount":  3081 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-numerics\/","datePublished": "2024-02-20T11:13:57+08:00","dateModified": "2024-02-20T17:05:58+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, C","wordcount":  3103 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-numerics\/","datePublished": "2024-02-20T11:13:57+08:00","dateModified": "2024-02-22T23:11:51+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -159,7 +159,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-20 11:13:57"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="更新于 2024-02-20 17:05:58"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="3081 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-20 11:13:57"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="更新于 2024-02-22 23:11:51"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-22">2024-02-22</time></span>&nbsp;<span title="3103 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -388,6 +388,7 @@
 <li>第 3 行的 <code>*y ^= *x</code> 的结果等价于 <code>*y ^ *x ^ *y</code>，整数满足交换律和结合律，所以结果为 <code>*x</code></li>
 <li>第 4 行的 <code>*x ^= *y</code> 的结果等价于 <code>*x ^ *y ^ *x</code>，整数满足交换律和结合律，所以结果为 <code>*y</code></li>
 </ul>
+<p>这个实作方法常用于没有额外空间的情形，例如 <a href="https://en.wikipedia.org/wiki/Bootloader#:~:text=A%20bootloader%2C%20also%20spelled%20as,open%20source%20bootloader%20Windows%20bootloader"target="_blank" rel="external nofollow noopener noreferrer">Bootloader</a></p>
 <h3 id="避免-overflow">避免 overflow</h3>
 <p>整数运算 <code>(x + y) / 2</code> 可能会导致 overflow (如果 x, y 数值都接近 UINT32_MAX)，可以改写为以下不会导致 overflow 的程式码</p>
 <div class="highlight" id="id-9"><div class="chroma">
@@ -638,7 +639,7 @@
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-02-20 17:05:58">更新于 2024-02-20&nbsp;</span>
+        <span title="更新于 2024-02-22 23:11:51">更新于 2024-02-22&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/c-numerics/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
