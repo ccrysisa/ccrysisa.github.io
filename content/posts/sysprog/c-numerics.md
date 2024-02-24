@@ -172,6 +172,8 @@ x & (x - 1) == 0
 (x ^ ' ')
 ```
 
+> Each lowercase letter is 32 + uppercase equivalent. This means simply flipping the bit at position 5 (counting from least significant bit at position 0) inverts the case of a letter.
+
 ### XOR swap
 
 通过 xor 运算符可以实现无需临时变量的，交换两个数值的程式码
