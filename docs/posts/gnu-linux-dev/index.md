@@ -243,9 +243,10 @@ findName() 0.006495 0.002938 0.000001
 
 - [Youtube - gnuplot Tutorlal](https://youtu.be/9k-l_ol9jok) 这个教程有五部影片，到发布者的主页搜寻即可。
 
-## Graphviz
+## Linux 绘图工具: Graphviz
 
-[官方网站](https://graphviz.org/)
+- [官方网站](https://graphviz.org/)
+- [一小时实践入门 Graphviz](https://zhuanlan.zhihu.com/p/644358139)
 
 安装:
 
@@ -253,7 +254,21 @@ findName() 0.006495 0.002938 0.000001
 $ sudo apt install graphviz
 ```
 
-第一周的 linked list 专项测验题会大量使用到。
+查看安装版本:
+
+```bash
+$ dot -V
+dot - graphviz version 2.43.0 (0)
+```
+
+通过脚本生成图像:
+
+```bash
+$ dot -Tpng example.dot -o example.png
+```
+
+> Graphviz 在每周测验题的原理解释分析时会大量使用到，请务必掌握以实作出 Readable 的报告。
+
 
 ## 其它工具
 

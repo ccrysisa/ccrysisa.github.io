@@ -43,7 +43,7 @@ repost:
 
 <!--more-->
 
-- {{< link href="https://hackmd.io/@sysprog/c-numerics" content="原文地址" external-icon=true >}}   
+- {{< link href="https://hackmd.io/@sysprog/c-numerics" content="原文地址" external-icon=true >}}
 
 ## Balanced ternary
 

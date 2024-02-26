@@ -24,7 +24,7 @@
     
   "><meta itemprop="datePublished" content="2023-12-25T15:43:50+08:00" />
 <meta itemprop="dateModified" content="2024-02-16T20:29:31+08:00" />
-<meta itemprop="wordCount" content="3415"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="3481"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog," /><meta property="og:title" content="GNU/Linux 开发工具" />
 <meta property="og:description" content="
     
@@ -63,7 +63,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/gnu-linux-dev\/"
-    },"genre": "posts","keywords": "Sysprog","wordcount":  3415 ,
+    },"genre": "posts","keywords": "Sysprog","wordcount":  3481 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/gnu-linux-dev\/","datePublished": "2023-12-25T15:43:50+08:00","dateModified": "2024-02-16T20:29:31+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -179,7 +179,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2023-12-25 15:43:50"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-25">2023-12-25</time></span>&nbsp;<span title="更新于 2024-02-16 20:29:31"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-16">2024-02-16</time></span>&nbsp;<span title="3415 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2023-12-25 15:43:50"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-25">2023-12-25</time></span>&nbsp;<span title="更新于 2024-02-16 20:29:31"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-16">2024-02-16</time></span>&nbsp;<span title="3481 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -195,7 +195,7 @@
     <li><a href="#makefile">Makefile</a></li>
     <li><a href="#linux-性能分析工具-perf">Linux 性能分析工具: Perf</a></li>
     <li><a href="#linux-绘图工具-gnuplot">Linux 绘图工具: gnuplot</a></li>
-    <li><a href="#graphviz">Graphviz</a></li>
+    <li><a href="#linux-绘图工具-graphviz">Linux 绘图工具: Graphviz</a></li>
     <li><a href="#其它工具">其它工具</a>
       <ul>
         <li><a href="#cloc">cloc</a></li>
@@ -247,7 +247,7 @@
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>原文档中的将公钥复制到 clipboard 中使用了 <code>clip</code> 命令，但是这个命令在 Ubuntu 中并没有对应的命令。可以使用 <code>xclip</code> + <code>alias</code> 达到近似效果。</p>
-<div class="highlight" id="id-10"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -366,7 +366,7 @@
       <i class="icon fa-solid fa-check-circle fa-fw" aria-hidden="true"></i>成功<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
-      <div class="admonition-content"><div class="highlight" id="id-11"><div class="chroma">
+      <div class="admonition-content"><div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -382,7 +382,7 @@
 <li>输出第二行表示 perf 工具已经取样并写入了一个名为 perf.data 的二进制文件，文件大小为 0.009 MB，其中包含了 94 个采样。（可以通过 <code>ls</code> 命令来检查 perf.data 文件是否存在）</li>
 </ul>
 <p>接下来通过 <code>perf report</code> 对之前输出的二进制文件 <code>perf.data</code> 进行分析。可以通过方向键选择，并通过 ENTER 进入下一层查看分析结果。</p>
-<div class="highlight" id="id-12"><div class="chroma">
+<div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -552,8 +552,11 @@
 <ul>
 <li><a href="https://youtu.be/9k-l_ol9jok"target="_blank" rel="external nofollow noopener noreferrer">Youtube - gnuplot Tutorlal</a> 这个教程有五部影片，到发布者的主页搜寻即可。</li>
 </ul>
-<h2 id="graphviz">Graphviz</h2>
-<p><a href="https://graphviz.org/"target="_blank" rel="external nofollow noopener noreferrer">官方网站</a></p>
+<h2 id="linux-绘图工具-graphviz">Linux 绘图工具: Graphviz</h2>
+<ul>
+<li><a href="https://graphviz.org/"target="_blank" rel="external nofollow noopener noreferrer">官方网站</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/644358139"target="_blank" rel="external nofollow noopener noreferrer">一小时实践入门 Graphviz</a></li>
+</ul>
 <p>安装:</p>
 <div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -562,11 +565,31 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install graphviz</span></span></code></pre></td></tr></table>
 </div>
-</div><p>第一周的 linked list 专项测验题会大量使用到。</p>
+</div><p>查看安装版本:</p>
+<div class="highlight" id="id-7"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ dot -V
+</span></span><span class="line"><span class="cl">dot - graphviz version 2.43.0 <span class="o">(</span>0<span class="o">)</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过脚本生成图像:</p>
+<div class="highlight" id="id-8"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ dot -Tpng example.dot -o example.png</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Graphviz 在每周测验题的原理解释分析时会大量使用到，请务必掌握以实作出 Readable 的报告。</p>
+</blockquote>
 <h2 id="其它工具">其它工具</h2>
 <h3 id="cloc">cloc</h3>
 <p>man 1 cloc</p>
-<div class="highlight" id="id-7"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -595,7 +618,7 @@
 </div>
 </div><h3 id="top">top</h3>
 <p>man 1 top</p>
-<div class="highlight" id="id-8"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -642,7 +665,7 @@
 </div>
 </div><h3 id="htop">htop</h3>
 <p>man 1 htop</p>
-<div class="highlight" id="id-9"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2

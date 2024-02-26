@@ -5,13 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>Linux 核心设计: 第 1 周测验题 - KZn&#39;s Blog</title><meta name="author" content="ccrysisa">
+    <title>Linux 核心设计: 第 1 周测验题 linked list - KZn&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
-<meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Sysprog, Linux, C' /><meta itemprop="name" content="Linux 核心设计: 第 1 周测验题">
+<meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Sysprog, Linux, C' /><meta itemprop="name" content="Linux 核心设计: 第 1 周测验题 linked list">
 <meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-02-16T14:59:25+08:00" />
 <meta itemprop="dateModified" content="2024-02-20T00:10:40+08:00" />
-<meta itemprop="wordCount" content="426"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="Sysprog,Linux,C," /><meta property="og:title" content="Linux 核心设计: 第 1 周测验题" />
+<meta itemprop="wordCount" content="723"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Sysprog,Linux,C," /><meta property="og:title" content="Linux 核心设计: 第 1 周测验题 linked list" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/linux-quiz1/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
@@ -19,7 +19,7 @@
 <meta property="article:modified_time" content="2024-02-20T00:10:40+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Linux 核心设计: 第 1 周测验题"/>
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Linux 核心设计: 第 1 周测验题 linked list"/>
 <meta name="twitter:description" content=""/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -30,12 +30,12 @@
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "Linux 核心设计: 第 1 周测验题",
+    "headline": "Linux 核心设计: 第 1 周测验题 linked list",
     "inLanguage": "zh-CN",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux-quiz1\/"
-    },"genre": "posts","keywords": "Sysprog, Linux, C","wordcount":  426 ,
+    },"genre": "posts","keywords": "Sysprog, Linux, C","wordcount":  723 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/linux-quiz1\/","datePublished": "2024-02-16T14:59:25+08:00","dateModified": "2024-02-20T00:10:40+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -147,11 +147,11 @@
     </aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Linux 核心设计: 第 1 周测验题</span>
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Linux 核心设计: 第 1 周测验题 linked list</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-16 14:59:25"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-16">2024-02-16</time></span>&nbsp;<span title="更新于 2024-02-20 00:10:40"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="426 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-16 14:59:25"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-16">2024-02-16</time></span>&nbsp;<span title="更新于 2024-02-20 00:10:40"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="723 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -163,6 +163,11 @@
       <ul>
         <li><a href="#测验-1">测验 1</a></li>
         <li><a href="#测验-2">测验 2</a></li>
+      </ul>
+    </li>
+    <li><a href="#2020q1-第-1-週測驗題">2020q1 第 1 週測驗題</a>
+      <ul>
+        <li><a href="#测验-1-1">测验 1</a></li>
       </ul>
     </li>
   </ul>
@@ -244,7 +249,92 @@
 <p>count &raquo; 後面接的輸出為何</p>
 <ul>
 <li>(f) 0</li>
-</ul></div><div class="post-footer" id="post-footer">
+</ul>
+<h2 id="2020q1-第-1-週測驗題">2020q1 第 1 週測驗題</h2>
+<h3 id="测验-1-1">测验 1</h3>
+<ul>
+<li>本题使用的是单向 linked list</li>
+</ul>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">__list</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">__list</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">list</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>
+<p>一开始的 if 语句用于判断 start 是否为 NULL 或是否只有一个节点，如果是则直接返回无需排序</p>
+</li>
+<li>
+<p>接下来使用 mergesort 来对 linked list 进行从小到大排序，并且每次左侧链表只划分一个节点，剩余节点全部划为右侧链表</p>
+</li>
+</ul>
+<div class="highlight" id="id-2"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="n">list</span> <span class="o">*</span><span class="n">left</span> <span class="o">=</span> <span class="n">start</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">list</span> <span class="o">*</span><span class="n">right</span> <span class="o">=</span> <span class="n">left</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">left</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="c1">// LL0;
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>再来就是归并操作，将 left 和 right 进行归并，如果 merge 为 NULL，则将对应的节点赋值给它和 start，否则需要迭代 left 或 right 以及 merge 以完成归并操作</li>
+</ul>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="n">list</span> <span class="o">*</span><span class="n">merge</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span> <span class="n">left</span> <span class="o">||</span> <span class="n">right</span><span class="p">;</span> <span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">right</span> <span class="o">||</span> <span class="p">(</span><span class="n">left</span> <span class="o">&amp;&amp;</span> <span class="n">left</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">merge</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">start</span> <span class="o">=</span> <span class="n">merge</span> <span class="o">=</span> <span class="n">left</span><span class="p">;</span> <span class="c1">// LL1;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">merge</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">left</span><span class="p">;</span> <span class="c1">// LL2;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">merge</span> <span class="o">=</span> <span class="n">merge</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">left</span> <span class="o">=</span> <span class="n">left</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span> <span class="c1">// LL3;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">merge</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">start</span> <span class="o">=</span> <span class="n">merge</span> <span class="o">=</span> <span class="n">right</span><span class="p">;</span> <span class="c1">// LL4;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">merge</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">right</span><span class="p">;</span> <span class="c1">// LL5;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">merge</span> <span class="o">=</span> <span class="n">merge</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">right</span> <span class="o">=</span> <span class="n">right</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span> <span class="c1">// LL6;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
@@ -253,14 +343,14 @@
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/linux-quiz1/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/linux-quiz1/" data-title="Linux 核心设计: 第 1 周测验题" data-hashtags="Sysprog,Linux,C"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/linux-quiz1/" data-title="Linux 核心设计: 第 1 周测验题 linked list" data-hashtags="Sysprog,Linux,C"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/linux-quiz1/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/linux-quiz1/" data-title="Linux 核心设计: 第 1 周测验题" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/linux-quiz1/" data-title="Linux 核心设计: 第 1 周测验题"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/linux-quiz1/" data-title="Linux 核心设计: 第 1 周测验题"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/linux-quiz1/" data-title="Linux 核心设计: 第 1 周测验题" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/linux-quiz1/" data-title="Linux 核心设计: 第 1 周测验题" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/linux-quiz1/" data-title="Linux 核心设计: 第 1 周测验题"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/linux-quiz1/" data-title="Linux 核心设计: 第 1 周测验题 linked list" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/linux-quiz1/" data-title="Linux 核心设计: 第 1 周测验题 linked list"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/linux-quiz1/" data-title="Linux 核心设计: 第 1 周测验题 linked list"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/linux-quiz1/" data-title="Linux 核心设计: 第 1 周测验题 linked list" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/linux-quiz1/" data-title="Linux 核心设计: 第 1 周测验题 linked list" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/linux-quiz1/" data-title="Linux 核心设计: 第 1 周测验题 linked list"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
       </div>
     </div>

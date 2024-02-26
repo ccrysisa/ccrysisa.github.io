@@ -39,7 +39,11 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
+> 不少 C/C++ 开发者听过 "内存对齐" (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。
+
 <!--more-->
+
+- {{< link href="https://hackmd.io/@sysprog/c-memory" content="原文地址" external-icon=true >}}
 
 ## 复习数值系统
 
@@ -107,9 +111,9 @@ for (int i = n - 1 ; i - sizeof(char) >= 0; i--)
 
 ## Bitwise Operator
 
-- [ ] [Bitwise Operators Quiz Answers](http://doc.callmematthi.eu/C_Bitwise_Operators.html)
-- [ ] [Practice with bit operations](https://pconrad.github.io/old_pconrad_cs16/topics/bitOps/)
-- [ ] [Bitwise Practice](https://web.stanford.edu/class/archive/cs/cs107/cs107.1202/lab1/practice.html)
+- [x] [Bitwise Operators Quiz Answers](http://doc.callmematthi.eu/C_Bitwise_Operators.html)
+- [x] [Practice with bit operations](https://pconrad.github.io/old_pconrad_cs16/topics/bitOps/)
+- [x] [Bitwise Practice](https://web.stanford.edu/class/archive/cs/cs107/cs107.1202/lab1/practice.html)
 
 > Each lowercase letter is 32 + uppercase equivalent. This means simply flipping the bit at position 5 (counting from least significant bit at position 0) inverts the case of a letter.
 
@@ -153,4 +157,6 @@ if (list_empty(head) || !head)
 ->  000101.11      (5.75)
 ->  000101         (5)
 ```
+
+## 做中学
 
