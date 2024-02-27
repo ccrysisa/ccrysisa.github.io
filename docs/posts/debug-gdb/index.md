@@ -131,6 +131,8 @@ $3 = 3
 $4 = 4
 ```
 
+> Use `p/format` to instead select other formats such as `x` for hex, `t` for binary, and `c` for char.
+
 ### backtrace
 
 `backtrace (bt)` 命令用于打印当前调用栈的信息，也称为堆栈回溯 (backtrace)。它显示了程序在执行过程中经过的函数调用序列，以及每个函数调用的位置和参数，即可以获取以下信息：

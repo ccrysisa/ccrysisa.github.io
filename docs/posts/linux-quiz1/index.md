@@ -1,4 +1,4 @@
-# Linux 核心设计: 第 1 周测验题
+# Linux 核心设计: 第 1 周测验题 linked list
 
 
 <!--more-->
@@ -67,7 +67,52 @@ K5 >> 後面接的輸出為何
 count >> 後面接的輸出為何
 - (f) 0
 
+## 2020q1 第 1 週測驗題
 
+### 测验 1
+
+- 本题使用的是单向 linked list
+
+```c
+typedef struct __list {
+    int data;
+    struct __list *next;
+} list;
+```
+
+- 一开始的 if 语句用于判断 start 是否为 NULL 或是否只有一个节点，如果是则直接返回无需排序
+
+- 接下来使用 mergesort 来对 linked list 进行从小到大排序，并且每次左侧链表只划分一个节点，剩余节点全部划为右侧链表
+
+```c
+    list *left = start;
+    list *right = left->next;
+    left->next = NULL; // LL0;
+```
+
+- 再来就是归并操作，将 left 和 right 进行归并，如果 merge 为 NULL，则将对应的节点赋值给它和 start，否则需要迭代 left 或 right 以及 merge 以完成归并操作
+
+```c
+    for (list *merge = NULL; left || right; ) {
+        if (!right || (left && left->data < right->data)) {
+            if (!merge) {
+                start = merge = left; // LL1;
+            } else {
+                merge->next = left; // LL2;
+                merge = merge->next;
+            }
+            left = left->next; // LL3;
+        } else {
+            if (!merge) {
+                start = merge = right; // LL4;
+            } else {
+                merge->next = right; // LL5;
+                merge = merge->next;
+            }
+            right = right->next; // LL6;
+        }
+    }
+```
 
 ---
 

@@ -245,7 +245,7 @@ Great! 果然是 Pointer 类型不同导致的，我们可以看到 `&a` 的类�
 
 根据 [Zero size arrays in C ](https://news.ycombinator.com/item?id=11674374)，原文中的 `char (*argv)[0]` 在函数参数传递时会被转换成 `char **argv`。而为什么在查看地址 `((char **) argv)[0]` 开始的连续 4 个 `char *` 内容时，会打印出 `envp` 中的内容，可以参考以下的进入 `main` 函数时的栈布局：
 
-![](/images/c/argv.png)
+{{< image src="/images/c/argv.png" >}}
 
 `argv` 和 `envp` 所指的字符串区域是相连的，所以在越过 `argv` 字符串区域的边界后，会继续打印 `envp` 区域的字符串。这也是为什么打印出的字符串之间地址增长于其长度相匹配。所以从地址 `(char **) argv` 开始的区域只是一个 `char *` 数组，使用 `x/4s` 对这部分进行字符串格式打印显然是看不懂的。
 

@@ -5,22 +5,30 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>C Bitwise - KZn&#39;s Blog</title><meta name="author" content="ccrysisa">
+    <title>你所不知道的 C 语言: bitwise 操作 - KZn&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
-<meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Sysprog, C' /><meta itemprop="name" content="C Bitwise">
-<meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-02-23T13:13:33+08:00" />
-<meta itemprop="dateModified" content="2024-02-23T13:30:31+08:00" />
-<meta itemprop="wordCount" content="154"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="Sysprog,C," /><meta property="og:title" content="C Bitwise" />
-<meta property="og:description" content="" />
+<meta name="description" content="
+不少 C/C&#43;&#43; 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。
+" /><meta name="keywords" content='Sysprog, C' /><meta itemprop="name" content="你所不知道的 C 语言: bitwise 操作">
+<meta itemprop="description" content="
+不少 C/C&#43;&#43; 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。
+"><meta itemprop="datePublished" content="2024-02-23T13:13:33+08:00" />
+<meta itemprop="dateModified" content="2024-02-24T20:46:03+08:00" />
+<meta itemprop="wordCount" content="1594"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Sysprog,C," /><meta property="og:title" content="你所不知道的 C 语言: bitwise 操作" />
+<meta property="og:description" content="
+不少 C/C&#43;&#43; 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-bitwise/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-23T13:13:33+08:00" />
-<meta property="article:modified_time" content="2024-02-23T13:30:31+08:00" />
+<meta property="article:modified_time" content="2024-02-24T20:46:03+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="C Bitwise"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: bitwise 操作"/>
+<meta name="twitter:description" content="
+不少 C/C&#43;&#43; 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。
+"/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -30,13 +38,13 @@
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "C Bitwise",
+    "headline": "你所不知道的 C 语言: bitwise 操作",
     "inLanguage": "zh-CN",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-bitwise\/"
-    },"genre": "posts","keywords": "Sysprog, C","wordcount":  154 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-bitwise\/","datePublished": "2024-02-23T13:13:33+08:00","dateModified": "2024-02-23T13:30:31+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, C","wordcount":  1594 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-bitwise\/","datePublished": "2024-02-23T13:13:33+08:00","dateModified": "2024-02-24T20:46:03+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -140,19 +148,171 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
 
   <aside class="aside-custom">
     </aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>C Bitwise</span>
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>你所不知道的 C 语言: bitwise 操作</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-23 13:13:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-23">2024-02-23</time></span>&nbsp;<span title="更新于 2024-02-23 13:30:31"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-23">2024-02-23</time></span>&nbsp;<span title="154 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
-    </div><div class="content" id="content"><p>位运算满足交换律，但逻辑运算并不满足交换律，因为短路机制。考虑 Linked list 中的情形:</p>
+      <div class="post-meta-line"><span title="发布于 2024-02-23 13:13:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-23">2024-02-23</time></span>&nbsp;<span title="更新于 2024-02-24 20:46:03"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-24">2024-02-24</time></span>&nbsp;<span title="1594 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#复习数值系统">复习数值系统</a>
+      <ul>
+        <li><a href="#位元组合">位元组合</a></li>
+        <li><a href="#位移运算">位移运算</a></li>
+        <li><a href="#signed--unsigned">Signed &amp; Unsigned</a></li>
+        <li><a href="#sign-extension">Sign Extension</a></li>
+      </ul>
+    </li>
+    <li><a href="#bitwise-operator">Bitwise Operator</a>
+      <ul>
+        <li><a href="#bitwise--logical">bitwise &amp; logical</a></li>
+        <li><a href="#right-shifts">Right Shifts</a></li>
+      </ul>
+    </li>
+    <li><a href="#做中学">做中学</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><blockquote>
+<p>不少 C/C++ 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。</p>
+</blockquote>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/c-memory"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>
+<h2 id="复习数值系统">复习数值系统</h2>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 短片: <a href="https://www.youtube.com/watch?v=8J7sAYoG50A"target="_blank" rel="external nofollow noopener noreferrer">十进制，十二进制，六十进制从何而来？阿拉伯人成就了文艺复兴？[数学大师]</a> [YouTube]</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-numerics"target="_blank" rel="external nofollow noopener noreferrer">你所不知道的 C 语言: 数值系统</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/binary-representation"target="_blank" rel="external nofollow noopener noreferrer">解读计算机编码</a></li>
+</ul>
+<h3 id="位元组合">位元组合</h3>
+<p>一些位元组合表示特定的意义，而不是表示数值，这些组合被称为 <strong>trap representation</strong></p>
+<ul>
+<li>C11 6.2.6.2 Integer types</li>
+</ul>
+<blockquote>
+<p>For unsigned integer types other than unsigned char, the bits of the object representation shall be divided into two groups: value bits and padding bits (there need not be any of the latter). If there are N value bits, each bit shall represent a different power of 2 between 1 and 2N−1, so that objects of that type shall be capable of representing values from 0 to 2N−1 using a pure binary representation; this shall be known as the value representation. The values of any padding bits are unspecified.</p>
+</blockquote>
+<p><code>uintN_t</code> 和 <code>intN_t</code> 保证没有填充位元 (padding bits)，且 <code>intN_t</code> 是二补数编码，所以对这两种类型进行位操作是安全的。</p>
+<ul>
+<li>C99 7.18.1.1 Exact-width integer types</li>
+</ul>
+<blockquote>
+<p>The typedef name intN_t designates a signed integer type with width N, no padding bits, and a two’s complement representation.</p>
+</blockquote>
+<div class="details admonition info open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>有符号整数上也有可能产生陷阱表示法 (trap representation)</p>
+<p>补充资讯: <a href="https://csapp.cs.cmu.edu/3e/waside/waside-tmin.pdf"target="_blank" rel="external nofollow noopener noreferrer">CS:APP Web Aside DATA:TMIN: Writing TMin in C</a></p>
+</div>
+    </div>
+  </div>
+<h3 id="位移运算">位移运算</h3>
+<p>位移运算的未定义情况 (<strong>6.5.7 Bitwise shift operators</strong>):</p>
+<ul>
+<li>左移超过变量长度，则运算结果未定义</li>
+</ul>
+<blockquote>
+<p>If the value of the right operand is negative or is greater than or equal to the width of the promoted left operand, the behavior is undefined.</p>
+</blockquote>
+<ul>
+<li>对一个负数进行右移，C 语言规格未定义，作为 implementation-defined，GCC 实作为算术位移 (arithmetic shift)</li>
+</ul>
+<blockquote>
+<p>If E1 has a signed type and a negative value, the resulting value is implementation-defined.</p>
+</blockquote>
+<h3 id="signed--unsigned">Signed &amp; Unsigned</h3>
+<p>当 Unsigned 和 Signed 混合在同一表达式时，Signed 会被转换成 Unsigned，运算结果可能不符合我们的预期 (这里大赞 Rust，这种情况会编译失败&#x1f923;)。案例请参考原文，这里举一个比较常见的例子:</p>
 <div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">;</span> <span class="n">i</span> <span class="o">-</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">char</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;i: 0x%x</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">i</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这段程式码会导致无限循环，因为条件判断语句 <code>i - sizeof(char) &gt;= 0</code> 恒为真 (变量 i 被转换成 Unsigned 了)。</p>
+<ul>
+<li>6.5.3.4 The sizeof operator</li>
+</ul>
+<blockquote>
+<p>The value of the result is implementation-defined, and its type (an unsigned integer type) is size_t, defined in &lt;stddef.h&gt; (and other headers).</p>
+</blockquote>
+<ul>
+<li>7.17 Common definitions &lt;stddef.h&gt;</li>
+</ul>
+<blockquote>
+<p><code>size_t</code> which is the unsigned integer type of the result of the sizeof operator</p>
+</blockquote>
+<h3 id="sign-extension">Sign Extension</h3>
+<p>将 w bit signed integer 扩展为 w+k bit signed integer，只需将 sign bit 补充至扩展的 bits。</p>
+<p>数值等价性推导:</p>
+<ul>
+<li>positive: 显然是正确的，sign bit 为 0，扩展后数值仍等于原数值</li>
+<li>negitive: 将 w bit 情形时的除开 sign bit 的数值设为 U，则原数值为 $2^{-(w-1)} + U$，则扩展为 w+k bit 后数值为 $2^{-(w+k-1)} + 2^{w+k-2} + &hellip; + 2^{-(w-1)} + U$，因为 $2^{-(w+k-1)} + 2^{w+k-2} + &hellip; + 2^{w-1} = 2^{-(w-1)}$，所以数值依然等价。</li>
+</ul>
+<blockquote>
+<p>$2^{-(w+k-1)} + 2^{w+k-2} + &hellip; + 2^{w-1}$ 可以考虑从左往右的运算，每次都是将原先的数值减半，所以最后的数值为 $2^{-(w+k-1)}$</p>
+</blockquote>
+<p>所以如果 n 是 signed 32-bit，则 <code>n &gt;&gt; 31</code> 等价于 <code>n == 0 ? 0 : -1</code>。在这个的基础上，请重新阅读 [解读计算机编码] 中的 abs 和 min/max 实作。</p>
+<h2 id="bitwise-operator">Bitwise Operator</h2>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="http://doc.callmematthi.eu/C_Bitwise_Operators.html"target="_blank" rel="external nofollow noopener noreferrer">Bitwise Operators Quiz Answers</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://pconrad.github.io/old_pconrad_cs16/topics/bitOps/"target="_blank" rel="external nofollow noopener noreferrer">Practice with bit operations</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://web.stanford.edu/class/archive/cs/cs107/cs107.1202/lab1/practice.html"target="_blank" rel="external nofollow noopener noreferrer">Bitwise Practice</a></li>
+</ul>
+<blockquote>
+<p>Each lowercase letter is 32 + uppercase equivalent. This means simply flipping the bit at position 5 (counting from least significant bit at position 0) inverts the case of a letter.</p>
+</blockquote>
+<blockquote>
+<p>The gdb print command (shortened p) defaults to decimal format. Use p/format to instead select other formats such as x for hex, t for binary, and c for char.</p>
+</blockquote>
+<div class="highlight" id="id-2"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// unsigned integer `mine`, `yours`
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">remove</span> <span class="n">yours</span> <span class="n">from</span> <span class="n">mine</span>                            <span class="n">mine</span> <span class="o">=</span> <span class="n">mine</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">yours</span>
+</span></span><span class="line"><span class="cl"><span class="n">test</span> <span class="k">if</span> <span class="n">mine</span> <span class="n">has</span> <span class="n">both</span> <span class="n">of</span> <span class="n">two</span> <span class="n">lowest</span> <span class="n">bits</span> <span class="nf">on</span>       <span class="p">(</span><span class="n">mine</span> <span class="o">&amp;</span> <span class="mh">0x3</span><span class="p">)</span> <span class="o">==</span> <span class="mh">0x3</span>
+</span></span><span class="line"><span class="cl"><span class="n">n</span> <span class="n">least</span> <span class="n">significant</span> <span class="n">bits</span> <span class="n">on</span><span class="p">,</span> <span class="n">all</span> <span class="n">others</span> <span class="nf">off</span>       <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="n">most</span> <span class="n">significant</span> <span class="n">bits</span> <span class="n">on</span><span class="p">,</span> <span class="n">all</span> <span class="n">others</span> <span class="nf">off</span>        <span class="p">(</span><span class="o">~</span><span class="mi">0</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">32</span> <span class="o">-</span> <span class="n">k</span><span class="p">))</span> <span class="n">or</span>
+</span></span><span class="line"><span class="cl">                                                  <span class="o">~</span><span class="p">(</span><span class="o">~</span><span class="mi">0U</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// unsigned integer `x`, `y` (right-shift: arithmetic shift)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span> <span class="o">&amp;=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>                                      <span class="n">clears</span> <span class="n">lowest</span> <span class="s">&#34;on&#34;</span> <span class="n">bit</span> <span class="n">in</span> <span class="nf">x</span>
+</span></span><span class="line"><span class="cl"><span class="p">(</span><span class="n">x</span> <span class="o">^</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span>                                       <span class="nb">true</span> <span class="k">if</span> <span class="n">x</span> <span class="n">and</span> <span class="n">y</span> <span class="n">have</span> <span class="n">opposite</span> <span class="n">signs</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>程序语言只提供最小粒度为 Byte 的操作，但是不直接提供 Bit 粒度的操作，这与字节顺序相关。假设提供以 Bit 为粒度的操作，这就需要在编程时考虑 <strong>大端/小端模式</strong>，极其繁琐。</p>
+<h3 id="bitwise--logical">bitwise &amp; logical</h3>
+<p>位运算满足交换律，但逻辑运算并不满足交换律，因为短路机制。考虑 Linked list 中的情形:</p>
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -164,23 +324,37 @@
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">list_empty</span><span class="p">(</span><span class="n">head</span><span class="p">)</span> <span class="o">||</span> <span class="o">!</span><span class="n">head</span><span class="p">)</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>第二条语句在执行时会报错，因为 <code>list_empty</code> 要求传入的参数不为 NULL</p>
-<p>程序语言只提供最小粒度为 Byte 的操作，但是不直接提供 Bit 粒度的操作，这与字节顺序相关。假设提供以 Bit 为粒度的操作，这就需要在编程时考虑大段、小端模式，极其繁琐。</p></div><div class="post-footer" id="post-footer">
+<h3 id="right-shifts">Right Shifts</h3>
+<p>对于 Unsigned 或 positive sign integer 做右移运算时 <code>x &gt;&gt; n</code>，其最终结果值为 $\lfloor x / 2^n \rfloor$。</p>
+<p>因为这种情况的右移操作相当于对每个 bit 表示的 power 加上 $-n$，再考虑有些 bit 表示的 power 加上 $-n$ 后会小于 0，此时直接将这些 bit 所表示的值去除即可 (因为在 integer 中 bit 的 power 最小为 0，如果 power 小于 0 表示的是小数值)，这个操作对应于向下取整。</p>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">    00010111 &gt;&gt; 2  (23 &gt;&gt; 4)
+</span></span><span class="line"><span class="cl">-&gt;  000101.11      (5.75)
+</span></span><span class="line"><span class="cl">-&gt;  000101         (5)</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="做中学">做中学</h2></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-02-23 13:30:31">更新于 2024-02-23&nbsp;</span>
+        <span title="更新于 2024-02-24 20:46:03">更新于 2024-02-24&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/c-bitwise/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="C Bitwise" data-hashtags="Sysprog,C"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="你所不知道的 C 语言: bitwise 操作" data-hashtags="Sysprog,C"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="C Bitwise" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="C Bitwise"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="C Bitwise"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="C Bitwise" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="C Bitwise" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="C Bitwise"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="你所不知道的 C 语言: bitwise 操作" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="你所不知道的 C 语言: bitwise 操作"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="你所不知道的 C 语言: bitwise 操作"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="你所不知道的 C 语言: bitwise 操作" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="你所不知道的 C 语言: bitwise 操作" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="你所不知道的 C 语言: bitwise 操作"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
       </div>
     </div>

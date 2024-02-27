@@ -43,7 +43,7 @@ repost:
 
 <!--more-->
 
-- {{< link href="https://hackmd.io/@sysprog/c-numerics" content="原文地址" external-icon=true >}}   
+- {{< link href="https://hackmd.io/@sysprog/c-numerics" content="原文地址" external-icon=true >}}
 
 ## Balanced ternary
 
@@ -171,6 +171,8 @@ x & (x - 1) == 0
 // 大小写互转
 (x ^ ' ')
 ```
+
+> Each lowercase letter is 32 + uppercase equivalent. This means simply flipping the bit at position 5 (counting from least significant bit at position 0) inverts the case of a letter.
 
 ### XOR swap
 
