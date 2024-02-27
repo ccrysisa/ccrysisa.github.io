@@ -18,7 +18,11 @@ durations: static, thread, automatic, and allocated.
 
 ## 影片注解
 
+### cargo check
+
 cargo check 可以给出更简洁的提示，例如相对于编译器给出的错误信息，它会整合相同的错误信息，从而提供简洁切要的提示信息。而且它是一个静态分析工具，不需要进行编译即可给出提示，所以速度会比编译快很多，在大型项目上尤为明显。
+
+### ref
 
 影片大概 49 分时提到了
 
@@ -30,7 +34,7 @@ if let Some(ref mut remainder) = self.remainder {...}
 
 因为在 pattern match 中形如 `&mut` 这类也是用于 pattern match 的，不能用于获取 reference，这也是为什么需要使用 `ref mut` 这类语法来获取 reference 的原因。
 
----
+### operator ?
 
 影片大概 56 分时提到了
 
@@ -40,7 +44,7 @@ let remainder = self.remainder.as_mut()?;
 
 为什么使用之前所提的 `let remainder = &mut self.remainder?;` 这是因为使用 `?` 运算符返回的是内部值的 copy，所以这种情况 `remainder` 里是 `self.remainder?` 返回的值 (是原有 `self.remainder` 内部值的 copy) 的 reference
 
----
+### &str vs String
 
 影片大概 1:03 时提到了 `str` 与 `String` 的区别，个人觉得讲的很好：
 
@@ -53,13 +57,45 @@ String -> &str (cheap -- AsRef)
 &str -> String (expensive -- memcpy)
 ```
 
----
+对于 `String` 使用 `&*` 可以保证将其转换成 `&str`，因为 `*` 会先将 `String` 转换成 `str`。当然对于函数参数的 `&str`，只需传入 `&String` 即可自动转换类型。
+
+### lifetime
 
 可以将结构体的 lifetime 的第一个 (一般为 `'a`) 视为实例的 lifetime，其它的可以表示与实例 lifetime 无关的 lifetime。由于 compiler 不够智能，所以它会将实例化时传入参数的 lifetime 中相关联的最小 lifetime 视为实例的 lifetime 约束 (即实例的 lifetime 包含于该 lifetime 内)。
 
----
+当在实现结构体的方法或 Trait 时，如果在实现方法时无需使用 lifetime 的名称，则可以使用匿名 lifetime `'_`，或者在编译器可以推推导出 lifetime 时也可以使用匿名 lifetime `'_`。
 
-对于 `String` 使用 `&*` 可以保证将其转换成 `&str`，因为 `*` 会先将 `String` 转换成 `str`。当然对于函数参数的 `&str`，只需传入 `&String` 即可自动转换类型。
+- only lifetime
+
+```rs
+struct Apple<'a> {
+    owner: &'a Human,
+}
+
+impl Apple<'_> {
+    ...
+}
+```
+
+- lifetime and generic
+
+```rs
+struct Apple<'a, T> {
+    owner: &'a T,
+}
+
+impl<T> Apple<'_, T> {
+    ...
+}
+```
+
+- compiler can know lifetime
+
+```rs
+pun fn func(&self) -> Apple<'_, T> {
+    ...
+}
+```
 
 ## Documentations
 

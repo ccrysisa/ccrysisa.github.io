@@ -16,6 +16,7 @@ weight: 0
 tags:
   - Rust
   - Smart pointer
+  - Interior Mutability
 categories:
   - Rust
 hiddenFromHomePage: false
@@ -73,6 +74,8 @@ Struct [std::cell::UnsafeCell](https://doc.rust-lang.org/std/cell/struct.UnsafeC
 Module [std::cell Cell\<T\>](https://doc.rust-lang.org/std/cell/index.html#cellt) 
 > `Cell<T>` implements interior mutability by moving values in and out of the cell. That is, an &mut T to the inner value can never be obtained, and the value itself cannot be directly obtained without replacing it with something else. Both of these rules ensure that there is never more than one reference pointing to the inner value. This type provides the following methods:
 
+{{< image src="/images/rust/cell.drawio.svg" caption="Cell" >}}
+
 在 Rust 中对一个变量 (T)，在已存在其 immutable references (&T) 时使用 mutable reference (&mut T) 是禁止的，因为这样会因为编译器优化而导致程序的行为不一定符合我们的预期。考虑以下的代码:
 
 ```rs
@@ -112,12 +115,16 @@ unsafe { println!("{}", *uc.get()); }
 Module [std::cell RefCell\<T\>](https://doc.rust-lang.org/std/cell/index.html#refcellt) 
 > `RefCell<T>` uses Rust’s lifetimes to implement “dynamic borrowing”, a process whereby one can claim temporary, exclusive, mutable access to the inner value. Borrows for `RefCell<T>`s are tracked at runtime, unlike Rust’s native reference types which are entirely tracked statically, at compile time.
 
+{{< image src="/images/rust/refcell.drawio.svg" caption="RefCell" >}}
+
 `RefCell` 也提供了之前所提的“内部可变性”机制，但是是通过提供 ***引用*** 而不是转移所有权来实现。所以它常用于 Tree, Graph 这类数据结构，因为这些数据结构的节点 "很大"，不大可能实现 Copy 的 Trait (因为开销太大了)，所以一般使用 `RefCell` 来实现节点的相互引用关系。
 
 ### Rc
 
 method [std::boxed::Box::into_raw](https://doc.rust-lang.org/std/boxed/struct.Box.html#method.into_raw)
 > After calling this function, the caller is responsible for the memory previously managed by the Box. In particular, the caller should properly destroy T and release the memory, taking into account the memory layout used by Box. The easiest way to do this is to convert the raw pointer back into a Box with the Box::from_raw function, allowing the Box destructor to perform the cleanup.
+
+{{< image src="/images/rust/rc.drawio.svg" caption="Rc" >}}
 
 ### Raw pointers vs references
 
@@ -132,6 +139,49 @@ You have no guarantee, but you also cann\'t do much with a `*`. If you have a ra
 You\'re not able to go from a const pointer to an exclusive reference. But you can go from a mutable pointer to an exclusive reference.
 
 > To guarantee that you have to follow **onwership** semantics in Rust.
+
+### PhantomData & Drop check
+
+- The Rustonomicon: [Drop Check](https://doc.rust-lang.org/nomicon/dropck.html)
+- Medium: [Rust Notes: PhantomData](https://medium.com/@0xor0ne/rust-notes-phantomdata-505757bf56a7)
+
+```rs
+struct Foo<'a, T: Default> {
+    v: &'a mut T,
+}
+
+impl<T> Drop for Foo<'_, T: Default> {
+    fn drop(&mut self) {
+        let _ = std::mem::replace(self.v, T::default());
+    }
+}
+
+fn main() {
+    let mut t = String::from("hello");
+    let foo = Foo { v: &mut t };
+    drop(t);
+    drop(foo);
+}
+```
+
+最后的 2 行 drop 语句会导致编译失败，因为编译器知道 foo 引用了 t，所以会进行 drop check，保证 t 的 lifetime 至少和 foo 一样长，因为 drop 时会按照从内到外的顺序对结构体的成员及其本身进行 drop。但是对于我们实现的 Rc 使用的是 raw pointer，如果不加 PhantomData，那么在对 Rc 进行 drop 时并不会检查 raw pointer 所指向的 RcInner 的 lifetime 是否满足要求，即在 drop Rc 之前 drop RcInner 并不会导致编译失败。简单来说，PhantomData 就是让编译器以为 Rc 拥有 RcInner 的所有权或引用，由此进行期望的 drop check 行为。
+
+### Thread Safety
+
+- Cell
+> Because even though you\'re not giving out references to things, having two threads modify the same value at the same time is just not okay. There actually is o thread-safe version of `Cell`. (*Think it as pointer in C* :rofl:)
+
+- RefCell
+> You could totally implement a thread-safe version of RefCell, one that uses an atomic counter instead of `Cell` for these numbers. So it turns out that the CPU has built-in instructions that can, in a thread-safe way, increment and decrement counters.
+
+- Rc
+> The thread-safe version of `Rc` is `Arc`, or Atomic Reference Count.
+
+### Copy-on-Write (COW)
+
+Struct [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html#)
+> The type `Cow` is a smart pointer providing clone-on-write functionality: it can enclose and provide immutable access to borrowed data, and clone the data lazily when mutation or ownership is required. The type is designed to work with general borrowed data via the `Borrow` trait.
+
 
 ## Documentations
 
@@ -151,6 +201,8 @@ You\'re not able to go from a const pointer to an exclusive reference. But you c
 - Module [std::rc](https://doc.rust-lang.org/std/rc/index.html)
 
 - Module [std::sync](https://doc.rust-lang.org/std/sync/index.html)
+  - Struct [std::sync::Mutex](https://doc.rust-lang.org/std/sync/struct.Mutex.html)
+  - Struct [std::sync::RwLock](https://doc.rust-lang.org/std/sync/struct.RwLock.html)
   - Struct [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html)
 
 - Struct [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html)
@@ -164,16 +216,18 @@ You\'re not able to go from a const pointer to an exclusive reference. But you c
 
 - Struct [std::marker::PhantomData](https://doc.rust-lang.org/std/marker/struct.PhantomData.html)
 
-- Trait [std::ops::Drop](https://doc.rust-lang.org/std/ops/trait.Drop.html)
+- Struct [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html#)
 
-- Function [std::mem::drop](https://doc.rust-lang.org/std/mem/fn.drop.html)
+- Trait [std::ops::Drop](https://doc.rust-lang.org/std/ops/trait.Drop.html)
 
 - Trait [std::ops::Deref](https://doc.rust-lang.org/std/ops/trait.Deref.html)
 
 - Trait [std::ops::DerefMut](https://doc.rust-lang.org/std/ops/trait.DerefMut.html)
 
+- Trait [std::marker::Sized](https://doc.rust-lang.org/std/marker/trait.Sized.html)
+
 - Function [std:\:thread\::spawn](https://doc.rust-lang.org/std/thread/fn.spawn.html)
 
-## References
+- Function [std::mem::replace](https://doc.rust-lang.org/std/mem/fn.replace.html)
 
-- The Rustonomicon: [Drop Check](https://doc.rust-lang.org/nomicon/dropck.html)
+- Function [std::mem::drop](https://doc.rust-lang.org/std/mem/fn.drop.html)
