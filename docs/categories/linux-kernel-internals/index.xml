@@ -4,14 +4,24 @@
     <link>https://ccrysisa.github.io/categories/linux-kernel-internals/</link>
     <description>Linux Kernel Internals - 分类 - KZn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 23 Feb 2024 13:13:33 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/linux-kernel-internals/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 27 Feb 2024 22:44:38 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/linux-kernel-internals/" rel="self" type="application/rss+xml" /><item>
+  <title>你所不知道的 C 语言: 内存管理、对齐及硬体特性</title>
+  <link>https://ccrysisa.github.io/posts/c-memory/</link>
+  <pubDate>Tue, 27 Feb 2024 22:44:38 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-memory/</guid>
+  <description><![CDATA[<blockquote>
+<p>不少 C/C++ 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>你所不知道的 C 语言: bitwise 操作</title>
   <link>https://ccrysisa.github.io/posts/c-bitwise/</link>
   <pubDate>Fri, 23 Feb 2024 13:13:33 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-bitwise/</guid>
   <description><![CDATA[<blockquote>
-<p>不少 C/C++ 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。</p>
+<p>Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，颇多乍看像是魔法的 C 程式码就是 bitops 的组合。</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -91,16 +101,6 @@
 规格书版本为 n1256，对应 C99 标准，对应的 <a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf"target="_blank" rel="external nofollow noopener noreferrer">PDF 下载地址</a>。
 也配合 C11 标准来阅读，版本 n1570，对应的 <a href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1570.pdf"target="_blank" rel="external nofollow noopener noreferrer">PDF 下载地址</a>。
 阅读规格书需要一定的体系结构、编译原理的相关知识，但不需要很高的程度。请善用检索工具，在阅读规格书时遇到术语时，请先在规格书中进行检索，因为极大可能是规格书自己定义的术语。</p>]]></description>
-</item>
-<item>
-  <title>解读计算机编码</title>
-  <link>https://ccrysisa.github.io/posts/binary-representation/</link>
-  <pubDate>Sun, 31 Dec 2023 15:43:50 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/binary-representation/</guid>
-  <description><![CDATA[<blockquote>
-<p>人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 + 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。</p>
-</blockquote>]]></description>
 </item>
 </channel>
 </rss>

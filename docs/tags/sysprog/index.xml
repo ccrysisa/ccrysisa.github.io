@@ -4,14 +4,24 @@
     <link>https://ccrysisa.github.io/tags/sysprog/</link>
     <description>Sysprog - 标签 - KZn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 23 Feb 2024 13:13:33 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 27 Feb 2024 22:44:38 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
+  <title>你所不知道的 C 语言: 内存管理、对齐及硬体特性</title>
+  <link>https://ccrysisa.github.io/posts/c-memory/</link>
+  <pubDate>Tue, 27 Feb 2024 22:44:38 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-memory/</guid>
+  <description><![CDATA[<blockquote>
+<p>不少 C/C++ 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>你所不知道的 C 语言: bitwise 操作</title>
   <link>https://ccrysisa.github.io/posts/c-bitwise/</link>
   <pubDate>Fri, 23 Feb 2024 13:13:33 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-bitwise/</guid>
   <description><![CDATA[<blockquote>
-<p>不少 C/C++ 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。</p>
+<p>Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，颇多乍看像是魔法的 C 程式码就是 bitops 的组合。</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -88,14 +98,6 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-spec-ch6/</guid>
   <description><![CDATA[<p>C 语言规格书 Chapter 6 - Language 阅读记录。</p>]]></description>
-</item>
-<item>
-  <title>C 规格第 7 章 Library</title>
-  <link>https://ccrysisa.github.io/posts/c-spec-ch7/</link>
-  <pubDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-spec-ch7/</guid>
-  <description><![CDATA[<p>C 语言规格书 Chapter 7 - Library 阅读记录。</p>]]></description>
 </item>
 </channel>
 </rss>

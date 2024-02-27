@@ -1,11 +1,11 @@
 # 你所不知道的 C 语言: bitwise 操作
 
 
-> 不少 C/C++ 开发者听过 "内存对齐" (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。
+> Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，颇多乍看像是魔法的 C 程式码就是 bitops 的组合。
 
 <!--more-->
 
-- {{< link href="https://hackmd.io/@sysprog/c-memory" content="原文地址" external-icon=true >}}
+- {{< link href="https://hackmd.io/@sysprog/c-bitwise" content="原文地址" external-icon=true >}}
 
 ## 复习数值系统
 

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>你所不知道的 C 语言: 内存管理、对齐及硬体特性 - KZn&#39;s Blog</title><meta name="author" content="ccrysisa">
+<meta name="author-link" content="https://github.com/ccrysisa">
+<meta name="description" content="
+不少 C/C&#43;&#43; 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。
+" /><meta name="keywords" content='Sysprog, C' /><meta itemprop="name" content="你所不知道的 C 语言: 内存管理、对齐及硬体特性">
+<meta itemprop="description" content="
+不少 C/C&#43;&#43; 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。
+"><meta itemprop="datePublished" content="2024-02-27T22:44:38+08:00" />
+<meta itemprop="dateModified" content="2024-02-27T23:45:11+08:00" />
+<meta itemprop="wordCount" content="1054"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Sysprog,C," /><meta property="og:title" content="你所不知道的 C 语言: 内存管理、对齐及硬体特性" />
+<meta property="og:description" content="
+不少 C/C&#43;&#43; 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ccrysisa.github.io/posts/c-memory/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-02-27T22:44:38+08:00" />
+<meta property="article:modified_time" content="2024-02-27T23:45:11+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 内存管理、对齐及硬体特性"/>
+<meta name="twitter:description" content="
+不少 C/C&#43;&#43; 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。
+"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/c-memory/" /><link rel="prev" href="https://ccrysisa.github.io/posts/c-bitwise/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "你所不知道的 C 语言: 内存管理、对齐及硬体特性",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/ccrysisa.github.io\/posts\/c-memory\/"
+    },"genre": "posts","keywords": "Sysprog, C","wordcount":  1054 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-memory\/","datePublished": "2024-02-27T22:44:38+08:00","dateModified": "2024-02-27T23:45:11+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "ccrysisa"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="KZn&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZn&#39;s Blog" data-alt="KZn&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZn&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="KZn&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZn&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>你所不知道的 C 语言: 内存管理、对齐及硬体特性</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-02-27 22:44:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-27">2024-02-27</time></span>&nbsp;<span title="更新于 2024-02-27 23:45:11"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-27">2024-02-27</time></span>&nbsp;<span title="1054 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#背景知识">背景知识</a>
+      <ul>
+        <li><a href="#你所不知道的-c-语言-指针篇httpshackmdioshybpr9wgl">你所不知道的 C 语言: <a href="https://hackmd.io/s/HyBPr9WGl">指针篇</a></a></li>
+        <li><a href="#你所不知道的-c-语言-函数呼叫篇httpshackmdiossj6hrj-zg">你所不知道的 C 语言: <a href="https://hackmd.io/s/SJ6hRj-zg">函数呼叫篇</a></a></li>
+      </ul>
+    </li>
+    <li><a href="#memory-金字塔">Memory 金字塔</a>
+      <ul>
+        <li><a href="#understanding-virtual-memory---the-plot-thickens">Understanding virtual memory - the plot thickens</a></li>
+        <li><a href="#understanding-stack-allocation">Understanding stack allocation</a></li>
+        <li><a href="#slab-allocator">Slab allocator</a></li>
+        <li><a href="#demand-paging-explained">Demand paging explained</a></li>
+      </ul>
+    </li>
+    <li><a href="#堆-heap">堆 Heap</a></li>
+    <li><a href="#data-alignment">Data alignment</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><blockquote>
+<p>不少 C/C++ 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。</p>
+</blockquote>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/c-memory"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>
+<h2 id="背景知识">背景知识</h2>
+<h3 id="你所不知道的-c-语言-指针篇httpshackmdioshybpr9wgl">你所不知道的 C 语言: <a href="https://hackmd.io/s/HyBPr9WGl"target="_blank" rel="external nofollow noopener noreferrer">指针篇</a></h3>
+<ul>
+<li>C99/C11 6.2.5 (28)</li>
+</ul>
+<blockquote>
+<p>A pointer to void shall have the same representation and alignment requirements as a pointer to a character type.</p>
+</blockquote>
+<ul>
+<li>C99/C11 6.3.2.3 (1)</li>
+</ul>
+<blockquote>
+<p>A pointer to void may be converted to or from a pointer to any object type. A pointer to any object type may be converted to a pointer to void and back again; the result shall compare equal to the original pointer.</p>
+</blockquote>
+<p>使用 <code>void *</code> 必须通过 explict (显式) 或强制转型，才能存取最终的 object，因为 <code>void</code> 无法判断 object 的大小信息。</p>
+<h3 id="你所不知道的-c-语言-函数呼叫篇httpshackmdiossj6hrj-zg">你所不知道的 C 语言: <a href="https://hackmd.io/s/SJ6hRj-zg"target="_blank" rel="external nofollow noopener noreferrer">函数呼叫篇</a></h3>
+<p>glibc 提供了 <code>malloc_stats()</code> 和 <code>malloc_info()</code> 这两个函数，可以查询 process 的 heap 空间使用情况信息。</p>
+<h2 id="memory-金字塔">Memory 金字塔</h2>
+<a class="lightgallery" href="https://hackmd.io/_uploads/ryo9Y1NAj.png?size=large" data-thumbnail="https://hackmd.io/_uploads/ryo9Y1NAj.png?size=small" data-sub-html="<h2>https://hackmd.io/_uploads/ryo9Y1NAj.png</h2>"><img loading="lazy" src="https://hackmd.io/_uploads/ryo9Y1NAj.png" srcset="https://hackmd.io/_uploads/ryo9Y1NAj.png?size=small, https://hackmd.io/_uploads/ryo9Y1NAj.png?size=medium 1.5x, https://hackmd.io/_uploads/ryo9Y1NAj.png?size=large 2x" sizes="auto" data-title="https://hackmd.io/_uploads/ryo9Y1NAj.png" data-alt="https://hackmd.io/_uploads/ryo9Y1NAj.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p>这个金字塔的层级图提示我们，善用 Cache locality 可以有效提高程式效能。</p>
+<div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://marek.vavrusa.com/memory/"target="_blank" rel="external nofollow noopener noreferrer">What a C programmer should know about memory</a>
+(<a href="https://wen00072.github.io/blog/2015/08/08/notes-what-a-c-programmer-should-know-about-memory/"target="_blank" rel="external nofollow noopener noreferrer">简记</a>)</li>
+</ul>
+</div>
+    </div>
+  </div>
+<h3 id="understanding-virtual-memory---the-plot-thickens">Understanding virtual memory - the plot thickens</h3>
+<blockquote>
+<p>The virtual memory allocator (VMA) may give you a memory it doesn’t have, all in a vain hope that you’re not going to use it. Just like banks today</p>
+</blockquote>
+<p>虚拟内存的管理类似于银行，返回的分配空间未必可以立即使用。memory allocator 和银行类似，可用空间就类似于银行的现金储备金，银行可以开很多支票，但是这些支票可以兑现的前提是这些支票不会在同一时间来兑现，虚拟内存管理也类似，分配空间也期望用户不会立即全部使用。</p>
+<h3 id="understanding-stack-allocation">Understanding stack allocation</h3>
+<blockquote>
+<p>This is how variable-length arrays (VLA), and also <a href="https://linux.die.net/man/3/alloca"target="_blank" rel="external nofollow noopener noreferrer">alloca()</a> work, with one difference - VLA validity is limited by the scope, alloca’d memory persists until the current function returns (or unwinds if you’re feeling sophisticated).</p>
+</blockquote>
+<p>VLA 和 alloca 分配的都是栈 (stack) 空间，只需将栈指针 (sp) 按需求加减一下即可实现空间分配。因为 stack 空间是有限的，所以 Linux 核心中禁止使用 VLA，防止 Stack Overflow &#x1f923;</p>
+<h3 id="slab-allocator">Slab allocator</h3>
+<blockquote>
+<p>The principle of slab allocation was described by Bonwick for a kernel object cache, but it applies for the user-space as well. Oh-kay, we’re not interested in pinning slabs to CPUs, but back to the gist — you ask the allocator for a slab of memory, let’s say a whole page, and you cut it into many fixed-size pieces. Presuming each piece can hold at least a pointer or an integer, you can link them into a list, where the list head points to the first free element.</p>
+</blockquote>
+<p>在使用 alloc 的内存空间时，这些空间很有可能是不连续的。所以此时对于系统就会存在一些问题，一个是内存空间碎片 fragment，因为分配的空间未必会全部使用到，另一个是因为不连续，所以无法利用 Cache locality 来提升效能。</p>
+<h3 id="demand-paging-explained">Demand paging explained</h3>
+<p>Linux 系统会提供一些内存管理的 API 和机制:</p>
+<ul>
+<li>mlock() - lock/unlock memory 禁止某个区域的内存被 swapped out 到磁盘 (只是向 OS 建议，OS 可能不会理会)</li>
+<li>madvise() - give advice about use of memory</li>
+<li>lazy loading 利用 page-fault 来实现</li>
+<li>copy on write</li>
+</ul>
+<div class="details admonition info open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ul>
+<li><a href="https://hackmd.io/@sysprog/HkW3Dr1Rb"target="_blank" rel="external nofollow noopener noreferrer">現代處理器設計: Cache 原理和實際影響</a></li>
+<li><a href="https://hackmd.io/s/HkyscQn2z"target="_blank" rel="external nofollow noopener noreferrer">Cache 原理和實際影響</a>: 進行 <a href="https://lwn.net/Articles/252125/"target="_blank" rel="external nofollow noopener noreferrer">CPU caches</a> 中文重點提示並且重現對應的實驗</li>
+<li><a href="https://hackmd.io/s/HkICAjeJg#"target="_blank" rel="external nofollow noopener noreferrer">針對多執行緒環境設計的 Memory allocator</a></li>
+<li><a href="https://hackmd.io/s/H1TP6FV6z"target="_blank" rel="external nofollow noopener noreferrer">rpmalloc 探討</a></li>
+</ul>
+</div>
+    </div>
+  </div>
+<h2 id="堆-heap">堆 Heap</h2>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> Stack Overflow: <a href="https://stackoverflow.com/questions/1699057/why-are-two-different-concepts-both-called-heap"target="_blank" rel="external nofollow noopener noreferrer">Why are two different concepts both called &ldquo;heap&rdquo;?</a></li>
+</ul>
+<h2 id="data-alignment">Data alignment</h2></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="更新于 2024-02-27 23:45:11">更新于 2024-02-27&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/c-memory/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-memory/" data-title="你所不知道的 C 语言: 内存管理、对齐及硬体特性" data-hashtags="Sysprog,C"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/c-memory/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-memory/" data-title="你所不知道的 C 语言: 内存管理、对齐及硬体特性" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-memory/" data-title="你所不知道的 C 语言: 内存管理、对齐及硬体特性"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/c-memory/" data-title="你所不知道的 C 语言: 内存管理、对齐及硬体特性"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/c-memory/" data-title="你所不知道的 C 语言: 内存管理、对齐及硬体特性" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-memory/" data-title="你所不知道的 C 语言: 内存管理、对齐及硬体特性" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-memory/" data-title="你所不知道的 C 语言: 内存管理、对齐及硬体特性"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/c/' class="post-tag">C</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/posts/c-bitwise/" class="post-nav-item" rel="prev" title="你所不知道的 C 语言: bitwise 操作"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>你所不知道的 C 语言: bitwise 操作</a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

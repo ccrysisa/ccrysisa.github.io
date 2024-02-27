@@ -4,16 +4,26 @@
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 23 Feb 2024 13:13:33 &#43;0800</lastBuildDate>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 27 Feb 2024 22:44:38 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+  <title>你所不知道的 C 语言: 内存管理、对齐及硬体特性</title>
+  <link>https://ccrysisa.github.io/posts/c-memory/</link>
+  <pubDate>Tue, 27 Feb 2024 22:44:38 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-memory/</guid>
+  <description><![CDATA[<blockquote>
+<p>不少 C/C++ 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>你所不知道的 C 语言: bitwise 操作</title>
   <link>https://ccrysisa.github.io/posts/c-bitwise/</link>
   <pubDate>Fri, 23 Feb 2024 13:13:33 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-bitwise/</guid>
   <description><![CDATA[<blockquote>
-<p>不少 C/C++ 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。</p>
+<p>Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，颇多乍看像是魔法的 C 程式码就是 bitops 的组合。</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -90,16 +100,6 @@
   <guid>https://ccrysisa.github.io/posts/c-linked-list/</guid>
   <description><![CDATA[<blockquote>
 <p>无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>Crust of Rust: Declarative Macros</title>
-  <link>https://ccrysisa.github.io/posts/declarative-macros/</link>
-  <pubDate>Wed, 31 Jan 2024 22:32:27 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/declarative-macros/</guid>
-  <description><![CDATA[<blockquote>
-<p>In this second Crust of Rust video, we cover declarative macros, macro_rules!, by re-implementing the vec! macro from the standard library. As part of that, we cover not only how to write these, but some of the gotchas and tricks you&rsquo;ll run into, and some common use-cases.</p>
 </blockquote>]]></description>
 </item>
 </channel>
