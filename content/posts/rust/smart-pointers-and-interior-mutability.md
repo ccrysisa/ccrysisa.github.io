@@ -39,7 +39,7 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-> In this fourth Crust of Rust video, we cover smart pointers and interior mutability, by re-implementing the Cell, RefCell, and Rc types from the standard library. As part of that, we cover when those types are useful, how they work, and what the equivalent thread-safe versions of these types are. In the process, we go over some of the finer details of Rust's ownership model, and the UnsafeCell type. We also dive briefly into the Drop Check rabbit hole (https://doc.rust-lang.org/nightly/nomicon/dropck.html) before coming back up for air.
+> In this fourth Crust of Rust video, we cover smart pointers and interior mutability, by re-implementing the Cell, RefCell, and Rc types from the standard library. As part of that, we cover when those types are useful, how they work, and what the equivalent thread-safe versions of these types are. In the process, we go over some of the finer details of Rust\'s ownership model, and the UnsafeCell type. We also dive briefly into the Drop Check rabbit hole (https://doc.rust-lang.org/nightly/nomicon/dropck.html) before coming back up for air.
 
 <!--more-->
 
@@ -112,7 +112,26 @@ unsafe { println!("{}", *uc.get()); }
 Module [std::cell RefCell\<T\>](https://doc.rust-lang.org/std/cell/index.html#refcellt) 
 > `RefCell<T>` uses Rust’s lifetimes to implement “dynamic borrowing”, a process whereby one can claim temporary, exclusive, mutable access to the inner value. Borrows for `RefCell<T>`s are tracked at runtime, unlike Rust’s native reference types which are entirely tracked statically, at compile time.
 
-`RefCell` 也提供了之前所提的“内部可变性”机制，但是是通过提供 ***引用*** 而不是转移所有权来实现。
+`RefCell` 也提供了之前所提的“内部可变性”机制，但是是通过提供 ***引用*** 而不是转移所有权来实现。所以它常用于 Tree, Graph 这类数据结构，因为这些数据结构的节点 "很大"，不大可能实现 Copy 的 Trait (因为开销太大了)，所以一般使用 `RefCell` 来实现节点的相互引用关系。
+
+### Rc
+
+method [std::boxed::Box::into_raw](https://doc.rust-lang.org/std/boxed/struct.Box.html#method.into_raw)
+> After calling this function, the caller is responsible for the memory previously managed by the Box. In particular, the caller should properly destroy T and release the memory, taking into account the memory layout used by Box. The easiest way to do this is to convert the raw pointer back into a Box with the Box::from_raw function, allowing the Box destructor to perform the cleanup.
+
+### Raw pointers vs references
+
+`* mut` and `* const` are not references, they are raw pointers. In Rust, there are a bunch of semantics you have to follow when you using references. 
+
+Like if you use `&` symbol, an `&` alone means a shared reference, and you have to guarantee that there are no exclusive references to that thing. And similarly, if you have a `&mut`, a exclusive reference, you know that there are not shared references.
+
+The `*` version of these, like `* mut` and `* const`, do not have these guarantees. If you have a `* mut`, there may be other `* mut`s to the same thing. There might be `* const` to the same thing.
+
+You have no guarantee, but you also cann\'t do much with a `*`. If you have a raw pointer, the only thing you can really do to it is use an **unsafe** block to dereference it and turn it into reference. But that is unsafe, *you need to document wht it is safe.* 
+
+You\'re not able to go from a const pointer to an exclusive reference. But you can go from a mutable pointer to an exclusive reference.
+
+> To guarantee that you have to follow **onwership** semantics in Rust.
 
 ## Documentations
 
@@ -134,10 +153,27 @@ Module [std::cell RefCell\<T\>](https://doc.rust-lang.org/std/cell/index.html#re
 - Module [std::sync](https://doc.rust-lang.org/std/sync/index.html)
   - Struct [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html)
 
+- Struct [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html)
+  - method [std::boxed::Box::into_raw](https://doc.rust-lang.org/std/boxed/struct.Box.html#method.into_raw)
+  - method [std::boxed::Box::from_raw](https://doc.rust-lang.org/std/boxed/struct.Box.html#method.from_raw)
+
+- Struct [std::ptr::NonNull](https://doc.rust-lang.org/std/ptr/struct.NonNull.html)
+  - method [std::ptr::NonNull::new_unchecked](https://doc.rust-lang.org/std/ptr/struct.NonNull.html#method.new_unchecked)
+  - method [std::ptr::NonNull::as_ref](https://doc.rust-lang.org/std/ptr/struct.NonNull.html#method.as_ref)
+  - method [std::ptr::NonNull::as_ptr](https://doc.rust-lang.org/std/ptr/struct.NonNull.html#method.as_ptr)
+
+- Struct [std::marker::PhantomData](https://doc.rust-lang.org/std/marker/struct.PhantomData.html)
+
 - Trait [std::ops::Drop](https://doc.rust-lang.org/std/ops/trait.Drop.html)
+
+- Function [std::mem::drop](https://doc.rust-lang.org/std/mem/fn.drop.html)
 
 - Trait [std::ops::Deref](https://doc.rust-lang.org/std/ops/trait.Deref.html)
 
 - Trait [std::ops::DerefMut](https://doc.rust-lang.org/std/ops/trait.DerefMut.html)
 
-- function [std:\:thread\::spawn](https://doc.rust-lang.org/std/thread/fn.spawn.html)
+- Function [std:\:thread\::spawn](https://doc.rust-lang.org/std/thread/fn.spawn.html)
+
+## References
+
+- The Rustonomicon: [Drop Check](https://doc.rust-lang.org/nomicon/dropck.html)
