@@ -16,6 +16,7 @@ weight: 0
 tags:
   - Sysprog
   - C
+  - Standard
 categories:
   - Linux Kernel Internals
 hiddenFromHomePage: false

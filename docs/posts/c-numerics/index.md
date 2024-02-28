@@ -125,6 +125,8 @@ x & (x - 1) == 0
 
 通过 [ASCII table](https://www.asciitable.com/) 中对 ASCII 编码的分布规律，可以实现大小写转换的 constant-time function
 
+> 也可以通过命令 `man ascii` 来输出精美的 ASCII table
+
 ```c
 // 字符转小写
 (x | ' ')

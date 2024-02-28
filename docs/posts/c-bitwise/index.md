@@ -9,7 +9,7 @@
 
 ## 复习数值系统
 
-- [x] 短片: [十进制，十二进制，六十进制从何而来？阿拉伯人成就了文艺复兴？[数学大师]](https://www.youtube.com/watch?v=8J7sAYoG50A) [YouTube]
+- [x] YouTube: [十进制，十二进制，六十进制从何而来？阿拉伯人成就了文艺复兴？[数学大师]](https://www.youtube.com/watch?v=8J7sAYoG50A) 
 - [x] [你所不知道的 C 语言: 数值系统](https://hackmd.io/@sysprog/c-numerics)
 - [x] [解读计算机编码](https://hackmd.io/@sysprog/binary-representation)
 
@@ -33,7 +33,9 @@
 
 ### 位移运算
 
-位移运算的未定义情况 (**6.5.7 Bitwise shift operators**):
+位移运算的未定义情况:
+
+**C99 6.5.7 Bitwise shift operators**
 
 - 左移超过变量长度，则运算结果未定义
 > If the value of the right operand is negative or is greater than or equal to the width of the promoted left operand, the behavior is undefined.
@@ -69,7 +71,7 @@ for (int i = n - 1 ; i - sizeof(char) >= 0; i--)
 
 > $2^{-(w+k-1)} + 2^{w+k-2} + ... + 2^{w-1}$ 可以考虑从左往右的运算，每次都是将原先的数值减半，所以最后的数值为 $2^{-(w+k-1)}$
 
-所以如果 n 是 signed 32-bit，则 `n >> 31` 等价于 `n == 0 ? 0 : -1`。在这个的基础上，请重新阅读 [解读计算机编码] 中的 abs 和 min/max 实作。
+所以如果 n 是 signed 32-bit，则 `n >> 31` 等价于 `n == 0 ? 0 : -1`。在这个的基础上，请重新阅读 [解读计算机编码](https://hackmd.io/@sysprog/binary-representation) 中的 abs 和 min/max 实作。
 
 ## Bitwise Operator
 
@@ -79,7 +81,7 @@ for (int i = n - 1 ; i - sizeof(char) >= 0; i--)
 
 > Each lowercase letter is 32 + uppercase equivalent. This means simply flipping the bit at position 5 (counting from least significant bit at position 0) inverts the case of a letter.
 
-> The gdb print command (shortened p) defaults to decimal format. Use p/format to instead select other formats such as x for hex, t for binary, and c for char.
+> The gdb print command (shortened p) defaults to decimal format. Use `p/format` to instead select other formats such as `x` for hex, `t` for binary, and `c` for char.
 
 ```c
 // unsigned integer `mine`, `yours`
@@ -87,7 +89,7 @@ remove yours from mine                            mine = mine & ~yours
 test if mine has both of two lowest bits on       (mine & 0x3) == 0x3
 n least significant bits on, all others off       (1 << n) - 1
 k most significant bits on, all others off        (~0 << (32 - k)) or
-                                                  ~(~0U >> 1)
+                                                  ~(~0U >> k)
 
 // unsigned integer `x`, `y` (right-shift: arithmetic shift)
 x &= (x - 1)                                      clears lowest "on" bit in x
@@ -120,8 +122,107 @@ if (list_empty(head) || !head)
 ->  000101         (5)
 ```
 
-## 做中学
+## bitwise 实作
 
+- Vi/Vim 为什么使用 hjkl 作为移动字符?
+> 當我們回顧 1967 年 ASCII 的編碼規範，可發現前 32 個字元都是控制碼，讓人們得以透過這些特別字元來控制畫面和相關 I/O，早期鍵盤的 "control" 按鍵就搭配這些特別字元使用。"control" 組合按鍵會將原本字元的第 1 個 bit 進行 XOR，於是 H 字元對應 ASCII 編碼為 100_1000 (過去僅用 7 bit 編碼)，組合 "control" 後 (即 Ctrl+H) 會得到 000_1000，也就是 backspace 的編碼，這也是為何在某些程式中按下 backspace 按鍵會得到 ^H 輸出的原因。相似地，當按下 Ctrl+J 時會得到 000_1010，即 linefeed
+
+{{< admonition >}}
+where n is the bit number, and 0 is the least significant bit
+{{< /admonition >}}
+
+### Set a bit
+
+```c
+unsigned char a |= (1 << n);
+```
+
+### Clear a bit
+
+```c
+unsigned char a &= ~(1 << n);
+```
+
+### Toggle a bit
+
+```c
+unsigned char a ^= (1 << n);
+```
+
+### Test a bit
+
+```c
+bool a = (val & (1 << n)) > 0;
+```
+
+### The right/left most byte
+
+```c
+// assuming 16 bit, 2-byte short integer
+unsigned short right = val & 0xff;        /* right most (least significant) byte */
+unsigned short left  = (val >> 8) & 0xff; /* left  most (most  significant) byte */
+
+// assuming 32 bit, 4-byte int integer
+unsigned int right = val & 0xff;        /* right most (least significant) byte */
+unsigned int left  = (val >> 24) & 0xff; /* left  most (most  significant) byte */
+```
+
+### Sign bit
+
+```c
+// assuming 16 bit, 2-byte short integer, two's complement
+bool sign = val & 0x8000;
+
+// assuming 32 bit, 4-byte int integer, two's complement
+bool sign = val & 0x80000000;
+```
+
+### Uses of Bitwise Operations or Why to Study Bits
+
+- Compression
+- Set operations
+- Encryption
+
+> 最常见的就是位图 (bitmap)，常用于文件系统 (file system)，可以节省空间 (每个元素只用一个 bit 来表示)，可以很方便的进行集合操作 (通过 bitwise operator)。
+
+```
+x ^ y = (~x & y) | (x & ~y)
+```
+
+## 影像处理
+
+- [x] Stack Overflow: [what (r+1 + (r >> 8)) >> 8 does?](https://stackoverflow.com/questions/30237567/what-r1-r-8-8-does)
+
+在图形引擎中将除法运算 `x / 255` 用位运算 `(x+1 + (x >> 8)) >> 8` 来实作，可以大幅度提升计算效能。
+
+### 案例分析
+
+实作程式码: [RGBAtoBW](https://github.com/charles620016/embedded-summer2015/tree/master/RGBAtoBW)
+
+给定每个 pixel 为 32-bit 的 RGBA 的 bitmap，提升效能的方案:
+
+- 建立表格加速浮点运算
+- 减少位运算: 可以使用 pointer 的 offset 取代原本复杂的 bitwise operation
+
+```c
+bwPixel = table[rgbPixel & 0x00ffffff] + rgbPixel & 0xff000000;
+```
+
+只需对 RGB 部分建立浮点数表，因为 `rgbPixel & 0xff00000` 获取的是 A，无需参与浮点运算。这样建立的表最大下标应为 0x00ffffff，所以这个表占用 $2^{24} Bytes = 16MB$，显然这个表太大了 **not cache friendly**
+
+```c
+bw = (uint32_t) mul_299[r] + (uint32_t) mul_587[g] + (uint32_t) mul_144[b];
+bwPixel = (a << 24) + (bw << 16) + (bw << 8) + bw;
+```
+
+分别对 R, G, B 建立对应的浮点数表，则这三个表总共占用 $3 \times 2^8 Bytes < 32KB$ **cache friendly**
+
+## 案例探讨
+
+{{< admonition info >}}
+- [位元旋转实作和 Linux 核心案例](https://hackmd.io/@sysprog/bitwise-rotation)
+- [reverse bit 原理和案例分析](https://hackmd.io/@sysprog/bitwise-reverse)
+{{< /admonition >}}
 
 
 ---

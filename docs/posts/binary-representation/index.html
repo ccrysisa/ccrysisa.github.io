@@ -9,13 +9,13 @@
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="
 人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 &#43; 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
-" /><meta name="keywords" content='Sysprog' /><meta itemprop="name" content="解读计算机编码">
+" /><meta name="keywords" content='Sysprog, Numerics, Bitwise' /><meta itemprop="name" content="解读计算机编码">
 <meta itemprop="description" content="
 人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 &#43; 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
 "><meta itemprop="datePublished" content="2023-12-31T15:43:50+08:00" />
 <meta itemprop="dateModified" content="2024-02-24T20:46:03+08:00" />
 <meta itemprop="wordCount" content="1886"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="Sysprog," /><meta property="og:title" content="解读计算机编码" />
+<meta itemprop="keywords" content="Sysprog,Numerics,Bitwise," /><meta property="og:title" content="解读计算机编码" />
 <meta property="og:description" content="
 人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 &#43; 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
 " />
@@ -43,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/binary-representation\/"
-    },"genre": "posts","keywords": "Sysprog","wordcount":  1886 ,
+    },"genre": "posts","keywords": "Sysprog, Numerics, Bitwise","wordcount":  1886 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/binary-representation\/","datePublished": "2023-12-31T15:43:50+08:00","dateModified": "2024-02-24T20:46:03+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -474,7 +474,7 @@ $$
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/binary-representation/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/binary-representation/" data-title="解读计算机编码" data-hashtags="Sysprog"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/binary-representation/" data-title="解读计算机编码" data-hashtags="Sysprog,Numerics,Bitwise"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/binary-representation/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/binary-representation/" data-title="解读计算机编码" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/binary-representation/" data-title="解读计算机编码"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -488,7 +488,7 @@ $$
   </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/numerics/' class="post-tag">Numerics</a><a href='/tags/bitwise/' class="post-tag">Bitwise</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>

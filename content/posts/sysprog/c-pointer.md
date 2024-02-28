@@ -16,6 +16,7 @@ weight: 0
 tags:
   - Sysprog
   - C
+  - Pointer
 categories:
   - Linux Kernel Internals
 hiddenFromHomePage: false

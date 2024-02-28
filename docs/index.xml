@@ -4,9 +4,27 @@
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 27 Feb 2024 22:44:38 &#43;0800</lastBuildDate>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+  <title>Linux 核心设计/实作 (Linux Kernel Internals) Spring 2023</title>
+  <link>https://ccrysisa.github.io/posts/linux2023/</link>
+  <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
+  <description><![CDATA[<blockquote>
+<p>在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>你所不知道的 C 语言: 开发工具和规格标准</title>
+  <link>https://ccrysisa.github.io/posts/c-standards/</link>
+  <pubDate>Wed, 28 Feb 2024 11:11:47 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-standards/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>你所不知道的 C 语言: 内存管理、对齐及硬体特性</title>
   <link>https://ccrysisa.github.io/posts/c-memory/</link>
   <pubDate>Tue, 27 Feb 2024 22:44:38 &#43;0800</pubDate>
@@ -80,26 +98,6 @@
   <guid>https://ccrysisa.github.io/posts/linux-concepts/</guid>
   <description><![CDATA[<blockquote>
 <p>面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>Crust of Rust: Iterators</title>
-  <link>https://ccrysisa.github.io/posts/iterators/</link>
-  <pubDate>Mon, 05 Feb 2024 17:18:34 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/iterators/</guid>
-  <description><![CDATA[<blockquote>
-<p>In this third Crust of Rust video, we cover iterators and trait bounds, by re-implementing the &ldquo;flatten&rdquo; Iterator method from the standard library. As part of that, we cover some of the weirder trait bounds that are required, including what&rsquo;s needed to extend the implementation to support backwards iteration.</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: linked list 和非连续内存</title>
-  <link>https://ccrysisa.github.io/posts/c-linked-list/</link>
-  <pubDate>Sat, 03 Feb 2024 10:44:56 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-linked-list/</guid>
-  <description><![CDATA[<blockquote>
-<p>无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。</p>
 </blockquote>]]></description>
 </item>
 </channel>

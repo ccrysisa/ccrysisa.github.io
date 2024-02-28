@@ -11,10 +11,10 @@
 
 ### 你所不知道的 C 语言: [指针篇](https://hackmd.io/s/HyBPr9WGl)
 
-- C99/C11 6.2.5 (28)
+- C99/C11 6.2.5 Types (28)
 > A pointer to void shall have the same representation and alignment requirements as a pointer to a character type.
 
-- C99/C11 6.3.2.3 (1)
+- C99/C11 6.3.2.3 Pointers (1)
 > A pointer to void may be converted to or from a pointer to any object type. A pointer to any object type may be converted to a pointer to void and back again; the result shall compare equal to the original pointer.
 
 使用 `void *` 必须通过 explict (显式) 或强制转型，才能存取最终的 object，因为 `void` 无法判断 object 的大小信息。

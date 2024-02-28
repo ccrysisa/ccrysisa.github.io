@@ -1,3 +1,5 @@
+https://ccrysisa.github.io/posts/linux2023/
+https://ccrysisa.github.io/posts/c-standards/
 https://ccrysisa.github.io/posts/c-memory/
 https://ccrysisa.github.io/posts/c-bitwise/
 https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/

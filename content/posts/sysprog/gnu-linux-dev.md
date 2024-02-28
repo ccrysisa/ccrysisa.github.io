@@ -15,6 +15,7 @@ comment: false
 weight: 0
 tags:
   - Sysprog
+  - Linux
 categories:
   - Linux Kernel Internals
 hiddenFromHomePage: false
