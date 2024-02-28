@@ -10,7 +10,7 @@
 <meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Sysprog, Linux, C' /><meta itemprop="name" content="Linux 核心设计: 第 1 周测验题 linked list">
 <meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-02-16T14:59:25+08:00" />
 <meta itemprop="dateModified" content="2024-02-26T21:54:31+08:00" />
-<meta itemprop="wordCount" content="723"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="818"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux,C," /><meta property="og:title" content="Linux 核心设计: 第 1 周测验题 linked list" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
@@ -35,7 +35,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux-quiz1\/"
-    },"genre": "posts","keywords": "Sysprog, Linux, C","wordcount":  723 ,
+    },"genre": "posts","keywords": "Sysprog, Linux, C","wordcount":  818 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/linux-quiz1\/","datePublished": "2024-02-16T14:59:25+08:00","dateModified": "2024-02-26T21:54:31+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -151,7 +151,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-16 14:59:25"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-16">2024-02-16</time></span>&nbsp;<span title="更新于 2024-02-26 21:54:31"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-26">2024-02-26</time></span>&nbsp;<span title="723 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-16 14:59:25"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-16">2024-02-16</time></span>&nbsp;<span title="更新于 2024-02-26 21:54:31"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-26">2024-02-26</time></span>&nbsp;<span title="818 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -334,7 +334,21 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>延伸問題:</p>
+<ol>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 解釋上述程式運作原理;</li>
+<li>指出程式改進空間，特別是考慮到 <a href="https://en.wikipedia.org/wiki/Merge_sort#Optimizing_merge_sort"target="_blank" rel="external nofollow noopener noreferrer">Optimizing merge sort</a>;</li>
+<li>將上述 singly-linked list 擴充為 circular doubly-linked list 並重新實作對應的 sort;</li>
+<li>依循 Linux 核心 <a href="https://github.com/torvalds/linux/blob/master/include/linux/list.h"target="_blank" rel="external nofollow noopener noreferrer">include/linux/list.h</a> 程式碼的方式，改寫上述排序程式;</li>
+<li>嘗試將原本遞迴的程式改寫為 iterative 版本;</li>
+</ol></div>
+    </div>
+  </div></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">

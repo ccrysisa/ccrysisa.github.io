@@ -152,3 +152,13 @@ typedef struct __list {
         }
     }
 ```
+
+{{< admonition tip >}}
+延伸問題:
+
+1. [x] 解釋上述程式運作原理;
+2. 指出程式改進空間，特別是考慮到 [Optimizing merge sort](https://en.wikipedia.org/wiki/Merge_sort#Optimizing_merge_sort);
+3. 將上述 singly-linked list 擴充為 circular doubly-linked list 並重新實作對應的 sort;
+4. 依循 Linux 核心 [include/linux/list.h](https://github.com/torvalds/linux/blob/master/include/linux/list.h) 程式碼的方式，改寫上述排序程式;
+5. 嘗試將原本遞迴的程式改寫為 iterative 版本;
+{{< /admonition >}}

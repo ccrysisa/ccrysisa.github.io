@@ -5,27 +5,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>Linux 核心设计/实作 (Linux Kernel Internals) Spring 2023 - KZn&#39;s Blog</title><meta name="author" content="ccrysisa">
+    <title>Linux 核心设计/实作 (Linux Kernel Internals) - KZn&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="
 在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
-" /><meta name="keywords" content='Sysprog, Linux' /><meta itemprop="name" content="Linux 核心设计/实作 (Linux Kernel Internals) Spring 2023">
+" /><meta name="keywords" content='Sysprog, Linux' /><meta itemprop="name" content="Linux 核心设计/实作 (Linux Kernel Internals)">
 <meta itemprop="description" content="
 在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
 "><meta itemprop="datePublished" content="2024-02-28T20:46:33+08:00" />
-<meta itemprop="dateModified" content="2024-02-28T21:02:41+08:00" />
-<meta itemprop="wordCount" content="9196"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="Sysprog,Linux," /><meta property="og:title" content="Linux 核心设计/实作 (Linux Kernel Internals) Spring 2023" />
+<meta itemprop="dateModified" content="2024-02-28T21:03:22+08:00" />
+<meta itemprop="wordCount" content="9185"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Sysprog,Linux," /><meta property="og:title" content="Linux 核心设计/实作 (Linux Kernel Internals)" />
 <meta property="og:description" content="
 在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/linux2023/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-28T20:46:33+08:00" />
-<meta property="article:modified_time" content="2024-02-28T21:02:41+08:00" />
+<meta property="article:modified_time" content="2024-02-28T21:03:22+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Linux 核心设计/实作 (Linux Kernel Internals) Spring 2023"/>
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Linux 核心设计/实作 (Linux Kernel Internals)"/>
 <meta name="twitter:description" content="
 在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
 "/>
@@ -38,13 +38,13 @@
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "Linux 核心设计/实作 (Linux Kernel Internals) Spring 2023",
+    "headline": "Linux 核心设计/实作 (Linux Kernel Internals)",
     "inLanguage": "zh-CN",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux2023\/"
-    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  9196 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023\/","datePublished": "2024-02-28T20:46:33+08:00","dateModified": "2024-02-28T21:02:41+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  9185 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023\/","datePublished": "2024-02-28T20:46:33+08:00","dateModified": "2024-02-28T21:03:22+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -155,11 +155,11 @@
     </aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Linux 核心设计/实作 (Linux Kernel Internals) Spring 2023</span>
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Linux 核心设计/实作 (Linux Kernel Internals)</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-28 20:46:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="更新于 2024-02-28 21:02:41"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="9196 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 9200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 19 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-28 20:46:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="更新于 2024-02-28 21:03:22"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="9185 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 9200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 19 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -179,10 +179,7 @@
       </div><div class="content" id="content"><blockquote>
 <p>在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
 </blockquote>
-<ul>
-<li><a href="http://wiki.csie.ncku.edu.tw/linux/schedule?revision=ff44817ff7c75ed4ec0d22e6fdc3337af1f597c3"target="_blank" rel="external nofollow noopener noreferrer">原始网页<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
-</ul>
-<h1 id="linux-核心設計實作-linux-kernel-internals">Linux 核心設計/實作 (Linux Kernel Internals)</h1>
+<a href="http://wiki.csie.ncku.edu.tw/linux/schedule?revision=ff44817ff7c75ed4ec0d22e6fdc3337af1f597c3"target="_blank" rel="external nofollow noopener noreferrer">原始页面<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 <ul>
 <li>Instructor: <a href="/User/jserv">Jim Huang</a> (黃敬群) <code>&lt;jserv.tw@gmail.com&gt;</code></li>
 <li><a href="/linux/schedule-old">往年課程進度</a></li>
@@ -928,19 +925,19 @@ Applications For Linux</a> / <a href="https://evlproject.org/"target="_blank" re
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-02-28 21:02:41">更新于 2024-02-28&nbsp;</span>
+        <span title="更新于 2024-02-28 21:03:22">更新于 2024-02-28&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/linux2023/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/linux2023/" data-title="Linux 核心设计/实作 (Linux Kernel Internals) Spring 2023" data-hashtags="Sysprog,Linux"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/linux2023/" data-title="Linux 核心设计/实作 (Linux Kernel Internals)" data-hashtags="Sysprog,Linux"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/linux2023/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/linux2023/" data-title="Linux 核心设计/实作 (Linux Kernel Internals) Spring 2023" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/linux2023/" data-title="Linux 核心设计/实作 (Linux Kernel Internals) Spring 2023"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/linux2023/" data-title="Linux 核心设计/实作 (Linux Kernel Internals) Spring 2023"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/linux2023/" data-title="Linux 核心设计/实作 (Linux Kernel Internals) Spring 2023" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/linux2023/" data-title="Linux 核心设计/实作 (Linux Kernel Internals) Spring 2023" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/linux2023/" data-title="Linux 核心设计/实作 (Linux Kernel Internals) Spring 2023"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/linux2023/" data-title="Linux 核心设计/实作 (Linux Kernel Internals)" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/linux2023/" data-title="Linux 核心设计/实作 (Linux Kernel Internals)"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/linux2023/" data-title="Linux 核心设计/实作 (Linux Kernel Internals)"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/linux2023/" data-title="Linux 核心设计/实作 (Linux Kernel Internals)" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/linux2023/" data-title="Linux 核心设计/实作 (Linux Kernel Internals)" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/linux2023/" data-title="Linux 核心设计/实作 (Linux Kernel Internals)"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
       </div>
     </div>

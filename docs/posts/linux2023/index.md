@@ -1,13 +1,11 @@
-# Linux 核心设计/实作 (Linux Kernel Internals) Spring 2023
+# Linux 核心设计/实作 (Linux Kernel Internals)
 
 
 > 在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
 
 <!--more-->
 
-- {{< link href="http://wiki.csie.ncku.edu.tw/linux/schedule?revision=ff44817ff7c75ed4ec0d22e6fdc3337af1f597c3" content="原始网页" external-icon=true >}}
-
-# Linux 核心設計/實作 (Linux Kernel Internals)
+{{< link href="http://wiki.csie.ncku.edu.tw/linux/schedule?revision=ff44817ff7c75ed4ec0d22e6fdc3337af1f597c3" content="原始页面" external-icon=true >}}
 
 - Instructor: [Jim Huang](/User/jserv) (黃敬群) `<jserv.tw@gmail.com>`
 - [往年課程進度](/linux/schedule-old)

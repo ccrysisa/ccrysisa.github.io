@@ -71,6 +71,10 @@ balanced ternary 三进制中 -, 0, + 在数学上具备对称性质。它相对
 
 浮点数 IEEE 754:
 
+An example of a layout for 32-bit floating point is
+
+{{< image src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Float_example.svg/885px-Float_example.svg.png" >}}
+
 - [x] [Conversión de un número binario a formato IEEE 754](https://www.youtube.com/watch?v=VlX4OlKvzAk)
 
 单精度浮点数相对于整数 **在某些情況下不满足結合律和交换律**，所以不构成 **阿贝尔群**，在编写程序时需要注意这一点。即使编写程序时谨慎处理了单精度浮点数运算，但是编译器优化可能会将我们的处理破划掉。所以涉及到单精度浮点数，都需要注意其运算。
