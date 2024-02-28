@@ -16,6 +16,7 @@ weight: 0
 tags:
   - Sysprog
   - C
+  - Bit
 categories:
   - Linux Kernel Internals
 hiddenFromHomePage: false
@@ -158,5 +159,71 @@ if (list_empty(head) || !head)
 ->  000101         (5)
 ```
 
-## 做中学
+## bitwise 实作
 
+- Vi/Vim 为什么使用 HJKL 作为移动字符?
+> 當我們回顧 1967 年 ASCII 的編碼規範，可發現前 32 個字元都是控制碼，讓人們得以透過這些特別字元來控制畫面和相關 I/O，早期鍵盤的 "control" 按鍵就搭配這些特別字元使用。"control" 組合按鍵會將原本字元的第 1 個 bit 進行 XOR，於是 H 字元對應 ASCII 編碼為 100_1000 (過去僅用 7 bit 編碼)，組合 "control" 後 (即 Ctrl+H) 會得到 000_1000，也就是 backspace 的編碼，這也是為何在某些程式中按下 backspace 按鍵會得到 ^H 輸出的原因。相似地，當按下 Ctrl+J 時會得到 000_1010，即 linefeed
+
+{{< admonition >}}
+where n is the bit number, and 0 is the least significant bit
+{{< /admonition >}}
+
+### Set a bit
+
+```c
+unsigned char a |= (1 << n);
+```
+
+### Clear a bit
+
+```c
+unsigned char a &= ~(1 << n);
+```
+
+### Toggle a bit
+
+```c
+unsigned char a ^= (1 << n);
+```
+
+### Test a bit
+
+```c
+bool a = (val & (1 << n)) > 0;
+```
+
+### The right/left most byte
+
+```c
+// assuming 16 bit, 2-byte short integer
+unsigned short right = val & 0xff;        /* right most (least significant) byte */
+unsigned short left  = (val >> 8) & 0xff; /* left  most (most  significant) byte */
+
+// assuming 32 bit, 4-byte int integer
+unsigned int right = val & 0xff;        /* right most (least significant) byte */
+unsigned int left  = (val >> 24) & 0xff; /* left  most (most  significant) byte */
+```
+
+### Sign bit
+
+```c
+// assuming 16 bit, 2-byte short integer, two's complement
+bool sign = val & 0x8000;
+
+// assuming 32 bit, 4-byte int integer, two's complement
+bool sign = val & 0x80000000;
+```
+
+### Uses of Bitwise Operations or Why to Study Bits
+
+- Compression
+- Set operations
+- Encryption
+
+> 最常见的就是位图 (bitmap)，常用于文件系统 (file system)，可以节省空间 (每个元素只用一个 bit 来表示)，可以很方便的进行集合操作 (通过 bitwise operator)。
+
+```
+x ^ y = (~x & y) | (x & ~y)
+```
+
+## 影像处理
