@@ -71,7 +71,7 @@ for (int i = n - 1 ; i - sizeof(char) >= 0; i--)
 
 > $2^{-(w+k-1)} + 2^{w+k-2} + ... + 2^{w-1}$ 可以考虑从左往右的运算，每次都是将原先的数值减半，所以最后的数值为 $2^{-(w+k-1)}$
 
-所以如果 n 是 signed 32-bit，则 `n >> 31` 等价于 `n == 0 ? 0 : -1`。在这个的基础上，请重新阅读 [解读计算机编码](https://hackmd.io/@sysprog/binary-representation) 中的 abs 和 min/max 实作。
+所以如果 n 是 signed 32-bit，则 `n >> 31` 等价于 `n == 0 ? 0 : -1`。在这个的基础上，请重新阅读 [解读计算机编码](https://hackmd.io/@sysprog/binary-representation) 中的 abs 和 min/max 的常数时间实作。
 
 ## Bitwise Operator
 
@@ -130,6 +130,8 @@ if (list_empty(head) || !head)
 {{< admonition >}}
 where n is the bit number, and 0 is the least significant bit
 {{< /admonition >}}
+
+{{< link href="https://github.com/ccrysisa/LKI/blob/main/c-bitwise" content=Source external-icon=true >}}
 
 ### Set a bit
 

@@ -1,4 +1,4 @@
-# Linux 核心设计: Lab0
+# Linux 核心设计: C Programming Lab
 
 
 <!--more-->

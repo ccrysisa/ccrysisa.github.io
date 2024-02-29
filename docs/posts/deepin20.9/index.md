@@ -17,7 +17,7 @@
 新手教学文档:
 [Ubuntu 22.04LTS 相关配置]({{< relref "ubuntu22.04lts.md" >}})
 
-> 在境内可以使用 {{< link "gitclone.com" >}} 来加速 clone 的速度。
+> 在境内可以使用 [gitclone](http://gitclone.com) 镜像站来加快 clone 的速度。
 
 ## 编辑器: VS Code
 

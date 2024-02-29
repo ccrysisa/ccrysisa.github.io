@@ -1,4 +1,4 @@
-# GDB 调试入门
+# GDB 调试工具
 
 
 大型开源项目的规模十分庞大，例如使用 Rust 编写的 Servo 浏览器，这个项目有近十万行代码。在开发规模如此庞大的项目时，了解如何通过正确的方式进行调试非常重要，因为这样可以帮助开发者快速地找到瓶颈。
@@ -254,6 +254,16 @@ type = int [12][31]
 GDB 会将空白行的断点自动下移到下一非空的代码行。
 
 `set print pretty` 命令可以以更易读和格式化的方式显示结构化数据，以更友好的方式输出结构体、类、数组等复杂类型的数据，更易于阅读和理解。
+
+## References
+
+- video: [Linux basic anti-debug](https://www.youtube.com/watch?v=UTVp4jpJoyc)
+- video: [C Programming, Disassembly, Debugging, Linux, GDB](https://www.youtube.com/watch?v=twxEVeDceGw)
+- [rr](http://rr-project.org/) (Record and Replay Framework)
+  - video: [Quick demo](https://www.youtube.com/watch?v=hYsLBcTX00I)
+  - video: [Record and replay debugging with "rr"](https://www.youtube.com/watch?v=ytNlefY8PIE)
+
+
 
 
 ---

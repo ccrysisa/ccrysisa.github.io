@@ -1,5 +1,5 @@
 ---
-title: "Linux 核心设计: Lab0"
+title: "Linux 核心设计: C Programming Lab"
 subtitle:
 date: 2024-02-19T16:23:01+08:00
 # draft: true

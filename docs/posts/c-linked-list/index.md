@@ -85,8 +85,10 @@ $n$ 为 `listsSize`，$m$ 为 merge linked list 过程中产生的 linked list �
 
 {{< link href="https://github.com/ccrysisa/LKI/blob/main/c-linked-list" content=Source external-icon=true >}}
 
-{{< admonition info >}}
+{{< admonition tip >}}
 - [ ] [Merge Sort 与它的变化](https://hackmd.io/@lambert-wu/list-merge-sort)
+
+不论是这里的 non-recursion 版本的 merge sort，还是后面的 non-recursion 版本的 quick sort，本质上都是通过模拟栈 (stack) 操作来实现的，关于这个模拟 stack 方法，可以参考蒋炎岩老师的录影 [应用视角的操作系统 (程序的状态机模型；编译优化)](https://www.bilibili.com/video/BV1Ks4y1Y7Rw/)。
 {{< /admonition >}}
 
 ## Linux 核心的 linked list

@@ -219,6 +219,8 @@ char c = *(a + 2);
 
 这也是为什么对于一个 Array `a`，`&a` 和 `&a[0]` 值虽然相同，但 `&a + 1` 和 `&a[0] + 1` 的结果大部分时候是大不相同的，这件事乍一看是非常惊人的，但其实不然，在了解 Array 和 Pointer 之后，也就那么一回事 :rofl:
 
+{{< link href="https://github.com/ccrysisa/LKI/blob/main/c-pointer" content=Source external-icon=true >}}
+
 ### GDB 实作
 
 ```c

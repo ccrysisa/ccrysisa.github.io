@@ -94,8 +94,8 @@ VLA 和 alloca 分配的都是栈 (stack) 空间，只需将栈指针 (sp) 按�
 
 Linux 系统会提供一些内存管理的 API 和机制:
 - mlock() - lock/unlock memory 禁止某个区域的内存被 swapped out 到磁盘 (只是向 OS 建议，OS 可能不会理会)
-- madvise() - give advice about use of memory
-- lazy loading 利用 page-fault 来实现
+- madvise() - give advice about use of memory (同样只是向 OS 建议，OS 可能不会理会)
+- lazy loading - 利用缺页异常 ([page-fault](https://en.wikipedia.org/wiki/Page_fault)) 来实现
 - copy on write 
 
 {{< admonition info >}}
@@ -110,3 +110,61 @@ Linux 系统会提供一些内存管理的 API 和机制:
 - [x] Stack Overflow: [Why are two different concepts both called "heap"?](https://stackoverflow.com/questions/1699057/why-are-two-different-concepts-both-called-heap)
 
 ## Data alignment
+
+一个 data object 具有两个特性:
+- value
+- storage location (address)
+
+### alignment vs unalignment
+
+假设硬体要求 4 Bytes alignment，CPU 存取数据时的操作如下:
+
+{{< image src="https://imgur-backup.hackmd.io/aDCYyWc.png" caption="alignment" >}}
+{{< image src="https://imgur-backup.hackmd.io/wIfEVy9.png" caption="unalignment" >}}
+
+{{< link href="https://github.com/ccrysisa/LKI/blob/main/c-memory" content=Source external-icon=true >}}
+
+除此之外，unalignment 也可能会无法充分利用 cache 效能，即存取的数据一部分 cache hit，另一部分 cache miss。当然对于这种情况，cache 也是采用类似上面的 merge 机制来进行存取，只是效能低下。
+
+- GCC: [6.60.8 Structure-Packing Pragmas](https://gcc.gnu.org/onlinedocs/gcc-5.4.0/gcc/Structure-Packing-Pragmas.html)
+
+> The *n* value below always is required to be a small power of two and specifies the new alignment in bytes.
+> 
+> 3. `#pragma pack(push[,n])` pushes the current alignment setting on an internal stack and then optionally sets the new alignment.    
+> 4. `#pragma pack(pop)` restores the alignment setting to the one saved at the top of the internal stack (and removes that stack entry). Note that `#pragma pack([n])` does not influence this internal stack; thus it is possible to have `#pragma pack(push)` followed by multiple `#pragma pack(n)` instances and finalized by a single `#pragma pack(pop)`.
+
+alignment 与 unalignment 的效能分布:
+
+{{< image src="https://i.imgur.com/yUS7zcw.png" >}}
+
+### malloc
+
+malloc 分配的空间是 alignment 的:
+
+- man malloc
+> The malloc() and calloc() functions return a pointer to the allocated memory, which is suitably aligned for any built-in type.
+
+- [The GNU C Library - Malloc Example](https://www.gnu.org/software/libc/manual/html_node/Malloc-Examples.html)
+>The block that malloc gives you is guaranteed to be aligned so that it can hold any type of data. On GNU systems, the address is always a multiple of eight on 32-bit systems, and a multiple of 16 on 64-bit systems. 
+
+使用 GDB 进行测试，确定在 Linux x86_64 上 malloc 分配的内存以 16 Bytes 对齐，即地址以 16 进制显示时最后一个数为 0。
+
+### unalignment get & set
+
+如上面所述，在 32-bit 架构上进行 8 bytes 对齐的存取效能比较高 (远比单纯访问一个 byte 高)，所以原文利用这一特性实作了 `unaligned_get8` 这一函数。
+- `csrc & 0xfffffffc` 
+  - 向下取整到最近的 8 bytes alignment 的地址
+- `v >> (((uint32_t) csrc & 0x3) * 8)` 
+  - 将获取的 alignment 的 32-bit 进行位移以获取我们想要的那个字节
+
+{{< image src="https://advoop.sdds.ca/assets/images/type_int-b04deb28b0b45490fcb1e70f8466d8ad.png" >}}
+
+而在 [你所不知道的 C 语言: 指针篇](https://hackmd.io/@sysprog/c-pointer) 中实作的 16-bit integer 在 unalignment 情况下的存取，并没有考虑到上面利用 alignment 来提升效能。
+
+参考原文 32-bit integer 存取，实作 64-bit integer 的 get & set:
+
+## oncurrent-II
+
+- 源码: [concurrent-ll](https://github.com/jserv/concurrent-ll/tree/master/src/lockfree)
+- 论文: [A Pragmatic Implementation of Non-Blocking Linked Lists](https://www.cl.cam.ac.uk/research/srg/netos/papers/2001-caslists.pdf)
+

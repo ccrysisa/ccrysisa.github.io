@@ -7,20 +7,40 @@
     <meta name="robots" content="noodp" />
     <title>你所不知道的 C 语言: 开发工具和规格标准 - KZn&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
-<meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Sysprog, C, Standard' /><meta itemprop="name" content="你所不知道的 C 语言: 开发工具和规格标准">
-<meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-02-28T11:11:47+08:00" />
-<meta itemprop="dateModified" content="2024-02-28T21:03:22+08:00" />
-<meta itemprop="wordCount" content="396"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta name="description" content="
+Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言在工程领域的瑰宝，里头充斥则各种“艺术”，往往会吓到初次接触的人们，但总是能够使用 C 语言标准和开发工具提供的扩展 (主要是来自 gcc 的 GNU extensions) 来解释。
+
+“工欲善其事，必先利其器”
+
+" /><meta name="keywords" content='Sysprog, C, Standard' /><meta itemprop="name" content="你所不知道的 C 语言: 开发工具和规格标准">
+<meta itemprop="description" content="
+Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言在工程领域的瑰宝，里头充斥则各种“艺术”，往往会吓到初次接触的人们，但总是能够使用 C 语言标准和开发工具提供的扩展 (主要是来自 gcc 的 GNU extensions) 来解释。
+
+“工欲善其事，必先利其器”
+
+"><meta itemprop="datePublished" content="2024-02-28T11:11:47+08:00" />
+<meta itemprop="dateModified" content="2024-02-29T11:43:01+08:00" />
+<meta itemprop="wordCount" content="1063"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Standard," /><meta property="og:title" content="你所不知道的 C 语言: 开发工具和规格标准" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="
+Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言在工程领域的瑰宝，里头充斥则各种“艺术”，往往会吓到初次接触的人们，但总是能够使用 C 语言标准和开发工具提供的扩展 (主要是来自 gcc 的 GNU extensions) 来解释。
+
+“工欲善其事，必先利其器”
+
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-standards/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-28T11:11:47+08:00" />
-<meta property="article:modified_time" content="2024-02-28T21:03:22+08:00" />
+<meta property="article:modified_time" content="2024-02-29T11:43:01+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 开发工具和规格标准"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="
+Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言在工程领域的瑰宝，里头充斥则各种“艺术”，往往会吓到初次接触的人们，但总是能够使用 C 语言标准和开发工具提供的扩展 (主要是来自 gcc 的 GNU extensions) 来解释。
+
+“工欲善其事，必先利其器”
+
+"/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -35,8 +55,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-standards\/"
-    },"genre": "posts","keywords": "Sysprog, C, Standard","wordcount":  396 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-standards\/","datePublished": "2024-02-28T11:11:47+08:00","dateModified": "2024-02-28T21:03:22+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, C, Standard","wordcount":  1063 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-standards\/","datePublished": "2024-02-28T11:11:47+08:00","dateModified": "2024-02-29T11:43:01+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -151,7 +171,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-28 11:11:47"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="更新于 2024-02-28 21:03:22"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="396 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-28 11:11:47"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="更新于 2024-02-29 11:43:01"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="1063 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -164,11 +184,29 @@
       <ul>
         <li><a href="#main">main</a></li>
         <li><a href="#incomplete-type">incomplete type</a></li>
+        <li><a href="#规格不仅要看最新的过往的也要熟悉">规格不仅要看最新的，过往的也要熟悉</a></li>
       </ul>
     </li>
+    <li><a href="#gdb">GDB</a></li>
+    <li><a href="#c23">C23</a></li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><h2 id="c-vs-c">C vs C++</h2>
+      </div><div class="content" id="content"><blockquote>
+<p>Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言在工程领域的瑰宝，里头充斥则各种“艺术”，往往会吓到初次接触的人们，但总是能够使用 C 语言标准和开发工具提供的扩展 (主要是来自 gcc 的 GNU extensions) 来解释。</p>
+<ul>
+<li>“工欲善其事，必先利其器”</li>
+</ul>
+</blockquote>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/c-standards"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>
+<blockquote class="blockquote-center">
+  <p><strong>If I had eight hours to chop down a tree, I’d spend six hours sharpening my axe.</strong></p>
+<p>—— Abraham Lincoln</p>
+
+</blockquote>
+<p>语言规格: C89/C90 -&gt; C99 -&gt; C11 -&gt; C17/C18 -&gt; C2x</p>
+<h2 id="c-vs-c">C vs C++</h2>
 <blockquote>
 <p>C is quirky, flawed, and an enormous success. Although accidents of history surely helped, it evidently satisfied a need for a system implementation language efficient enough to displace assembly language, yet sufficiently abstract and fluent to describe algorithms and interactions in a wide variety of environments. —— Dennis M. Ritchie</p>
 </blockquote>
@@ -244,11 +282,57 @@ used, as they are local to the function in which they are declared):</p>
 </ul>
 <blockquote>
 <p><em>incomplete types</em> (types that describe objects but lack information needed to determine their sizes).</p>
-</blockquote></div><div class="post-footer" id="post-footer">
+</blockquote>
+<h3 id="规格不仅要看最新的过往的也要熟悉">规格不仅要看最新的，过往的也要熟悉</h3>
+<p>因为很多 (嵌入式) 设备上运行的 Linux 可能是很旧的版本，那时 Linux 使用的是更旧的 C 语言规格。例如空中巴士 330 客机的娱乐系统里执行的是十几年前的 Red Hat Linux，总有人要为这些“古董”负责 &#x1f923;</p>
+<h2 id="gdb">GDB</h2>
+<p>使用 GDB 这类调试工具可以大幅度提升我们编写代码、除错的能力 &#x1f436;</p>
+<ul>
+<li>video: <a href="https://www.youtube.com/watch?v=UTVp4jpJoyc"target="_blank" rel="external nofollow noopener noreferrer">Linux basic anti-debug</a></li>
+<li>video: <a href="https://www.youtube.com/watch?v=twxEVeDceGw"target="_blank" rel="external nofollow noopener noreferrer">C Programming, Disassembly, Debugging, Linux, GDB</a></li>
+<li><a href="http://rr-project.org/"target="_blank" rel="external nofollow noopener noreferrer">rr</a> (Record and Replay Framework)
+<ul>
+<li>video: <a href="https://www.youtube.com/watch?v=hYsLBcTX00I"target="_blank" rel="external nofollow noopener noreferrer">Quick demo</a></li>
+<li>video: <a href="https://www.youtube.com/watch?v=ytNlefY8PIE"target="_blank" rel="external nofollow noopener noreferrer">Record and replay debugging with &ldquo;rr&rdquo;</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="c23">C23</h2>
+<p>上一个 C 语言标准是 C17，正式名称为 ISO/IEC 9899:2018，是 2017 年准备，2018年正式发布的标准规范。C23 则是目前正在开发的规格，其预计新增特性如下:</p>
+<ul>
+<li><code>typeof</code>: 由 GNU extension 转正，用于实作 <code>container_of</code> 宏</li>
+<li><code>call_once</code>: 保证在 concurrent 环境中，某段程式码只会执行 1 次</li>
+<li><code>char8_t</code>: Unicode friendly <code>u8&quot;💣&quot;[0]</code></li>
+<li><code>unreachable()</code>: 由 GNU extension 转正，提示允许编译器对某段程式码进行更激进的最佳化</li>
+<li><code>= {}</code>: 取代 <code>memset</code> 函数调用</li>
+<li>ISO/IEC 60559:2020: 最新的 IEEE 754 浮点数运算标准</li>
+<li><code>_Static_assert</code>: 扩充 C11 允许单一参数</li>
+<li>吸收 C++11 风格的 attribute 语法，例如 <code>nodiscard</code>, <code>maybe_unused</code>, <code>deprecated</code>, <code>fallthrough</code></li>
+<li>新的函数: <code>memccpy()</code>, <code>strdup()</code>, <code>strndup()</code> ——— 类似于 POSIX、SVID中 C 函数库的扩充</li>
+<li>强制规范使用二补数表示整数</li>
+<li>不支援 <a href="https://stackoverflow.com/questions/3092006/function-declaration-kr-vs-ansi"target="_blank" rel="external nofollow noopener noreferrer">K&amp;R 风格的函数定义</a></li>
+<li>二进制表示法: <code>0b10101010</code> 以及对应 printf() 的 <code>%b</code> (在此之前 C 语言是不支援二进制表示法的 &#x1f923;)</li>
+<li>Type generic functions for performing checked integer arithmetic (Integer overflow)</li>
+<li><code>_BitInt(N)</code> and <code>UnsignedBitInt(N)</code> types for bit-precise integers</li>
+<li><code>#elifdef</code> and <code>#elifndef</code></li>
+<li>支持在数值中间加入分隔符，易于阅读，例如 <code>0xFFFF'FFFF</code></li>
+</ul>
+<div class="details admonition info open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ul>
+<li><a href="https://thephd.dev/ever-closer-c23-improvements"target="_blank" rel="external nofollow noopener noreferrer">Ever Closer - C23 Draws Nearer</a></li>
+<li><a href="https://thephd.dev/c23-is-coming-here-is-what-is-on-the-menu"target="_blank" rel="external nofollow noopener noreferrer">C23 is Finished: Here is What is on the Menu</a></li>
+</ul>
+</div>
+    </div>
+  </div></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-02-28 21:03:22">更新于 2024-02-28&nbsp;</span>
+        <span title="更新于 2024-02-29 11:43:01">更新于 2024-02-29&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/c-standards/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>

@@ -170,6 +170,8 @@ if (list_empty(head) || !head)
 where n is the bit number, and 0 is the least significant bit
 {{< /admonition >}}
 
+{{< link href="https://github.com/ccrysisa/LKI/blob/main/c-bitwise" content=Source external-icon=true >}}
+
 ### Set a bit
 
 ```c
