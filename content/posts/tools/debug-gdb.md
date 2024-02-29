@@ -1,5 +1,5 @@
 ---
-title: GDB 调试入门
+title: GDB 调试工具
 subtitle:
 date: 2024-01-16T17:15:46+08:00
 draft: false
@@ -295,3 +295,13 @@ type = int [12][31]
 GDB 会将空白行的断点自动下移到下一非空的代码行。
 
 `set print pretty` 命令可以以更易读和格式化的方式显示结构化数据，以更友好的方式输出结构体、类、数组等复杂类型的数据，更易于阅读和理解。
+
+## References
+
+- video: [Linux basic anti-debug](https://www.youtube.com/watch?v=UTVp4jpJoyc)
+- video: [C Programming, Disassembly, Debugging, Linux, GDB](https://www.youtube.com/watch?v=twxEVeDceGw)
+- [rr](http://rr-project.org/) (Record and Replay Framework)
+  - video: [Quick demo](https://www.youtube.com/watch?v=hYsLBcTX00I)
+  - video: [Record and replay debugging with "rr"](https://www.youtube.com/watch?v=ytNlefY8PIE)
+
+
