@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/posts/</link>
     <description>所有文章 | KZn&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 29 Feb 2024 23:44:29 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -12,6 +12,27 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>RISC-V Optimization Guide</title>
+  <link>https://ccrysisa.github.io/posts/riscv-optimization-guide/</link>
+  <pubDate>Thu, 29 Feb 2024 23:44:29 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/riscv-optimization-guide/</guid>
+  <description><![CDATA[<blockquote>
+<p>The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.</p>
+<p>近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>Crust of Rust: Channels</title>
+  <link>https://ccrysisa.github.io/posts/channels/</link>
+  <pubDate>Thu, 29 Feb 2024 20:30:30 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/channels/</guid>
+  <description><![CDATA[<blockquote>
+<p>In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mpsc) channels, by re-implementing some of the std::sync::mpsc types from the standard library. As part of that, we cover what channels are used for, how they work at a high level, different common channel variants, and common channel implementations. In the process, we go over some common Rust concurrency primitives like Mutex and Condvar.</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -83,24 +104,6 @@
   <guid>https://ccrysisa.github.io/posts/rust-tcp/</guid>
   <description><![CDATA[<blockquote>
 <p>In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — <a href="https://tools.ietf.org/html/rfc793"target="_blank" rel="external nofollow noopener noreferrer">https://tools.ietf.org/html/rfc793</a> — which describes the original protocol, with the goal of being able to set up and tear down a connection with a &ldquo;real&rdquo; TCP stack at the other end (netcat in particular). We&rsquo;re writing it using a user-space networking interface (see <a href="https://www.kernel.org/doc/Documentation/networking/tuntap.txt"target="_blank" rel="external nofollow noopener noreferrer">https://www.kernel.org/doc/Documentation/networking/tuntap.txt</a> and the Rust bindings at <a href="https://docs.rs/tun-tap/%29"target="_blank" rel="external nofollow noopener noreferrer">https://docs.rs/tun-tap/)</a>.</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>Linux 核心设计: 第 1 周测验题 linked list</title>
-  <link>https://ccrysisa.github.io/posts/linux-quiz1/</link>
-  <pubDate>Fri, 16 Feb 2024 14:59:25 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/linux-quiz1/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>Linux 核心设计: 操作系统术语及概念</title>
-  <link>https://ccrysisa.github.io/posts/linux-concepts/</link>
-  <pubDate>Thu, 15 Feb 2024 12:51:49 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/linux-concepts/</guid>
-  <description><![CDATA[<blockquote>
-<p>面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。</p>
 </blockquote>]]></description>
 </item>
 </channel>

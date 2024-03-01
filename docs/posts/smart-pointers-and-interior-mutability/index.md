@@ -74,7 +74,9 @@ unsafe { println!("{}", *uc.get()); }
 ### RefCell
 
 Module [std::cell RefCell\<T\>](https://doc.rust-lang.org/std/cell/index.html#refcellt) 
-> `RefCell<T>` uses Rust’s lifetimes to implement “dynamic borrowing”, a process whereby one can claim temporary, exclusive, mutable access to the inner value. Borrows for `RefCell<T>`s are tracked at runtime, unlike Rust’s native reference types which are entirely tracked statically, at compile time.
+> `RefCell<T>` uses Rust\’s lifetimes to implement "dynamic borrowing", a process whereby one can claim temporary, exclusive, mutable access to the inner value. Borrows for `RefCell<T>\`s are tracked at runtime, unlike Rust’s native reference types which are entirely tracked statically, at compile time.
+
+- **Runtime Borrow Check**
 
 {{< image src="/images/rust/refcell.drawio.svg" caption="RefCell" >}}
 
@@ -143,6 +145,21 @@ fn main() {
 Struct [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html#)
 > The type `Cow` is a smart pointer providing clone-on-write functionality: it can enclose and provide immutable access to borrowed data, and clone the data lazily when mutation or ownership is required. The type is designed to work with general borrowed data via the `Borrow` trait.
 
+## Homework
+
+{{< admonition info >}}
+实作说明:
+- [ ] 尝试使用 RefCell 来实现 Linux kernel 风格的 linked list
+  - 数据结构为 circular doubly linked list
+  - 实现 insert_head, remove_head 方法
+  - 实现 insert_tail, remove_tail 方法
+  - 实现 list_size, list_empty, list_is_singular 方法
+  - 实现迭代器 (Iterator)，支持双向迭代 (DoubleEndedIterator)
+
+参考资料:
+- [sysprog21/linux-list](https://github.com/sysprog21/linux-list/blob/master/include/list.h#L94)
+- [linux/list.h](https://github.com/torvalds/linux/blob/master/include/linux/list.h#L84)
+{{< /admonition >}}
 
 ## Documentations
 

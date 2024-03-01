@@ -49,7 +49,8 @@ repost:
 - {{< link href="https://riscv-optimization-guide-riseproject-c94355ae3e6872252baa952524.gitlab.io/riscv-optimization-guide.html" content="原文地址" external-icon=true >}}
 - {{< link href="https://www.bilibili.com/video/BV1Ft421t7PS" content="解说录影" external-icon=true >}}
 
-## 前置知识
+## 相关知识
 
-- 推荐参考 [体系结构如何作用于编译器后端-邱吉](https://www.bilibili.com/video/BV1a84y1S7J7) [bilibili] 这个关于微架构、指令集是怎样和编译器、软件相互影响的 Overview
-  - 这个讲座介绍的是通用 CPU 并不仅限于 RISC-V 上
+推荐参考 [体系结构如何作用于编译器后端-邱吉](https://www.bilibili.com/video/BV1a84y1S7J7) [bilibili] 
+- 这个讲座是关于微架构、指令集是怎样和编译器、软件相互协作、相互影响的 Overview
+- 这个讲座介绍的是通用 CPU 并不仅限于 RISC-V 上

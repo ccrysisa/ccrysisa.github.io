@@ -1,4 +1,6 @@
 https://ccrysisa.github.io/posts/linux2023/
+https://ccrysisa.github.io/posts/riscv-optimization-guide/
+https://ccrysisa.github.io/posts/channels/
 https://ccrysisa.github.io/posts/c-standards/
 https://ccrysisa.github.io/posts/c-memory/
 https://ccrysisa.github.io/posts/c-bitwise/

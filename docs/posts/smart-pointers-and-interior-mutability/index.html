@@ -13,8 +13,8 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
 <meta itemprop="description" content="
 In this fourth Crust of Rust video, we cover smart pointers and interior mutability, by re-implementing the Cell, RefCell, and Rc types from the standard library. As part of that, we cover when those types are useful, how they work, and what the equivalent thread-safe versions of these types are. In the process, we go over some of the finer details of Rust&#39;s ownership model, and the UnsafeCell type. We also dive briefly into the Drop Check rabbit hole (https://doc.rust-lang.org/nightly/nomicon/dropck.html) before coming back up for air.
 "><meta itemprop="datePublished" content="2024-02-20T17:33:06+08:00" />
-<meta itemprop="dateModified" content="2024-02-27T16:24:49+08:00" />
-<meta itemprop="wordCount" content="2238"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-02-29T23:40:46+08:00" />
+<meta itemprop="wordCount" content="2306"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Smart pointer,Interior Mutability," /><meta property="og:title" content="Crust of Rust: Smart Pointers and Interior Mutability" />
 <meta property="og:description" content="
 In this fourth Crust of Rust video, we cover smart pointers and interior mutability, by re-implementing the Cell, RefCell, and Rc types from the standard library. As part of that, we cover when those types are useful, how they work, and what the equivalent thread-safe versions of these types are. In the process, we go over some of the finer details of Rust&#39;s ownership model, and the UnsafeCell type. We also dive briefly into the Drop Check rabbit hole (https://doc.rust-lang.org/nightly/nomicon/dropck.html) before coming back up for air.
@@ -22,7 +22,7 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-20T17:33:06+08:00" />
-<meta property="article:modified_time" content="2024-02-27T16:24:49+08:00" />
+<meta property="article:modified_time" content="2024-02-29T23:40:46+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Crust of Rust: Smart Pointers and Interior Mutability"/>
@@ -43,8 +43,8 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/smart-pointers-and-interior-mutability\/"
-    },"genre": "posts","keywords": "Rust, Smart pointer, Interior Mutability","wordcount":  2238 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/smart-pointers-and-interior-mutability\/","datePublished": "2024-02-20T17:33:06+08:00","dateModified": "2024-02-27T16:24:49+08:00","publisher": {
+    },"genre": "posts","keywords": "Rust, Smart pointer, Interior Mutability","wordcount":  2306 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/smart-pointers-and-interior-mutability\/","datePublished": "2024-02-20T17:33:06+08:00","dateModified": "2024-02-29T23:40:46+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -159,7 +159,7 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-20 17:33:06"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="更新于 2024-02-27 16:24:49"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-27">2024-02-27</time></span>&nbsp;<span title="2238 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-20 17:33:06"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="更新于 2024-02-29 23:40:46"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="2306 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -179,6 +179,7 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
         <li><a href="#copy-on-write-cow">Copy-on-Write (COW)</a></li>
       </ul>
     </li>
+    <li><a href="#homework">Homework</a></li>
     <li><a href="#documentations">Documentations</a>
       <ul>
         <li><a href="#crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html">std</a></a></li>
@@ -277,8 +278,11 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
 <h3 id="refcell">RefCell</h3>
 <p>Module <a href="https://doc.rust-lang.org/std/cell/index.html#refcellt"target="_blank" rel="external nofollow noopener noreferrer">std::cell RefCell&lt;T&gt;</a></p>
 <blockquote>
-<p><code>RefCell&lt;T&gt;</code> uses Rust’s lifetimes to implement “dynamic borrowing”, a process whereby one can claim temporary, exclusive, mutable access to the inner value. Borrows for <code>RefCell&lt;T&gt;</code>s are tracked at runtime, unlike Rust’s native reference types which are entirely tracked statically, at compile time.</p>
+<p><code>RefCell&lt;T&gt;</code> uses Rust\’s lifetimes to implement &ldquo;dynamic borrowing&rdquo;, a process whereby one can claim temporary, exclusive, mutable access to the inner value. Borrows for <code>RefCell&lt;T&gt;\</code>s are tracked at runtime, unlike Rust’s native reference types which are entirely tracked statically, at compile time.</p>
 </blockquote>
+<ul>
+<li><strong>Runtime Borrow Check</strong></li>
+</ul>
 <figure><a class="lightgallery" href="/images/rust/refcell.drawio.svg?size=large" data-thumbnail="/images/rust/refcell.drawio.svg?size=small" data-sub-html="<h2>RefCell</h2>"><img loading="lazy" src="/images/rust/refcell.drawio.svg" srcset="/images/rust/refcell.drawio.svg?size=small, /images/rust/refcell.drawio.svg?size=medium 1.5x, /images/rust/refcell.drawio.svg?size=large 2x" sizes="auto" data-title="/images/rust/refcell.drawio.svg" data-alt="/images/rust/refcell.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">RefCell</figcaption>
   </figure>
 <p><code>RefCell</code> 也提供了之前所提的“内部可变性”机制，但是是通过提供 <em><strong>引用</strong></em> 而不是转移所有权来实现。所以它常用于 Tree, Graph 这类数据结构，因为这些数据结构的节点 &ldquo;很大&rdquo;，不大可能实现 Copy 的 Trait (因为开销太大了)，所以一般使用 <code>RefCell</code> 来实现节点的相互引用关系。</p>
@@ -365,6 +369,32 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
 <blockquote>
 <p>The type <code>Cow</code> is a smart pointer providing clone-on-write functionality: it can enclose and provide immutable access to borrowed data, and clone the data lazily when mutation or ownership is required. The type is designed to work with general borrowed data via the <code>Borrow</code> trait.</p>
 </blockquote>
+<h2 id="homework">Homework</h2>
+<div class="details admonition info open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>实作说明:</p>
+<ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 尝试使用 RefCell 来实现 Linux kernel 风格的 linked list
+<ul>
+<li>数据结构为 circular doubly linked list</li>
+<li>实现 insert_head, remove_head 方法</li>
+<li>实现 insert_tail, remove_tail 方法</li>
+<li>实现 list_size, list_empty, list_is_singular 方法</li>
+<li>实现迭代器 (Iterator)，支持双向迭代 (DoubleEndedIterator)</li>
+</ul>
+</li>
+</ul>
+<p>参考资料:</p>
+<ul>
+<li><a href="https://github.com/sysprog21/linux-list/blob/master/include/list.h#L94"target="_blank" rel="external nofollow noopener noreferrer">sysprog21/linux-list</a></li>
+<li><a href="https://github.com/torvalds/linux/blob/master/include/linux/list.h#L84"target="_blank" rel="external nofollow noopener noreferrer">linux/list.h</a></li>
+</ul>
+</div>
+    </div>
+  </div>
 <h2 id="documentations">Documentations</h2>
 <p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>
@@ -440,7 +470,7 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-02-27 16:24:49">更新于 2024-02-27&nbsp;</span>
+        <span title="更新于 2024-02-29 23:40:46">更新于 2024-02-29&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/smart-pointers-and-interior-mutability/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -469,7 +499,7 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
       <a href="/posts/c-bitwise/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: bitwise 操作">你所不知道的 C 语言: bitwise 操作<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

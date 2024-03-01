@@ -1,0 +1,19 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Architecture - 标签 - KZn&#39;s Blog</title>
+    <link>https://ccrysisa.github.io/tags/architecture/</link>
+    <description>Architecture - 标签 - KZn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 29 Feb 2024 23:44:29 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/architecture/" rel="self" type="application/rss+xml" /><item>
+  <title>RISC-V Optimization Guide</title>
+  <link>https://ccrysisa.github.io/posts/riscv-optimization-guide/</link>
+  <pubDate>Thu, 29 Feb 2024 23:44:29 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/riscv-optimization-guide/</guid>
+  <description><![CDATA[<blockquote>
+<p>The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.</p>
+<p>近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。</p>
+</blockquote>]]></description>
+</item>
+</channel>
+</rss>

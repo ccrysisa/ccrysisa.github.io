@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Channel - 标签 - KZn&#39;s Blog</title>
+    <link>https://ccrysisa.github.io/tags/channel/</link>
+    <description>Channel - 标签 - KZn&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 29 Feb 2024 20:30:30 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/channel/" rel="self" type="application/rss+xml" /><item>
+  <title>Crust of Rust: Channels</title>
+  <link>https://ccrysisa.github.io/posts/channels/</link>
+  <pubDate>Thu, 29 Feb 2024 20:30:30 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/channels/</guid>
+  <description><![CDATA[<blockquote>
+<p>In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mpsc) channels, by re-implementing some of the std::sync::mpsc types from the standard library. As part of that, we cover what channels are used for, how they work at a high level, different common channel variants, and common channel implementations. In the process, we go over some common Rust concurrency primitives like Mutex and Condvar.</p>
+</blockquote>]]></description>
+</item>
+</channel>
+</rss>
