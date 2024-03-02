@@ -160,6 +160,12 @@ The macro works by using the Debug implementation of the type of the given expre
 - **Rendezvous channels**: Synchronous with capacity = 0. Used for thread synchronization.
 - **Oneshot channels**: Any capacity. In practice, only one call to send().
 
+### async/await
+
+- Module [std::future](https://doc.rust-lang.org/std/future/index.html)
+- Keyword [async](https://doc.rust-lang.org/std/keyword.async.html)
+- Keyword [await](https://doc.rust-lang.org/std/keyword.await.html)
+
 ## Homework
 
 {{< admonition info >}}
@@ -167,9 +173,16 @@ The macro works by using the Debug implementation of the type of the given expre
 - [ ] 尝试实现 Synchronous channels 
   - 使用 Atomic 存储 senders 以提高效能
   - 使用两个 ConVar 来指示 sender 和 receiver 进行 block 和 wake up
+  - receiver 被 drop 时需要通知所有 senders 以释放资源
+  - 使用 linked list 来取代 VecDeque 以避免 resize 的效能损失
+- 尝试阅读 std 中 mpsc 的实现 [Module std::sync::mpsc](https://doc.rust-lang.org/src/std/sync/mpsc/mod.rs.html#1-1246https://doc.rust-lang.org/src/std/sync/mpsc/mod.rs.html#1-1246)
+  - 对比阅读其他库关于 channel 的实现: [crossbeam](https://github.com/crossbeam-rs/crossbeam), [flume](https://github.com/zesterer/flume)
 
 参考资料:
 - Module [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html)
+- Module [std::sync::mpsc](https://doc.rust-lang.org/src/std/sync/mpsc/mod.rs.html#1-1246https://doc.rust-lang.org/src/std/sync/mpsc/mod.rs.html#1-1246)
+- Crate [crossbeam](https://docs.rs/crossbeam/latest/crossbeam/)
+- Crate [flume](https://docs.rs/flume/latest/flume/)
 {{< /admonition >}}
 
 ## Documentations
@@ -205,3 +218,7 @@ The macro works by using the Debug implementation of the type of the given expre
 - Function [std::mem::swap](https://doc.rust-lang.org/std/mem/fn.swap.html)
 
 - Macro [std::dbg](https://doc.rust-lang.org/std/macro.dbg.html)
+
+## Further readings
+
+- Go 语言也有 channel: [解说 Go channel 底层原理](https://www.bilibili.com/video/BV1uv4y187p6)

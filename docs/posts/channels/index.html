@@ -13,8 +13,8 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
 <meta itemprop="description" content="
 In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mpsc) channels, by re-implementing some of the std::sync::mpsc types from the standard library. As part of that, we cover what channels are used for, how they work at a high level, different common channel variants, and common channel implementations. In the process, we go over some common Rust concurrency primitives like Mutex and Condvar.
 "><meta itemprop="datePublished" content="2024-02-29T20:30:30+08:00" />
-<meta itemprop="dateModified" content="2024-02-29T23:40:46+08:00" />
-<meta itemprop="wordCount" content="1413"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-03-02T00:02:13+08:00" />
+<meta itemprop="wordCount" content="1503"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Channel," /><meta property="og:title" content="Crust of Rust: Channels" />
 <meta property="og:description" content="
 In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mpsc) channels, by re-implementing some of the std::sync::mpsc types from the standard library. As part of that, we cover what channels are used for, how they work at a high level, different common channel variants, and common channel implementations. In the process, we go over some common Rust concurrency primitives like Mutex and Condvar.
@@ -22,7 +22,7 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/channels/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-29T20:30:30+08:00" />
-<meta property="article:modified_time" content="2024-02-29T23:40:46+08:00" />
+<meta property="article:modified_time" content="2024-03-02T00:02:13+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Crust of Rust: Channels"/>
@@ -43,8 +43,8 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/channels\/"
-    },"genre": "posts","keywords": "Rust, Channel","wordcount":  1413 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/channels\/","datePublished": "2024-02-29T20:30:30+08:00","dateModified": "2024-02-29T23:40:46+08:00","publisher": {
+    },"genre": "posts","keywords": "Rust, Channel","wordcount":  1503 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/channels\/","datePublished": "2024-02-29T20:30:30+08:00","dateModified": "2024-03-02T00:02:13+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -159,7 +159,7 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-29 20:30:30"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="更新于 2024-02-29 23:40:46"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="1413 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-29 20:30:30"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="更新于 2024-03-02 00:02:13"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-02">2024-03-02</time></span>&nbsp;<span title="1503 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -181,6 +181,7 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
         <li><a href="#performance-optimization">Performance optimization</a></li>
         <li><a href="#synchronous-channels">Synchronous channels</a></li>
         <li><a href="#channel-flavors">Channel flavors</a></li>
+        <li><a href="#asyncawait">async/await</a></li>
       </ul>
     </li>
     <li><a href="#homework">Homework</a></li>
@@ -189,6 +190,7 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
         <li><a href="#crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html">std</a></a></li>
       </ul>
     </li>
+    <li><a href="#further-readings">Further readings</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><blockquote>
@@ -353,6 +355,12 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
 <li><strong>Rendezvous channels</strong>: Synchronous with capacity = 0. Used for thread synchronization.</li>
 <li><strong>Oneshot channels</strong>: Any capacity. In practice, only one call to send().</li>
 </ul>
+<h3 id="asyncawait">async/await</h3>
+<ul>
+<li>Module <a href="https://doc.rust-lang.org/std/future/index.html"target="_blank" rel="external nofollow noopener noreferrer">std::future</a></li>
+<li>Keyword <a href="https://doc.rust-lang.org/std/keyword.async.html"target="_blank" rel="external nofollow noopener noreferrer">async</a></li>
+<li>Keyword <a href="https://doc.rust-lang.org/std/keyword.await.html"target="_blank" rel="external nofollow noopener noreferrer">await</a></li>
+</ul>
 <h2 id="homework">Homework</h2>
 <div class="details admonition info open">
     <div class="details-summary admonition-title">
@@ -365,12 +373,22 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
 <ul>
 <li>使用 Atomic 存储 senders 以提高效能</li>
 <li>使用两个 ConVar 来指示 sender 和 receiver 进行 block 和 wake up</li>
+<li>receiver 被 drop 时需要通知所有 senders 以释放资源</li>
+<li>使用 linked list 来取代 VecDeque 以避免 resize 的效能损失</li>
+</ul>
+</li>
+<li>尝试阅读 std 中 mpsc 的实现 <a href="https://doc.rust-lang.org/src/std/sync/mpsc/mod.rs.html#1-1246https://doc.rust-lang.org/src/std/sync/mpsc/mod.rs.html#1-1246"target="_blank" rel="external nofollow noopener noreferrer">Module std::sync::mpsc</a>
+<ul>
+<li>对比阅读其他库关于 channel 的实现: <a href="https://github.com/crossbeam-rs/crossbeam"target="_blank" rel="external nofollow noopener noreferrer">crossbeam</a>, <a href="https://github.com/zesterer/flume"target="_blank" rel="external nofollow noopener noreferrer">flume</a></li>
 </ul>
 </li>
 </ul>
 <p>参考资料:</p>
 <ul>
 <li>Module <a href="https://doc.rust-lang.org/std/sync/atomic/index.html"target="_blank" rel="external nofollow noopener noreferrer">std::sync::atomic</a></li>
+<li>Module <a href="https://doc.rust-lang.org/src/std/sync/mpsc/mod.rs.html#1-1246https://doc.rust-lang.org/src/std/sync/mpsc/mod.rs.html#1-1246"target="_blank" rel="external nofollow noopener noreferrer">std::sync::mpsc</a></li>
+<li>Crate <a href="https://docs.rs/crossbeam/latest/crossbeam/"target="_blank" rel="external nofollow noopener noreferrer">crossbeam</a></li>
+<li>Crate <a href="https://docs.rs/flume/latest/flume/"target="_blank" rel="external nofollow noopener noreferrer">flume</a></li>
 </ul>
 </div>
     </div>
@@ -424,11 +442,15 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
 <li>
 <p>Macro <a href="https://doc.rust-lang.org/std/macro.dbg.html"target="_blank" rel="external nofollow noopener noreferrer">std::dbg</a></p>
 </li>
+</ul>
+<h2 id="further-readings">Further readings</h2>
+<ul>
+<li>Go 语言也有 channel: <a href="https://www.bilibili.com/video/BV1uv4y187p6"target="_blank" rel="external nofollow noopener noreferrer">解说 Go channel 底层原理</a></li>
 </ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-02-29 23:40:46">更新于 2024-02-29&nbsp;</span>
+        <span title="更新于 2024-03-02 00:02:13">更新于 2024-03-02&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/channels/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
