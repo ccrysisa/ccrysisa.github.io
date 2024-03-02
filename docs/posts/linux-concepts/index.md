@@ -140,6 +140,36 @@ UNSW COMP9242: [Advanced Operating Systems](https://www.cse.unsw.edu.au/~cs9242/
 这门课可以作为辅助材料，讲得深入浅出，可以作为进阶材料阅读。
 {{< /admonition >}}
 
+## man
+
+```bash
+$ man man
+       The  table  below  shows  the  section numbers of the manual followed by the
+       types of pages they contain.
+
+       1   Executable programs or shell commands
+       2   System calls (functions provided by the kernel)
+       3   Library calls (functions within program libraries)
+       4   Special files (usually found in /dev)
+       5   File formats and conventions, e.g. /etc/passwd
+       6   Games
+       7   Miscellaneous (including macro packages and conventions),  e.g.  man(7),
+           groff(7), man-pages(7)
+       8   System administration commands (usually only for root)
+       9   Kernel routines [Non standard]
+
+```
+
+## 系统软件开发思维
+
+### Maslow's pyramid of code review
+
+{{< image src="https://imgur-backup.hackmd.io/DBMmMNi.png" caption="Maslow's pyramid of code review" >}}
+
+### Benchmark / Profiling
+
+{{< image src="https://hackpad-attachments.s3.amazonaws.com/embedded2015.hackpad.com_xDmCCv0k00K_p.299401_1446124062219_truth.jpg" caption="Benchmark / Profiling" >}}
+
 
 ---
 

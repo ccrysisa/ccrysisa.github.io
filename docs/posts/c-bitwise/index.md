@@ -108,7 +108,14 @@ if (!head || list_empty(head))
 if (list_empty(head) || !head)
 ```
 
-第二条语句在执行时会报错，因为 `list_empty` 要求传入的参数不为 NULL
+第二条语句在执行时会报错，因为 `list_empty` 要求传入的参数不为 NULL。
+
+逻辑运算符 `!` 相当有效，C99 并没有完全支持 bool 类型，对于整数，它是将非零整数视为 true，零视为 false。所以如果你需要保证某一表达式的结果不仅是 true of false，还要求对应 0 or 1 时，可以使用 `!!(expr)` 来实现。
+
+- C99 6.5.3.3 Unary arithmetic operators
+> The result of the logical negation operator ! is 0 if the value of its operand compares unequal to 0, 1 if the value of its operand compares equal to 0. The result has type int. The expression !E is equivalent to (0==E).
+
+所以 `!!(expr)` 的结果为 `int` 并且数值只有 0 或 1。
 
 ### Right Shifts
 
@@ -226,6 +233,160 @@ bwPixel = (a << 24) + (bw << 16) + (bw << 8) + bw;
 - [reverse bit 原理和案例分析](https://hackmd.io/@sysprog/bitwise-reverse)
 {{< /admonition >}}
 
+## 类神经网络的 ReLU 极其常数时间复杂度实作
+
+- {{< link href="https://hackmd.io/@sysprog/constant-time-relu" content="原文地址" external-icon=true >}}
+
+ReLU 定义如下:
+{{< raw >}}
+$$
+ReLU(x) = 
+\begin{cases}
+x & \text{if } x \geq 0 \newline
+0 & \text{if } x \lt 0
+\end{cases}
+$$
+{{< /raw >}}
+
+显然如果 $x$ 是 32-bit 的二补数，可以使用上面提到的 `x >> 31` 的技巧来实作 constant-time function:
+
+```c
+int32_t ReLU(int32_t x) {
+    return ~(x >> 31) & x;
+}
+```
+
+但是在深度学习中，浮点数使用更加常见，对于浮点数进行位移运算是不允许的
+
+- C99 6.5.7 Bitwise shift operators
+> Each of the operands shall have integer type.
+
+所以这里以 32-bit float 浮点数类型为例，利用 32-bit 二补数和 32-bit float 的 MSB 都是 sign bit，以及 C 语言类型 union 的特性
+
+- C99 6.5.2.3 
+> (82) If the member used to access the contents of a union object is not the same as the member last used to store a value in the object, the appropriate part of the object representation of the value is reinterpreted as an object representation in the new type as described in 6.2.6 (a process sometimes called "type punning"). This might be a trap representation.
+
+即 union 所有成员是共用一块内存的，所以访问成员时会将这块内存存储的 object 按照成员的类型进行解释。利用 `int32_t` 和 `float` 的 MSB 都是 sign bit 的特性，可以巧妙绕开对浮点数进行位移运算的限制，并且因为 union 成员内存的共用性质，保证结果的数值符合预期。
+
+```c
+float ReLU(float x) {
+    union {
+        float f;
+        int32_t i;
+    } u = {.f = x};
+
+    u.i &= ~(u.i >> 31);
+    return u.f;
+}
+```
+
+同理可以完成 64-bit 浮点数的 ReLU 常数时间实作。
+
+```c
+double ReLU(float x) {
+    union {
+        double f;
+        int64_t i;
+    } u = {.f = x};
+
+    u.i &= ~(u.i >> 63);
+    return u.f;
+}
+```
+
+## C 语言的 bit-field
+
+```c
+#include <stdbool.h>
+#include <stdio.h>
+bool is_one(int i) { return i == 1; }
+int main() {
+    struct { signed int a : 1; } obj = { .a = 1 };
+    puts(is_one(obj.a) ? "one" : "not one");
+    return 0;
+}
+```
+
+- C99 6.7.2.1 Structure and union specifiers
+
+> A bit-field shall have a type that is a qualified or unqualified version of `_Bool`, `signed int`, `unsigned int`, or some other implementation-defined type. 
+
+> A bit-field is interpreted as a signed or unsigned integer type consisting of the specified number of bits.
+
+将 `a` 这个 1-bit 的位域 (bit-field) 声明成 `signed int`，即将 `a` 视为一个 1-bit 的二补数，所以 `a` 的数值只有 0，-1。接下来将 1 赋值给 `a` 会使得 `a` 的数值为 -1，然后将 `a` 作为参数传入 `is_one` 时会进行符号扩展 (sign extension) 为 32-bit 的二补数 (假设编译器会将 `int` 视为 signed int)，所以数值仍然为 -1。因此最终会输出 "not one".
+
+### Linux 核心: BUILD_BUG_ON_ZERO()
+
+```c
+/*
+ * Force a compilation error if condition is true, but also produce a
+ * result (of value 0 and type size_t), so the expression can be used
+ * e.g. in a structure initializer (or where-ever else comma expressions
+ * aren't permitted).
+ */
+#define BUILD_BUG_ON_ZERO(e) (sizeof(struct { int:(-!!(e)); }))
+```
+
+这个宏运用了上面所说的 `!!` 技巧将 `-!!(e)` 的数值限定在 0 和 -1。
+
+这个宏的功能是:
+- 当 `e` 为 true 时，`-!!(e)` 为 -1，即 bit-field 的 size 为负数
+- 当 `e` 为 false 时，`-!!(e)` 为 0，即 bit-field 的 size 为 0
+
+- C99 6.7.2.1 Structure and union specifiers
+
+> The expression that specifies the width of a bit-field shall be an **integer constant expression with a nonnegative value** that does not exceed the width of an object of the type that would be specified were the colon and expression omitted. If the value is zero, the declaration shall have no declarator.
+
+> A bit-field declaration with no declarator, but only a colon and a width, indicates an unnamed bit-field. As a special case, a bit-field structure member with a width of 0 indicates that no further bit-field is to be packed into the unit in which the previous bitfield, if any, was placed.
+
+> (108) An unnamed bit-field structure member is useful for padding to conform to externally imposed layouts.
+
+根据上面 C99 标准的说明，当 bit-feild 的 size 为负数时会编译失败 (只允许 integer constant expression with a nonnegative value)，当 bit-field 为 0 时，会进行 alignment (以之前的 bit-field 成员所在的 unit 为单位)。
+
+```c
+struct foo {
+    int a : 3;
+    int b : 2;
+    int : 0; /* Force alignment to next boundary */
+    int c : 4;
+    int d : 3;
+};
+
+int main() {
+    int i = 0xFFFF;
+    struct foo *f = (struct foo *) &i;
+    printf("a=%d\nb=%d\nc=%d\nd=%d\n", f->a, f->b, f->c, f->d);
+    return 0;
+}
+```
+
+这里使用了 size 为 0 的 bit-field，其内存布局如下:
+
+```
+i = 1111 1111 1111 1111
+X stand for unknown value
+assume little endian
+
+padding & start from here
+        ↓
+        1111 1111 1111 1111XXXX XXXX XXXX XXXX
+                     b baaa           ddd cccc
+
+        |←  int 32 bits  →||←  int 32 bits  →|
+```
+
+zero size bit-field 使得这里在 `a`, `b` 和 `c`, `d` 之间进行 `sizeof(int)` 的 alignment，所以 `c`, `d` 位于 `i` 这个 object 范围之外，因此 `c`, `d` 每次执行时的数值是不确定的，当然这也依赖于编译器，可以使用 gcc 和 clang 进行测试 :rofl:
+
+- C11 3.14 1 memory location
+> (*NOTE 2*) A bit-field and an adjacent non-bit-field member are in separate memory locations. The same
+> applies to two bit-fields, if one is declared inside a nested structure declaration and the other is not, or if the
+> two are separated by a zero-length bit-field declaration, or if they are separated by a non-bit-field member
+> declaration. It is not safe to concurrently update two non-atomic bit-fields in the same structure if all
+> members declared between them are also (non-zero-length) bit-fields, no matter what the sizes of those
+> intervening bit-fields happen to be.
+
+对于 `BUILD_BUG_ON_ZERO` 这个宏，C11 提供了 [_Static_assert](https://en.cppreference.com/w/c/language/_Static_assert) 语法达到相同效果，但是 Linux kernel 自己维护了一套编译工具链 (这个工具链 gcc 版本可能还没接纳 C11 :rofl:)，所以还是使用自己编写的 `BUILD_BUG_ON_ZERO` 宏。
+ 
 
 ---
 

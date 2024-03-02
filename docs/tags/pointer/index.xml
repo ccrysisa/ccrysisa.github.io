@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>Pointer - 标签 - KZn&#39;s Blog</title>
+    <title>Pointer - 标签 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/pointer/</link>
-    <description>Pointer - 标签 - KZn&#39;s Blog</description>
+    <description>Pointer - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 14 Jan 2024 22:41:38 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/pointer/" rel="self" type="application/rss+xml" /><item>
   <title>你所不知道的 C 语言: 指针篇</title>

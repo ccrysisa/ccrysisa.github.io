@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>Linux 核心设计: 操作系统术语及概念 - KZn&#39;s Blog</title><meta name="author" content="ccrysisa">
+    <title>Linux 核心设计: 操作系统术语及概念 - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="
 面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。
@@ -14,7 +14,7 @@
 面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。
 "><meta itemprop="datePublished" content="2024-02-15T12:51:49+08:00" />
 <meta itemprop="dateModified" content="2024-02-20T15:23:31+08:00" />
-<meta itemprop="wordCount" content="1246"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1367"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux," /><meta property="og:title" content="Linux 核心设计: 操作系统术语及概念" />
 <meta property="og:description" content="
 面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。
@@ -43,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux-concepts\/"
-    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  1246 ,
+    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  1367 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/linux-concepts\/","datePublished": "2024-02-15T12:51:49+08:00","dateModified": "2024-02-20T15:23:31+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -55,7 +55,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZn&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZn&#39;s Blog" data-alt="KZn&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZn&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -95,7 +95,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZn&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZn&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -159,7 +159,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-15 12:51:49"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-15">2024-02-15</time></span>&nbsp;<span title="更新于 2024-02-20 15:23:31"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="1246 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-15 12:51:49"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-15">2024-02-15</time></span>&nbsp;<span title="更新于 2024-02-20 15:23:31"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="1367 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -176,6 +176,13 @@
       </ul>
     </li>
     <li><a href="#细节切入点">细节切入点</a></li>
+    <li><a href="#man">man</a></li>
+    <li><a href="#系统软件开发思维">系统软件开发思维</a>
+      <ul>
+        <li><a href="#maslows-pyramid-of-code-review">Maslow&rsquo;s pyramid of code review</a></li>
+        <li><a href="#benchmark--profiling">Benchmark / Profiling</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><blockquote>
@@ -351,7 +358,48 @@
 <p>这门课可以作为辅助材料，讲得深入浅出，可以作为进阶材料阅读。</p>
 </div>
     </div>
-  </div></div><div class="post-footer" id="post-footer">
+  </div>
+<h2 id="man">man</h2>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ man man
+</span></span><span class="line"><span class="cl">       The  table  below  shows  the  section numbers of the manual followed by the
+</span></span><span class="line"><span class="cl">       types of pages they contain.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       <span class="m">1</span>   Executable programs or shell commands
+</span></span><span class="line"><span class="cl">       <span class="m">2</span>   System calls <span class="o">(</span>functions provided by the kernel<span class="o">)</span>
+</span></span><span class="line"><span class="cl">       <span class="m">3</span>   Library calls <span class="o">(</span>functions within program libraries<span class="o">)</span>
+</span></span><span class="line"><span class="cl">       <span class="m">4</span>   Special files <span class="o">(</span>usually found in /dev<span class="o">)</span>
+</span></span><span class="line"><span class="cl">       <span class="m">5</span>   File formats and conventions, e.g. /etc/passwd
+</span></span><span class="line"><span class="cl">       <span class="m">6</span>   Games
+</span></span><span class="line"><span class="cl">       <span class="m">7</span>   Miscellaneous <span class="o">(</span>including macro packages and conventions<span class="o">)</span>,  e.g.  man<span class="o">(</span>7<span class="o">)</span>,
+</span></span><span class="line"><span class="cl">           groff<span class="o">(</span>7<span class="o">)</span>, man-pages<span class="o">(</span>7<span class="o">)</span>
+</span></span><span class="line"><span class="cl">       <span class="m">8</span>   System administration commands <span class="o">(</span>usually only <span class="k">for</span> root<span class="o">)</span>
+</span></span><span class="line"><span class="cl">       <span class="m">9</span>   Kernel routines <span class="o">[</span>Non standard<span class="o">]</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="系统软件开发思维">系统软件开发思维</h2>
+<h3 id="maslows-pyramid-of-code-review">Maslow&rsquo;s pyramid of code review</h3>
+<figure><a class="lightgallery" href="https://imgur-backup.hackmd.io/DBMmMNi.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/DBMmMNi.png?size=small" data-sub-html="<h2>Maslow&rsquo;s pyramid of code review</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/DBMmMNi.png" srcset="https://imgur-backup.hackmd.io/DBMmMNi.png?size=small, https://imgur-backup.hackmd.io/DBMmMNi.png?size=medium 1.5x, https://imgur-backup.hackmd.io/DBMmMNi.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/DBMmMNi.png" data-alt="https://imgur-backup.hackmd.io/DBMmMNi.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Maslow&rsquo;s pyramid of code review</figcaption>
+  </figure>
+<h3 id="benchmark--profiling">Benchmark / Profiling</h3>
+<figure><a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2015.hackpad.com_xDmCCv0k00K_p.299401_1446124062219_truth.jpg?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2015.hackpad.com_xDmCCv0k00K_p.299401_1446124062219_truth.jpg?size=small" data-sub-html="<h2>Benchmark / Profiling</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2015.hackpad.com_xDmCCv0k00K_p.299401_1446124062219_truth.jpg" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2015.hackpad.com_xDmCCv0k00K_p.299401_1446124062219_truth.jpg?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2015.hackpad.com_xDmCCv0k00K_p.299401_1446124062219_truth.jpg?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2015.hackpad.com_xDmCCv0k00K_p.299401_1446124062219_truth.jpg?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2015.hackpad.com_xDmCCv0k00K_p.299401_1446124062219_truth.jpg" data-alt="https://hackpad-attachments.s3.amazonaws.com/embedded2015.hackpad.com_xDmCCv0k00K_p.299401_1446124062219_truth.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Benchmark / Profiling</figcaption>
+  </figure></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
@@ -384,7 +432,7 @@
       <a href="/posts/linux-quiz1/" class="post-nav-item" rel="next" title="Linux 核心设计: 第 1 周测验题 linked list">Linux 核心设计: 第 1 周测验题 linked list<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

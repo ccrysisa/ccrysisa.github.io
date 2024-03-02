@@ -186,3 +186,50 @@ Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contai
 {{< /admonition >}}
 
 ## Fisher–Yates shuffle
+
+- Wikipedia [Fisher–Yates shuffle](https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle)
+> The Fisher–Yates shuffle is an algorithm for shuffling a finite sequence.
+
+原文所说的事件复杂度，是考虑关于构造结果链表时的复杂度，并不考虑寻找指定节点的复杂度，所以对于原始方法复杂度为 $1 + 2 + ... + n = O(n^2)$，对于 modern method 复杂度为 $1 + 1 + ... + 1 = O(n)$
+
+原文实作虽然使用了 pointer to pointer，但是使用上并没有体现 linus 所说的 good taste，重新实作如下:
+
+```c
+void shuffle(node_t **head)
+{
+    srand(time(NULL));
+
+    // First, we have to know how long is the linked list
+    int len = 0;
+    node_t **indirect = head;
+    while (*indirect) {
+        len++;
+        indirect = &(*indirect)->next;
+    }
+
+    // Append shuffling result to another linked list
+    node_t *new = NULL;
+    node_t **new_tail = &new;
+
+    while (len) {
+        int random = rand() % len;
+        indirect = head;
+
+        while (random--)
+            indirect = &(*indirect)->next;
+
+        node_t *tmp = *indirect;
+        *indirect = (*indirect)->next;
+        tmp->next = NULL;
+
+        *new_tail = tmp;
+        new_tail = &(*new_tail)->next;
+
+        len--;
+    }
+
+    *head = new;
+}
+```
+
+主要是修改了新链表 `new` 那一部分，只需要一个 pointer to pinter `new_tail` 就可以避免条件判断。

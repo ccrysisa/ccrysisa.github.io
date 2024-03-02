@@ -17,7 +17,6 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
 ------------------------------------------------------
 ### 第 1 週: 誠實面對自己
 > (Feb 13, 14, 16)
-
 - [x] [教材解說](https://youtu.be/ptbJQUAv2ro)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
 - [x] [課程簡介和注意須知](https://docs.google.com/presentation/d/1xmb_mvsHISWp6naP1rHOyrxzMzNQkVoKK69lGRRXV9M/edit?usp=sharing) / [課程簡介解說錄影](https://youtu.be/qebDgIIEDYw)`*`
     * 每週均安排隨堂測驗，採計其中最高分的 9 次
@@ -36,7 +35,7 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
     * 人們對數學的加減運算可輕易在腦中辨識符號並理解其結果，但電腦做任何事都受限於實體資料儲存及操作方式，換言之，電腦硬體實際只認得 0 和 1，卻不知道符號 + 和 - 在數學及應用場域的意義，於是工程人員引入「補數」以表達人們認知上的正負數
     * 您有沒有想過，為何「二補數」(2’s complement) 被電腦廣泛採用呢？背後的設計考量是什麼？本文嘗試從數學觀點去解讀編碼背後的原理
 - [x] [你所不知道的 C 語言：指標篇](https://hackmd.io/@sysprog/c-pointer)`*`
-- [ ] [linked list 和非連續記憶體操作](https://hackmd.io/@sysprog/c-linked-list)`*`
+- [x] [linked list 和非連續記憶體操作](https://hackmd.io/@sysprog/c-linked-list)`*`
     * 安排 linked list 作為第一份作業及隨堂測驗的考量點:
         + 檢驗學員對於 C 語言指標操作的熟悉程度 (附帶思考：對於 Java 程式語言來說，該如何實作 linked list 呢？)
         + linked list 本質上就是對非連續記憶體的操作，乍看僅是一種單純的資料結構，但對應的演算法變化多端，像是「如何偵測 linked list 是否存在環狀結構？」和「如何對 linked list 排序並確保空間複雜度為 O(1) 呢？」
@@ -56,7 +55,6 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
 
 ### 第 2 週: C 語言程式設計
 > (Feb 20, 21, 23)
-
 * [x] [教材解說](https://youtu.be/YawpeXUiN1k)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
 * [Linux v6.2 發布](https://kernelnewbies.org/Linux_6.2): 接下來會是讓學員眼花撩亂的主版號/次版號的飛快跳躍 / [kernel.org](https://kernel.org/)
 * [x] [Linux: 作業系統術語及概念](https://hackmd.io/@sysprog/linux-concepts)`*`
@@ -65,7 +63,7 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
     - 儘管數值系統並非 C 語言所特有，但在 Linux 核心大量存在 u8/u16/u32/u64 這樣透過 typedef 所定義的型態，伴隨著各式 alignment 存取，若學員對數值系統的認知不夠充分，可能立即就被阻擋在探索 Linux 核心之外 —— 畢竟你完全搞不清楚，為何在 Linux 核心存取特定資料需要繞一大圈。
 - [x] [C 語言: Bitwise 操作](https://hackmd.io/@sysprog/c-bitwise)`*`
     - Linux 核心原始程式碼存在大量 bit(-wise) operations (簡稱 bitops)，頗多乍看像是魔法的 C 程式碼就是 bitops 的組合
-    - [ ] [類神經網路的 ReLU 及其常數時間複雜度實作](https://hackmd.io/@sysprog/constant-time-relu)
+    - [x] [類神經網路的 ReLU 及其常數時間複雜度實作](https://hackmd.io/@sysprog/constant-time-relu)
     - [ ] [從 √2 的存在談開平方根的快速運算](https://hackmd.io/@sysprog/sqrt)
 * [ ] [Linux 核心的 hash table 實作](https://hackmd.io/@sysprog/linux-hashtable)
 * [x] [為什麼要深入學習 C 語言？](https://hackmd.io/@sysprog/c-standards)`*`
@@ -79,7 +77,7 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
     * [ ] 搭配閱讀: [The Lost Art of Structure Packing](http://www.catb.org/esr/structure-packing/)
     * 從虛擬記憶體談起，歸納出現代銀行和虛擬記憶體兩者高度相似: malloc 給出 valid pointer 不要太高興，等你要開始用的時候搞不好作業系統給個 OOM ——簡單來說就是一張支票，能不能拿來開等到兌現才知道。
     * 探討 heap (動態配置產生，系統會存放在另外一塊空間)、data alignment，和 malloc 實作機制等議題。這些都是理解 Linux 核心運作的關鍵概念。
-* [ ] [C 語言: bit-field](https://hackmd.io/@sysprog/c-bitfield)
+* [x] [C 語言: bit-field](https://hackmd.io/@sysprog/c-bitfield)
     - bit field 是 C 語言一個很被忽略的特徵，但在 Linux 和 gcc 這類系統軟體很常出現，不僅是精準規範每個 bit 的作用，甚至用來「擴充」C 語言
 - [參考題目](https://hackmd.io/@sysprog/linux2022-quiz2) / [參考題目](https://hackmd.io/@sysprog/linux2021-quiz2)`*` / [參考題解 1](https://hackmd.io/@93i7xo2/sysprog2021q1-hw2-quiz2), [參考題解 2](https://hackmd.io/@hankluo6/2021q1quiz2), [參考題解 3](https://hackmd.io/@bakudr18/SkS-Y_lX_)
 - [作業](https://hackmd.io/@sysprog/linux2023-homework2): 截止繳交日 Mar 7
@@ -87,8 +85,8 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
 - 第 2 週隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz2) (內含作答表單)
 - [課堂問答簡記](https://hackmd.io/VIvUZemESvGUev4aCwOnWA?view)
 
-### 第 3 週 (Feb 27, 28, Mar 2): 並行和 C 語言程式設計
-
+### 第 3 週: 並行和 C 語言程式設計
+> (Feb 27, 28, Mar 2)
 * [教材解說](https://youtu.be/7efdpMCx-ak)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
 * 公告
     + 2 月 28 日沒有實體課程，但安排線上測驗 (「Linux 核心設計」課程的學員務必參加)，在 15:20-23:59 之間依據 [Google Calendar](https://calendar.google.com/calendar/embed?src=embedded.master2015%40gmail.com&ctz=Asia%2FTaipei) 進行作答

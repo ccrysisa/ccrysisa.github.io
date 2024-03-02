@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>你所不知道的 C 语言: bitwise 操作 - KZn&#39;s Blog</title><meta name="author" content="ccrysisa">
+    <title>你所不知道的 C 语言: bitwise 操作 - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="
 Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，颇多乍看像是魔法的 C 程式码就是 bitops 的组合。
@@ -14,7 +14,7 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，颇多乍看像是魔法的 C 程式码就是 bitops 的组合。
 "><meta itemprop="datePublished" content="2024-02-23T13:13:33+08:00" />
 <meta itemprop="dateModified" content="2024-02-29T19:00:34+08:00" />
-<meta itemprop="wordCount" content="2273"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="3858"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Bitwise," /><meta property="og:title" content="你所不知道的 C 语言: bitwise 操作" />
 <meta property="og:description" content="
 Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，颇多乍看像是魔法的 C 程式码就是 bitops 的组合。
@@ -43,7 +43,7 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-bitwise\/"
-    },"genre": "posts","keywords": "Sysprog, C, Bitwise","wordcount":  2273 ,
+    },"genre": "posts","keywords": "Sysprog, C, Bitwise","wordcount":  3858 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-bitwise\/","datePublished": "2024-02-23T13:13:33+08:00","dateModified": "2024-02-29T19:00:34+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -55,7 +55,7 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZn&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZn&#39;s Blog" data-alt="KZn&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZn&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -95,7 +95,7 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZn&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZn&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -159,7 +159,7 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-23 13:13:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-23">2024-02-23</time></span>&nbsp;<span title="更新于 2024-02-29 19:00:34"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="2273 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-23 13:13:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-23">2024-02-23</time></span>&nbsp;<span title="更新于 2024-02-29 19:00:34"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="3858 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 8 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -198,6 +198,12 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
       </ul>
     </li>
     <li><a href="#案例探讨">案例探讨</a></li>
+    <li><a href="#类神经网络的-relu-极其常数时间复杂度实作">类神经网络的 ReLU 极其常数时间复杂度实作</a></li>
+    <li><a href="#c-语言的-bit-field">C 语言的 bit-field</a>
+      <ul>
+        <li><a href="#linux-核心-build_bug_on_zero">Linux 核心: BUILD_BUG_ON_ZERO()</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><blockquote>
@@ -340,7 +346,15 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span> <span class="o">||</span> <span class="nf">list_empty</span><span class="p">(</span><span class="n">head</span><span class="p">))</span>
 </span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">list_empty</span><span class="p">(</span><span class="n">head</span><span class="p">)</span> <span class="o">||</span> <span class="o">!</span><span class="n">head</span><span class="p">)</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>第二条语句在执行时会报错，因为 <code>list_empty</code> 要求传入的参数不为 NULL</p>
+</div><p>第二条语句在执行时会报错，因为 <code>list_empty</code> 要求传入的参数不为 NULL。</p>
+<p>逻辑运算符 <code>!</code> 相当有效，C99 并没有完全支持 bool 类型，对于整数，它是将非零整数视为 true，零视为 false。所以如果你需要保证某一表达式的结果不仅是 true of false，还要求对应 0 or 1 时，可以使用 <code>!!(expr)</code> 来实现。</p>
+<ul>
+<li>C99 6.5.3.3 Unary arithmetic operators</li>
+</ul>
+<blockquote>
+<p>The result of the logical negation operator ! is 0 if the value of its operand compares unequal to 0, 1 if the value of its operand compares equal to 0. The result has type int. The expression !E is equivalent to (0==E).</p>
+</blockquote>
+<p>所以 <code>!!(expr)</code> 的结果为 <code>int</code> 并且数值只有 0 或 1。</p>
 <h3 id="right-shifts">Right Shifts</h3>
 <p>对于 Unsigned 或 positive sign integer 做右移运算时 <code>x &gt;&gt; n</code>，其最终结果值为 $\lfloor x / 2^n \rfloor$。</p>
 <p>因为这种情况的右移操作相当于对每个 bit 表示的 power 加上 $-n$，再考虑有些 bit 表示的 power 加上 $-n$ 后会小于 0，此时直接将这些 bit 所表示的值去除即可 (因为在 integer 中 bit 的 power 最小为 0，如果 power 小于 0 表示的是小数值)，这个操作对应于向下取整。</p>
@@ -497,7 +511,242 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 </ul>
 </div>
     </div>
-  </div></div><div class="post-footer" id="post-footer">
+  </div>
+<h2 id="类神经网络的-relu-极其常数时间复杂度实作">类神经网络的 ReLU 极其常数时间复杂度实作</h2>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/constant-time-relu"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>
+<p>ReLU 定义如下:
+<div class="fi-row">
+$$
+ReLU(x) = 
+\begin{cases}
+x & \text{if } x \geq 0 \newline
+0 & \text{if } x \lt 0
+\end{cases}
+$$
+</div></p>
+<p>显然如果 $x$ 是 32-bit 的二补数，可以使用上面提到的 <code>x &gt;&gt; 31</code> 的技巧来实作 constant-time function:</p>
+<div class="highlight" id="id-14"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int32_t</span> <span class="nf">ReLU</span><span class="p">(</span><span class="kt">int32_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">~</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">31</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">x</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>但是在深度学习中，浮点数使用更加常见，对于浮点数进行位移运算是不允许的</p>
+<ul>
+<li>C99 6.5.7 Bitwise shift operators</li>
+</ul>
+<blockquote>
+<p>Each of the operands shall have integer type.</p>
+</blockquote>
+<p>所以这里以 32-bit float 浮点数类型为例，利用 32-bit 二补数和 32-bit float 的 MSB 都是 sign bit，以及 C 语言类型 union 的特性</p>
+<ul>
+<li>C99 6.5.2.3</li>
+</ul>
+<blockquote>
+<p>(82) If the member used to access the contents of a union object is not the same as the member last used to store a value in the object, the appropriate part of the object representation of the value is reinterpreted as an object representation in the new type as described in 6.2.6 (a process sometimes called &ldquo;type punning&rdquo;). This might be a trap representation.</p>
+</blockquote>
+<p>即 union 所有成员是共用一块内存的，所以访问成员时会将这块内存存储的 object 按照成员的类型进行解释。利用 <code>int32_t</code> 和 <code>float</code> 的 MSB 都是 sign bit 的特性，可以巧妙绕开对浮点数进行位移运算的限制，并且因为 union 成员内存的共用性质，保证结果的数值符合预期。</p>
+<div class="highlight" id="id-15"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">float</span> <span class="nf">ReLU</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">union</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">float</span> <span class="n">f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int32_t</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">u</span> <span class="o">=</span> <span class="p">{.</span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">u</span><span class="p">.</span><span class="n">i</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="p">(</span><span class="n">u</span><span class="p">.</span><span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">31</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">u</span><span class="p">.</span><span class="n">f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>同理可以完成 64-bit 浮点数的 ReLU 常数时间实作。</p>
+<div class="highlight" id="id-16"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">double</span> <span class="nf">ReLU</span><span class="p">(</span><span class="kt">float</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">union</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">double</span> <span class="n">f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int64_t</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="n">u</span> <span class="o">=</span> <span class="p">{.</span><span class="n">f</span> <span class="o">=</span> <span class="n">x</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">u</span><span class="p">.</span><span class="n">i</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="p">(</span><span class="n">u</span><span class="p">.</span><span class="n">i</span> <span class="o">&gt;&gt;</span> <span class="mi">63</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">u</span><span class="p">.</span><span class="n">f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="c-语言的-bit-field">C 语言的 bit-field</h2>
+<div class="highlight" id="id-17"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdbool.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">bool</span> <span class="nf">is_one</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="p">{</span> <span class="kt">signed</span> <span class="kt">int</span> <span class="nl">a</span> <span class="p">:</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">{</span> <span class="p">.</span><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="nf">is_one</span><span class="p">(</span><span class="n">obj</span><span class="p">.</span><span class="n">a</span><span class="p">)</span> <span class="o">?</span> <span class="s">&#34;one&#34;</span> <span class="o">:</span> <span class="s">&#34;not one&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>C99 6.7.2.1 Structure and union specifiers</li>
+</ul>
+<blockquote>
+<p>A bit-field shall have a type that is a qualified or unqualified version of <code>_Bool</code>, <code>signed int</code>, <code>unsigned int</code>, or some other implementation-defined type.</p>
+</blockquote>
+<blockquote>
+<p>A bit-field is interpreted as a signed or unsigned integer type consisting of the specified number of bits.</p>
+</blockquote>
+<p>将 <code>a</code> 这个 1-bit 的位域 (bit-field) 声明成 <code>signed int</code>，即将 <code>a</code> 视为一个 1-bit 的二补数，所以 <code>a</code> 的数值只有 0，-1。接下来将 1 赋值给 <code>a</code> 会使得 <code>a</code> 的数值为 -1，然后将 <code>a</code> 作为参数传入 <code>is_one</code> 时会进行符号扩展 (sign extension) 为 32-bit 的二补数 (假设编译器会将 <code>int</code> 视为 signed int)，所以数值仍然为 -1。因此最终会输出 &ldquo;not one&rdquo;.</p>
+<h3 id="linux-核心-build_bug_on_zero">Linux 核心: BUILD_BUG_ON_ZERO()</h3>
+<div class="highlight" id="id-18"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Force a compilation error if condition is true, but also produce a
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * result (of value 0 and type size_t), so the expression can be used
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * e.g. in a structure initializer (or where-ever else comma expressions
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * aren&#39;t permitted).
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define BUILD_BUG_ON_ZERO(e) (sizeof(struct { int:(-!!(e)); }))</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个宏运用了上面所说的 <code>!!</code> 技巧将 <code>-!!(e)</code> 的数值限定在 0 和 -1。</p>
+<p>这个宏的功能是:</p>
+<ul>
+<li>
+<p>当 <code>e</code> 为 true 时，<code>-!!(e)</code> 为 -1，即 bit-field 的 size 为负数</p>
+</li>
+<li>
+<p>当 <code>e</code> 为 false 时，<code>-!!(e)</code> 为 0，即 bit-field 的 size 为 0</p>
+</li>
+<li>
+<p>C99 6.7.2.1 Structure and union specifiers</p>
+</li>
+</ul>
+<blockquote>
+<p>The expression that specifies the width of a bit-field shall be an <strong>integer constant expression with a nonnegative value</strong> that does not exceed the width of an object of the type that would be specified were the colon and expression omitted. If the value is zero, the declaration shall have no declarator.</p>
+</blockquote>
+<blockquote>
+<p>A bit-field declaration with no declarator, but only a colon and a width, indicates an unnamed bit-field. As a special case, a bit-field structure member with a width of 0 indicates that no further bit-field is to be packed into the unit in which the previous bitfield, if any, was placed.</p>
+</blockquote>
+<blockquote>
+<p>(108) An unnamed bit-field structure member is useful for padding to conform to externally imposed layouts.</p>
+</blockquote>
+<p>根据上面 C99 标准的说明，当 bit-feild 的 size 为负数时会编译失败 (只允许 integer constant expression with a nonnegative value)，当 bit-field 为 0 时，会进行 alignment (以之前的 bit-field 成员所在的 unit 为单位)。</p>
+<div class="highlight" id="id-19"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">foo</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nl">a</span> <span class="p">:</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nl">b</span> <span class="p">:</span> <span class="mi">2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* Force alignment to next boundary */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nl">c</span> <span class="p">:</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="nl">d</span> <span class="p">:</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mh">0xFFFF</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">foo</span> <span class="o">*</span><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="k">struct</span> <span class="n">foo</span> <span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;a=%d</span><span class="se">\n</span><span class="s">b=%d</span><span class="se">\n</span><span class="s">c=%d</span><span class="se">\n</span><span class="s">d=%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">a</span><span class="p">,</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">b</span><span class="p">,</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">c</span><span class="p">,</span> <span class="n">f</span><span class="o">-&gt;</span><span class="n">d</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里使用了 size 为 0 的 bit-field，其内存布局如下:</p>
+<div class="highlight" id="id-20"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">i = 1111 1111 1111 1111
+</span></span><span class="line"><span class="cl">X stand for unknown value
+</span></span><span class="line"><span class="cl">assume little endian
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">padding &amp; start from here
+</span></span><span class="line"><span class="cl">        ↓
+</span></span><span class="line"><span class="cl">        1111 1111 1111 1111XXXX XXXX XXXX XXXX
+</span></span><span class="line"><span class="cl">                     b baaa           ddd cccc
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        |←  int 32 bits  →||←  int 32 bits  →|</span></span></code></pre></td></tr></table>
+</div>
+</div><p>zero size bit-field 使得这里在 <code>a</code>, <code>b</code> 和 <code>c</code>, <code>d</code> 之间进行 <code>sizeof(int)</code> 的 alignment，所以 <code>c</code>, <code>d</code> 位于 <code>i</code> 这个 object 范围之外，因此 <code>c</code>, <code>d</code> 每次执行时的数值是不确定的，当然这也依赖于编译器，可以使用 gcc 和 clang 进行测试 &#x1f923;</p>
+<ul>
+<li>C11 3.14 1 memory location</li>
+</ul>
+<blockquote>
+<p>(<em>NOTE 2</em>) A bit-field and an adjacent non-bit-field member are in separate memory locations. The same
+applies to two bit-fields, if one is declared inside a nested structure declaration and the other is not, or if the
+two are separated by a zero-length bit-field declaration, or if they are separated by a non-bit-field member
+declaration. It is not safe to concurrently update two non-atomic bit-fields in the same structure if all
+members declared between them are also (non-zero-length) bit-fields, no matter what the sizes of those
+intervening bit-fields happen to be.</p>
+</blockquote>
+<p>对于 <code>BUILD_BUG_ON_ZERO</code> 这个宏，C11 提供了 <a href="https://en.cppreference.com/w/c/language/_Static_assert"target="_blank" rel="external nofollow noopener noreferrer">_Static_assert</a> 语法达到相同效果，但是 Linux kernel 自己维护了一套编译工具链 (这个工具链 gcc 版本可能还没接纳 C11 &#x1f923;)，所以还是使用自己编写的 <code>BUILD_BUG_ON_ZERO</code> 宏。</p></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
@@ -530,7 +779,7 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
       <a href="/posts/c-memory/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: 内存管理、对齐及硬体特性">你所不知道的 C 语言: 内存管理、对齐及硬体特性<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

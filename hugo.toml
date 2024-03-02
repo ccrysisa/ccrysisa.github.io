@@ -1,4 +1,4 @@
-title = "KZn's Blog"
+title = "KZnight's Blog"
 baseURL = "https://ccrysisa.github.io/"
 # 设置默认的语言 ["en", "zh-cn", "fr", "pl", ...]
 defaultContentLanguage = "zh-cn"
@@ -159,7 +159,7 @@ mobileMode = "auto"
 # LOGO 的 URL
 logo = "/fixit.min.svg"
 # 标题名称
-name = "KZn's Blog"
+name = "KZnight's Blog"
 # 你可以在名称（允许 HTML 格式）之前添加其他信息，例如图标
 pre = ""
 # 你可以在名称（允许 HTML 格式）之后添加其他信息，例如图标
@@ -262,7 +262,7 @@ avatarURL = "/images/avatar1.png"
 #  头像菜单链接的 identifier
 avatarMenu = ""
 #  主页显示的网站标题（支持 HTML 格式）
-title = ""
+title = "KZnight"
 # 主页显示的网站副标题
 subtitle = "What I cannot create, I do not understand."
 # 是否为副标题显示打字机动画
@@ -347,7 +347,7 @@ Ko-Fi = ""
 BuyMeaCoffee = ""
 Linktree = ""
 QQ = ""
-QQGroup = ""                     # https://qun.qq.com/join.html
+QQGroup = ""                   # https://qun.qq.com/join.html
 Diaspora = ""
 CSDN = ""
 Discord = ""
@@ -362,7 +362,7 @@ RootMe = ""
 Feishu = ""
 TryHackMe = ""
 Phone = ""
-Email = "caijiaxin@dragonos.org"
+Email = "gshine@m.scnu.edu.cn"
 RSS = true
 
 #  文章页面配置

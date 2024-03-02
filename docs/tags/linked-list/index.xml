@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>Linked List - 标签 - KZn&#39;s Blog</title>
+    <title>Linked List - 标签 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/linked-list/</link>
-    <description>Linked List - 标签 - KZn&#39;s Blog</description>
+    <description>Linked List - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 03 Feb 2024 10:44:56 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/linked-list/" rel="self" type="application/rss+xml" /><item>
   <title>你所不知道的 C 语言: linked list 和非连续内存</title>
