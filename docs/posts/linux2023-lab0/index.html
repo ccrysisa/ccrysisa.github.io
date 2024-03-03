@@ -10,7 +10,7 @@
 <meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Sysprog, Linux, C' /><meta itemprop="name" content="Linux 核心设计: C Programming Lab">
 <meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-02-19T16:23:01+08:00" />
 <meta itemprop="dateModified" content="2024-02-29T19:00:34+08:00" />
-<meta itemprop="wordCount" content="243"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="815"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux,C," /><meta property="og:title" content="Linux 核心设计: C Programming Lab" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
@@ -35,7 +35,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux2023-lab0\/"
-    },"genre": "posts","keywords": "Sysprog, Linux, C","wordcount":  243 ,
+    },"genre": "posts","keywords": "Sysprog, Linux, C","wordcount":  815 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023-lab0\/","datePublished": "2024-02-19T16:23:01+08:00","dateModified": "2024-02-29T19:00:34+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -151,7 +151,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-19 16:23:01"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-19">2024-02-19</time></span>&nbsp;<span title="更新于 2024-02-29 19:00:34"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="243 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-19 16:23:01"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-19">2024-02-19</time></span>&nbsp;<span title="更新于 2024-02-29 19:00:34"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="815 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -159,16 +159,25 @@
         </div>
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#预期目标--开发环境设置">预期目标 + 开发环境设置</a>
+    <li><a href="#程序分析工具">程序分析工具</a></li>
+    <li><a href="#queue">Queue</a>
       <ul>
-        <li><a href="#程序分析工具">程序分析工具</a></li>
-        <li><a href="#queue">Queue</a></li>
+        <li><a href="#leetcode">leetcode</a></li>
+        <li><a href="#q_new--q_free">q_new &amp; q_free</a></li>
+        <li><a href="#q_insert--q_remove">q_insert &amp; q_remove</a></li>
+      </ul>
+    </li>
+    <li><a href="#valgrind">Valgrind</a></li>
+    <li><a href="#自动测试">自动测试</a>
+      <ul>
+        <li><a href="#追踪内存的分配和释放">追踪内存的分配和释放</a></li>
+        <li><a href="#qtest-命令解释器">qtest 命令解释器</a></li>
+        <li><a href="#signal">Signal</a></li>
       </ul>
     </li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><h2 id="预期目标--开发环境设置">预期目标 + 开发环境设置</h2>
-<h3 id="程序分析工具">程序分析工具</h3>
+      </div><div class="content" id="content"><h2 id="程序分析工具">程序分析工具</h2>
 <ul>
 <li>
 <p><a href="https://cppcheck.sourceforge.io/"target="_blank" rel="external nofollow noopener noreferrer">Cppcheck</a> 是 <strong>静态</strong> 程序分析工具，即无需运行程序就可以分析出程序潜在的问题，当然会有一定的误差，类似的工具有 <a href="https://doc.rust-lang.org/cargo/commands/cargo-check.html"target="_blank" rel="external nofollow noopener noreferrer">cargo-check</a></p>
@@ -177,7 +186,8 @@
 <p><a href="https://valgrind.org/"target="_blank" rel="external nofollow noopener noreferrer">Valgrind</a> 是 <strong>动态</strong> 程序分析工具，即需要将程序运行起来再进行分析，通常用于检测内存泄漏 (<a href="https://en.wikipedia.org/wiki/Memory_leak"target="_blank" rel="external nofollow noopener noreferrer">memory leak</a>)</p>
 </li>
 </ul>
-<h3 id="queue">Queue</h3>
+<h2 id="queue">Queue</h2>
+<h3 id="leetcode">leetcode</h3>
 <p>相关的 LeetCode 题目的实作情况:</p>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 2095. Delete the Middle Node of a Linked List</a></li>
@@ -187,7 +197,86 @@
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/remove-nodes-from-linked-list/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 2487. Remove Nodes From Linked List</a> / <a href="https://leetcode.com/problems/remove-nodes-from-linked-list/solutions/4188092/simple-easy-cpp-solution-with-explanation/"target="_blank" rel="external nofollow noopener noreferrer">参考题解</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/merge-k-sorted-lists/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 23. Merge k Sorted Lists</a></li>
 </ul>
-<p><code>q_free</code> 在遍历时需要释放当前节点所在元素的空间，所以需要使用 <code>list_for_each_entry_safe</code>，而 <code>q_size</code> 无需在遍历时修改当前节点，所以使用 <code>list_for_each</code> 就足够了。</p></div><div class="post-footer" id="post-footer">
+<h3 id="q_new--q_free">q_new &amp; q_free</h3>
+<ul>
+<li><code>q_new</code> 使用 <code>malloc</code> 分配空间，并使用 <code>INIT_LIST_HEAD</code> 进行初始化。</li>
+<li><code>q_free</code> 遍历 queue 进行逐个节点释放，所以需要使用 <code>_safe</code> 后缀的 for_each 宏，释放时需要先释放成员 <code>value</code>，再释放节点 (回想一下 C++ 的析构函数)，可以直接使用 <code>q_release_element</code> 函数。</li>
+</ul>
+<blockquote>
+<p><code>q_free</code> 在遍历时需要释放当前节点所在元素的空间，所以需要使用 <code>list_for_each_entry_safe</code>，而 <code>q_size</code> 无需在遍历时修改当前节点，所以使用 <code>list_for_each</code> 就足够了。</p>
+</blockquote>
+<h3 id="q_insert--q_remove">q_insert &amp; q_remove</h3>
+<p>insert 时需要特判 head 是否为 NULL 以及 malloc 分配是否成功，接下来需要使用 <code>strdup</code> 对所给参数进行复制 (<code>strdup</code> 内部是通过 <code>malloc</code> 来实现的，所以之前 <code>q_free</code> 时也需要是否 <code>value</code>)，最后根据插入的位置调用 <code>list_add</code> 或 <code>list_add_tail</code> 进行插入。</p>
+<p>remove 时需要特判 head 是否为 NULL 以及 queue 是否为空，接下来根据需要 remove 的节点调用 <code>list_first_entry</code> 或 <code>list_last_entry</code> 获取节点对应的元素，通过 <code>list_del_init</code> 来清除出 queue，最后如果 <code>value</code> 字段不为 NULL，则通过 <code>memcpy</code> 将 <code>value</code> 字段对应的字符串复制到指定位置。</p>
+<h2 id="valgrind">Valgrind</h2>
+<ul>
+<li>2007 年的论文: <a href="https://valgrind.org/docs/valgrind2007.pdf"target="_blank" rel="external nofollow noopener noreferrer">Valgrind: A Framework for Heavyweight Dynamic Binary Instrumentation</a></li>
+<li>繁体中文版本的 <a href="https://wdv4758h-notes.readthedocs.io/zh_TW/latest/valgrind/dynamic-binary-instrumentation.html"target="_blank" rel="external nofollow noopener noreferrer">论文导读</a></li>
+</ul>
+<p>memory lost:</p>
+<ul>
+<li>definitely lost</li>
+<li>indirectly lost</li>
+<li>possibly lost</li>
+<li>still readchable</li>
+</ul>
+<p>运行 valgrind 和 gdb 类似，都需要使用 <code>-g</code> 参数来编译 C/C++ 源程序以生成调试信息，然后还可以通过 <code>-q</code> 参数指示 valgrind 进入 quite 模式，减少启动时信息的输出。</p>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ valgrind -q --leak-check<span class="o">=</span>full ./case1</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>--leak-check=full</code>: 启用全面的内存泄漏检查，valgrind 将会报告所有的内存泄漏情况，包括详细的堆栈跟踪信息</li>
+<li><code>--show-possibly-lost=no</code>: 不输出 possibly lost 相关报告</li>
+<li><code>--track-fds=yes</code>: 侦测 file descriptor 开了没关的情况</li>
+</ul>
+<blockquote>
+<p>valgrind 输出的报告 invalid write/read 这类的单位是 Byte，即 size of X (bytes)</p>
+</blockquote>
+<p>程序运行时内存布局:</p>
+<a class="lightgallery" href="https://i.imgur.com/OhqUECc.png?size=large" data-thumbnail="https://i.imgur.com/OhqUECc.png?size=small" data-sub-html="<h2>https://i.imgur.com/OhqUECc.png</h2>"><img loading="lazy" src="https://i.imgur.com/OhqUECc.png" srcset="https://i.imgur.com/OhqUECc.png?size=small, https://i.imgur.com/OhqUECc.png?size=medium 1.5x, https://i.imgur.com/OhqUECc.png?size=large 2x" sizes="auto" data-title="https://i.imgur.com/OhqUECc.png" data-alt="https://i.imgur.com/OhqUECc.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<div class="details admonition info open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ul>
+<li><a href="https://valgrind.org/docs/manual/manual.html"target="_blank" rel="external nofollow noopener noreferrer">Valgrind User Manual</a></li>
+<li><a href="https://valgrind.org/docs/manual/ms-manual.html"target="_blank" rel="external nofollow noopener noreferrer">Massif: a heap profiler</a></li>
+</ul>
+</div>
+    </div>
+  </div>
+<h2 id="自动测试">自动测试</h2>
+<h3 id="追踪内存的分配和释放">追踪内存的分配和释放</h3>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> Wikipedia: <a href="https://en.wikipedia.org/wiki/Hooking"target="_blank" rel="external nofollow noopener noreferrer">Hooking</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> Wikipedia: <a href="https://en.wikipedia.org/wiki/Test_harness"target="_blank" rel="external nofollow noopener noreferrer">Test harness</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> GCC: <a href="https://gcc.gnu.org/onlinedocs/gcc/Zero-Length.html"target="_blank" rel="external nofollow noopener noreferrer">Arrays of Length Zero</a></li>
+</ul>
+<blockquote>
+<p>The alignment of a zero-length array is the same as the alignment of its elements.</p>
+</blockquote>
+<p>相关源代码阅读 (harness.h, harness.c):</p>
+<ul>
+<li><code>test_malloc()</code></li>
+<li><code>test_free()</code></li>
+<li><code>test_calloc()</code></li>
+<li><code>find_footer()</code></li>
+<li><code>find_header()</code></li>
+</ul>
+<h3 id="qtest-命令解释器">qtest 命令解释器</h3>
+<p>新增指令 hello，用于打印 <code>Hello, world&quot;</code> 的信息。</p>
+<p>相关源代码阅读 (console.h, console.c):</p>
+<ul>
+<li><code>init_cmd()</code></li>
+<li><code>ADD_COMMADN</code></li>
+<li><code>add_cmd()</code></li>
+</ul>
+<h3 id="signal">Signal</h3></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
@@ -220,7 +309,7 @@
       <a href="/posts/c-numerics/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: 数值系统">你所不知道的 C 语言: 数值系统<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
