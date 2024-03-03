@@ -16,7 +16,7 @@ The intention is to give specific actionable optimization recommendations for so
 近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。
 "><meta itemprop="datePublished" content="2024-02-29T23:44:29+08:00" />
 <meta itemprop="dateModified" content="2024-03-02T00:02:13+08:00" />
-<meta itemprop="wordCount" content="187"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="285"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="RISC-V,Optimization,Architecture," /><meta property="og:title" content="RISC-V Optimization Guide" />
 <meta property="og:description" content="
 The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.
@@ -47,7 +47,7 @@ The intention is to give specific actionable optimization recommendations for so
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/riscv-optimization-guide\/"
-    },"genre": "posts","keywords": "RISC-V, Optimization, Architecture","wordcount":  187 ,
+    },"genre": "posts","keywords": "RISC-V, Optimization, Architecture","wordcount":  285 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/riscv-optimization-guide\/","datePublished": "2024-02-29T23:44:29+08:00","dateModified": "2024-03-02T00:02:13+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -163,7 +163,7 @@ The intention is to give specific actionable optimization recommendations for so
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/risc-v/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> RISC-V</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-29 23:44:29"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="更新于 2024-03-02 00:02:13"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-02">2024-03-02</time></span>&nbsp;<span title="187 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-29 23:44:29"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="更新于 2024-03-02 00:02:13"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-02">2024-03-02</time></span>&nbsp;<span title="285 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -172,6 +172,14 @@ The intention is to give specific actionable optimization recommendations for so
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#相关知识">相关知识</a></li>
+    <li><a href="#detecting-risc-v-extensions-on-linux">Detecting RISC-V Extensions on Linux</a>
+      <ul>
+        <li><a href="#multi-versioning">Multi-versioning</a></li>
+      </ul>
+    </li>
+    <li><a href="#optimizing-scalar-integer">Optimizing Scalar Integer</a></li>
+    <li><a href="#optimizing-scalar-floating-point">Optimizing Scalar Floating Point</a></li>
+    <li><a href="#optimizing-vector">Optimizing Vector</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><blockquote>
@@ -180,13 +188,35 @@ The intention is to give specific actionable optimization recommendations for so
 </blockquote>
 <ul>
 <li><a href="https://riscv-optimization-guide-riseproject-c94355ae3e6872252baa952524.gitlab.io/riscv-optimization-guide.html"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+<li><a href="https://riscv-optimization-guide-riseproject-c94355ae3e6872252baa952524.gitlab.io/riscv-optimization-guide.pdf"target="_blank" rel="external nofollow noopener noreferrer">原文 PDF<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 <li><a href="https://www.bilibili.com/video/BV1Ft421t7PS"target="_blank" rel="external nofollow noopener noreferrer">解说录影<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
 <h2 id="相关知识">相关知识</h2>
+<p>RISC-V ISA 规格书: <a href="https://riscv.org/technical/specifications/"target="_blank" rel="external nofollow noopener noreferrer">https://riscv.org/technical/specifications/</a></p>
 <p>推荐参考 <a href="https://www.bilibili.com/video/BV1a84y1S7J7"target="_blank" rel="external nofollow noopener noreferrer">体系结构如何作用于编译器后端-邱吉</a> [bilibili]</p>
 <ul>
 <li>这个讲座是关于微架构、指令集是怎样和编译器、软件相互协作、相互影响的 Overview</li>
 <li>这个讲座介绍的是通用 CPU 并不仅限于 RISC-V 上</li>
+</ul>
+<h2 id="detecting-risc-v-extensions-on-linux">Detecting RISC-V Extensions on Linux</h2>
+<h3 id="multi-versioning">Multi-versioning</h3>
+<ul>
+<li>最新进展: <a href="https://reviews.llvm.org/D151730"target="_blank" rel="external nofollow noopener noreferrer">https://reviews.llvm.org/D151730</a></li>
+<li>相关介绍: <a href="https://maskray.me/blog/2023-02-05-function-multi-versioning"target="_blank" rel="external nofollow noopener noreferrer">https://maskray.me/blog/2023-02-05-function-multi-versioning</a></li>
+</ul>
+<h2 id="optimizing-scalar-integer">Optimizing Scalar Integer</h2>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/374235855"target="_blank" rel="external nofollow noopener noreferrer">RV32G 下 lui/auipc 和 addi 结合加载立即数时的补值问题</a></li>
+</ul>
+<p>有关 RISC-V 的 imm 优化:</p>
+<ul>
+<li>Craig Topper: <a href="https://www.youtube.com/watch?v=TmWs3QsSuUg"target="_blank" rel="external nofollow noopener noreferrer">2022 LLVM Dev Mtg: RISC-V Sign Extension Optimizations</a></li>
+<li><a href="https://www.bilibili.com/video/BV1pN411H7Y3"target="_blank" rel="external nofollow noopener noreferrer">改进RISC-V的代码生成-廖春玉</a></li>
+</ul>
+<h2 id="optimizing-scalar-floating-point">Optimizing Scalar Floating Point</h2>
+<h2 id="optimizing-vector">Optimizing Vector</h2>
+<ul>
+<li>What about vector instructions? YouTube: <a href="https://www.youtube.com/watch?v=o_n4AKwdfiA"target="_blank" rel="external nofollow noopener noreferrer">Introduction to SIMD</a></li>
 </ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
@@ -220,7 +250,7 @@ The intention is to give specific actionable optimization recommendations for so
       <a href="/posts/linux2023/" class="post-nav-item" rel="next" title="Linux 核心设计/实作 (Linux Kernel Internals)">Linux 核心设计/实作 (Linux Kernel Internals)<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
