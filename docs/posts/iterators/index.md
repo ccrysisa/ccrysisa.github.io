@@ -56,7 +56,7 @@ Trait [std::iter::DoubleEndedIterator](https://doc.rust-lang.org/std/iter/trait.
 
 {{< admonition info >}}
 实作说明:
-- [ ] 尝试实现 Iterator 的 `flat_map` 方法
+- [x] 尝试实现 Iterator 的 `flat_map` 方法 (Github: [My Implementation](https://github.com/ccrysisa/rusty/blob/main/iterators/src/flatmap.rs))
 
 参考资料:
 - method [std::iter::Iterator::flat_map](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flat_map)
@@ -84,7 +84,11 @@ Trait [std::iter::DoubleEndedIterator](https://doc.rust-lang.org/std/iter/trait.
 
 - function [std::iter::empty](https://doc.rust-lang.org/std/iter/fn.empty.html)
 
+- Struct [std::iter::Empty](https://doc.rust-lang.org/std/iter/struct.Empty.html)
+
 - function [std::iter::once](https://doc.rust-lang.org/std/iter/fn.once.html)
+
+- Struct [std::iter::Once](https://doc.rust-lang.org/std/iter/struct.Once.html)
 
 - Trait [std::iter::DoubleEndedIterator](https://doc.rust-lang.org/std/iter/trait.DoubleEndedIterator.html)
 
@@ -97,7 +101,8 @@ Trait [std::iter::DoubleEndedIterator](https://doc.rust-lang.org/std/iter/trait.
 ## References
 
 - [What is the difference between iter and into_iter?](https://stackoverflow.com/questions/34733811/what-is-the-difference-between-iter-and-into-iter) [Stack Overflow]
-- [可能不是你看过最无聊的 Rust 入门喜剧 102 (1)闭包与迭代器](https://www.bilibili.com/video/BV1d64y1K7M3)
+- [How to run a specific unit test in Rust?](https://stackoverflow.com/questions/54585804/how-to-run-a-specific-unit-test-in-rust) [Stack Overflow]
+- [可能不是你看过最无聊的 Rust 入门喜剧 102 (1) 闭包与迭代器](https://www.bilibili.com/video/BV1d64y1K7M3) [bilibili]
 
 
 ---

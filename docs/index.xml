@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 03 Mar 2024 16:07:14 &#43;0800</lastBuildDate>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 04 Mar 2024 15:02:28 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
@@ -14,6 +14,16 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>Crust of Rust: Sorting Algorithms</title>
+  <link>https://ccrysisa.github.io/posts/orst/</link>
+  <pubDate>Mon, 04 Mar 2024 15:02:28 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/orst/</guid>
+  <description><![CDATA[<blockquote>
+<p>In this Crust of Rust episode, we implement some common sorting algorithms in Rust. This episode doesn't aim to explain any single concept, but rather showcase what writing &ldquo;normal&rdquo; Rust code is like, and explaining various &ldquo;odd bits&rdquo; we come across along the way. The thinking here is that sorting algorithms are both familiar and easy to compare across languages, so this might serve as a good bridge into Rust if you are familiar with other languages.</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -99,14 +109,6 @@
   <description><![CDATA[<blockquote>
 <p>尽管数值系统并非 C 语言所持有，但在 Linux 核心大量存在 u8/u16/u32/u64 这样通过 typedef 所定义的类型，伴随着各种 alignment 存取，如果对数值系统的认知不够充分，可能立即就被阻拦在探索 Linux 核心之外——毕竟你完全搞不清楚，为何 Linux 核心存取特定资料需要绕一大圈。</p>
 </blockquote>]]></description>
-</item>
-<item>
-  <title>Linux 核心设计: C Programming Lab</title>
-  <link>https://ccrysisa.github.io/posts/linux2023-lab0/</link>
-  <pubDate>Mon, 19 Feb 2024 16:23:01 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/linux2023-lab0/</guid>
-  <description><![CDATA[]]></description>
 </item>
 </channel>
 </rss>

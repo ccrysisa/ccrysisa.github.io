@@ -212,7 +212,7 @@ Struct [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html#)
 
 ## References
 
-- [x] [可能不是你看过最无聊的 Rust 入门喜剧102 (2) 智能指针](https://www.bilibili.com/video/BV16e411n7h4)
+- [可能不是你看过最无聊的 Rust 入门喜剧102 (2) 智能指针](https://www.bilibili.com/video/BV16e411n7h4) [bilibili]
 
 
 ---

@@ -13,8 +13,8 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
 <meta itemprop="description" content="
 In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mpsc) channels, by re-implementing some of the std::sync::mpsc types from the standard library. As part of that, we cover what channels are used for, how they work at a high level, different common channel variants, and common channel implementations. In the process, we go over some common Rust concurrency primitives like Mutex and Condvar.
 "><meta itemprop="datePublished" content="2024-02-29T20:30:30+08:00" />
-<meta itemprop="dateModified" content="2024-03-02T16:31:33+08:00" />
-<meta itemprop="wordCount" content="1526"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-03-04T12:46:31+08:00" />
+<meta itemprop="wordCount" content="1527"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Channel," /><meta property="og:title" content="Crust of Rust: Channels" />
 <meta property="og:description" content="
 In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mpsc) channels, by re-implementing some of the std::sync::mpsc types from the standard library. As part of that, we cover what channels are used for, how they work at a high level, different common channel variants, and common channel implementations. In the process, we go over some common Rust concurrency primitives like Mutex and Condvar.
@@ -22,7 +22,7 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/channels/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-29T20:30:30+08:00" />
-<meta property="article:modified_time" content="2024-03-02T16:31:33+08:00" />
+<meta property="article:modified_time" content="2024-03-04T12:46:31+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Crust of Rust: Channels"/>
@@ -43,8 +43,8 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/channels\/"
-    },"genre": "posts","keywords": "Rust, Channel","wordcount":  1526 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/channels\/","datePublished": "2024-02-29T20:30:30+08:00","dateModified": "2024-03-02T16:31:33+08:00","publisher": {
+    },"genre": "posts","keywords": "Rust, Channel","wordcount":  1527 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/channels\/","datePublished": "2024-02-29T20:30:30+08:00","dateModified": "2024-03-04T12:46:31+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -159,7 +159,7 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-29 20:30:30"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="更新于 2024-03-02 16:31:33"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-02">2024-03-02</time></span>&nbsp;<span title="1526 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-29 20:30:30"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="更新于 2024-03-04 12:46:31"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="1527 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -190,7 +190,7 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
         <li><a href="#crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html">std</a></a></li>
       </ul>
     </li>
-    <li><a href="#further-readings">Further readings</a></li>
+    <li><a href="#references">References</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><blockquote>
@@ -443,15 +443,15 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
 <p>Macro <a href="https://doc.rust-lang.org/std/macro.dbg.html"target="_blank" rel="external nofollow noopener noreferrer">std::dbg</a></p>
 </li>
 </ul>
-<h2 id="further-readings">Further readings</h2>
+<h2 id="references">References</h2>
 <ul>
-<li>Go 语言也有 channel: <a href="https://www.bilibili.com/video/BV1uv4y187p6"target="_blank" rel="external nofollow noopener noreferrer">解说 Go channel 底层原理</a></li>
-<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://www.bilibili.com/video/BV1DK42147jb"target="_blank" rel="external nofollow noopener noreferrer">可能不是你看过最无聊的 Rust 入门喜剧 102 (3) 多线程并发</a></li>
+<li>Go 语言也有 channel: <a href="https://www.bilibili.com/video/BV1uv4y187p6"target="_blank" rel="external nofollow noopener noreferrer">解说 Go channel 底层原理</a> [bilibili]</li>
+<li><a href="https://www.bilibili.com/video/BV1DK42147jb"target="_blank" rel="external nofollow noopener noreferrer">可能不是你看过最无聊的 Rust 入门喜剧 102 (3) 多线程并发</a> [bilibili]</li>
 </ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-03-02 16:31:33">更新于 2024-03-02&nbsp;</span>
+        <span title="更新于 2024-03-04 12:46:31">更新于 2024-03-04&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/channels/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -480,7 +480,7 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
       <a href="/posts/riscv-optimization-guide/" class="post-nav-item" rel="next" title="RISC-V Optimization Guide">RISC-V Optimization Guide<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

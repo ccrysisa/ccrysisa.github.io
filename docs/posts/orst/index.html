@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Crust of Rust: Sorting Algorithms - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
+<meta name="author-link" content="https://github.com/ccrysisa">
+<meta name="description" content="
+In this Crust of Rust episode, we implement some common sorting algorithms in Rust. This episode doesn&#39;t aim to explain any single concept, but rather showcase what writing &ldquo;normal&rdquo; Rust code is like, and explaining various &ldquo;odd bits&rdquo; we come across along the way. The thinking here is that sorting algorithms are both familiar and easy to compare across languages, so this might serve as a good bridge into Rust if you are familiar with other languages.
+" /><meta name="keywords" content='Rust, Sort, Algorithm' /><meta itemprop="name" content="Crust of Rust: Sorting Algorithms">
+<meta itemprop="description" content="
+In this Crust of Rust episode, we implement some common sorting algorithms in Rust. This episode doesn&#39;t aim to explain any single concept, but rather showcase what writing &ldquo;normal&rdquo; Rust code is like, and explaining various &ldquo;odd bits&rdquo; we come across along the way. The thinking here is that sorting algorithms are both familiar and easy to compare across languages, so this might serve as a good bridge into Rust if you are familiar with other languages.
+"><meta itemprop="datePublished" content="2024-03-04T15:02:28+08:00" />
+<meta itemprop="dateModified" content="2024-03-04T20:50:22+08:00" />
+<meta itemprop="wordCount" content="881"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Rust,Sort,Algorithm," /><meta property="og:title" content="Crust of Rust: Sorting Algorithms" />
+<meta property="og:description" content="
+In this Crust of Rust episode, we implement some common sorting algorithms in Rust. This episode doesn&#39;t aim to explain any single concept, but rather showcase what writing &ldquo;normal&rdquo; Rust code is like, and explaining various &ldquo;odd bits&rdquo; we come across along the way. The thinking here is that sorting algorithms are both familiar and easy to compare across languages, so this might serve as a good bridge into Rust if you are familiar with other languages.
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ccrysisa.github.io/posts/orst/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-03-04T15:02:28+08:00" />
+<meta property="article:modified_time" content="2024-03-04T20:50:22+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Crust of Rust: Sorting Algorithms"/>
+<meta name="twitter:description" content="
+In this Crust of Rust episode, we implement some common sorting algorithms in Rust. This episode doesn&#39;t aim to explain any single concept, but rather showcase what writing &ldquo;normal&rdquo; Rust code is like, and explaining various &ldquo;odd bits&rdquo; we come across along the way. The thinking here is that sorting algorithms are both familiar and easy to compare across languages, so this might serve as a good bridge into Rust if you are familiar with other languages.
+"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/orst/" /><link rel="prev" href="https://ccrysisa.github.io/posts/linux-dev-review/" /><link rel="next" href="https://ccrysisa.github.io/posts/linux2023/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Crust of Rust: Sorting Algorithms",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/ccrysisa.github.io\/posts\/orst\/"
+    },"genre": "posts","keywords": "Rust, Sort, Algorithm","wordcount":  881 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/orst\/","datePublished": "2024-03-04T15:02:28+08:00","dateModified": "2024-03-04T20:50:22+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "ccrysisa"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Crust of Rust: Sorting Algorithms</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-03-04 15:02:28"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="更新于 2024-03-04 20:50:22"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="881 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#影片注解">影片注解</a>
+      <ul>
+        <li><a href="#total-order-vs-partial-order">Total order vs Partial order</a></li>
+        <li><a href="#trait--generic">Trait &amp; Generic</a></li>
+        <li><a href="#bubble-sort">Bubble sort</a></li>
+        <li><a href="#insertion-sort">Insertion sort</a></li>
+      </ul>
+    </li>
+    <li><a href="#documentations">Documentations</a>
+      <ul>
+        <li><a href="#crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html">std</a></a></li>
+      </ul>
+    </li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><blockquote>
+<p>In this Crust of Rust episode, we implement some common sorting algorithms in Rust. This episode doesn't aim to explain any single concept, but rather showcase what writing &ldquo;normal&rdquo; Rust code is like, and explaining various &ldquo;odd bits&rdquo; we come across along the way. The thinking here is that sorting algorithms are both familiar and easy to compare across languages, so this might serve as a good bridge into Rust if you are familiar with other languages.</p>
+</blockquote>
+<ul>
+<li>整理自 <a href="https://www.youtube.com/watch?v=h4RkCyJyXmM"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></li>
+</ul>
+<div class="details admonition question open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>问题<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>You may note that the url of this posy is &ldquo;orst&rdquo;. Why was it given this name?</p>
+<p>Since &ldquo;sort&rdquo; when sorted becomes &ldquo;orst&rdquo;. &#x1f923;</p>
+</div>
+    </div>
+  </div>
+<h2 id="影片注解">影片注解</h2>
+<h3 id="total-order-vs-partial-order">Total order vs Partial order</h3>
+<ul>
+<li>
+<p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Total_order"target="_blank" rel="external nofollow noopener noreferrer">Total order</a></p>
+</li>
+<li>
+<p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Partially_ordered_set#Partial_order"target="_blank" rel="external nofollow noopener noreferrer">Partial order</a></p>
+</li>
+<li>
+<p>Stack Overflow: <a href="https://stackoverflow.com/questions/55889912/what-does-it-mean-by-partial-ordering-and-total-ordering-in-the-discussion-o"target="_blank" rel="external nofollow noopener noreferrer">What does it mean by &ldquo;partial ordering&rdquo; and &ldquo;total ordering&rdquo; in the discussion of Lamport's synchronization Algorithm?</a></p>
+</li>
+</ul>
+<blockquote>
+<p>This definition says that in a total order any two things are comparable. Wheras in a partial order a thing needs neither to be &ldquo;smaller&rdquo; than an other nor the other way around, in a total order each thing is either &ldquo;smaller&rdquo; than an other or the other way around.</p>
+</blockquote>
+<p>简单来说，在 total order 中任意两个元素都可以进行比较，而在 partial order 中则不一定满足。例如对于集合
+<div class="fi-row">
+$$
+S = \{a,\ b,\ c\}
+$$
+</div>
+在 total order 中，$a, b, c$ 任意两个元素之间都必须能进行比较，而在 partial order 中没有怎么严格的要求，可能只有 $a &lt; b, b &lt; c$ 这两条比较规则。</p>
+<p>在 Rust 中，浮点数 (<code>f32</code>, <code>f64</code>) 只实现了 PartialOrd 这个 Trait 而没有实现 Ord，因为根据 <a href="https://en.wikipedia.org/wiki/IEEE_754"target="_blank" rel="external nofollow noopener noreferrer">IEEE 754</a>，浮点数中存在一些特殊值，例如 NaN，它们是没法进行比较的。出于相同原因，浮点数也只实现了 <code>PartialEq</code> 而没有实现 <code>Eq</code> trait。</p>
+<h3 id="trait--generic">Trait &amp; Generic</h3>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">sort</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">S</span><span class="o">&gt;</span><span class="p">(</span><span class="n">slice</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="p">[</span><span class="n">T</span><span class="p">])</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">where</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">T</span>: <span class="nb">Ord</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">S</span>: <span class="nc">Sorter</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">S</span>::<span class="n">sort</span><span class="p">(</span><span class="n">slice</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">sort</span>::<span class="o">&lt;</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">StdSorter</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">things</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这段代码巧妙地利用泛型 (generic) 来传递了&quot;参数&quot;，当然这种技巧只限于可以通过类型来调用方法的情况 (上面代码段的 <code>S::sort(...)</code> 以及 <code>sort::&lt;_, StdSorter&gt;(...)</code> 片段)。</p>
+<p>思考以下代码表示的意义:</p>
+<div class="highlight" id="id-2"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Sorter</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">sort</span><span class="p">(</span><span class="n">slice</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="p">[</span><span class="n">T</span><span class="p">])</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">where</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">T</span>: <span class="nb">Ord</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="n">Sorter</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">sort</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">slice</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="p">[</span><span class="n">T</span><span class="p">])</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">where</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">T</span>: <span class="nb">Ord</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>第一个表示的是有多个 tait，例如 <code>Sorter&lt;i32&gt;</code>, <code>Sorter&lt;i64&gt;</code> 等，第二个表示只有一个 trait <code>Sorter</code>，但是实现这个 trait 需要实现多个方法，例如 <code>sort&lt;i32&gt;</code>, <code>sort&lt;i64&gt;</code> 等，所以第一种写法更加普适和使用 (因为未必能完全实现第二种 trait 要求的所有方法)。</p>
+<h3 id="bubble-sort">Bubble sort</h3>
+<ul>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Bubble_sort"target="_blank" rel="external nofollow noopener noreferrer">Bubble sort</a></li>
+</ul>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">n :<span class="o">=</span> length<span class="o">(</span>A<span class="o">)</span>
+</span></span><span class="line"><span class="cl">repeat
+</span></span><span class="line"><span class="cl">    swapped :<span class="o">=</span> <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> i :<span class="o">=</span> <span class="m">1</span> to n-1 inclusive <span class="k">do</span>
+</span></span><span class="line"><span class="cl">        <span class="o">{</span> <span class="k">if</span> this pair is out of order <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> A<span class="o">[</span>i-1<span class="o">]</span> &gt; A<span class="o">[</span>i<span class="o">]</span> <span class="k">then</span>
+</span></span><span class="line"><span class="cl">            <span class="o">{</span> swap them and remember something changed <span class="o">}</span>
+</span></span><span class="line"><span class="cl">            swap<span class="o">(</span>A<span class="o">[</span>i-1<span class="o">]</span>, A<span class="o">[</span>i<span class="o">])</span>
+</span></span><span class="line"><span class="cl">            swapped :<span class="o">=</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">        end <span class="k">if</span>
+</span></span><span class="line"><span class="cl">    end <span class="k">for</span>
+</span></span><span class="line"><span class="cl"><span class="k">until</span> not swapped</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="insertion-sort">Insertion sort</h3>
+<ul>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Insertion_sort"target="_blank" rel="external nofollow noopener noreferrer">Insertion sort</a></li>
+</ul>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">i ← <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> i &lt; length<span class="o">(</span>A<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    j ← i
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> j &gt; <span class="m">0</span> and A<span class="o">[</span>j-1<span class="o">]</span> &gt; A<span class="o">[</span>j<span class="o">]</span>
+</span></span><span class="line"><span class="cl">        swap A<span class="o">[</span>j<span class="o">]</span> and A<span class="o">[</span>j-1<span class="o">]</span>
+</span></span><span class="line"><span class="cl">        j ← j - <span class="m">1</span>
+</span></span><span class="line"><span class="cl">    end <span class="k">while</span>
+</span></span><span class="line"><span class="cl">    i ← i + <span class="m">1</span>
+</span></span><span class="line"><span class="cl">end <span class="k">while</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="documentations">Documentations</h2>
+<p>这里列举视频中一些概念相关的 documentation</p>
+<blockquote>
+<p>学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料</p>
+</blockquote>
+<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3>
+<blockquote>
+<p>可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)</p>
+</blockquote>
+<ul>
+<li>
+<p>Trait <a href="https://doc.rust-lang.org/std/cmp/trait.Ord.html"target="_blank" rel="external nofollow noopener noreferrer">std::cmp::Ord</a></p>
+</li>
+<li>
+<p>Primitive Type <a href="https://doc.rust-lang.org/std/primitive.slice.html#"target="_blank" rel="external nofollow noopener noreferrer">slice</a></p>
+<ul>
+<li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.sort"target="_blank" rel="external nofollow noopener noreferrer">slice::sort</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.sort_unstable"target="_blank" rel="external nofollow noopener noreferrer">slice::sort_unstable</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.sort_by"target="_blank" rel="external nofollow noopener noreferrer">slice::sort_by</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.sort_by_key"target="_blank" rel="external nofollow noopener noreferrer">slice::sort_by_key</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.swap"target="_blank" rel="external nofollow noopener noreferrer">slice::swap</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.binary_search"target="_blank" rel="external nofollow noopener noreferrer">slice::binary_search</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Sorting_algorithm"target="_blank" rel="external nofollow noopener noreferrer">Sorting algorithm</a></li>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Timsort"target="_blank" rel="external nofollow noopener noreferrer">Timsort</a></li>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Bubble_sort"target="_blank" rel="external nofollow noopener noreferrer">Bubble sort</a></li>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Insertion_sort"target="_blank" rel="external nofollow noopener noreferrer">Insertion sort</a></li>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Total_order"target="_blank" rel="external nofollow noopener noreferrer">Total order</a></li>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Partially_ordered_set#Partial_order"target="_blank" rel="external nofollow noopener noreferrer">Partial order</a></li>
+<li>Stack Overflow: <a href="https://stackoverflow.com/questions/55889912/what-does-it-mean-by-partial-ordering-and-total-ordering-in-the-discussion-o"target="_blank" rel="external nofollow noopener noreferrer">Partial ordering vs Potal ordering</a></li>
+<li>Stack Overflow: <a href="https://stackoverflow.com/questions/34801622/difference-between-benchmarking-and-profiling"target="_blank" rel="external nofollow noopener noreferrer">Difference between Benchmarking and Profiling</a></li>
+</ul></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="更新于 2024-03-04 20:50:22">更新于 2024-03-04&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/orst/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/orst/" data-title="Crust of Rust: Sorting Algorithms" data-hashtags="Rust,Sort,Algorithm"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/orst/" data-hashtag="Rust"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/orst/" data-title="Crust of Rust: Sorting Algorithms" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/orst/" data-title="Crust of Rust: Sorting Algorithms"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/orst/" data-title="Crust of Rust: Sorting Algorithms"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/orst/" data-title="Crust of Rust: Sorting Algorithms" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/orst/" data-title="Crust of Rust: Sorting Algorithms" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/orst/" data-title="Crust of Rust: Sorting Algorithms"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/rust/' class="post-tag">Rust</a><a href='/tags/sort/' class="post-tag">Sort</a><a href='/tags/algorithm/' class="post-tag">Algorithm</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/posts/linux-dev-review/" class="post-nav-item" rel="prev" title="Linux 核心设计: 发展动态回顾"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Linux 核心设计: 发展动态回顾</a>
+      <a href="/posts/linux2023/" class="post-nav-item" rel="next" title="Linux 核心设计/实作 (Linux Kernel Internals)">Linux 核心设计/实作 (Linux Kernel Internals)<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>
