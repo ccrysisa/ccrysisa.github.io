@@ -184,6 +184,7 @@ The macro works by using the Debug implementation of the type of the given expre
 ## Further readings
 
 - Go 语言也有 channel: [解说 Go channel 底层原理](https://www.bilibili.com/video/BV1uv4y187p6)
+- [x] [可能不是你看过最无聊的 Rust 入门喜剧 102 (3) 多线程并发](https://www.bilibili.com/video/BV1DK42147jb)
 
 
 ---

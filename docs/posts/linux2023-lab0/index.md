@@ -76,6 +76,8 @@ $ valgrind -q --leak-check=full ./case1
 - [x] GCC: [Arrays of Length Zero](https://gcc.gnu.org/onlinedocs/gcc/Zero-Length.html)
 > The alignment of a zero-length array is the same as the alignment of its elements.
 
+{{< image src="https://imgur-backup.hackmd.io/j1fRN0B.png" >}}
+
 相关源代码阅读 (harness.h, harness.c):
 - `test_malloc()`
 - `test_free()`
@@ -85,7 +87,11 @@ $ valgrind -q --leak-check=full ./case1
 
 ### qtest 命令解释器
 
-新增指令 hello，用于打印 `Hello, world"` 的信息。
+新增指令 hello，用于打印 `Hello, world"` 的信息。调用流程:
+```
+main → run_console → cmd_select → interpret_cmd → parse_args
+                                                → interpret_cmda → do_hello
+```
 
 相关源代码阅读 (console.h, console.c):
 - `init_cmd()`
@@ -93,6 +99,41 @@ $ valgrind -q --leak-check=full ./case1
 - `add_cmd()`
 
 ### Signal
+
+- [signal(2) — Linux manual page](https://man7.org/linux/man-pages/man2/signal.2.html)
+> signal() sets the disposition of the signal signum to handler, which is
+> either SIG_IGN, SIG_DFL, or the address of a  programmer-defined  func‐
+> tion (a "signal handler").
+
+- [setjmp(3) — Linux manual page](https://man7.org/linux/man-pages/man3/longjmp.3.html)
+> The functions described on this page are used for performing
+> "nonlocal gotos": transferring execution from one function to a
+> predetermined location in another function.  The setjmp()
+> function dynamically establishes the target to which control will
+> later be transferred, and longjmp() performs the transfer of
+> execution.
+
+Why use `sigsetjmp()`/`siglongjmp()` instead of `setjmp()`/`longjmp()`? 
+
+- [The Linux Programming Interface](https://man7.org/tlpi/)
+
+> The sa_mask field allows us to specify a set of signals that aren’t permitted to interrupt execution of this handler. In addition, the signal that caused the handler to be invoked is automatically added to the process signal mask. This means that a signal handler won’t recursively interrupt itself if a second instance of the same signal arrives while the handler is executing.
+
+> However, there is a problem with using the standard longjmp() function to exit from a signal handler. We noted earlier that, upon entry to the signal handler, the kernel automatically adds the invoking signal, as well as any signals specified in the act.sa_mask field, to the process signal mask, and then removes these signals from the mask when the handler does a normal return.
+> 
+> What happens to the signal mask if we exit the signal handler using longjmp()? The answer depends on the genealogy of the particular UNIX implementation.
+
+- `jmp_ready` 技巧 (用于保证在 `siglongjmp()` 之前必然执行过一次 `sigsetjmp()`):
+> Because a signal can be generated at any time, it may actually occur before the target of the goto has been set up by sigsetjmp() (or setjmp()). To prevent this possibility (which would cause the handler to perform a nonlocal goto using an uninitialized env buffer), we employ a guard variable, canJump, to indicate whether the env buffer has been initialized. If canJump is false, then instead of doing a nonlocal goto, the handler simply returns.
+
+相关源代码阅读:
+- qtest.c
+  - `q_init()`
+  - `sigsegv_handler()`
+  - `sigalrm_handler()`
+- harness.c
+  - `trigger_exception()`
+  - `exception_setup()`
 
 
 ---

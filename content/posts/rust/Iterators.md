@@ -135,3 +135,4 @@ Trait [std::iter::DoubleEndedIterator](https://doc.rust-lang.org/std/iter/trait.
 ## References
 
 - [What is the difference between iter and into_iter?](https://stackoverflow.com/questions/34733811/what-is-the-difference-between-iter-and-into-iter) [Stack Overflow]
+- [可能不是你看过最无聊的 Rust 入门喜剧 102 (1)闭包与迭代器](https://www.bilibili.com/video/BV1d64y1K7M3)

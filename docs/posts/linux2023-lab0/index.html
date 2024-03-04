@@ -9,14 +9,14 @@
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Sysprog, Linux, C' /><meta itemprop="name" content="Linux 核心设计: C Programming Lab">
 <meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-02-19T16:23:01+08:00" />
-<meta itemprop="dateModified" content="2024-02-29T19:00:34+08:00" />
-<meta itemprop="wordCount" content="815"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-03-03T20:37:33+08:00" />
+<meta itemprop="wordCount" content="1202"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux,C," /><meta property="og:title" content="Linux 核心设计: C Programming Lab" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/linux2023-lab0/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-19T16:23:01+08:00" />
-<meta property="article:modified_time" content="2024-02-29T19:00:34+08:00" />
+<meta property="article:modified_time" content="2024-03-03T20:37:33+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Linux 核心设计: C Programming Lab"/>
@@ -35,8 +35,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux2023-lab0\/"
-    },"genre": "posts","keywords": "Sysprog, Linux, C","wordcount":  815 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023-lab0\/","datePublished": "2024-02-19T16:23:01+08:00","dateModified": "2024-02-29T19:00:34+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, Linux, C","wordcount":  1202 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023-lab0\/","datePublished": "2024-02-19T16:23:01+08:00","dateModified": "2024-03-03T20:37:33+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -151,7 +151,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-19 16:23:01"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-19">2024-02-19</time></span>&nbsp;<span title="更新于 2024-02-29 19:00:34"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="815 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-19 16:23:01"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-19">2024-02-19</time></span>&nbsp;<span title="更新于 2024-03-03 20:37:33"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-03">2024-03-03</time></span>&nbsp;<span title="1202 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -260,6 +260,7 @@
 <blockquote>
 <p>The alignment of a zero-length array is the same as the alignment of its elements.</p>
 </blockquote>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/j1fRN0B.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/j1fRN0B.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/j1fRN0B.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/j1fRN0B.png" srcset="https://imgur-backup.hackmd.io/j1fRN0B.png?size=small, https://imgur-backup.hackmd.io/j1fRN0B.png?size=medium 1.5x, https://imgur-backup.hackmd.io/j1fRN0B.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/j1fRN0B.png" data-alt="https://imgur-backup.hackmd.io/j1fRN0B.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>相关源代码阅读 (harness.h, harness.c):</p>
 <ul>
 <li><code>test_malloc()</code></li>
@@ -269,18 +270,79 @@
 <li><code>find_header()</code></li>
 </ul>
 <h3 id="qtest-命令解释器">qtest 命令解释器</h3>
-<p>新增指令 hello，用于打印 <code>Hello, world&quot;</code> 的信息。</p>
-<p>相关源代码阅读 (console.h, console.c):</p>
+<p>新增指令 hello，用于打印 <code>Hello, world&quot;</code> 的信息。调用流程:</p>
+<div class="highlight" id="id-2"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">main → run_console → cmd_select → interpret_cmd → parse_args
+</span></span><span class="line"><span class="cl">                                                → interpret_cmda → do_hello</span></span></code></pre></td></tr></table>
+</div>
+</div><p>相关源代码阅读 (console.h, console.c):</p>
 <ul>
 <li><code>init_cmd()</code></li>
 <li><code>ADD_COMMADN</code></li>
 <li><code>add_cmd()</code></li>
 </ul>
-<h3 id="signal">Signal</h3></div><div class="post-footer" id="post-footer">
+<h3 id="signal">Signal</h3>
+<ul>
+<li><a href="https://man7.org/linux/man-pages/man2/signal.2.html"target="_blank" rel="external nofollow noopener noreferrer">signal(2) — Linux manual page</a></li>
+</ul>
+<blockquote>
+<p>signal() sets the disposition of the signal signum to handler, which is
+either SIG_IGN, SIG_DFL, or the address of a  programmer-defined  func‐
+tion (a &ldquo;signal handler&rdquo;).</p>
+</blockquote>
+<ul>
+<li><a href="https://man7.org/linux/man-pages/man3/longjmp.3.html"target="_blank" rel="external nofollow noopener noreferrer">setjmp(3) — Linux manual page</a></li>
+</ul>
+<blockquote>
+<p>The functions described on this page are used for performing
+&ldquo;nonlocal gotos&rdquo;: transferring execution from one function to a
+predetermined location in another function.  The setjmp()
+function dynamically establishes the target to which control will
+later be transferred, and longjmp() performs the transfer of
+execution.</p>
+</blockquote>
+<p>Why use <code>sigsetjmp()</code>/<code>siglongjmp()</code> instead of <code>setjmp()</code>/<code>longjmp()</code>?</p>
+<ul>
+<li><a href="https://man7.org/tlpi/"target="_blank" rel="external nofollow noopener noreferrer">The Linux Programming Interface</a></li>
+</ul>
+<blockquote>
+<p>The sa_mask field allows us to specify a set of signals that aren’t permitted to interrupt execution of this handler. In addition, the signal that caused the handler to be invoked is automatically added to the process signal mask. This means that a signal handler won’t recursively interrupt itself if a second instance of the same signal arrives while the handler is executing.</p>
+</blockquote>
+<blockquote>
+<p>However, there is a problem with using the standard longjmp() function to exit from a signal handler. We noted earlier that, upon entry to the signal handler, the kernel automatically adds the invoking signal, as well as any signals specified in the act.sa_mask field, to the process signal mask, and then removes these signals from the mask when the handler does a normal return.</p>
+<p>What happens to the signal mask if we exit the signal handler using longjmp()? The answer depends on the genealogy of the particular UNIX implementation.</p>
+</blockquote>
+<ul>
+<li><code>jmp_ready</code> 技巧 (用于保证在 <code>siglongjmp()</code> 之前必然执行过一次 <code>sigsetjmp()</code>):</li>
+</ul>
+<blockquote>
+<p>Because a signal can be generated at any time, it may actually occur before the target of the goto has been set up by sigsetjmp() (or setjmp()). To prevent this possibility (which would cause the handler to perform a nonlocal goto using an uninitialized env buffer), we employ a guard variable, canJump, to indicate whether the env buffer has been initialized. If canJump is false, then instead of doing a nonlocal goto, the handler simply returns.</p>
+</blockquote>
+<p>相关源代码阅读:</p>
+<ul>
+<li>qtest.c
+<ul>
+<li><code>q_init()</code></li>
+<li><code>sigsegv_handler()</code></li>
+<li><code>sigalrm_handler()</code></li>
+</ul>
+</li>
+<li>harness.c
+<ul>
+<li><code>trigger_exception()</code></li>
+<li><code>exception_setup()</code></li>
+</ul>
+</li>
+</ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-02-29 19:00:34">更新于 2024-02-29&nbsp;</span>
+        <span title="更新于 2024-03-03 20:37:33">更新于 2024-03-03&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/linux2023-lab0/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
