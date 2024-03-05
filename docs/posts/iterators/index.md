@@ -102,6 +102,7 @@ Trait [std::iter::DoubleEndedIterator](https://doc.rust-lang.org/std/iter/trait.
 
 - [What is the difference between iter and into_iter?](https://stackoverflow.com/questions/34733811/what-is-the-difference-between-iter-and-into-iter) [Stack Overflow]
 - [How to run a specific unit test in Rust?](https://stackoverflow.com/questions/54585804/how-to-run-a-specific-unit-test-in-rust) [Stack Overflow]
+- [How do I implement a trait with a generic method?](https://stackoverflow.com/questions/53085270/how-do-i-implement-a-trait-with-a-generic-method) [Stack Overflow]
 - [可能不是你看过最无聊的 Rust 入门喜剧 102 (1) 闭包与迭代器](https://www.bilibili.com/video/BV1d64y1K7M3) [bilibili]
 
 

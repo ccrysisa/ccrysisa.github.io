@@ -1,5 +1,5 @@
 ---
-title: GDB 调试工具
+title: 程序调试工具 GDB
 subtitle:
 date: 2024-01-16T17:15:46+08:00
 draft: false

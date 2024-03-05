@@ -44,7 +44,10 @@ repost:
 <!--more-->
 
 {{< link href="http://wiki.csie.ncku.edu.tw/linux/schedule?revision=ff44817ff7c75ed4ec0d22e6fdc3337af1f597c3" content="原始页面" external-icon=true >}}
+|
+{{< link href="/archives/Linux.pdf" content="PDF" external-icon=true >}}
 
+------------------------------------------------------
 - Instructor: [Jim Huang](/User/jserv) (黃敬群) `<jserv.tw@gmail.com>`
 - [往年課程進度](/linux/schedule-old)
 - [Linux 核心設計 (線上講座)](https://hackmd.io/@sysprog/linux-kernel-internal)
@@ -87,7 +90,7 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
 - 佳句偶得：「大部分的人一輩子洞察力不彰，原因之一是怕講錯被笑。想了一點點就不敢繼續也沒記錄或分享，時間都花在讀書查資料看別人怎麼想。看完就真的沒有自己的洞察了」([出處](https://www.facebook.com/chtsai/posts/pfbid0Sw9Bv8GN8houyS6A6Mvg5gtWXShKFgguhTHuNFsDDGn9XZQE7C64pBy5atB9gXtJl))
 - [作業](https://hackmd.io/@sysprog/linux2023-homework1): 截止繳交日: Feb 28, 2023
     * [ ] [lab0](https://hackmd.io/@sysprog/linux2023-lab0)`*`
-    * [ ] [quiz1](https://hackmd.io/@sysprog/ByiHJidps)
+    * [quiz1](https://hackmd.io/@sysprog/ByiHJidps)
 - 第 1 週隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz1) (內含作答表單)
 - [課堂問答簡記](https://hackmd.io/VIvUZemESvGUev4aCwOnWA?view)
 
@@ -107,7 +110,7 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
 * [x] [為什麼要深入學習 C 語言？](https://hackmd.io/@sysprog/c-standards)`*`
     - C 語言發明者 Dennis M. Ritchie 說：「C 很彆扭又缺陷重重，卻異常成功。固然有歷史的巧合推波助瀾，可也的確是因為它能滿足於系統軟體實作的程式語言期待：既有相當的效率來取代組合語言，又可充分達到抽象且流暢，能用於描述在多樣環境的演算法。」
     - Linux 核心作為世界上最成功的開放原始碼計畫，也是 C 語言在工程領域的瑰寶，裡頭充斥各式「藝術」，往往會嚇到初次接觸的人們，但總是能夠用 C 語言標準和開發工具提供的擴展 (主要來自 gcc 的 GNU extensions) 來解釋。
-* [ ] [基於 C 語言標準研究與系統程式安全議題](https://hackmd.io/@sysprog/c-std-security)
+* [x] [基於 C 語言標準研究與系統程式安全議題](https://hackmd.io/@sysprog/c-std-security)
     - 藉由研讀漏洞程式碼及 C 語言標準，討論系統程式的安全議題
     - 透過除錯器追蹤程式碼實際運行的狀況，了解其運作原理;
     - 取材自 dangling pointer, CWE-416 Use After Free, CVE-2017-16943 以及 integer overflow 的議題;

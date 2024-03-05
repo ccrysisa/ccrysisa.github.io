@@ -14,7 +14,7 @@
 在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
 "><meta itemprop="datePublished" content="2024-02-28T20:46:33+08:00" />
 <meta itemprop="dateModified" content="2024-03-02T23:10:16+08:00" />
-<meta itemprop="wordCount" content="9186"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="9188"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux," /><meta property="og:title" content="Linux 核心设计/实作 (Linux Kernel Internals)" />
 <meta property="og:description" content="
 在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
@@ -32,7 +32,7 @@
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/linux2023/" /><link rel="prev" href="https://ccrysisa.github.io/posts/orst/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/linux2023/" /><link rel="prev" href="https://ccrysisa.github.io/posts/c-std-security/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -43,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux2023\/"
-    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  9186 ,
+    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  9188 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023\/","datePublished": "2024-02-28T20:46:33+08:00","dateModified": "2024-03-02T23:10:16+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -159,7 +159,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-28 20:46:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="更新于 2024-03-02 23:10:16"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-02">2024-03-02</time></span>&nbsp;<span title="9186 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 9200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 19 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-28 20:46:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="更新于 2024-03-02 23:10:16"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-02">2024-03-02</time></span>&nbsp;<span title="9188 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 9200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 19 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -179,7 +179,10 @@
       </div><div class="content" id="content"><blockquote>
 <p>在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
 </blockquote>
-<a href="http://wiki.csie.ncku.edu.tw/linux/schedule?revision=ff44817ff7c75ed4ec0d22e6fdc3337af1f597c3"target="_blank" rel="external nofollow noopener noreferrer">原始页面<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+<p><a href="http://wiki.csie.ncku.edu.tw/linux/schedule?revision=ff44817ff7c75ed4ec0d22e6fdc3337af1f597c3"target="_blank" rel="external nofollow noopener noreferrer">原始页面<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+|
+<a href="/archives/Linux.pdf">PDF</a></p>
+<hr>
 <ul>
 <li>Instructor: <a href="/User/jserv">Jim Huang</a> (黃敬群) <code>&lt;jserv.tw@gmail.com&gt;</code></li>
 <li><a href="/linux/schedule-old">往年課程進度</a></li>
@@ -247,7 +250,7 @@
 <li><a href="https://hackmd.io/@sysprog/linux2023-homework1"target="_blank" rel="external nofollow noopener noreferrer">作業</a>: 截止繳交日: Feb 28, 2023
 <ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/linux2023-lab0"target="_blank" rel="external nofollow noopener noreferrer">lab0</a><code>*</code></li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/ByiHJidps"target="_blank" rel="external nofollow noopener noreferrer">quiz1</a></li>
+<li><a href="https://hackmd.io/@sysprog/ByiHJidps"target="_blank" rel="external nofollow noopener noreferrer">quiz1</a></li>
 </ul>
 </li>
 <li>第 1 週隨堂測驗: <a href="https://hackmd.io/@sysprog/linux2023-quiz1"target="_blank" rel="external nofollow noopener noreferrer">題目</a> (內含作答表單)</li>
@@ -285,7 +288,7 @@
 <li>Linux 核心作為世界上最成功的開放原始碼計畫，也是 C 語言在工程領域的瑰寶，裡頭充斥各式「藝術」，往往會嚇到初次接觸的人們，但總是能夠用 C 語言標準和開發工具提供的擴展 (主要來自 gcc 的 GNU extensions) 來解釋。</li>
 </ul>
 </li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-std-security"target="_blank" rel="external nofollow noopener noreferrer">基於 C 語言標準研究與系統程式安全議題</a>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-std-security"target="_blank" rel="external nofollow noopener noreferrer">基於 C 語言標準研究與系統程式安全議題</a>
 <ul>
 <li>藉由研讀漏洞程式碼及 C 語言標準，討論系統程式的安全議題</li>
 <li>透過除錯器追蹤程式碼實際運行的狀況，了解其運作原理;</li>
@@ -953,10 +956,10 @@ Applications For Linux</a> / <a href="https://evlproject.org/"target="_blank" re
     </section>
   </div>
 
-  <div class="post-nav"><a href="/posts/orst/" class="post-nav-item" rel="prev" title="Crust of Rust: Sorting Algorithms"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Crust of Rust: Sorting Algorithms</a></div>
+  <div class="post-nav"><a href="/posts/c-std-security/" class="post-nav-item" rel="prev" title="基于 C 语言标准研究与系统程序安全议题"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>基于 C 语言标准研究与系统程序安全议题</a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

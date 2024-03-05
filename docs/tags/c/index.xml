@@ -4,7 +4,17 @@
     <link>https://ccrysisa.github.io/tags/c/</link>
     <description>C - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 28 Feb 2024 11:11:47 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/c/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 05 Mar 2024 16:32:40 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/c/" rel="self" type="application/rss+xml" /><item>
+  <title>基于 C 语言标准研究与系统程序安全议题</title>
+  <link>https://ccrysisa.github.io/posts/c-std-security/</link>
+  <pubDate>Tue, 05 Mar 2024 16:32:40 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-std-security/</guid>
+  <description><![CDATA[<blockquote>
+<p>借由阅读 C 语言标准理解规范是研究系统安全最基础的步骤，但很多人都忽略阅读规范这点，而正因对于规范的不了解、撰写程序的不严谨，导致漏洞的产生的案例比比皆是，例如 2014 年的 OpenSSL Heartbleed Attack<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 便是便是因为使用 memcpy 之际缺乏对应内存范围检查，造成相当大的危害。本文重新梳理 C 语言程序设计的细节，并借由调试器帮助理解程序的运作。</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>你所不知道的 C 语言: 开发工具和规格标准</title>
   <link>https://ccrysisa.github.io/posts/c-standards/</link>
   <pubDate>Wed, 28 Feb 2024 11:11:47 &#43;0800</pubDate>
@@ -93,14 +103,6 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-spec-ch6/</guid>
   <description><![CDATA[<p>C 语言规格书 Chapter 6 - Language 阅读记录。</p>]]></description>
-</item>
-<item>
-  <title>C 规格第 7 章 Library</title>
-  <link>https://ccrysisa.github.io/posts/c-spec-ch7/</link>
-  <pubDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-spec-ch7/</guid>
-  <description><![CDATA[<p>C 语言规格书 Chapter 7 - Library 阅读记录。</p>]]></description>
 </item>
 </channel>
 </rss>

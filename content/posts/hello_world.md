@@ -141,6 +141,8 @@ typedef struct Block_t {
 
 - [FixIt 快速上手](https://fixit.lruihao.cn/zh-cn/documentation/getting-started/)
 - [使用 Hugo + Github 搭建个人博客](https://zhuanlan.zhihu.com/p/105021100)
+- [Markdown 基本语法](https://fixit.lruihao.cn/zh-cn/documentation/content-management/markdown-syntax/basics/)
 - [Emoji 支持](https://fixit.lruihao.cn/zh-cn/guides/emoji-support/)
 - [扩展 Shortcodes 概述](https://fixit.lruihao.cn/zh-cn/documentation/content-management/shortcodes/extended/introduction/#admonition)
+- [图表支持](https://fixit.lruihao.cn/zh-cn/documentation/content-management/diagrams/)
 - [URL management](https://gohugo.io/content-management/urls/#permalinks)
