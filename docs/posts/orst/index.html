@@ -13,8 +13,8 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
 <meta itemprop="description" content="
 In this Crust of Rust episode, we implement some common sorting algorithms in Rust. This episode doesn&#39;t aim to explain any single concept, but rather showcase what writing &ldquo;normal&rdquo; Rust code is like, and explaining various &ldquo;odd bits&rdquo; we come across along the way. The thinking here is that sorting algorithms are both familiar and easy to compare across languages, so this might serve as a good bridge into Rust if you are familiar with other languages.
 "><meta itemprop="datePublished" content="2024-03-04T15:02:28+08:00" />
-<meta itemprop="dateModified" content="2024-03-04T23:05:35+08:00" />
-<meta itemprop="wordCount" content="881"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-03-06T11:05:11+08:00" />
+<meta itemprop="wordCount" content="1255"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Sort,Algorithm," /><meta property="og:title" content="Crust of Rust: Sorting Algorithms" />
 <meta property="og:description" content="
 In this Crust of Rust episode, we implement some common sorting algorithms in Rust. This episode doesn&#39;t aim to explain any single concept, but rather showcase what writing &ldquo;normal&rdquo; Rust code is like, and explaining various &ldquo;odd bits&rdquo; we come across along the way. The thinking here is that sorting algorithms are both familiar and easy to compare across languages, so this might serve as a good bridge into Rust if you are familiar with other languages.
@@ -22,7 +22,7 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/orst/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-03-04T15:02:28+08:00" />
-<meta property="article:modified_time" content="2024-03-04T23:05:35+08:00" />
+<meta property="article:modified_time" content="2024-03-06T11:05:11+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Crust of Rust: Sorting Algorithms"/>
@@ -43,8 +43,8 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/orst\/"
-    },"genre": "posts","keywords": "Rust, Sort, Algorithm","wordcount":  881 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/orst\/","datePublished": "2024-03-04T15:02:28+08:00","dateModified": "2024-03-04T23:05:35+08:00","publisher": {
+    },"genre": "posts","keywords": "Rust, Sort, Algorithm","wordcount":  1255 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/orst\/","datePublished": "2024-03-04T15:02:28+08:00","dateModified": "2024-03-06T11:05:11+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -159,7 +159,7 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-04 15:02:28"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="更新于 2024-03-04 23:05:35"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="881 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-04 15:02:28"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="更新于 2024-03-06 11:05:11"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-06">2024-03-06</time></span>&nbsp;<span title="1255 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -173,6 +173,8 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
         <li><a href="#trait--generic">Trait &amp; Generic</a></li>
         <li><a href="#bubble-sort">Bubble sort</a></li>
         <li><a href="#insertion-sort">Insertion sort</a></li>
+        <li><a href="#selection-sort">Selection sort</a></li>
+        <li><a href="#quicksort">Quicksort</a></li>
       </ul>
     </li>
     <li><a href="#documentations">Documentations</a>
@@ -337,7 +339,126 @@ $$
 </span></span><span class="line"><span class="cl">    i ← i + <span class="m">1</span>
 </span></span><span class="line"><span class="cl">end <span class="k">while</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="documentations">Documentations</h2>
+</div><p>使用 <a href="https://en.wikipedia.org/wiki/Binary_search_algorithm"target="_blank" rel="external nofollow noopener noreferrer">Binary search algorithm</a> 可以将 insertion sort 的 comparsion 次数降到 $O(nlogn)$，但是 swap 次数仍然是 $O(n^2)$ &#x1f923;</p>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="c1">// use binary search to find index
+</span></span></span><span class="line"><span class="cl"><span class="c1">// then use .insert to splice in i
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="n">slice</span><span class="p">[</span><span class="o">..</span><span class="n">unsorted</span><span class="p">].</span><span class="n">binary_search</span><span class="p">(</span><span class="o">&amp;</span><span class="n">slice</span><span class="p">[</span><span class="n">unsorted</span><span class="p">])</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// [ a, c, e].binary_search(c) =&gt; Ok(1)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="nb">Ok</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// [ a, c, e].binary_search(b) =&gt; Err(1)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="nb">Err</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">slice</span><span class="p">[</span><span class="n">i</span><span class="o">..=</span><span class="n">unsorted</span><span class="p">].</span><span class="n">rotate_right</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><code>match</code> 的内部逻辑也可以改写为 <code>OK(i) | Err(i) =&gt; i</code></p>
+</blockquote>
+<h3 id="selection-sort">Selection sort</h3>
+<ul>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Selection_sort"target="_blank" rel="external nofollow noopener noreferrer">Selection sort</a></li>
+</ul>
+<div class="details admonition quote open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>There are many different ways to sort the cards. Here&rsquo;s a simple one, called selection sort, possibly similar to how you sorted the cards above:</p>
+<ol>
+<li>Find the smallest card. Swap it with the first card.</li>
+<li>Find the second-smallest card. Swap it with the second card.</li>
+<li>Find the third-smallest card. Swap it with the third card.</li>
+<li>Repeat finding the next-smallest card, and swapping it into the correct position until the array is sorted.</li>
+</ol></div>
+    </div>
+  </div>
+<blockquote>
+<p><a href="https://www.khanacademy.org/computing/computer-science/algorithms/sorting-algorithms/a/selection-sort-pseudocode"target="_blank" rel="external nofollow noopener noreferrer">source</a></p>
+</blockquote>
+<p>使用函数式编程可以写成相当 readable 的程式码，以下为获取 slice 最小值对应的 index:</p>
+<div class="highlight" id="id-6"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">smallest_in_rest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slice</span><span class="p">[</span><span class="n">unsorted</span><span class="o">..</span><span class="p">]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">iter</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">enumerate</span><span class="p">()</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">min_by_key</span><span class="p">(</span><span class="o">|&amp;</span><span class="p">(</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="o">|</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">)</span><span class="o">|</span><span class="w"> </span><span class="n">unsorted</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;slice is not empty&#34;</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="quicksort">Quicksort</h3>
+<ul>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Quicksort"target="_blank" rel="external nofollow noopener noreferrer">Quicksort</a></li>
+</ul>
+<p>可以通过 extra allocation 和 in-place 两种方式来实现 quicksort，其中 extra allocation 比较好理解，in-place 方式的 pseudocode 如下:</p>
+<div class="highlight" id="id-7"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Quicksort<span class="o">(</span>A,p,r<span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="o">(</span>p &lt; r<span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">       q &lt;- Partition<span class="o">(</span>A,p,r<span class="o">)</span>
+</span></span><span class="line"><span class="cl">       Quicksort<span class="o">(</span>A,p,q<span class="o">)</span>
+</span></span><span class="line"><span class="cl">       Quicksort<span class="o">(</span>A,q+1,r<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">Partition<span class="o">(</span>A,p,r<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    x &lt;- A<span class="o">[</span>p<span class="o">]</span>
+</span></span><span class="line"><span class="cl">    i &lt;- p-1
+</span></span><span class="line"><span class="cl">    j &lt;- r+1
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="o">(</span>True<span class="o">)</span> <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        repeat <span class="o">{</span> j &lt;- j-1 <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">until</span> <span class="o">(</span>A<span class="o">[</span>j<span class="o">]</span> &lt;<span class="o">=</span> x<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        repeat <span class="o">{</span> i &lt;- i+1 <span class="o">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">until</span> <span class="o">(</span>A<span class="o">[</span>i<span class="o">]</span> &gt;<span class="o">=</span> x<span class="o">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="o">(</span>i &lt; j<span class="o">)</span> swap<span class="o">(</span>A<span class="o">[</span>i<span class="o">]</span>, A<span class="o">[</span>j<span class="o">])</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span>       <span class="k">return</span><span class="o">(</span>j<span class="o">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p><a href="https://sites.cc.gatech.edu/classes/cs3158_98_fall/quicksort.html"target="_blank" rel="external nofollow noopener noreferrer">source</a></p>
+</blockquote>
+<h2 id="documentations">Documentations</h2>
 <p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>
 <p>学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料</p>
@@ -359,24 +480,41 @@ $$
 <li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.sort_by_key"target="_blank" rel="external nofollow noopener noreferrer">slice::sort_by_key</a></li>
 <li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.swap"target="_blank" rel="external nofollow noopener noreferrer">slice::swap</a></li>
 <li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.binary_search"target="_blank" rel="external nofollow noopener noreferrer">slice::binary_search</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.rotate_right"target="_blank" rel="external nofollow noopener noreferrer">slice::rotate_right</a></li>
 </ul>
+</li>
+<li>
+<p>Trait <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html"target="_blank" rel="external nofollow noopener noreferrer">std::iter::Iterator</a></p>
+<ul>
+<li>method <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.min"target="_blank" rel="external nofollow noopener noreferrer">std::iter::Iterator::min</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.max_by_key"target="_blank" rel="external nofollow noopener noreferrer">std::iter::Iterator::min_by_key</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.enumerate"target="_blank" rel="external nofollow noopener noreferrer">std::iter::Iterator::enumerate</a></li>
+</ul>
+</li>
+<li>
+<p>method <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.expect"target="_blank" rel="external nofollow noopener noreferrer">std::option::Option::expect</a></p>
+</li>
+<li>
+<p>method <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.expect"target="_blank" rel="external nofollow noopener noreferrer">std::result::Result::expect</a></p>
+</li>
+<li>
+<p>method <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.map"target="_blank" rel="external nofollow noopener noreferrer">std::option::Option::map</a></p>
+</li>
+<li>
+<p>method <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.map"target="_blank" rel="external nofollow noopener noreferrer">std::result::Result::map</a></p>
 </li>
 </ul>
 <h2 id="references">References</h2>
 <ul>
-<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Sorting_algorithm"target="_blank" rel="external nofollow noopener noreferrer">Sorting algorithm</a></li>
-<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Timsort"target="_blank" rel="external nofollow noopener noreferrer">Timsort</a></li>
-<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Bubble_sort"target="_blank" rel="external nofollow noopener noreferrer">Bubble sort</a></li>
-<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Insertion_sort"target="_blank" rel="external nofollow noopener noreferrer">Insertion sort</a></li>
-<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Total_order"target="_blank" rel="external nofollow noopener noreferrer">Total order</a></li>
-<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Partially_ordered_set#Partial_order"target="_blank" rel="external nofollow noopener noreferrer">Partial order</a></li>
-<li>Stack Overflow: <a href="https://stackoverflow.com/questions/55889912/what-does-it-mean-by-partial-ordering-and-total-ordering-in-the-discussion-o"target="_blank" rel="external nofollow noopener noreferrer">Partial ordering vs Potal ordering</a></li>
-<li>Stack Overflow: <a href="https://stackoverflow.com/questions/34801622/difference-between-benchmarking-and-profiling"target="_blank" rel="external nofollow noopener noreferrer">Difference between Benchmarking and Profiling</a></li>
+<li><a href="https://github.com/jonhoo/orst"target="_blank" rel="external nofollow noopener noreferrer">orst</a> [Github]</li>
+<li><a href="https://en.wikipedia.org/wiki/Sorting_algorithm"target="_blank" rel="external nofollow noopener noreferrer">Sorting algorithm</a> [Wikipedia]</li>
+<li><a href="https://en.wikipedia.org/wiki/Timsort"target="_blank" rel="external nofollow noopener noreferrer">Timsort</a> [Wikipedia]</li>
+<li><a href="https://stackoverflow.com/questions/34801622/difference-between-benchmarking-and-profiling"target="_blank" rel="external nofollow noopener noreferrer">Difference between Benchmarking and Profiling</a> [Stack Overflow]</li>
 </ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-03-04 23:05:35">更新于 2024-03-04&nbsp;</span>
+        <span title="更新于 2024-03-06 11:05:11">更新于 2024-03-06&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/orst/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -405,7 +543,7 @@ $$
       <a href="/posts/c-std-security/" class="post-nav-item" rel="next" title="基于 C 语言标准研究与系统程序安全议题">基于 C 语言标准研究与系统程序安全议题<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

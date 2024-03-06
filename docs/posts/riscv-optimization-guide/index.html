@@ -16,7 +16,7 @@ The intention is to give specific actionable optimization recommendations for so
 近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。
 "><meta itemprop="datePublished" content="2024-02-29T23:44:29+08:00" />
 <meta itemprop="dateModified" content="2024-03-03T12:49:29+08:00" />
-<meta itemprop="wordCount" content="285"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1375"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="RISC-V,Optimization,Architecture," /><meta property="og:title" content="RISC-V Optimization Guide" />
 <meta property="og:description" content="
 The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.
@@ -47,7 +47,7 @@ The intention is to give specific actionable optimization recommendations for so
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/riscv-optimization-guide\/"
-    },"genre": "posts","keywords": "RISC-V, Optimization, Architecture","wordcount":  285 ,
+    },"genre": "posts","keywords": "RISC-V, Optimization, Architecture","wordcount":  1375 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/riscv-optimization-guide\/","datePublished": "2024-02-29T23:44:29+08:00","dateModified": "2024-03-03T12:49:29+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -163,7 +163,7 @@ The intention is to give specific actionable optimization recommendations for so
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/risc-v/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> RISC-V</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-29 23:44:29"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="更新于 2024-03-03 12:49:29"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-03">2024-03-03</time></span>&nbsp;<span title="285 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-29 23:44:29"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="更新于 2024-03-03 12:49:29"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-03">2024-03-03</time></span>&nbsp;<span title="1375 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -177,7 +177,15 @@ The intention is to give specific actionable optimization recommendations for so
         <li><a href="#multi-versioning">Multi-versioning</a></li>
       </ul>
     </li>
-    <li><a href="#optimizing-scalar-integer">Optimizing Scalar Integer</a></li>
+    <li><a href="#optimizing-scalar-integer">Optimizing Scalar Integer</a>
+      <ul>
+        <li><a href="#materializing-constants">Materializing Constants</a></li>
+        <li><a href="#avoid-branches-using-conditional-moves">Avoid branches using conditional moves</a></li>
+        <li><a href="#padding">Padding</a></li>
+        <li><a href="#align-char-array-to-greater-alignment">Align char array to greater alignment</a></li>
+        <li><a href="#use-shifts-to-clear-leadingtrailing-bits">Use shifts to clear leading/trailing bits</a></li>
+      </ul>
+    </li>
     <li><a href="#optimizing-scalar-floating-point">Optimizing Scalar Floating Point</a></li>
     <li><a href="#optimizing-vector">Optimizing Vector</a></li>
   </ul>
@@ -199,24 +207,166 @@ The intention is to give specific actionable optimization recommendations for so
 <li>这个讲座介绍的是通用 CPU 并不仅限于 RISC-V 上</li>
 </ul>
 <h2 id="detecting-risc-v-extensions-on-linux">Detecting RISC-V Extensions on Linux</h2>
+<p>参考以下文章构建 Linux RISC-V 然后进行原文的 <code>riscv_hwprobe</code> 系统调用实验:</p>
+<ul>
+<li><a href="https://hackernoon.com/how-to-set-up-the-environment-for-riscv-64-linux-kernel-development-in-ubuntu-2004-si5p35kv"target="_blank" rel="external nofollow noopener noreferrer">How To Set Up The Environment for RISCV-64 Linux Kernel Development In Ubuntu 20.04</a></li>
+<li><a href="https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html"target="_blank" rel="external nofollow noopener noreferrer">Running 64- and 32-bit RISC-V Linux on QEMU</a></li>
+</ul>
 <h3 id="multi-versioning">Multi-versioning</h3>
 <ul>
 <li>最新进展: <a href="https://reviews.llvm.org/D151730"target="_blank" rel="external nofollow noopener noreferrer">https://reviews.llvm.org/D151730</a></li>
 <li>相关介绍: <a href="https://maskray.me/blog/2023-02-05-function-multi-versioning"target="_blank" rel="external nofollow noopener noreferrer">https://maskray.me/blog/2023-02-05-function-multi-versioning</a></li>
 </ul>
 <h2 id="optimizing-scalar-integer">Optimizing Scalar Integer</h2>
+<h3 id="materializing-constants">Materializing Constants</h3>
 <ul>
-<li><a href="https://zhuanlan.zhihu.com/p/374235855"target="_blank" rel="external nofollow noopener noreferrer">RV32G 下 lui/auipc 和 addi 结合加载立即数时的补值问题</a></li>
+<li>RV64I 5.2 Integer Computational Instructions</li>
 </ul>
-<p>有关 RISC-V 的 imm 优化:</p>
+<blockquote>
+<p>Additional instruction variants are provided to manipulate 32-bit values in RV64I, indicated by a ‘W’ suffix to the opcode.</p>
+<p>These “*W” instructions ignore the upper 32 bits of their inputs and always produce 32-bit signed values, i.e. bits XLEN-1 through 31 are equal.</p>
+</blockquote>
+<blockquote>
+<p>ADDIW is an RV64I instruction that adds the sign-extended 12-bit immediate to register rs1 and produces the proper sign-extension of a 32-bit result in rd.</p>
+</blockquote>
+<p>原文 Prefer idiomatic LUI/ADDI sequence for 32 bit constants 部分使用 <code>lui</code> 和 <code>addiw</code> 构建 0x1fffff 的说明比较晦涩难懂 (<del>说实话我没看懂原文的 addiw 为什么需要减去 4096 &#x1f607;</del>)</p>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>根据下面的参考文章，如果 <code>addiw</code> 的立即数的 MSB 被置为 1 时，只需在 <code>lui</code> 时多加一个 1 即可构建我们想要的 32-bit 数值。而原文中除了对 <code>lui</code> 加 1 外，还对 <code>addiw</code> 进行减去 4096 的操作:</p>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="nf">addiw</span> <span class="no">a0</span><span class="p">,</span> <span class="no">a0</span><span class="p">,</span> <span class="p">(</span><span class="mi">0xfff</span> <span class="p">-</span> <span class="mi">4096</span><span class="p">)</span>  <span class="err">;</span> <span class="no">addiw</span> <span class="no">a0</span><span class="p">,</span> <span class="no">a0</span><span class="p">,</span> <span class="p">-</span><span class="mi">1</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这乍一看不知道为何需要减去 4096，其实本质很简单，根据上面的 ISA manual <code>addiw</code> 的立即数是 12-bit 的 signed number，即应该传入的是数值。但是直接使用 0xfff 表示传入的仅仅是 0xfff 这个编码对应的数值 (可以表示 12-bit signed 下的数值 -1，也可以表示 unsigned 编码下 0xfff 对应的数值 4095，在 12-bit signed 下 integer overflow)，为了保证 <code>addiw</code> 的立即数的数值符合我们的预期 (即 0xfff 在 12-bit signed 下数值是 -1) 以及避免 integer overflow，所以需要将 0xfff - 4096 得到 12-bit signed 数值 -1 (虽然这个编码和 0xfff 是一样的&hellip;)。</p>
+<div class="highlight" id="id-6"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="nf">addiw</span> <span class="no">a0</span><span class="p">,</span> <span class="no">a0</span><span class="p">,</span> <span class="p">-</span><span class="mi">1</span>    <span class="c1">; right
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">addiw</span> <span class="no">a0</span><span class="p">,</span> <span class="no">a0</span><span class="p">,</span> <span class="mi">4095</span>  <span class="err">;</span> <span class="no">integer</span> <span class="no">overflow</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><a href="/posts/binary-representation/">解读计算机编码</a></li>
+<li><a href="/posts/c-numerics/">C 语言: 数值系统篇</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/374235855"target="_blank" rel="external nofollow noopener noreferrer">RV32G 下 lui/auipc 和 addi 结合加载立即数时的补值问题</a> [zhihu]</li>
+<li><a href="https://stackoverflow.com/questions/50742420/risc-v-build-32-bit-constants-with-lui-and-addi"target="_blank" rel="external nofollow noopener noreferrer">RISC-V build 32-bit constants with LUI and ADDI</a> [Stack Overflow]</li>
+</ul>
+</div>
+    </div>
+  </div>
+<p>原文 Fold immediates into consuming instructions where possible 部分，相关的 RISC-V 的 imm 优化:</p>
 <ul>
 <li>Craig Topper: <a href="https://www.youtube.com/watch?v=TmWs3QsSuUg"target="_blank" rel="external nofollow noopener noreferrer">2022 LLVM Dev Mtg: RISC-V Sign Extension Optimizations</a></li>
-<li><a href="https://www.bilibili.com/video/BV1pN411H7Y3"target="_blank" rel="external nofollow noopener noreferrer">改进RISC-V的代码生成-廖春玉</a></li>
+<li><a href="https://www.bilibili.com/video/BV1pN411H7Y3"target="_blank" rel="external nofollow noopener noreferrer">改进RISC-V的代码生成-廖春玉</a> [bilibili]</li>
 </ul>
+<h3 id="avoid-branches-using-conditional-moves">Avoid branches using conditional moves</h3>
+<p><a href="https://github.com/riscv/riscv-zicond/releases/tag/v1.0"target="_blank" rel="external nofollow noopener noreferrer">Zicond extension</a> 提供了我们在 RISC-V 上实作常数时间函数 (contant-time function) 的能力，用于避免分支预测，从而减少因分支预测失败带来的高昂代价。</p>
+<div class="fi-row">
+$$
+a0 = 
+\begin{cases}
+constant1 & \text{if } x \neq 0 \newline
+constant2 & \text{if } x = 0
+\end{cases}
+$$
+</div>
+<p>原文使用了 CZERO.NEZ，下面我们使用 CZERO.EQZ 来实作原文的例子:</p>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="nf">li</span> <span class="no">t2</span><span class="p">,</span> <span class="no">constant2</span>
+</span></span><span class="line"><span class="cl"><span class="nf">li</span> <span class="no">t3</span><span class="p">,</span> <span class="p">(</span><span class="no">constant1</span> <span class="p">-</span> <span class="no">constant2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nf">CZERO.EQZ</span> <span class="no">t3</span><span class="p">,</span> <span class="no">t3</span><span class="p">,</span> <span class="no">a0</span>
+</span></span><span class="line"><span class="cl"><span class="nf">add</span> <span class="no">a0</span><span class="p">,</span> <span class="no">t3</span><span class="p">,</span> <span class="no">t2</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>原文也介绍了如何使用 seqz 来实作 constant-time function，下面使用 snez 来实作原文的例子:</p>
+<div class="highlight" id="id-2"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="nf">li</span> <span class="no">t2</span><span class="p">,</span> <span class="no">constant1</span>
+</span></span><span class="line"><span class="cl"><span class="nf">li</span> <span class="no">t3</span><span class="p">,</span> <span class="no">constant2</span>
+</span></span><span class="line"><span class="cl"><span class="nf">snez</span> <span class="no">t0</span><span class="p">,</span> <span class="no">a0</span>
+</span></span><span class="line"><span class="cl"><span class="nf">addi</span> <span class="no">t0</span><span class="p">,</span> <span class="no">t0</span><span class="p">,</span> <span class="p">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="nf">xor</span> <span class="no">t1</span><span class="p">,</span> <span class="no">t2</span><span class="p">,</span> <span class="no">t3</span>
+</span></span><span class="line"><span class="cl"><span class="nf">and</span> <span class="no">t1</span><span class="p">,</span> <span class="no">t1</span><span class="p">,</span> <span class="no">t0</span>
+</span></span><span class="line"><span class="cl"><span class="nf">xor</span> <span class="no">a0</span><span class="p">,</span> <span class="no">t1</span><span class="p">,</span> <span class="no">t2</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果有 \‘M\’ 扩展可以通过 <code>mul</code> 指令进行简化 (通过 snez 来实作原文例子):</p>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="nf">li</span> <span class="no">t2</span><span class="p">,</span> <span class="no">constant1</span>
+</span></span><span class="line"><span class="cl"><span class="nf">li</span> <span class="no">t3</span><span class="p">,</span> <span class="no">constant2</span>
+</span></span><span class="line"><span class="cl"><span class="nf">xor</span> <span class="no">t1</span><span class="p">,</span> <span class="no">t2</span><span class="p">,</span> <span class="no">t3</span>
+</span></span><span class="line"><span class="cl"><span class="nf">snez</span> <span class="no">t0</span><span class="p">,</span> <span class="no">a0</span>
+</span></span><span class="line"><span class="cl"><span class="nf">mul</span> <span class="no">t1</span><span class="p">,</span> <span class="no">t1</span><span class="p">,</span> <span class="no">t0</span>
+</span></span><span class="line"><span class="cl"><span class="nf">xor</span> <span class="no">a0</span><span class="p">,</span> <span class="no">t1</span><span class="p">,</span> <span class="no">t3</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="padding">Padding</h3>
+<blockquote>
+<p>Use canonical NOPs, NOP ( ADDI X0, X0, 0 ) and C.NOP ( C.ADDI X0, 0 ), to add padding within a function. Use the canonical illegal instruction ( either 2 or 4 bytes of zeros depending on whether the C extension is supported ) to add padding between functions.</p>
+</blockquote>
+<ul>
+<li>因为在函数内部的执行频率高，使用合法的 NOPs 进行对齐 padding，防止在乱序执行时，流水线在遇见非法指令后就不再执行后续指令，造成效能损失</li>
+<li>如果控制流被传递到两个函数之间，那么加大可能是程序执行出错了，使用非法的指令进行对齐 padding 可以帮助我们更好更快地 debug</li>
+</ul>
+<h3 id="align-char-array-to-greater-alignment">Align char array to greater alignment</h3>
+<p>Why use wider load/store usage for memory copy?</p>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/c-memory"target="_blank" rel="external nofollow noopener noreferrer">C 语言: 内存管理、对齐及硬体特性</a></li>
+</ul>
+<h3 id="use-shifts-to-clear-leadingtrailing-bits">Use shifts to clear leading/trailing bits</h3>
+<p>实作 64-bit 版本的原文例子 (retain the highest 12 bits):</p>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-asm" data-lang="asm"><span class="line"><span class="cl"><span class="nf">slli</span> <span class="no">x6</span><span class="p">,</span> <span class="no">x5</span><span class="p">,</span> <span class="mi">52</span>
+</span></span><span class="line"><span class="cl"><span class="nf">slri</span> <span class="no">x7</span><span class="p">,</span> <span class="no">x5</span><span class="p">,</span> <span class="mi">52</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>RV64I 5.2 Integer Computational Instructions</li>
+</ul>
+<blockquote>
+<p>LUI (load upper immediate) uses the same opcode as RV32I. LUI places the 20-bit U-immediate into bits 31–12 of register rd and places zero in the lowest 12 bits. The 32-bit result is sign-extended to 64 bits.</p>
+</blockquote>
 <h2 id="optimizing-scalar-floating-point">Optimizing Scalar Floating Point</h2>
 <h2 id="optimizing-vector">Optimizing Vector</h2>
+<p>What about vector instructions?</p>
 <ul>
-<li>What about vector instructions? YouTube: <a href="https://www.youtube.com/watch?v=o_n4AKwdfiA"target="_blank" rel="external nofollow noopener noreferrer">Introduction to SIMD</a></li>
+<li>YouTube: <a href="https://www.youtube.com/watch?v=o_n4AKwdfiA"target="_blank" rel="external nofollow noopener noreferrer">Introduction to SIMD</a></li>
+<li><a href="https://eupilot.eu/wp-content/uploads/2022/11/RISC-V-VectorExtension-1-1.pdf"target="_blank" rel="external nofollow noopener noreferrer">Introduction to the RISC-V Vector Extension</a> [PDF]</li>
+<li>2020 RISC-V Summit: <a href="https://www.youtube.com/watch?v=oTaOd8qr53U"target="_blank" rel="external nofollow noopener noreferrer">Tutorial: RISC-V Vector Extension Demystified</a></li>
 </ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
@@ -250,7 +400,7 @@ The intention is to give specific actionable optimization recommendations for so
       <a href="/posts/linux-dev-review/" class="post-nav-item" rel="next" title="Linux 核心设计: 发展动态回顾">Linux 核心设计: 发展动态回顾<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

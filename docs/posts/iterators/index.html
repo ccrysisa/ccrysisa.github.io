@@ -13,7 +13,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
 <meta itemprop="description" content="
 In this third Crust of Rust video, we cover iterators and trait bounds, by re-implementing the &ldquo;flatten&rdquo; Iterator method from the standard library. As part of that, we cover some of the weirder trait bounds that are required, including what&rsquo;s needed to extend the implementation to support backwards iteration.
 "><meta itemprop="datePublished" content="2024-02-05T17:18:34+08:00" />
-<meta itemprop="dateModified" content="2024-03-04T23:05:35+08:00" />
+<meta itemprop="dateModified" content="2024-03-05T21:19:09+08:00" />
 <meta itemprop="wordCount" content="676"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Iterator," /><meta property="og:title" content="Crust of Rust: Iterators" />
 <meta property="og:description" content="
@@ -22,7 +22,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/iterators/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-05T17:18:34+08:00" />
-<meta property="article:modified_time" content="2024-03-04T23:05:35+08:00" />
+<meta property="article:modified_time" content="2024-03-05T21:19:09+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Crust of Rust: Iterators"/>
@@ -44,7 +44,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/iterators\/"
     },"genre": "posts","keywords": "Rust, Iterator","wordcount":  676 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/iterators\/","datePublished": "2024-02-05T17:18:34+08:00","dateModified": "2024-03-04T23:05:35+08:00","publisher": {
+    "url": "https:\/\/ccrysisa.github.io\/posts\/iterators\/","datePublished": "2024-02-05T17:18:34+08:00","dateModified": "2024-03-05T21:19:09+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -159,7 +159,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-05 17:18:34"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="更新于 2024-03-04 23:05:35"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="676 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-05 17:18:34"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="更新于 2024-03-05 21:19:09"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-05">2024-03-05</time></span>&nbsp;<span title="676 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -324,7 +324,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-03-04 23:05:35">更新于 2024-03-04&nbsp;</span>
+        <span title="更新于 2024-03-05 21:19:09">更新于 2024-03-05&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/iterators/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -353,7 +353,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
       <a href="/posts/linux-concepts/" class="post-nav-item" rel="next" title="Linux 核心设计: 操作系统术语及概念">Linux 核心设计: 操作系统术语及概念<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
