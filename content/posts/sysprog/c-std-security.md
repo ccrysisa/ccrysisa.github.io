@@ -247,9 +247,14 @@ $ gcc -g -o uaf.o uaf.c -fsanitize-address-use-after-scope
 $ ./uaf.o 
 0x7ffca405c596 is different from 0x7ffca405c597
 7ffca405c596 is not the same as 7ffca405c597
+
+$ clang -g -o uaf.o uaf.c 
+$ ./uaf.o 
+0x7fff86b298ff is different from 0x7fff86b298fe
+7fff86b298ff is not the same as 7fff86b298fe
 ```
 
-gcc 可以通过显式指定参数 `-fsanitize-address-use-after-scope` 来避免 Use-After-Scope 的问题，否则在 scope 结束后，接下来的其他 scope 会使用之前已结束的 scope 的内存空间，从而造成 Use-After-Scope 问题 (使用 GDB 在上面两种不同的情况下，查看变量 `a`, `b` 所在的地址)。
+gcc 可以通过显式指定参数 `-fsanitize-address-use-after-scope` 来避免 Use-After-Scope 的问题，否则在 scope 结束后，接下来的其他 scope 会使用之前已结束的 scope 的内存空间，从而造成 Use-After-Scope 问题 (使用 GDB 在上面两种不同的情况下，查看变量 `a`, `b` 所在的地址)，而 clang 则是默认开启相关保护。
 
 
 [^1]: ["OpenSSL Heartbleed", Synopsys](http://heartbleed.com/)

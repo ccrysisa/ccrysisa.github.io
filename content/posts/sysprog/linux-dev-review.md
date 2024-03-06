@@ -49,18 +49,19 @@ repost:
 
 > 前置知识: [Linux 核心设计: 操作系统术语及概念](https://hackmd.io/@sysprog/linux-concepts)
 
-YouTube: [Linux kernel – Solving big problems in small steps for more than 20 years (FOSDEM 2020, T. Leemhuis)](https://www.youtube.com/watch?v=WsktXXMOg1k)
+FOSDEM 2020, T. Leemhuis:
+- YouTube: [Linux kernel – Solving big problems in small steps for more than 20 years](https://www.youtube.com/watch?v=WsktXXMOg1k)
+- [slides](https://archive.fosdem.org/2020/schedule/event/linux_kernel/attachments/slides/3890/export/events/attachments/linux_kernel/slides/3890/Fosdem_Leemhuis_Kernel_Steps.pdf)
 
 以上面的讲座为主轴，回顾 Linux 的发展动态，由此展望 Linux 未来的发展方向。
 - SMP (Symmetric multiprocessing)
 - scalability
 - BKL (Big kernel lock)
 - Xen, KVM
-- namespace, cgroups, container
-- eBPF
-- XDP
-- PREEMPT_RT
-- io_uring
+- namespace, cgroups, container - *云服务*
+- eBPF, XDP - *网络封包的高效过滤 (在内核即可处理封包的过滤，无需在用户态制定规则)*
+- PREEMPT_RT - *硬即时操作系统 ([hard real time os](https://www.suse.com/c/what-is-a-real-time-operating-system/#:~:text=Hard%20Real%2DTime%20Operating%20Systems,in%20time%20could%20be%20catastrophic.))*
+- io_uring - *高效的非同步 I/O (Linux 大部分系统调用都是非同步的)*
 
 ## Linux 2.4
 

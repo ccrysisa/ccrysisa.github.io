@@ -1,5 +1,5 @@
 ---
-title: "你所不知道的 C 语言: 数值系统"
+title: "你所不知道的 C 语言: 数值系统篇"
 subtitle:
 date: 2024-02-20T11:13:57+08:00
 # draft: true
