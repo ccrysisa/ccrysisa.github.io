@@ -142,6 +142,76 @@ while i < length(A)
 end while
 ```
 
+使用 [Binary search algorithm](https://en.wikipedia.org/wiki/Binary_search_algorithm) 可以将 insertion sort 的 comparsion 次数降到 $O(nlogn)$，但是 swap 次数仍然是 $O(n^2)$ :rofl:
+
+```rs
+// use binary search to find index
+// then use .insert to splice in i
+let i = match slice[..unsorted].binary_search(&slice[unsorted]) {
+    // [ a, c, e].binary_search(c) => Ok(1)
+    Ok(i) => i,
+    // [ a, c, e].binary_search(b) => Err(1)
+    Err(i) => i,
+};
+slice[i..=unsorted].rotate_right(1);
+```
+
+> `match` 的内部逻辑也可以改写为 `OK(i) | Err(i) => i`
+
+### Selection sort
+
+- Wikipedia: [Selection sort](https://en.wikipedia.org/wiki/Selection_sort)
+
+{{< admonition quote >}}
+There are many different ways to sort the cards. Here's a simple one, called selection sort, possibly similar to how you sorted the cards above:
+1. Find the smallest card. Swap it with the first card.
+2. Find the second-smallest card. Swap it with the second card.
+3. Find the third-smallest card. Swap it with the third card.
+4. Repeat finding the next-smallest card, and swapping it into the correct position until the array is sorted.
+{{< /admonition >}}
+> [source](https://www.khanacademy.org/computing/computer-science/algorithms/sorting-algorithms/a/selection-sort-pseudocode)
+
+使用函数式编程可以写成相当 readable 的程式码，以下为获取 slice 最小值对应的 index:
+
+```rs
+let smallest_in_rest = slice[unsorted..]
+                .iter()
+                .enumerate()
+                .min_by_key(|&(_, v)| v)
+                .map(|(i, _)| unsorted + i)
+                .expect("slice is not empty");
+```
+
+### Quicksort
+
+- Wikipedia: [Quicksort](https://en.wikipedia.org/wiki/Quicksort)
+
+可以通过 extra allocation 和 in-place 两种方式来实现 quicksort，其中 extra allocation 比较好理解，in-place 方式的 pseudocode 如下:
+
+```bash
+Quicksort(A,p,r) {
+    if (p < r) {
+       q <- Partition(A,p,r)
+       Quicksort(A,p,q)
+       Quicksort(A,q+1,r)
+    }
+}
+Partition(A,p,r)
+    x <- A[p]
+    i <- p-1
+    j <- r+1
+    while (True) {
+        repeat { j <- j-1 }
+        until (A[j] <= x)
+        repeat { i <- i+1 }
+        until (A[i] >= x)
+        if (i < j) swap(A[i], A[j])
+        else       return(j)
+    }
+}
+```
+> [source](https://sites.cc.gatech.edu/classes/cs3158_98_fall/quicksort.html)
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
@@ -161,14 +231,21 @@ end while
   - method [slice::sort_by_key](https://doc.rust-lang.org/std/primitive.slice.html#method.sort_by_key)
   - method [slice::swap](https://doc.rust-lang.org/std/primitive.slice.html#method.swap)
   - method [slice::binary_search](https://doc.rust-lang.org/std/primitive.slice.html#method.binary_search)
+  - method [slice::rotate_right](https://doc.rust-lang.org/std/primitive.slice.html#method.rotate_right)
+
+- Trait [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
+  - method [std::iter::Iterator::min](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.min)
+  - method [std::iter::Iterator::min_by_key](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.max_by_key)
+  - method [std::iter::Iterator::enumerate](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.enumerate)
+
+- method [std::option::Option::expect](https://doc.rust-lang.org/std/option/enum.Option.html#method.expect)
+- method [std::result::Result::expect](https://doc.rust-lang.org/std/result/enum.Result.html#method.expect)
+- method [std::option::Option::map](https://doc.rust-lang.org/std/option/enum.Option.html#method.map)
+- method [std::result::Result::map](https://doc.rust-lang.org/std/result/enum.Result.html#method.map)
 
 ## References
 
-- Wikipedia: [Sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm)
-- Wikipedia: [Timsort](https://en.wikipedia.org/wiki/Timsort)
-- Wikipedia: [Bubble sort](https://en.wikipedia.org/wiki/Bubble_sort)
-- Wikipedia: [Insertion sort](https://en.wikipedia.org/wiki/Insertion_sort)
-- Wikipedia: [Total order](https://en.wikipedia.org/wiki/Total_order)
-- Wikipedia: [Partial order](https://en.wikipedia.org/wiki/Partially_ordered_set#Partial_order)
-- Stack Overflow: [Partial ordering vs Potal ordering](https://stackoverflow.com/questions/55889912/what-does-it-mean-by-partial-ordering-and-total-ordering-in-the-discussion-o)
-- Stack Overflow: [Difference between Benchmarking and Profiling](https://stackoverflow.com/questions/34801622/difference-between-benchmarking-and-profiling)
+- [orst](https://github.com/jonhoo/orst) [Github]
+- [Sorting algorithm](https://en.wikipedia.org/wiki/Sorting_algorithm) [Wikipedia]
+- [Timsort](https://en.wikipedia.org/wiki/Timsort) [Wikipedia]
+- [Difference between Benchmarking and Profiling](https://stackoverflow.com/questions/34801622/difference-between-benchmarking-and-profiling) [Stack Overflow]
