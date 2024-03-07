@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/posts/</link>
     <description>所有文章 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 05 Mar 2024 16:32:40 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 07 Mar 2024 14:48:21 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -12,6 +12,16 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>openEuler RISC-V 系统: QEMU 仿真和 Mugen 测试框架</title>
+  <link>https://ccrysisa.github.io/posts/openeuler-riscv-qemu-mugen/</link>
+  <pubDate>Thu, 07 Mar 2024 14:48:21 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/openeuler-riscv-qemu-mugen/</guid>
+  <description><![CDATA[<blockquote>
+<p>本文对通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统的流程进行详细介绍，以及介绍如何通过 <a href="https://gitee.com/openeuler/mugen"target="_blank" rel="external nofollow noopener noreferrer">mugen</a> 测试框架来对 RISC-V 版本的 openEuler 进行系统、软件等方面测试，并根据测试日志对错误原因进行分析。</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -96,16 +106,6 @@
   <guid>https://ccrysisa.github.io/posts/c-bitwise/</guid>
   <description><![CDATA[<blockquote>
 <p>Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，颇多乍看像是魔法的 C 程式码就是 bitops 的组合。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>Crust of Rust: Smart Pointers and Interior Mutability</title>
-  <link>https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/</link>
-  <pubDate>Tue, 20 Feb 2024 17:33:06 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/</guid>
-  <description><![CDATA[<blockquote>
-<p>In this fourth Crust of Rust video, we cover smart pointers and interior mutability, by re-implementing the Cell, RefCell, and Rc types from the standard library. As part of that, we cover when those types are useful, how they work, and what the equivalent thread-safe versions of these types are. In the process, we go over some of the finer details of Rust's ownership model, and the UnsafeCell type. We also dive briefly into the Drop Check rabbit hole (<a href="https://doc.rust-lang.org/nightly/nomicon/dropck.html"target="_blank" rel="external nofollow noopener noreferrer">https://doc.rust-lang.org/nightly/nomicon/dropck.html</a>) before coming back up for air.</p>
 </blockquote>]]></description>
 </item>
 </channel>
