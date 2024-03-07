@@ -11,31 +11,39 @@
 
 > 前置知识: [Linux 核心设计: 操作系统术语及概念](https://hackmd.io/@sysprog/linux-concepts)
 
-YouTube: [Linux kernel – Solving big problems in small steps for more than 20 years (FOSDEM 2020, T. Leemhuis)](https://www.youtube.com/watch?v=WsktXXMOg1k)
+FOSDEM 2020, T. Leemhuis:
+- YouTube: [Linux kernel – Solving big problems in small steps for more than 20 years](https://www.youtube.com/watch?v=WsktXXMOg1k)
+- [slides](https://archive.fosdem.org/2020/schedule/event/linux_kernel/attachments/slides/3890/export/events/attachments/linux_kernel/slides/3890/Fosdem_Leemhuis_Kernel_Steps.pdf) (这个投影片共有 248 页，所以加载时可能会比较慢 :rofl:)
 
 以上面的讲座为主轴，回顾 Linux 的发展动态，由此展望 Linux 未来的发展方向。
 - SMP (Symmetric multiprocessing)
 - scalability
 - BKL (Big kernel lock)
 - Xen, KVM
-- namespace, cgroups, container
-- eBPF
-- XDP
-- PREEMPT_RT
-- io_uring
+- namespace, cgroups, container - *云服务*
+- eBPF, XDP - *网络封包的高效过滤 (在内核即可处理封包的过滤，无需在用户态制定规则)*
+- PREEMPT_RT - *硬即时操作系统 ([hard real time os](https://www.suse.com/c/what-is-a-real-time-operating-system/#:~:text=Hard%20Real%2DTime%20Operating%20Systems,in%20time%20could%20be%20catastrophic.))*
+- io_uring - *高效的非同步 I/O (Linux 大部分系统调用都是非同步的)*
+- nommu - *用于嵌入式降低功耗*
+
+Linux 相关人物 (可在 YouTube 上找到他们的一些演讲):
+- Jonathan Corbet
 
 ## Linux 2.4
 
 - [ ] [Version 2.4 of the LINUX KERNEL--Why Should a System Administrator Upgrade?](https://www.informit.com/articles/article.aspx?p=20667)
 
-LInux 核心的道路: **只提供机制不提供策略**。例如 khttp (in-kernel httpd) 的弃用。
+> 自 2004 年開始，釋出過程發生變化，新核心每隔 2-3 個月定期釋出，編號為 2.6.0, 2.6.1，直到 2.6.39
+这件事对于操作系统的开发有很大的影响，是一个巨大的变革。透过这种发行机制，CPU 厂商可以直接在最新的 Linux kernel 上适配正在开发的 CPU 及相关硬体，而无需拿到真正的 CPU 硬体再进行相应的开发，这使得 Linux 获得了更多厂商的支持和投入，进而进入了飞速发展期。
+
+LInux 核心的道路: **只提供机制不提供策略**。例如 khttp (in-kernel httpd) 的弃用，通过提供更高效的系统调用来提高网页服务器的效能，而不是像 Windows NT 一样用户态性能不够就把程式搬进 kernel :rofl:
 
 ## SMP 支援
 
 相关故事: Digital Domain and TITANIC (泰坦尼克号)
+- [Red Hat Sinks Titanic](https://www.redhat.com/en/about/press-releases/press-titanic)
 - [Linux Helps Bring Titanic to Life](https://www.linuxjournal.com/article/2494)
 - [Digital Domain: TITANIC](https://www.digitaldomain.com/work/titanic/)
-- [Red Hat Sinks Titanic](https://www.redhat.com/en/about/press-releases/press-titanic)
 - [Industrial Light and Magic](https://www.linuxjournal.com/article/6011)
 - [MaterialX Joins the Academy Software Foundation as a Hosted Project](https://www.aswf.io/blog/materialx-joins-the-academy-software-foundation-as-a-hosted-project/)
 

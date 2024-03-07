@@ -137,6 +137,14 @@ Unix-like 工具使用技巧:
 - [ ] [1963 Timesharing: A Solution to Computer Bottlenecks](https://www.youtube.com/watch?v=Q07PhW5sCEk) [YouTube]
 - [x] [Supervisory program](https://en.wikipedia.org/wiki/Supervisory_program) [Wikipedia]
 
+### Monolithic kernel vs Microkernel
+
+- [淺談 Microkernel 設計和真實世界中的應用](https://hackmd.io/@sysprog/microkernel-design)
+- [Hybrid kernel](https://en.wikipedia.org/wiki/Hybrid_kernel) [wikipedia]
+
+> "As to the whole 'hybrid kernel' thing - it's just marketing. It's 'oh, those microkernels had good PR, how can we try to get good PR for our working kernel? Oh, I know, let's use a cool name and try to imply that it has all the PR advantages that that other system has'."   
+> —— Linus Torvalds
+
 ### 虚拟化
 
 MicroVM 和 Unikernel 都是使用 CPU 层级的虚拟化技术，在 Host OS 上面构建的 GuestOS:
@@ -166,10 +174,16 @@ Wikipedia: [scalability](https://en.wikipedia.org/wiki/Scalability)
 - RCU
 - algorithm complexity
 
+### eBPF
+
+透过 eBPF 可将 Monolithic kernel 的 Linux 取得 microkernel 的特性
+
+- [The Beginners Guide to eBPF Programming](https://github.com/lizrice/ebpf-beginners), Liza RIce (live programming + source code)
+- [A thorough introduction to eBPF](https://lwn.net/Articles/740157/) (four articles in lwn.net), Matt FLeming, December 2017
+
 ## 细节切入点
 
-CPU 和 OS 的基本概念科普网站: 
-- [ ] [Putting the “You” in CPU](https://cpu.land/)
+CPU 和 OS 的基本概念科普网站: [Putting the “You” in CPU](https://cpu.land/)
 > 相当于科普版 CSAPP
 
 {{< admonition tip >}}
