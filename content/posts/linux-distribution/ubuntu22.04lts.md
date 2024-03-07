@@ -75,8 +75,9 @@ $ proxy_off
 
 根据 [搜狗输入法 Linux 安装指导][sougou-linux-guide] 来安装搜狗输入法。
 
-- 无需卸载系统 ibus 输入法框架。
-- 通过 `Ctrl + space` 唤醒搜狗输入法。
+- 安装时无需卸载系统 ibus 输入法框架 (与上面的安装指导不一致)
+- 通过 `Ctrl + space` 唤醒搜狗输入法
+- 通过 `Ctrl + Shift + Z` 呼出特殊符号表
 
 ## 快捷键
 
