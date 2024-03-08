@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Concurrency - 分类 - KZnight&#39;s Blog</title>
+    <link>https://ccrysisa.github.io/categories/concurrency/</link>
+    <description>Concurrency - 分类 - KZnight&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 08 Mar 2024 17:29:25 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/concurrency/" rel="self" type="application/rss+xml" /><item>
+  <title>并行程序设计</title>
+  <link>https://ccrysisa.github.io/posts/concurrency/</link>
+  <pubDate>Fri, 08 Mar 2024 17:29:25 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/concurrency/</guid>
+  <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

@@ -18,6 +18,7 @@ tags:
   - Linux
   - Concurrency
 categories:
+  - Concurrency
   - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false
