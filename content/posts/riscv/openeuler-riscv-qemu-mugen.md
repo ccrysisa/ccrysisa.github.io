@@ -17,10 +17,11 @@ tags:
   - RISC-V
   - Linux
   - openEuler
-  - Qemu
+  - QEMU
   - Mugen
 categories:
   - RISC-V
+  - Linux Distribution
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

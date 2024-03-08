@@ -79,7 +79,7 @@ LInux 核心的道路: **只提供机制不提供策略**。例如 khttp (in-ker
 ## SMP 支援
 
 相关故事: Digital Domain and TITANIC (泰坦尼克号)
-- [Red Hat Sinks Titanic](https://www.redhat.com/en/about/press-releases/press-titanic)
+- [x] [Red Hat Sinks Titanic](https://www.redhat.com/en/about/press-releases/press-titanic)
 - [Linux Helps Bring Titanic to Life](https://www.linuxjournal.com/article/2494)
 - [Digital Domain: TITANIC](https://www.digitaldomain.com/work/titanic/)
 - [Industrial Light and Magic](https://www.linuxjournal.com/article/6011)
@@ -93,4 +93,36 @@ Linux 2.4 在 SMP 的效率问题也正是 BLK 所引起的:
 - 从上面的实作机制可以看出，这样的机制效率是很低的，虽然有多核 (core)，但是当一个 process 获得 BLK 时，只有该 process 所在的 core 可以执行，其他 core 只能等待
 - BLK 已于 v.6.39 版本中被彻底去除
 
-[Linux 5.5's Scheduler Sees A Load Balancing Rework For Better Perf But Risks Regressions](https://www.phoronix.com/scan.php?page=news_item&px=Linux-5.5-Scheduler)
+[Linux 5.5's Scheduler Sees A Load Balancing Rework For Better Perf But Risks Regressions](https://www.phoronix.com/scan.php?page=news_item&px=Linux-5.5-Scheduler) :white_check_mark:
+> When testing on a dual quad-core ARM64 system they found the performance ranged from less than 1% to upwards of 10% for the Hackbench scheduler test. With a 224-core ARM64 server, the performance ranged from less than 1% improvements to 12% better performance with Hackbench and up to 33% better performance with Dbench. More numbers and details via the v4 patch revision.
+
+## 虚拟化
+
+{{< image src="https://imgur-backup.hackmd.io/bTI4zZv.png" >}}
+
+- [Cloud Hypervisor](https://github.com/cloud-hypervisor/cloud-hypervisor)
+- [Xen and the Art of Virtualization](https://www.cl.cam.ac.uk/research/srg/netos/papers/2003-xensosp.pdf)
+
+## DPDK (Data Plane Development Kit)
+
+- Stack Overflow["zero copy networking" vs "kernel bypass"?](https://stackoverflow.com/questions/18343365/zero-copy-networking-vs-kernel-bypass)
+
+**Kernel-bypass networking**
+
+```mermaid
+graph TD;
+    NIC-->Kernel;
+    Kernel-->User;
+    NIC--DPDK-->User;
+```
+
+## XDP: eXpress Data Path
+
+```mermaid
+graph TD;
+    NIC-->Kernel;
+    Kernel-->User;
+    Kernel--XDP-->NIC;
+```
+
+- [LPC2018 - Path to DPDK speeds for AF XDP](https://www.youtube.com/watch?v=JmGfJok32Kw) / [slides](https://linuxplumbersconf.org/event/2/contributions/99/attachments/98/116/lpc18_pres_af_xdp_perf-v3.pdf)
