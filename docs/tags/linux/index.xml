@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/tags/linux/</link>
     <description>Linux - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 07 Mar 2024 14:48:21 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 08 Mar 2024 17:29:25 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -13,6 +13,14 @@
   <description><![CDATA[<blockquote>
 <p>在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
 </blockquote>]]></description>
+</item>
+<item>
+  <title>并行程序设计</title>
+  <link>https://ccrysisa.github.io/posts/concurrency/</link>
+  <pubDate>Fri, 08 Mar 2024 17:29:25 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/concurrency/</guid>
+  <description><![CDATA[]]></description>
 </item>
 <item>
   <title>openEuler RISC-V 系统: QEMU 仿真和 Mugen 测试框架</title>
@@ -83,21 +91,6 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/ubuntu22.04lts/</guid>
   <description><![CDATA[网络代理 根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo apt install net-tools 安装并启]]></description>
-</item>
-<item>
-  <title>GNU/Linux 开发工具</title>
-  <link>https://ccrysisa.github.io/posts/gnu-linux-dev/</link>
-  <pubDate>Mon, 25 Dec 2023 15:43:50 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/gnu-linux-dev/</guid>
-  <description><![CDATA[<div class="details admonition abstract open">
-    <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content">GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而上提供各类触及“灵魂”的学习案例，让所有课程从纸上谈兵转变成沙场实战，会极大地提升工程实践的效率和技能。</div>
-    </div>
-  </div>]]></description>
 </item>
 </channel>
 </rss>

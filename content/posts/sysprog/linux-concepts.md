@@ -49,8 +49,8 @@ repost:
 
 虚拟化 (Virtualization) 技术分为 CPU 层级的虚拟化技术，例如 [KVM](https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine) 和 [RVM](https://github.com/equation314/RVM-Tutorial)，也有操作系统层级的虚拟化技术，例如 [Docker](https://en.wikipedia.org/wiki/Docker_(software))。
 
-- [ ] [Plan 9 from Bell Labs](https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs) [Wikipedia]
-- [ ] [LXC](https://en.wikipedia.org/wiki/LXC) [Wikipedia]
+- [x] [Plan 9 from Bell Labs](https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs) [Wikipedia]
+- [x] [LXC](https://en.wikipedia.org/wiki/LXC) [Wikipedia]
 
 {{< admonition info >}}
 - [從 Revolution OS 看作業系統生態變化](https://hackmd.io/@sysprog/revolution-os-note)
@@ -84,7 +84,7 @@ repost:
 
 wiki:
 
-- [ ] [Pipeline (Unix)](https://en.wikipedia.org/wiki/Pipeline_(Unix)) [Wikipedia]
+- [x] [Pipeline (Unix)](https://en.wikipedia.org/wiki/Pipeline_(Unix)) [Wikipedia]
 - [x] [Process identifier](https://en.wikipedia.org/wiki/Process_identifier) [Wikipedia]
 - [x] [watchdog](https://linux.die.net/man/8/watchdog) [Linux man page]
 - [x] [init](https://en.wikipedia.org/wiki/Init) [Wikipedia]
@@ -93,10 +93,10 @@ wiki:
 - [x] [clone](https://man7.org/linux/man-pages/man2/clone.2.html) [Linux man page]
 - [x] [Project Genie](https://en.wikipedia.org/wiki/Project_Genie) [Wikipedia]
 - [x] [posix_spawn](https://man7.org/linux/man-pages/man3/posix_spawn.3.html) [Linux man page]
-- [ ] [Native POSIX Thread Library](https://en.wikipedia.org/wiki/Native_POSIX_Thread_Library) [Wikipedia]
+- [x] [Native POSIX Thread Library](https://en.wikipedia.org/wiki/Native_POSIX_Thread_Library) [Wikipedia]
 - [x] [极客漫画: 不要使用 SIGKILL 的原因](https://linux.cn/article-8771-1.html)
-- [ ] [wait](https://man7.org/linux/man-pages/man2/wait.2.html) [Linux man page]
-- [ ] [signal](https://man7.org/linux/man-pages/man7/signal.7.html) [Linux man page]
+- [x] [wait](https://man7.org/linux/man-pages/man2/wait.2.html) [Linux man page]
+- [x] [signal](https://man7.org/linux/man-pages/man7/signal.7.html) [Linux man page]
 - [x] [TUX web server](https://en.wikipedia.org/wiki/TUX_web_server) [Wikipedia]
  -[x] [cron](https://en.wikipedia.org/wiki/Cron)
 

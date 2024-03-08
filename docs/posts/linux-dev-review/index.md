@@ -41,7 +41,7 @@ LInux 核心的道路: **只提供机制不提供策略**。例如 khttp (in-ker
 ## SMP 支援
 
 相关故事: Digital Domain and TITANIC (泰坦尼克号)
-- [Red Hat Sinks Titanic](https://www.redhat.com/en/about/press-releases/press-titanic)
+- [x] [Red Hat Sinks Titanic](https://www.redhat.com/en/about/press-releases/press-titanic)
 - [Linux Helps Bring Titanic to Life](https://www.linuxjournal.com/article/2494)
 - [Digital Domain: TITANIC](https://www.digitaldomain.com/work/titanic/)
 - [Industrial Light and Magic](https://www.linuxjournal.com/article/6011)
@@ -55,7 +55,111 @@ Linux 2.4 在 SMP 的效率问题也正是 BLK 所引起的:
 - 从上面的实作机制可以看出，这样的机制效率是很低的，虽然有多核 (core)，但是当一个 process 获得 BLK 时，只有该 process 所在的 core 可以执行，其他 core 只能等待
 - BLK 已于 v.6.39 版本中被彻底去除
 
-[Linux 5.5's Scheduler Sees A Load Balancing Rework For Better Perf But Risks Regressions](https://www.phoronix.com/scan.php?page=news_item&px=Linux-5.5-Scheduler)
+[Linux 5.5's Scheduler Sees A Load Balancing Rework For Better Perf But Risks Regressions](https://www.phoronix.com/scan.php?page=news_item&px=Linux-5.5-Scheduler) :white_check_mark:
+> When testing on a dual quad-core ARM64 system they found the performance ranged from less than 1% to upwards of 10% for the Hackbench scheduler test. With a 224-core ARM64 server, the performance ranged from less than 1% improvements to 12% better performance with Hackbench and up to 33% better performance with Dbench. More numbers and details via the v4 patch revision.
+
+## 虚拟化
+
+{{< image src="https://imgur-backup.hackmd.io/bTI4zZv.png" >}}
+
+- [Cloud Hypervisor](https://github.com/cloud-hypervisor/cloud-hypervisor)
+- [Xen and the Art of Virtualization](https://www.cl.cam.ac.uk/research/srg/netos/papers/2003-xensosp.pdf)
+
+## DPDK (Data Plane Development Kit)
+
+一言以蔽之: **Kernel-bypass networking**，即略过 kernel 直接让 User programs 处理网络封包，以提升效能。一般实作于高频交易的场景。
+
+```mermaid
+graph TD;
+    NIC-->Kernel;
+    Kernel-->User;
+    NIC--DPDK-->User;
+```
+
+- [ ] YouTube: [Kernel-bypass networking for fun and profit](https://www.youtube.com/watch?v=noqSZorzooc)
+- Stack Overflow["zero copy networking" vs "kernel bypass"?](https://stackoverflow.com/questions/18343365/zero-copy-networking-vs-kernel-bypass)
+
+## XDP: eXpress Data Path
+
+常和 eBPF 配合实现在 kernel 进行定制化的封包过滤，从而减少 cop to/from kernel/user 这类操作的效能损失。
+
+- [ ] [LPC2018 - Path to DPDK speeds for AF XDP](https://www.youtube.com/watch?v=JmGfJok32Kw) / [slides](https://linuxplumbersconf.org/event/2/contributions/99/attachments/98/116/lpc18_pres_af_xdp_perf-v3.pdf)
+
+## AIO
+
+Synchronous / Asynchronous I/O：在從/向核心空間讀取/寫入資料 (i.e. **實際進行 I/O 操作**) 的過程，使用者層級的行程是否會被 **blocked**。
+
+> AIO 在某些情景下处理不当，性能甚至低于 blocked 的 I/O 方法，这也引导出了 io_uring
+
+{{< admonition tip >}}
+- UNIX 哲学: Everything is a file.
+- Linux 不成文规范: Everything is a file descriptor.
+{{< /admonition >}}
+
+- [ ] [Kernel Recipes 2019 - Faster IO through io_uring](https://www.youtube.com/watch?v=-5T4Cjw46ys) / [slides](https://www.slideshare.net/ennael/kernel-recipes-2019-faster-io-through-iouring)
+- [io_uring](https://hackmd.io/@sysprog/iouring)
+
+## Container
+
+Container 构建在 Linux 核心的基础建设上: namespace, cgroups, capabilities, seccomp
+
+```
++----------------------+
+| +------------------+ |
+| | cgroup           | |
+| | namespace        | |
+| | union-capable fs | |
+| |                  | |
+| |     Container    | |
+| +------------------+ |
+|                      |
+| +------------------+ |
+| |     Container    | |
+| +------------------+ |
+|                      |
+| +------------------+ |
+| |     Container    | |
+| +------------------+ |
+|                      |
+|  Linux kernel (host) |
++----------------------+
+```
+
+- [x] YouTube: [Containers: cgroups, Linux kernel namespaces, ufs, Docker, and intro to Kubernetes pods](https://www.youtube.com/watch?v=el7768BNUPw)
+
+- Stack Overflow: [difference between cgroups and namespaces](https://stackoverflow.com/questions/34820558/difference-between-cgroups-and-namespaces)
+> - **cgroup**: Control Groups provide a mechanism for aggregating/partitioning sets of tasks, and all their future children, into hierarchical groups with specialized behaviour.
+> - **namespace**: wraps a global system resource in an abstraction that makes it appear to the processes within the namespace that they have their own isolated instance of the global resource.
+
+- Wikipedia: [UnionFS](https://en.wikipedia.org/wiki/UnionFS)
+- Wikipedia: [Microservices](https://en.wikipedia.org/wiki/Microservices)
+
+## BPF/cBPF/eBPF
+
+{{< admonition tip >}}
+run small programs in kernel mode    
+20 years ago, this idea would likely have been shot down immediately
+{{< /admonition >}}
+
+{{< image src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_664518ea635bfd0623080100c02e72b8.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1709888316&Signature=gmFTKHZT9f9x0oQVWfO52J6WK7U%3D" >}}
+
+- [ ] [Netflix talks about Extended BPF - A new software type](https://www.youtube.com/watch?v=7pmXdG8-7WU) / [slides](https://www.slideshare.net/brendangregg/um2019-bpf-a-new-type-of-software)
+
+## Real-Time
+
+- [Linux 核心设计: PREEMPT_RT 作为迈向硬即时操作系统的机制](https://hackmd.io/@sysprog/preempt-rt)
+
+## printk
+
+- [ ] [Why printk() is so complicated (and how to fix it)](https://lwn.net/Articles/800946/)
+
+## ZFS, BtrFS, RAID
+
+- [ ] [ZFS versus RAID: Eight Ironwolf disks, two filesystems, one winner](https://arstechnica.com/gadgets/2020/05/zfs-versus-raid-eight-ironwolf-disks-two-filesystems-one-winner/)
+
+## Rust
+
+- [ ] [Linux 核心采纳 Rust 的状况](https://hackmd.io/@linD026/rust-in-linux-organize)
 
 
 ---
