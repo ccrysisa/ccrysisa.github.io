@@ -14,7 +14,7 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
 In this Crust of Rust episode, we implement some common sorting algorithms in Rust. This episode doesn&#39;t aim to explain any single concept, but rather showcase what writing &ldquo;normal&rdquo; Rust code is like, and explaining various &ldquo;odd bits&rdquo; we come across along the way. The thinking here is that sorting algorithms are both familiar and easy to compare across languages, so this might serve as a good bridge into Rust if you are familiar with other languages.
 "><meta itemprop="datePublished" content="2024-03-04T15:02:28+08:00" />
 <meta itemprop="dateModified" content="2024-03-06T11:05:11+08:00" />
-<meta itemprop="wordCount" content="1255"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1706"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Sort,Algorithm," /><meta property="og:title" content="Crust of Rust: Sorting Algorithms" />
 <meta property="og:description" content="
 In this Crust of Rust episode, we implement some common sorting algorithms in Rust. This episode doesn&#39;t aim to explain any single concept, but rather showcase what writing &ldquo;normal&rdquo; Rust code is like, and explaining various &ldquo;odd bits&rdquo; we come across along the way. The thinking here is that sorting algorithms are both familiar and easy to compare across languages, so this might serve as a good bridge into Rust if you are familiar with other languages.
@@ -43,7 +43,7 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/orst\/"
-    },"genre": "posts","keywords": "Rust, Sort, Algorithm","wordcount":  1255 ,
+    },"genre": "posts","keywords": "Rust, Sort, Algorithm","wordcount":  1706 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/orst\/","datePublished": "2024-03-04T15:02:28+08:00","dateModified": "2024-03-06T11:05:11+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -158,8 +158,8 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Crust of Rust: Sorting Algorithms</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-04 15:02:28"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="更新于 2024-03-06 11:05:11"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-06">2024-03-06</time></span>&nbsp;<span title="1255 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+          <span class="post-category">收录于 <a href="/categories/draft/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> draft</a>&ensp;<a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-03-04 15:02:28"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="更新于 2024-03-06 11:05:11"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-06">2024-03-06</time></span>&nbsp;<span title="1706 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -175,11 +175,13 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
         <li><a href="#insertion-sort">Insertion sort</a></li>
         <li><a href="#selection-sort">Selection sort</a></li>
         <li><a href="#quicksort">Quicksort</a></li>
+        <li><a href="#benchmark">Benchmark</a></li>
       </ul>
     </li>
     <li><a href="#documentations">Documentations</a>
       <ul>
         <li><a href="#crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html">std</a></a></li>
+        <li><a href="#crate-randhttpsdocsrsrandlatestrand">Crate <a href="https://docs.rs/rand/latest/rand/">rand</a></a></li>
       </ul>
     </li>
     <li><a href="#references">References</a></li>
@@ -458,6 +460,43 @@ $$
 </div><blockquote>
 <p><a href="https://sites.cc.gatech.edu/classes/cs3158_98_fall/quicksort.html"target="_blank" rel="external nofollow noopener noreferrer">source</a></p>
 </blockquote>
+<ul>
+<li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.split_at_mut"target="_blank" rel="external nofollow noopener noreferrer">slice::split_at_mut</a></li>
+</ul>
+<p>实现 Quick sort 时使用了 <code>split_at_mut</code> 来绕开引用检查，因为如果你此时拥有一个指向 pivot 的不可变引用，就无法对 slice 剩余的部分使用可变引用，而 <code>split_at_mut</code> 则使得原本的 slice 被分为两个可变引用，从而绕开了之前的单一引用检查。</p>
+<blockquote>
+<p>后面发现可以使用更符合语义的 <code>split_first_mut</code>，当然思路还是一样的</p>
+</blockquote>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>我个人认为实现 Quick sort 的关键在于把握以下两个 invariants:</p>
+<ul>
+<li><code>left</code>: current checking index for element which is equal or less than the pivot</li>
+<li><code>right</code>: current checking index for element which is greater than the pivot</li>
+</ul>
+<p>即这两个下标对应的元素只是当前准备检查的，不一定符合元素的排列规范，如下图所示:</p>
+<div class="highlight" id="id-8"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[ &lt;= pivot ] [ ] [ ... ] [ ] [ &gt; pivot ]
+</span></span><span class="line"><span class="cl">              ^           ^
+</span></span><span class="line"><span class="cl">              |           |
+</span></span><span class="line"><span class="cl">            left        right</span></span></code></pre></td></tr></table>
+</div>
+</div><p>所以当 <code>left == right</code> 时两边都没有对所指向的元素进行检查，分情况讨论 (该元素是 $&lt;= pivot$ 或 $&gt; pivot$) 可以得出: 当 <code>left &gt; right</code> 时，<code>right</code> 指向的是 $&lt;= pivot$ 的元素，将其与 pivot 进行 swap 即可实现 partition 操作。(其实此时 <code>left</code> 指向的是 $&gt; pivot$ 部分的第一个元素，<code>right</code> 指向的是 $&lt;= pivot$ 部分的最后一个元素，但是需要注意 <code>rest</code> 与 <code>slice</code> 之间的下标转换)</p>
+</div>
+    </div>
+  </div>
+<h3 id="benchmark">Benchmark</h3>
+<p>通过封装类型 <code>SortEvaluator</code> 及实现 trait <code>PartialEq</code>, <code>Eq</code>, <code>PartialOrd</code>, <code>Ord</code> 来统计排序过程中的比较操作 (<code>eq</code>, <code>partial_cmp</code>, <code>cmp</code>) 的次数。</p>
 <h2 id="documentations">Documentations</h2>
 <p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>
@@ -469,7 +508,13 @@ $$
 </blockquote>
 <ul>
 <li>
-<p>Trait <a href="https://doc.rust-lang.org/std/cmp/trait.Ord.html"target="_blank" rel="external nofollow noopener noreferrer">std::cmp::Ord</a></p>
+<p>Module <a href="https://doc.rust-lang.org/std/cmp/index.html"target="_blank" rel="external nofollow noopener noreferrer">std::cmp</a></p>
+<ul>
+<li>Trait <a href="https://doc.rust-lang.org/std/cmp/trait.Ord.html"target="_blank" rel="external nofollow noopener noreferrer">std::cmp::Ord</a></li>
+<li>Trait <a href="https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html"target="_blank" rel="external nofollow noopener noreferrer">std::cmp::PartialOrd</a></li>
+<li>Trait <a href="https://doc.rust-lang.org/std/cmp/trait.Eq.html"target="_blank" rel="external nofollow noopener noreferrer">std::cmp::Eq</a></li>
+<li>Trait <a href="https://doc.rust-lang.org/std/cmp/trait.PartialEq.html"target="_blank" rel="external nofollow noopener noreferrer">std::cmp::PartialEq</a></li>
+</ul>
 </li>
 <li>
 <p>Primitive Type <a href="https://doc.rust-lang.org/std/primitive.slice.html#"target="_blank" rel="external nofollow noopener noreferrer">slice</a></p>
@@ -481,6 +526,9 @@ $$
 <li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.swap"target="_blank" rel="external nofollow noopener noreferrer">slice::swap</a></li>
 <li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.binary_search"target="_blank" rel="external nofollow noopener noreferrer">slice::binary_search</a></li>
 <li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.rotate_right"target="_blank" rel="external nofollow noopener noreferrer">slice::rotate_right</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.split_at_mut"target="_blank" rel="external nofollow noopener noreferrer">slice::split_at_mut</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.split_first_mut"target="_blank" rel="external nofollow noopener noreferrer">slice::split_first_mut</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.to_vec"target="_blank" rel="external nofollow noopener noreferrer">slice::to_vec</a></li>
 </ul>
 </li>
 <li>
@@ -492,17 +540,32 @@ $$
 </ul>
 </li>
 <li>
-<p>method <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.expect"target="_blank" rel="external nofollow noopener noreferrer">std::option::Option::expect</a></p>
+<p>Enum <a href="https://doc.rust-lang.org/std/option/enum.Option.html"target="_blank" rel="external nofollow noopener noreferrer">std::option::Option</a></p>
+<ul>
+<li>method <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.expect"target="_blank" rel="external nofollow noopener noreferrer">std::option::Option::expect</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.map"target="_blank" rel="external nofollow noopener noreferrer">std::option::Option::map</a></li>
+</ul>
 </li>
 <li>
-<p>method <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.expect"target="_blank" rel="external nofollow noopener noreferrer">std::result::Result::expect</a></p>
+<p>Enum <a href="https://doc.rust-lang.org/std/result/enum.Result.html"target="_blank" rel="external nofollow noopener noreferrer">std::result::Result</a></p>
+<ul>
+<li>method <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.expect"target="_blank" rel="external nofollow noopener noreferrer">std::result::Result::expect</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.map"target="_blank" rel="external nofollow noopener noreferrer">std::result::Result::map</a></li>
+</ul>
 </li>
 <li>
-<p>method <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.map"target="_blank" rel="external nofollow noopener noreferrer">std::option::Option::map</a></p>
+<p>Module <a href="https://doc.rust-lang.org/std/time/index.html"target="_blank" rel="external nofollow noopener noreferrer">std::time</a></p>
+<ul>
+<li>method <a href="https://doc.rust-lang.org/std/time/struct.Instant.html"target="_blank" rel="external nofollow noopener noreferrer">std::time::Instant::now</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/time/struct.Instant.html#method.elapsed"target="_blank" rel="external nofollow noopener noreferrer">std::time::Instant::elapsed</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/time/struct.Duration.html#method.as_secs_f64"target="_blank" rel="external nofollow noopener noreferrer">std::time::Duration::as_secs_f64</a></li>
+</ul>
 </li>
-<li>
-<p>method <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.map"target="_blank" rel="external nofollow noopener noreferrer">std::result::Result::map</a></p>
-</li>
+</ul>
+<h3 id="crate-randhttpsdocsrsrandlatestrand">Crate <a href="https://docs.rs/rand/latest/rand/"target="_blank" rel="external nofollow noopener noreferrer">rand</a></h3>
+<ul>
+<li>Function <a href="https://docs.rs/rand/latest/rand/fn.thread_rng.html"target="_blank" rel="external nofollow noopener noreferrer">rand::thread_rng</a></li>
+<li>method <a href="https://docs.rs/rand/latest/rand/seq/trait.SliceRandom.html#tymethod.shuffle"target="_blank" rel="external nofollow noopener noreferrer">rand::seq::SliceRandom::shuffle</a></li>
 </ul>
 <h2 id="references">References</h2>
 <ul>

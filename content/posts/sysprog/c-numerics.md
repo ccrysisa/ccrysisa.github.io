@@ -18,6 +18,7 @@ tags:
   - C
   - Numerics
 categories:
+  - C
   - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false

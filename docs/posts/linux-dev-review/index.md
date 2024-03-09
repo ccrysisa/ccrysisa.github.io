@@ -141,7 +141,7 @@ run small programs in kernel mode
 20 years ago, this idea would likely have been shot down immediately
 {{< /admonition >}}
 
-{{< image src="https://hackmd-prod-images.s3-ap-northeast-1.amazonaws.com/uploads/upload_664518ea635bfd0623080100c02e72b8.png?AWSAccessKeyId=AKIA3XSAAW6AWSKNINWO&Expires=1709888316&Signature=gmFTKHZT9f9x0oQVWfO52J6WK7U%3D" >}}
+{{< image src="https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg" >}}
 
 - [ ] [Netflix talks about Extended BPF - A new software type](https://www.youtube.com/watch?v=7pmXdG8-7WU) / [slides](https://www.slideshare.net/brendangregg/um2019-bpf-a-new-type-of-software)
 

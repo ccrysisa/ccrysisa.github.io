@@ -18,6 +18,7 @@ tags:
   - Sort
   - Algorithm
 categories:
+  - draft
   - Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -212,6 +213,33 @@ Partition(A,p,r)
 ```
 > [source](https://sites.cc.gatech.edu/classes/cs3158_98_fall/quicksort.html)
 
+- method [slice::split_at_mut](https://doc.rust-lang.org/std/primitive.slice.html#method.split_at_mut)
+
+实现 Quick sort 时使用了 `split_at_mut` 来绕开引用检查，因为如果你此时拥有一个指向 pivot 的不可变引用，就无法对 slice 剩余的部分使用可变引用，而 `split_at_mut` 则使得原本的 slice 被分为两个可变引用，从而绕开了之前的单一引用检查。
+> 后面发现可以使用更符合语义的 `split_first_mut`，当然思路还是一样的
+
+{{< admonition >}}
+我个人认为实现 Quick sort 的关键在于把握以下两个 invariants:
+
+- `left`: current checking index for element which is equal or less than the pivot
+- `right`: current checking index for element which is greater than the pivot
+
+即这两个下标对应的元素只是当前准备检查的，不一定符合元素的排列规范，如下图所示:
+
+```
+[ <= pivot ] [ ] [ ... ] [ ] [ > pivot ]
+              ^           ^
+              |           |
+            left        right
+```
+
+所以当 `left == right` 时两边都没有对所指向的元素进行检查，分情况讨论 (该元素是 $<= pivot$ 或 $> pivot$) 可以得出: 当 `left > right` 时，`right` 指向的是 $<= pivot$ 的元素，将其与 pivot 进行 swap 即可实现 partition 操作。(其实此时 `left` 指向的是 $> pivot$ 部分的第一个元素，`right` 指向的是 $<= pivot$ 部分的最后一个元素，但是需要注意 `rest` 与 `slice` 之间的下标转换)
+{{< /admonition >}}
+
+### Benchmark
+
+通过封装类型 `SortEvaluator` 及实现 trait `PartialEq`, `Eq`, `PartialOrd`, `Ord` 来统计排序过程中的比较操作 (`eq`, `partial_cmp`, `cmp`) 的次数。
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
@@ -222,7 +250,11 @@ Partition(A,p,r)
 
 > 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 
-- Trait [std::cmp::Ord](https://doc.rust-lang.org/std/cmp/trait.Ord.html)
+- Module [std::cmp](https://doc.rust-lang.org/std/cmp/index.html)
+  - Trait [std::cmp::Ord](https://doc.rust-lang.org/std/cmp/trait.Ord.html)
+  - Trait [std::cmp::PartialOrd](https://doc.rust-lang.org/std/cmp/trait.PartialOrd.html)
+  - Trait [std::cmp::Eq](https://doc.rust-lang.org/std/cmp/trait.Eq.html)
+  - Trait [std::cmp::PartialEq](https://doc.rust-lang.org/std/cmp/trait.PartialEq.html)
 
 - Primitive Type [slice](https://doc.rust-lang.org/std/primitive.slice.html#)
   - method [slice::sort](https://doc.rust-lang.org/std/primitive.slice.html#method.sort)
@@ -232,16 +264,32 @@ Partition(A,p,r)
   - method [slice::swap](https://doc.rust-lang.org/std/primitive.slice.html#method.swap)
   - method [slice::binary_search](https://doc.rust-lang.org/std/primitive.slice.html#method.binary_search)
   - method [slice::rotate_right](https://doc.rust-lang.org/std/primitive.slice.html#method.rotate_right)
+  - method [slice::split_at_mut](https://doc.rust-lang.org/std/primitive.slice.html#method.split_at_mut)
+  - method [slice::split_first_mut](https://doc.rust-lang.org/std/primitive.slice.html#method.split_first_mut)
+  - method [slice::to_vec](https://doc.rust-lang.org/std/primitive.slice.html#method.to_vec)
 
 - Trait [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
   - method [std::iter::Iterator::min](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.min)
   - method [std::iter::Iterator::min_by_key](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.max_by_key)
   - method [std::iter::Iterator::enumerate](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.enumerate)
 
-- method [std::option::Option::expect](https://doc.rust-lang.org/std/option/enum.Option.html#method.expect)
-- method [std::result::Result::expect](https://doc.rust-lang.org/std/result/enum.Result.html#method.expect)
-- method [std::option::Option::map](https://doc.rust-lang.org/std/option/enum.Option.html#method.map)
-- method [std::result::Result::map](https://doc.rust-lang.org/std/result/enum.Result.html#method.map)
+- Enum [std::option::Option](https://doc.rust-lang.org/std/option/enum.Option.html)
+  - method [std::option::Option::expect](https://doc.rust-lang.org/std/option/enum.Option.html#method.expect)
+  - method [std::option::Option::map](https://doc.rust-lang.org/std/option/enum.Option.html#method.map)
+
+- Enum [std::result::Result](https://doc.rust-lang.org/std/result/enum.Result.html)
+  - method [std::result::Result::expect](https://doc.rust-lang.org/std/result/enum.Result.html#method.expect)
+  - method [std::result::Result::map](https://doc.rust-lang.org/std/result/enum.Result.html#method.map)
+
+- Module [std::time](https://doc.rust-lang.org/std/time/index.html)
+  - method [std::time::Instant::now](https://doc.rust-lang.org/std/time/struct.Instant.html)
+  - method [std::time::Instant::elapsed](https://doc.rust-lang.org/std/time/struct.Instant.html#method.elapsed)
+  - method [std::time::Duration::as_secs_f64](https://doc.rust-lang.org/std/time/struct.Duration.html#method.as_secs_f64)
+
+### Crate [rand](https://docs.rs/rand/latest/rand/)
+
+- Function [rand::thread_rng](https://docs.rs/rand/latest/rand/fn.thread_rng.html)
+- method [rand::seq::SliceRandom::shuffle](https://docs.rs/rand/latest/rand/seq/trait.SliceRandom.html#tymethod.shuffle)
 
 ## References
 

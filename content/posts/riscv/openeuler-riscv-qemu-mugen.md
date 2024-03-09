@@ -284,7 +284,7 @@ file.c:5:6: error: Array 'a[10]' accessed at index 10, which is out of bounds. [
 $ echo $?
 0
 ```
-> 测试原因是 grep 在之前的 cppcheck 的输出里匹配到 `A=1`，所以导致返回值为 0。这部分测试的逻辑是: 仅对于 22.03 版本 openEuler 上的 cppcheck 在以参数 `-DA` 执行时才会输出包含 `A=1` 的信息，但是个人猜测是在比 22.03 及更高版本的 openEuler 上使用 cppcheck 搭配 `-DA` 都可以输出包含 `A=1` 的信息
+> 测试失败原因是 grep 在之前的 cppcheck 的输出里匹配到 `A=1`，所以导致返回值为 0。这部分测试的逻辑是: 仅对于 22.03 版本 openEuler 上的 cppcheck 在以参数 `-DA` 执行时才会输出包含 `A=1` 的信息，但是个人猜测是在比 22.03 及更高版本的 openEuler 上使用 cppcheck 搭配 `-DA` 都可以输出包含 `A=1` 的信息
 
 ### 实验总结和讨论
 

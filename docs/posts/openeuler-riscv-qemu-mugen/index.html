@@ -14,7 +14,7 @@
 本文对通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统的流程进行详细介绍，以及介绍如何通过 mugen 测试框架来对 RISC-V 版本的 openEuler 进行系统、软件等方面测试，并根据测试日志对错误原因进行分析。
 "><meta itemprop="datePublished" content="2024-03-07T14:48:21+08:00" />
 <meta itemprop="dateModified" content="2024-03-08T13:29:55+08:00" />
-<meta itemprop="wordCount" content="2275"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="2277"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="RISC-V,Linux,openEuler,QEMU,Mugen," /><meta property="og:title" content="openEuler RISC-V 系统: QEMU 仿真和 Mugen 测试框架" />
 <meta property="og:description" content="
 本文对通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统的流程进行详细介绍，以及介绍如何通过 mugen 测试框架来对 RISC-V 版本的 openEuler 进行系统、软件等方面测试，并根据测试日志对错误原因进行分析。
@@ -43,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/openeuler-riscv-qemu-mugen\/"
-    },"genre": "posts","keywords": "RISC-V, Linux, openEuler, QEMU, Mugen","wordcount":  2275 ,
+    },"genre": "posts","keywords": "RISC-V, Linux, openEuler, QEMU, Mugen","wordcount":  2277 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/openeuler-riscv-qemu-mugen\/","datePublished": "2024-03-07T14:48:21+08:00","dateModified": "2024-03-08T13:29:55+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -159,7 +159,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/risc-v/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> RISC-V</a>&ensp;<a href="/categories/linux-distribution/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Distribution</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-07 14:48:21"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-07">2024-03-07</time></span>&nbsp;<span title="更新于 2024-03-08 13:29:55"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-08">2024-03-08</time></span>&nbsp;<span title="2275 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-07 14:48:21"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-07">2024-03-07</time></span>&nbsp;<span title="更新于 2024-03-08 13:29:55"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-08">2024-03-08</time></span>&nbsp;<span title="2277 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -535,7 +535,7 @@ When -D is used, Cppcheck will only check 1 configuration unless these are used.
 </span></span><span class="line"><span class="cl"><span class="m">0</span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>测试原因是 grep 在之前的 cppcheck 的输出里匹配到 <code>A=1</code>，所以导致返回值为 0。这部分测试的逻辑是: 仅对于 22.03 版本 openEuler 上的 cppcheck 在以参数 <code>-DA</code> 执行时才会输出包含 <code>A=1</code> 的信息，但是个人猜测是在比 22.03 及更高版本的 openEuler 上使用 cppcheck 搭配 <code>-DA</code> 都可以输出包含 <code>A=1</code> 的信息</p>
+<p>测试失败原因是 grep 在之前的 cppcheck 的输出里匹配到 <code>A=1</code>，所以导致返回值为 0。这部分测试的逻辑是: 仅对于 22.03 版本 openEuler 上的 cppcheck 在以参数 <code>-DA</code> 执行时才会输出包含 <code>A=1</code> 的信息，但是个人猜测是在比 22.03 及更高版本的 openEuler 上使用 cppcheck 搭配 <code>-DA</code> 都可以输出包含 <code>A=1</code> 的信息</p>
 </blockquote>
 <h3 id="实验总结和讨论">实验总结和讨论</h3>
 <p>初步体验了使用 QEMU 构建 openEuler RISC-V 系统虚拟机的流程，以及使用 ssh 连接 QEMU 虚拟机的技巧。实验过程中最大感触是 mugen 的文档，相对于 cppcheck 这类产品的文档，不够详细，很多内容需要阅读源码来理解 (好处是精进了我对 shell 脚本编程的理解 &#x1f923;)。</p>

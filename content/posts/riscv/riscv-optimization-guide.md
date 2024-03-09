@@ -18,6 +18,7 @@ tags:
   - Optimization
   - Architecture
 categories:
+  - draft
   - RISC-V
 hiddenFromHomePage: false
 hiddenFromSearch: false

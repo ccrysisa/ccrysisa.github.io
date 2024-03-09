@@ -18,6 +18,7 @@ tags:
   - C
   - Memory
 categories:
+  - C
   - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false

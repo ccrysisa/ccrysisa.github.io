@@ -4,7 +4,83 @@
     <link>https://ccrysisa.github.io/categories/c/</link>
     <description>C - 分类 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/c/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 05 Mar 2024 16:32:40 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/c/" rel="self" type="application/rss+xml" /><item>
+  <title>基于 C 语言标准研究与系统程序安全议题</title>
+  <link>https://ccrysisa.github.io/posts/c-std-security/</link>
+  <pubDate>Tue, 05 Mar 2024 16:32:40 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-std-security/</guid>
+  <description><![CDATA[<blockquote>
+<p>借由阅读 C 语言标准理解规范是研究系统安全最基础的步骤，但很多人都忽略阅读规范这点，而正因对于规范的不了解、撰写程序的不严谨，导致漏洞的产生的案例比比皆是，例如 2014 年的 OpenSSL Heartbleed Attack<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 便是便是因为使用 memcpy 之际缺乏对应内存范围检查，造成相当大的危害。本文重新梳理 C 语言程序设计的细节，并借由调试器帮助理解程序的运作。</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>你所不知道的 C 语言: 开发工具和规格标准</title>
+  <link>https://ccrysisa.github.io/posts/c-standards/</link>
+  <pubDate>Wed, 28 Feb 2024 11:11:47 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-standards/</guid>
+  <description><![CDATA[<blockquote>
+<p>Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言在工程领域的瑰宝，里头充斥则各种“艺术”，往往会吓到初次接触的人们，但总是能够使用 C 语言标准和开发工具提供的扩展 (主要是来自 gcc 的 GNU extensions) 来解释。</p>
+<ul>
+<li>“工欲善其事，必先利其器”</li>
+</ul>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>你所不知道的 C 语言: 内存管理、对齐及硬体特性</title>
+  <link>https://ccrysisa.github.io/posts/c-memory/</link>
+  <pubDate>Tue, 27 Feb 2024 22:44:38 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-memory/</guid>
+  <description><![CDATA[<blockquote>
+<p>不少 C/C++ 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>你所不知道的 C 语言: bitwise 操作</title>
+  <link>https://ccrysisa.github.io/posts/c-bitwise/</link>
+  <pubDate>Fri, 23 Feb 2024 13:13:33 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-bitwise/</guid>
+  <description><![CDATA[<blockquote>
+<p>Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，颇多乍看像是魔法的 C 程式码就是 bitops 的组合。</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>你所不知道的 C 语言: 数值系统篇</title>
+  <link>https://ccrysisa.github.io/posts/c-numerics/</link>
+  <pubDate>Tue, 20 Feb 2024 11:13:57 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-numerics/</guid>
+  <description><![CDATA[<blockquote>
+<p>尽管数值系统并非 C 语言所持有，但在 Linux 核心大量存在 u8/u16/u32/u64 这样通过 typedef 所定义的类型，伴随着各种 alignment 存取，如果对数值系统的认知不够充分，可能立即就被阻拦在探索 Linux 核心之外——毕竟你完全搞不清楚，为何 Linux 核心存取特定资料需要绕一大圈。</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>你所不知道的 C 语言: linked list 和非连续内存</title>
+  <link>https://ccrysisa.github.io/posts/c-linked-list/</link>
+  <pubDate>Sat, 03 Feb 2024 10:44:56 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-linked-list/</guid>
+  <description><![CDATA[<blockquote>
+<p>无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>你所不知道的 C 语言: 指针篇</title>
+  <link>https://ccrysisa.github.io/posts/c-pointer/</link>
+  <pubDate>Sun, 14 Jan 2024 22:41:38 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-pointer/</guid>
+  <description><![CDATA[<blockquote>
+<p><em>「指针」 扮演 「记忆体」 和 「物件」 之间的桥梁</em></p>
+</blockquote>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/c-pointer"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>]]></description>
+</item>
+<item>
   <title>C 规格第 6 章 Language</title>
   <link>https://ccrysisa.github.io/posts/c-spec-ch6/</link>
   <pubDate>Thu, 11 Jan 2024 23:23:48 &#43;0800</pubDate>

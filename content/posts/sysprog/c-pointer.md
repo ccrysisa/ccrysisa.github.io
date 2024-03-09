@@ -18,6 +18,7 @@ tags:
   - C
   - Pointer
 categories:
+  - C
   - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false

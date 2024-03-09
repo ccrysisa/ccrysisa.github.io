@@ -18,6 +18,7 @@ tags:
   - Ranked-choice voting
   - Website
 categories:
+  - draft
   - Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false

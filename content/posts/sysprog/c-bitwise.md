@@ -18,6 +18,7 @@ tags:
   - C
   - Bitwise
 categories:
+  - C
   - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false
