@@ -1,4 +1,4 @@
-# Implementing TCP/IP in Rust
+# Rust Coding: Implementing TCP/IP in Rust
 
 
 > In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — https://tools.ietf.org/html/rfc793 — which describes the original protocol, with the goal of being able to set up and tear down a connection with a "real" TCP stack at the other end (netcat in particular). We're writing it using a user-space networking interface (see https://www.kernel.org/doc/Documentation/networking/tuntap.txt and the Rust bindings at https://docs.rs/tun-tap/).
@@ -188,14 +188,18 @@ NOTE BENE:  this diagram is only a summary and must not be taken as the total sp
 - https://datatracker.ietf.org/doc/html/rfc2398 
 - https://datatracker.ietf.org/doc/html/rfc2525
 - https://datatracker.ietf.org/doc/html/rfc791
+- https://www.saminiir.com/lets-code-tcp-ip-stack-3-tcp-handshake/
+- https://www.saminiir.com/lets-code-tcp-ip-stack-4-tcp-data-flow-socket-api/
+- https://www.saminiir.com/lets-code-tcp-ip-stack-5-tcp-retransmission/
 
 {{< admonition >}}
-- RFC 793 描述了原始的 TCP 协议的内容 
+- RFC 793 描述了原始的 TCP 协议的内容 (重点阅读 3.FUNCTIONAL SPECIFICATION )
 - RFC 1122 则是对原始的 TCP 功能的一些扩展进行说明
 - RFC 7414 的 Section 2 则对 TCP 的核心功能进行了简要描述
 - RFC 2398 描述了对实现的 TCP 的一些测试方法和工具
 - RFC 2525 说明了在实现 TCP 过程中可能会出现的错误，并指出可能导致错误的潜在问题
-- RFC 791 描述了 IP 协议
+- RFC 791 描述了 IP 协议 的内容
+- 最后 3 篇博客介绍了 TCP 协议相关术语和概念，可以搭配 RFC 793 阅读
 {{< /admonition >}}
 
 

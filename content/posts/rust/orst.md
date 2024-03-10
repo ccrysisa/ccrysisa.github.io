@@ -281,6 +281,8 @@ $ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys XXXXXX
 3.通过指定库源的方式来安装 R (如果未指定库源则还是从默认源进行下载 3.5 版本):
 ```bash
 $ sudo apt install buster-cran40 r-base
+$ R --version
+R version 4.3.3 (2024-02-29)
 ```
 
 大功告成，按照上面按照 ggplot2 即可
@@ -290,6 +292,7 @@ $ sudo apt install buster-cran40 r-base
 
 {{< admonition info >}}
 实作说明:
+- [x] 添加标准库的 sort_unstable 进入基准测试
 - [ ] 尝试实现 Merge sort
 {{< /admonition >}}
 

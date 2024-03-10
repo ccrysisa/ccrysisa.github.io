@@ -200,6 +200,63 @@ Partition(A,p,r)
 
 通过封装类型 `SortEvaluator` 及实现 trait `PartialEq`, `Eq`, `PartialOrd`, `Ord` 来统计排序过程中的比较操作 (`eq`, `partial_cmp`, `cmp`) 的次数。
 
+- [Why can\'t the Ord trait provide default implementations for the required methods from the inherited traits using the cmp function?](https://stackoverflow.com/questions/28387711/why-cant-the-ord-trait-provide-default-implementations-for-the-required-methods)
+
+### R and ggplot2
+
+```bash
+# install R
+$ sudo apt install r-base
+# install ggplot2 by R
+$ R
+> install.packages("ggplot2")
+```
+
+- [Are there Unix-like binaries for R?](https://cran.r-project.org/doc/FAQ/R-FAQ.html#Are-there-Unix_002dlike-binaries-for-R_003f)
+- https://ggplot2.tidyverse.org/
+
+{{< admonition type="question" open=false >}}
+deepin 软件源下载的 R 语言包可能版本过低 (3.5)，可以通过添加库源的方式来下载高版本的 R 语言包:
+
+1.添加 Debian buster (oldstable) 库源到 /etc/apt/sourcelist 里:
+```bash
+# https://mirrors.tuna.tsinghua.edu.cn/CRAN/
+deb http://cloud.r-project.org/bin/linux/debian buster-cran40/
+```
+
+2.更新软件，可能会遇到没有公钥的问题 (即出现下方的 NO_PUBKEY):
+```bash
+$ sudo apt update
+...
+  NO_PUBKEY XXXXXX
+...
+```
+
+此时可以 NO_PUBKEY 后的 XXXXXX 就是公钥，我们只需要将其添加一下即可:
+```bash
+$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys XXXXXX
+```
+
+添加完公钥后再重新更新一次软件源
+
+3.通过指定库源的方式来安装 R (如果未指定库源则还是从默认源进行下载 3.5 版本):
+```bash
+$ sudo apt install buster-cran40 r-base
+$ R --version
+R version 4.3.3 (2024-02-29)
+```
+
+大功告成，按照上面按照 ggplot2 即可
+{{< /admonition >}}
+
+## Homework
+
+{{< admonition info >}}
+实作说明:
+- [x] 添加标准库的 sort_unstable 进入基准测试
+- [ ] 尝试实现 Merge sort
+{{< /admonition >}}
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
