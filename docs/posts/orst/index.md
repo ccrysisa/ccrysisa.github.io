@@ -202,6 +202,9 @@ Partition(A,p,r)
 
 - [Why can\'t the Ord trait provide default implementations for the required methods from the inherited traits using the cmp function?](https://stackoverflow.com/questions/28387711/why-cant-the-ord-trait-provide-default-implementations-for-the-required-methods)
 
+{{< image src="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png" >}}
+{{< image src="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png" >}}
+
 ### R and ggplot2
 
 ```bash
@@ -246,7 +249,7 @@ $ R --version
 R version 4.3.3 (2024-02-29)
 ```
 
-大功告成，按照上面按照 ggplot2 即可
+大功告成，按照上面安装 ggplot2 即可
 {{< /admonition >}}
 
 ## Homework
@@ -255,6 +258,11 @@ R version 4.3.3 (2024-02-29)
 实作说明:
 - [x] 添加标准库的 sort_unstable 进入基准测试
 - [ ] 尝试实现 Merge sort
+- [ ] 尝试实现 Heapsort
+
+参考资料:
+- Wikipedia: [Merge sort](https://en.wikipedia.org/wiki/Merge_sort)
+- Wikipedia: [Heapsort](https://en.wikipedia.org/wiki/Heapsort)
 {{< /admonition >}}
 
 ## Documentations

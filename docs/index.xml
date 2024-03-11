@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 08 Mar 2024 21:14:30 &#43;0800</lastBuildDate>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 11 Mar 2024 16:23:57 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
@@ -17,6 +17,14 @@
 </blockquote>]]></description>
 </item>
 <item>
+  <title>并行程序设计: 执行顺序</title>
+  <link>https://ccrysisa.github.io/posts/concurrency-ordering/</link>
+  <pubDate>Mon, 11 Mar 2024 16:23:57 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/concurrency-ordering/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>Rust Coding: Build a Ranked-choice voting site</title>
   <link>https://ccrysisa.github.io/posts/ranked-choice-voting-site/</link>
   <pubDate>Fri, 08 Mar 2024 21:14:30 &#43;0800</pubDate>
@@ -25,12 +33,14 @@
   <description><![CDATA[]]></description>
 </item>
 <item>
-  <title>并行程序设计</title>
-  <link>https://ccrysisa.github.io/posts/concurrency/</link>
+  <title>并行程序设计: 概念</title>
+  <link>https://ccrysisa.github.io/posts/concurrency-concepts/</link>
   <pubDate>Fri, 08 Mar 2024 17:29:25 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/concurrency/</guid>
-  <description><![CDATA[]]></description>
+  <guid>https://ccrysisa.github.io/posts/concurrency-concepts/</guid>
+  <description><![CDATA[<blockquote>
+<p>透过建立 Concurrency 和 Parallelism、Mutex 与 Semaphore 的基本概念，本讲座将透过 POSIX Tread 探讨 thread pool, Lock-Free Programming, lock-free 使用的 atomic 操作, memory ordering, M:N threading model 等进阶议题。</p>
+</blockquote>]]></description>
 </item>
 <item>
   <title>openEuler RISC-V 系统: QEMU 仿真和 Mugen 测试框架</title>
@@ -91,19 +101,6 @@
   <guid>https://ccrysisa.github.io/posts/channels/</guid>
   <description><![CDATA[<blockquote>
 <p>In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mpsc) channels, by re-implementing some of the std::sync::mpsc types from the standard library. As part of that, we cover what channels are used for, how they work at a high level, different common channel variants, and common channel implementations. In the process, we go over some common Rust concurrency primitives like Mutex and Condvar.</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: 开发工具和规格标准</title>
-  <link>https://ccrysisa.github.io/posts/c-standards/</link>
-  <pubDate>Wed, 28 Feb 2024 11:11:47 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-standards/</guid>
-  <description><![CDATA[<blockquote>
-<p>Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言在工程领域的瑰宝，里头充斥则各种“艺术”，往往会吓到初次接触的人们，但总是能够使用 C 语言标准和开发工具提供的扩展 (主要是来自 gcc 的 GNU extensions) 来解释。</p>
-<ul>
-<li>“工欲善其事，必先利其器”</li>
-</ul>
 </blockquote>]]></description>
 </item>
 </channel>

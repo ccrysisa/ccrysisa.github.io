@@ -13,8 +13,8 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
 <meta itemprop="description" content="
 In this Crust of Rust episode, we implement some common sorting algorithms in Rust. This episode doesn&#39;t aim to explain any single concept, but rather showcase what writing &ldquo;normal&rdquo; Rust code is like, and explaining various &ldquo;odd bits&rdquo; we come across along the way. The thinking here is that sorting algorithms are both familiar and easy to compare across languages, so this might serve as a good bridge into Rust if you are familiar with other languages.
 "><meta itemprop="datePublished" content="2024-03-04T15:02:28+08:00" />
-<meta itemprop="dateModified" content="2024-03-10T17:33:09+08:00" />
-<meta itemprop="wordCount" content="2013"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-03-11T13:25:58+08:00" />
+<meta itemprop="wordCount" content="2028"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Sort,Algorithm," /><meta property="og:title" content="Crust of Rust: Sorting Algorithms" />
 <meta property="og:description" content="
 In this Crust of Rust episode, we implement some common sorting algorithms in Rust. This episode doesn&#39;t aim to explain any single concept, but rather showcase what writing &ldquo;normal&rdquo; Rust code is like, and explaining various &ldquo;odd bits&rdquo; we come across along the way. The thinking here is that sorting algorithms are both familiar and easy to compare across languages, so this might serve as a good bridge into Rust if you are familiar with other languages.
@@ -22,7 +22,7 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/orst/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-03-04T15:02:28+08:00" />
-<meta property="article:modified_time" content="2024-03-10T17:33:09+08:00" />
+<meta property="article:modified_time" content="2024-03-11T13:25:58+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Crust of Rust: Sorting Algorithms"/>
@@ -43,8 +43,8 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/orst\/"
-    },"genre": "posts","keywords": "Rust, Sort, Algorithm","wordcount":  2013 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/orst\/","datePublished": "2024-03-04T15:02:28+08:00","dateModified": "2024-03-10T17:33:09+08:00","publisher": {
+    },"genre": "posts","keywords": "Rust, Sort, Algorithm","wordcount":  2028 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/orst\/","datePublished": "2024-03-04T15:02:28+08:00","dateModified": "2024-03-11T13:25:58+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -159,7 +159,7 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-04 15:02:28"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="更新于 2024-03-10 17:33:09"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-10">2024-03-10</time></span>&nbsp;<span title="2013 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-04 15:02:28"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="更新于 2024-03-11 13:25:58"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-11">2024-03-11</time></span>&nbsp;<span title="2028 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -502,6 +502,8 @@ $$
 <ul>
 <li><a href="https://stackoverflow.com/questions/28387711/why-cant-the-ord-trait-provide-default-implementations-for-the-required-methods"target="_blank" rel="external nofollow noopener noreferrer">Why can't the Ord trait provide default implementations for the required methods from the inherited traits using the cmp function?</a></li>
 </ul>
+<p><a class="lightgallery" href="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png?size=large" data-thumbnail="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png?size=small" data-sub-html="<h2>https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png</h2>"><img loading="lazy" src="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png" srcset="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png?size=small, https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png?size=medium 1.5x, https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png?size=large 2x" sizes="auto" data-title="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png" data-alt="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png?size=large" data-thumbnail="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png?size=small" data-sub-html="<h2>https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png</h2>"><img loading="lazy" src="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png" srcset="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png?size=small, https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png?size=medium 1.5x, https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png?size=large 2x" sizes="auto" data-title="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png" data-alt="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a></p>
 <h3 id="r-and-ggplot2">R and ggplot2</h3>
 <div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -573,7 +575,7 @@ $$
 </span></span><span class="line"><span class="cl">$ R --version
 </span></span><span class="line"><span class="cl">R version 4.3.3 <span class="o">(</span>2024-02-29<span class="o">)</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>大功告成，按照上面按照 ggplot2 即可</p>
+</div><p>大功告成，按照上面安装 ggplot2 即可</p>
 </div>
     </div>
   </div>
@@ -587,7 +589,14 @@ $$
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 添加标准库的 sort_unstable 进入基准测试</li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 尝试实现 Merge sort</li>
-</ul></div>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 尝试实现 Heapsort</li>
+</ul>
+<p>参考资料:</p>
+<ul>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Merge_sort"target="_blank" rel="external nofollow noopener noreferrer">Merge sort</a></li>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Heapsort"target="_blank" rel="external nofollow noopener noreferrer">Heapsort</a></li>
+</ul>
+</div>
     </div>
   </div>
 <h2 id="documentations">Documentations</h2>
@@ -670,7 +679,7 @@ $$
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-03-10 17:33:09">更新于 2024-03-10&nbsp;</span>
+        <span title="更新于 2024-03-11 13:25:58">更新于 2024-03-11&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/orst/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -699,7 +708,7 @@ $$
       <a href="/posts/c-std-security/" class="post-nav-item" rel="next" title="基于 C 语言标准研究与系统程序安全议题">基于 C 语言标准研究与系统程序安全议题<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
