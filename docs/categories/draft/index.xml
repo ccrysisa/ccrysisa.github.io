@@ -24,16 +24,6 @@
 </blockquote>]]></description>
 </item>
 <item>
-  <title>Rust Coding: Implementing TCP/IP in Rust</title>
-  <link>https://ccrysisa.github.io/posts/rust-tcp/</link>
-  <pubDate>Sat, 17 Feb 2024 19:01:53 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/rust-tcp/</guid>
-  <description><![CDATA[<blockquote>
-<p>In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — <a href="https://tools.ietf.org/html/rfc793"target="_blank" rel="external nofollow noopener noreferrer">https://tools.ietf.org/html/rfc793</a> — which describes the original protocol, with the goal of being able to set up and tear down a connection with a &ldquo;real&rdquo; TCP stack at the other end (netcat in particular). We&rsquo;re writing it using a user-space networking interface (see <a href="https://www.kernel.org/doc/Documentation/networking/tuntap.txt"target="_blank" rel="external nofollow noopener noreferrer">https://www.kernel.org/doc/Documentation/networking/tuntap.txt</a> and the Rust bindings at <a href="https://docs.rs/tun-tap/%29"target="_blank" rel="external nofollow noopener noreferrer">https://docs.rs/tun-tap/)</a>.</p>
-</blockquote>]]></description>
-</item>
-<item>
   <title>Hello, World</title>
   <link>https://ccrysisa.github.io/posts/hello_world/</link>
   <pubDate>Sat, 23 Dec 2023 20:23:12 &#43;0800</pubDate>

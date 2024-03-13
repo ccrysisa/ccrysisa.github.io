@@ -239,7 +239,7 @@ Partition(A,p,r)
 
 通过封装类型 `SortEvaluator` 及实现 trait `PartialEq`, `Eq`, `PartialOrd`, `Ord` 来统计排序过程中的比较操作 (`eq`, `partial_cmp`, `cmp`) 的次数。
 
-- [Why can\'t the Ord trait provide default implementations for the required methods from the inherited traits using the cmp function?](https://stackoverflow.com/questions/28387711/why-cant-the-ord-trait-provide-default-implementations-for-the-required-methods)
+Stack Overflow: [Why can\'t the Ord trait provide default implementations for the required methods from the inherited traits using the cmp function?](https://stackoverflow.com/questions/28387711/why-cant-the-ord-trait-provide-default-implementations-for-the-required-methods)
 
 {{< image src="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png" >}}
 {{< image src="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png" >}}

@@ -1,5 +1,5 @@
 ---
-title: "Rust: 进行中的未来"
+title: "Why Rust?"
 subtitle:
 date: 2023-12-28T20:18:03+08:00
 draft: false

@@ -1,4 +1,4 @@
-# Rust: 进行中的未来
+# Why Rust?
 
 
 ## Rust in 100 Seconds
@@ -37,5 +37,5 @@ YouTube: [Visualizing memory layout of Rust's data types](https://www.youtube.co
 ---
 
 > 作者: [ccrysisa](https://github.com/ccrysisa)  
-> URL: https://ccrysisa.github.io/posts/rust-introduction/  
+> URL: https://ccrysisa.github.io/posts/why-rust-/  
 
