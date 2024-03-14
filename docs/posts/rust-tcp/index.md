@@ -1,4 +1,4 @@
-# Rust Coding: Implementing TCP/IP in Rust
+# Impl Rust: TCP/IP
 
 
 > In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — https://tools.ietf.org/html/rfc793 — which describes the original protocol, with the goal of being able to set up and tear down a connection with a "real" TCP stack at the other end (netcat in particular). We're writing it using a user-space networking interface (see https://www.kernel.org/doc/Documentation/networking/tuntap.txt and the Rust bindings at https://docs.rs/tun-tap/).

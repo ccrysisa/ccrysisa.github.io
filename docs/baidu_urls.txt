@@ -1,6 +1,5 @@
 https://ccrysisa.github.io/posts/linux2023/
 https://ccrysisa.github.io/posts/concurrency-ordering/
-https://ccrysisa.github.io/posts/ranked-choice-voting-site/
 https://ccrysisa.github.io/posts/concurrency-concepts/
 https://ccrysisa.github.io/posts/openeuler-riscv-qemu-mugen/
 https://ccrysisa.github.io/posts/c-std-security/
