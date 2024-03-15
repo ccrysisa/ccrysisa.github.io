@@ -92,11 +92,15 @@ C 语言不允许 nested function 以简化编译器的设计 (当然现在的 g
 
 ## Stack
 
+### Layout
+
 {{< image src="https://imgur-backup.hackmd.io/S5QUT5I.png" >}}
 
 [System V Application Binary Interface AMD64 Architecture Processor Supplement](https://github.com/hjl-tools/x86-psABI/wiki/x86-64-psABI-1.0.pdf) [PDF]
 
 {{< image src="https://imgur-backup.hackmd.io/Fec7Vyx.png" >}}
+
+### PEDA
 
 实验需要使用到 GDB 的 PEDA 扩展:
 
@@ -111,6 +115,16 @@ $ echo "source ~/peda/peda.py" >> ~/.gdbinit
 动态追踪 Stack 实验的 call funcA 可以通过 GDB 指令 `stepi` 或 `si` 来实现
 {{< /admonition >}}
 
+### stack-based buffer overflow
+
+## ROP
+
 ## heap
 
 使用 malloc 时操作系统可能会 overcommit，而正因为这个 overcommit 的特性，malloc 返回有效地址也不见得是安全的。除此之外，因为 overcommit，使用 malloc 后立即搭配使用 memset 代价也很高 (因为操作系统 overcommit 可能会先分配一个小空间而不是一下子分配全部，因为它优先重复使用之前已使用过的小块空间)，并且如果是设置为 0，则有可能会对原本为 0 的空间进行重复设置，降低效能。此时可以应该善用 calloc，虽然也会 overcommit，但是会保证分配空间的前面都是 0 (因为优先分配的是需要操作系统参与的大块空间)，无需使用 memset 这类操作而降低效能。
+
+### malloc / free
+
+## RAII
+
+## setjmp & longjmp
