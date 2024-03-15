@@ -4,7 +4,17 @@
     <link>https://ccrysisa.github.io/categories/c/</link>
     <description>C - 分类 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 05 Mar 2024 16:32:40 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/c/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 15 Mar 2024 10:40:59 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/c/" rel="self" type="application/rss+xml" /><item>
+  <title>你所不知道的 C 语言: 函数呼叫篇</title>
+  <link>https://ccrysisa.github.io/posts/c-function/</link>
+  <pubDate>Fri, 15 Mar 2024 10:40:59 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-function/</guid>
+  <description><![CDATA[<blockquote>
+<p>本講座將帶著學員重新探索函式呼叫背後的原理，從程式語言和計算機結構的發展簡史談起，讓學員自電腦軟硬體演化過程去掌握 calling convention 的考量，伴隨著 stack 和 heap 的操作，再探討 C 程式如何處理函式呼叫、跨越函式間的跳躍 (如 <a href="https://man7.org/linux/man-pages/man3/setjmp.3.html"target="_blank" rel="external nofollow noopener noreferrer">setjmp</a> 和 <a href="https://linux.die.net/man/3/longjmp"target="_blank" rel="external nofollow noopener noreferrer">longjmp</a>)，再來思索資訊安全和執行效率的議題。</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>基于 C 语言标准研究与系统程序安全议题</title>
   <link>https://ccrysisa.github.io/posts/c-std-security/</link>
   <pubDate>Tue, 05 Mar 2024 16:32:40 &#43;0800</pubDate>
@@ -22,9 +32,9 @@
   <guid>https://ccrysisa.github.io/posts/c-standards/</guid>
   <description><![CDATA[<blockquote>
 <p>Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言在工程领域的瑰宝，里头充斥则各种“艺术”，往往会吓到初次接触的人们，但总是能够使用 C 语言标准和开发工具提供的扩展 (主要是来自 gcc 的 GNU extensions) 来解释。</p>
-<ul>
-<li>“工欲善其事，必先利其器”</li>
-</ul>
+<blockquote>
+<p>“工欲善其事，必先利其器”</p>
+</blockquote>
 </blockquote>]]></description>
 </item>
 <item>
@@ -95,17 +105,6 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-spec-ch7/</guid>
   <description><![CDATA[<p>C 语言规格书 Chapter 7 - Library 阅读记录。</p>]]></description>
-</item>
-<item>
-  <title>C 语言规格书 阅读记录</title>
-  <link>https://ccrysisa.github.io/posts/c-specification/</link>
-  <pubDate>Sat, 06 Jan 2024 16:07:25 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-specification/</guid>
-  <description><![CDATA[<p>C 语言规格书阅读学习记录。
-规格书草案版本为 n1256，对应 C99 标准，对应的 <a href="https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf"target="_blank" rel="external nofollow noopener noreferrer">PDF 下载地址</a>。
-也配合 C11 标准来阅读，草案版本 n1570，对应的 <a href="http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1570.pdf"target="_blank" rel="external nofollow noopener noreferrer">PDF 下载地址</a>。
-阅读规格书需要一定的体系结构、编译原理的相关知识，但不需要很高的程度。请善用检索工具，在阅读规格书时遇到术语时，请先在规格书中进行检索，因为极大可能是规格书自己定义的术语。</p>]]></description>
 </item>
 </channel>
 </rss>

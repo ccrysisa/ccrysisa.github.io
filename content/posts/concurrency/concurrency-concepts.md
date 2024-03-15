@@ -80,6 +80,4 @@ Mutex 和 Semaphore 在实作上可能是没有差异的 (例如早期的 Linux)
 {{< image src="/images/c/cnp.png" caption="Concurrent, non-parallel execution" >}}
 {{< image src="/images/c/cp.png" caption="Concurrent, parallel execution" >}}
 
-{{< admonition info >}}
 - Tim Mattson (Intel): [Introduction to OpenMP](https://www.youtube.com/playlist?list=PLLX-Q6B8xqZ8n8bwjGdzBJ25X2utwnoEG) [YouTube]
-{{< /admonition >}}

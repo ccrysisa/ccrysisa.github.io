@@ -42,7 +42,7 @@ repost:
 ---
 
 > Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言在工程领域的瑰宝，里头充斥则各种“艺术”，往往会吓到初次接触的人们，但总是能够使用 C 语言标准和开发工具提供的扩展 (主要是来自 gcc 的 GNU extensions) 来解释。
-> - “工欲善其事，必先利其器”   
+> > “工欲善其事，必先利其器”   
 
 <!--more-->
 
@@ -75,7 +75,7 @@ repost:
 
 - C++ 标准更新飞快: C++11, C++14, C++17, ...
 
-{{< image src="https://imgur-backup.hackmd.io/ITVm6gI.png" >}}
+{{< image src="https://i.imgur.com/ITVm6gI.png" >}}
 
 > 从 C99, C++98 开始，C 语言和 C++ 分道扬镳
 

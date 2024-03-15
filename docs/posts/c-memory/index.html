@@ -14,7 +14,7 @@
 不少 C/C&#43;&#43; 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。
 "><meta itemprop="datePublished" content="2024-02-27T22:44:38+08:00" />
 <meta itemprop="dateModified" content="2024-03-09T20:11:06+08:00" />
-<meta itemprop="wordCount" content="1645"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1659"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Memory," /><meta property="og:title" content="你所不知道的 C 语言: 内存管理、对齐及硬体特性" />
 <meta property="og:description" content="
 不少 C/C&#43;&#43; 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。
@@ -43,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-memory\/"
-    },"genre": "posts","keywords": "Sysprog, C, Memory","wordcount":  1645 ,
+    },"genre": "posts","keywords": "Sysprog, C, Memory","wordcount":  1659 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-memory\/","datePublished": "2024-02-27T22:44:38+08:00","dateModified": "2024-03-09T20:11:06+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -159,7 +159,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-27 22:44:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-27">2024-02-27</time></span>&nbsp;<span title="更新于 2024-03-09 20:11:06"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-09">2024-03-09</time></span>&nbsp;<span title="1645 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-27 22:44:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-27">2024-02-27</time></span>&nbsp;<span title="更新于 2024-03-09 20:11:06"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-09">2024-03-09</time></span>&nbsp;<span title="1659 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -271,6 +271,9 @@
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> Stack Overflow: <a href="https://stackoverflow.com/questions/1699057/why-are-two-different-concepts-both-called-heap"target="_blank" rel="external nofollow noopener noreferrer">Why are two different concepts both called &ldquo;heap&rdquo;?</a></li>
 </ul>
+<blockquote>
+<p>Several authors began about 1975 to call the pool of available memory a &ldquo;heap.&rdquo;</p>
+</blockquote>
 <h2 id="data-alignment">Data alignment</h2>
 <p>一个 data object 具有两个特性:</p>
 <ul>

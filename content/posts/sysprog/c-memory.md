@@ -109,6 +109,7 @@ Linux 系统会提供一些内存管理的 API 和机制:
 ## 堆 Heap
 
 - [x] Stack Overflow: [Why are two different concepts both called "heap"?](https://stackoverflow.com/questions/1699057/why-are-two-different-concepts-both-called-heap)
+> Several authors began about 1975 to call the pool of available memory a "heap."
 
 ## Data alignment
 
