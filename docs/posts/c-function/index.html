@@ -8,16 +8,16 @@
     <title>你所不知道的 C 语言: 函数呼叫篇 - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="
-本講座將帶著學員重新探索函式呼叫背後的原理，從程式語言和計算機結構的發展簡史談起，讓學員自電腦軟硬體演化過程去掌握 calling convention 的考量，伴隨著 stack 和 heap 的操作，再探討 C 程式如何處理函式呼叫、跨越函式間的跳躍 (如 setjmp 和 longjmp)，再來思索資訊安全和執行效率的議題。
+本讲座将带着学员重新探索函数呼叫背后的原理，从程序语言和计算机结构的发展简史谈起，让学员自电脑软硬件演化过程去掌握 calling convention 的考量，伴随着 stack 和 heap 的操作，再探讨 C 程序如何处理函数呼叫、跨越函数间的跳跃 (如 setjmp 和 longjmp)，再来思索资讯安全和执行效率的议题。着重在计算机架构对应的支援和行为分析。
 " /><meta name="keywords" content='Sysprog, C, Function' /><meta itemprop="name" content="你所不知道的 C 语言: 函数呼叫篇">
 <meta itemprop="description" content="
-本講座將帶著學員重新探索函式呼叫背後的原理，從程式語言和計算機結構的發展簡史談起，讓學員自電腦軟硬體演化過程去掌握 calling convention 的考量，伴隨著 stack 和 heap 的操作，再探討 C 程式如何處理函式呼叫、跨越函式間的跳躍 (如 setjmp 和 longjmp)，再來思索資訊安全和執行效率的議題。
+本讲座将带着学员重新探索函数呼叫背后的原理，从程序语言和计算机结构的发展简史谈起，让学员自电脑软硬件演化过程去掌握 calling convention 的考量，伴随着 stack 和 heap 的操作，再探讨 C 程序如何处理函数呼叫、跨越函数间的跳跃 (如 setjmp 和 longjmp)，再来思索资讯安全和执行效率的议题。着重在计算机架构对应的支援和行为分析。
 "><meta itemprop="datePublished" content="2024-03-15T10:40:59+08:00" />
 <meta itemprop="dateModified" content="2024-03-15T23:47:54+08:00" />
-<meta itemprop="wordCount" content="1463"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1482"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Function," /><meta property="og:title" content="你所不知道的 C 语言: 函数呼叫篇" />
 <meta property="og:description" content="
-本講座將帶著學員重新探索函式呼叫背後的原理，從程式語言和計算機結構的發展簡史談起，讓學員自電腦軟硬體演化過程去掌握 calling convention 的考量，伴隨著 stack 和 heap 的操作，再探討 C 程式如何處理函式呼叫、跨越函式間的跳躍 (如 setjmp 和 longjmp)，再來思索資訊安全和執行效率的議題。
+本讲座将带着学员重新探索函数呼叫背后的原理，从程序语言和计算机结构的发展简史谈起，让学员自电脑软硬件演化过程去掌握 calling convention 的考量，伴随着 stack 和 heap 的操作，再探讨 C 程序如何处理函数呼叫、跨越函数间的跳跃 (如 setjmp 和 longjmp)，再来思索资讯安全和执行效率的议题。着重在计算机架构对应的支援和行为分析。
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-function/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
@@ -27,7 +27,7 @@
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 函数呼叫篇"/>
 <meta name="twitter:description" content="
-本講座將帶著學員重新探索函式呼叫背後的原理，從程式語言和計算機結構的發展簡史談起，讓學員自電腦軟硬體演化過程去掌握 calling convention 的考量，伴隨著 stack 和 heap 的操作，再探討 C 程式如何處理函式呼叫、跨越函式間的跳躍 (如 setjmp 和 longjmp)，再來思索資訊安全和執行效率的議題。
+本讲座将带着学员重新探索函数呼叫背后的原理，从程序语言和计算机结构的发展简史谈起，让学员自电脑软硬件演化过程去掌握 calling convention 的考量，伴随着 stack 和 heap 的操作，再探讨 C 程序如何处理函数呼叫、跨越函数间的跳跃 (如 setjmp 和 longjmp)，再来思索资讯安全和执行效率的议题。着重在计算机架构对应的支援和行为分析。
 "/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -43,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-function\/"
-    },"genre": "posts","keywords": "Sysprog, C, Function","wordcount":  1463 ,
+    },"genre": "posts","keywords": "Sysprog, C, Function","wordcount":  1482 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-function\/","datePublished": "2024-03-15T10:40:59+08:00","dateModified": "2024-03-15T23:47:54+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -159,7 +159,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-15 10:40:59"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-15">2024-03-15</time></span>&nbsp;<span title="更新于 2024-03-15 23:47:54"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-15">2024-03-15</time></span>&nbsp;<span title="1463 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-15 10:40:59"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-15">2024-03-15</time></span>&nbsp;<span title="更新于 2024-03-15 23:47:54"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-15">2024-03-15</time></span>&nbsp;<span title="1482 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -170,7 +170,7 @@
     <li><a href="#function-prototype">function prototype</a></li>
     <li><a href="#编程语言的-function">编程语言的 function</a></li>
     <li><a href="#process-与-c-程序">Process 与 C 程序</a></li>
-    <li><a href="#stack">Stack</a>
+    <li><a href="#stack">stack</a>
       <ul>
         <li><a href="#layout">Layout</a></li>
         <li><a href="#peda">PEDA</a></li>
@@ -188,7 +188,7 @@
   </ul>
 </nav></div>
       </div><div class="content" id="content"><blockquote>
-<p>本講座將帶著學員重新探索函式呼叫背後的原理，從程式語言和計算機結構的發展簡史談起，讓學員自電腦軟硬體演化過程去掌握 calling convention 的考量，伴隨著 stack 和 heap 的操作，再探討 C 程式如何處理函式呼叫、跨越函式間的跳躍 (如 <a href="https://man7.org/linux/man-pages/man3/setjmp.3.html"target="_blank" rel="external nofollow noopener noreferrer">setjmp</a> 和 <a href="https://linux.die.net/man/3/longjmp"target="_blank" rel="external nofollow noopener noreferrer">longjmp</a>)，再來思索資訊安全和執行效率的議題。</p>
+<p>本讲座将带着学员重新探索函数呼叫背后的原理，从程序语言和计算机结构的发展简史谈起，让学员自电脑软硬件演化过程去掌握 calling convention 的考量，伴随着 stack 和 heap 的操作，再探讨 C 程序如何处理函数呼叫、跨越函数间的跳跃 (如 <a href="https://man7.org/linux/man-pages/man3/setjmp.3.html"target="_blank" rel="external nofollow noopener noreferrer">setjmp</a> 和 <a href="https://linux.die.net/man/3/longjmp"target="_blank" rel="external nofollow noopener noreferrer">longjmp</a>)，再来思索资讯安全和执行效率的议题。着重在计算机架构对应的支援和行为分析。</p>
 </blockquote>
 <ul>
 <li><a href="https://hackmd.io/@sysprog/c-function"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
@@ -251,7 +251,7 @@
 <p>In computer software, an application binary interface (ABI) is an interface between two binary program modules. Often, one of these modules is a library or operating system facility, and the other is a program that is being run by a user.</p>
 </blockquote>
 <p>在 Intel x86 架构中，当返回值可以放在寄存器时就放在寄存器中返回，以提高效能，如果放不下，则将返回值的起始地址放在寄存器中返回。</p>
-<h2 id="stack">Stack</h2>
+<h2 id="stack">stack</h2>
 <h3 id="layout">Layout</h3>
 <a class="lightgallery" href="https://imgur-backup.hackmd.io/S5QUT5I.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/S5QUT5I.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/S5QUT5I.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/S5QUT5I.png" srcset="https://imgur-backup.hackmd.io/S5QUT5I.png?size=small, https://imgur-backup.hackmd.io/S5QUT5I.png?size=medium 1.5x, https://imgur-backup.hackmd.io/S5QUT5I.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/S5QUT5I.png" data-alt="https://imgur-backup.hackmd.io/S5QUT5I.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p><a href="https://github.com/hjl-tools/x86-psABI/wiki/x86-64-psABI-1.0.pdf"target="_blank" rel="external nofollow noopener noreferrer">System V Application Binary Interface AMD64 Architecture Processor Supplement</a> [PDF]</p>

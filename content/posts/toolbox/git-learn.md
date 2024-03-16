@@ -17,7 +17,7 @@ tags:
   - Git
   - GitHub
 categories:
-  - Git
+  - Toolbox
   - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false

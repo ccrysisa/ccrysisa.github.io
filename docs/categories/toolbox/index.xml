@@ -1,10 +1,18 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>Git - 分类 - KZnight&#39;s Blog</title>
-    <link>https://ccrysisa.github.io/categories/git/</link>
-    <description>Git - 分类 - KZnight&#39;s Blog</description>
+    <title>Toolbox - 分类 - KZnight&#39;s Blog</title>
+    <link>https://ccrysisa.github.io/categories/toolbox/</link>
+    <description>Toolbox - 分类 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/git/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/toolbox/" rel="self" type="application/rss+xml" /><item>
+  <title>程序调试工具 GDB</title>
+  <link>https://ccrysisa.github.io/posts/debug-gdb/</link>
+  <pubDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/debug-gdb/</guid>
+  <description><![CDATA[<p>大型开源项目的规模十分庞大，例如使用 Rust 编写的 Servo 浏览器，这个项目有近十万行代码。在开发规模如此庞大的项目时，了解如何通过正确的方式进行调试非常重要，因为这样可以帮助开发者快速地找到瓶颈。</p>]]></description>
+</item>
+<item>
   <title>Git/GitHub 资源与问题汇总</title>
   <link>https://ccrysisa.github.io/posts/git/</link>
   <pubDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</pubDate>

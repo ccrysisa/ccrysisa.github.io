@@ -17,7 +17,7 @@ tags:
   - Git
   - GitHub
 categories:
-  - Git
+  - Toolbox
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

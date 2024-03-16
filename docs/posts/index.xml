@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/posts/</link>
     <description>所有文章 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 16 Mar 2024 10:59:36 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 16 Mar 2024 20:56:18 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -12,6 +12,18 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>你所不知道的 C 语言: 递归呼叫篇</title>
+  <link>https://ccrysisa.github.io/posts/c-recursion/</link>
+  <pubDate>Sat, 16 Mar 2024 20:56:18 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-recursion/</guid>
+  <description><![CDATA[<blockquote>
+<p>在许多应用程序中，递归 (recursion) 可以简单又优雅地解决貌似繁琐的问题，也就是不断地拆解原有问题为相似的子问题，直到无法拆解为止，并且定义最简化状况的处理机制，一如数学思维。递归对 C 语言程序开发者来说，绝对不会陌生，但能掌握者却少，很多人甚至难以讲出汉诺塔之外的使用案例。</p>
+<p>究竟递归是如何优雅地解决真实世界的问题，又如何兼顾执行效率呢》我们从运作原理开始探讨，搭配若干 C 程序解说，并且我们将以简化过的 UNIX 工具为例，分析透过递归来大幅缩减程式码。</p>
+<p>或许跟你想象中不同，Linux 核心的原始程式码里头也用到递归函数呼叫，特别在较复杂的实作，例如文件系统，善用递归可大幅缩减程式码，但这也导致追踪程序运作的难度大增。</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -31,7 +43,7 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/c-function/</guid>
   <description><![CDATA[<blockquote>
-<p>本講座將帶著學員重新探索函式呼叫背後的原理，從程式語言和計算機結構的發展簡史談起，讓學員自電腦軟硬體演化過程去掌握 calling convention 的考量，伴隨著 stack 和 heap 的操作，再探討 C 程式如何處理函式呼叫、跨越函式間的跳躍 (如 <a href="https://man7.org/linux/man-pages/man3/setjmp.3.html"target="_blank" rel="external nofollow noopener noreferrer">setjmp</a> 和 <a href="https://linux.die.net/man/3/longjmp"target="_blank" rel="external nofollow noopener noreferrer">longjmp</a>)，再來思索資訊安全和執行效率的議題。</p>
+<p>本讲座将带着学员重新探索函数呼叫背后的原理，从程序语言和计算机结构的发展简史谈起，让学员自电脑软硬件演化过程去掌握 calling convention 的考量，伴随着 stack 和 heap 的操作，再探讨 C 程序如何处理函数呼叫、跨越函数间的跳跃 (如 <a href="https://man7.org/linux/man-pages/man3/setjmp.3.html"target="_blank" rel="external nofollow noopener noreferrer">setjmp</a> 和 <a href="https://linux.die.net/man/3/longjmp"target="_blank" rel="external nofollow noopener noreferrer">longjmp</a>)，再来思索资讯安全和执行效率的议题。着重在计算机架构对应的支援和行为分析。</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -90,17 +102,6 @@
   <guid>https://ccrysisa.github.io/posts/linux-dev-review/</guid>
   <description><![CDATA[<blockquote>
 <p>本講座將以 Thorsten Leemhuis 在 FOSDEM 2020 開場演說 &ldquo;Linux kernel – Solving big problems in small steps for more than 20 years&rdquo; (slides) 為主軸，嘗試歸納自 21 世紀第一年開始的 Linux 核心 2.4 版到如今的 5.x 版，中間核心開發者如何克服 SMP (Symmetric multiprocessing), scalability, 及各式硬體架構和周邊裝置支援等難題，過程中提出全面移除 BKL (Big kernel lock)、實作虛擬化技術 (如 Xen 和 KVM)、提出 namespace 和 cgroups 從而確立容器化 (container) 的能力，再來是核心發展的明星技術 eBPF 會在既有的基礎之上，帶來 XDP 和哪些令人驚豔的機制呢？又，Linux 核心終於正式納入發展十餘年的 PREEMPT_RT，使得 Linux 核心得以成為硬即時的作業系統，對內部設計有哪些衝擊？AIO 後繼的 io_uring 讓 Linux 有更優雅且高效的非同步 I/O 存取，我們該如何看待？</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>RISC-V Optimization Guide</title>
-  <link>https://ccrysisa.github.io/posts/riscv-optimization-guide/</link>
-  <pubDate>Thu, 29 Feb 2024 23:44:29 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/riscv-optimization-guide/</guid>
-  <description><![CDATA[<blockquote>
-<p>The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.</p>
-<p>近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。</p>
 </blockquote>]]></description>
 </item>
 </channel>

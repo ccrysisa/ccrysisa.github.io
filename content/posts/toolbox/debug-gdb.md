@@ -20,6 +20,7 @@ tags:
   - C/C++
   - Sysprog
 categories:
+  - Toolbox
   - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false

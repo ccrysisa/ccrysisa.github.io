@@ -1,7 +1,7 @@
 # 你所不知道的 C 语言: 函数呼叫篇
 
 
-> 本講座將帶著學員重新探索函式呼叫背後的原理，從程式語言和計算機結構的發展簡史談起，讓學員自電腦軟硬體演化過程去掌握 calling convention 的考量，伴隨著 stack 和 heap 的操作，再探討 C 程式如何處理函式呼叫、跨越函式間的跳躍 (如 [setjmp](https://man7.org/linux/man-pages/man3/setjmp.3.html) 和 [longjmp](https://linux.die.net/man/3/longjmp))，再來思索資訊安全和執行效率的議題。
+> 本讲座将带着学员重新探索函数呼叫背后的原理，从程序语言和计算机结构的发展简史谈起，让学员自电脑软硬件演化过程去掌握 calling convention 的考量，伴随着 stack 和 heap 的操作，再探讨 C 程序如何处理函数呼叫、跨越函数间的跳跃 (如 [setjmp](https://man7.org/linux/man-pages/man3/setjmp.3.html) 和 [longjmp](https://linux.die.net/man/3/longjmp))，再来思索资讯安全和执行效率的议题。着重在计算机架构对应的支援和行为分析。
 
 <!--more-->
 
@@ -50,7 +50,7 @@ C 语言不允许 nested function 以简化编译器的设计 (当然现在的 g
 
 在 Intel x86 架构中，当返回值可以放在寄存器时就放在寄存器中返回，以提高效能，如果放不下，则将返回值的起始地址放在寄存器中返回。
 
-## Stack
+## stack
 
 ### Layout
 

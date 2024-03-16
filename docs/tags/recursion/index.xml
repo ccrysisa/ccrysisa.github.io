@@ -1,0 +1,20 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Recursion - 标签 - KZnight&#39;s Blog</title>
+    <link>https://ccrysisa.github.io/tags/recursion/</link>
+    <description>Recursion - 标签 - KZnight&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 16 Mar 2024 20:56:18 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/recursion/" rel="self" type="application/rss+xml" /><item>
+  <title>你所不知道的 C 语言: 递归呼叫篇</title>
+  <link>https://ccrysisa.github.io/posts/c-recursion/</link>
+  <pubDate>Sat, 16 Mar 2024 20:56:18 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-recursion/</guid>
+  <description><![CDATA[<blockquote>
+<p>在许多应用程序中，递归 (recursion) 可以简单又优雅地解决貌似繁琐的问题，也就是不断地拆解原有问题为相似的子问题，直到无法拆解为止，并且定义最简化状况的处理机制，一如数学思维。递归对 C 语言程序开发者来说，绝对不会陌生，但能掌握者却少，很多人甚至难以讲出汉诺塔之外的使用案例。</p>
+<p>究竟递归是如何优雅地解决真实世界的问题，又如何兼顾执行效率呢》我们从运作原理开始探讨，搭配若干 C 程序解说，并且我们将以简化过的 UNIX 工具为例，分析透过递归来大幅缩减程式码。</p>
+<p>或许跟你想象中不同，Linux 核心的原始程式码里头也用到递归函数呼叫，特别在较复杂的实作，例如文件系统，善用递归可大幅缩减程式码，但这也导致追踪程序运作的难度大增。</p>
+</blockquote>]]></description>
+</item>
+</channel>
+</rss>
