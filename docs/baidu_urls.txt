@@ -1,4 +1,5 @@
 https://ccrysisa.github.io/posts/linux2023/
+https://ccrysisa.github.io/posts/linux-hashtable/
 https://ccrysisa.github.io/posts/c-function/
 https://ccrysisa.github.io/posts/concurrency-ordering/
 https://ccrysisa.github.io/posts/concurrency-concepts/

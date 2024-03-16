@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 15 Mar 2024 10:40:59 &#43;0800</lastBuildDate>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 16 Mar 2024 10:59:36 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
@@ -14,6 +14,16 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>Linux 核心的 hash table 实作</title>
+  <link>https://ccrysisa.github.io/posts/linux-hashtable/</link>
+  <pubDate>Sat, 16 Mar 2024 10:59:36 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/linux-hashtable/</guid>
+  <description><![CDATA[<blockquote>
+<p>Linux 核心如同其它复杂的资讯系统，也提供 <a href="https://en.wikipedia.org/wiki/Hash_table"target="_blank" rel="external nofollow noopener noreferrer">hash table</a> 的实作，但其原始程式码中却藏有间接指针 (可参见 <a href="https://hackmd.io/@sysprog/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">你所不知道的 C 语言: linked list 和非连续内存</a>) 的巧妙和数学奥秘。</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -93,16 +103,6 @@
   <description><![CDATA[<blockquote>
 <p>The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.</p>
 <p>近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>Crust of Rust: Channels</title>
-  <link>https://ccrysisa.github.io/posts/channels/</link>
-  <pubDate>Thu, 29 Feb 2024 20:30:30 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/channels/</guid>
-  <description><![CDATA[<blockquote>
-<p>In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mpsc) channels, by re-implementing some of the std::sync::mpsc types from the standard library. As part of that, we cover what channels are used for, how they work at a high level, different common channel variants, and common channel implementations. In the process, we go over some common Rust concurrency primitives like Mutex and Condvar.</p>
 </blockquote>]]></description>
 </item>
 </channel>

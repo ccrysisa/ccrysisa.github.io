@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/tags/linux/</link>
     <description>Linux - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 11 Mar 2024 16:23:57 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 16 Mar 2024 10:59:36 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -12,6 +12,16 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>Linux 核心的 hash table 实作</title>
+  <link>https://ccrysisa.github.io/posts/linux-hashtable/</link>
+  <pubDate>Sat, 16 Mar 2024 10:59:36 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/linux-hashtable/</guid>
+  <description><![CDATA[<blockquote>
+<p>Linux 核心如同其它复杂的资讯系统，也提供 <a href="https://en.wikipedia.org/wiki/Hash_table"target="_blank" rel="external nofollow noopener noreferrer">hash table</a> 的实作，但其原始程式码中却藏有间接指针 (可参见 <a href="https://hackmd.io/@sysprog/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">你所不知道的 C 语言: linked list 和非连续内存</a>) 的巧妙和数学奥秘。</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -85,14 +95,6 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/deepin20.9/</guid>
   <description><![CDATA[<p>记录一下折腾 Deepin 20.9 的物理机的过程与相关的配置。</p>]]></description>
-</item>
-<item>
-  <title>在 Deepin 20.9 上构建 DragonOS</title>
-  <link>https://ccrysisa.github.io/posts/deepin-dragonos/</link>
-  <pubDate>Mon, 22 Jan 2024 21:36:18 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/deepin-dragonos/</guid>
-  <description><![CDATA[<p>在 deepin 20.9 上根据 <a href="https://docs.dragonos.org/zh-cn/latest/introduction/build_system.html"target="_blank" rel="external nofollow noopener noreferrer">DragonOS 构建文档</a> 的 bootstrap.sh 的方式来构建 DragonOS 时，如果没有事先安装 Qemu 会出现 KVM 相关的依赖问题。本文记录解决这一问题的过程。</p>]]></description>
 </item>
 </channel>
 </rss>
