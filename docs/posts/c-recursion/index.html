@@ -18,7 +18,7 @@
 或许跟你想象中不同，Linux 核心的原始程式码里头也用到递归函数呼叫，特别在较复杂的实作，例如文件系统，善用递归可大幅缩减程式码，但这也导致追踪程序运作的难度大增。
 "><meta itemprop="datePublished" content="2024-03-16T20:56:18+08:00" />
 <meta itemprop="dateModified" content="2024-03-16T21:44:26+08:00" />
-<meta itemprop="wordCount" content="506"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1264"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Recursion," /><meta property="og:title" content="你所不知道的 C 语言: 递归呼叫篇" />
 <meta property="og:description" content="
 在许多应用程序中，递归 (recursion) 可以简单又优雅地解决貌似繁琐的问题，也就是不断地拆解原有问题为相似的子问题，直到无法拆解为止，并且定义最简化状况的处理机制，一如数学思维。递归对 C 语言程序开发者来说，绝对不会陌生，但能掌握者却少，很多人甚至难以讲出汉诺塔之外的使用案例。
@@ -51,7 +51,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-recursion\/"
-    },"genre": "posts","keywords": "Sysprog, C, Recursion","wordcount":  506 ,
+    },"genre": "posts","keywords": "Sysprog, C, Recursion","wordcount":  1264 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-recursion\/","datePublished": "2024-03-16T20:56:18+08:00","dateModified": "2024-03-16T21:44:26+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -167,7 +167,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-16 20:56:18"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="更新于 2024-03-16 21:44:26"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="506 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-16 20:56:18"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="更新于 2024-03-16 21:44:26"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="1264 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -177,6 +177,10 @@
   <ul>
     <li><a href="#recursion">Recursion</a></li>
     <li><a href="#递归并没有想象的那么慢">递归并没有想象的那么慢</a></li>
+    <li><a href="#案例分析-等效电阻">案例分析: 等效电阻</a></li>
+    <li><a href="#案例分析-数列输出">案例分析: 数列输出</a></li>
+    <li><a href="#递归程序设计">递归程序设计</a></li>
+    <li><a href="#fibonacci-sequence">Fibonacci sequence</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><blockquote>
@@ -247,10 +251,297 @@
 </span></span><span class="line"><span class="cl">	testl	%edx, %edx
 </span></span><span class="line"><span class="cl">	jne	.LBB1_2</span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://notfalse.net/9/recursion"target="_blank" rel="external nofollow noopener noreferrer">遞迴 (Recursion)</a></li>
+</div><div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://notfalse.net/9/recursion"target="_blank" rel="external nofollow noopener noreferrer">遞迴 (Recursion)</a></li>
 </ul>
-<p>Tail recursion 可以被编译器进行最优化，从而达到和循环一样节省空间，但这需要编译器支持，有些编译器并不支持 tail recursion 优化 &#x1f923;</p></div><div class="post-footer" id="post-footer">
+<p>Tail recursion 可以被编译器进行k空间利用最优化，从而达到和循环一样节省空间，但这需要编译器支持，有些编译器并不支持 tail recursion 优化 &#x1f923;</p>
+<p>虽然如此，将一般的递归改写为 tail recursion 还是可以获得极大的效能提升。</p>
+</div>
+    </div>
+  </div>
+<a href="https://github.com/ccrysisa/LKI/blob/main/c-recursion"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+<h2 id="案例分析-等效电阻">案例分析: 等效电阻</h2>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">                        r
+</span></span><span class="line"><span class="cl">              ----------###-------------  A          -------- A
+</span></span><span class="line"><span class="cl">             |                  |                    |
+</span></span><span class="line"><span class="cl">             #                  #                    #
+</span></span><span class="line"><span class="cl">R(r, n - 1)  #                r #             ==&gt;    #  R(r, n)
+</span></span><span class="line"><span class="cl">             #                  #                    #
+</span></span><span class="line"><span class="cl">             |                  |                    |
+</span></span><span class="line"><span class="cl">             ---------------------------  B          -------- B</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="fi-row">
+$$
+R(r,n)=
+\begin{cases}
+r & \text{if n = 1}\\
+1 / (\frac1r + \frac1{R(r, n - 1) + r}) & \text{if n > 1}
+\end{cases}
+$$
+</div>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-py" data-lang="py"><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">circuit</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">r</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="n">circuit</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="o">+</span> <span class="n">r</span><span class="p">))</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="案例分析-数列输出">案例分析: 数列输出</h2>
+<ul>
+<li>man 3 printf</li>
+</ul>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">RETURN VALUE
+</span></span><span class="line"><span class="cl">      Upon successful return, these functions return the number of characters
+</span></span><span class="line"><span class="cl">      printed (excluding the null byte used to end output to strings).</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以通过 <code>ulimit -s</code> 来改 stack size，预设为 8MB</p>
+<ul>
+<li>ulimit</li>
+</ul>
+<div class="highlight" id="id-6"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">User limits - limit the use of system-wide resources.
+</span></span><span class="line"><span class="cl">   -s   The maximum stack size.</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现代编译器的最优化可能会造成递归实作的非预期改变，因为编译器可能会对递归实作在编译时期进行一些优化，从而提高效能和降低内存使用。</p>
+<h2 id="递归程序设计">递归程序设计</h2>
+<ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://web.archive.org/web/20191228141133/http://www.cs.cmu.edu:80/~adamchik/15-121/lectures/Recursions/recursions.html"target="_blank" rel="external nofollow noopener noreferrer">Recursive Programming</a></li>
+</ul>
+<h2 id="fibonacci-sequence">Fibonacci sequence</h2>
+<p>使用矩阵配合快速幂算法，可以将时间复杂度从 $O(n)$ 降低到 $O(\log n)$</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>时间复杂度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rcursive</td>
+<td>$O(n^2)$</td>
+</tr>
+<tr>
+<td>Iterative</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td>Tail recursion</td>
+<td>$O(n)$</td>
+</tr>
+<tr>
+<td>Q-Matrix</td>
+<td>$O(\log n)$</td>
+</tr>
+<tr>
+<td>Fast doubling</td>
+<td>$O(\log n)$</td>
+</tr>
+</tbody>
+</table>
+<p>原文的 Q-Matrix 实作挺多漏洞的，下面为修正后的实作 (注意矩阵乘法的 <code>memset</code> 是必须的，否则会使用到栈上超出生命周期的 obeject):</p>
+<div class="highlight" id="id-7"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">matrix_multiply</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="kt">int</span> <span class="n">b</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="kt">int</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">*</span> <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">j</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">matrix_pow</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">t1</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">matrix_pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">t1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">matrix_multiply</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">t1</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="n">t2</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">matrix_pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="n">t1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">matrix_pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">t2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">matrix_multiply</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">fib</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">A1</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">}};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">result</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">matrix_pow</span><span class="p">(</span><span class="n">A1</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Fast doubling 公式:
+<div class="fi-row">
+$$
+\begin{split}
+F(2k) &= F(k)[2F(k+1) - F(k)] \\
+F(2k+1) &= F(k+1)^2+F(k)^2
+\end{split}
+$$
+</div></p>
+<p>具体推导:</p>
+<div class="fi-row">
+$$
+\begin{split}
+\begin{bmatrix}
+ F(2n+1) \\
+ F(2n)  
+\end{bmatrix} &=
+\begin{bmatrix}
+ 1 & 1 \\
+ 1 & 0  
+\end{bmatrix}^{2n}
+\begin{bmatrix}
+ F(1) \\
+ F(0) 
+\end{bmatrix}\\ \\ &=
+\begin{bmatrix}
+ 1 & 1 \\
+ 1 & 0  
+\end{bmatrix}^n
+\begin{bmatrix}
+ 1 & 1 \\
+ 1 & 0  
+\end{bmatrix}^n
+\begin{bmatrix}
+ F(1) \\
+ F(0) 
+\end{bmatrix}\\ \\ &=
+\begin{bmatrix}
+F(n+1) & F(n) \\
+F(n) & F(n-1)  
+\end{bmatrix}
+\begin{bmatrix}
+F(n+1) & F(n) \\
+F(n) & F(n-1)  
+\end{bmatrix}
+\begin{bmatrix}
+ 1 \\
+ 0 
+\end{bmatrix}\\ \\ &=
+\begin{bmatrix}
+ F(n+1)^2 + F(n)^2\\
+ F(n)F(n+1) + F(n-1)F(n) 
+\end{bmatrix}
+\end{split}
+$$
+</div>
+<p>然后根据 $F(k + 1) = F(k) + F(k - 1)$ 可得 $F(2k)$ 情况的公式。</p>
+<p>原文中非递增情形比较晦涩，但其本质是通过累加来逼近目标值:</p>
+<div class="highlight" id="id-8"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">t0</span> <span class="o">=</span> <span class="n">t3</span><span class="p">;</span>       <span class="c1">// F(n-2);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">t3</span> <span class="o">=</span> <span class="n">t4</span><span class="p">;</span>       <span class="c1">// F(n-1);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">t4</span> <span class="o">=</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">t4</span><span class="p">;</span>  <span class="c1">// F(n)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
@@ -283,7 +574,7 @@
       <a href="/posts/subtying-and-variance/" class="post-nav-item" rel="next" title="Crust of Rust: Subtying and Variance">Crust of Rust: Subtying and Variance<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
