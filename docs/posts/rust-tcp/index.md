@@ -143,6 +143,12 @@ NOTE BENE:  this diagram is only a summary and must not be taken as the total sp
 [Time to live](https://en.wikipedia.org/wiki/Time_to_live#:~:text=In%20the%20IPv4%20header%2C%20TTL,recommended%20initial%20value%20is%2064.) [Wikipedia]
 > In the IPv4 header, TTL is the 9th octet of 20. In the IPv6 header, it is the 8th octet of 40. The maximum TTL value is 255, the maximum value of a single octet. A recommended initial value is 64.
 
+SND.WL1 and SND.WL2
+> Note that SND.WND is an offset from SND.UNA, that SND.WL1
+> records the sequence number of the last segment used to update
+> SND.WND, and that SND.WL2 records the acknowledgment number of
+> the last segment used to update SND.WND.  The check here
+> prevents using old segments to update the window.
 
 ## Documentations
 

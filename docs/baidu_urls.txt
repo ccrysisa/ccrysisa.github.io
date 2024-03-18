@@ -1,4 +1,5 @@
 https://ccrysisa.github.io/posts/linux2023/
+https://ccrysisa.github.io/posts/subtying-and-variance/
 https://ccrysisa.github.io/posts/c-recursion/
 https://ccrysisa.github.io/posts/linux-hashtable/
 https://ccrysisa.github.io/posts/c-function/

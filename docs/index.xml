@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 16 Mar 2024 20:56:18 &#43;0800</lastBuildDate>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 17 Mar 2024 10:38:01 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
@@ -14,6 +14,16 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>Crust of Rust: Subtying and Variance</title>
+  <link>https://ccrysisa.github.io/posts/subtying-and-variance/</link>
+  <pubDate>Sun, 17 Mar 2024 10:38:01 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/subtying-and-variance/</guid>
+  <description><![CDATA[<blockquote>
+<p>In this episode of Crust of Rust, we go over subtyping and variance — a niche part of Rust that most people don&rsquo;t have to think about, but which is deeply ingrained in some of Rust&rsquo;s borrow ergonomics, and occasionally manifests in confusing ways. In particular, we explore how trying to implement the relatively straightforward <code>strtok</code> function from C/C++ in Rust quickly lands us in a place where the function is more or less impossible to call due to variance!</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -94,16 +104,6 @@
   <guid>https://ccrysisa.github.io/posts/orst/</guid>
   <description><![CDATA[<blockquote>
 <p>In this Crust of Rust episode, we implement some common sorting algorithms in Rust. This episode doesn't aim to explain any single concept, but rather showcase what writing &ldquo;normal&rdquo; Rust code is like, and explaining various &ldquo;odd bits&rdquo; we come across along the way. The thinking here is that sorting algorithms are both familiar and easy to compare across languages, so this might serve as a good bridge into Rust if you are familiar with other languages.</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>Linux 核心设计: 发展动态回顾</title>
-  <link>https://ccrysisa.github.io/posts/linux-dev-review/</link>
-  <pubDate>Sun, 03 Mar 2024 16:07:14 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/linux-dev-review/</guid>
-  <description><![CDATA[<blockquote>
-<p>本講座將以 Thorsten Leemhuis 在 FOSDEM 2020 開場演說 &ldquo;Linux kernel – Solving big problems in small steps for more than 20 years&rdquo; (slides) 為主軸，嘗試歸納自 21 世紀第一年開始的 Linux 核心 2.4 版到如今的 5.x 版，中間核心開發者如何克服 SMP (Symmetric multiprocessing), scalability, 及各式硬體架構和周邊裝置支援等難題，過程中提出全面移除 BKL (Big kernel lock)、實作虛擬化技術 (如 Xen 和 KVM)、提出 namespace 和 cgroups 從而確立容器化 (container) 的能力，再來是核心發展的明星技術 eBPF 會在既有的基礎之上，帶來 XDP 和哪些令人驚豔的機制呢？又，Linux 核心終於正式納入發展十餘年的 PREEMPT_RT，使得 Linux 核心得以成為硬即時的作業系統，對內部設計有哪些衝擊？AIO 後繼的 io_uring 讓 Linux 有更優雅且高效的非同步 I/O 存取，我們該如何看待？</p>
 </blockquote>]]></description>
 </item>
 </channel>

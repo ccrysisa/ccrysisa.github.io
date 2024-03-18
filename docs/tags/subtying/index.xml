@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Subtying - 标签 - KZnight&#39;s Blog</title>
+    <link>https://ccrysisa.github.io/tags/subtying/</link>
+    <description>Subtying - 标签 - KZnight&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 17 Mar 2024 10:38:01 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/subtying/" rel="self" type="application/rss+xml" /><item>
+  <title>Crust of Rust: Subtying and Variance</title>
+  <link>https://ccrysisa.github.io/posts/subtying-and-variance/</link>
+  <pubDate>Sun, 17 Mar 2024 10:38:01 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/subtying-and-variance/</guid>
+  <description><![CDATA[<blockquote>
+<p>In this episode of Crust of Rust, we go over subtyping and variance — a niche part of Rust that most people don&rsquo;t have to think about, but which is deeply ingrained in some of Rust&rsquo;s borrow ergonomics, and occasionally manifests in confusing ways. In particular, we explore how trying to implement the relatively straightforward <code>strtok</code> function from C/C++ in Rust quickly lands us in a place where the function is more or less impossible to call due to variance!</p>
+</blockquote>]]></description>
+</item>
+</channel>
+</rss>

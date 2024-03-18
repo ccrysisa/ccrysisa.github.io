@@ -257,6 +257,7 @@ R version 4.3.3 (2024-02-29)
 {{< admonition info >}}
 实作说明:
 - [x] 添加标准库的 sort_unstable 进入基准测试
+- [ ] 将交换操作 (swap) 纳入基准测试
 - [ ] 尝试实现 Merge sort
 - [ ] 尝试实现 Heapsort
 
