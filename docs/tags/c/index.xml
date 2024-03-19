@@ -5,7 +5,7 @@
     <description>C - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 16 Mar 2024 20:56:18 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/c/" rel="self" type="application/rss+xml" /><item>
-  <title>你所不知道的 C 语言: 递归呼叫篇</title>
+  <title>你所不知道的 C 语言: 递归调用篇</title>
   <link>https://ccrysisa.github.io/posts/c-recursion/</link>
   <pubDate>Sat, 16 Mar 2024 20:56:18 &#43;0800</pubDate>
   <author>ccrysisa</author>
@@ -17,7 +17,7 @@
 </blockquote>]]></description>
 </item>
 <item>
-  <title>你所不知道的 C 语言: 函数呼叫篇</title>
+  <title>你所不知道的 C 语言: 函数调用篇</title>
   <link>https://ccrysisa.github.io/posts/c-function/</link>
   <pubDate>Fri, 15 Mar 2024 10:40:59 &#43;0800</pubDate>
   <author>ccrysisa</author>

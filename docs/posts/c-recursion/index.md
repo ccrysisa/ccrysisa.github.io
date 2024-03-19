@@ -1,4 +1,4 @@
-# 你所不知道的 C 语言: 递归呼叫篇
+# 你所不知道的 C 语言: 递归调用篇
 
 
 > 在许多应用程序中，递归 (recursion) 可以简单又优雅地解决貌似繁琐的问题，也就是不断地拆解原有问题为相似的子问题，直到无法拆解为止，并且定义最简化状况的处理机制，一如数学思维。递归对 C 语言程序开发者来说，绝对不会陌生，但能掌握者却少，很多人甚至难以讲出汉诺塔之外的使用案例。
@@ -15,6 +15,15 @@
 
 > To Iterate is Human, to Recurse, Divine.
 - [x] http://coder.aqualuna.me/2011/07/to-iterate-is-human-to-recurse-divine.html
+
+{{< admonition >}}
+笔者的递归 (Recursion) 是通过 UC Berkeley 的 
+
+- [CS61A: Structure and Interpretation of Computer Programs](https://cs61a.org/)
+- [CS70: Discrete Mathematics and Probability Theory](https://www.eecs70.org/) 
+
+学习的，这个搭配式的学习模式使得我在实作——递归 (cs61a) 和理论——归纳法 (cs70) 上相互配合理解，从而对递归在实作和理论上都有了充分认知。
+{{< /admonition >}}
 
 ## 递归并没有想象的那么慢
 
@@ -110,19 +119,19 @@ User limits - limit the use of system-wide resources.
 
 ## 递归程序设计
 
-- [ ] [Recursive Programming](https://web.archive.org/web/20191228141133/http://www.cs.cmu.edu:80/~adamchik/15-121/lectures/Recursions/recursions.html)
+- [Recursive Programming](https://web.archive.org/web/20191228141133/http://www.cs.cmu.edu:80/~adamchik/15-121/lectures/Recursions/recursions.html)
  
 ## Fibonacci sequence
 
 使用矩阵配合快速幂算法，可以将时间复杂度从 $O(n)$ 降低到 $O(\\log n)$
 
-| 方法 | 时间复杂度 |
-| -------------- | ------------ |
-| Rcursive       | $O(n^2)$     |
-| Iterative      | $O(n)$       |
-| Tail recursion | $O(n)$       |
-| Q-Matrix       | $O(\\log n)$ |
-| Fast doubling  | $O(\\log n)$ |
+| 方法 | 时间复杂度 | 空间复杂度 |
+| -------------- | ------------ | ------------ |
+| Rcursive       | $O(2^n)$     | $O(n)$       |
+| Iterative      | $O(n)$       | $O(1)$       |
+| Tail recursion | $O(n)$       | $O(1)$       |
+| Q-Matrix       | $O(\\log n)$ | $O(n)$       |
+| Fast doubling  | $O(\\log n)$ | $O(1)$       |
 
 原文的 Q-Matrix 实作挺多漏洞的，下面为修正后的实作 (注意矩阵乘法的 `memset` 是必须的，否则会使用到栈上超出生命周期的 obeject):
 
@@ -242,6 +251,95 @@ else {
     i++;
 }
 ```
+
+## 案例分析: 字符串反转
+
+原文对于时间复杂度的分析貌似有些问题，下面给出本人的见解。第一种方法的时间复杂度为: 
+$$
+T(n) = 2T(n-1) + T(n-2)
+$$
+所以第一种方法的时间复杂度为 $O(2^n)$。
+
+第二种方法只是列出了程式码，而没有说明递归函数的作用，在本人看来，递归函数一定要明确说明其目的，才能比较好理解递归的作用，所以下面给出递归函数 `rev_core` 的功能说明:
+
+```c
+// 返回字符串 head 的最大下标 (下标相对于 idx 偏移)，并且将字符串 head 相对于
+// 整条字符串的中间对称点进行反转
+int rev_core(char *head, int idx) {
+    if (head[idx] != '\0') {
+        int end = rev_core(head, idx + 1);
+        if (idx > end / 2)
+            swap(head + idx, head + end - idx);
+        return end;
+    }
+    return idx - 1;
+}
+
+char *reverse(char *s) {
+    rev_core(s, 0);
+    return s;
+}
+```
+
+时间复杂度显然为 $O(n)$
+
+## 案例分析: 建立目录
+
+[mkdir](https://man7.org/linux/man-pages/man2/mkdir.2.html) [Linux manual page (2)]
+```
+DESCRIPTION         
+       Create the DIRECTORY(ies), if they do not already exist.
+```
+
+补充一下递归函数 `mkdir_r` 的功能描述:
+
+```c
+// 从路径 `path` 的第 `level` 层开始创建目录
+int mkdir_r(const char *path, int level);
+```
+
+## 案例分析: 类似 find 的程序
+
+[opendir](https://man7.org/linux/man-pages/man3/opendir.3.html) [Linux manual page (3)]
+```
+RETURN VALUE         
+       The opendir() and fdopendir() functions return a pointer to the
+       directory stream.  On error, NULL is returned, and errno is set
+       to indicate the error.
+```
+
+[readdir](https://man7.org/linux/man-pages/man3/readdir.3.html) [Linux manual page (3)]
+```
+RETURN VALUE         
+       On success, readdir() returns a pointer to a dirent structure.
+       (This structure may be statically allocated; do not attempt to
+       free(3) it.)
+
+       If the end of the directory stream is reached, NULL is returned
+       and errno is not changed.  If an error occurs, NULL is returned
+       and errno is set to indicate the error.  To distinguish end of
+       stream from an error, set errno to zero before calling readdir()
+       and then check the value of errno if NULL is returned.
+```
+
+- [x] 练习: 连同文件一起输出
+- [x] 练习: 将输出的 `.` 和 `..` 过滤掉
+
+## 案例分析: Merge Sort
+
+- [x] [Program for Merge Sort in C](https://www.thecrazyprogrammer.com/2014/03/c-program-for-implementation-of-merge-sort.html)
+- [MapReduce with POSIX Thread](https://hackmd.io/@top30339/Hkb-lXkyg)
+
+## 函数式程序开发
+
+- [Toward Concurrency](https://hackmd.io/@jserv/H10MXXoT)
+- [Functional programming in C](https://lucabolognese.wordpress.com/2013/01/04/functional-programming-in-c/)
+- [Functional Programming 风格的 C 语言实作](https://hackmd.io/@sysprog/c-functional-programming)
+
+## 递归背后的理论
+
+- [ ] YouTube: [Lambda Calculus - Computerphile](https://youtu.be/eis11j_iGMs)
+- [ ] YouTube: [Essentials: Functional Programming's Y Combinator - Computerphile](https://youtu.be/9T8A89jgeTI)
 
 
 ---

@@ -1,4 +1,4 @@
-# 你所不知道的 C 语言: 函数呼叫篇
+# 你所不知道的 C 语言: 函数调用篇
 
 
 > 本讲座将带着学员重新探索函数呼叫背后的原理，从程序语言和计算机结构的发展简史谈起，让学员自电脑软硬件演化过程去掌握 calling convention 的考量，伴随着 stack 和 heap 的操作，再探讨 C 程序如何处理函数呼叫、跨越函数间的跳跃 (如 [setjmp](https://man7.org/linux/man-pages/man3/setjmp.3.html) 和 [longjmp](https://linux.die.net/man/3/longjmp))，再来思索资讯安全和执行效率的议题。着重在计算机架构对应的支援和行为分析。

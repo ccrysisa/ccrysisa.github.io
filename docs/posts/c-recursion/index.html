@@ -5,21 +5,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>你所不知道的 C 语言: 递归呼叫篇 - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
+    <title>你所不知道的 C 语言: 递归调用篇 - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="
 在许多应用程序中，递归 (recursion) 可以简单又优雅地解决貌似繁琐的问题，也就是不断地拆解原有问题为相似的子问题，直到无法拆解为止，并且定义最简化状况的处理机制，一如数学思维。递归对 C 语言程序开发者来说，绝对不会陌生，但能掌握者却少，很多人甚至难以讲出汉诺塔之外的使用案例。
 究竟递归是如何优雅地解决真实世界的问题，又如何兼顾执行效率呢》我们从运作原理开始探讨，搭配若干 C 程序解说，并且我们将以简化过的 UNIX 工具为例，分析透过递归来大幅缩减程式码。
 或许跟你想象中不同，Linux 核心的原始程式码里头也用到递归函数呼叫，特别在较复杂的实作，例如文件系统，善用递归可大幅缩减程式码，但这也导致追踪程序运作的难度大增。
-" /><meta name="keywords" content='Sysprog, C, Recursion' /><meta itemprop="name" content="你所不知道的 C 语言: 递归呼叫篇">
+" /><meta name="keywords" content='Sysprog, C, Recursion' /><meta itemprop="name" content="你所不知道的 C 语言: 递归调用篇">
 <meta itemprop="description" content="
 在许多应用程序中，递归 (recursion) 可以简单又优雅地解决貌似繁琐的问题，也就是不断地拆解原有问题为相似的子问题，直到无法拆解为止，并且定义最简化状况的处理机制，一如数学思维。递归对 C 语言程序开发者来说，绝对不会陌生，但能掌握者却少，很多人甚至难以讲出汉诺塔之外的使用案例。
 究竟递归是如何优雅地解决真实世界的问题，又如何兼顾执行效率呢》我们从运作原理开始探讨，搭配若干 C 程序解说，并且我们将以简化过的 UNIX 工具为例，分析透过递归来大幅缩减程式码。
 或许跟你想象中不同，Linux 核心的原始程式码里头也用到递归函数呼叫，特别在较复杂的实作，例如文件系统，善用递归可大幅缩减程式码，但这也导致追踪程序运作的难度大增。
 "><meta itemprop="datePublished" content="2024-03-16T20:56:18+08:00" />
-<meta itemprop="dateModified" content="2024-03-16T21:44:26+08:00" />
-<meta itemprop="wordCount" content="1264"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="Sysprog,C,Recursion," /><meta property="og:title" content="你所不知道的 C 语言: 递归呼叫篇" />
+<meta itemprop="dateModified" content="2024-03-18T21:08:45+08:00" />
+<meta itemprop="wordCount" content="1938"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Sysprog,C,Recursion," /><meta property="og:title" content="你所不知道的 C 语言: 递归调用篇" />
 <meta property="og:description" content="
 在许多应用程序中，递归 (recursion) 可以简单又优雅地解决貌似繁琐的问题，也就是不断地拆解原有问题为相似的子问题，直到无法拆解为止，并且定义最简化状况的处理机制，一如数学思维。递归对 C 语言程序开发者来说，绝对不会陌生，但能掌握者却少，很多人甚至难以讲出汉诺塔之外的使用案例。
 究竟递归是如何优雅地解决真实世界的问题，又如何兼顾执行效率呢》我们从运作原理开始探讨，搭配若干 C 程序解说，并且我们将以简化过的 UNIX 工具为例，分析透过递归来大幅缩减程式码。
@@ -28,10 +28,10 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-recursion/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-03-16T20:56:18+08:00" />
-<meta property="article:modified_time" content="2024-03-16T21:44:26+08:00" />
+<meta property="article:modified_time" content="2024-03-18T21:08:45+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 递归呼叫篇"/>
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 递归调用篇"/>
 <meta name="twitter:description" content="
 在许多应用程序中，递归 (recursion) 可以简单又优雅地解决貌似繁琐的问题，也就是不断地拆解原有问题为相似的子问题，直到无法拆解为止，并且定义最简化状况的处理机制，一如数学思维。递归对 C 语言程序开发者来说，绝对不会陌生，但能掌握者却少，很多人甚至难以讲出汉诺塔之外的使用案例。
 究竟递归是如何优雅地解决真实世界的问题，又如何兼顾执行效率呢》我们从运作原理开始探讨，搭配若干 C 程序解说，并且我们将以简化过的 UNIX 工具为例，分析透过递归来大幅缩减程式码。
@@ -46,13 +46,13 @@
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "你所不知道的 C 语言: 递归呼叫篇",
+    "headline": "你所不知道的 C 语言: 递归调用篇",
     "inLanguage": "zh-CN",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-recursion\/"
-    },"genre": "posts","keywords": "Sysprog, C, Recursion","wordcount":  1264 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-recursion\/","datePublished": "2024-03-16T20:56:18+08:00","dateModified": "2024-03-16T21:44:26+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, C, Recursion","wordcount":  1938 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-recursion\/","datePublished": "2024-03-16T20:56:18+08:00","dateModified": "2024-03-18T21:08:45+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -163,11 +163,11 @@
     </aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>你所不知道的 C 语言: 递归呼叫篇</span>
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>你所不知道的 C 语言: 递归调用篇</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-16 20:56:18"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="更新于 2024-03-16 21:44:26"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="1264 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-16 20:56:18"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="更新于 2024-03-18 21:08:45"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-18">2024-03-18</time></span>&nbsp;<span title="1938 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -181,6 +181,12 @@
     <li><a href="#案例分析-数列输出">案例分析: 数列输出</a></li>
     <li><a href="#递归程序设计">递归程序设计</a></li>
     <li><a href="#fibonacci-sequence">Fibonacci sequence</a></li>
+    <li><a href="#案例分析-字符串反转">案例分析: 字符串反转</a></li>
+    <li><a href="#案例分析-建立目录">案例分析: 建立目录</a></li>
+    <li><a href="#案例分析-类似-find-的程序">案例分析: 类似 find 的程序</a></li>
+    <li><a href="#案例分析-merge-sort">案例分析: Merge Sort</a></li>
+    <li><a href="#函数式程序开发">函数式程序开发</a></li>
+    <li><a href="#递归背后的理论">递归背后的理论</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><blockquote>
@@ -198,6 +204,20 @@
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="http://coder.aqualuna.me/2011/07/to-iterate-is-human-to-recurse-divine.html"target="_blank" rel="external nofollow noopener noreferrer">http://coder.aqualuna.me/2011/07/to-iterate-is-human-to-recurse-divine.html</a></li>
 </ul>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>笔者的递归 (Recursion) 是通过 UC Berkeley 的</p>
+<ul>
+<li><a href="https://cs61a.org/"target="_blank" rel="external nofollow noopener noreferrer">CS61A: Structure and Interpretation of Computer Programs</a></li>
+<li><a href="https://www.eecs70.org/"target="_blank" rel="external nofollow noopener noreferrer">CS70: Discrete Mathematics and Probability Theory</a></li>
+</ul>
+<p>学习的，这个搭配式的学习模式使得我在实作——递归 (cs61a) 和理论——归纳法 (cs70) 上相互配合理解，从而对递归在实作和理论上都有了充分认知。</p>
+</div>
+    </div>
+  </div>
 <h2 id="递归并没有想象的那么慢">递归并没有想象的那么慢</h2>
 <p>以最大公因数 (Greatest Common Divisor, GCD) 为例，分别以循环和递归进行实作:</p>
 <div class="highlight" id="id-1"><div class="chroma">
@@ -342,7 +362,7 @@ $$
 </div><p>现代编译器的最优化可能会造成递归实作的非预期改变，因为编译器可能会对递归实作在编译时期进行一些优化，从而提高效能和降低内存使用。</p>
 <h2 id="递归程序设计">递归程序设计</h2>
 <ul>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://web.archive.org/web/20191228141133/http://www.cs.cmu.edu:80/~adamchik/15-121/lectures/Recursions/recursions.html"target="_blank" rel="external nofollow noopener noreferrer">Recursive Programming</a></li>
+<li><a href="https://web.archive.org/web/20191228141133/http://www.cs.cmu.edu:80/~adamchik/15-121/lectures/Recursions/recursions.html"target="_blank" rel="external nofollow noopener noreferrer">Recursive Programming</a></li>
 </ul>
 <h2 id="fibonacci-sequence">Fibonacci sequence</h2>
 <p>使用矩阵配合快速幂算法，可以将时间复杂度从 $O(n)$ 降低到 $O(\log n)$</p>
@@ -351,28 +371,34 @@ $$
 <tr>
 <th>方法</th>
 <th>时间复杂度</th>
+<th>空间复杂度</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Rcursive</td>
-<td>$O(n^2)$</td>
+<td>$O(2^n)$</td>
+<td>$O(n)$</td>
 </tr>
 <tr>
 <td>Iterative</td>
 <td>$O(n)$</td>
+<td>$O(1)$</td>
 </tr>
 <tr>
 <td>Tail recursion</td>
 <td>$O(n)$</td>
+<td>$O(1)$</td>
 </tr>
 <tr>
 <td>Q-Matrix</td>
 <td>$O(\log n)$</td>
+<td>$O(n)$</td>
 </tr>
 <tr>
 <td>Fast doubling</td>
 <td>$O(\log n)$</td>
+<td>$O(1)$</td>
 </tr>
 </tbody>
 </table>
@@ -541,23 +567,149 @@ $$
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">i</span><span class="o">++</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><h2 id="案例分析-字符串反转">案例分析: 字符串反转</h2>
+<p>原文对于时间复杂度的分析貌似有些问题，下面给出本人的见解。第一种方法的时间复杂度为:
+$$
+T(n) = 2T(n-1) + T(n-2)
+$$
+所以第一种方法的时间复杂度为 $O(2^n)$。</p>
+<p>第二种方法只是列出了程式码，而没有说明递归函数的作用，在本人看来，递归函数一定要明确说明其目的，才能比较好理解递归的作用，所以下面给出递归函数 <code>rev_core</code> 的功能说明:</p>
+<div class="highlight" id="id-9"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 返回字符串 head 的最大下标 (下标相对于 idx 偏移)，并且将字符串 head 相对于
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 整条字符串的中间对称点进行反转
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">rev_core</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="n">idx</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">head</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;\0&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">end</span> <span class="o">=</span> <span class="nf">rev_core</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="n">idx</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&gt;</span> <span class="n">end</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">swap</span><span class="p">(</span><span class="n">head</span> <span class="o">+</span> <span class="n">idx</span><span class="p">,</span> <span class="n">head</span> <span class="o">+</span> <span class="n">end</span> <span class="o">-</span> <span class="n">idx</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">end</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">char</span> <span class="o">*</span><span class="nf">reverse</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">rev_core</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">s</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>时间复杂度显然为 $O(n)$</p>
+<h2 id="案例分析-建立目录">案例分析: 建立目录</h2>
+<p><a href="https://man7.org/linux/man-pages/man2/mkdir.2.html"target="_blank" rel="external nofollow noopener noreferrer">mkdir</a> [Linux manual page (2)]</p>
+<div class="highlight" id="id-10"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">DESCRIPTION         
+</span></span><span class="line"><span class="cl">       Create the DIRECTORY(ies), if they do not already exist.</span></span></code></pre></td></tr></table>
+</div>
+</div><p>补充一下递归函数 <code>mkdir_r</code> 的功能描述:</p>
+<div class="highlight" id="id-11"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// 从路径 `path` 的第 `level` 层开始创建目录
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">mkdir_r</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="kt">int</span> <span class="n">level</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="案例分析-类似-find-的程序">案例分析: 类似 find 的程序</h2>
+<p><a href="https://man7.org/linux/man-pages/man3/opendir.3.html"target="_blank" rel="external nofollow noopener noreferrer">opendir</a> [Linux manual page (3)]</p>
+<div class="highlight" id="id-12"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">RETURN VALUE         
+</span></span><span class="line"><span class="cl">       The opendir() and fdopendir() functions return a pointer to the
+</span></span><span class="line"><span class="cl">       directory stream.  On error, NULL is returned, and errno is set
+</span></span><span class="line"><span class="cl">       to indicate the error.</span></span></code></pre></td></tr></table>
+</div>
+</div><p><a href="https://man7.org/linux/man-pages/man3/readdir.3.html"target="_blank" rel="external nofollow noopener noreferrer">readdir</a> [Linux manual page (3)]</p>
+<div class="highlight" id="id-13"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">RETURN VALUE         
+</span></span><span class="line"><span class="cl">       On success, readdir() returns a pointer to a dirent structure.
+</span></span><span class="line"><span class="cl">       (This structure may be statically allocated; do not attempt to
+</span></span><span class="line"><span class="cl">       free(3) it.)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">       If the end of the directory stream is reached, NULL is returned
+</span></span><span class="line"><span class="cl">       and errno is not changed.  If an error occurs, NULL is returned
+</span></span><span class="line"><span class="cl">       and errno is set to indicate the error.  To distinguish end of
+</span></span><span class="line"><span class="cl">       stream from an error, set errno to zero before calling readdir()
+</span></span><span class="line"><span class="cl">       and then check the value of errno if NULL is returned.</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 练习: 连同文件一起输出</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 练习: 将输出的 <code>.</code> 和 <code>..</code> 过滤掉</li>
+</ul>
+<h2 id="案例分析-merge-sort">案例分析: Merge Sort</h2>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://www.thecrazyprogrammer.com/2014/03/c-program-for-implementation-of-merge-sort.html"target="_blank" rel="external nofollow noopener noreferrer">Program for Merge Sort in C</a></li>
+<li><a href="https://hackmd.io/@top30339/Hkb-lXkyg"target="_blank" rel="external nofollow noopener noreferrer">MapReduce with POSIX Thread</a></li>
+</ul>
+<h2 id="函数式程序开发">函数式程序开发</h2>
+<ul>
+<li><a href="https://hackmd.io/@jserv/H10MXXoT"target="_blank" rel="external nofollow noopener noreferrer">Toward Concurrency</a></li>
+<li><a href="https://lucabolognese.wordpress.com/2013/01/04/functional-programming-in-c/"target="_blank" rel="external nofollow noopener noreferrer">Functional programming in C</a></li>
+<li><a href="https://hackmd.io/@sysprog/c-functional-programming"target="_blank" rel="external nofollow noopener noreferrer">Functional Programming 风格的 C 语言实作</a></li>
+</ul>
+<h2 id="递归背后的理论">递归背后的理论</h2>
+<ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> YouTube: <a href="https://youtu.be/eis11j_iGMs"target="_blank" rel="external nofollow noopener noreferrer">Lambda Calculus - Computerphile</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> YouTube: <a href="https://youtu.be/9T8A89jgeTI"target="_blank" rel="external nofollow noopener noreferrer">Essentials: Functional Programming&rsquo;s Y Combinator - Computerphile</a></li>
+</ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-03-16 21:44:26">更新于 2024-03-16&nbsp;</span>
+        <span title="更新于 2024-03-18 21:08:45">更新于 2024-03-18&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/c-recursion/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-recursion/" data-title="你所不知道的 C 语言: 递归呼叫篇" data-hashtags="Sysprog,C,Recursion"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-recursion/" data-title="你所不知道的 C 语言: 递归调用篇" data-hashtags="Sysprog,C,Recursion"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/c-recursion/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-recursion/" data-title="你所不知道的 C 语言: 递归呼叫篇" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-recursion/" data-title="你所不知道的 C 语言: 递归呼叫篇"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/c-recursion/" data-title="你所不知道的 C 语言: 递归呼叫篇"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/c-recursion/" data-title="你所不知道的 C 语言: 递归呼叫篇" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-recursion/" data-title="你所不知道的 C 语言: 递归呼叫篇" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-recursion/" data-title="你所不知道的 C 语言: 递归呼叫篇"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-recursion/" data-title="你所不知道的 C 语言: 递归调用篇" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-recursion/" data-title="你所不知道的 C 语言: 递归调用篇"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/c-recursion/" data-title="你所不知道的 C 语言: 递归调用篇"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/c-recursion/" data-title="你所不知道的 C 语言: 递归调用篇" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-recursion/" data-title="你所不知道的 C 语言: 递归调用篇" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-recursion/" data-title="你所不知道的 C 语言: 递归调用篇"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
       </div>
     </div>

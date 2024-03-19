@@ -311,7 +311,7 @@ char *p  = "hello";
 char p[] = "hello";
 ```
 
-这两个是不一样的，因为 string literals 是必须放在 “static storage” 中，而 char p[] 则表示将资料分配在 stack 內，所以这会造成编译器隐式地生成额外代码，在执行时 (runtime) 将 string literals 从 static storage 拷贝到 stack 中，所以此时 `return p` 会造成 UB。而 `char *p` 的情形不同，此时 `p` 只是一个指向 static storage 的指针，进行 `return p` 是合法的。
+这两个是不一样的，因为 string literals 是必须放在 “static storage” 中，而 char p[] 则表示将资料分配在 stack 內，所以这会造成编译器隐式地生成额外代码，在执行时 (runtime) 将 string literals 从 static storage 拷贝到 stack 中，所以此时 `return p` 会造成 UB。而 `char *p` 的情形不同，此时 `p` 只是一个指向 static storage 的指针，进行 `return p` 是合法的。除此之外，无法对第一种方法的字符串进行修改操作，因为它指向的字符串存放的区域的资料是无法修改的，否则会造成 segmentationfalut :rofl:
 
 在大部分情况下，null pointer 并不是一个有效的字符串，所以在 glibc 中字符相关的大部分函数也不会对 null pointer 进行特判 (特判会增加分支，从而影响程序效能)，所以在调用这些函数时需要用户自己判断是否为 null pointer，否则会造成 UB。
 
