@@ -2,7 +2,7 @@
   <channel>
     <title>RISC-V - 分类 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/categories/risc-v/</link>
-    <description>RISC-V - 分类 - KZnight&#39;s Blog</description>
+    <description>RISC-V - 分类 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 07 Mar 2024 14:48:21 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/risc-v/" rel="self" type="application/rss+xml" /><item>
   <title>openEuler RISC-V 系统: QEMU 仿真和 Mugen 测试框架</title>

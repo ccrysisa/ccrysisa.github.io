@@ -18,7 +18,7 @@ tags:
   - Linux
   - DragonOS
 categories:
-  - Linux Distribution
+  - Operating Systems
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

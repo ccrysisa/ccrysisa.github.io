@@ -17,7 +17,7 @@ tags:
   - Linux
   - Deepin
 categories:
-  - Linux Distribution
+  - Operating Systems
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

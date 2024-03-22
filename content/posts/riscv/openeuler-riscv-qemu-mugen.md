@@ -21,7 +21,7 @@ tags:
   - Mugen
 categories:
   - RISC-V
-  - Linux Distribution
+  - Operating Systems
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

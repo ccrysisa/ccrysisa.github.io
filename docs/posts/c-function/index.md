@@ -1,20 +1,20 @@
 # 你所不知道的 C 语言: 函数调用篇
 
 
-> 本讲座将带着学员重新探索函数呼叫背后的原理，从程序语言和计算机结构的发展简史谈起，让学员自电脑软硬件演化过程去掌握 calling convention 的考量，伴随着 stack 和 heap 的操作，再探讨 C 程序如何处理函数呼叫、跨越函数间的跳跃 (如 [setjmp](https://man7.org/linux/man-pages/man3/setjmp.3.html) 和 [longjmp](https://linux.die.net/man/3/longjmp))，再来思索资讯安全和执行效率的议题。着重在计算机架构对应的支援和行为分析。
+&gt; 本讲座将带着学员重新探索函数呼叫背后的原理，从程序语言和计算机结构的发展简史谈起，让学员自电脑软硬件演化过程去掌握 calling convention 的考量，伴随着 stack 和 heap 的操作，再探讨 C 程序如何处理函数呼叫、跨越函数间的跳跃 (如 [setjmp](https://man7.org/linux/man-pages/man3/setjmp.3.html) 和 [longjmp](https://linux.die.net/man/3/longjmp))，再来思索资讯安全和执行效率的议题。着重在计算机架构对应的支援和行为分析。
 
-<!--more-->
+&lt;!--more--&gt;
 
-- {{< link href="https://hackmd.io/@sysprog/c-function" content="原文地址" external-icon=true >}}
+- {{&lt; link href=&#34;https://hackmd.io/@sysprog/c-function&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
 
 ## function prototype
 
 - [ ] [Very early C compilers and language](https://www.bell-labs.com/usr/dmr/www/primevalC.html)
-> 一个小故事，可以解释 C 语言的一些设计理念，例如 `switch-case` 中每个 case 都需要 `break`
+&gt; 一个小故事，可以解释 C 语言的一些设计理念，例如 `switch-case` 中每个 case 都需要 `break`
 - [ ] [The Development of the C Language](https://www.bell-labs.com/usr/dmr/www/chist.html)
-> Dennis M. Ritchie 讲述 C 语言漫长的发展史，并搭配程式码来说明当初为何如此设计、取舍考量。了解这些历史背景可以让我们成为更专业的 C 语言 Programmer
+&gt; Dennis M. Ritchie 讲述 C 语言漫长的发展史，并搭配程式码来说明当初为何如此设计、取舍考量。了解这些历史背景可以让我们成为更专业的 C 语言 Programmer
 - [ ] [Rationale for International Standard – Programming Languages – C](https://pllab.cs.nthu.edu.tw/cs340402/readings/c/c9x_standard.pdf)
-> 讲述 C 语言标准的变更，并搭配程式码解释变更的原理和考量
+&gt; 讲述 C 语言标准的变更，并搭配程式码解释变更的原理和考量
 
 在早期的 C 语言中，并不需要 function prototype，因为当编译器发现一个函数名出现在表达式并且后面跟着左括号 `(`，例如 `a = func(...)`，就会将该函数解读为：返回值类型预设为 `int`，参数类型和个数由调用者提供来决定，按照这样规则编写程式码，可以在无需事先定义函数即可先写调用函数的逻辑。但是这样设计也会造成潜在问题：程序员在调用函数时需要谨慎处理，需要自己检查调用时的参数类型和个数符合函数定义 (因为当时的编译器无法正确判断调用函数时的参数是否符合预期的类型和个数，当时编译器的能力与先前提到的规则是一体两面)，并且返回值类型预设为 `int` (当时还没有 `void` 类型)，所以对于函数返回值，也需要谨慎处理。
 
@@ -31,7 +31,7 @@ void func2(int x) {
 }
 ```
 
-> Rust 的不可变引用也是编译器可以进行更激进的最优化处理的一个例子
+&gt; Rust 的不可变引用也是编译器可以进行更激进的最优化处理的一个例子
 
 ## 编程语言的 function
 
@@ -41,12 +41,12 @@ C 语言不允许 nested function 以简化编译器的设计 (当然现在的 g
 
 ## Process 与 C 程序
 
-***程序存放在磁盘时叫 Program，加载到内存后叫 "Process"***
+***程序存放在磁盘时叫 Program，加载到内存后叫 &#34;Process&#34;***
 
-{{< image src="https://imgur-backup.hackmd.io/DpZOmhb.png" >}}
+{{&lt; image src=&#34;https://imgur-backup.hackmd.io/DpZOmhb.png&#34; &gt;}}
 
 - Wikipedia: [Application binary interface](https://en.wikipedia.org/wiki/Application_binary_interface)
-> In computer software, an application binary interface (ABI) is an interface between two binary program modules. Often, one of these modules is a library or operating system facility, and the other is a program that is being run by a user.
+&gt; In computer software, an application binary interface (ABI) is an interface between two binary program modules. Often, one of these modules is a library or operating system facility, and the other is a program that is being run by a user.
 
 在 Intel x86 架构中，当返回值可以放在寄存器时就放在寄存器中返回，以提高效能，如果放不下，则将返回值的起始地址放在寄存器中返回。
 
@@ -54,26 +54,26 @@ C 语言不允许 nested function 以简化编译器的设计 (当然现在的 g
 
 ### Layout
 
-{{< image src="https://imgur-backup.hackmd.io/S5QUT5I.png" >}}
+{{&lt; image src=&#34;https://imgur-backup.hackmd.io/S5QUT5I.png&#34; &gt;}}
 
 [System V Application Binary Interface AMD64 Architecture Processor Supplement](https://github.com/hjl-tools/x86-psABI/wiki/x86-64-psABI-1.0.pdf) [PDF]
 
-{{< image src="https://imgur-backup.hackmd.io/Fec7Vyx.png" >}}
+{{&lt; image src=&#34;https://imgur-backup.hackmd.io/Fec7Vyx.png&#34; &gt;}}
 
 ### PEDA
 
 实验需要使用到 GDB 的 PEDA 扩展:
 
-> Enhance the display of gdb: colorize and display disassembly codes, registers, memory information during debugging.
+&gt; Enhance the display of gdb: colorize and display disassembly codes, registers, memory information during debugging.
 
 ```bash
 $ git clone https://github.com/longld/peda.git ~/peda
-$ echo "source ~/peda/peda.py" >> ~/.gdbinit
+$ echo &#34;source ~/peda/peda.py&#34; &gt;&gt; ~/.gdbinit
 ```
 
-{{< admonition tip >}}
+{{&lt; admonition tip &gt;}}
 动态追踪 Stack 实验的 call funcA 可以通过 GDB 指令 `stepi` 或 `si` 来实现
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ### stack-based buffer overflow
 
@@ -87,7 +87,7 @@ $ echo "source ~/peda/peda.py" >> ~/.gdbinit
 
 ## RAII
 
-## setjmp & longjmp
+## setjmp &amp; longjmp
 
 
 ---
