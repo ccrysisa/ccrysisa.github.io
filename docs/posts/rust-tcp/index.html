@@ -14,7 +14,7 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
 In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — https://tools.ietf.org/html/rfc793 — which describes the original protocol, with the goal of being able to set up and tear down a connection with a &ldquo;real&rdquo; TCP stack at the other end (netcat in particular). We&rsquo;re writing it using a user-space networking interface (see https://www.kernel.org/doc/Documentation/networking/tuntap.txt and the Rust bindings at https://docs.rs/tun-tap/).
 "><meta itemprop="datePublished" content="2024-02-17T19:01:53+08:00" />
 <meta itemprop="dateModified" content="2024-03-18T10:07:25+08:00" />
-<meta itemprop="wordCount" content="1575"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1562"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,TCP,Network," /><meta property="og:title" content="Impl Rust: TCP/IP" />
 <meta property="og:description" content="
 In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — https://tools.ietf.org/html/rfc793 — which describes the original protocol, with the goal of being able to set up and tear down a connection with a &ldquo;real&rdquo; TCP stack at the other end (netcat in particular). We&rsquo;re writing it using a user-space networking interface (see https://www.kernel.org/doc/Documentation/networking/tuntap.txt and the Rust bindings at https://docs.rs/tun-tap/).
@@ -43,7 +43,7 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/rust-tcp\/"
-    },"genre": "posts","keywords": "Rust, TCP, Network","wordcount":  1575 ,
+    },"genre": "posts","keywords": "Rust, TCP, Network","wordcount":  1562 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/rust-tcp\/","datePublished": "2024-02-17T19:01:53+08:00","dateModified": "2024-03-18T10:07:25+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -55,7 +55,7 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -95,7 +95,7 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -148,12 +148,18 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Impl Rust: TCP/IP</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/rust/" class="post-category" title="分类 - Rust"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a>&ensp;<a href="/categories/network/" class="post-category" title="分类 - Network"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Network</a></span></div><div class="post-meta-line"><span title="发布于 2024-02-17 19:01:53"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-17">2024-02-17</time></span>&nbsp;<span title="更新于 2024-03-18 10:07:25"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-18">2024-03-18</time></span>&nbsp;<span title="1575 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a>&ensp;<a href="/categories/network/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Network</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-02-17 19:01:53"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-17">2024-02-17</time></span>&nbsp;<span title="更新于 2024-03-18 10:07:25"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-18">2024-03-18</time></span>&nbsp;<span title="1562 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -187,9 +193,9 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
 <ul>
 <li><a href="https://www.youtube.com/watch?v=bzja9fQWzdA"target="_blank" rel="external nofollow noopener noreferrer">Part 1</a></li>
 </ul>
-<h2 id="影片注解-part-1" class="heading-element">
-  <a href="#%e5%bd%b1%e7%89%87%e6%b3%a8%e8%a7%a3-part-1" class="heading-mark"></a>影片注解 Part 1</h2><h3 id="raw-socket-vs-tuntap-device" class="heading-element">
-  <a href="#raw-socket-vs-tuntap-device" class="heading-mark"></a>Raw socket vs TUN/TAP device</h3><ul>
+<h2 id="影片注解-part-1">影片注解 Part 1</h2>
+<h3 id="raw-socket-vs-tuntap-device">Raw socket vs TUN/TAP device</h3>
+<ul>
 <li><a href="https://en.wikipedia.org/wiki/Network_socket#Raw_sockets#Types"target="_blank" rel="external nofollow noopener noreferrer">Raw sockets</a> [Wikipedia]</li>
 <li><a href="https://en.wikipedia.org/wiki/TUN/TAP"target="_blank" rel="external nofollow noopener noreferrer">TUN/TAP</a> [Wikipedia]</li>
 <li><a href="https://stackoverflow.com/questions/41343802/raw-socket-vs-tun-device"target="_blank" rel="external nofollow noopener noreferrer">Raw socket vs TUN device</a> [Stack Overflow]</li>
@@ -211,7 +217,7 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
 <blockquote>
 <p>Kernel interact with programs in user space in the same host.</p>
 </blockquote>
-<a class="lightgallery" href="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=large" data-thumbnail="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=small" data-sub-html="<h2>https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png</h2>"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png" alt="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png" srcset="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=small, https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=medium 1.5x, https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=large 2x" sizes="auto" data-title="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=large" data-thumbnail="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=small" data-sub-html="<h2>https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png</h2>"><img loading="lazy" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png" srcset="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=small, https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=medium 1.5x, https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png?size=large 2x" sizes="auto" data-title="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png" data-alt="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <blockquote>
 <p>和其他物理网卡一样，用户进程创建的 TUN/TAP 设备仍然是被 kernel 所拥有的 (kernel 可以使用设备进行发送/接收)，只不过用户进程也可以像操作 <strong>管道 (pipe)</strong> 那样，操作所创建的 TUN/TAP 设备 (可以使用该设备进行发送/接收)，从而与 kernel 的物理网卡进行通信。</p>
 </blockquote>
@@ -232,8 +238,8 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
 </span></span><span class="line"><span class="cl">    Raw protocol(IP, IPv6, etc) frame.   </span></span></code></pre></td></tr></table>
 </div>
 </div><p>通过 TUN/TAP 设备接收的封包，会拥有 Flags 和 Proto 这两个字段 (共 4 个字节，这也是 iface 的 <code>without_packet_info</code> 和 <code>recv</code> 方法所描述的 prepended packet info)，然后才是原始协议的 frame。其中的 Proto 字段是 <a href="https://en.wikipedia.org/wiki/EtherType"target="_blank" rel="external nofollow noopener noreferrer">EtherType</a> [Wikipedia]，可以根据里面的 values 来判断接受封包的协议类型 (0x0800 表示 IPv4，0x86DD 表示 IPv6)。</p>
-<h3 id="setcap" class="heading-element">
-  <a href="#setcap" class="heading-mark"></a>setcap</h3><ul>
+<h3 id="setcap">setcap</h3>
+<ul>
 <li><a href="https://man7.org/linux/man-pages/man8/setcap.8.html"target="_blank" rel="external nofollow noopener noreferrer">setcap</a> [Linux manual page]</li>
 <li><a href="https://man7.org/linux/man-pages/man3/cap_from_text.3.html"target="_blank" rel="external nofollow noopener noreferrer">cap_from_text</a> [Linux manual page]</li>
 </ul>
@@ -279,14 +285,14 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
 </span></span><span class="line"><span class="cl">$ sudo ip link <span class="nb">set</span> up dev tun0</span></span></code></pre></td></tr></table>
 </div>
 </div><p>每次编译后都需要执行一遍这个流程 (因为重新编译生成的可执行文件需要重新设置权限)，我们将这些流程的逻辑写成一个脚本 <a href="">run.sh</a>。这个脚本为了输出的美观性增加了额外逻辑，例如将 trust 放在后台执行，将脚本设置为等待 trust 执行完成后才结束执行。</p>
-<h3 id="endianness" class="heading-element">
-  <a href="#endianness" class="heading-mark"></a>Endianness</h3><ul>
+<h3 id="endianness">Endianness</h3>
+<ul>
 <li><a href="https://en.wikipedia.org/wiki/Endianness"target="_blank" rel="external nofollow noopener noreferrer">Endianness</a> [Wikipedia]</li>
 <li><a href="https://stackoverflow.com/questions/13514614/why-is-network-byte-order-defined-to-be-big-endian"target="_blank" rel="external nofollow noopener noreferrer">Why is network-byte-order defined to be big-endian?</a> [Stack Overflow]</li>
 </ul>
 <p>Rust 提供了 Trait <a href="https://doc.rust-lang.org/std/simd/trait.ToBytes.html#"target="_blank" rel="external nofollow noopener noreferrer">std::simd::ToBytes</a> 用于大小端字节序之间的相互转换，方法 <code>from_be_bytes</code> 是将大端字节序的一系列字节转换成对应表示的数值。</p>
-<h3 id="ip" class="heading-element">
-  <a href="#ip" class="heading-mark"></a>IP</h3><p>因为 TUN 只是在 Network layer 的虚拟设备 (TAP 则是 Data link layer 层)，所以需要手动解析 IP 封包。</p>
+<h3 id="ip">IP</h3>
+<p>因为 TUN 只是在 Network layer 的虚拟设备 (TAP 则是 Data link layer 层)，所以需要手动解析 IP 封包。</p>
 <ul>
 <li><a href="https://datatracker.ietf.org/doc/html/rfc791"target="_blank" rel="external nofollow noopener noreferrer">RFC 791</a> 3.1. Internet Header Format</li>
 <li><a href="https://en.wikipedia.org/wiki/List_of_IP_protocol_numbers"target="_blank" rel="external nofollow noopener noreferrer">List of IP protocol numbers</a> [Wikipedia]</li>
@@ -337,8 +343,8 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
 <li><a href="https://en.wikipedia.org/wiki/Wireshark"target="_blank" rel="external nofollow noopener noreferrer">Wireshark</a> [Wikipedia]</li>
 <li><a href="https://www.wireshark.org/docs/man-pages/tshark.html"target="_blank" rel="external nofollow noopener noreferrer">tshark</a> [Manual Page]</li>
 </ul>
-<h3 id="tcp" class="heading-element">
-  <a href="#tcp" class="heading-mark"></a>TCP</h3><p>[RFC 793] 3.2 Terminology</p>
+<h3 id="tcp">TCP</h3>
+<p>[RFC 793] 3.2 Terminology</p>
 <blockquote>
 <p>The state diagram in figure 6 illustrates only state changes, together
 with the causing events and resulting actions, but addresses neither
@@ -366,13 +372,13 @@ SND.WND, and that SND.WL2 records the acknowledgment number of
 the last segment used to update SND.WND.  The check here
 prevents using old segments to update the window.</p>
 </blockquote>
-<h2 id="documentations" class="heading-element">
-  <a href="#documentations" class="heading-mark"></a>Documentations</h2><p>这里列举视频中一些概念相关的 documentation</p>
+<h2 id="documentations">Documentations</h2>
+<p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>
 <p>学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料</p>
 </blockquote>
-<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml" class="heading-element">
-  <a href="#crate-stdhttpsdocrust-langorgstdindexhtml" class="heading-mark"></a>Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3><ul>
+<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3>
+<ul>
 <li>
 <p>Module <a href="https://doc.rust-lang.org/std/io/index.html"target="_blank" rel="external nofollow noopener noreferrer">std::io</a></p>
 <ul>
@@ -402,19 +408,19 @@ prevents using old segments to update the window.</p>
 <p>method <a href="https://doc.rust-lang.org/std/primitive.u16.html#method.from_be_bytes"target="_blank" rel="external nofollow noopener noreferrer">u16::from_be_bytes</a></p>
 </li>
 </ul>
-<h3 id="crate-tun_taphttpsdocsrstun-taplatesttun_tap" class="heading-element">
-  <a href="#crate-tun_taphttpsdocsrstun-taplatesttun_tap" class="heading-mark"></a>Crate <a href="https://docs.rs/tun-tap/latest/tun_tap/"target="_blank" rel="external nofollow noopener noreferrer">tun_tap</a></h3><ul>
+<h3 id="crate-tun_taphttpsdocsrstun-taplatesttun_tap">Crate <a href="https://docs.rs/tun-tap/latest/tun_tap/"target="_blank" rel="external nofollow noopener noreferrer">tun_tap</a></h3>
+<ul>
 <li>Enum <a href="https://docs.rs/tun-tap/latest/tun_tap/enum.Mode.html"target="_blank" rel="external nofollow noopener noreferrer">tun_tap::Mode</a></li>
 </ul>
-<h3 id="crate-etherparsehttpsdocsrsetherparselatestetherparseindexhtml" class="heading-element">
-  <a href="#crate-etherparsehttpsdocsrsetherparselatestetherparseindexhtml" class="heading-mark"></a>Crate <a href="https://docs.rs/etherparse/latest/etherparse/index.html"target="_blank" rel="external nofollow noopener noreferrer">etherparse</a></h3><ul>
+<h3 id="crate-etherparsehttpsdocsrsetherparselatestetherparseindexhtml">Crate <a href="https://docs.rs/etherparse/latest/etherparse/index.html"target="_blank" rel="external nofollow noopener noreferrer">etherparse</a></h3>
+<ul>
 <li>Struct <a href="https://docs.rs/etherparse/latest/etherparse/struct.Ipv4HeaderSlice.html"target="_blank" rel="external nofollow noopener noreferrer">etherparse::Ipv4HeaderSlice</a></li>
 <li>Struct <a href="https://docs.rs/etherparse/latest/etherparse/struct.Ipv4Header.html"target="_blank" rel="external nofollow noopener noreferrer">etherparse::Ipv4Header</a></li>
 <li>Struct <a href="https://docs.rs/etherparse/latest/etherparse/struct.TcpHeaderSlice.html"target="_blank" rel="external nofollow noopener noreferrer">etherparse::TcpHeaderSlice</a></li>
 <li>Struct <a href="https://docs.rs/etherparse/latest/etherparse/struct.TcpHeader.html"target="_blank" rel="external nofollow noopener noreferrer">etherparse::TcpHeader</a></li>
 </ul>
-<h2 id="references" class="heading-element">
-  <a href="#references" class="heading-mark"></a>References</h2><ul>
+<h2 id="references">References</h2>
+<ul>
 <li><a href="https://datatracker.ietf.org/doc/html/rfc793"target="_blank" rel="external nofollow noopener noreferrer">https://datatracker.ietf.org/doc/html/rfc793</a></li>
 <li><a href="https://datatracker.ietf.org/doc/html/rfc1122"target="_blank" rel="external nofollow noopener noreferrer">https://datatracker.ietf.org/doc/html/rfc1122</a></li>
 <li><a href="https://datatracker.ietf.org/doc/html/rfc7414#section-2"target="_blank" rel="external nofollow noopener noreferrer">https://datatracker.ietf.org/doc/html/rfc7414#section-2</a></li>
@@ -446,10 +452,11 @@ prevents using old segments to update the window.</p>
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-03-18 10:07:25">更新于 2024-03-18&nbsp;</span>
-      </div></div><div class="post-info-line">
-        <div class="post-info-md"><span><a href="/posts/rust-tcp/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-        <div class="post-info-share">
-          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/rust-tcp/" data-title="Impl Rust: TCP/IP" data-hashtags="Rust,TCP,Network"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/rust-tcp/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/rust-tcp/" data-title="Impl Rust: TCP/IP" data-hashtags="Rust,TCP,Network"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/rust-tcp/" data-hashtag="Rust"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/rust-tcp/" data-title="Impl Rust: TCP/IP" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/rust-tcp/" data-title="Impl Rust: TCP/IP"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -458,11 +465,12 @@ prevents using old segments to update the window.</p>
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/rust-tcp/" data-title="Impl Rust: TCP/IP" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/rust-tcp/" data-title="Impl Rust: TCP/IP"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-        </div>
-      </div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/rust/" class="post-tag" title="标签 - Rust">Rust</a><a href="/tags/tcp/" class="post-tag" title="标签 - TCP">TCP</a><a href="/tags/network/" class="post-tag" title="标签 - Network">Network</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/rust/' class="post-tag">Rust</a><a href='/tags/tcp/' class="post-tag">TCP</a><a href='/tags/network/' class="post-tag">Network</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -471,14 +479,11 @@ prevents using old segments to update the window.</p>
   <div class="post-nav"><a href="/posts/linux-quiz1/" class="post-nav-item" rel="prev" title="Linux 核心设计: 第 1 周测验题 linked list"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Linux 核心设计: 第 1 周测验题 linked list</a>
       <a href="/posts/linux2023-lab0/" class="post-nav-item" rel="next" title="Linux 核心设计: C Programming Lab">Linux 核心设计: C Programming Lab<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article>
-
-  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -486,5 +491,5 @@ prevents using old segments to update the window.</p>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

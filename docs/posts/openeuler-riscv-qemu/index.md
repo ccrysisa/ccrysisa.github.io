@@ -1,47 +1,5 @@
----
-title: "openEuler RISC-V 系统: QEMU 仿真和 Mugen 测试框架"
-subtitle:
-date: 2024-03-07T14:48:21+08:00
-# draft: true
-# author:
-#   name:
-#   link:
-#   email:
-#   avatar:
-description:
-keywords:
-license:
-comment: false
-weight: 0
-tags:
-  - RISC-V
-  - Linux
-  - openEuler
-  - QEMU
-  - Mugen
-categories:
-  - RISC-V
-  - Operating Systems
-hiddenFromHomePage: false
-hiddenFromSearch: false
-hiddenFromRss: false
-summary:
-resources:
-  - name: featured-image
-    src: featured-image.jpg
-  - name: featured-image-preview
-    src: featured-image-preview.jpg
-toc: true
-math: true
-lightgallery: true
-password:
-message:
-repost:
-  enable: true
-  url:
+# openEuler RISC-V 系统: QEMU 仿真
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
----
 
 > 本文对通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统的流程进行详细介绍，以及介绍如何通过 [mugen](https://gitee.com/openeuler/mugen) 测试框架来对 RISC-V 版本的 openEuler 进行系统、软件等方面测试，并根据测试日志对错误原因进行分析。
 
@@ -292,6 +250,19 @@ $ echo $?
 
 我个人比较期待 RISC-V 配合 nommu 在嵌入式这类低功耗领域的发展，同时也对 [RISC-V Hypervisor	Extension](https://riscv.org/wp-content/uploads/2017/12/Tue0942-riscv-hypervisor-waterman.pdf) 在虚拟化方面的发展感兴趣。
 
+## Neofetch
+
+根据 [neofetch wiki](https://github.com/dylanaraps/neofetch/wiki/Installation#latest-git-master-bleeding-edge) 从 git 拉取最新数据进行构建:
+
+```bash
+$ git clone https://github.com/dylanaraps/neofetch
+$ cd neofetch
+$ make install
+$ neofetch
+```
+
+{{< image src="/images/oerv/openEuler-RISC-V-neofetch.png" >}}
+
 ## References
 
 - openEuler RISC-V: [通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统](https://github.com/openeuler-mirror/RISC-V/blob/master/doc/tutorials/vm-qemu-oErv.md)
@@ -301,3 +272,10 @@ $ echo $?
 - openEuler Docs: [使用 DNF 管理软件包](https://docs.openeuler.org/zh/docs/22.03_LTS_SP2/docs/Administration/%E4%BD%BF%E7%94%A8DNF%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E5%8C%85.html)
 - [基于 openEuler 虚拟机本地执行 mugen 测试脚本](http://devops-dev.com/article/438)
 - Video: [Mugen 框架的使用](https://www.bilibili.com/video/BV1UU4y1G7Zs/)
+
+
+---
+
+> 作者: [ccrysisa](https://github.com/ccrysisa)  
+> URL: https://ccrysisa.github.io/posts/openeuler-riscv-qemu/  
+

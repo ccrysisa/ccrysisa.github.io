@@ -55,6 +55,38 @@ repost:
 - cplusplus: [strtok](https://cplusplus.com/reference/cstring/strtok/)
 - cppreference: [strtok](https://en.cppreference.com/w/cpp/string/byte/strtok)
 
+### shortening lifetimes
+
+影片大概 19 分时给出了为何 cargo test 失败的推导，个人觉得非常巧妙
+
+```rs
+pub fn strtok<'a>(s: &'a mut &'a str, delimiter: char) { ... }
+
+let mut x = "hello world";
+strtok(&mut x, ' ');
+```
+
+为了更直观地表示和函数 `strtok` 的返回值 lifetime 无关，这里将返回值先去掉了。在调用 `strtok` 时，编译器对于参数 `s` 的 lifetime 推导如下:
+
+```
+&'a mut &'a str
+&   mut x
+
+&'a mut &'a str
+&   mut &'static str
+
+&'a mut &'static str
+&   mut &'static str
+
+&'static mut &'static str
+&        mut &'static str
+
+&'static mut &'static str
+&'static mut &'static str
+```
+
+所以 `strtok` 在接收参数 `s` 后 (通过传入 `&mut x`)，会推导其 lifetime 为 static，这就会导致后面使用 `x` 的不可变引用 (`&x`) 时发生冲突。
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 

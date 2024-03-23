@@ -20,7 +20,7 @@ Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言�
 
 "><meta itemprop="datePublished" content="2024-02-28T11:11:47+08:00" />
 <meta itemprop="dateModified" content="2024-03-15T18:29:42+08:00" />
-<meta itemprop="wordCount" content="1070"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1063"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Standard," /><meta property="og:title" content="你所不知道的 C 语言: 开发工具和规格标准" />
 <meta property="og:description" content="
 Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言在工程领域的瑰宝，里头充斥则各种“艺术”，往往会吓到初次接触的人们，但总是能够使用 C 语言标准和开发工具提供的扩展 (主要是来自 gcc 的 GNU extensions) 来解释。
@@ -55,7 +55,7 @@ Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言�
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-standards\/"
-    },"genre": "posts","keywords": "Sysprog, C, Standard","wordcount":  1070 ,
+    },"genre": "posts","keywords": "Sysprog, C, Standard","wordcount":  1063 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-standards\/","datePublished": "2024-02-28T11:11:47+08:00","dateModified": "2024-03-15T18:29:42+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -67,7 +67,7 @@ Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言�
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -107,7 +107,7 @@ Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言�
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -160,12 +160,18 @@ Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言�
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>你所不知道的 C 语言: 开发工具和规格标准</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/c/" class="post-category" title="分类 - C"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-02-28 11:11:47"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="更新于 2024-03-15 18:29:42"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-15">2024-03-15</time></span>&nbsp;<span title="1070 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-02-28 11:11:47"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="更新于 2024-03-15 18:29:42"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-15">2024-03-15</time></span>&nbsp;<span title="1063 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -200,11 +206,11 @@ Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言�
 
 </blockquote>
 <p>语言规格: C89/C90 -&gt; C99 -&gt; C11 -&gt; C17/C18 -&gt; C2x</p>
-<h2 id="c-vs-c" class="heading-element">
-  <a href="#c-vs-c" class="heading-mark"></a>C vs C++</h2><blockquote>
+<h2 id="c-vs-c">C vs C++</h2>
+<blockquote>
 <p>C is quirky, flawed, and an enormous success. Although accidents of history surely helped, it evidently satisfied a need for a system implementation language efficient enough to displace assembly language, yet sufficiently abstract and fluent to describe algorithms and interactions in a wide variety of environments. —— Dennis M. Ritchie</p>
 </blockquote>
-<a class="lightgallery" href="https://imgur-backup.hackmd.io/1gWHzfd.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/1gWHzfd.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/1gWHzfd.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/1gWHzfd.png" alt="https://imgur-backup.hackmd.io/1gWHzfd.png" srcset="https://imgur-backup.hackmd.io/1gWHzfd.png?size=small, https://imgur-backup.hackmd.io/1gWHzfd.png?size=medium 1.5x, https://imgur-backup.hackmd.io/1gWHzfd.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/1gWHzfd.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/1gWHzfd.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/1gWHzfd.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/1gWHzfd.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/1gWHzfd.png" srcset="https://imgur-backup.hackmd.io/1gWHzfd.png?size=small, https://imgur-backup.hackmd.io/1gWHzfd.png?size=medium 1.5x, https://imgur-backup.hackmd.io/1gWHzfd.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/1gWHzfd.png" data-alt="https://imgur-backup.hackmd.io/1gWHzfd.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <ul>
 <li>
 <p>David Brailsford: <a href="https://www.youtube.com/watch?v=ci1PJexnfNE"target="_blank" rel="external nofollow noopener noreferrer">Why C is so Influential - Computerphile</a></p>
@@ -228,7 +234,7 @@ C rather than fixing some true deep problem.</p>
 <p>C++ 标准更新飞快: C++11, C++14, C++17, &hellip;</p>
 </li>
 </ul>
-<a class="lightgallery" href="https://i.imgur.com/ITVm6gI.png?size=large" data-thumbnail="https://i.imgur.com/ITVm6gI.png?size=small" data-sub-html="<h2>https://i.imgur.com/ITVm6gI.png</h2>"><img loading="lazy" src="https://i.imgur.com/ITVm6gI.png" alt="https://i.imgur.com/ITVm6gI.png" srcset="https://i.imgur.com/ITVm6gI.png?size=small, https://i.imgur.com/ITVm6gI.png?size=medium 1.5x, https://i.imgur.com/ITVm6gI.png?size=large 2x" sizes="auto" data-title="https://i.imgur.com/ITVm6gI.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://i.imgur.com/ITVm6gI.png?size=large" data-thumbnail="https://i.imgur.com/ITVm6gI.png?size=small" data-sub-html="<h2>https://i.imgur.com/ITVm6gI.png</h2>"><img loading="lazy" src="https://i.imgur.com/ITVm6gI.png" srcset="https://i.imgur.com/ITVm6gI.png?size=small, https://i.imgur.com/ITVm6gI.png?size=medium 1.5x, https://i.imgur.com/ITVm6gI.png?size=large 2x" sizes="auto" data-title="https://i.imgur.com/ITVm6gI.png" data-alt="https://i.imgur.com/ITVm6gI.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <blockquote>
 <p>从 C99, C++98 开始，C 语言和 C++ 分道扬镳</p>
 </blockquote>
@@ -241,9 +247,9 @@ C rather than fixing some true deep problem.</p>
 <blockquote>
 <p>介绍了自举 (sel-hosting/compiling) 以及 C0, C1, C2, C3, &hellip; 等的演化过程</p>
 </blockquote>
-<h2 id="c-语言规格书" class="heading-element">
-  <a href="#c-%e8%af%ad%e8%a8%80%e8%a7%84%e6%a0%bc%e4%b9%a6" class="heading-mark"></a>C 语言规格书</h2><h3 id="main" class="heading-element">
-  <a href="#main" class="heading-mark"></a>main</h3><p>阅读 C 语言规格书可以让你洞察本质，不在没意义的事情上浪费时间，例如在某乎大肆讨论的 <code>void main()</code> 和 <code>int main()</code> <a href="https://www.zhihu.com/question/60047465"target="_blank" rel="external nofollow noopener noreferrer">问题</a> &#x1f923;</p>
+<h2 id="c-语言规格书">C 语言规格书</h2>
+<h3 id="main">main</h3>
+<p>阅读 C 语言规格书可以让你洞察本质，不在没意义的事情上浪费时间，例如在某乎大肆讨论的 <code>void main()</code> 和 <code>int main()</code> <a href="https://www.zhihu.com/question/60047465"target="_blank" rel="external nofollow noopener noreferrer">问题</a> &#x1f923;</p>
 <ul>
 <li>C99/C11 5.1.2.2.1 Program startup</li>
 </ul>
@@ -270,17 +276,17 @@ used, as they are local to the function in which they are declared):</p>
 <blockquote>
 <p>Thus, int can be replaced by a typedef name defined as <code>int</code>, or the type of <code>argv</code> can be written as <code>char ** argv</code>, and so on.</p>
 </blockquote>
-<h3 id="incomplete-type" class="heading-element">
-  <a href="#incomplete-type" class="heading-mark"></a>incomplete type</h3><ul>
+<h3 id="incomplete-type">incomplete type</h3>
+<ul>
 <li>C99 6.2.5 Types</li>
 </ul>
 <blockquote>
 <p><em>incomplete types</em> (types that describe objects but lack information needed to determine their sizes).</p>
 </blockquote>
-<h3 id="规格不仅要看最新的过往的也要熟悉" class="heading-element">
-  <a href="#%e8%a7%84%e6%a0%bc%e4%b8%8d%e4%bb%85%e8%a6%81%e7%9c%8b%e6%9c%80%e6%96%b0%e7%9a%84%e8%bf%87%e5%be%80%e7%9a%84%e4%b9%9f%e8%a6%81%e7%86%9f%e6%82%89" class="heading-mark"></a>规格不仅要看最新的，过往的也要熟悉</h3><p>因为很多 (嵌入式) 设备上运行的 Linux 可能是很旧的版本，那时 Linux 使用的是更旧的 C 语言规格。例如空中巴士 330 客机的娱乐系统里执行的是十几年前的 Red Hat Linux，总有人要为这些“古董”负责 &#x1f923;</p>
-<h2 id="gdb" class="heading-element">
-  <a href="#gdb" class="heading-mark"></a>GDB</h2><p>使用 GDB 这类调试工具可以大幅度提升我们编写代码、除错的能力 &#x1f436;</p>
+<h3 id="规格不仅要看最新的过往的也要熟悉">规格不仅要看最新的，过往的也要熟悉</h3>
+<p>因为很多 (嵌入式) 设备上运行的 Linux 可能是很旧的版本，那时 Linux 使用的是更旧的 C 语言规格。例如空中巴士 330 客机的娱乐系统里执行的是十几年前的 Red Hat Linux，总有人要为这些“古董”负责 &#x1f923;</p>
+<h2 id="gdb">GDB</h2>
+<p>使用 GDB 这类调试工具可以大幅度提升我们编写代码、除错的能力 &#x1f436;</p>
 <ul>
 <li>video: <a href="https://www.youtube.com/watch?v=UTVp4jpJoyc"target="_blank" rel="external nofollow noopener noreferrer">Linux basic anti-debug</a></li>
 <li>video: <a href="https://www.youtube.com/watch?v=twxEVeDceGw"target="_blank" rel="external nofollow noopener noreferrer">C Programming, Disassembly, Debugging, Linux, GDB</a></li>
@@ -291,8 +297,8 @@ used, as they are local to the function in which they are declared):</p>
 </ul>
 </li>
 </ul>
-<h2 id="c23" class="heading-element">
-  <a href="#c23" class="heading-mark"></a>C23</h2><p>上一个 C 语言标准是 C17，正式名称为 ISO/IEC 9899:2018，是 2017 年准备，2018年正式发布的标准规范。C23 则是目前正在开发的规格，其预计新增特性如下:</p>
+<h2 id="c23">C23</h2>
+<p>上一个 C 语言标准是 C17，正式名称为 ISO/IEC 9899:2018，是 2017 年准备，2018年正式发布的标准规范。C23 则是目前正在开发的规格，其预计新增特性如下:</p>
 <ul>
 <li><code>typeof</code>: 由 GNU extension 转正，用于实作 <code>container_of</code> 宏</li>
 <li><code>call_once</code>: 保证在 concurrent 环境中，某段程式码只会执行 1 次</li>
@@ -327,10 +333,11 @@ used, as they are local to the function in which they are declared):</p>
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-03-15 18:29:42">更新于 2024-03-15&nbsp;</span>
-      </div></div><div class="post-info-line">
-        <div class="post-info-md"><span><a href="/posts/c-standards/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-        <div class="post-info-share">
-          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-standards/" data-title="你所不知道的 C 语言: 开发工具和规格标准" data-hashtags="Sysprog,C,Standard"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/c-standards/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-standards/" data-title="你所不知道的 C 语言: 开发工具和规格标准" data-hashtags="Sysprog,C,Standard"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/c-standards/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-standards/" data-title="你所不知道的 C 语言: 开发工具和规格标准" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-standards/" data-title="你所不知道的 C 语言: 开发工具和规格标准"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -339,11 +346,12 @@ used, as they are local to the function in which they are declared):</p>
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-standards/" data-title="你所不知道的 C 语言: 开发工具和规格标准" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-standards/" data-title="你所不知道的 C 语言: 开发工具和规格标准"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-        </div>
-      </div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a><a href="/tags/c/" class="post-tag" title="标签 - C">C</a><a href="/tags/standard/" class="post-tag" title="标签 - Standard">Standard</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/c/' class="post-tag">C</a><a href='/tags/standard/' class="post-tag">Standard</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -352,14 +360,11 @@ used, as they are local to the function in which they are declared):</p>
   <div class="post-nav"><a href="/posts/c-memory/" class="post-nav-item" rel="prev" title="你所不知道的 C 语言: 内存管理、对齐及硬体特性"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>你所不知道的 C 语言: 内存管理、对齐及硬体特性</a>
       <a href="/posts/channels/" class="post-nav-item" rel="next" title="Crust of Rust: Channels">Crust of Rust: Channels<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article>
-
-  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -367,5 +372,5 @@ used, as they are local to the function in which they are declared):</p>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

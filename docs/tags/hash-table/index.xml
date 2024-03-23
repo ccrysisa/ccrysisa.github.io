@@ -2,7 +2,7 @@
   <channel>
     <title>Hash table - 标签 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/hash-table/</link>
-    <description>Hash table - 标签 | KZnight&#39;s Blog</description>
+    <description>Hash table - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 16 Mar 2024 10:59:36 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/hash-table/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心的 hash table 实作</title>

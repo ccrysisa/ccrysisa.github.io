@@ -2,7 +2,7 @@
   <channel>
     <title>Linux - 标签 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/linux/</link>
-    <description>Linux - 标签 | KZnight&#39;s Blog</description>
+    <description>Linux - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 16 Mar 2024 10:59:36 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
@@ -43,11 +43,11 @@
 </blockquote>]]></description>
 </item>
 <item>
-  <title>openEuler RISC-V 系统: QEMU 仿真和 Mugen 测试框架</title>
-  <link>https://ccrysisa.github.io/posts/openeuler-riscv-qemu-mugen/</link>
+  <title>openEuler RISC-V 系统: QEMU 仿真</title>
+  <link>https://ccrysisa.github.io/posts/openeuler-riscv-qemu/</link>
   <pubDate>Thu, 07 Mar 2024 14:48:21 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/openeuler-riscv-qemu-mugen/</guid>
+  <guid>https://ccrysisa.github.io/posts/openeuler-riscv-qemu/</guid>
   <description><![CDATA[<blockquote>
 <p>本文对通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统的流程进行详细介绍，以及介绍如何通过 <a href="https://gitee.com/openeuler/mugen"target="_blank" rel="external nofollow noopener noreferrer">mugen</a> 测试框架来对 RISC-V 版本的 openEuler 进行系统、软件等方面测试，并根据测试日志对错误原因进行分析。</p>
 </blockquote>]]></description>

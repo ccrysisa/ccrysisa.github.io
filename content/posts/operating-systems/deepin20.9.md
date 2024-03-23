@@ -77,6 +77,10 @@ repost:
 - **Vim**
 - **VSCode Great Icons** 文件图标主题
 
+{{< admonition question >}}
+rust5-analyzer 插件可能会因为新版本要求 glibc 2.29 而导致启动失败，请参考这个 [issue](https://github.com/rust-lang/rust-analyzer/issues/11558) 来解决。
+{{< /admonition >}}
+
 ## 终端和 Vim
 
 新手教学文档: 
