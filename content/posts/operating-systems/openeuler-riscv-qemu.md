@@ -315,3 +315,6 @@ $ neofetch
 - openEuler Docs: [使用 DNF 管理软件包](https://docs.openeuler.org/zh/docs/22.03_LTS_SP2/docs/Administration/%E4%BD%BF%E7%94%A8DNF%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E5%8C%85.html)
 - [基于 openEuler 虚拟机本地执行 mugen 测试脚本](http://devops-dev.com/article/438)
 - Video: [Mugen 框架的使用](https://www.bilibili.com/video/BV1UU4y1G7Zs/)
+- https://openbuildservice.org/help/manuals/obs-user-guide/
+- https://gitee.com/openEuler/RISC-V#/openeuler/RISC-V/
+- https://gitee.com/zxs-un/doc-port2riscv64-openEuler
