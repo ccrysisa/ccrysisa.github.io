@@ -306,6 +306,10 @@ $ neofetch
 
 {{< image src="/images/oerv/openEuler-RISC-V-neofetch.png" >}}
 
+## OBS/OSC
+
+OBS 的 Package 中 _service 配置文件，revision 字段是对应与 Git 仓库的 commit id (如果你使用的 Source Code Management (SCM) 方式是 Git 托管的话)
+
 ## References
 
 - openEuler RISC-V: [通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统](https://github.com/openeuler-mirror/RISC-V/blob/master/doc/tutorials/vm-qemu-oErv.md)
@@ -318,3 +322,5 @@ $ neofetch
 - https://openbuildservice.org/help/manuals/obs-user-guide/
 - https://gitee.com/openEuler/RISC-V#/openeuler/RISC-V/
 - https://gitee.com/zxs-un/doc-port2riscv64-openEuler
+- https://stackoverflow.com/questions/5308816/how-can-i-merge-multiple-commits-onto-another-branch-as-a-single-squashed-commit
+
