@@ -295,7 +295,7 @@ $ echo $?
 
 ## Neofetch
 
-根据 [neofetch wiki](https://github.com/dylanaraps/neofetch/wiki/Installation#latest-git-master-bleeding-edge) 从 git 拉取最新数据进行构建:
+由于工作内容是对软件包进行: 编译 -> 失败 -> 定位问题 -> 修复 -> 重新编译，所以我们倾向于直接从源码编译，根据 [neofetch wiki](https://github.com/dylanaraps/neofetch/wiki/Installation#latest-git-master-bleeding-edge) 从 git 拉取最新数据进行构建:
 
 ```bash
 $ git clone https://github.com/dylanaraps/neofetch
@@ -306,7 +306,7 @@ $ neofetch
 
 {{< image src="/images/oerv/openEuler-RISC-V-neofetch.png" >}}
 
-## OBS/OSC
+## Open Build Service (OBS)
 
 OBS 的 Package 中 _service 配置文件，revision 字段是对应与 Git 仓库的 commit id (如果你使用的 Source Code Management (SCM) 方式是 Git 托管的话)
 

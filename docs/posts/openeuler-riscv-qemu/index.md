@@ -252,7 +252,7 @@ $ echo $?
 
 ## Neofetch
 
-根据 [neofetch wiki](https://github.com/dylanaraps/neofetch/wiki/Installation#latest-git-master-bleeding-edge) 从 git 拉取最新数据进行构建:
+由于工作内容是对软件包进行: 编译 -> 失败 -> 定位问题 -> 修复 -> 重新编译，所以我们倾向于直接从源码编译，根据 [neofetch wiki](https://github.com/dylanaraps/neofetch/wiki/Installation#latest-git-master-bleeding-edge) 从 git 拉取最新数据进行构建:
 
 ```bash
 $ git clone https://github.com/dylanaraps/neofetch
@@ -263,6 +263,10 @@ $ neofetch
 
 {{< image src="/images/oerv/openEuler-RISC-V-neofetch.png" >}}
 
+## Open Build Service (OBS)
+
+OBS 的 Package 中 _service 配置文件，revision 字段是对应与 Git 仓库的 commit id (如果你使用的 Source Code Management (SCM) 方式是 Git 托管的话)
+
 ## References
 
 - openEuler RISC-V: [通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统](https://github.com/openeuler-mirror/RISC-V/blob/master/doc/tutorials/vm-qemu-oErv.md)
@@ -272,6 +276,11 @@ $ neofetch
 - openEuler Docs: [使用 DNF 管理软件包](https://docs.openeuler.org/zh/docs/22.03_LTS_SP2/docs/Administration/%E4%BD%BF%E7%94%A8DNF%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E5%8C%85.html)
 - [基于 openEuler 虚拟机本地执行 mugen 测试脚本](http://devops-dev.com/article/438)
 - Video: [Mugen 框架的使用](https://www.bilibili.com/video/BV1UU4y1G7Zs/)
+- https://openbuildservice.org/help/manuals/obs-user-guide/
+- https://gitee.com/openEuler/RISC-V#/openeuler/RISC-V/
+- https://gitee.com/zxs-un/doc-port2riscv64-openEuler
+- https://stackoverflow.com/questions/5308816/how-can-i-merge-multiple-commits-onto-another-branch-as-a-single-squashed-commit
+
 
 
 ---

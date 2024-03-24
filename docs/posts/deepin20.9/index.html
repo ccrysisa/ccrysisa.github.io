@@ -9,14 +9,14 @@
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="记录一下折腾 Deepin 20.9 的物理机的过程与相关的配置。" /><meta name="keywords" content='Linux, Deepin' /><meta itemprop="name" content="深度操作系统 Deepin 20.9 安装配置">
 <meta itemprop="description" content="记录一下折腾 Deepin 20.9 的物理机的过程与相关的配置。"><meta itemprop="datePublished" content="2024-01-24T18:59:56+08:00" />
-<meta itemprop="dateModified" content="2024-03-22T23:00:35+08:00" />
-<meta itemprop="wordCount" content="685"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-03-23T12:40:01+08:00" />
+<meta itemprop="wordCount" content="721"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Linux,Deepin," /><meta property="og:title" content="深度操作系统 Deepin 20.9 安装配置" />
 <meta property="og:description" content="记录一下折腾 Deepin 20.9 的物理机的过程与相关的配置。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/deepin20.9/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-01-24T18:59:56+08:00" />
-<meta property="article:modified_time" content="2024-03-22T23:00:35+08:00" />
+<meta property="article:modified_time" content="2024-03-23T12:40:01+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="深度操作系统 Deepin 20.9 安装配置"/>
@@ -35,8 +35,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/deepin20.9\/"
-    },"genre": "posts","keywords": "Linux, Deepin","wordcount":  685 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/deepin20.9\/","datePublished": "2024-01-24T18:59:56+08:00","dateModified": "2024-03-22T23:00:35+08:00","publisher": {
+    },"genre": "posts","keywords": "Linux, Deepin","wordcount":  721 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/deepin20.9\/","datePublished": "2024-01-24T18:59:56+08:00","dateModified": "2024-03-23T12:40:01+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -151,7 +151,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/operating-systems/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Operating Systems</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-01-24 18:59:56"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-24">2024-01-24</time></span>&nbsp;<span title="更新于 2024-03-22 23:00:35"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-22">2024-03-22</time></span>&nbsp;<span title="685 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-01-24 18:59:56"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-24">2024-01-24</time></span>&nbsp;<span title="更新于 2024-03-23 12:40:01"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-23">2024-03-23</time></span>&nbsp;<span title="721 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -164,6 +164,7 @@
     <li><a href="#编辑器-vs-code">编辑器: VS Code</a></li>
     <li><a href="#终端和-vim">终端和 Vim</a></li>
     <li><a href="#系统语言-rust">系统语言: Rust</a></li>
+    <li><a href="#tldr">tldr</a></li>
     <li><a href="#效果展示">效果展示</a></li>
     <li><a href="#faq">FAQ</a></li>
   </ul>
@@ -312,7 +313,19 @@
 </span></span><span class="line"><span class="cl">$ rustup update</span></span></code></pre></td></tr></table>
 </div>
 </div><p>个人偏向于使用 nightly toolchain</p>
-<h2 id="效果展示">效果展示</h2>
+<h2 id="tldr">tldr</h2>
+<blockquote>
+<p>The tldr-pages project is a collection of community-maintained help pages for command-line tools, that aims to be a simpler, more approachable complement to traditional man pages.</p>
+</blockquote>
+<p>安装 tldr:</p>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install tldr</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="效果展示">效果展示</h2>
 <p><figure><a class="lightgallery" href="/images/tools/deepin-terminal-vim.png?size=large" data-thumbnail="/images/tools/deepin-terminal-vim.png?size=small" data-sub-html="<h2>Deepin Terminial Vim</h2>"><img loading="lazy" src="/images/tools/deepin-terminal-vim.png" srcset="/images/tools/deepin-terminal-vim.png?size=small, /images/tools/deepin-terminal-vim.png?size=medium 1.5x, /images/tools/deepin-terminal-vim.png?size=large 2x" sizes="auto" data-title="/images/tools/deepin-terminal-vim.png" data-alt="/images/tools/deepin-terminal-vim.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Deepin Terminial Vim</figcaption>
   </figure>
 <figure><a class="lightgallery" href="/images/tools/deepin-dde-desktop.png?size=large" data-thumbnail="/images/tools/deepin-dde-desktop.png?size=small" data-sub-html="<h2>Deepin DDE Desktop</h2>"><img loading="lazy" src="/images/tools/deepin-dde-desktop.png" srcset="/images/tools/deepin-dde-desktop.png?size=small, /images/tools/deepin-dde-desktop.png?size=medium 1.5x, /images/tools/deepin-dde-desktop.png?size=large 2x" sizes="auto" data-title="/images/tools/deepin-dde-desktop.png" data-alt="/images/tools/deepin-dde-desktop.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Deepin DDE Desktop</figcaption>
@@ -324,7 +337,7 @@
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>重启后可能会出现，输入密码无法进入图形界面重新返回登录界面，这一循环状况。这个是 deepin 的默认 shell 是 dash 造成的，只需将默认的 shell 改为 bash 即可解决问题：</p>
-<div class="highlight" id="id-3"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -338,7 +351,7 @@
 </span></span><span class="line"><span class="cl">$ sudo ln -s /bin/bash /bin/sh</span></span></code></pre></td></tr></table>
 </div>
 </div><p>如果你已经处于无限登录界面循环这一状况，可以通过 <code>Ctrl + Alt + &lt;F2&gt;</code> 进入 tty2 界面进行修改：</p>
-<div class="highlight" id="id-4"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -355,7 +368,7 @@
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-03-22 23:00:35">更新于 2024-03-22&nbsp;</span>
+        <span title="更新于 2024-03-23 12:40:01">更新于 2024-03-23&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/deepin20.9/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>

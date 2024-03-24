@@ -50,26 +50,46 @@ repost:
 
 <!--more-->
 
-以 [2022 年的 OS 课程](https://jyywiki.cn/OS/2022/index.html) 作为主线学习，辅以 [2023 年课程](https://jyywiki.cn/OS/2023/index.html) 和 [2024 年课程](https://jyywiki.cn/OS/2024/index.html) 的内容加以补充、扩展。
+---
 
-## 操作系统概述 (为什么要学操作系统) 
+时隔一年，在跟随 B 站 up 主 [@踌躇月光](https://space.bilibili.com/491131440/) 从零编写一个基于 x86 架构的内核 [Txics](https://github.com/vanJker/TXOS) 后，终于可以跟得上 [@绿导师](https://space.bilibili.com/202224425) 的课程了 :rofl: 这次以 [2022 年的 OS 课程](https://jyywiki.cn/OS/2022/index.html) 作为主线学习，辅以 [2023 年课程](https://jyywiki.cn/OS/2023/index.html) 和 [2024 年课程](https://jyywiki.cn/OS/2024/index.html) 的内容加以补充、扩展。
+
+{{< image src="https://jyywiki.cn/pages/OS/img/tux-source.jpg" >}}
+
+## 操作系统概述 (为什么要学操作系统)
+
+{{< link href="https://www.bilibili.com/video/BV1Cm4y1d7Ur/" content="直播录影" external-icon=true >}}
+|
+{{< link href="https://jyywiki.cn/OS/2022/slides/1.slides.html" content="讲义页面" external-icon=true >}}
+|
+{{< link href="https://jyywiki.cn/OS/2022/notes/1.html" content="阅读材料" external-icon=true >}}
+
+---
 
 一个 Talk 的经典三段式结构: Why? What? How? (这个真是汇报的大杀器 :rofl:)
 
-### 1950s 的计算机
+1950s 的计算机
+- I/O 设备的速度已经严重低于处理器的速度，中断机制出现 (1953)
+- 希望使用计算机的人越来越多；希望调用 API 而不是直接访问设备
+- 批处理系统 = 程序的自动切换 (换卡) + 库函数 API
+- 操作系统中开始出现 *设备*、*文件*、*任务* 等对象和 API
 
-I/O 设备的速度已经严重低于处理器的速度，中断机制出现 (1953)
+1960s 的计算机
+- 可以同时载入多个程序而不用 “换卡” 了
+- 能载入多个程序到内存且灵活调度它们的管理程序，包括程序可以调用的 API
+- 既然操作系统已经可以在程序之间切换，为什么不让它们定时切换呢？
 
-希望使用计算机的人越来越多；希望调用 API 而不是直接访问设备
+操作系统机制出现和发展的原因，不需要死记硬背，这些机制都是应需求而诞生、发展的，非常的自然。
 
-“批处理系统” = 程序的自动切换 (换卡) + 库函数 API
+实验环境:
 
-操作系统中开始出现 “设备”、“文件”、“任务” 等对象和 API
+```bash
+$ uname -a
+Linux cai-PC 5.15.77-amd64-desktop #2 SMP Thu Jun 15 16:06:18 CST 2023 x86_64 GNU/Linux
+```
 
-### 1960s 的计算机
+安装 tldr:
 
-可以同时载入多个程序而不用 “换卡” 了
-
-能载入多个程序到内存且灵活调度它们的管理程序，包括程序可以调用的 API
-
-既然操作系统已经可以在程序之间切换，为什么不让它们定时切换呢？
+```bash
+$ sudo apt install tldr
+```

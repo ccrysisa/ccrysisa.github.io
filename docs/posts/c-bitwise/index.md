@@ -385,6 +385,8 @@ zero size bit-field 使得这里在 `a`, `b` 和 `c`, `d` 之间进行 `sizeof(i
 > members declared between them are also (non-zero-length) bit-fields, no matter what the sizes of those
 > intervening bit-fields happen to be.
 
+所以 `BUILD_BUG_ON_ZERO` 宏相当于编译时期的 `assert`，因为 `assert` 是在执行时期才会触发的，对于 Linux 核心来说代价太大了 (想象一下核心运行着突然触发一个 `assert` 导致当掉 :rofl:)，所以采用了 `BUILD_BUG_ON_ZERO` 宏在编译时期就进行检查 (莫名有一种 Rust 的风格 :rofl:)
+
 对于 `BUILD_BUG_ON_ZERO` 这个宏，C11 提供了 [_Static_assert](https://en.cppreference.com/w/c/language/_Static_assert) 语法达到相同效果，但是 Linux kernel 自己维护了一套编译工具链 (这个工具链 gcc 版本可能还没接纳 C11 :rofl:)，所以还是使用自己编写的 `BUILD_BUG_ON_ZERO` 宏。
  
 

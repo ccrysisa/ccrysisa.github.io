@@ -110,6 +110,16 @@ $ rustup update
 
 个人偏向于使用 nightly toolchain
 
+## tldr
+
+> The tldr-pages project is a collection of community-maintained help pages for command-line tools, that aims to be a simpler, more approachable complement to traditional man pages.
+
+安装 tldr:
+
+```bash
+$ sudo apt install tldr
+```
+
 ## 效果展示
 
 {{< image src="/images/tools/deepin-terminal-vim.png" caption="Deepin Terminial Vim" >}}
