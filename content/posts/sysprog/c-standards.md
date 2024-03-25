@@ -42,11 +42,13 @@ repost:
 ---
 
 > Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言在工程领域的瑰宝，里头充斥则各种“艺术”，往往会吓到初次接触的人们，但总是能够使用 C 语言标准和开发工具提供的扩展 (主要是来自 gcc 的 GNU extensions) 来解释。
-> > “工欲善其事，必先利其器”   
+> > **工欲善其事，必先利其器**
 
 <!--more-->
 
 - {{< link href="https://hackmd.io/@sysprog/c-standards" content="原文地址" external-icon=true >}}
+
+---
 
 {{< center-quote >}}
 **If I had eight hours to chop down a tree, I’d spend six hours sharpening my axe.**
