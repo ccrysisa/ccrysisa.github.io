@@ -266,11 +266,65 @@ $ neofetch
 
 ## Open Build Service (OBS)
 
-观看教学影片: [openEuler构建之OBS使用指导 - bilibili](https://www.bilibili.com/video/BV1YK411H7E2/) 了解 OBS 的基本概念、OBS 网页 以及 **OSC 命令行工具** 的使用方法。
+观看教学影片: [openEuler构建之OBS使用指导 - bilibili](https://www.bilibili.com/video/BV1YK411H7E2/) 并对比阅读
+
+- [Beginnerʼs Guide](https://openbuildservice.org/help/manuals/obs-user-guide/art.obs.bg)
+- [openSUSE:Build Service 新手入门](https://zh.opensuse.org/openSUSE:Build_Service_%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8)
+- [如何通过OpenSUSE Open Build Service（OBS）构建Debian包 for RISCV-64](https://zhuanlan.zhihu.com/p/564032072)
+
+了解掌握 OBS 的基本概念、OBS 网页 以及 **OSC 命令行工具** 的使用方法。
+
+> 这部分内容很重要，和后续工作内容息息相关，在这里不要图快，打牢基础比较好。
+
+{{< image src="/images/oerv/obs-concepts.png" >}}
+{{< image src="/images/oerv/obs-concepts-2.png" >}}
 
 OBS 的 Package 中 _service 配置文件，revision 字段是对应与 Git 仓库的 commit id (如果你使用的 Source Code Management (SCM) 方式是 Git 托管的话)
 
-参考仓库: https://gitee.com/zxs-un/doc-port2riscv64-openEuler 内的相关文档完成 pcre2 的本地编译构建:
+参考仓库: https://gitee.com/zxs-un/doc-port2riscv64-openEuler 内的相关文档
+
+- [osc命令工具的安装与~/.oscrc配置文件](https://gitee.com/zxs-un/doc-port2riscv64-openEuler/blob/master/doc/build-osc-config-oscrc.md)
+- [在 openEuler 上安装 osc build 本地构建工具](https://gitee.com/zxs-un/doc-port2riscv64-openEuler/blob/master/doc/build-osc-build-tools.md)
+- [使用 osc build 在本地构建 openEuler OBS 服务端的内容](https://gitee.com/zxs-un/doc-port2riscv64-openEuler/blob/master/doc/build-osc-obs-service.md)
+
+在 openEuler RISC-V QEMU 虚拟机内完成 OBS、OSC 相关基础设施的安装:
+
+```bash
+# install osc and build
+$ sudo yum install osc build
+
+# configure osc in ~/.oscrc
+[general]
+apiurl = https://build.openeuler.openatom.cn
+no_verify = 1 # 未配置证书情况下不验证
+
+[https://build.openeuler.openatom.cn]
+user=username # 用户名
+pass=password # 明文密码
+trusted_prj=openEuler:selfbuild:function # 此项目为openEuler:Mailine:RISC-V项目的依赖库
+```
+
+在 openEuler RISC-V QEMU 虚拟机内完成 pcre2 的本地编译构建:
+
+```bash
+# 选定 pcre2 包
+$ osc co openEuler:Mainline:RISC-V/pcre2
+$ cd openEuler\:Mainline\:RISC-V/pcre2/
+# 更新并下载相关文件到本地
+$ osc up -S
+# 重命名刚刚下载的文件
+$ rm -f _service;for file in `ls | grep -v .osc`;do new_file=${file##*:};mv $file $new_file;done
+# 查看一下仓库信息，方便后续构建
+$ osc repos
+standard_riscv64  riscv64
+mainline_gcc      riscv64
+# 指定仓库和架构并进行本地构建
+$ osc build standard_riscv64 riscv64
+```
+
+{{< image src="/images/oerv/osc-build-pcre2.png" >}}
+
+总计用时 1301s
 
 ## References
 
