@@ -5,6 +5,19 @@
 
 <!--more-->
 
+---
+
+国立阳明交通大学 陈邻安老师，开设了两学期的统计课程，分别是上学期的 **统计学** 和下学期的 **高等统计学**。
+
+| 课程名称 | 英文名称 | 课程地址 | 课程视频 |
+| :----: | :-----: | :----: | :-----: |
+| 统计学    | Statistics          | [课程资讯][stat]  | [YouTube][stat-video] |
+| 高等统计学 | Advanced Statistics | [课程资讯][astat] | [YouTube][astat-video] |
+
+这两个学期课程的作业、习题以及解答都可以在 [这里](https://stat.nycu.edu.tw/zh_tw/course/community/info7) 找到。
+
+---
+
 {{< center-quote >}}
 ***学习一门课，要学习其“精神”，而不是学习其方法。***
 {{< /center-quote >}}
@@ -43,27 +56,27 @@ $$
 $$
 {{< /raw >}}
 
-{{< admonition title="Proof." open=false >}}
+---
+
 {{< raw >}}
 $$
 \begin{split}
-& \mathrm{since}\ \emptyset \cap S = \emptyset \\
-& \mathrm{then}\ P(S) = P(\emptyset \cap S) = P(\emptyset) + P(S) \\
+& \mathrm{Since}\ \emptyset \cap S = \emptyset \\
+& \mathrm{Then}\ P(S) = P(\emptyset \cap S) = P(\emptyset) + P(S) \\
 & \mathrm{and}\ P(S) = 1 \\
-& \mathrm{thus}\ P(\emptyset) = P(S) - P(S) = 0 \\
+& \mathrm{Thus}\ P(\emptyset) = P(S) - P(S) = 0 \\
 & Q.D.E. \\
 & \\
-& \mathrm{since}\ A^{C} \cap A = \emptyset \\
-& \mathrm{then}\ P(S) = P(A^{C} \cup A) = P(A^{C}) + P(A) \\
+& \mathrm{Since}\ A^{C} \cap A = \emptyset \\
+& \mathrm{Then}\ P(S) = P(A^{C} \cup A) = P(A^{C}) + P(A) \\
 & \mathrm{and}\ P(S) = 1 \\
-& \mathrm{thus}\ P(A^{C}) = P(S) - P(A) = 1 - p \\
+& \mathrm{Thus}\ P(A^{C}) = P(S) - P(A) = 1 - p \\
 & Q.D.E.
 \end{split}
 $$
 {{< /raw >}}
-{{< /admonition >}}
 
-
+---
 
 **Random variable** $X$ 是将 sample space $S$ 映射到实数域 $R$ 的映射关系，即 $S$ 是定义域 (domain)，$R$ 是值域 (co-domain)。由于 $S$ 和 $R$ 在计数上并不相同，所以 $r.v.\ X$ 只是单射，并不是满射。
 为什么需要这样的映射关系？因为对于实数，可以使用微积分这类数学工具对概率的性质进行研究，而微积分这类数学工具对于 sample space 显然是无法使用的。
@@ -134,6 +147,12 @@ $$
 
 - [List of LaTeX mathematical symbols](https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols)
 
+
+[stat]: https://ocw.nycu.edu.tw/?post_type=course_page&p=25566
+[stat-video]: https://www.youtube.com/playlist?list=PLj6E8qlqmkFtvN44vX_D7YRxAgivkONyN
+
+[astat]: https://ocw.nycu.edu.tw/?post_type=course_page&p=25439
+[astat-video]: https://www.youtube.com/playlist?list=PLj6E8qlqmkFvneoIIsf3yPr_TVPy6qimA
 
 ---
 

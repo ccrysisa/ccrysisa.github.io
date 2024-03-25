@@ -298,6 +298,7 @@ $ echo $?
 由于工作内容是对软件包进行: 编译 -> 失败 -> 定位问题 -> 修复 -> 重新编译，所以我们倾向于直接从源码编译，根据 [neofetch wiki](https://github.com/dylanaraps/neofetch/wiki/Installation#latest-git-master-bleeding-edge) 从 git 拉取最新数据进行构建:
 
 ```bash
+# enter into euler openEuler RISC-V QEMU
 $ git clone https://github.com/dylanaraps/neofetch
 $ cd neofetch
 $ make install
@@ -308,7 +309,11 @@ $ neofetch
 
 ## Open Build Service (OBS)
 
+观看教学影片: [openEuler构建之OBS使用指导 - bilibili](https://www.bilibili.com/video/BV1YK411H7E2/) 了解 OBS 的基本概念、OBS 网页 以及 **OSC 命令行工具** 的使用方法。
+
 OBS 的 Package 中 _service 配置文件，revision 字段是对应与 Git 仓库的 commit id (如果你使用的 Source Code Management (SCM) 方式是 Git 托管的话)
+
+参考仓库: https://gitee.com/zxs-un/doc-port2riscv64-openEuler 内的相关文档完成 pcre2 的本地编译构建:
 
 ## References
 
