@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>你所不知道的 C 语言: 前置处理器应用篇 - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
+<meta name="author-link" content="https://github.com/ccrysisa">
+<meta name="description" content="
+相較於頻繁納入新語法的程式語言 (如 C&#43;&#43; 和 Java)，C 語言顯得很保守，但總是能藉由前置處理器 (preprocessor) 對語法進行擴充，甚至搭配工具鏈 (toolchain) 的若干進階機制，做到大大超出程式語言規範的複雜機制。例如主要以 C 語言開發的 Linux 核心就搭配前置處理器和連結器 (linker) 的特徵，實作出 Linux 核心模組，允許開發者動態掛載/卸載，因巨集包裝得好，多數 Linux 核心核心模組的開發者只要專注在與 Linux 核心互動的部分。
+
+
+本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C&#43;&#43; template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO,max, min, 和 container_of 等巨集。
+" /><meta name="keywords" content='Sysprog, C, Preprocessor' /><meta itemprop="name" content="你所不知道的 C 语言: 前置处理器应用篇">
+<meta itemprop="description" content="
+相較於頻繁納入新語法的程式語言 (如 C&#43;&#43; 和 Java)，C 語言顯得很保守，但總是能藉由前置處理器 (preprocessor) 對語法進行擴充，甚至搭配工具鏈 (toolchain) 的若干進階機制，做到大大超出程式語言規範的複雜機制。例如主要以 C 語言開發的 Linux 核心就搭配前置處理器和連結器 (linker) 的特徵，實作出 Linux 核心模組，允許開發者動態掛載/卸載，因巨集包裝得好，多數 Linux 核心核心模組的開發者只要專注在與 Linux 核心互動的部分。
+
+
+本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C&#43;&#43; template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO,max, min, 和 container_of 等巨集。
+"><meta itemprop="datePublished" content="2024-03-25T22:55:44+08:00" />
+<meta itemprop="dateModified" content="2024-03-27T13:06:47+08:00" />
+<meta itemprop="wordCount" content="1401"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Sysprog,C,Preprocessor," /><meta property="og:title" content="你所不知道的 C 语言: 前置处理器应用篇" />
+<meta property="og:description" content="
+相較於頻繁納入新語法的程式語言 (如 C&#43;&#43; 和 Java)，C 語言顯得很保守，但總是能藉由前置處理器 (preprocessor) 對語法進行擴充，甚至搭配工具鏈 (toolchain) 的若干進階機制，做到大大超出程式語言規範的複雜機制。例如主要以 C 語言開發的 Linux 核心就搭配前置處理器和連結器 (linker) 的特徵，實作出 Linux 核心模組，允許開發者動態掛載/卸載，因巨集包裝得好，多數 Linux 核心核心模組的開發者只要專注在與 Linux 核心互動的部分。
+
+
+本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C&#43;&#43; template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO,max, min, 和 container_of 等巨集。
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ccrysisa.github.io/posts/c-preprocessor/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-03-25T22:55:44+08:00" />
+<meta property="article:modified_time" content="2024-03-27T13:06:47+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 前置处理器应用篇"/>
+<meta name="twitter:description" content="
+相較於頻繁納入新語法的程式語言 (如 C&#43;&#43; 和 Java)，C 語言顯得很保守，但總是能藉由前置處理器 (preprocessor) 對語法進行擴充，甚至搭配工具鏈 (toolchain) 的若干進階機制，做到大大超出程式語言規範的複雜機制。例如主要以 C 語言開發的 Linux 核心就搭配前置處理器和連結器 (linker) 的特徵，實作出 Linux 核心模組，允許開發者動態掛載/卸載，因巨集包裝得好，多數 Linux 核心核心模組的開發者只要專注在與 Linux 核心互動的部分。
+
+
+本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C&#43;&#43; template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO,max, min, 和 container_of 等巨集。
+"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/c-preprocessor/" /><link rel="prev" href="https://ccrysisa.github.io/posts/subtying-and-variance/" /><link rel="next" href="https://ccrysisa.github.io/posts/linux2023/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "你所不知道的 C 语言: 前置处理器应用篇",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/ccrysisa.github.io\/posts\/c-preprocessor\/"
+    },"genre": "posts","keywords": "Sysprog, C, Preprocessor","wordcount":  1401 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-preprocessor\/","datePublished": "2024-03-25T22:55:44+08:00","dateModified": "2024-03-27T13:06:47+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "ccrysisa"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>你所不知道的 C 语言: 前置处理器应用篇</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-03-25 22:55:44"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-25">2024-03-25</time></span>&nbsp;<span title="更新于 2024-03-27 13:06:47"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-27">2024-03-27</time></span>&nbsp;<span title="1401 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#不要小看-preprocessor">不要小看 preprocessor</a></li>
+    <li><a href="#object-oriented-programming">Object Oriented Programming</a></li>
+    <li><a href="#c11-_generic">C11: _Generic</a></li>
+    <li><a href="#block">Block</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><blockquote>
+<p>相較於頻繁納入新語法的程式語言 (如 C++ 和 Java)，C 語言顯得很保守，但總是能藉由前置處理器 (preprocessor) 對語法進行擴充，甚至搭配工具鏈 (toolchain) 的若干進階機制，做到大大超出程式語言規範的複雜機制。例如主要以 C 語言開發的 Linux 核心就搭配前置處理器和連結器 (linker) 的特徵，實作出 Linux 核心模組，允許開發者動態掛載/卸載，因巨集包裝得好，多數 Linux 核心核心模組的開發者只要專注在與 Linux 核心互動的部分。</p>
+</blockquote>
+<blockquote>
+<p>本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C++ template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO,max, min, 和 container_of 等巨集。</p>
+</blockquote>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/c-preprocessor"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>
+<h2 id="不要小看-preprocessor">不要小看 preprocessor</h2>
+<ul>
+<li>man gcc</li>
+</ul>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-zed" data-lang="zed"><span class="line"><span class="cl"><span class="o">-</span><span class="n">D</span><span class="w"> </span><span class="n">name</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Predefine</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">macro</span><span class="p">,</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="kt">definition</span><span class="w"> </span><span class="err">1</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">-</span><span class="n">D</span><span class="w"> </span><span class="n">name</span><span class="o">=</span><span class="kt">definition</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">The</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="kt">definition</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">tokenized</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">processed</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">if</span><span class="w"> </span><span class="n">they</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">appeared</span><span class="w"> </span><span class="n">during</span><span class="w"> </span><span class="n">translation</span><span class="w"> </span><span class="n">phase</span><span class="w"> </span><span class="n">three</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="nv">#define</span><span class="w"> </span><span class="n">directive</span><span class="p">.</span><span class="w">  </span><span class="n">In</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">particular</span><span class="p">,</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="kt">definition</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">truncated</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">embedded</span><span class="w"> </span><span class="n">newline</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">characters</span><span class="p">.</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在 Makefile 中往 CFLAGS 加入 <code>-D’;’=’;’</code> 这类搞怪信息，会导致编译时出现一些不明所以的编译错误 (恶搞专用 &#x1f923;)</p>
+<p>早期的 C++ 是和 C 语言兼容的，那时候的 C++ 相当于 C 语言的一种 preprocessor，将 C++ 代码预编译为对应的 C 语言代码，具体可以参考 <a href="http://janvitek.org/events/NEU/4500/s20/cwc.html"target="_blank" rel="external nofollow noopener noreferrer">C with Classes</a>。事实上现在的 C++ 和 C 语言早已分道扬镳，形同陌路，虽然语法上有相似的地方，但请把这两个语言当成不同的语言看待 &#x1f923;</p>
+<blockquote>
+<p>体验一下 C++ 模版 (template) 的威力 &#x274c; 丑陋 &#x2714;&#xfe0f; :</p>
+</blockquote>
+<a class="lightgallery" href="https://i.imgur.com/MVZVuDt.png?size=large" data-thumbnail="https://i.imgur.com/MVZVuDt.png?size=small" data-sub-html="<h2>https://i.imgur.com/MVZVuDt.png</h2>"><img loading="lazy" src="https://i.imgur.com/MVZVuDt.png" srcset="https://i.imgur.com/MVZVuDt.png?size=small, https://i.imgur.com/MVZVuDt.png?size=medium 1.5x, https://i.imgur.com/MVZVuDt.png?size=large 2x" sizes="auto" data-title="https://i.imgur.com/MVZVuDt.png" data-alt="https://i.imgur.com/MVZVuDt.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<blockquote>
+<p>C 语言: 大道至简 &#x2705;</p>
+</blockquote>
+<h2 id="object-oriented-programming">Object Oriented Programming</h2>
+<p>面向对象编程时，善用前置处理器可大幅简化和开发</p>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <code>#</code>: <a href="https://gcc.gnu.org/onlinedocs/cpp/Stringizing.html"target="_blank" rel="external nofollow noopener noreferrer">Stringizing</a> convert a macro argument into a string constant</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <code>##</code>: <a href="https://gcc.gnu.org/onlinedocs/cpp/Concatenation.html"target="_blank" rel="external nofollow noopener noreferrer">Concatenation</a> merge two tokens into one while expanding macros.</li>
+</ul>
+<p><strong>宏的实际作用: generate (产生/生成) 程式码</strong></p>
+<blockquote>
+<p>Rust 的过程宏 (procedural macros) 进一步强化了这一目的，可以自定义语法树进行代码生成。</p>
+</blockquote>
+<p>可以 <code>gcc -E -P</code> 来观察预处理后的输出:</p>
+<ul>
+<li>man gcc</li>
+</ul>
+<div class="highlight" id="id-2"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">-E  Stop after the preprocessing stage; do not run the compiler proper.
+</span></span><span class="line"><span class="cl">    The output is in the form of preprocessed source code, which is
+</span></span><span class="line"><span class="cl">    sent to the standard output.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Input files that don&#39;t require preprocessing are ignored.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">-P  Inhibit generation of linemarkers in the output from the
+</span></span><span class="line"><span class="cl">    preprocessor.  This might be useful when running the preprocessor
+</span></span><span class="line"><span class="cl">    on something that is not C code, and will be sent to a program
+</span></span><span class="line"><span class="cl">    which might be confused by the linemarkers.</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以依据不同时期的标准来对 C 源程序编译生成目标文件:</p>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://www.gnu.org/software/libc/manual/html_node/Feature-Test-Macros.html"target="_blank" rel="external nofollow noopener noreferrer">Feature Test Macros</a></li>
+</ul>
+<blockquote>
+<p>The exact set of features available when you compile a source file is controlled by which feature test macros you define.</p>
+</blockquote>
+<p>使用 <code>gcc -E -P</code> 观察 objects.h 预处理后的输出，透过 <code>make</code> 和 <code>make check</code> 玩一下这个最简单光线追踪引擎</p>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> GitHub: <a href="https://github.com/embedded2016/raytracing"target="_blank" rel="external nofollow noopener noreferrer">raytracing</a></li>
+</ul>
+<p>object oriented programming 不等于 class based programming, 只需要满足 Object-oriented programming (OOP) is a computer programming model that organizes software design around data, or objects, rather than functions and logic. 这个概念的就是 OOP。</p>
+<a href="https://github.com/ccrysisa/LKI/blob/main/c-recursion"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+<h2 id="c11-_generic">C11: _Generic</h2>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 阅读 <a href="https://www.open-std.org/jtc1/sc22/WG14/www/docs/n1570.pdf"target="_blank" rel="external nofollow noopener noreferrer">C11 规格书</a> 6.5.1.1 Generic selection</li>
+</ul>
+<blockquote>
+<p>The controlling expression of a generic selection is not evaluated. If a generic selection
+has a generic association with a type name that is compatible with the type of the
+controlling expression, then the result expression of the generic selection is the
+expression in that generic association. Otherwise, the result expression of the generic
+selection is the expression in the default generic association. None of the expressions
+from any other generic association of the generic selection is evaluated.</p>
+</blockquote>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define cbrt(X) \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    _Generic((X), \     
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>             <span class="kt">long</span> <span class="kt">double</span><span class="o">:</span> <span class="n">cbrtl</span><span class="p">,</span> \
+</span></span><span class="line"><span class="cl">             <span class="k">default</span><span class="o">:</span> <span class="n">cbrt</span><span class="p">,</span>  \
+</span></span><span class="line"><span class="cl">             <span class="k">const</span> <span class="kt">float</span><span class="o">:</span> <span class="n">cbrtf</span><span class="p">,</span> \
+</span></span><span class="line"><span class="cl">             <span class="kt">float</span><span class="o">:</span> <span class="n">cbrtf</span>  \
+</span></span><span class="line"><span class="cl">    <span class="p">)(</span><span class="n">X</span><span class="p">)</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>经过 func.c/func.cpp 的输出对比，C++ 模版在字符类型的的判定比较准确，C11 的 <code>_Generic</code> 会先将 <code>char</code> 转换成 <code>int</code> 导致结果稍有瑕疵，这是因为在 C 语言中字符常量 (例如 &lsquo;a&rsquo;) 的类型是 <code>int</code> 而不是 <code>char</code>。</p>
+<ul>
+<li>Stack Overflow: <a href="https://stackoverflow.com/questions/76701502/what-to-do-to-make-generica-char-1-int-2-1-true"target="_blank" rel="external nofollow noopener noreferrer">What to do to make &lsquo;_Generic(&lsquo;a&rsquo;, char : 1, int : 2) == 1&rsquo; true</a></li>
+</ul>
+<h2 id="block">Block</h2>
+<ul>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Blocks_%28C_language_extension%29"target="_blank" rel="external nofollow noopener noreferrer">Blocks (C language extension)</a></li>
+</ul>
+<blockquote>
+<p>Blocks are a non-standard extension added by Apple Inc. to Clang&rsquo;s implementations of the C, C++, and Objective-C programming languages that uses a lambda expression-like syntax to create closures within these languages.</p>
+</blockquote>
+<blockquote>
+<p>Like function definitions, blocks can take arguments, and declare their own variables internally. Unlike ordinary C function definitions, their value can capture state from their surrounding context. A block definition produces an opaque value which contains both a reference to the code within the block and a snapshot of the current state of local stack variables at the time of its definition. The block may be later invoked in the same manner as a function pointer. The block may be assigned to variables, passed to functions, and otherwise treated like a normal function pointer, although the application programmer (or the API) must mark the block with a special operator (Block_copy) if it&rsquo;s to be used outside the scope in which it was defined.</p>
+</blockquote>
+<p>使用 BLock 可以减少宏展开时的重复计算次数。目前 clang 是支持 Block 这个扩展的，但是在编译时需要加上参数 <code>-fblocks</code>:</p>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ clang -fblocks blocks-test.c -lBlocksRuntime</span></span></code></pre></td></tr></table>
+</div>
+</div><p>同时还需要 <a href="https://github.com/mackyle/blocksruntime"target="_blank" rel="external nofollow noopener noreferrer">BlocksRuntime</a> 这个库，按照仓库 README 安装即可:</p>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># clone repo</span>
+</span></span><span class="line"><span class="cl">$ git clone https://github.com/mackyle/blocksruntime.git
+</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> blocksruntime/
+</span></span><span class="line"><span class="cl"><span class="c1"># building</span>
+</span></span><span class="line"><span class="cl">$ ./buildlib
+</span></span><span class="line"><span class="cl"><span class="c1"># testing</span>
+</span></span><span class="line"><span class="cl">$ ./checktests
+</span></span><span class="line"><span class="cl"><span class="c1"># installing</span>
+</span></span><span class="line"><span class="cl">$ sudo ./installlib</span></span></code></pre></td></tr></table>
+</div>
+</div></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="更新于 2024-03-27 13:06:47">更新于 2024-03-27&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/c-preprocessor/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-preprocessor/" data-title="你所不知道的 C 语言: 前置处理器应用篇" data-hashtags="Sysprog,C,Preprocessor"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/c-preprocessor/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-preprocessor/" data-title="你所不知道的 C 语言: 前置处理器应用篇" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-preprocessor/" data-title="你所不知道的 C 语言: 前置处理器应用篇"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/c-preprocessor/" data-title="你所不知道的 C 语言: 前置处理器应用篇"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/c-preprocessor/" data-title="你所不知道的 C 语言: 前置处理器应用篇" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-preprocessor/" data-title="你所不知道的 C 语言: 前置处理器应用篇" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-preprocessor/" data-title="你所不知道的 C 语言: 前置处理器应用篇"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/c/' class="post-tag">C</a><a href='/tags/preprocessor/' class="post-tag">Preprocessor</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/posts/subtying-and-variance/" class="post-nav-item" rel="prev" title="Crust of Rust: Subtying and Variance"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Crust of Rust: Subtying and Variance</a>
+      <a href="/posts/linux2023/" class="post-nav-item" rel="next" title="Linux 核心设计/实作 (Linux Kernel Internals)">Linux 核心设计/实作 (Linux Kernel Internals)<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

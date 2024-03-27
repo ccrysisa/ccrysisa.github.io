@@ -1,0 +1,21 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Preprocessor - 标签 - KZnight&#39;s Blog</title>
+    <link>https://ccrysisa.github.io/tags/preprocessor/</link>
+    <description>Preprocessor - 标签 - KZnight&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 25 Mar 2024 22:55:44 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/preprocessor/" rel="self" type="application/rss+xml" /><item>
+  <title>你所不知道的 C 语言: 前置处理器应用篇</title>
+  <link>https://ccrysisa.github.io/posts/c-preprocessor/</link>
+  <pubDate>Mon, 25 Mar 2024 22:55:44 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-preprocessor/</guid>
+  <description><![CDATA[<blockquote>
+<p>相較於頻繁納入新語法的程式語言 (如 C++ 和 Java)，C 語言顯得很保守，但總是能藉由前置處理器 (preprocessor) 對語法進行擴充，甚至搭配工具鏈 (toolchain) 的若干進階機制，做到大大超出程式語言規範的複雜機制。例如主要以 C 語言開發的 Linux 核心就搭配前置處理器和連結器 (linker) 的特徵，實作出 Linux 核心模組，允許開發者動態掛載/卸載，因巨集包裝得好，多數 Linux 核心核心模組的開發者只要專注在與 Linux 核心互動的部分。</p>
+</blockquote>
+<blockquote>
+<p>本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C++ template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO,max, min, 和 container_of 等巨集。</p>
+</blockquote>]]></description>
+</item>
+</channel>
+</rss>
