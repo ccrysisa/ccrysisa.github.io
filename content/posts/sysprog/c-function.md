@@ -73,6 +73,12 @@ void func2(int x) {
 
 > Rust 的不可变引用也是编译器可以进行更激进的最优化处理的一个例子
 
+{{< admonition >}}
+为什么早期的 C 语言没有 function prototype 呢？因为早期的 C 语言，不管有多少个源程序文件，都是先通过 `cat` 合并成一个单元文件，在进行编译链接生成目标文件。这样就导致了就算写了 function prototye，使用 `cat` 合并时，这些 prototype 不一定会出现在我们期望的程序开始处，即无法利用 prototype 对于函数调用进行检查，所以干脆不写 prototype。
+
+在 preprocessor 出现后，通过 `#include` 这类语法并搭配 preprocessor 可以保证对于每个源文件，都可以通过 function prototype 对函数调用进行参数个数、类型检查，因为 `#include` 语句位于源文件起始处，并且此时 C 语言程序的编译过程改变了: 对单一源文件进行预处理、编译，然后再对得到的目标文件进行链接。所以此时透过 preprocessor 可以保证 function prototype 位于函数调用之前，可以进行严格地检查。
+{{< /admonition >}}
+
 ## 编程语言的 function
 
 C 语言不允许 nested function 以简化编译器的设计 (当然现在的 gcc 提供 nested funtion 的扩展)，即 C 语言的 function 是一等公民，位于语法最顶层 (top-level)，因为支持 nested function 需要 staic link 机制来确认外层函数。

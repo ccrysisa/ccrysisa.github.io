@@ -52,9 +52,13 @@ repost:
 
 ---
 
-时隔一年，在跟随 B 站 up 主 [@踌躇月光](https://space.bilibili.com/491131440/) 从零编写一个基于 x86 架构的内核 [Txics](https://github.com/vanJker/TXOS) 后，终于可以跟得上 [@绿导师](https://space.bilibili.com/202224425) 的课程了 :rofl: 这次以 [2022 年的 OS 课程](https://jyywiki.cn/OS/2022/index.html) 作为主线学习，辅以 [2023 年课程](https://jyywiki.cn/OS/2023/index.html) 和 [2024 年课程](https://jyywiki.cn/OS/2024/index.html) 的内容加以补充、扩展。
+时隔一年，在跟随 B 站 up 主 [@踌躇月光](https://space.bilibili.com/491131440/) 从零编写一个基于 x86 架构的内核 [Txics](https://github.com/vanJker/TXOS) 后，终于可以跟得上 [@绿导师](https://space.bilibili.com/202224425) 的课程了 :rofl: 这次以 [2022 年的 OS 课程](https://jyywiki.cn/OS/2022/index.html) 作为主线学习，辅以 [2023 年课程](https://jyywiki.cn/OS/2023/index.html) 和 [2024 年课程](https://jyywiki.cn/OS/2024/index.html) 的内容加以补充、扩展，并搭配南大的 ICS 课程进行作业，后期可能会加入清华大学的 rCore 实验 (待定)。
 
 {{< image src="https://jyywiki.cn/pages/OS/img/tux-source.jpg" >}}
+
+{{< admonition open=false >}}
+JYY 2022 年的 OSDI 课程讲义和阅读材料是分开的，2023 年和 2024 年进行了改进，讲义和阅读材料合并成类似于共笔的材料，所以下面有一些 lectures 是没有阅读材料链接的。
+{{< /admonition >}}
 
 ## 操作系统概述 (为什么要学操作系统)
 
@@ -81,7 +85,7 @@ repost:
 
 操作系统机制出现和发展的原因，不需要死记硬背，这些机制都是应需求而诞生、发展的，非常的自然。
 
-实验环境:
+实验环境: deepin 20.9
 
 ```bash
 $ uname -a
