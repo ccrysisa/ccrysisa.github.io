@@ -9,20 +9,20 @@
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="
 本文对通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统的流程进行详细介绍，以及介绍如何通过 mugen 测试框架来对 RISC-V 版本的 openEuler 进行系统、软件等方面测试，并根据测试日志对错误原因进行分析。
-" /><meta name="keywords" content='RISC-V, Linux, openEuler, QEMU, Mugen, Neofetch, nspawn' /><meta itemprop="name" content="openEuler RISC-V 系统: QEMU 仿真">
+" /><meta name="keywords" content='RISC-V, openEuler, QEMU, Mugen' /><meta itemprop="name" content="openEuler RISC-V 系统: QEMU 仿真">
 <meta itemprop="description" content="
 本文对通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统的流程进行详细介绍，以及介绍如何通过 mugen 测试框架来对 RISC-V 版本的 openEuler 进行系统、软件等方面测试，并根据测试日志对错误原因进行分析。
 "><meta itemprop="datePublished" content="2024-03-07T14:48:21+08:00" />
-<meta itemprop="dateModified" content="2024-03-25T18:26:30+08:00" />
-<meta itemprop="wordCount" content="2875"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="RISC-V,Linux,openEuler,QEMU,Mugen,Neofetch,nspawn," /><meta property="og:title" content="openEuler RISC-V 系统: QEMU 仿真" />
+<meta itemprop="dateModified" content="2024-03-28T16:34:23+08:00" />
+<meta itemprop="wordCount" content="2255"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="RISC-V,openEuler,QEMU,Mugen," /><meta property="og:title" content="openEuler RISC-V 系统: QEMU 仿真" />
 <meta property="og:description" content="
 本文对通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统的流程进行详细介绍，以及介绍如何通过 mugen 测试框架来对 RISC-V 版本的 openEuler 进行系统、软件等方面测试，并根据测试日志对错误原因进行分析。
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/openeuler-riscv-qemu/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-03-07T14:48:21+08:00" />
-<meta property="article:modified_time" content="2024-03-25T18:26:30+08:00" />
+<meta property="article:modified_time" content="2024-03-28T16:34:23+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="openEuler RISC-V 系统: QEMU 仿真"/>
@@ -43,8 +43,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/openeuler-riscv-qemu\/"
-    },"genre": "posts","keywords": "RISC-V, Linux, openEuler, QEMU, Mugen, Neofetch, nspawn","wordcount":  2875 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/openeuler-riscv-qemu\/","datePublished": "2024-03-07T14:48:21+08:00","dateModified": "2024-03-25T18:26:30+08:00","publisher": {
+    },"genre": "posts","keywords": "RISC-V, openEuler, QEMU, Mugen","wordcount":  2255 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/openeuler-riscv-qemu\/","datePublished": "2024-03-07T14:48:21+08:00","dateModified": "2024-03-28T16:34:23+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -158,8 +158,8 @@
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>openEuler RISC-V 系统: QEMU 仿真</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/risc-v/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> RISC-V</a>&ensp;<a href="/categories/operating-systems/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Operating Systems</a>&ensp;<a href="/categories/oerv/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> OERV</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-07 14:48:21"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-07">2024-03-07</time></span>&nbsp;<span title="更新于 2024-03-25 18:26:30"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-25">2024-03-25</time></span>&nbsp;<span title="2875 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 6 分钟</span>&nbsp;</div>
+          <span class="post-category">收录于 <a href="/categories/risc-v/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> RISC-V</a>&ensp;<a href="/categories/operating-systems/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Operating Systems</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-03-07 14:48:21"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-07">2024-03-07</time></span>&nbsp;<span title="更新于 2024-03-28 16:34:23"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-28">2024-03-28</time></span>&nbsp;<span title="2255 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -180,8 +180,6 @@
         <li><a href="#实验总结和讨论">实验总结和讨论</a></li>
       </ul>
     </li>
-    <li><a href="#neofetch">Neofetch</a></li>
-    <li><a href="#open-build-service-obs">Open Build Service (OBS)</a></li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav></div>
@@ -538,108 +536,6 @@ When -D is used, Cppcheck will only check 1 configuration unless these are used.
 <h3 id="实验总结和讨论">实验总结和讨论</h3>
 <p>初步体验了使用 QEMU 构建 openEuler RISC-V 系统虚拟机的流程，以及使用 ssh 连接 QEMU 虚拟机的技巧。实验过程中最大感触是 mugen 的文档，相对于 cppcheck 这类产品的文档，不够详细，很多内容需要阅读源码来理解 (好处是精进了我对 shell 脚本编程的理解 &#x1f923;)。</p>
 <p>我个人比较期待 RISC-V 配合 nommu 在嵌入式这类低功耗领域的发展，同时也对 <a href="https://riscv.org/wp-content/uploads/2017/12/Tue0942-riscv-hypervisor-waterman.pdf"target="_blank" rel="external nofollow noopener noreferrer">RISC-V Hypervisor	Extension</a> 在虚拟化方面的发展感兴趣。</p>
-<h2 id="neofetch">Neofetch</h2>
-<p>由于工作内容是对软件包进行: 编译 -&gt; 失败 -&gt; 定位问题 -&gt; 修复 -&gt; 重新编译，所以我们倾向于直接从源码编译，根据 <a href="https://github.com/dylanaraps/neofetch/wiki/Installation#latest-git-master-bleeding-edge"target="_blank" rel="external nofollow noopener noreferrer">neofetch wiki</a> 从 git 拉取最新数据进行构建:</p>
-<div class="highlight" id="id-25"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># enter into euler openEuler RISC-V QEMU</span>
-</span></span><span class="line"><span class="cl">$ git clone https://github.com/dylanaraps/neofetch
-</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> neofetch
-</span></span><span class="line"><span class="cl">$ make install
-</span></span><span class="line"><span class="cl">$ neofetch</span></span></code></pre></td></tr></table>
-</div>
-</div><a class="lightgallery" href="/images/oerv/openEuler-RISC-V-neofetch.png?size=large" data-thumbnail="/images/oerv/openEuler-RISC-V-neofetch.png?size=small" data-sub-html="<h2>/images/oerv/openEuler-RISC-V-neofetch.png</h2>"><img loading="lazy" src="/images/oerv/openEuler-RISC-V-neofetch.png" srcset="/images/oerv/openEuler-RISC-V-neofetch.png?size=small, /images/oerv/openEuler-RISC-V-neofetch.png?size=medium 1.5x, /images/oerv/openEuler-RISC-V-neofetch.png?size=large 2x" sizes="auto" data-title="/images/oerv/openEuler-RISC-V-neofetch.png" data-alt="/images/oerv/openEuler-RISC-V-neofetch.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
-<h2 id="open-build-service-obs">Open Build Service (OBS)</h2>
-<p>观看教学影片: <a href="https://www.bilibili.com/video/BV1YK411H7E2/"target="_blank" rel="external nofollow noopener noreferrer">openEuler构建之OBS使用指导 - bilibili</a> 并对比阅读</p>
-<ul>
-<li><a href="https://openbuildservice.org/help/manuals/obs-user-guide/art.obs.bg"target="_blank" rel="external nofollow noopener noreferrer">Beginnerʼs Guide</a></li>
-<li><a href="https://zh.opensuse.org/openSUSE:Build_Service_%E6%96%B0%E6%89%8B%E5%85%A5%E9%97%A8"target="_blank" rel="external nofollow noopener noreferrer">openSUSE:Build Service 新手入门</a></li>
-<li><a href="https://zhuanlan.zhihu.com/p/564032072"target="_blank" rel="external nofollow noopener noreferrer">如何通过OpenSUSE Open Build Service（OBS）构建Debian包 for RISCV-64</a></li>
-</ul>
-<p>了解掌握 OBS 的基本概念、OBS 网页 以及 <strong>OSC 命令行工具</strong> 的使用方法。</p>
-<blockquote>
-<p>这部分内容很重要，和后续工作内容息息相关，在这里不要图快，打牢基础比较好。</p>
-</blockquote>
-<p><a class="lightgallery" href="/images/oerv/obs-concepts.png?size=large" data-thumbnail="/images/oerv/obs-concepts.png?size=small" data-sub-html="<h2>/images/oerv/obs-concepts.png</h2>"><img loading="lazy" src="/images/oerv/obs-concepts.png" srcset="/images/oerv/obs-concepts.png?size=small, /images/oerv/obs-concepts.png?size=medium 1.5x, /images/oerv/obs-concepts.png?size=large 2x" sizes="auto" data-title="/images/oerv/obs-concepts.png" data-alt="/images/oerv/obs-concepts.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
-<a class="lightgallery" href="/images/oerv/obs-concepts-2.png?size=large" data-thumbnail="/images/oerv/obs-concepts-2.png?size=small" data-sub-html="<h2>/images/oerv/obs-concepts-2.png</h2>"><img loading="lazy" src="/images/oerv/obs-concepts-2.png" srcset="/images/oerv/obs-concepts-2.png?size=small, /images/oerv/obs-concepts-2.png?size=medium 1.5x, /images/oerv/obs-concepts-2.png?size=large 2x" sizes="auto" data-title="/images/oerv/obs-concepts-2.png" data-alt="/images/oerv/obs-concepts-2.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a></p>
-<p>OBS 的 Package 中 _service 配置文件，revision 字段是对应与 Git 仓库的 commit id (如果你使用的 Source Code Management (SCM) 方式是 Git 托管的话)</p>
-<p>参考仓库: <a href="https://gitee.com/zxs-un/doc-port2riscv64-openEuler"target="_blank" rel="external nofollow noopener noreferrer">https://gitee.com/zxs-un/doc-port2riscv64-openEuler</a> 内的相关文档</p>
-<ul>
-<li><a href="https://gitee.com/zxs-un/doc-port2riscv64-openEuler/blob/master/doc/build-osc-config-oscrc.md"target="_blank" rel="external nofollow noopener noreferrer">osc命令工具的安装与~/.oscrc配置文件</a></li>
-<li><a href="https://gitee.com/zxs-un/doc-port2riscv64-openEuler/blob/master/doc/build-osc-build-tools.md"target="_blank" rel="external nofollow noopener noreferrer">在 openEuler 上安装 osc build 本地构建工具</a></li>
-<li><a href="https://gitee.com/zxs-un/doc-port2riscv64-openEuler/blob/master/doc/build-osc-obs-service.md"target="_blank" rel="external nofollow noopener noreferrer">使用 osc build 在本地构建 openEuler OBS 服务端的内容</a></li>
-</ul>
-<p>在 openEuler RISC-V QEMU 虚拟机内完成 OBS、OSC 相关基础设施的安装:</p>
-<div class="highlight" id="id-26"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># install osc and build</span>
-</span></span><span class="line"><span class="cl">$ sudo yum install osc build
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># configure osc in ~/.oscrc</span>
-</span></span><span class="line"><span class="cl"><span class="o">[</span>general<span class="o">]</span>
-</span></span><span class="line"><span class="cl"><span class="nv">apiurl</span> <span class="o">=</span> https://build.openeuler.openatom.cn
-</span></span><span class="line"><span class="cl"><span class="nv">no_verify</span> <span class="o">=</span> <span class="m">1</span> <span class="c1"># 未配置证书情况下不验证</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="o">[</span>https://build.openeuler.openatom.cn<span class="o">]</span>
-</span></span><span class="line"><span class="cl"><span class="nv">user</span><span class="o">=</span>username <span class="c1"># 用户名</span>
-</span></span><span class="line"><span class="cl"><span class="nv">pass</span><span class="o">=</span>password <span class="c1"># 明文密码</span>
-</span></span><span class="line"><span class="cl"><span class="nv">trusted_prj</span><span class="o">=</span>openEuler:selfbuild:function <span class="c1"># 此项目为openEuler:Mailine:RISC-V项目的依赖库</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>在 openEuler RISC-V QEMU 虚拟机内完成 pcre2 的本地编译构建:</p>
-<div class="highlight" id="id-27"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 选定 pcre2 包</span>
-</span></span><span class="line"><span class="cl">$ osc co openEuler:Mainline:RISC-V/pcre2
-</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> openEuler<span class="se">\:</span>Mainline<span class="se">\:</span>RISC-V/pcre2/
-</span></span><span class="line"><span class="cl"><span class="c1"># 更新并下载相关文件到本地</span>
-</span></span><span class="line"><span class="cl">$ osc up -S
-</span></span><span class="line"><span class="cl"><span class="c1"># 重命名刚刚下载的文件</span>
-</span></span><span class="line"><span class="cl">$ rm -f _service<span class="p">;</span><span class="k">for</span> file in <span class="sb">`</span>ls <span class="p">|</span> grep -v .osc<span class="sb">`</span><span class="p">;</span><span class="k">do</span> <span class="nv">new_file</span><span class="o">=</span><span class="si">${</span><span class="nv">file</span><span class="p">##*:</span><span class="si">}</span><span class="p">;</span>mv <span class="nv">$file</span> <span class="nv">$new_file</span><span class="p">;</span><span class="k">done</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 查看一下仓库信息，方便后续构建</span>
-</span></span><span class="line"><span class="cl">$ osc repos
-</span></span><span class="line"><span class="cl">standard_riscv64  riscv64
-</span></span><span class="line"><span class="cl">mainline_gcc      riscv64
-</span></span><span class="line"><span class="cl"><span class="c1"># 指定仓库和架构并进行本地构建</span>
-</span></span><span class="line"><span class="cl">$ osc build standard_riscv64 riscv64</span></span></code></pre></td></tr></table>
-</div>
-</div><a class="lightgallery" href="/images/oerv/osc-build-pcre2.png?size=large" data-thumbnail="/images/oerv/osc-build-pcre2.png?size=small" data-sub-html="<h2>/images/oerv/osc-build-pcre2.png</h2>"><img loading="lazy" src="/images/oerv/osc-build-pcre2.png" srcset="/images/oerv/osc-build-pcre2.png?size=small, /images/oerv/osc-build-pcre2.png?size=medium 1.5x, /images/oerv/osc-build-pcre2.png?size=large 2x" sizes="auto" data-title="/images/oerv/osc-build-pcre2.png" data-alt="/images/oerv/osc-build-pcre2.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
-<p>总计用时 1301s</p>
 <h2 id="references">References</h2>
 <ul>
 <li>openEuler RISC-V: <a href="https://github.com/openeuler-mirror/RISC-V/blob/master/doc/tutorials/vm-qemu-oErv.md"target="_blank" rel="external nofollow noopener noreferrer">通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统</a></li>
@@ -652,17 +548,16 @@ When -D is used, Cppcheck will only check 1 configuration unless these are used.
 <li><a href="https://openbuildservice.org/help/manuals/obs-user-guide/"target="_blank" rel="external nofollow noopener noreferrer">https://openbuildservice.org/help/manuals/obs-user-guide/</a></li>
 <li><a href="https://gitee.com/openEuler/RISC-V#/openeuler/RISC-V/"target="_blank" rel="external nofollow noopener noreferrer">https://gitee.com/openEuler/RISC-V#/openeuler/RISC-V/</a></li>
 <li><a href="https://gitee.com/zxs-un/doc-port2riscv64-openEuler"target="_blank" rel="external nofollow noopener noreferrer">https://gitee.com/zxs-un/doc-port2riscv64-openEuler</a></li>
-<li><a href="https://stackoverflow.com/questions/5308816/how-can-i-merge-multiple-commits-onto-another-branch-as-a-single-squashed-commit"target="_blank" rel="external nofollow noopener noreferrer">https://stackoverflow.com/questions/5308816/how-can-i-merge-multiple-commits-onto-another-branch-as-a-single-squashed-commit</a></li>
 </ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-03-25 18:26:30">更新于 2024-03-25&nbsp;</span>
+        <span title="更新于 2024-03-28 16:34:23">更新于 2024-03-28&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/openeuler-riscv-qemu/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/openeuler-riscv-qemu/" data-title="openEuler RISC-V 系统: QEMU 仿真" data-hashtags="RISC-V,Linux,openEuler,QEMU,Mugen,Neofetch,nspawn"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/openeuler-riscv-qemu/" data-title="openEuler RISC-V 系统: QEMU 仿真" data-hashtags="RISC-V,openEuler,QEMU,Mugen"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/openeuler-riscv-qemu/" data-hashtag="RISC-V"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/openeuler-riscv-qemu/" data-title="openEuler RISC-V 系统: QEMU 仿真" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/openeuler-riscv-qemu/" data-title="openEuler RISC-V 系统: QEMU 仿真"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -676,7 +571,7 @@ When -D is used, Cppcheck will only check 1 configuration unless these are used.
   </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/risc-v/' class="post-tag">RISC-V</a><a href='/tags/linux/' class="post-tag">Linux</a><a href='/tags/openeuler/' class="post-tag">openEuler</a><a href='/tags/qemu/' class="post-tag">QEMU</a><a href='/tags/mugen/' class="post-tag">Mugen</a><a href='/tags/neofetch/' class="post-tag">Neofetch</a><a href='/tags/nspawn/' class="post-tag">nspawn</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/risc-v/' class="post-tag">RISC-V</a><a href='/tags/openeuler/' class="post-tag">openEuler</a><a href='/tags/qemu/' class="post-tag">QEMU</a><a href='/tags/mugen/' class="post-tag">Mugen</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
