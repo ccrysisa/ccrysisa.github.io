@@ -4,7 +4,15 @@
     <link>https://ccrysisa.github.io/tags/openeuler/</link>
     <description>openEuler - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 07 Mar 2024 14:48:21 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/openeuler/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 28 Mar 2024 12:21:48 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/openeuler/" rel="self" type="application/rss+xml" /><item>
+  <title>Deepin 20.9 KVM 安装和管理</title>
+  <link>https://ccrysisa.github.io/posts/deepin-kvm/</link>
+  <pubDate>Thu, 28 Mar 2024 12:21:48 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/deepin-kvm/</guid>
+  <description><![CDATA[<p>本篇主要介绍在 deepin20.9 操作系统平台下，使用 KVM 虚拟化技术来创建和安装 Linux 发行版，并以创建安装 openEuler 22.03 LTS SP3 的 KVM 虚拟机作为示范，让学员领略 KVM 虚拟化技术的强大魅力。</p>]]></description>
+</item>
+<item>
   <title>openEuler RISC-V 系统: QEMU 仿真</title>
   <link>https://ccrysisa.github.io/posts/openeuler-riscv-qemu/</link>
   <pubDate>Thu, 07 Mar 2024 14:48:21 &#43;0800</pubDate>

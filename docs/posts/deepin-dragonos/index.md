@@ -1,4 +1,4 @@
-# 在 Deepin 20.9 上构建 DragonOS
+# Deepin 20.9 构建 DragonOS
 
 
 

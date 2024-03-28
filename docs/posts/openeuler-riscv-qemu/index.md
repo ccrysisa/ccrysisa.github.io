@@ -40,27 +40,25 @@ $ sudo apt install build-essential git libglib2.0-dev libfdt-dev libpixman-1-dev
 $ wget https://download.qemu.org/qemu-7.2.0.tar.xz
 ```
 
-解压源码包、修改名称并移动到目标目录 /usr/local/bin/:
+解压源码包、修改名称:
 ```bash
 $ tar xvJf qemu-7.2.0.tar.xz
-$ mv qemu-7.2.0 qemu-riscv64
-$ sudo mv qemu-riscv64 /usr/local/bin/
+$ mv qemu-7.2.0 qemu
 ```
 
 进入 qemu 对应目录并配置编译选项:
 ```bash
-$ sudo ./configure --enable-slirp --target-list=riscv64-softmmu,riscv64-linux-user --prefix=/usr/local/bin/qemu-riscv64
+$./configure
 ```
 
 编译安装:
 ```bash
 $ sudo make -j$(nproc)
-$ sudo make install -j$(nproc)
 ```
 
 在 ~/.bashrc 中添加环境变量:
 ```bash
-export PATH=$PATH:/usr/local/bin/qemu-riscv64/build
+export PATH=$PATH:/path/to/qemu/build
 ```
 
 刷新一下 ~/.bashrc (或新开一个终端) 查看一下 QEMU 是否安装成功:

@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/posts/</link>
     <description>所有文章 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 25 Mar 2024 22:55:44 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 28 Mar 2024 12:21:48 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -13,6 +13,14 @@
   <description><![CDATA[<blockquote>
 <p>在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
 </blockquote>]]></description>
+</item>
+<item>
+  <title>Deepin 20.9 KVM 安装和管理</title>
+  <link>https://ccrysisa.github.io/posts/deepin-kvm/</link>
+  <pubDate>Thu, 28 Mar 2024 12:21:48 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/deepin-kvm/</guid>
+  <description><![CDATA[<p>本篇主要介绍在 deepin20.9 操作系统平台下，使用 KVM 虚拟化技术来创建和安装 Linux 发行版，并以创建安装 openEuler 22.03 LTS SP3 的 KVM 虚拟机作为示范，让学员领略 KVM 虚拟化技术的强大魅力。</p>]]></description>
 </item>
 <item>
   <title>你所不知道的 C 语言: 前置处理器应用篇</title>
@@ -95,16 +103,6 @@
   <guid>https://ccrysisa.github.io/posts/openeuler-riscv-qemu/</guid>
   <description><![CDATA[<blockquote>
 <p>本文对通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统的流程进行详细介绍，以及介绍如何通过 <a href="https://gitee.com/openeuler/mugen"target="_blank" rel="external nofollow noopener noreferrer">mugen</a> 测试框架来对 RISC-V 版本的 openEuler 进行系统、软件等方面测试，并根据测试日志对错误原因进行分析。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>基于 C 语言标准研究与系统程序安全议题</title>
-  <link>https://ccrysisa.github.io/posts/c-std-security/</link>
-  <pubDate>Tue, 05 Mar 2024 16:32:40 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-std-security/</guid>
-  <description><![CDATA[<blockquote>
-<p>借由阅读 C 语言标准理解规范是研究系统安全最基础的步骤，但很多人都忽略阅读规范这点，而正因对于规范的不了解、撰写程序的不严谨，导致漏洞的产生的案例比比皆是，例如 2014 年的 OpenSSL Heartbleed Attack<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 便是便是因为使用 memcpy 之际缺乏对应内存范围检查，造成相当大的危害。本文重新梳理 C 语言程序设计的细节，并借由调试器帮助理解程序的运作。</p>
 </blockquote>]]></description>
 </item>
 </channel>
