@@ -1,44 +1,5 @@
----
-title: "南京大学 操作系统: 设计与实现 重点提示"
-subtitle:
-date: 2024-03-24T10:01:43+08:00
-# draft: true
-author:
-  name: vanJker
-  link: https://github.com/vanJker
-  email: cjshine@foxmail.com
-  avatar: https://avatars.githubusercontent.com/u/88960102?s=96&v=4
-description:
-keywords:
-license:
-comment: false
-weight: 0
-tags:
-  - Linux
-  - QEMU
-  - RISC-V
-categories:
-  - Operating Systems
-hiddenFromHomePage: false
-hiddenFromSearch: false
-hiddenFromRss: false
-summary:
-resources:
-  - name: featured-image
-    src: featured-image.jpg
-  - name: featured-image-preview
-    src: featured-image-preview.jpg
-toc: true
-math: true
-lightgallery: true
-password:
-message:
-repost:
-  enable: true
-  url:
+# 南京大学 操作系统: 设计与实现 重点提示
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
----
 
 操作系统使用正确的抽象使构造庞大的计算机软件/硬件生态从不可能变为可能。这门课围绕操作系统是 **如何设计** (应用程序视角)、**怎样实现** (硬件视角) 两个角度展开，分为两个主要部分：
 
@@ -107,3 +68,10 @@ $ sudo apt install tldr
 {{< link href="https://jyywiki.cn/OS/2022/notes/1.html" content="阅读材料" external-icon=true >}}
 
 ---
+
+
+---
+
+> 作者: [vanJker](https://github.com/vanJker)  
+> URL: https://ccrysisa.github.io/posts/nju-osdi/  
+

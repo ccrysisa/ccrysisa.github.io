@@ -2,6 +2,7 @@ https://ccrysisa.github.io/posts/linux2023/
 https://ccrysisa.github.io/posts/oerv-pretask/
 https://ccrysisa.github.io/posts/deepin-kvm/
 https://ccrysisa.github.io/posts/c-preprocessor/
+https://ccrysisa.github.io/posts/nju-osdi/
 https://ccrysisa.github.io/posts/subtying-and-variance/
 https://ccrysisa.github.io/posts/c-recursion/
 https://ccrysisa.github.io/posts/linux-hashtable/
