@@ -21,7 +21,6 @@ tags:
   - openEuler
 categories:
   - Operating Systems
-  - OERV
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

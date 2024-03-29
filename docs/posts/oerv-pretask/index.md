@@ -1,4 +1,4 @@
-# OERV Pretask
+# OERV 之 Pretask
 
 
 > pretask 作为社区入门探索，目的是帮助实习生一起搭建工作环境，熟悉 oerv 的工作流程和合作方式。pretask 分为三个步骤:

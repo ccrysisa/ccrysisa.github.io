@@ -21,8 +21,8 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
 Mini labs (应用程序视角；设计)：通过实现一系列有趣的 (黑科技) 代码理解操作系统中对象存在的意义和操作系统 API 的使用方法、设计理念
 OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层实现多处理器操作系统内核，向应用程序提供一些基础操作系统 API
 "><meta itemprop="datePublished" content="2024-03-24T10:01:43+08:00" />
-<meta itemprop="dateModified" content="2024-03-27T13:06:47+08:00" />
-<meta itemprop="wordCount" content="868"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-03-28T22:09:34+08:00" />
+<meta itemprop="wordCount" content="1248"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Linux,QEMU,RISC-V," /><meta property="og:title" content="南京大学 操作系统: 设计与实现 重点提示" />
 <meta property="og:description" content="操作系统使用正确的抽象使构造庞大的计算机软件/硬件生态从不可能变为可能。这门课围绕操作系统是 如何设计 (应用程序视角)、怎样实现 (硬件视角) 两个角度展开，分为两个主要部分：
 原理课 (并发/虚拟化/持久化)：以教科书内容为主，介绍操作系统的原理性内容。课程同时注重讲解操作系统相关的代码实现和编程技巧，包括操作系统中常用的命令行/代码工具、教学操作系统 xv6 的代码讲解等
@@ -34,7 +34,7 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/nju-osdi/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-03-24T10:01:43+08:00" />
-<meta property="article:modified_time" content="2024-03-27T13:06:47+08:00" />
+<meta property="article:modified_time" content="2024-03-28T22:09:34+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="南京大学 操作系统: 设计与实现 重点提示"/>
@@ -59,8 +59,8 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/nju-osdi\/"
-    },"genre": "posts","keywords": "Linux, QEMU, RISC-V","wordcount":  868 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/nju-osdi\/","datePublished": "2024-03-24T10:01:43+08:00","dateModified": "2024-03-27T13:06:47+08:00","publisher": {
+    },"genre": "posts","keywords": "Linux, QEMU, RISC-V","wordcount":  1248 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/nju-osdi\/","datePublished": "2024-03-24T10:01:43+08:00","dateModified": "2024-03-28T22:09:34+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -175,7 +175,7 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" data-title="vanJker" data-alt="vanJker" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span>
           <span class="post-category">收录于 <a href="/categories/operating-systems/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Operating Systems</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-24 10:01:43"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-24">2024-03-24</time></span>&nbsp;<span title="更新于 2024-03-27 13:06:47"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-27">2024-03-27</time></span>&nbsp;<span title="868 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-24 10:01:43"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-24">2024-03-24</time></span>&nbsp;<span title="更新于 2024-03-28 22:09:34"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-28">2024-03-28</time></span>&nbsp;<span title="1248 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -183,8 +183,13 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
         </div>
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#操作系统概述-为什么要学操作系统">操作系统概述 (为什么要学操作系统)</a></li>
-    <li><a href="#操作系统上的程序-什么是程序和编译器">操作系统上的程序 (什么是程序和编译器)</a></li>
+    <li><a href="#第-1-周-绪论">第 1 周: 绪论</a>
+      <ul>
+        <li><a href="#操作系统概述-为什么要学操作系统">操作系统概述 (为什么要学操作系统)</a></li>
+        <li><a href="#操作系统上的程序-什么是程序和编译器">操作系统上的程序 (什么是程序和编译器)</a></li>
+      </ul>
+    </li>
+    <li><a href="#第-2-周-并发">第 2 周: 并发</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><p>操作系统使用正确的抽象使构造庞大的计算机软件/硬件生态从不可能变为可能。这门课围绕操作系统是 <strong>如何设计</strong> (应用程序视角)、<strong>怎样实现</strong> (硬件视角) 两个角度展开，分为两个主要部分：</p>
@@ -205,7 +210,8 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
       <div class="admonition-content">JYY 2022 年的 OSDI 课程讲义和阅读材料是分开的，2023 年和 2024 年进行了改进，讲义和阅读材料合并成类似于共笔的材料，所以下面有一些 lectures 是没有阅读材料链接的。</div>
     </div>
   </div>
-<h2 id="操作系统概述-为什么要学操作系统">操作系统概述 (为什么要学操作系统)</h2>
+<h2 id="第-1-周-绪论">第 1 周: 绪论</h2>
+<h3 id="操作系统概述-为什么要学操作系统">操作系统概述 (为什么要学操作系统)</h3>
 <p><a href="https://www.bilibili.com/video/BV1Cm4y1d7Ur/"target="_blank" rel="external nofollow noopener noreferrer">直播录影<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 |
 <a href="https://jyywiki.cn/OS/2022/slides/1.slides.html"target="_blank" rel="external nofollow noopener noreferrer">讲义页面<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
@@ -245,17 +251,33 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install tldr</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="操作系统上的程序-什么是程序和编译器">操作系统上的程序 (什么是程序和编译器)</h2>
+</div><p>有些系统可能没有预装 man 手册:</p>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install manpages</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="操作系统上的程序-什么是程序和编译器">操作系统上的程序 (什么是程序和编译器)</h3>
 <p><a href="https://www.bilibili.com/video/BV12L4y1379V/"target="_blank" rel="external nofollow noopener noreferrer">直播录影<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 |
 <a href="https://jyywiki.cn/OS/2022/slides/2.slides.html"target="_blank" rel="external nofollow noopener noreferrer">讲义页面<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 |
 <a href="https://jyywiki.cn/OS/2022/notes/1.html"target="_blank" rel="external nofollow noopener noreferrer">阅读材料<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></p>
-<hr></div><div class="post-footer" id="post-footer">
+<hr>
+<p>UNIX 哲学:</p>
+<ul>
+<li>Make each program do one thing well</li>
+<li>Expect the output of every program to become the input to another</li>
+</ul>
+<p>只使用纯&quot;计算&quot;的指令 (无论是 deterministic 还是 non-deterministic) 无法使程序停下来，因为将程序本质是状态机，而状态机通过“计算”的指令只能从一个状态迁移到另一个状态，无法实现销毁状态机的操作 (对应退出/停下程序)，要么死循环，要么 undefined behavior。这时需要程序对应的状态机之外的另一个东西来控制、管理该状态机，以实现程序的停下/退出操作，这就是 OS 的 syscall 存在的意义，它可以游离在程序对应的状态机之外，并修改状态机的内容 (因为程序呼叫 syscall 时已经全权授予 OS 对其状态内容进行修改)。</p>
+<p>空的 _start 函数可以成功编译并链接，但是由于函数是空的，它会编译生成 <code>retq</code> 指令，这会导致 pc 跳转到不合法的区域，而正确的做法应该是使用 <code>syscall exit</code> 来结束该程序 (熟悉 C 语言函数调用的同学应该能看懂这段描述)。</p>
+<h2 id="第-2-周-并发">第 2 周: 并发</h2></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-03-27 13:06:47">更新于 2024-03-27&nbsp;</span>
+        <span title="更新于 2024-03-28 22:09:34">更新于 2024-03-28&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/nju-osdi/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>

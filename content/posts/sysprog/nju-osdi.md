@@ -60,7 +60,9 @@ repost:
 JYY 2022 年的 OSDI 课程讲义和阅读材料是分开的，2023 年和 2024 年进行了改进，讲义和阅读材料合并成类似于共笔的材料，所以下面有一些 lectures 是没有阅读材料链接的。
 {{< /admonition >}}
 
-## 操作系统概述 (为什么要学操作系统)
+## 第 1 周: 绪论
+
+### 操作系统概述 (为什么要学操作系统)
 
 {{< link href="https://www.bilibili.com/video/BV1Cm4y1d7Ur/" content="直播录影" external-icon=true >}}
 |
@@ -86,19 +88,22 @@ JYY 2022 年的 OSDI 课程讲义和阅读材料是分开的，2023 年和 2024 
 操作系统机制出现和发展的原因，不需要死记硬背，这些机制都是应需求而诞生、发展的，非常的自然。
 
 实验环境: deepin 20.9
-
 ```bash
 $ uname -a
 Linux cai-PC 5.15.77-amd64-desktop #2 SMP Thu Jun 15 16:06:18 CST 2023 x86_64 GNU/Linux
 ```
 
 安装 tldr:
-
 ```bash
 $ sudo apt install tldr
 ```
 
-## 操作系统上的程序 (什么是程序和编译器)
+有些系统可能没有预装 man 手册:
+```bash
+$ sudo apt install manpages
+```
+
+### 操作系统上的程序 (什么是程序和编译器)
 
 {{< link href="https://www.bilibili.com/video/BV12L4y1379V/" content="直播录影" external-icon=true >}}
 |
@@ -107,3 +112,13 @@ $ sudo apt install tldr
 {{< link href="https://jyywiki.cn/OS/2022/notes/1.html" content="阅读材料" external-icon=true >}}
 
 ---
+
+UNIX 哲学:
+- Make each program do one thing well
+- Expect the output of every program to become the input to another
+
+只使用纯"计算"的指令 (无论是 deterministic 还是 non-deterministic) 无法使程序停下来，因为将程序本质是状态机，而状态机通过“计算”的指令只能从一个状态迁移到另一个状态，无法实现销毁状态机的操作 (对应退出/停下程序)，要么死循环，要么 undefined behavior。这时需要程序对应的状态机之外的另一个东西来控制、管理该状态机，以实现程序的停下/退出操作，这就是 OS 的 syscall 存在的意义，它可以游离在程序对应的状态机之外，并修改状态机的内容 (因为程序呼叫 syscall 时已经全权授予 OS 对其状态内容进行修改)。
+
+空的 _start 函数可以成功编译并链接，但是由于函数是空的，它会编译生成 `retq` 指令，这会导致 pc 跳转到不合法的区域，而正确的做法应该是使用 `syscall exit` 来结束该程序 (熟悉 C 语言函数调用的同学应该能看懂这段描述)。
+
+## 第 2 周: 并发
