@@ -1,11 +1,11 @@
 # Linux 核心设计: 操作系统术语及概念
 
 
-> 面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。
+&gt; 面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。
 
-<!--more-->
+&lt;!--more--&gt;
 
-- {{< link href="https://hackmd.io/@sysprog/linux-concepts" content="原文地址" external-icon=true >}}
+- {{&lt; link href=&#34;https://hackmd.io/@sysprog/linux-concepts&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
 
 ## Linux 核心发展
 
@@ -14,16 +14,16 @@
 - [x] [Plan 9 from Bell Labs](https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs) [Wikipedia]
 - [x] [LXC](https://en.wikipedia.org/wiki/LXC) [Wikipedia]
 
-{{< admonition info >}}
+{{&lt; admonition info &gt;}}
 - [從 Revolution OS 看作業系統生態變化](https://hackmd.io/@sysprog/revolution-os-note)
 - [Linux 核心設計: 透過 eBPF 觀察作業系統行為](https://hackmd.io/@sysprog/linux-ebpf)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ## 看漫画学 Linux
 
-{{< link href="https://hackmd.io/@sysprog/linux-comic" content="原文地址" external-icon=true >}}
+{{&lt; link href=&#34;https://hackmd.io/@sysprog/linux-comic&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
 
-{{< image src="https://turnoff.us/image/en/inside-the-linux-kernel.png" caption="inside the linux kernel" >}}
+{{&lt; image src=&#34;https://turnoff.us/image/en/inside-the-linux-kernel.png&#34; caption=&#34;inside the linux kernel&#34; &gt;}}
 
 整理上图，可以得到 **自底向上** 的 Linux 系统结构:
 
@@ -62,13 +62,13 @@ wiki:
 - [x] [TUX web server](https://en.wikipedia.org/wiki/TUX_web_server) [Wikipedia]
  -[x] [cron](https://en.wikipedia.org/wiki/Cron)
 
-{{< admonition tip >}}
+{{&lt; admonition tip &gt;}}
 [Multics](https://en.wikipedia.org/wiki/Multics) 采用了当时背景下的几乎所有的先进技术，可以参考该系统获取系统领域的灵感。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 虚拟内存管理与现代银行的运行逻辑类似，通过 `malloc` 分配的有效虚拟地址并不能保证真正可用，类似于支票得去银行兑现时才知道银行真正的现金储备。但是根据统计学公式，虚拟地址和银行现金可以保证在大部分情况下，都可以满足需求，当然突发的大规模虚拟内存使用、现金兑现时就无法保证了。这部分的原理推导需要学习概率论、统计学等数理课程。
 
-{{< admonition type=info open=false >}}
+{{&lt; admonition type=info open=false &gt;}}
 Linux 核心设计:
 
 - [Linux 核心設計: 檔案系統概念及實作手法](https://hackmd.io/@sysprog/linux-file-system)
@@ -86,7 +86,7 @@ Unix-like 工具使用技巧:
 
 - [Mastering UNIX pipes, Part 1](https://www.moritz.systems/blog/mastering-unix-pipes-part-1/)
 - [Mastering UNIX pipes, Part 2](https://www.moritz.systems/blog/mastering-unix-pipes-part-2/)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ## 高阶观点
 
@@ -104,8 +104,8 @@ Unix-like 工具使用技巧:
 - [淺談 Microkernel 設計和真實世界中的應用](https://hackmd.io/@sysprog/microkernel-design)
 - [Hybrid kernel](https://en.wikipedia.org/wiki/Hybrid_kernel) [wikipedia]
 
-> "As to the whole 'hybrid kernel' thing - it's just marketing. It's 'oh, those microkernels had good PR, how can we try to get good PR for our working kernel? Oh, I know, let's use a cool name and try to imply that it has all the PR advantages that that other system has'."   
-> —— Linus Torvalds
+&gt; &#34;As to the whole &#39;hybrid kernel&#39; thing - it&#39;s just marketing. It&#39;s &#39;oh, those microkernels had good PR, how can we try to get good PR for our working kernel? Oh, I know, let&#39;s use a cool name and try to imply that it has all the PR advantages that that other system has&#39;.&#34;   
+&gt; —— Linus Torvalds
 
 ### 虚拟化
 
@@ -117,19 +117,19 @@ MicroVM 和 Unikernel 都是使用 CPU 层级的虚拟化技术，在 Host OS �
 
 Container Sandbox 使用的是 OS 层级的虚拟化技术，即它是将一组进程隔离起来构建为容器，这样可能会导致这一组进程就耗尽了系统的资源，其他进程无法使用系统的资源。同时因为是进程级的隔离，所以安全性不及 CPU 层级的 MicroVM 和 Unikernel。
 
-{{< admonition info >}}
+{{&lt; admonition info &gt;}}
 相关演讲、录影:
 - YouTube: [Inside the Mac OS X Kernel](https://youtu.be/-7GMHB3Plc8)
 - YouTube: [What Are MicroVMs? And Why Should I Care?](https://youtu.be/4d0NIfuFLXc)
 - YouTube: [From the Ground Up: How We Built the Nanos Unikernel](https://youtu.be/0v21hGvCDPY)
 
 相关论文阅读:
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ### Scalability
 
 Wikipedia: [scalability](https://en.wikipedia.org/wiki/Scalability) 
-> A system whose performance improves after adding hardware, proportionally to the capacity added, is said to be a scalable system.
+&gt; A system whose performance improves after adding hardware, proportionally to the capacity added, is said to be a scalable system.
 
 - lock-free
 - sequence lock
@@ -140,19 +140,19 @@ Wikipedia: [scalability](https://en.wikipedia.org/wiki/Scalability)
 
 透过 eBPF 可将 Monolithic kernel 的 Linux 取得 microkernel 的特性
 
-- [The Beginners Guide to eBPF Programming](https://github.com/lizrice/ebpf-beginners), Liza RIce (live programming + source code)
+- [The Beginners Guide to eBPF Programming](https://github.com/lizrice/ebpf-beginners), Liza RIce (live programming &#43; source code)
 - [A thorough introduction to eBPF](https://lwn.net/Articles/740157/) (four articles in lwn.net), Matt FLeming, December 2017
 
 ## 细节切入点
 
 CPU 和 OS 的基本概念科普网站: [Putting the “You” in CPU](https://cpu.land/)
-> 相当于科普版 CSAPP
+&gt; 相当于科普版 CSAPP
 
-{{< admonition tip >}}
+{{&lt; admonition tip &gt;}}
 UNSW COMP9242: [Advanced Operating Systems](https://www.cse.unsw.edu.au/~cs9242/23/lectures.shtml) (2023/T3)
 
 这门课可以作为辅助材料，讲得深入浅出，可以作为进阶材料阅读。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ## man
 
@@ -176,13 +176,13 @@ $ man man
 
 ## 系统软件开发思维
 
-### Maslow's pyramid of code review
+### Maslow&#39;s pyramid of code review
 
-{{< image src="https://imgur-backup.hackmd.io/DBMmMNi.png" caption="Maslow's pyramid of code review" >}}
+{{&lt; image src=&#34;https://imgur-backup.hackmd.io/DBMmMNi.png&#34; caption=&#34;Maslow&#39;s pyramid of code review&#34; &gt;}}
 
 ### Benchmark / Profiling
 
-{{< image src="https://hackpad-attachments.s3.amazonaws.com/embedded2015.hackpad.com_xDmCCv0k00K_p.299401_1446124062219_truth.jpg" caption="Benchmark / Profiling" >}}
+{{&lt; image src=&#34;https://hackpad-attachments.s3.amazonaws.com/embedded2015.hackpad.com_xDmCCv0k00K_p.299401_1446124062219_truth.jpg&#34; caption=&#34;Benchmark / Profiling&#34; &gt;}}
 
 
 ---

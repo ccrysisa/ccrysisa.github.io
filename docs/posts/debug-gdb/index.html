@@ -10,7 +10,7 @@
 <meta name="description" content="大型开源项目的规模十分庞大，例如使用 Rust 编写的 Servo 浏览器，这个项目有近十万行代码。在开发规模如此庞大的项目时，了解如何通过正确的方式进行调试非常重要，因为这样可以帮助开发者快速地找到瓶颈。" /><meta name="keywords" content='Debug, GDB, Rust, C/C&#43;&#43;, Sysprog' /><meta itemprop="name" content="程序调试工具 GDB">
 <meta itemprop="description" content="大型开源项目的规模十分庞大，例如使用 Rust 编写的 Servo 浏览器，这个项目有近十万行代码。在开发规模如此庞大的项目时，了解如何通过正确的方式进行调试非常重要，因为这样可以帮助开发者快速地找到瓶颈。"><meta itemprop="datePublished" content="2024-01-16T17:15:46+08:00" />
 <meta itemprop="dateModified" content="2024-03-16T21:44:26+08:00" />
-<meta itemprop="wordCount" content="3043"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="3034"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Debug,GDB,Rust,C/C&#43;&#43;,Sysprog," /><meta property="og:title" content="程序调试工具 GDB" />
 <meta property="og:description" content="大型开源项目的规模十分庞大，例如使用 Rust 编写的 Servo 浏览器，这个项目有近十万行代码。在开发规模如此庞大的项目时，了解如何通过正确的方式进行调试非常重要，因为这样可以帮助开发者快速地找到瓶颈。" />
 <meta property="og:type" content="article" />
@@ -35,7 +35,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/debug-gdb\/"
-    },"genre": "posts","keywords": "Debug, GDB, Rust, C\/C\u002b\u002b, Sysprog","wordcount":  3043 ,
+    },"genre": "posts","keywords": "Debug, GDB, Rust, C\/C\u002b\u002b, Sysprog","wordcount":  3034 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/debug-gdb\/","datePublished": "2024-01-16T17:15:46+08:00","dateModified": "2024-03-16T21:44:26+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -47,7 +47,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -87,7 +87,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -140,18 +140,12 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>程序调试工具 GDB</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/toolbox/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Toolbox</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-01-16 17:15:46"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-16">2024-01-16</time></span>&nbsp;<span title="更新于 2024-03-16 21:44:26"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="3043 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/toolbox/" class="post-category" title="分类 - Toolbox"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Toolbox</a>&ensp;<a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-01-16 17:15:46"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-16">2024-01-16</time></span>&nbsp;<span title="更新于 2024-03-16 21:44:26"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="3034 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -192,8 +186,8 @@
 <li><a href="https://tigercosmos.xyz/post/2020/09/system/debug-gdb/"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 | <a href="https://www.youtube.com/watch?v=IttSz0BYZ8o"target="_blank" rel="external nofollow noopener noreferrer">教学录影<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
-<h2 id="gdb-调试">GDB 调试</h2>
-<p>观看教学视频 <a href="gdb-basics">拯救資工系學生的基本素養—使用 GDB 除錯基本教學</a> 和搭配博文 ==[How to debug Rust/C/C++ via GDB][debug-gdb]==，学习 GDB 的基本操作和熟悉使用 GDB 调试 Rust/C/C++ 程序。</p>
+<h2 id="gdb-调试" class="heading-element">
+  <a href="#gdb-%e8%b0%83%e8%af%95" class="heading-mark"></a>GDB 调试</h2><p>观看教学视频 <a href="gdb-basics">拯救資工系學生的基本素養—使用 GDB 除錯基本教學</a> 和搭配博文 ==[How to debug Rust/C/C++ via GDB][debug-gdb]==，学习 GDB 的基本操作和熟悉使用 GDB 调试 Rust/C/C++ 程序。</p>
 <ul>
 <li>掌握 <code>run/r</code>, <code>break/b</code>, <code>print/p</code>, <code>continue/c</code>, <code>step/s</code> <code>info/i</code>, <code>delete/d</code>, <code>backtrace/bt</code>, <code>frame/f</code>, <code>up</code>/<code>down</code>, <code>exit/q</code> 等命令的用法。以及 GBD 的一些特性，例如 GDB 会将空白行的断点自动下移到下一代码行；使用 <code>break</code> 命令时可以输入源文件路径，也可以只输入源文件名称。</li>
 </ul>
@@ -202,8 +196,8 @@
 <li><a href="https://github.com/ccrysisa/LKI/blob/main/debug/test.c"target="_blank" rel="external nofollow noopener noreferrer">test.c</a></li>
 <li><a href="https://github.com/ccrysisa/LKI/tree/main/debug/hello_cargo"target="_blank" rel="external nofollow noopener noreferrer">hello_cargo/</a></li>
 </ul>
-<h2 id="gdb-基本介绍">GDB 基本介绍</h2>
-<div class="details admonition quote open">
+<h2 id="gdb-基本介绍" class="heading-element">
+  <a href="#gdb-%e5%9f%ba%e6%9c%ac%e4%bb%8b%e7%bb%8d" class="heading-mark"></a>GDB 基本介绍</h2><div class="details admonition quote open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -223,8 +217,8 @@
 <blockquote>
 <p>LLDB 与 GDB 的命令类似，本文也可用于 LLDB 的入门学习。</p>
 </blockquote>
-<h2 id="gdb-调试-cc">GDB 调试 C/C++</h2>
-<p>要使用 GDB 来调试 C/C++，需要在编译时加上 <code>-g</code> 参数（必需），也可以使用 <code>-Og</code> 参数来对 debug 进行优化（但使用 <code>-Og</code> 后 compiler 可能会把一些东西移除掉，所以 debug 时可能不会符合预期），例如：</p>
+<h2 id="gdb-调试-cc" class="heading-element">
+  <a href="#gdb-%e8%b0%83%e8%af%95-cc" class="heading-mark"></a>GDB 调试 C/C++</h2><p>要使用 GDB 来调试 C/C++，需要在编译时加上 <code>-g</code> 参数（必需），也可以使用 <code>-Og</code> 参数来对 debug 进行优化（但使用 <code>-Og</code> 后 compiler 可能会把一些东西移除掉，所以 debug 时可能不会符合预期），例如：</p>
 <div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -235,8 +229,8 @@
 </span></span><span class="line"><span class="cl">$ gdb -q ./test</span></span></code></pre></td></tr></table>
 </div>
 </div><a href="https://github.com/ccrysisa/LKI/tree/main/debug/test.c"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
-<h2 id="gdb-调试-rust">GDB 调试 Rust</h2>
-<p>在使用 <code>build</code> 命令构建 debug 目标文件（即位于 target/debug 目录下的目标文件，与 package 同名）后，就可以通过 gdb 来进行调试：</p>
+<h2 id="gdb-调试-rust" class="heading-element">
+  <a href="#gdb-%e8%b0%83%e8%af%95-rust" class="heading-mark"></a>GDB 调试 Rust</h2><p>在使用 <code>build</code> 命令构建 debug 目标文件（即位于 target/debug 目录下的目标文件，与 package 同名）后，就可以通过 gdb 来进行调试：</p>
 <div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -248,11 +242,11 @@
 </div>
 </div><p>但是如果是使用 <code>cargo build --release</code> 构建的 release 目标文件（即位于 target/release 目录下的目标文件），则无法使用 GDB 进行调试，因为 release 目标未包含任何调试信息，类似于未使用 <code>-g</code> 参数编译 C/C++ 源代码。</p>
 <a href="https://github.com/ccrysisa/LKI/tree/main/debug/hello_cargo"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
-<h2 id="gdb-基本命令">GDB 基本命令</h2>
-<h3 id="run">run</h3>
-<p><code>run (r)</code> 命令用于从程序的执行起始点开始执行，直到遇到下一个断点或者程序结束。</p>
-<h3 id="continue">continue</h3>
-<p><code>continue (c)</code> 命令用于从当前停止的断点位置处继续执行程序，直到遇到下一个断点或者程序结束。</p>
+<h2 id="gdb-基本命令" class="heading-element">
+  <a href="#gdb-%e5%9f%ba%e6%9c%ac%e5%91%bd%e4%bb%a4" class="heading-mark"></a>GDB 基本命令</h2><h3 id="run" class="heading-element">
+  <a href="#run" class="heading-mark"></a>run</h3><p><code>run (r)</code> 命令用于从程序的执行起始点开始执行，直到遇到下一个断点或者程序结束。</p>
+<h3 id="continue" class="heading-element">
+  <a href="#continue" class="heading-mark"></a>continue</h3><p><code>continue (c)</code> 命令用于从当前停止的断点位置处继续执行程序，直到遇到下一个断点或者程序结束。</p>
 <div class="details admonition note open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -261,8 +255,8 @@
       <div class="admonition-content"><code>run</code> 和 <code>continue</code> 的区别在于 <code>run</code> 是将程序从头开始执行。例如如果未设置任何断点，使用 <code>run</code> 可以反复执行程序，而如果使用 <code>continue</code> 则会提示 <em>The program is not being run</em>。</div>
     </div>
   </div>
-<h3 id="step">step</h3>
-<p><code>step (s)</code> 命令用于 <strong>逐行</strong> 执行程序，在遇到函数调用时进入对应函数，并在函数内部的第一行暂停。<code>step</code> 命令以 <em>单步方式</em> 执行程序的每一行代码，并跟踪函数调用的进入和退出。</p>
+<h3 id="step" class="heading-element">
+  <a href="#step" class="heading-mark"></a>step</h3><p><code>step (s)</code> 命令用于 <strong>逐行</strong> 执行程序，在遇到函数调用时进入对应函数，并在函数内部的第一行暂停。<code>step</code> 命令以 <em>单步方式</em> 执行程序的每一行代码，并跟踪函数调用的进入和退出。</p>
 <div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -284,10 +278,10 @@
       <div class="admonition-content"><code>step</code> 命令与 <code>continue</code> 命令相同，只能在程序处于运行态（即停留在断点处）时才能使用。</div>
     </div>
   </div>
-<h3 id="next">next</h3>
-<p><code>next (n)</code> 命令用于执行当前行并移动到 <strong>下一行</strong>，它用于逐行执行程序，但不会进入函数调用。</p>
-<h3 id="break">break</h3>
-<p><code>break (b)</code> 命令用于在可执行问卷对应的源程序中加入断点，可以在程序处于 <em>未运行态/运行态</em> 时加入断点（运行态是指程序停留在断点处但未执行完毕的姿态）。</p>
+<h3 id="next" class="heading-element">
+  <a href="#next" class="heading-mark"></a>next</h3><p><code>next (n)</code> 命令用于执行当前行并移动到 <strong>下一行</strong>，它用于逐行执行程序，但不会进入函数调用。</p>
+<h3 id="break" class="heading-element">
+  <a href="#break" class="heading-mark"></a>break</h3><p><code>break (b)</code> 命令用于在可执行问卷对应的源程序中加入断点，可以在程序处于 <em>未运行态/运行态</em> 时加入断点（运行态是指程序停留在断点处但未执行完毕的姿态）。</p>
 <p>可以通过指定 源文件对应的 <em>行数/函数名</em> 来加入断点（源文件名可以省略）：</p>
 <div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -308,8 +302,8 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> test1.c:7
 </span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> <span class="nb">break</span> test2.c:main</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="print">print</h3>
-<p><code>print (p)</code> 命令用于在调试过程中打印 <em>变量</em>的值或 <em>表达式</em> 的结果，帮助开发者检查程序状态并查看特定变量的当前值。</p>
+</div><h3 id="print" class="heading-element">
+  <a href="#print" class="heading-mark"></a>print</h3><p><code>print (p)</code> 命令用于在调试过程中打印 <em>变量</em>的值或 <em>表达式</em> 的结果，帮助开发者检查程序状态并查看特定变量的当前值。</p>
 <div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -342,8 +336,8 @@
 </div><blockquote>
 <p>Use <code>p/format</code> to instead select other formats such as <code>x</code> for hex, <code>t</code> for binary, and <code>c</code> for char.</p>
 </blockquote>
-<h3 id="backtrace">backtrace</h3>
-<p><code>backtrace (bt)</code> 命令用于打印当前调用栈的信息，也称为堆栈回溯 (backtrace)。它显示了程序在执行过程中经过的函数调用序列，以及每个函数调用的位置和参数，即可以获取以下信息：</p>
+<h3 id="backtrace" class="heading-element">
+  <a href="#backtrace" class="heading-mark"></a>backtrace</h3><p><code>backtrace (bt)</code> 命令用于打印当前调用栈的信息，也称为堆栈回溯 (backtrace)。它显示了程序在执行过程中经过的函数调用序列，以及每个函数调用的位置和参数，即可以获取以下信息：</p>
 <ul>
 <li><em>函数调用序列</em>：显示程序当前的函数调用序列，以及每个函数的名称和所在的源代码文件。</li>
 <li><em>栈帧信息</em>：对于每个函数调用，显示该函数的栈帧信息，包括栈帧的地址和栈帧的大小。</li>
@@ -369,10 +363,10 @@
       <div class="admonition-content"><code>backtrace</code> 命令对于跟踪程序的执行路径、检查函数调用的顺序以及定位错误非常有用。在实际中，一般会搭配其他GDB命令（如 <code>up</code>、<code>down</code> 和 <code>frame</code>）结合使用，以查看特定栈帧的更多详细信息或切换到不同的栈帧。在上面的例子中，<code>#0</code> 和 <code>#1</code> 表示栈帧的编号，可以通过 <code>frame</code> 配合这些编号来切换栈帧。</div>
     </div>
   </div>
-<h3 id="where">where</h3>
-<p><code>where</code> 和 <code>backtrace</code> 命令都用于显示程序的调用栈信息。<code>backtrace</code> 提供更详细的调用栈信息，包括函数名称、文件名、行号、参数和局部变量的值。而 <code>where</code> 命令可以理解为 <code>backtrace</code> 的一个简化版本，它提供的是较为紧凑的调用栈信息，通常只包含函数名称、文件名和行号。</p>
-<h3 id="frame">frame</h3>
-<p><code>frame (f)</code> 命令用于选择特定的栈帧 (stack frame)，从而切换到不同的函数调用上下文，每个栈帧对应于程序中的一个函数调用。</p>
+<h3 id="where" class="heading-element">
+  <a href="#where" class="heading-mark"></a>where</h3><p><code>where</code> 和 <code>backtrace</code> 命令都用于显示程序的调用栈信息。<code>backtrace</code> 提供更详细的调用栈信息，包括函数名称、文件名、行号、参数和局部变量的值。而 <code>where</code> 命令可以理解为 <code>backtrace</code> 的一个简化版本，它提供的是较为紧凑的调用栈信息，通常只包含函数名称、文件名和行号。</p>
+<h3 id="frame" class="heading-element">
+  <a href="#frame" class="heading-mark"></a>frame</h3><p><code>frame (f)</code> 命令用于选择特定的栈帧 (stack frame)，从而切换到不同的函数调用上下文，每个栈帧对应于程序中的一个函数调用。</p>
 <p>接着上一个例子，切换到 <code>main</code> 函数所在的栈帧：</p>
 <div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -385,8 +379,8 @@
 </span></span><span class="line"><span class="cl"><span class="c1">#1  0x00005555555551d2 in main () at test.c:14</span>
 </span></span><span class="line"><span class="cl"><span class="m">14</span>          int <span class="nv">result</span> <span class="o">=</span> foo<span class="o">()</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="updown">up/down</h3>
-<p><code>up</code> 和 <code>down</code> 命令用于在调试过程中在不同的栈帧之间进行切换：</p>
+</div><h3 id="updown" class="heading-element">
+  <a href="#updown" class="heading-mark"></a>up/down</h3><p><code>up</code> 和 <code>down</code> 命令用于在调试过程中在不同的栈帧之间进行切换：</p>
 <ul>
 <li><code>up</code> 用于在调用栈中向上移动到较高的栈帧，即进入调用当前函数的函数。每次执行 <code>up</code> 命令，GDB 将切换到上一个（更高层次）的栈帧。这可以用于查看调用当前函数的上层函数的执行上下文。</li>
 <li><code>down</code> 用于在调用栈中向下移动到较低的栈帧，即返回到当前函数调用的函数。每次执行 <code>down</code> 命令，GDB 将切换到下一个（较低层次）的栈帧。这可以用于返回到调用当前函数的函数的执行上下文。</li>
@@ -412,8 +406,8 @@
 </span></span><span class="line"><span class="cl"><span class="c1">#0  foo () at test.c:7</span>
 </span></span><span class="line"><span class="cl"><span class="m">7</span>         printf<span class="o">(</span><span class="s2">&#34;bar = %d\n&#34;</span>, bar<span class="o">)</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="info">info</h3>
-<p><code>info (i)</code> 命令用于获取程序状态和调试环境的相关信息，该命令后面可以跟随不同的子命令，用于获取特定类型的信息。</p>
+</div><h3 id="info" class="heading-element">
+  <a href="#info" class="heading-mark"></a>info</h3><p><code>info (i)</code> 命令用于获取程序状态和调试环境的相关信息，该命令后面可以跟随不同的子命令，用于获取特定类型的信息。</p>
 <p>一些常用的 <code>info</code> 子命令：</p>
 <ul>
 <li><code>info breakpoints</code> 显示已设置的所有断点 (breakpoint) 信息，包括断点编号、断点类型、断点位置等。</li>
@@ -438,11 +432,11 @@
 </span></span><span class="line"><span class="cl"><span class="m">1</span>       breakpoint     keep y   0x000055555555518f in foo at test.c:7
 </span></span><span class="line"><span class="cl"><span class="m">2</span>       breakpoint     keep y   0x0000555555555175 in foo at test.c:4</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="delete">delete</h3>
-<p><code>delete (d)</code> 命令用于删除断点 (breakpoint) 或观察点 (watchpoint)。断点是在程序执行期间暂停执行的特定位置，而观察点是在特定条件满足时暂停执行的位置。</p>
+</div><h3 id="delete" class="heading-element">
+  <a href="#delete" class="heading-mark"></a>delete</h3><p><code>delete (d)</code> 命令用于删除断点 (breakpoint) 或观察点 (watchpoint)。断点是在程序执行期间暂停执行的特定位置，而观察点是在特定条件满足时暂停执行的位置。</p>
 <p>可以通过指定 <em>断点 / 观察点</em> 的编号或使用 <code>delete</code> 命令相关的参数，来删除已设置的断点 / 观察点。断点 / 观察点编号可以在使用 <code>info breakpoints</code> / <code>info watchpoints</code> 命令时获得。</p>
-<h3 id="quit">quit</h3>
-<p><code>quit (q)</code> 命令用于退出 GDB，返回终端页面。</p>
+<h3 id="quit" class="heading-element">
+  <a href="#quit" class="heading-mark"></a>quit</h3><p><code>quit (q)</code> 命令用于退出 GDB，返回终端页面。</p>
 <div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -452,11 +446,11 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> quit
 </span></span><span class="line"><span class="cl">$ <span class="c1"># Now, in the terminial</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="list">list</h3>
-<p><code>list</code> 命令用于显示当前位置的代码片段，默认情况下，它会显示当前位置的前后10行代码。</p>
+</div><h3 id="list" class="heading-element">
+  <a href="#list" class="heading-mark"></a>list</h3><p><code>list</code> 命令用于显示当前位置的代码片段，默认情况下，它会显示当前位置的前后10行代码。</p>
 <p><code>list</code> 命令也可以显示指定范围的代码，使用 <code>list &lt;start&gt;,&lt;end&gt;</code> 命令将显示从 start 行到 end 行的源代码。</p>
-<h3 id="whatis">whatis</h3>
-<p><code>whatis</code> 命令用于获取给定标识符（如变量、函数或类型）的类型信息。</p>
+<h3 id="whatis" class="heading-element">
+  <a href="#whatis" class="heading-mark"></a>whatis</h3><p><code>whatis</code> 命令用于获取给定标识符（如变量、函数或类型）的类型信息。</p>
 <div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -474,14 +468,14 @@
 </span></span><span class="line"><span class="cl"><span class="o">(</span>gdb<span class="o">)</span> whatis calendar
 </span></span><span class="line"><span class="cl"><span class="nb">type</span> <span class="o">=</span> int <span class="o">[</span>12<span class="o">][</span>31<span class="o">]</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="x">x</h3>
-<p><code>x</code> 命令用于查看内存中的数据，使用 x 命令搭配不同的格式来显示内存中的数据，也可以搭配 <code>/</code> 后跟数字来指定要显示的内存单元数量。例如，<code>x/4 &lt;address&gt;</code> 表示显示地址 address 开始的连续 4 个内存单元的内容。</p>
-<h3 id="其他">其他</h3>
-<p>如果被调试程序正处于运行态（即已经通过 <code>run</code> 命令来运行程序），此时可以通过 <code>Ctrl+C</code> 来中断 GDB，程序将被立即中断，并在中断时所运行到的地方暂停。这种方式被称为 <strong>手动断点</strong>，手动断点可以理解为一个临时断点，只会在该处暂停一次。</p>
+</div><h3 id="x" class="heading-element">
+  <a href="#x" class="heading-mark"></a>x</h3><p><code>x</code> 命令用于查看内存中的数据，使用 x 命令搭配不同的格式来显示内存中的数据，也可以搭配 <code>/</code> 后跟数字来指定要显示的内存单元数量。例如，<code>x/4 &lt;address&gt;</code> 表示显示地址 address 开始的连续 4 个内存单元的内容。</p>
+<h3 id="其他" class="heading-element">
+  <a href="#%e5%85%b6%e4%bb%96" class="heading-mark"></a>其他</h3><p>如果被调试程序正处于运行态（即已经通过 <code>run</code> 命令来运行程序），此时可以通过 <code>Ctrl+C</code> 来中断 GDB，程序将被立即中断，并在中断时所运行到的地方暂停。这种方式被称为 <strong>手动断点</strong>，手动断点可以理解为一个临时断点，只会在该处暂停一次。</p>
 <p>GDB 会将空白行的断点自动下移到下一非空的代码行。</p>
 <p><code>set print pretty</code> 命令可以以更易读和格式化的方式显示结构化数据，以更友好的方式输出结构体、类、数组等复杂类型的数据，更易于阅读和理解。</p>
-<h2 id="references">References</h2>
-<ul>
+<h2 id="references" class="heading-element">
+  <a href="#references" class="heading-mark"></a>References</h2><ul>
 <li>video: <a href="https://www.youtube.com/watch?v=UTVp4jpJoyc"target="_blank" rel="external nofollow noopener noreferrer">Linux basic anti-debug</a></li>
 <li>video: <a href="https://www.youtube.com/watch?v=twxEVeDceGw"target="_blank" rel="external nofollow noopener noreferrer">C Programming, Disassembly, Debugging, Linux, GDB</a></li>
 <li><a href="http://rr-project.org/"target="_blank" rel="external nofollow noopener noreferrer">rr</a> (Record and Replay Framework)
@@ -495,11 +489,10 @@
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-03-16 21:44:26">更新于 2024-03-16&nbsp;</span>
-      </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/debug-gdb/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/debug-gdb/" data-title="程序调试工具 GDB" data-hashtags="Debug,GDB,Rust,C/C&#43;&#43;,Sysprog"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/debug-gdb/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/debug-gdb/" data-title="程序调试工具 GDB" data-hashtags="Debug,GDB,Rust,C/C&#43;&#43;,Sysprog"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/debug-gdb/" data-hashtag="Debug"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/debug-gdb/" data-title="程序调试工具 GDB" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/debug-gdb/" data-title="程序调试工具 GDB"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -508,12 +501,11 @@
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/debug-gdb/" data-title="程序调试工具 GDB" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/debug-gdb/" data-title="程序调试工具 GDB"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-      </div>
-    </div>
-  </div>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/debug/' class="post-tag">Debug</a><a href='/tags/gdb/' class="post-tag">GDB</a><a href='/tags/rust/' class="post-tag">Rust</a><a href='/tags/c/c&#43;&#43;/' class="post-tag">C/C&#43;&#43;</a><a href='/tags/sysprog/' class="post-tag">Sysprog</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/debug/" class="post-tag" title="标签 - Debug">Debug</a><a href="/tags/gdb/" class="post-tag" title="标签 - GDB">GDB</a><a href="/tags/rust/" class="post-tag" title="标签 - Rust">Rust</a><a href="/tags/c/c&#43;&#43;/" class="post-tag" title="标签 - C/C&#43;&#43;">C/C&#43;&#43;</a><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -522,16 +514,19 @@
   <div class="post-nav"><a href="/posts/c-pointer/" class="post-nav-item" rel="prev" title="你所不知道的 C 语言: 指针篇"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>你所不知道的 C 语言: 指针篇</a>
       <a href="/posts/nycu-statistics/" class="post-nav-item" rel="next" title="国立阳明交通大学 统计学 重点提示">国立阳明交通大学 统计学 重点提示<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
         </div></div><div id="mask"></div><noscript>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

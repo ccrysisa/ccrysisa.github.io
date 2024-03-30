@@ -53,7 +53,7 @@ repost:
 | :-----: | :----: | :-----: | :-----: |
 | 國立清華大學 | [計算機網路概論][courseinfo] | [課程講義與練習題][slides&hws] | [Youtube][playlist] |
 
-## L1 Foundation 重点提示与练习
+## L1: Foundation
 
 Outline:
 
@@ -126,7 +126,7 @@ Salvatore Sanfilippo 在 YouTube 上对 smallchat 的讲解：
 
 GitHub 上也有使用 Go 和 Rust 实现该项目的仓库，如果你对 Go 或 Rust 的网络编程 (Network Programming) 感兴趣，可以参考这个[仓库](https://github.com/smallnest/smallchat)。
 
-## L2 IEEE 802.3 Ethernet
+## L2: IEEE 802.3 Ethernet
 
 **Outline:**
 - Introduction
@@ -200,6 +200,12 @@ Host 在 detect collision 之后进行 backoff random delay，delay 结束后按
 {{< /admonition >}}
 
 ### Homework
+
+## L3: IEEE 802.11 Wireless LAN
+
+无线网络这章太难了，战术性放弃
+
+## L4: IEEE 802.1D Spanning Tree Algorithm
 
 
 [courseinfo]: https://ocw.nthu.edu.tw/ocw/index.php?page=course&cid=291&
