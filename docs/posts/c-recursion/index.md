@@ -338,8 +338,33 @@ RETURN VALUE
 
 ## 递归背后的理论
 
-- [ ] YouTube: [Lambda Calculus - Computerphile](https://youtu.be/eis11j_iGMs)
-- [ ] YouTube: [Essentials: Functional Programming's Y Combinator - Computerphile](https://youtu.be/9T8A89jgeTI)
+- [x] YouTube: [Lambda Calculus - Computerphile](https://youtu.be/eis11j_iGMs)
+- YouTube: [Essentials: Functional Programming's Y Combinator - Computerphile](https://youtu.be/9T8A89jgeTI)
+
+第一个影片相对还蛮好懂，第二个影片对于非 PL 背景的人来说完全是看不懂，所以暂时先放弃了
+
+第一个影片主要介绍函数式编程的核心概念: 函数可以像其它 object 一样被传递使用，没有额外的限制，并且 object 是可以由函数来定义、构建的，例如我们可以定义 true 和 false:
+
+TRUE:  $\lambda x.\ \lambda y.\ x$   
+FALSE: $\lambda x.\ \lambda y.\ y$   
+
+因为 true 和 false 就是用来控制流程的，为 true 时我们 do somthing，为 false 我们 do other，所以上面这种定义是有意义的，当然你也可以定义为其它，毕竟函数式编程让我们可以定义任意我们想定义的东西 :rofl:
+
+接下来我们就可以通过先前定义的 TRUE 和 FALSE 来实现 NOT, AND, OR 这类操作了:
+
+NOT: $\lambda b.\ b.$ FALSE TRUE   
+AND: $\lambda x.\ \lambda y.\ x.\ y.\$ FALSE   
+OR:  $\lambda x.\ \lambda y.\ x$ TRUE $y.$   
+
+乍一看这个挺抽象的，其实上面的实现正体现了函数式编程的威力，我们以 NOT TRUE 的推导带大家体会一下:
+
+NOT TRUE   
+$\ \ \ \ $ $b.$ FALSE TRUE   
+$\ \ \ \ $ TRUE FALSE TRUE   
+$\ \ \ \ $ TRUE (FALSE TRUE)   
+$\ \ \ \ $ FALSE  
+
+其余推导同理
 
 
 ---

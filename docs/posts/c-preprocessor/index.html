@@ -11,27 +11,27 @@
 相較於頻繁納入新語法的程式語言 (如 C&#43;&#43; 和 Java)，C 語言顯得很保守，但總是能藉由前置處理器 (preprocessor) 對語法進行擴充，甚至搭配工具鏈 (toolchain) 的若干進階機制，做到大大超出程式語言規範的複雜機制。例如主要以 C 語言開發的 Linux 核心就搭配前置處理器和連結器 (linker) 的特徵，實作出 Linux 核心模組，允許開發者動態掛載/卸載，因巨集包裝得好，多數 Linux 核心核心模組的開發者只要專注在與 Linux 核心互動的部分。
 
 
-本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C&#43;&#43; template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO,max, min, 和 container_of 等巨集。
+本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C&#43;&#43; template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO, max, min, 和 container_of 等巨集。
 " /><meta name="keywords" content='Sysprog, C, Preprocessor' /><meta itemprop="name" content="你所不知道的 C 语言: 前置处理器应用篇">
 <meta itemprop="description" content="
 相較於頻繁納入新語法的程式語言 (如 C&#43;&#43; 和 Java)，C 語言顯得很保守，但總是能藉由前置處理器 (preprocessor) 對語法進行擴充，甚至搭配工具鏈 (toolchain) 的若干進階機制，做到大大超出程式語言規範的複雜機制。例如主要以 C 語言開發的 Linux 核心就搭配前置處理器和連結器 (linker) 的特徵，實作出 Linux 核心模組，允許開發者動態掛載/卸載，因巨集包裝得好，多數 Linux 核心核心模組的開發者只要專注在與 Linux 核心互動的部分。
 
 
-本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C&#43;&#43; template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO,max, min, 和 container_of 等巨集。
+本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C&#43;&#43; template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO, max, min, 和 container_of 等巨集。
 "><meta itemprop="datePublished" content="2024-03-25T22:55:44+08:00" />
-<meta itemprop="dateModified" content="2024-03-27T18:51:51+08:00" />
-<meta itemprop="wordCount" content="1401"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-03-30T11:26:28+08:00" />
+<meta itemprop="wordCount" content="1663"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Preprocessor," /><meta property="og:title" content="你所不知道的 C 语言: 前置处理器应用篇" />
 <meta property="og:description" content="
 相較於頻繁納入新語法的程式語言 (如 C&#43;&#43; 和 Java)，C 語言顯得很保守，但總是能藉由前置處理器 (preprocessor) 對語法進行擴充，甚至搭配工具鏈 (toolchain) 的若干進階機制，做到大大超出程式語言規範的複雜機制。例如主要以 C 語言開發的 Linux 核心就搭配前置處理器和連結器 (linker) 的特徵，實作出 Linux 核心模組，允許開發者動態掛載/卸載，因巨集包裝得好，多數 Linux 核心核心模組的開發者只要專注在與 Linux 核心互動的部分。
 
 
-本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C&#43;&#43; template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO,max, min, 和 container_of 等巨集。
+本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C&#43;&#43; template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO, max, min, 和 container_of 等巨集。
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-preprocessor/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-03-25T22:55:44+08:00" />
-<meta property="article:modified_time" content="2024-03-27T18:51:51+08:00" />
+<meta property="article:modified_time" content="2024-03-30T11:26:28+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 前置处理器应用篇"/>
@@ -39,7 +39,7 @@
 相較於頻繁納入新語法的程式語言 (如 C&#43;&#43; 和 Java)，C 語言顯得很保守，但總是能藉由前置處理器 (preprocessor) 對語法進行擴充，甚至搭配工具鏈 (toolchain) 的若干進階機制，做到大大超出程式語言規範的複雜機制。例如主要以 C 語言開發的 Linux 核心就搭配前置處理器和連結器 (linker) 的特徵，實作出 Linux 核心模組，允許開發者動態掛載/卸載，因巨集包裝得好，多數 Linux 核心核心模組的開發者只要專注在與 Linux 核心互動的部分。
 
 
-本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C&#43;&#43; template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO,max, min, 和 container_of 等巨集。
+本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C&#43;&#43; template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO, max, min, 和 container_of 等巨集。
 "/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
@@ -55,8 +55,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-preprocessor\/"
-    },"genre": "posts","keywords": "Sysprog, C, Preprocessor","wordcount":  1401 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-preprocessor\/","datePublished": "2024-03-25T22:55:44+08:00","dateModified": "2024-03-27T18:51:51+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, C, Preprocessor","wordcount":  1663 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-preprocessor\/","datePublished": "2024-03-25T22:55:44+08:00","dateModified": "2024-03-30T11:26:28+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -171,7 +171,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-25 22:55:44"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-25">2024-03-25</time></span>&nbsp;<span title="更新于 2024-03-27 18:51:51"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-27">2024-03-27</time></span>&nbsp;<span title="1401 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-25 22:55:44"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-25">2024-03-25</time></span>&nbsp;<span title="更新于 2024-03-30 11:26:28"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-30">2024-03-30</time></span>&nbsp;<span title="1663 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -183,13 +183,28 @@
     <li><a href="#object-oriented-programming">Object Oriented Programming</a></li>
     <li><a href="#c11-_generic">C11: _Generic</a></li>
     <li><a href="#block">Block</a></li>
+    <li><a href="#array_size-宏">ARRAY_SIZE 宏</a></li>
+    <li><a href="#dp----while-0-宏">dp { &hellip; } while (0) 宏</a></li>
+    <li><a href="#应用-string-switch-in-c">应用: String switch in C</a></li>
+    <li><a href="#应用-linked-list-的各式变种">应用: Linked List 的各式变种</a></li>
+    <li><a href="#其它应用">其它应用</a>
+      <ul>
+        <li><a href="#unit-test">Unit Test</a></li>
+        <li><a href="#object-model">Object Model</a></li>
+        <li><a href="#exception-handling">Exception Handling</a></li>
+        <li><a href="#adt">ADT</a></li>
+      </ul>
+    </li>
+    <li><a href="#linux-核心宏-build_bug_on_zero">Linux 核心宏: BUILD_BUG_ON_ZERO</a></li>
+    <li><a href="#linux-核心原始程式码宏-max-min">Linux 核心原始程式码宏: max, min</a></li>
+    <li><a href="#linux-核心原始程式码宏-contain_of">Linux 核心原始程式码宏: contain_of</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><blockquote>
 <p>相較於頻繁納入新語法的程式語言 (如 C++ 和 Java)，C 語言顯得很保守，但總是能藉由前置處理器 (preprocessor) 對語法進行擴充，甚至搭配工具鏈 (toolchain) 的若干進階機制，做到大大超出程式語言規範的複雜機制。例如主要以 C 語言開發的 Linux 核心就搭配前置處理器和連結器 (linker) 的特徵，實作出 Linux 核心模組，允許開發者動態掛載/卸載，因巨集包裝得好，多數 Linux 核心核心模組的開發者只要專注在與 Linux 核心互動的部分。</p>
 </blockquote>
 <blockquote>
-<p>本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C++ template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO,max, min, 和 container_of 等巨集。</p>
+<p>本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C++ template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO, max, min, 和 container_of 等巨集。</p>
 </blockquote>
 <ul>
 <li><a href="https://hackmd.io/@sysprog/c-preprocessor"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
@@ -357,11 +372,74 @@ from any other generic association of the generic selection is evaluated.</p>
 </span></span><span class="line"><span class="cl"><span class="c1"># installing</span>
 </span></span><span class="line"><span class="cl">$ sudo ./installlib</span></span></code></pre></td></tr></table>
 </div>
-</div></div><div class="post-footer" id="post-footer">
+</div><p>除了 Block 之外，常见的避免 double evaluation 的方法还有利用 <code>typeof</code> 提前计算:</p>
+<div class="highlight" id="id-6"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define DOUBLE(a) ((a) + (a))
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define DOUBLE(a) ({ \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    __typeof__(a) _x_in_DOUBLE = (a); \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    _x_in_DOUBLE + _x_in_DOUBLE; \
+</span></span></span><span class="line"><span class="cl"><span class="cp">})</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="array_size-宏">ARRAY_SIZE 宏</h2>
+<ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://frankchang0125.blogspot.tw/2012/10/linux-kernel-arraysize.html"target="_blank" rel="external nofollow noopener noreferrer">Linux Kernel: ARRAY_SIZE()</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 从 Linux 核心 「提炼」 出的 <a href="http://ccodearchive.net/info/array_size.html"target="_blank" rel="external nofollow noopener noreferrer">array_size</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://msdn.microsoft.com/en-us/library/ms175773.aspx"target="_blank" rel="external nofollow noopener noreferrer">_countof Macro</a></li>
+</ul>
+<h2 id="dp----while-0-宏">dp { &hellip; } while (0) 宏</h2>
+<ul>
+<li>避免 dangling else，即 if 和 else 未符合预期的配对 (常见于未使用 <code>{}</code> 包裹)</li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> Stack Overflow: <a href="https://stackoverflow.com/questions/1067226/c-multi-line-macro-do-while0-vs-scope-block"target="_blank" rel="external nofollow noopener noreferrer">C multi-line macro: do/while(0) vs scope block</a></li>
+</ul>
+<h2 id="应用-string-switch-in-c">应用: String switch in C</h2>
+<ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://tia.mat.br/posts/2012/08/09/string_switch_in_c.html"target="_blank" rel="external nofollow noopener noreferrer">String switch in C</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://tia.mat.br/posts/2018/02/01/more_on_string_switch_in_c.html"target="_blank" rel="external nofollow noopener noreferrer">More on string switch in C</a></li>
+</ul>
+<h2 id="应用-linked-list-的各式变种">应用: Linked List 的各式变种</h2>
+<ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://gist.github.com/afcidk/441abae865be13c599b8f749792908b6"target="_blank" rel="external nofollow noopener noreferrer">Simple code for checking the speed difference between function call and macro</a></li>
+</ul>
+<h2 id="其它应用">其它应用</h2>
+<h3 id="unit-test">Unit Test</h3>
+<h3 id="object-model">Object Model</h3>
+<h3 id="exception-handling">Exception Handling</h3>
+<h3 id="adt">ADT</h3>
+<div class="details admonition success open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-check-circle fa-fw" aria-hidden="true"></i>成功<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">Linux 核心原始程式码也善用宏来扩充</div>
+    </div>
+  </div>
+<h2 id="linux-核心宏-build_bug_on_zero">Linux 核心宏: BUILD_BUG_ON_ZERO</h2>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/c-bitfield"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>
+<p>简单来说就是编译器就进行检查的 <code>assert</code>，我写了 <a href="/posts/c-bitwise/#linux-核心-build_bug_on_zero">一篇文章</a> 来说明它的原理。</p>
+<h2 id="linux-核心原始程式码宏-max-min">Linux 核心原始程式码宏: max, min</h2>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/linux-macro-minmax"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>
+<h2 id="linux-核心原始程式码宏-contain_of">Linux 核心原始程式码宏: contain_of</h2>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/linux-macro-containerof"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-03-27 18:51:51">更新于 2024-03-27&nbsp;</span>
+        <span title="更新于 2024-03-30 11:26:28">更新于 2024-03-30&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/c-preprocessor/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -390,7 +468,7 @@ from any other generic association of the generic selection is evaluated.</p>
       <a href="/posts/deepin-kvm/" class="post-nav-item" rel="next" title="Deepin 20.9 KVM 安装和管理">Deepin 20.9 KVM 安装和管理<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

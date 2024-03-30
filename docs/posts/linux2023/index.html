@@ -14,7 +14,7 @@
 在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
 "><meta itemprop="datePublished" content="2024-02-28T20:46:33+08:00" />
 <meta itemprop="dateModified" content="2024-03-16T13:13:05+08:00" />
-<meta itemprop="wordCount" content="9188"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="9196"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux," /><meta property="og:title" content="Linux 核心设计/实作 (Linux Kernel Internals)" />
 <meta property="og:description" content="
 在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
@@ -43,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux2023\/"
-    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  9188 ,
+    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  9196 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023\/","datePublished": "2024-02-28T20:46:33+08:00","dateModified": "2024-03-16T13:13:05+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -159,7 +159,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-28 20:46:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="更新于 2024-03-16 13:13:05"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="9188 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 9200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 19 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-28 20:46:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="更新于 2024-03-16 13:13:05"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="9196 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 9200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 19 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -341,7 +341,13 @@
 <p><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/revolution-os-note"target="_blank" rel="external nofollow noopener noreferrer">從 Revolution OS 看作業系統生態變化</a><code>*</code></p>
 </li>
 <li>
-<p><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/concurrency/"target="_blank" rel="external nofollow noopener noreferrer">並行和多執行緒程式設計</a><code>*</code>: 應涵蓋 Part 1 到 Part 4</p>
+<p><a href="https://hackmd.io/@sysprog/concurrency/"target="_blank" rel="external nofollow noopener noreferrer">並行和多執行緒程式設計</a><code>*</code>: 應涵蓋 Part 1 到 Part 4</p>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> Part 1</li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> Part 2</li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> Part 3</li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> Part 4</li>
+</ul>
 </li>
 <li>
 <p><a href="https://hackmd.io/@sysprog/c-function"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 函式呼叫</a><code>*</code></p>
@@ -350,7 +356,7 @@
 </ul>
 </li>
 <li>
-<p><a href="https://hackmd.io/@sysprog/c-recursion"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 遞迴呼叫</a><code>*</code></p>
+<p><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-recursion"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 遞迴呼叫</a><code>*</code></p>
 <ul>
 <li>或許跟你想像中不同，Linux 核心的原始程式碼裡頭也用到遞迴函式呼叫，特別在較複雜的實作，例如檔案系統，善用遞迴可大幅縮減程式碼，但這也導致追蹤程式運作的難度大增</li>
 </ul>
@@ -959,7 +965,7 @@ Applications For Linux</a> / <a href="https://evlproject.org/"target="_blank" re
   <div class="post-nav"><a href="/posts/oerv-pretask/" class="post-nav-item" rel="prev" title="OERV 之 Pretask"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>OERV 之 Pretask</a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

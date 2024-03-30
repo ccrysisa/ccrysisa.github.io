@@ -23,8 +23,8 @@
       GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而上提供各类触及“灵魂”的学习案例，让所有课程从纸上谈兵转变成沙场实战，会极大地提升工程实践的效率和技能。
     
   "><meta itemprop="datePublished" content="2023-12-25T15:43:50+08:00" />
-<meta itemprop="dateModified" content="2024-03-16T21:44:26+08:00" />
-<meta itemprop="wordCount" content="3481"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-03-30T11:26:28+08:00" />
+<meta itemprop="wordCount" content="3136"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux," /><meta property="og:title" content="GNU/Linux 开发工具" />
 <meta property="og:description" content="
     
@@ -37,7 +37,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/gnu-linux-dev/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-25T15:43:50+08:00" />
-<meta property="article:modified_time" content="2024-03-16T21:44:26+08:00" />
+<meta property="article:modified_time" content="2024-03-30T11:26:28+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="GNU/Linux 开发工具"/>
@@ -63,8 +63,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/gnu-linux-dev\/"
-    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  3481 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/gnu-linux-dev\/","datePublished": "2023-12-25T15:43:50+08:00","dateModified": "2024-03-16T21:44:26+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  3136 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/gnu-linux-dev\/","datePublished": "2023-12-25T15:43:50+08:00","dateModified": "2024-03-30T11:26:28+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -179,7 +179,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2023-12-25 15:43:50"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-25">2023-12-25</time></span>&nbsp;<span title="更新于 2024-03-16 21:44:26"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="3481 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2023-12-25 15:43:50"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-25">2023-12-25</time></span>&nbsp;<span title="更新于 2024-03-30 11:26:28"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-30">2024-03-30</time></span>&nbsp;<span title="3136 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -247,7 +247,7 @@
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>原文档中的将公钥复制到 clipboard 中使用了 <code>clip</code> 命令，但是这个命令在 Ubuntu 中并没有对应的命令。可以使用 <code>xclip</code> + <code>alias</code> 达到近似效果。</p>
-<div class="highlight" id="id-12"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -366,7 +366,7 @@
       <i class="icon fa-solid fa-check-circle fa-fw" aria-hidden="true"></i>成功<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
-      <div class="admonition-content"><div class="highlight" id="id-13"><div class="chroma">
+      <div class="admonition-content"><div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -382,7 +382,7 @@
 <li>输出第二行表示 perf 工具已经取样并写入了一个名为 perf.data 的二进制文件，文件大小为 0.009 MB，其中包含了 94 个采样。（可以通过 <code>ls</code> 命令来检查 perf.data 文件是否存在）</li>
 </ul>
 <p>接下来通过 <code>perf report</code> 对之前输出的二进制文件 <code>perf.data</code> 进行分析。可以通过方向键选择，并通过 ENTER 进入下一层查看分析结果。</p>
-<div class="highlight" id="id-14"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -589,122 +589,23 @@
 <h2 id="其它工具">其它工具</h2>
 <h3 id="cloc">cloc</h3>
 <p>man 1 cloc</p>
-<div class="highlight" id="id-9"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">NAME
-</span></span><span class="line"><span class="cl">       cloc - Count, or compute differences of, lines of source code and comments.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">SYNOPSIS
-</span></span><span class="line"><span class="cl">       cloc [options] &lt;FILE|DIR&gt; ...
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">DESCRIPTION
-</span></span><span class="line"><span class="cl">       Count, or compute differences of, physical lines of source code in the given files (may be
-</span></span><span class="line"><span class="cl">       archives such as compressed tarballs or zip files, or git commit hashes or branch names) and/or
-</span></span><span class="line"><span class="cl">       recursively below the given directories.  It is written entirely in Perl, using only modules from
-</span></span><span class="line"><span class="cl">       the standard distribution.</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="top">top</h3>
+<blockquote>
+<p>cloc - Count, or compute differences of, lines of source code and comments.</p>
+</blockquote>
+<h3 id="top">top</h3>
 <p>man 1 top</p>
-<div class="highlight" id="id-10"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">NAME
-</span></span><span class="line"><span class="cl">       top - display Linux processes
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">SYNOPSIS
-</span></span><span class="line"><span class="cl">       top -hv|-bcEeHiOSs1 -d secs -n max -u|U user -p pids -o field -w [cols]
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">       The traditional switches `-&#39; and whitespace are optional.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">DESCRIPTION
-</span></span><span class="line"><span class="cl">       The  top  program  provides  a  dynamic real-time view of a running system.  It can display system
-</span></span><span class="line"><span class="cl">       summary information as well as a list of processes or threads currently being managed by the Linux
-</span></span><span class="line"><span class="cl">       kernel.   The  types  of  system  summary  information  shown  and  the  types,  order and size of
-</span></span><span class="line"><span class="cl">       information displayed for processes are all user configurable and that configuration can  be  made
-</span></span><span class="line"><span class="cl">       persistent across restarts.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">       The  program  provides  a limited interactive interface for process manipulation as well as a much
-</span></span><span class="line"><span class="cl">       more extensive interface  for  personal  configuration   --   encompassing  every  aspect  of  its
-</span></span><span class="line"><span class="cl">       operation.   And  while  top  is  referred  to  throughout this document, you are free to name the
-</span></span><span class="line"><span class="cl">       program anything you wish.  That new name, possibly an alias, will  then  be  reflected  on  top&#39;s
-</span></span><span class="line"><span class="cl">       display and used when reading and writing a configuration file.</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="htop">htop</h3>
+<blockquote>
+<p>top - display Linux processes</p>
+</blockquote>
+<h3 id="htop">htop</h3>
 <p>man 1 htop</p>
-<div class="highlight" id="id-11"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">NAME
-</span></span><span class="line"><span class="cl">       htop - interactive process viewer
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">SYNOPSIS
-</span></span><span class="line"><span class="cl">       htop [-dCFhpustvH]
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">DESCRIPTION
-</span></span><span class="line"><span class="cl">       htop is a cross-platform ncurses-based process viewer.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">       It  is  similar to top, but allows you to scroll vertically and horizontally, and interact using a
-</span></span><span class="line"><span class="cl">       pointing device (mouse).  You can observe all processes running on the system,  along  with  their
-</span></span><span class="line"><span class="cl">       command  line arguments, as well as view them in a tree format, select multiple processes and act‐
-</span></span><span class="line"><span class="cl">       ing on them all at once.
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">       Tasks related to processes (killing, renicing) can be done without entering their PIDs.</span></span></code></pre></td></tr></table>
-</div>
-</div></div><div class="post-footer" id="post-footer">
+<blockquote>
+<p>htop - interactive process viewer</p>
+</blockquote></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-03-16 21:44:26">更新于 2024-03-16&nbsp;</span>
+        <span title="更新于 2024-03-30 11:26:28">更新于 2024-03-30&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/gnu-linux-dev/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -733,7 +634,7 @@
       <a href="/posts/ubuntu22.04lts/" class="post-nav-item" rel="next" title="Ubuntu 22.04LTS 相关配置">Ubuntu 22.04LTS 相关配置<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

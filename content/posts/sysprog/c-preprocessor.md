@@ -162,6 +162,17 @@ $ ./checktests
 $ sudo ./installlib
 ```
 
+除了 Block 之外，常见的避免 double evaluation 的方法还有利用 `typeof` 提前计算:
+
+```c
+#define DOUBLE(a) ((a) + (a))
+
+#define DOUBLE(a) ({ \
+    __typeof__(a) _x_in_DOUBLE = (a); \
+    _x_in_DOUBLE + _x_in_DOUBLE; \
+})
+```
+
 ## ARRAY_SIZE 宏
 
 - [ ] [Linux Kernel: ARRAY_SIZE()](https://frankchang0125.blogspot.tw/2012/10/linux-kernel-arraysize.html)
@@ -175,7 +186,12 @@ $ sudo ./installlib
 
 ## 应用: String switch in C
 
+- [ ] [String switch in C](https://tia.mat.br/posts/2012/08/09/string_switch_in_c.html)
+- [ ] [More on string switch in C](https://tia.mat.br/posts/2018/02/01/more_on_string_switch_in_c.html)
+
 ## 应用: Linked List 的各式变种
+
+- [ ] [Simple code for checking the speed difference between function call and macro](https://gist.github.com/afcidk/441abae865be13c599b8f749792908b6)
 
 ## 其它应用
 
@@ -187,8 +203,20 @@ $ sudo ./installlib
 
 ### ADT
 
-## Linux 核心中的应用
+{{< admonition success >}}
+Linux 核心原始程式码也善用宏来扩充
+{{< /admonition >}}
 
-### BUILD_BUG_ON_ZERO 宏
+## Linux 核心宏: BUILD_BUG_ON_ZERO
 
 - {{< link href="https://hackmd.io/@sysprog/c-bitfield" content="原文地址" external-icon=true >}}
+
+简单来说就是编译器就进行检查的 `assert`，我写了 [一篇文章]({{< relref "./c-bitwise.md#linux-核心-build_bug_on_zero" >}}) 来说明它的原理。
+
+## Linux 核心原始程式码宏: max, min
+
+- {{< link href="https://hackmd.io/@sysprog/linux-macro-minmax" content="原文地址" external-icon=true >}}
+
+## Linux 核心原始程式码宏: contain_of
+
+- {{< link href="https://hackmd.io/@sysprog/linux-macro-containerof" content="原文地址" external-icon=true >}}

@@ -3,7 +3,7 @@
 
 > 相較於頻繁納入新語法的程式語言 (如 C++ 和 Java)，C 語言顯得很保守，但總是能藉由前置處理器 (preprocessor) 對語法進行擴充，甚至搭配工具鏈 (toolchain) 的若干進階機制，做到大大超出程式語言規範的複雜機制。例如主要以 C 語言開發的 Linux 核心就搭配前置處理器和連結器 (linker) 的特徵，實作出 Linux 核心模組，允許開發者動態掛載/卸載，因巨集包裝得好，多數 Linux 核心核心模組的開發者只要專注在與 Linux 核心互動的部分。
 
-> 本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C++ template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO,max, min, 和 container_of 等巨集。
+> 本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C++ template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO, max, min, 和 container_of 等巨集。
 
 <!--more-->
 
@@ -121,6 +121,65 @@ $ ./checktests
 # installing
 $ sudo ./installlib
 ```
+
+除了 Block 之外，常见的避免 double evaluation 的方法还有利用 `typeof` 提前计算:
+
+```c
+#define DOUBLE(a) ((a) + (a))
+
+#define DOUBLE(a) ({ \
+    __typeof__(a) _x_in_DOUBLE = (a); \
+    _x_in_DOUBLE + _x_in_DOUBLE; \
+})
+```
+
+## ARRAY_SIZE 宏
+
+- [ ] [Linux Kernel: ARRAY_SIZE()](https://frankchang0125.blogspot.tw/2012/10/linux-kernel-arraysize.html)
+- [ ] 从 Linux 核心 「提炼」 出的 [array_size](http://ccodearchive.net/info/array_size.html)
+- [ ] [_countof Macro](https://msdn.microsoft.com/en-us/library/ms175773.aspx)
+
+## dp { ... } while (0) 宏
+
+- 避免 dangling else，即 if 和 else 未符合预期的配对 (常见于未使用 `{}` 包裹)
+- [ ] Stack Overflow: [C multi-line macro: do/while(0) vs scope block](https://stackoverflow.com/questions/1067226/c-multi-line-macro-do-while0-vs-scope-block)
+
+## 应用: String switch in C
+
+- [ ] [String switch in C](https://tia.mat.br/posts/2012/08/09/string_switch_in_c.html)
+- [ ] [More on string switch in C](https://tia.mat.br/posts/2018/02/01/more_on_string_switch_in_c.html)
+
+## 应用: Linked List 的各式变种
+
+- [ ] [Simple code for checking the speed difference between function call and macro](https://gist.github.com/afcidk/441abae865be13c599b8f749792908b6)
+
+## 其它应用
+
+### Unit Test
+
+### Object Model
+
+### Exception Handling
+
+### ADT
+
+{{< admonition success >}}
+Linux 核心原始程式码也善用宏来扩充
+{{< /admonition >}}
+
+## Linux 核心宏: BUILD_BUG_ON_ZERO
+
+- {{< link href="https://hackmd.io/@sysprog/c-bitfield" content="原文地址" external-icon=true >}}
+
+简单来说就是编译器就进行检查的 `assert`，我写了 [一篇文章]({{< relref "./c-bitwise.md#linux-核心-build_bug_on_zero" >}}) 来说明它的原理。
+
+## Linux 核心原始程式码宏: max, min
+
+- {{< link href="https://hackmd.io/@sysprog/linux-macro-minmax" content="原文地址" external-icon=true >}}
+
+## Linux 核心原始程式码宏: contain_of
+
+- {{< link href="https://hackmd.io/@sysprog/linux-macro-containerof" content="原文地址" external-icon=true >}}
 
 
 ---

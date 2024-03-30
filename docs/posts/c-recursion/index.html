@@ -18,7 +18,7 @@
 或许跟你想象中不同，Linux 核心的原始程式码里头也用到递归函数呼叫，特别在较复杂的实作，例如文件系统，善用递归可大幅缩减程式码，但这也导致追踪程序运作的难度大增。
 "><meta itemprop="datePublished" content="2024-03-16T20:56:18+08:00" />
 <meta itemprop="dateModified" content="2024-03-19T21:03:19+08:00" />
-<meta itemprop="wordCount" content="1938"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="2292"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Recursion," /><meta property="og:title" content="你所不知道的 C 语言: 递归调用篇" />
 <meta property="og:description" content="
 在许多应用程序中，递归 (recursion) 可以简单又优雅地解决貌似繁琐的问题，也就是不断地拆解原有问题为相似的子问题，直到无法拆解为止，并且定义最简化状况的处理机制，一如数学思维。递归对 C 语言程序开发者来说，绝对不会陌生，但能掌握者却少，很多人甚至难以讲出汉诺塔之外的使用案例。
@@ -51,7 +51,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-recursion\/"
-    },"genre": "posts","keywords": "Sysprog, C, Recursion","wordcount":  1938 ,
+    },"genre": "posts","keywords": "Sysprog, C, Recursion","wordcount":  2292 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-recursion\/","datePublished": "2024-03-16T20:56:18+08:00","dateModified": "2024-03-19T21:03:19+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -167,7 +167,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-16 20:56:18"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="更新于 2024-03-19 21:03:19"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-19">2024-03-19</time></span>&nbsp;<span title="1938 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-16 20:56:18"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="更新于 2024-03-19 21:03:19"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-19">2024-03-19</time></span>&nbsp;<span title="2292 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -691,9 +691,25 @@ $$
 </ul>
 <h2 id="递归背后的理论">递归背后的理论</h2>
 <ul>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> YouTube: <a href="https://youtu.be/eis11j_iGMs"target="_blank" rel="external nofollow noopener noreferrer">Lambda Calculus - Computerphile</a></li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> YouTube: <a href="https://youtu.be/9T8A89jgeTI"target="_blank" rel="external nofollow noopener noreferrer">Essentials: Functional Programming&rsquo;s Y Combinator - Computerphile</a></li>
-</ul></div><div class="post-footer" id="post-footer">
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> YouTube: <a href="https://youtu.be/eis11j_iGMs"target="_blank" rel="external nofollow noopener noreferrer">Lambda Calculus - Computerphile</a></li>
+<li>YouTube: <a href="https://youtu.be/9T8A89jgeTI"target="_blank" rel="external nofollow noopener noreferrer">Essentials: Functional Programming&rsquo;s Y Combinator - Computerphile</a></li>
+</ul>
+<p>第一个影片相对还蛮好懂，第二个影片对于非 PL 背景的人来说完全是看不懂，所以暂时先放弃了</p>
+<p>第一个影片主要介绍函数式编程的核心概念: 函数可以像其它 object 一样被传递使用，没有额外的限制，并且 object 是可以由函数来定义、构建的，例如我们可以定义 true 和 false:</p>
+<p>TRUE:  $\lambda x.\ \lambda y.\ x$<br>
+FALSE: $\lambda x.\ \lambda y.\ y$</p>
+<p>因为 true 和 false 就是用来控制流程的，为 true 时我们 do somthing，为 false 我们 do other，所以上面这种定义是有意义的，当然你也可以定义为其它，毕竟函数式编程让我们可以定义任意我们想定义的东西 &#x1f923;</p>
+<p>接下来我们就可以通过先前定义的 TRUE 和 FALSE 来实现 NOT, AND, OR 这类操作了:</p>
+<p>NOT: $\lambda b.\ b.$ FALSE TRUE<br>
+AND: $\lambda x.\ \lambda y.\ x.\ y.$ FALSE<br>
+OR:  $\lambda x.\ \lambda y.\ x$ TRUE $y.$</p>
+<p>乍一看这个挺抽象的，其实上面的实现正体现了函数式编程的威力，我们以 NOT TRUE 的推导带大家体会一下:</p>
+<p>NOT TRUE<br>
+$\ \ \ \ $ $b.$ FALSE TRUE<br>
+$\ \ \ \ $ TRUE FALSE TRUE<br>
+$\ \ \ \ $ TRUE (FALSE TRUE)<br>
+$\ \ \ \ $ FALSE</p>
+<p>其余推导同理</p></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
@@ -726,7 +742,7 @@ $$
       <a href="/posts/subtying-and-variance/" class="post-nav-item" rel="next" title="Crust of Rust: Subtying and Variance">Crust of Rust: Subtying and Variance<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
