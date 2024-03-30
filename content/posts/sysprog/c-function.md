@@ -134,3 +134,13 @@ $ echo "source ~/peda/peda.py" >> ~/.gdbinit
 ## RAII
 
 ## setjmp & longjmp
+
+- [setjmp(3) — Linux manual page](https://man7.org/linux/man-pages/man3/longjmp.3.html)
+> The functions described on this page are used for performing
+> "nonlocal gotos": transferring execution from one function to a
+> predetermined location in another function.  The setjmp()
+> function dynamically establishes the target to which control will
+> later be transferred, and longjmp() performs the transfer of
+> execution.
+
+具体解说可以阅读 [lab0-c](https://hackmd.io/@sysprog/linux2023-lab0) 的「自動測試程式」部分

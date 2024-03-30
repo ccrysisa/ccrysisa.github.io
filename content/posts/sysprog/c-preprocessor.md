@@ -43,7 +43,7 @@ repost:
 
 > 相較於頻繁納入新語法的程式語言 (如 C++ 和 Java)，C 語言顯得很保守，但總是能藉由前置處理器 (preprocessor) 對語法進行擴充，甚至搭配工具鏈 (toolchain) 的若干進階機制，做到大大超出程式語言規範的複雜機制。例如主要以 C 語言開發的 Linux 核心就搭配前置處理器和連結器 (linker) 的特徵，實作出 Linux 核心模組，允許開發者動態掛載/卸載，因巨集包裝得好，多數 Linux 核心核心模組的開發者只要專注在與 Linux 核心互動的部分。
 
-> 本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C++ template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO,max, min, 和 container_of 等巨集。
+> 本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C++ template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO, max, min, 和 container_of 等巨集。
 
 <!--more-->
 
@@ -161,3 +161,34 @@ $ ./checktests
 # installing
 $ sudo ./installlib
 ```
+
+## ARRAY_SIZE 宏
+
+- [ ] [Linux Kernel: ARRAY_SIZE()](https://frankchang0125.blogspot.tw/2012/10/linux-kernel-arraysize.html)
+- [ ] 从 Linux 核心 「提炼」 出的 [array_size](http://ccodearchive.net/info/array_size.html)
+- [ ] [_countof Macro](https://msdn.microsoft.com/en-us/library/ms175773.aspx)
+
+## dp { ... } while (0) 宏
+
+- 避免 dangling else，即 if 和 else 未符合预期的配对 (常见于未使用 `{}` 包裹)
+- [ ] Stack Overflow: [C multi-line macro: do/while(0) vs scope block](https://stackoverflow.com/questions/1067226/c-multi-line-macro-do-while0-vs-scope-block)
+
+## 应用: String switch in C
+
+## 应用: Linked List 的各式变种
+
+## 其它应用
+
+### Unit Test
+
+### Object Model
+
+### Exception Handling
+
+### ADT
+
+## Linux 核心中的应用
+
+### BUILD_BUG_ON_ZERO 宏
+
+- {{< link href="https://hackmd.io/@sysprog/c-bitfield" content="原文地址" external-icon=true >}}
