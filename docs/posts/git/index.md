@@ -6,7 +6,7 @@
 新手入门推荐，对于 Git 的入门操作讲解十分友好。
 
 - [视频地址](https://youtu.be/LZ4oOzZwgrk)
-- [学习记录]({{&lt; relref &#34;git-learn&#34; &gt;}})
+- [学习记录]({{< relref "git-learn" >}})
 
 ## Git 常见问题及解决
 
@@ -22,10 +22,15 @@ HostName ssh.github.com
 Port 443
 ```
 
+### GitHub 支持多个账户通过 ssh 连接
+
+- [Using multiple github accounts with ssh keys](https://gist.github.com/oanhnn/80a89405ab9023894df7)
+
 ## References
 
 - [Git 基本原理](https://www.bilibili.com/video/BV1TA411q75f)
 - [Learn Git Branching](https://learngitbranching.js.org/)
+- [DIY a Git](https://space.bilibili.com/18777618/channel/collectiondetail?sid=2067230)
 - [ugit](https://github.com/rafifos/ugit)
 - [动手学习GIT - 最好学习GIT的方式是从零开始做一个](https://zhuanlan.zhihu.com/p/608514754)
 

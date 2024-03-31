@@ -2,9 +2,19 @@
   <channel>
     <title>Operating Systems - 分类 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/categories/operating-systems/</link>
-    <description>Operating Systems - 分类 | KZnight&#39;s Blog</description>
+    <description>Operating Systems - 分类 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 28 Mar 2024 12:21:48 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/operating-systems/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 31 Mar 2024 16:03:59 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/operating-systems/" rel="self" type="application/rss+xml" /><item>
+  <title>南京大学 计算机系统基础 重点提示</title>
+  <link>https://ccrysisa.github.io/posts/nju-ics/</link>
+  <pubDate>Sun, 31 Mar 2024 16:03:59 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/nju-ics/</guid>
+  <description><![CDATA[<blockquote>
+<p>理解一个系统的最佳实践就是去实现它。因此在本课程的PA 部分，你将会在框架代码的基础上实现一个 RISC-V 全系统模拟器 NEMU，它不仅能运行各类测试程序，甚至还可以运行操作系统和 “仙剑奇侠传”。模拟过硬件的执行，自然就能深 (痛) 入 (苦) 理解计算机系统了。</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>Deepin 20.9 KVM 安装和管理</title>
   <link>https://ccrysisa.github.io/posts/deepin-kvm/</link>
   <pubDate>Thu, 28 Mar 2024 12:21:48 &#43;0800</pubDate>
@@ -58,7 +68,7 @@
   <pubDate>Wed, 27 Dec 2023 20:35:45 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/ubuntu22.04lts/</guid>
-  <description><![CDATA[网络代理根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo apt install net-tools 安装并启]]></description>
+  <description><![CDATA[网络代理 根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo apt install net-tools 安装并启]]></description>
 </item>
 </channel>
 </rss>

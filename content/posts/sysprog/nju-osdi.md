@@ -102,7 +102,7 @@ $ sudo apt install tldr
 
 有些系统可能没有预装 man 手册:
 ```bash
-$ sudo apt install manpages
+$ sudo apt install manpages manpages-de manpages-de-dev manpages-dev manpages-posix manpages-posix-dev glibc-doc
 ```
 
 ### 操作系统上的程序 (什么是程序和编译器)

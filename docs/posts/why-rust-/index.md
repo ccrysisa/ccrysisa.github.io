@@ -8,9 +8,9 @@
 - [x] 所有权 (ownership)
 - [x] 借用 (borrow) 
 
-{{&lt; admonition warning &gt;}}
-0:55 This is wrong, value mutability doesn&#39;t have anything to do with the value being stored on the stack or the heap (and the example `let mut hello = &#34;hi mom&#34;` will be stored on the stack since it&#39;s type is `&amp;&#39;static str`), it depends on the type of the value (if it&#39;s `Sized` or not).
-{{&lt; /admonition &gt;}}
+{{< admonition warning >}}
+0:55 This is wrong, value mutability doesn't have anything to do with the value being stored on the stack or the heap (and the example `let mut hello = "hi mom"` will be stored on the stack since it's type is `&'static str`), it depends on the type of the value (if it's `Sized` or not).
+{{< /admonition >}}
 
 ## The adoption of Rust in Business (2022)
 
@@ -18,9 +18,9 @@
 
 Rust 目前蓬勃发展，预测未来是很难的，但是 Rust 已经是进行时的未来了 :rofl:
 
-## Visualizing memory layout of Rust&#39;s data types
+## Visualizing memory layout of Rust's data types
 
-YouTube: [Visualizing memory layout of Rust&#39;s data types](https://www.youtube.com/watch?v=7_o-YRxf_cc&amp;t=0s) 
+YouTube: [Visualizing memory layout of Rust's data types](https://www.youtube.com/watch?v=7_o-YRxf_cc&t=0s) 
 
 影片的中文翻译：
 
