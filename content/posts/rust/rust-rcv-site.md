@@ -1,5 +1,5 @@
 ---
-title: "Rust Coding: Build a Ranked-choice voting site"
+title: "Build a Ranked-choice voting site in Rust"
 subtitle:
 date: 2024-03-08T21:14:30+08:00
 draft: true

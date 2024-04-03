@@ -1,42 +1,5 @@
----
-title: "Matt KØDVB: Go Class 重点提示"
-subtitle:
-date: 2024-03-25T10:16:26+08:00
-# draft: true
-# author:
-#   name:
-#   link:
-#   email:
-#   avatar:
-description:
-keywords:
-license:
-comment: false
-weight: 0
-tags:
-  - Go
-categories:
-  - Toolbox
-hiddenFromHomePage: false
-hiddenFromSearch: false
-hiddenFromRss: false
-summary:
-resources:
-  - name: featured-image
-    src: featured-image.jpg
-  - name: featured-image-preview
-    src: featured-image-preview.jpg
-toc: true
-math: true
-lightgallery: true
-password:
-message:
-repost:
-  enable: true
-  url:
+# Matt KØDVB: Go Class 重点提示
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
----
 
 <!--more-->
 
@@ -88,3 +51,10 @@ Source: https://github.com/ccrysisa/go-class/examples/cmd/
 Source: 
 - https://github.com/ccrysisa/go-class/examples/numbers/
 - https://github.com/ccrysisa/go-class/examples/types/
+
+
+---
+
+> 作者: [ccrysisa](https://github.com/ccrysisa)  
+> URL: https://ccrysisa.github.io/posts/go-class/  
+

@@ -4,6 +4,7 @@ https://ccrysisa.github.io/posts/english/
 https://ccrysisa.github.io/posts/oerv-pretask/
 https://ccrysisa.github.io/posts/deepin-kvm/
 https://ccrysisa.github.io/posts/c-preprocessor/
+https://ccrysisa.github.io/posts/go-class/
 https://ccrysisa.github.io/posts/nju-osdi/
 https://ccrysisa.github.io/posts/subtying-and-variance/
 https://ccrysisa.github.io/posts/c-recursion/

@@ -14,11 +14,9 @@ license:
 comment: false
 weight: 0
 tags:
-  - draft
   - Rust
   - Git 
 categories:
-  - draft
   - Rust
   - Git
 hiddenFromHomePage: false
