@@ -7,6 +7,14 @@
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 31 Mar 2024 16:03:59 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
+  <title>English Everyday</title>
+  <link>https://ccrysisa.github.io/posts/english/</link>
+  <pubDate>Sat, 30 Mar 2024 12:17:31 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/english/</guid>
+  <description><![CDATA[<p>This post is used to record the process of my English learning.</p>]]></description>
+</item>
+<item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -25,14 +33,6 @@
   <description><![CDATA[<blockquote>
 <p>理解一个系统的最佳实践就是去实现它。因此在本课程的PA 部分，你将会在框架代码的基础上实现一个 RISC-V 全系统模拟器 NEMU，它不仅能运行各类测试程序，甚至还可以运行操作系统和 “仙剑奇侠传”。模拟过硬件的执行，自然就能深 (痛) 入 (苦) 理解计算机系统了。</p>
 </blockquote>]]></description>
-</item>
-<item>
-  <title>English learning</title>
-  <link>https://ccrysisa.github.io/posts/english/</link>
-  <pubDate>Sat, 30 Mar 2024 12:17:31 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/english/</guid>
-  <description><![CDATA[<p>This post is used to record the process of my English learning.</p>]]></description>
 </item>
 <item>
   <title>OERV 之 Pretask</title>
@@ -69,14 +69,6 @@
 </blockquote>]]></description>
 </item>
 <item>
-  <title>Matt KØDVB: Go Class 重点提示</title>
-  <link>https://ccrysisa.github.io/posts/go-class/</link>
-  <pubDate>Mon, 25 Mar 2024 10:16:26 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/go-class/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
   <title>南京大学 操作系统: 设计与实现 重点提示</title>
   <link>https://ccrysisa.github.io/posts/nju-osdi/</link>
   <pubDate>Sun, 24 Mar 2024 10:01:43 &#43;0800</pubDate>
@@ -110,6 +102,16 @@
 <p>在许多应用程序中，递归 (recursion) 可以简单又优雅地解决貌似繁琐的问题，也就是不断地拆解原有问题为相似的子问题，直到无法拆解为止，并且定义最简化状况的处理机制，一如数学思维。递归对 C 语言程序开发者来说，绝对不会陌生，但能掌握者却少，很多人甚至难以讲出汉诺塔之外的使用案例。</p>
 <p>究竟递归是如何优雅地解决真实世界的问题，又如何兼顾执行效率呢》我们从运作原理开始探讨，搭配若干 C 程序解说，并且我们将以简化过的 UNIX 工具为例，分析透过递归来大幅缩减程式码。</p>
 <p>或许跟你想象中不同，Linux 核心的原始程式码里头也用到递归函数呼叫，特别在较复杂的实作，例如文件系统，善用递归可大幅缩减程式码，但这也导致追踪程序运作的难度大增。</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>Linux 核心的 hash table 实作</title>
+  <link>https://ccrysisa.github.io/posts/linux-hashtable/</link>
+  <pubDate>Sat, 16 Mar 2024 10:59:36 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/linux-hashtable/</guid>
+  <description><![CDATA[<blockquote>
+<p>Linux 核心如同其它复杂的资讯系统，也提供 <a href="https://en.wikipedia.org/wiki/Hash_table"target="_blank" rel="external nofollow noopener noreferrer">hash table</a> 的实作，但其原始程式码中却藏有间接指针 (可参见 <a href="https://hackmd.io/@sysprog/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">你所不知道的 C 语言: linked list 和非连续内存</a>) 的巧妙和数学奥秘。</p>
 </blockquote>]]></description>
 </item>
 </channel>
