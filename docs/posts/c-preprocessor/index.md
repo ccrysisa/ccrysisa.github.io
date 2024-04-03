@@ -2,7 +2,7 @@
 
 
 > 相較於頻繁納入新語法的程式語言 (如 C++ 和 Java)，C 語言顯得很保守，但總是能藉由前置處理器 (preprocessor) 對語法進行擴充，甚至搭配工具鏈 (toolchain) 的若干進階機制，做到大大超出程式語言規範的複雜機制。例如主要以 C 語言開發的 Linux 核心就搭配前置處理器和連結器 (linker) 的特徵，實作出 Linux 核心模組，允許開發者動態掛載/卸載，因巨集包裝得好，多數 Linux 核心核心模組的開發者只要專注在與 Linux 核心互動的部分。
-
+>
 > 本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C++ template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO, max, min, 和 container_of 等巨集。
 
 <!--more-->
@@ -135,19 +135,105 @@ $ sudo ./installlib
 
 ## ARRAY_SIZE 宏
 
-- [ ] [Linux Kernel: ARRAY_SIZE()](https://frankchang0125.blogspot.tw/2012/10/linux-kernel-arraysize.html)
-- [ ] 从 Linux 核心 「提炼」 出的 [array_size](http://ccodearchive.net/info/array_size.html)
-- [ ] [_countof Macro](https://msdn.microsoft.com/en-us/library/ms175773.aspx)
+```c
+// get the number of elements in array
+#define ARRAY_SIZE(arr)    (sizeof(arr) / sizeof((arr)[0]))
+```
 
-## dp { ... } while (0) 宏
+这样实作的 `ARRAY_SIZE` 宏有很大的隐患，例如它无法对传入的 `arr` 进行类型检查，如果碰上不合格的 C 程序员，在数组隐式转换成指针后使用 `ARRAY_SIZE` 宏会得到非预期的结果，我们需要在编译器就提醒程序员不要错用这个宏。
 
-- 避免 dangling else，即 if 和 else 未符合预期的配对 (常见于未使用 `{}` 包裹)
-- [ ] Stack Overflow: [C multi-line macro: do/while(0) vs scope block](https://stackoverflow.com/questions/1067226/c-multi-line-macro-do-while0-vs-scope-block)
+{{< admonition >}}
+阅读以下博客以理解 Linux 核心的 `ARRAY_SIZE` 原理机制和实作手法:
+
+- [x] [Linux Kernel: ARRAY_SIZE()](https://frankchang0125.blogspot.tw/2012/10/linux-kernel-arraysize.html)
+{{< /admonition >}}
+
+Linux 核心的 `ARRAY_SIZE` 宏在上面那个简陋版的宏的基础上，加上了类型检查，保证传入的是数组而不是指针：
+
+```c {title="include/linux/kernel.h"}
+#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]) + __must_be_array(arr))
+```
+
+```c {title="include/linux/compiler-gcc.h"}
+/* &a[0] degrades to a pointer: a different type from an array */
+#define __must_be_array(a) BUILD_BUG_ON_ZERO(__same_type((a), &(a)[0]))
+```
+
+```c {title="include/linux/compiler.h"}
+/* Are two types/vars the same type (ignoring qualifiers)? */
+#ifndef __same_type
+# define __same_type(a, b) __builtin_types_compatible_p(typeof(a), typeof(b))
+#endif
+```
+
+- [6.54 Other built-in functions provided by GCC](https://gcc.gnu.org/onlinedocs/gcc-4.7.2/gcc/Other-Builtins.html#Other-Builtins)
+> You can use the built-in function __builtin_types_compatible_p to determine whether two types are the same.
+> 
+> This built-in function returns 1 if the unqualified versions of the types *type1* and *type2* (which are types, not expressions) are compatible, 0 otherwise. The result of this built-in function can be used in integer constant expressions.
+
+- [6.6 Referring to a Type with typeof](https://gcc.gnu.org/onlinedocs/gcc-4.7.2/gcc/Typeof.html#Typeof)
+> Another way to refer to the type of an expression is with typeof. The syntax of using of this keyword looks like sizeof, but the construct acts semantically like a type name defined with typedef.
+
+所以 Linux 核心的 `ARRAY_SIZE` 宏额外加上了 `__must_be_array` 宏，但是这个宏在编译成功时会返回 0，编译失败自然就不需要考虑返回值了 :rofl: 所以它起到的作用是之前提到的类型检查，透过 `BUILD_BUG_ON_ZERO` 宏和 `__same_type` 宏。
+
+- [x] 从 Linux 核心 「提炼」 出的 [array_size](http://ccodearchive.net/info/array_size.html)
+- [x] [_countof Macro](https://msdn.microsoft.com/en-us/library/ms175773.aspx)
+
+## do { ... } while (0) 宏
+
+**用于避免 dangling else，即 if 和 else 未符合预期的配对 (常见于未使用 `{}` 包裹)**
+
+考虑以下情形:
+
+```c
+#define handler(cond) if (cond) foo()
+
+if (<condition1>)
+    handler(<conditional2>)
+else
+    bar()
+```
+
+这个写法乍一看没什么问题，但是我们把它展开来看一下:
+
+```c
+if (<condition1>)
+    if (<conditional2>)
+        foo()
+else
+    bar()
+```
+
+显然此时由于未使用 `{}` 区块进行包裹，导致 `else` 部分与 `handler` 宏的 `if` 逻辑进行配对了。`do {...} while (0)` 宏的作用就是提供类似于 `{}` 区块的隔离性 (因为它的循环体只能执行一遍 :rofl:)
+
+{{< admonition >}}
+下面的讨论是关于为什么要使用 `do {...} while(0)` 而不是 `{}`，非常值得一读:
+
+- [x] Stack Overflow: [C multi-line macro: do/while(0) vs scope block](https://stackoverflow.com/questions/1067226/c-multi-line-macro-do-while0-vs-scope-block)
+{{< /admonition >}}
+
+> The more elegant solution is to make sure that macro expand into a regular statement, not into a compound one.
+
+主要是考虑到对包含 `{}` 的宏，像一般的 statement 一样加上 `;` 会导致之前的 `if` 语句结束，从而导致后面的 `else` 语句无法配对进而编译失败，而使用 `do {...} while (0)` 后面加上 `;` 并不会导致这个问题。
 
 ## 应用: String switch in C
 
-- [ ] [String switch in C](https://tia.mat.br/posts/2012/08/09/string_switch_in_c.html)
-- [ ] [More on string switch in C](https://tia.mat.br/posts/2018/02/01/more_on_string_switch_in_c.html)
+这篇博文展示了如何在 C 语言中对 string 使用 switch case:
+
+- [x] [String switch in C](https://tia.mat.br/posts/2012/08/09/string_switch_in_c.html)
+
+```c
+#define STRING_SWITCH_L(s) switch (*((int32_t *)(s)) | 0x20202020)
+#define MULTICHAR_CONSTANT(a,b,c,d) ((int32_t)((a) | (b) << 8 | (c) << 16 | (d) << 24))
+```
+
+> Note that `STRING_SWITCH_L` performs a bitwise OR with the 32-bit integral value – this is a fast means of lowering the case of four characters at once.
+
+然后 `MULTICHAR_CONSTANT` 则是将参数按小端字节序计算出对应的数值。
+
+这篇博文说明了在 C 语言中对 string 使用 switch case 提升效能的原理 (除此之外还讲解了内存对齐相关的效能问题):
+
+- [x] [More on string switch in C](https://tia.mat.br/posts/2018/02/01/more_on_string_switch_in_c.html)
 
 ## 应用: Linked List 的各式变种
 
