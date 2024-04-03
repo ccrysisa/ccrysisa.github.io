@@ -42,3 +42,11 @@ repost:
 ---
 
 <!--more-->
+
+## Happens-before
+
+短片:
+- [x] [Happened Before Relationship](https://youtu.be/gGilgOSYbaI)
+- [x] [Happened Before Relation (cont)](https://youtu.be/q-CwESo9UsM)
+
+{{< image src="/images/c/happens-beore.png" >}}
