@@ -273,21 +273,66 @@ else
 
 这篇博文说明了在 C 语言中对 string 使用 switch case 提升效能的原理 (除此之外还讲解了内存对齐相关的效能问题):
 
-- [x] [More on string switch in C](https://tia.mat.br/posts/2018/02/01/more_on_string_switch_in_c.html)
+- [cx] [More on string switch in C](https://tia.mat.br/posts/2018/02/01/more_on_string_switch_in_c.html)
 
 ## 应用: Linked List 的各式变种
 
-- [ ] [Simple code for checking the speed difference between function call and macro](https://gist.github.com/afcidk/441abae865be13c599b8f749792908b6)
+宏和函数调用的效能对比:
+
+- [x] [Simple code for checking the speed difference between function call and macro](https://gist.github.com/afcidk/441abae865be13c599b8f749792908b6)
+
+{{< image src="https://imgur-backup.hackmd.io/6taKMzN.png" >}}
+
+> 在進行函式呼叫時，我們除了需要把參數推入特定的暫存器或是堆疊，還要儲存目前暫存器的值到堆疊。在函式呼叫數量少的狀況，影響不顯著，但隨著數量增長，就會導致程式運作比用 macro 實作時慢。
+
+这也是为什么 Linux 核心对于 linked list 的功能大量采用宏来实现。
+
+静态的 linked list 初始化需要使用到 **compound literal**:
+
+- [x] C99 6.5.2.5 Compound literals
+> - The type name shall specify an object type or an array of unknown size, but not a variable length array type.
+> - A postfix expression that consists of a parenthesized type name followed by a braceenclosed list of initializers is a compound literal. It provides an unnamed object whose value is given by the initializer list.
+> - If the type name specifies an array of unknown size, the size is determined by the initializer list as specified in 6.7.8, and the type of the compound literal is that of the completed array type. Otherwise (when the type name specifies an object type), the type of the compound literal is that specified by the type name. In either case, the result is an lvalue.
+
+- [x] C99 6.7.8 Initialization
+> Each brace-enclosed initializer list has an associated current object. When no
+> designations are present, subobjects of the current object are initialized in order according
+> to the type of the current object: array elements in increasing subscript order, structure
+> members in declaration order, and the first named member of a union. In contrast, a
+> designation causes the following initializer to begin initialization of the subobject
+> described by the designator. Initialization then continues forward in order, beginning
+> with the next subobject after that described by the designator.
 
 ## 其它应用
 
 ### Unit Test
 
+测试框架本质是提供一个框架模版，让程序员将精力放在测试逻辑的编写上。使用 C 语言的宏配合前置处理器，可以很方便地实现这个功能。
+
+- [x] [unity/unity_fixture.h](https://github.com/ThrowTheSwitch/Unity/blob/master/extras/fixture/src/unity_fixture.h)
+- [Google Test](https://github.com/google/googletest)
+
 ### Object Model
+
+同样的，使用 C 语言的宏和前置处理器，可以让 C 语言拥有 OOP 的表达能力:
+
+- [ObjectC](https://github.com/DaemonSnake/ObjectC): use as a superset of the C language adding a lot of modern concepts missing in C
 
 ### Exception Handling
 
+通过宏和 `setjmp/longjmp` 可以很轻松地实作出 C 语言的异常机制:
+
+[ExtendedC](https://github.com/jspahrsummers/libextc) library extends the C programming language through complex macros and other tricks that increase productivity, safety, and code reuse without needing to use a higher-level language such as C++, Objective-C, or D.
+
+- [include/exception.h](https://github.com/jspahrsummers/libextc/blob/master/include/exception.h)
+
 ### ADT
+
+与之前所提的 Linux 核心的 linked list 类似，使用宏取代函数调用可以降低 ADT 的相关操作的效能损失:
+
+[pearldb](https://github.com/willemt/pearldb): A Lightweight Durable HTTP Key-Value Pair Database in C
+
+- [klib/ksort.h](https://github.com/willemt/pearldb/blob/master/deps/klib/ksort.h) 通过宏展开实作的排序算法
 
 {{< admonition success >}}
 Linux 核心原始程式码也善用宏来扩充
@@ -297,7 +342,7 @@ Linux 核心原始程式码也善用宏来扩充
 
 - {{< link href="https://hackmd.io/@sysprog/c-bitfield" content="原文地址" external-icon=true >}}
 
-简单来说就是编译器就进行检查的 `assert`，我写了 [一篇文章]({{< relref "./c-bitwise.md#linux-核心-build_bug_on_zero" >}}) 来说明它的原理。
+简单来说就是编译器就进行检查的 `assert`，我写了 [相关笔记]({{< relref "./c-bitwise.md#linux-核心-build_bug_on_zero" >}}) 来说明它的原理。
 
 ## Linux 核心原始程式码宏: max, min
 

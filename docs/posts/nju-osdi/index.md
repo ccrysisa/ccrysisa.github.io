@@ -9,25 +9,25 @@
 - Mini labs (应用程序视角；设计)：通过实现一系列有趣的 (黑科技) 代码理解操作系统中对象存在的意义和操作系统 API 的使用方法、设计理念
 - OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层实现多处理器操作系统内核，向应用程序提供一些基础操作系统 API
 
-&lt;!--more--&gt;
+<!--more-->
 
 ---
 
 时隔一年，在跟随 B 站 up 主 [@踌躇月光](https://space.bilibili.com/491131440/) 从零编写一个基于 x86 架构的内核 [Txics](https://github.com/vanJker/TXOS) 后，终于可以跟得上 [@绿导师](https://space.bilibili.com/202224425) 的课程了 :rofl: 这次以 [2022 年的 OS 课程](https://jyywiki.cn/OS/2022/index.html) 作为主线学习，辅以 [2023 年课程](https://jyywiki.cn/OS/2023/index.html) 和 [2024 年课程](https://jyywiki.cn/OS/2024/index.html) 的内容加以补充、扩展，并搭配南大的 ICS 课程进行作业，后期可能会加入清华大学的 rCore 实验 (待定)。
 
-{{&lt; image src=&#34;https://jyywiki.cn/pages/OS/img/tux-source.jpg&#34; caption=&#34;tux&#34; &gt;}}
+{{< image src="https://jyywiki.cn/pages/OS/img/tux-source.jpg" caption="tux" >}}
 
-{{&lt; admonition question &gt;}}
+{{< admonition question >}}
 JYY 2022 年的 OSDI 课程讲义和阅读材料是分开的，2023 年和 2024 年进行了改进，讲义和阅读材料合并成类似于共笔的材料，所以下面有一些 lectures 是没有阅读材料链接的。
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ## 第 1 周: 绪论
 
 ### 操作系统概述 (为什么要学操作系统)
 
-{{&lt; link href=&#34;https://www.bilibili.com/video/BV1Cm4y1d7Ur/&#34; content=&#34;直播录影&#34; external-icon=true &gt;}}
+{{< link href="https://www.bilibili.com/video/BV1Cm4y1d7Ur/" content="直播录影" external-icon=true >}}
 |
-{{&lt; link href=&#34;https://jyywiki.cn/OS/2022/slides/1.slides.html&#34; content=&#34;讲义页面&#34; external-icon=true &gt;}}
+{{< link href="https://jyywiki.cn/OS/2022/slides/1.slides.html" content="讲义页面" external-icon=true >}}
 
 ---
 
@@ -36,7 +36,7 @@ JYY 2022 年的 OSDI 课程讲义和阅读材料是分开的，2023 年和 2024 
 1950s 的计算机
 - I/O 设备的速度已经严重低于处理器的速度，中断机制出现 (1953)
 - 希望使用计算机的人越来越多；希望调用 API 而不是直接访问设备
-- 批处理系统 = 程序的自动切换 (换卡) &#43; 库函数 API
+- 批处理系统 = 程序的自动切换 (换卡) + 库函数 API
 - 操作系统中开始出现 *设备*、*文件*、*任务* 等对象和 API
 
 1960s 的计算机
@@ -47,7 +47,7 @@ JYY 2022 年的 OSDI 课程讲义和阅读材料是分开的，2023 年和 2024 
 操作系统机制出现和发展的原因，不需要死记硬背，这些机制都是应需求而诞生、发展的，非常的自然。
 
 **什么是操作系统？**
-- 程序视角：对象 &#43; API
+- 程序视角：对象 + API
 - 硬件视角：一个 C 程序
 
 实验环境: deepin 20.9
@@ -68,11 +68,11 @@ $ sudo apt install manpages manpages-de manpages-de-dev manpages-dev manpages-po
 
 ### 操作系统上的程序 (什么是程序和编译器)
 
-{{&lt; link href=&#34;https://www.bilibili.com/video/BV12L4y1379V/&#34; content=&#34;直播录影&#34; external-icon=true &gt;}}
+{{< link href="https://www.bilibili.com/video/BV12L4y1379V/" content="直播录影" external-icon=true >}}
 |
-{{&lt; link href=&#34;https://jyywiki.cn/OS/2022/slides/2.slides.html&#34; content=&#34;讲义页面&#34; external-icon=true &gt;}}
+{{< link href="https://jyywiki.cn/OS/2022/slides/2.slides.html" content="讲义页面" external-icon=true >}}
 |
-{{&lt; link href=&#34;https://jyywiki.cn/OS/2022/notes/1.html&#34; content=&#34;阅读材料&#34; external-icon=true &gt;}}
+{{< link href="https://jyywiki.cn/OS/2022/notes/1.html" content="阅读材料" external-icon=true >}}
 
 ---
 
@@ -84,15 +84,15 @@ UNIX 哲学:
 
 计算机是构建在状态机 (数字电路) 之上的，所以运行在计算机之上的程序 (不管是操作系统还是应用，无论是源代码还是二进制) 都是状态机。C程序的状态机模型中，状态是由堆栈确定的，所以函数调用是状态迁移，因为它改变了堆栈，即改变了状态机的状态。明确这一点之后，我们可以通过模拟堆栈的方式，来将任意的递归程序改写为非递归程序，例如经典的汉诺塔程序。
 
-&gt; 程序 = 状态机
-&gt; - 源代码 $S$ (状态机): 状态迁移 = 执行语句
-&gt; - 二进制代码 $C$ (状态机): 状态迁移 = 执行指令
+> 程序 = 状态机
+> - 源代码 $S$ (状态机): 状态迁移 = 执行语句
+> - 二进制代码 $C$ (状态机): 状态迁移 = 执行指令
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 jyy 所给的非递归汉诺塔程序也是通过模拟堆栈状态转移实现的，但是比较晦涩的一点是，对于每一个堆栈状态，都有可能需要执行最多 4 条语句 (对应 `for` 循环和 `pc`)，这一点比较难懂。
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
-只使用纯&#34;计算&#34;的指令 (无论是 deterministic 还是 non-deterministic) 无法使程序停下来，因为将程序本质是状态机，而状态机通过“计算”的指令只能从一个状态迁移到另一个状态，无法实现销毁状态机的操作 (对应退出/停下程序)，要么死循环，要么 undefined behavior。这时需要程序对应的状态机之外的另一个东西来控制、管理该状态机，以实现程序的停下/退出操作，这就是 OS 的 syscall 存在的意义，它可以游离在程序对应的状态机之外，并修改状态机的内容 (因为程序呼叫 syscall 时已经全权授予 OS 对其状态内容进行修改)。
+只使用纯"计算"的指令 (无论是 deterministic 还是 non-deterministic) 无法使程序停下来，因为将程序本质是状态机，而状态机通过“计算”的指令只能从一个状态迁移到另一个状态，无法实现销毁状态机的操作 (对应退出/停下程序)，要么死循环，要么 undefined behavior。这时需要程序对应的状态机之外的另一个东西来控制、管理该状态机，以实现程序的停下/退出操作，这就是 OS 的 syscall 存在的意义，它可以游离在程序对应的状态机之外，并修改状态机的内容 (因为程序呼叫 syscall 时已经全权授予 OS 对其状态内容进行修改)。
 
 空的 _start 函数可以成功编译并链接，但是由于函数是空的，它会编译生成 `retq` 指令，这会导致 pc 跳转到不合法的区域，而正确的做法应该是使用 `syscall exit` 来结束该程序 (熟悉 C 语言函数调用的同学应该能看懂这段描述)。
 
@@ -101,7 +101,7 @@ jyy 所给的非递归汉诺塔程序也是通过模拟堆栈状态转移实现�
 int _start() {}
 
 // start.o
-0000000000000000 &lt;_start&gt;:
+0000000000000000 <_start>:
    0:   55                      push   %rbp
    1:   48 89 e5                mov    %rsp,%rbp
    4:   90                      nop
@@ -112,10 +112,10 @@ int _start() {}
 通过 `syscall` 实现了和 mininal.S 功能一致的最小 C 语言 hello, world 程序 mininal.c:
 
 ```c
-#include &lt;sys/syscall.h&gt;
-#include &lt;unistd.h&gt;
+#include <sys/syscall.h>
+#include <unistd.h>
 int main() {
-    char buf[] = &#34;\033[01;31mHello, OS World\033[0m\n&#34;;
+    char buf[] = "\033[01;31mHello, OS World\033[0m\n";
     syscall(SYS_write, 1, buf, sizeof(buf));
     syscall(SYS_exit, 42);
 }
@@ -127,7 +127,7 @@ int main() {
 
 从“状态机”的角度可以帮我们解决一个重要的基本问题: **什么是编译器？？？**
 
-&gt; 编译器: 源代码 S (状态机) $\rightarrow$ 二进制代码 C (状态机)
+> 编译器: 源代码 S (状态机) $\rightarrow$ 二进制代码 C (状态机)
 $$C=compile(S)$$
 
 即编译器的功能是将源代码对应的状态机 $S$ 转换成二进制代码对应的状态机 $C$。但是这里需要注意，这两个状态机不需要完全等价，只需要满足 **$S$ 与 $C$ 的可观测行为严格一致** 即可，这也是编译优化的理论基础：在保证观测一致性 (sound) 的前提下改写代码 (rewriting)。
@@ -152,15 +152,15 @@ $ strace ./hello-goodbye
 
 - Linux manual page: [strace](https://man7.org/linux/man-pages/man1/strace.1.html)
 
-{{&lt; admonition tip &gt;}}
+{{< admonition tip >}}
 可以通过 `apt-file` 来检索文件名可能在那些 package 里，例如:
 
 ```bash
 $ sudo apt install apt-file
 $ sudo apt-file update
-$ sudo apt-file search &lt;filename&gt;
+$ sudo apt-file search <filename>
 ```
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ## 第 2 周: 并发
 

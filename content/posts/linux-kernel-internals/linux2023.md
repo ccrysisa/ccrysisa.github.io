@@ -136,7 +136,7 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
 * [x] [Linux: 發展動態回顧](https://hackmd.io/@sysprog/linux-dev-review)`*`
 * [ ] [從 Revolution OS 看作業系統生態變化](https://hackmd.io/@sysprog/revolution-os-note)`*`
 * [並行和多執行緒程式設計](https://hackmd.io/@sysprog/concurrency/)`*`: 應涵蓋 Part 1 到 Part 4
-    - [x] Part 1
+    - [x] Part 1: 概念、执行顺序
     - [ ] Part 2
     - [ ] Part 3
     - [ ] Part 4
@@ -144,7 +144,7 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
     - 著重在計算機架構對應的支援和行為分析
 * [x] [C 語言: 遞迴呼叫](https://hackmd.io/@sysprog/c-recursion)`*`
     - 或許跟你想像中不同，Linux 核心的原始程式碼裡頭也用到遞迴函式呼叫，特別在較複雜的實作，例如檔案系統，善用遞迴可大幅縮減程式碼，但這也導致追蹤程式運作的難度大增
-* [C 語言: 前置處理器應用](https://hackmd.io/@sysprog/c-preprocessor)`*`
+* [x] [C 語言: 前置處理器應用](https://hackmd.io/@sysprog/c-preprocessor)`*`
     - C 語言之所以不需要時常發佈新的語言特徵又可以保持活力，前置處理器 (preprocessor) 是很重要的因素，有心者可逕行「擴充」C 語言
 * [C 語言: goto 和流程控制](https://hackmd.io/@sysprog/c-control-flow)`*`
     - goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這樣看待，至少在 Linux 核心原始程式碼中，goto 是大量存在 (跟你想像中不同吧)。有時不用 goto 會寫出更可怕的程式碼
