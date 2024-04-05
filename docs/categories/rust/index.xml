@@ -4,7 +4,17 @@
     <link>https://ccrysisa.github.io/categories/rust/</link>
     <description>Rust - 分类 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 17 Mar 2024 10:38:01 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/rust/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 05 Apr 2024 17:52:13 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/rust/" rel="self" type="application/rss+xml" /><item>
+  <title>Rust Lifetime: 由浅入深理解生命周期</title>
+  <link>https://ccrysisa.github.io/posts/rust-lifetime/</link>
+  <pubDate>Fri, 05 Apr 2024 17:52:13 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/rust-lifetime/</guid>
+  <description><![CDATA[<blockquote>
+<p>从基础到进阶讲解探讨 Rust 生命周期，不仅仅是 lifetime kata，还有更多的 lifetime 资料，都来讲解和探讨，从「入门 Rust」到「进阶 Rust」</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>Crust of Rust: Subtying and Variance</title>
   <link>https://ccrysisa.github.io/posts/subtying-and-variance/</link>
   <pubDate>Sun, 17 Mar 2024 10:38:01 &#43;0800</pubDate>

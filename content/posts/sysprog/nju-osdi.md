@@ -2,7 +2,7 @@
 title: "南京大学 操作系统: 设计与实现 重点提示"
 subtitle:
 date: 2024-03-24T10:01:43+08:00
-# draft: true
+draft: true
 author:
   name: vanJker
   link: https://github.com/vanJker

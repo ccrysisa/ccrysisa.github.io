@@ -2,7 +2,7 @@
 title: "南京大学 计算机系统基础 重点提示"
 subtitle:
 date: 2024-03-31T16:03:59+08:00
-# draft: true
+draft: true
 author:
   name: vanJker
   link: https://github.com/vanJker

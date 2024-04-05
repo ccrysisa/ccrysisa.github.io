@@ -4,7 +4,17 @@
     <link>https://ccrysisa.github.io/tags/rust/</link>
     <description>Rust - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 17 Mar 2024 10:38:01 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/rust/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 05 Apr 2024 17:52:13 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/rust/" rel="self" type="application/rss+xml" /><item>
+  <title>Rust Lifetime: 由浅入深理解生命周期</title>
+  <link>https://ccrysisa.github.io/posts/rust-lifetime/</link>
+  <pubDate>Fri, 05 Apr 2024 17:52:13 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/rust-lifetime/</guid>
+  <description><![CDATA[<blockquote>
+<p>从基础到进阶讲解探讨 Rust 生命周期，不仅仅是 lifetime kata，还有更多的 lifetime 资料，都来讲解和探讨，从「入门 Rust」到「进阶 Rust」</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>Crust of Rust: Subtying and Variance</title>
   <link>https://ccrysisa.github.io/posts/subtying-and-variance/</link>
   <pubDate>Sun, 17 Mar 2024 10:38:01 &#43;0800</pubDate>
@@ -91,14 +101,6 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/debug-gdb/</guid>
   <description><![CDATA[<p>大型开源项目的规模十分庞大，例如使用 Rust 编写的 Servo 浏览器，这个项目有近十万行代码。在开发规模如此庞大的项目时，了解如何通过正确的方式进行调试非常重要，因为这样可以帮助开发者快速地找到瓶颈。</p>]]></description>
-</item>
-<item>
-  <title>Why Rust?</title>
-  <link>https://ccrysisa.github.io/posts/why-rust-/</link>
-  <pubDate>Thu, 28 Dec 2023 20:18:03 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/why-rust-/</guid>
-  <description><![CDATA[Rust in 100 Seconds 观看短片: Rust in 100 Seconds &#x2705; 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello = &quot;hi]]></description>
 </item>
 </channel>
 </rss>

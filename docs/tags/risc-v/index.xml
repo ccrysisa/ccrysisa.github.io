@@ -20,20 +20,6 @@
 </blockquote>]]></description>
 </item>
 <item>
-  <title>南京大学 操作系统: 设计与实现 重点提示</title>
-  <link>https://ccrysisa.github.io/posts/nju-osdi/</link>
-  <pubDate>Sun, 24 Mar 2024 10:01:43 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/nju-osdi/</guid>
-  <description><![CDATA[<p>操作系统使用正确的抽象使构造庞大的计算机软件/硬件生态从不可能变为可能。这门课围绕操作系统是 <strong>如何设计</strong> (应用程序视角)、<strong>怎样实现</strong> (硬件视角) 两个角度展开，分为两个主要部分：</p>
-<p>原理课 (并发/虚拟化/持久化)：以教科书内容为主，介绍操作系统的原理性内容。课程同时注重讲解操作系统相关的代码实现和编程技巧，包括操作系统中常用的命令行/代码工具、教学操作系统 xv6 的代码讲解等</p>
-<p>理解操作系统最重要的实验部分:</p>
-<ul>
-<li>Mini labs (应用程序视角；设计)：通过实现一系列有趣的 (黑科技) 代码理解操作系统中对象存在的意义和操作系统 API 的使用方法、设计理念</li>
-<li>OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层实现多处理器操作系统内核，向应用程序提供一些基础操作系统 API</li>
-</ul>]]></description>
-</item>
-<item>
   <title>openEuler RISC-V 系统: QEMU 仿真</title>
   <link>https://ccrysisa.github.io/posts/openeuler-riscv-qemu/</link>
   <pubDate>Thu, 07 Mar 2024 14:48:21 &#43;0800</pubDate>

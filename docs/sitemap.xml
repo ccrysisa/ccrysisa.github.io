@@ -4,18 +4,19 @@
   ><url>
       <loc>https://ccrysisa.github.io/posts/english/</loc><lastmod>2024-04-03T23:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/posts/linux2023/</loc><lastmod>2024-04-04T22:47:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ccrysisa.github.io/categories/</loc><lastmod>2024-04-05T19:10:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ccrysisa.github.io/</loc><lastmod>2024-04-05T19:10:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ccrysisa.github.io/tags/lifetime/</loc><lastmod>2024-04-05T19:10:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ccrysisa.github.io/posts/</loc><lastmod>2024-04-05T19:10:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ccrysisa.github.io/tags/rust/</loc><lastmod>2024-04-05T19:10:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ccrysisa.github.io/categories/rust/</loc><lastmod>2024-04-05T19:10:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ccrysisa.github.io/posts/rust-lifetime/</loc><lastmod>2024-04-05T19:10:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ccrysisa.github.io/tags/</loc><lastmod>2024-04-05T19:10:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/tags/c/</loc><lastmod>2024-04-05T12:55:21&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/categories/c/</loc><lastmod>2024-04-05T12:55:21&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ccrysisa.github.io/categories/</loc><lastmod>2024-04-05T12:55:21&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ccrysisa.github.io/</loc><lastmod>2024-04-05T12:55:21&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/categories/linux-kernel-internals/</loc><lastmod>2024-04-05T12:55:21&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ccrysisa.github.io/posts/</loc><lastmod>2024-04-05T12:55:21&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/tags/sysprog/</loc><lastmod>2024-04-05T12:55:21&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ccrysisa.github.io/tags/</loc><lastmod>2024-04-05T12:55:21&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/posts/c-control-flow/</loc><lastmod>2024-04-05T12:55:21&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ccrysisa.github.io/tags/linux/</loc><lastmod>2024-04-04T22:47:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ccrysisa.github.io/categories/operating-systems/</loc><lastmod>2024-03-31T16:24:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ccrysisa.github.io/posts/nju-ics/</loc><lastmod>2024-03-31T16:24:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/tags/draft/</loc><lastmod>2024-04-03T23:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/categories/draft/</loc><lastmod>2024-04-03T23:06:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/tags/chroot/</loc><lastmod>2024-03-29T21:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
@@ -24,18 +25,17 @@
       <loc>https://ccrysisa.github.io/tags/nspawn/</loc><lastmod>2024-03-29T21:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/posts/oerv-pretask/</loc><lastmod>2024-03-29T21:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/tags/openeuler/</loc><lastmod>2024-03-29T21:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ccrysisa.github.io/tags/qemu/</loc><lastmod>2024-03-31T16:24:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ccrysisa.github.io/tags/risc-v/</loc><lastmod>2024-03-31T16:24:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ccrysisa.github.io/tags/qemu/</loc><lastmod>2024-03-29T21:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ccrysisa.github.io/tags/risc-v/</loc><lastmod>2024-03-29T21:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/categories/risc-v/</loc><lastmod>2024-03-29T21:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/tags/deepin/</loc><lastmod>2024-03-29T21:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/posts/deepin-kvm/</loc><lastmod>2024-03-29T21:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/tags/kvm/</loc><lastmod>2024-03-29T21:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ccrysisa.github.io/tags/linux/</loc><lastmod>2024-04-04T22:47:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
+      <loc>https://ccrysisa.github.io/categories/operating-systems/</loc><lastmod>2024-03-29T21:39:25&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/tags/preprocessor/</loc><lastmod>2024-04-04T22:47:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/posts/c-preprocessor/</loc><lastmod>2024-04-04T22:47:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
-      <loc>https://ccrysisa.github.io/posts/nju-osdi/</loc><lastmod>2024-03-31T16:24:05&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
       <loc>https://ccrysisa.github.io/posts/subtying-and-variance/</loc><lastmod>2024-03-23T12:40:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-      <loc>https://ccrysisa.github.io/tags/rust/</loc><lastmod>2024-03-23T12:40:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-      <loc>https://ccrysisa.github.io/categories/rust/</loc><lastmod>2024-03-23T12:40:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ccrysisa.github.io/tags/subtying/</loc><lastmod>2024-03-23T12:40:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ccrysisa.github.io/tags/variance/</loc><lastmod>2024-03-23T12:40:01&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ccrysisa.github.io/tags/recursion/</loc><lastmod>2024-03-30T16:44:39&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>1</priority></url><url>
@@ -64,8 +64,8 @@
       <loc>https://ccrysisa.github.io/posts/channels/</loc><lastmod>2024-03-04T23:05:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
       <loc>https://ccrysisa.github.io/tags/standard/</loc><lastmod>2024-03-25T23:46:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ccrysisa.github.io/posts/c-standards/</loc><lastmod>2024-03-25T23:46:41&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
-      <loc>https://ccrysisa.github.io/tags/memory/</loc><lastmod>2024-03-15T18:29:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
-      <loc>https://ccrysisa.github.io/posts/c-memory/</loc><lastmod>2024-03-15T18:29:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url><url>
+      <loc>https://ccrysisa.github.io/tags/memory/</loc><lastmod>2024-03-15T18:29:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
+      <loc>https://ccrysisa.github.io/posts/c-memory/</loc><lastmod>2024-03-15T18:29:42&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url><url>
       <loc>https://ccrysisa.github.io/tags/bitwise/</loc><lastmod>2024-03-24T13:40:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ccrysisa.github.io/posts/c-bitwise/</loc><lastmod>2024-03-24T13:40:19&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/</loc><lastmod>2024-03-04T23:05:35&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.6</priority></url><url>
@@ -88,7 +88,6 @@
       <loc>https://ccrysisa.github.io/tags/declarative-macros/</loc><lastmod>2024-02-20T22:02:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ccrysisa.github.io/tags/macro/</loc><lastmod>2024-02-20T22:02:45&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ccrysisa.github.io/posts/lifetime-annotations/</loc><lastmod>2024-02-23T19:01:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
-      <loc>https://ccrysisa.github.io/tags/lifetime/</loc><lastmod>2024-02-23T19:01:46&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.5</priority></url><url>
       <loc>https://ccrysisa.github.io/posts/deepin20.9/</loc><lastmod>2024-03-25T00:31:47&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ccrysisa.github.io/posts/deepin-dragonos/</loc><lastmod>2024-03-28T16:34:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
       <loc>https://ccrysisa.github.io/tags/dragonos/</loc><lastmod>2024-03-28T16:34:23&#43;08:00</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url><url>
