@@ -4,7 +4,17 @@
     <link>https://ccrysisa.github.io/categories/c/</link>
     <description>C - 分类 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 25 Mar 2024 22:55:44 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/c/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 05 Apr 2024 11:39:34 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/c/" rel="self" type="application/rss+xml" /><item>
+  <title>你所不知道的 C 语言: goto 和流程控制篇</title>
+  <link>https://ccrysisa.github.io/posts/c-control-flow/</link>
+  <pubDate>Fri, 05 Apr 2024 11:39:34 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-control-flow/</guid>
+  <description><![CDATA[<blockquote>
+<p>goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這樣看待，至少在 Linux 核心原始程式碼中，goto 是大量存在 (跟你想像中不同吧)。有時不用 goto 會寫出更可怕的程式碼</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>你所不知道的 C 语言: 前置处理器应用篇</title>
   <link>https://ccrysisa.github.io/posts/c-preprocessor/</link>
   <pubDate>Mon, 25 Mar 2024 22:55:44 &#43;0800</pubDate>
@@ -99,19 +109,6 @@
   <description><![CDATA[<blockquote>
 <p>无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。</p>
 </blockquote>]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: 指针篇</title>
-  <link>https://ccrysisa.github.io/posts/c-pointer/</link>
-  <pubDate>Sun, 14 Jan 2024 22:41:38 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-pointer/</guid>
-  <description><![CDATA[<blockquote>
-<p><em>「指针」 扮演 「记忆体」 和 「物件」 之间的桥梁</em></p>
-</blockquote>
-<ul>
-<li><a href="https://hackmd.io/@sysprog/c-pointer"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
-</ul>]]></description>
 </item>
 </channel>
 </rss>

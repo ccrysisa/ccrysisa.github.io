@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/categories/linux-kernel-internals/</link>
     <description>Linux Kernel Internals - 分类 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 25 Mar 2024 22:55:44 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/linux-kernel-internals/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 05 Apr 2024 11:39:34 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/linux-kernel-internals/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -12,6 +12,16 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>你所不知道的 C 语言: goto 和流程控制篇</title>
+  <link>https://ccrysisa.github.io/posts/c-control-flow/</link>
+  <pubDate>Fri, 05 Apr 2024 11:39:34 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-control-flow/</guid>
+  <description><![CDATA[<blockquote>
+<p>goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這樣看待，至少在 Linux 核心原始程式碼中，goto 是大量存在 (跟你想像中不同吧)。有時不用 goto 會寫出更可怕的程式碼</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -93,19 +103,6 @@
   <guid>https://ccrysisa.github.io/posts/linux-dev-review/</guid>
   <description><![CDATA[<blockquote>
 <p>本講座將以 Thorsten Leemhuis 在 FOSDEM 2020 開場演說 &ldquo;Linux kernel – Solving big problems in small steps for more than 20 years&rdquo; (slides) 為主軸，嘗試歸納自 21 世紀第一年開始的 Linux 核心 2.4 版到如今的 5.x 版，中間核心開發者如何克服 SMP (Symmetric multiprocessing), scalability, 及各式硬體架構和周邊裝置支援等難題，過程中提出全面移除 BKL (Big kernel lock)、實作虛擬化技術 (如 Xen 和 KVM)、提出 namespace 和 cgroups 從而確立容器化 (container) 的能力，再來是核心發展的明星技術 eBPF 會在既有的基礎之上，帶來 XDP 和哪些令人驚豔的機制呢？又，Linux 核心終於正式納入發展十餘年的 PREEMPT_RT，使得 Linux 核心得以成為硬即時的作業系統，對內部設計有哪些衝擊？AIO 後繼的 io_uring 讓 Linux 有更優雅且高效的非同步 I/O 存取，我們該如何看待？</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: 开发工具和规格标准</title>
-  <link>https://ccrysisa.github.io/posts/c-standards/</link>
-  <pubDate>Wed, 28 Feb 2024 11:11:47 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-standards/</guid>
-  <description><![CDATA[<blockquote>
-<p>Linux 核心作为世界上最成功的开放原始码计划，也是 C 语言在工程领域的瑰宝，里头充斥则各种“艺术”，往往会吓到初次接触的人们，但总是能够使用 C 语言标准和开发工具提供的扩展 (主要是来自 gcc 的 GNU extensions) 来解释。</p>
-<blockquote>
-<p><strong>工欲善其事，必先利其器</strong></p>
-</blockquote>
 </blockquote>]]></description>
 </item>
 </channel>
