@@ -340,7 +340,9 @@ Linux 核心原始程式码也善用宏来扩充
 
 - {{< link href="https://hackmd.io/@sysprog/c-bitfield" content="原文地址" external-icon=true >}}
 
-简单来说就是编译器就进行检查的 `assert`，我写了 [相关笔记]({{< relref "./c-bitwise.md#linux-核心-build_bug_on_zero" >}}) 来说明它的原理。
+{{< admonition >}}
+简单来说就是编译时期就进行检查的 `assert`，我写了 [相关笔记]({{< relref "./c-bitwise.md#linux-核心-build_bug_on_zero" >}}) 来说明它的原理。
+{{< /admonition >}}
 
 ## Linux 核心原始程式码宏: max, min
 

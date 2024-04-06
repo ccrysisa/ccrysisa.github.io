@@ -136,3 +136,7 @@ Linux 核心中的实作:
 - [ ] [Tom Duff 本人的解释](http://doc.cat-v.org/bell_labs/duffs_device)
 
 ## co-routine 应用
+
+Wikipedia: [Coroutine](https://en.wikipedia.org/wiki/Coroutine)
+
+不借助操作系统也可以实作出多工交执行的 illusion (通过 `switch-case` 黑魔法来实现 :rofl:)

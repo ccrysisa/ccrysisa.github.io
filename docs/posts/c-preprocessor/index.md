@@ -1,9 +1,7 @@
 # 你所不知道的 C 语言: 前置处理器应用篇
 
 
-> 相較於頻繁納入新語法的程式語言 (如 C++ 和 Java)，C 語言顯得很保守，但總是能藉由前置處理器 (preprocessor) 對語法進行擴充，甚至搭配工具鏈 (toolchain) 的若干進階機制，做到大大超出程式語言規範的複雜機制。例如主要以 C 語言開發的 Linux 核心就搭配前置處理器和連結器 (linker) 的特徵，實作出 Linux 核心模組，允許開發者動態掛載/卸載，因巨集包裝得好，多數 Linux 核心核心模組的開發者只要專注在與 Linux 核心互動的部分。
->
-> 本議程回顧 C99/C11 的巨集 (macro) 特徵，探討 C11 新的關鍵字 _Generic 搭配 macro 來達到 C++ template 的作用。探討 C 語言程式的物件導向程式設計、抽象資料型態 (ADT) / 泛型程式設計 (Generics)、程式碼產生器、模仿其他程式語言，以及用前置處理器搭配多種工具程式的技巧，還探討 Linux 核心原始程式碼善用巨集來擴充程式開發的豐富度，例如: BUILD_BUG_ON_ZERO, max, min, 和 container_of 等巨集。
+> C 语言之所以不需要时常发布新的语言特性又可以保持活力，前置处理器 (preprocessor) 是很重要的因素，有心者可进行「扩充」C 语言。
 
 <!--more-->
 
@@ -288,7 +286,7 @@ else
 
 ### ADT
 
-与之前所提的 Linux 核心的 linked list 类似，使用宏取代函数调用可以降低 ADT 的相关操作的效能损失:
+与之前所提的 Linux 核心的 linked list 类似，使用宏取代函数调用可以降低 **抽象数据类型** (ADT) 的相关操作的效能损失:
 
 [pearldb](https://github.com/willemt/pearldb): A Lightweight Durable HTTP Key-Value Pair Database in C
 
@@ -302,7 +300,9 @@ Linux 核心原始程式码也善用宏来扩充
 
 - {{< link href="https://hackmd.io/@sysprog/c-bitfield" content="原文地址" external-icon=true >}}
 
-简单来说就是编译器就进行检查的 `assert`，我写了 [相关笔记]({{< relref "./c-bitwise.md#linux-核心-build_bug_on_zero" >}}) 来说明它的原理。
+{{< admonition >}}
+简单来说就是编译时期就进行检查的 `assert`，我写了 [相关笔记]({{< relref "./c-bitwise.md#linux-核心-build_bug_on_zero" >}}) 来说明它的原理。
+{{< /admonition >}}
 
 ## Linux 核心原始程式码宏: max, min
 

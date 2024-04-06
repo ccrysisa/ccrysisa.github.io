@@ -36,8 +36,6 @@ https://ccrysisa.github.io/posts/nycu-statistics/
 https://ccrysisa.github.io/posts/debug-gdb/
 https://ccrysisa.github.io/posts/c-pointer/
 https://ccrysisa.github.io/posts/nthu-computer-network/
-https://ccrysisa.github.io/posts/c-spec-ch6/
-https://ccrysisa.github.io/posts/c-spec-ch7/
 https://ccrysisa.github.io/posts/c-specification/
 https://ccrysisa.github.io/posts/git/
 https://ccrysisa.github.io/posts/network/
