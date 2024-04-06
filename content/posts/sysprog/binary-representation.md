@@ -190,8 +190,8 @@ $$
 
 比较常见的常数时间实作方法是，**消除分支**。因为不同分支的执行时间可能会不同，这会被利用进行时序攻击。这个方法需要对 C 语言中的编码和位运算有一定的了解。
 
-- [C99 STandard - 7.18.1.1 Exact-width integer types 阅读记录]({{< relref "../c-pl/c-spec-ch7.md#71811-exact-width-integer-types" >}})
-- [C99 Standard - 6.5.7.5 Bitwise shift operators 阅读记录]({{< relref "../c-pl/c-spec-ch6.md#657-bitwise-shift-operators" >}})
+- C99 7.18.1.1 Exact-width integer types
+- C99 6.5.7.5 Bitwise shift operators 
 
 {{< link href="https://github.com/ccrysisa/LKI/tree/main/constant-time" content="Source" external-icon=true >}}
 

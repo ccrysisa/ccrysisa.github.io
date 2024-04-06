@@ -1,13 +1,19 @@
 # Linux 核心设计/实作 (Linux Kernel Internals)
 
 
-> 在 Linux 核心设计/实作 Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
+> 在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
 
 <!--more-->
 
 {{< link href="http://wiki.csie.ncku.edu.tw/linux/schedule?revision=ff44817ff7c75ed4ec0d22e6fdc3337af1f597c3" content="原始页面" external-icon=true >}}
 |
 {{< link href="/archives/Linux.pdf" content="PDF" external-icon=true >}}
+
+{{< admonition success >}}
+如果你学习时感到挫折，感到进度推进很慢，这很正常，因为 Jserv 的一个讲座，需要我们花费一个星期去消化 :rofl:
+
+所以没必要为此焦虑，如果你觉得某个内容不太理解，可以尝试先去看其他讲座，将原先不懂的知识交给大脑隐式消化，过段时间再回来看，你的理解会大有不同。
+{{< /admonition >}}
 
 ------------------------------------------------------
 - Instructor: [Jim Huang](/User/jserv) (黃敬群) `<jserv.tw@gmail.com>`

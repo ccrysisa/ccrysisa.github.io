@@ -1,7 +1,7 @@
 ---
-title: C 规格第 6 章 Language
+title: "C 语言规格书 重点提示"
 subtitle:
-date: 2024-01-11T23:23:48+08:00
+date: 2024-01-06T16:07:25+08:00
 draft: false
 # author:
 #   name:
@@ -18,6 +18,7 @@ tags:
   - Sysprog
 categories:
   - C
+  - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -28,7 +29,7 @@ resources:
   - name: featured-image-preview
     src: featured-image-preview.jpg
 toc: true
-math: true
+math: false
 lightgallery: false
 password:
 message:
@@ -39,9 +40,14 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-C 语言规格书 Chapter 6 - Language 阅读记录。
+C 语言规格书阅读学习记录。
+规格书草案版本为 n1256，对应 C99 标准，对应的 [PDF 下载地址](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf)。
+也配合 C11 标准来阅读，草案版本 n1570，对应的 [PDF 下载地址](http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1570.pdf)。
+阅读规格书需要一定的体系结构、编译原理的相关知识，但不需要很高的程度。请善用检索工具，在阅读规格书时遇到术语时，请先在规格书中进行检索，因为极大可能是规格书自己定义的术语。
 
 <!--more-->
+
+## 6. Language
 
 ## 6.2 Concepts
 
@@ -193,3 +199,47 @@ function returning type’’.
 - 如果 **E1** 是有符号并且是负数，则结果由具体实现决定 (implementation-defined)。
 
 {{< /details >}}
+
+## 7. Library
+
+## 7.18 Integer types <stdint.h>
+
+描述了头文件 `stdint.h` 必须定义和实现的整数类型，以及相应的宏。
+
+### 7.18.1 Integer types
+
+#### 7.18.1.1 Exact-width integer types
+
+二补数编码，固定长度 N 的整数类型：
+
+- 有符号数：`intN_t`
+- 无符号数：`uintN_t`
+
+#### 7.18.1.2 Minimum-width integer types
+
+至少拥有长度 N 的整数类型：
+
+- 有符号数：`int_leastN_t`
+- 无符号数：`uint_leastN_t`
+
+#### 7.18.1.3 Fastest minimum-width integer types
+
+至少拥有长度 N，且操作速度最快的整数类型：
+
+- 有符号数：`int_fastN_t`
+- 无符号数：`uint_fastN_t`
+
+#### 7.18.1.4 Integer types capable of holding object pointers
+
+可以将指向 `void` 的有效指针转换成该整数类型，也可以将该整数类型转换回指向 `void` 的指针类型，并且转换结果与之前的指针值保持一致：
+
+- 有符号数：`intptr_t`
+- 无符号数：`uintptr_t`
+
+#### 7.18.1.5 Greatest-width integer types
+
+可以表示任意整数类型所表示的值的整数类型，即具有最大长度的整数类型：
+
+- 有符号数：`intmax_t`
+- 无符号数：`uintmax_t`
+
