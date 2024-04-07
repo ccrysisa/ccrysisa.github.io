@@ -3,19 +3,19 @@
 
 This post is used to record the process of my English learning.
 
-<!--more-->
+&lt;!--more--&gt;
 
 ## Preface
 
 ***工欲善其事，必先利其器***   
 ***If I had eight hours to chop down a tree, I’d spend six hours sharpening my axe.***
 
-- 单词书: Merriam-Webster's Vocabulary Builder
+- 单词书: Merriam-Webster&#39;s Vocabulary Builder
 - 写作书: The Elements of Style
 - 语法书: https://grammar.codeyu.com/
 - 发音教学:
 
-{{< youtube QxQUapA-2w4 >}}
+{{&lt; youtube QxQUapA-2w4 &gt;}}
 
 一些 YouTube channels:
 
@@ -27,7 +27,7 @@ This post is used to record the process of my English learning.
 一些 B 站 UP 主:
 
 - [妈妈不用担心我的英语](https://space.bilibili.com/70217434)
-- [英语兔]
+- [英语兔]()
 
 一些 GitHub 仓库:
 
@@ -40,15 +40,23 @@ This post is used to record the process of my English learning.
 
 ### NCE 1
 
-- [x] 001: *Excuse me!*
-- [x] 003: *Sorry, sir!*
-- [x] 005: *Nice to meet you!*
-- [x] 007：*Are you a teacher?*
-- [x] 009: *How are you today?*
-- [x] 011: *Is this your shirt?* 
-- [x] 013: *A new dress*
-- [x] 015: *Your passports, please*
-- [x] 017: *How do you do*
+- [x] 001: Excuse me!
+- [x] 003: Sorry, sir!
+- [x] 005: Nice to meet you!
+- [x] 007: Are you a teacher?
+- [x] 009: How are you today?
+- [x] 011: Is this your shirt?
+- [x] 013: A new dress
+- [x] 015: Your passports, please
+- [x] 017: How do you do
+- [x] 019: Tired and thirsty
+- [x] 021: Which book?
+- [x] 023: Which glasses?
+- [x] 025: Mrs. Smith&#39;s kitchen
+- [x] 027: Mrs. Smith&#39;s living room
+- [x] 029: Come in, Amy
+- [x] 031: Where&#39;s Sally
+- [x] 033: A fine day
 
 ---
 
@@ -66,6 +74,27 @@ engineer
 
 perhaps
 - *adv.* used to show that something is possible or that you are not certain about something.
+
+refrigerator
+- *n.* a piece of kitchen equipment that uses electricity to preserve food at a cold temperature.
+
+armchair
+- *n.* a comfortable chair with sides that support your arms.
+
+stereo
+- *n.* 
+
+wardrobe
+- *n.* a tall cupboard in which you hang your clothes.
+
+dust
+- *v.* to use a cloth to remove dust from the surface of something.
+
+sweep
+- *v.* to clean something, especially a floor by using a brush to collect the dirt into one place from which it can be removed.
+
+aeroplane
+- *n.*
 
 
 ---

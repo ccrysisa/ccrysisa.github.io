@@ -2,7 +2,7 @@
   <channel>
     <title>Sysprog - 标签 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/sysprog/</link>
-    <description>Sysprog - 标签 - KZnight&#39;s Blog</description>
+    <description>Sysprog - 标签 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 05 Apr 2024 11:39:34 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
