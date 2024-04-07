@@ -13,8 +13,8 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
 <meta itemprop="description" content="
 goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這樣看待，至少在 Linux 核心原始程式碼中，goto 是大量存在 (跟你想像中不同吧)。有時不用 goto 會寫出更可怕的程式碼。
 "><meta itemprop="datePublished" content="2024-04-05T11:39:34+08:00" />
-<meta itemprop="dateModified" content="2024-04-06T13:28:05+08:00" />
-<meta itemprop="wordCount" content="923"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-04-06T19:06:14+08:00" />
+<meta itemprop="wordCount" content="930"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Control flow," /><meta property="og:title" content="你所不知道的 C 语言: goto 和流程控制篇" />
 <meta property="og:description" content="
 goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這樣看待，至少在 Linux 核心原始程式碼中，goto 是大量存在 (跟你想像中不同吧)。有時不用 goto 會寫出更可怕的程式碼。
@@ -22,7 +22,7 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-control-flow/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-05T11:39:34+08:00" />
-<meta property="article:modified_time" content="2024-04-06T13:28:05+08:00" />
+<meta property="article:modified_time" content="2024-04-06T19:06:14+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: goto 和流程控制篇"/>
@@ -43,8 +43,8 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-control-flow\/"
-    },"genre": "posts","keywords": "Sysprog, C, Control flow","wordcount":  923 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-control-flow\/","datePublished": "2024-04-05T11:39:34+08:00","dateModified": "2024-04-06T13:28:05+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, C, Control flow","wordcount":  930 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-control-flow\/","datePublished": "2024-04-05T11:39:34+08:00","dateModified": "2024-04-06T19:06:14+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -55,7 +55,7 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -95,7 +95,7 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -148,18 +148,12 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>你所不知道的 C 语言: goto 和流程控制篇</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-04-05 11:39:34"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-05">2024-04-05</time></span>&nbsp;<span title="更新于 2024-04-06 13:28:05"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-06">2024-04-06</time></span>&nbsp;<span title="923 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/c/" class="post-category" title="分类 - C"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-04-05 11:39:34"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-05">2024-04-05</time></span>&nbsp;<span title="更新于 2024-04-06 19:06:14"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-06">2024-04-06</time></span>&nbsp;<span title="930 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -185,8 +179,8 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
 <li><a href="https://hackmd.io/@sysprog/c-control-flow"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
 <p>Stack Overflow: <a href="https://stackoverflow.com/questions/46586/goto-still-considered-harmful"target="_blank" rel="external nofollow noopener noreferrer">GOTO still considered harmful?</a></p>
-<h2 id="misra-c">MISRA C</h2>
-<p><a href="https://caxapa.ru/thumbs/468328/misra-c-2004.pdf"target="_blank" rel="external nofollow noopener noreferrer">MISRA-C:2004</a> Guidelines for the use of the C language in critical systems</p>
+<h2 id="misra-c" class="heading-element">
+  <a href="#misra-c" class="heading-mark"></a>MISRA C</h2><p><a href="https://caxapa.ru/thumbs/468328/misra-c-2004.pdf"target="_blank" rel="external nofollow noopener noreferrer">MISRA-C:2004</a> Guidelines for the use of the C language in critical systems</p>
 <p>MISRA C 禁用 <code>goto</code> 和 <code>continue</code>，但可用 <code>break</code>:</p>
 <ul>
 <li><strong>Rule 14.4 (required): The goto statement shall not be used.</strong></li>
@@ -204,8 +198,8 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
 <blockquote>
 <p>Case in point: MISRA C forbids goto statements primarily because it can mess up static analysis. Yet this rule is gratuitously followed even when no static analysis tools are used, thus yielding none of the gains that you trade off for occasionally writing ugly code.</p>
 </blockquote>
-<h2 id="goto-没有想象中那么可怕">GOTO 没有想象中那么可怕</h2>
-<p>虽然 MISRA C 这类规范都明确禁止了使用 goto，但 goto 并没有想像中的那么可怕，在一些领域还是极具活力的。</p>
+<h2 id="goto-没有想象中那么可怕" class="heading-element">
+  <a href="#goto-%e6%b2%a1%e6%9c%89%e6%83%b3%e8%b1%a1%e4%b8%ad%e9%82%a3%e4%b9%88%e5%8f%af%e6%80%95" class="heading-mark"></a>GOTO 没有想象中那么可怕</h2><p>虽然 MISRA C 这类规范都明确禁止了使用 goto，但 goto 并没有想像中的那么可怕，在一些领域还是极具活力的。</p>
 <p>在 C 语言中 goto 语句是实作错误处理的极佳选择 (如果你看过 xv6 应该不陌生):</p>
 <ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="http://eli.thegreenplace.net/2009/04/27/using-goto-for-error-handling-in-c"target="_blank" rel="external nofollow noopener noreferrer">Using goto for error handling in C</a></li>
@@ -223,8 +217,8 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
 <p>以 <code>goto</code> 为关键字进行检索</p>
 </blockquote>
 <p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Goto#Common_usage_patterns"target="_blank" rel="external nofollow noopener noreferrer">Common usage patterns of Goto</a></p>
-<h2 id="switch--goto">switch &amp; goto</h2>
-<ul>
+<h2 id="switch--goto" class="heading-element">
+  <a href="#switch--goto" class="heading-mark"></a>switch &amp; goto</h2><ul>
 <li><a href="https://eli.thegreenplace.net/2012/07/12/computed-goto-for-efficient-dispatch-tables"target="_blank" rel="external nofollow noopener noreferrer">Computed goto for efficient dispatch tables</a></li>
 </ul>
 <p>效能对比:</p>
@@ -238,32 +232,32 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
 <blockquote>
 <p>branch prediction 的部分，switch 需要預測接下來跳到哪個分支 case，而 computed goto 則是在每個 instruction 預測下一個 instruction，這之中比較直覺的想法是 computed goto 的prediction可以根據上個指令來預測，但是 switch 的prediction每次預測沒辦法根據上個指令，因此在 branch prediction accuracy 上 computed goto 會比較高。</p>
 </blockquote>
-<h2 id="do--while-0-宏">do {&hellip;} while (0) 宏</h2>
-<p><strong>用于避免 dangling else，即 if 和 else 未符合预期的配对 (常见于未使用 <code>{}</code> 包裹)</strong></p>
+<h2 id="do--while-0-宏" class="heading-element">
+  <a href="#do--while-0-%e5%ae%8f" class="heading-mark"></a>do {&hellip;} while (0) 宏</h2><p><strong>用于避免 dangling else，即 if 和 else 未符合预期的配对 (常见于未使用 <code>{}</code> 包裹)</strong></p>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> Stack Overflow: <a href="https://stackoverflow.com/questions/1067226/c-multi-line-macro-do-while0-vs-scope-block"target="_blank" rel="external nofollow noopener noreferrer">C multi-line macro: do/while(0) vs scope block</a></li>
 </ul>
 <p>我写了 <a href="/posts/c-preprocessor/#do----while-0-宏">相关笔记</a> 记录在前置处理器篇。</p>
-<h2 id="用-goto-实作-raii-开发风格">用 goto 实作 RAII 开发风格</h2>
-<ul>
+<h2 id="用-goto-实作-raii-开发风格" class="heading-element">
+  <a href="#%e7%94%a8-goto-%e5%ae%9e%e4%bd%9c-raii-%e5%bc%80%e5%8f%91%e9%a3%8e%e6%a0%bc" class="heading-mark"></a>用 goto 实作 RAII 开发风格</h2><ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://vilimpoc.org/research/raii-in-c/"target="_blank" rel="external nofollow noopener noreferrer">RAII in C</a></li>
 </ul>
 <p>Linux 核心中的实作:</p>
 <ul>
 <li><a href="https://github.com/torvalds/linux/blob/master/mm/shmem.c"target="_blank" rel="external nofollow noopener noreferrer">shmem.c</a></li>
 </ul>
-<h2 id="检阅-c-语言规格书">检阅 C 语言规格书</h2>
-<ul>
+<h2 id="检阅-c-语言规格书" class="heading-element">
+  <a href="#%e6%a3%80%e9%98%85-c-%e8%af%ad%e8%a8%80%e8%a7%84%e6%a0%bc%e4%b9%a6" class="heading-mark"></a>检阅 C 语言规格书</h2><ul>
 <li><a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1548.pdf"target="_blank" rel="external nofollow noopener noreferrer">ISO/IEC 9899:201x Committee Draft</a></li>
 </ul>
-<h2 id="和想象中不同的-switch-case">和想象中不同的 switch-case</h2>
-<p><code>switch-case</code> 语句中的 case 部分本质上是 label，所以使用其它语句 (例如 <code>if</code>) 将其包裹起来并不影响 <code>switch</code> 语句的跳转。</p>
+<h2 id="和想象中不同的-switch-case" class="heading-element">
+  <a href="#%e5%92%8c%e6%83%b3%e8%b1%a1%e4%b8%ad%e4%b8%8d%e5%90%8c%e7%9a%84-switch-case" class="heading-mark"></a>和想象中不同的 switch-case</h2><p><code>switch-case</code> 语句中的 case 部分本质上是 label，所以使用其它语句 (例如 <code>if</code>) 将其包裹起来并不影响 <code>switch</code> 语句的跳转。</p>
 <ul>
 <li><a href="https://www.codeproject.com/Articles/100473/Something-You-May-Not-Know-About-the-Switch-Statem"target="_blank" rel="external nofollow noopener noreferrer">Something You May Not Know About the Switch Statement in C/C++</a></li>
 <li><a href="http://blog.robertelder.org/switch-statements-statement-expressions/"target="_blank" rel="external nofollow noopener noreferrer">How to Get Fired Using Switch Statements &amp; Statement Expressions</a></li>
 </ul>
-<h2 id="duffs-device">Duff&rsquo;s Device</h2>
-<blockquote>
+<h2 id="duffs-device" class="heading-element">
+  <a href="#duffs-device" class="heading-mark"></a>Duff&rsquo;s Device</h2><blockquote>
 <p>这个技巧常用于内存数据的复制，类似于 <code>memcpy</code></p>
 </blockquote>
 <ul>
@@ -271,18 +265,17 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="http://c-faq.com/misc/duffexpln.html"target="_blank" rel="external nofollow noopener noreferrer">Duff&rsquo;s Device 的详细解释</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="http://doc.cat-v.org/bell_labs/duffs_device"target="_blank" rel="external nofollow noopener noreferrer">Tom Duff 本人的解释</a></li>
 </ul>
-<h2 id="co-routine-应用">co-routine 应用</h2>
-<p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Coroutine"target="_blank" rel="external nofollow noopener noreferrer">Coroutine</a></p>
+<h2 id="co-routine-应用" class="heading-element">
+  <a href="#co-routine-%e5%ba%94%e7%94%a8" class="heading-mark"></a>co-routine 应用</h2><p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Coroutine"target="_blank" rel="external nofollow noopener noreferrer">Coroutine</a></p>
 <p>不借助操作系统也可以实作出多工交执行的 illusion (通过 <code>switch-case</code> 黑魔法来实现 &#x1f923;)</p></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-04-06 13:28:05">更新于 2024-04-06&nbsp;</span>
-      </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/c-control-flow/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-control-flow/" data-title="你所不知道的 C 语言: goto 和流程控制篇" data-hashtags="Sysprog,C,Control flow"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+        <span title="更新于 2024-04-06 19:06:14">更新于 2024-04-06&nbsp;</span>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/c-control-flow/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-control-flow/" data-title="你所不知道的 C 语言: goto 和流程控制篇" data-hashtags="Sysprog,C,Control flow"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/c-control-flow/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-control-flow/" data-title="你所不知道的 C 语言: goto 和流程控制篇" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-control-flow/" data-title="你所不知道的 C 语言: goto 和流程控制篇"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -291,12 +284,11 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-control-flow/" data-title="你所不知道的 C 语言: goto 和流程控制篇" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-control-flow/" data-title="你所不知道的 C 语言: goto 和流程控制篇"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-      </div>
-    </div>
-  </div>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/c/' class="post-tag">C</a><a href='/tags/control-flow/' class="post-tag">Control flow</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a><a href="/tags/c/" class="post-tag" title="标签 - C">C</a><a href="/tags/control-flow/" class="post-tag" title="标签 - Control flow">Control flow</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -305,11 +297,14 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
   <div class="post-nav"><a href="/posts/oerv-pretask/" class="post-nav-item" rel="prev" title="OERV 之 Pretask"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>OERV 之 Pretask</a>
       <a href="/posts/rust-lifetime/" class="post-nav-item" rel="next" title="Rust Lifetime: 由浅入深理解生命周期">Rust Lifetime: 由浅入深理解生命周期<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -317,5 +312,5 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>
