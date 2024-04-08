@@ -3,7 +3,7 @@
 
 记录一下折腾 Deepin 20.9 的物理机的过程与相关的配置。
 
-&lt;!--more--&gt;
+<!--more-->
 
 ## 安装与配置
 
@@ -15,9 +15,9 @@
 ## 网络代理
 
 新手教学文档:
-[Ubuntu 22.04LTS 相关配置]({{&lt; relref &#34;ubuntu22.04lts.md&#34; &gt;}})
+[Ubuntu 22.04LTS 相关配置]({{< relref "ubuntu22.04lts.md" >}})
 
-&gt; 在境内可以使用 [gitclone](http://gitclone.com) 镜像站来加快 clone 的速度。
+> 在境内可以使用 [gitclone](http://gitclone.com) 镜像站来加快 clone 的速度。
 
 ## 编辑器: VS Code
 
@@ -26,22 +26,22 @@
 [HackMD]
 
 本人的一些注解:
-[GNU/Linux 开发工具]({{&lt; relref &#34;../sysprog/gnu-linux-dev.md&#34; &gt;}})
+[GNU/Linux 开发工具]({{< relref "../sysprog/gnu-linux-dev.md" >}})
 
 这里列举一下本人配置的插件：
 
 - **Even Better TOML**
 - **CodeLLDB** 用于调试 Rust
 - **Git History**
-- **Native Debug** 用于调试 C/C&#43;&#43;
+- **Native Debug** 用于调试 C/C++
 - **rust-analyzer**
 - **Tokyo Night** 挺好看的一个主题
 - **Vim**
 - **VSCode Great Icons** 文件图标主题
 
-{{&lt; admonition question &gt;}}
+{{< admonition question >}}
 rust5-analyzer 插件可能会因为新版本要求 glibc 2.29 而导致启动失败，请参考这个 [issue](https://github.com/rust-lang/rust-analyzer/issues/11558) 来解决。
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ## 终端和 Vim
 
@@ -50,24 +50,24 @@ rust5-analyzer 插件可能会因为新版本要求 glibc 2.29 而导致启动�
 [HackMD]
 
 本人的一些注解: 
-[GNU/Linux 开发工具]({{&lt; relref &#34;../sysprog/gnu-linux-dev.md&#34; &gt;}})
+[GNU/Linux 开发工具]({{< relref "../sysprog/gnu-linux-dev.md" >}})
 
 - 本人的终端提示符配置: `\u@\h\W`
 - 本人使用 [Minimalist Vim Plugin Manager](https://github.com/junegunn/vim-plug) 来管理 Vim 插件，配置如下:
 
-```bash {title=&#34;~/.vimrc&#34;}
-&#34; Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)                          
-call plug#begin(&#39;~/.vim/plugged&#39;)
+```bash {title="~/.vimrc"}
+" Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)                          
+call plug#begin('~/.vim/plugged')
 
-Plug &#39;Shougo/neocomplcache&#39;
-Plug &#39;scrooloose/nerdtree&#39;
-map &lt;F5&gt; :NERDTreeToggle&lt;CR&gt;
+Plug 'Shougo/neocomplcache'
+Plug 'scrooloose/nerdtree'
+map <F5> :NERDTreeToggle<CR>
 
 call plug#end()
 
 let g:neocomplcache_enable_at_startup = 1 
 let g:neocomplcache_enable_smart_case = 1 
-inoremap &lt;expr&gt;&lt;TAB&gt; pumvisible()?&#34;\&lt;C-n&gt;&#34; : &#34;\&lt;TAB&gt;&#34;
+inoremap <expr><TAB> pumvisible()?"\<C-n>" : "\<TAB>"
 
 syntax on
 set number
@@ -80,9 +80,9 @@ set shiftwidth=4
 set ai
 set hlsearch
 set smartindent
-map &lt;F4&gt; : set nu!&lt;BAR&gt;set nonu?&lt;CR&gt;
+map <F4> : set nu!<BAR>set nonu?<CR>
 
-&#34; autocomplete dropdown list colorscheme
+" autocomplete dropdown list colorscheme
 hi Pmenu ctermfg=0 ctermbg=7 
 hi PmenuSel ctermfg=7 ctermbg=4
 ```
@@ -97,7 +97,7 @@ hi PmenuSel ctermfg=7 ctermbg=4
 
 ```bash
 # install rust
-$ curl --proto &#39;=https&#39; --tlsv1.2 https://sh.rustup.rs -sSf | sh
+$ curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh
 # install nightly toolchain
 $ rustup toolchain install nightly
 # change to nightly toolchain
@@ -112,7 +112,7 @@ $ rustup update
 
 ## tldr
 
-&gt; The tldr-pages project is a collection of community-maintained help pages for command-line tools, that aims to be a simpler, more approachable complement to traditional man pages.
+> The tldr-pages project is a collection of community-maintained help pages for command-line tools, that aims to be a simpler, more approachable complement to traditional man pages.
 
 安装 tldr:
 
@@ -122,22 +122,22 @@ $ sudo apt install tldr
 
 ## 效果展示
 
-{{&lt; image src=&#34;/images/tools/deepin-terminal-vim.png&#34; caption=&#34;Deepin Terminial Vim&#34; &gt;}}
-{{&lt; image src=&#34;/images/tools/deepin-dde-desktop.png&#34; caption=&#34;Deepin DDE Desktop&#34; &gt;}}
+{{< image src="/images/tools/deepin-terminal-vim.png" caption="Deepin Terminial Vim" >}}
+{{< image src="/images/tools/deepin-dde-desktop.png" caption="Deepin DDE Desktop" >}}
 
 ## FAQ
 
-{{&lt; admonition question &gt;}}
+{{< admonition question >}}
 重启后可能会出现，输入密码无法进入图形界面重新返回登录界面，这一循环状况。这个是 deepin 的默认 shell 是 dash 造成的，只需将默认的 shell 改为 bash 即可解决问题：
 
 ```bash
 $ ls -l /bin/sh
-lrwxrwxrwx 1 root root 9 xx月  xx xx:xx /bin/sh -&gt; /bin/dash
+lrwxrwxrwx 1 root root 9 xx月  xx xx:xx /bin/sh -> /bin/dash
 $ sudo rm /bin/sh
 $ sudo ln -s /bin/bash /bin/sh
 ```
 
-如果你已经处于无限登录界面循环这一状况，可以通过 `Ctrl &#43; Alt &#43; &lt;F2&gt;` 进入 tty2 界面进行修改：
+如果你已经处于无限登录界面循环这一状况，可以通过 `Ctrl + Alt + <F2>` 进入 tty2 界面进行修改：
 
 ```bash
 # 先查看问题日志，判断是不是 shell 导致的问题
@@ -145,7 +145,7 @@ $ cat .xsession-errors
 # 如果是，则重复上面的操作即可
 ```
 
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 
 ---
