@@ -13,8 +13,8 @@
 <meta itemprop="description" content="
 从基础到进阶讲解探讨 Rust 生命周期，不仅仅是 lifetime kata，还有更多的 lifetime 资料，都来讲解和探讨，从「入门 Rust」到「进阶 Rust」
 "><meta itemprop="datePublished" content="2024-04-05T17:52:13+08:00" />
-<meta itemprop="dateModified" content="2024-04-05T19:14:41+08:00" />
-<meta itemprop="wordCount" content="1407"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-04-09T20:38:33+08:00" />
+<meta itemprop="wordCount" content="2279"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Lifetime," /><meta property="og:title" content="Rust Lifetime: 由浅入深理解生命周期" />
 <meta property="og:description" content="
 从基础到进阶讲解探讨 Rust 生命周期，不仅仅是 lifetime kata，还有更多的 lifetime 资料，都来讲解和探讨，从「入门 Rust」到「进阶 Rust」
@@ -22,7 +22,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/rust-lifetime/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-05T17:52:13+08:00" />
-<meta property="article:modified_time" content="2024-04-05T19:14:41+08:00" />
+<meta property="article:modified_time" content="2024-04-09T20:38:33+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Rust Lifetime: 由浅入深理解生命周期"/>
@@ -32,7 +32,7 @@
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/rust-lifetime/" /><link rel="prev" href="https://ccrysisa.github.io/posts/c-control-flow/" /><link rel="next" href="https://ccrysisa.github.io/posts/linux2023/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/rust-lifetime/" /><link rel="prev" href="https://ccrysisa.github.io/posts/c-control-flow/" /><link rel="next" href="https://ccrysisa.github.io/posts/c-trick/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -43,8 +43,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/rust-lifetime\/"
-    },"genre": "posts","keywords": "Rust, Lifetime","wordcount":  1407 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/rust-lifetime\/","datePublished": "2024-04-05T17:52:13+08:00","dateModified": "2024-04-05T19:14:41+08:00","publisher": {
+    },"genre": "posts","keywords": "Rust, Lifetime","wordcount":  2279 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/rust-lifetime\/","datePublished": "2024-04-05T17:52:13+08:00","dateModified": "2024-04-09T20:38:33+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -159,7 +159,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-04-05 17:52:13"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-05">2024-04-05</time></span>&nbsp;<span title="更新于 2024-04-05 19:14:41"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-05">2024-04-05</time></span>&nbsp;<span title="1407 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-04-05 17:52:13"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-05">2024-04-05</time></span>&nbsp;<span title="更新于 2024-04-09 20:38:33"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-09">2024-04-09</time></span>&nbsp;<span title="2279 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -170,7 +170,9 @@
     <li><a href="#引用--生命周期">引用 &amp; 生命周期</a></li>
     <li><a href="#生命周期标注">生命周期标注</a></li>
     <li><a href="#生命周期在函数上的省略规则">生命周期在函数上的省略规则</a></li>
-    <li><a href="#关注生命周期">关注生命周期</a></li>
+    <li><a href="#关注可变引用">关注可变引用</a></li>
+    <li><a href="#struct--enum-生命周期标注">struct / enum 生命周期标注</a></li>
+    <li><a href="#static-和-_"><code>'static</code> 和 <code>'_</code></a></li>
     <li><a href="#documentations">Documentations</a>
       <ul>
         <li><a href="#crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html">std</a></a></li>
@@ -190,7 +192,8 @@
       <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
-      <div class="admonition-content">学习 John Gjengset 的教学影片 <a href="https://www.youtube.com/watch?v=iVYWDIW71jk"target="_blank" rel="external nofollow noopener noreferrer">Subtying and Variance</a> 时发现自己对 Rust 生命周期 (lifetime) 还是不太理解，于是便前来补课 &#x1f923;</div>
+      <div class="admonition-content">学习 John Gjengset 的教学影片 <a href="https://www.youtube.com/watch?v=iVYWDIW71jk"target="_blank" rel="external nofollow noopener noreferrer">Subtying and Variance</a> 时发现自己对 Rust 生命周期 (lifetime) 还是不太理解，于是便前来补课 &#x1f923;
+同时完成 <a href="https://tfpk.github.io/lifetimekata/"target="_blank" rel="external nofollow noopener noreferrer">LifetimeKata</a> 的练习。</div>
     </div>
   </div>
 <h2 id="引用--生命周期">引用 &amp; 生命周期</h2>
@@ -206,7 +209,7 @@
 <pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">split</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="p">,</span><span class="w"> </span><span class="na">&#39;b</span><span class="o">&gt;</span><span class="p">(</span><span class="n">text</span>: <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">delimiter</span>: <span class="kp">&amp;</span><span class="na">&#39;b</span> <span class="kt">str</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>单线程情况下，参数 <code>text</code> 和 <code>delimiter</code> 在函数 <code>split</code> 范围内都是有效的。</p>
-<p>也因为这个状态机模型，Rust 的生命周期对于参数在函数体内的使用的影响并不大，主要影响的是涉及生命周期的参数或返回值在 <strong>函数调用后的生命周期推导</strong>，下面给出一些技巧:</p>
+<p>也因为这个状态机模型，Rust 的生命周期对于参数在函数体内的使用的影响并不大，主要影响的是涉及生命周期的参数或返回值在 <strong>函数调用后的生命周期使用约束</strong>，下面给出一些技巧:</p>
 <div class="details admonition tip open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -214,7 +217,7 @@
     <div class="details-content">
       <div class="admonition-content"><p><strong>最大共同生命周期</strong>: 从引用的当前共同使用开始，直到任一引用对应的 object 消亡，即其生命周期结束。</p>
 <p>当以相同的生命周期标注，来对函数参数的生命周期进行标注时，其表示参数的最大共同生命周期，例如:</p>
-<div class="highlight" id="id-5"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -223,7 +226,7 @@
 </div>
 </div><p>生命周期 <code>'a</code> 表示参数 <code>x</code>, <code>y</code>, <code>z</code> 的最大共同生命周期，即 <code>x</code>, <code>y</code>, <code>z</code> 可以共同存活的最大生命周期。</p>
 <p>当以相同的生命周期标注，来对函数参数和返回值的生命周期进行标注时，其表示返回值的生命周期必须在参数的生命周期内，例如:</p>
-<div class="highlight" id="id-6"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -232,12 +235,20 @@
 </div>
 </div><p>生命周期 <code>'a</code> 表示返回值的生命周期必须在参数 <code>x</code> 的生命周期内，即返回值的生命周期是参数和返回值的最大共同生命周期。所以在返回值可以使用的地方，参数都必须存活，这也是常出现问题的地方。</p>
 <p>最后看一下将这两个技巧结合起来的一个例子:</p>
-<div class="highlight" id="id-7"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">f</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="p">(</span><span class="n">x</span>: <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>: <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="kt">i32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="kt">i32</span> <span class="p">{</span><span class="o">..</span><span class="p">.}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>参数取最大生命周期在容器情况下会被另一个技巧取代，即容器和容器内部元素都被标注为相同的生命周期，这种情况会让容器的生命周期和容器内的元素的生命周期保持一致。这是因为隐式规则: 容器的生命周期 $\leq$ 容器内元素的生命周期，这显然已经满足了最大生命周期的要求，而此时标注一样的生命周期，会被编译器推导为二者的生命周期相同，即 <strong>容器的生命周期和容器内的元素的生命周期一致</strong>:</p>
+<div class="highlight" id="id-13"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">strtok</span><span class="p">(</span><span class="n">x</span>: <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="nc">mut</span><span class="w"> </span><span class="o">&amp;</span><span class="na">&#39;a</span><span class="w"> </span><span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>: <span class="kt">char</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
     </div>
@@ -282,7 +293,7 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>在上面例子中，由于将方法 <code>as_slice_mut</code> 的可变引用参数和返回值的生命周期都标注为相同 <code>'a</code>，所以在范围 scope 中，在编译器看来 <code>s</code> 的可变引用仍然有效 (回想一下之前的参数和返回值的生命周期推导技巧)，所以在这个范围内无法使用 <code>s</code> 的引用 (不管是可变还是不可变，回想一下 Rust 的引用规则)，这是一个很常见的可变引用引起非预期的生命周期的例子，下一节会进一步介绍。</p>
-<h2 id="关注生命周期">关注生命周期</h2>
+<h2 id="关注可变引用">关注可变引用</h2>
 <a class="lightgallery" href="/images/rust/rust-lifetime-04.png?size=large" data-thumbnail="/images/rust/rust-lifetime-04.png?size=small" data-sub-html="<h2>/images/rust/rust-lifetime-04.png</h2>"><img loading="lazy" src="/images/rust/rust-lifetime-04.png" srcset="/images/rust/rust-lifetime-04.png?size=small, /images/rust/rust-lifetime-04.png?size=medium 1.5x, /images/rust/rust-lifetime-04.png?size=large 2x" sizes="auto" data-title="/images/rust/rust-lifetime-04.png" data-alt="/images/rust/rust-lifetime-04.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -291,7 +302,7 @@
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">insert_value</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="p">(</span><span class="n">my_vec</span>: <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="nc">mut</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="na">&#39;a</span><span class="w"> </span><span class="kt">i32</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span>: <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>这个例子和之前的例子很类似，同样的，使用我们的参数生命周期推导技巧，调用函数 <code>insert_value</code> 后，当参数 <code>vec</code> 和 <code>value</code> 的最大共同生命周期的范围很广时，这时就需要注意，在这个范围内，我们无法使用 <code>my_vec</code> 对应的 object 的任何其它引用 (因为编译器会认为此时还存在可变引用 <code>my_vec</code>)，从而编译错误。为避免这种非预期的生命周期，应当将函数原型改写如下:</p>
+</div><p>这个例子和之前的例子很类似，同样的，使用我们的参数生命周期推导技巧，调用函数 <code>insert_value</code> 后，当参数 <code>vec</code> 和 <code>value</code> 的最大共同生命周期的范围很广时，这时就需要注意，在这个范围内，我们无法使用 <code>my_vec</code> 对应的 object 的任何其它引用 (因为编译器会认为此时还存在可变引用 <code>my_vec</code>)，从而编译错误。这就是容器和引用使用相同生命周期标注，而导致的强约束。为避免这种非预期的生命周期，应当将函数原型改写如下:</p>
 <div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -300,9 +311,97 @@
 <pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">insert_value</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="p">,</span><span class="w"> </span><span class="na">&#39;b</span><span class="o">&gt;</span><span class="p">(</span><span class="n">my_vec</span>: <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="nc">mut</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="na">&#39;b</span><span class="w"> </span><span class="kt">i32</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span>: <span class="kp">&amp;</span><span class="na">&#39;b</span> <span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>这样改写会包含一个隐式的生命周期规则: <code>'a</code> $\leq$ <code>'b</code>，这很好理解，容器的生命周期应该比所引用的 object 短。</p>
+<p>这样改写会包含一个隐式的生命周期规则: <code>'a</code> $\leq$ <code>'b</code>，这很好理解，容器的生命周期应该比所引用的 object 短，这个隐式规则在下一节的 struct/enum 的生命周期标注非常重要。</p>
 </blockquote>
-<h2 id="documentations">Documentations</h2>
+<h2 id="struct--enum-生命周期标注">struct / enum 生命周期标注</h2>
+<a class="lightgallery" href="/images/rust/rust-lifetime-05.png?size=large" data-thumbnail="/images/rust/rust-lifetime-05.png?size=small" data-sub-html="<h2>/images/rust/rust-lifetime-05.png</h2>"><img loading="lazy" src="/images/rust/rust-lifetime-05.png" srcset="/images/rust/rust-lifetime-05.png?size=small, /images/rust/rust-lifetime-05.png?size=medium 1.5x, /images/rust/rust-lifetime-05.png?size=large 2x" sizes="auto" data-title="/images/rust/rust-lifetime-05.png" data-alt="/images/rust/rust-lifetime-05.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p>struct / enum 的生命周期标注也可以通过之前所提的 <strong>状态机</strong> 模型来进行理解，因为 struct / enum 本身不具备引用对应的 object 的所有权，在进行方法 (method) 调用时并不能截断引用对应的 object 的生命周期。</p>
+<p>struct / enum 生命周期标注主要需要特别注意一点，就是 struct / enum 本身的可变引用的生命周期标注，最好不要和为引用的成员的生命周期的标注，标注为相同，因为这极大可能会导致 <strong>生命周期强约束</strong>，例如:</p>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">strtok</span><span class="p">(</span><span class="n">x</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="na">&#39;a</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="w"> </span><span class="kt">i32</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>: <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果参数 <code>Vec&lt;'a i32&gt;</code> 的 vector 里的 <code>i32</code> 引用的生命周期是 <code>static</code> 的话，依据我们之前所提的技巧，会将可变引用 <code>&amp;'a mut</code> 的生命周期也推导为 <code>static</code>，这就导致再也无法借用 <code>x</code> 对应的 object。</p>
+<h2 id="static-和-_"><code>'static</code> 和 <code>'_</code></h2>
+<a class="lightgallery" href="/images/rust/rust-lifetime-06.png?size=large" data-thumbnail="/images/rust/rust-lifetime-06.png?size=small" data-sub-html="<h2>/images/rust/rust-lifetime-06.png</h2>"><img loading="lazy" src="/images/rust/rust-lifetime-06.png" srcset="/images/rust/rust-lifetime-06.png?size=small, /images/rust/rust-lifetime-06.png?size=medium 1.5x, /images/rust/rust-lifetime-06.png?size=large 2x" sizes="auto" data-title="/images/rust/rust-lifetime-06.png" data-alt="/images/rust/rust-lifetime-06.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<div class="highlight" id="id-6"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">foo</span><span class="p">(</span><span class="n">_input</span>: <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">&#39;static</span> <span class="kt">str</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s">&#34;abc&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果不进行 <code>static</code> 生命周期标注，依据省略规则，编译器会把返回值的生命周期推导为 <code>'a</code>，即和输入参数一样，这就不符合我们预期使用了。</p>
+<p>如果使用 <code>static</code> 标注 struct / enum 里的成员，则无需标注 struct / enum 的生命周期，因为 <code>static</code> 表示在整个程序运行起见都有效，没必要对容器进行生命周期标注。</p>
+<div class="highlight" id="id-7"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">UniqueWords</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">sentence</span>: <span class="kp">&amp;</span><span class="nb">&#39;static</span> <span class="kt">str</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">unique_words</span>: <span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="nb">&#39;static</span><span class="w"> </span><span class="kt">str</span><span class="o">&gt;</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">impl</span><span class="w"> </span><span class="n">UniqueWords</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在没有使用到 struct 的生命周期标注时，impl 可以不显式指明生命周期，而是通过 <code>'_</code> 让编译器自行推导:</p>
+<div class="highlight" id="id-8"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Counter</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">inner</span>: <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="nc">mut</span><span class="w"> </span><span class="kt">i32</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">impl</span><span class="w"> </span><span class="n">Counter</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">increment</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// is the same as
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">impl</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Counter</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="k">fn</span> <span class="nf">increment</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>函数返回值不是引用，但是返回值类型里有成员是引用，依据省略规则，编译器无法自行推导该成员的生命周期，此时可以通过 <code>'_</code> 来提示编译器依据省略规则，对返回值的成员的生命周期进行推导:</p>
+<div class="highlight" id="id-9"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">StrWrap</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="na">&#39;a</span><span class="w"> </span><span class="kt">str</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">make_wrapper</span><span class="p">(</span><span class="n">string</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">StrWrap</span><span class="o">&lt;</span><span class="nb">&#39;_</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// is the same as
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fn</span> <span class="nf">make_wrapper</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="p">(</span><span class="n">string</span>: <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">StrWrap</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="documentations">Documentations</h2>
 <p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>
 <p>学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料</p>
@@ -319,7 +418,7 @@
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-04-05 19:14:41">更新于 2024-04-05&nbsp;</span>
+        <span title="更新于 2024-04-09 20:38:33">更新于 2024-04-09&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/rust-lifetime/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -345,10 +444,10 @@
   </div>
 
   <div class="post-nav"><a href="/posts/c-control-flow/" class="post-nav-item" rel="prev" title="你所不知道的 C 语言: goto 和流程控制篇"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>你所不知道的 C 语言: goto 和流程控制篇</a>
-      <a href="/posts/linux2023/" class="post-nav-item" rel="next" title="Linux 核心设计/实作 (Linux Kernel Internals)">Linux 核心设计/实作 (Linux Kernel Internals)<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+      <a href="/posts/c-trick/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: 技巧篇">你所不知道的 C 语言: 技巧篇<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

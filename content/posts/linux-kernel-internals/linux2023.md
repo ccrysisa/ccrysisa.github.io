@@ -48,7 +48,7 @@ repost:
 {{< link href="/archives/Linux.pdf" content="PDF" external-icon=true >}}
 
 {{< admonition success >}}
-如果你学习时感到挫折，感到进度推进很慢，这很正常，因为 Jserv 的一个讲座，需要我们花费一个星期去消化 :rofl:
+如果你学习时感到挫折，感到进度推进很慢，这很正常，因为 Jserv 的一个讲座，需要我们花费一个星期去消化 :rofl: 并且 Jserv 也提到前 6 周课程的密度是比较大的
 
 所以没必要为此焦虑，如果你觉得某个内容不太理解，可以尝试先去看其他讲座，将原先不懂的知识交给大脑隐式消化，过段时间再回来看，你的理解会大有不同。
 {{< /admonition >}}

@@ -4,7 +4,17 @@
     <link>https://ccrysisa.github.io/tags/c/</link>
     <description>C - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 05 Apr 2024 11:39:34 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/c/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 10 Apr 2024 16:06:08 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/c/" rel="self" type="application/rss+xml" /><item>
+  <title>你所不知道的 C 语言: 技巧篇</title>
+  <link>https://ccrysisa.github.io/posts/c-trick/</link>
+  <pubDate>Wed, 10 Apr 2024 16:06:08 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-trick/</guid>
+  <description><![CDATA[<blockquote>
+<p>本次講座將選定幾個案例，藉此解說 C 語言程式設計的技巧，像是對矩陣操作進行包裝、初始化特定結構的成員、追蹤物件配置的記憶體、Smart Pointer 等等。</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>你所不知道的 C 语言: goto 和流程控制篇</title>
   <link>https://ccrysisa.github.io/posts/c-control-flow/</link>
   <pubDate>Fri, 05 Apr 2024 11:39:34 &#43;0800</pubDate>
@@ -98,14 +108,6 @@
   <description><![CDATA[<blockquote>
 <p>尽管数值系统并非 C 语言所持有，但在 Linux 核心大量存在 u8/u16/u32/u64 这样通过 typedef 所定义的类型，伴随着各种 alignment 存取，如果对数值系统的认知不够充分，可能立即就被阻拦在探索 Linux 核心之外——毕竟你完全搞不清楚，为何 Linux 核心存取特定资料需要绕一大圈。</p>
 </blockquote>]]></description>
-</item>
-<item>
-  <title>Linux 核心设计: C Programming Lab</title>
-  <link>https://ccrysisa.github.io/posts/linux2023-lab0/</link>
-  <pubDate>Mon, 19 Feb 2024 16:23:01 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/linux2023-lab0/</guid>
-  <description><![CDATA[]]></description>
 </item>
 </channel>
 </rss>

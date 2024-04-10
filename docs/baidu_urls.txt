@@ -1,5 +1,7 @@
 https://ccrysisa.github.io/posts/english/
 https://ccrysisa.github.io/posts/linux2023/
+https://ccrysisa.github.io/posts/posix-threads/
+https://ccrysisa.github.io/posts/c-trick/
 https://ccrysisa.github.io/posts/rust-lifetime/
 https://ccrysisa.github.io/posts/c-control-flow/
 https://ccrysisa.github.io/posts/oerv-pretask/

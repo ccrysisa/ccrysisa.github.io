@@ -109,6 +109,7 @@ typedef struct Block_t {
 - [扩展 Shortcodes 概述](https://fixit.lruihao.cn/zh-cn/documentation/content-management/shortcodes/extended/introduction/#admonition)
 - [图表支持](https://fixit.lruihao.cn/zh-cn/documentation/content-management/diagrams/)
 - [URL management](https://gohugo.io/content-management/urls/#permalinks)
+- [111年度資工所心得](https://hackmd.io/@ygb5JBlmSc-8GJtxiMg5Fw/B1-rO9vb9)
 
 
 ---
