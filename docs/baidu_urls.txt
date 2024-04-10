@@ -39,7 +39,6 @@ https://ccrysisa.github.io/posts/c-pointer/
 https://ccrysisa.github.io/posts/nthu-computer-network/
 https://ccrysisa.github.io/posts/c-specification/
 https://ccrysisa.github.io/posts/git/
-https://ccrysisa.github.io/posts/network/
 https://ccrysisa.github.io/posts/binary-representation/
 https://ccrysisa.github.io/posts/why-rust-/
 https://ccrysisa.github.io/posts/git-learn/

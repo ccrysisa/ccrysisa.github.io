@@ -1,4 +1,4 @@
-# 国立清华大学 计算机网络概论 重点提示
+# 计算机网络 重点提示
 
 
 之前学校的计网理论课学得云里雾里，对于物理层和数据链路层并没有清晰的逻辑框架，而这学期的计网课设内容为数据链路层和网络层的相关内容，写起来还是云里雾里。虽然最终艰难地把课设水过去了，但是个人认为网络对于 CSer 非常重要，特别是在互联网行业，网络知识是必不可少的。
@@ -14,7 +14,7 @@
 | :-----: | :----: | :-----: | :-----: |
 | 國立清華大學 | [計算機網路概論][courseinfo] | [課程講義與練習題][slides&hws] | [Youtube][playlist] |
 
-## L1: Foundation
+## Foundation
 
 Outline:
 
@@ -87,7 +87,7 @@ Salvatore Sanfilippo 在 YouTube 上对 smallchat 的讲解：
 
 GitHub 上也有使用 Go 和 Rust 实现该项目的仓库，如果你对 Go 或 Rust 的网络编程 (Network Programming) 感兴趣，可以参考这个[仓库](https://github.com/smallnest/smallchat)。
 
-## L2: IEEE 802.3 Ethernet
+## IEEE 802.3 Ethernet
 
 **Outline:**
 - Introduction
@@ -160,13 +160,23 @@ unicast address, broadcast address, multicast address (P26)
 Host 在 detect collision 之后进行 backoff random delay，delay 结束后按照 1-persistent protocol (P35) 继续等待到  busy channel goes idle 后立刻进行传输。
 {{< /admonition >}}
 
-### Homework
-
-## L3: IEEE 802.11 Wireless LAN
+## IEEE 802.11 Wireless LAN
 
 无线网络这章太难了，战术性放弃
 
-## L4: IEEE 802.1D Spanning Tree Algorithm
+## IEEE 802.1D Spanning Tree Algorithm
+
+## Referenecs
+
+- [110-1 計算機網路 (清大開放式課程)](https://hackmd.io/@0xff07/network/https%3A%2F%2Fhackmd.io%2F%400xff07%2FByADDQ57Y)
+- [小菜学网络](https://fasionchan.com/network/)
+- [NUDT 高级计算机网络实验: 基于UDP的可靠传输](https://luzhixing12345.github.io/netlab/)
+- [可靠 UDP 的实现 (KCP over UDP)](https://sunyunqiang.com/blog/reliable_udp_protocol/) 
+- [基于 UDP 的可靠传输](https://www.bilibili.com/video/BV1di4y1z7Mn) [bilibili]
+- [实现基于 UDP 的网络文件传输器，程序员的经验大礼包项目](https://www.bilibili.com/video/BV12P411T78X) [bilibili]
+- [ping 命令但是用来通信，学习计算机网络好项目，也可能是校园网福利](https://www.bilibili.com/video/BV1Wd4y1b7b4) [bilibili]
+- [Implementing TCP in Rust](https://www.youtube.com/playlist?list=PLqbS7AVVErFivDY3iKAQk3_VAm8SXwt1X) [YouTube]
+- [Let\'s code a TCP/IP stack](http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/)
 
 
 [courseinfo]: https://ocw.nthu.edu.tw/ocw/index.php?page=course&cid=291&

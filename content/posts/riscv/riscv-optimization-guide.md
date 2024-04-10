@@ -1,5 +1,5 @@
 ---
-title: RISC-V Optimization Guide
+title: "RISC-V Optimization Guide 重点提示"
 subtitle:
 date: 2024-02-29T23:44:29+08:00
 # draft: true
@@ -18,7 +18,6 @@ tags:
   - Optimization
   - Architecture
 categories:
-  - draft
   - RISC-V
 hiddenFromHomePage: false
 hiddenFromSearch: false

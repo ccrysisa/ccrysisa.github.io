@@ -5,7 +5,7 @@
     <description>Architecture - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 29 Feb 2024 23:44:29 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/architecture/" rel="self" type="application/rss+xml" /><item>
-  <title>RISC-V Optimization Guide</title>
+  <title>RISC-V Optimization Guide 重点提示</title>
   <link>https://ccrysisa.github.io/posts/riscv-optimization-guide/</link>
   <pubDate>Thu, 29 Feb 2024 23:44:29 &#43;0800</pubDate>
   <author>ccrysisa</author>

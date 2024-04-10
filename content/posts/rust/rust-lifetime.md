@@ -208,6 +208,129 @@ fn make_wrapper(string: &str) -> StrWrap<'_> {...}
 fn make_wrapper<'a>(string: &'a str) -> StrWrap<'a> {...}
 ```
 
+## 生命周期型变和绑定
+
+{{< image src="/images/rust/rust-lifetime-07.png" >}}
+
+因为 Rust 是没有继承的概念，所以下面以 scala 来对类型的型变举例子进行讲解 (但是不需要你对 Scala 有任何了解):
+
+```scala
+class A
+class B extends A // B is subclass of A
+
+private def f1(a: A): Unit = {
+  println("f1 works!")
+}
+
+def main(args: Array[STring]): Unit = {
+  val a = new A
+  val b = new B
+
+  f1(a) // succeed
+  f1(b) // succeed
+}
+```
+
+这个例子很好理解，因为 `B` 是 `A` 的子类，所以作为参数传入函数 `f1` 显然是可以接受的。但是当泛型 (generic) 和子类 (subclass) 结合起来时，就变得复杂了:
+
+```scala
+class A
+class B extends A // B is subclass of A
+class Foo[T]      // generic
+
+private def f1(a: Foo[A]): Unit = {
+  println("f1 works!")
+}
+
+def main(args: Array[STring]): Unit = {
+  val foo_a = new Foo[A]
+  val foo_b = new Foo[B]
+
+  f1(a) // succeed
+  f1(b) // error
+}
+```
+
+在编译器看来，虽然 `B` 是 `A` 的子类，但是编译器认为 `Foo[A]` 和 `Foo[B]` 是两个独立的类型，这个被称为 **不变 (invariant)**。而我们的直觉是，这种情况 `Foo[B]` 应该是 `Foo[A]` 的子类，这就引出了 **协变 (covariant)**。将上面例子的第 3 行的 `Foo` 定义修改如下:
+
+```scala
+class Foo[+T]      // covariant
+```
+
+就可以让编译器推导出 `Foo[B]` 是 `Foo[A]` 的子类，进而让第 14 行编译通过。
+
+除此之外，还有 **逆变 (contra-variant)**，它会将子类关系反转。将上面例子的第 3 行的 `Foo` 定义修改如下:
+
+```scala
+class Foo[-T]      // contra-variant
+```
+
+编译器就会推导出关系: `Foo[A]` 是 `Foo[B]` 的子类，这个关系刚好是 `A` 和 `B` 的反转。
+
+在 Scala 中，函数之间的关系也体现了协变和逆变，即 **参数是逆变的，返回值是协变的**:
+
+```scala
+class A
+class B extends A // B is subclass of A
+class C extends B // C is subclass of B
+/* 
+ * `A => C` is subclass of `B => B` 
+ */
+```
+
+为什么 `A => C` 是 `B => B` 的子类呢？其实也很好理解，`B => B` 的返回值是 `B`，这个返回值可以用 `C` 来代替，但不能用 `A` 来代替，这显然满足协变。`B => B` 的参数是 `B`，这个参数可以用 `A` 来代替而不能用 `C` 来代替 (因为有一部分 `B` 不一定是 `C`，而 `B` 则一定是 `A`)，这满足逆变。
+
+{{< image src="/images/rust/rust-lifetime-08.png" >}}
+
+`T` 可以表示所有情况: ownership, immutable reference, mutable reference，例如 `T` 可以表示 `i32`, `&i32`, `&mut i32` (如果你使用过 `into_iterator` 的话应该不陌生)
+
+`T: 'a` 是说：如果 `T` 里面含有引用，那么这个引用的生命周期必须是 `'a` 的子类，即比 `'a` 长或和 `'a` 相等。`T: 'static` 也类似，表示 `T` 里面的引用 (如果有的话)，要么比 `'static` 长或和 `'static` 相等，因为不可能有比 `'static` 更长的生命周期，所以这个标注表示 **要么 `T` 里面的引用和 `'static` 一样长，要么 `T` 里面没有引用只有所有权 (owneship)**。
+
+- The Rust Reference: [Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html)
+
+{{< image src="/images/rust/rust-variance1.png" >}}
+
+- The Rustonomicon: [Subtyping and Variance](https://doc.rust-lang.org/nomicon/subtyping.html)
+
+{{< image src="/images/rust/rust-variance2.png" >}}
+
+基本和我们之前所说的一致，这里需要注意一点: 凡是涉及可变引用的 `T`，都是不变 (invariant)。这也很好理解，因为可变引用需要保证所引用的类型 `T` 是一致并且是唯一的，否则会扰乱 Rust 的引用模型。因为可变引用不仅可以改变所指向的 object 的内容，还可以改变自身，即改变指向的 object，如果此时 `T` 不是不变 (invariant) 的，那么可以将这个可变引用指向 `T` 的子类，这会导致该可变引用指向的 object 被可变借用一次后无法归还，从而导致后续再也无法引用该 object。此外还会导致原本没有生命周期约束的两个独立类型，被生命周期约束，具体见后面的例子。
+
+```rs
+struct Foo<'a> {
+    _phantom: PhantomData<&'a i32>,
+}
+
+fn foo<'short, 'long: 'short>( // long is subclass of short
+    mut short_foo: Foo<'short>,
+    mut long_foo:  Foo<'long>,
+) {
+    short_foo = long_foo;   // succeed
+    long_foo  = short_foo;  // error
+}
+```
+
+下面是一个可变引用的例子。参数 `short_foo` 和 `long_foo` 没有关系，是两个独立的类型，所以无法相互赋值，这保证了可变引用的模型约束。除此之外，如果可变引用的型变规则不是不变 (inariant) 则会导致 `short_foo` 和 `long_foo` 在函数 `foo` 调用后的生命周期约束为:   
+
+- `short_foo` $\leq$ `long_foo` (协变) 
+- `long_foo` $\leq$ `short_foo` (逆变)   
+
+而它们本身可能并没有这种约束，生命周期是互相独立的。
+
+```rs
+struct Foo<'a> {
+    _phantom: PhantomData<&'a i32>,
+}
+
+fn foo<'short, 'long: 'short>( // long is subclass of short
+    mut short_foo: &mut Foo<'short>,
+    mut long_foo:  &mut Foo<'long>,
+) {
+    short_foo = long_foo;   // error
+    long_foo  = short_foo;  // error
+}
+```
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
@@ -222,3 +345,5 @@ fn make_wrapper<'a>(string: &'a str) -> StrWrap<'a> {...}
 
 - [LifetimeKata](https://tfpk.github.io/lifetimekata/)
 - [The Rust Reference](https://doc.rust-lang.org/reference/)
+- [泛型中的型变 (协变，逆变，不可变)](https://juejin.cn/post/6952434934589947912)
+- [Variant Types and Polymorphism](https://www.cs.cornell.edu/courses/cs3110/2012sp/lectures/lec04-types/lec04.html)
