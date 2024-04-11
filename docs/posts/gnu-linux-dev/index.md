@@ -36,11 +36,7 @@ GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而�
 
 以下资源作为自学资源，用于补充自己不熟悉的操作，或者作为以上资料的补充工具手册。
 
-<<<<<<< HEAD
-- [Git 中文教学 - YouTube][git-tutorials-zh] ([学习记录]({{&lt; relref &#34;../toolbox/git-learn.md&#34; &gt;}}))
-=======
-- [Git 中文教学 - YouTube][git-tutorials-zh] ([学习记录]({{< relref "../toolkit/git-learn.md" >}}))
->>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
+- [Git 中文教学 - YouTube][git-tutorials-zh] ([学习记录]({{&lt; relref &#34;../toolkit/git-learn.md&#34; &gt;}}))
 - [30 天精通 Git 版本控制 - GitHub][learn-git-in-30-days]
 
 {{&lt; admonition warning &gt;}}

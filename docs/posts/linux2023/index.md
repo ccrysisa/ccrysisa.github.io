@@ -1,11 +1,7 @@
 # Linux 核心设计/实作 (Linux Kernel Internals)
 
 
-<<<<<<< HEAD
 &gt; 在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
-=======
-> 在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
->>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
 
 &lt;!--more--&gt;
 
@@ -14,16 +10,14 @@
 {{&lt; link href=&#34;/archives/Linux.pdf&#34; content=&#34;PDF&#34; external-icon=true &gt;}}
 
 {{&lt; admonition success &gt;}}
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 如果你学习时感到挫折，感到进度推进很慢，这很正常，因为 Jserv 的一个讲座，需要我们花费一个星期去消化 :rofl:
+=======
+如果你学习时感到挫折，感到进度推进很慢，这很正常，因为 Jserv 的一个讲座，需要我们花费一个星期去消化 :rofl: 并且 Jserv 也提到前 6 周课程的密度是比较大的
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; ca918a0972dc3c7d155998c5dfa36a48f678343b
 
 所以没必要为此焦虑，如果你觉得某个内容不太理解，可以尝试先去看其他讲座，将原先不懂的知识交给大脑隐式消化，过段时间再回来看，你的理解会大有不同。
 {{&lt; /admonition &gt;}}
-
-{{< admonition success >}}
-如果你学习时感到挫折，感到进度推进很慢，这很正常，因为 Jserv 的一个讲座，需要我们花费一个星期去消化 :rofl: 并且 Jserv 也提到前 6 周课程的密度是比较大的
-
-所以没必要为此焦虑，如果你觉得某个内容不太理解，可以尝试先去看其他讲座，将原先不懂的知识交给大脑隐式消化，过段时间再回来看，你的理解会大有不同。
-{{< /admonition >}}
 
 ------------------------------------------------------
 - Instructor: [Jim Huang](/User/jserv) (黃敬群) `&lt;jserv.tw@gmail.com&gt;`
@@ -133,35 +127,8 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
     - [review](https://hackmd.io/@sysprog/linux2023-review)`*`
 * Week3 隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz3) (內含作答表單)
 
-<<<<<<< HEAD
-* 第 4 週 (Mar 6, 7, 9): 數值系統 &#43; 編譯器
-    - [教材解說](https://youtu.be/cjq0OuUeepA)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
-    * 公告:
-        - 請填寫 [Google 表單](https://forms.gle/rANw1FmXxd2rB3dP8)，以利後續追蹤
-        - 《Demystifying the Linux CPU Scheduler》的書稿已寄送給成功大學的選課學生，旁聽的學員預計在 3 月 13 日取得 (第 5 週進度)
-    * 貢獻程式碼到 Linux 核心
-        - [第一次給 Linux Kernel 發 patch](https://hackmd.io/@rhythm/BkjJeugOv)
-        - [提交第一份 Patch 到 Linux Kernel](https://hackmd.io/@steven1lung/submitting-patches)
-        - [第一次發 patch 到 LKML](https://hackmd.io/@Risheng/ry5futJF9)
-    * [追求神乎其技的程式設計之道](https://vgod.medium.com/7cccc3c68f1e)
-        - 「可以看出抄襲風氣在台灣並不只是小時候在學校抄抄作業而已；媒體工作者在報導中任意抄襲及轉載是種不尊重自己專業的表現，不但隱含著一種應付了事的心態，更代表著這些人對於自己的工作沒有熱情，更沒有著一點堅持。如果要說我在美國看到這邊和台灣有什麼最大的不同，我想關鍵的差異就在對自己的工作有沒有熱情和堅持而已了。」
-        - 「程式藝術家也不過是在『簡潔』、『彈性』、『效率』這三大目標上進行一連串的取捨 (trade-off) 和最佳化。」
-    * [Linux 核心的紅黑樹](https://hackmd.io/@sysprog/linux-rbtree)
-    * [CS:APP 第 2 章重點提示和練習](https://hackmd.io/@sysprog/CSAPP-ch2)`*`
-    * 核心開發者當然要熟悉編譯器行為
-        - [Linus Torvalds 教你分析 gcc 行為](https://lkml.org/lkml/2019/2/25/1092)
-        - [Pointers are more abstract than you might expect in C](https://pvs-studio.com/en/blog/posts/cpp/0576/) / [HackerNews 討論](https://news.ycombinator.com/item?id=17439467)
-    * [C 編譯器原理和案例分析](https://hackmd.io/@sysprog/c-compiler-construction)`*`
-    * [C 語言: 未定義行為](https://hackmd.io/@sysprog/c-undefined-behavior)`*`: C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化
-    * [C 語言: 編譯器和最佳化原理](https://hackmd.io/@sysprog/c-compiler-optimization)`*`
-    * 《Demystifying the Linux CPU Scheduler》第 1 章
-    * [作業](https://hackmd.io/@sysprog/linux2023-homework4): 截止繳交日: Mar 30
-        * [quiz4](https://hackmd.io/@sysprog/HJaX8tuyh)
-    * Week4 隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz4) (內含作答表單)
-    - [課堂問答簡記](https://hackmd.io/@sysprog/rJVas7NJn)
-=======
-### 第 4 週: 數值系統 + 編譯器
-> (Mar 6, 7, 9)
+### 第 4 週: 數值系統 &#43; 編譯器
+&gt; (Mar 6, 7, 9)
 - [教材解說](https://youtu.be/cjq0OuUeepA)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
 * 公告:
     - 請填寫 [Google 表單](https://forms.gle/rANw1FmXxd2rB3dP8)，以利後續追蹤
@@ -186,7 +153,6 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
     * [quiz4](https://hackmd.io/@sysprog/HJaX8tuyh)
 * Week4 隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz4) (內含作答表單)
 - [課堂問答簡記](https://hackmd.io/@sysprog/rJVas7NJn)
->>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
 
 * 第 5 週 (Mar 13, 14, 16): Linux CPU scheduler
     - [教材解說](https://youtu.be/f-SprmkcOI0)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)

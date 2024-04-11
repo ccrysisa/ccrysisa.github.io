@@ -176,7 +176,7 @@ Host 在 detect collision 之后进行 backoff random delay，delay 结束后按
 - [实现基于 UDP 的网络文件传输器，程序员的经验大礼包项目](https://www.bilibili.com/video/BV12P411T78X) [bilibili]
 - [ping 命令但是用来通信，学习计算机网络好项目，也可能是校园网福利](https://www.bilibili.com/video/BV1Wd4y1b7b4) [bilibili]
 - [Implementing TCP in Rust](https://www.youtube.com/playlist?list=PLqbS7AVVErFivDY3iKAQk3_VAm8SXwt1X) [YouTube]
-- [Let\'s code a TCP/IP stack](http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/)
+- [Let\&#39;s code a TCP/IP stack](http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/)
 
 
 [courseinfo]: https://ocw.nthu.edu.tw/ocw/index.php?page=course&amp;cid=291&amp;

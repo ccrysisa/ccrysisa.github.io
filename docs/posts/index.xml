@@ -20,8 +20,6 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
-<<<<<<< HEAD
-=======
 </blockquote>]]></description>
 </item>
 <item>
@@ -40,7 +38,6 @@
   <guid>https://ccrysisa.github.io/posts/c-trick/</guid>
   <description><![CDATA[<blockquote>
 <p>本次講座將選定幾個案例，藉此解說 C 語言程式設計的技巧，像是對矩陣操作進行包裝、初始化特定結構的成員、追蹤物件配置的記憶體、Smart Pointer 等等。</p>
->>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
 </blockquote>]]></description>
 </item>
 <item>

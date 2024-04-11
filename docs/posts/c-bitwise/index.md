@@ -235,11 +235,7 @@ bwPixel = (a &lt;&lt; 24) &#43; (bw &lt;&lt; 16) &#43; (bw &lt;&lt; 8) &#43; bw;
 
 ## 类神经网络的 ReLU 极其常数时间复杂度实作
 
-<<<<<<< HEAD
-- {{&lt; link href=&#34;https://hackmd.io/@sysprog/constant-time-relu&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
-=======
-{{< link href="https://hackmd.io/@sysprog/constant-time-relu" content="原文地址" external-icon=true >}}
->>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
+{{&lt; link href=&#34;https://hackmd.io/@sysprog/constant-time-relu&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
 
 ReLU 定义如下:
 {{&lt; raw &gt;}}
@@ -300,11 +296,11 @@ double ReLU(float x) {
 
 ## 从 $\sqrt 2$ 的存在谈开平方根的快速运算
 
-{{< link href="https://hackmd.io/@sysprog/sqrt" content="原文地址" external-icon=true >}}
+{{&lt; link href=&#34;https://hackmd.io/@sysprog/sqrt&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 这一部分需要学员对现代数学观点有一些了解，强烈推荐修台大齐震宇老师的「数学潜水艇/新生营演讲」，齐老师的这些讲座难度和广度大致相当于其它院校开设的「数学导论」一课。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ### $\sqrt 2$ 的缘起和计算
 
@@ -332,35 +328,35 @@ double ReLU(float x) {
 
 牛顿法公式:
 $$
-p \approx p_0 -\dfrac{f(p_0)}{f'(p_0)}
+p \approx p_0 -\dfrac{f(p_0)}{f&#39;(p_0)}
 $$
 
 后面利用 $f(x) = x^2 - N = 0$ 求平方根的公式可以根据这个推导而来的，图形化解释 (切线) 也符合这个公式，自行推导:
 
-{{< raw >}}
+{{&lt; raw &gt;}}
 $$
 \begin{split}
-f(x) &= x^2-N = 0 \\
-b &= a - \frac{f(a)}{f'(a)} = a - \frac{a^2 - N}{2a} \\
-  &= \frac{a^2+N}{2a} = (a+\frac{N}{a}) \div 2
+f(x) &amp;= x^2-N = 0 \\
+b &amp;= a - \frac{f(a)}{f&#39;(a)} = a - \frac{a^2 - N}{2a} \\
+  &amp;= \frac{a^2&#43;N}{2a} = (a&#43;\frac{N}{a}) \div 2
 \end{split}
 $$
-{{< /raw >}}
+{{&lt; /raw &gt;}}
 
 ```c
 int mySqrt(int n)
 {
     if (n == 0)
         return 0;
-    if (n < 4)
+    if (n &lt; 4)
         return 1;
 
     unsigned int ans = n / 2;
-    if (ans > 65535)  // 65535 = 2^16 - 1
+    if (ans &gt; 65535)  // 65535 = 2^16 - 1
         ans = 65535;
     
-    while (ans * ans > n  || (ans + 1) * (ans + 1) <= n)
-        ans = (ans + n / ans) / 2;
+    while (ans * ans &gt; n  || (ans &#43; 1) * (ans &#43; 1) &lt;= n)
+        ans = (ans &#43; n / ans) / 2;
     return ans;
 }
 ```
@@ -373,9 +369,9 @@ int mySqrt(int n)
 
 ### 二进位的平方根
 
-在使用位运算计算平方根的程式码中，我们又见到了的 `union` 和 `do {...} whil (0)` 的运用。位运算求解平方根的核心在于: $n$ 可以根据 IEEE 754 表示为 $S\times1.Frac\times2^{127+E}$，这种表示法下求解平方根只需计算 $\sqrt{1.Frac}$ 和 $\sqrt{2^{(127+E)}}$ 两部分 (只考虑非负数的平方根)。虽然描述起来简单，但由于 IEEE 754 编码的复杂性，需要考虑很多情况，例如 $E$ 全 0 或全 1，因为此时对应的数值就不是之前表示的那样了 (指 $S\times1.Frac\times2^{127+E}$)，需要额外考量。
+在使用位运算计算平方根的程式码中，我们又见到了的 `union` 和 `do {...} whil (0)` 的运用。位运算求解平方根的核心在于: $n$ 可以根据 IEEE 754 表示为 $S\times1.Frac\times2^{127&#43;E}$，这种表示法下求解平方根只需计算 $\sqrt{1.Frac}$ 和 $\sqrt{2^{(127&#43;E)}}$ 两部分 (只考虑非负数的平方根)。虽然描述起来简单，但由于 IEEE 754 编码的复杂性，需要考虑很多情况，例如 $E$ 全 0 或全 1，因为此时对应的数值就不是之前表示的那样了 (指 $S\times1.Frac\times2^{127&#43;E}$)，需要额外考量。
 
-{{< image src="https://hackmd.io/_uploads/Hymhown-9.png" >}}
+{{&lt; image src=&#34;https://hackmd.io/_uploads/Hymhown-9.png&#34; &gt;}}
 - sign: 1 bit `0x80000000`
 - exponent: 8 bits `0x7f800000`
 - fraction: 23 bits `0x007fffff`
@@ -386,11 +382,11 @@ int mySqrt(int n)
 
 当然这里要求和之前一样，平方根只需要整数精度即可，所以只需求出指数部分的平方根，然后通过二分法进行逼近即可满足要求 (因为剩余部分是 $1.Frac$ 并不影响平方根的整数精度，但是会导致一定误差，所以需要对指数部分进行二分逼近求值)。
 
-> 先求出整數 `n` 開根號後結果的 $1.FRACTION \times 2^{EXPONENT}$ 的 $EXPONENT$ 部份，則我們知道 `n` 開根號後的結果 $k$ 應滿足 $2^{EXPONENT} \leq k < 2^{EXPONENT+1}$，因此後續可以用二分搜尋法找出結果。
+&gt; 先求出整數 `n` 開根號後結果的 $1.FRACTION \times 2^{EXPONENT}$ 的 $EXPONENT$ 部份，則我們知道 `n` 開根號後的結果 $k$ 應滿足 $2^{EXPONENT} \leq k &lt; 2^{EXPONENT&#43;1}$，因此後續可以用二分搜尋法找出結果。
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 这段程式码可以再一次看到 枚举 `union` 和 宏 `do {...} while (0)` 的应用之外，主要是根据 IEEE 754 编码规范进行求解，所以需要对浮点数的编码格式有一定认知，可以参考阅读: [你所不知道的 C 语言: 浮点数运算](https://hackmd.io/@sysprog/c-floating-point)。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ### Fast Inverse Square Root (平方根倒数)
 
@@ -398,45 +394,45 @@ int mySqrt(int n)
 
 - [x] YouTube: [没有显卡的年代，这群程序员用4行代码优化游戏](https://www.youtube.com/watch?v=g1r3iLejTw0)
 
-使用 IEEE 754 表示任意单精度浮点数为: $x = (1 + \frac{M}{2^{23}}) \times 2^{E-127}$，则该 $x$ 对应的对数为
+使用 IEEE 754 表示任意单精度浮点数为: $x = (1 &#43; \frac{M}{2^{23}}) \times 2^{E-127}$，则该 $x$ 对应的对数为
 
-{{< raw >}}
+{{&lt; raw &gt;}}
 $$
 \begin{split}
-\log x &= \log{(1 + \frac{M}{2^{23}}) \times 2^{E-127}} \\
-       &= \log{(1 + \frac{M}{2^{23}})} + \log{2^{E-127}} \\
-       &= \frac{M}{2^{23}} + E - 127 \\
-       & = \frac{1}{2^{23}}(2^{23} \times E + M) - 127 \\
-       & = \frac{1}{2^{23}}X - 127
+\log x &amp;= \log{(1 &#43; \frac{M}{2^{23}}) \times 2^{E-127}} \\
+       &amp;= \log{(1 &#43; \frac{M}{2^{23}})} &#43; \log{2^{E-127}} \\
+       &amp;= \frac{M}{2^{23}} &#43; E - 127 \\
+       &amp; = \frac{1}{2^{23}}(2^{23} \times E &#43; M) - 127 \\
+       &amp; = \frac{1}{2^{23}}X - 127
 \end{split}
 $$
-{{< /raw >}}
+{{&lt; /raw &gt;}}
 
-注意上面处理 $\log{(1 + \frac{M}{2^{23}})}$ 部分时使用近似函数 $f(x) = x$ 代替了，当然会有一些误差，后面会提。最后的 $2^{23} \times E + M$ 部分只和浮点数的表示域相关，并且 **这个运算的结果值和以二补数编码解释浮点数的数值相同** (参考上面的 IEEE 754 浮点数结构图，以及二补数的数值计算规则)，我们用一个大写标识 $X$ 来标记其只与浮点数编码相关，并且对应二补数编码下的数值。
+注意上面处理 $\log{(1 &#43; \frac{M}{2^{23}})}$ 部分时使用近似函数 $f(x) = x$ 代替了，当然会有一些误差，后面会提。最后的 $2^{23} \times E &#43; M$ 部分只和浮点数的表示域相关，并且 **这个运算的结果值和以二补数编码解释浮点数的数值相同** (参考上面的 IEEE 754 浮点数结构图，以及二补数的数值计算规则)，我们用一个大写标识 $X$ 来标记其只与浮点数编码相关，并且对应二补数编码下的数值。
 
 推导出对数的通用公式后，接下来就可以推导平方根倒数了，即求得对应数值的 $-\frac{1}{2}$ 次方。假设 $a$ 是 $y$ 的平方根倒数，则有等式:
 
-{{< raw >}}
+{{&lt; raw &gt;}}
 $$
 \begin{split}
-\log a &= \log{y^{-\frac{1}{2}}} \\
-\log a &= -\frac{1}{2} \log y \\
--\frac{1}{2^{23}}A - 127 &= -\frac{1}{2}(-\frac{1}{2^{23}} - 127) \\
-A &= 381 \times 2^{22} - \frac{1}{2} Y
+\log a &amp;= \log{y^{-\frac{1}{2}}} \\
+\log a &amp;= -\frac{1}{2} \log y \\
+-\frac{1}{2^{23}}A - 127 &amp;= -\frac{1}{2}(-\frac{1}{2^{23}} - 127) \\
+A &amp;= 381 \times 2^{22} - \frac{1}{2} Y
 \end{split}
 $$
-{{< /raw >}}
+{{&lt; /raw &gt;}}
 
 中间将数值由浮点数转换成二补数编码表示，并求得最终的浮点数表示为 $381 \times 2^{22} - \frac{1}{2} Y$，其中的 $381 \times 2^{22}$ 对应的 16 进制恰好为 `0x5f400000`，这已经很接近我们看到的魔数了，但还有一点偏差。
-这是因为在计算 $\log{(1 + \frac{M}{2^{23}})}$ 时直接使用 $f(x) = x$ 导致的总体误差还是较大，但是只需要将其稍微往 $y$ 轴正方向偏移一些就可以减少总体误差 (机器学习中常用的技巧 :rofl:)，所以使用 $\frac{M}{2^{23}} + \lambda$ 代替原先的 $\frac{M}{2^{23}}$ ($\lambda$ 为修正的误差且 $\lambda > 0$)，这会导致最终结果的 381 发生稍微一些变化 (因为二补数编码解释浮点数格式部分 $X$ 不能动，只能影响常数 $127$，而常数 $127$ 又直接影响最终结果的 $381$ 这类常数部分)，进而产生魔数 `0x5f3759df`。
+这是因为在计算 $\log{(1 &#43; \frac{M}{2^{23}})}$ 时直接使用 $f(x) = x$ 导致的总体误差还是较大，但是只需要将其稍微往 $y$ 轴正方向偏移一些就可以减少总体误差 (机器学习中常用的技巧 :rofl:)，所以使用 $\frac{M}{2^{23}} &#43; \lambda$ 代替原先的 $\frac{M}{2^{23}}$ ($\lambda$ 为修正的误差且 $\lambda &gt; 0$)，这会导致最终结果的 381 发生稍微一些变化 (因为二补数编码解释浮点数格式部分 $X$ 不能动，只能影响常数 $127$，而常数 $127$ 又直接影响最终结果的 $381$ 这类常数部分)，进而产生魔数 `0x5f3759df`。
  
 ```c
 float InvSqrt(float x)
 {  
     float xhalf = 0.5f * x;
-    int i = *(int *) &x;
-    i = 0x5f3759df - (i >> 1);
-    x = *(float *) &i;
+    int i = *(int *) &amp;x;
+    i = 0x5f3759df - (i &gt;&gt; 1);
+    x = *(float *) &amp;i;
     x = x * (1.5f - xhalf * x * x); // only once newton iteration
     return x;
 }
@@ -444,7 +440,7 @@ float InvSqrt(float x)
 
 ## C 语言的 bit-field
 
-{{< link href="https://hackmd.io/@sysprog/c-bitfield" content="原文地址" external-icon=true >}}
+{{&lt; link href=&#34;https://hackmd.io/@sysprog/c-bitfield&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
 
 ```c
 #include &lt;stdbool.h&gt;
