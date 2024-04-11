@@ -1,7 +1,11 @@
 # 你所不知道的 C 语言: goto 和流程控制篇
 
 
+<<<<<<< HEAD
 &gt; goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這樣看待，至少在 Linux 核心原始程式碼中，goto 是大量存在 (跟你想像中不同吧)。有時不用 goto 會寫出更可怕的程式碼。
+=======
+> goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這樣看待，至少在 Linux 核心原始程式碼中，goto 是大量存在 (跟你想像中不同吧)。有時不用 goto 會寫出更可怕的程式碼。
+>>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
 
 &lt;!--more--&gt;
 
@@ -37,7 +41,11 @@ Stack Overflow 上的相关讨论:
 
 - [ ] [Using goto for error handling in C](http://eli.thegreenplace.net/2009/04/27/using-goto-for-error-handling-in-c)
 
+<<<<<<< HEAD
 &gt; 以 `setjmp` 为关键字进行检索
+=======
+> 以 `setjmp` 为关键字进行检索
+>>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
 
 相关实作:
 
@@ -45,7 +53,11 @@ Stack Overflow 上的相关讨论:
 - [OpenBSD&#39;s httpd](https://github.com/reyk/httpd/blob/master/httpd/httpd.c#L564)
 - Linux kernel 里 NFS inode 验证的函数: [fs/nfs/inode.c](https://github.com/torvalds/linux/blob/v5.15/fs/nfs/inode.c)
 
+<<<<<<< HEAD
 &gt; 以 `goto` 为关键字进行检索
+=======
+> 以 `goto` 为关键字进行检索
+>>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
 
 Wikipedia: [Common usage patterns of Goto](https://en.wikipedia.org/wiki/Goto#Common_usage_patterns)
 
@@ -57,9 +69,15 @@ Wikipedia: [Common usage patterns of Goto](https://en.wikipedia.org/wiki/Goto#Co
 - bounds checking
 - branch prediction
 
+<<<<<<< HEAD
 &gt; bounds checking 是在 switch 中執行的一個環節，每次迴圈中檢查是否有 default case 的狀況，即使程式中的 switch 沒有用到 default case，編譯期間仍會產生強制檢查的程式，所以 switch 會較 computed goto 多花一個 bounds checking 的步驟
 
 &gt; branch prediction 的部分，switch 需要預測接下來跳到哪個分支 case，而 computed goto 則是在每個 instruction 預測下一個 instruction，這之中比較直覺的想法是 computed goto 的prediction可以根據上個指令來預測，但是 switch 的prediction每次預測沒辦法根據上個指令，因此在 branch prediction accuracy 上 computed goto 會比較高。
+=======
+> bounds checking 是在 switch 中執行的一個環節，每次迴圈中檢查是否有 default case 的狀況，即使程式中的 switch 沒有用到 default case，編譯期間仍會產生強制檢查的程式，所以 switch 會較 computed goto 多花一個 bounds checking 的步驟
+
+> branch prediction 的部分，switch 需要預測接下來跳到哪個分支 case，而 computed goto 則是在每個 instruction 預測下一個 instruction，這之中比較直覺的想法是 computed goto 的prediction可以根據上個指令來預測，但是 switch 的prediction每次預測沒辦法根據上個指令，因此在 branch prediction accuracy 上 computed goto 會比較高。
+>>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
 
 ## do {...} while (0) 宏
 
@@ -67,7 +85,11 @@ Wikipedia: [Common usage patterns of Goto](https://en.wikipedia.org/wiki/Goto#Co
 
 - [x] Stack Overflow: [C multi-line macro: do/while(0) vs scope block](https://stackoverflow.com/questions/1067226/c-multi-line-macro-do-while0-vs-scope-block)
 
+<<<<<<< HEAD
 我写了 [相关笔记]({{&lt; relref &#34;./c-preprocessor/#do----while-0-%E5%AE%8F&#34; &gt;}}) 记录在前置处理器篇。
+=======
+我写了 [相关笔记]({{< relref "./c-preprocessor/#do----while-0-%E5%AE%8F" >}}) 记录在前置处理器篇。
+>>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
 
 ## 用 goto 实作 RAII 开发风格
 
@@ -84,6 +106,7 @@ Linux 核心中的实作:
 
 `switch-case` 语句中的 case 部分本质上是 label，所以使用其它语句 (例如 `if`) 将其包裹起来并不影响 `switch` 语句的跳转。
 
+<<<<<<< HEAD
 - [Something You May Not Know About the Switch Statement in C/C&#43;&#43;](https://www.codeproject.com/Articles/100473/Something-You-May-Not-Know-About-the-Switch-Statem)
 - [How to Get Fired Using Switch Statements &amp; Statement Expressions](http://blog.robertelder.org/switch-statements-statement-expressions/)
 
@@ -93,6 +116,17 @@ Linux 核心中的实作:
 
 - [ ] Wikipedia: [Duff&#39;s Device](https://en.wikipedia.org/wiki/Duff%27s_device)
 - [ ] [Duff&#39;s Device 的详细解释](http://c-faq.com/misc/duffexpln.html)
+=======
+- [Something You May Not Know About the Switch Statement in C/C++](https://www.codeproject.com/Articles/100473/Something-You-May-Not-Know-About-the-Switch-Statem)
+- [How to Get Fired Using Switch Statements & Statement Expressions](http://blog.robertelder.org/switch-statements-statement-expressions/)
+
+## Duff's Device
+
+> 这个技巧常用于内存数据的复制，类似于 `memcpy`
+
+- [ ] Wikipedia: [Duff's Device](https://en.wikipedia.org/wiki/Duff%27s_device)
+- [ ] [Duff's Device 的详细解释](http://c-faq.com/misc/duffexpln.html)
+>>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
 - [ ] [Tom Duff 本人的解释](http://doc.cat-v.org/bell_labs/duffs_device)
 
 ## co-routine 应用

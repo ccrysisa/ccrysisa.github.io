@@ -16,7 +16,7 @@ weight: 0
 tags:
   - Go
 categories:
-  - Toolbox
+  - Toolkit
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

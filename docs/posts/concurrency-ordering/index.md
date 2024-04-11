@@ -3,6 +3,8 @@
 
 &lt;!--more--&gt;
 
+- {{< link href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fconcurrency-ordering" content="原文地址" external-icon=true >}}
+
 ## Happens-before
 
 短片:

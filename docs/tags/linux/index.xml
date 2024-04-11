@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/tags/linux/</link>
     <description>Linux - 标签 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 28 Mar 2024 12:21:48 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 10 Apr 2024 16:09:35 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -13,6 +13,14 @@
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
 </blockquote>]]></description>
+</item>
+<item>
+  <title>并行程序设计: POSIX Threads</title>
+  <link>https://ccrysisa.github.io/posts/posix-threads/</link>
+  <pubDate>Wed, 10 Apr 2024 16:09:35 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/posix-threads/</guid>
+  <description><![CDATA[]]></description>
 </item>
 <item>
   <title>Deepin 20.9 KVM 安装和管理</title>
@@ -85,14 +93,6 @@
   <description><![CDATA[<blockquote>
 <p>面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。</p>
 </blockquote>]]></description>
-</item>
-<item>
-  <title>深度操作系统 Deepin 20.9 安装配置</title>
-  <link>https://ccrysisa.github.io/posts/deepin20.9/</link>
-  <pubDate>Wed, 24 Jan 2024 18:59:56 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/deepin20.9/</guid>
-  <description><![CDATA[<p>记录一下折腾 Deepin 20.9 的物理机的过程与相关的配置。</p>]]></description>
 </item>
 </channel>
 </rss>

@@ -1,7 +1,11 @@
 # 你所不知道的 C 语言: 前置处理器应用篇
 
 
+<<<<<<< HEAD
 &gt; C 语言之所以不需要时常发布新的语言特性又可以保持活力，前置处理器 (preprocessor) 是很重要的因素，有心者可进行「扩充」C 语言。
+=======
+> C 语言之所以不需要时常发布新的语言特性又可以保持活力，前置处理器 (preprocessor) 是很重要的因素，有心者可进行「扩充」C 语言。
+>>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
 
 &lt;!--more--&gt;
 
@@ -300,9 +304,15 @@ Linux 核心原始程式码也善用宏来扩充
 
 - {{&lt; link href=&#34;https://hackmd.io/@sysprog/c-bitfield&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
 
+<<<<<<< HEAD
 {{&lt; admonition &gt;}}
 简单来说就是编译时期就进行检查的 `assert`，我写了 [相关笔记]({{&lt; relref &#34;./c-bitwise.md#linux-核心-build_bug_on_zero&#34; &gt;}}) 来说明它的原理。
 {{&lt; /admonition &gt;}}
+=======
+{{< admonition >}}
+简单来说就是编译时期就进行检查的 `assert`，我写了 [相关笔记]({{< relref "./c-bitwise.md#linux-核心-build_bug_on_zero" >}}) 来说明它的原理。
+{{< /admonition >}}
+>>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
 
 ## Linux 核心原始程式码宏: max, min
 

@@ -96,6 +96,13 @@ This post is used to record the process of my English learning.
 - [x] 029: Come in, Amy
 - [x] 031: Where's Sally
 - [x] 033: A fine day
+- [x] 035: Our village
+- [x] 037: Making a bookcase
+- [x] 039: Don't drop it!
+- [x] 041: Penny's bag
+- [x] 043: Hurry up!
+- [x] 045: The boss's letter
+- [x] 047: A cup of coffee
 
 ---
 
@@ -133,4 +140,16 @@ sweep
 - *v.* to clean something, especially a floor by using a brush to collect the dirt into one place from which it can be removed.
 
 aeroplane
+- *n.*
+
+vase
+- *n.*
+
+tobacco
+- *n.*
+
+kettle
+- *n.*
+
+cupboard
 - *n.*

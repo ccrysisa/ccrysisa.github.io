@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/categories/linux-kernel-internals/</link>
     <description>Linux Kernel Internals - 分类 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 05 Apr 2024 11:39:34 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/linux-kernel-internals/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 10 Apr 2024 16:09:35 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/linux-kernel-internals/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -12,6 +12,27 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+<<<<<<< HEAD
+=======
+</blockquote>]]></description>
+</item>
+<item>
+  <title>并行程序设计: POSIX Threads</title>
+  <link>https://ccrysisa.github.io/posts/posix-threads/</link>
+  <pubDate>Wed, 10 Apr 2024 16:09:35 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/posix-threads/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
+  <title>你所不知道的 C 语言: 技巧篇</title>
+  <link>https://ccrysisa.github.io/posts/c-trick/</link>
+  <pubDate>Wed, 10 Apr 2024 16:06:08 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-trick/</guid>
+  <description><![CDATA[<blockquote>
+<p>本次講座將選定幾個案例，藉此解說 C 語言程式設計的技巧，像是對矩陣操作進行包裝、初始化特定結構的成員、追蹤物件配置的記憶體、Smart Pointer 等等。</p>
+>>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
 </blockquote>]]></description>
 </item>
 <item>
@@ -82,26 +103,6 @@
   <guid>https://ccrysisa.github.io/posts/concurrency-concepts/</guid>
   <description><![CDATA[<blockquote>
 <p>透过建立 Concurrency 和 Parallelism、Mutex 与 Semaphore 的基本概念，本讲座将透过 POSIX Tread 探讨 thread pool, Lock-Free Programming, lock-free 使用的 atomic 操作, memory ordering, M:N threading model 等进阶议题。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>基于 C 语言标准研究与系统程序安全议题</title>
-  <link>https://ccrysisa.github.io/posts/c-std-security/</link>
-  <pubDate>Tue, 05 Mar 2024 16:32:40 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-std-security/</guid>
-  <description><![CDATA[<blockquote>
-<p>借由阅读 C 语言标准理解规范是研究系统安全最基础的步骤，但很多人都忽略阅读规范这点，而正因对于规范的不了解、撰写程序的不严谨，导致漏洞的产生的案例比比皆是，例如 2014 年的 OpenSSL Heartbleed Attack<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> 便是便是因为使用 memcpy 之际缺乏对应内存范围检查，造成相当大的危害。本文重新梳理 C 语言程序设计的细节，并借由调试器帮助理解程序的运作。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>Linux 核心设计: 发展动态回顾</title>
-  <link>https://ccrysisa.github.io/posts/linux-dev-review/</link>
-  <pubDate>Sun, 03 Mar 2024 16:07:14 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/linux-dev-review/</guid>
-  <description><![CDATA[<blockquote>
-<p>本講座將以 Thorsten Leemhuis 在 FOSDEM 2020 開場演說 &ldquo;Linux kernel – Solving big problems in small steps for more than 20 years&rdquo; (slides) 為主軸，嘗試歸納自 21 世紀第一年開始的 Linux 核心 2.4 版到如今的 5.x 版，中間核心開發者如何克服 SMP (Symmetric multiprocessing), scalability, 及各式硬體架構和周邊裝置支援等難題，過程中提出全面移除 BKL (Big kernel lock)、實作虛擬化技術 (如 Xen 和 KVM)、提出 namespace 和 cgroups 從而確立容器化 (container) 的能力，再來是核心發展的明星技術 eBPF 會在既有的基礎之上，帶來 XDP 和哪些令人驚豔的機制呢？又，Linux 核心終於正式納入發展十餘年的 PREEMPT_RT，使得 Linux 核心得以成為硬即時的作業系統，對內部設計有哪些衝擊？AIO 後繼的 io_uring 讓 Linux 有更優雅且高效的非同步 I/O 存取，我們該如何看待？</p>
 </blockquote>]]></description>
 </item>
 </channel>

@@ -52,10 +52,17 @@ This post is used to record the process of my English learning.
 - [x] 019: Tired and thirsty
 - [x] 021: Which book?
 - [x] 023: Which glasses?
+<<<<<<< HEAD
 - [x] 025: Mrs. Smith&#39;s kitchen
 - [x] 027: Mrs. Smith&#39;s living room
 - [x] 029: Come in, Amy
 - [x] 031: Where&#39;s Sally
+=======
+- [x] 025: Mrs. Smith's kitchen
+- [x] 027: Mrs. Smith's living room
+- [x] 029: Come in, Amy
+- [x] 031: Where's Sally
+>>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
 - [x] 033: A fine day
 
 ---

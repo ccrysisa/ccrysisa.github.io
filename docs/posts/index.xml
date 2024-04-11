@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/posts/</link>
     <description>所有文章 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 05 Apr 2024 17:52:13 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 10 Apr 2024 16:09:35 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
   <title>English Everyday</title>
   <link>https://ccrysisa.github.io/posts/english/</link>
   <pubDate>Sat, 30 Mar 2024 12:17:31 &#43;0800</pubDate>
@@ -20,6 +20,27 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+<<<<<<< HEAD
+=======
+</blockquote>]]></description>
+</item>
+<item>
+  <title>并行程序设计: POSIX Threads</title>
+  <link>https://ccrysisa.github.io/posts/posix-threads/</link>
+  <pubDate>Wed, 10 Apr 2024 16:09:35 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/posix-threads/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
+  <title>你所不知道的 C 语言: 技巧篇</title>
+  <link>https://ccrysisa.github.io/posts/c-trick/</link>
+  <pubDate>Wed, 10 Apr 2024 16:06:08 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-trick/</guid>
+  <description><![CDATA[<blockquote>
+<p>本次講座將選定幾個案例，藉此解說 C 語言程式設計的技巧，像是對矩陣操作進行包裝、初始化特定結構的成員、追蹤物件配置的記憶體、Smart Pointer 等等。</p>
+>>>>>>> ca918a0972dc3c7d155998c5dfa36a48f678343b
 </blockquote>]]></description>
 </item>
 <item>
@@ -83,28 +104,6 @@
   <guid>https://ccrysisa.github.io/posts/subtying-and-variance/</guid>
   <description><![CDATA[<blockquote>
 <p>In this episode of Crust of Rust, we go over subtyping and variance — a niche part of Rust that most people don&rsquo;t have to think about, but which is deeply ingrained in some of Rust&rsquo;s borrow ergonomics, and occasionally manifests in confusing ways. In particular, we explore how trying to implement the relatively straightforward <code>strtok</code> function from C/C++ in Rust quickly lands us in a place where the function is more or less impossible to call due to variance!</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: 递归调用篇</title>
-  <link>https://ccrysisa.github.io/posts/c-recursion/</link>
-  <pubDate>Sat, 16 Mar 2024 20:56:18 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-recursion/</guid>
-  <description><![CDATA[<blockquote>
-<p>在许多应用程序中，递归 (recursion) 可以简单又优雅地解决貌似繁琐的问题，也就是不断地拆解原有问题为相似的子问题，直到无法拆解为止，并且定义最简化状况的处理机制，一如数学思维。递归对 C 语言程序开发者来说，绝对不会陌生，但能掌握者却少，很多人甚至难以讲出汉诺塔之外的使用案例。</p>
-<p>究竟递归是如何优雅地解决真实世界的问题，又如何兼顾执行效率呢》我们从运作原理开始探讨，搭配若干 C 程序解说，并且我们将以简化过的 UNIX 工具为例，分析透过递归来大幅缩减程式码。</p>
-<p>或许跟你想象中不同，Linux 核心的原始程式码里头也用到递归函数呼叫，特别在较复杂的实作，例如文件系统，善用递归可大幅缩减程式码，但这也导致追踪程序运作的难度大增。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>Linux 核心的 hash table 实作</title>
-  <link>https://ccrysisa.github.io/posts/linux-hashtable/</link>
-  <pubDate>Sat, 16 Mar 2024 10:59:36 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/linux-hashtable/</guid>
-  <description><![CDATA[<blockquote>
-<p>Linux 核心如同其它复杂的资讯系统，也提供 <a href="https://en.wikipedia.org/wiki/Hash_table"target="_blank" rel="external nofollow noopener noreferrer">hash table</a> 的实作，但其原始程式码中却藏有间接指针 (可参见 <a href="https://hackmd.io/@sysprog/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">你所不知道的 C 语言: linked list 和非连续内存</a>) 的巧妙和数学奥秘。</p>
 </blockquote>]]></description>
 </item>
 </channel>
