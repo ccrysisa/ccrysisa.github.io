@@ -111,7 +111,7 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
 - [x] [C 語言: Bitwise 操作](https://hackmd.io/@sysprog/c-bitwise)`*`
     - Linux 核心原始程式碼存在大量 bit(-wise) operations (簡稱 bitops)，頗多乍看像是魔法的 C 程式碼就是 bitops 的組合
     - [x] [類神經網路的 ReLU 及其常數時間複雜度實作](https://hackmd.io/@sysprog/constant-time-relu)
-    - [ ] [從 √2 的存在談開平方根的快速運算](https://hackmd.io/@sysprog/sqrt)
+    - [x] [從 √2 的存在談開平方根的快速運算](https://hackmd.io/@sysprog/sqrt)
 * [x] [Linux 核心的 hash table 實作](https://hackmd.io/@sysprog/linux-hashtable)
 * [x] [為什麼要深入學習 C 語言？](https://hackmd.io/@sysprog/c-standards)`*`
     - C 語言發明者 Dennis M. Ritchie 說：「C 很彆扭又缺陷重重，卻異常成功。固然有歷史的巧合推波助瀾，可也的確是因為它能滿足於系統軟體實作的程式語言期待：既有相當的效率來取代組合語言，又可充分達到抽象且流暢，能用於描述在多樣環境的演算法。」
@@ -146,44 +146,47 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
     - [ ] Part 2
     - [ ] Part 3
     - [ ] Part 4
-* [C 語言: 函式呼叫](https://hackmd.io/@sysprog/c-function)`*`
+* [ ] [C 語言: 函式呼叫](https://hackmd.io/@sysprog/c-function)`*`
     - 著重在計算機架構對應的支援和行為分析
 * [x] [C 語言: 遞迴呼叫](https://hackmd.io/@sysprog/c-recursion)`*`
     - 或許跟你想像中不同，Linux 核心的原始程式碼裡頭也用到遞迴函式呼叫，特別在較複雜的實作，例如檔案系統，善用遞迴可大幅縮減程式碼，但這也導致追蹤程式運作的難度大增
 * [x] [C 語言: 前置處理器應用](https://hackmd.io/@sysprog/c-preprocessor)`*`
     - C 語言之所以不需要時常發佈新的語言特徵又可以保持活力，前置處理器 (preprocessor) 是很重要的因素，有心者可逕行「擴充」C 語言
-* [C 語言: goto 和流程控制](https://hackmd.io/@sysprog/c-control-flow)`*`
+* [ ] [C 語言: goto 和流程控制](https://hackmd.io/@sysprog/c-control-flow)`*`
     - goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這樣看待，至少在 Linux 核心原始程式碼中，goto 是大量存在 (跟你想像中不同吧)。有時不用 goto 會寫出更可怕的程式碼
-* [C 語言程式設計技巧](https://hackmd.io/@sysprog/c-trick)`*`
+* [ ] [C 語言程式設計技巧](https://hackmd.io/@sysprog/c-trick)`*`
 * [作業](https://hackmd.io/@sysprog/linux2023-homework3): 截止繳交日: Mar 21
-    - [fibdrv](https://hackmd.io/@sysprog/linux2023-fibdrv)`*`, [quiz3](https://hackmd.io/@sysprog/H1hV29nRj), [review](https://hackmd.io/@sysprog/linux2023-review)`*`
+    - [fibdrv](https://hackmd.io/@sysprog/linux2023-fibdrv)`*`
+    - [quiz3](https://hackmd.io/@sysprog/H1hV29nRj)
+    - [review](https://hackmd.io/@sysprog/linux2023-review)`*`
 * Week3 隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz3) (內含作答表單)
 
-* 第 4 週 (Mar 6, 7, 9): 數值系統 + 編譯器
-    - [教材解說](https://youtu.be/cjq0OuUeepA)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
-    * 公告:
-        - 請填寫 [Google 表單](https://forms.gle/rANw1FmXxd2rB3dP8)，以利後續追蹤
-        - 《Demystifying the Linux CPU Scheduler》的書稿已寄送給成功大學的選課學生，旁聽的學員預計在 3 月 13 日取得 (第 5 週進度)
-    * 貢獻程式碼到 Linux 核心
-        - [第一次給 Linux Kernel 發 patch](https://hackmd.io/@rhythm/BkjJeugOv)
-        - [提交第一份 Patch 到 Linux Kernel](https://hackmd.io/@steven1lung/submitting-patches)
-        - [第一次發 patch 到 LKML](https://hackmd.io/@Risheng/ry5futJF9)
-    * [追求神乎其技的程式設計之道](https://vgod.medium.com/7cccc3c68f1e)
-        - 「可以看出抄襲風氣在台灣並不只是小時候在學校抄抄作業而已；媒體工作者在報導中任意抄襲及轉載是種不尊重自己專業的表現，不但隱含著一種應付了事的心態，更代表著這些人對於自己的工作沒有熱情，更沒有著一點堅持。如果要說我在美國看到這邊和台灣有什麼最大的不同，我想關鍵的差異就在對自己的工作有沒有熱情和堅持而已了。」
-        - 「程式藝術家也不過是在『簡潔』、『彈性』、『效率』這三大目標上進行一連串的取捨 (trade-off) 和最佳化。」
-    * [Linux 核心的紅黑樹](https://hackmd.io/@sysprog/linux-rbtree)
-    * [CS:APP 第 2 章重點提示和練習](https://hackmd.io/@sysprog/CSAPP-ch2)`*`
-    * 核心開發者當然要熟悉編譯器行為
-        - [Linus Torvalds 教你分析 gcc 行為](https://lkml.org/lkml/2019/2/25/1092)
-        - [Pointers are more abstract than you might expect in C](https://pvs-studio.com/en/blog/posts/cpp/0576/) / [HackerNews 討論](https://news.ycombinator.com/item?id=17439467)
-    * [C 編譯器原理和案例分析](https://hackmd.io/@sysprog/c-compiler-construction)`*`
-    * [C 語言: 未定義行為](https://hackmd.io/@sysprog/c-undefined-behavior)`*`: C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化
-    * [C 語言: 編譯器和最佳化原理](https://hackmd.io/@sysprog/c-compiler-optimization)`*`
-    * 《Demystifying the Linux CPU Scheduler》第 1 章
-    * [作業](https://hackmd.io/@sysprog/linux2023-homework4): 截止繳交日: Mar 30
-        * [quiz4](https://hackmd.io/@sysprog/HJaX8tuyh)
-    * Week4 隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz4) (內含作答表單)
-    - [課堂問答簡記](https://hackmd.io/@sysprog/rJVas7NJn)
+### 第 4 週: 數值系統 + 編譯器
+> (Mar 6, 7, 9)
+- [教材解說](https://youtu.be/cjq0OuUeepA)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
+* 公告:
+    - 請填寫 [Google 表單](https://forms.gle/rANw1FmXxd2rB3dP8)，以利後續追蹤
+    - 《Demystifying the Linux CPU Scheduler》的書稿已寄送給成功大學的選課學生，旁聽的學員預計在 3 月 13 日取得 (第 5 週進度)
+* 貢獻程式碼到 Linux 核心
+    - [第一次給 Linux Kernel 發 patch](https://hackmd.io/@rhythm/BkjJeugOv)
+    - [提交第一份 Patch 到 Linux Kernel](https://hackmd.io/@steven1lung/submitting-patches)
+    - [第一次發 patch 到 LKML](https://hackmd.io/@Risheng/ry5futJF9)
+* [追求神乎其技的程式設計之道](https://vgod.medium.com/7cccc3c68f1e)
+    - 「可以看出抄襲風氣在台灣並不只是小時候在學校抄抄作業而已；媒體工作者在報導中任意抄襲及轉載是種不尊重自己專業的表現，不但隱含著一種應付了事的心態，更代表著這些人對於自己的工作沒有熱情，更沒有著一點堅持。如果要說我在美國看到這邊和台灣有什麼最大的不同，我想關鍵的差異就在對自己的工作有沒有熱情和堅持而已了。」
+    - 「程式藝術家也不過是在『簡潔』、『彈性』、『效率』這三大目標上進行一連串的取捨 (trade-off) 和最佳化。」
+* [Linux 核心的紅黑樹](https://hackmd.io/@sysprog/linux-rbtree)
+* [CS:APP 第 2 章重點提示和練習](https://hackmd.io/@sysprog/CSAPP-ch2)`*`
+* 核心開發者當然要熟悉編譯器行為
+    - [Linus Torvalds 教你分析 gcc 行為](https://lkml.org/lkml/2019/2/25/1092)
+    - [Pointers are more abstract than you might expect in C](https://pvs-studio.com/en/blog/posts/cpp/0576/) / [HackerNews 討論](https://news.ycombinator.com/item?id=17439467)
+* [C 編譯器原理和案例分析](https://hackmd.io/@sysprog/c-compiler-construction)`*`
+* [C 語言: 未定義行為](https://hackmd.io/@sysprog/c-undefined-behavior)`*`: C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化
+* [C 語言: 編譯器和最佳化原理](https://hackmd.io/@sysprog/c-compiler-optimization)`*`
+* 《Demystifying the Linux CPU Scheduler》第 1 章
+* [作業](https://hackmd.io/@sysprog/linux2023-homework4): 截止繳交日: Mar 30
+    * [quiz4](https://hackmd.io/@sysprog/HJaX8tuyh)
+* Week4 隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz4) (內含作答表單)
+- [課堂問答簡記](https://hackmd.io/@sysprog/rJVas7NJn)
 
 * 第 5 週 (Mar 13, 14, 16): Linux CPU scheduler
     - [教材解說](https://youtu.be/f-SprmkcOI0)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
