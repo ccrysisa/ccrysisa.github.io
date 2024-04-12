@@ -2,9 +2,19 @@
   <channel>
     <title>Linux - 分类 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/categories/linux/</link>
-    <description>Linux - 分类 | KZnight&#39;s Blog</description>
+    <description>Linux - 分类 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 16 Mar 2024 10:59:36 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/linux/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 12 Apr 2024 19:00:59 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/linux/" rel="self" type="application/rss+xml" /><item>
+  <title>Linux 核心的红黑树</title>
+  <link>https://ccrysisa.github.io/posts/linux-rbtree/</link>
+  <pubDate>Fri, 12 Apr 2024 19:00:59 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/linux-rbtree/</guid>
+  <description><![CDATA[<blockquote>
+<p>Linux 核心原始程式碼中，許多地方出現紅黑樹的蹤影，例如：hr_timer 使用紅黑樹來記錄計時器 (timer) 端發出的要求、ext3 檔案系統使用紅黑樹來追蹤目錄內容變更，以及 CFS (Completely Fair Scheduler) 這個 Linux 預設 CPU 排程器，由於需要頻繁地插入跟移除節點 (任務)，因此開發者選擇用紅黑樹 (搭配一些效能調整)。VMA（Virtual Memory Area）也用紅黑樹來紀錄追蹤頁面 (page) 變更，因為後者不免存在頻繁的讀取 VMA 結構，如 page fault 和 mmap 等操作，且當大量的已映射 (mapped) 區域時存在時，若要尋找某個特定的虛擬記憶體地址，鏈結串列 (linked list) 的走訪成本過高，因此需要一種資料結構以提供更有效率的尋找，於是紅黑樹就可勝任。</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>Linux 核心的 hash table 实作</title>
   <link>https://ccrysisa.github.io/posts/linux-hashtable/</link>
   <pubDate>Sat, 16 Mar 2024 10:59:36 &#43;0800</pubDate>

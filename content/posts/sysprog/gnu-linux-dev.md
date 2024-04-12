@@ -17,6 +17,7 @@ tags:
   - Sysprog
   - Linux
 categories:
+  - Toolkit
   - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false

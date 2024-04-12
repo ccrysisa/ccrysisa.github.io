@@ -3,19 +3,19 @@
 
 This post is used to record the process of my English learning.
 
-&lt;!--more--&gt;
+<!--more-->
 
 ## Preface
 
 ***工欲善其事，必先利其器***   
 ***If I had eight hours to chop down a tree, I’d spend six hours sharpening my axe.***
 
-- 单词书: Merriam-Webster&#39;s Vocabulary Builder
+- 单词书: Merriam-Webster's Vocabulary Builder
 - 写作书: The Elements of Style
 - 语法书: https://grammar.codeyu.com/
 - 发音教学:
 
-{{&lt; youtube QxQUapA-2w4 &gt;}}
+{{< youtube QxQUapA-2w4 >}}
 
 一些 YouTube channels:
 
@@ -52,17 +52,17 @@ This post is used to record the process of my English learning.
 - [x] 019: Tired and thirsty
 - [x] 021: Which book?
 - [x] 023: Which glasses?
-- [x] 025: Mrs. Smith&#39;s kitchen
-- [x] 027: Mrs. Smith&#39;s living room
+- [x] 025: Mrs. Smith's kitchen
+- [x] 027: Mrs. Smith's living room
 - [x] 029: Come in, Amy
-- [x] 031: Where&#39;s Sally
+- [x] 031: Where's Sally
 - [x] 033: A fine day
 - [x] 035: Our village
 - [x] 037: Making a bookcase
-- [x] 039: Don&#39;t drop it!
-- [x] 041: Penny&#39;s bag
+- [x] 039: Don't drop it!
+- [x] 041: Penny's bag
 - [x] 043: Hurry up!
-- [x] 045: The boss&#39;s letter
+- [x] 045: The boss's letter
 - [x] 047: A cup of coffee
 
 ---

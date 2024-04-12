@@ -1,9 +1,9 @@
 # 并行程序设计: POSIX Threads
 
 
-&lt;!--more--&gt;
+<!--more-->
 
-- {{&lt; link href=&#34;https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fposix-threads&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
+- {{< link href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fposix-threads" content="原文地址" external-icon=true >}}
 
 
 ---
