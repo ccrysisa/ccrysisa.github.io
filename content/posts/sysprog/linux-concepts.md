@@ -189,14 +189,19 @@ CPU 和 OS 的基本概念科普网站: [Putting the “You” in CPU](https://c
 
 {{< admonition tip >}}
 UNSW COMP9242: [Advanced Operating Systems](https://www.cse.unsw.edu.au/~cs9242/23/lectures.shtml) (2023/T3)
-
-这门课可以作为辅助材料，讲得深入浅出，可以作为进阶材料阅读。
+- YouTube: [2022: UNSW's COMP9242 Advanced Operating Systems](https://www.youtube.com/playlist?list=PLtoQeavghzr3nlXyJEXaTLU9Ca0DXWMnt)
+- 这门课可以作为辅助材料，讲得深入浅出，可以作为进阶材料阅读。
 
 Georgia Tech **Advanced Operating Systems**:
 - [Part 1](https://www.youtube.com/playlist?list=PLAwxTw4SYaPkKfusBLVfklgfdcB3BNpwX)
 - [Part 2](https://www.youtube.com/playlist?list=PLAwxTw4SYaPm4vV1XbFV93ZuT2saSq1hO)
 - [Part 3](https://www.youtube.com/playlist?list=PLAwxTw4SYaPk5-YaXFkWY4UXdv6pVdiYg)
 - [Part 4](https://www.youtube.com/playlist?list=PLAwxTw4SYaPmfaiuzJcK3tNoeKlvRR990)
+
+Reddit: [Best book to learn in-depth knowledge about the Linux Kernel?](https://www.reddit.com/r/linux/comments/z26h5h/best_book_to_learn_indepth_knowledge_about_the/)
+- [Linux From Scratch](https://www.linuxfromscratch.org/)
+- Amazon: [Linux Kernel Development](https://www.amazon.com/Linux-Kernel-Development-Robert-Love/dp/0672329468)
+- YouTube: [Steven Rostedt - Learning the Linux Kernel with tracing](https://www.youtube.com/watch?v=JRyrhsx-L5Y)
 {{< /admonition >}}
 
 ## man

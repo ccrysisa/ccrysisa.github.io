@@ -103,8 +103,16 @@ This post is used to record the process of my English learning.
 - [x] 043: Hurry up!
 - [x] 045: The boss's letter
 - [x] 047: A cup of coffee
+- [x] 049: At the butcher's
+- [x] 051: A pleasant climate
+- [x] 053: An interesting climate
+- [x] 055: The Sawyer family
+- [x] 057: An unusual day
+- [x] 059: Is that all?
 
 ---
+
+Source: [Cambridge Dictionary](https://dictionary.cambridge.org/)
 
 handbag
 - *n.* a small bag used by a woman to carry everyday personal items.
@@ -152,4 +160,24 @@ kettle
 - *n.*
 
 cupboard
+- *n.*
+
+beef
+- *n.*
+
+lamb
+- *n.*
+
+steak
+- *n.*
+
+mince
+- *n.*
+
+mild
+
+pad
+- *n.*
+
+chalk
 - *n.*
