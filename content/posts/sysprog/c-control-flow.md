@@ -77,8 +77,6 @@ Stack Overflow 上的相关讨论:
 
 - [ ] [Using goto for error handling in C](http://eli.thegreenplace.net/2009/04/27/using-goto-for-error-handling-in-c)
 
-> 以 `setjmp` 为关键字进行检索
-
 相关实作:
 
 - [goto 在 Linux 核心广泛应用](https://github.com/torvalds/linux/search?utf8=%E2%9C%93&q=goto)

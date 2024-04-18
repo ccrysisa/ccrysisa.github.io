@@ -271,7 +271,7 @@ else
 
 这篇博文说明了在 C 语言中对 string 使用 switch case 提升效能的原理 (除此之外还讲解了内存对齐相关的效能问题):
 
-- [cx] [More on string switch in C](https://tia.mat.br/posts/2018/02/01/more_on_string_switch_in_c.html)
+- [x] [More on string switch in C](https://tia.mat.br/posts/2018/02/01/more_on_string_switch_in_c.html)
 
 ## 应用: Linked List 的各式变种
 
@@ -338,16 +338,14 @@ Linux 核心原始程式码也善用宏来扩充
 
 ## Linux 核心宏: BUILD_BUG_ON_ZERO
 
-- {{< link href="https://hackmd.io/@sysprog/c-bitfield" content="原文地址" external-icon=true >}}
+{{< link href="https://hackmd.io/@sysprog/c-bitfield" content="原文地址" external-icon=true >}}
 
-{{< admonition >}}
 简单来说就是编译时期就进行检查的 `assert`，我写了 [相关笔记]({{< relref "./c-bitwise.md#linux-核心-build_bug_on_zero" >}}) 来说明它的原理。
-{{< /admonition >}}
 
 ## Linux 核心原始程式码宏: max, min
 
-- {{< link href="https://hackmd.io/@sysprog/linux-macro-minmax" content="原文地址" external-icon=true >}}
+{{< link href="https://hackmd.io/@sysprog/linux-macro-minmax" content="原文地址" external-icon=true >}}
 
 ## Linux 核心原始程式码宏: contain_of
 
-- {{< link href="https://hackmd.io/@sysprog/linux-macro-containerof" content="原文地址" external-icon=true >}}
+{{< link href="https://hackmd.io/@sysprog/linux-macro-containerof" content="原文地址" external-icon=true >}}
