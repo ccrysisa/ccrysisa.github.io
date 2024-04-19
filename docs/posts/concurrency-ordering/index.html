@@ -10,7 +10,7 @@
 <meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Sysprog, Linux, Concurrency' /><meta itemprop="name" content="并行程序设计: 执行顺序">
 <meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-03-11T16:23:57+08:00" />
 <meta itemprop="dateModified" content="2024-04-10T17:09:32+08:00" />
-<meta itemprop="wordCount" content="52"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1872"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux,Concurrency," /><meta property="og:title" content="并行程序设计: 执行顺序" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
@@ -35,7 +35,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/concurrency-ordering\/"
-    },"genre": "posts","keywords": "Sysprog, Linux, Concurrency","wordcount":  52 ,
+    },"genre": "posts","keywords": "Sysprog, Linux, Concurrency","wordcount":  1872 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/concurrency-ordering\/","datePublished": "2024-03-11T16:23:57+08:00","dateModified": "2024-04-10T17:09:32+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -151,7 +151,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/concurrency/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Concurrency</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-11 16:23:57"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-11">2024-03-11</time></span>&nbsp;<span title="更新于 2024-04-10 17:09:32"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-10">2024-04-10</time></span>&nbsp;<span title="52 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-11 16:23:57"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-11">2024-03-11</time></span>&nbsp;<span title="更新于 2024-04-10 17:09:32"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-10">2024-04-10</time></span>&nbsp;<span title="1872 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -159,12 +159,54 @@
         </div>
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
+    <li><a href="#evaluation">Evaluation</a></li>
+    <li><a href="#sequenced-before">Sequenced-before</a></li>
     <li><a href="#happens-before">Happens-before</a></li>
+    <li><a href="#synchronized-with">Synchronized-with</a></li>
     <li><a href="#memory-consistency-models">Memory Consistency Models</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><ul>
 <li><a href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fconcurrency-ordering"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>
+<h2 id="evaluation">Evaluation</h2>
+<blockquote>
+<p>所謂求值 (Evaluation)，其實指二件事情，一是 value computations，對一串運算式計算的結果；另一是 side effect，亦即修改物件狀態，像是修改記憶體內變數的值、呼叫函式庫的 I/O 處理函式之類的操作。</p>
+</blockquote>
+<h2 id="sequenced-before">Sequenced-before</h2>
+<blockquote>
+<p>sequenced-before 是種對 <strong>同一個執行緒</strong> 下，求值順序關係的描述。</p>
+</blockquote>
+<ul>
+<li>若 A is sequenced-before B，代表 A 的求值會先完成，才進行對 B 的求值</li>
+<li>若 A is not sequenced before B 而且 B is sequenced before A，代表 B 的求值會先完成，才開始對 A 的求值。</li>
+<li>若 A is not sequenced before B 而且 B is not sequenced before A，代表兩種可能，一種是順序不定，甚至這兩者的求值過程可能會重疊（因為 CPU 重排指令交錯的關係）或不重疊。</li>
+</ul>
+<blockquote>
+<p>而程式語言的工作，就是定義一連串關於 sequenced-before 的規範，舉例來說： 以下提到的先於、先進行之類的用詞，全部的意思都是 sequenced-before，也就是「先完成之後才開始進行」</p>
+</blockquote>
+<ul>
+<li>i++ 這類的後置運算子，value computation 會先於 side effect</li>
+<li>對於 assignment operator 而言 (=, +=, -= 一類)，會先進行運算元的 value computation，之後才是 assignment 的 side effect，最後是整個 assignment expression 的 value computation。</li>
+</ul>
+<p>虽然规格书定义了关于 sequenced-before 的规范，但不可能面面俱到，还是存在有些执行顺序是未定义的，例如 <code>f1() + f2() + f3()</code>，规格书只规定了 <code>+</code> 操作是在对 <code>f1(), f2(), f3()</code> 求值之后进行的，但是对于求值时的 <code>f1()</code> 这类函数呼叫，并没有规定哪个函数先进行调用求值，所以在求值时第一个调用的可能是 <code>f1()</code> 或 <code>f2()</code> 或 <code>f3()</code>。</p>
+<p>sequenced-before 的规范缺失导致了 <a href="https://en.wikipedia.org/wiki/Partially_ordered_set#Partial_orders"target="_blank" rel="external nofollow noopener noreferrer">partial order</a> 场景的出现，二这可能会导致未定义行为，例如经典的头脑体操 <code>i = i++</code>：</p>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/6D8EBmH.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/6D8EBmH.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/6D8EBmH.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/6D8EBmH.png" srcset="https://imgur-backup.hackmd.io/6D8EBmH.png?size=small, https://imgur-backup.hackmd.io/6D8EBmH.png?size=medium 1.5x, https://imgur-backup.hackmd.io/6D8EBmH.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/6D8EBmH.png" data-alt="https://imgur-backup.hackmd.io/6D8EBmH.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p>出现这个未定义行为的原因是，<code>i++</code> 的 side effect 与 <code>=</code> 之间不存在 sequenced-bofore 关系 (因为 partial order)，而这会导致该语句的执行结果是不确定的 (没想到吧，单线程的程序你也有可能不确定执行顺序 &#x1f923;)</p>
+<div class="details admonition warning open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-exclamation-triangle fa-fw" aria-hidden="true"></i>警告<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>注意: 在 <code>C++17</code> 後，上方敘述不是未定義行為</p>
+<p>假設 <code>i</code> 初始值為 0，由於 <code>=</code> 在 <code>C++17</code> 後為 sequenced，因此 <code>i++</code> 的計算與 side effect 都會先完成，所以 <code>i++</code> 得到 0，隨後 side-effect 導致 <code>i</code> 遞增 1，因此此時 <code>i</code> 為 1；之後執行 <code>i =</code> 這邊，所以利用右側表達式的值來指定數值，亦即剛才的 0，因此 <code>i</code> 最後結果為 0。 所以 <code>i</code> 值轉變的順序為 $0 \rightarrow 1 \rightarrow 0$，第一個箭頭為 side effect 造成的結果，第二個則是 <code>=</code> 造成的結果。</p>
+</div>
+    </div>
+  </div>
+<ul>
+<li><a href="http://josephmansfield.uk/articles/c&#43;&#43;-sequenced-before-graphs.html"target="_blank" rel="external nofollow noopener noreferrer">C++ sequenced-before graphs</a></li>
+<li><a href="http://en.cppreference.com/w/cpp/language/eval_order"target="_blank" rel="external nofollow noopener noreferrer">Order of evaluation from cppreference</a></li>
+<li><a href="https://stackoverflow.com/questions/4176328/what-are-sequence-points-and-how-do-they-relate-to-undefined-behavior"target="_blank" rel="external nofollow noopener noreferrer">What are sequence points, and how do they relate to undefined behavior?</a></li>
 </ul>
 <h2 id="happens-before">Happens-before</h2>
 <p>短片:</p>
@@ -173,6 +215,83 @@
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://youtu.be/q-CwESo9UsM"target="_blank" rel="external nofollow noopener noreferrer">Happened Before Relation (cont)</a></li>
 </ul>
 <a class="lightgallery" href="/images/c/happens-beore.png?size=large" data-thumbnail="/images/c/happens-beore.png?size=small" data-sub-html="<h2>/images/c/happens-beore.png</h2>"><img loading="lazy" src="/images/c/happens-beore.png" srcset="/images/c/happens-beore.png?size=small, /images/c/happens-beore.png?size=medium 1.5x, /images/c/happens-beore.png?size=large 2x" sizes="auto" data-title="/images/c/happens-beore.png" data-alt="/images/c/happens-beore.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p>从上图可以看出 happens-before 其实就是在 sequenced-before 基础上增加了多执行绪 communication 情形，可以理解为 happens-before 将 sequenced-before 扩大到涵盖多执行绪的情形了，即执行顺序有先后次序 (执行顺序其实不太准确，<strong>执行结果显现</strong> 的先后次序更加准确 &#x1f923;)</p>
+<blockquote>
+<p>图中的 concurrent events 其实就是多执行绪下没有先后次序的情形</p>
+</blockquote>
+<p>Java 规格书 <a href="https://docs.oracle.com/javase/specs/jls/se17/html/jls-17.html#jls-17.4.5"target="_blank" rel="external nofollow noopener noreferrer">17.4.5. Happens-before Order</a> 也能佐证我们的观点:</p>
+<blockquote>
+<p>If one action happens-before another, then the first is visible to and ordered before the second.</p>
+</blockquote>
+<div class="details admonition quote open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>換言之，若望文生義說 &ldquo;Happens-Before&rdquo; 是「先行發生」，那就南轅北轍。Happens-Before 並非說前一操作發生在後續操作的前面，它真正要表達的是：「前面一個操作的效果對後續操作是 <strong>可見</strong>」。</p>
+<p>這裡的關鍵是，Happens-before 強調 visible，而非實際執行的順序。</p>
+<p>實際程式在執行時，只需要「看起來有這樣的效果」即可，編譯器有很大的空間可調整程式執行順序，亦即 <a href="https://en.wikipedia.org/wiki/Memory_ordering#Compile-time_memory_ordering"target="_blank" rel="external nofollow noopener noreferrer">compile-time memory ordering</a>。</p>
+<p>因此我們得知一個關鍵概念: A happens-before B 不代表實際上 A happening before B (注意時態，後者強調進行中，前者則是從結果來看)，亦即只要 A 的效果在 B 執行之前，對於 B 是 visible 即可，實際的執行順序不用細究。</p>
+</div>
+    </div>
+  </div>
+<p>C11 正式将并行和 memory order 相关的规范引入到语言的标准:</p>
+<ul>
+<li>5.1.2.4 Multi-threaded executions and data races</li>
+</ul>
+<blockquote>
+<p>All modifications to a particular atomic object M occur in some particular total order,
+called the modification order of M. If A and B are modifications of an atomic object M,
+and A happens before B, then A shall precede B in the modification order of M, which is
+defined below.</p>
+</blockquote>
+<p>cppreference <a href="http://en.cppreference.com/w/cpp/atomic/memory_order#Happens-before"target="_blank" rel="external nofollow noopener noreferrer">std::memory_order</a></p>
+<blockquote>
+<p>Regardless of threads, evaluation A happens-before evaluation B if any of the following is true:</p>
+<ol>
+<li>A is sequenced-before B</li>
+<li>A inter-thread happens before B</li>
+</ol>
+</blockquote>
+<div class="details admonition quote open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">通常程式開發者逐行撰寫程式，期望前一行的效果會影響到後一行的程式碼。稍早已解釋何謂 Sequenced-before，現在可注意到，Sequenced-before 實際就是同一個執行緒內的 happens-before 關係。</div>
+    </div>
+  </div>
+<p>在多执行绪情况下，如果没法确保 happens-before 关系，程序往往会产生意料之外的结果，例如:</p>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果现在有两个执行绪在同时执行，执行绪 A 执行 <code>counter++</code>，执行绪 B 将 <code>counter</code> 的值打印出来。因为 A 和 B 两个执行绪不具备 happens-before 关系，没有保证 <code>counter++</code> 后的效果对打印 <code>counter</code> 是可见的，导致打印出来的可能是 <code>1</code> 也可能是 <code>0</code>，这个也就是图中的 concurrent events 关系。</p>
+<div class="details admonition quote open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">因此，程式語言必須提供適當的手段，讓程式開發者得以建立跨越執行緒間的 happens-before 的關係，如此一來才能確保程式執行的結果正確。</div>
+    </div>
+  </div>
+<ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://preshing.com/20130702/the-happens-before-relation/"target="_blank" rel="external nofollow noopener noreferrer">The Happens-Before Relation</a></li>
+</ul>
+<h2 id="synchronized-with">Synchronized-with</h2>
+<div class="details admonition quote open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>synchronized-with 是個發生在二個不同執行緒間的同步行為，當 A synchronized-with B 時，代表 A 對記憶體操作的效果，對於 B 是可見的。而 A 和 B 是二個不同的執行緒的某個操作。</p>
+<p>不難發現，其實 synchronized-with 就是跨越多個執行緒版本的 happens-before。</p>
+</div>
+    </div>
+  </div>
 <h2 id="memory-consistency-models">Memory Consistency Models</h2>
 <div class="details admonition tip open">
     <div class="details-summary admonition-title">
