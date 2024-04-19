@@ -45,3 +45,27 @@ repost:
 <!--more-->
 
 - {{< link href="https://hackmd.io/@sysprog/c-trick" content="原文地址" external-icon=true >}}
+
+## 从矩阵操作谈起
+
+C 语言也可作实现 [Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming) (需要搭配前置处理器扩充语法)
+
+- [ ] GNU Manual [6.29 Designated Initializers](https://gcc.gnu.org/onlinedocs/gcc/Designated-Inits.html)
+- [ ] Stack Overflow: [Why does C++11 not support designated initializer lists as C99?](https://stackoverflow.com/questions/18731707/why-does-c11-not-support-designated-initializer-lists-as-c99)
+- **从 C99 (含) 以后，C 和 C++ 就分道扬镳了**。相关差异可以参考: [Incompatibilities Between ISO C and ISO C++](http://david.tribble.com/text/cdiffs.htm)
+- 结构体的成员函数实作时使用 `static`，并搭配 [API gateway](https://github.com/embedded2016/server-framework/blob/master/async.c#L258) 可以获得一部分 namespace 的功能
+- [ ] [Fun with C99 Syntax](https://www.dribin.org/dave/blog/archives/2010/05/15/c99_syntax/)
+
+## 明确初始化特定结构的成员
+
+静态空间初始化配置:
+
+动态空间初始化配置:
+
+- [ ] [Initializing a heap-allocated structure in C](https://tia.mat.br/posts/2015/05/01/initializing_a_heap_allocated_structure_in_c.html)
+
+## 追踪物件配置的记忆体
+
+## Smart Pointer
+
+## C99 Variable Length Arrays (VLA)

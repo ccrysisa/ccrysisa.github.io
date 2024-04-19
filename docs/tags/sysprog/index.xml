@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/tags/sysprog/</link>
     <description>Sysprog - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 12 Apr 2024 19:00:59 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 19 Apr 2024 15:33:40 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -12,6 +12,16 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>CS:APP 第 2 章重点提示和练习</title>
+  <link>https://ccrysisa.github.io/posts/csapp-ch2/</link>
+  <pubDate>Fri, 19 Apr 2024 15:33:40 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/csapp-ch2/</guid>
+  <description><![CDATA[<blockquote>
+<p>千万不要小看数值系统，史上不少有名的 <a href="https://hackmd.io/@sysprog/software-failure"target="_blank" rel="external nofollow noopener noreferrer">软体缺失案例</a> 就因为开发者未能充分掌握相关议题，而导致莫大的伤害与损失。</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -93,14 +103,6 @@
   <description><![CDATA[<blockquote>
 <p>本讲座将带着学员重新探索函数呼叫背后的原理，从程序语言和计算机结构的发展简史谈起，让学员自电脑软硬件演化过程去掌握 calling convention 的考量，伴随着 stack 和 heap 的操作，再探讨 C 程序如何处理函数呼叫、跨越函数间的跳跃 (如 <a href="https://man7.org/linux/man-pages/man3/setjmp.3.html"target="_blank" rel="external nofollow noopener noreferrer">setjmp</a> 和 <a href="https://linux.die.net/man/3/longjmp"target="_blank" rel="external nofollow noopener noreferrer">longjmp</a>)，再来思索资讯安全和执行效率的议题。着重在计算机架构对应的支援和行为分析。</p>
 </blockquote>]]></description>
-</item>
-<item>
-  <title>并行程序设计: 执行顺序</title>
-  <link>https://ccrysisa.github.io/posts/concurrency-ordering/</link>
-  <pubDate>Mon, 11 Mar 2024 16:23:57 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/concurrency-ordering/</guid>
-  <description><![CDATA[]]></description>
 </item>
 </channel>
 </rss>

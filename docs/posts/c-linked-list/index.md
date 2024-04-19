@@ -1,4 +1,4 @@
-# 你所不知道的 C 语言: linked list 和非连续内存
+# 你所不知道的 C 语言: linked list 和非连续记忆体
 
 
 > 无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。

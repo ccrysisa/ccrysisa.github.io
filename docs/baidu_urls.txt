@@ -1,5 +1,6 @@
 https://ccrysisa.github.io/posts/english/
 https://ccrysisa.github.io/posts/linux2023/
+https://ccrysisa.github.io/posts/csapp-ch2/
 https://ccrysisa.github.io/posts/linux-rbtree/
 https://ccrysisa.github.io/posts/posix-threads/
 https://ccrysisa.github.io/posts/c-trick/

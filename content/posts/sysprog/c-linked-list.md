@@ -1,5 +1,5 @@
 ---
-title: "你所不知道的 C 语言: linked list 和非连续内存"
+title: "你所不知道的 C 语言: linked list 和非连续记忆体"
 subtitle:
 date: 2024-02-03T10:44:56+08:00
 # draft: true

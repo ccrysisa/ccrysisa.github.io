@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/posts/</link>
     <description>所有文章 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 12 Apr 2024 19:00:59 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 19 Apr 2024 15:33:40 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
   <title>English Everyday</title>
   <link>https://ccrysisa.github.io/posts/english/</link>
   <pubDate>Sat, 30 Mar 2024 12:17:31 &#43;0800</pubDate>
@@ -20,6 +20,16 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>CS:APP 第 2 章重点提示和练习</title>
+  <link>https://ccrysisa.github.io/posts/csapp-ch2/</link>
+  <pubDate>Fri, 19 Apr 2024 15:33:40 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/csapp-ch2/</guid>
+  <description><![CDATA[<blockquote>
+<p>千万不要小看数值系统，史上不少有名的 <a href="https://hackmd.io/@sysprog/software-failure"target="_blank" rel="external nofollow noopener noreferrer">软体缺失案例</a> 就因为开发者未能充分掌握相关议题，而导致莫大的伤害与损失。</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -92,16 +102,6 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/deepin-kvm/</guid>
   <description><![CDATA[<p>本篇主要介绍在 deepin20.9 操作系统平台下，使用 KVM 虚拟化技术来创建和安装 Linux 发行版，并以创建安装 openEuler 22.03 LTS SP3 的 KVM 虚拟机作为示范，让学员领略 KVM 虚拟化技术的强大魅力。</p>]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: 前置处理器应用篇</title>
-  <link>https://ccrysisa.github.io/posts/c-preprocessor/</link>
-  <pubDate>Mon, 25 Mar 2024 22:55:44 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-preprocessor/</guid>
-  <description><![CDATA[<blockquote>
-<p>C 语言之所以不需要时常发布新的语言特性又可以保持活力，前置处理器 (preprocessor) 是很重要的因素，有心者可进行「扩充」C 语言。</p>
-</blockquote>]]></description>
 </item>
 </channel>
 </rss>

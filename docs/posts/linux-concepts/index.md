@@ -148,7 +148,7 @@ Wikipedia: [scalability](https://en.wikipedia.org/wiki/Scalability)
 CPU 和 OS 的基本概念科普网站: [Putting the “You” in CPU](https://cpu.land/)
 > 相当于科普版 CSAPP
 
-{{< admonition tip >}}
+{{< admonition info >}}
 UNSW COMP9242: [Advanced Operating Systems](https://www.cse.unsw.edu.au/~cs9242/23/lectures.shtml) (2023/T3)
 - YouTube: [2022: UNSW's COMP9242 Advanced Operating Systems](https://www.youtube.com/playlist?list=PLtoQeavghzr3nlXyJEXaTLU9Ca0DXWMnt)
 - 这门课可以作为辅助材料，讲得深入浅出，可以作为进阶材料阅读。
@@ -164,26 +164,6 @@ Reddit: [Best book to learn in-depth knowledge about the Linux Kernel?](https://
 - Amazon: [Linux Kernel Development](https://www.amazon.com/Linux-Kernel-Development-Robert-Love/dp/0672329468)
 - YouTube: [Steven Rostedt - Learning the Linux Kernel with tracing](https://www.youtube.com/watch?v=JRyrhsx-L5Y)
 {{< /admonition >}}
-
-## man
-
-```bash
-$ man man
-       The  table  below  shows  the  section numbers of the manual followed by the
-       types of pages they contain.
-
-       1   Executable programs or shell commands
-       2   System calls (functions provided by the kernel)
-       3   Library calls (functions within program libraries)
-       4   Special files (usually found in /dev)
-       5   File formats and conventions, e.g. /etc/passwd
-       6   Games
-       7   Miscellaneous (including macro packages and conventions),  e.g.  man(7),
-           groff(7), man-pages(7)
-       8   System administration commands (usually only for root)
-       9   Kernel routines [Non standard]
-
-```
 
 ## 系统软件开发思维
 
