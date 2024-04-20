@@ -1,11 +1,11 @@
 # CS:APP 第 2 章重点提示和练习
 
 
-> 千万不要小看数值系统，史上不少有名的 [软体缺失案例](https://hackmd.io/@sysprog/software-failure) 就因为开发者未能充分掌握相关议题，而导致莫大的伤害与损失。
+&gt; 千万不要小看数值系统，史上不少有名的 [软体缺失案例](https://hackmd.io/@sysprog/software-failure) 就因为开发者未能充分掌握相关议题，而导致莫大的伤害与损失。
 
-<!--more-->
+&lt;!--more--&gt;
 
-- {{< link href="https://hackmd.io/@sysprog/CSAPP-ch2" content="原文地址" external-icon=true >}}
+- {{&lt; link href=&#34;https://hackmd.io/@sysprog/CSAPP-ch2&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
 
 搭配 CMU: 15-213: Intro to Computer Systems: Schedule for Fall 2015
 - 可以在 [这里](https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/schedule.html) 找到相关的投影片和录影
@@ -26,9 +26,9 @@
   - [ ] [Faster arithmetic by flipping signs](https://nfrechette.github.io/2019/05/08/sign_flip_optimization/)
   - [ ] [Faster floating point arithmetic with Exclusive OR](https://nfrechette.github.io/2019/10/22/float_xor_optimization/)
 
-> 看了上面的第 3 个影片后，对 pac-man 256 莫名感兴趣 :rofl:
+&gt; 看了上面的第 3 个影片后，对 pac-man 256 莫名感兴趣 :rofl:
 
-### Bits, Bytes & Integers
+### Bits, Bytes &amp; Integers
 
 
 ---

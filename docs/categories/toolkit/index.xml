@@ -2,9 +2,17 @@
   <channel>
     <title>Toolkit - 分类 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/categories/toolkit/</link>
-    <description>Toolkit - 分类 - KZnight&#39;s Blog</description>
+    <description>Toolkit - 分类 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/toolkit/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 20 Apr 2024 12:14:18 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/toolkit/" rel="self" type="application/rss+xml" /><item>
+  <title>Windows 10 WSL2 Ubuntu 22.04 配置指南</title>
+  <link>https://ccrysisa.github.io/posts/wsl2/</link>
+  <pubDate>Sat, 20 Apr 2024 12:14:18 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/wsl2/</guid>
+  <description><![CDATA[<p>今日闲来无事，刷了会 B 站，突发奇想将发灰了一年多的 WSL2 找回来折腾一下 (之前为了在 VMware 中开启嵌套虚拟化，不得以将 WSL2 打入冷宫 &#x1f923;)。由于这一年内功功力大涨，很快就完成了 WLS2 的再召集启用，下面列出配置的主要步骤和相关材料。</p>]]></description>
+</item>
+<item>
   <title>程序调试工具 GDB</title>
   <link>https://ccrysisa.github.io/posts/debug-gdb/</link>
   <pubDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</pubDate>
@@ -18,7 +26,7 @@
   <pubDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/git/</guid>
-  <description><![CDATA[Git 中文教学 新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout 网络问题导致 22 端口被禁止，无法正常使用]]></description>
+  <description><![CDATA[Git 中文教学新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout网络问题导致 22 端口被禁止，]]></description>
 </item>
 <item>
   <title>Git 学习记录</title>

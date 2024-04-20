@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/posts/</link>
     <description>所有文章 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 19 Apr 2024 15:33:40 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 20 Apr 2024 12:14:18 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
   <title>English Everyday</title>
   <link>https://ccrysisa.github.io/posts/english/</link>
   <pubDate>Sat, 30 Mar 2024 12:17:31 &#43;0800</pubDate>
@@ -21,6 +21,14 @@
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
 </blockquote>]]></description>
+</item>
+<item>
+  <title>Windows 10 WSL2 Ubuntu 22.04 配置指南</title>
+  <link>https://ccrysisa.github.io/posts/wsl2/</link>
+  <pubDate>Sat, 20 Apr 2024 12:14:18 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/wsl2/</guid>
+  <description><![CDATA[<p>今日闲来无事，刷了会 B 站，突发奇想将发灰了一年多的 WSL2 找回来折腾一下 (之前为了在 VMware 中开启嵌套虚拟化，不得以将 WSL2 打入冷宫 &#x1f923;)。由于这一年内功功力大涨，很快就完成了 WLS2 的再召集启用，下面列出配置的主要步骤和相关材料。</p>]]></description>
 </item>
 <item>
   <title>CS:APP 第 2 章重点提示和练习</title>
@@ -94,14 +102,6 @@
 <li>任务三：尝试使用 qemu user &amp; nspawn 或者 docker 加速完成任务二</li>
 </ul>
 </blockquote>]]></description>
-</item>
-<item>
-  <title>Deepin 20.9 KVM 安装和管理</title>
-  <link>https://ccrysisa.github.io/posts/deepin-kvm/</link>
-  <pubDate>Thu, 28 Mar 2024 12:21:48 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/deepin-kvm/</guid>
-  <description><![CDATA[<p>本篇主要介绍在 deepin20.9 操作系统平台下，使用 KVM 虚拟化技术来创建和安装 Linux 发行版，并以创建安装 openEuler 22.03 LTS SP3 的 KVM 虚拟机作为示范，让学员领略 KVM 虚拟化技术的强大魅力。</p>]]></description>
 </item>
 </channel>
 </rss>

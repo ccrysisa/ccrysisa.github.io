@@ -14,7 +14,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
 In this third Crust of Rust video, we cover iterators and trait bounds, by re-implementing the &ldquo;flatten&rdquo; Iterator method from the standard library. As part of that, we cover some of the weirder trait bounds that are required, including what&rsquo;s needed to extend the implementation to support backwards iteration.
 "><meta itemprop="datePublished" content="2024-02-05T17:18:34+08:00" />
 <meta itemprop="dateModified" content="2024-03-05T21:19:09+08:00" />
-<meta itemprop="wordCount" content="676"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="687"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Iterator," /><meta property="og:title" content="Crust of Rust: Iterators" />
 <meta property="og:description" content="
 In this third Crust of Rust video, we cover iterators and trait bounds, by re-implementing the &ldquo;flatten&rdquo; Iterator method from the standard library. As part of that, we cover some of the weirder trait bounds that are required, including what&rsquo;s needed to extend the implementation to support backwards iteration.
@@ -43,7 +43,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/iterators\/"
-    },"genre": "posts","keywords": "Rust, Iterator","wordcount":  676 ,
+    },"genre": "posts","keywords": "Rust, Iterator","wordcount":  687 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/iterators\/","datePublished": "2024-02-05T17:18:34+08:00","dateModified": "2024-03-05T21:19:09+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -55,7 +55,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -95,7 +95,7 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -148,18 +148,12 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Crust of Rust: Iterators</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-05 17:18:34"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="更新于 2024-03-05 21:19:09"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-05">2024-03-05</time></span>&nbsp;<span title="676 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/rust/" class="post-category" title="分类 - Rust"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div><div class="post-meta-line"><span title="发布于 2024-02-05 17:18:34"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-05">2024-02-05</time></span>&nbsp;<span title="更新于 2024-03-05 21:19:09"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-05">2024-03-05</time></span>&nbsp;<span title="687 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -189,9 +183,9 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
 <ul>
 <li>整理自 <a href="https://www.youtube.com/watch?v=yozQ9C69pNs"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></li>
 </ul>
-<h2 id="影片注解">影片注解</h2>
-<h3 id="generic-traits-vs-associated-types">Generic traits vs associated types</h3>
-<div class="highlight" id="id-1"><div class="chroma">
+<h2 id="影片注解" class="heading-element">
+  <a href="#%e5%bd%b1%e7%89%87%e6%b3%a8%e8%a7%a3" class="heading-mark"></a>影片注解</h2><h3 id="generic-traits-vs-associated-types" class="heading-element">
+  <a href="#generic-traits-vs-associated-types" class="heading-mark"></a>Generic traits vs associated types</h3><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -233,21 +227,21 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这两条 for 语句虽然效果一样，但是后者是使用 <code>&lt;&amp;vs&gt; into_iter</code> 讲 <code>&amp;vs</code> 转为 iterator，而不是调用 <code>iter()</code> 方法。</p>
-<h3 id="iteratorflatten">Iterator::flatten</h3>
-<p>method <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flatten"target="_blank" rel="external nofollow noopener noreferrer">std::iter::Iterator::flatten</a></p>
+<h3 id="iteratorflatten" class="heading-element">
+  <a href="#iteratorflatten" class="heading-mark"></a>Iterator::flatten</h3><p>method <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flatten"target="_blank" rel="external nofollow noopener noreferrer">std::iter::Iterator::flatten</a></p>
 <blockquote>
 <p>Creates an iterator that flattens nested structure.</p>
 <p>This is useful when you have an iterator of iterators or an iterator of things that can be turned into iterators and you want to remove one level of indirection.</p>
 </blockquote>
 <p><code>flatten()</code> 的本质是将一种 Iterator 类型转换成另一种 Iterator 类型，所以调用者和返回值 <code>Flatten</code> 都满足 trait Iterator，因为都是迭代器，只是将原先的 n-level 压扁为 1-level 的 Iterator 了。录影视频里只考虑 2-level 的情况。</p>
-<h3 id="doubleendediterator">DoubleEndedIterator</h3>
-<p>Trait <a href="https://doc.rust-lang.org/std/iter/trait.DoubleEndedIterator.html"target="_blank" rel="external nofollow noopener noreferrer">std::iter::DoubleEndedIterator</a></p>
+<h3 id="doubleendediterator" class="heading-element">
+  <a href="#doubleendediterator" class="heading-mark"></a>DoubleEndedIterator</h3><p>Trait <a href="https://doc.rust-lang.org/std/iter/trait.DoubleEndedIterator.html"target="_blank" rel="external nofollow noopener noreferrer">std::iter::DoubleEndedIterator</a></p>
 <blockquote>
 <p>It is important to note that both back and forth work on the same range, and do not cross: iteration is over when they meet in the middle.</p>
 </blockquote>
 <p>也就是说，back 和 front 的迭代器类似于双指针，但是这两个迭代器并不会越过对方。</p>
-<h2 id="homework">Homework</h2>
-<div class="details admonition info open">
+<h2 id="homework" class="heading-element">
+  <a href="#homework" class="heading-mark"></a>Homework</h2><div class="details admonition info open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -264,13 +258,13 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
 </div>
     </div>
   </div>
-<h2 id="documentations">Documentations</h2>
-<p>这里列举视频中一些概念相关的 documentation</p>
+<h2 id="documentations" class="heading-element">
+  <a href="#documentations" class="heading-mark"></a>Documentations</h2><p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>
 <p>学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料</p>
 </blockquote>
-<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3>
-<blockquote>
+<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml" class="heading-element">
+  <a href="#crate-stdhttpsdocrust-langorgstdindexhtml" class="heading-mark"></a>Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3><blockquote>
 <p>可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)</p>
 </blockquote>
 <ul>
@@ -314,8 +308,8 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
 <p>Trait <a href="https://doc.rust-lang.org/std/marker/trait.Sized.html"target="_blank" rel="external nofollow noopener noreferrer">std::marker::Sized</a></p>
 </li>
 </ul>
-<h2 id="references">References</h2>
-<ul>
+<h2 id="references" class="heading-element">
+  <a href="#references" class="heading-mark"></a>References</h2><ul>
 <li><a href="https://stackoverflow.com/questions/34733811/what-is-the-difference-between-iter-and-into-iter"target="_blank" rel="external nofollow noopener noreferrer">What is the difference between iter and into_iter?</a> [Stack Overflow]</li>
 <li><a href="https://stackoverflow.com/questions/54585804/how-to-run-a-specific-unit-test-in-rust"target="_blank" rel="external nofollow noopener noreferrer">How to run a specific unit test in Rust?</a> [Stack Overflow]</li>
 <li><a href="https://stackoverflow.com/questions/53085270/how-do-i-implement-a-trait-with-a-generic-method"target="_blank" rel="external nofollow noopener noreferrer">How do I implement a trait with a generic method?</a> [Stack Overflow]</li>
@@ -325,11 +319,10 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-03-05 21:19:09">更新于 2024-03-05&nbsp;</span>
-      </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/iterators/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/iterators/" data-title="Crust of Rust: Iterators" data-hashtags="Rust,Iterator"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/iterators/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/iterators/" data-title="Crust of Rust: Iterators" data-hashtags="Rust,Iterator"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/iterators/" data-hashtag="Rust"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/iterators/" data-title="Crust of Rust: Iterators" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/iterators/" data-title="Crust of Rust: Iterators"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -338,12 +331,11 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/iterators/" data-title="Crust of Rust: Iterators" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/iterators/" data-title="Crust of Rust: Iterators"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-      </div>
-    </div>
-  </div>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/rust/' class="post-tag">Rust</a><a href='/tags/iterator/' class="post-tag">Iterator</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/rust/" class="post-tag" title="标签 - Rust">Rust</a><a href="/tags/iterator/" class="post-tag" title="标签 - Iterator">Iterator</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -352,16 +344,19 @@ In this third Crust of Rust video, we cover iterators and trait bounds, by re-im
   <div class="post-nav"><a href="/posts/c-linked-list/" class="post-nav-item" rel="prev" title="你所不知道的 C 语言: linked list 和非连续记忆体"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>你所不知道的 C 语言: linked list 和非连续记忆体</a>
       <a href="/posts/linux-concepts/" class="post-nav-item" rel="next" title="Linux 核心设计: 操作系统术语及概念">Linux 核心设计: 操作系统术语及概念<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
         </div></div><div id="mask"></div><noscript>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

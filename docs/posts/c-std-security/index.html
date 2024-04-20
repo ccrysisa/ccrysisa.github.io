@@ -14,7 +14,7 @@
 借由阅读 C 语言标准理解规范是研究系统安全最基础的步骤，但很多人都忽略阅读规范这点，而正因对于规范的不了解、撰写程序的不严谨，导致漏洞的产生的案例比比皆是，例如 2014 年的 OpenSSL Heartbleed Attack1 便是便是因为使用 memcpy 之际缺乏对应内存范围检查，造成相当大的危害。本文重新梳理 C 语言程序设计的细节，并借由调试器帮助理解程序的运作。
 "><meta itemprop="datePublished" content="2024-03-05T16:32:40+08:00" />
 <meta itemprop="dateModified" content="2024-03-09T20:11:06+08:00" />
-<meta itemprop="wordCount" content="1729"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1742"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Security," /><meta property="og:title" content="基于 C 语言标准研究与系统程序安全议题" />
 <meta property="og:description" content="
 借由阅读 C 语言标准理解规范是研究系统安全最基础的步骤，但很多人都忽略阅读规范这点，而正因对于规范的不了解、撰写程序的不严谨，导致漏洞的产生的案例比比皆是，例如 2014 年的 OpenSSL Heartbleed Attack1 便是便是因为使用 memcpy 之际缺乏对应内存范围检查，造成相当大的危害。本文重新梳理 C 语言程序设计的细节，并借由调试器帮助理解程序的运作。
@@ -43,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-std-security\/"
-    },"genre": "posts","keywords": "Sysprog, C, Security","wordcount":  1729 ,
+    },"genre": "posts","keywords": "Sysprog, C, Security","wordcount":  1742 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-std-security\/","datePublished": "2024-03-05T16:32:40+08:00","dateModified": "2024-03-09T20:11:06+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -55,7 +55,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -95,7 +95,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -148,18 +148,12 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>基于 C 语言标准研究与系统程序安全议题</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-05 16:32:40"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-05">2024-03-05</time></span>&nbsp;<span title="更新于 2024-03-09 20:11:06"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-09">2024-03-09</time></span>&nbsp;<span title="1729 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/c/" class="post-category" title="分类 - C"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-03-05 16:32:40"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-05">2024-03-05</time></span>&nbsp;<span title="更新于 2024-03-09 20:11:06"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-09">2024-03-09</time></span>&nbsp;<span title="1742 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -201,21 +195,21 @@
 <ul>
 <li><a href="https://hackmd.io/@sysprog/c-std-security"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
-<h2 id="目标">目标</h2>
-<ol>
+<h2 id="目标" class="heading-element">
+  <a href="#%e7%9b%ae%e6%a0%87" class="heading-mark"></a>目标</h2><ol>
 <li>借由研读漏洞程序及 C 语言标准，讨论系统程序的安全议题</li>
 <li>通过调试器追踪程序实际运行的状况，了解其运作原理</li>
 <li>取材自 <a href="https://en.wikipedia.org/wiki/Dangling_pointer"target="_blank" rel="external nofollow noopener noreferrer">dangling pointer</a>, <a href="https://cwe.mitre.org/data/definitions/416.html"target="_blank" rel="external nofollow noopener noreferrer">CWE-416 Use After Free</a>, <a href="https://nvd.nist.gov/vuln/detail/CVE-2017-16943"target="_blank" rel="external nofollow noopener noreferrer">CVE-2017-16943</a> 以及 <a href="https://en.wikipedia.org/wiki/Integer_overflow"target="_blank" rel="external nofollow noopener noreferrer">integer overflow</a> 的议题</li>
 </ol>
-<h2 id="实验环境">实验环境</h2>
-<ul>
+<h2 id="实验环境" class="heading-element">
+  <a href="#%e5%ae%9e%e9%aa%8c%e7%8e%af%e5%a2%83" class="heading-mark"></a>实验环境</h2><ul>
 <li>编译器版本: gcc 11</li>
 <li>调试器: GDB</li>
 <li>操作系统: Ubuntu Linux 22.04</li>
 </ul>
-<h2 id="主题-一-integer-type-资料处理">主题 (一): Integer type 资料处理</h2>
-<h3 id="i-integer-conversion--integer-promotion">I. Integer Conversion &amp; Integer Promotion</h3>
-<div class="highlight" id="id-1"><div class="chroma">
+<h2 id="主题-一-integer-type-资料处理" class="heading-element">
+  <a href="#%e4%b8%bb%e9%a2%98-%e4%b8%80-integer-type-%e8%b5%84%e6%96%99%e5%a4%84%e7%90%86" class="heading-mark"></a>主题 (一): Integer type 资料处理</h2><h3 id="i-integer-conversion--integer-promotion" class="heading-element">
+  <a href="#i-integer-conversion--integer-promotion" class="heading-mark"></a>I. Integer Conversion &amp; Integer Promotion</h3><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -241,8 +235,8 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>上述程式码执行结果为: <code>r1</code> 输出为十进制的 4294967295，<code>r2</code> 输出为十进制的 -1。这个结果和 C11 规格书中提到的 Integer 的两个特性有关: Integer Conversion 和 Integer Promotion。</p>
-<h4 id="1-integer-conversion">(1) Integer Conversion</h4>
-<ul>
+<h4 id="1-integer-conversion" class="heading-element">
+  <a href="#1-integer-conversion" class="heading-mark"></a>(1) Integer Conversion</h4><ul>
 <li>C11 6.3.1.1 Boolean, characters, and integers</li>
 </ul>
 <blockquote>
@@ -281,8 +275,8 @@ other rules for determining the integer conversion rank.</p>
 <li>long long int &gt; long int &gt; int &gt; short int &gt; signed char</li>
 <li>unsigned int == signed int, if they are both in same precision and same size</li>
 </ul>
-<h4 id="2-integer-promotion">(2) Integer Promotion</h4>
-<p>当 integer 进行通常的算数运算 (Usual arithmetic) 时，会先进行 integer promotions 转换成 <code>int</code> 或 <code>unsigned int</code> 或者保持不变 (转换后的运算子被称为 promoted operands)，然后 promoted operands 再根据自身类型以及对应的 rank 进行 arithmetic conversions，最终得到结果的类型。</p>
+<h4 id="2-integer-promotion" class="heading-element">
+  <a href="#2-integer-promotion" class="heading-mark"></a>(2) Integer Promotion</h4><p>当 integer 进行通常的算数运算 (Usual arithmetic) 时，会先进行 integer promotions 转换成 <code>int</code> 或 <code>unsigned int</code> 或者保持不变 (转换后的运算子被称为 promoted operands)，然后 promoted operands 再根据自身类型以及对应的 rank 进行 arithmetic conversions，最终得到结果的类型。</p>
 <ul>
 <li>C11 6.3.1.1 Boolean, characters, and integers</li>
 </ul>
@@ -347,13 +341,13 @@ corresponding to the type of the operand with signed integer type.</p>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">si</span> <span class="o">+</span> <span class="n">ui</span><span class="p">;</span> <span class="c1">// si is converted to unsigned int, result is unsigned
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="ii-衍生的安全议题-integer-overflow">II. 衍生的安全议题: Integer Overflow</h3>
-<ul>
+</div><h3 id="ii-衍生的安全议题-integer-overflow" class="heading-element">
+  <a href="#ii-%e8%a1%8d%e7%94%9f%e7%9a%84%e5%ae%89%e5%85%a8%e8%ae%ae%e9%a2%98-integer-overflow" class="heading-mark"></a>II. 衍生的安全议题: Integer Overflow</h3><ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/2641285/what-is-an-integer-overflow-error"target="_blank" rel="external nofollow noopener noreferrer">What is an integer overflow error?</a></li>
 </ul>
-<h2 id="主题-二-object-的生命周期">主题 (二): Object 的生命周期</h2>
-<h3 id="i-dangling-pointer">I. Dangling Pointer</h3>
-<ul>
+<h2 id="主题-二-object-的生命周期" class="heading-element">
+  <a href="#%e4%b8%bb%e9%a2%98-%e4%ba%8c-object-%e7%9a%84%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f" class="heading-mark"></a>主题 (二): Object 的生命周期</h2><h3 id="i-dangling-pointer" class="heading-element">
+  <a href="#i-dangling-pointer" class="heading-mark"></a>I. Dangling Pointer</h3><ul>
 <li>C11 6.2.4 Storage durations of objects (2)</li>
 </ul>
 <blockquote>
@@ -370,22 +364,22 @@ the object it points to (or just past) reaches the end of its lifetime.</p>
 <p>When a pointer is pointing at the memory address of a variable but after some time that variable is deleted from that memory location while the pointer is still pointing to it, then such a pointer is known as a dangling pointer and this problem is known as the dangling pointer problem.</p>
 </blockquote>
 <p>所以在 object 的生命周期结束后，应将指向 object 原本处于的内存空间的指针置为 NULL，避免 dangling pointer。</p>
-<h3 id="ii-cwe-416-use-after-free">II. CWE-416 Use After Free</h3>
-<ul>
+<h3 id="ii-cwe-416-use-after-free" class="heading-element">
+  <a href="#ii-cwe-416-use-after-free" class="heading-mark"></a>II. CWE-416 Use After Free</h3><ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> OWASP: <a href="https://owasp.org/www-community/vulnerabilities/Using_freed_memory#"target="_blank" rel="external nofollow noopener noreferrer">Using freed memory</a></li>
 </ul>
 <blockquote>
 <p>Referencing memory after it has been freed can cause a program to crash.</p>
 <p>The use of heap allocated memory after it has been freed or deleted leads to undefined system behavior and, in many cases, to a write-what-where condition.</p>
 </blockquote>
-<h3 id="iii-案例探讨-cve-2017-16943-abusing-uaf-leads-to-exim-rce">III. 案例探讨: CVE-2017-16943 Abusing UAF leads to Exim RCE</h3>
-<ul>
+<h3 id="iii-案例探讨-cve-2017-16943-abusing-uaf-leads-to-exim-rce" class="heading-element">
+  <a href="#iii-%e6%a1%88%e4%be%8b%e6%8e%a2%e8%ae%a8-cve-2017-16943-abusing-uaf-leads-to-exim-rce" class="heading-mark"></a>III. 案例探讨: CVE-2017-16943 Abusing UAF leads to Exim RCE</h3><ul>
 <li><a href="https://devco.re/blog/2017/12/11/Exim-RCE-advisory-CVE-2017-16943-en/"target="_blank" rel="external nofollow noopener noreferrer">Road to Exim RCE - Abusing Unsafe Memory Allocator in the Most Popular MTA</a></li>
 </ul>
-<h2 id="实验结果与验证">实验结果与验证</h2>
-<a href="https://github.com/ccrysisa/LKI/blob/main/c-std-security"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
-<h3 id="ㄧ-integer-promotion-验证">(ㄧ) Integer Promotion 验证</h3>
-<p>测试程式码:</p>
+<h2 id="实验结果与验证" class="heading-element">
+  <a href="#%e5%ae%9e%e9%aa%8c%e7%bb%93%e6%9e%9c%e4%b8%8e%e9%aa%8c%e8%af%81" class="heading-mark"></a>实验结果与验证</h2><a href="https://github.com/ccrysisa/LKI/blob/main/c-std-security"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+<h3 id="ㄧ-integer-promotion-验证" class="heading-element">
+  <a href="#%e3%84%a7-integer-promotion-%e9%aa%8c%e8%af%81" class="heading-mark"></a>(ㄧ) Integer Promotion 验证</h3><p>测试程式码:</p>
 <div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -423,8 +417,8 @@ the object it points to (or just past) reaches the end of its lifetime.</p>
 </span></span><span class="line"><span class="cl">$ ./integer-promotion.o 
 </span></span><span class="line"><span class="cl"><span class="m">4294967295</span> -1</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="二-object-生命周期">(二) Object 生命周期</h3>
-<p>测试程式码:</p>
+</div><h3 id="二-object-生命周期" class="heading-element">
+  <a href="#%e4%ba%8c-object-%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f" class="heading-mark"></a>(二) Object 生命周期</h3><p>测试程式码:</p>
 <div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -525,11 +519,10 @@ the object it points to (or just past) reaches the end of its lifetime.</p>
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-03-09 20:11:06">更新于 2024-03-09&nbsp;</span>
-      </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/c-std-security/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-std-security/" data-title="基于 C 语言标准研究与系统程序安全议题" data-hashtags="Sysprog,C,Security"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/c-std-security/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-std-security/" data-title="基于 C 语言标准研究与系统程序安全议题" data-hashtags="Sysprog,C,Security"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/c-std-security/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-std-security/" data-title="基于 C 语言标准研究与系统程序安全议题" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-std-security/" data-title="基于 C 语言标准研究与系统程序安全议题"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -538,12 +531,11 @@ the object it points to (or just past) reaches the end of its lifetime.</p>
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-std-security/" data-title="基于 C 语言标准研究与系统程序安全议题" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-std-security/" data-title="基于 C 语言标准研究与系统程序安全议题"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-      </div>
-    </div>
-  </div>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/c/' class="post-tag">C</a><a href='/tags/security/' class="post-tag">Security</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a><a href="/tags/c/" class="post-tag" title="标签 - C">C</a><a href="/tags/security/" class="post-tag" title="标签 - Security">Security</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -552,11 +544,14 @@ the object it points to (or just past) reaches the end of its lifetime.</p>
   <div class="post-nav"><a href="/posts/orst/" class="post-nav-item" rel="prev" title="Crust of Rust: Sorting Algorithms"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Crust of Rust: Sorting Algorithms</a>
       <a href="/posts/openeuler-riscv-qemu/" class="post-nav-item" rel="next" title="openEuler RISC-V 系统: QEMU 仿真">openEuler RISC-V 系统: QEMU 仿真<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -564,5 +559,5 @@ the object it points to (or just past) reaches the end of its lifetime.</p>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-3":{"title":"integer-promotion.c"},"id-5":{"title":"uaf.c"}},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-3":{"title":"integer-promotion.c"},"id-5":{"title":"uaf.c"}},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

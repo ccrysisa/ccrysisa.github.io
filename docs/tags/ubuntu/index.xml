@@ -2,15 +2,23 @@
   <channel>
     <title>Ubuntu - 标签 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/ubuntu/</link>
-    <description>Ubuntu - 标签 - KZnight&#39;s Blog</description>
+    <description>Ubuntu - 标签 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 27 Dec 2023 20:35:45 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/ubuntu/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 20 Apr 2024 12:14:18 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/ubuntu/" rel="self" type="application/rss+xml" /><item>
+  <title>Windows 10 WSL2 Ubuntu 22.04 配置指南</title>
+  <link>https://ccrysisa.github.io/posts/wsl2/</link>
+  <pubDate>Sat, 20 Apr 2024 12:14:18 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/wsl2/</guid>
+  <description><![CDATA[<p>今日闲来无事，刷了会 B 站，突发奇想将发灰了一年多的 WSL2 找回来折腾一下 (之前为了在 VMware 中开启嵌套虚拟化，不得以将 WSL2 打入冷宫 &#x1f923;)。由于这一年内功功力大涨，很快就完成了 WLS2 的再召集启用，下面列出配置的主要步骤和相关材料。</p>]]></description>
+</item>
+<item>
   <title>Ubuntu 22.04LTS 相关配置</title>
   <link>https://ccrysisa.github.io/posts/ubuntu22.04lts/</link>
   <pubDate>Wed, 27 Dec 2023 20:35:45 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/ubuntu22.04lts/</guid>
-  <description><![CDATA[网络代理 根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo apt install net-tools 安装并启]]></description>
+  <description><![CDATA[网络代理根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo apt install net-tools 安装并启]]></description>
 </item>
 </channel>
 </rss>

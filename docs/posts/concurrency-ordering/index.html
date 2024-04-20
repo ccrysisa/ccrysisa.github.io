@@ -9,14 +9,14 @@
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Sysprog, Linux, Concurrency' /><meta itemprop="name" content="并行程序设计: 执行顺序">
 <meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-03-11T16:23:57+08:00" />
-<meta itemprop="dateModified" content="2024-04-10T17:09:32+08:00" />
-<meta itemprop="wordCount" content="1872"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-04-19T21:56:32+08:00" />
+<meta itemprop="wordCount" content="1885"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux,Concurrency," /><meta property="og:title" content="并行程序设计: 执行顺序" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/concurrency-ordering/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-03-11T16:23:57+08:00" />
-<meta property="article:modified_time" content="2024-04-10T17:09:32+08:00" />
+<meta property="article:modified_time" content="2024-04-19T21:56:32+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="并行程序设计: 执行顺序"/>
@@ -35,8 +35,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/concurrency-ordering\/"
-    },"genre": "posts","keywords": "Sysprog, Linux, Concurrency","wordcount":  1872 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/concurrency-ordering\/","datePublished": "2024-03-11T16:23:57+08:00","dateModified": "2024-04-10T17:09:32+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, Linux, Concurrency","wordcount":  1885 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/concurrency-ordering\/","datePublished": "2024-03-11T16:23:57+08:00","dateModified": "2024-04-19T21:56:32+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -47,7 +47,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -87,7 +87,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -140,18 +140,12 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>并行程序设计: 执行顺序</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/concurrency/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Concurrency</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-11 16:23:57"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-11">2024-03-11</time></span>&nbsp;<span title="更新于 2024-04-10 17:09:32"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-10">2024-04-10</time></span>&nbsp;<span title="1872 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/concurrency/" class="post-category" title="分类 - Concurrency"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Concurrency</a>&ensp;<a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-03-11 16:23:57"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-11">2024-03-11</time></span>&nbsp;<span title="更新于 2024-04-19 21:56:32"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-19">2024-04-19</time></span>&nbsp;<span title="1885 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -169,12 +163,12 @@
       </div><div class="content" id="content"><ul>
 <li><a href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fconcurrency-ordering"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
-<h2 id="evaluation">Evaluation</h2>
-<blockquote>
+<h2 id="evaluation" class="heading-element">
+  <a href="#evaluation" class="heading-mark"></a>Evaluation</h2><blockquote>
 <p>所謂求值 (Evaluation)，其實指二件事情，一是 value computations，對一串運算式計算的結果；另一是 side effect，亦即修改物件狀態，像是修改記憶體內變數的值、呼叫函式庫的 I/O 處理函式之類的操作。</p>
 </blockquote>
-<h2 id="sequenced-before">Sequenced-before</h2>
-<blockquote>
+<h2 id="sequenced-before" class="heading-element">
+  <a href="#sequenced-before" class="heading-mark"></a>Sequenced-before</h2><blockquote>
 <p>sequenced-before 是種對 <strong>同一個執行緒</strong> 下，求值順序關係的描述。</p>
 </blockquote>
 <ul>
@@ -191,7 +185,7 @@
 </ul>
 <p>虽然规格书定义了关于 sequenced-before 的规范，但不可能面面俱到，还是存在有些执行顺序是未定义的，例如 <code>f1() + f2() + f3()</code>，规格书只规定了 <code>+</code> 操作是在对 <code>f1(), f2(), f3()</code> 求值之后进行的，但是对于求值时的 <code>f1()</code> 这类函数呼叫，并没有规定哪个函数先进行调用求值，所以在求值时第一个调用的可能是 <code>f1()</code> 或 <code>f2()</code> 或 <code>f3()</code>。</p>
 <p>sequenced-before 的规范缺失导致了 <a href="https://en.wikipedia.org/wiki/Partially_ordered_set#Partial_orders"target="_blank" rel="external nofollow noopener noreferrer">partial order</a> 场景的出现，二这可能会导致未定义行为，例如经典的头脑体操 <code>i = i++</code>：</p>
-<a class="lightgallery" href="https://imgur-backup.hackmd.io/6D8EBmH.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/6D8EBmH.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/6D8EBmH.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/6D8EBmH.png" srcset="https://imgur-backup.hackmd.io/6D8EBmH.png?size=small, https://imgur-backup.hackmd.io/6D8EBmH.png?size=medium 1.5x, https://imgur-backup.hackmd.io/6D8EBmH.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/6D8EBmH.png" data-alt="https://imgur-backup.hackmd.io/6D8EBmH.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/6D8EBmH.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/6D8EBmH.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/6D8EBmH.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/6D8EBmH.png" alt="https://imgur-backup.hackmd.io/6D8EBmH.png" srcset="https://imgur-backup.hackmd.io/6D8EBmH.png?size=small, https://imgur-backup.hackmd.io/6D8EBmH.png?size=medium 1.5x, https://imgur-backup.hackmd.io/6D8EBmH.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/6D8EBmH.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>出现这个未定义行为的原因是，<code>i++</code> 的 side effect 与 <code>=</code> 之间不存在 sequenced-bofore 关系 (因为 partial order)，而这会导致该语句的执行结果是不确定的 (没想到吧，单线程的程序你也有可能不确定执行顺序 &#x1f923;)</p>
 <div class="details admonition warning open">
     <div class="details-summary admonition-title">
@@ -208,13 +202,13 @@
 <li><a href="http://en.cppreference.com/w/cpp/language/eval_order"target="_blank" rel="external nofollow noopener noreferrer">Order of evaluation from cppreference</a></li>
 <li><a href="https://stackoverflow.com/questions/4176328/what-are-sequence-points-and-how-do-they-relate-to-undefined-behavior"target="_blank" rel="external nofollow noopener noreferrer">What are sequence points, and how do they relate to undefined behavior?</a></li>
 </ul>
-<h2 id="happens-before">Happens-before</h2>
-<p>短片:</p>
+<h2 id="happens-before" class="heading-element">
+  <a href="#happens-before" class="heading-mark"></a>Happens-before</h2><p>短片:</p>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://youtu.be/gGilgOSYbaI"target="_blank" rel="external nofollow noopener noreferrer">Happened Before Relationship</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://youtu.be/q-CwESo9UsM"target="_blank" rel="external nofollow noopener noreferrer">Happened Before Relation (cont)</a></li>
 </ul>
-<a class="lightgallery" href="/images/c/happens-beore.png?size=large" data-thumbnail="/images/c/happens-beore.png?size=small" data-sub-html="<h2>/images/c/happens-beore.png</h2>"><img loading="lazy" src="/images/c/happens-beore.png" srcset="/images/c/happens-beore.png?size=small, /images/c/happens-beore.png?size=medium 1.5x, /images/c/happens-beore.png?size=large 2x" sizes="auto" data-title="/images/c/happens-beore.png" data-alt="/images/c/happens-beore.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="/images/c/happens-beore.png?size=large" data-thumbnail="/images/c/happens-beore.png?size=small" data-sub-html="<h2>/images/c/happens-beore.png</h2>"><img loading="lazy" src="/images/c/happens-beore.png" alt="/images/c/happens-beore.png" srcset="/images/c/happens-beore.png?size=small, /images/c/happens-beore.png?size=medium 1.5x, /images/c/happens-beore.png?size=large 2x" sizes="auto" data-title="/images/c/happens-beore.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>从上图可以看出 happens-before 其实就是在 sequenced-before 基础上增加了多执行绪 communication 情形，可以理解为 happens-before 将 sequenced-before 扩大到涵盖多执行绪的情形了，即执行顺序有先后次序 (执行顺序其实不太准确，<strong>执行结果显现</strong> 的先后次序更加准确 &#x1f923;)</p>
 <blockquote>
 <p>图中的 concurrent events 其实就是多执行绪下没有先后次序的情形</p>
@@ -281,8 +275,8 @@ defined below.</p>
 <ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://preshing.com/20130702/the-happens-before-relation/"target="_blank" rel="external nofollow noopener noreferrer">The Happens-Before Relation</a></li>
 </ul>
-<h2 id="synchronized-with">Synchronized-with</h2>
-<div class="details admonition quote open">
+<h2 id="synchronized-with" class="heading-element">
+  <a href="#synchronized-with" class="heading-mark"></a>Synchronized-with</h2><div class="details admonition quote open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -292,8 +286,8 @@ defined below.</p>
 </div>
     </div>
   </div>
-<h2 id="memory-consistency-models">Memory Consistency Models</h2>
-<div class="details admonition tip open">
+<h2 id="memory-consistency-models" class="heading-element">
+  <a href="#memory-consistency-models" class="heading-mark"></a>Memory Consistency Models</h2><div class="details admonition tip open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -307,12 +301,11 @@ defined below.</p>
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-04-10 17:09:32">更新于 2024-04-10&nbsp;</span>
-      </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/concurrency-ordering/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/concurrency-ordering/" data-title="并行程序设计: 执行顺序" data-hashtags="Sysprog,Linux,Concurrency"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+        <span title="更新于 2024-04-19 21:56:32">更新于 2024-04-19&nbsp;</span>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/concurrency-ordering/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/concurrency-ordering/" data-title="并行程序设计: 执行顺序" data-hashtags="Sysprog,Linux,Concurrency"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/concurrency-ordering/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/concurrency-ordering/" data-title="并行程序设计: 执行顺序" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/concurrency-ordering/" data-title="并行程序设计: 执行顺序"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -321,12 +314,11 @@ defined below.</p>
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/concurrency-ordering/" data-title="并行程序设计: 执行顺序" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/concurrency-ordering/" data-title="并行程序设计: 执行顺序"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-      </div>
-    </div>
-  </div>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/linux/' class="post-tag">Linux</a><a href='/tags/concurrency/' class="post-tag">Concurrency</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a><a href="/tags/linux/" class="post-tag" title="标签 - Linux">Linux</a><a href="/tags/concurrency/" class="post-tag" title="标签 - Concurrency">Concurrency</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -335,11 +327,14 @@ defined below.</p>
   <div class="post-nav"><a href="/posts/concurrency-concepts/" class="post-nav-item" rel="prev" title="并行程序设计: 概念"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>并行程序设计: 概念</a>
       <a href="/posts/c-function/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: 函数调用篇">你所不知道的 C 语言: 函数调用篇<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -347,5 +342,5 @@ defined below.</p>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>
