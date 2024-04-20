@@ -96,7 +96,7 @@ $ osc build standard_riscv64 riscv64
 
 由于 deepin 20.9 的 Python3 版本仅为 3.7，构建 osc 和 qemu 显然不太够，所以我通过 KVM 构建了一个 openEuler 22.03 LTS SP3 的虚拟机，在上面进行这项任务。
 
-- [Deepin 20.9 KVM 安装和管理 openEuler 22.03 LTS SP3]({{&lt; relref &#34;../operating-systems/deepin-kvm&#34; &gt;}})
+- [Deepin 20.9 KVM 安装和管理 openEuler 22.03 LTS SP3]({{&lt; relref &#34;../toolkit/deepin-kvm&#34; &gt;}})
 
 编译 QEMU 时常见错误修正:
 

@@ -18,7 +18,7 @@ tags:
   - Linux
   - DragonOS
 categories:
-  - Operating Systems
+  - Toolkit
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

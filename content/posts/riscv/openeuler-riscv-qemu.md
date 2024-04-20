@@ -20,7 +20,6 @@ tags:
   - Mugen
 categories:
   - RISC-V
-  - Operating Systems
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

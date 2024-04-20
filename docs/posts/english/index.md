@@ -70,6 +70,12 @@ This post is used to record the process of my English learning.
 - [x] 055: The Sawyer family
 - [x] 057: An unusual day
 - [x] 059: Is that all?
+- [x] 063: Thank you, doctor.
+- [x] 065: Not a baby.
+- [x] 067: The weekend
+- [x] 069: The car race
+- [x] 071: He&#39;s awful
+- [x] 073: The way to King Street
 
 ---
 
@@ -144,6 +150,9 @@ chalk
 - *n.*
 
 greengrocer
+- *n.*
+
+phrase
 - *n.*
 
 

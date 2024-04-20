@@ -118,4 +118,6 @@ $$
 
 {{< image src="/images/math/inportance-of-definition.png" >}}
 
+第 13 页 (反转了的) 辗转相除法的阅读顺序是：先阅读左边，在阅读右边，右边的推导是将上面的式子代入到下面的式子得来。
+
 ## 綫性代數

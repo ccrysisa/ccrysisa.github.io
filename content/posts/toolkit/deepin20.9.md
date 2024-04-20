@@ -17,7 +17,7 @@ tags:
   - Linux
   - Deepin
 categories:
-  - Operating Systems
+  - Toolkit
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

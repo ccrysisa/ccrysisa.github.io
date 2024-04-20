@@ -48,7 +48,7 @@ repost:
 
 操作系统: Windows 10
 
-## 安装 WSL 2 和 Linux 发行版
+## 安装 WSL2 和 Linux 发行版
 
 {{< bilibili BV1mX4y177dJ >}}
 
@@ -107,6 +107,12 @@ Ubuntu-22.04                           Ubuntu 22.04 LTS
 ## Windows Terminal 美化
 
 {{< bilibili BV1GM4m1X7s3 >}}
+
+## 其它
+
+目前 Windows 10 上的 WSL2 应该都支持 WSLg (如果你一直更新的话)，可以使用 gedit 来测试一下 WLSg 的功能，可以参考微软的官方文档:
+
+- {{< link href="https://github.com/microsoft/wslg" content="https://github.com/microsoft/wslg" external-icon=true >}}
 
 ## 效果展示
 
