@@ -2,7 +2,7 @@
 title: "南京大学 操作系统: 设计与实现 重点提示"
 subtitle:
 date: 2024-03-24T10:01:43+08:00
-draft: true
+# draft: true
 author:
   name: vanJker
   link: https://github.com/vanJker
@@ -18,7 +18,7 @@ tags:
   - QEMU
   - RISC-V
 categories:
-  - Operating Systems
+  - Systems
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -64,11 +64,11 @@ JYY 2022 年的 OSDI 课程讲义和阅读材料是分开的，2023 年和 2024 
 
 ### 操作系统概述 (为什么要学操作系统)
 
-{{< link href="https://www.bilibili.com/video/BV1Cm4y1d7Ur/" content="直播录影" external-icon=true >}}
-|
-{{< link href="https://jyywiki.cn/OS/2022/slides/1.slides.html" content="讲义页面" external-icon=true >}}
-
----
+{{< admonition info >}}
+[直播录影](https://www.bilibili.com/video/BV1Cm4y1d7Ur/)
+/
+[讲义页面](https://jyywiki.cn/OS/2022/slides/1.slides.html)
+{{< /admonition >}}
 
 一个 Talk 的经典三段式结构: Why? What? How? (这个真是汇报的大杀器 :rofl:)
 
@@ -107,13 +107,13 @@ $ sudo apt install manpages manpages-de manpages-de-dev manpages-dev manpages-po
 
 ### 操作系统上的程序 (什么是程序和编译器)
 
-{{< link href="https://www.bilibili.com/video/BV12L4y1379V/" content="直播录影" external-icon=true >}}
-|
-{{< link href="https://jyywiki.cn/OS/2022/slides/2.slides.html" content="讲义页面" external-icon=true >}}
-|
-{{< link href="https://jyywiki.cn/OS/2022/notes/1.html" content="阅读材料" external-icon=true >}}
-
----
+{{< admonition info >}}
+[直播录影](https://www.bilibili.com/video/BV12L4y1379V/)
+/
+[讲义页面](https://jyywiki.cn/OS/2022/slides/2.slides.html)
+/
+[阅读材料](https://jyywiki.cn/OS/2022/notes/1.html)
+{{< /admonition >}}
 
 UNIX 哲学:
 - Make each program do one thing well

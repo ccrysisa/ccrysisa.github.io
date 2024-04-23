@@ -68,3 +68,11 @@ repost:
 > 看了上面的第 3 个影片后，对 pac-man 256 莫名感兴趣 :rofl:
 
 ### Bits, Bytes & Integers
+
+{{< admonition info >}}
+[第一部分录影](https://www.bilibili.com/video/BV1iW411d7hd?p=2) 
+/ 
+[投影片](https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/lectures/02-03-bits-ints.pdf)
+/ 
+阅读章节: 2.1
+{{< /admonition >}}

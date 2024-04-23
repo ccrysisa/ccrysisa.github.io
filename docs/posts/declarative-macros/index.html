@@ -14,7 +14,7 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
 In this second Crust of Rust video, we cover declarative macros, macro_rules!, by re-implementing the vec! macro from the standard library. As part of that, we cover not only how to write these, but some of the gotchas and tricks you&rsquo;ll run into, and some common use-cases.
 "><meta itemprop="datePublished" content="2024-01-31T22:32:27+08:00" />
 <meta itemprop="dateModified" content="2024-02-20T22:02:45+08:00" />
-<meta itemprop="wordCount" content="1596"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1546"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Macro,Declarative Macros," /><meta property="og:title" content="Crust of Rust: Declarative Macros" />
 <meta property="og:description" content="
 In this second Crust of Rust video, we cover declarative macros, macro_rules!, by re-implementing the vec! macro from the standard library. As part of that, we cover not only how to write these, but some of the gotchas and tricks you&rsquo;ll run into, and some common use-cases.
@@ -43,7 +43,7 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/declarative-macros\/"
-    },"genre": "posts","keywords": "Rust, Macro, Declarative Macros","wordcount":  1596 ,
+    },"genre": "posts","keywords": "Rust, Macro, Declarative Macros","wordcount":  1546 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/declarative-macros\/","datePublished": "2024-01-31T22:32:27+08:00","dateModified": "2024-02-20T22:02:45+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -55,7 +55,7 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -95,7 +95,7 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -148,12 +148,18 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Crust of Rust: Declarative Macros</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/rust/" class="post-category" title="分类 - Rust"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div><div class="post-meta-line"><span title="发布于 2024-01-31 22:32:27"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-31">2024-01-31</time></span>&nbsp;<span title="更新于 2024-02-20 22:02:45"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="1596 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-01-31 22:32:27"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-31">2024-01-31</time></span>&nbsp;<span title="更新于 2024-02-20 22:02:45"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="1546 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -187,9 +193,9 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
 <ul>
 <li>整理自 <a href="https://www.youtube.com/watch?v=q6paRBbLgNw"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></li>
 </ul>
-<h2 id="影片注解" class="heading-element">
-  <a href="#%e5%bd%b1%e7%89%87%e6%b3%a8%e8%a7%a3" class="heading-mark"></a>影片注解</h2><h3 id="regex" class="heading-element">
-  <a href="#regex" class="heading-mark"></a>regex</h3><p>macro 可以使用以下 3 种分隔符来传入参数 (注意花括号 <code>{}</code> 的需要与 macro 名之间进行空格，末尾不需要分号，这是因为 <code>{}</code> 会被编译器视为一个 statement，无需使用 <code>;</code> 来进行分隔):</p>
+<h2 id="影片注解">影片注解</h2>
+<h3 id="regex">regex</h3>
+<p>macro 可以使用以下 3 种分隔符来传入参数 (注意花括号 <code>{}</code> 的需要与 macro 名之间进行空格，末尾不需要分号，这是因为 <code>{}</code> 会被编译器视为一个 statement，无需使用 <code>;</code> 来进行分隔):</p>
 <div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -239,8 +245,8 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
 <pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="cp">$(</span><span class="o">..</span><span class="p">.)[</span><span class="n">delimiter</span><span class="p">](</span><span class="o">+|*|?</span><span class="p">)</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>其中分隔符 (delimiter) 是可选的。它会根据内部所包含的参数 <code>$(...)</code> (本例中是 <code>$(elem)</code>) 来进行自动解包装，生成对应次数的 statement，如果有分隔符 (delimiter) 也会生成对应的符号。</p>
-<h3 id="cargo-expand" class="heading-element">
-  <a href="#cargo-expand" class="heading-mark"></a>cargo expand</h3><p>cargo-expand 可以将宏展开，对于宏的除错非常方便，可以以下命令来安装:</p>
+<h3 id="cargo-expand">cargo expand</h3>
+<p>cargo-expand 可以将宏展开，对于宏的除错非常方便，可以以下命令来安装:</p>
 <div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -264,8 +270,8 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="cp">$</span><span class="w"> </span><span class="n">cargo</span><span class="w"> </span><span class="n">expand</span><span class="w"> </span><span class="o">--</span><span class="n">lib</span><span class="w"> </span><span class="n">tests</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="scope" class="heading-element">
-  <a href="#scope" class="heading-mark"></a>scope</h3><p>由于 Rust 中 macro 和 normal code 的作用域不一致，所以像 C 语言那种在 macro 中定义变量或在 macro 中直接修改已有变量是不可行的，操作这种 lvalue 的情况需要使用 macro 参数进行传入，否则无法通过编译。</p>
+</div><h3 id="scope">scope</h3>
+<p>由于 Rust 中 macro 和 normal code 的作用域不一致，所以像 C 语言那种在 macro 中定义变量或在 macro 中直接修改已有变量是不可行的，操作这种 lvalue 的情况需要使用 macro 参数进行传入，否则无法通过编译。</p>
 <div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -311,8 +317,8 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="statements" class="heading-element">
-  <a href="#statements" class="heading-mark"></a>statements</h3><p>在 Rust macro 中，如果需要将传入的 syntax 转换成多个 statements，需要使用 <code>{}</code> 进行包装:</p>
+</div><h3 id="statements">statements</h3>
+<p>在 Rust macro 中，如果需要将传入的 syntax 转换成多个 statements，需要使用 <code>{}</code> 进行包装:</p>
 <div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -325,8 +331,8 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>其中第一对 <code>{}</code> 是 macro 语法所要求的的，第二对 <code>{}</code> 则是用于包装 statements 的 <code>{}</code>，使用 cargo expand 进行查看会更直观。</p>
-<h3 id="delimiter" class="heading-element">
-  <a href="#delimiter" class="heading-mark"></a>delimiter</h3><p>注意 macro 中传入的 syntax，其使用的类似于 <code>=&gt;</code> 的分隔符是有限的，例如不能使用 <code>-&gt;</code> 作为分隔符，具体可以查阅手册。</p>
+<h3 id="delimiter">delimiter</h3>
+<p>注意 macro 中传入的 syntax，其使用的类似于 <code>=&gt;</code> 的分隔符是有限的，例如不能使用 <code>-&gt;</code> 作为分隔符，具体可以查阅手册。</p>
 <div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -346,8 +352,8 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
       <div class="admonition-content">当 declarative macros 变得复杂时，它的可读性会变得很差，这时候需要使用 procedural macros。但是 procedural macros 需要多花费一些编译周期 (compilition cycle)，因为需要先对 procedural macros 进行编译，再编译 lib/bin 对应的源文件。</div>
     </div>
   </div>
-<h3 id="calculating" class="heading-element">
-  <a href="#calculating" class="heading-mark"></a>calculating</h3><p>编写 macro 时传入的参数如果是 expression，需要先对其进行计算，然后使用 <code>clone</code> 方法来对该计算结果进行拷贝，这样能最大限度的避免打破 Rust 所有权制度的限制。</p>
+<h3 id="calculating">calculating</h3>
+<p>编写 macro 时传入的参数如果是 expression，需要先对其进行计算，然后使用 <code>clone</code> 方法来对该计算结果进行拷贝，这样能最大限度的避免打破 Rust 所有权制度的限制。</p>
 <div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -394,8 +400,8 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
 </div></div>
     </div>
   </div>
-<h3 id="trait" class="heading-element">
-  <a href="#trait" class="heading-mark"></a>trait</h3><p>Rust 中的 macro 无法限制传入参数的 Trait，例如不能限制参数必须实现 Clone 这个 Trait。</p>
+<h3 id="trait">trait</h3>
+<p>Rust 中的 macro 无法限制传入参数的 Trait，例如不能限制参数必须实现 Clone 这个 Trait。</p>
 <p><code>::std::iter</code> 带有前置双冒号 <code>::</code> 的语法，是在没有显式引入 <code>use std::iter</code> 模块的情况下访问该模块的方式。在这种情况下，<code>::std::iter</code> 表示全局命名空间 (global namespace) 中的 std::iter 模块，即标准库中的 iter 模块。由于 macro 需要进行 export 建议编写 macro 时尽量使用 <code>::</code> 这类语法。</p>
 <div class="details admonition tip open">
     <div class="details-summary admonition-title">
@@ -405,8 +411,8 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
       <div class="admonition-content">计算 vector 的元素个数时使用 <code>()</code> 引用 <code>[()]</code> 进行计数是一个常见技巧，因为 <code>()</code> 是 zero size 的，所以并不会占用栈空间。其他的元素计数方法可以参考 <a href="https://veykril.github.io/tlborm/"target="_blank" rel="external nofollow noopener noreferrer">The Little Book of Rust Macros</a> 的 2.5.2 Counting 一节。</div>
     </div>
   </div>
-<h2 id="homework" class="heading-element">
-  <a href="#homework" class="heading-mark"></a>Homework</h2><div class="details admonition info open">
+<h2 id="homework">Homework</h2>
+<div class="details admonition info open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -423,13 +429,13 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
 </div>
     </div>
   </div>
-<h2 id="documentations" class="heading-element">
-  <a href="#documentations" class="heading-mark"></a>Documentations</h2><p>这里列举视频中一些概念相关的 documentation</p>
+<h2 id="documentations">Documentations</h2>
+<p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>
 <p>学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料</p>
 </blockquote>
-<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml" class="heading-element">
-  <a href="#crate-stdhttpsdocrust-langorgstdindexhtml" class="heading-mark"></a>Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3><blockquote>
+<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3>
+<blockquote>
 <p>可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)</p>
 </blockquote>
 <ul>
@@ -455,8 +461,8 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
 <p>method <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.take"target="_blank" rel="external nofollow noopener noreferrer">std::option::Option::take</a></p>
 </li>
 </ul>
-<h2 id="references" class="heading-element">
-  <a href="#references" class="heading-mark"></a>References</h2><p>原版的 <a href="https://danielkeep.github.io/tlborm/book/index.html"target="_blank" rel="external nofollow noopener noreferrer">The Little Book of Rust Macros</a> 在 Rust 更新新版本后没有持续更新，另一位大牛对这本小册子进行了相应的更新:</p>
+<h2 id="references">References</h2>
+<p>原版的 <a href="https://danielkeep.github.io/tlborm/book/index.html"target="_blank" rel="external nofollow noopener noreferrer">The Little Book of Rust Macros</a> 在 Rust 更新新版本后没有持续更新，另一位大牛对这本小册子进行了相应的更新:</p>
 <ul>
 <li><a href="https://veykril.github.io/tlborm/"target="_blank" rel="external nofollow noopener noreferrer">The Little Book of Rust Macros</a></li>
 </ul>
@@ -468,10 +474,11 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-02-20 22:02:45">更新于 2024-02-20&nbsp;</span>
-      </div></div><div class="post-info-line">
-        <div class="post-info-md"><span><a href="/posts/declarative-macros/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-        <div class="post-info-share">
-          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/declarative-macros/" data-title="Crust of Rust: Declarative Macros" data-hashtags="Rust,Macro,Declarative Macros"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/declarative-macros/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/declarative-macros/" data-title="Crust of Rust: Declarative Macros" data-hashtags="Rust,Macro,Declarative Macros"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/declarative-macros/" data-hashtag="Rust"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/declarative-macros/" data-title="Crust of Rust: Declarative Macros" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/declarative-macros/" data-title="Crust of Rust: Declarative Macros"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -480,11 +487,12 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/declarative-macros/" data-title="Crust of Rust: Declarative Macros" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/declarative-macros/" data-title="Crust of Rust: Declarative Macros"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-        </div>
-      </div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/rust/" class="post-tag" title="标签 - Rust">Rust</a><a href="/tags/macro/" class="post-tag" title="标签 - Macro">Macro</a><a href="/tags/declarative-macros/" class="post-tag" title="标签 - Declarative Macros">Declarative Macros</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/rust/' class="post-tag">Rust</a><a href='/tags/macro/' class="post-tag">Macro</a><a href='/tags/declarative-macros/' class="post-tag">Declarative Macros</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -493,19 +501,16 @@ In this second Crust of Rust video, we cover declarative macros, macro_rules!, b
   <div class="post-nav"><a href="/posts/lifetime-annotations/" class="post-nav-item" rel="prev" title="Crust of Rust: Lifetime Annotations"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Crust of Rust: Lifetime Annotations</a>
       <a href="/posts/c-linked-list/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: linked list 和非连续记忆体">你所不知道的 C 语言: linked list 和非连续记忆体<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article>
-
-  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
         </div></div><div id="mask"></div><noscript>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":20},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

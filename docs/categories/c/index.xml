@@ -2,9 +2,20 @@
   <channel>
     <title>C - 分类 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/categories/c/</link>
-    <description>C - 分类 | KZnight&#39;s Blog</description>
+    <description>C - 分类 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 10 Apr 2024 16:06:08 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/c/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 23 Apr 2024 15:17:38 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/c/" rel="self" type="application/rss+xml" /><item>
+  <title>你所不知道的 C 语言: 编译器原理和案例分析</title>
+  <link>https://ccrysisa.github.io/posts/c-compiler-construction/</link>
+  <pubDate>Tue, 23 Apr 2024 15:17:38 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-compiler-construction/</guid>
+  <description><![CDATA[<blockquote>
+<p>AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。</p>
+<p>預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>你所不知道的 C 语言: 技巧篇</title>
   <link>https://ccrysisa.github.io/posts/c-trick/</link>
   <pubDate>Wed, 10 Apr 2024 16:06:08 &#43;0800</pubDate>
@@ -97,16 +108,6 @@
   <guid>https://ccrysisa.github.io/posts/c-bitwise/</guid>
   <description><![CDATA[<blockquote>
 <p>Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，颇多乍看像是魔法的 C 程式码就是 bitops 的组合。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: 数值系统篇</title>
-  <link>https://ccrysisa.github.io/posts/c-numerics/</link>
-  <pubDate>Tue, 20 Feb 2024 11:13:57 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-numerics/</guid>
-  <description><![CDATA[<blockquote>
-<p>尽管数值系统并非 C 语言所持有，但在 Linux 核心大量存在 u8/u16/u32/u64 这样通过 typedef 所定义的类型，伴随着各种 alignment 存取，如果对数值系统的认知不够充分，可能立即就被阻拦在探索 Linux 核心之外——毕竟你完全搞不清楚，为何 Linux 核心存取特定资料需要绕一大圈。</p>
 </blockquote>]]></description>
 </item>
 </channel>

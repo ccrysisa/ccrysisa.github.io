@@ -46,6 +46,8 @@ repost:
 
 - {{< link href="https://hackmd.io/@sysprog/c-trick" content="原文地址" external-icon=true >}}
 
+{{< image src="https://imgur-backup.hackmd.io/KC1dCXq.jpg" >}}
+
 ## 从矩阵操作谈起
 
 C 语言也可作实现 [Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming) (需要搭配前置处理器扩充语法)
@@ -69,3 +71,25 @@ C 语言也可作实现 [Object-oriented programming](https://en.wikipedia.org/w
 ## Smart Pointer
 
 ## C99 Variable Length Arrays (VLA)
+
+## 字符串和数值转换
+
+- [ ] [Integer to string conversion](https://tia.mat.br/posts/2014/06/23/integer_to_string_conversion.html)
+
+## GCC 支援 Plan 9 C Extension
+
+- [ ] GCC [6.65 Unnamed Structure and Union Fields](https://gcc.gnu.org/onlinedocs/gcc/Unnamed-Fields.html)
+
+## GCC transparent union
+
+- [ ] GCC [6.35.1 Common Type Attributes](https://gcc.gnu.org/onlinedocs/gcc/Common-Type-Attributes.html#Common-Type-Attributes)
+
+## 高阶的 C 语言的「开发框架」
+
+[cello](https://libcello.org/) 是上面提到的技巧的集大成者，在 C 语言基础上，提供以下进阶特征:
+
+## 善用 GNU extension 的 typeof
+
+- [ ] GCC [6.7 Referring to a Type with typeof](https://gcc.gnu.org/onlinedocs/gcc/Typeof.html)
+
+> `typeof` 在 C23 中已由 GNU extenison 转正为 C 语言标准

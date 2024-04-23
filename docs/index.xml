@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 20 Apr 2024 12:14:18 &#43;0800</lastBuildDate>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 23 Apr 2024 15:17:38 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
   <title>English Everyday</title>
@@ -22,6 +22,17 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>你所不知道的 C 语言: 编译器原理和案例分析</title>
+  <link>https://ccrysisa.github.io/posts/c-compiler-construction/</link>
+  <pubDate>Tue, 23 Apr 2024 15:17:38 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-compiler-construction/</guid>
+  <description><![CDATA[<blockquote>
+<p>AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。</p>
+<p>預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -88,21 +99,6 @@
   <guid>https://ccrysisa.github.io/posts/c-control-flow/</guid>
   <description><![CDATA[<blockquote>
 <p>goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這樣看待，至少在 Linux 核心原始程式碼中，goto 是大量存在 (跟你想像中不同吧)。有時不用 goto 會寫出更可怕的程式碼。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>OERV 之 Pretask</title>
-  <link>https://ccrysisa.github.io/posts/oerv-pretask/</link>
-  <pubDate>Thu, 28 Mar 2024 19:15:59 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/oerv-pretask/</guid>
-  <description><![CDATA[<blockquote>
-<p>pretask 作为社区入门探索，目的是帮助实习生一起搭建工作环境，熟悉 oerv 的工作流程和合作方式。pretask 分为三个步骤:</p>
-<ul>
-<li>任务一：通过 QEMU 仿真 RISC-V 环境并启动 openEuler RISC-V 系统，设法输出 neofetch 结果并截图提交</li>
-<li>任务二：在 openEuler RISC-V 系统上通过 obs 命令行工具 osc，从源代码构建 RISC-V 版本的 rpm 包，比如 pcre2。提示首先需要在 <a href="https://build.openeuler.openatom.cn/project/show/openEuler:Mainline:RISC-V"target="_blank" rel="external nofollow noopener noreferrer">openEuler 的 OBS</a> 上注册账号</li>
-<li>任务三：尝试使用 qemu user &amp; nspawn 或者 docker 加速完成任务二</li>
-</ul>
 </blockquote>]]></description>
 </item>
 </channel>

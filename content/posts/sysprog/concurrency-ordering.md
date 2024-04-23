@@ -134,7 +134,23 @@ int counter = 0;
 因此，程式語言必須提供適當的手段，讓程式開發者得以建立跨越執行緒間的 happens-before 的關係，如此一來才能確保程式執行的結果正確。
 {{< /admonition >}}
 
-- [ ] [The Happens-Before Relation](https://preshing.com/20130702/the-happens-before-relation/)
+### The Happens-Before Relation
+
+- [x] [The Happens-Before Relation](https://preshing.com/20130702/the-happens-before-relation/)
+
+> Let A and B represent operations performed by a multithreaded process. If A happens-before B, then the memory effects of A effectively become visible to the thread performing B before B is performed.
+
+> No matter which programming language you use, they all have one thing in common: If operations A and B are performed by the same thread, and A’s statement comes before B’s statement in program order, then A happens-before B.
+
+Happens-Before Does Not Imply Happening Before
+
+> In this case, though, the store to A doesn’t actually influence the store to B. (2) still behaves the same as it would have even if the effects of (1) had been visible, which is effectively the same as (1)’s effects being visible. Therefore, this doesn’t count as a violation of the happens-before rule. 
+
+Happening Before Does Not Imply Happens-Before
+
+> The happens-before relationship only exists where the language standards say it exists. And since these are plain loads and stores, the C++11 standard has no rule which introduces a happens-before relation between (2) and (3), even when (3) reads the value written by (2).
+
+这里说的 happens-before 关系必须要在语言标准中有规定的才算，单执行绪的情况自然在标准内，多执行绪的情况，标准一般会制定相关的同步原语之间的 happens-before 关系，例如对 mutex 的连续两个操作必然是 happens-before 关系，更多的例子见后面的 synchronized-with 部分。
 
 ## Synchronized-with
 
@@ -144,9 +160,73 @@ synchronized-with 是個發生在二個不同執行緒間的同步行為，當 A
 不難發現，其實 synchronized-with 就是跨越多個執行緒版本的 happens-before。
 {{< /admonition >}}
 
+### 从 Java 切入
+
+- synchronized 关键字
+
+{{< admonition quote >}}
+**Mutual Exclusive**   
+對同一個物件而言，不可能有二個前綴 synchronized 的方法同時交錯執行，當一個執行緒正在執行前綴 synchronized 的方法時，其他想執行 synchronized 方法的執行緒會被阻擋 (block)。
+
+**確立 Happens-before 關係**   
+對同一個物件而言，當一個執行緒離開 synchronized 方法時，會自動對接下來呼叫 synchronized 方法的執行緒建立一個 Happens-before 關係，前一個 synchronized 的方法對該物件所做的修改，保證對接下來進入 synchronized 方法的執行緒可見。
+{{< /admonition >}}
+
+- volatile 关键字
+
+{{< admonition quote >}}
+A write to a volatile field happens-before every subsequent read of that same volatile
+{{< /admonition >}}
+
+- thread create/join
+
+{{< image src="https://imgur-backup.hackmd.io/BWLFl2m.png" >}}
+
+### C++ 的观点
+
+> The library defines a number of atomic operations and operations on mutexes that are specially identified as synchronization operations. These operations play a special role in making assignments in one thread **visible** to another.
+
+又是 visible 说明强调的还是 happens-before 这一关系 :rofl:
+
+```c++
+#include <iostream>       // std::cout
+#include <thread>         // std::thread
+#include <mutex>          // std::mutex
+
+std::mutex mtx;           // mutex for critical section
+int count = 0;
+
+void print_thread_id (int id) {
+    // critical section (exclusive access to std::cout signaled by locking mtx):
+    mtx.lock();
+    std::cout << "thread #" << id  << "  count:" << count << '\n';
+    count++;
+    mtx.unlock();
+}
+int main () {
+    std::thread threads[10];
+    // spawn 10 threads:
+    for (int i=0; i<10; ++i)
+        threads[i] = std::thread(print_thread_id,i+1);
+    for (auto& th : threads) th.join();
+    return 0;
+}
+```
+
+这段程序里每个执行的 thread 之间都是 happens-before / synchronized-with 关系，因为它们的执行体都被 mutex 包裹了，而对 mutex 的操作是 happens-before 关系的。如果没有使用 mutex，那么 thread 之间不存在 happens-before 关系，打印出来的内容也是乱七八糟的。
+
+- cppreference [std::mutex](https://en.cppreference.com/w/cpp/thread/mutex)
+- cplusplus [std::mutex::lock](https://cplusplus.com/reference/mutex/mutex/lock/)
+
+### 深入 Synchronizes-with
+
+- [ ] [The Synchronizes-With Relation](https://preshing.com/20130823/the-synchronizes-with-relation/)
+
+{{< image src="https://imgur-backup.hackmd.io/qrgwQni.png" >}}
+
 ## Memory Consistency Models
 
 {{< admonition tip >}}
-相关论文/技术报告 (可以用来参考理解):
+相关论文 / 技术报告 (可以用来参考理解):
 - [ ] [Shared Memory Consistency Models: A Tutorial 1995 Sarita V. Adve, Kourosh Gharachorloo](https://inst.eecs.berkeley.edu/~cs252/sp17/papers/consistency-tutorial-1995.pdf)
 {{< /admonition >}}

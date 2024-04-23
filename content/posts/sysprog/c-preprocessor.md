@@ -267,6 +267,8 @@ else
 
 > Note that `STRING_SWITCH_L` performs a bitwise OR with the 32-bit integral value – this is a fast means of lowering the case of four characters at once.
 
+这里有一个 `| 0x20202020` 的位运算操作，这个运算的作用是将对应的字符转换成对应小写字符，具体可以参考本人于数值系统篇的 [记录]({{< relref "./c-numerics/#ascii-table" >}}) (提示: 字符 `' '` 对应的 ASCII 编码为 0x20)。
+
 然后 `MULTICHAR_CONSTANT` 则是将参数按小端字节序计算出对应的数值。
 
 这篇博文说明了在 C 语言中对 string 使用 switch case 提升效能的原理 (除此之外还讲解了内存对齐相关的效能问题):
