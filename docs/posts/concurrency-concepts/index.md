@@ -28,6 +28,26 @@ Mutex 和 Semaphore 在实作上可能是没有差异的 (例如早期的 Linux)
 
 > 一個可再進入 (reentrancy) 的函式是可被多個工作同時呼叫，而不會有資料不一致的問題。簡單來說，一個可再進入的函式，會避免在函式中使用任何共享記憶區 (global memory)，所有的變數與資料均存在呼叫者的資料區或函式本身的堆疊區 (stack memory)。
 
+## 经典的 Fork-join 模型
+
+{{< image src="https://hackmd.io/_uploads/S1wxT_y6a.png" >}}
+$\rightarrow$
+{{< image src="https://hackmd.io/_uploads/SkF-6_16p.png" >}}
+$\rightarrow$
+{{< image src="https://hackmd.io/_uploads/SkF-6_16p.png" >}}
+$\rightarrow$
+{{< image src="https://hackmd.io/_uploads/BkvMpukTa.png" >}}
+
+---
+
+{{< image src="https://hackmd.io/_uploads/SJtQpdyT6.png" caption="Fork-join Parallelism" >}}
+
+{{< image src="https://hackmd.io/_uploads/S1lQ6_1pa.png" caption="Fork/join model" >}}
+
+从图也可以看出，设定一个 join 点是非常必要的 (通常是由主执行绪对 join 点进行设置)，因为 fork 之后新增的执行绪有可能立刻就执行完毕了，然后当主执行绪到达 join 点时，即可 join 操作进行下一步，也有可能 fork 之后新增的执行绪是惰性的，它们只有当主执行绪到达 join 点时，才会开始执行直到完毕，即主执行绪先抵达 join 点等待其它执行绪完成执行，从而完成 join 操作接着进行下一步。
+
+因为 fork 操作时分叉处的执行绪的执行流程，对于主执行绪是无法预测的 (立刻执行、惰性执行、...)，所以设定一个 join 点可以保证在这个 join 点时主执行绪和其它分叉的执行绪的执行预期行为一致，即在这个 join 点，不管是主执行绪还是分叉执行绪都完成了相应的执行流程。
+
 ## Concurrency 和 Parallelism
 
 - [ ] Rob Pike: [Concurrency Is Not Parallelism](https://www.youtube.com/watch?v=qmg1CF3gZQ0) / [slides](https://go.dev/talks/2012/waza.slide#1)

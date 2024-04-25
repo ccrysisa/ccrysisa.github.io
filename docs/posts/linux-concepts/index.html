@@ -14,7 +14,7 @@
 面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。
 "><meta itemprop="datePublished" content="2024-02-15T12:51:49+08:00" />
 <meta itemprop="dateModified" content="2024-04-19T17:31:37+08:00" />
-<meta itemprop="wordCount" content="1439"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1398"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux," /><meta property="og:title" content="Linux 核心设计: 操作系统术语及概念" />
 <meta property="og:description" content="
 面對原始程式碼超越 3 千萬行規模的 Linux 核心 (2023 年)，最令人感到挫折的，絕非缺乏程式註解，而是就算見到滿滿的註解，自己卻有如文盲，全然無從理解起。為什麼呢？往往是因為對作業系統的認知太侷限。
@@ -43,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux-concepts\/"
-    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  1439 ,
+    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  1398 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/linux-concepts\/","datePublished": "2024-02-15T12:51:49+08:00","dateModified": "2024-04-19T17:31:37+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -159,7 +159,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-15 12:51:49"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-15">2024-02-15</time></span>&nbsp;<span title="更新于 2024-04-19 17:31:37"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-19">2024-04-19</time></span>&nbsp;<span title="1439 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-15 12:51:49"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-15">2024-02-15</time></span>&nbsp;<span title="更新于 2024-04-19 17:31:37"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-19">2024-04-19</time></span>&nbsp;<span title="1398 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -371,21 +371,7 @@
 <ul>
 <li>YouTube: <a href="https://www.youtube.com/playlist?list=PLtoQeavghzr3nlXyJEXaTLU9Ca0DXWMnt"target="_blank" rel="external nofollow noopener noreferrer">2022: UNSW&rsquo;s COMP9242 Advanced Operating Systems</a></li>
 <li>这门课可以作为辅助材料，讲得深入浅出，可以作为进阶材料阅读。</li>
-</ul>
-<p>Georgia Tech <strong>Advanced Operating Systems</strong>:</p>
-<ul>
-<li><a href="https://www.youtube.com/playlist?list=PLAwxTw4SYaPkKfusBLVfklgfdcB3BNpwX"target="_blank" rel="external nofollow noopener noreferrer">Part 1</a></li>
-<li><a href="https://www.youtube.com/playlist?list=PLAwxTw4SYaPm4vV1XbFV93ZuT2saSq1hO"target="_blank" rel="external nofollow noopener noreferrer">Part 2</a></li>
-<li><a href="https://www.youtube.com/playlist?list=PLAwxTw4SYaPk5-YaXFkWY4UXdv6pVdiYg"target="_blank" rel="external nofollow noopener noreferrer">Part 3</a></li>
-<li><a href="https://www.youtube.com/playlist?list=PLAwxTw4SYaPmfaiuzJcK3tNoeKlvRR990"target="_blank" rel="external nofollow noopener noreferrer">Part 4</a></li>
-</ul>
-<p>Reddit: <a href="https://www.reddit.com/r/linux/comments/z26h5h/best_book_to_learn_indepth_knowledge_about_the/"target="_blank" rel="external nofollow noopener noreferrer">Best book to learn in-depth knowledge about the Linux Kernel?</a></p>
-<ul>
-<li><a href="https://www.linuxfromscratch.org/"target="_blank" rel="external nofollow noopener noreferrer">Linux From Scratch</a></li>
-<li>Amazon: <a href="https://www.amazon.com/Linux-Kernel-Development-Robert-Love/dp/0672329468"target="_blank" rel="external nofollow noopener noreferrer">Linux Kernel Development</a></li>
-<li>YouTube: <a href="https://www.youtube.com/watch?v=JRyrhsx-L5Y"target="_blank" rel="external nofollow noopener noreferrer">Steven Rostedt - Learning the Linux Kernel with tracing</a></li>
-</ul>
-</div>
+</ul></div>
     </div>
   </div>
 <h2 id="系统软件开发思维">系统软件开发思维</h2>

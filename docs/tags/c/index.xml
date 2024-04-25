@@ -4,7 +4,23 @@
     <link>https://ccrysisa.github.io/tags/c/</link>
     <description>C - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 23 Apr 2024 15:17:38 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/c/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 24 Apr 2024 21:09:59 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/c/" rel="self" type="application/rss+xml" /><item>
+  <title>你所不知道的 C 语言: 编译器和最佳化原理篇</title>
+  <link>https://ccrysisa.github.io/posts/c-compiler-optimization/</link>
+  <pubDate>Wed, 24 Apr 2024 21:09:59 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-compiler-optimization/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
+  <title>你所不知道的 C 语言: 未定义/未指定行为篇</title>
+  <link>https://ccrysisa.github.io/posts/c-undefined-behavior/</link>
+  <pubDate>Wed, 24 Apr 2024 21:09:40 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-undefined-behavior/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>你所不知道的 C 语言: 编译器原理和案例分析</title>
   <link>https://ccrysisa.github.io/posts/c-compiler-construction/</link>
   <pubDate>Tue, 23 Apr 2024 15:17:38 &#43;0800</pubDate>
@@ -88,26 +104,6 @@
 <blockquote>
 <p><strong>工欲善其事，必先利其器</strong></p>
 </blockquote>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: 记忆体管理、对齐及硬体特性</title>
-  <link>https://ccrysisa.github.io/posts/c-memory/</link>
-  <pubDate>Tue, 27 Feb 2024 22:44:38 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-memory/</guid>
-  <description><![CDATA[<blockquote>
-<p>不少 C/C++ 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: bitwise 操作</title>
-  <link>https://ccrysisa.github.io/posts/c-bitwise/</link>
-  <pubDate>Fri, 23 Feb 2024 13:13:33 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-bitwise/</guid>
-  <description><![CDATA[<blockquote>
-<p>Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，颇多乍看像是魔法的 C 程式码就是 bitops 的组合。</p>
 </blockquote>]]></description>
 </item>
 </channel>

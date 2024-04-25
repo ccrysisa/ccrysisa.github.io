@@ -108,24 +108,30 @@ Wikipedia: [Common usage patterns of Goto](https://en.wikipedia.org/wiki/Goto#Co
 > 
 > To anyone with a bit of experience with assembly language programming, the computed goto immediately makes sense because it just exposes a common instruction that most modern CPU architectures have - jump through a register (aka. indirect jump).
 
-{{< admonition >}}
 `computed goto`  比 `switch` 效能更高的原因:
 1. The switch does a bit more per iteration because of bounds checking.
 2. The effects of hardware branch prediction.
 
 C99:
-{{< admonition quote >}}
-If no converted case constant expression matches and there is no default label, no part of the switch body is executed. 
-{{< /admonition >}}
+> If no converted case constant expression matches and there is no default label, no part of the switch body is executed. 
 
 因为标准的这个要求，所以编译器对于 `switch` 会生成额外的 safe 检查代码，以符合上面情形的 "no part of the switch body is executed" 的要求。
 
+> Since the switch statement has a single "master jump" that dispatches all opcodes, predicting its destination is quite difficult. On the other hand, the computed goto statement is compiled into a separate jump per opcode, so given that instructions often come in pairs it's much easier for the branch predictor to "home in" on the various jumps correctly.
+
+作者提到，ta 个人认为分支预测是导致效能差异的主要因素:
+
+> I can't say for sure which one of the two factors weighs more in the speed difference between the switch and the computed goto, but if I had to guess I'd say it's the branch prediction.
+
+除此之外，有这篇文章的 disassembly 部分可以得知，`switch` 的底层是通过所谓的 jump table 来实作的:
+
 {{< admonition quote >}}
-Since the switch statement has a single "master jump" that dispatches all opcodes, predicting its destination is quite difficult. On the other hand, the computed goto statement is compiled into a separate jump per opcode, so given that instructions often come in pairs it's much easier for the branch predictor to "home in" on the various jumps correctly.
+How did I figure out which part of the code handles which opcode? Note that the "table jump" is done with:
+```
+jmpq   *0x400b20(,%rdx,8)
+```
 {{< /admonition >}}
 
-I can't say for sure which one of the two factors weighs more in the speed difference between the switch and the computed goto, but if I had to guess I'd say it's the branch prediction.
-{{< /admonition >}}
 
 > bounds checking 是在 switch 中執行的一個環節，每次迴圈中檢查是否有 default case 的狀況，即使程式中的 switch 沒有用到 default case，編譯期間仍會產生強制檢查的程式，所以 switch 會較 computed goto 多花一個 bounds checking 的步驟
 
@@ -163,6 +169,8 @@ Linux 核心中的实作:
 > The identifier in a goto statement shall name a label located somewhere in the enclosing function. A goto statement shall not jump from outside the scope of an identifier having a variably modified type to inside the scope of that identifier.
 
 规格书后面的例子也值得一看 (特别是当你看不懂规格书严格的英语语法想表达什么的时候 :rofl:)
+
+从规格书中也可以得知，`goto` 虽然是无条件跳转 (对应汇编语言的 `jmp` 这类无条件跳转指令)，但它的跳转范围是有限制的 (jump to another place)，而不是可以跳转到任意程式码 (这也是为什么 `setjmp/longjmp` 被称为「长跳转」的原因，与 `goto` 这类「短跳转」相对应)。
 
 相关实作:
 - CPython 的 [Modules/_asynciomodule.c](https://github.com/python/cpython/blob/main/Modules/_asynciomodule.c#L1711)

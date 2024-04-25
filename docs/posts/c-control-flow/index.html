@@ -14,7 +14,7 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
 goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這樣看待，至少在 Linux 核心原始程式碼中，goto 是大量存在 (跟你想像中不同吧)。有時不用 goto 會寫出更可怕的程式碼。
 "><meta itemprop="datePublished" content="2024-04-05T11:39:34+08:00" />
 <meta itemprop="dateModified" content="2024-04-18T18:04:13+08:00" />
-<meta itemprop="wordCount" content="1664"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1865"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Control flow," /><meta property="og:title" content="你所不知道的 C 语言: goto 和流程控制篇" />
 <meta property="og:description" content="
 goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這樣看待，至少在 Linux 核心原始程式碼中，goto 是大量存在 (跟你想像中不同吧)。有時不用 goto 會寫出更可怕的程式碼。
@@ -43,7 +43,7 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-control-flow\/"
-    },"genre": "posts","keywords": "Sysprog, C, Control flow","wordcount":  1664 ,
+    },"genre": "posts","keywords": "Sysprog, C, Control flow","wordcount":  1865 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-control-flow\/","datePublished": "2024-04-05T11:39:34+08:00","dateModified": "2024-04-18T18:04:13+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -159,7 +159,7 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-04-05 11:39:34"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-05">2024-04-05</time></span>&nbsp;<span title="更新于 2024-04-18 18:04:13"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-18">2024-04-18</time></span>&nbsp;<span title="1664 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-04-05 11:39:34"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-05">2024-04-05</time></span>&nbsp;<span title="更新于 2024-04-18 18:04:13"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-18">2024-04-18</time></span>&nbsp;<span title="1865 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -245,36 +245,38 @@ goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這
 <p>the condition serves as an offset into a lookup table that says where to jump next.</p>
 <p>To anyone with a bit of experience with assembly language programming, the computed goto immediately makes sense because it just exposes a common instruction that most modern CPU architectures have - jump through a register (aka. indirect jump).</p>
 </blockquote>
-<div class="details admonition note open">
-    <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content"><p><code>computed goto</code>  比 <code>switch</code> 效能更高的原因:</p>
+<p><code>computed goto</code>  比 <code>switch</code> 效能更高的原因:</p>
 <ol>
 <li>The switch does a bit more per iteration because of bounds checking.</li>
 <li>The effects of hardware branch prediction.</li>
 </ol>
 <p>C99:</p>
-<div class="details admonition quote open">
-    <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content">If no converted case constant expression matches and there is no default label, no part of the switch body is executed.</div>
-    </div>
-  </div>
+<blockquote>
+<p>If no converted case constant expression matches and there is no default label, no part of the switch body is executed.</p>
+</blockquote>
 <p>因为标准的这个要求，所以编译器对于 <code>switch</code> 会生成额外的 safe 检查代码，以符合上面情形的 &ldquo;no part of the switch body is executed&rdquo; 的要求。</p>
+<blockquote>
+<p>Since the switch statement has a single &ldquo;master jump&rdquo; that dispatches all opcodes, predicting its destination is quite difficult. On the other hand, the computed goto statement is compiled into a separate jump per opcode, so given that instructions often come in pairs it&rsquo;s much easier for the branch predictor to &ldquo;home in&rdquo; on the various jumps correctly.</p>
+</blockquote>
+<p>作者提到，ta 个人认为分支预测是导致效能差异的主要因素:</p>
+<blockquote>
+<p>I can&rsquo;t say for sure which one of the two factors weighs more in the speed difference between the switch and the computed goto, but if I had to guess I&rsquo;d say it&rsquo;s the branch prediction.</p>
+</blockquote>
+<p>除此之外，有这篇文章的 disassembly 部分可以得知，<code>switch</code> 的底层是通过所谓的 jump table 来实作的:</p>
 <div class="details admonition quote open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
-      <div class="admonition-content">Since the switch statement has a single &ldquo;master jump&rdquo; that dispatches all opcodes, predicting its destination is quite difficult. On the other hand, the computed goto statement is compiled into a separate jump per opcode, so given that instructions often come in pairs it&rsquo;s much easier for the branch predictor to &ldquo;home in&rdquo; on the various jumps correctly.</div>
-    </div>
-  </div>
-<p>I can&rsquo;t say for sure which one of the two factors weighs more in the speed difference between the switch and the computed goto, but if I had to guess I&rsquo;d say it&rsquo;s the branch prediction.</p>
+      <div class="admonition-content"><p>How did I figure out which part of the code handles which opcode? Note that the &ldquo;table jump&rdquo; is done with:</p>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">jmpq   *0x400b20(,%rdx,8)</span></span></code></pre></td></tr></table>
 </div>
+</div></div>
     </div>
   </div>
 <blockquote>
@@ -320,6 +322,7 @@ unwind all resources allocated before the point of failure.</p>
 <p>The identifier in a goto statement shall name a label located somewhere in the enclosing function. A goto statement shall not jump from outside the scope of an identifier having a variably modified type to inside the scope of that identifier.</p>
 </blockquote>
 <p>规格书后面的例子也值得一看 (特别是当你看不懂规格书严格的英语语法想表达什么的时候 &#x1f923;)</p>
+<p>从规格书中也可以得知，<code>goto</code> 虽然是无条件跳转 (对应汇编语言的 <code>jmp</code> 这类无条件跳转指令)，但它的跳转范围是有限制的 (jump to another place)，而不是可以跳转到任意程式码 (这也是为什么 <code>setjmp/longjmp</code> 被称为「长跳转」的原因，与 <code>goto</code> 这类「短跳转」相对应)。</p>
 <p>相关实作:</p>
 <ul>
 <li>CPython 的 <a href="https://github.com/python/cpython/blob/main/Modules/_asynciomodule.c#L1711"target="_blank" rel="external nofollow noopener noreferrer">Modules/_asynciomodule.c</a></li>

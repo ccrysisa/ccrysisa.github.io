@@ -1,6 +1,10 @@
 # 并行程序设计: 执行顺序
 
 
+> 多執行緒環境下，程式會出問題，往往在於執行順序的不確定性。一旦顧及分散式系統 (distributed systems)，執行順序和衍生的時序 (timing) 問題更加複雜。
+> 
+> 我們將從如何定義程式執行的順序開始說起，為了簡單起見，我們先從單執行緒的觀點來看執行順序這件事，其中最關鍵知識就是 Sequenced-before，你將會發現就連單執行緒的程式，也可能會產生不確定的執行順序。
+
 <!--more-->
 
 - {{< link href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fconcurrency-ordering" content="原文地址" external-icon=true >}}

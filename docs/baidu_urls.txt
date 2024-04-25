@@ -1,5 +1,7 @@
 https://ccrysisa.github.io/posts/english/
 https://ccrysisa.github.io/posts/linux2023/
+https://ccrysisa.github.io/posts/c-compiler-optimization/
+https://ccrysisa.github.io/posts/c-undefined-behavior/
 https://ccrysisa.github.io/posts/c-compiler-construction/
 https://ccrysisa.github.io/posts/wsl2/
 https://ccrysisa.github.io/posts/csapp-ch2/

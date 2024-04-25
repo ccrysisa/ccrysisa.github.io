@@ -10,7 +10,7 @@
 <meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Sysprog, Linux, Concurrency' /><meta itemprop="name" content="并行程序设计: POSIX Threads">
 <meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-04-10T16:09:35+08:00" />
 <meta itemprop="dateModified" content="2024-04-10T17:09:32+08:00" />
-<meta itemprop="wordCount" content="4"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="869"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux,Concurrency," /><meta property="og:title" content="并行程序设计: POSIX Threads" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
@@ -35,7 +35,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/posix-threads\/"
-    },"genre": "posts","keywords": "Sysprog, Linux, Concurrency","wordcount":  4 ,
+    },"genre": "posts","keywords": "Sysprog, Linux, Concurrency","wordcount":  869 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/posix-threads\/","datePublished": "2024-04-10T16:09:35+08:00","dateModified": "2024-04-10T17:09:32+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -140,7 +140,8 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
 
   <aside class="aside-custom">
     </aside>
@@ -150,10 +151,217 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/concurrency/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Concurrency</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-04-10 16:09:35"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-10">2024-04-10</time></span>&nbsp;<span title="更新于 2024-04-10 17:09:32"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-10">2024-04-10</time></span>&nbsp;<span title="4 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
-    </div><div class="content" id="content"><ul>
+      <div class="post-meta-line"><span title="发布于 2024-04-10 16:09:35"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-10">2024-04-10</time></span>&nbsp;<span title="更新于 2024-04-10 17:09:32"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-10">2024-04-10</time></span>&nbsp;<span title="869 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#process-vs-thread-vs-coroutines">Process vs. Thread vs. Coroutines</a>
+      <ul>
+        <li><a href="#thread--process">Thread &amp; Process</a></li>
+        <li><a href="#pthread-posix-threads">PThread (POSIX threads)</a></li>
+        <li><a href="#synchronizing-threads">Synchronizing Threads</a>
+          <ul>
+            <li><a href="#mutex-locks">mutex locks</a></li>
+            <li><a href="#condition-variables">condition variables</a></li>
+            <li><a href="#semaphores">semaphores</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#posix-threads">POSIX Threads</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><ul>
 <li><a href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fposix-threads"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
-</ul></div><div class="post-footer" id="post-footer">
+</ul>
+<h2 id="process-vs-thread-vs-coroutines">Process vs. Thread vs. Coroutines</h2>
+<blockquote>
+<ul>
+<li>
+<p>With threads, the operating system switches running tasks preemptively according to its scheduling algorithm.</p>
+</li>
+<li>
+<p>With coroutines, the programmer chooses, meaning tasks are cooperatively multitasked by pausing and resuming functions at set points.</p>
+<ul>
+<li>coroutine switches are cooperative, meaning the programmer controls when a switch will happen.</li>
+<li>The kernel is not involved in coroutine switches.</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>一图胜千语:</p>
+<a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined" data-alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p>具体一点，从函数执行流程来看:</p>
+<p><a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined" data-alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+$\rightarrow$ 在使用 coroutinues 后执行流程变成 $\rightarrow$
+<a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined" data-alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a></p>
+<h3 id="thread--process">Thread &amp; Process</h3>
+<p><a class="lightgallery" href="https://imgur-backup.hackmd.io/QW1YWsC.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/QW1YWsC.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/QW1YWsC.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/QW1YWsC.png" srcset="https://imgur-backup.hackmd.io/QW1YWsC.png?size=small, https://imgur-backup.hackmd.io/QW1YWsC.png?size=medium 1.5x, https://imgur-backup.hackmd.io/QW1YWsC.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/QW1YWsC.png" data-alt="https://imgur-backup.hackmd.io/QW1YWsC.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/gUF3Vz9.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/gUF3Vz9.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/gUF3Vz9.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/gUF3Vz9.png" srcset="https://imgur-backup.hackmd.io/gUF3Vz9.png?size=small, https://imgur-backup.hackmd.io/gUF3Vz9.png?size=medium 1.5x, https://imgur-backup.hackmd.io/gUF3Vz9.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/gUF3Vz9.png" data-alt="https://imgur-backup.hackmd.io/gUF3Vz9.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a></p>
+<ul>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Light-weight_process"target="_blank" rel="external nofollow noopener noreferrer">Light-weight process</a></li>
+</ul>
+<blockquote>
+<p>On Linux, user threads are implemented by allowing certain processes to share resources, which sometimes leads to these processes to be called &ldquo;light weight processes&rdquo;.</p>
+</blockquote>
+<ul>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Thread-local_storage"target="_blank" rel="external nofollow noopener noreferrer">Thread-local storage</a></li>
+</ul>
+<blockquote>
+<p>On a modern machine, where multiple threads may be modifying the errno variable, a call of a system function on one thread may overwrite the value previously set by a call of a system function on a different thread, possibly before following code on that different thread could check for the error condition. The solution is to have errno be a variable that looks as if it is global, but is physically stored in a per-thread memory pool, the thread-local storage.</p>
+</blockquote>
+<h3 id="pthread-posix-threads">PThread (POSIX threads)</h3>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/0yeKpoT.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/0yeKpoT.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/0yeKpoT.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/0yeKpoT.png" srcset="https://imgur-backup.hackmd.io/0yeKpoT.png?size=small, https://imgur-backup.hackmd.io/0yeKpoT.png?size=medium 1.5x, https://imgur-backup.hackmd.io/0yeKpoT.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/0yeKpoT.png" data-alt="https://imgur-backup.hackmd.io/0yeKpoT.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p>POSIX 的全称是 Portable Operating System Interfaces，结合上图，所以你明白 pthread 的 P 代表的意义了吗？<br>
+<details>
+  <summary>Answer</summary>
+  从 CPU 厂商群魔乱舞中诞生的标准，自然是要保证可移植 Portable 的啦 &#x1f923;
+</details></p>
+<p>下面的这个由 Lawrence Livermore National Laboratory 撰写的教程文档写的非常棒，值得一读 (他们还有关于 HPC 高性能计算的相关教程文档):</p>
+<ul>
+<li><a href="https://hpc-tutorials.llnl.gov/posix/"target="_blank" rel="external nofollow noopener noreferrer">POSIX Threads Programming</a></li>
+</ul>
+<h3 id="synchronizing-threads">Synchronizing Threads</h3>
+<p>3 basic synchronization primitives (为什么是这 3 个？请从 synchronized-with 关系进行思考)</p>
+<ul>
+<li>mutex locks</li>
+<li>condition variables</li>
+<li>semaphores</li>
+</ul>
+<p>取材自 Ching-Kuang Shene 教授的讲义:</p>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="http://pages.mtu.edu/~shene/FORUM/Taiwan-Forum/ComputerScience/004-Concurrency/WWW/SLIDES/15-Pthreads.pdf"target="_blank" rel="external nofollow noopener noreferrer">Part IV Other Systems: IIIPthreads: A Brief Review</a></li>
+</ul>
+<blockquote>
+<p>Conditions in Pthreads are usually used with a mutex to enforce mutual exclusion.</p>
+</blockquote>
+<h4 id="mutex-locks">mutex locks</h4>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">pthread_mutex_t</span> <span class="n">mutex</span> <span class="o">=</span> <span class="n">PTHREAD_MUTEX_INITIALIZER</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">pthread_mutex_init</span><span class="p">(</span><span class="kt">pthread_mutex_t</span> <span class="o">*</span><span class="n">mutex</span><span class="p">,</span> <span class="kt">pthread_mutexattr_t</span> <span class="o">*</span><span class="n">attr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">pthread_mutex_destroy</span><span class="p">(</span><span class="kt">pthread_mutex_t</span> <span class="o">*</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">pthread_mutex_lock</span><span class="p">(</span><span class="kt">pthread_mutex_t</span> <span class="o">*</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">pthread_mutex_unlock</span><span class="p">(</span><span class="kt">pthread_mutex_t</span> <span class="o">*</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">pthread_mutex_trylock</span><span class="p">(</span><span class="kt">pthread_mutex_t</span> <span class="o">*</span><span class="n">mutex</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><a class="lightgallery" href="https://imgur-backup.hackmd.io/mE4l7n1.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/mE4l7n1.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/mE4l7n1.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/mE4l7n1.png" srcset="https://imgur-backup.hackmd.io/mE4l7n1.png?size=small, https://imgur-backup.hackmd.io/mE4l7n1.png?size=medium 1.5x, https://imgur-backup.hackmd.io/mE4l7n1.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/mE4l7n1.png" data-alt="https://imgur-backup.hackmd.io/mE4l7n1.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<ul>
+<li>Only the <strong id="id-5">owner</strong> can unlock a mutex. Since mutexes cannot be copied, use pointers.</li>
+<li>If <code>pthread_mutex_trylock()</code> returns <code>EBUSY</code>, the lock is already locked. Otherwise, the calling thread becomes the owner of this lock.</li>
+<li>With <code>pthread_mutexattr_settype()</code>, the type of a mutex can be set to allow recursive locking or report deadlock if the owner locks again</li>
+</ul>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>单纯的 Mutex 无法应对复杂情形的「生产者-消费者」问题，例如单生产者单消费者、多生产者单消费者、单生产者多消费者，甚至是多生产者多消费者 &#x1f635; 需要配合 condition variables</p>
+<p>我有用 Rust 写过一个「多生产者单消费者」的程序，相关的博客解说在 <a href="/posts/channels/">这里</a></p>
+</div>
+    </div>
+  </div>
+<h4 id="condition-variables">condition variables</h4>
+<div class="highlight" id="id-2"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">pthread_cond_init</span><span class="p">(</span><span class="kt">pthread_cond_t</span> <span class="o">*</span><span class="n">cond</span><span class="p">,</span> <span class="k">const</span> <span class="kt">pthread_condattr_t</span>  <span class="o">*</span><span class="n">attr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">pthread_cond_destroy</span><span class="p">(</span><span class="kt">pthread_cond_t</span> <span class="o">*</span><span class="n">cond</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">pthread_cond_wait</span><span class="p">(</span><span class="kt">pthread_cond_t</span> <span class="o">*</span><span class="n">cond</span><span class="p">,</span> <span class="kt">pthread_mutex_t</span> <span class="o">*</span><span class="n">mutex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">pthread_cond_signal</span><span class="p">(</span><span class="kt">pthread_cond_t</span> <span class="o">*</span><span class="n">cond</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">pthread_cond_broadcast</span><span class="p">(</span><span class="kt">pthread_cond_t</span> <span class="o">*</span><span class="n">cond</span><span class="p">);</span> <span class="c1">// all threads waiting on a condition need to be woken up
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Condition variables allow a thread to block until a specific condition becomes true
+<ul>
+<li>blocked thread goes to wait queue for condition</li>
+</ul>
+</li>
+<li>When the condition becomes true, some other thread signals the blocked thread(s)</li>
+<li>Conditions in Pthreads are usually used with a mutex to enforce mutual exclusion.
+<ul>
+<li>the wait call should occur under the protection of a mutex</li>
+</ul>
+</li>
+</ul>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/9gRzRDG.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/9gRzRDG.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/9gRzRDG.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/9gRzRDG.png" srcset="https://imgur-backup.hackmd.io/9gRzRDG.png?size=small, https://imgur-backup.hackmd.io/9gRzRDG.png?size=medium 1.5x, https://imgur-backup.hackmd.io/9gRzRDG.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/9gRzRDG.png" data-alt="https://imgur-backup.hackmd.io/9gRzRDG.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p>使用 condition variables 改写之前 mutex 部分的 producer 实作 (实作是单生产者单消费者模型，且缓冲区有 <code>MAX_SIZE</code> 个元素):</p>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">producer</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(;;)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">pthread_mutex_lock</span><span class="p">(</span><span class="n">lock</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">==</span> <span class="n">MAX_SIZE</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">pthread_cond_wait</span><span class="p">(</span><span class="n">notFull</span><span class="p">,</span> <span class="n">lock</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">buf</span><span class="p">[</span><span class="n">count</span><span class="p">]</span> <span class="o">=</span> <span class="nf">getChar</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">pthread_cond_signal</span><span class="p">(</span><span class="n">notEmpty</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">pthread_mutex_unlock</span><span class="p">(</span><span class="n">lock</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="semaphores">semaphores</h4>
+<p>semaphores 是站在「资源的数量」的角度来看待问题，这与 condition variables 是不同的</p>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">sem_t</span> <span class="n">semaphore</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">sem_init</span><span class="p">(</span><span class="kt">sem_t</span> <span class="o">*</span><span class="n">sem</span><span class="p">,</span> <span class="kt">int</span> <span class="n">pshared</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">sem_wait</span><span class="p">(</span><span class="kt">sem_t</span> <span class="o">*</span><span class="n">sem</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">sem_post</span><span class="p">(</span><span class="kt">sem_t</span> <span class="o">*</span><span class="n">sem</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Can do increments and decrements of semaphore value</li>
+<li>Semaphore can be initialized to any value</li>
+<li>Thread blocks if semaphore value is less than or equal to zero when a decrement is attempted</li>
+<li>As soon as semaphore value is greater than zero, one of the blocked threads wakes up and continues
+<ul>
+<li>no guarantees as to which thread this might be</li>
+</ul>
+</li>
+</ul>
+<h2 id="posix-threads">POSIX Threads</h2></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
@@ -197,5 +405,5 @@
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><link rel="stylesheet" href="/css/cdfe12.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

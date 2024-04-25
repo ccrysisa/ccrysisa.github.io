@@ -21,7 +21,7 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
 Mini labs (应用程序视角；设计)：通过实现一系列有趣的 (黑科技) 代码理解操作系统中对象存在的意义和操作系统 API 的使用方法、设计理念
 OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层实现多处理器操作系统内核，向应用程序提供一些基础操作系统 API
 "><meta itemprop="datePublished" content="2024-03-24T10:01:43+08:00" />
-<meta itemprop="dateModified" content="2024-04-05T19:14:41+08:00" />
+<meta itemprop="dateModified" content="2024-04-23T17:26:03+08:00" />
 <meta itemprop="wordCount" content="2106"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Linux,QEMU,RISC-V," /><meta property="og:title" content="南京大学 操作系统: 设计与实现 重点提示" />
 <meta property="og:description" content="操作系统使用正确的抽象使构造庞大的计算机软件/硬件生态从不可能变为可能。这门课围绕操作系统是 如何设计 (应用程序视角)、怎样实现 (硬件视角) 两个角度展开，分为两个主要部分：
@@ -34,7 +34,7 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/nju-osdi/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-03-24T10:01:43+08:00" />
-<meta property="article:modified_time" content="2024-04-05T19:14:41+08:00" />
+<meta property="article:modified_time" content="2024-04-23T17:26:03+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="南京大学 操作系统: 设计与实现 重点提示"/>
@@ -60,7 +60,7 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/nju-osdi\/"
     },"genre": "posts","keywords": "Linux, QEMU, RISC-V","wordcount":  2106 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/nju-osdi\/","datePublished": "2024-03-24T10:01:43+08:00","dateModified": "2024-04-05T19:14:41+08:00","publisher": {
+    "url": "https:\/\/ccrysisa.github.io\/posts\/nju-osdi\/","datePublished": "2024-03-24T10:01:43+08:00","dateModified": "2024-04-23T17:26:03+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -175,7 +175,7 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" data-title="vanJker" data-alt="vanJker" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span>
           <span class="post-category">收录于 <a href="/categories/systems/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Systems</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-24 10:01:43"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-24">2024-03-24</time></span>&nbsp;<span title="更新于 2024-04-05 19:14:41"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-05">2024-04-05</time></span>&nbsp;<span title="2106 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-24 10:01:43"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-24">2024-03-24</time></span>&nbsp;<span title="更新于 2024-04-23 17:26:03"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-23">2024-04-23</time></span>&nbsp;<span title="2106 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -419,7 +419,7 @@ $$C=compile(S)$$</p>
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-04-05 19:14:41">更新于 2024-04-05&nbsp;</span>
+        <span title="更新于 2024-04-23 17:26:03">更新于 2024-04-23&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/nju-osdi/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>

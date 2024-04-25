@@ -55,51 +55,50 @@ repost:
 
 [godbolt](http://gcc.godbolt.org/) 可以直接在网页上看到，源代码由各类 compiler 生成的 Assembly Code
 
-[How to read this prototype?]() [Stack Overflow] :white_check_mark:
+[How to read this prototype?](https://stackoverflow.com/questions/15739500/how-to-read-this-prototype) [Stack Overflow] :white_check_mark:
 {{< details "Note" >}}
 
 这个问题是关于 `signal` 系统调用的函数原型解读，里面的回答页给出了很多对于指针，特别是 *函数指针* 的说明，下面节选一些特别有意思的回答：
 
-> The whole thing declares a function called `signal`:
->
-> - `signal` takes an int and a function pointer
->   - this function pointer takes an `int` and returns `void`
-> - `signal` returns a function pointer
->   - `this function pointer takes an `int` and returns a `void`
->
-> That's where the last int comes in.
->
-> ---
->
-> You can use [the spiral rule](https://c-faq.com/decl/spiral.anderson.html) to make sense of such declarations, or the program `cdecl(1)`.
+{{< admonition quote >}}
+The whole thing declares a function called `signal`:
+- `signal` takes an int and a function pointer
+  - this function pointer takes an `int` and returns `void`
+- `signal` returns a function pointer
+  - `this function pointer takes an `int` and returns a `void`
+That's where the last int comes in.
 
+You can use [the spiral rule](https://c-faq.com/decl/spiral.anderson.html) to make sense of such declarations, or the program `cdecl(1)`.
+{{< /admonition >}}
+
+The whole thing declares a function called `signal`:
 这里面提到了 [the spiral rule](https://c-faq.com/decl/spiral.anderson.html) 这是一个用于解析 C 语言中声明 (declaration) 的方法；另外还提到了 `cdecl` 这一程序，它也有类似的作用，可以使用英文进行声明或者解释。
 
----
+{{< admonition quote >}}
+Find the leftmost identifier and work your way out, remembering that `[]` and `()` bind before `*`; IOW, `*a[]` is an array of pointers, `(*a)[]` is a pointer to an array, `*f()` is a function returning a pointer, and `(*f)()` is a pointer to a function. Thus,
 
-> Find the leftmost identifier and work your way out, remembering that `[]` and `()` bind before `*`; IOW, `*a[]` is an array of pointers, `(*a)[]` is a pointer to an array, `*f()` is a function returning a pointer, and `(*f)()` is a pointer to a function. Thus,
-> 
-> ```c
-> void ( *signal(int sig, void (*handler)(int)) ) (int);
-> ```
-> 
-> breaks down as
-> 
-> ```c
->         signal                                          -- signal
->         signal(                               )         -- is a function
->         signal(    sig                        )         -- with a parameter named sig
->         signal(int sig,                       )         --   of type int
->         signal(int sig,        handler        )         -- and a parameter named handler
->         signal(int sig,       *handler        )         --   which is a pointer
->         signal(int sig,      (*handler)(   )) )         --   to a function
->         signal(int sig,      (*handler)(int)) )         --   taking an int parameter
->         signal(int sig, void (*handler)(int)) )         --   and returning void
->        *signal(int sig, void (*handler)(int)) )         -- returning a pointer
->      ( *signal(int sig, void (*handler)(int)) )(   )    -- to a function
->      ( *signal(int sig, void (*handler)(int)) )(int)    --   taking an int parameter
-> void ( *signal(int sig, void (*handler)(int)) )(int);   --   and returning void
-> ```
+```c
+void ( *signal(int sig, void (*handler)(int)) ) (int);
+```
+
+breaks down as
+
+```c
+        signal                                          -- signal
+        signal(                               )         -- is a function
+        signal(    sig                        )         -- with a parameter named sig
+        signal(int sig,                       )         --   of type int
+        signal(int sig,        handler        )         -- and a parameter named handler
+        signal(int sig,       *handler        )         --   which is a pointer
+        signal(int sig,      (*handler)(   )) )         --   to a function
+        signal(int sig,      (*handler)(int)) )         --   taking an int parameter
+        signal(int sig, void (*handler)(int)) )         --   and returning void
+       *signal(int sig, void (*handler)(int)) )         -- returning a pointer
+     ( *signal(int sig, void (*handler)(int)) )(   )    -- to a function
+     ( *signal(int sig, void (*handler)(int)) )(int)    --   taking an int parameter
+void ( *signal(int sig, void (*handler)(int)) )(int);   --   and returning void
+```
+{{< /admonition >}}
 
 这一回答强调了 `*` 和 `[]`、`()` 优先级的关系，这在判断数组指针、函数指针时是个非常好用的技巧。
 {{< /details >}}
