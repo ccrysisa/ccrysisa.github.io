@@ -75,6 +75,8 @@ This post is used to record the process of my English learning.
 - https://github.com/IammyselfBOOKS/New_concept_English
 - https://github.com/protogenesis/NewConceptEnglish
 
+> 仓库中关于新概念英语的网址，录音是正确的，但是有一些正文不太准确，可以下载书籍进行对比
+
 ## New Concept English
 
 ### NCE 1
@@ -115,6 +117,11 @@ This post is used to record the process of my English learning.
 - [x] 069: The car race
 - [x] 071: He's awful
 - [x] 073: The way to King Street
+- [x] 075: Uncomfortable shoes
+- [x] 077: Terrible toothache
+- [x] 079: Peggy's shopping list
+- [x] 081: Roast beef and potato
+- [x] 083: Going on a holiday
 
 ---
 
@@ -192,4 +199,19 @@ greengrocer
 - *n.*
 
 phrase
+- *n.*
+
+jam
+- *n.*
+
+grocer
+- *n.*
+
+bear
+- *n.*
+
+wine
+- *n.*
+
+cinema
 - *n.*

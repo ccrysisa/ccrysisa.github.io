@@ -1,18 +1,18 @@
 # OERV 之 Pretask
 
 
-> pretask 作为社区入门探索，目的是帮助实习生一起搭建工作环境，熟悉 oerv 的工作流程和合作方式。pretask 分为三个步骤:
-> - 任务一：通过 QEMU 仿真 RISC-V 环境并启动 openEuler RISC-V 系统，设法输出 neofetch 结果并截图提交
-> - 任务二：在 openEuler RISC-V 系统上通过 obs 命令行工具 osc，从源代码构建 RISC-V 版本的 rpm 包，比如 pcre2。提示首先需要在 [openEuler 的 OBS](https://build.openeuler.openatom.cn/project/show/openEuler:Mainline:RISC-V) 上注册账号 
-> - 任务三：尝试使用 qemu user & nspawn 或者 docker 加速完成任务二
+&gt; pretask 作为社区入门探索，目的是帮助实习生一起搭建工作环境，熟悉 oerv 的工作流程和合作方式。pretask 分为三个步骤:
+&gt; - 任务一：通过 QEMU 仿真 RISC-V 环境并启动 openEuler RISC-V 系统，设法输出 neofetch 结果并截图提交
+&gt; - 任务二：在 openEuler RISC-V 系统上通过 obs 命令行工具 osc，从源代码构建 RISC-V 版本的 rpm 包，比如 pcre2。提示首先需要在 [openEuler 的 OBS](https://build.openeuler.openatom.cn/project/show/openEuler:Mainline:RISC-V) 上注册账号 
+&gt; - 任务三：尝试使用 qemu user &amp; nspawn 或者 docker 加速完成任务二
 
-<!--more-->
+&lt;!--more--&gt;
 
 ## Pretask 1: Neofetch
 
-> 任务一：通过 QEMU 仿真 RISC-V 环境并启动 openEuler RISC-V 系统，设法输出 neofetch 结果并截图提交
+&gt; 任务一：通过 QEMU 仿真 RISC-V 环境并启动 openEuler RISC-V 系统，设法输出 neofetch 结果并截图提交
 
-由于工作内容是对软件包进行: 编译 -> 失败 -> 定位问题 -> 修复 -> 重新编译，所以我们倾向于直接从源码编译，根据 [neofetch wiki](https://github.com/dylanaraps/neofetch/wiki/Installation#latest-git-master-bleeding-edge) 从 git 拉取最新数据进行构建:
+由于工作内容是对软件包进行: 编译 -&gt; 失败 -&gt; 定位问题 -&gt; 修复 -&gt; 重新编译，所以我们倾向于直接从源码编译，根据 [neofetch wiki](https://github.com/dylanaraps/neofetch/wiki/Installation#latest-git-master-bleeding-edge) 从 git 拉取最新数据进行构建:
 
 ```bash
 # enter into euler openEuler RISC-V QEMU
@@ -22,11 +22,11 @@ $ make install
 $ neofetch
 ```
 
-{{< image src="/images/oerv/openEuler-RISC-V-neofetch.png" >}}
+{{&lt; image src=&#34;/images/oerv/openEuler-RISC-V-neofetch.png&#34; &gt;}}
 
 ## Pretask 2: Open Build Service (OBS)
 
-> 任务二：在 openEuler RISC-V 系统上通过 obs 命令行工具 osc，从源代码构建 RISC-V 版本的 rpm 包，比如 pcre2。提示首先需要在 [openEuler 的 OBS](https://build.openeuler.openatom.cn/project/show/openEuler:Mainline:RISC-V) 上注册账号 
+&gt; 任务二：在 openEuler RISC-V 系统上通过 obs 命令行工具 osc，从源代码构建 RISC-V 版本的 rpm 包，比如 pcre2。提示首先需要在 [openEuler 的 OBS](https://build.openeuler.openatom.cn/project/show/openEuler:Mainline:RISC-V) 上注册账号 
 
 观看教学影片: [openEuler构建之OBS使用指导 - bilibili](https://www.bilibili.com/video/BV1YK411H7E2/) 并对比阅读
 
@@ -36,10 +36,10 @@ $ neofetch
 
 了解掌握 OBS 的基本概念、OBS 网页 以及 **OSC 命令行工具** 的使用方法。
 
-> 这部分内容很重要，和后续工作内容息息相关，在这里不要图快，打牢基础比较好。
+&gt; 这部分内容很重要，和后续工作内容息息相关，在这里不要图快，打牢基础比较好。
 
-{{< image src="/images/oerv/obs-concepts.png" >}}
-{{< image src="/images/oerv/obs-concepts-2.png" >}}
+{{&lt; image src=&#34;/images/oerv/obs-concepts.png&#34; &gt;}}
+{{&lt; image src=&#34;/images/oerv/obs-concepts-2.png&#34; &gt;}}
 
 OBS 的 Package 中 _service 配置文件，revision 字段是对应与 Git 仓库的 commit id (如果你使用的 Source Code Management (SCM) 方式是 Git 托管的话)
 
@@ -84,24 +84,24 @@ mainline_gcc      riscv64
 $ osc build standard_riscv64 riscv64
 ```
 
-{{< image src="/images/oerv/osc-build-pcre2.png" >}}
+{{&lt; image src=&#34;/images/oerv/osc-build-pcre2.png&#34; &gt;}}
 
 总计用时 1301s
 
 ## Pretask 3: 容器加速构建
 
-> 任务三：尝试使用 qemu user & nspawn 或者 docker 加速完成任务二
+&gt; 任务三：尝试使用 qemu user &amp; nspawn 或者 docker 加速完成任务二
 
 参考 [文档](https://gitee.com/openeuler/RISC-V/blob/master/doc/tutorials/qemu-user-mode.md)
 
 由于 deepin 20.9 的 Python3 版本仅为 3.7，构建 osc 和 qemu 显然不太够，所以我通过 KVM 构建了一个 openEuler 22.03 LTS SP3 的虚拟机，在上面进行这项任务。
 
-- [Deepin 20.9 KVM 安装和管理 openEuler 22.03 LTS SP3]({{< relref "../toolkit/deepin-kvm" >}})
+- [Deepin 20.9 KVM 安装和管理 openEuler 22.03 LTS SP3]({{&lt; relref &#34;../toolkit/deepin-kvm&#34; &gt;}})
 
 编译 QEMU 时常见错误修正:
 
 ```bash
-ERROR: Python package 'sphinx' was not found nor installed.
+ERROR: Python package &#39;sphinx&#39; was not found nor installed.
 $ sudo yum install python3-sphinx
 
 ERROR: cannot find ninja
@@ -125,7 +125,7 @@ $ osc build standard_riscv64 riscv64 --vm-type=nspawn
 会遇到以下报错 (且经过相当多时间排错，仍无法解决该问题，个人猜测是平台问题):
 
 ```bash
-can't locate file/copy.pm: /usr/lib64/perl5/vendor_perl/file/copy.pm: permission denied at /usr/bin/autoreconf line 49.
+can&#39;t locate file/copy.pm: /usr/lib64/perl5/vendor_perl/file/copy.pm: permission denied at /usr/bin/autoreconf line 49.
 ```
 
 所以退而求其次，使用 chroot 来构建:
@@ -134,7 +134,7 @@ can't locate file/copy.pm: /usr/lib64/perl5/vendor_perl/file/copy.pm: permission
 $ osc build standard_riscv64 riscv64 --vm-type=chroot
 ```
 
-{{< image src="/images/oerv/osc-build-pcre2-chroot.png" >}}
+{{&lt; image src=&#34;/images/oerv/osc-build-pcre2-chroot.png&#34; &gt;}}
 
 总计用时 749s，比 qemu-system-riscv64 快了将近 2 倍，效能提升相当可观。
 

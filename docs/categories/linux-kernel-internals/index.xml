@@ -2,7 +2,7 @@
   <channel>
     <title>Linux Kernel Internals - 分类 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/categories/linux-kernel-internals/</link>
-    <description>Linux Kernel Internals - 分类 - KZnight&#39;s Blog</description>
+    <description>Linux Kernel Internals - 分类 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 24 Apr 2024 21:09:59 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/linux-kernel-internals/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
