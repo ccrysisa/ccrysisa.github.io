@@ -113,13 +113,32 @@ typedef struct Block_t {
 
 ## Admonition
 
-{{< admonition >}} 一个 注意 横幅 {{< /admonition >}}
+{{< admonition >}} 
+[111年度資工所心得](https://hackmd.io/@ygb5JBlmSc-8GJtxiMg5Fw/B1-rO9vb9)
+{{< /admonition >}}
 
-{{< admonition abstract >}} 一个 摘要 横幅 {{< /admonition >}}
+{{< admonition abstract >}} 
+Georgia Tech - **Advanced Operating Systems**:
+[Part 1](https://www.youtube.com/playlist?list=PLAwxTw4SYaPkKfusBLVfklgfdcB3BNpwX) /
+[Part 2](https://www.youtube.com/playlist?list=PLAwxTw4SYaPm4vV1XbFV93ZuT2saSq1hO) /
+[Part 3](https://www.youtube.com/playlist?list=PLAwxTw4SYaPk5-YaXFkWY4UXdv6pVdiYg) /
+[Part 4](https://www.youtube.com/playlist?list=PLAwxTw4SYaPmfaiuzJcK3tNoeKlvRR990)
+{{< /admonition >}}
 
-{{< admonition info >}} 一个 信息 横幅 {{< /admonition >}}
+{{< admonition info >}} 
+Reddit: [Best book to learn in-depth knowledge about the Linux Kernel?](https://www.reddit.com/r/linux/comments/z26h5h/best_book_to_learn_indepth_knowledge_about_the/)
+- Project: [Linux From Scratch](https://www.linuxfromscratch.org/)
+- Book: [Linux Kernel Development](https://www.amazon.com/Linux-Kernel-Development-Robert-Love/dp/0672329468)
+- Video: [Steven Rostedt - Learning the Linux Kernel with tracing](https://www.youtube.com/watch?v=JRyrhsx-L5Y)
+{{< /admonition >}}
 
-{{< admonition tip >}} 一个 技巧 横幅 {{< /admonition >}}
+{{< admonition tip >}} 
+WIkipedia: 
+[Xenix](https://en.wikipedia.org/wiki/Xenix) /
+[Multics](https://en.wikipedia.org/wiki/Multics) /
+[Plan9](https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs) /
+[FreeBSD](https://en.wikipedia.org/wiki/FreeBSD)
+{{< /admonition >}}
 
 {{< admonition success >}} 一个 成功 横幅 {{< /admonition >}}
 
@@ -147,27 +166,5 @@ typedef struct Block_t {
 - [图表支持](https://fixit.lruihao.cn/zh-cn/documentation/content-management/diagrams/)
 - [URL management](https://gohugo.io/content-management/urls/#permalinks)
 
----
 
-## 资源中转站
 
-{{< admonition >}}
-[111年度資工所心得](https://hackmd.io/@ygb5JBlmSc-8GJtxiMg5Fw/B1-rO9vb9)
-{{< /admonition >}}
-
-{{< admonition abstract >}}
-Georgia Tech **Advanced Operating Systems**:
-- [Part 1](https://www.youtube.com/playlist?list=PLAwxTw4SYaPkKfusBLVfklgfdcB3BNpwX)
-- [Part 2](https://www.youtube.com/playlist?list=PLAwxTw4SYaPm4vV1XbFV93ZuT2saSq1hO)
-- [Part 3](https://www.youtube.com/playlist?list=PLAwxTw4SYaPk5-YaXFkWY4UXdv6pVdiYg)
-- [Part 4](https://www.youtube.com/playlist?list=PLAwxTw4SYaPmfaiuzJcK3tNoeKlvRR990)
-{{< /admonition >}}
-
-{{< admonition info >}}
-Reddit: [Best book to learn in-depth knowledge about the Linux Kernel?](https://www.reddit.com/r/linux/comments/z26h5h/best_book_to_learn_indepth_knowledge_about_the/)
-- [Linux From Scratch](https://www.linuxfromscratch.org/)
-- Amazon: [Linux Kernel Development](https://www.amazon.com/Linux-Kernel-Development-Robert-Love/dp/0672329468)
-- YouTube: [Steven Rostedt - Learning the Linux Kernel with tracing](https://www.youtube.com/watch?v=JRyrhsx-L5Y)
-{{< /admonition >}}
-
-[Xenix](https://en.wikipedia.org/wiki/Xenix)

@@ -1,11 +1,11 @@
 # CS:APP 第 2 章重点提示和练习
 
 
-&gt; 千万不要小看数值系统，史上不少有名的 [软体缺失案例](https://hackmd.io/@sysprog/software-failure) 就因为开发者未能充分掌握相关议题，而导致莫大的伤害与损失。
+> 千万不要小看数值系统，史上不少有名的 [软体缺失案例](https://hackmd.io/@sysprog/software-failure) 就因为开发者未能充分掌握相关议题，而导致莫大的伤害与损失。
 
-&lt;!--more--&gt;
+<!--more-->
 
-- {{&lt; link href=&#34;https://hackmd.io/@sysprog/CSAPP-ch2&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
+- {{< link href="https://hackmd.io/@sysprog/CSAPP-ch2" content="原文地址" external-icon=true >}}
 
 搭配 CMU: 15-213: Intro to Computer Systems: Schedule for Fall 2015
 - 可以在 [这里](https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/schedule.html) 找到相关的投影片和录影
@@ -26,17 +26,30 @@
   - [ ] [Faster arithmetic by flipping signs](https://nfrechette.github.io/2019/05/08/sign_flip_optimization/)
   - [ ] [Faster floating point arithmetic with Exclusive OR](https://nfrechette.github.io/2019/10/22/float_xor_optimization/)
 
-&gt; 看了上面的第 3 个影片后，对 pac-man 256 莫名感兴趣 :rofl:
+> 看了上面的第 3 个影片后，对 pac-man 256 莫名感兴趣 :rofl:
 
-### Bits, Bytes &amp; Integers
+### Bits, Bytes & Integers
 
-{{&lt; admonition info &gt;}}
-[第一部分录影](https://www.bilibili.com/video/BV1iW411d7hd?p=2) 
+{{< admonition info >}}
+[第一部分录影](https://www.bilibili.com/video/BV1iW411d7hd?p=2) :white_check_mark:
 / 
-[投影片](https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/lectures/02-03-bits-ints.pdf)
+[投影片](https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/lectures/02-03-bits-ints.pdf) :white_check_mark:
 / 
-阅读章节: 2.1
-{{&lt; /admonition &gt;}}
+阅读章节: 2.1 :white_check_mark:
+{{< /admonition >}}
+
+{{< admonition info >}}
+[第二部分录影](https://www.bilibili.com/video/BV1iW411d7hd?p=3) :white_check_mark:
+/ 
+[投影片](https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/lectures/02-03-bits-ints.pdf) :white_check_mark:
+/ 
+阅读章节: 2.2-2.3 
+{{< /admonition >}}
+
+{{< image src="/images/c/02-03-bits-ints-41.png" >}}
+
+计算乘法至多需要多少位可以从无符号数和二补数的编码方式来思考。无符号数乘法最大值为 $2^{2w}-2^{2+1}+1$ 不超过 $2^{2w}$，依据无符号数编码方式至多需要 $2w$ bits 表示；二补数乘法最小值为 $-2^{2w-2}+2^{w-1}$，依据而二补数编码 MSB 表示值 $-2^{2w-2}$，所以 MSB 为第 $2w-2$ 位，至多需要 $2w-1$ bits 表示二补数乘法的最小值；二补数乘法最大值为 $2^{2w-2}$，因为 MSB 为符号位，所以 MSB 的右一位表示值 $2^{2w-2}$，即第 $2w-2$ 位，所以至多需要 $2w$ 位来表示该值 (因为还需要考虑一个符号位)。
+
 
 
 ---

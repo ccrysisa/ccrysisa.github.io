@@ -1,47 +1,47 @@
 # 并行程序设计: POSIX Threads
 
 
-&lt;!--more--&gt;
+<!--more-->
 
-- {{&lt; link href=&#34;https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fposix-threads&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
+- {{< link href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fposix-threads" content="原文地址" external-icon=true >}}
 
 ## Process vs. Thread vs. Coroutines
 
-&gt; - With threads, the operating system switches running tasks preemptively according to its scheduling algorithm.
-&gt; 
-&gt; - With coroutines, the programmer chooses, meaning tasks are cooperatively multitasked by pausing and resuming functions at set points.
-&gt;   - coroutine switches are cooperative, meaning the programmer controls when a switch will happen.
-&gt;   - The kernel is not involved in coroutine switches.
+> - With threads, the operating system switches running tasks preemptively according to its scheduling algorithm.
+> 
+> - With coroutines, the programmer chooses, meaning tasks are cooperatively multitasked by pausing and resuming functions at set points.
+>   - coroutine switches are cooperative, meaning the programmer controls when a switch will happen.
+>   - The kernel is not involved in coroutine switches.
 
 一图胜千语:
 
-{{&lt; image src=&#34;https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined&#34; &gt;}}
+{{< image src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined" >}}
 
 具体一点，从函数执行流程来看:
 
-{{&lt; image src=&#34;https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined&#34; &gt;}}
+{{< image src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined" >}}
 $\rightarrow$ 在使用 coroutinues 后执行流程变成 $\rightarrow$
-{{&lt; image src=&#34;https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined&#34; &gt;}}
+{{< image src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined" >}}
 
-### Thread &amp; Process
+### Thread & Process
 
-{{&lt; image src=&#34;https://imgur-backup.hackmd.io/QW1YWsC.png&#34; &gt;}}
-{{&lt; image src=&#34;https://imgur-backup.hackmd.io/gUF3Vz9.png&#34; &gt;}}
+{{< image src="https://imgur-backup.hackmd.io/QW1YWsC.png" >}}
+{{< image src="https://imgur-backup.hackmd.io/gUF3Vz9.png" >}}
 
 - Wikipedia: [Light-weight process](https://en.wikipedia.org/wiki/Light-weight_process)
-&gt; On Linux, user threads are implemented by allowing certain processes to share resources, which sometimes leads to these processes to be called &#34;light weight processes&#34;.
+> On Linux, user threads are implemented by allowing certain processes to share resources, which sometimes leads to these processes to be called "light weight processes".
 
 - Wikipedia: [Thread-local storage](https://en.wikipedia.org/wiki/Thread-local_storage)
-&gt; On a modern machine, where multiple threads may be modifying the errno variable, a call of a system function on one thread may overwrite the value previously set by a call of a system function on a different thread, possibly before following code on that different thread could check for the error condition. The solution is to have errno be a variable that looks as if it is global, but is physically stored in a per-thread memory pool, the thread-local storage.
+> On a modern machine, where multiple threads may be modifying the errno variable, a call of a system function on one thread may overwrite the value previously set by a call of a system function on a different thread, possibly before following code on that different thread could check for the error condition. The solution is to have errno be a variable that looks as if it is global, but is physically stored in a per-thread memory pool, the thread-local storage.
 
 ### PThread (POSIX threads)
 
-{{&lt; image src=&#34;https://imgur-backup.hackmd.io/0yeKpoT.png&#34; &gt;}}
+{{< image src="https://imgur-backup.hackmd.io/0yeKpoT.png" >}}
 
 POSIX 的全称是 Portable Operating System Interfaces，结合上图，所以你明白 pthread 的 P 代表的意义了吗？   
-{{&lt; details &#34;Answer&#34;&gt;}}
+{{< details "Answer">}}
 从 CPU 厂商群魔乱舞中诞生的标准，自然是要保证可移植 Portable 的啦 :rofl:
-{{&lt; /details &gt;}}
+{{< /details >}}
 
 下面的这个由 Lawrence Livermore National Laboratory 撰写的教程文档写的非常棒，值得一读 (他们还有关于 HPC 高性能计算的相关教程文档):
 - [POSIX Threads Programming](https://hpc-tutorials.llnl.gov/posix/)
@@ -58,7 +58,7 @@ POSIX 的全称是 Portable Operating System Interfaces，结合上图，所以�
 
 - [x] [Part IV Other Systems: IIIPthreads: A Brief Review](http://pages.mtu.edu/~shene/FORUM/Taiwan-Forum/ComputerScience/004-Concurrency/WWW/SLIDES/15-Pthreads.pdf)
 
-&gt; Conditions in Pthreads are usually used with a mutex to enforce mutual exclusion.
+> Conditions in Pthreads are usually used with a mutex to enforce mutual exclusion.
 
 #### mutex locks
 
@@ -72,17 +72,17 @@ int pthread_mutex_unlock(pthread_mutex_t *mutex);
 int pthread_mutex_trylock(pthread_mutex_t *mutex);
 ```
 
-{{&lt; image src=&#34;https://imgur-backup.hackmd.io/mE4l7n1.png&#34; &gt;}}
+{{< image src="https://imgur-backup.hackmd.io/mE4l7n1.png" >}}
 
-- Only the {{&lt; style &#34;background-color:green&#34; &#34;strong&#34; &gt;}}owner{{&lt; /style &gt;}} can unlock a mutex. Since mutexes cannot be copied, use pointers.
+- Only the {{< style "background-color:green" "strong" >}}owner{{< /style >}} can unlock a mutex. Since mutexes cannot be copied, use pointers.
 - If `pthread_mutex_trylock()` returns `EBUSY`, the lock is already locked. Otherwise, the calling thread becomes the owner of this lock.
 - With `pthread_mutexattr_settype()`, the type of a mutex can be set to allow recursive locking or report deadlock if the owner locks again
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 单纯的 Mutex 无法应对复杂情形的「生产者-消费者」问题，例如单生产者单消费者、多生产者单消费者、单生产者多消费者，甚至是多生产者多消费者 :dizzy_face: 需要配合 condition variables
 
-我有用 Rust 写过一个「多生产者单消费者」的程序，相关的博客解说在 [这里]({{&lt; relref &#34;../rust/channels&#34; &gt;}})
-{{&lt; /admonition &gt;}}
+我有用 Rust 写过一个「多生产者单消费者」的程序，相关的博客解说在 [这里]({{< relref "../rust/channels" >}})
+{{< /admonition >}}
 
 #### condition variables
 
@@ -101,7 +101,7 @@ int pthread_cond_broadcast(pthread_cond_t *cond); // all threads waiting on a co
 - Conditions in Pthreads are usually used with a mutex to enforce mutual exclusion.
   - the wait call should occur under the protection of a mutex
 
-{{&lt; image src=&#34;https://imgur-backup.hackmd.io/9gRzRDG.png&#34; &gt;}}
+{{< image src="https://imgur-backup.hackmd.io/9gRzRDG.png" >}}
 
 使用 condition variables 改写之前 mutex 部分的 producer 实作 (实作是单生产者单消费者模型，且缓冲区有 `MAX_SIZE` 个元素):
 
@@ -112,7 +112,7 @@ void producer(char *buf) {
         while (count == MAX_SIZE)
             pthread_cond_wait(notFull, lock);
         buf[count] = getChar();
-        count&#43;&#43;;
+        count++;
         pthread_cond_signal(notEmpty);
         pthread_mutex_unlock(lock);
     }

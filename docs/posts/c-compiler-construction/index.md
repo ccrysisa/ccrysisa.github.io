@@ -1,13 +1,13 @@
 # 你所不知道的 C 语言: 编译器原理和案例分析
 
 
-&gt; AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。
-&gt; 
-&gt; 預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。
+> AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。
+> 
+> 預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。
 
-&lt;!--more--&gt;
+<!--more-->
 
-- {{&lt; link href=&#34;https://hackmd.io/@sysprog/c-compiler-construction&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
+- {{< link href="https://hackmd.io/@sysprog/c-compiler-construction" content="原文地址" external-icon=true >}}
 
 ## 如何打造一个具体而微的 C 语言编译器
 
@@ -34,9 +34,9 @@
 - [c4](https://github.com/rswier/c4) 是很好的切入點，原作者 Robert Swierczek 還又另一個 [更完整的 C 編譯器實作](https://github.com/rswier/swieros/blob/master/root/bin/c.c)
 - AMaCC 在 Robert Swierczek 的基礎上，額外實作 C 語言的 struct, switch-case, for, C-style comment 支援，並且重寫了 IR 執行程式碼，得以輸出合法 GNU/Linux ELF 執行檔 (支援 [armhf](https://wiki.debian.org/ArmHardFloatPort) ABI) 和 JIT 編譯
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 上面的第一个链接是关于 c4 的教程，非常值得一看和一做 (动手实践是 CSer 必备能力 :rofl:)
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ## IR (Intermediate representation)
 
@@ -45,9 +45,9 @@
 - [ ] [How to write a very simple JIT compiler](https://github.com/spencertipping/jit-tutorial)
 - [ ] [How to write a UNIX shell, with a lot of background](https://github.com/spencertipping/shell-tutorial)
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 最后两个链接对于提高系统编程 (System programming) 能力非常有益，Just do it!
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ## 程序语言设计和编译器考量
 
