@@ -47,6 +47,12 @@ repost:
 
 ## 重点提示
 
+### Arguments
+
+C 语言的 CLI 程序处理参数的逻辑是过程式的，即每次执行都会通过 `argv` 来获取本次执行的参数并进行相应的处理 (Rust 的 `std::env::args()` 处理 CLI 程序的参数方式也类似，都是对每次执行实例进行过程式的处理)，而 [Clap](https://docs.rs/clap/latest/clap/) 不同，它类似于面向对象的思想，通过定义一个结构体 (object)，每次运行时通过 `clap::Parser::parse` 获取并处理本次运行的参数 (即实例化 object)，这样开发的 CLI 程序扩展性会更好。
+
+### BufReader
+
 Struct [std::io::BufReader](https://doc.rust-lang.org/std/io/struct.BufReader.html) 中关于系统调用 (syscall) 的开销，以及如何使用 buffer 这一机制减少 syscall 调用以此提高效能，进行了比较直观的描述:
 
 > It can be excessively inefficient to work directly with a Read instance. For example, every call to read on TcpStream results in a system call. A BufReader<R> performs large, infrequent reads on the underlying Read and maintains an in-memory buffer of the results.

@@ -1,5 +1,6 @@
 https://ccrysisa.github.io/posts/english/
 https://ccrysisa.github.io/posts/linux2023/
+https://ccrysisa.github.io/friends/
 https://ccrysisa.github.io/posts/rust-cli/
 https://ccrysisa.github.io/posts/c-compiler-optimization/
 https://ccrysisa.github.io/posts/c-undefined-behavior/
