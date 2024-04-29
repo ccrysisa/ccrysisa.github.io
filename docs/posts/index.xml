@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/posts/</link>
     <description>所有文章 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 24 Apr 2024 21:09:59 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 29 Apr 2024 16:23:33 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
   <title>English Everyday</title>
   <link>https://ccrysisa.github.io/posts/english/</link>
   <pubDate>Sat, 30 Mar 2024 12:17:31 &#43;0800</pubDate>
@@ -20,6 +20,16 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>Command Line Applications in Rust</title>
+  <link>https://ccrysisa.github.io/posts/rust-cli/</link>
+  <pubDate>Mon, 29 Apr 2024 16:23:33 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/rust-cli/</guid>
+  <description><![CDATA[<blockquote>
+<p>Rust is a statically compiled, fast language with great tooling and a rapidly growing ecosystem. That makes it a great fit for writing command line applications: They should be small, portable, and quick to run. Command line applications are also a great way to get started with learning Rust; or to introduce Rust to your team!</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -84,16 +94,6 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/posix-threads/</guid>
   <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: 技巧篇</title>
-  <link>https://ccrysisa.github.io/posts/c-trick/</link>
-  <pubDate>Wed, 10 Apr 2024 16:06:08 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-trick/</guid>
-  <description><![CDATA[<blockquote>
-<p>本次講座將選定幾個案例，藉此解說 C 語言程式設計的技巧，像是對矩陣操作進行包裝、初始化特定結構的成員、追蹤物件配置的記憶體、Smart Pointer 等等。</p>
-</blockquote>]]></description>
 </item>
 </channel>
 </rss>
