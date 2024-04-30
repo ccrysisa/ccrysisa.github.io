@@ -54,6 +54,11 @@ repost:
 - [ ] [用十分鐘 向 jserv 學習作業系統設計](https://www.slideshare.net/ccckmit/jserv#22)
 - [x] [用1500 行建構可自我編譯的 C 編譯器](https://hackmd.io/coscup18-source-c-compiler)
 / [投影片](https://drive.google.com/file/d/1-0QGf2JSni-CwYigaEORW6JUehS8LS79/view)
+
+[AMaCC](https://github.com/jserv/amacc) 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。
+
+預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。
+
 - Wikipedia: [Executable and Linkable Format](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format)
 
 ## 编译器和软件工业强度息息相关
@@ -84,14 +89,84 @@ repost:
 
 {{< image src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg" >}}
 
-### 手把手教你构建 C 语言编译器
+## 手把手教你构建 C 语言编译器
 
 [原文地址](https://github.com/lotabout/write-a-C-interpreter)
 
-### 延伸阅读
+编译原理课程教导的是如何完成一个「编译器的编译器」 即 [Compiler-compiler](https://en.wikipedia.org/wiki/Compiler-compiler)，这个难度比较大，因为需要考虑通用性，但是实作一个简单的编译器并没有这么难。
+
+- Wikipedia: [Compiler-compiler](https://en.wikipedia.org/wiki/Compiler-compiler)
+
+### 设计
+
+一般而言，编译器的编写分为 3 个步骤：
+1. 词法分析器，用于将字符串转化成内部的表示结构。
+2. 语法分析器，将词法分析得到的标记流（token）生成一棵语法树。
+3. 目标代码的生成，将语法树转化成目标代码。
+
+### 虚拟机
+
+在该项目的虚拟机设计中，函数调用时 callee 的参数位于 caller 的栈帧 (frame) 内，并且函数调用需要使用到 4 条指令:
+
+1. `CALL` 指令将 callee 的返回地址压入栈，然后跳转到 callee 的入口处
+2. `ENT` 指令保存 ebp 寄存器的值并为 callee 的栈帧设置 esp 和 ebp 寄存器，在栈中给 callee 的局部变量分配空间
+3. `ADJ` 指令在 callee 逻辑执行完毕后，释放之前分配给局部变量的栈空间
+4. `LEV` 指令将 ebp 和 esp 寄存器恢复为对应 caller 栈帧，并跳转到之前保存的 callee 的返回地址处
+
+除此之外，在 callee 执行期间，可能需要通过 `LEA` 指令来访问函数参数和局部变量。
+
+```
+sub_function(arg1, arg2, arg3);
+
+|    ....       | high address
++---------------+
+| arg: 1        |    new_bp + 4
++---------------+
+| arg: 2        |    new_bp + 3
++---------------+
+| arg: 3        |    new_bp + 2
++---------------+
+|return address |    new_bp + 1
++---------------+
+| old BP        | <- new BP
++---------------+
+| local var 1   |    new_bp - 1
++---------------+
+| local var 2   |    new_bp - 2
++---------------+
+|    ....       |  low address
+```
 
 - Wikipedia: [Stack machine](https://en.wikipedia.org/wiki/Stack_machine)
-- Wikipedia: [Compiler-compiler](https://en.wikipedia.org/wiki/Compiler-compiler)
+- Wikipedia: [x86 calling conventions](https://en.wikipedia.org/wiki/X86_calling_conventions)
+
+{{< admonition question "问题 `PRTF` means?" false >}}
+```c
+else if (op == PRTF) { 
+  tmp = sp + pc[1]; 
+  ax = printf((char *)tmp[-1], tmp[-2], tmp[-3], tmp[-4], tmp[-5], tmp[-6]); 
+}
+```
+
+这里 [c4](https://github.com/rswier/c4) 对于 `PRTF` 指令的处理暂时没看明白...
+{{< /admonition >}}
+
+{{< admonition question "问题 `-m32` error" false >}}
+gcc 通过 `-m32` 参数编译本节代码时可能会遇到以下报错:
+
+```bash
+fatal error: bits/wordsize.h: No such file or directory
+```
+
+这是因为当前安装的 gcc 只有 64 位的库而没有 32 位的库，通过以下命令安装 32 位库解决问题:
+
+```bash
+$ sudo apt install gcc-multilib
+```
+
+Stack Overflow: 
+- ["fatal error: bits/libc-header-start.h: No such file or directory" while compiling HTK](https://stackoverflow.com/questions/54082459/fatal-error-bits-libc-header-start-h-no-such-file-or-directory-while-compili)
+{{< /admonition >}}
 
 ## IR (Intermediate representation)
 
@@ -109,6 +184,8 @@ JIT (Just in time) 表示“即时”，形象描述就是“及时雨” :rofl:
 ### How to write a UNIX shell
 
 {{< image src="/images/c/shell.drawio.svg" >}}
+
+系统编程 (System Programming) 的入门项目，阅读过程需要查询搭配 man 手册，以熟悉库函数和系统调用的原型和作用。
 
 Linux manual page: 
 [fflush](https://man7.org/linux/man-pages/man3/fflush.3.html)

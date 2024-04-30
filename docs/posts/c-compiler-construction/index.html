@@ -15,8 +15,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。
 預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。
 "><meta itemprop="datePublished" content="2024-04-23T15:17:38+08:00" />
-<meta itemprop="dateModified" content="2024-04-25T19:49:18+08:00" />
-<meta itemprop="wordCount" content="782"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-04-30T17:00:03+08:00" />
+<meta itemprop="wordCount" content="1659"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Compiler," /><meta property="og:title" content="你所不知道的 C 语言: 编译器原理和案例分析" />
 <meta property="og:description" content="
 AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。
@@ -25,7 +25,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-compiler-construction/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-23T15:17:38+08:00" />
-<meta property="article:modified_time" content="2024-04-25T19:49:18+08:00" />
+<meta property="article:modified_time" content="2024-04-30T17:00:03+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 编译器原理和案例分析"/>
@@ -47,8 +47,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/"
-    },"genre": "posts","keywords": "Sysprog, C, Compiler","wordcount":  782 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/","datePublished": "2024-04-23T15:17:38+08:00","dateModified": "2024-04-25T19:49:18+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, C, Compiler","wordcount":  1659 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/","datePublished": "2024-04-23T15:17:38+08:00","dateModified": "2024-04-30T17:00:03+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -176,7 +176,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-04-23 15:17:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-23">2024-04-23</time></span>&nbsp;<span title="更新于 2024-04-25 19:49:18"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-25">2024-04-25</time></span>&nbsp;<span title="782 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-04-23 15:17:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-23">2024-04-23</time></span>&nbsp;<span title="更新于 2024-04-30 17:00:03"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-30">2024-04-30</time></span>&nbsp;<span title="1659 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -187,15 +187,17 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     <li><a href="#如何打造一个具体而微的-c-语言编译器">如何打造一个具体而微的 C 语言编译器</a></li>
     <li><a href="#编译器和软件工业强度息息相关">编译器和软件工业强度息息相关</a></li>
     <li><a href="#背景知识">背景知识</a></li>
-    <li><a href="#c-程序的解析和语意">C 程序的解析和语意</a>
+    <li><a href="#c-程序的解析和语意">C 程序的解析和语意</a></li>
+    <li><a href="#手把手教你构建-c-语言编译器">手把手教你构建 C 语言编译器</a>
       <ul>
-        <li><a href="#手把手教你构建-c-语言编译器">手把手教你构建 C 语言编译器</a></li>
-        <li><a href="#延伸阅读">延伸阅读</a></li>
+        <li><a href="#设计">设计</a></li>
+        <li><a href="#虚拟机">虚拟机</a></li>
       </ul>
     </li>
     <li><a href="#ir-intermediate-representation">IR (Intermediate representation)</a>
       <ul>
-        <li><a href="#延伸阅读-1">延伸阅读</a></li>
+        <li><a href="#how-to-write-a-unix-shell">How to write a UNIX shell</a></li>
+        <li><a href="#延伸阅读">延伸阅读</a></li>
       </ul>
     </li>
     <li><a href="#程序语言设计和编译器考量">程序语言设计和编译器考量</a></li>
@@ -213,6 +215,10 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://www.slideshare.net/ccckmit/jserv#22"target="_blank" rel="external nofollow noopener noreferrer">用十分鐘 向 jserv 學習作業系統設計</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/coscup18-source-c-compiler"target="_blank" rel="external nofollow noopener noreferrer">用1500 行建構可自我編譯的 C 編譯器</a>
 / <a href="https://drive.google.com/file/d/1-0QGf2JSni-CwYigaEORW6JUehS8LS79/view"target="_blank" rel="external nofollow noopener noreferrer">投影片</a></li>
+</ul>
+<p><a href="https://github.com/jserv/amacc"target="_blank" rel="external nofollow noopener noreferrer">AMaCC</a> 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。</p>
+<p>預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。</p>
+<ul>
 <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format"target="_blank" rel="external nofollow noopener noreferrer">Executable and Linkable Format</a></li>
 </ul>
 <h2 id="编译器和软件工业强度息息相关">编译器和软件工业强度息息相关</h2>
@@ -246,31 +252,157 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     </div>
   </div>
 <a class="lightgallery" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=large" data-thumbnail="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=small" data-sub-html="<h2>https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg</h2>"><img loading="lazy" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg" srcset="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=small, https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=medium 1.5x, https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=large 2x" sizes="auto" data-title="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg" data-alt="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
-<h3 id="手把手教你构建-c-语言编译器">手把手教你构建 C 语言编译器</h3>
+<h2 id="手把手教你构建-c-语言编译器">手把手教你构建 C 语言编译器</h2>
 <p><a href="https://github.com/lotabout/write-a-C-interpreter"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></p>
-<h3 id="延伸阅读">延伸阅读</h3>
+<p>编译原理课程教导的是如何完成一个「编译器的编译器」 即 <a href="https://en.wikipedia.org/wiki/Compiler-compiler"target="_blank" rel="external nofollow noopener noreferrer">Compiler-compiler</a>，这个难度比较大，因为需要考虑通用性，但是实作一个简单的编译器并没有这么难。</p>
 <ul>
-<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Stack_machine"target="_blank" rel="external nofollow noopener noreferrer">Stack machine</a></li>
 <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Compiler-compiler"target="_blank" rel="external nofollow noopener noreferrer">Compiler-compiler</a></li>
 </ul>
+<h3 id="设计">设计</h3>
+<p>一般而言，编译器的编写分为 3 个步骤：</p>
+<ol>
+<li>词法分析器，用于将字符串转化成内部的表示结构。</li>
+<li>语法分析器，将词法分析得到的标记流（token）生成一棵语法树。</li>
+<li>目标代码的生成，将语法树转化成目标代码。</li>
+</ol>
+<h3 id="虚拟机">虚拟机</h3>
+<p>在该项目的虚拟机设计中，函数调用时 callee 的参数位于 caller 的栈帧 (frame) 内，并且函数调用需要使用到 4 条指令:</p>
+<ol>
+<li><code>CALL</code> 指令将 callee 的返回地址压入栈，然后跳转到 callee 的入口处</li>
+<li><code>ENT</code> 指令保存 ebp 寄存器的值并为 callee 的栈帧设置 esp 和 ebp 寄存器，在栈中给 callee 的局部变量分配空间</li>
+<li><code>ADJ</code> 指令在 callee 逻辑执行完毕后，释放之前分配给局部变量的栈空间</li>
+<li><code>LEV</code> 指令将 ebp 和 esp 寄存器恢复为对应 caller 栈帧，并跳转到之前保存的 callee 的返回地址处</li>
+</ol>
+<p>除此之外，在 callee 执行期间，可能需要通过 <code>LEA</code> 指令来访问函数参数和局部变量。</p>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">sub_function</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">,</span> <span class="n">arg3</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">|</span>    <span class="o">....</span>       <span class="o">|</span> <span class="n">high</span> <span class="n">address</span>
+</span></span><span class="line"><span class="cl"><span class="o">+---------------+</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span> <span class="n">arg</span><span class="p">:</span> <span class="mi">1</span>        <span class="o">|</span>    <span class="n">new_bp</span> <span class="o">+</span> <span class="mi">4</span>
+</span></span><span class="line"><span class="cl"><span class="o">+---------------+</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span> <span class="n">arg</span><span class="p">:</span> <span class="mi">2</span>        <span class="o">|</span>    <span class="n">new_bp</span> <span class="o">+</span> <span class="mi">3</span>
+</span></span><span class="line"><span class="cl"><span class="o">+---------------+</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span> <span class="n">arg</span><span class="p">:</span> <span class="mi">3</span>        <span class="o">|</span>    <span class="n">new_bp</span> <span class="o">+</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="o">+---------------+</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span><span class="k">return</span> <span class="n">address</span> <span class="o">|</span>    <span class="n">new_bp</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">+---------------+</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span> <span class="n">old</span> <span class="n">BP</span>        <span class="o">|</span> <span class="o">&lt;-</span> <span class="n">new</span> <span class="n">BP</span>
+</span></span><span class="line"><span class="cl"><span class="o">+---------------+</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span> <span class="n">local</span> <span class="k">var</span> <span class="mi">1</span>   <span class="o">|</span>    <span class="n">new_bp</span> <span class="o">-</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="o">+---------------+</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span> <span class="n">local</span> <span class="k">var</span> <span class="mi">2</span>   <span class="o">|</span>    <span class="n">new_bp</span> <span class="o">-</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="o">+---------------+</span>
+</span></span><span class="line"><span class="cl"><span class="o">|</span>    <span class="o">....</span>       <span class="o">|</span>  <span class="n">low</span> <span class="n">address</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Stack_machine"target="_blank" rel="external nofollow noopener noreferrer">Stack machine</a></li>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/X86_calling_conventions"target="_blank" rel="external nofollow noopener noreferrer">x86 calling conventions</a></li>
+</ul>
+<div class="details admonition question">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>问题 <code>PRTF</code> means?<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-2"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">op</span> <span class="o">==</span> <span class="n">PRTF</span><span class="p">)</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">  <span class="n">tmp</span> <span class="o">=</span> <span class="n">sp</span> <span class="o">+</span> <span class="n">pc</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span> 
+</span></span><span class="line"><span class="cl">  <span class="n">ax</span> <span class="o">=</span> <span class="nf">printf</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">]);</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里 <a href="https://github.com/rswier/c4"target="_blank" rel="external nofollow noopener noreferrer">c4</a> 对于 <code>PRTF</code> 指令的处理暂时没看明白&hellip;</p></div>
+    </div>
+  </div>
+<div class="details admonition question">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>问题 <code>-m32</code> error<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>gcc 通过 <code>-m32</code> 参数编译本节代码时可能会遇到以下报错:</p>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fatal error: bits/wordsize.h: No such file or directory</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这是因为当前安装的 gcc 只有 64 位的库而没有 32 位的库，通过以下命令安装 32 位库解决问题:</p>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install gcc-multilib</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Stack Overflow:</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/54082459/fatal-error-bits-libc-header-start-h-no-such-file-or-directory-while-compili"target="_blank" rel="external nofollow noopener noreferrer">&ldquo;fatal error: bits/libc-header-start.h: No such file or directory&rdquo; while compiling HTK</a></li>
+</ul>
+</div>
+    </div>
+  </div>
 <h2 id="ir-intermediate-representation">IR (Intermediate representation)</h2>
 <ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://www.slideshare.net/jserv/jit-compiler"target="_blank" rel="external nofollow noopener noreferrer">Interpreter, Compiler, JIT from scratch</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://eli.thegreenplace.net/2013/11/05/how-to-jit-an-introduction"target="_blank" rel="external nofollow noopener noreferrer">How to JIT - an introduction</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://github.com/spencertipping/jit-tutorial"target="_blank" rel="external nofollow noopener noreferrer">How to write a very simple JIT compiler</a></li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://github.com/spencertipping/shell-tutorial"target="_blank" rel="external nofollow noopener noreferrer">How to write a UNIX shell, with a lot of background</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://github.com/spencertipping/shell-tutorial"target="_blank" rel="external nofollow noopener noreferrer">How to write a UNIX shell, with a lot of background</a></li>
 </ul>
 <div class="details admonition note open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
-      <div class="admonition-content"><p>JIT (Just in time) 表示“即时”，形象描述就是“及时雨” &#x1f923; 原理是将解释执行的“热点“编译成位于一个内存区域的 machine code，从而减轻内存的压力 (解释执行时会在内存中跳来跳去，而一个区域的 machine code 是连续执行，内存压力没这么大并且可以充分利用 cache 从而提高效能)。</p>
+      <div class="admonition-content"><p>JIT (Just in time) 表示“即时”，形象描述就是“及时雨” &#x1f923; 原理是将解释执行的“热点“编译成位于一个内存区域的 machine code，从而减轻内存的压力。因为解释执行时会在内存中跳来跳去，而一个区域的 machine code 是连续执行，内存压力没这么大并且可以充分利用 cache 从而提高效能。另一个因素可以参考 <a href="https://hackmd.io/@sysprog/c-control-flow"target="_blank" rel="external nofollow noopener noreferrer">你所不知道的 C 語言: goto 和流程控制篇</a>，从 VM 的 <code>swith-case</code> 和 <code>computed goto</code> 在效能差异的主要因素「分支预测」进行思考。</p>
 <p>最后两个链接对于提高系统编程 (System programming) 能力非常有益，Just do it!</p>
 </div>
     </div>
   </div>
-<h3 id="延伸阅读-1">延伸阅读</h3>
+<h3 id="how-to-write-a-unix-shell">How to write a UNIX shell</h3>
+<a class="lightgallery" href="/images/c/shell.drawio.svg?size=large" data-thumbnail="/images/c/shell.drawio.svg?size=small" data-sub-html="<h2>/images/c/shell.drawio.svg</h2>"><img loading="lazy" src="/images/c/shell.drawio.svg" srcset="/images/c/shell.drawio.svg?size=small, /images/c/shell.drawio.svg?size=medium 1.5x, /images/c/shell.drawio.svg?size=large 2x" sizes="auto" data-title="/images/c/shell.drawio.svg" data-alt="/images/c/shell.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p>系统编程 (System Programming) 的入门项目，阅读过程需要查询搭配 man 手册，以熟悉库函数和系统调用的原型和作用。</p>
+<p>Linux manual page:
+<a href="https://man7.org/linux/man-pages/man3/fflush.3.html"target="_blank" rel="external nofollow noopener noreferrer">fflush</a>
+/ <a href="https://man7.org/linux/man-pages/man5/elf.5.html"target="_blank" rel="external nofollow noopener noreferrer">elf</a>
+/ <a href="https://man7.org/linux/man-pages/man3/exec.3.html"target="_blank" rel="external nofollow noopener noreferrer">exec</a>
+/ <a href="https://man7.org/linux/man-pages/man3/perror.3.html"target="_blank" rel="external nofollow noopener noreferrer">perror</a>
+/ <a href="https://man7.org/linux/man-pages/man3/getline.3.html"target="_blank" rel="external nofollow noopener noreferrer">getline</a>
+/ <a href="https://www.man7.org/linux/man-pages/man3/strchr.3.html"target="_blank" rel="external nofollow noopener noreferrer">strchr</a>
+/ <a href="https://man7.org/linux/man-pages/man3/waitpid.3p.html"target="_blank" rel="external nofollow noopener noreferrer">waitpid</a>
+/ <a href="https://man7.org/linux/man-pages/man3/fprintf.3p.html"target="_blank" rel="external nofollow noopener noreferrer">fprintf</a>
+/ <a href="https://man7.org/linux/man-pages/man2/pipe.2.html"target="_blank" rel="external nofollow noopener noreferrer">pipe</a>
+/ <a href="https://man7.org/linux/man-pages/man2/dup.2.html"target="_blank" rel="external nofollow noopener noreferrer">dup</a>
+/ <a href="https://man7.org/linux/man-pages/man2/close.2.html"target="_blank" rel="external nofollow noopener noreferrer">close</a></p>
+<h3 id="延伸阅读">延伸阅读</h3>
 <ul>
 <li>Linux manual page: <a href="https://man7.org/linux/man-pages/man3/bsearch.3.html"target="_blank" rel="external nofollow noopener noreferrer">bsearch</a></li>
 </ul>
@@ -281,7 +413,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-04-25 19:49:18">更新于 2024-04-25&nbsp;</span>
+        <span title="更新于 2024-04-30 17:00:03">更新于 2024-04-30&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/c-compiler-construction/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
