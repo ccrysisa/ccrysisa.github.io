@@ -98,13 +98,30 @@ repost:
 - [ ] [Interpreter, Compiler, JIT from scratch](https://www.slideshare.net/jserv/jit-compiler)
 - [ ] [How to JIT - an introduction](https://eli.thegreenplace.net/2013/11/05/how-to-jit-an-introduction)
 - [ ] [How to write a very simple JIT compiler](https://github.com/spencertipping/jit-tutorial)
-- [ ] [How to write a UNIX shell, with a lot of background](https://github.com/spencertipping/shell-tutorial)
+- [x] [How to write a UNIX shell, with a lot of background](https://github.com/spencertipping/shell-tutorial)
 
 {{< admonition >}}
-JIT (Just in time) 表示“即时”，形象描述就是“及时雨” :rofl: 原理是将解释执行的“热点“编译成位于一个内存区域的 machine code，从而减轻内存的压力 (解释执行时会在内存中跳来跳去，而一个区域的 machine code 是连续执行，内存压力没这么大并且可以充分利用 cache 从而提高效能)。
+JIT (Just in time) 表示“即时”，形象描述就是“及时雨” :rofl: 原理是将解释执行的“热点“编译成位于一个内存区域的 machine code，从而减轻内存的压力。因为解释执行时会在内存中跳来跳去，而一个区域的 machine code 是连续执行，内存压力没这么大并且可以充分利用 cache 从而提高效能。另一个因素可以参考 [你所不知道的 C 語言: goto 和流程控制篇](https://hackmd.io/@sysprog/c-control-flow)，从 VM 的 `swith-case` 和 `computed goto` 在效能差异的主要因素「分支预测」进行思考。
 
 最后两个链接对于提高系统编程 (System programming) 能力非常有益，Just do it!
 {{< /admonition >}}
+
+### How to write a UNIX shell
+
+{{< image src="/images/c/shell.drawio.svg" >}}
+
+Linux manual page: 
+[fflush](https://man7.org/linux/man-pages/man3/fflush.3.html)
+/ [elf](https://man7.org/linux/man-pages/man5/elf.5.html)
+/ [exec](https://man7.org/linux/man-pages/man3/exec.3.html)
+/ [perror](https://man7.org/linux/man-pages/man3/perror.3.html)
+/ [getline](https://man7.org/linux/man-pages/man3/getline.3.html)
+/ [strchr](https://www.man7.org/linux/man-pages/man3/strchr.3.html)
+/ [waitpid](https://man7.org/linux/man-pages/man3/waitpid.3p.html)
+/ [fprintf](https://man7.org/linux/man-pages/man3/fprintf.3p.html)
+/ [pipe](https://man7.org/linux/man-pages/man2/pipe.2.html)
+/ [dup](https://man7.org/linux/man-pages/man2/dup.2.html)
+/ [close](https://man7.org/linux/man-pages/man2/close.2.html)
 
 ### 延伸阅读
 
