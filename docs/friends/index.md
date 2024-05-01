@@ -1,4 +1,4 @@
-# 友情链接
+# 所有友链
 
 
 <!-- When you set data `friends.yml` in `yourProject/data/` directory, it will be automatically loaded here. -->

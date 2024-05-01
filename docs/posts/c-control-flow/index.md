@@ -143,24 +143,222 @@ Linux 核心中的实作:
 
 ## 和想象中不同的 switch-case
 
-`switch-case` 语句中的 case 部分本质上是 label，所以使用其它语句 (例如 `if`) 将其包裹起来并不影响 `switch` 语句的跳转。
+`switch-case` 语句中的 case 部分本质上是 label，所以使用其它语句 (例如 `if`) 将其包裹起来并不影响 `switch` 语句的跳转。所以将 `swicth-case` 的 `case` 部分用 `if (0)` 包裹起来就无需使用 `break` 来进行跳出了:
+
+```c
+switch (argc - 1) {
+             case  0: num =  "zero";
+    if (0) { case  1: num =   "one"; }
+    if (0) { case  2: num =   "two"; }
+    if (0) { case  3: num = "three"; }
+    if (0) { default: num =  "many"; }
+```
+
+归纳一下，这种实作方法符合以下结构:
+
+```c
+if (0) { label: ... }
+```
+
+- [x] [Clifford’s Device](https://clifford.at/cliffords-device.html)
+
+> A **Clifford's Device** is a section of code is surrounded by `if (0) { label: … }` so it is skipped in the normal flow of execution and is only reached via the goto label, reintegrating with the normal flow of execution and the end of the `if (0)` statement. It solves a situation where one would usually need to duplicate code or create a state variable holding the information if the additional code block should be called.
+
+> A switch statement is nothing else than a computed goto statement. So it is possible to use Clifford's Device with a switch statement as well.
+
+简单来说，这种方法主要用于开发阶段时的运行时信息输出，在发行阶段运行时不再输出这一信息的情景，有助于开发时程序员进行侦错。除此之外，在使用枚举作为 `switch-case` 的表达式时，如果 `case` 没有对全部的枚举值进行处理的话，编译器会给出警告 (Rust 警告 :rofl: 但 Rust 会直接报错)，使用 `if (0) { ... }` 技巧将未处理的枚举值对应的 `case` 包裹就不会出现警告，同时也不影响代码逻辑。
+
+在 OpenSSL 中也有类似手法的实作:
+
+```c
+    if (!ok) goto end;
+    if (0) {
+end:
+        X509_get_pubkey_parameters(NULL, ctx->chain);
+    }
+```
 
 - [Something You May Not Know About the Switch Statement in C/C++](https://www.codeproject.com/Articles/100473/Something-You-May-Not-Know-About-the-Switch-Statem)
 - [How to Get Fired Using Switch Statements & Statement Expressions](http://blog.robertelder.org/switch-statements-statement-expressions/)
 
 ## Duff's Device
 
-> 这个技巧常用于内存数据的复制，类似于 `memcpy`
+这个技巧常用于内存数据的复制，类似于 `memcpy`。主要思路类似于在数值系统篇提到的 `strcpy`，针对 alignment 和 unalignment 的情况分别进行相应的处理，但效能比不上优化过的 `memcpy`。
 
-- [ ] Wikipedia: [Duff's Device](https://en.wikipedia.org/wiki/Duff%27s_device)
+- [x] Wikipedia: [Duff's Device](https://en.wikipedia.org/wiki/Duff%27s_device)
+> To handle cases where the number of iterations is not divisible by the unrolled-loop increments, a common technique among assembly language programmers is to jump directly into the middle of the unrolled loop body to handle the remainder. Duff implemented this technique in C by using C's case label fall-through feature to jump into the unrolled body.
+
+Linux 核心中的实作运用:
+
+```c
+void dsend(int count) {
+    if (!count)
+        return;
+    int n = (count + 7) / 8;
+    switch (count % 8) {
+    case 0:
+        do {
+            puts("case 0");
+        case 7:
+            puts("case 7");
+        case 6:
+            puts("case 6");
+        case 5:
+            puts("case 5");
+        case 4:
+            puts("case 4");
+        case 3:
+            puts("case 3");
+        case 2:
+            puts("case 2");
+        case 1:
+            puts("case 1");
+        } while (--n > 0);
+    }
+}
+```
+
+试着将上面这段程式码修改为 `memcpy` 功能的实作，进一步体会 Duff's Device 的核心机制，同时结合「[C语言: 内存管理篇](https://hackmd.io/@sysprog/c-memory)」思考为什么该实作效能不高。
+
+{{< details "Answer" >}}
+未充分利用 data alignment 和现代处理器的寄存器大小，每次只处理一个 byte 导致效率低下。
+{{< /details >}}
+
 - [ ] [Duff's Device 的详细解释](http://c-faq.com/misc/duffexpln.html)
 - [ ] [Tom Duff 本人的解释](http://doc.cat-v.org/bell_labs/duffs_device)
+
+{{< admonition quote >}}
+但在現代的微處理器中，Duff's Device 不見得會帶來好處，改用已針對處理器架構最佳化的 memcpy 函式，例如 Linux 核心的修改 fbdev: Improve performance of sys_fillrect()
+
+- 使用 Duff's Device 的 sys_fillrect(): 166,603 cycles
+- 運用已最佳化 memcpy 的 sys_fillrect(): 26,586 cycles
+{{< /admonition >}}
 
 ## co-routine 应用
 
 Wikipedia: [Coroutine](https://en.wikipedia.org/wiki/Coroutine)
 
 不借助操作系统也可以实作出多工交执行的 illusion (通过 `switch-case` 黑魔法来实现 :rofl:)
+
+- [x] PuTTY 作者 Simon Tatham: [Coroutines in C](https://www.chiark.greenend.org.uk/~sgtatham/coroutines.html) 
+
+{{< admonition >}}
+这是一篇好文章，下面我对文章画一些重点
+{{< /admonition >}}
+
+> In The Art of Computer Programming, Donald Knuth presents a solution to this sort of problem. His answer is to throw away the stack concept completely. Stop thinking of one process as the caller and the other as the callee, and start thinking of them as cooperating equals.
+
+> The callee has all the problems. For our callee, we want a function which has a "return and continue" operation: return from the function, and next time it is called, resume control from just after the return statement. For example, we would like to be able to write a function that says
+
+```c
+int function(void) {
+    int i;
+    for (i = 0; i < 10; i++)
+        return i;   /* won't work, but wouldn't it be nice */
+}
+```
+
+> and have ten successive calls to the function return the numbers 0 through 9.
+
+> How can we implement this? Well, we can transfer control to an arbitrary point in the function using a goto statement. So if we use a state variable, we could do this:
+
+```c
+int function(void) {
+    static int i, state = 0;
+    switch (state) {
+        case 0: goto LABEL0;
+        case 1: goto LABEL1;
+    }
+    LABEL0: /* start of function */
+    for (i = 0; i < 10; i++) {
+        state = 1; /* so we will come back to LABEL1 */
+        return i;
+        LABEL1:; /* resume control straight after the return */
+    }
+}
+```
+
+这个实作里面，`staic` 这个修饰词也起到了很大作用，尝试带入一个流程去体会 `static` 在这段程式码的作用，并试着想一下如果没有 `static` 修饰变量 `i` 和 `state` 会导致上面后果。
+
+> The famous "Duff's device" in C makes use of the fact that a case statement is still legal within a sub-block of its matching switch statement.
+
+> We can put it to a slightly different use in the coroutine trick. Instead of using a switch statement to decide which goto statement to execute, we can use the switch statement to perform the jump itself:
+
+```c
+int function(void) {
+    static int i, state = 0;
+    switch (state) {
+        case 0: /* start of function */
+        for (i = 0; i < 10; i++) {
+            state = 1; /* so we will come back to "case 1" */
+            return i;
+            case 1:; /* resume control straight after the return */
+        }
+    }
+}
+```
+
+> Now this is looking promising. All we have to do now is construct a few well chosen macros, and we can hide the gory details in something plausible-looking:
+
+```c
+#define crBegin static int state=0; switch(state) { case 0:
+#define crReturn(i,x) do { state=i; return x; case i:; } while (0)
+#define crFinish }
+int function(void) {
+    static int i;
+    crBegin;
+    for (i = 0; i < 10; i++)
+        crReturn(1, i);
+    crFinish;
+}
+```
+
+这里又用到了 `do { ... } while (0)` 搭配宏的技巧 :rofl:
+
+> The only snag remaining is the first parameter to crReturn. Just as when we invented a new label in the previous section we had to avoid it colliding with existing label names, now we must ensure all our state parameters to crReturn are different. The consequences will be fairly benign - the compiler will catch it and not let it do horrible things at run time - but we still need to avoid doing it.
+
+> Even this can be solved. ANSI C provides the special macro name __LINE__, which expands to the current source line number. So we can rewrite crReturn as
+
+```c
+#define crReturn(x) do { state=__LINE__; return x; \
+                         case __LINE__:; } while (0)
+```                        
+
+这个实作手法本质上和 Knuth 所提的机制相同，将函数的状态存储在其它地方而不是存放在 stack 上，这里存储的地方就是之前所提的那些被 `static` 修饰的变量 (因为 `static` 修饰的变量存储在 data 段而不在栈上)，事实上这些 `static` 变量实现了一个小型的状态机。
+
+> We have achieved what we set out to achieve: a portable ANSI C means of passing data between a producer and a consumer without the need to rewrite one as an explicit state machine. We have done this by combining the C preprocessor with a little-used feature of the switch statement to create an implicit state machine.
+
+`static` 变量的表达能力有限，但是可以通过预先分配空间，并通过指针操作取代 `static` 变量操作来实现 coroutine 的可重入性:
+
+> In a serious application, this toy coroutine implementation is unlikely to be useful, because it relies on static variables and so it fails to be re-entrant or multi-threadable. Ideally, in a real application, you would want to be able to call the same function in several different contexts, and at each call in a given context, have control resume just after the last return in the same context.
+
+> This is easily enough done. We arrange an extra function parameter, which is a pointer to a context structure; we declare all our local state, and our coroutine state variable, as elements of that structure.
+
+> It's a little bit ugly, because suddenly you have to use ctx->i as a loop counter where you would previously just have used i; virtually all your serious variables become elements of the coroutine context structure. But it removes the problems with re-entrancy, and still hasn't impacted the structure of the routine.
+
+作者最后提供了相关实作:
+- [coroutine.h](https://www.chiark.greenend.org.uk/~sgtatham/coroutine.h)
+
+---
+
+在 PuTTY 里的相关实作:
+- [ssh.c](https://github.com/Yasushi/putty/blob/31a2ad775f393aad1c31a983b0baea205d48e219/ssh.c#L414)
+
+将原文的「合作式多工」中的 `cr_yield` 宏使用 `do { ... } while (0)` 手法改写：
+
+```c
+#define cr_yield()               \
+    do {                         \
+        __s = __LINE__;          \
+        usleep(THREAD_INTERVAL); \
+        return;                  \
+    case __LINE__:;              \
+    } while (0)
+```
+
+延伸阅读:
+- [x] [深入了解 switch-case](https://airfishqi.blogspot.com/2016/11/switch-case.html)
+- [x] [Protothreads](https://dunkels.com/adam/pt/)
 
 
 ---

@@ -1,5 +1,5 @@
 ---
-title: "友情链接"
+title: "所有友链"
 subtitle:
 type: friends
 date: 2024-04-29T23:46:50+08:00

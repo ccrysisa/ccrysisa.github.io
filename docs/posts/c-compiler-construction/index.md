@@ -128,6 +128,12 @@ Stack Overflow:
 - ["fatal error: bits/libc-header-start.h: No such file or directory" while compiling HTK](https://stackoverflow.com/questions/54082459/fatal-error-bits-libc-header-start-h-no-such-file-or-directory-while-compili)
 {{< /admonition >}}
 
+### 词法分析器
+
+我们并不会一次性地将所有源码全部转换成标记流，原因有二：
+1. 字符串转换成标记流有时是有状态的，即与代码的上下文是有关系的。
+2. 保存所有的标记流没有意义且浪费空间。
+
 ## IR (Intermediate representation)
 
 - [ ] [Interpreter, Compiler, JIT from scratch](https://www.slideshare.net/jserv/jit-compiler)

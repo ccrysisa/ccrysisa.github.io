@@ -5,9 +5,9 @@
 
 <!--more-->
 
-{{< link href="http://wiki.csie.ncku.edu.tw/linux/schedule?revision=ff44817ff7c75ed4ec0d22e6fdc3337af1f597c3" content="原始页面" external-icon=true >}}
-|
-{{< link href="/archives/Linux.pdf" content="PDF" external-icon=true >}}
+- {{< link href="http://wiki.csie.ncku.edu.tw/linux/schedule?revision=ff44817ff7c75ed4ec0d22e6fdc3337af1f597c3" content="原始页面" >}}
+/
+{{< link href="/archives/Linux.pdf" content="PDF" >}}
 
 {{< admonition success >}}
 如果你学习时感到挫折，感到进度推进很慢，这很正常，因为 Jserv 的一个讲座，需要我们花费一个星期去消化 :rofl: 并且 Jserv 也提到前 6 周课程的密度是比较大的
@@ -15,7 +15,6 @@
 所以没必要为此焦虑，如果你觉得某个内容不太理解，可以尝试先去看其他讲座，将原先不懂的知识交给大脑隐式消化，过段时间再回来看，你的理解会大有不同。
 {{< /admonition >}}
 
-------------------------------------------------------
 - Instructor: [Jim Huang](/User/jserv) (黃敬群) `<jserv.tw@gmail.com>`
 - [往年課程進度](/linux/schedule-old)
 - [Linux 核心設計 (線上講座)](https://hackmd.io/@sysprog/linux-kernel-internal)
@@ -105,7 +104,7 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
 * [ ] [從 Revolution OS 看作業系統生態變化](https://hackmd.io/@sysprog/revolution-os-note)`*`
 * [並行和多執行緒程式設計](https://hackmd.io/@sysprog/concurrency/)`*`: 應涵蓋 Part 1 到 Part 4
     - [x] Part 1: 概念、执行顺序
-    - [ ] Part 2
+    - [ ] Part 2: POSIX Thread
     - [ ] Part 3
     - [ ] Part 4
 * [ ] [C 語言: 函式呼叫](https://hackmd.io/@sysprog/c-function)`*`
@@ -114,7 +113,7 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
     - 或許跟你想像中不同，Linux 核心的原始程式碼裡頭也用到遞迴函式呼叫，特別在較複雜的實作，例如檔案系統，善用遞迴可大幅縮減程式碼，但這也導致追蹤程式運作的難度大增
 * [x] [C 語言: 前置處理器應用](https://hackmd.io/@sysprog/c-preprocessor)`*`
     - C 語言之所以不需要時常發佈新的語言特徵又可以保持活力，前置處理器 (preprocessor) 是很重要的因素，有心者可逕行「擴充」C 語言
-* [ ] [C 語言: goto 和流程控制](https://hackmd.io/@sysprog/c-control-flow)`*`
+* [x] [C 語言: goto 和流程控制](https://hackmd.io/@sysprog/c-control-flow)`*`
     - goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這樣看待，至少在 Linux 核心原始程式碼中，goto 是大量存在 (跟你想像中不同吧)。有時不用 goto 會寫出更可怕的程式碼
 * [ ] [C 語言程式設計技巧](https://hackmd.io/@sysprog/c-trick)`*`
 * [作業](https://hackmd.io/@sysprog/linux2023-homework3): 截止繳交日: Mar 21
@@ -125,50 +124,51 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
 
 ### 第 4 週: 數值系統 + 編譯器
 > (Mar 6, 7, 9)
-- [教材解說](https://youtu.be/cjq0OuUeepA)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
+- [x] [教材解說](https://youtu.be/cjq0OuUeepA)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
 * 公告:
     - 請填寫 [Google 表單](https://forms.gle/rANw1FmXxd2rB3dP8)，以利後續追蹤
     - 《Demystifying the Linux CPU Scheduler》的書稿已寄送給成功大學的選課學生，旁聽的學員預計在 3 月 13 日取得 (第 5 週進度)
 * 貢獻程式碼到 Linux 核心
-    - [第一次給 Linux Kernel 發 patch](https://hackmd.io/@rhythm/BkjJeugOv)
-    - [提交第一份 Patch 到 Linux Kernel](https://hackmd.io/@steven1lung/submitting-patches)
-    - [第一次發 patch 到 LKML](https://hackmd.io/@Risheng/ry5futJF9)
-* [追求神乎其技的程式設計之道](https://vgod.medium.com/7cccc3c68f1e)
+    - [ ] [第一次給 Linux Kernel 發 patch](https://hackmd.io/@rhythm/BkjJeugOv)
+    - [ ] [提交第一份 Patch 到 Linux Kernel](https://hackmd.io/@steven1lung/submitting-patches)
+    - [ ] [第一次發 patch 到 LKML](https://hackmd.io/@Risheng/ry5futJF9)
+* [ ] [追求神乎其技的程式設計之道](https://vgod.medium.com/7cccc3c68f1e)
     - 「可以看出抄襲風氣在台灣並不只是小時候在學校抄抄作業而已；媒體工作者在報導中任意抄襲及轉載是種不尊重自己專業的表現，不但隱含著一種應付了事的心態，更代表著這些人對於自己的工作沒有熱情，更沒有著一點堅持。如果要說我在美國看到這邊和台灣有什麼最大的不同，我想關鍵的差異就在對自己的工作有沒有熱情和堅持而已了。」
     - 「程式藝術家也不過是在『簡潔』、『彈性』、『效率』這三大目標上進行一連串的取捨 (trade-off) 和最佳化。」
-* [Linux 核心的紅黑樹](https://hackmd.io/@sysprog/linux-rbtree)
-* [CS:APP 第 2 章重點提示和練習](https://hackmd.io/@sysprog/CSAPP-ch2)`*`
+* [ ] [Linux 核心的紅黑樹](https://hackmd.io/@sysprog/linux-rbtree)
+* [ ] [CS:APP 第 2 章重點提示和練習](https://hackmd.io/@sysprog/CSAPP-ch2)`*`
 * 核心開發者當然要熟悉編譯器行為
-    - [Linus Torvalds 教你分析 gcc 行為](https://lkml.org/lkml/2019/2/25/1092)
-    - [Pointers are more abstract than you might expect in C](https://pvs-studio.com/en/blog/posts/cpp/0576/) / [HackerNews 討論](https://news.ycombinator.com/item?id=17439467)
-* [C 編譯器原理和案例分析](https://hackmd.io/@sysprog/c-compiler-construction)`*`
-* [C 語言: 未定義行為](https://hackmd.io/@sysprog/c-undefined-behavior)`*`: C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化
-* [C 語言: 編譯器和最佳化原理](https://hackmd.io/@sysprog/c-compiler-optimization)`*`
+    - [ ] [Linus Torvalds 教你分析 gcc 行為](https://lkml.org/lkml/2019/2/25/1092)
+    - [ ] [Pointers are more abstract than you might expect in C](https://pvs-studio.com/en/blog/posts/cpp/0576/) / [HackerNews 討論](https://news.ycombinator.com/item?id=17439467)
+* [ ] [C 編譯器原理和案例分析](https://hackmd.io/@sysprog/c-compiler-construction)`*`
+* [ ] [C 語言: 未定義行為](https://hackmd.io/@sysprog/c-undefined-behavior)`*`: C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化
+* [ ] [C 語言: 編譯器和最佳化原理](https://hackmd.io/@sysprog/c-compiler-optimization)`*`
 * 《Demystifying the Linux CPU Scheduler》第 1 章
 * [作業](https://hackmd.io/@sysprog/linux2023-homework4): 截止繳交日: Mar 30
     * [quiz4](https://hackmd.io/@sysprog/HJaX8tuyh)
 * Week4 隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz4) (內含作答表單)
 - [課堂問答簡記](https://hackmd.io/@sysprog/rJVas7NJn)
 
-* 第 5 週 (Mar 13, 14, 16): Linux CPU scheduler
-    - [教材解說](https://youtu.be/f-SprmkcOI0)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
-    * 公告:
-        - 本週導入客製化作業，讓學員選擇改進前四週的作業或自訂題目 (例如貢獻程式碼到 Linux 核心)，隨後安排授課教師和學員的線上一對一討論
-    * [浮點數運算](https://hackmd.io/@sysprog/c-floating-point)`*`: 工程領域往往是一系列的取捨結果，浮點數更是如此，在軟體發開發有太多失誤案例源自工程人員對浮點數運算的掌握不足，本議程希望藉由探討真實世界的血淋淋案例，帶著學員思考 IEEE 754 規格和相關軟硬體考量點，最後也會探討在深度學習領域為了改善資料處理效率，而引入的 [BFloat16](https://en.wikipedia.org/wiki/Bfloat16_floating-point_format) 這樣的新標準
-        - [float16 vs. bfloat16](https://twitter.com/rasbt/status/1631679894219284480)
-    * 記憶體配置器涉及 bitwise 操作及浮點數運算。傳統的即時系統和該領域的作業系統 (即 RTOS) 為了讓系統行為更可預測，往往捨棄動態記憶體配置的能力，但這顯然讓系統的擴充能力大幅受限。後來研究人員提出 TLSF (Two-Level Segregated Fit) 嘗試讓即時系統也能享用動態記憶體管理，其關鍵訴求是 "O(1) cost for malloc, free, realloc, aligned_alloc"
-        - [Benchmarking Malloc with Doom 3](https://www.forrestthewoods.com/blog/benchmarking-malloc-with-doom3/)
-        - [tlsf-bsd](https://github.com/jserv/tlsf-bsd)
-        - TLSF: [Part 1: Background](https://brnz.org/hbr/?p=1735), [Part 2: The floating point](https://brnz.org/hbr/?p=1744)
-    * [Linux 核心模組運作原理](https://hackmd.io/@sysprog/linux-kernel-module)
-    * [Linux: 不只挑選任務的排程器](https://hackmd.io/@sysprog/linux-scheduler)`*`: 排程器 (scheduler) 是任何一個多工作業系統核心都具備的機制，但彼此落差極大，考量點不僅是演算法，還有當應用規模提昇時 (所謂的 scalability) 和涉及即時處理之際，會招致不可預知的狀況 (non-determinism)，不僅即時系統在意，任何建構在 Linux 核心之上的大型服務都會深受衝擊。是此，Linux 核心的排程器經歷多次變革，需要留意的是，排程的難度不在於挑選下一個可執行的行程 (process)，而是讓執行完的行程得以安插到合適的位置，使得 runqueue 依然依據符合預期的順序。
-    * [C 語言: 動態連結器](https://hackmd.io/@sysprog/c-dynamic-linkage)`*`
-    * [C 語言: 連結器和執行檔資訊](https://hackmd.io/@sysprog/c-linker-loader)`*`
-    * [C 語言: 執行階段程式庫 (CRT)](https://hackmd.io/@sysprog/c-runtime)`*`
-    * [作業](https://hackmd.io/@sysprog/linux2023-homework5): 截止繳交 Apr 10
-        - [assessment](https://hackmd.io/@sysprog/r1O7Xcp12)
-    * Week5 隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz5) (內含作答表單)
-    - [課堂問答簡記](https://hackmd.io/@sysprog/rJVas7NJn)
+### 第 5 週: Linux CPU scheduler
+> (Mar 13, 14, 16)
+- [教材解說](https://youtu.be/f-SprmkcOI0)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
+* 公告:
+    - 本週導入客製化作業，讓學員選擇改進前四週的作業或自訂題目 (例如貢獻程式碼到 Linux 核心)，隨後安排授課教師和學員的線上一對一討論
+* [浮點數運算](https://hackmd.io/@sysprog/c-floating-point)`*`: 工程領域往往是一系列的取捨結果，浮點數更是如此，在軟體發開發有太多失誤案例源自工程人員對浮點數運算的掌握不足，本議程希望藉由探討真實世界的血淋淋案例，帶著學員思考 IEEE 754 規格和相關軟硬體考量點，最後也會探討在深度學習領域為了改善資料處理效率，而引入的 [BFloat16](https://en.wikipedia.org/wiki/Bfloat16_floating-point_format) 這樣的新標準
+    - [float16 vs. bfloat16](https://twitter.com/rasbt/status/1631679894219284480)
+* 記憶體配置器涉及 bitwise 操作及浮點數運算。傳統的即時系統和該領域的作業系統 (即 RTOS) 為了讓系統行為更可預測，往往捨棄動態記憶體配置的能力，但這顯然讓系統的擴充能力大幅受限。後來研究人員提出 TLSF (Two-Level Segregated Fit) 嘗試讓即時系統也能享用動態記憶體管理，其關鍵訴求是 "O(1) cost for malloc, free, realloc, aligned_alloc"
+    - [Benchmarking Malloc with Doom 3](https://www.forrestthewoods.com/blog/benchmarking-malloc-with-doom3/)
+    - [tlsf-bsd](https://github.com/jserv/tlsf-bsd)
+    - TLSF: [Part 1: Background](https://brnz.org/hbr/?p=1735), [Part 2: The floating point](https://brnz.org/hbr/?p=1744)
+* [Linux 核心模組運作原理](https://hackmd.io/@sysprog/linux-kernel-module)
+* [Linux: 不只挑選任務的排程器](https://hackmd.io/@sysprog/linux-scheduler)`*`: 排程器 (scheduler) 是任何一個多工作業系統核心都具備的機制，但彼此落差極大，考量點不僅是演算法，還有當應用規模提昇時 (所謂的 scalability) 和涉及即時處理之際，會招致不可預知的狀況 (non-determinism)，不僅即時系統在意，任何建構在 Linux 核心之上的大型服務都會深受衝擊。是此，Linux 核心的排程器經歷多次變革，需要留意的是，排程的難度不在於挑選下一個可執行的行程 (process)，而是讓執行完的行程得以安插到合適的位置，使得 runqueue 依然依據符合預期的順序。
+* [C 語言: 動態連結器](https://hackmd.io/@sysprog/c-dynamic-linkage)`*`
+* [C 語言: 連結器和執行檔資訊](https://hackmd.io/@sysprog/c-linker-loader)`*`
+* [C 語言: 執行階段程式庫 (CRT)](https://hackmd.io/@sysprog/c-runtime)`*`
+* [作業](https://hackmd.io/@sysprog/linux2023-homework5): 截止繳交 Apr 10
+    - [assessment](https://hackmd.io/@sysprog/r1O7Xcp12)
+* Week5 隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz5) (內含作答表單)
+- [課堂問答簡記](https://hackmd.io/@sysprog/rJVas7NJn)
 
 * 第 6 週 (Mar 20, 21, 23): System call + CPU Scheduler
     - [教材解說](https://youtu.be/zW_MAMy7DBE)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
