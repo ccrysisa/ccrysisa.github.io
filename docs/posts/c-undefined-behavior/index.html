@@ -7,12 +7,18 @@
     <meta name="robots" content="noodp" />
     <title>你所不知道的 C 语言: 未定义/未指定行为篇 - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
-<meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Sysprog, C' /><meta itemprop="name" content="你所不知道的 C 语言: 未定义/未指定行为篇">
-<meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-04-24T21:09:40+08:00" />
+<meta name="description" content="
+C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化
+" /><meta name="keywords" content='Sysprog, C' /><meta itemprop="name" content="你所不知道的 C 语言: 未定义/未指定行为篇">
+<meta itemprop="description" content="
+C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化
+"><meta itemprop="datePublished" content="2024-04-24T21:09:40+08:00" />
 <meta itemprop="dateModified" content="2024-04-25T19:49:18+08:00" />
-<meta itemprop="wordCount" content="0"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="425"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C," /><meta property="og:title" content="你所不知道的 C 语言: 未定义/未指定行为篇" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="
+C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-undefined-behavior/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-24T21:09:40+08:00" />
@@ -20,7 +26,9 @@
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 未定义/未指定行为篇"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="
+C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化
+"/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -35,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-undefined-behavior\/"
-    },"genre": "posts","keywords": "Sysprog, C","wordcount":  0 ,
+    },"genre": "posts","keywords": "Sysprog, C","wordcount":  425 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-undefined-behavior\/","datePublished": "2024-04-24T21:09:40+08:00","dateModified": "2024-04-25T19:49:18+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -153,7 +161,8 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
 
   <aside class="aside-custom">
     </aside>
@@ -163,8 +172,54 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-04-24 21:09:40"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-24">2024-04-24</time></span>&nbsp;<span title="更新于 2024-04-25 19:49:18"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-25">2024-04-25</time></span>&nbsp;<span title="0 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 0 分钟</span>&nbsp;</div>
-    </div><div class="content" id="content"></div><div class="post-footer" id="post-footer">
+      <div class="post-meta-line"><span title="发布于 2024-04-24 21:09:40"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-24">2024-04-24</time></span>&nbsp;<span title="更新于 2024-04-25 19:49:18"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-25">2024-04-25</time></span>&nbsp;<span title="425 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#从-c-语言试题谈起">从 C 语言试题谈起</a></li>
+    <li><a href="#程序语言不都该详细规范怎么会有-ub-呢">程序语言不都该详细规范，怎么会有 UB 呢？</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><blockquote>
+<p>C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化</p>
+</blockquote>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/c-undefined-behavior"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>
+<h2 id="从-c-语言试题谈起">从 C 语言试题谈起</h2>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">++</span> <span class="o">+</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>请问 <code>i</code> 的值在第 2 行执行完毕后为？</p>
+<blockquote>
+<p>C 語言沒規定 <code>i++</code> 或 <code>++i</code> 的「加 1」動作到底是在哪個敘述的哪個時刻執行，因此，不同 C 編譯器若在不同的位置 + 1，就可能導致截然不同的結果。</p>
+</blockquote>
+<p>这一部分可以参考「并行程序设计: <a href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fconcurrency-ordering"target="_blank" rel="external nofollow noopener noreferrer">执行顺序</a>」中 Evaluation 和 Sequenced-before 的讲解。</p>
+<p>与区分「并行」和「平行」类似，我们这里要区分「未定义行为」和「未指定行为」:</p>
+<ul>
+<li>未定义行为 (<a href="https://en.wikipedia.org/wiki/Undefined_behavior"target="_blank" rel="external nofollow noopener noreferrer">Undefined behavior</a>): 程序行为并未在 <strong>语言规范</strong> (在 C 中，自然是 ISO/IEC 9899 一类的规格) 所明确定义规范。缩写为 &ldquo;UB&rdquo;。</li>
+</ul>
+<blockquote>
+<p>undefined behavior (UB) is the result of executing a program whose behavior is prescribed to be unpredictable, in the language specification to which the computer code adheres.</p>
+</blockquote>
+<ul>
+<li>未指定行为 (<a href="https://en.wikipedia.org/wiki/Unspecified_behavior"target="_blank" rel="external nofollow noopener noreferrer">Unspecified behavior</a>): 程序行为依赖 <strong>编译器实作和平台特性</strong> 而定。</li>
+</ul>
+<blockquote>
+<p>unspecified behavior is behavior that may vary on different implementations of a programming language.</p>
+</blockquote>
+<h2 id="程序语言不都该详细规范怎么会有-ub-呢">程序语言不都该详细规范，怎么会有 UB 呢？</h2>
+<p>编译器最佳化建立在 UB 的基础上，即编译器会消除 UB 来进行最佳化，而让程序不是依赖与 UB 产生的结果。</p></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">

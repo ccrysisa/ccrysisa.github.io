@@ -61,6 +61,13 @@ repost:
 
 - Wikipedia: [Executable and Linkable Format](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format)
 
+## Build a minimal multi-tasking OS kernel for RISC-V from scratch
+
+- GitHub: [mini-riscv-os](https://github.com/cccriscv/mini-riscv-os)
+
+这个专案是对 Jserv 的 700 行系列的致敬，启发自 [mini-arm-os](https://github.com/jserv/mini-arm-os) 专案:
+> Build a minimal multi-tasking OS kernel for RISC-V from scratch. Mini-riscv-os was inspired by jserv's mini-arm-os project. However, ccckmit rewrite the project for RISC-V, and run on Win10 instead of Linux.
+
 ## 编译器和软件工业强度息息相关
 
 - [ ] [形式化驗證 (Formal Verification)](https://hackmd.io/@sysprog/formal-verification)
@@ -204,6 +211,41 @@ Stack Overflow:
 - [What is Left Recursion and how it is eliminated?](https://www.tutorialspoint.com/what-is-left-recursion-and-how-it-is-eliminated)
 
 ### 变量定义
+
+{{< admonition question "问题: `current_id[Value]`" false >}}
+```c
+current_id[Value] = (int)(text + 1); // the memory address of function
+current_id[Value] = (int)data; // assign memory address
+```
+
+这两个涉及 `current_id[Value]` 字段的处理暂时没弄明白，可能需要到后面代码生成阶段配合虚拟机设计才能理解。
+{{< /admonition >}}
+
+### 函数定义
+
+本节的 `text` 貌似执行的是当前生成的指令，所以下一条指令 (即将要生成的指令) 的地址为 `text + 1`。
+
+{{< admonition type=question open=false >}}
+`function_declaration` 中的这一部分处理，虽然逻辑是在 symbol table 中将局部变量恢复成全局变量的属性，但感觉这样会导致多出一些未定义的全局变量 (由局部变量转换时多出来):
+```c
+current_id[Class] = current_id[BClass];
+current_id[Type]  = current_id[BType];
+current_id[Value] = current_id[BValue];
+```
+{{< /admonition >}}
+
+### 语句
+
+这一节对于 Return 语句处理是会生成 `LEV` 指令，这与上一节函数定义部分生成的 `LEV` 指令并不冲突，因为函数定义生成的 `LEV` 指令对于函数末尾，而本节 Return 语句生成的 `LEV` 语句可以对应函数体内的其他 `return` 返回语句 (毕竟一个函数内可以存在多个返回语句)。
+
+```c
+int func(int x) {
+    if (x > 0) {
+        return x;
+    }
+    return -x;
+}
+```
 
 ## IR (Intermediate representation)
 

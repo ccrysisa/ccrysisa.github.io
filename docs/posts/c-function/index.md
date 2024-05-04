@@ -83,9 +83,7 @@ $ echo "source ~/peda/peda.py" >> ~/.gdbinit
 
 ## 从递归观察函数调用
 
-`infinite.c`
-
-```c
+```c {title="infinite.c"}
 int func(int x) {
     static int count = 0;
     int y = x; // local var

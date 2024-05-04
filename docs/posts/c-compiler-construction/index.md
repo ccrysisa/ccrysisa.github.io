@@ -11,7 +11,7 @@
 
 ## 如何打造一个具体而微的 C 语言编译器
 
-- [ ] [用十分鐘 向 jserv 學習作業系統設計](https://www.slideshare.net/ccckmit/jserv#22)
+- [x] [用十分鐘 向 jserv 學習作業系統設計](https://www.slideshare.net/ccckmit/jserv#22)
 - [x] [用1500 行建構可自我編譯的 C 編譯器](https://hackmd.io/coscup18-source-c-compiler)
 / [投影片](https://drive.google.com/file/d/1-0QGf2JSni-CwYigaEORW6JUehS8LS79/view)
 
@@ -20,6 +20,13 @@
 預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。
 
 - Wikipedia: [Executable and Linkable Format](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format)
+
+## Build a minimal multi-tasking OS kernel for RISC-V from scratch
+
+- GitHub: [mini-riscv-os](https://github.com/cccriscv/mini-riscv-os)
+
+这个专案是对 Jserv 的 700 行系列的致敬，启发自 [mini-arm-os](https://github.com/jserv/mini-arm-os) 专案:
+> Build a minimal multi-tasking OS kernel for RISC-V from scratch. Mini-riscv-os was inspired by jserv's mini-arm-os project. However, ccckmit rewrite the project for RISC-V, and run on Win10 instead of Linux.
 
 ## 编译器和软件工业强度息息相关
 
@@ -51,11 +58,20 @@
 
 ## 手把手教你构建 C 语言编译器
 
-[原文地址](https://github.com/lotabout/write-a-C-interpreter)
+{{< link href="https://github.com/lotabout/write-a-C-interpreter" content="原文地址" external-icon=true >}}
 
-编译原理课程教导的是如何完成一个「编译器的编译器」 即 [Compiler-compiler](https://en.wikipedia.org/wiki/Compiler-compiler)，这个难度比较大，因为需要考虑通用性，但是实作一个简单的编译器并没有这么难。
+编译原理课程教导的是如何完成一个「编译器的编译器」，即 [Compiler-compiler](https://en.wikipedia.org/wiki/Compiler-compiler)，这个难度比较大，因为需要考虑通用性，但是实作一个简单的编译器并没有这么难。
 
 - Wikipedia: [Compiler-compiler](https://en.wikipedia.org/wiki/Compiler-compiler)
+
+{{< admonition >}}
+这篇教程里面会有一些比较奇怪古板的写法，例如:
+```c
+int i; i = 0; // instead of `int i = 0;`
+a = a + 1;    // instead of `a += 1;`
+```
+这都是为了实现这个编译器的自举 (self-host)，所以在语法上没有太大的灵活性 (因为这个编译器不支持这么灵活的语法 :rofl:)
+{{< /admonition >}}
 
 ### 设计
 
@@ -100,7 +116,7 @@ sub_function(arg1, arg2, arg3);
 - Wikipedia: [Stack machine](https://en.wikipedia.org/wiki/Stack_machine)
 - Wikipedia: [x86 calling conventions](https://en.wikipedia.org/wiki/X86_calling_conventions)
 
-{{< admonition question "问题 `PRTF` means?" false >}}
+{{< admonition question "问题: `PRTF` means" false >}}
 ```c
 else if (op == PRTF) { 
   tmp = sp + pc[1]; 
@@ -111,7 +127,7 @@ else if (op == PRTF) {
 这里 [c4](https://github.com/rswier/c4) 对于 `PRTF` 指令的处理暂时没看明白...
 {{< /admonition >}}
 
-{{< admonition question "问题 `-m32` error" false >}}
+{{< admonition question "问题: `-m32` error" false >}}
 gcc 通过 `-m32` 参数编译本节代码时可能会遇到以下报错:
 
 ```bash
@@ -133,6 +149,63 @@ Stack Overflow:
 我们并不会一次性地将所有源码全部转换成标记流，原因有二：
 1. 字符串转换成标记流有时是有状态的，即与代码的上下文是有关系的。
 2. 保存所有的标记流没有意义且浪费空间。
+
+在处理数字时使用到了一些「数值系统篇」时提到的技巧，例如利用 ASCII Table 的特性。假设 `token` 存储当前字符，如果是 `0-9` 这类数字字符，使用 `token & 15` 可以获得该数字字符对应的数值；如果是 `a-f` 或 `A-F` 这类字符，`token & 15` 会取得相对于 9 的偏移值，例如 `A & 15` 和 `a & 15` 返回的都是 1。
+
+上面这一技巧依赖于这一事实：字符 `0-9` 对应的十六进制为 `0x30 - 0x39`，字符 `A-F` 对应的十六进制为 `0x41 - 0x46`，字符 `a-f` 对应的十六进制为 `0x61 - 0x66`。
+
+对于「关键字与内置函数」的处理:
+- **关键字**: 首先使用词法分析器将其识别为 identifier，然后将 symbol table 中的 token 类型改为对应的关键字
+- **内置函数**: 类似的先进行词法分析识别为 identifier，然后在 symbol table 中修改其 Class, Type, Value 字段的值
+
+{{< admonition question "问题: `current_id[Value]`" false >}}
+暂时没搞懂为什么要将内置函数在 symbol table 中的 `Value` 字段修改为对应的指令 (例如 `EXIT`)
+{{< /admonition >}}
+
+### 递归下降
+
+这一节是以四则运算表达式的语法分析为例，介绍递归下降的相关实作，并不是编译器实作的一部分 :rofl: 但也用到了前一节所提的词法分析，虽然简单很多 (因为四则运算只需考虑标识符为数字的情况)。
+
+语法分析的关键点在于: 它是根据词法分析获得的 token 流进行分析的，其中的 `match` 方法是用于判断当前获得的 token 是否符合语法分析的预期以及基于 token 进行向前看 (对比一下词法分析是基于字符的向前看)。
+
+- [What is Left Recursion and how it is eliminated?](https://www.tutorialspoint.com/what-is-left-recursion-and-how-it-is-eliminated)
+
+### 变量定义
+
+{{< admonition question "问题: `current_id[Value]`" false >}}
+```c
+current_id[Value] = (int)(text + 1); // the memory address of function
+current_id[Value] = (int)data; // assign memory address
+```
+
+这两个涉及 `current_id[Value]` 字段的处理暂时没弄明白，可能需要到后面代码生成阶段配合虚拟机设计才能理解。
+{{< /admonition >}}
+
+### 函数定义
+
+本节的 `text` 貌似执行的是当前生成的指令，所以下一条指令 (即将要生成的指令) 的地址为 `text + 1`。
+
+{{< admonition type=question open=false >}}
+`function_declaration` 中的这一部分处理，虽然逻辑是在 symbol table 中将局部变量恢复成全局变量的属性，但感觉这样会导致多出一些未定义的全局变量 (由局部变量转换时多出来):
+```c
+current_id[Class] = current_id[BClass];
+current_id[Type]  = current_id[BType];
+current_id[Value] = current_id[BValue];
+```
+{{< /admonition >}}
+
+### 语句
+
+这一节对于 Return 语句处理是会生成 `LEV` 指令，这与上一节函数定义部分生成的 `LEV` 指令并不冲突，因为函数定义生成的 `LEV` 指令对于函数末尾，而本节 Return 语句生成的 `LEV` 语句可以对应函数体内的其他 `return` 返回语句 (毕竟一个函数内可以存在多个返回语句)。
+
+```c
+int func(int x) {
+    if (x > 0) {
+        return x;
+    }
+    return -x;
+}
+```
 
 ## IR (Intermediate representation)
 
