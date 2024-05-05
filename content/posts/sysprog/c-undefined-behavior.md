@@ -68,4 +68,102 @@ i = i++ + ++i;
 
 ## 程序语言不都该详细规范，怎么会有 UB 呢？
 
-编译器最佳化建立在 UB 的基础上，即编译器会消除 UB 来进行最佳化，而让程序不是依赖与 UB 产生的结果。
+编译器最佳化建立在 UB 的基础上，即编译器进行最佳化会忽略 UB，因为 C 语言标准和编译器认为，***未定义行为不能出现在程序中***，并且将这个准则作为前提来实作编译器。所以 C 语言编译器对源代码进行翻译和优化，其输出的机器码的行为应该与 **标准定义的行为** 一致。也就是说编译出来的机器码只保证与标准的定义行为对应，对于未定义行为不保证有对应的机器码 (事实上大部分的 UB 都被编译器优化掉了)。
+
+```c
+int func(unsigned char x)
+{
+    int value = 2147483600; /* assuming 32 bit int */
+    value += x;
+    if (value < 2147483600)
+        bar();
+    return value;
+}
+```
+
+第 4 行可能会导致 signed integer overflow，而 signed integer overflow 在 C 语言是 UB，所以编译器优化时会认为不会发生 signed integer overflow (对应前文的 ***未定义行为不能出现在程序中***)，那么编译器就会第 5 行的条件判断是不可能成立的，进而将其优化掉:
+
+```c
+int foo(unsigned char x)
+{
+    int value = 2147483600;
+    value += x;
+    return value;
+}
+```
+
+## CppCon 2016: Undefined Behavior
+
+- [ ] CppCon 2016: Chandler Carruth [Garbage In, Garbage Out: Arguing about Undefined Behavior with Nasal Demons](https://www.youtube.com/watch?v=yG1OZ69H_-o)
+
+```c
+int *p = nullptr;
+int x = *p;
+```
+
+Programming error, like using an API out of contract.
+
+```c
+/// \param p must not be null
+void f(int *p);
+
+void f(int *p) [[expects: p != nullptr]];
+```
+
+Programming errors result in *incorrect programs*. We cannot define the behavior of *incorrect programs*.
+
+{{< center-quote >}}
+**UB is a *symptom* of incorrect programs.**
+{{< /center-quote >}}
+
+The code used a feature *out of contract*. The feature has a *narrow contract*! It was a *latent* error all this time.
+
+Can we make every language feature have a wide contract? 
+- **No.** Instead, evaluate wide vs. narrow contracts case by case.
+
+Ok, can we at least *constrain* UB?
+- UB is inherently unconstrained... But this isn't about UB!
+
+Can we define *some* behavior when out of contract?
+- Yes.. But what do you define?
+- Different users need differemt behaviors.
+
+When is it appropriate to have a narrow contract?
+- A narrow contract is a simpler semantic model.
+- But this may not match expectations.
+
+**Principles for narrow language contracts:**
+1. Checkable (probabilisticallt) at runtime
+2. Provide significant value: bug finding, simplification, and/or optimization
+3. Easily explained and taught to programmers
+4. Not widely violated by existing code that works correctly and as intended
+
+**Let's examine interesting cases with this framework**
+
+```c++
+#include <iostream>
+
+int main() {
+  volatile unsigned x = 1;
+  volatile unsigned y = 33;
+  volatile unsigned result = x << y;
+
+  std::cout << "Bad shift: " << result << "\n";
+}
+```
+
+```c++
+// Allocate a zeroed rtx vector of N elements
+//
+// sizeof(struct rtvec_def) == 16
+// sizeof(rtunion) == 8
+rtvec rtvec_alloc(int a) {
+  rtvec rt;
+  int i;
+  rt = (rtvec)obstack_alloc(
+      rtl_obstack,
+      sizeof(struct rtvec_def) + (n - 1) + sizeof(rtvunion));
+  // ...
+  return rt;
+}
+```
