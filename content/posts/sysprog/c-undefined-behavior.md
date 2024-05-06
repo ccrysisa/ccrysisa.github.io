@@ -68,7 +68,15 @@ i = i++ + ++i;
 
 ## 程序语言不都该详细规范，怎么会有 UB 呢？
 
-编译器最佳化建立在 UB 的基础上，即编译器进行最佳化会忽略 UB，因为 C 语言标准和编译器认为，***未定义行为不能出现在程序中***，并且将这个准则作为前提来实作编译器。所以 C 语言编译器对源代码进行翻译和优化，其输出的机器码的行为应该与 **标准定义的行为** 一致。也就是说编译出来的机器码只保证与标准的定义行为对应，对于未定义行为不保证有对应的机器码 (事实上大部分的 UB 都被编译器优化掉了)。
+编译器最佳化建立在 UB 的基础上，即编译器进行最佳化会忽略 UB，因为 C 语言标准和编译器认为，***未定义行为不能出现在程序中***，并且将这个准则作为前提来实作编译器。所以 C 语言编译器对源代码进行翻译和优化，其输出的机器码的行为应该与 **标准定义的行为** 一致。也就是说编译出来的机器码只保证与标准的定义行为对应，对于未定义行为不保证有对应的机器码。
+
+{{< admonition >}}
+类似于 API 的使用，你必须在遵守 API 的限制的前提下使用 API，才能得到预期的结果，如果你不遵循 API 的限定，那么 API 返回的结果不保证符合你的预期 (但这不意味着你只能遵守 API 的限制，你当然可以不遵守，只是后果自负，UB 也类似，没说不行，但是后果自负 :rofl:)。例如一个 API 要求传入的参数必须是非负数，如果你传入了一个负数，那么 API 返回的结果不大可能符合你的预期，因为这个 API 的内部实现可能没考虑负数情形。
+
+从这个角度看，UB 其实就是不遵守语言规范 (等价于 API 的限制) 的行为，编译器对于语言规范的实现一般来说是不考虑 UB 的 (等价于 API 的内部实现)，所以因为 UB 造成的结果需要程序员自行承担 (等价于不遵守限制乱用 API 需要自己承担责任)。所以单纯考虑 UB 是没啥意义的，因为它只是结果的具体表现，应该从语言规范和编译器的角度考虑。
+
+除此之外，因为编译器作为语言规范的实作，它在最佳化时会一般只考虑符合语言规范的部分，简而言之，编译器可能会将 UB 部分的代码移除掉 (越激进的优化越有可能)。
+{{< /admonition >}}
 
 ```c
 int func(unsigned char x)
@@ -92,9 +100,21 @@ int foo(unsigned char x)
 }
 ```
 
+Java 这类强调安全的语言也会存在 UB (Java 安全的一个方面是它只使用 signed integer)，所以有时候你会在项目中看到类似如下的注释:
+
+```java
+/* Do not try to optimize this lines.
+ * This is the only way you can do this
+ * without undefined behavior
+ */
+```
+
+Kugan Vivekanandarajah 和 Yvan Roux 探讨 UB 和编译器最佳化的演讲:
+- [ ] [BKK16-503 Undefined Behavior and Compiler Optimizations – Why Your Program Stopped Working With A Newer Compiler](https://www.slideshare.net/linaroorg/bkk16503-undefined-behavior-and-compiler-optimizations-why-your-program-stopped-working-with-a-newer-compiler) / [演讲录影](https://youtu.be/wZT20kR2AzY)
+
 ## CppCon 2016: Undefined Behavior
 
-- [ ] CppCon 2016: Chandler Carruth [Garbage In, Garbage Out: Arguing about Undefined Behavior with Nasal Demons](https://www.youtube.com/watch?v=yG1OZ69H_-o)
+- [x] CppCon 2016: Chandler Carruth [Garbage In, Garbage Out: Arguing about Undefined Behavior with Nasal Demons](https://www.youtube.com/watch?v=yG1OZ69H_-o)
 
 ```c
 int *p = nullptr;
@@ -138,7 +158,9 @@ When is it appropriate to have a narrow contract?
 3. Easily explained and taught to programmers
 4. Not widely violated by existing code that works correctly and as intended
 
-**Let's examine interesting cases with this framework**
+### Examples
+
+Let's examine interesting cases with this framework
 
 ```c++
 #include <iostream>
@@ -152,12 +174,14 @@ int main() {
 }
 ```
 
+左移操作 `x << y` 如果 `y >= <bits of x>` 那么这个行为是 UB
+
 ```c++
 // Allocate a zeroed rtx vector of N elements
 //
 // sizeof(struct rtvec_def) == 16
 // sizeof(rtunion) == 8
-rtvec rtvec_alloc(int a) {
+rtvec rtvec_alloc(int n) {
   rtvec rt;
   int i;
   rt = (rtvec)obstack_alloc(
@@ -167,3 +191,137 @@ rtvec rtvec_alloc(int a) {
   return rt;
 }
 ```
+
+这里需要对 API 加一个限制: `n >= 1`
+
+```c++
+bool mainGtu(uint32_t i1, uint32_t i2,    # BB#0:
+             uint8_t *block) {                    movl %edi, %eax
+  uint8_t c1, c2;                                 movb (%rdx,%rax), %al
+                                                  movl %esi, %ebp
+  /* 1 */                                         movb (%rdx,%rbp), %bl
+  c1 = block[i1]; c2 = block[i2];                 cmpb %bl, %al
+  if (c1 != c2) return (c1 > c2);                 jne .LBB27_1
+  i1++; i2++;                             # BB#2:
+                                                  leal 1(%rdi), %eax
+  /* 2 */                                         leal 1(%rsi), %ebp
+  c1 = block[i1]; c2 = block[i2];                 movb (%rdx,%rax), %al
+  if (c1 != c2) return (c1 > c2);                 movb (%rdx,%rbp), %bl
+  i1++; i2++;                                     cmpb %bl, %al
+                                                  jne .LBB27_1
+  ...                                     # ...
+}
+```
+
+```c++
+bool mainGtu(int32_t i1, int32_t i2,      # BB#0:
+             uint8_t *block) {                    movzbl (%rdx, %rsi), %eax
+  uint8_t c1, c2;                                 cmpb %al, (%rdx,%rdi)
+                                                  jne .LBB27_1
+  /* 1 */                                         
+  c1 = block[i1]; c2 = block[i2];                 
+  if (c1 != c2) return (c1 > c2);                 
+  i1++; i2++;                             # BB#2:
+                                                  movzbl 1(%rdx, %rsi), %eax
+  /* 2 */                                         cmpb %al, 1(%rdx,%rdi)
+  c1 = block[i1]; c2 = block[i2];                 jne .LBB27_1
+  if (c1 != c2) return (c1 > c2);                 
+  i1++; i2++;                                     
+                                                  
+  ...                                     # ...
+}
+```
+
+这里的底层机制是: unsigned integer 的 overflow 不是 UB，而是等价于对 *UMax* of its size 取模，所以当使用 `uint32_t` 时，编译器需要生成特殊的指令用于保证 `i1` 和 `i2` 的值是这样的序列: $i$, $i+1$, ..., *UMax*, $0$, $1$, ... (这是 wide contract，即对任意的 unsigned integer 加法的行为都有规范并且编译器进行了相应实作)
+
+但是当使用 signed integer 时，因为 signed integer overflow 是 UB，所以编译器只需生成指令用于保证 `i1` 和 `i2` 的值是这样的序列: $i$, $i+1$, $i+2$, ... 所以只需要生成单纯的 add 指令即可，甚至可以进行指针运算 `p + i`，然后递增这个指针值即可。(这是 narrow contract，即使用 signed integer 时编译器不需要关心是否会发生 overflow，因为这是程序员的责任，它对 signed integer 加法的实作不考虑 overflow 的情景)
+
+{{< admonition tip >}}
+这个例子再次说明，未定义行为存在的重要目的是，语言标准中的刻意留空，运行更激进最优化的存在。例如规范限制 signed integer 的使用不会出现 overflow，进而编译器以这个前提进行最优化 (类似于 API 的使用限制不能使用负数，那么 API 的实作也不会考虑负数的情形)。***不管是进行最优化还是不进行最优化的编译器，都是对语言规范的一种实现。***
+{{< /admonition >}}
+
+```c
+#include <iostream>
+#include <limits>
+#include <stdint.h>
+
+int main() {
+  volatile int32_t x = std::numeric_limits<int32_t>::min();
+  volatile int32_t y = 7;
+  volatile int32_t result = (x >> y);
+  std::cout << "Arithmetic shift: " << std::hex << result << "\n";
+}
+```
+Arithmetic shift is **Implementation defined behavior**. (narrow contract)
+
+```c
+#include <string.h>
+
+int main() {
+  void *volatile src = nullptr;
+  void *volatile dst = nullptr;
+  volatile size_t size = 0;
+
+  memcpy(dst, src, size);
+}
+```
+
+The source and destination shall not be nullptr in memcpy. (narrow contract)
+
+---
+
+{{< admonition >}}
+现在再回头看下开头的例子，如果我们将第 3 行的 `x` 改为 `unsigned int` 类型，那么编译器就不会将第 5 行的 if 语句优化掉 (因为 unsigned int 的使用是 wide contract 的):
+
+```c
+int func(unsigned char x)
+{
+    unsigned int value = 2147483600; /* assuming 32 bit */
+    value += x;
+    if (value < 2147483600)
+        bar();
+    return value;
+}
+```
+{{< /admonition >}}
+
+## 侦测 Undefined Behavior
+
+- [UndefinedBehaviorSanitizer](https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html)
+- Linux 核心也引入 [The Undefined Behavior Sanitizer - UBSAN](https://people.freedesktop.org/~narmstrong/meson_drm_doc/dev-tools/ubsan.html)
+
+## Undefined Behavior 的几种类型
+
+### Signed integer overflow
+
+### Shifting an n-bit integer by n or more bits
+
+### Divide by zero
+
+### Dereferencing a NULL pointer
+
+- Wikidepia: [Linux kernel oops](https://en.wikipedia.org/wiki/Linux_kernel_oops)
+
+{{< image src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Linux-2.6-oops-parisc.jpg" >}}
+
+### Pointer arithmetic that wraps
+
+### Two pointers of different types that alias
+
+### Reading an uninitialized variable
+
+```c
+#include <stdio.h>
+
+int main() {
+    int x;
+    int y = x + 10;
+    printf("%d %d\n", x, y);
+
+    return 0;
+}
+```
+
+## 相关博客
+
+- [ ] [Undefined Behavior in 2017](https://blog.regehr.org/archives/1520)
