@@ -103,7 +103,10 @@ WIkipedia:
 [FreeBSD](https://en.wikipedia.org/wiki/FreeBSD)
 {{< /admonition >}}
 
-{{< admonition success >}} 一个 成功 横幅 {{< /admonition >}}
+{{< admonition success >}}
+- OSDI
+- PLDI
+{{< /admonition >}}
 
 {{< admonition question >}} 一个 问题 横幅 {{< /admonition >}}
 

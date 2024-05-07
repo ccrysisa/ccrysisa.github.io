@@ -75,7 +75,7 @@ i = i++ + ++i;
 
 从这个角度看，UB 其实就是不遵守语言规范 (等价于 API 的限制) 的行为，编译器对于语言规范的实现一般来说是不考虑 UB 的 (等价于 API 的内部实现)，所以因为 UB 造成的结果需要程序员自行承担 (等价于不遵守限制乱用 API 需要自己承担责任)。所以单纯考虑 UB 是没啥意义的，因为它只是结果的具体表现，应该从语言规范和编译器的角度考虑。
 
-除此之外，因为编译器作为语言规范的实作，它在最佳化时会一般只考虑符合语言规范的部分，简而言之，编译器可能会将 UB 部分的代码移除掉 (越激进的优化越有可能)。
+除此之外，因为编译器作为语言规范的实作，它在最佳化时会一般 **只考虑符合语言规范** 的部分，简而言之，编译器可能会将 UB 部分的代码移除掉 (越激进的优化越有可能)。因为它认为源程序已经是符合语言规范的，所以会移除掉在符合规范情况下显得不必要的逻辑。
 {{< /admonition >}}
 
 ```c
@@ -357,12 +357,16 @@ Note that what exactly is considered undefined differs slightly between C and C+
 
 {{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-24-2048.jpg" >}}
 
-{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-25-2048.jpg" >}}
+- [x] LWN [Fun with NULL pointers](https://lwn.net/Articles/342330/)
 
-- [ ] LWN [Fun with NULL pointers](https://lwn.net/Articles/342330/)
+> There is one little problem with that reasoning, though: NULL (zero) can actually be a valid pointer address. By default, the very bottom of the virtual address space (the "zero page," along with a few pages above it) is set to disallow all access as a way of catching null-pointer bugs (like the one described above) in both user and kernel space. But it is possible, using the mmap() system call, to put real memory at the bottom of the virtual address space. 
+
+> This is where the next interesting step in the chain of failures happens: the GCC compiler will, by default, optimize the NULL test out. The reasoning is that, since the pointer has already been dereferenced (and has not been changed), it cannot be NULL. So there is no point in checking it. Once again, this logic makes sense most of the time, but not in situations where NULL might actually be a valid pointer.
+
+> A NULL pointer was dereferenced before being checked, the check was optimized out by the compiler
+
 - gcc [PR68853](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=68853)
-- Wikidepia: [Linux kernel oops](https://en.wikipedia.org/wiki/Linux_kernel_oops)
-
+- Wikidepia: [Linux kernel oops](https://en.wikipedia.org/wiki/Linux_kernel_oops) 
 {{< image src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Linux-2.6-oops-parisc.jpg" >}}
 
 ### Pointer arithmetic that wraps

@@ -20,9 +20,6 @@
 預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。
 
 - Wikipedia: [Executable and Linkable Format](https://en.wikipedia.org/wiki/Executable_and_Linkable_Format)
-
-## Build a minimal multi-tasking OS kernel for RISC-V from scratch
-
 - GitHub: [mini-riscv-os](https://github.com/cccriscv/mini-riscv-os)
 
 这个专案是对 Jserv 的 700 行系列的致敬，启发自 [mini-arm-os](https://github.com/jserv/mini-arm-os) 专案:
@@ -116,7 +113,7 @@ sub_function(arg1, arg2, arg3);
 - Wikipedia: [Stack machine](https://en.wikipedia.org/wiki/Stack_machine)
 - Wikipedia: [x86 calling conventions](https://en.wikipedia.org/wiki/X86_calling_conventions)
 
-{{< admonition question "问题: `PRTF` means" false >}}
+{{< admonition question "PRTF" false >}}
 ```c
 else if (op == PRTF) { 
   tmp = sp + pc[1]; 
@@ -127,7 +124,7 @@ else if (op == PRTF) {
 这里 [c4](https://github.com/rswier/c4) 对于 `PRTF` 指令的处理暂时没看明白...
 {{< /admonition >}}
 
-{{< admonition question "问题: `-m32` error" false >}}
+{{< admonition question "gcc -m32 error" false >}}
 gcc 通过 `-m32` 参数编译本节代码时可能会遇到以下报错:
 
 ```bash
@@ -158,8 +155,17 @@ Stack Overflow:
 - **关键字**: 首先使用词法分析器将其识别为 identifier，然后将 symbol table 中的 token 类型改为对应的关键字
 - **内置函数**: 类似的先进行词法分析识别为 identifier，然后在 symbol table 中修改其 Class, Type, Value 字段的值
 
-{{< admonition question "问题: `current_id[Value]`" false >}}
+{{< admonition question "current_id[Value] and system functions" false >}}
 暂时没搞懂为什么要将内置函数在 symbol table 中的 `Value` 字段修改为对应的指令 (例如 `EXIT`)
+
+阅读完「表达式」一节后已理解，这样内置函数可以直接通过 symbol table 的 `Value` 字段来生成对应的指令，而不像普通函数一样搭配地址生成相关的跳转指令。
+
+```c
+if (id[Class] == Sys) {
+    // system functions
+    *++text = id[Value];
+}
+```
 {{< /admonition >}}
 
 ### 递归下降
@@ -172,25 +178,41 @@ Stack Overflow:
 
 ### 变量定义
 
-{{< admonition question "问题: `current_id[Value]`" false >}}
+{{< admonition question "current_id[Value] and address" false >}}
 ```c
 current_id[Value] = (int)(text + 1); // the memory address of function
 current_id[Value] = (int)data; // assign memory address
 ```
 
 这两个涉及 `current_id[Value]` 字段的处理暂时没弄明白，可能需要到后面代码生成阶段配合虚拟机设计才能理解。
+
+全局变量 `text` 指向代码段当前已生成指令的位置，所以 `text + 1` 才是下一条指令的位置，`data` 表示数据段当前生成的位置。
 {{< /admonition >}}
 
 ### 函数定义
 
-本节的 `text` 貌似执行的是当前生成的指令，所以下一条指令 (即将要生成的指令) 的地址为 `text + 1`。
+代码段全局变量 `text` 表示的是当前生成的指令，所以下一条指令 (即将要生成的指令) 的地址为 `text + 1`。
 
-{{< admonition type=question open=false >}}
+{{< admonition question "function_declaration" false >}}
 `function_declaration` 中的这一部分处理，虽然逻辑是在 symbol table 中将局部变量恢复成全局变量的属性，但感觉这样会导致多出一些未定义的全局变量 (由局部变量转换时多出来):
+
 ```c
 current_id[Class] = current_id[BClass];
 current_id[Type]  = current_id[BType];
 current_id[Value] = current_id[BValue];
+```
+
+「表达式」一节中对于没有设置 `Class` 字段的标识符会判定为未定义变量:
+
+```c
+if (id[Class] == Loc) {
+    ...
+} else if (id[Class] == Glo) {
+    ...
+} else {
+    printf("%d: undefined variable\n", line);
+    exit(-1);
+}
 ```
 {{< /admonition >}}
 
@@ -206,6 +228,57 @@ int func(int x) {
     return -x;
 }
 ```
+
+### 表达式
+
+#### 一元运算符
+
+根据词法分析器 `next()` 字符串部分的逻辑，扫描到字符串时对应的 token 是 `"`。
+
+{{< admonition question "pointer type" false >}}
+```c
+data = (char *)(((int)data + sizeof(int)) & (-sizeof(int)));
+```
+
+这段代码的含义是，递增数据段指针 `data` 并将该指针进行 `sizeof(int)` 粒度的 data alignment，至于为什么这么处理，个人暂时猜测是和 pinter type 的类型有关，可能 c4 编译器的 pointer type 都是 `int *`，需要进行相关的 data alignment，否则虚拟机取字符串时会触发 exception。
+
+确实如此，后面自增自减时对于指针的处理是 `*++text = (expr_type > PTR) ? sizeof(int) : sizeof(char);` 显然指针被认为是 `int *` 类型。
+{{< /admonition >}}
+
+解析 `sizeof` 时对任意的 pinter type 都认为它的 size 等价于 `sizeof(int)`，这不奇怪，在 32 位的机器上，pointer 和 int 都是 32 位的 (感谢 CSAPP :rofl:)。
+
+处理局部变量时的代码生成，需要和之前函数定义的参数解析部分搭配阅读:
+
+```c
+// codegen
+*++text = index_of_bp - id[Value];
+// function parameter
+current_id[Value]  = params++;
+index_of_bp = params+1;
+```
+
+无论是局部变量还是全局变量，symbol table 中的 `Value` 字段存放的是与该变量相关的地址信息 (偏移量或绝对地址)。除此之外，还需要理解局部变量和 `index_of_bp` 之间的偏移关系 (这样才能明白如何保持了参数顺序入栈的关系并进行正确存取)。
+
+`void expression(int level)` 的参数 `level` 表示上一个运算符的优先级，这样可以利用程序自身的栈进行表达式优先级入栈出栈进行运算，而不需要额外实现栈来进行模拟，表达式优先级和栈的运算可以参考本节开头的例子。
+
+指针取值部分如果考虑 pointer of pointer 情形会比较绕，多思考并把握关键: 指针取值运算符 `*` 是从右向左结合的，即 `***p = (*(*(*p)))`
+
+处理正负号时原文是这样描述“我们没有取负的操作，用 `0 - x` 来实现 `-x`”，但代码逻辑实质上是用「`-1 * x` 来实现 `-x`」，也比较合理，放置处理负号 / 减号时陷入无限递归。
+
+```c
+*++text = IMM;
+*++text = -1;
+*++text = PUSH;
+expression(Inc);
+*++text = MUL;
+```
+
+「自增自减」例如 `++p` 需要需要使用变量 `p` 的地址两次：一次用于读取 `p` 的数值，一次用于将自增后的数值存储回 `p` 处，并且自增自减实质上是通过 `p +/- 1` 来实现的 。
+
+#### 二元运算符
+
+一篇关于表达式优先级爬山的博文:
+- [Parsing expressions by precedence climbing](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing/)
 
 ## IR (Intermediate representation)
 

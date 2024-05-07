@@ -15,8 +15,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。
 預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。
 "><meta itemprop="datePublished" content="2024-04-23T15:17:38+08:00" />
-<meta itemprop="dateModified" content="2024-05-04T19:33:10+08:00" />
-<meta itemprop="wordCount" content="2778"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-05-07T18:46:19+08:00" />
+<meta itemprop="wordCount" content="3742"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Compiler," /><meta property="og:title" content="你所不知道的 C 语言: 编译器原理和案例分析" />
 <meta property="og:description" content="
 AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。
@@ -25,7 +25,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-compiler-construction/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-23T15:17:38+08:00" />
-<meta property="article:modified_time" content="2024-05-04T19:33:10+08:00" />
+<meta property="article:modified_time" content="2024-05-07T18:46:19+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 编译器原理和案例分析"/>
@@ -47,8 +47,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/"
-    },"genre": "posts","keywords": "Sysprog, C, Compiler","wordcount":  2778 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/","datePublished": "2024-04-23T15:17:38+08:00","dateModified": "2024-05-04T19:33:10+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, C, Compiler","wordcount":  3742 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/","datePublished": "2024-04-23T15:17:38+08:00","dateModified": "2024-05-07T18:46:19+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -176,7 +176,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-04-23 15:17:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-23">2024-04-23</time></span>&nbsp;<span title="更新于 2024-05-04 19:33:10"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-04">2024-05-04</time></span>&nbsp;<span title="2778 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 6 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-04-23 15:17:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-23">2024-04-23</time></span>&nbsp;<span title="更新于 2024-05-07 18:46:19"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-07">2024-05-07</time></span>&nbsp;<span title="3742 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 8 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -185,7 +185,6 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
     <li><a href="#如何打造一个具体而微的-c-语言编译器">如何打造一个具体而微的 C 语言编译器</a></li>
-    <li><a href="#build-a-minimal-multi-tasking-os-kernel-for-risc-v-from-scratch">Build a minimal multi-tasking OS kernel for RISC-V from scratch</a></li>
     <li><a href="#编译器和软件工业强度息息相关">编译器和软件工业强度息息相关</a></li>
     <li><a href="#背景知识">背景知识</a></li>
     <li><a href="#c-程序的解析和语意">C 程序的解析和语意</a></li>
@@ -198,6 +197,12 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
         <li><a href="#变量定义">变量定义</a></li>
         <li><a href="#函数定义">函数定义</a></li>
         <li><a href="#语句">语句</a></li>
+        <li><a href="#表达式">表达式</a>
+          <ul>
+            <li><a href="#一元运算符">一元运算符</a></li>
+            <li><a href="#二元运算符">二元运算符</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#ir-intermediate-representation">IR (Intermediate representation)</a>
@@ -226,9 +231,6 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <p>預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。</p>
 <ul>
 <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Executable_and_Linkable_Format"target="_blank" rel="external nofollow noopener noreferrer">Executable and Linkable Format</a></li>
-</ul>
-<h2 id="build-a-minimal-multi-tasking-os-kernel-for-risc-v-from-scratch">Build a minimal multi-tasking OS kernel for RISC-V from scratch</h2>
-<ul>
 <li>GitHub: <a href="https://github.com/cccriscv/mini-riscv-os"target="_blank" rel="external nofollow noopener noreferrer">mini-riscv-os</a></li>
 </ul>
 <p>这个专案是对 Jserv 的 700 行系列的致敬，启发自 <a href="https://github.com/jserv/mini-arm-os"target="_blank" rel="external nofollow noopener noreferrer">mini-arm-os</a> 专案:</p>
@@ -278,7 +280,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>这篇教程里面会有一些比较奇怪古板的写法，例如:</p>
-<div class="highlight" id="id-3"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -357,10 +359,10 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </ul>
 <div class="details admonition question">
     <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>问题: <code>PRTF</code> means<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>PRTF<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
-      <div class="admonition-content"><div class="highlight" id="id-4"><div class="chroma">
+      <div class="admonition-content"><div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -378,11 +380,11 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
   </div>
 <div class="details admonition question">
     <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>问题: <code>-m32</code> error<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>gcc -m32 error<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>gcc 通过 <code>-m32</code> 参数编译本节代码时可能会遇到以下报错:</p>
-<div class="highlight" id="id-5"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -390,7 +392,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fatal error: bits/wordsize.h: No such file or directory</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这是因为当前安装的 gcc 只有 64 位的库而没有 32 位的库，通过以下命令安装 32 位库解决问题:</p>
-<div class="highlight" id="id-6"><div class="chroma">
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -419,10 +421,25 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </ul>
 <div class="details admonition question">
     <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>问题: <code>current_id[Value]</code><i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>current_id[Value] and system functions<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
-      <div class="admonition-content">暂时没搞懂为什么要将内置函数在 symbol table 中的 <code>Value</code> 字段修改为对应的指令 (例如 <code>EXIT</code>)</div>
+      <div class="admonition-content"><p>暂时没搞懂为什么要将内置函数在 symbol table 中的 <code>Value</code> 字段修改为对应的指令 (例如 <code>EXIT</code>)</p>
+<p>阅读完「表达式」一节后已理解，这样内置函数可以直接通过 symbol table 的 <code>Value</code> 字段来生成对应的指令，而不像普通函数一样搭配地址生成相关的跳转指令。</p>
+<div class="highlight" id="id-9"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">id</span><span class="p">[</span><span class="n">Class</span><span class="p">]</span> <span class="o">==</span> <span class="n">Sys</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// system functions
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">*++</span><span class="n">text</span> <span class="o">=</span> <span class="n">id</span><span class="p">[</span><span class="n">Value</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div>
     </div>
   </div>
 <h3 id="递归下降">递归下降</h3>
@@ -434,10 +451,10 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <h3 id="变量定义">变量定义</h3>
 <div class="details admonition question">
     <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>问题: <code>current_id[Value]</code><i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>current_id[Value] and address<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
-      <div class="admonition-content"><div class="highlight" id="id-7"><div class="chroma">
+      <div class="admonition-content"><div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -447,18 +464,20 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">current_id</span><span class="p">[</span><span class="n">Value</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">data</span><span class="p">;</span> <span class="c1">// assign memory address
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>这两个涉及 <code>current_id[Value]</code> 字段的处理暂时没弄明白，可能需要到后面代码生成阶段配合虚拟机设计才能理解。</p></div>
+</div><p>这两个涉及 <code>current_id[Value]</code> 字段的处理暂时没弄明白，可能需要到后面代码生成阶段配合虚拟机设计才能理解。</p>
+<p>全局变量 <code>text</code> 指向代码段当前已生成指令的位置，所以 <code>text + 1</code> 才是下一条指令的位置，<code>data</code> 表示数据段当前生成的位置。</p>
+</div>
     </div>
   </div>
 <h3 id="函数定义">函数定义</h3>
-<p>本节的 <code>text</code> 貌似执行的是当前生成的指令，所以下一条指令 (即将要生成的指令) 的地址为 <code>text + 1</code>。</p>
+<p>代码段全局变量 <code>text</code> 表示的是当前生成的指令，所以下一条指令 (即将要生成的指令) 的地址为 <code>text + 1</code>。</p>
 <div class="details admonition question">
     <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>问题<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>function_declaration<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
       <div class="admonition-content"><p><code>function_declaration</code> 中的这一部分处理，虽然逻辑是在 symbol table 中将局部变量恢复成全局变量的属性，但感觉这样会导致多出一些未定义的全局变量 (由局部变量转换时多出来):</p>
-<div class="highlight" id="id-8"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -468,6 +487,28 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">current_id</span><span class="p">[</span><span class="n">Class</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_id</span><span class="p">[</span><span class="n">BClass</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl"><span class="n">current_id</span><span class="p">[</span><span class="n">Type</span><span class="p">]</span>  <span class="o">=</span> <span class="n">current_id</span><span class="p">[</span><span class="n">BType</span><span class="p">];</span>
 </span></span><span class="line"><span class="cl"><span class="n">current_id</span><span class="p">[</span><span class="n">Value</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_id</span><span class="p">[</span><span class="n">BValue</span><span class="p">];</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>「表达式」一节中对于没有设置 <code>Class</code> 字段的标识符会判定为未定义变量:</p>
+<div class="highlight" id="id-12"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">id</span><span class="p">[</span><span class="n">Class</span><span class="p">]</span> <span class="o">==</span> <span class="n">Loc</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">id</span><span class="p">[</span><span class="n">Class</span><span class="p">]</span> <span class="o">==</span> <span class="n">Glo</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d: undefined variable</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">line</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div></div>
     </div>
@@ -491,7 +532,69 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">-</span><span class="n">x</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="ir-intermediate-representation">IR (Intermediate representation)</h2>
+</div><h3 id="表达式">表达式</h3>
+<h4 id="一元运算符">一元运算符</h4>
+<p>根据词法分析器 <code>next()</code> 字符串部分的逻辑，扫描到字符串时对应的 token 是 <code>&quot;</code>。</p>
+<div class="details admonition question">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>pointer type<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-13"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)(((</span><span class="kt">int</span><span class="p">)</span><span class="n">data</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">-</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)));</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这段代码的含义是，递增数据段指针 <code>data</code> 并将该指针进行 <code>sizeof(int)</code> 粒度的 data alignment，至于为什么这么处理，个人暂时猜测是和 pinter type 的类型有关，可能 c4 编译器的 pointer type 都是 <code>int *</code>，需要进行相关的 data alignment，否则虚拟机取字符串时会触发 exception。</p>
+<p>确实如此，后面自增自减时对于指针的处理是 <code>*++text = (expr_type &gt; PTR) ? sizeof(int) : sizeof(char);</code> 显然指针被认为是 <code>int *</code> 类型。</p>
+</div>
+    </div>
+  </div>
+<p>解析 <code>sizeof</code> 时对任意的 pinter type 都认为它的 size 等价于 <code>sizeof(int)</code>，这不奇怪，在 32 位的机器上，pointer 和 int 都是 32 位的 (感谢 CSAPP &#x1f923;)。</p>
+<p>处理局部变量时的代码生成，需要和之前函数定义的参数解析部分搭配阅读:</p>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// codegen
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">*++</span><span class="n">text</span> <span class="o">=</span> <span class="n">index_of_bp</span> <span class="o">-</span> <span class="n">id</span><span class="p">[</span><span class="n">Value</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// function parameter
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">current_id</span><span class="p">[</span><span class="n">Value</span><span class="p">]</span>  <span class="o">=</span> <span class="n">params</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">index_of_bp</span> <span class="o">=</span> <span class="n">params</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>无论是局部变量还是全局变量，symbol table 中的 <code>Value</code> 字段存放的是与该变量相关的地址信息 (偏移量或绝对地址)。除此之外，还需要理解局部变量和 <code>index_of_bp</code> 之间的偏移关系 (这样才能明白如何保持了参数顺序入栈的关系并进行正确存取)。</p>
+<p><code>void expression(int level)</code> 的参数 <code>level</code> 表示上一个运算符的优先级，这样可以利用程序自身的栈进行表达式优先级入栈出栈进行运算，而不需要额外实现栈来进行模拟，表达式优先级和栈的运算可以参考本节开头的例子。</p>
+<p>指针取值部分如果考虑 pointer of pointer 情形会比较绕，多思考并把握关键: 指针取值运算符 <code>*</code> 是从右向左结合的，即 <code>***p = (*(*(*p)))</code></p>
+<p>处理正负号时原文是这样描述“我们没有取负的操作，用 <code>0 - x</code> 来实现 <code>-x</code>”，但代码逻辑实质上是用「<code>-1 * x</code> 来实现 <code>-x</code>」，也比较合理，放置处理负号 / 减号时陷入无限递归。</p>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="o">*++</span><span class="n">text</span> <span class="o">=</span> <span class="n">IMM</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">*++</span><span class="n">text</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">*++</span><span class="n">text</span> <span class="o">=</span> <span class="n">PUSH</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">expression</span><span class="p">(</span><span class="n">Inc</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">*++</span><span class="n">text</span> <span class="o">=</span> <span class="n">MUL</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>「自增自减」例如 <code>++p</code> 需要需要使用变量 <code>p</code> 的地址两次：一次用于读取 <code>p</code> 的数值，一次用于将自增后的数值存储回 <code>p</code> 处，并且自增自减实质上是通过 <code>p +/- 1</code> 来实现的 。</p>
+<h4 id="二元运算符">二元运算符</h4>
+<p>一篇关于表达式优先级爬山的博文:</p>
+<ul>
+<li><a href="https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing/"target="_blank" rel="external nofollow noopener noreferrer">Parsing expressions by precedence climbing</a></li>
+</ul>
+<h2 id="ir-intermediate-representation">IR (Intermediate representation)</h2>
 <ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://www.slideshare.net/jserv/jit-compiler"target="_blank" rel="external nofollow noopener noreferrer">Interpreter, Compiler, JIT from scratch</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://eli.thegreenplace.net/2013/11/05/how-to-jit-an-introduction"target="_blank" rel="external nofollow noopener noreferrer">How to JIT - an introduction</a></li>
@@ -534,7 +637,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-05-04 19:33:10">更新于 2024-05-04&nbsp;</span>
+        <span title="更新于 2024-05-07 18:46:19">更新于 2024-05-07&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/c-compiler-construction/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -563,7 +666,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
       <a href="/posts/c-undefined-behavior/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: 未定义/未指定行为篇">你所不知道的 C 语言: 未定义/未指定行为篇<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
