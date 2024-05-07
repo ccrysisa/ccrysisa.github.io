@@ -109,9 +109,6 @@ Java 这类强调安全的语言也会存在 UB (Java 安全的一个方面是�
  */
 ```
 
-Kugan Vivekanandarajah 和 Yvan Roux 探讨 UB 和编译器最佳化的演讲:
-- [ ] [BKK16-503 Undefined Behavior and Compiler Optimizations – Why Your Program Stopped Working With A Newer Compiler](https://www.slideshare.net/linaroorg/bkk16503-undefined-behavior-and-compiler-optimizations-why-your-program-stopped-working-with-a-newer-compiler) / [演讲录影](https://youtu.be/wZT20kR2AzY)
-
 ## CppCon 2016: Undefined Behavior
 
 - [x] CppCon 2016: Chandler Carruth [Garbage In, Garbage Out: Arguing about Undefined Behavior with Nasal Demons](https://www.youtube.com/watch?v=yG1OZ69H_-o)
@@ -285,30 +282,98 @@ int func(unsigned char x)
 ```
 {{< /admonition >}}
 
+## Undefined Behavior and Compiler Optimizations
+
+Kugan Vivekanandarajah 和 Yvan Roux 探讨 UB 和编译器最佳化的演讲:
+- [x] [BKK16-503 Undefined Behavior and Compiler Optimizations – Why Your Program Stopped Working With A Newer Compiler](https://www.slideshare.net/linaroorg/bkk16503-undefined-behavior-and-compiler-optimizations-why-your-program-stopped-working-with-a-newer-compiler) / [演讲录影](https://youtu.be/wZT20kR2AzY)
+
+{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-4-2048.jpg" >}}
+
+{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-5-2048.jpg" >}}
+
+- [gcc PR53073](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=53073)
+> compiles 464.h264ref in SPEC CPU 2006 into infinite loop.
+
+- C99 6.5.2.1 Array subscripting
+> A postfix expression followed by an expression in square brackets `[]` is a subscripted designation of an element of an array object. The definition of the subscript operator `[]` is that `E1[E2]` is identical to `(*((E1)+(E2)))`. 
+
+- C99 6.5.6 Additive operators (8) 
+> If both the pointer operand and the result point to elements of the same array object, or one past the last element of the array object, the evaluation shall not produce an overflow; otherwise, the behavior is undefined. If the result points one past the last element of the array object, it shall not be used as the operand of a unary * operator that is evaluated.
+
+
+{{< admonition >}}
+这个投影片很厉害，原文后面介绍的 UB 的几种类型都是启发自这里。所以我打算将这个投影片的相关部分穿插在后面对应的部分。
+{{< /admonition >}}
+
+{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-10-2048.jpg" >}}
+
+{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-27-2048.jpg" >}}
+
 ## 侦测 Undefined Behavior
 
-- [UndefinedBehaviorSanitizer](https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html)
+{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-12-2048.jpg" >}}
+
+- Clang: [UndefinedBehaviorSanitizer](https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html)
 - Linux 核心也引入 [The Undefined Behavior Sanitizer - UBSAN](https://people.freedesktop.org/~narmstrong/meson_drm_doc/dev-tools/ubsan.html)
 
 ## Undefined Behavior 的几种类型
 
+{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-11-2048.jpg" >}}
+
 ### Signed integer overflow
+
+{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-14-2048.jpg" >}}
+
+{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-15-2048.jpg" >}}
+
+gcc 使用编译选项 `-fno-strict-overflow` 和 `-fwrapv` 可以在最佳化时阻止这样的行为。
+
+- [gcc PR34075](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=30475)
+
+{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-16-2048.jpg" >}}
+
+- [x] LWN [GCC and pointer overflows](https://lwn.net/Articles/278137/)
+
+> This behavior is allowed by the C standard, which states that, in a correct program, pointer addition will not yield a pointer value outside of the same object. 
+
+> That kind of optimization often must assume that programs are written correctly; otherwise the compiler is unable to remove code which, in a correctly-written (standard-compliant) program, is unnecessary. 
 
 ### Shifting an n-bit integer by n or more bits
 
+{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-18-2048.jpg" >}}
+
+- gcc [PR48418](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=48418)
+> This invokes undefined behavior, any result is acceptable.
+
+Note that what exactly is considered undefined differs slightly between C and C++, as well as between ISO C90 and C99. Generally, the right operand must not be negative and must not be greater than or equal to the width of the (promoted) left operand. An example of invalid shift operation is the following:
+
 ### Divide by zero
+
+{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-21-2048.jpg" >}}
+
+- gcc [PR29968](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=29968)
 
 ### Dereferencing a NULL pointer
 
+{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-24-2048.jpg" >}}
+
+{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-25-2048.jpg" >}}
+
+- [ ] LWN [Fun with NULL pointers](https://lwn.net/Articles/342330/)
+- gcc [PR68853](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=68853)
 - Wikidepia: [Linux kernel oops](https://en.wikipedia.org/wiki/Linux_kernel_oops)
 
 {{< image src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Linux-2.6-oops-parisc.jpg" >}}
 
 ### Pointer arithmetic that wraps
 
-### Two pointers of different types that alias
+{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-23-2048.jpg" >}}
+
+- gcc [PR54365](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=54365)
 
 ### Reading an uninitialized variable
+
+{{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-26-2048.jpg" >}}
 
 ```c
 #include <stdio.h>
@@ -322,6 +387,14 @@ int main() {
 }
 ```
 
-## 相关博客
+## 延伸阅读
 
+LLVM 之父撰写的系列文章: **What Every C Programmer Should Know About Undefined Behavior**
+- [ ] [Part 1](http://blog.llvm.org/2011/05/what-every-c-programmer-should-know.html)
+- [ ] [Part 2](http://blog.llvm.org/2011/05/what-every-c-programmer-should-know_14.html)
+- [ ] [Part 3](http://blog.llvm.org/2011/05/what-every-c-programmer-should-know_21.html)
+
+{{< admonition info >}}
 - [ ] [Undefined Behavior in 2017](https://blog.regehr.org/archives/1520)
+- [ ] [Why undefined behavior may call a never-called function](https://kristerw.blogspot.com/2017/09/why-undefined-behavior-may-call-never.html)
+{{< /admonition >}}
