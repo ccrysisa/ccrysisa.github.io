@@ -89,3 +89,5 @@ repost:
 
 计算乘法至多需要多少位可以从无符号数和二补数的编码方式来思考。无符号数乘法最大值为 $2^{2w}-2^{2+1}+1$ 不超过 $2^{2w}$，依据无符号数编码方式至多需要 $2w$ bits 表示；二补数乘法最小值为 $-2^{2w-2}+2^{w-1}$，依据而二补数编码 MSB 表示值 $-2^{2w-2}$，所以 MSB 为第 $2w-2$ 位，至多需要 $2w-1$ bits 表示二补数乘法的最小值；二补数乘法最大值为 $2^{2w-2}$，因为 MSB 为符号位，所以 MSB 的右一位表示值 $2^{2w-2}$，即第 $2w-2$ 位，所以至多需要 $2w$ 位来表示该值 (因为还需要考虑一个符号位)。
 
+- CS:APP 2.2.3 Two’s-Complement Encodings
+> Note the different position of apostrophes: two’s complement versus ones’ complement. The term “two’s complement” arises from the fact that for nonnegative x we compute a w-bit representation of −x as 2w − x (a single two.) The term “ones’ complement” comes from the property that we can compute −x in this notation as [111 . . . 1] − x (multiple ones).
