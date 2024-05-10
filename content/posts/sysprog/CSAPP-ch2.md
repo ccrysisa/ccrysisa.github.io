@@ -91,3 +91,15 @@ repost:
 
 - CS:APP 2.2.3 Two’s-Complement Encodings
 > Note the different position of apostrophes: two’s complement versus ones’ complement. The term “two’s complement” arises from the fact that for nonnegative x we compute a w-bit representation of −x as 2w − x (a single two.) The term “ones’ complement” comes from the property that we can compute −x in this notation as [111 . . . 1] − x (multiple ones).
+
+- CS:APP 2.2.6 Expanding the Bit Representation of a Number
+> This shows that, when converting from short to unsigned, the program first changes the size and then the type. That is, (unsigned) sx is equivalent to (unsigned) (int) sx, evaluating to 4,294,954,951, not (unsigned) (unsigned short) sx, which evaluates to 53,191. Indeed, this convention is required by the C standards.
+
+关于位扩展/裁剪与符号类型的关系这部分，可以参看我所写的笔记 [基于 C 语言标准研究与系统程序安全议题]({{< relref "./c-std-security.md" >}})，里面有根据规格书进行了探讨。
+
+- CS:APP
+> DERIVATION: Detecting overflow of unsigned addition
+> 
+> Observe that $x + y \geq x$, and hence if $s$ did not overflow, we will surely have $s \geq x$. On the other hand, if $s$ did overflow, we have $s = x + y − 2^w$. Given that $y < 2^w$, we have $y − 2^w < 0$, and hence $s = x + (y − 2^w ) < x$.
+
+这个证明挺有趣的，对于加法 overflow 得出的结果 $s$ 的值必然比任意一个操作数 $x$ 和 $y$ 的值都小。
