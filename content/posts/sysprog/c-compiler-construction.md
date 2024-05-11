@@ -78,7 +78,9 @@ repost:
 
 ## C 程序的解析和语意
 
-- [ ] [手把手教你构建 C 语言编译器](https://lotabout.me/2015/write-a-C-interpreter-0/)
+- [x] [手把手教你构建 C 语言编译器](https://lotabout.me/2015/write-a-C-interpreter-0/)
+- [ ] [北大编译实践在线文档](https://pku-minic.github.io/online-doc/#/)
+- [ ] [Crafting Interpreters](https://craftinginterpreters.com/)
 - [descent 點評幾本編譯器設計書籍](http://descent-incoming.blogspot.com/2017/01/blog-post.html)
 - [desent 教你逐步開發編譯器](http://descent-incoming.blogspot.com/2018/01/44.html)
 - [c4](https://github.com/rswier/c4) 是很好的切入點，原作者 Robert Swierczek 還又另一個 [更完整的 C 編譯器實作](https://github.com/rswier/swieros/blob/master/root/bin/c.c)，这个实作支持 preprocessor
