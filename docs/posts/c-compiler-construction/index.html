@@ -15,8 +15,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。
 預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。
 "><meta itemprop="datePublished" content="2024-04-23T15:17:38+08:00" />
-<meta itemprop="dateModified" content="2024-05-07T18:46:19+08:00" />
-<meta itemprop="wordCount" content="3742"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-05-10T11:38:54+08:00" />
+<meta itemprop="wordCount" content="5515"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Compiler," /><meta property="og:title" content="你所不知道的 C 语言: 编译器原理和案例分析" />
 <meta property="og:description" content="
 AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。
@@ -25,7 +25,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-compiler-construction/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-23T15:17:38+08:00" />
-<meta property="article:modified_time" content="2024-05-07T18:46:19+08:00" />
+<meta property="article:modified_time" content="2024-05-10T11:38:54+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 编译器原理和案例分析"/>
@@ -47,8 +47,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/"
-    },"genre": "posts","keywords": "Sysprog, C, Compiler","wordcount":  3742 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/","datePublished": "2024-04-23T15:17:38+08:00","dateModified": "2024-05-07T18:46:19+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, C, Compiler","wordcount":  5515 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/","datePublished": "2024-04-23T15:17:38+08:00","dateModified": "2024-05-10T11:38:54+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -176,7 +176,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-04-23 15:17:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-23">2024-04-23</time></span>&nbsp;<span title="更新于 2024-05-07 18:46:19"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-07">2024-05-07</time></span>&nbsp;<span title="3742 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 8 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-04-23 15:17:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-23">2024-04-23</time></span>&nbsp;<span title="更新于 2024-05-10 11:38:54"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-10">2024-05-10</time></span>&nbsp;<span title="5515 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 5600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 12 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -201,6 +201,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
           <ul>
             <li><a href="#一元运算符">一元运算符</a></li>
             <li><a href="#二元运算符">二元运算符</a></li>
+            <li><a href="#初始化栈">初始化栈</a></li>
           </ul>
         </li>
       </ul>
@@ -280,7 +281,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>这篇教程里面会有一些比较奇怪古板的写法，例如:</p>
-<div class="highlight" id="id-5"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -301,6 +302,23 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <li>语法分析器，将词法分析得到的标记流（token）生成一棵语法树。</li>
 <li>目标代码的生成，将语法树转化成目标代码。</li>
 </ol>
+<div class="details admonition question">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>argc &amp; argv<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><div class="highlight" id="id-8"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">argc</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">argv</span><span class="o">++</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>main</code> 函数这部分的处理是将该进程 <code>argc</code> 和 <code>argv</code> 设定为解释执行的源程序对应的值，以让虚拟机正确地解释执行源程序 (需要看完「虚拟机」和「表达式」部分才能理解这部分处理的意义)。</p></div>
+    </div>
+  </div>
 <h3 id="虚拟机">虚拟机</h3>
 <p>在该项目的虚拟机设计中，函数调用时 callee 的参数位于 caller 的栈帧 (frame) 内，并且函数调用需要使用到 4 条指令:</p>
 <ol>
@@ -362,7 +380,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
       <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>PRTF<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
-      <div class="admonition-content"><div class="highlight" id="id-6"><div class="chroma">
+      <div class="admonition-content"><div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -375,7 +393,74 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </span></span><span class="line"><span class="cl">  <span class="n">ax</span> <span class="o">=</span> <span class="nf">printf</span><span class="p">((</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span> <span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">],</span> <span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">],</span> <span class="n">tmp</span><span class="p">[</span><span class="o">-</span><span class="mi">6</span><span class="p">]);</span> 
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>这里 <a href="https://github.com/rswier/c4"target="_blank" rel="external nofollow noopener noreferrer">c4</a> 对于 <code>PRTF</code> 指令的处理暂时没看明白&hellip;</p></div>
+</div><p>这里 <a href="https://github.com/rswier/c4"target="_blank" rel="external nofollow noopener noreferrer">c4</a> 对于 <code>PRTF</code> 指令的处理暂时没看明白&hellip;</p>
+<p>完成「表达式」一节的阅读后，可以得知函数的指令生成顺序是: 参数入栈 -&gt; 函数调用 -&gt; 释放参数空间，在 <code>expression()</code> 中有相应的逻辑:</p>
+<div class="highlight" id="id-10"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// pass in arguments
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">tmp</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// number of arguments
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">while</span> <span class="p">(</span><span class="n">token</span> <span class="o">!=</span> <span class="sc">&#39;)&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">expression</span><span class="p">(</span><span class="n">Assign</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">*++</span><span class="n">text</span> <span class="o">=</span> <span class="n">PUSH</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">tmp</span> <span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// function call
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="n">id</span><span class="p">[</span><span class="n">Class</span><span class="p">]</span> <span class="o">==</span> <span class="n">Sys</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// system functions
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">*++</span><span class="n">text</span> <span class="o">=</span> <span class="n">id</span><span class="p">[</span><span class="n">Value</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">id</span><span class="p">[</span><span class="n">Class</span><span class="p">]</span> <span class="o">==</span> <span class="n">Fun</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// function call
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="o">*++</span><span class="n">text</span> <span class="o">=</span> <span class="n">CALL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">*++</span><span class="n">text</span> <span class="o">=</span> <span class="n">id</span><span class="p">[</span><span class="n">Value</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// clean the stack for arguments
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="n">tmp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">*++</span><span class="n">text</span> <span class="o">=</span> <span class="n">ADJ</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="o">*++</span><span class="n">text</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>所以 <code>PRTF</code> 指令处理中的 <code>pc[1]</code> 表示的恰好是释放参数空间的 <code>ADJ</code> 指定参数，都是表示参数的个数。可以根据这个参数数量来在栈中定位函数参数，当然这里为了简化，将 <code>PRTF</code> 对应的 <code>printf</code> 参数固定为了 6 个 (这可能会有一些漏洞)。</p>
+<p>除此之外，还要注意，根据「词法分析器」章节的处理，字符串的值 (token_val) 是它的地址:</p>
+<div class="highlight" id="id-11"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">token</span> <span class="o">==</span> <span class="sc">&#39;&#34;&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">token_val</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">last_pos</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>所以虚拟机在执行 <code>PRTF</code> 指令时将第一个参数解释为 <code>char *</code> 类型。</p>
+</div>
     </div>
   </div>
 <div class="details admonition question">
@@ -384,7 +469,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>gcc 通过 <code>-m32</code> 参数编译本节代码时可能会遇到以下报错:</p>
-<div class="highlight" id="id-7"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -392,7 +477,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fatal error: bits/wordsize.h: No such file or directory</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这是因为当前安装的 gcc 只有 64 位的库而没有 32 位的库，通过以下命令安装 32 位库解决问题:</p>
-<div class="highlight" id="id-8"><div class="chroma">
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -426,7 +511,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     <div class="details-content">
       <div class="admonition-content"><p>暂时没搞懂为什么要将内置函数在 symbol table 中的 <code>Value</code> 字段修改为对应的指令 (例如 <code>EXIT</code>)</p>
 <p>阅读完「表达式」一节后已理解，这样内置函数可以直接通过 symbol table 的 <code>Value</code> 字段来生成对应的指令，而不像普通函数一样搭配地址生成相关的跳转指令。</p>
-<div class="highlight" id="id-9"><div class="chroma">
+<div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -442,6 +527,25 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div></div>
     </div>
   </div>
+<div class="details admonition danger open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-skull-crossbones fa-fw" aria-hidden="true"></i>危险<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>对于关键字和内置函数的处理部分:</p>
+<div class="highlight" id="id-15"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">src</span> <span class="o">=</span> <span class="s">&#34;char else enum if int return sizeof while &#34;</span>
+</span></span><span class="line"><span class="cl">      <span class="s">&#34;open read close printf malloc memset memcmp exit void main&#34;</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>一定要注意第一行最后的 <code>while</code> 后面有一个 <strong>空格</strong>，这是保证字符串拼接后可以被词法分析器识别为两个 token。如果不加空格，字符串会把这一部分拼接成 <code>... whileopen ...</code>，这样就不符合我们的预期了，进而导致程序出错。</p>
+</div>
+    </div>
+  </div>
 <h3 id="递归下降">递归下降</h3>
 <p>这一节是以四则运算表达式的语法分析为例，介绍递归下降的相关实作，并不是编译器实作的一部分 &#x1f923; 但也用到了前一节所提的词法分析，虽然简单很多 (因为四则运算只需考虑标识符为数字的情况)。</p>
 <p>语法分析的关键点在于: 它是根据词法分析获得的 token 流进行分析的，其中的 <code>match</code> 方法是用于判断当前获得的 token 是否符合语法分析的预期以及基于 token 进行向前看 (对比一下词法分析是基于字符的向前看)。</p>
@@ -454,7 +558,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
       <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>current_id[Value] and address<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
-      <div class="admonition-content"><div class="highlight" id="id-10"><div class="chroma">
+      <div class="admonition-content"><div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -477,7 +581,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     </div>
     <div class="details-content">
       <div class="admonition-content"><p><code>function_declaration</code> 中的这一部分处理，虽然逻辑是在 symbol table 中将局部变量恢复成全局变量的属性，但感觉这样会导致多出一些未定义的全局变量 (由局部变量转换时多出来):</p>
-<div class="highlight" id="id-11"><div class="chroma">
+<div class="highlight" id="id-17"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -489,7 +593,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </span></span><span class="line"><span class="cl"><span class="n">current_id</span><span class="p">[</span><span class="n">Value</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_id</span><span class="p">[</span><span class="n">BValue</span><span class="p">];</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>「表达式」一节中对于没有设置 <code>Class</code> 字段的标识符会判定为未定义变量:</p>
-<div class="highlight" id="id-12"><div class="chroma">
+<div class="highlight" id="id-18"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -533,6 +637,29 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="表达式">表达式</h3>
+<p><code>void expression(int level)</code> 的参数 <code>level</code> 表示上一个运算符的优先级，这样可以利用程序自身的栈进行表达式优先级入栈出栈进行运算，而不需要额外实现栈来进行模拟，表达式优先级和栈的运算可以参考本节开头的例子。</p>
+<blockquote>
+<p>我们需要不断地向右扫描，直到遇到优先级 <strong>小于</strong> 当前优先级的运算符。</p>
+</blockquote>
+<blockquote>
+<p>当我们调用 <code>expression(level)</code> 进行解析的时候，我们其实通过了参数 <code>level</code> 指定了当前的优先级。</p>
+</blockquote>
+<p>当碰到优先级小于 <code>Assign</code> 的标识符时，会结束 <code>expression()</code> 的执行并返回。对于未摘录在枚举中的符号，例如 <code>:</code>，其 ASCII 值都小于 <code>Assign</code> 的值，所以碰到时也会从 <code>expression()</code> 返回。其它符号同理，自行查阅 ASCII 表对比即可 (这也是为什么枚举时设定 <code>Num</code> 等于 128)。</p>
+<p>一元运算符和二元运算符的处理不是泾渭分明的，例如对于 <code>a = 10</code> 这个表达式，它的处理流程是这样的:</p>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">expression</span><span class="p">()</span>  <span class="c1">// 一元运算符: Id
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>              <span class="c1">// 二元运算符: =
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">expression</span><span class="p">()</span>  <span class="c1">// 一元运算符: Num
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>一个涉及两次函数调用，第一次调用处理了标识符 <code>a</code> 和运算符 <code>=</code>，第二次调用处理了数字 <code>10</code>，可以自行走访一下流程进行体会 (learn anything by tracing)，即一次 <code>expression()</code> 最多可以处理一个一元运算符和一个二元运算符。</p>
+<p>除此之外，<code>expression()</code> 执行完成之后，生成的指令流会将结果放置在寄存器 <code>ax</code> 中，可以以这个为前提进行后续的指令生成。</p>
 <h4 id="一元运算符">一元运算符</h4>
 <p>根据词法分析器 <code>next()</code> 字符串部分的逻辑，扫描到字符串时对应的 token 是 <code>&quot;</code>。</p>
 <div class="details admonition question">
@@ -540,7 +667,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
       <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>pointer type<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
-      <div class="admonition-content"><div class="highlight" id="id-13"><div class="chroma">
+      <div class="admonition-content"><div class="highlight" id="id-19"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -548,13 +675,14 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)(((</span><span class="kt">int</span><span class="p">)</span><span class="n">data</span> <span class="o">+</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">))</span> <span class="o">&amp;</span> <span class="p">(</span><span class="o">-</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">)));</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这段代码的含义是，递增数据段指针 <code>data</code> 并将该指针进行 <code>sizeof(int)</code> 粒度的 data alignment，至于为什么这么处理，个人暂时猜测是和 pinter type 的类型有关，可能 c4 编译器的 pointer type 都是 <code>int *</code>，需要进行相关的 data alignment，否则虚拟机取字符串时会触发 exception。</p>
-<p>确实如此，后面自增自减时对于指针的处理是 <code>*++text = (expr_type &gt; PTR) ? sizeof(int) : sizeof(char);</code> 显然指针被认为是 <code>int *</code> 类型。</p>
+<p>确实如此，后面自增自减时对于指针的处理是 <code>*++text = (expr_type &gt; PTR) ? sizeof(int) : sizeof(char);</code> <del>显然指针被认为是 int * 类型</del>。</p>
+<p>上面说的有误，<code>(expr_type &gt; PTR)</code> 表示的是除 <code>char *</code> 之外的指针类型 (因为 <code>CHAR</code> 值为 0)。</p>
 </div>
     </div>
   </div>
 <p>解析 <code>sizeof</code> 时对任意的 pinter type 都认为它的 size 等价于 <code>sizeof(int)</code>，这不奇怪，在 32 位的机器上，pointer 和 int 都是 32 位的 (感谢 CSAPP &#x1f923;)。</p>
 <p>处理局部变量时的代码生成，需要和之前函数定义的参数解析部分搭配阅读:</p>
-<div class="highlight" id="id-3"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -570,10 +698,9 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </span></span><span class="line"><span class="cl"><span class="n">index_of_bp</span> <span class="o">=</span> <span class="n">params</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>无论是局部变量还是全局变量，symbol table 中的 <code>Value</code> 字段存放的是与该变量相关的地址信息 (偏移量或绝对地址)。除此之外，还需要理解局部变量和 <code>index_of_bp</code> 之间的偏移关系 (这样才能明白如何保持了参数顺序入栈的关系并进行正确存取)。</p>
-<p><code>void expression(int level)</code> 的参数 <code>level</code> 表示上一个运算符的优先级，这样可以利用程序自身的栈进行表达式优先级入栈出栈进行运算，而不需要额外实现栈来进行模拟，表达式优先级和栈的运算可以参考本节开头的例子。</p>
 <p>指针取值部分如果考虑 pointer of pointer 情形会比较绕，多思考并把握关键: 指针取值运算符 <code>*</code> 是从右向左结合的，即 <code>***p = (*(*(*p)))</code></p>
 <p>处理正负号时原文是这样描述“我们没有取负的操作，用 <code>0 - x</code> 来实现 <code>-x</code>”，但代码逻辑实质上是用「<code>-1 * x</code> 来实现 <code>-x</code>」，也比较合理，放置处理负号 / 减号时陷入无限递归。</p>
-<div class="highlight" id="id-4"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -590,10 +717,35 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div>
 </div><p>「自增自减」例如 <code>++p</code> 需要需要使用变量 <code>p</code> 的地址两次：一次用于读取 <code>p</code> 的数值，一次用于将自增后的数值存储回 <code>p</code> 处，并且自增自减实质上是通过 <code>p +/- 1</code> 来实现的 。</p>
 <h4 id="二元运算符">二元运算符</h4>
+<p>处理 <code>||</code> 和 <code>&amp;&amp;</code> 时，对于右边的 operand 的处理分别是 <code>expression(Lan)</code> 和 <code>expression(Or)</code>，限制的优先级刚好比当前的运算符高一级，使得遇到同级运算符时会返回，从而让外部的 <code>while</code> 循环来处理，这样可以保证生成正确的指令序列。</p>
 <p>一篇关于表达式优先级爬山的博文:</p>
 <ul>
 <li><a href="https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing/"target="_blank" rel="external nofollow noopener noreferrer">Parsing expressions by precedence climbing</a></li>
 </ul>
+<h4 id="初始化栈">初始化栈</h4>
+<div class="highlight" id="id-6"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">// setup stack
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">sp</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span> <span class="o">*</span><span class="p">)((</span><span class="kt">int</span><span class="p">)</span><span class="n">stack</span> <span class="o">+</span> <span class="n">poolsize</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">*--</span><span class="n">sp</span> <span class="o">=</span> <span class="n">EXIT</span><span class="p">;</span> <span class="c1">// call exit if main returns
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="o">*--</span><span class="n">sp</span> <span class="o">=</span> <span class="n">PUSH</span><span class="p">;</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">sp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">*--</span><span class="n">sp</span> <span class="o">=</span> <span class="n">argc</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">*--</span><span class="n">sp</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">argv</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">*--</span><span class="n">sp</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">tmp</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这段代码原文没有过多描述，但其实挺难懂的，其本质是根据函数调用的 ABI 来配置栈空间以对应函数调用 <code>main(argc, argv)</code>。所以第 5~6 行的作用现在明白了，就是配置 <code>main</code> 函数的参数顺序入栈，但这里需要注意 <code>argv</code> 参数对应的字符串并不在我们虚拟机设定的 <code>data</code> 段，而是在我们这个程序“自己的空间”内 (程序“自己的空间”是指属于 c4 这个程序的空间，但不属于虚拟机设定的空间)，除此之外的字符串大都同时存在于虚拟机的 <code>data</code> 段和 c4 这个程序“自己的空间”内 (词法分析器处理字符串时进行了拷贝到虚拟机的 <code>data</code> 段)。</p>
+<p>第 4 行和第 7 行设定 <code>main</code> 函数的返回地址，这也符合栈的布局: 参数 -&gt; 返回地址，使得 <code>main</code> 函数对应的指令可以通过 <code>LEV</code> 指令进行函数返回。现在就到好玩的地方了，注意到 <code>tmp</code> 在第 4 行设定的地址是位于栈中的，所以当 <code>main</code> 函数返回时它会跳转到我们在第 4 行设定的 <code>PUSH</code> 指令处 (即将 <code>pc</code> 的值设定为该处)。这是没问题的，因为我们的虚拟机也可以执行位于栈中的指令 (虽然这有很大的风险，例如 ROP 攻击，但是这只是个小 demo 管它呢 &#x1f923;)。</p>
+<p>当 <code>main</code> 函数返回后，根据上面的叙述，它会先执行第 4 行的 <code>PUSH</code> 指令，这个指令的作用是将 <code>main</code> 函数的返回值压入栈中 (因为 Return 语句生成的指令序列会将返回值放置在 <code>ax</code> 寄存器)。不用担心当且指令被覆盖的问题，因为这段代码配置的栈，并没有包括清除参数空间的逻辑，所以在 <code>main</code> 函数返回后，<code>sp</code> 指向的是第 6 行配置的 <code>argv</code> 参数处。</p>
+<p>执行完第 4 行的 <code>PUSH</code> 指令后，会接着执行第 3 行的 <code>EXIT</code> 指令，因为 (<code>pc</code> 寄存器在虚拟机运行时是递增的)，此时虚拟机将 <code>main</code> 函数的返回值作为本进程的返回值进行返回，并结束进程。</p>
 <h2 id="ir-intermediate-representation">IR (Intermediate representation)</h2>
 <ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://www.slideshare.net/jserv/jit-compiler"target="_blank" rel="external nofollow noopener noreferrer">Interpreter, Compiler, JIT from scratch</a></li>
@@ -637,7 +789,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-05-07 18:46:19">更新于 2024-05-07&nbsp;</span>
+        <span title="更新于 2024-05-10 11:38:54">更新于 2024-05-10&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/c-compiler-construction/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>

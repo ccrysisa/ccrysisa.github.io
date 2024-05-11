@@ -257,6 +257,15 @@ if (id[Class] == Sys) {
 ```
 {{< /admonition >}}
 
+{{< admonition danger >}}
+对于关键字和内置函数的处理部分:
+```c
+src = "char else enum if int return sizeof while "
+      "open read close printf malloc memset memcmp exit void main";
+```
+一定要注意第一行最后的 `while` 后面有一个 **空格**，这是保证字符串拼接后可以被词法分析器识别为两个 token。如果不加空格，字符串会把这一部分拼接成 `... whileopen ...`，这样就不符合我们的预期了，进而导致程序出错。
+{{< /admonition >}}
+
 ### 递归下降
 
 这一节是以四则运算表达式的语法分析为例，介绍递归下降的相关实作，并不是编译器实作的一部分 :rofl: 但也用到了前一节所提的词法分析，虽然简单很多 (因为四则运算只需考虑标识符为数字的情况)。

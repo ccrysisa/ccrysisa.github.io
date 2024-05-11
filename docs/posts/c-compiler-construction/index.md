@@ -77,6 +77,15 @@ a = a + 1;    // instead of `a += 1;`
 2. 语法分析器，将词法分析得到的标记流（token）生成一棵语法树。
 3. 目标代码的生成，将语法树转化成目标代码。
 
+{{< admonition question "argc & argv" false >}}
+```c
+argc--;
+argv++;
+```
+
+`main` 函数这部分的处理是将该进程 `argc` 和 `argv` 设定为解释执行的源程序对应的值，以让虚拟机正确地解释执行源程序 (需要看完「虚拟机」和「表达式」部分才能理解这部分处理的意义)。
+{{< /admonition >}}
+
 ### 虚拟机
 
 在该项目的虚拟机设计中，函数调用时 callee 的参数位于 caller 的栈帧 (frame) 内，并且函数调用需要使用到 4 条指令:
@@ -122,6 +131,46 @@ else if (op == PRTF) {
 ```
 
 这里 [c4](https://github.com/rswier/c4) 对于 `PRTF` 指令的处理暂时没看明白...
+
+完成「表达式」一节的阅读后，可以得知函数的指令生成顺序是: 参数入栈 -> 函数调用 -> 释放参数空间，在 `expression()` 中有相应的逻辑:
+
+```c
+// pass in arguments
+tmp = 0; // number of arguments
+while (token != ')') {
+    expression(Assign);
+    *++text = PUSH;
+    tmp ++;
+    ...
+}
+...
+// function call
+if (id[Class] == Sys) { // system functions
+    *++text = id[Value];
+}
+else if (id[Class] == Fun) { // function call
+    *++text = CALL;
+    *++text = id[Value];
+}
+...
+// clean the stack for arguments
+if (tmp > 0) {
+    *++text = ADJ;
+    *++text = tmp;
+}
+```
+
+所以 `PRTF` 指令处理中的 `pc[1]` 表示的恰好是释放参数空间的 `ADJ` 指定参数，都是表示参数的个数。可以根据这个参数数量来在栈中定位函数参数，当然这里为了简化，将 `PRTF` 对应的 `printf` 参数固定为了 6 个 (这可能会有一些漏洞)。
+
+除此之外，还要注意，根据「词法分析器」章节的处理，字符串的值 (token_val) 是它的地址:
+
+```c
+if (token == '"') {
+    token_val = (int)last_pos;
+}
+```
+
+所以虚拟机在执行 `PRTF` 指令时将第一个参数解释为 `char *` 类型。
 {{< /admonition >}}
 
 {{< admonition question "gcc -m32 error" false >}}
@@ -166,6 +215,15 @@ if (id[Class] == Sys) {
     *++text = id[Value];
 }
 ```
+{{< /admonition >}}
+
+{{< admonition danger >}}
+对于关键字和内置函数的处理部分:
+```c
+src = "char else enum if int return sizeof while "
+      "open read close printf malloc memset memcmp exit void main";
+```
+一定要注意第一行最后的 `while` 后面有一个 **空格**，这是保证字符串拼接后可以被词法分析器识别为两个 token。如果不加空格，字符串会把这一部分拼接成 `... whileopen ...`，这样就不符合我们的预期了，进而导致程序出错。
 {{< /admonition >}}
 
 ### 递归下降
@@ -231,6 +289,26 @@ int func(int x) {
 
 ### 表达式
 
+`void expression(int level)` 的参数 `level` 表示上一个运算符的优先级，这样可以利用程序自身的栈进行表达式优先级入栈出栈进行运算，而不需要额外实现栈来进行模拟，表达式优先级和栈的运算可以参考本节开头的例子。
+
+> 我们需要不断地向右扫描，直到遇到优先级 **小于** 当前优先级的运算符。
+
+> 当我们调用 `expression(level)` 进行解析的时候，我们其实通过了参数 `level` 指定了当前的优先级。
+
+当碰到优先级小于 `Assign` 的标识符时，会结束 `expression()` 的执行并返回。对于未摘录在枚举中的符号，例如 `:`，其 ASCII 值都小于 `Assign` 的值，所以碰到时也会从 `expression()` 返回。其它符号同理，自行查阅 ASCII 表对比即可 (这也是为什么枚举时设定 `Num` 等于 128)。
+
+一元运算符和二元运算符的处理不是泾渭分明的，例如对于 `a = 10` 这个表达式，它的处理流程是这样的:
+
+```c
+expression()  // 一元运算符: Id
+              // 二元运算符: =
+expression()  // 一元运算符: Num
+```
+
+一个涉及两次函数调用，第一次调用处理了标识符 `a` 和运算符 `=`，第二次调用处理了数字 `10`，可以自行走访一下流程进行体会 (learn anything by tracing)，即一次 `expression()` 最多可以处理一个一元运算符和一个二元运算符。
+
+除此之外，`expression()` 执行完成之后，生成的指令流会将结果放置在寄存器 `ax` 中，可以以这个为前提进行后续的指令生成。
+
 #### 一元运算符
 
 根据词法分析器 `next()` 字符串部分的逻辑，扫描到字符串时对应的 token 是 `"`。
@@ -242,7 +320,9 @@ data = (char *)(((int)data + sizeof(int)) & (-sizeof(int)));
 
 这段代码的含义是，递增数据段指针 `data` 并将该指针进行 `sizeof(int)` 粒度的 data alignment，至于为什么这么处理，个人暂时猜测是和 pinter type 的类型有关，可能 c4 编译器的 pointer type 都是 `int *`，需要进行相关的 data alignment，否则虚拟机取字符串时会触发 exception。
 
-确实如此，后面自增自减时对于指针的处理是 `*++text = (expr_type > PTR) ? sizeof(int) : sizeof(char);` 显然指针被认为是 `int *` 类型。
+确实如此，后面自增自减时对于指针的处理是 `*++text = (expr_type > PTR) ? sizeof(int) : sizeof(char);` ~~显然指针被认为是 int * 类型~~。
+
+上面说的有误，`(expr_type > PTR)` 表示的是除 `char *` 之外的指针类型 (因为 `CHAR` 值为 0)。
 {{< /admonition >}}
 
 解析 `sizeof` 时对任意的 pinter type 都认为它的 size 等价于 `sizeof(int)`，这不奇怪，在 32 位的机器上，pointer 和 int 都是 32 位的 (感谢 CSAPP :rofl:)。
@@ -258,8 +338,6 @@ index_of_bp = params+1;
 ```
 
 无论是局部变量还是全局变量，symbol table 中的 `Value` 字段存放的是与该变量相关的地址信息 (偏移量或绝对地址)。除此之外，还需要理解局部变量和 `index_of_bp` 之间的偏移关系 (这样才能明白如何保持了参数顺序入栈的关系并进行正确存取)。
-
-`void expression(int level)` 的参数 `level` 表示上一个运算符的优先级，这样可以利用程序自身的栈进行表达式优先级入栈出栈进行运算，而不需要额外实现栈来进行模拟，表达式优先级和栈的运算可以参考本节开头的例子。
 
 指针取值部分如果考虑 pointer of pointer 情形会比较绕，多思考并把握关键: 指针取值运算符 `*` 是从右向左结合的，即 `***p = (*(*(*p)))`
 
@@ -277,8 +355,30 @@ expression(Inc);
 
 #### 二元运算符
 
+处理 `||` 和 `&&` 时，对于右边的 operand 的处理分别是 `expression(Lan)` 和 `expression(Or)`，限制的优先级刚好比当前的运算符高一级，使得遇到同级运算符时会返回，从而让外部的 `while` 循环来处理，这样可以保证生成正确的指令序列。
+
 一篇关于表达式优先级爬山的博文:
 - [Parsing expressions by precedence climbing](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing/)
+
+#### 初始化栈
+
+```c
+// setup stack
+sp = (int *)((int)stack + poolsize);
+*--sp = EXIT; // call exit if main returns
+*--sp = PUSH; tmp = sp;
+*--sp = argc;
+*--sp = (int)argv;
+*--sp = (int)tmp;
+```
+
+这段代码原文没有过多描述，但其实挺难懂的，其本质是根据函数调用的 ABI 来配置栈空间以对应函数调用 `main(argc, argv)`。所以第 5~6 行的作用现在明白了，就是配置 `main` 函数的参数顺序入栈，但这里需要注意 `argv` 参数对应的字符串并不在我们虚拟机设定的 `data` 段，而是在我们这个程序“自己的空间”内 (程序“自己的空间”是指属于 c4 这个程序的空间，但不属于虚拟机设定的空间)，除此之外的字符串大都同时存在于虚拟机的 `data` 段和 c4 这个程序“自己的空间”内 (词法分析器处理字符串时进行了拷贝到虚拟机的 `data` 段)。
+
+第 4 行和第 7 行设定 `main` 函数的返回地址，这也符合栈的布局: 参数 -> 返回地址，使得 `main` 函数对应的指令可以通过 `LEV` 指令进行函数返回。现在就到好玩的地方了，注意到 `tmp` 在第 4 行设定的地址是位于栈中的，所以当 `main` 函数返回时它会跳转到我们在第 4 行设定的 `PUSH` 指令处 (即将 `pc` 的值设定为该处)。这是没问题的，因为我们的虚拟机也可以执行位于栈中的指令 (虽然这有很大的风险，例如 ROP 攻击，但是这只是个小 demo 管它呢 :rofl:)。
+
+当 `main` 函数返回后，根据上面的叙述，它会先执行第 4 行的 `PUSH` 指令，这个指令的作用是将 `main` 函数的返回值压入栈中 (因为 Return 语句生成的指令序列会将返回值放置在 `ax` 寄存器)。不用担心当且指令被覆盖的问题，因为这段代码配置的栈，并没有包括清除参数空间的逻辑，所以在 `main` 函数返回后，`sp` 指向的是第 6 行配置的 `argv` 参数处。
+
+执行完第 4 行的 `PUSH` 指令后，会接着执行第 3 行的 `EXIT` 指令，因为 (`pc` 寄存器在虚拟机运行时是递增的)，此时虚拟机将 `main` 函数的返回值作为本进程的返回值进行返回，并结束进程。
 
 ## IR (Intermediate representation)
 
