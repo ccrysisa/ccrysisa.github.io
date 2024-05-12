@@ -47,7 +47,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -93,7 +93,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -153,12 +153,18 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>数学开放式课程学习指引</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" alt="vanJker" data-title="vanJker" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/mathematics/" class="post-category" title="分类 - Mathematics"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Mathematics</a></span></div><div class="post-meta-line"><span title="发布于 2023-12-23 21:35:47"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-23">2023-12-23</time></span>&nbsp;<span title="更新于 2024-05-12 21:10:50"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-12">2024-05-12</time></span>&nbsp;<span title="1671 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" data-title="vanJker" data-alt="vanJker" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span>
+          <span class="post-category">收录于 <a href="/categories/mathematics/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Mathematics</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2023-12-23 21:35:47"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-23">2023-12-23</time></span>&nbsp;<span title="更新于 2024-05-12 21:10:50"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-12">2024-05-12</time></span>&nbsp;<span title="1671 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -193,10 +199,10 @@
 </ul>
 </li>
 </ul>
-<h2 id="逻辑集合论" class="heading-element">
-  <a href="#%e9%80%bb%e8%be%91%e9%9b%86%e5%90%88%e8%ae%ba" class="heading-mark"></a>逻辑、集合论</h2><a class="lightgallery" href="/images/math/key-of-mathematics.png?size=large" data-thumbnail="/images/math/key-of-mathematics.png?size=small" data-sub-html="<h2>/images/math/key-of-mathematics.png</h2>"><img loading="lazy" src="/images/math/key-of-mathematics.png" alt="/images/math/key-of-mathematics.png" srcset="/images/math/key-of-mathematics.png?size=small, /images/math/key-of-mathematics.png?size=medium 1.5x, /images/math/key-of-mathematics.png?size=large 2x" sizes="auto" data-title="/images/math/key-of-mathematics.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
-<h3 id="簡易邏輯" class="heading-element">
-  <a href="#%e7%b0%a1%e6%98%93%e9%82%8f%e8%bc%af" class="heading-mark"></a>簡易邏輯</h3><p>在联结词构成的复合命题中，命题的语义和真值需要分开考虑，特别是联结词 $\implies$。以 $p \implies q$ 为例 (注意 $p$ 和 $q$ 都是抽象命题，可指代任意命题，类似于未知数 $x$)，如果从 $p$ 和 $q$ 的语义考虑，很容易就陷入语义的 “如果 $p$ 则 $q$” 这类语义混淆中，导致强加因果，但因为在逻辑上 $p$ 和 $q$ 可以没有任何关系，所以此时忽略它们的语义，而只根据它们的真值和相关定义上推断该复合命题的真值 ($p \implies q$ 等价于 $(\neg p) \lor q$)。简单来说，逻辑上的蕴涵式包括语义上的因果关系，即因果关系是蕴涵式的真子集。</p>
+<h2 id="逻辑集合论">逻辑、集合论</h2>
+<a class="lightgallery" href="/images/math/key-of-mathematics.png?size=large" data-thumbnail="/images/math/key-of-mathematics.png?size=small" data-sub-html="<h2>/images/math/key-of-mathematics.png</h2>"><img loading="lazy" src="/images/math/key-of-mathematics.png" srcset="/images/math/key-of-mathematics.png?size=small, /images/math/key-of-mathematics.png?size=medium 1.5x, /images/math/key-of-mathematics.png?size=large 2x" sizes="auto" data-title="/images/math/key-of-mathematics.png" data-alt="/images/math/key-of-mathematics.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<h3 id="簡易邏輯">簡易邏輯</h3>
+<p>在联结词构成的复合命题中，命题的语义和真值需要分开考虑，特别是联结词 $\implies$。以 $p \implies q$ 为例 (注意 $p$ 和 $q$ 都是抽象命题，可指代任意命题，类似于未知数 $x$)，如果从 $p$ 和 $q$ 的语义考虑，很容易就陷入语义的 “如果 $p$ 则 $q$” 这类语义混淆中，导致强加因果，但因为在逻辑上 $p$ 和 $q$ 可以没有任何关系，所以此时忽略它们的语义，而只根据它们的真值和相关定义上推断该复合命题的真值 ($p \implies q$ 等价于 $(\neg p) \lor q$)。简单来说，逻辑上的蕴涵式包括语义上的因果关系，即因果关系是蕴涵式的真子集。</p>
 <p>第 16 页的趣味问题可以通过以下 “标准” 方式 (这里的 “标准” 指的是一种通用方法思路，并非应试教育中的得分点) 来解决:<br>
 令悟空、八戒、悟净和龙马分别为 $a, b, c, d$，令命题「$X$ 第 $Y$」为 $XY$，例如 “悟空第一” 则表示为命题 $a1$，则有以下命题成立:
 <div class="fi-row">
@@ -211,8 +217,8 @@ $$
 然后化简该表达式即可得到结果 (因为这个问题是精心设计过的，所以会有一个唯一解)。</p>
 <p>性质也是命题，即其真假值可以谈论 (但未必能确定)。但正如第 22 页的注一所说，一般不讨论性质 $A(x)$ 的真假值，只有将具体成代入时才有可能谈论其真假值 (这很好理解，抽象的不定元 $x$ 可以代表无限多的东西，代入性质 $A(x)$ 的真假值可能并不相同)。但是需要注意后面集合论中虽然也使用了性质来定义群体，但是此时的性质表示 $A(x)$ 这个命题为真，即 $x$ 满足 $A$ 这个性质。所以需要细心看待逻辑学和集合论的性质一次，它们有共同点也有不同点。</p>
 <p>处理更多不定元的性质时，按照第 24 ~ 27 页的注二的方法，将其转换成简单形式的单一不定元的性质进行处理。</p>
-<h3 id="集合概念簡介" class="heading-element">
-  <a href="#%e9%9b%86%e5%90%88%e6%a6%82%e5%bf%b5%e7%b0%a1%e4%bb%8b" class="heading-mark"></a>集合概念簡介</h3><p>第 42 页上运用了类似的化简不定元技巧，通过括号将同一时间处理不定元数量减少为 1.除此之外，这里还有一个不等式和区间/射线符号的技巧: <strong>不带等号的不等式和区间/射线符号搭配使用时，需要反转区间/射线符号</strong>，这个技巧可以从区间/射线符号的定义推导而来。以该页最后的例子为例:</p>
+<h3 id="集合概念簡介">集合概念簡介</h3>
+<p>第 42 页上运用了类似的化简不定元技巧，通过括号将同一时间处理不定元数量减少为 1.除此之外，这里还有一个不等式和区间/射线符号的技巧: <strong>不带等号的不等式和区间/射线符号搭配使用时，需要反转区间/射线符号</strong>，这个技巧可以从区间/射线符号的定义推导而来。以该页最后的例子为例:</p>
 <div class="fi-row">
 $$
 (\bigcup_{m \in (0,1)}(1-\frac{1}{k}, 9-m]) \land (8 < 9-m < 9) \\
@@ -239,11 +245,11 @@ $$
 <p><em>例行公事式的证明</em></p>
 <p><strong>练习二</strong>:</p>
 <p><em>例行公事式的证明</em></p>
-<h2 id="初等整數論" class="heading-element">
-  <a href="#%e5%88%9d%e7%ad%89%e6%95%b4%e6%95%b8%e8%ab%96" class="heading-mark"></a>初等整數論</h2><a class="lightgallery" href="/images/math/inportance-of-definition.png?size=large" data-thumbnail="/images/math/inportance-of-definition.png?size=small" data-sub-html="<h2>/images/math/inportance-of-definition.png</h2>"><img loading="lazy" src="/images/math/inportance-of-definition.png" alt="/images/math/inportance-of-definition.png" srcset="/images/math/inportance-of-definition.png?size=small, /images/math/inportance-of-definition.png?size=medium 1.5x, /images/math/inportance-of-definition.png?size=large 2x" sizes="auto" data-title="/images/math/inportance-of-definition.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
+<h2 id="初等整數論">初等整數論</h2>
+<a class="lightgallery" href="/images/math/inportance-of-definition.png?size=large" data-thumbnail="/images/math/inportance-of-definition.png?size=small" data-sub-html="<h2>/images/math/inportance-of-definition.png</h2>"><img loading="lazy" src="/images/math/inportance-of-definition.png" srcset="/images/math/inportance-of-definition.png?size=small, /images/math/inportance-of-definition.png?size=medium 1.5x, /images/math/inportance-of-definition.png?size=large 2x" sizes="auto" data-title="/images/math/inportance-of-definition.png" data-alt="/images/math/inportance-of-definition.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>第 13 页 (反转了的) 辗转相除法的阅读顺序是：先阅读左边，在阅读右边，右边的推导是将上面的式子代入到下面的式子得来。</p>
-<h2 id="群群作用與-burnside-引理" class="heading-element">
-  <a href="#%e7%be%a4%e7%be%a4%e4%bd%9c%e7%94%a8%e8%88%87-burnside-%e5%bc%95%e7%90%86" class="heading-mark"></a>群、群作用與 Burnside 引理</h2><p>第 16 页的 $Perm(X)$ 表示 $X$ 的元素进行置换对应的所有映射构成的集合，这个集合的基数为 $8!$。表示这个集合的某个元素 (也就是置换对应的映射)，可以用投影片上的形如 $(1\ 4\ 2)(3\ 7)(5)(6)$ 来表示，比较直观的体现这个映射的效果。</p>
+<h2 id="群群作用與-burnside-引理">群、群作用與 Burnside 引理</h2>
+<p>第 16 页的 $Perm(X)$ 表示 $X$ 的元素进行置换对应的所有映射构成的集合，这个集合的基数为 $8!$。表示这个集合的某个元素 (也就是置换对应的映射)，可以用投影片上的形如 $(1\ 4\ 2)(3\ 7)(5)(6)$ 来表示，比较直观的体现这个映射的效果。</p>
 <p>第 18 页子群定义的结合律一般不需要特别考虑，因为子群的任意元素属于群，而群的元素都满足结合律，所以子群的任意元素都满足结合律。</p>
 <p>第 18 页的证明提示「消去律」，是指在证明子群性质时利用群的 <strong>可逆</strong> 和 <strong>单位元</strong> 性质进行证明。因为依据定义，群的单位元可作用的范围比子群的单位元作用范围广。</p>
 <p>第 22 页的正八边形共有 16 种保持轮廓的变换 (8 种旋转和 8 种反面)，类似的，正十六边形则有 32 种保持轮廓的变换 (16 种旋转和 16 种反面)。这只是一种找规律问题，观察第 23 和 24 页分别列举的旋转和反面映射，可以获得这个规律的直觉。总结一下，正 $n$ 边形一共有 $2n$ 种保持轮廓的变换方法 ($n$ 种旋转和 $n$ 种反面)</p></div><div class="post-footer" id="post-footer">
@@ -251,10 +257,11 @@ $$
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-05-12 21:10:50">更新于 2024-05-12&nbsp;</span>
-      </div></div><div class="post-info-line">
-        <div class="post-info-md"><span><a href="/posts/math/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-        <div class="post-info-share">
-          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/math/" data-title="数学开放式课程学习指引" data-hashtags="Mathematics"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/math/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/math/" data-title="数学开放式课程学习指引" data-hashtags="Mathematics"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/math/" data-hashtag="Mathematics"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/math/" data-title="数学开放式课程学习指引" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/math/" data-title="数学开放式课程学习指引"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -263,11 +270,12 @@ $$
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/math/" data-title="数学开放式课程学习指引" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/math/" data-title="数学开放式课程学习指引"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-        </div>
-      </div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/mathematics/" class="post-tag" title="标签 - Mathematics">Mathematics</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/mathematics/' class="post-tag">Mathematics</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -276,14 +284,11 @@ $$
   <div class="post-nav"><a href="/posts/hello_world/" class="post-nav-item" rel="prev" title="Hello, World"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Hello, World</a>
       <a href="/posts/gnu-linux-dev/" class="post-nav-item" rel="next" title="GNU/Linux 开发工具">GNU/Linux 开发工具<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article>
-
-  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -291,5 +296,5 @@ $$
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

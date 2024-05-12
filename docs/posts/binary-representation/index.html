@@ -14,7 +14,7 @@
 人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 &#43; 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
 "><meta itemprop="datePublished" content="2023-12-31T15:43:50+08:00" />
 <meta itemprop="dateModified" content="2024-05-08T21:06:39+08:00" />
-<meta itemprop="wordCount" content="2003"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1996"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Numerics,Bitwise," /><meta property="og:title" content="解读计算机编码" />
 <meta property="og:description" content="
 人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 &#43; 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
@@ -43,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/binary-representation\/"
-    },"genre": "posts","keywords": "Sysprog, Numerics, Bitwise","wordcount":  2003 ,
+    },"genre": "posts","keywords": "Sysprog, Numerics, Bitwise","wordcount":  1996 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/binary-representation\/","datePublished": "2023-12-31T15:43:50+08:00","dateModified": "2024-05-08T21:06:39+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -55,7 +55,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -101,7 +101,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -161,12 +161,18 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>解读计算机编码</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2023-12-31 15:43:50"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-31">2023-12-31</time></span>&nbsp;<span title="更新于 2024-05-08 21:06:39"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-08">2024-05-08</time></span>&nbsp;<span title="2003 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2023-12-31 15:43:50"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-31">2023-12-31</time></span>&nbsp;<span title="更新于 2024-05-08 21:06:39"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-08">2024-05-08</time></span>&nbsp;<span title="1996 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -216,13 +222,13 @@
 </ul></div>
     </div>
   </div>
-<h2 id="一补数-ones-complement" class="heading-element">
-  <a href="#%e4%b8%80%e8%a1%a5%e6%95%b0-ones-complement" class="heading-mark"></a>一补数 (Ones’ complement)</h2><h3 id="9-的补数" class="heading-element">
-  <a href="#9-%e7%9a%84%e8%a1%a5%e6%95%b0" class="heading-mark"></a>9 的补数</h3><ul>
+<h2 id="一补数-ones-complement">一补数 (Ones’ complement)</h2>
+<h3 id="9-的补数">9 的补数</h3>
+<ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 科普短片: <a href="https://www.youtube.com/watch?v=kRmExkQoOPY"target="_blank" rel="external nofollow noopener noreferrer">Not just counting, but saving lives: Curta</a></li>
 </ul>
-<h3 id="运算原理" class="heading-element">
-  <a href="#%e8%bf%90%e7%ae%97%e5%8e%9f%e7%90%86" class="heading-mark"></a>运算原理</h3><div class="details admonition note open">
+<h3 id="运算原理">运算原理</h3>
+<div class="details admonition note open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -274,9 +280,9 @@ $$
 所以需要在溢出时循环进位 $+\ (1 - 2^{32})$ 来消除运算结果中的一个 $2^{32} - 1$。</p>
 </li>
 </ul>
-<h2 id="二补数-twos-complement" class="heading-element">
-  <a href="#%e4%ba%8c%e8%a1%a5%e6%95%b0-twos-complement" class="heading-mark"></a>二补数 (Two&rsquo;s complement)</h2><h3 id="正负数编码表示" class="heading-element">
-  <a href="#%e6%ad%a3%e8%b4%9f%e6%95%b0%e7%bc%96%e7%a0%81%e8%a1%a8%e7%a4%ba" class="heading-mark"></a>正负数编码表示</h3><p>假设有 n-bit 的二补数编码 $A$，$-A$ 的推导如下：</p>
+<h2 id="二补数-twos-complement">二补数 (Two&rsquo;s complement)</h2>
+<h3 id="正负数编码表示">正负数编码表示</h3>
+<p>假设有 n-bit 的二补数编码 $A$，$-A$ 的推导如下：</p>
 <ul>
 <li>格式一：</li>
 </ul>
@@ -310,7 +316,7 @@ $$
 <blockquote>
 <p>Note the different position of apostrophes: two’s complement versus ones’ complement. The term “two’s complement” arises from the fact that for nonnegative x we compute a w-bit representation of −x as 2w − x (a single two.) The term “ones’ complement” comes from the property that we can compute −x in this notation as [111 . . . 1] − x (multiple ones).</p>
 </blockquote>
-<figure><a class="lightgallery" href="/images/git/twos_complement.png?size=large" data-thumbnail="/images/git/twos_complement.png?size=small" data-sub-html="<h2>Twos&rsquo; complement</h2>"><img loading="lazy" src="/images/git/twos_complement.png" alt="/images/git/twos_complement.png" srcset="/images/git/twos_complement.png?size=small, /images/git/twos_complement.png?size=medium 1.5x, /images/git/twos_complement.png?size=large 2x" sizes="auto" data-title="/images/git/twos_complement.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Twos&rsquo; complement</figcaption>
+<figure><a class="lightgallery" href="/images/git/twos_complement.png?size=large" data-thumbnail="/images/git/twos_complement.png?size=small" data-sub-html="<h2>Twos&rsquo; complement</h2>"><img loading="lazy" src="/images/git/twos_complement.png" srcset="/images/git/twos_complement.png?size=small, /images/git/twos_complement.png?size=medium 1.5x, /images/git/twos_complement.png?size=large 2x" sizes="auto" data-title="/images/git/twos_complement.png" data-alt="/images/git/twos_complement.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Twos&rsquo; complement</figcaption>
   </figure>
 <div class="details admonition note open">
     <div class="details-summary admonition-title">
@@ -333,15 +339,15 @@ $$
 </div></div>
     </div>
   </div>
-<h3 id="加--减法器设计" class="heading-element">
-  <a href="#%e5%8a%a0--%e5%87%8f%e6%b3%95%e5%99%a8%e8%ae%be%e8%ae%a1" class="heading-mark"></a>加 / 减法器设计</h3><p>科普短片: <a href="https://www.youtube.com/watch?v=VBDoT8o4q00"target="_blank" rel="external nofollow noopener noreferrer">See How Computers Add Numbers In One Lesson</a> &#x2705;</p>
+<h3 id="加--减法器设计">加 / 减法器设计</h3>
+<p>科普短片: <a href="https://www.youtube.com/watch?v=VBDoT8o4q00"target="_blank" rel="external nofollow noopener noreferrer">See How Computers Add Numbers In One Lesson</a> &#x2705;</p>
 <ul>
 <li>了解晶体管的原理</li>
 <li>了解基本逻辑门元件，例如 OR, AND 逻辑门的设计</li>
 <li>了解加法器的原理和工作流程。</li>
 </ul>
-<h2 id="阿贝尔群及对称性" class="heading-element">
-  <a href="#%e9%98%bf%e8%b4%9d%e5%b0%94%e7%be%a4%e5%8f%8a%e5%af%b9%e7%a7%b0%e6%80%a7" class="heading-mark"></a>阿贝尔群及对称性</h2><div class="details admonition tip open">
+<h2 id="阿贝尔群及对称性">阿贝尔群及对称性</h2>
+<div class="details admonition tip open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -356,8 +362,8 @@ $$
     </div>
   </div>
 <p>科普影片: <a href="https://www.youtube.com/playlist?list=PLYtoePJQbGmiq3lqkJcxSKW0eW5objmjQ"target="_blank" rel="external nofollow noopener noreferrer">从五次方程到伽罗瓦理论</a></p>
-<h2 id="旁路攻击" class="heading-element">
-  <a href="#%e6%97%81%e8%b7%af%e6%94%bb%e5%87%bb" class="heading-mark"></a>旁路攻击</h2><p>观看科普视频: <a href="https://www.youtube.com/watch?v=2xCICHh4Pas"target="_blank" rel="external nofollow noopener noreferrer">我听得到你打了什么字</a> &#x2705;</p>
+<h2 id="旁路攻击">旁路攻击</h2>
+<p>观看科普视频: <a href="https://www.youtube.com/watch?v=2xCICHh4Pas"target="_blank" rel="external nofollow noopener noreferrer">我听得到你打了什么字</a> &#x2705;</p>
 <ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 阅读相关论文 <a href="https://web.eecs.umich.edu/~genkin/teaching/fall2019/EECS598-12_files/kbdacoustic.pdf"target="_blank" rel="external nofollow noopener noreferrer">Keyboard Acoustic Emanations</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 体验使用相关工具 <a href="https://github.com/ggerganov/kbd-audio"target="_blank" rel="external nofollow noopener noreferrer">kbd-audio</a></li>
@@ -382,15 +388,15 @@ $$
 </div>
     </div>
   </div>
-<h3 id="constant-time-functions" class="heading-element">
-  <a href="#constant-time-functions" class="heading-mark"></a>Constant-Time Functions</h3><p>比较常见的常数时间实作方法是，<strong>消除分支</strong>。因为不同分支的执行时间可能会不同，这会被利用进行时序攻击。这个方法需要对 C 语言中的编码和位运算有一定的了解。</p>
+<h3 id="constant-time-functions">Constant-Time Functions</h3>
+<p>比较常见的常数时间实作方法是，<strong>消除分支</strong>。因为不同分支的执行时间可能会不同，这会被利用进行时序攻击。这个方法需要对 C 语言中的编码和位运算有一定的了解。</p>
 <ul>
 <li>C99 7.18.1.1 Exact-width integer types</li>
 <li>C99 6.5.7.5 Bitwise shift operators</li>
 </ul>
 <a href="https://github.com/ccrysisa/LKI/tree/main/constant-time"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
-<h4 id="branchless-abs" class="heading-element">
-  <a href="#branchless-abs" class="heading-mark"></a>Branchless abs</h4><blockquote>
+<h4 id="branchless-abs">Branchless abs</h4>
+<blockquote>
 <p>如果 n 是 signed 32-bit，则 <code>n &gt;&gt; 31</code> 等价于 <code>n == 0 ? 0 : -1</code></p>
 </blockquote>
 <p>方法一，原理为 $-A = \neg (A - 1)$:</p>
@@ -425,8 +431,8 @@ $$
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">^</span> <span class="n">mask</span><span class="p">)</span> <span class="o">-</span> <span class="n">mask</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="branchless-minmax" class="heading-element">
-  <a href="#branchless-minmax" class="heading-mark"></a>Branchless min/max</h4><p>Min:</p>
+</div><h4 id="branchless-minmax">Branchless min/max</h4>
+<p>Min:</p>
 <div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -483,10 +489,11 @@ $$
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-05-08 21:06:39">更新于 2024-05-08&nbsp;</span>
-      </div></div><div class="post-info-line">
-        <div class="post-info-md"><span><a href="/posts/binary-representation/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-        <div class="post-info-share">
-          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/binary-representation/" data-title="解读计算机编码" data-hashtags="Sysprog,Numerics,Bitwise"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/binary-representation/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/binary-representation/" data-title="解读计算机编码" data-hashtags="Sysprog,Numerics,Bitwise"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/binary-representation/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/binary-representation/" data-title="解读计算机编码" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/binary-representation/" data-title="解读计算机编码"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -495,11 +502,12 @@ $$
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/binary-representation/" data-title="解读计算机编码" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/binary-representation/" data-title="解读计算机编码"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-        </div>
-      </div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a><a href="/tags/numerics/" class="post-tag" title="标签 - Numerics">Numerics</a><a href="/tags/bitwise/" class="post-tag" title="标签 - Bitwise">Bitwise</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/numerics/' class="post-tag">Numerics</a><a href='/tags/bitwise/' class="post-tag">Bitwise</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -508,14 +516,11 @@ $$
   <div class="post-nav"><a href="/posts/why-rust-/" class="post-nav-item" rel="prev" title="Why Rust?"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Why Rust?</a>
       <a href="/posts/git/" class="post-nav-item" rel="next" title="Git/GitHub 资源与问题汇总">Git/GitHub 资源与问题汇总<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article>
-
-  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -523,5 +528,5 @@ $$
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>
