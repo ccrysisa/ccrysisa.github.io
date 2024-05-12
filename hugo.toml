@@ -64,6 +64,16 @@ title = ""
 weight = 3
 [menu.main.params]
 icon = "fa-solid fa-tags"
+[[menu.main]]
+identifier = "friends"
+pre = ""
+post = ""
+name = "Friends"
+url = "/friends/"
+title = ""
+weight = 4
+[menu.main.params]
+icon = "fa-solid fa-user-group"
 
 [params]
 #  FixIt 主题版本

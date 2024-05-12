@@ -94,6 +94,9 @@ $$
 
 也可以通过一补数和二补数，在时钟表上的对称轴偏差，来理解上述两种方式是等价的。
 
+- CS:APP 2.2.3 Two’s-Complement Encodings
+> Note the different position of apostrophes: two’s complement versus ones’ complement. The term “two’s complement” arises from the fact that for nonnegative x we compute a w-bit representation of −x as 2w − x (a single two.) The term “ones’ complement” comes from the property that we can compute −x in this notation as [111 . . . 1] − x (multiple ones).
+
 {{< image src="/images/git/twos_complement.png" caption="Twos' complement" >}}
 
 {{< admonition >}}
@@ -138,8 +141,8 @@ $$
 借由 Wikipedia 了解旁路攻击 ([Side-channel attack][side-channel-attack]) 和时序攻击 ([Timing attack][timing-attack]) 的基本概念 :white_check_mark: 
 - [x] [Black-box testing](https://en.wikipedia.org/wiki/Black-box_testing)
 - [x] [Row hammer](https://en.wikipedia.org/wiki/Row_hammer)
-- [ ] [Cold boot attack](https://en.wikipedia.org/wiki/Cold_boot_attack)
-- [ ] [Rubber-hose cryptanalysis](https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis)
+- [x] [Cold boot attack](https://en.wikipedia.org/wiki/Cold_boot_attack)
+- [x] [Rubber-hose cryptanalysis](https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis)
 
 {{< admonition info "延伸阅读" >}}
 - [ ] [The password guessing bug in Tenex](https://www.sjoerdlangkemper.nl/2016/11/01/tenex-password-bug/)

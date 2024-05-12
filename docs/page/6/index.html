@@ -58,7 +58,13 @@
                 href="/tags/"
                 
                 
-              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-user-group fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
             <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
             <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
               <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
@@ -121,7 +127,14 @@
                   href="/tags/"
                   
                   
-                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-user-group fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item menu-system">
           <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
       </ul>
     </nav>
@@ -136,6 +149,13 @@
     </a><a href="mailto:gshine@m.scnu.edu.cn" title="Email" rel=" me"><i class="fa-regular fa-envelope fa-fw" aria-hidden="true"></i>
     </a><a href="/index.xml" title="RSS"target="_blank" rel="external nofollow noopener noreferrer me"><i class="fa-solid fa-rss fa-fw" aria-hidden="true"></i>
     </a></div></div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+    <span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><a href="/posts/c-memory/">你所不知道的 C 语言: 记忆体管理、对齐及硬体特性</a>
+  </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>&nbsp;<span class="post-publish" title='2024-02-27 22:44:38'>发布于 <time datetime="2024-02-27">2024-02-27</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="content"><blockquote>
+<p>不少 C/C++ 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。</p>
+</blockquote></div><div class="post-footer">
+    <a href="/posts/c-memory/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/c/' class="post-tag">C</a><a href='/tags/memory/' class="post-tag">Memory</a></div></div>
+</article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
     <span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><a href="/posts/c-bitwise/">你所不知道的 C 语言: bitwise 操作</a>
   </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>&nbsp;<span class="post-publish" title='2024-02-23 13:13:33'>发布于 <time datetime="2024-02-23">2024-02-23</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="content"><blockquote>
@@ -158,8 +178,30 @@
     <a href="/posts/c-numerics/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/c/' class="post-tag">C</a><a href='/tags/numerics/' class="post-tag">Numerics</a></div></div>
 </article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-    <span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><a href="/posts/linux2023-lab0/">Linux 核心设计: C Programming Lab</a>
-  </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>&nbsp;<span class="post-publish" title='2024-02-19 16:23:01'>发布于 <time datetime="2024-02-19">2024-02-19</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="content"></div><div class="post-footer">
+    <span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><a href="/posts/linux2023-lab0/">Linux 核心设计: lab0-c</a>
+  </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>&nbsp;<span class="post-publish" title='2024-02-19 16:23:01'>发布于 <time datetime="2024-02-19">2024-02-19</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="content"><div class="details admonition abstract open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>预期目标<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ul>
+<li><a href="https://hackmd.io/@sysprog/c-programming"target="_blank" rel="external nofollow noopener noreferrer">C 语言程序设计</a> 议题，如 <a href="https://en.wikibooks.org/wiki/C_Programming/stdarg.h"target="_blank" rel="external nofollow noopener noreferrer">不定个参数的处理</a>，<a href="https://en.wikibooks.org/wiki/C_Programming/signal.h"target="_blank" rel="external nofollow noopener noreferrer">signal</a>，<a href="https://en.wikibooks.org/wiki/C_Programming/setjmp.h"target="_blank" rel="external nofollow noopener noreferrer">setjmp/longjmp</a></li>
+<li>学习 <a href="https://hackmd.io/@sysprog/gnu-linux-dev"target="_blank" rel="external nofollow noopener noreferrer">GNU/Linux 开发工具</a>:
+<ul>
+<li><a href="https://cppcheck.sourceforge.io/"target="_blank" rel="external nofollow noopener noreferrer">Cppcheck</a>: <strong>静态</strong> 程序分析工具，即无需运行程序就可以分析出程序潜在的问题，当然会有一定的误差，类似的工具有 <a href="https://doc.rust-lang.org/cargo/commands/cargo-check.html"target="_blank" rel="external nofollow noopener noreferrer">cargo-check</a></li>
+<li><a href="https://valgrind.org/"target="_blank" rel="external nofollow noopener noreferrer">Valgrind</a>: <strong>动态</strong> 程序分析工具，即需要将程序运行起来再进行分析，通常用于检测内存泄漏 (<a href="https://en.wikipedia.org/wiki/Memory_leak"target="_blank" rel="external nofollow noopener noreferrer">memory leak</a>)</li>
+</ul>
+</li>
+<li>学习使用 Git 与 GitHub</li>
+<li>树立一致且易于协作的程序开发规范</li>
+<li>研究自动测试机制</li>
+<li>接触 <a href="http://man7.org/tlpi/"target="_blank" rel="external nofollow noopener noreferrer">Linux Programming INterface</a></li>
+<li>理解电脑乱数原理、应用场景，和相关的验证</li>
+<li>研究 Linux 核心链表的实作机制，及其高效的排序实作</li>
+</ul>
+</div>
+    </div>
+  </div></div><div class="post-footer">
     <a href="/posts/linux2023-lab0/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/linux/' class="post-tag">Linux</a><a href='/tags/c/' class="post-tag">C</a></div></div>
 </article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
@@ -168,11 +210,6 @@
 <p>In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — <a href="https://tools.ietf.org/html/rfc793"target="_blank" rel="external nofollow noopener noreferrer">https://tools.ietf.org/html/rfc793</a> — which describes the original protocol, with the goal of being able to set up and tear down a connection with a &ldquo;real&rdquo; TCP stack at the other end (netcat in particular). We&rsquo;re writing it using a user-space networking interface (see <a href="https://www.kernel.org/doc/Documentation/networking/tuntap.txt"target="_blank" rel="external nofollow noopener noreferrer">https://www.kernel.org/doc/Documentation/networking/tuntap.txt</a> and the Rust bindings at <a href="https://docs.rs/tun-tap/%29"target="_blank" rel="external nofollow noopener noreferrer">https://docs.rs/tun-tap/)</a>.</p>
 </blockquote></div><div class="post-footer">
     <a href="/posts/rust-tcp/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/rust/' class="post-tag">Rust</a><a href='/tags/tcp/' class="post-tag">TCP</a><a href='/tags/network/' class="post-tag">Network</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-    <span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><a href="/posts/linux-quiz1/">Linux 核心设计: 第 1 周测验题 linked list</a>
-  </h1><div class="post-meta"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>&nbsp;<span class="post-publish" title='2024-02-16 14:59:25'>发布于 <time datetime="2024-02-16">2024-02-16</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="content"></div><div class="post-footer">
-    <a href="/posts/linux-quiz1/">阅读全文</a><div class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/linux/' class="post-tag">Linux</a><a href='/tags/c/' class="post-tag">C</a></div></div>
 </article>
 <ul class="pagination"><li class="page-item">
           <span class="page-link">

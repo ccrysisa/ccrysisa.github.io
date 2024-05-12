@@ -4,7 +4,17 @@
     <link>https://ccrysisa.github.io/tags/rust/</link>
     <description>Rust - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 05 Apr 2024 17:52:13 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/rust/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 29 Apr 2024 16:23:33 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/rust/" rel="self" type="application/rss+xml" /><item>
+  <title>Command Line Applications in Rust</title>
+  <link>https://ccrysisa.github.io/posts/rust-cli/</link>
+  <pubDate>Mon, 29 Apr 2024 16:23:33 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/rust-cli/</guid>
+  <description><![CDATA[<blockquote>
+<p>Rust is a statically compiled, fast language with great tooling and a rapidly growing ecosystem. That makes it a great fit for writing command line applications: They should be small, portable, and quick to run. Command line applications are also a great way to get started with learning Rust; or to introduce Rust to your team!</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>Rust Lifetime: 由浅入深理解生命周期</title>
   <link>https://ccrysisa.github.io/posts/rust-lifetime/</link>
   <pubDate>Fri, 05 Apr 2024 17:52:13 &#43;0800</pubDate>
@@ -93,14 +103,6 @@
   <description><![CDATA[<blockquote>
 <p>We&rsquo;re going to investigate a case where you need multiple explicit lifetime annotations. We explore why they are needed, and why we need more than one in this particular case. We also talk about some of the differences between the string types and introduce generics over a self-defined trait in the process.</p>
 </blockquote>]]></description>
-</item>
-<item>
-  <title>程序调试工具 GDB</title>
-  <link>https://ccrysisa.github.io/posts/debug-gdb/</link>
-  <pubDate>Tue, 16 Jan 2024 17:15:46 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/debug-gdb/</guid>
-  <description><![CDATA[<p>大型开源项目的规模十分庞大，例如使用 Rust 编写的 Servo 浏览器，这个项目有近十万行代码。在开发规模如此庞大的项目时，了解如何通过正确的方式进行调试非常重要，因为这样可以帮助开发者快速地找到瓶颈。</p>]]></description>
 </item>
 </channel>
 </rss>

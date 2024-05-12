@@ -157,7 +157,10 @@ Talks:
 - [Rich Hickey Talks](https://www.youtube.com/playlist?list=PLZdCLR02grLrEwKaZv-5QbUzK0zGKOOcr)
 {{< /admonition >}}
 
-{{< admonition question >}} 一个 问题 横幅 {{< /admonition >}}
+{{< admonition question >}}
+- OSDI
+- PLDI
+{{< /admonition >}}
 
 {{< admonition warning >}} 一个 警告 横幅 {{< /admonition >}}
 

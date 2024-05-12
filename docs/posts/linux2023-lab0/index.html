@@ -5,22 +5,110 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>Linux 核心设计: C Programming Lab - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
+    <title>Linux 核心设计: lab0-c - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
-<meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Sysprog, Linux, C' /><meta itemprop="name" content="Linux 核心设计: C Programming Lab">
-<meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-02-19T16:23:01+08:00" />
-<meta itemprop="dateModified" content="2024-03-04T12:46:31+08:00" />
-<meta itemprop="wordCount" content="1202"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="Sysprog,Linux,C," /><meta property="og:title" content="Linux 核心设计: C Programming Lab" />
-<meta property="og:description" content="" />
+<meta name="description" content="
+    
+      预期目标
+    
+    
+      
+C 语言程序设计 议题，如 不定个参数的处理，signal，setjmp/longjmp
+学习 GNU/Linux 开发工具:
+
+Cppcheck: 静态 程序分析工具，即无需运行程序就可以分析出程序潜在的问题，当然会有一定的误差，类似的工具有 cargo-check
+Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分析，通常用于检测内存泄漏 (memory leak)
+
+
+学习使用 Git 与 GitHub
+树立一致且易于协作的程序开发规范
+研究自动测试机制
+接触 Linux Programming INterface
+理解电脑乱数原理、应用场景，和相关的验证
+研究 Linux 核心链表的实作机制，及其高效的排序实作
+
+
+    
+  " /><meta name="keywords" content='Sysprog, Linux, C' /><meta itemprop="name" content="Linux 核心设计: lab0-c">
+<meta itemprop="description" content="
+    
+      预期目标
+    
+    
+      
+C 语言程序设计 议题，如 不定个参数的处理，signal，setjmp/longjmp
+学习 GNU/Linux 开发工具:
+
+Cppcheck: 静态 程序分析工具，即无需运行程序就可以分析出程序潜在的问题，当然会有一定的误差，类似的工具有 cargo-check
+Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分析，通常用于检测内存泄漏 (memory leak)
+
+
+学习使用 Git 与 GitHub
+树立一致且易于协作的程序开发规范
+研究自动测试机制
+接触 Linux Programming INterface
+理解电脑乱数原理、应用场景，和相关的验证
+研究 Linux 核心链表的实作机制，及其高效的排序实作
+
+
+    
+  "><meta itemprop="datePublished" content="2024-02-19T16:23:01+08:00" />
+<meta itemprop="dateModified" content="2024-05-05T13:47:55+08:00" />
+<meta itemprop="wordCount" content="5423"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Sysprog,Linux,C," /><meta property="og:title" content="Linux 核心设计: lab0-c" />
+<meta property="og:description" content="
+    
+      预期目标
+    
+    
+      
+C 语言程序设计 议题，如 不定个参数的处理，signal，setjmp/longjmp
+学习 GNU/Linux 开发工具:
+
+Cppcheck: 静态 程序分析工具，即无需运行程序就可以分析出程序潜在的问题，当然会有一定的误差，类似的工具有 cargo-check
+Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分析，通常用于检测内存泄漏 (memory leak)
+
+
+学习使用 Git 与 GitHub
+树立一致且易于协作的程序开发规范
+研究自动测试机制
+接触 Linux Programming INterface
+理解电脑乱数原理、应用场景，和相关的验证
+研究 Linux 核心链表的实作机制，及其高效的排序实作
+
+
+    
+  " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/linux2023-lab0/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-19T16:23:01+08:00" />
-<meta property="article:modified_time" content="2024-03-04T12:46:31+08:00" />
+<meta property="article:modified_time" content="2024-05-05T13:47:55+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Linux 核心设计: C Programming Lab"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Linux 核心设计: lab0-c"/>
+<meta name="twitter:description" content="
+    
+      预期目标
+    
+    
+      
+C 语言程序设计 议题，如 不定个参数的处理，signal，setjmp/longjmp
+学习 GNU/Linux 开发工具:
+
+Cppcheck: 静态 程序分析工具，即无需运行程序就可以分析出程序潜在的问题，当然会有一定的误差，类似的工具有 cargo-check
+Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分析，通常用于检测内存泄漏 (memory leak)
+
+
+学习使用 Git 与 GitHub
+树立一致且易于协作的程序开发规范
+研究自动测试机制
+接触 Linux Programming INterface
+理解电脑乱数原理、应用场景，和相关的验证
+研究 Linux 核心链表的实作机制，及其高效的排序实作
+
+
+    
+  "/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -30,13 +118,13 @@
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "Linux 核心设计: C Programming Lab",
+    "headline": "Linux 核心设计: lab0-c",
     "inLanguage": "zh-CN",
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux2023-lab0\/"
-    },"genre": "posts","keywords": "Sysprog, Linux, C","wordcount":  1202 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023-lab0\/","datePublished": "2024-02-19T16:23:01+08:00","dateModified": "2024-03-04T12:46:31+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, Linux, C","wordcount":  5423 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023-lab0\/","datePublished": "2024-02-19T16:23:01+08:00","dateModified": "2024-05-05T13:47:55+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -67,7 +155,13 @@
                 href="/tags/"
                 
                 
-              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-user-group fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
             <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
             <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
               <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
@@ -130,7 +224,14 @@
                   href="/tags/"
                   
                   
-                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-user-group fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item menu-system">
           <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
       </ul>
     </nav>
@@ -147,11 +248,11 @@
     </aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Linux 核心设计: C Programming Lab</span>
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Linux 核心设计: lab0-c</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-19 16:23:01"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-19">2024-02-19</time></span>&nbsp;<span title="更新于 2024-03-04 12:46:31"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="1202 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-19 16:23:01"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-19">2024-02-19</time></span>&nbsp;<span title="更新于 2024-05-05 13:47:55"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-05">2024-05-05</time></span>&nbsp;<span title="5423 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 5500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 11 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -159,36 +260,76 @@
         </div>
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#程序分析工具">程序分析工具</a></li>
-    <li><a href="#queue">Queue</a>
+    <li><a href="#改写自-cmu-计算机系统概论的作业">改写自 CMU 计算机系统概论的作业</a>
       <ul>
-        <li><a href="#leetcode">leetcode</a></li>
+        <li><a href="#q_size">q_size</a></li>
         <li><a href="#q_new--q_free">q_new &amp; q_free</a></li>
         <li><a href="#q_insert--q_remove">q_insert &amp; q_remove</a></li>
       </ul>
     </li>
-    <li><a href="#valgrind">Valgrind</a></li>
-    <li><a href="#自动测试">自动测试</a>
+    <li><a href="#开发环境设定">开发环境设定</a></li>
+    <li><a href="#取得程式码并进行开发">取得程式码并进行开发</a>
+      <ul>
+        <li><a href="#clang-format-工具和一致的程序撰写风格">clang-format 工具和一致的程序撰写风格</a></li>
+        <li><a href="#git-hooks-进行自动程式码排版检查">Git Hooks 进行自动程式码排版检查</a></li>
+        <li><a href="#github-actions-设定">GitHub Actions 设定</a></li>
+      </ul>
+    </li>
+    <li><a href="#以-valgrind-分析内存问题">以 Valgrind 分析内存问题</a>
+      <ul>
+        <li><a href="#valgrind-使用案例">Valgrind 使用案例</a>
+          <ul>
+            <li><a href="#memory-leak">Memory Leak</a></li>
+            <li><a href="#invalid-memory-access">Invalid Memory Access</a></li>
+            <li><a href="#other">Other</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#自动测试程序">自动测试程序</a>
       <ul>
         <li><a href="#追踪内存的分配和释放">追踪内存的分配和释放</a></li>
         <li><a href="#qtest-命令解释器">qtest 命令解释器</a></li>
-        <li><a href="#signal">Signal</a></li>
+        <li><a href="#signal-处理和应用">Signal 处理和应用</a></li>
+        <li><a href="#检测非预期的内存操作或程序执行超时">检测非预期的内存操作或程序执行超时</a></li>
       </ul>
     </li>
+    <li><a href="#整合网页服务器">整合网页服务器</a>
+      <ul>
+        <li><a href="#整合-tiny-web-server">整合 tiny-web-server</a></li>
+      </ul>
+    </li>
+    <li><a href="#在-qtest-提供新命令-shuffle">在 qtest 提供新命令 shuffle</a></li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><h2 id="程序分析工具">程序分析工具</h2>
+      </div><div class="content" id="content"><div class="details admonition abstract open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>预期目标<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ul>
+<li><a href="https://hackmd.io/@sysprog/c-programming"target="_blank" rel="external nofollow noopener noreferrer">C 语言程序设计</a> 议题，如 <a href="https://en.wikibooks.org/wiki/C_Programming/stdarg.h"target="_blank" rel="external nofollow noopener noreferrer">不定个参数的处理</a>，<a href="https://en.wikibooks.org/wiki/C_Programming/signal.h"target="_blank" rel="external nofollow noopener noreferrer">signal</a>，<a href="https://en.wikibooks.org/wiki/C_Programming/setjmp.h"target="_blank" rel="external nofollow noopener noreferrer">setjmp/longjmp</a></li>
+<li>学习 <a href="https://hackmd.io/@sysprog/gnu-linux-dev"target="_blank" rel="external nofollow noopener noreferrer">GNU/Linux 开发工具</a>:
 <ul>
-<li>
-<p><a href="https://cppcheck.sourceforge.io/"target="_blank" rel="external nofollow noopener noreferrer">Cppcheck</a> 是 <strong>静态</strong> 程序分析工具，即无需运行程序就可以分析出程序潜在的问题，当然会有一定的误差，类似的工具有 <a href="https://doc.rust-lang.org/cargo/commands/cargo-check.html"target="_blank" rel="external nofollow noopener noreferrer">cargo-check</a></p>
-</li>
-<li>
-<p><a href="https://valgrind.org/"target="_blank" rel="external nofollow noopener noreferrer">Valgrind</a> 是 <strong>动态</strong> 程序分析工具，即需要将程序运行起来再进行分析，通常用于检测内存泄漏 (<a href="https://en.wikipedia.org/wiki/Memory_leak"target="_blank" rel="external nofollow noopener noreferrer">memory leak</a>)</p>
-</li>
+<li><a href="https://cppcheck.sourceforge.io/"target="_blank" rel="external nofollow noopener noreferrer">Cppcheck</a>: <strong>静态</strong> 程序分析工具，即无需运行程序就可以分析出程序潜在的问题，当然会有一定的误差，类似的工具有 <a href="https://doc.rust-lang.org/cargo/commands/cargo-check.html"target="_blank" rel="external nofollow noopener noreferrer">cargo-check</a></li>
+<li><a href="https://valgrind.org/"target="_blank" rel="external nofollow noopener noreferrer">Valgrind</a>: <strong>动态</strong> 程序分析工具，即需要将程序运行起来再进行分析，通常用于检测内存泄漏 (<a href="https://en.wikipedia.org/wiki/Memory_leak"target="_blank" rel="external nofollow noopener noreferrer">memory leak</a>)</li>
 </ul>
-<h2 id="queue">Queue</h2>
-<h3 id="leetcode">leetcode</h3>
-<p>相关的 LeetCode 题目的实作情况:</p>
+</li>
+<li>学习使用 Git 与 GitHub</li>
+<li>树立一致且易于协作的程序开发规范</li>
+<li>研究自动测试机制</li>
+<li>接触 <a href="http://man7.org/tlpi/"target="_blank" rel="external nofollow noopener noreferrer">Linux Programming INterface</a></li>
+<li>理解电脑乱数原理、应用场景，和相关的验证</li>
+<li>研究 Linux 核心链表的实作机制，及其高效的排序实作</li>
+</ul>
+</div>
+    </div>
+  </div>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/linux2023-lab0"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul>
+<h2 id="改写自-cmu-计算机系统概论的作业">改写自 CMU 计算机系统概论的作业</h2>
+<p><a href="https://github.com/sysprog21/lab0-c"target="_blank" rel="external nofollow noopener noreferrer">lab0-c</a> 改写自 CMU 的 <a href="http://www.cs.cmu.edu/~213/index.html"target="_blank" rel="external nofollow noopener noreferrer">15-213/15-513 Introduction to Computer Systems (ICS)</a> 课程的 <a href="https://www.cs.cmu.edu/afs/cs/academic/class/15213-s20/www/labs/cprogramminglab.pdf"target="_blank" rel="external nofollow noopener noreferrer">C Programming Lab: Assessing Your C Programming Skills</a>，用于检验学生对于 C 语言程序设计认知。</p>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 2095. Delete the Middle Node of a Linked List</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 82. Remove Duplicates from Sorted List II</a></li>
@@ -197,7 +338,38 @@
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/remove-nodes-from-linked-list/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 2487. Remove Nodes From Linked List</a> / <a href="https://leetcode.com/problems/remove-nodes-from-linked-list/solutions/4188092/simple-easy-cpp-solution-with-explanation/"target="_blank" rel="external nofollow noopener noreferrer">参考题解</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/merge-k-sorted-lists/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 23. Merge k Sorted Lists</a></li>
 </ul>
-<h3 id="q_new--q_free">q_new &amp; q_free</h3>
+<p>头文件 <a href="https://github.com/sysprog21/lab0-c/blob/master/list.h"target="_blank" rel="external nofollow noopener noreferrer">list.h</a> 依据 Linux 核心风格实作了相应的 linked list 常用操作的宏，这个文件对于本次实验很重要，需要仔细阅读并在实验过程中使用这些宏来简化程式码。</p>
+<h3 id="q_size">q_size</h3>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* Return number of elements in queue */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">q_size</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">li</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">list_for_each</span> <span class="p">(</span><span class="n">li</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">len</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">len</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q_new--q_free">q_new &amp; q_free</h3>
 <ul>
 <li><code>q_new</code> 使用 <code>malloc</code> 分配空间，并使用 <code>INIT_LIST_HEAD</code> 进行初始化。</li>
 <li><code>q_free</code> 遍历 queue 进行逐个节点释放，所以需要使用 <code>_safe</code> 后缀的 for_each 宏，释放时需要先释放成员 <code>value</code>，再释放节点 (回想一下 C++ 的析构函数)，可以直接使用 <code>q_release_element</code> 函数。</li>
@@ -208,11 +380,409 @@
 <h3 id="q_insert--q_remove">q_insert &amp; q_remove</h3>
 <p>insert 时需要特判 head 是否为 NULL 以及 malloc 分配是否成功，接下来需要使用 <code>strdup</code> 对所给参数进行复制 (<code>strdup</code> 内部是通过 <code>malloc</code> 来实现的，所以之前 <code>q_free</code> 时也需要是否 <code>value</code>)，最后根据插入的位置调用 <code>list_add</code> 或 <code>list_add_tail</code> 进行插入。</p>
 <p>remove 时需要特判 head 是否为 NULL 以及 queue 是否为空，接下来根据需要 remove 的节点调用 <code>list_first_entry</code> 或 <code>list_last_entry</code> 获取节点对应的元素，通过 <code>list_del_init</code> 来清除出 queue，最后如果 <code>value</code> 字段不为 NULL，则通过 <code>memcpy</code> 将 <code>value</code> 字段对应的字符串复制到指定位置。</p>
-<h2 id="valgrind">Valgrind</h2>
+<p>关于 <a href="">lab0-c</a> 相关命令的使用，可以参照阅读后面的「取得程式码并进行开发」部分。</p>
+<div class="highlight" id="id-2"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ ./qtest
+</span></span><span class="line"><span class="cl">cmd&gt; <span class="nb">help</span>
+</span></span><span class="line"><span class="cl">Commands:
+</span></span><span class="line"><span class="cl">  <span class="c1">#           ...          | Display comment</span>
+</span></span><span class="line"><span class="cl">  dedup                    <span class="p">|</span> Delete all nodes that have duplicate string
+</span></span><span class="line"><span class="cl">  descend                  <span class="p">|</span> Remove every node which has a node with a strictly greater value anywhere to the right side of it
+</span></span><span class="line"><span class="cl">  dm                       <span class="p">|</span> Delete middle node in queue
+</span></span><span class="line"><span class="cl">  free                     <span class="p">|</span> Delete queue
+</span></span><span class="line"><span class="cl">  <span class="nb">help</span>                     <span class="p">|</span> Show summary
+</span></span><span class="line"><span class="cl">  ...</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ul>
+<li><a href="https://english.stackexchange.com/questions/52508/difference-between-delete-and-remove"target="_blank" rel="external nofollow noopener noreferrer">Difference between &ldquo;delete&rdquo; and &ldquo;remove&rdquo;</a></li>
+</ul>
+<p>Delete and remove are defined quite similarly, but the main difference between them is that delete means erase (i.e. rendered nonexistent or nonrecoverable), while remove connotes take away and set aside (but kept in existence).</p>
+<p>In your example, if the item is existent after the removal, just say remove, but if it ceases to exist, say delete.</p>
+</div>
+    </div>
+  </div>
+<h2 id="开发环境设定">开发环境设定</h2>
+<p>安装必要的开发工具包:</p>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install build-essential git-core valgrind
+</span></span><span class="line"><span class="cl">$ sudo apt install cppcheck clang-format aspell colordiff</span></span></code></pre></td></tr></table>
+</div>
+</div><p>基本的 Linux 命令行操作，可参考 <a href="https://linux.vbird.org/"target="_blank" rel="external nofollow noopener noreferrer">鸟哥的 Linux 私房菜的</a> 相关章节:</p>
+<ul>
+<li><a href="https://linux.vbird.org/linux_basic/centos7/0210filepermission.php"target="_blank" rel="external nofollow noopener noreferrer">Linux 的檔案權限與目錄配置</a></li>
+<li><a href="https://linux.vbird.org/linux_basic/centos7/0220filemanager.php"target="_blank" rel="external nofollow noopener noreferrer">Linux 檔案與目錄管理</a></li>
+<li><a href="https://linux.vbird.org/linux_basic/centos7/0240tarcompress.php"target="_blank" rel="external nofollow noopener noreferrer">檔案與檔案系統的壓縮、打包與備份</a></li>
+</ul>
+<div class="details admonition success open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-check-circle fa-fw" aria-hidden="true"></i>成功<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>&ldquo;If I had eight hours to chop down a tree, I’d spend six hours sharpening my axe.&rdquo; – Abraham Lincoln</p>
+<p>「工欲善其事，必先利其器」</p>
+</div>
+    </div>
+  </div>
+<h2 id="取得程式码并进行开发">取得程式码并进行开发</h2>
+<p>建立开发目录:</p>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> ~
+</span></span><span class="line"><span class="cl">$ mkdir -p linux2023</span></span></code></pre></td></tr></table>
+</div>
+</div><p>从 GItHub 获取 [lab-c] 程式码:</p>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git clone git@github.com:&lt;username&gt;/lab0-c
+</span></span><span class="line"><span class="cl"><span class="c1"># or</span>
+</span></span><span class="line"><span class="cl">$ git clone https://github.com/&lt;username&gt;/lab0-c</span></span></code></pre></td></tr></table>
+</div>
+</div><p>切换的 <code>lab0-c</code> 目录并进行编译:</p>
+<div class="highlight" id="id-6"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nb">cd</span> lab0-c
+</span></span><span class="line"><span class="cl">$ make</span></span></code></pre></td></tr></table>
+</div>
+</div><p>预期看到以下输出:</p>
+<div class="highlight" id="id-7"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">  CC	qtest.o
+</span></span><span class="line"><span class="cl">  CC	report.o
+</span></span><span class="line"><span class="cl">  CC	console.o
+</span></span><span class="line"><span class="cl">  CC	harness.o
+</span></span><span class="line"><span class="cl">  CC	queue.o
+</span></span><span class="line"><span class="cl">  CC	random.o
+</span></span><span class="line"><span class="cl">  CC	dudect/constant.o
+</span></span><span class="line"><span class="cl">  CC	dudect/fixture.o
+</span></span><span class="line"><span class="cl">  CC	dudect/ttest.o
+</span></span><span class="line"><span class="cl">  CC	shannon_entropy.o
+</span></span><span class="line"><span class="cl">  CC	linenoise.o
+</span></span><span class="line"><span class="cl">  CC	web.o
+</span></span><span class="line"><span class="cl">  LD	qtest</span></span></code></pre></td></tr></table>
+</div>
+</div><p>也可以清除编译输出的档案 (一般是可执行文件和目标文件):</p>
+<div class="highlight" id="id-8"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ make clean</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以通过以下命令设定编译时输出的细节：</p>
+<div class="highlight" id="id-9"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ make <span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样编译时会输出更多细节:</p>
+<div class="highlight" id="id-10"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ make
+</span></span><span class="line"><span class="cl">gcc -o qtest.o -O1 -g -Wall -Werror -c -MMD -MF .qtest.o.d qtest.c
+</span></span><span class="line"><span class="cl">gcc -o report.o -O1 -g -Wall -Werror -c -MMD -MF .report.o.d report.c
+</span></span><span class="line"><span class="cl">gcc -o console.o -O1 -g -Wall -Werror -c -MMD -MF .console.o.d console.c
+</span></span><span class="line"><span class="cl">gcc -o harness.o -O1 -g -Wall -Werror -c -MMD -MF .harness.o.d harness.c
+</span></span><span class="line"><span class="cl">gcc -o queue.o -O1 -g -Wall -Werror -c -MMD -MF .queue.o.d queue.c
+</span></span><span class="line"><span class="cl">gcc -o qtest qtest.o report.o console.o harness.o queue.o</span></span></code></pre></td></tr></table>
+</div>
+</div><p>即最终的执行档案为 <code>qtest</code>。接下来可以通过以下命令来测试 <code>qtest</code>:</p>
+<div class="highlight" id="id-11"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ make check
+</span></span><span class="line"><span class="cl">./qtest -v <span class="m">3</span> -f traces/trace-eg.cmd
+</span></span><span class="line"><span class="cl">cmd&gt; 
+</span></span><span class="line"><span class="cl">cmd&gt; <span class="c1"># Demonstration of queue testing framework</span>
+</span></span><span class="line"><span class="cl">cmd&gt; <span class="c1"># Use help command to see list of commands and options</span>
+</span></span><span class="line"><span class="cl">cmd&gt; <span class="c1"># Initial queue is NULL.</span>
+</span></span><span class="line"><span class="cl">cmd&gt; show
+</span></span><span class="line"><span class="cl"><span class="nv">q</span> <span class="o">=</span> NULL
+</span></span><span class="line"><span class="cl">cmd&gt; <span class="c1"># Create empty queue</span>
+</span></span><span class="line"><span class="cl">cmd&gt; new
+</span></span><span class="line"><span class="cl"><span class="nv">q</span> <span class="o">=</span> <span class="o">[]</span>
+</span></span><span class="line"><span class="cl">cmd&gt; <span class="c1"># Fill it with some values.  First at the head</span>
+</span></span><span class="line"><span class="cl">cmd&gt; ih dolphin</span></span></code></pre></td></tr></table>
+</div>
+</div><p>即将 <a href="https://github.com/sysprog21/lab0-c/blob/master/traces/trace-eg.cmd"target="_blank" rel="external nofollow noopener noreferrer">traces/trace-eg.cmd</a> 的内容作为测试命令指派给 <code>qtest</code> 执行。</p>
+<p>由输出可以得知命令 <code>make check</code> 只是对一些基本功能进行测试，可以通过以下命令进行全面覆盖的测试:</p>
+<div class="highlight" id="id-12"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ make test</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个命令也是本次实验的自动评分系统，其实际执行了 <a href="https://github.com/sysprog21/lab0-c/blob/master/scripts/driver.py"target="_blank" rel="external nofollow noopener noreferrer">scripts/driver.py</a> 这个 Python 程序，这个程序的基本逻辑就是将 traces/trace-XX-CAT.cmd 这类内容作为测试命令指派给 <code>qtest</code> 内部的命令解释器进行执行，并依据测试结果计算相应的分数。</p>
+<p>通过以下命令会开启 <a href="https://github.com/google/sanitizers/wiki/AddressSanitizer"target="_blank" rel="external nofollow noopener noreferrer">AddressSanitizer</a> 从而强化执行时期的内存检测，在进行测试时会输出相应的内存检测信息:</p>
+<div class="highlight" id="id-13"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ make <span class="nv">SANITIZER</span><span class="o">=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">$ make <span class="nb">test</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># the following output as an example</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="nv">8522</span><span class="o">==</span>ERROR: AddressSanitizer: SEGV on unknown address 0x000000000008 <span class="o">(</span>pc 0x55ea517092cb bp 0x7ffe778b4900 sp 0x7ffe778b4900 T0<span class="o">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="nv">8522</span><span class="o">==</span>The signal is caused by a READ memory access.
+</span></span><span class="line"><span class="cl"><span class="o">==</span><span class="nv">8522</span><span class="o">==</span>Hint: address points to the zero page.
+</span></span><span class="line"><span class="cl">    <span class="c1">#0 0x55ea517092ca in q_remove_head lab0-c/queue.c:74</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#1 0x55ea51704880 in do_remove_head lab0-c/qtest.c:311</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#2 0x55ea51707054 in interpret_cmda lab0-c/console.c:217</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#3 0x55ea51707a58 in interpret_cmd lab0-c/console.c:240</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#4 0x55ea51708725 in cmd_select lab0-c/console.c:568</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#5 0x55ea51708b42 in run_console lab0-c/console.c:627</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#6 0x55ea51705c7d in main lab0-c/qtest.c:700</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#7 0x7facce0d8b96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">#8 0x55ea51703819 in _start (lab0-c/qtest+0x5819)</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><a href="https://www.slideshare.net/sermp/sanitizer-cppcon-russia"target="_blank" rel="external nofollow noopener noreferrer">Address/Thread/Memory Sanitizer</a></li>
+<li><a href="https://www.slideshare.net/slideshow/a-look-into-the-sanitizer-family-asan-ubsan-by-akul-pillai/135506952"target="_blank" rel="external nofollow noopener noreferrer">A look into the sanitizer family (ASAN &amp; UBSAN) by Akul Pillai</a></li>
+</ul>
+<h3 id="clang-format-工具和一致的程序撰写风格">clang-format 工具和一致的程序撰写风格</h3>
+<p>需要在当前目录或指定路径有 <code>.clang-format</code> 文件，然后通过以下使用方式:</p>
+<div class="highlight" id="id-14"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ clang-format -i *.<span class="o">[</span>ch<span class="o">]</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>相关程序风格查看原文即可</p>
+</blockquote>
+<h3 id="git-hooks-进行自动程式码排版检查">Git Hooks 进行自动程式码排版检查</h3>
+<p>第一次 make 后，Git pre-commit / pre-push hook 将被自动安装到当前的工作区 (workspace)，之后每次执行 git commit 時，<a href="https://www.atlassian.com/git/tutorials/git-hooks"target="_blank" rel="external nofollow noopener noreferrer">Git hook</a> 都会检查 C/C++ 的代码风格是否与 <code>.clang-format</code> 要求的一致，并同时通过 <a href="http://cppcheck.sourceforge.net/"target="_blank" rel="external nofollow noopener noreferrer">Cppcheck</a> 进行静态程序分析检查。</p>
+<div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>tig 可以更加方便的浏览 git repository 的信息:</p>
+<div class="highlight" id="id-28"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># install</span>
+</span></span><span class="line"><span class="cl">$ sudo apt install tig
+</span></span><span class="line"><span class="cl"><span class="c1"># read the manual</span>
+</span></span><span class="line"><span class="cl">$ tig --help
+</span></span><span class="line"><span class="cl"><span class="c1"># or if you have installed tldr</span>
+</span></span><span class="line"><span class="cl">$ tldr tig</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+    </div>
+  </div>
+<p>怎么写好一个 Git Commit:</p>
+<ul>
+<li>英文原文: <a href="https://cbea.ms/git-commit/"target="_blank" rel="external nofollow noopener noreferrer">How to Write a Git Commit Message</a></li>
+<li>中文翻译: <a href="https://blog.louie.lu/2017/03/21/%E5%A6%82%E4%BD%95%E5%AF%AB%E4%B8%80%E5%80%8B-git-commit-message/"target="_blank" rel="external nofollow noopener noreferrer">如何寫一個 Git Commit Message</a></li>
+</ul>
+<p>The seven rules of a great Git commit message:</p>
+<ol>
+<li>Separate subject from body with a blank line</li>
+<li>Limit the subject line to 50 characters</li>
+<li>Capitalize the subject line</li>
+<li>Do not end the subject line with a period</li>
+<li>Use the imperative mood in the subject line</li>
+<li>Wrap the body at 72 characters</li>
+<li>Use the body to explain what and why vs. how</li>
+</ol>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">請避免用 <code>$ git commit -m</code>，而是透過編輯器調整 git commit message。許多網路教學為了行文便利，用 <code>$ git commit -m</code> 示範，但這樣很容易讓人留下語焉不詳的訊息，未能提升為好的 Git Commit Message。因此，從今以後，不要用 <code>git commit -m</code>, 改用 <code>git commit -a</code> (或其他參數) 並詳細查驗變更的檔案。</div>
+    </div>
+  </div>
+<p>设置 Git 的默认编辑器为 Vim:</p>
+<div class="highlight" id="id-15"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git config --global core.editor vim</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="github-actions-设定">GitHub Actions 设定</h3>
+<blockquote>
+<p>GitHub Actions 是 GitHub 提供的 CI/CD 服務，CI/CD 代表的是 Continuous Integration 持續整合與 Continuous Deployment 持續部署，簡單來說就是將程式流程自動化。lab0-c 提供幾項自動化測試，包含：檢查排版、編譯結果和自動評分等等。這裡需要注意的是 fork 完成後，預設情況下 GitHub Action 不會被啟動，所以需要 <strong>手動開啟 GitHub Actions</strong>，在你所 fork 出的 repository 的 Actions 內點選 <code>I understand my workflows, go ahead and enable them</code></p>
+</blockquote>
+<blockquote>
+<p>開啟 GitHub Actions 後，當每次 push 到遠端時，GitHub 就會自動測試作業設計的檢查項目，當有錯誤時會收到 CI failed 的 email 通知。</p>
+</blockquote>
+<blockquote>
+<p>在現有的 GitHub Actions 對應的測試項目中，一旦收到 <code>git push</code> 的事件，系統就會自動執行 <code>make test</code>，並在失敗時發信件通知學員。</p>
+</blockquote>
+<blockquote>
+<p>點擊信件中的 <code>View workflow run</code> 即可在 GitHub 網站中得知 GitHub Actions 的測試狀況。</p>
+</blockquote>
+<h2 id="以-valgrind-分析内存问题">以 Valgrind 分析内存问题</h2>
+<p><a href="https://valgrind.org/"target="_blank" rel="external nofollow noopener noreferrer">Valgrind</a> is an instrumentation framework for building dynamic analysis tools. There are Valgrind tools that can automatically detect many memory management and threading bugs, and profile your programs in detail. You can also use Valgrind to build new tools.</p>
+<p>使用方式:</p>
+<div class="highlight" id="id-16"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ valgrind --tool<span class="o">=</span>&lt;toolname&gt; &lt;program&gt;</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><a href="http://maintainablecode.logdown.com/posts/245425-valgrind-is-not-a-leak-checker"target="_blank" rel="external nofollow noopener noreferrer">Valgrind is NOT a leak checker</a></li>
+</ul>
+<blockquote>
+<p>Valgrind is an undefined behavior checking tool first, a function and memory profiler second, a data-race detection tool third, and a leak checking tool last.</p>
+</blockquote>
+<div class="details admonition quote open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">dynamic Binary Instrumentation (DBI) 著重於二進位執行檔的追蹤與資訊彙整，而 dynamic Binary Analysis (DBA) 則強調對收集資訊的分析。上述 Valgrind 是個 DBI 系統框架，可建構一系列 DBA 工具，藉由 shadow values 技術來實作，後者要求對所有的暫存器和使用到的主記憶體做 shadow (即自行維護的副本)，這也使得 Valgrind 相較其他分析方法會較慢。</div>
+    </div>
+  </div>
+<div class="details admonition quote open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>也就是說，<a href="https://valgrind.org/"target="_blank" rel="external nofollow noopener noreferrer">Valgrind</a> 主要的手法是將暫存器和主記憶體的內容自行維護副本，並在任何情況下都可以安全正確地使用，同時記錄程式的所有操作，在不影響程式執行結果前提下，輸出有用的資訊。為了實作功能，<a href="https://valgrind.org/"target="_blank" rel="external nofollow noopener noreferrer">Valgrind</a> 利用 <a href="https://en.wikipedia.org/wiki/Dynamic_recompilation"target="_blank" rel="external nofollow noopener noreferrer">dynamic binary re-compilation</a> 把測試程式 (稱為 client 程式) 的機械碼解析到 VEX 中間表示法 (intermediate representation，簡稱 IR，是種虛擬的指令集架構，規範在原始程式碼 <a href="https://sourceware.org/git/?p=valgrind.git;a=blob;f=VEX/pub/libvex_ir.h"target="_blank" rel="external nofollow noopener noreferrer">VEX/pub/libvex_ir.h</a>)。VEX IR 在 <a href="https://valgrind.org/"target="_blank" rel="external nofollow noopener noreferrer">Valgrind</a> 採用執行導向的方式，以 just-in-time (JIT) 編譯技術動態地把機械碼轉為 IR，倘若觸發特定工具感興趣的事件 (如記憶體配置)，就會跳躍到對應的處理工具，後者會插入一些分析程式碼，再把這些程式碼轉換為機械碼，儲存到 code cache 中，以利後續需要時執行。</p>
+<div class="highlight" id="id-29"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Machine Code --&gt; IR --&gt; IR --&gt; Machine Code
+</span></span><span class="line"><span class="cl">        ^        ^      ^
+</span></span><span class="line"><span class="cl">        |        |      |
+</span></span><span class="line"><span class="cl">    translate    |      |
+</span></span><span class="line"><span class="cl">                 |      |
+</span></span><span class="line"><span class="cl">            instrument  |
+</span></span><span class="line"><span class="cl">                        |
+</span></span><span class="line"><span class="cl">                     translate  </span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+    </div>
+  </div>
+<p>Valgrind 启动后会对 client 程序进行转换，所以 Valgrind 执行的是加工后的 client 程序:</p>
 <ul>
 <li>2007 年的论文: <a href="https://valgrind.org/docs/valgrind2007.pdf"target="_blank" rel="external nofollow noopener noreferrer">Valgrind: A Framework for Heavyweight Dynamic Binary Instrumentation</a></li>
 <li>繁体中文版本的 <a href="https://wdv4758h-notes.readthedocs.io/zh_TW/latest/valgrind/dynamic-binary-instrumentation.html"target="_blank" rel="external nofollow noopener noreferrer">论文导读</a></li>
 </ul>
+<h3 id="valgrind-使用案例">Valgrind 使用案例</h3>
+<p>安装调试工具以让 Valgrind 更好地进行分析:</p>
+<div class="highlight" id="id-17"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install libc6-dbg</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="memory-leak">Memory Leak</h4>
+<p>常见错误有: <code>malloc</code> 了一个空间但没 <code>free</code> 导致内存泄露</p>
 <p>memory lost:</p>
 <ul>
 <li>definitely lost</li>
@@ -221,7 +791,7 @@
 <li>still readchable</li>
 </ul>
 <p>运行 valgrind 和 gdb 类似，都需要使用 <code>-g</code> 参数来编译 C/C++ 源程序以生成调试信息，然后还可以通过 <code>-q</code> 参数指示 valgrind 进入 quite 模式，减少启动时信息的输出。</p>
-<div class="highlight" id="id-1"><div class="chroma">
+<div class="highlight" id="id-18"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -233,11 +803,21 @@
 <li><code>--show-possibly-lost=no</code>: 不输出 possibly lost 相关报告</li>
 <li><code>--track-fds=yes</code>: 侦测 file descriptor 开了没关的情况</li>
 </ul>
+<h4 id="invalid-memory-access">Invalid Memory Access</h4>
+<p>常见错误有: <code>malloc</code> 了并 <code>free</code> 但又对这个已经被 free 的空间进行操作，即 <a href="https://cwe.mitre.org/data/definitions/416.html"target="_blank" rel="external nofollow noopener noreferrer">Use After Free</a></p>
 <blockquote>
 <p>valgrind 输出的报告 invalid write/read 这类的单位是 Byte，即 size of X (bytes)</p>
 </blockquote>
-<p>程序运行时内存布局:</p>
+<h4 id="other">Other</h4>
+<ul>
+<li><code>Conditional jump or move depends on uninitialised value(s)</code> 这个错误一般是因为使用了没有结束字符 (null-terminated string) 的字符串</li>
+<li>不同函数使用了不合法的栈空间，例如函数 A 使用了已经返回了的函数 B 的栈空间，这样的操作是不合法的</li>
+<li>对局部变量的存取超过范围会导致 <code>stack corrupt</code> (个人感觉等同 stack overflow)</li>
+</ul>
+<p>程序运行时的内存布局:</p>
 <a class="lightgallery" href="https://i.imgur.com/OhqUECc.png?size=large" data-thumbnail="https://i.imgur.com/OhqUECc.png?size=small" data-sub-html="<h2>https://i.imgur.com/OhqUECc.png</h2>"><img loading="lazy" src="https://i.imgur.com/OhqUECc.png" srcset="https://i.imgur.com/OhqUECc.png?size=small, https://i.imgur.com/OhqUECc.png?size=medium 1.5x, https://i.imgur.com/OhqUECc.png?size=large 2x" sizes="auto" data-title="https://i.imgur.com/OhqUECc.png" data-alt="https://i.imgur.com/OhqUECc.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p>Valgrind 配合 <a href="https://valgrind.org/docs/manual/ms-manual.html"target="_blank" rel="external nofollow noopener noreferrer">Massif</a> 可以对程序运行时的内存行为进行可视化:</p>
+<a class="lightgallery" href="https://imgur.com/F7hbcsN.png?size=large" data-thumbnail="https://imgur.com/F7hbcsN.png?size=small" data-sub-html="<h2>https://imgur.com/F7hbcsN.png</h2>"><img loading="lazy" src="https://imgur.com/F7hbcsN.png" srcset="https://imgur.com/F7hbcsN.png?size=small, https://imgur.com/F7hbcsN.png?size=medium 1.5x, https://imgur.com/F7hbcsN.png?size=large 2x" sizes="auto" data-title="https://imgur.com/F7hbcsN.png" data-alt="https://imgur.com/F7hbcsN.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <div class="details admonition info open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -250,7 +830,19 @@
 </div>
     </div>
   </div>
-<h2 id="自动测试">自动测试</h2>
+<p>lab0-c 也引入了 Valgrind 来协助侦测实验过程中可能出现的内存相关问题，例如 <a href="https://en.wikipedia.org/wiki/Memory_leak"target="_blank" rel="external nofollow noopener noreferrer">memory leak</a>, <a href="https://en.wikipedia.org/wiki/Buffer_overflow"target="_blank" rel="external nofollow noopener noreferrer">buffer overflow</a>, <a href="https://en.wikipedia.org/wiki/Dangling_pointer"target="_blank" rel="external nofollow noopener noreferrer">Dangling pointer</a> 等等。使用方式如下:</p>
+<div class="highlight" id="id-19"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ make valgrind</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="自动测试程序">自动测试程序</h2>
+<ul>
+<li><a href="https://man7.org/linux/man-pages/man7/signal.7.html"target="_blank" rel="external nofollow noopener noreferrer">signal</a></li>
+<li>异常执行流</li>
+</ul>
 <h3 id="追踪内存的分配和释放">追踪内存的分配和释放</h3>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> Wikipedia: <a href="https://en.wikipedia.org/wiki/Hooking"target="_blank" rel="external nofollow noopener noreferrer">Hooking</a></li>
@@ -260,43 +852,161 @@
 <blockquote>
 <p>The alignment of a zero-length array is the same as the alignment of its elements.</p>
 </blockquote>
-<a class="lightgallery" href="https://imgur-backup.hackmd.io/j1fRN0B.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/j1fRN0B.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/j1fRN0B.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/j1fRN0B.png" srcset="https://imgur-backup.hackmd.io/j1fRN0B.png?size=small, https://imgur-backup.hackmd.io/j1fRN0B.png?size=medium 1.5x, https://imgur-backup.hackmd.io/j1fRN0B.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/j1fRN0B.png" data-alt="https://imgur-backup.hackmd.io/j1fRN0B.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
-<p>相关源代码阅读 (harness.h, harness.c):</p>
+<p><a class="lightgallery" href="https://imgur-backup.hackmd.io/j1fRN0B.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/j1fRN0B.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/j1fRN0B.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/j1fRN0B.png" srcset="https://imgur-backup.hackmd.io/j1fRN0B.png?size=small, https://imgur-backup.hackmd.io/j1fRN0B.png?size=medium 1.5x, https://imgur-backup.hackmd.io/j1fRN0B.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/j1fRN0B.png" data-alt="https://imgur-backup.hackmd.io/j1fRN0B.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/nkCgAZL.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/nkCgAZL.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/nkCgAZL.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/nkCgAZL.png" srcset="https://imgur-backup.hackmd.io/nkCgAZL.png?size=small, https://imgur-backup.hackmd.io/nkCgAZL.png?size=medium 1.5x, https://imgur-backup.hackmd.io/nkCgAZL.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/nkCgAZL.png" data-alt="https://imgur-backup.hackmd.io/nkCgAZL.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a></p>
 <ul>
-<li><code>test_malloc()</code></li>
-<li><code>test_free()</code></li>
-<li><code>test_calloc()</code></li>
-<li><code>find_footer()</code></li>
-<li><code>find_header()</code></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://frankchang0125.blogspot.com/2013/01/c-struct-hack-structure-with-variable.html"target="_blank" rel="external nofollow noopener noreferrer">C Struct Hack - Structure with variable length array</a></li>
 </ul>
-<h3 id="qtest-命令解释器">qtest 命令解释器</h3>
+<p>相关源代码阅读 (<a href="https://github.com/sysprog21/lab0-c/blob/master/harness.h"target="_blank" rel="external nofollow noopener noreferrer">harness.h</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/harness.c"target="_blank" rel="external nofollow noopener noreferrer">harness.c</a>):</p>
+<div class="highlight" id="id-20"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">__block_element</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">__block_element</span> <span class="o">*</span><span class="n">next</span><span class="p">,</span> <span class="o">*</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">size_t</span> <span class="n">payload_size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">size_t</span> <span class="n">magic_header</span><span class="p">;</span> <span class="cm">/* Marker to see if block seems legitimate */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">payload</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* Also place magic number at tail of every block */</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="kt">block_element_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* Find header of block, given its payload.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Signal error if doesn&#39;t seem like legitimate block
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">block_element_t</span> <span class="o">*</span><span class="nf">find_header</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* Given pointer to block, find its footer */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span> <span class="o">*</span><span class="nf">find_footer</span><span class="p">(</span><span class="kt">block_element_t</span> <span class="o">*</span><span class="n">b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* Implementation of application functions */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="o">*</span><span class="nf">test_malloc</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// cppcheck-suppress unusedFunction
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="o">*</span><span class="nf">test_calloc</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">nelem</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">elsize</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test_free</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="qtest-命令解释器">qtest 命令解释器</h3>
 <p>新增指令 hello，用于打印 <code>Hello, world&quot;</code> 的信息。调用流程:</p>
-<div class="highlight" id="id-2"><div class="chroma">
+<div class="highlight" id="id-21"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">main → run_console → cmd_select → interpret_cmd → interpret_cmda → do_hello</span></span></code></pre></td></tr></table>
+</div>
+</div><p>相关源代码阅读 (<a href="https://github.com/sysprog21/lab0-c/blob/master/console.h"target="_blank" rel="external nofollow noopener noreferrer">console.h</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/console.c"target="_blank" rel="external nofollow noopener noreferrer">console.c</a>):</p>
+<div class="highlight" id="id-22"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">__cmd_element</span> <span class="p">{...}</span> <span class="kt">cmd_element_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* Optionally supply function that gets invoked when parameter changes */</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="nf">void</span> <span class="p">(</span><span class="o">*</span><span class="kt">setter_func_t</span><span class="p">)(</span><span class="kt">int</span> <span class="n">oldval</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* Integer-valued parameters */</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">__param_element</span> <span class="p">{...}</span> <span class="kt">param_element_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* Initialize interpreter */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">init_cmd</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* Add a new command */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_cmd</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">,</span> <span class="kt">cmd_func_t</span> <span class="n">operation</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">summary</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">parameter</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define ADD_COMMAND(cmd, msg, param) add_cmd(#cmd, do_##cmd, msg, param)
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* Add a new parameter */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">add_param</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">name</span><span class="p">,</span> <span class="kt">int</span> <span class="o">*</span><span class="n">valp</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">summary</span><span class="p">,</span> <span class="kt">setter_func_t</span> <span class="n">setter</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* Execute a command that has already been split into arguments */</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">bool</span> <span class="nf">interpret_cmda</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition danger open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-skull-crossbones fa-fw" aria-hidden="true"></i>危险<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">原文的「命令直译器的初始化准备」部分，示例的代码片段与最新的代码有许多差别 (特别是结构体的名称)，一定要搭配阅读最新的源码，否则会十分迷糊。</div>
+    </div>
+  </div>
+<h3 id="signal-处理和应用">Signal 处理和应用</h3>
+<p>Linux manual page:</p>
+<ul>
+<li><a href="https://man7.org/linux/man-pages/man2/signal.2.html"target="_blank" rel="external nofollow noopener noreferrer">signal(2)</a></li>
+</ul>
+<blockquote>
+<p>signal() sets the disposition of the signal signum to handler, which is either SIG_IGN, SIG_DFL, or the address of a  programmer-defined  function (a &ldquo;signal handler&rdquo;).</p>
+</blockquote>
+<div class="highlight" id="id-23"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">main → run_console → cmd_select → interpret_cmd → parse_args
-</span></span><span class="line"><span class="cl">                                                → interpret_cmda → do_hello</span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">q_init</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fail_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">INIT_LIST_HEAD</span><span class="p">(</span><span class="o">&amp;</span><span class="n">chain</span><span class="p">.</span><span class="n">head</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">signal</span><span class="p">(</span><span class="n">SIGSEGV</span><span class="p">,</span> <span class="n">sigsegv_handler</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">signal</span><span class="p">(</span><span class="n">SIGALRM</span><span class="p">,</span> <span class="n">sigalrm_handler</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>相关源代码阅读 (console.h, console.c):</p>
-<ul>
-<li><code>init_cmd()</code></li>
-<li><code>ADD_COMMADN</code></li>
-<li><code>add_cmd()</code></li>
-</ul>
-<h3 id="signal">Signal</h3>
-<ul>
-<li><a href="https://man7.org/linux/man-pages/man2/signal.2.html"target="_blank" rel="external nofollow noopener noreferrer">signal(2) — Linux manual page</a></li>
+</div><ul>
+<li><a href="https://man7.org/linux/man-pages/man2/alarm.2.html"target="_blank" rel="external nofollow noopener noreferrer">alarm(2)</a></li>
 </ul>
 <blockquote>
-<p>signal() sets the disposition of the signal signum to handler, which is
-either SIG_IGN, SIG_DFL, or the address of a  programmer-defined  func‐
-tion (a &ldquo;signal handler&rdquo;).</p>
+<p>alarm() arranges for a SIGALRM signal to be delivered to the calling process in seconds seconds. If seconds is zero, any pending alarm is canceled. In any event any previously set alarm() is canceled.</p>
 </blockquote>
 <ul>
-<li><a href="https://man7.org/linux/man-pages/man3/longjmp.3.html"target="_blank" rel="external nofollow noopener noreferrer">setjmp(3) — Linux manual page</a></li>
+<li><a href="https://man7.org/linux/man-pages/man3/longjmp.3.html"target="_blank" rel="external nofollow noopener noreferrer">setjmp(3)</a></li>
 </ul>
 <blockquote>
 <p>The functions described on this page are used for performing
@@ -305,6 +1015,12 @@ predetermined location in another function.  The setjmp()
 function dynamically establishes the target to which control will
 later be transferred, and longjmp() performs the transfer of
 execution.</p>
+</blockquote>
+<ul>
+<li><a href="https://linux.die.net/man/3/sigsetjmp"target="_blank" rel="external nofollow noopener noreferrer">sigsetjmp(3)</a></li>
+</ul>
+<blockquote>
+<p>setjmp() and sigsetjmp() return 0 if returning directly, and nonzero when returning from longjmp(3) or siglongjmp(3) using the saved context.</p>
 </blockquote>
 <p>Why use <code>sigsetjmp()</code>/<code>siglongjmp()</code> instead of <code>setjmp()</code>/<code>longjmp()</code>?</p>
 <ul>
@@ -317,44 +1033,174 @@ execution.</p>
 <p>However, there is a problem with using the standard longjmp() function to exit from a signal handler. We noted earlier that, upon entry to the signal handler, the kernel automatically adds the invoking signal, as well as any signals specified in the act.sa_mask field, to the process signal mask, and then removes these signals from the mask when the handler does a normal return.</p>
 <p>What happens to the signal mask if we exit the signal handler using longjmp()? The answer depends on the genealogy of the particular UNIX implementation.</p>
 </blockquote>
+<div class="details admonition quote open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">簡言之，當某個 signal handler 被觸發時，該 signal 會在執行 signal handler 時會被遮罩住，並在 signal handler 回傳時恢復。而，在裡面使用 longjmp 時，解除訊號遮罩的行為有可能不會發生(是否解除則依照實作決定)。為了保證在非區域跳躍後能夠恢復，所以 POSIX 另行規範得以在 signal handler 中呼叫的 <code>sigsetjmp</code> 跟 <code>siglongjmp</code>。</div>
+    </div>
+  </div>
 <ul>
 <li><code>jmp_ready</code> 技巧 (用于保证在 <code>siglongjmp()</code> 之前必然执行过一次 <code>sigsetjmp()</code>):</li>
 </ul>
 <blockquote>
 <p>Because a signal can be generated at any time, it may actually occur before the target of the goto has been set up by sigsetjmp() (or setjmp()). To prevent this possibility (which would cause the handler to perform a nonlocal goto using an uninitialized env buffer), we employ a guard variable, canJump, to indicate whether the env buffer has been initialized. If canJump is false, then instead of doing a nonlocal goto, the handler simply returns.</p>
 </blockquote>
-<p>相关源代码阅读:</p>
+<p>在执行 <code>siglongjmp</code> 之前执行一次 <code>sigsetjmp</code> 是必须的，这用于保存 <code>sigsetjmp</code> 所处地方的上下文，而 <code>sigsetjmp</code> 所处地方正是 <code>siglongjmp</code> 执行时需要跳转到的地方，所以为了保证长跳转后执行符合预取，需要保存上下文。</p>
+<div class="highlight" id="id-24"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">trigger_exception</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">jmp_ready</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">siglongjmp</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">exception_setup</span><span class="p">(</span><span class="kt">bool</span> <span class="n">limit_time</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">sigsetjmp</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Got here from longjmp */</span>
+</span></span><span class="line"><span class="cl">        <span class="n">jmp_ready</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* Got here from initial call */</span>
+</span></span><span class="line"><span class="cl">        <span class="n">jmp_ready</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>相关源代码阅读 (<a href="https://github.com/sysprog21/lab0-c/blob/master/qtest.c"target="_blank" rel="external nofollow noopener noreferrer">qtest.c</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/report.h"target="_blank" rel="external nofollow noopener noreferrer">report.h</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/report.c"target="_blank" rel="external nofollow noopener noreferrer">report.c</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/harness.h"target="_blank" rel="external nofollow noopener noreferrer">harness.h</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/harness.c"target="_blank" rel="external nofollow noopener noreferrer">harness.c</a>):</p>
+<div class="highlight" id="id-25"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* Signal handlers */</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">sigsegv_handler</span><span class="p">(</span><span class="kt">int</span> <span class="n">sig</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">sigalrm_handler</span><span class="p">(</span><span class="kt">int</span> <span class="n">sig</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* Use longjmp to return to most recent exception setup */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">trigger_exception</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">msg</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* Prepare for a risky operation using setjmp.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Function returns true for initial return, false for error return
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">exception_setup</span><span class="p">(</span><span class="kt">bool</span> <span class="n">limit_time</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">report_event</span><span class="p">(</span><span class="kt">message_t</span> <span class="n">msg</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">fmt</span><span class="p">,</span> <span class="p">...);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="检测非预期的内存操作或程序执行超时">检测非预期的内存操作或程序执行超时</h3>
+<p>由上面可知，当收到 <code>SIGSEGV</code> 或 <code>SIGALRM</code> 信号时，会通过 <code>signal handler</code> &#x27a1;&#xfe0f; <code>trigger_exception</code> &#x27a1;&#xfe0f; <code>exception_setup</code> 这一条链路执行。那么当 <code>exception_setup</code> 函数返回时会跳转到哪里呢？</p>
+<p>在 <a href="">qtest.c</a> 的形如 <code>do_&lt;operation&gt;</code> 这类函数里面，都会直接或间接的包含以下的程式码:</p>
+<div class="highlight" id="id-26"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">exception_setup</span><span class="p">(</span><span class="nb">true</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nf">exception_cancel</span><span class="p">();</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>回到稍早提及的 <code>if (exception_setup(true))</code> 敘述中，若是第一次回傳，那麼會開始測試函式。若測試函式的過程中，發生任何錯誤 (亦即觸發 <code>SIGSEGV</code> 或 SIGALRM 一類的 <code>signal</code>)，就會立刻跳回 signal handler。signal handler 會印出錯誤訊息，並進行 <code>siglongjmp</code>。由 <code>exception_setup</code> 的程式可以知道又是跳到 <code>exception_setup(true)</code> 裡面，但這時會回傳 <code>false</code>，因而跳過測試函式，直接結束測試並回傳 <code>ok</code> 內含值。換言之，<code>exception_cancel()</code> 後就算再發生 <code>SIGALRM</code> 或 <code>SIGSEGV</code>，也不會再有機會回到 exception_setup() 裡面。</p>
+</blockquote>
+<h2 id="整合网页服务器">整合网页服务器</h2>
+<h3 id="整合-tiny-web-server">整合 tiny-web-server</h3>
 <ul>
-<li>qtest.c
-<ul>
-<li><code>q_init()</code></li>
-<li><code>sigsegv_handler()</code></li>
-<li><code>sigalrm_handler()</code></li>
+<li><a href="https://github.com/7890/tiny-web-server"target="_blank" rel="external nofollow noopener noreferrer">tiny-web-server</a></li>
 </ul>
-</li>
-<li>harness.c
+<div class="details admonition danger open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-skull-crossbones fa-fw" aria-hidden="true"></i>危险<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">原文的示例的代码片段与最新的代码有许多差别 (特别是函数的名称)，一定要搭配阅读最新的源码，否则会十分迷糊。</div>
+    </div>
+  </div>
+<p>程序等待输入的调用链 (<a href="https://github.com/sysprog21/lab0-c/blob/master/linenoise.c"target="_blank" rel="external nofollow noopener noreferrer">linenoise.c</a>):</p>
+<div class="highlight" id="id-27"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">linenoise() -&gt; line_raw() -&gt; line_edit()</span></span></code></pre></td></tr></table>
+</div>
+</div><p>但 <code>line_edit</code> 中是使用 <code>read</code> 等待用户输入，所以当 <code>read</code> 阻塞时就无法接收来自 web 传来的信息。尝试使用 <code>select()</code> 来同时处理标准输入 <code>stdin</code> 和网络 <code>socket</code>。</p>
 <ul>
-<li><code>trigger_exception()</code></li>
-<li><code>exception_setup()</code></li>
+<li><a href="https://man7.org/linux/man-pages/man2/select.2.html"target="_blank" rel="external nofollow noopener noreferrer">select(2)</a></li>
 </ul>
-</li>
-</ul></div><div class="post-footer" id="post-footer">
+<blockquote>
+<p>On success, select() and pselect() return the number of file
+descriptors contained in the three returned descriptor sets (that
+is, the total number of bits that are set in readfds, writefds,
+exceptfds).  The return value may be zero if the timeout expired
+before any file descriptors became ready.</p>
+<p>On error, -1 is returned, and errno is set to indicate the error;
+the file descriptor sets are unmodified, and timeout becomes
+undefined.</p>
+</blockquote>
+<a class="lightgallery" href="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg?size=large" data-thumbnail="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg?size=small" data-sub-html="<h2>https://hackmd.io/_uploads/HJ0_t8Kf9.jpg</h2>"><img loading="lazy" src="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg" srcset="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg?size=small, https://hackmd.io/_uploads/HJ0_t8Kf9.jpg?size=medium 1.5x, https://hackmd.io/_uploads/HJ0_t8Kf9.jpg?size=large 2x" sizes="auto" data-title="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg" data-alt="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p><code>select</code> 和 <code>poll</code> 都是上图所示的多路 I/O 复用的模型，优势在于可以同时处理多个 file descriptor，但缺点在于需要使用 2 次 syscall，第一次是等待 kernel 发出通知，第二次是从 kernel 拷贝数据，每次 syscall 都需要进行 context switch，导致这个模型比其他的 I/O 模型开销大 (context switch 开销是很大的)。</p>
+<p>相关源代码阅读 (<a href="https://github.com/sysprog21/lab0-c/blob/master/linenoise.h"target="_blank" rel="external nofollow noopener noreferrer">linenoise.h</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/linenoise.c"target="_blank" rel="external nofollow noopener noreferrer">linenoise.c</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/console.c"target="_blank" rel="external nofollow noopener noreferrer">console.c</a>):</p>
+<h2 id="在-qtest-提供新命令-shuffle">在 qtest 提供新命令 shuffle</h2></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-03-04 12:46:31">更新于 2024-03-04&nbsp;</span>
+        <span title="更新于 2024-05-05 13:47:55">更新于 2024-05-05&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/linux2023-lab0/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: C Programming Lab" data-hashtags="Sysprog,Linux,C"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: lab0-c" data-hashtags="Sysprog,Linux,C"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: C Programming Lab" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: C Programming Lab"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: C Programming Lab"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: C Programming Lab" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: C Programming Lab" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: C Programming Lab"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: lab0-c" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: lab0-c"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: lab0-c"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: lab0-c" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: lab0-c" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: lab0-c"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
       </div>
     </div>
@@ -382,5 +1228,5 @@ execution.</p>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-23":{"title":"qinit.c"}},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

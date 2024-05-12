@@ -13,8 +13,8 @@
 <meta itemprop="description" content="
 在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
 "><meta itemprop="datePublished" content="2024-02-28T20:46:33+08:00" />
-<meta itemprop="dateModified" content="2024-04-19T17:31:37+08:00" />
-<meta itemprop="wordCount" content="9356"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-05-01T20:00:05+08:00" />
+<meta itemprop="wordCount" content="9359"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux," /><meta property="og:title" content="Linux 核心设计/实作 (Linux Kernel Internals)" />
 <meta property="og:description" content="
 在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
@@ -22,7 +22,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/linux2023/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-28T20:46:33+08:00" />
-<meta property="article:modified_time" content="2024-04-19T17:31:37+08:00" />
+<meta property="article:modified_time" content="2024-05-01T20:00:05+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Linux 核心设计/实作 (Linux Kernel Internals)"/>
@@ -32,7 +32,7 @@
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/linux2023/" /><link rel="prev" href="https://ccrysisa.github.io/posts/c-compiler-optimization/" /><link rel="next" href="https://ccrysisa.github.io/posts/english/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/linux2023/" /><link rel="prev" href="https://ccrysisa.github.io/posts/rust-cli/" /><link rel="next" href="https://ccrysisa.github.io/posts/english/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -43,8 +43,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux2023\/"
-    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  9356 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023\/","datePublished": "2024-02-28T20:46:33+08:00","dateModified": "2024-04-19T17:31:37+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  9359 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023\/","datePublished": "2024-02-28T20:46:33+08:00","dateModified": "2024-05-01T20:00:05+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -75,7 +75,13 @@
                 href="/tags/"
                 
                 
-              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-user-group fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
             <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
             <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
               <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
@@ -138,7 +144,14 @@
                   href="/tags/"
                   
                   
-                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item menu-system">
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-user-group fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item menu-system">
           <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
       </ul>
     </nav>
@@ -159,7 +172,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-28 20:46:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="更新于 2024-04-19 17:31:37"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-19">2024-04-19</time></span>&nbsp;<span title="9356 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 9400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 19 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-28 20:46:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="更新于 2024-05-01 20:00:05"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-01">2024-05-01</time></span>&nbsp;<span title="9359 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 9400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 19 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -173,6 +186,7 @@
         <li><a href="#第-2-週-c-語言程式設計">第 2 週: C 語言程式設計</a></li>
         <li><a href="#第-3-週-並行和-c-語言程式設計">第 3 週: 並行和 C 語言程式設計</a></li>
         <li><a href="#第-4-週-數值系統--編譯器">第 4 週: 數值系統 + 編譯器</a></li>
+        <li><a href="#第-5-週-linux-cpu-scheduler">第 5 週: Linux CPU scheduler</a></li>
       </ul>
     </li>
   </ul>
@@ -180,9 +194,11 @@
       </div><div class="content" id="content"><blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
 </blockquote>
-<p><a href="http://wiki.csie.ncku.edu.tw/linux/schedule?revision=ff44817ff7c75ed4ec0d22e6fdc3337af1f597c3"target="_blank" rel="external nofollow noopener noreferrer">原始页面<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
-|
-<a href="/archives/Linux.pdf">PDF</a></p>
+<ul>
+<li><a href="http://wiki.csie.ncku.edu.tw/linux/schedule?revision=ff44817ff7c75ed4ec0d22e6fdc3337af1f597c3"target="_blank" rel="external nofollow noopener noreferrer">原始页面</a>
+/
+<a href="/archives/Linux.pdf">PDF</a></li>
+</ul>
 <div class="details admonition success open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-check-circle fa-fw" aria-hidden="true"></i>成功<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -193,7 +209,6 @@
 </div>
     </div>
   </div>
-<hr>
 <ul>
 <li>Instructor: <a href="/User/jserv">Jim Huang</a> (黃敬群) <code>&lt;jserv.tw@gmail.com&gt;</code></li>
 <li><a href="/linux/schedule-old">往年課程進度</a></li>
@@ -347,7 +362,7 @@
 <li><a href="https://hackmd.io/@sysprog/concurrency/"target="_blank" rel="external nofollow noopener noreferrer">並行和多執行緒程式設計</a><code>*</code>: 應涵蓋 Part 1 到 Part 4
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> Part 1: 概念、执行顺序</li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> Part 2</li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> Part 2: POSIX Thread</li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> Part 3</li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> Part 4</li>
 </ul>
@@ -367,7 +382,7 @@
 <li>C 語言之所以不需要時常發佈新的語言特徵又可以保持活力，前置處理器 (preprocessor) 是很重要的因素，有心者可逕行「擴充」C 語言</li>
 </ul>
 </li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-control-flow"target="_blank" rel="external nofollow noopener noreferrer">C 語言: goto 和流程控制</a><code>*</code>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-control-flow"target="_blank" rel="external nofollow noopener noreferrer">C 語言: goto 和流程控制</a><code>*</code>
 <ul>
 <li>goto 在 C 語言被某些人看做是妖魔般的存在，不過實在不用這樣看待，至少在 Linux 核心原始程式碼中，goto 是大量存在 (跟你想像中不同吧)。有時不用 goto 會寫出更可怕的程式碼</li>
 </ul>
@@ -387,7 +402,7 @@
 <p>(Mar 6, 7, 9)</p>
 </blockquote>
 <ul>
-<li><a href="https://youtu.be/cjq0OuUeepA"target="_blank" rel="external nofollow noopener noreferrer">教材解說</a><code>*</code> (僅止於概況，請詳閱下方教材及個別的對應解說錄影)</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://youtu.be/cjq0OuUeepA"target="_blank" rel="external nofollow noopener noreferrer">教材解說</a><code>*</code> (僅止於概況，請詳閱下方教材及個別的對應解說錄影)</li>
 </ul>
 <ul>
 <li>公告:
@@ -398,28 +413,28 @@
 </li>
 <li>貢獻程式碼到 Linux 核心
 <ul>
-<li><a href="https://hackmd.io/@rhythm/BkjJeugOv"target="_blank" rel="external nofollow noopener noreferrer">第一次給 Linux Kernel 發 patch</a></li>
-<li><a href="https://hackmd.io/@steven1lung/submitting-patches"target="_blank" rel="external nofollow noopener noreferrer">提交第一份 Patch 到 Linux Kernel</a></li>
-<li><a href="https://hackmd.io/@Risheng/ry5futJF9"target="_blank" rel="external nofollow noopener noreferrer">第一次發 patch 到 LKML</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@rhythm/BkjJeugOv"target="_blank" rel="external nofollow noopener noreferrer">第一次給 Linux Kernel 發 patch</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@steven1lung/submitting-patches"target="_blank" rel="external nofollow noopener noreferrer">提交第一份 Patch 到 Linux Kernel</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@Risheng/ry5futJF9"target="_blank" rel="external nofollow noopener noreferrer">第一次發 patch 到 LKML</a></li>
 </ul>
 </li>
-<li><a href="https://vgod.medium.com/7cccc3c68f1e"target="_blank" rel="external nofollow noopener noreferrer">追求神乎其技的程式設計之道</a>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://vgod.medium.com/7cccc3c68f1e"target="_blank" rel="external nofollow noopener noreferrer">追求神乎其技的程式設計之道</a>
 <ul>
 <li>「可以看出抄襲風氣在台灣並不只是小時候在學校抄抄作業而已；媒體工作者在報導中任意抄襲及轉載是種不尊重自己專業的表現，不但隱含著一種應付了事的心態，更代表著這些人對於自己的工作沒有熱情，更沒有著一點堅持。如果要說我在美國看到這邊和台灣有什麼最大的不同，我想關鍵的差異就在對自己的工作有沒有熱情和堅持而已了。」</li>
 <li>「程式藝術家也不過是在『簡潔』、『彈性』、『效率』這三大目標上進行一連串的取捨 (trade-off) 和最佳化。」</li>
 </ul>
 </li>
-<li><a href="https://hackmd.io/@sysprog/linux-rbtree"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心的紅黑樹</a></li>
-<li><a href="https://hackmd.io/@sysprog/CSAPP-ch2"target="_blank" rel="external nofollow noopener noreferrer">CS:APP 第 2 章重點提示和練習</a><code>*</code></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/linux-rbtree"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心的紅黑樹</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/CSAPP-ch2"target="_blank" rel="external nofollow noopener noreferrer">CS:APP 第 2 章重點提示和練習</a><code>*</code></li>
 <li>核心開發者當然要熟悉編譯器行為
 <ul>
-<li><a href="https://lkml.org/lkml/2019/2/25/1092"target="_blank" rel="external nofollow noopener noreferrer">Linus Torvalds 教你分析 gcc 行為</a></li>
-<li><a href="https://pvs-studio.com/en/blog/posts/cpp/0576/"target="_blank" rel="external nofollow noopener noreferrer">Pointers are more abstract than you might expect in C</a> / <a href="https://news.ycombinator.com/item?id=17439467"target="_blank" rel="external nofollow noopener noreferrer">HackerNews 討論</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://lkml.org/lkml/2019/2/25/1092"target="_blank" rel="external nofollow noopener noreferrer">Linus Torvalds 教你分析 gcc 行為</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://pvs-studio.com/en/blog/posts/cpp/0576/"target="_blank" rel="external nofollow noopener noreferrer">Pointers are more abstract than you might expect in C</a> / <a href="https://news.ycombinator.com/item?id=17439467"target="_blank" rel="external nofollow noopener noreferrer">HackerNews 討論</a></li>
 </ul>
 </li>
-<li><a href="https://hackmd.io/@sysprog/c-compiler-construction"target="_blank" rel="external nofollow noopener noreferrer">C 編譯器原理和案例分析</a><code>*</code></li>
-<li><a href="https://hackmd.io/@sysprog/c-undefined-behavior"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 未定義行為</a><code>*</code>: C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化</li>
-<li><a href="https://hackmd.io/@sysprog/c-compiler-optimization"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 編譯器和最佳化原理</a><code>*</code></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-compiler-construction"target="_blank" rel="external nofollow noopener noreferrer">C 編譯器原理和案例分析</a><code>*</code></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-undefined-behavior"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 未定義行為</a><code>*</code>: C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化</li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-compiler-optimization"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 編譯器和最佳化原理</a><code>*</code></li>
 <li>《Demystifying the Linux CPU Scheduler》第 1 章</li>
 <li><a href="https://hackmd.io/@sysprog/linux2023-homework4"target="_blank" rel="external nofollow noopener noreferrer">作業</a>: 截止繳交日: Mar 30
 <ul>
@@ -431,9 +446,10 @@
 <ul>
 <li><a href="https://hackmd.io/@sysprog/rJVas7NJn"target="_blank" rel="external nofollow noopener noreferrer">課堂問答簡記</a></li>
 </ul>
-<ul>
-<li>
-<p>第 5 週 (Mar 13, 14, 16): Linux CPU scheduler</p>
+<h3 id="第-5-週-linux-cpu-scheduler">第 5 週: Linux CPU scheduler</h3>
+<blockquote>
+<p>(Mar 13, 14, 16)</p>
+</blockquote>
 <ul>
 <li><a href="https://youtu.be/f-SprmkcOI0"target="_blank" rel="external nofollow noopener noreferrer">教材解說</a><code>*</code> (僅止於概況，請詳閱下方教材及個別的對應解說錄影)</li>
 </ul>
@@ -470,7 +486,7 @@
 <ul>
 <li><a href="https://hackmd.io/@sysprog/rJVas7NJn"target="_blank" rel="external nofollow noopener noreferrer">課堂問答簡記</a></li>
 </ul>
-</li>
+<ul>
 <li>
 <p>第 6 週 (Mar 20, 21, 23): System call + CPU Scheduler</p>
 <ul>
@@ -936,7 +952,7 @@ Applications For Linux</a> / <a href="https://evlproject.org/"target="_blank" re
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-04-19 17:31:37">更新于 2024-04-19&nbsp;</span>
+        <span title="更新于 2024-05-01 20:00:05">更新于 2024-05-01&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/linux2023/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -961,7 +977,7 @@ Applications For Linux</a> / <a href="https://evlproject.org/"target="_blank" re
     </section>
   </div>
 
-  <div class="post-nav"><a href="/posts/c-compiler-optimization/" class="post-nav-item" rel="prev" title="你所不知道的 C 语言: 编译器和最佳化原理篇"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>你所不知道的 C 语言: 编译器和最佳化原理篇</a>
+  <div class="post-nav"><a href="/posts/rust-cli/" class="post-nav-item" rel="prev" title="Command Line Applications in Rust"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Command Line Applications in Rust</a>
       <a href="/posts/english/" class="post-nav-item" rel="next" title="English Everyday">English Everyday<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
