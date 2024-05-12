@@ -215,3 +215,15 @@ wine
 
 cinema
 - *n.*
+
+attendant
+- *n.*
+
+garage
+- *n.*
+
+lamp-post
+- *n.*
+
+pilot
+- *n.*

@@ -118,11 +118,20 @@ typedef struct Block_t {
 {{< /admonition >}}
 
 {{< admonition abstract >}} 
-Georgia Tech - **Advanced Operating Systems**:
+Udacity (Georgia Tech):
+
+- Advanced Operating Systems:
 [Part 1](https://www.youtube.com/playlist?list=PLAwxTw4SYaPkKfusBLVfklgfdcB3BNpwX) /
 [Part 2](https://www.youtube.com/playlist?list=PLAwxTw4SYaPm4vV1XbFV93ZuT2saSq1hO) /
 [Part 3](https://www.youtube.com/playlist?list=PLAwxTw4SYaPk5-YaXFkWY4UXdv6pVdiYg) /
 [Part 4](https://www.youtube.com/playlist?list=PLAwxTw4SYaPmfaiuzJcK3tNoeKlvRR990)
+- High Performance Computer Architecture:
+[Part 1](https://www.youtube.com/playlist?list=PLAwxTw4SYaPmqpjgrmf4-DGlaeV0om4iP) /
+[Part 2](https://www.youtube.com/playlist?list=PLAwxTw4SYaPkNw98-MFodLzKgi6bYGjZs) /
+[Part 3](https://www.youtube.com/playlist?list=PLAwxTw4SYaPnhRXZ6wuHnnclMLfg_yjHs) /
+[Part 4](https://www.youtube.com/playlist?list=PLAwxTw4SYaPn79fsplIuZG34KwbkYSedj) /
+[Part 5](https://www.youtube.com/playlist?list=PLAwxTw4SYaPkr-vo9gKBTid_BWpWEfuXe) /
+[Part 6](https://www.youtube.com/playlist?list=PLAwxTw4SYaPndXEsI4kAa6BDSTRbkCKJN)
 {{< /admonition >}}
 
 {{< admonition info >}} 
@@ -133,14 +142,20 @@ Reddit: [Best book to learn in-depth knowledge about the Linux Kernel?](https://
 {{< /admonition >}}
 
 {{< admonition tip >}} 
-WIkipedia: 
+Wikipedia: 
 [Xenix](https://en.wikipedia.org/wiki/Xenix) /
 [Multics](https://en.wikipedia.org/wiki/Multics) /
 [Plan9](https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs) /
 [FreeBSD](https://en.wikipedia.org/wiki/FreeBSD)
 {{< /admonition >}}
 
-{{< admonition success >}} 一个 成功 横幅 {{< /admonition >}}
+{{< admonition success >}}
+Talks:
+
+- [Developing Kernel Drivers with Modern C++ - Pavel Yosifovich](https://www.youtube.com/watch?v=AsSMKL5vaXw)
+- [Containers From Scratch • Liz Rice • GOTO 2018](https://www.youtube.com/watch?v=8fi7uSYlOdc)
+- [Rich Hickey Talks](https://www.youtube.com/playlist?list=PLZdCLR02grLrEwKaZv-5QbUzK0zGKOOcr)
+{{< /admonition >}}
 
 {{< admonition question >}} 一个 问题 横幅 {{< /admonition >}}
 
