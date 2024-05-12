@@ -1,36 +1,36 @@
 # 所有友链
 
 
-<!-- When you set data `friends.yml` in `yourProject/data/` directory, it will be automatically loaded here. -->
+&lt;!-- When you set data `friends.yml` in `yourProject/data/` directory, it will be automatically loaded here. --&gt;
 
 ---
 
-<!-- You can define additional content below for this page. -->
+&lt;!-- You can define additional content below for this page. --&gt;
 
-{{< details "Reminder" >}}
+{{&lt; details &#34;Reminder&#34; &gt;}}
 ## Base info
 
 ```yaml
 - nickname: Lruihao
   avatar: https://lruihao.cn/images/avatar.jpg
   url: https://lruihao.cn
-  description: Lruihao's Note
+  description: Lruihao&#39;s Note
 ```
 
 ## Friendly Reminder
 
-{{< admonition info "Notice" true >}}
+{{&lt; admonition info &#34;Notice&#34; true &gt;}}
 
 1. If you want to exchange link, please leave a comment in the above format. (personal non-commercial blogs / websites only)
 2. :(fa-solid fa-exclamation-triangle): Website failure, stop maintenance and improper content may be unlinked!
-3. Those websites that do not respect other people's labor achievements, reprint without source, or malicious acts, please do not come to exchange.
+3. Those websites that do not respect other people&#39;s labor achievements, reprint without source, or malicious acts, please do not come to exchange.
 
-{{< /admonition >}}
-{{< /details >}}
+{{&lt; /admonition &gt;}}
+{{&lt; /details &gt;}}
 
 
 ---
 
-> 作者: [ccrysisa](https://github.com/ccrysisa)  
+> 作者:   
 > URL: https://ccrysisa.github.io/friends/  
 
