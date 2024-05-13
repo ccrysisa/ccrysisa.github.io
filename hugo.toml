@@ -893,7 +893,7 @@ unsafe = true
 # 目录设置
 [markup.tableOfContents]
 startLevel = 2
-endLevel = 6
+endLevel = 5
 
 # 网站地图配置
 [sitemap]

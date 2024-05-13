@@ -16,7 +16,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。
 "><meta itemprop="datePublished" content="2024-04-23T15:17:38+08:00" />
 <meta itemprop="dateModified" content="2024-05-12T00:17:33+08:00" />
-<meta itemprop="wordCount" content="5527"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="5669"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Compiler," /><meta property="og:title" content="你所不知道的 C 语言: 编译器原理和案例分析" />
 <meta property="og:description" content="
 AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。
@@ -47,7 +47,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/"
-    },"genre": "posts","keywords": "Sysprog, C, Compiler","wordcount":  5527 ,
+    },"genre": "posts","keywords": "Sysprog, C, Compiler","wordcount":  5669 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/","datePublished": "2024-04-23T15:17:38+08:00","dateModified": "2024-05-12T00:17:33+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -176,7 +176,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-04-23 15:17:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-23">2024-04-23</time></span>&nbsp;<span title="更新于 2024-05-12 00:17:33"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-12">2024-05-12</time></span>&nbsp;<span title="5527 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 5600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 12 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-04-23 15:17:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-23">2024-04-23</time></span>&nbsp;<span title="更新于 2024-05-12 00:17:33"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-12">2024-05-12</time></span>&nbsp;<span title="5669 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 5700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 12 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -749,6 +749,22 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <p>当 <code>main</code> 函数返回后，根据上面的叙述，它会先执行第 4 行的 <code>PUSH</code> 指令，这个指令的作用是将 <code>main</code> 函数的返回值压入栈中 (因为 Return 语句生成的指令序列会将返回值放置在 <code>ax</code> 寄存器)。不用担心当且指令被覆盖的问题，因为这段代码配置的栈，并没有包括清除参数空间的逻辑，所以在 <code>main</code> 函数返回后，<code>sp</code> 指向的是第 6 行配置的 <code>argv</code> 参数处。</p>
 <p>执行完第 4 行的 <code>PUSH</code> 指令后，会接着执行第 3 行的 <code>EXIT</code> 指令，因为 (<code>pc</code> 寄存器在虚拟机运行时是递增的)，此时虚拟机将 <code>main</code> 函数的返回值作为本进程的返回值进行返回，并结束进程。</p>
 <h2 id="ir-intermediate-representation">IR (Intermediate representation)</h2>
+<ul>
+<li>Wikipedia: <a href=""></a></li>
+</ul>
+<blockquote>
+<p>An intermediate representation (IR) is the data structure or code used internally by a compiler or virtual machine to represent source code.</p>
+</blockquote>
+<blockquote>
+<p>An intermediate language is the language of an abstract machine designed to aid in the analysis of computer programs.</p>
+</blockquote>
+<blockquote>
+<p>A popular format for intermediate languages is three-address code.</p>
+</blockquote>
+<blockquote>
+<p>Though not explicitly designed as an intermediate language, C&rsquo;s nature as an abstraction of assembly and its ubiquity as the de facto system language in Unix-like and other operating systems has made it a popular intermediate language</p>
+</blockquote>
+<p>所以一般的 IR 长得和汇编语言比较像，但是比汇编高阶，因为 IR 是建立在这样的虚拟机器 (abstract machine designed to aid in the analysis of computer programs) 之上的。</p>
 <ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://www.slideshare.net/jserv/jit-compiler"target="_blank" rel="external nofollow noopener noreferrer">Interpreter, Compiler, JIT from scratch</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://eli.thegreenplace.net/2013/11/05/how-to-jit-an-introduction"target="_blank" rel="external nofollow noopener noreferrer">How to JIT - an introduction</a></li>
