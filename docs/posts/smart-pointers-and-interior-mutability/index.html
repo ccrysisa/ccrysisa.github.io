@@ -14,7 +14,7 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
 In this fourth Crust of Rust video, we cover smart pointers and interior mutability, by re-implementing the Cell, RefCell, and Rc types from the standard library. As part of that, we cover when those types are useful, how they work, and what the equivalent thread-safe versions of these types are. In the process, we go over some of the finer details of Rust&#39;s ownership model, and the UnsafeCell type. We also dive briefly into the Drop Check rabbit hole (https://doc.rust-lang.org/nightly/nomicon/dropck.html) before coming back up for air.
 "><meta itemprop="datePublished" content="2024-02-20T17:33:06+08:00" />
 <meta itemprop="dateModified" content="2024-03-04T23:05:35+08:00" />
-<meta itemprop="wordCount" content="2339"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="2332"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Smart pointer,Interior Mutability," /><meta property="og:title" content="Crust of Rust: Smart Pointers and Interior Mutability" />
 <meta property="og:description" content="
 In this fourth Crust of Rust video, we cover smart pointers and interior mutability, by re-implementing the Cell, RefCell, and Rc types from the standard library. As part of that, we cover when those types are useful, how they work, and what the equivalent thread-safe versions of these types are. In the process, we go over some of the finer details of Rust&#39;s ownership model, and the UnsafeCell type. We also dive briefly into the Drop Check rabbit hole (https://doc.rust-lang.org/nightly/nomicon/dropck.html) before coming back up for air.
@@ -43,7 +43,7 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/smart-pointers-and-interior-mutability\/"
-    },"genre": "posts","keywords": "Rust, Smart pointer, Interior Mutability","wordcount":  2339 ,
+    },"genre": "posts","keywords": "Rust, Smart pointer, Interior Mutability","wordcount":  2332 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/smart-pointers-and-interior-mutability\/","datePublished": "2024-02-20T17:33:06+08:00","dateModified": "2024-03-04T23:05:35+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -55,7 +55,7 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -101,7 +101,7 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -161,12 +161,18 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Crust of Rust: Smart Pointers and Interior Mutability</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/rust/" class="post-category" title="分类 - Rust"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div><div class="post-meta-line"><span title="发布于 2024-02-20 17:33:06"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="更新于 2024-03-04 23:05:35"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="2339 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-02-20 17:33:06"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-20">2024-02-20</time></span>&nbsp;<span title="更新于 2024-03-04 23:05:35"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="2332 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -201,9 +207,9 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
 <ul>
 <li>整理自 <a href="https://www.youtube.com/watch?v=8O0Nt9qY_vo"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></li>
 </ul>
-<h2 id="影片注解" class="heading-element">
-  <a href="#%e5%bd%b1%e7%89%87%e6%b3%a8%e8%a7%a3" class="heading-mark"></a>影片注解</h2><h3 id="interior-mutability" class="heading-element">
-  <a href="#interior-mutability" class="heading-mark"></a>Interior Mutability</h3><p>Module <a href="https://doc.rust-lang.org/std/cell/index.html"target="_blank" rel="external nofollow noopener noreferrer">std::cell</a></p>
+<h2 id="影片注解">影片注解</h2>
+<h3 id="interior-mutability">Interior Mutability</h3>
+<p>Module <a href="https://doc.rust-lang.org/std/cell/index.html"target="_blank" rel="external nofollow noopener noreferrer">std::cell</a></p>
 <blockquote>
 <p>Rust memory safety is based on this rule: Given an object T, it is only possible to have one of the following:</p>
 <ul>
@@ -226,12 +232,12 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
 <blockquote>
 <p>The UnsafeCell API itself is technically very simple: .get() gives you a raw pointer *mut T to its contents. It is up to you as the abstraction designer to use that raw pointer correctly.</p>
 </blockquote>
-<h3 id="cell" class="heading-element">
-  <a href="#cell" class="heading-mark"></a>Cell</h3><p>Module <a href="https://doc.rust-lang.org/std/cell/index.html#cellt"target="_blank" rel="external nofollow noopener noreferrer">std::cell Cell&lt;T&gt;</a></p>
+<h3 id="cell">Cell</h3>
+<p>Module <a href="https://doc.rust-lang.org/std/cell/index.html#cellt"target="_blank" rel="external nofollow noopener noreferrer">std::cell Cell&lt;T&gt;</a></p>
 <blockquote>
 <p><code>Cell&lt;T&gt;</code> implements interior mutability by moving values in and out of the cell. That is, an &amp;mut T to the inner value can never be obtained, and the value itself cannot be directly obtained without replacing it with something else. Both of these rules ensure that there is never more than one reference pointing to the inner value. This type provides the following methods:</p>
 </blockquote>
-<figure><a class="lightgallery" href="/images/rust/cell.drawio.svg?size=large" data-thumbnail="/images/rust/cell.drawio.svg?size=small" data-sub-html="<h2>Cell</h2>"><img loading="lazy" src="/images/rust/cell.drawio.svg" alt="/images/rust/cell.drawio.svg" srcset="/images/rust/cell.drawio.svg?size=small, /images/rust/cell.drawio.svg?size=medium 1.5x, /images/rust/cell.drawio.svg?size=large 2x" sizes="auto" data-title="/images/rust/cell.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Cell</figcaption>
+<figure><a class="lightgallery" href="/images/rust/cell.drawio.svg?size=large" data-thumbnail="/images/rust/cell.drawio.svg?size=small" data-sub-html="<h2>Cell</h2>"><img loading="lazy" src="/images/rust/cell.drawio.svg" srcset="/images/rust/cell.drawio.svg?size=small, /images/rust/cell.drawio.svg?size=medium 1.5x, /images/rust/cell.drawio.svg?size=large 2x" sizes="auto" data-title="/images/rust/cell.drawio.svg" data-alt="/images/rust/cell.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Cell</figcaption>
   </figure>
 <p>在 Rust 中对一个变量 (T)，在已存在其 immutable references (&amp;T) 时使用 mutable reference (&amp;mut T) 是禁止的，因为这样会因为编译器优化而导致程序的行为不一定符合我们的预期。考虑以下的代码:</p>
 <div class="highlight" id="id-1"><div class="chroma">
@@ -283,26 +289,26 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
       <div class="admonition-content"><code>Cell</code> 提供了这样一个“内部可变性”机制: <strong>在拥有对一个 object 多个引用时，可以通过任意一个引用对 object 进行内部可变，并保证在此之后其他引用对于该 object 的信息是最新的。</strong></div>
     </div>
   </div>
-<h3 id="refcell" class="heading-element">
-  <a href="#refcell" class="heading-mark"></a>RefCell</h3><p>Module <a href="https://doc.rust-lang.org/std/cell/index.html#refcellt"target="_blank" rel="external nofollow noopener noreferrer">std::cell RefCell&lt;T&gt;</a></p>
+<h3 id="refcell">RefCell</h3>
+<p>Module <a href="https://doc.rust-lang.org/std/cell/index.html#refcellt"target="_blank" rel="external nofollow noopener noreferrer">std::cell RefCell&lt;T&gt;</a></p>
 <blockquote>
 <p><code>RefCell&lt;T&gt;</code> uses Rust\’s lifetimes to implement &ldquo;dynamic borrowing&rdquo;, a process whereby one can claim temporary, exclusive, mutable access to the inner value. Borrows for <code>RefCell&lt;T&gt;\</code>s are tracked at runtime, unlike Rust’s native reference types which are entirely tracked statically, at compile time.</p>
 </blockquote>
 <ul>
 <li><strong>Runtime Borrow Check</strong></li>
 </ul>
-<figure><a class="lightgallery" href="/images/rust/refcell.drawio.svg?size=large" data-thumbnail="/images/rust/refcell.drawio.svg?size=small" data-sub-html="<h2>RefCell</h2>"><img loading="lazy" src="/images/rust/refcell.drawio.svg" alt="/images/rust/refcell.drawio.svg" srcset="/images/rust/refcell.drawio.svg?size=small, /images/rust/refcell.drawio.svg?size=medium 1.5x, /images/rust/refcell.drawio.svg?size=large 2x" sizes="auto" data-title="/images/rust/refcell.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">RefCell</figcaption>
+<figure><a class="lightgallery" href="/images/rust/refcell.drawio.svg?size=large" data-thumbnail="/images/rust/refcell.drawio.svg?size=small" data-sub-html="<h2>RefCell</h2>"><img loading="lazy" src="/images/rust/refcell.drawio.svg" srcset="/images/rust/refcell.drawio.svg?size=small, /images/rust/refcell.drawio.svg?size=medium 1.5x, /images/rust/refcell.drawio.svg?size=large 2x" sizes="auto" data-title="/images/rust/refcell.drawio.svg" data-alt="/images/rust/refcell.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">RefCell</figcaption>
   </figure>
 <p><code>RefCell</code> 也提供了之前所提的“内部可变性”机制，但是是通过提供 <em><strong>引用</strong></em> 而不是转移所有权来实现。所以它常用于 Tree, Graph 这类数据结构，因为这些数据结构的节点 &ldquo;很大&rdquo;，不大可能实现 Copy 的 Trait (因为开销太大了)，所以一般使用 <code>RefCell</code> 来实现节点的相互引用关系。</p>
-<h3 id="rc" class="heading-element">
-  <a href="#rc" class="heading-mark"></a>Rc</h3><p>method <a href="https://doc.rust-lang.org/std/boxed/struct.Box.html#method.into_raw"target="_blank" rel="external nofollow noopener noreferrer">std::boxed::Box::into_raw</a></p>
+<h3 id="rc">Rc</h3>
+<p>method <a href="https://doc.rust-lang.org/std/boxed/struct.Box.html#method.into_raw"target="_blank" rel="external nofollow noopener noreferrer">std::boxed::Box::into_raw</a></p>
 <blockquote>
 <p>After calling this function, the caller is responsible for the memory previously managed by the Box. In particular, the caller should properly destroy T and release the memory, taking into account the memory layout used by Box. The easiest way to do this is to convert the raw pointer back into a Box with the Box::from_raw function, allowing the Box destructor to perform the cleanup.</p>
 </blockquote>
-<figure><a class="lightgallery" href="/images/rust/rc.drawio.svg?size=large" data-thumbnail="/images/rust/rc.drawio.svg?size=small" data-sub-html="<h2>Rc</h2>"><img loading="lazy" src="/images/rust/rc.drawio.svg" alt="/images/rust/rc.drawio.svg" srcset="/images/rust/rc.drawio.svg?size=small, /images/rust/rc.drawio.svg?size=medium 1.5x, /images/rust/rc.drawio.svg?size=large 2x" sizes="auto" data-title="/images/rust/rc.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Rc</figcaption>
+<figure><a class="lightgallery" href="/images/rust/rc.drawio.svg?size=large" data-thumbnail="/images/rust/rc.drawio.svg?size=small" data-sub-html="<h2>Rc</h2>"><img loading="lazy" src="/images/rust/rc.drawio.svg" srcset="/images/rust/rc.drawio.svg?size=small, /images/rust/rc.drawio.svg?size=medium 1.5x, /images/rust/rc.drawio.svg?size=large 2x" sizes="auto" data-title="/images/rust/rc.drawio.svg" data-alt="/images/rust/rc.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Rc</figcaption>
   </figure>
-<h3 id="raw-pointers-vs-references" class="heading-element">
-  <a href="#raw-pointers-vs-references" class="heading-mark"></a>Raw pointers vs references</h3><p><code>* mut</code> and <code>* const</code> are not references, they are raw pointers. In Rust, there are a bunch of semantics you have to follow when you using references.</p>
+<h3 id="raw-pointers-vs-references">Raw pointers vs references</h3>
+<p><code>* mut</code> and <code>* const</code> are not references, they are raw pointers. In Rust, there are a bunch of semantics you have to follow when you using references.</p>
 <p>Like if you use <code>&amp;</code> symbol, an <code>&amp;</code> alone means a shared reference, and you have to guarantee that there are no exclusive references to that thing. And similarly, if you have a <code>&amp;mut</code>, a exclusive reference, you know that there are not shared references.</p>
 <p>The <code>*</code> version of these, like <code>* mut</code> and <code>* const</code>, do not have these guarantees. If you have a <code>* mut</code>, there may be other <code>* mut</code>s to the same thing. There might be <code>* const</code> to the same thing.</p>
 <p>You have no guarantee, but you also cann't do much with a <code>*</code>. If you have a raw pointer, the only thing you can really do to it is use an <strong>unsafe</strong> block to dereference it and turn it into reference. But that is unsafe, <em>you need to document wht it is safe.</em></p>
@@ -310,8 +316,8 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
 <blockquote>
 <p>To guarantee that you have to follow <strong>onwership</strong> semantics in Rust.</p>
 </blockquote>
-<h3 id="phantomdata--drop-check" class="heading-element">
-  <a href="#phantomdata--drop-check" class="heading-mark"></a>PhantomData &amp; Drop check</h3><ul>
+<h3 id="phantomdata--drop-check">PhantomData &amp; Drop check</h3>
+<ul>
 <li>The Rustonomicon: <a href="https://doc.rust-lang.org/nomicon/dropck.html"target="_blank" rel="external nofollow noopener noreferrer">Drop Check</a></li>
 <li>Medium: <a href="https://medium.com/@0xor0ne/rust-notes-phantomdata-505757bf56a7"target="_blank" rel="external nofollow noopener noreferrer">Rust Notes: PhantomData</a></li>
 </ul>
@@ -353,8 +359,8 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>最后的 2 行 drop 语句会导致编译失败，因为编译器知道 foo 引用了 t，所以会进行 drop check，保证 t 的 lifetime 至少和 foo 一样长，因为 drop 时会按照从内到外的顺序对结构体的成员及其本身进行 drop。但是对于我们实现的 Rc 使用的是 raw pointer，如果不加 PhantomData，那么在对 Rc 进行 drop 时并不会检查 raw pointer 所指向的 RcInner 的 lifetime 是否满足要求，即在 drop Rc 之前 drop RcInner 并不会导致编译失败。简单来说，PhantomData 就是让编译器以为 Rc 拥有 RcInner 的所有权或引用，由此进行期望的 drop check 行为。</p>
-<h3 id="thread-safety" class="heading-element">
-  <a href="#thread-safety" class="heading-mark"></a>Thread Safety</h3><ul>
+<h3 id="thread-safety">Thread Safety</h3>
+<ul>
 <li>Cell</li>
 </ul>
 <blockquote>
@@ -372,13 +378,13 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
 <blockquote>
 <p>The thread-safe version of <code>Rc</code> is <code>Arc</code>, or Atomic Reference Count.</p>
 </blockquote>
-<h3 id="copy-on-write-cow" class="heading-element">
-  <a href="#copy-on-write-cow" class="heading-mark"></a>Copy-on-Write (COW)</h3><p>Struct <a href="https://doc.rust-lang.org/std/borrow/enum.Cow.html#"target="_blank" rel="external nofollow noopener noreferrer">std::borrow::Cow</a></p>
+<h3 id="copy-on-write-cow">Copy-on-Write (COW)</h3>
+<p>Struct <a href="https://doc.rust-lang.org/std/borrow/enum.Cow.html#"target="_blank" rel="external nofollow noopener noreferrer">std::borrow::Cow</a></p>
 <blockquote>
 <p>The type <code>Cow</code> is a smart pointer providing clone-on-write functionality: it can enclose and provide immutable access to borrowed data, and clone the data lazily when mutation or ownership is required. The type is designed to work with general borrowed data via the <code>Borrow</code> trait.</p>
 </blockquote>
-<h2 id="homework" class="heading-element">
-  <a href="#homework" class="heading-mark"></a>Homework</h2><div class="details admonition info open">
+<h2 id="homework">Homework</h2>
+<div class="details admonition info open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -403,13 +409,13 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
 </div>
     </div>
   </div>
-<h2 id="documentations" class="heading-element">
-  <a href="#documentations" class="heading-mark"></a>Documentations</h2><p>这里列举视频中一些概念相关的 documentation</p>
+<h2 id="documentations">Documentations</h2>
+<p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>
 <p>学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料</p>
 </blockquote>
-<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml" class="heading-element">
-  <a href="#crate-stdhttpsdocrust-langorgstdindexhtml" class="heading-mark"></a>Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3><blockquote>
+<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3>
+<blockquote>
 <p>可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)</p>
 </blockquote>
 <ul>
@@ -475,18 +481,19 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
 <p>Function <a href="https://doc.rust-lang.org/std/mem/fn.drop.html"target="_blank" rel="external nofollow noopener noreferrer">std::mem::drop</a></p>
 </li>
 </ul>
-<h2 id="references" class="heading-element">
-  <a href="#references" class="heading-mark"></a>References</h2><ul>
+<h2 id="references">References</h2>
+<ul>
 <li><a href="https://www.bilibili.com/video/BV16e411n7h4"target="_blank" rel="external nofollow noopener noreferrer">可能不是你看过最无聊的 Rust 入门喜剧102 (2) 智能指针</a> [bilibili]</li>
 </ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-03-04 23:05:35">更新于 2024-03-04&nbsp;</span>
-      </div></div><div class="post-info-line">
-        <div class="post-info-md"><span><a href="/posts/smart-pointers-and-interior-mutability/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-        <div class="post-info-share">
-          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/" data-title="Crust of Rust: Smart Pointers and Interior Mutability" data-hashtags="Rust,Smart pointer,Interior Mutability"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/smart-pointers-and-interior-mutability/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/" data-title="Crust of Rust: Smart Pointers and Interior Mutability" data-hashtags="Rust,Smart pointer,Interior Mutability"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/" data-hashtag="Rust"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/" data-title="Crust of Rust: Smart Pointers and Interior Mutability" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/" data-title="Crust of Rust: Smart Pointers and Interior Mutability"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -495,11 +502,12 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/" data-title="Crust of Rust: Smart Pointers and Interior Mutability" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/" data-title="Crust of Rust: Smart Pointers and Interior Mutability"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-        </div>
-      </div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/rust/" class="post-tag" title="标签 - Rust">Rust</a><a href="/tags/smart-pointer/" class="post-tag" title="标签 - Smart pointer">Smart pointer</a><a href="/tags/interior-mutability/" class="post-tag" title="标签 - Interior Mutability">Interior Mutability</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/rust/' class="post-tag">Rust</a><a href='/tags/smart-pointer/' class="post-tag">Smart pointer</a><a href='/tags/interior-mutability/' class="post-tag">Interior Mutability</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -508,14 +516,11 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
   <div class="post-nav"><a href="/posts/c-numerics/" class="post-nav-item" rel="prev" title="你所不知道的 C 语言: 数值系统篇"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>你所不知道的 C 语言: 数值系统篇</a>
       <a href="/posts/c-bitwise/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: bitwise 操作">你所不知道的 C 语言: bitwise 操作<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article>
-
-  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -523,5 +528,5 @@ In this fourth Crust of Rust video, we cover smart pointers and interior mutabil
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

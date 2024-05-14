@@ -16,7 +16,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。
 "><meta itemprop="datePublished" content="2024-04-23T15:17:38+08:00" />
 <meta itemprop="dateModified" content="2024-05-13T17:18:49+08:00" />
-<meta itemprop="wordCount" content="5672"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="5669"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Compiler," /><meta property="og:title" content="你所不知道的 C 语言: 编译器原理和案例分析" />
 <meta property="og:description" content="
 AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。
@@ -47,7 +47,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/"
-    },"genre": "posts","keywords": "Sysprog, C, Compiler","wordcount":  5672 ,
+    },"genre": "posts","keywords": "Sysprog, C, Compiler","wordcount":  5669 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/","datePublished": "2024-04-23T15:17:38+08:00","dateModified": "2024-05-13T17:18:49+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -59,7 +59,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -105,7 +105,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -165,12 +165,18 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>你所不知道的 C 语言: 编译器原理和案例分析</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/c/" class="post-category" title="分类 - C"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-04-23 15:17:38"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-23">2024-04-23</time></span>&nbsp;<span title="更新于 2024-05-13 17:18:49"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-13">2024-05-13</time></span>&nbsp;<span title="5672 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 5700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 12 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-04-23 15:17:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-23">2024-04-23</time></span>&nbsp;<span title="更新于 2024-05-13 17:18:49"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-13">2024-05-13</time></span>&nbsp;<span title="5669 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 5700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 12 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -216,8 +222,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <ul>
 <li><a href="https://hackmd.io/@sysprog/c-compiler-construction"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
-<h2 id="如何打造一个具体而微的-c-语言编译器" class="heading-element">
-  <a href="#%e5%a6%82%e4%bd%95%e6%89%93%e9%80%a0%e4%b8%80%e4%b8%aa%e5%85%b7%e4%bd%93%e8%80%8c%e5%be%ae%e7%9a%84-c-%e8%af%ad%e8%a8%80%e7%bc%96%e8%af%91%e5%99%a8" class="heading-mark"></a>如何打造一个具体而微的 C 语言编译器</h2><ul>
+<h2 id="如何打造一个具体而微的-c-语言编译器">如何打造一个具体而微的 C 语言编译器</h2>
+<ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://www.slideshare.net/ccckmit/jserv#22"target="_blank" rel="external nofollow noopener noreferrer">用十分鐘 向 jserv 學習作業系統設計</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/coscup18-source-c-compiler"target="_blank" rel="external nofollow noopener noreferrer">用1500 行建構可自我編譯的 C 編譯器</a>
 / <a href="https://drive.google.com/file/d/1-0QGf2JSni-CwYigaEORW6JUehS8LS79/view"target="_blank" rel="external nofollow noopener noreferrer">投影片</a></li>
@@ -232,19 +238,19 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <blockquote>
 <p>Build a minimal multi-tasking OS kernel for RISC-V from scratch. Mini-riscv-os was inspired by jserv&rsquo;s mini-arm-os project. However, ccckmit rewrite the project for RISC-V, and run on Win10 instead of Linux.</p>
 </blockquote>
-<h2 id="编译器和软件工业强度息息相关" class="heading-element">
-  <a href="#%e7%bc%96%e8%af%91%e5%99%a8%e5%92%8c%e8%bd%af%e4%bb%b6%e5%b7%a5%e4%b8%9a%e5%bc%ba%e5%ba%a6%e6%81%af%e6%81%af%e7%9b%b8%e5%85%b3" class="heading-mark"></a>编译器和软件工业强度息息相关</h2><ul>
+<h2 id="编译器和软件工业强度息息相关">编译器和软件工业强度息息相关</h2>
+<ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/formal-verification"target="_blank" rel="external nofollow noopener noreferrer">形式化驗證 (Formal Verification)</a></li>
 </ul>
-<h2 id="背景知识" class="heading-element">
-  <a href="#%e8%83%8c%e6%99%af%e7%9f%a5%e8%af%86" class="heading-mark"></a>背景知识</h2><ul>
+<h2 id="背景知识">背景知识</h2>
+<ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 你所不知道的 C 语言: <a href="https://hackmd.io/s/Hy72937Me"target="_blank" rel="external nofollow noopener noreferrer">编译器和最佳化原理篇</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 你所不知道的 C 语言: <a href="https://hackmd.io/s/SJ6hRj-zg"target="_blank" rel="external nofollow noopener noreferrer">函数呼叫篇</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 你所不知道的 C 语言: <a href="https://hackmd.io/s/HkK7Uf4Ml"target="_blank" rel="external nofollow noopener noreferrer">动态连链接器和执行时期篇</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/s/SkBsZoReb"target="_blank" rel="external nofollow noopener noreferrer">虚拟机器设计与实作</a></li>
 </ul>
-<h2 id="c-程序的解析和语意" class="heading-element">
-  <a href="#c-%e7%a8%8b%e5%ba%8f%e7%9a%84%e8%a7%a3%e6%9e%90%e5%92%8c%e8%af%ad%e6%84%8f" class="heading-mark"></a>C 程序的解析和语意</h2><ul>
+<h2 id="c-程序的解析和语意">C 程序的解析和语意</h2>
+<ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://lotabout.me/2015/write-a-C-interpreter-0/"target="_blank" rel="external nofollow noopener noreferrer">手把手教你构建 C 语言编译器</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://pku-minic.github.io/online-doc/#/"target="_blank" rel="external nofollow noopener noreferrer">北大编译实践在线文档</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://craftinginterpreters.com/"target="_blank" rel="external nofollow noopener noreferrer">Crafting Interpreters</a></li>
@@ -264,9 +270,9 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div>
     </div>
   </div>
-<a class="lightgallery" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=large" data-thumbnail="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=small" data-sub-html="<h2>https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg</h2>"><img loading="lazy" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg" alt="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg" srcset="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=small, https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=medium 1.5x, https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=large 2x" sizes="auto" data-title="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
-<h2 id="手把手教你构建-c-语言编译器" class="heading-element">
-  <a href="#%e6%89%8b%e6%8a%8a%e6%89%8b%e6%95%99%e4%bd%a0%e6%9e%84%e5%bb%ba-c-%e8%af%ad%e8%a8%80%e7%bc%96%e8%af%91%e5%99%a8" class="heading-mark"></a>手把手教你构建 C 语言编译器</h2><a href="https://github.com/lotabout/write-a-C-interpreter"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+<a class="lightgallery" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=large" data-thumbnail="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=small" data-sub-html="<h2>https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg</h2>"><img loading="lazy" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg" srcset="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=small, https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=medium 1.5x, https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=large 2x" sizes="auto" data-title="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg" data-alt="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<h2 id="手把手教你构建-c-语言编译器">手把手教你构建 C 语言编译器</h2>
+<a href="https://github.com/lotabout/write-a-C-interpreter"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 <p>编译原理课程教导的是如何完成一个「编译器的编译器」，即 <a href="https://en.wikipedia.org/wiki/Compiler-compiler"target="_blank" rel="external nofollow noopener noreferrer">Compiler-compiler</a>，这个难度比较大，因为需要考虑通用性，但是实作一个简单的编译器并没有这么难。</p>
 <ul>
 <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Compiler-compiler"target="_blank" rel="external nofollow noopener noreferrer">Compiler-compiler</a></li>
@@ -291,8 +297,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div>
     </div>
   </div>
-<h3 id="设计" class="heading-element">
-  <a href="#%e8%ae%be%e8%ae%a1" class="heading-mark"></a>设计</h3><p>一般而言，编译器的编写分为 3 个步骤：</p>
+<h3 id="设计">设计</h3>
+<p>一般而言，编译器的编写分为 3 个步骤：</p>
 <ol>
 <li>词法分析器，用于将字符串转化成内部的表示结构。</li>
 <li>语法分析器，将词法分析得到的标记流（token）生成一棵语法树。</li>
@@ -315,8 +321,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div><p><code>main</code> 函数这部分的处理是将该进程 <code>argc</code> 和 <code>argv</code> 设定为解释执行的源程序对应的值，以让虚拟机正确地解释执行源程序 (需要看完「虚拟机」和「表达式」部分才能理解这部分处理的意义)。</p></div>
     </div>
   </div>
-<h3 id="虚拟机" class="heading-element">
-  <a href="#%e8%99%9a%e6%8b%9f%e6%9c%ba" class="heading-mark"></a>虚拟机</h3><p>在该项目的虚拟机设计中，函数调用时 callee 的参数位于 caller 的栈帧 (frame) 内，并且函数调用需要使用到 4 条指令:</p>
+<h3 id="虚拟机">虚拟机</h3>
+<p>在该项目的虚拟机设计中，函数调用时 callee 的参数位于 caller 的栈帧 (frame) 内，并且函数调用需要使用到 4 条指令:</p>
 <ol>
 <li><code>CALL</code> 指令将 callee 的返回地址压入栈，然后跳转到 callee 的入口处</li>
 <li><code>ENT</code> 指令保存 ebp 寄存器的值并为 callee 的栈帧设置 esp 和 ebp 寄存器，在栈中给 callee 的局部变量分配空间</li>
@@ -487,8 +493,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div>
     </div>
   </div>
-<h3 id="词法分析器" class="heading-element">
-  <a href="#%e8%af%8d%e6%b3%95%e5%88%86%e6%9e%90%e5%99%a8" class="heading-mark"></a>词法分析器</h3><p>我们并不会一次性地将所有源码全部转换成标记流，原因有二：</p>
+<h3 id="词法分析器">词法分析器</h3>
+<p>我们并不会一次性地将所有源码全部转换成标记流，原因有二：</p>
 <ol>
 <li>字符串转换成标记流有时是有状态的，即与代码的上下文是有关系的。</li>
 <li>保存所有的标记流没有意义且浪费空间。</li>
@@ -542,14 +548,14 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div>
     </div>
   </div>
-<h3 id="递归下降" class="heading-element">
-  <a href="#%e9%80%92%e5%bd%92%e4%b8%8b%e9%99%8d" class="heading-mark"></a>递归下降</h3><p>这一节是以四则运算表达式的语法分析为例，介绍递归下降的相关实作，并不是编译器实作的一部分 &#x1f923; 但也用到了前一节所提的词法分析，虽然简单很多 (因为四则运算只需考虑标识符为数字的情况)。</p>
+<h3 id="递归下降">递归下降</h3>
+<p>这一节是以四则运算表达式的语法分析为例，介绍递归下降的相关实作，并不是编译器实作的一部分 &#x1f923; 但也用到了前一节所提的词法分析，虽然简单很多 (因为四则运算只需考虑标识符为数字的情况)。</p>
 <p>语法分析的关键点在于: 它是根据词法分析获得的 token 流进行分析的，其中的 <code>match</code> 方法是用于判断当前获得的 token 是否符合语法分析的预期以及基于 token 进行向前看 (对比一下词法分析是基于字符的向前看)。</p>
 <ul>
 <li><a href="https://www.tutorialspoint.com/what-is-left-recursion-and-how-it-is-eliminated"target="_blank" rel="external nofollow noopener noreferrer">What is Left Recursion and how it is eliminated?</a></li>
 </ul>
-<h3 id="变量定义" class="heading-element">
-  <a href="#%e5%8f%98%e9%87%8f%e5%ae%9a%e4%b9%89" class="heading-mark"></a>变量定义</h3><div class="details admonition question">
+<h3 id="变量定义">变量定义</h3>
+<div class="details admonition question">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>current_id[Value] and address<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -569,8 +575,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div>
     </div>
   </div>
-<h3 id="函数定义" class="heading-element">
-  <a href="#%e5%87%bd%e6%95%b0%e5%ae%9a%e4%b9%89" class="heading-mark"></a>函数定义</h3><p>代码段全局变量 <code>text</code> 表示的是当前生成的指令，所以下一条指令 (即将要生成的指令) 的地址为 <code>text + 1</code>。</p>
+<h3 id="函数定义">函数定义</h3>
+<p>代码段全局变量 <code>text</code> 表示的是当前生成的指令，所以下一条指令 (即将要生成的指令) 的地址为 <code>text + 1</code>。</p>
 <div class="details admonition question">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>function_declaration<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -613,8 +619,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div></div>
     </div>
   </div>
-<h3 id="语句" class="heading-element">
-  <a href="#%e8%af%ad%e5%8f%a5" class="heading-mark"></a>语句</h3><p>这一节对于 Return 语句处理是会生成 <code>LEV</code> 指令，这与上一节函数定义部分生成的 <code>LEV</code> 指令并不冲突，因为函数定义生成的 <code>LEV</code> 指令对于函数末尾，而本节 Return 语句生成的 <code>LEV</code> 语句可以对应函数体内的其他 <code>return</code> 返回语句 (毕竟一个函数内可以存在多个返回语句)。</p>
+<h3 id="语句">语句</h3>
+<p>这一节对于 Return 语句处理是会生成 <code>LEV</code> 指令，这与上一节函数定义部分生成的 <code>LEV</code> 指令并不冲突，因为函数定义生成的 <code>LEV</code> 指令对于函数末尾，而本节 Return 语句生成的 <code>LEV</code> 语句可以对应函数体内的其他 <code>return</code> 返回语句 (毕竟一个函数内可以存在多个返回语句)。</p>
 <div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -632,8 +638,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">-</span><span class="n">x</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="表达式" class="heading-element">
-  <a href="#%e8%a1%a8%e8%be%be%e5%bc%8f" class="heading-mark"></a>表达式</h3><p><code>void expression(int level)</code> 的参数 <code>level</code> 表示上一个运算符的优先级，这样可以利用程序自身的栈进行表达式优先级入栈出栈进行运算，而不需要额外实现栈来进行模拟，表达式优先级和栈的运算可以参考本节开头的例子。</p>
+</div><h3 id="表达式">表达式</h3>
+<p><code>void expression(int level)</code> 的参数 <code>level</code> 表示上一个运算符的优先级，这样可以利用程序自身的栈进行表达式优先级入栈出栈进行运算，而不需要额外实现栈来进行模拟，表达式优先级和栈的运算可以参考本节开头的例子。</p>
 <blockquote>
 <p>我们需要不断地向右扫描，直到遇到优先级 <strong>小于</strong> 当前优先级的运算符。</p>
 </blockquote>
@@ -656,8 +662,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div>
 </div><p>一个涉及两次函数调用，第一次调用处理了标识符 <code>a</code> 和运算符 <code>=</code>，第二次调用处理了数字 <code>10</code>，可以自行走访一下流程进行体会 (learn anything by tracing)，即一次 <code>expression()</code> 最多可以处理一个一元运算符和一个二元运算符。</p>
 <p>除此之外，<code>expression()</code> 执行完成之后，生成的指令流会将结果放置在寄存器 <code>ax</code> 中，可以以这个为前提进行后续的指令生成。</p>
-<h4 id="一元运算符" class="heading-element">
-  <a href="#%e4%b8%80%e5%85%83%e8%bf%90%e7%ae%97%e7%ac%a6" class="heading-mark"></a>一元运算符</h4><p>根据词法分析器 <code>next()</code> 字符串部分的逻辑，扫描到字符串时对应的 token 是 <code>&quot;</code>。</p>
+<h4 id="一元运算符">一元运算符</h4>
+<p>根据词法分析器 <code>next()</code> 字符串部分的逻辑，扫描到字符串时对应的 token 是 <code>&quot;</code>。</p>
 <div class="details admonition question">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>pointer type<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -712,14 +718,14 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </span></span><span class="line"><span class="cl"><span class="o">*++</span><span class="n">text</span> <span class="o">=</span> <span class="n">MUL</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>「自增自减」例如 <code>++p</code> 需要需要使用变量 <code>p</code> 的地址两次：一次用于读取 <code>p</code> 的数值，一次用于将自增后的数值存储回 <code>p</code> 处，并且自增自减实质上是通过 <code>p +/- 1</code> 来实现的 。</p>
-<h4 id="二元运算符" class="heading-element">
-  <a href="#%e4%ba%8c%e5%85%83%e8%bf%90%e7%ae%97%e7%ac%a6" class="heading-mark"></a>二元运算符</h4><p>处理 <code>||</code> 和 <code>&amp;&amp;</code> 时，对于右边的 operand 的处理分别是 <code>expression(Lan)</code> 和 <code>expression(Or)</code>，限制的优先级刚好比当前的运算符高一级，使得遇到同级运算符时会返回，从而让外部的 <code>while</code> 循环来处理，这样可以保证生成正确的指令序列。</p>
+<h4 id="二元运算符">二元运算符</h4>
+<p>处理 <code>||</code> 和 <code>&amp;&amp;</code> 时，对于右边的 operand 的处理分别是 <code>expression(Lan)</code> 和 <code>expression(Or)</code>，限制的优先级刚好比当前的运算符高一级，使得遇到同级运算符时会返回，从而让外部的 <code>while</code> 循环来处理，这样可以保证生成正确的指令序列。</p>
 <p>一篇关于表达式优先级爬山的博文:</p>
 <ul>
 <li><a href="https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing/"target="_blank" rel="external nofollow noopener noreferrer">Parsing expressions by precedence climbing</a></li>
 </ul>
-<h4 id="初始化栈" class="heading-element">
-  <a href="#%e5%88%9d%e5%a7%8b%e5%8c%96%e6%a0%88" class="heading-mark"></a>初始化栈</h4><div class="highlight" id="id-6"><div class="chroma">
+<h4 id="初始化栈">初始化栈</h4>
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -742,8 +748,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <p>第 4 行和第 7 行设定 <code>main</code> 函数的返回地址，这也符合栈的布局: 参数 -&gt; 返回地址，使得 <code>main</code> 函数对应的指令可以通过 <code>LEV</code> 指令进行函数返回。现在就到好玩的地方了，注意到 <code>tmp</code> 在第 4 行设定的地址是位于栈中的，所以当 <code>main</code> 函数返回时它会跳转到我们在第 4 行设定的 <code>PUSH</code> 指令处 (即将 <code>pc</code> 的值设定为该处)。这是没问题的，因为我们的虚拟机也可以执行位于栈中的指令 (虽然这有很大的风险，例如 ROP 攻击，但是这只是个小 demo 管它呢 &#x1f923;)。</p>
 <p>当 <code>main</code> 函数返回后，根据上面的叙述，它会先执行第 4 行的 <code>PUSH</code> 指令，这个指令的作用是将 <code>main</code> 函数的返回值压入栈中 (因为 Return 语句生成的指令序列会将返回值放置在 <code>ax</code> 寄存器)。不用担心当且指令被覆盖的问题，因为这段代码配置的栈，并没有包括清除参数空间的逻辑，所以在 <code>main</code> 函数返回后，<code>sp</code> 指向的是第 6 行配置的 <code>argv</code> 参数处。</p>
 <p>执行完第 4 行的 <code>PUSH</code> 指令后，会接着执行第 3 行的 <code>EXIT</code> 指令，因为 (<code>pc</code> 寄存器在虚拟机运行时是递增的)，此时虚拟机将 <code>main</code> 函数的返回值作为本进程的返回值进行返回，并结束进程。</p>
-<h2 id="ir-intermediate-representation" class="heading-element">
-  <a href="#ir-intermediate-representation" class="heading-mark"></a>IR (Intermediate representation)</h2><ul>
+<h2 id="ir-intermediate-representation">IR (Intermediate representation)</h2>
+<ul>
 <li>Wikipedia: <a href=""></a></li>
 </ul>
 <blockquote>
@@ -775,8 +781,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div>
     </div>
   </div>
-<h3 id="how-to-write-a-unix-shell" class="heading-element">
-  <a href="#how-to-write-a-unix-shell" class="heading-mark"></a>How to write a UNIX shell</h3><a class="lightgallery" href="/images/c/shell.drawio.svg?size=large" data-thumbnail="/images/c/shell.drawio.svg?size=small" data-sub-html="<h2>/images/c/shell.drawio.svg</h2>"><img loading="lazy" src="/images/c/shell.drawio.svg" alt="/images/c/shell.drawio.svg" srcset="/images/c/shell.drawio.svg?size=small, /images/c/shell.drawio.svg?size=medium 1.5x, /images/c/shell.drawio.svg?size=large 2x" sizes="auto" data-title="/images/c/shell.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
+<h3 id="how-to-write-a-unix-shell">How to write a UNIX shell</h3>
+<a class="lightgallery" href="/images/c/shell.drawio.svg?size=large" data-thumbnail="/images/c/shell.drawio.svg?size=small" data-sub-html="<h2>/images/c/shell.drawio.svg</h2>"><img loading="lazy" src="/images/c/shell.drawio.svg" srcset="/images/c/shell.drawio.svg?size=small, /images/c/shell.drawio.svg?size=medium 1.5x, /images/c/shell.drawio.svg?size=large 2x" sizes="auto" data-title="/images/c/shell.drawio.svg" data-alt="/images/c/shell.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>系统编程 (System Programming) 的入门项目，阅读过程需要查询搭配 man 手册，以熟悉库函数和系统调用的原型和作用。</p>
 <p>Linux manual page:
 <a href="https://man7.org/linux/man-pages/man3/fflush.3.html"target="_blank" rel="external nofollow noopener noreferrer">fflush</a>
@@ -790,22 +796,23 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 / <a href="https://man7.org/linux/man-pages/man2/pipe.2.html"target="_blank" rel="external nofollow noopener noreferrer">pipe</a>
 / <a href="https://man7.org/linux/man-pages/man2/dup.2.html"target="_blank" rel="external nofollow noopener noreferrer">dup</a>
 / <a href="https://man7.org/linux/man-pages/man2/close.2.html"target="_blank" rel="external nofollow noopener noreferrer">close</a></p>
-<h3 id="延伸阅读" class="heading-element">
-  <a href="#%e5%bb%b6%e4%bc%b8%e9%98%85%e8%af%bb" class="heading-mark"></a>延伸阅读</h3><ul>
+<h3 id="延伸阅读">延伸阅读</h3>
+<ul>
 <li>Linux manual page: <a href="https://man7.org/linux/man-pages/man3/bsearch.3.html"target="_blank" rel="external nofollow noopener noreferrer">bsearch</a></li>
 </ul>
-<h2 id="程序语言设计和编译器考量" class="heading-element">
-  <a href="#%e7%a8%8b%e5%ba%8f%e8%af%ad%e8%a8%80%e8%ae%be%e8%ae%a1%e5%92%8c%e7%bc%96%e8%af%91%e5%99%a8%e8%80%83%e9%87%8f" class="heading-mark"></a>程序语言设计和编译器考量</h2><ul>
+<h2 id="程序语言设计和编译器考量">程序语言设计和编译器考量</h2>
+<ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> YouTube: <a href="https://www.youtube.com/watch?v=Sg4U4r_AgJU"target="_blank" rel="external nofollow noopener noreferrer">Brian Kernighan on successful language design</a></li>
 </ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-05-13 17:18:49">更新于 2024-05-13&nbsp;</span>
-      </div></div><div class="post-info-line">
-        <div class="post-info-md"><span><a href="/posts/c-compiler-construction/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-        <div class="post-info-share">
-          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-compiler-construction/" data-title="你所不知道的 C 语言: 编译器原理和案例分析" data-hashtags="Sysprog,C,Compiler"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/c-compiler-construction/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-compiler-construction/" data-title="你所不知道的 C 语言: 编译器原理和案例分析" data-hashtags="Sysprog,C,Compiler"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/c-compiler-construction/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-compiler-construction/" data-title="你所不知道的 C 语言: 编译器原理和案例分析" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-compiler-construction/" data-title="你所不知道的 C 语言: 编译器原理和案例分析"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -814,11 +821,12 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-compiler-construction/" data-title="你所不知道的 C 语言: 编译器原理和案例分析" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-compiler-construction/" data-title="你所不知道的 C 语言: 编译器原理和案例分析"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-        </div>
-      </div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a><a href="/tags/c/" class="post-tag" title="标签 - C">C</a><a href="/tags/compiler/" class="post-tag" title="标签 - Compiler">Compiler</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/c/' class="post-tag">C</a><a href='/tags/compiler/' class="post-tag">Compiler</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -827,14 +835,11 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
   <div class="post-nav"><a href="/posts/wsl2/" class="post-nav-item" rel="prev" title="Windows 10 WSL2 Ubuntu 22.04 配置指南"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Windows 10 WSL2 Ubuntu 22.04 配置指南</a>
       <a href="/posts/c-undefined-behavior/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: 未定义/未指定行为篇">你所不知道的 C 语言: 未定义/未指定行为篇<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article>
-
-  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -842,5 +847,5 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>
