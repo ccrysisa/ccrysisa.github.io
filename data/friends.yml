@@ -4,7 +4,7 @@
   description: 
 
 - nickname: Jon Gjengset
-  avatar: 
+  avatar: https://avatars.githubusercontent.com/u/176295?v=4
   url: https://thesquareplanet.com/
   description: 
 
@@ -19,9 +19,14 @@
   description: L. is a software engineer working on the Compute platform at Fastly.
 
 - nickname: John Regehr
-  avatar: 
+  avatar: https://files.mastodon.social/accounts/avatars/000/147/970/original/8dd7e7e6a7ea9f95.png
   url: https://blog.regehr.org/
-  description: 
+  description: Embedded in Academia
+
+- nickname: Justine Tunney
+  avatar: https://avatars.githubusercontent.com/u/49262?v=4
+  url: https://justine.lol/
+  description: Justine Tunney's Web Page
 
 - nickname: vanJker
   avatar: https://avatars.githubusercontent.com/u/88960102?s=96&v=4

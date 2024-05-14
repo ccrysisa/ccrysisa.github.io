@@ -2,7 +2,7 @@
 title: "南京大学 计算机系统基础 重点提示"
 subtitle:
 date: 2024-03-31T16:03:59+08:00
-draft: true
+# draft: true
 author:
   name: vanJker
   link: https://github.com/vanJker
@@ -16,7 +16,7 @@ weight: 0
 tags:
   - Linux
 categories:
-  - Operating Systems
+  - Systems
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -50,7 +50,7 @@ repost:
 授课视频的直播录影与 PA/Lab 并没有先后次序的强关联性，授课主要是分享一些在 PA/Lab 时可派上用场的小工具，所以授课视频之间也没有先后次序，按需观看即可。
 {{< /admonition >}}
 
-## PA
+## Programming Assignmets (PA)
 
 ### PA0: 环境安装与配置
 

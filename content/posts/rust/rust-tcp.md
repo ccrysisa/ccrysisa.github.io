@@ -19,7 +19,7 @@ tags:
   - Network
 categories:
   - Rust
-  - Network
+  - Systems
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

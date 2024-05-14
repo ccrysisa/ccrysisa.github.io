@@ -2,9 +2,19 @@
   <channel>
     <title>Systems - 分类 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/categories/systems/</link>
-    <description>Systems - 分类 - KZnight&#39;s Blog</description>
+    <description>Systems - 分类 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 24 Mar 2024 10:01:43 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/systems/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 31 Mar 2024 16:03:59 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/systems/" rel="self" type="application/rss+xml" /><item>
+  <title>南京大学 计算机系统基础 重点提示</title>
+  <link>https://ccrysisa.github.io/posts/nju-ics/</link>
+  <pubDate>Sun, 31 Mar 2024 16:03:59 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/nju-ics/</guid>
+  <description><![CDATA[<blockquote>
+<p>理解一个系统的最佳实践就是去实现它。因此在本课程的PA 部分，你将会在框架代码的基础上实现一个 RISC-V 全系统模拟器 NEMU，它不仅能运行各类测试程序，甚至还可以运行操作系统和 “仙剑奇侠传”。模拟过硬件的执行，自然就能深 (痛) 入 (苦) 理解计算机系统了。</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>南京大学 操作系统: 设计与实现 重点提示</title>
   <link>https://ccrysisa.github.io/posts/nju-osdi/</link>
   <pubDate>Sun, 24 Mar 2024 10:01:43 &#43;0800</pubDate>
@@ -17,6 +27,25 @@
 <li>Mini labs (应用程序视角；设计)：通过实现一系列有趣的 (黑科技) 代码理解操作系统中对象存在的意义和操作系统 API 的使用方法、设计理念</li>
 <li>OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层实现多处理器操作系统内核，向应用程序提供一些基础操作系统 API</li>
 </ul>]]></description>
+</item>
+<item>
+  <title>Impl Rust: TCP/IP</title>
+  <link>https://ccrysisa.github.io/posts/rust-tcp/</link>
+  <pubDate>Sat, 17 Feb 2024 19:01:53 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/rust-tcp/</guid>
+  <description><![CDATA[<blockquote>
+<p>In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — <a href="https://tools.ietf.org/html/rfc793"target="_blank" rel="external nofollow noopener noreferrer">https://tools.ietf.org/html/rfc793</a> — which describes the original protocol, with the goal of being able to set up and tear down a connection with a &ldquo;real&rdquo; TCP stack at the other end (netcat in particular). We&rsquo;re writing it using a user-space networking interface (see <a href="https://www.kernel.org/doc/Documentation/networking/tuntap.txt"target="_blank" rel="external nofollow noopener noreferrer">https://www.kernel.org/doc/Documentation/networking/tuntap.txt</a> and the Rust bindings at <a href="https://docs.rs/tun-tap/%29"target="_blank" rel="external nofollow noopener noreferrer">https://docs.rs/tun-tap/)</a>.</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>國立清華大學 計算機網路 重點提示</title>
+  <link>https://ccrysisa.github.io/posts/nthu-computer-network/</link>
+  <pubDate>Sun, 14 Jan 2024 12:09:38 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/nthu-computer-network/</guid>
+  <description><![CDATA[<p>之前学校的计网理论课学得云里雾里，对于物理层和数据链路层并没有清晰的逻辑框架，而这学期的计网课设内容为数据链路层和网络层的相关内容，写起来还是云里雾里。虽然最终艰难地把课设水过去了，但是个人认为网络对于 CSer 非常重要，特别是在互联网行业，网络知识是必不可少的。
+所以决定寒假重学计网，于是在 <a href="https://hackmd.io/"target="_blank" rel="external nofollow noopener noreferrer">HackMD</a> 上冲浪寻找相关资料。然后发现了这篇笔记 <a href="https://hackmd.io/@0xff07/network/https%3A%2F%2Fhackmd.io%2F%400xff07%2FByADDQ57Y"target="_blank" rel="external nofollow noopener noreferrer">110-1 計算機網路 (清大開放式課程)</a>，里面提到清大计网主要介绍 L2 ~ L4 一些著名的协议和算法，这完美符合个人的需求，而且该笔记还补充了一些额外的内容，例如 IPv6，所以当即决定搭配这篇笔记来学习清大的计算机网络概论。</p>]]></description>
 </item>
 </channel>
 </rss>

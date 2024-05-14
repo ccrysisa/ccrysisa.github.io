@@ -1,25 +1,25 @@
 # 你所不知道的 C 语言: 数值系统篇
 
 
-> 尽管数值系统并非 C 语言所持有，但在 Linux 核心大量存在 u8/u16/u32/u64 这样通过 typedef 所定义的类型，伴随着各种 alignment 存取，如果对数值系统的认知不够充分，可能立即就被阻拦在探索 Linux 核心之外——毕竟你完全搞不清楚，为何 Linux 核心存取特定资料需要绕一大圈。
+&gt; 尽管数值系统并非 C 语言所持有，但在 Linux 核心大量存在 u8/u16/u32/u64 这样通过 typedef 所定义的类型，伴随着各种 alignment 存取，如果对数值系统的认知不够充分，可能立即就被阻拦在探索 Linux 核心之外——毕竟你完全搞不清楚，为何 Linux 核心存取特定资料需要绕一大圈。
 
-<!--more-->
+&lt;!--more--&gt;
 
-- {{< link href="https://hackmd.io/@sysprog/c-numerics" content="原文地址" external-icon=true >}}
+- {{&lt; link href=&#34;https://hackmd.io/@sysprog/c-numerics&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
 
 ## Balanced ternary
 
-balanced ternary 三进制中 -, 0, + 在数学上具备对称性质。它相对于二进制编码的优势在于，其本身就可以表示正负数 (通过 +-, 0, +)，而二进制需要考虑 unsigned 和 signed 的情况，从而决定最高位所表示的数值。
+balanced ternary 三进制中 -, 0, &#43; 在数学上具备对称性质。它相对于二进制编码的优势在于，其本身就可以表示正负数 (通过 &#43;-, 0, &#43;)，而二进制需要考虑 unsigned 和 signed 的情况，从而决定最高位所表示的数值。
 
 相关的运算规则:
 
 ```
-+ add - = 0
-0 add + = +
+&#43; add - = 0
+0 add &#43; = &#43;
 0 add - = -
 ```
 
-以上运算规则都比较直观，这也决定了 balanced ternary 在编码上的对称性 (减法等价于加上逆元，逆元非常容易获得)。但是需要注意，上面的运算规则并没有涉及到相同位运算的规则，例如 $+\ (add)\ +$，这种运算也是 balanced ternary 相对于二进制编码的劣势，可以自行推导一下这种运算的规则。
+以上运算规则都比较直观，这也决定了 balanced ternary 在编码上的对称性 (减法等价于加上逆元，逆元非常容易获得)。但是需要注意，上面的运算规则并没有涉及到相同位运算的规则，例如 $&#43;\ (add)\ &#43;$，这种运算也是 balanced ternary 相对于二进制编码的劣势，可以自行推导一下这种运算的规则。
 
 - [The Balanced Ternary Machines of Soviet Russia](https://dev.to/buntine/the-balanced-ternary-machines-of-soviet-russia)
 
@@ -34,16 +34,16 @@ balanced ternary 三进制中 -, 0, + 在数学上具备对称性质。它相对
 
 An example of a layout for 32-bit floating point is
 
-{{< image src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Float_example.svg/885px-Float_example.svg.png" >}}
+{{&lt; image src=&#34;https://upload.wikimedia.org/wikipedia/commons/thumb/d/d2/Float_example.svg/885px-Float_example.svg.png&#34; &gt;}}
 
 - [x] [Conversión de un número binario a formato IEEE 754](https://www.youtube.com/watch?v=VlX4OlKvzAk)
 
 单精度浮点数相对于整数 **在某些情況下不满足結合律和交换律**，所以不构成 **阿贝尔群**，在编写程序时需要注意这一点。即使编写程序时谨慎处理了单精度浮点数运算，但是编译器优化可能会将我们的处理破划掉。所以涉及到单精度浮点数，都需要注意其运算。
 
-{{< admonition info >}}
+{{&lt; admonition info &gt;}}
 - 你所不知道的 C 语言: [浮点数运算](https://hackmd.io/@sysprog/c-floating-point)
 - 你所不知道的 C 语言: [编译器和最佳化原理篇](https://hackmd.io/@sysprog/c-compiler-optimization)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ## Integer Overflow
 
@@ -53,7 +53,7 @@ An example of a layout for 32-bit floating point is
 #define KSIZE 1024
 char kbuf[KSIZE];
 int copy_from_kernel(void *user_dest, int maxlen) {
-    int len = KSIZE < maxlen ? KSIZE : maxlen;
+    int len = KSIZE &lt; maxlen ? KSIZE : maxlen;
     memcpy(user_dest, kbuf, len);
     return len;
 }
@@ -69,8 +69,8 @@ void *memcpy(void *dest, const void *src, size_t n);
 
 会将 `len (=maxlen)` 解释为 `size_t` 类型，关于 `size_t` 类型
 
-- C99 [7.17 Common definitions <stddef.h>]
-> **size_t** which is the unsigned integer type of the result of the sizeof operator;
+- C99 [7.17 Common definitions &lt;stddef.h&gt;]
+&gt; **size_t** which is the unsigned integer type of the result of the sizeof operator;
 
 所以在 5 行中 `memcpy` 会将 `len` 这个“负“的数值按照无符号数的编码进行解释，这会导致将 `len` 解释为一个超级大的无符号数，可能远比 `KSIZE` 这个限制大。`copy_from_kernel` 这个函数是运行在 kernel 中的，这样可能会造成潜在的 kernel 信息数据泄露问题。
 
@@ -81,15 +81,15 @@ void *copy_elements(void *ele_src[], int ele_cnt, int ele_size) {
     void *result = malloc(ele_cnt * ele_size);
     if (result==NULL) return NULL;
     void *next = result;
-    for (int i = 0; i < ele_cnt; i++) {
+    for (int i = 0; i &lt; ele_cnt; i&#43;&#43;) {
         memcpy(next, ele_src[i], ele_size);
-        next += ele_size;
+        next &#43;= ele_size;
     }
     return result;
 }
 ```
 
-假设将 ele_cnt = $2^{20}+1$, ele_size=$2^{12}$ 代入，显然在第 2 行的 `ele_cnt * ele_size` 会超出 32 位整数表示的最大值，导致 overflow。又因为
+假设将 ele_cnt = $2^{20}&#43;1$, ele_size=$2^{12}$ 代入，显然在第 2 行的 `ele_cnt * ele_size` 会超出 32 位整数表示的最大值，导致 overflow。又因为
 
 - `malloc` 的原型声明
 
@@ -105,18 +105,18 @@ void *malloc(size_t size);
 
 - [x] 3Blue1Brown: [How to count to 1000 on two hands](https://www.youtube.com/watch?v=1SMmc9gQmHQ) [YouTube]
 
-> 本质上是使用无符号数的二进制编码来进行计数，将手指/脚趾视为数值的 bit
+&gt; 本质上是使用无符号数的二进制编码来进行计数，将手指/脚趾视为数值的 bit
 
-{{< admonition info >}}
+{{&lt; admonition info &gt;}}
 - [解读计算机编码](https://hackmd.io/@sysprog/binary-representation)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ### Power of two
 
 通过以下程式码可以判断 x 是否为 2 的次方
 
 ```c
-x & (x - 1) == 0
+x &amp; (x - 1) == 0
 ```
 
 通过值为 1 的最低位来进行归纳法证明，例如，对 `0b00000001`, `0b00000010`, `0b00000100`, ... 来进行归纳证明 (还需要证明 x 中只能有一个 bit 为值 1，不过这个比较简单)。另一种思路，通过 LSBO 以及 $X$ 和 $-X$ 的特性来证明。
@@ -129,18 +129,18 @@ x & (x - 1) == 0
 
 通过 [ASCII table](https://www.asciitable.com/) 中对 ASCII 编码的分布规律，可以实现大小写转换的 constant-time function
 
-> 也可以通过命令 `man ascii` 来输出精美的 ASCII table
+&gt; 也可以通过命令 `man ascii` 来输出精美的 ASCII table
 
 ```c
 // 字符转小写
-(x | ' ')
+(x | &#39; &#39;)
 // 字符转大写
-(x & ' ')
+(x &amp; &#39; &#39;)
 // 大小写互转
-(x ^ ' ')
+(x ^ &#39; &#39;)
 ```
 
-> Each lowercase letter is 32 + uppercase equivalent. This means simply flipping the bit at position 5 (counting from least significant bit at position 0) inverts the case of a letter.
+&gt; Each lowercase letter is 32 &#43; uppercase equivalent. This means simply flipping the bit at position 5 (counting from least significant bit at position 0) inverts the case of a letter.
 
 ### XOR swap
 
@@ -161,38 +161,38 @@ void xorSwap(int *x, int *y) {
 
 ### 避免 overflow
 
-整数运算 `(x + y) / 2` 可能会导致 overflow (如果 x, y 数值都接近 UINT32_MAX)，可以改写为以下不会导致 overflow 的程式码
+整数运算 `(x &#43; y) / 2` 可能会导致 overflow (如果 x, y 数值都接近 UINT32_MAX)，可以改写为以下不会导致 overflow 的程式码
 
 ```c
-(x & y) + (x ^ y) >> 1
+(x &amp; y) &#43; (x ^ y) &gt;&gt; 1
 ```
 
-使用加法器来思考: 对于 `x + y`，`x & y` 表示进位，`x ^ y` 表示位元和，所以 `x + y` 等价于 
+使用加法器来思考: 对于 `x &#43; y`，`x &amp; y` 表示进位，`x ^ y` 表示位元和，所以 `x &#43; y` 等价于 
 
 ```c
-(x & y) << 1 + (x ^ y)
+(x &amp; y) &lt;&lt; 1 &#43; (x ^ y)
 ```
 
-这个运算不会导致 overflow (因为使用了 bitwise 运算)。因此 `(x + y) / 2` 等价于
+这个运算不会导致 overflow (因为使用了 bitwise 运算)。因此 `(x &#43; y) / 2` 等价于
 
 ```c
-  ((x & y) << 1 + (x ^ y)) >> 1
-= ((x & y) << 1) >> 1 + (x ^ y) >> 1
-= (x & y) + (x ^ y) >> 1
+  ((x &amp; y) &lt;&lt; 1 &#43; (x ^ y)) &gt;&gt; 1
+= ((x &amp; y) &lt;&lt; 1) &gt;&gt; 1 &#43; (x ^ y) &gt;&gt; 1
+= (x &amp; y) &#43; (x ^ y) &gt;&gt; 1
 ```
 
-> 整数满足交换律和结合律
+&gt; 整数满足交换律和结合律
 
 ### macro DIRECT
 
 ```c
 #if LONG_MAX == 2147483647L
 #define DETECT(X) \
-    (((X) - 0x01010101) & ~(X) & 0x80808080)
+    (((X) - 0x01010101) &amp; ~(X) &amp; 0x80808080)
 #else
 #if LONG_MAX == 9223372036854775807L
 #define DETECT(X) \
-    (((X) - 0x0101010101010101) & ~(X) & 0x8080808080808080)
+    (((X) - 0x0101010101010101) &amp; ~(X) &amp; 0x8080808080808080)
 #else
 #error long int is not a 32bit or 64bit type.
 #endif
@@ -202,19 +202,19 @@ void xorSwap(int *x, int *y) {
 DIRECT 宏的作用是侦测 32bit/64bit 中是否存在一个 Byte 为 NULL。我们以最简单的情况 1 个 Byte 时来思考这个实作的本质：
 
 ```c
-  ((X) - 0x01) & ~(X) & 0x80
-= ~(~((X) - 0x01) | X) & 0x80
+  ((X) - 0x01) &amp; ~(X) &amp; 0x80
+= ~(~((X) - 0x01) | X) &amp; 0x80
 ```
 
 `~((X) - 0x01)` 是 `X` 的取负值编码，即 `-X`，根据二补数编码中 `-X` 和 `X` 的特性，可得 `(~((X) - 0x01) | X)` 为: `X` 二补数编码中值为 1 的最低位 (后续称之为 LSBO) 及更低位保持不变，LSBO 更高位均为 1。则 `~(~((X) - 0x01) | X)` 为: `X` 二补数编码中值为 1 的最低位 (后续称之为 LSBO) 的更低位翻转，LSBO 及更高位均为 0。
 
-> LSBO: Least Significant Bit with value of One
+&gt; LSBO: Least Significant Bit with value of One
 
 ```c
 X             = 0x0080
 (X) - 0x01    = 0xff80
 ~((X) - 0x01) = 0x007f
-~(~((X) - 0x01) | X) & 0x80 = 0
+~(~((X) - 0x01) | X) &amp; 0x80 = 0
 ```
 
 可以自行归纳推导出: 对于任意不为 0 的数值，上述流程推导的最终值都为 0，但对于值为 0 的数值，最终值为 0x80。由此可以推导出最开始的实作 `DIRECT` 宏。
@@ -226,7 +226,7 @@ X             = 0x0080
 
 ## Count Leading Zero
 
-计算 $\log_2N$ 可以通过计算数值对应的编码，高位有多少连续的 0'bits，再用 31 减去即可。可以通过 0x0001, 0x0010, 0x0002, ... 等编码来进行归纳推导出该结论。
+计算 $\log_2N$ 可以通过计算数值对应的编码，高位有多少连续的 0&#39;bits，再用 31 减去即可。可以通过 0x0001, 0x0010, 0x0002, ... 等编码来进行归纳推导出该结论。
 
 - iteration version
 
@@ -234,9 +234,9 @@ X             = 0x0080
 int clz(uint32_t x) {
     int n = 32, c = 16;
     do {
-        uint32_t y = x >> c;
+        uint32_t y = x &gt;&gt; c;
         if (y) { n -= c; x = y; }
-        c >>= 1;
+        c &gt;&gt;= 1;
     } while (c);
     return (n - x);
 }
@@ -248,11 +248,11 @@ int clz(uint32_t x) {
 int clz(uint32_t x) {
     if (x == 0) return 32;
     int n = 0;
-    if (x <= 0x0000FFFF) { n += 16; x <<= 16; }
-    if (x <= 0x00FFFFFF) { n += 8; x <<= 8; }
-    if (x <= 0x0FFFFFFF) { n += 4; x <<= 4; }
-    if (x <= 0x3FFFFFFF) { n += 2; x <<= 2; }
-    if (x <= 0x7FFFFFFF) { n += 1; x <<= 1; }
+    if (x &lt;= 0x0000FFFF) { n &#43;= 16; x &lt;&lt;= 16; }
+    if (x &lt;= 0x00FFFFFF) { n &#43;= 8; x &lt;&lt;= 8; }
+    if (x &lt;= 0x0FFFFFFF) { n &#43;= 4; x &lt;&lt;= 4; }
+    if (x &lt;= 0x3FFFFFFF) { n &#43;= 2; x &lt;&lt;= 2; }
+    if (x &lt;= 0x7FFFFFFF) { n &#43;= 1; x &lt;&lt;= 1; }
     return n;
 }
 ```
@@ -263,11 +263,11 @@ int clz(uint32_t x) {
 int clz(uint32_t x) {
     if (x == 0) return 32;
     int n = 1;
-    if ((x >> 16) == 0) { n += 16; x <<= 16; }
-    if ((x >> 24) == 0) { n += 8; x <<= 8; }
-    if ((x >> 28) == 0) { n += 4; x <<= 4; }
-    if ((x >> 30) == 0) { n += 2; x <<= 2; }
-    n = n - (x >> 31);
+    if ((x &gt;&gt; 16) == 0) { n &#43;= 16; x &lt;&lt;= 16; }
+    if ((x &gt;&gt; 24) == 0) { n &#43;= 8; x &lt;&lt;= 8; }
+    if ((x &gt;&gt; 28) == 0) { n &#43;= 4; x &lt;&lt;= 4; }
+    if ((x &gt;&gt; 30) == 0) { n &#43;= 2; x &lt;&lt;= 2; }
+    n = n - (x &gt;&gt; 31);
     return n;
 }
 ```
@@ -279,9 +279,9 @@ int clz(uint32_t x) {
 ```c
 int func(unsigned int x) {
     int val = 0; int i = 0;
-    for (i = 0; i < 32; i++) {
-        val = (val << 1) | (x & 0x1);
-        x >>= 1;
+    for (i = 0; i &lt; 32; i&#43;&#43;) {
+        val = (val &lt;&lt; 1) | (x &amp; 0x1);
+        x &gt;&gt;= 1;
     }
     return val;
 }
@@ -295,28 +295,28 @@ int func(unsigned int x) {
 int func(unsigned int x) {
     int val = 0;
     val = num;
-    val = ((val & 0xffff0000) >> 16) | ((val & 0x0000ffff) << 16);
-    val = ((val & 0xff00ff00) >> 8)  | ((val & 0x00ff00ff) << 8);
-    val = ((val & 0xf0f0f0f0) >> 4)  | ((val & 0x0f0f0f0f) << 4);
-    val = ((val & 0xcccccccc) >> 2)  | ((val & 0x33333333) << 2);
-    val = ((val & 0xaaaaaaaa) >> 1)  | ((val & 0x55555555) << 1);
+    val = ((val &amp; 0xffff0000) &gt;&gt; 16) | ((val &amp; 0x0000ffff) &lt;&lt; 16);
+    val = ((val &amp; 0xff00ff00) &gt;&gt; 8)  | ((val &amp; 0x00ff00ff) &lt;&lt; 8);
+    val = ((val &amp; 0xf0f0f0f0) &gt;&gt; 4)  | ((val &amp; 0x0f0f0f0f) &lt;&lt; 4);
+    val = ((val &amp; 0xcccccccc) &gt;&gt; 2)  | ((val &amp; 0x33333333) &lt;&lt; 2);
+    val = ((val &amp; 0xaaaaaaaa) &gt;&gt; 1)  | ((val &amp; 0x55555555) &lt;&lt; 1);
     return val;
 }
 ```
 
 - [Reverse integer bitwise without using loop](https://stackoverflow.com/questions/21511533/reverse-integer-bitwise-without-using-loop) [Stack Overflow]
 
-{{< admonition tip >}}
+{{&lt; admonition tip &gt;}}
 Bits Twiddling Hacks 解析: [(一)](https://hackmd.io/@0xff07/ORAORAORAORA), [(二)](https://hackmd.io/@0xff07/MUDAMUDAMUDA), [(三)](https://hackmd.io/@0xff07/WRYYYYYYYYYY)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ## 加解密的应用
 
-> 假設有一張黑白的相片是由很多個0 ~255 的 pixel 組成 (0 是黑色，255 是白色)，這時候可以用任意的 KEY (000000002 - 111111112) 跟原本的每個 pixel 做運算，如果使用 AND (每個 bit 有 75% 機率會變成 0)，所以圖會變暗。如果使用 OR (每個 bit 有 75% 機率會變 1)，圖就會變亮。這兩種幾乎都還是看的出原本的圖片，但若是用 XOR 的話，每個 bit 變成 0 或 1 的機率都是 50%，所以圖片就會變成看不出東西的雜訊。
+&gt; 假設有一張黑白的相片是由很多個0 ~255 的 pixel 組成 (0 是黑色，255 是白色)，這時候可以用任意的 KEY (000000002 - 111111112) 跟原本的每個 pixel 做運算，如果使用 AND (每個 bit 有 75% 機率會變成 0)，所以圖會變暗。如果使用 OR (每個 bit 有 75% 機率會變 1)，圖就會變亮。這兩種幾乎都還是看的出原本的圖片，但若是用 XOR 的話，每個 bit 變成 0 或 1 的機率都是 50%，所以圖片就會變成看不出東西的雜訊。
 
-{{< image src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_Sc7AmIvN7EN_p.578574_1463033229650_13199369_1147773728576962_1986608170_o.jpg" >}}
+{{&lt; image src=&#34;https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_Sc7AmIvN7EN_p.578574_1463033229650_13199369_1147773728576962_1986608170_o.jpg&#34; &gt;}}
 
-> 上圖左 1 是原圖，左 2 是用 AND 做運算之後，右 2 是用 OR 做運算之後，右 1 是用 XOR，可見使用 XOR 的加密效果最好。
+&gt; 上圖左 1 是原圖，左 2 是用 AND 做運算之後，右 2 是用 OR 做運算之後，右 1 是用 XOR，可見使用 XOR 的加密效果最好。
 
 这就是在密码学领域偏爱 XOR 的原因之一。除此之外，XOR 在概率统计上的优异特性也是另一个原因，具体证明推导请查看原文的说明。
 

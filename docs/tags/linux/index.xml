@@ -2,7 +2,7 @@
   <channel>
     <title>Linux - 标签 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/linux/</link>
-    <description>Linux - 标签 - KZnight&#39;s Blog</description>
+    <description>Linux - 标签 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 12 Apr 2024 19:00:59 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
@@ -31,6 +31,16 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/posix-threads/</guid>
   <description><![CDATA[]]></description>
+</item>
+<item>
+  <title>南京大学 计算机系统基础 重点提示</title>
+  <link>https://ccrysisa.github.io/posts/nju-ics/</link>
+  <pubDate>Sun, 31 Mar 2024 16:03:59 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/nju-ics/</guid>
+  <description><![CDATA[<blockquote>
+<p>理解一个系统的最佳实践就是去实现它。因此在本课程的PA 部分，你将会在框架代码的基础上实现一个 RISC-V 全系统模拟器 NEMU，它不仅能运行各类测试程序，甚至还可以运行操作系统和 “仙剑奇侠传”。模拟过硬件的执行，自然就能深 (痛) 入 (苦) 理解计算机系统了。</p>
+</blockquote>]]></description>
 </item>
 <item>
   <title>Deepin 20.9 KVM 安装和管理</title>
@@ -94,36 +104,6 @@
   <description><![CDATA[<blockquote>
 <p>本講座將以 Thorsten Leemhuis 在 FOSDEM 2020 開場演說 &ldquo;Linux kernel – Solving big problems in small steps for more than 20 years&rdquo; (slides) 為主軸，嘗試歸納自 21 世紀第一年開始的 Linux 核心 2.4 版到如今的 5.x 版，中間核心開發者如何克服 SMP (Symmetric multiprocessing), scalability, 及各式硬體架構和周邊裝置支援等難題，過程中提出全面移除 BKL (Big kernel lock)、實作虛擬化技術 (如 Xen 和 KVM)、提出 namespace 和 cgroups 從而確立容器化 (container) 的能力，再來是核心發展的明星技術 eBPF 會在既有的基礎之上，帶來 XDP 和哪些令人驚豔的機制呢？又，Linux 核心終於正式納入發展十餘年的 PREEMPT_RT，使得 Linux 核心得以成為硬即時的作業系統，對內部設計有哪些衝擊？AIO 後繼的 io_uring 讓 Linux 有更優雅且高效的非同步 I/O 存取，我們該如何看待？</p>
 </blockquote>]]></description>
-</item>
-<item>
-  <title>Linux 核心设计: lab0-c</title>
-  <link>https://ccrysisa.github.io/posts/linux2023-lab0/</link>
-  <pubDate>Mon, 19 Feb 2024 16:23:01 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/linux2023-lab0/</guid>
-  <description><![CDATA[<div class="details admonition abstract open">
-    <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>预期目标<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content"><ul>
-<li><a href="https://hackmd.io/@sysprog/c-programming"target="_blank" rel="external nofollow noopener noreferrer">C 语言程序设计</a> 议题，如 <a href="https://en.wikibooks.org/wiki/C_Programming/stdarg.h"target="_blank" rel="external nofollow noopener noreferrer">不定个参数的处理</a>，<a href="https://en.wikibooks.org/wiki/C_Programming/signal.h"target="_blank" rel="external nofollow noopener noreferrer">signal</a>，<a href="https://en.wikibooks.org/wiki/C_Programming/setjmp.h"target="_blank" rel="external nofollow noopener noreferrer">setjmp/longjmp</a></li>
-<li>学习 <a href="https://hackmd.io/@sysprog/gnu-linux-dev"target="_blank" rel="external nofollow noopener noreferrer">GNU/Linux 开发工具</a>:
-<ul>
-<li><a href="https://cppcheck.sourceforge.io/"target="_blank" rel="external nofollow noopener noreferrer">Cppcheck</a>: <strong>静态</strong> 程序分析工具，即无需运行程序就可以分析出程序潜在的问题，当然会有一定的误差，类似的工具有 <a href="https://doc.rust-lang.org/cargo/commands/cargo-check.html"target="_blank" rel="external nofollow noopener noreferrer">cargo-check</a></li>
-<li><a href="https://valgrind.org/"target="_blank" rel="external nofollow noopener noreferrer">Valgrind</a>: <strong>动态</strong> 程序分析工具，即需要将程序运行起来再进行分析，通常用于检测内存泄漏 (<a href="https://en.wikipedia.org/wiki/Memory_leak"target="_blank" rel="external nofollow noopener noreferrer">memory leak</a>)</li>
-</ul>
-</li>
-<li>学习使用 Git 与 GitHub</li>
-<li>树立一致且易于协作的程序开发规范</li>
-<li>研究自动测试机制</li>
-<li>接触 <a href="http://man7.org/tlpi/"target="_blank" rel="external nofollow noopener noreferrer">Linux Programming INterface</a></li>
-<li>理解电脑乱数原理、应用场景，和相关的验证</li>
-<li>研究 Linux 核心链表的实作机制，及其高效的排序实作</li>
-</ul>
-</div>
-    </div>
-  </div>]]></description>
 </item>
 </channel>
 </rss>

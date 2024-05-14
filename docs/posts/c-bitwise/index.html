@@ -14,7 +14,7 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，颇多乍看像是魔法的 C 程式码就是 bitops 的组合。
 "><meta itemprop="datePublished" content="2024-02-23T13:13:33+08:00" />
 <meta itemprop="dateModified" content="2024-04-12T20:56:51+08:00" />
-<meta itemprop="wordCount" content="6365"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="6399"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Bitwise," /><meta property="og:title" content="你所不知道的 C 语言: bitwise 操作" />
 <meta property="og:description" content="
 Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，颇多乍看像是魔法的 C 程式码就是 bitops 的组合。
@@ -43,7 +43,7 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-bitwise\/"
-    },"genre": "posts","keywords": "Sysprog, C, Bitwise","wordcount":  6365 ,
+    },"genre": "posts","keywords": "Sysprog, C, Bitwise","wordcount":  6399 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-bitwise\/","datePublished": "2024-02-23T13:13:33+08:00","dateModified": "2024-04-12T20:56:51+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -55,7 +55,7 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -101,7 +101,7 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -161,18 +161,12 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>你所不知道的 C 语言: bitwise 操作</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-23 13:13:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-23">2024-02-23</time></span>&nbsp;<span title="更新于 2024-04-12 20:56:51"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-12">2024-04-12</time></span>&nbsp;<span title="6365 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 6400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 13 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/c/" class="post-category" title="分类 - C"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-02-23 13:13:33"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-23">2024-02-23</time></span>&nbsp;<span title="更新于 2024-04-12 20:56:51"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-12">2024-04-12</time></span>&nbsp;<span title="6399 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 6400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 13 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -233,14 +227,14 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 <ul>
 <li><a href="https://hackmd.io/@sysprog/c-bitwise"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
-<h2 id="复习数值系统">复习数值系统</h2>
-<ul>
+<h2 id="复习数值系统" class="heading-element">
+  <a href="#%e5%a4%8d%e4%b9%a0%e6%95%b0%e5%80%bc%e7%b3%bb%e7%bb%9f" class="heading-mark"></a>复习数值系统</h2><ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> YouTube: <a href="https://www.youtube.com/watch?v=8J7sAYoG50A"target="_blank" rel="external nofollow noopener noreferrer">十进制，十二进制，六十进制从何而来？阿拉伯人成就了文艺复兴？[数学大师]</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-numerics"target="_blank" rel="external nofollow noopener noreferrer">你所不知道的 C 语言: 数值系统</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/binary-representation"target="_blank" rel="external nofollow noopener noreferrer">解读计算机编码</a></li>
 </ul>
-<h3 id="位元组合">位元组合</h3>
-<p>一些位元组合表示特定的意义，而不是表示数值，这些组合被称为 <strong>trap representation</strong></p>
+<h3 id="位元组合" class="heading-element">
+  <a href="#%e4%bd%8d%e5%85%83%e7%bb%84%e5%90%88" class="heading-mark"></a>位元组合</h3><p>一些位元组合表示特定的意义，而不是表示数值，这些组合被称为 <strong>trap representation</strong></p>
 <ul>
 <li>C11 6.2.6.2 Integer types</li>
 </ul>
@@ -264,8 +258,8 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 </div>
     </div>
   </div>
-<h3 id="位移运算">位移运算</h3>
-<p>位移运算的未定义情况:</p>
+<h3 id="位移运算" class="heading-element">
+  <a href="#%e4%bd%8d%e7%a7%bb%e8%bf%90%e7%ae%97" class="heading-mark"></a>位移运算</h3><p>位移运算的未定义情况:</p>
 <p><strong>C99 6.5.7 Bitwise shift operators</strong></p>
 <ul>
 <li>左移超过变量长度，则运算结果未定义</li>
@@ -279,8 +273,8 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 <blockquote>
 <p>If E1 has a signed type and a negative value, the resulting value is implementation-defined.</p>
 </blockquote>
-<h3 id="signed--unsigned">Signed &amp; Unsigned</h3>
-<p>当 Unsigned 和 Signed 混合在同一表达式时，Signed 会被转换成 Unsigned，运算结果可能不符合我们的预期 (这里大赞 Rust，这种情况会编译失败&#x1f923;)。案例请参考原文，这里举一个比较常见的例子:</p>
+<h3 id="signed--unsigned" class="heading-element">
+  <a href="#signed--unsigned" class="heading-mark"></a>Signed &amp; Unsigned</h3><p>当 Unsigned 和 Signed 混合在同一表达式时，Signed 会被转换成 Unsigned，运算结果可能不符合我们的预期 (这里大赞 Rust，这种情况会编译失败&#x1f923;)。案例请参考原文，这里举一个比较常见的例子:</p>
 <div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -305,8 +299,8 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 <blockquote>
 <p><code>size_t</code> which is the unsigned integer type of the result of the sizeof operator</p>
 </blockquote>
-<h3 id="sign-extension">Sign Extension</h3>
-<p>将 w bit signed integer 扩展为 w+k bit signed integer，只需将 sign bit 补充至扩展的 bits。</p>
+<h3 id="sign-extension" class="heading-element">
+  <a href="#sign-extension" class="heading-mark"></a>Sign Extension</h3><p>将 w bit signed integer 扩展为 w+k bit signed integer，只需将 sign bit 补充至扩展的 bits。</p>
 <p>数值等价性推导:</p>
 <ul>
 <li>positive: 显然是正确的，sign bit 为 0，扩展后数值仍等于原数值</li>
@@ -316,8 +310,8 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 <p>$2^{-(w+k-1)} + 2^{w+k-2} + &hellip; + 2^{w-1}$ 可以考虑从左往右的运算，每次都是将原先的数值减半，所以最后的数值为 $2^{-(w+k-1)}$</p>
 </blockquote>
 <p>所以如果 n 是 signed 32-bit，则 <code>n &gt;&gt; 31</code> 等价于 <code>n == 0 ? 0 : -1</code>。在这个的基础上，请重新阅读 <a href="https://hackmd.io/@sysprog/binary-representation"target="_blank" rel="external nofollow noopener noreferrer">解读计算机编码</a> 中的 abs 和 min/max 的常数时间实作。</p>
-<h2 id="bitwise-operator">Bitwise Operator</h2>
-<ul>
+<h2 id="bitwise-operator" class="heading-element">
+  <a href="#bitwise-operator" class="heading-mark"></a>Bitwise Operator</h2><ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="http://doc.callmematthi.eu/C_Bitwise_Operators.html"target="_blank" rel="external nofollow noopener noreferrer">Bitwise Operators Quiz Answers</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://pconrad.github.io/old_pconrad_cs16/topics/bitOps/"target="_blank" rel="external nofollow noopener noreferrer">Practice with bit operations</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://web.stanford.edu/class/archive/cs/cs107/cs107.1202/lab1/practice.html"target="_blank" rel="external nofollow noopener noreferrer">Bitwise Practice</a></li>
@@ -354,8 +348,8 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 </span></span><span class="line"><span class="cl"><span class="p">(</span><span class="n">x</span> <span class="o">^</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span>                                       <span class="nb">true</span> <span class="k">if</span> <span class="n">x</span> <span class="n">and</span> <span class="n">y</span> <span class="n">have</span> <span class="n">opposite</span> <span class="n">signs</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>程序语言只提供最小粒度为 Byte 的操作，但是不直接提供 Bit 粒度的操作，这与字节顺序相关。假设提供以 Bit 为粒度的操作，这就需要在编程时考虑 <strong>大端/小端模式</strong>，极其繁琐。</p>
-<h3 id="bitwise--logical">bitwise &amp; logical</h3>
-<p>位运算满足交换律，但逻辑运算并不满足交换律，因为短路机制。考虑 Linked list 中的情形:</p>
+<h3 id="bitwise--logical" class="heading-element">
+  <a href="#bitwise--logical" class="heading-mark"></a>bitwise &amp; logical</h3><p>位运算满足交换律，但逻辑运算并不满足交换律，因为短路机制。考虑 Linked list 中的情形:</p>
 <div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -376,8 +370,8 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 <p>The result of the logical negation operator ! is 0 if the value of its operand compares unequal to 0, 1 if the value of its operand compares equal to 0. The result has type int. The expression !E is equivalent to (0==E).</p>
 </blockquote>
 <p>所以 <code>!!(expr)</code> 的结果为 <code>int</code> 并且数值只有 0 或 1。</p>
-<h3 id="right-shifts">Right Shifts</h3>
-<p>对于 Unsigned 或 positive sign integer 做右移运算时 <code>x &gt;&gt; n</code>，其最终结果值为 $\lfloor x / 2^n \rfloor$。</p>
+<h3 id="right-shifts" class="heading-element">
+  <a href="#right-shifts" class="heading-mark"></a>Right Shifts</h3><p>对于 Unsigned 或 positive sign integer 做右移运算时 <code>x &gt;&gt; n</code>，其最终结果值为 $\lfloor x / 2^n \rfloor$。</p>
 <p>因为这种情况的右移操作相当于对每个 bit 表示的 power 加上 $-n$，再考虑有些 bit 表示的 power 加上 $-n$ 后会小于 0，此时直接将这些 bit 所表示的值去除即可 (因为在 integer 中 bit 的 power 最小为 0，如果 power 小于 0 表示的是小数值)，这个操作对应于向下取整。</p>
 <div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -390,8 +384,8 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 </span></span><span class="line"><span class="cl">-&gt;  000101.11      (5.75)
 </span></span><span class="line"><span class="cl">-&gt;  000101         (5)</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="bitwise-实作">bitwise 实作</h2>
-<ul>
+</div><h2 id="bitwise-实作" class="heading-element">
+  <a href="#bitwise-%e5%ae%9e%e4%bd%9c" class="heading-mark"></a>bitwise 实作</h2><ul>
 <li>Vi/Vim 为什么使用 hjkl 作为移动字符?</li>
 </ul>
 <blockquote>
@@ -406,40 +400,40 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
     </div>
   </div>
 <a href="https://github.com/ccrysisa/LKI/blob/main/c-bitwise"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
-<h3 id="set-a-bit">Set a bit</h3>
-<div class="highlight" id="id-5"><div class="chroma">
+<h3 id="set-a-bit" class="heading-element">
+  <a href="#set-a-bit" class="heading-mark"></a>Set a bit</h3><div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">a</span> <span class="o">|=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="clear-a-bit">Clear a bit</h3>
-<div class="highlight" id="id-6"><div class="chroma">
+</div><h3 id="clear-a-bit" class="heading-element">
+  <a href="#clear-a-bit" class="heading-mark"></a>Clear a bit</h3><div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">a</span> <span class="o">&amp;=</span> <span class="o">~</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="toggle-a-bit">Toggle a bit</h3>
-<div class="highlight" id="id-7"><div class="chroma">
+</div><h3 id="toggle-a-bit" class="heading-element">
+  <a href="#toggle-a-bit" class="heading-mark"></a>Toggle a bit</h3><div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">char</span> <span class="n">a</span> <span class="o">^=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="test-a-bit">Test a bit</h3>
-<div class="highlight" id="id-8"><div class="chroma">
+</div><h3 id="test-a-bit" class="heading-element">
+  <a href="#test-a-bit" class="heading-mark"></a>Test a bit</h3><div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span> <span class="o">&amp;</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="n">n</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="the-rightleft-most-byte">The right/left most byte</h3>
-<div class="highlight" id="id-9"><div class="chroma">
+</div><h3 id="the-rightleft-most-byte" class="heading-element">
+  <a href="#the-rightleft-most-byte" class="heading-mark"></a>The right/left most byte</h3><div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -458,8 +452,8 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">right</span> <span class="o">=</span> <span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">;</span>        <span class="cm">/* right most (least significant) byte */</span>
 </span></span><span class="line"><span class="cl"><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">left</span>  <span class="o">=</span> <span class="p">(</span><span class="n">val</span> <span class="o">&gt;&gt;</span> <span class="mi">24</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xff</span><span class="p">;</span> <span class="cm">/* left  most (most  significant) byte */</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="sign-bit">Sign bit</h3>
-<div class="highlight" id="id-10"><div class="chroma">
+</div><h3 id="sign-bit" class="heading-element">
+  <a href="#sign-bit" class="heading-mark"></a>Sign bit</h3><div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -474,8 +468,8 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 </span></span><span class="line"><span class="cl"><span class="c1">// assuming 32 bit, 4-byte int integer, two&#39;s complement
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">bool</span> <span class="n">sign</span> <span class="o">=</span> <span class="n">val</span> <span class="o">&amp;</span> <span class="mh">0x80000000</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="uses-of-bitwise-operations-or-why-to-study-bits">Uses of Bitwise Operations or Why to Study Bits</h3>
-<ul>
+</div><h3 id="uses-of-bitwise-operations-or-why-to-study-bits" class="heading-element">
+  <a href="#uses-of-bitwise-operations-or-why-to-study-bits" class="heading-mark"></a>Uses of Bitwise Operations or Why to Study Bits</h3><ul>
 <li>Compression</li>
 <li>Set operations</li>
 <li>Encryption</li>
@@ -490,13 +484,13 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">x ^ y = (~x &amp; y) | (x &amp; ~y)</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="影像处理">影像处理</h2>
-<ul>
+</div><h2 id="影像处理" class="heading-element">
+  <a href="#%e5%bd%b1%e5%83%8f%e5%a4%84%e7%90%86" class="heading-mark"></a>影像处理</h2><ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> Stack Overflow: <a href="https://stackoverflow.com/questions/30237567/what-r1-r-8-8-does"target="_blank" rel="external nofollow noopener noreferrer">what (r+1 + (r &raquo; 8)) &raquo; 8 does?</a></li>
 </ul>
 <p>在图形引擎中将除法运算 <code>x / 255</code> 用位运算 <code>(x+1 + (x &gt;&gt; 8)) &gt;&gt; 8</code> 来实作，可以大幅度提升计算效能。</p>
-<h3 id="案例分析">案例分析</h3>
-<p>实作程式码: <a href="https://github.com/charles620016/embedded-summer2015/tree/master/RGBAtoBW"target="_blank" rel="external nofollow noopener noreferrer">RGBAtoBW</a></p>
+<h3 id="案例分析" class="heading-element">
+  <a href="#%e6%a1%88%e4%be%8b%e5%88%86%e6%9e%90" class="heading-mark"></a>案例分析</h3><p>实作程式码: <a href="https://github.com/charles620016/embedded-summer2015/tree/master/RGBAtoBW"target="_blank" rel="external nofollow noopener noreferrer">RGBAtoBW</a></p>
 <p>给定每个 pixel 为 32-bit 的 RGBA 的 bitmap，提升效能的方案:</p>
 <ul>
 <li>建立表格加速浮点运算</li>
@@ -520,8 +514,8 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 </span></span><span class="line"><span class="cl"><span class="n">bwPixel</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="mi">24</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">bw</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">bw</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">+</span> <span class="n">bw</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>分别对 R, G, B 建立对应的浮点数表，则这三个表总共占用 $3 \times 2^8 Bytes &lt; 32KB$ <strong>cache friendly</strong></p>
-<h2 id="案例探讨">案例探讨</h2>
-<div class="details admonition info open">
+<h2 id="案例探讨" class="heading-element">
+  <a href="#%e6%a1%88%e4%be%8b%e6%8e%a2%e8%ae%a8" class="heading-mark"></a>案例探讨</h2><div class="details admonition info open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -533,8 +527,8 @@ Linux 核心原始程式码存在大量 bit(-wise) operations (简称 bitops)，
 </div>
     </div>
   </div>
-<h2 id="类神经网络的-relu-极其常数时间复杂度实作">类神经网络的 ReLU 极其常数时间复杂度实作</h2>
-<a href="https://hackmd.io/@sysprog/constant-time-relu"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+<h2 id="类神经网络的-relu-极其常数时间复杂度实作" class="heading-element">
+  <a href="#%e7%b1%bb%e7%a5%9e%e7%bb%8f%e7%bd%91%e7%bb%9c%e7%9a%84-relu-%e6%9e%81%e5%85%b6%e5%b8%b8%e6%95%b0%e6%97%b6%e9%97%b4%e5%a4%8d%e6%9d%82%e5%ba%a6%e5%ae%9e%e4%bd%9c" class="heading-mark"></a>类神经网络的 ReLU 极其常数时间复杂度实作</h2><a href="https://hackmd.io/@sysprog/constant-time-relu"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 <p>ReLU 定义如下:
 <div class="fi-row">
 $$
@@ -619,8 +613,8 @@ $$
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">u</span><span class="p">.</span><span class="n">f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="从-sqrt-2-的存在谈开平方根的快速运算">从 $\sqrt 2$ 的存在谈开平方根的快速运算</h2>
-<a href="https://hackmd.io/@sysprog/sqrt"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+</div><h2 id="从-sqrt-2-的存在谈开平方根的快速运算" class="heading-element">
+  <a href="#%e4%bb%8e-sqrt-2-%e7%9a%84%e5%ad%98%e5%9c%a8%e8%b0%88%e5%bc%80%e5%b9%b3%e6%96%b9%e6%a0%b9%e7%9a%84%e5%bf%ab%e9%80%9f%e8%bf%90%e7%ae%97" class="heading-mark"></a>从 $\sqrt 2$ 的存在谈开平方根的快速运算</h2><a href="https://hackmd.io/@sysprog/sqrt"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 <div class="details admonition note open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -629,8 +623,8 @@ $$
       <div class="admonition-content">这一部分需要学员对现代数学观点有一些了解，强烈推荐修台大齐震宇老师的「数学潜水艇/新生营演讲」，齐老师的这些讲座难度和广度大致相当于其它院校开设的「数学导论」一课。</div>
     </div>
   </div>
-<h3 id="sqrt-2-的缘起和计算">$\sqrt 2$ 的缘起和计算</h3>
-<ul>
+<h3 id="sqrt-2-的缘起和计算" class="heading-element">
+  <a href="#sqrt-2-%e7%9a%84%e7%bc%98%e8%b5%b7%e5%92%8c%e8%ae%a1%e7%ae%97" class="heading-mark"></a>$\sqrt 2$ 的缘起和计算</h3><ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> YouTube: <a href="https://youtu.be/nAOVQEcqjSM"target="_blank" rel="external nofollow noopener noreferrer">第一次数学危机，天才是怎么被扼杀的？</a></li>
 </ul>
 <p>可以通过「十分逼近法」来求得近似精确的 $\sqrt 2$ 的数值，这也是「数值计算/分析」领域的一个应用，除此之外还可以使用「二分逼近法」进行求值。十分逼近法和二分逼近法的主要区别在于：十分逼近法的收敛速度比二分逼近法快很多，即会更快求得理想范围精度对应的数值。</p>
@@ -643,8 +637,8 @@ $$
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> YouTube: <a href="https://www.youtube.com/watch?v=PHPj0jLhcnM"target="_blank" rel="external nofollow noopener noreferrer">二分逼近法和十分逼近法求平方根</a></li>
 </ul>
-<h3 id="固定点和牛顿法">固定点和牛顿法</h3>
-<p>固定点定理相关的证明挺有意思的 (前提是你修过数学导论这类具备现代数学观点和思维的课 &#x1f923;):</p>
+<h3 id="固定点和牛顿法" class="heading-element">
+  <a href="#%e5%9b%ba%e5%ae%9a%e7%82%b9%e5%92%8c%e7%89%9b%e9%a1%bf%e6%b3%95" class="heading-mark"></a>固定点和牛顿法</h3><p>固定点定理相关的证明挺有意思的 (前提是你修过数学导论这类具备现代数学观点和思维的课 &#x1f923;):</p>
 <ul>
 <li>存在性 (分类讨论)</li>
 <li>唯一性 (反证法)</li>
@@ -709,9 +703,9 @@ $$
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> LeetCode <a href="https://leetcode.com/problems/sqrtx/description/"target="_blank" rel="external nofollow noopener noreferrer">69. Sqrt(x)</a></li>
 </ul>
-<h3 id="二进位的平方根">二进位的平方根</h3>
-<p>在使用位运算计算平方根的程式码中，我们又见到了的 <code>union</code> 和 <code>do {...} whil (0)</code> 的运用。位运算求解平方根的核心在于: $n$ 可以根据 IEEE 754 表示为 $S\times1.Frac\times2^{127+E}$，这种表示法下求解平方根只需计算 $\sqrt{1.Frac}$ 和 $\sqrt{2^{(127+E)}}$ 两部分 (只考虑非负数的平方根)。虽然描述起来简单，但由于 IEEE 754 编码的复杂性，需要考虑很多情况，例如 $E$ 全 0 或全 1，因为此时对应的数值就不是之前表示的那样了 (指 $S\times1.Frac\times2^{127+E}$)，需要额外考量。</p>
-<a class="lightgallery" href="https://hackmd.io/_uploads/Hymhown-9.png?size=large" data-thumbnail="https://hackmd.io/_uploads/Hymhown-9.png?size=small" data-sub-html="<h2>https://hackmd.io/_uploads/Hymhown-9.png</h2>"><img loading="lazy" src="https://hackmd.io/_uploads/Hymhown-9.png" srcset="https://hackmd.io/_uploads/Hymhown-9.png?size=small, https://hackmd.io/_uploads/Hymhown-9.png?size=medium 1.5x, https://hackmd.io/_uploads/Hymhown-9.png?size=large 2x" sizes="auto" data-title="https://hackmd.io/_uploads/Hymhown-9.png" data-alt="https://hackmd.io/_uploads/Hymhown-9.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<h3 id="二进位的平方根" class="heading-element">
+  <a href="#%e4%ba%8c%e8%bf%9b%e4%bd%8d%e7%9a%84%e5%b9%b3%e6%96%b9%e6%a0%b9" class="heading-mark"></a>二进位的平方根</h3><p>在使用位运算计算平方根的程式码中，我们又见到了的 <code>union</code> 和 <code>do {...} whil (0)</code> 的运用。位运算求解平方根的核心在于: $n$ 可以根据 IEEE 754 表示为 $S\times1.Frac\times2^{127+E}$，这种表示法下求解平方根只需计算 $\sqrt{1.Frac}$ 和 $\sqrt{2^{(127+E)}}$ 两部分 (只考虑非负数的平方根)。虽然描述起来简单，但由于 IEEE 754 编码的复杂性，需要考虑很多情况，例如 $E$ 全 0 或全 1，因为此时对应的数值就不是之前表示的那样了 (指 $S\times1.Frac\times2^{127+E}$)，需要额外考量。</p>
+<a class="lightgallery" href="https://hackmd.io/_uploads/Hymhown-9.png?size=large" data-thumbnail="https://hackmd.io/_uploads/Hymhown-9.png?size=small" data-sub-html="<h2>https://hackmd.io/_uploads/Hymhown-9.png</h2>"><img loading="lazy" src="https://hackmd.io/_uploads/Hymhown-9.png" alt="https://hackmd.io/_uploads/Hymhown-9.png" srcset="https://hackmd.io/_uploads/Hymhown-9.png?size=small, https://hackmd.io/_uploads/Hymhown-9.png?size=medium 1.5x, https://hackmd.io/_uploads/Hymhown-9.png?size=large 2x" sizes="auto" data-title="https://hackmd.io/_uploads/Hymhown-9.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <ul>
 <li>sign: 1 bit <code>0x80000000</code></li>
 <li>exponent: 8 bits <code>0x7f800000</code></li>
@@ -731,8 +725,8 @@ $$
       <div class="admonition-content">这段程式码可以再一次看到 枚举 <code>union</code> 和 宏 <code>do {...} while (0)</code> 的应用之外，主要是根据 IEEE 754 编码规范进行求解，所以需要对浮点数的编码格式有一定认知，可以参考阅读: <a href="https://hackmd.io/@sysprog/c-floating-point"target="_blank" rel="external nofollow noopener noreferrer">你所不知道的 C 语言: 浮点数运算</a>。</div>
     </div>
   </div>
-<h3 id="fast-inverse-square-root-平方根倒数">Fast Inverse Square Root (平方根倒数)</h3>
-<p>下面的录影解说了程式码中的黑魔法 <code>0x5f3759df</code> 的原理，本质也是牛顿法，只不过是 <strong>选择一个接近目标值的初始值</strong>，从而只需要一次牛顿法即可求解出相对高精度的目标平方根 (例如将 $1.4$ 作为牛顿法求 $\sqrt 2$ 的初始值，只需一次迭代求解出的精度已经相当惊人了)，除此之外还运用到了对数求平方根倒数的技巧:</p>
+<h3 id="fast-inverse-square-root-平方根倒数" class="heading-element">
+  <a href="#fast-inverse-square-root-%e5%b9%b3%e6%96%b9%e6%a0%b9%e5%80%92%e6%95%b0" class="heading-mark"></a>Fast Inverse Square Root (平方根倒数)</h3><p>下面的录影解说了程式码中的黑魔法 <code>0x5f3759df</code> 的原理，本质也是牛顿法，只不过是 <strong>选择一个接近目标值的初始值</strong>，从而只需要一次牛顿法即可求解出相对高精度的目标平方根 (例如将 $1.4$ 作为牛顿法求 $\sqrt 2$ 的初始值，只需一次迭代求解出的精度已经相当惊人了)，除此之外还运用到了对数求平方根倒数的技巧:</p>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> YouTube: <a href="https://www.youtube.com/watch?v=g1r3iLejTw0"target="_blank" rel="external nofollow noopener noreferrer">没有显卡的年代，这群程序员用4行代码优化游戏</a></li>
 </ul>
@@ -785,8 +779,8 @@ $$
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">x</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="c-语言的-bit-field">C 语言的 bit-field</h2>
-<a href="https://hackmd.io/@sysprog/c-bitfield"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+</div><h2 id="c-语言的-bit-field" class="heading-element">
+  <a href="#c-%e8%af%ad%e8%a8%80%e7%9a%84-bit-field" class="heading-mark"></a>C 语言的 bit-field</h2><a href="https://hackmd.io/@sysprog/c-bitfield"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 <div class="highlight" id="id-19"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -818,8 +812,8 @@ $$
 <p>A bit-field is interpreted as a signed or unsigned integer type consisting of the specified number of bits.</p>
 </blockquote>
 <p>将 <code>a</code> 这个 1-bit 的位域 (bit-field) 声明成 <code>signed int</code>，即将 <code>a</code> 视为一个 1-bit 的二补数，所以 <code>a</code> 的数值只有 0，-1。接下来将 1 赋值给 <code>a</code> 会使得 <code>a</code> 的数值为 -1，然后将 <code>a</code> 作为参数传入 <code>is_one</code> 时会进行符号扩展 (sign extension) 为 32-bit 的二补数 (假设编译器会将 <code>int</code> 视为 signed int)，所以数值仍然为 -1。因此最终会输出 &ldquo;not one&rdquo;.</p>
-<h3 id="linux-核心-build_bug_on_zero">Linux 核心: BUILD_BUG_ON_ZERO()</h3>
-<div class="highlight" id="id-20"><div class="chroma">
+<h3 id="linux-核心-build_bug_on_zero" class="heading-element">
+  <a href="#linux-%e6%a0%b8%e5%bf%83-build_bug_on_zero" class="heading-mark"></a>Linux 核心: BUILD_BUG_ON_ZERO()</h3><div class="highlight" id="id-20"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -938,11 +932,10 @@ intervening bit-fields happen to be.</p>
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-04-12 20:56:51">更新于 2024-04-12&nbsp;</span>
-      </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/c-bitwise/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="你所不知道的 C 语言: bitwise 操作" data-hashtags="Sysprog,C,Bitwise"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/c-bitwise/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="你所不知道的 C 语言: bitwise 操作" data-hashtags="Sysprog,C,Bitwise"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="你所不知道的 C 语言: bitwise 操作" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="你所不知道的 C 语言: bitwise 操作"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -951,12 +944,11 @@ intervening bit-fields happen to be.</p>
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="你所不知道的 C 语言: bitwise 操作" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-bitwise/" data-title="你所不知道的 C 语言: bitwise 操作"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-      </div>
-    </div>
-  </div>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/c/' class="post-tag">C</a><a href='/tags/bitwise/' class="post-tag">Bitwise</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a><a href="/tags/c/" class="post-tag" title="标签 - C">C</a><a href="/tags/bitwise/" class="post-tag" title="标签 - Bitwise">Bitwise</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -965,11 +957,14 @@ intervening bit-fields happen to be.</p>
   <div class="post-nav"><a href="/posts/smart-pointers-and-interior-mutability/" class="post-nav-item" rel="prev" title="Crust of Rust: Smart Pointers and Interior Mutability"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Crust of Rust: Smart Pointers and Interior Mutability</a>
       <a href="/posts/c-memory/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: 记忆体管理、对齐及硬体特性">你所不知道的 C 语言: 记忆体管理、对齐及硬体特性<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -977,5 +972,5 @@ intervening bit-fields happen to be.</p>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>
