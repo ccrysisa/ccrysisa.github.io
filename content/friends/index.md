@@ -1,7 +1,7 @@
 ---
 title: "所有友链"
 subtitle:
-type: friends
+layout: friends
 date: 2024-04-29T23:46:50+08:00
 description: "ccrysisa's friends"
 keywords:
@@ -17,7 +17,6 @@ comment: false
 
 <!-- You can define additional content below for this page. -->
 
-{{< details "Reminder" >}}
 ## Base info
 
 ```yaml
@@ -36,4 +35,3 @@ comment: false
 3. Those websites that do not respect other people's labor achievements, reprint without source, or malicious acts, please do not come to exchange.
 
 {{< /admonition >}}
-{{< /details >}}

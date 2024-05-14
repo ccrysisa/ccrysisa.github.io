@@ -13,7 +13,7 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
 <meta itemprop="description" content="
 In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — https://tools.ietf.org/html/rfc793 — which describes the original protocol, with the goal of being able to set up and tear down a connection with a &ldquo;real&rdquo; TCP stack at the other end (netcat in particular). We&rsquo;re writing it using a user-space networking interface (see https://www.kernel.org/doc/Documentation/networking/tuntap.txt and the Rust bindings at https://docs.rs/tun-tap/).
 "><meta itemprop="datePublished" content="2024-02-17T19:01:53+08:00" />
-<meta itemprop="dateModified" content="2024-03-18T10:07:25+08:00" />
+<meta itemprop="dateModified" content="2024-05-14T09:57:18+08:00" />
 <meta itemprop="wordCount" content="1575"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,TCP,Network," /><meta property="og:title" content="Impl Rust: TCP/IP" />
 <meta property="og:description" content="
@@ -22,7 +22,7 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/rust-tcp/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-17T19:01:53+08:00" />
-<meta property="article:modified_time" content="2024-03-18T10:07:25+08:00" />
+<meta property="article:modified_time" content="2024-05-14T09:57:18+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Impl Rust: TCP/IP"/>
@@ -44,7 +44,7 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/rust-tcp\/"
     },"genre": "posts","keywords": "Rust, TCP, Network","wordcount":  1575 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/rust-tcp\/","datePublished": "2024-02-17T19:01:53+08:00","dateModified": "2024-03-18T10:07:25+08:00","publisher": {
+    "url": "https:\/\/ccrysisa.github.io\/posts\/rust-tcp\/","datePublished": "2024-02-17T19:01:53+08:00","dateModified": "2024-05-14T09:57:18+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -166,7 +166,7 @@ In this stream, we started implementing the ubiquitous TCP protocol that underli
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Impl Rust: TCP/IP</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/rust/" class="post-category" title="分类 - Rust"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a>&ensp;<a href="/categories/systems/" class="post-category" title="分类 - Systems"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Systems</a></span></div><div class="post-meta-line"><span title="发布于 2024-02-17 19:01:53"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-17">2024-02-17</time></span>&nbsp;<span title="更新于 2024-03-18 10:07:25"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-18">2024-03-18</time></span>&nbsp;<span title="1575 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/rust/" class="post-category" title="分类 - Rust"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a>&ensp;<a href="/categories/systems/" class="post-category" title="分类 - Systems"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Systems</a></span></div><div class="post-meta-line"><span title="发布于 2024-02-17 19:01:53"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-17">2024-02-17</time></span>&nbsp;<span title="更新于 2024-05-14 09:57:18"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-14">2024-05-14</time></span>&nbsp;<span title="1575 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -458,7 +458,7 @@ prevents using old segments to update the window.</p>
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-03-18 10:07:25">更新于 2024-03-18&nbsp;</span>
+        <span title="更新于 2024-05-14 09:57:18">更新于 2024-05-14&nbsp;</span>
       </div></div><div class="post-info-line">
         <div class="post-info-md"><span><a href="/posts/rust-tcp/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
         <div class="post-info-share">

@@ -7,7 +7,6 @@
 
 &lt;!-- You can define additional content below for this page. --&gt;
 
-{{&lt; details &#34;Reminder&#34; &gt;}}
 ## Base info
 
 ```yaml
@@ -26,11 +25,10 @@
 3. Those websites that do not respect other people&#39;s labor achievements, reprint without source, or malicious acts, please do not come to exchange.
 
 {{&lt; /admonition &gt;}}
-{{&lt; /details &gt;}}
 
 
 ---
 
-> 作者:   
+> 作者: [ccrysisa](https://github.com/ccrysisa)  
 > URL: https://ccrysisa.github.io/friends/  
 
