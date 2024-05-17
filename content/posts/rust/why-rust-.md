@@ -129,15 +129,14 @@ shadow 可理解为变量名可以和储存数据的地址绑定、解绑，所�
 
 ### Understanding Ownership
 
-- 4.1. What is Ownership?
+#### What is Ownership?
+
 > Rust uses a third approach: memory is managed through a system of ownership with a set of rules that the **compiler checks**. If any of the rules are violated, the program won\'t **compile**. None of the features of ownership will slow down your program while it\'s running.
 
-- 4.1. What is Ownership?
 > By the same token, a processor can do its job better if it works on data that’s close to other data (as it is on the stack) rather than farther away (as it can be on the heap).
 
 这主要是因为 cache 机制带来的效能提升
 
-- 4.1. What is Ownership?
 > Keeping track of what parts of code are using what data on the heap, minimizing the amount of duplicate data on the heap, and cleaning up unused data on the heap so you don’t run out of space are all problems that ownership addresses.
 
 从上面的描述可以看出，所有权 (ownership) 机制主要针对的是 heap 空间的管理，所以下面的 3 条规则也是针对 heap 空间上的数据:
@@ -146,14 +145,101 @@ shadow 可理解为变量名可以和储存数据的地址绑定、解绑，所�
 - There can only be one owner at a time.
 - When the owner goes out of scope, the value will be dropped.
 
-- 4.1. What is Ownership?
 > Rust takes a different path: the memory is automatically returned once the variable that owns it goes out of scope. 
 
-也就是说，Rust 使用类似与 stack 的方式来管理 heap 空间，因为 stack 上的数在超过作用于就会自动消亡 (通过 `sp` 寄存器进行出栈操作)。Rust 对于 heap 的管理也类似，在出栈同时还回收 heap 对应的空间。
+也就是说，Rust 使用类似与 stack 的方式来管理 heap 空间，因为 stack 上的数在超过作用于就会自动消亡 (通过 `sp` 寄存器进行出栈操作)。Rust 对于 heap 的管理也类似，在出栈同时还回收 heap 对应的空间，这是合理的，因为 heap 上的数据都会直接/简接地被 stack 上的数据所引用，例如指针。
+
+函数参数也类似，因为从函数调用 ABI 角度来看，赋值和函数调用时参数、返回的处理都是相同的，即在 stack 空间进行入栈操作。
+
+> We do not copy the data on the heap that the pointer refers to.
+
+也就是说通常情况下 移动 (Move) 只对 heap 上的数据起作用，对于 stack 上的数据，体现的是 拷贝 (Copy) 操作，当然这也不绝对，可以通过实现 `Copy` 这个 trait 来对 heap 的数据也进行拷贝操作。Rust 对于 stack 和 heap 上都有数据的 object (例如 String) 的赋值处理默认是: 拷贝 stack 上的数据，新的 stack 数据仍然指向同一个 heap 的数据，同时将原先 stack 数据所在的内存无效化。
+
+>  This is known as a double free error and is one of the memory safety bugs we mentioned previously. Freeing memory twice can lead to memory corruption, which can potentially lead to security vulnerabilities.
+
+> To ensure memory safety, after the line `let s2 = s1;`, Rust considers `s1` as no longer valid. Therefore, Rust doesn’t need to free anything when `s1` goes out of scope.
+
+> In addition, there’s a design choice that’s implied by this: Rust will never automatically create “deep” copies of your data. Therefore, any automatic copying can be assumed to be inexpensive in terms of runtime performance.
+
+移动 (Move) 操作解决了 double free 这个安全隐患，让 Rust 在内存安全的领域占据了一席之地。除此之外，Move 操作使得自动赋值的开销变得低廉，因为使用的是 Move 移动操作，而不是 Copy 拷贝操作。
+
+> Rust won’t let us annotate a type with Copy if the type, or any of its parts, has implemented the Drop trait. If the type needs something special to happen when the value goes out of scope and we add the Copy annotation to that type, we’ll get a compile-time error. 
+
+#### References and Borrowing
+
+从内存角度来看，reference 常用的场景为:
+```
+Reference            Owner
++-------+      +----------------+
+| stack |  --> | stack --> Heap |
++-------+      +----------------+
+```
+
+> Mutable references have one big restriction: if you have a mutable reference to a value, you can have no other references to that value.
+
+>  The benefit of having this restriction is that Rust can prevent data races at compile time. A data race is similar to a race condition and happens when these three behaviors occur:
+> - Two or more pointers access the same data at the same time.
+> - At least one of the pointers is being used to write to the data.
+> - There’s no mechanism being used to synchronize access to the data.
+
+> We also cannot have a mutable reference while we have an immutable one to the same value.
+
+编译时期即可防止数据竞争，同时允许了编译器进行激进的最佳化策略 (因为保证没有非预期的数据竞争发生)。
+
+> In Rust, by contrast, the compiler guarantees that references will never be dangling references: if you have a reference to some data, the compiler will ensure that the data will not go out of scope before the reference to the data does.
+
+编译器保证了我们使用引用时的正确性，同时这也是后面标注生命周期 (lifetime) 的机制基础。
+
+- At any given time, you can have either one mutable reference or any number of immutable references.
+- References must always be valid.
+
+#### The Slice Type
+
+> Slices let you reference a contiguous sequence of elements in a collection rather than the whole collection. **A slice is a kind of reference, so it does not have ownership.**
+
+切片 (slice) 也是一种引用 (references) 类型，所以它也遵守上一节提到的规则:
+> if you have a reference to some data, the compiler will ensure that the data will not go out of scope before the reference to the data does.
+
+对于类型为 `String` 的变量 `s`，它的一些 slice 需要注意，`&s[..]` 和 `&s[0..s.len()]` 是等价的，但是这两个和 `&s` 是不一样的，我们可以从内存角度获得启发:
+```
+&s -> s -> str
+&s[..] -> str
+```
+
+> String slice range indices must occur at valid UTF-8 character boundaries. If you attempt to create a string slice in the middle of a multibyte character, your program will exit with an error.
+
+> If we have a string slice, we can pass that directly. If we have a String, we can pass a slice of the String or a reference to the String. This flexibility takes advantage of deref coercions
+
+> Defining a function to take a string slice instead of a reference to a String makes our API more general and useful without losing any functionality
+
+{{< admonition >}}
+将 `&String` 类型的参数转换成 `&str` 类型从实作的角度来看，应该是由编译器负责的，原理大致是语法分析时，依据函数调用时传入的参数是 `&String` 还是 `&str` 类型，为了让代码生成器生成一样的指令对参数进行入栈操作 (本质都是将 `&str` 类型入栈)，所以语法分析器需要对 `&String` 进行一些额外的操作，让其转换成 `&str` 类型 (这部分由编译器帮我们做了，无需程序员进行手工转换)，当然程序员也可以手工进行转换成切片 `&s[..]` (编译器也是在做这件事情罢了)。
+{{< /admonition >}}
+
+Documentation:
+- method std::string::String::[as_bytes](https://doc.rust-lang.org/std/string/struct.String.html#method.as_bytes)
+- method std::iter::Iterator::[enumerate](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.enumerate)
+- Module std::[iter](https://doc.rust-lang.org/std/iter/index.html)
+
+### Using Structs to Structure Related Data
+
+Rust 不允许结构体初始化时只指定一部分字段的值，这防止了 UB 相关问题的触发。
+
+- 5.1. Defining and Instantiating Structs
+
+> Note that the entire instance must be mutable; Rust doesn’t allow us to mark only certain fields as mutable.
+
+>  Tuple structs are useful when you want to give the whole tuple a name and make the tuple a different type from other tuples, and when naming each field as in a regular struct would be verbose or redundant.
+
+> Unit-like structs can be useful when you need to implement a trait on some type but don’t have any data that you want to store in the type itself.
+
+{{< admonition >}}
+Rust 中 struct 默认是进行移动 (Move) 操作，而 tuple 默认是进行拷贝 (Copy) 操作。这是因为 struct 一般使用时都会引用 heap 中的数据 (例如 `String`)，而依据移动 (Move) 操作的语义，进行自动赋值时会拷贝 stack 上的数据并且执行同一 heap 的数据，但是原先 stack 的数据会无效化防止发生 double free。依据这个语义，就不难理解为何 Rust 中的结构体位于 stack 时也不会进行拷贝 (Copy) 操作而是进行移动 (Move) 操作了，因为需要根据常用场景对语义进行 trade-off，即使 struct 没有引用 heap 的数据，为了保障常用场景的效能，还是将这类结构体设计成 Move 操作，即会导致原先的结构体无效化。tuple 也同理，其常用场景为 stack 上的复合数据，所以默认为 Copy 操作。
+{{< /admonition >}}
 
 ## Visualizing memory layout of Rust\'s data types
 
-YouTube: [Visualizing memory layout of Rust's data types](https://www.youtube.com/watch?v=7_o-YRxf_cc&t=0s) 
+YouTube: [Visualizing memory layout of Rust\'s data types](https://www.youtube.com/watch?v=7_o-YRxf_cc&t=0s) 
 
 影片的中文翻译：
 
