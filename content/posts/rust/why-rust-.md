@@ -59,6 +59,9 @@ Rust 目前蓬勃发展，预测未来是很难的，但是 Rust 已经是进行
 
 ## The Rust Programming Language
 
+- Book: https://doc.rust-lang.org/book/
+- Video: https://www.bilibili.com/video/BV1hp4y1k7SV/
+
 ### Getting Started
 
 ```bash
@@ -113,7 +116,7 @@ shadow 可理解为变量名可以和储存数据的地址绑定、解绑，所�
 
 > A new scope block created with curly brackets is an expression
 
-从这个角度看，Rust 中的函数体也是表达式 (因为用 `{}` 包裹起来)，然后将函数的返回值视为表达式的结果值。好像也没毛病，毕竟 Rust 中所有函数都有返回值，没写返回值的默认为返回 `()`，表达式也类似，最后一条不是表达式的会补充一个 `()` 作为该表达式的结果。Rust 中很多语法都是表达式，例如 `if`, `match` 都是表达式，而在其他语言中一般是语句 (statement)，难怪有:
+从这个角度看，Rust 中的函数体也是表达式 (因为用 `{}` 包裹起来)，然后将函数的返回值视为表达式的结果值。好像也没毛病，毕竟 Rust 中所有函数都有返回值，没写返回值的默认为返回 `()`，表达式也类似，最后一条不是表达式的会补充一个 `()` 作为该表达式的结果。Rust 中很多语法都是表达式，例如 `if`, `match` 以及 `{}` 都是表达式，而在其他语言中一般是语句 (statement)，难怪有:
 > Rust is an expression-based language
 
 - 3.3. Functions
@@ -236,6 +239,63 @@ Rust 不允许结构体初始化时只指定一部分字段的值，这防止了
 {{< admonition >}}
 Rust 中 struct 默认是进行移动 (Move) 操作，而 tuple 默认是进行拷贝 (Copy) 操作。这是因为 struct 一般使用时都会引用 heap 中的数据 (例如 `String`)，而依据移动 (Move) 操作的语义，进行自动赋值时会拷贝 stack 上的数据并且执行同一 heap 的数据，但是原先 stack 的数据会无效化防止发生 double free。依据这个语义，就不难理解为何 Rust 中的结构体位于 stack 时也不会进行拷贝 (Copy) 操作而是进行移动 (Move) 操作了，因为需要根据常用场景对语义进行 trade-off，即使 struct 没有引用 heap 的数据，为了保障常用场景的效能，还是将这类结构体设计成 Move 操作，即会导致原先的结构体无效化。tuple 也同理，其常用场景为 stack 上的复合数据，所以默认为 Copy 操作。
 {{< /admonition >}}
+
+- 5.2. An Example Program Using Structs
+> It’s not the prettiest output, but it shows the values of all the fields for this instance, which would definitely help during debugging. When we have larger structs, it’s useful to have output that’s a bit easier to read; in those cases, we can use `{:#?}` instead of `{:?}` in the println! string.
+
+调试时常使用 `#[derive(Debug)]` 搭配 `{:?}` 或 `{:#？}` 打印相关的数据信息进行除错。
+
+- 5.3. Method Syntax
+> Rust doesn’t have an equivalent to the `->` operator; instead, Rust has a feature called automatic referencing and dereferencing. Calling methods is one of the few places in Rust that has this behavior.
+
+这也是为什么方法 (Method) 的第一个参数是 `self` 并且根据使用的引用类型和所有权有不同的签名，这正是为了方便编译器进行自动推断 (个人估计是语法分析时进行的)。
+
+- 5.3. Method Syntax
+> The `Self` keywords in the return type and in the body of the function are aliases for the type that appears after the impl keyword
+
+这个 `Self` 关键字语法在后面“附魔”上泛型和生命周期时就十分有用了 :rofl:
+
+### Enums and Pattern Matching
+
+这部分内容因为是从函数式编程演化而来的，可能会比较难理解。
+
+{{< admonition >}}
+Rust 中的枚举 (Enum) 实现了某种意义上的「大小类型」，即一个大类型涵盖有很多小类型，然后不同的小类型可以有不同的数据构成，然后最具表达力的一点是：这个大小类型关系可以不断递归下去。枚举附带的数据类型支持：结构体、匿名结构体、元组，这些通过编译器的语法分析都不难实现。
+{{< /admonition >}}
+
+- 6.1. Defining an Enum
+
+> However, representing the same concept using just an enum is more concise: rather than an enum inside a struct, we can put data directly into each enum variant. 
+
+因为枚举附带的数据在大部分场景都是引用 heap 数据的 object，所以对枚举的自动赋值操作和结构体一样，默认都是移动 (Move) 操作，即自动赋值后原先数据位于 stack 的那部分内存会失效。
+
+{{< admonition >}}
+Rust 的 `Option<T>` 的设计避免了其它语言中可能会出现的 UB，例如假设一个值存在，但实际上这个值并不存在，这允许编译器进行更激进的最佳化。在 Rust 中只要一个值不是 `Option<T>`，那它必然存在，并且在 Rust 中不能对 `Option<T>` 进行 `T` 的操作，而是需要先获取里面 `T` 的值才能进行操作，即 `Option<T>` 并没有继承 `T` 的行为。
+{{< /admonition >}}
+
+- 6.1. Defining an Enum
+> Rust does not have nulls, but it does have an enum that can encode the concept of a value being present or absent.
+
+> the compiler can’t infer the type that the corresponding Some variant will hold by looking only at a `None` value. 
+
+`None` 不是一种类型，而是一个大类型 `Option<T>` 下的一个小类型，所以会有各种各样的 `None` 类型，而不存在一个独一无二的 `None` 类型。
+
+- 6.2. The match Control Flow Construct
+> Another useful feature of match arms is that they can bind to the parts of the values that match the pattern. This is how we can extract values out of enum variants.
+
+模式匹配的机制是对 **枚举的类型** (包括大小类型) 进行匹配，像剥洋葱一样，最后将枚举类型附带的 **数据** 绑定到我们想要的变量上。只需要理解一点: ***只能对值进行绑定，类型是用来匹配的***。当然模式匹配也可以精确匹配到值，但这样没啥意义，因为你都知道值了，还进行模式匹配穷举干啥？:rofl: 这种精确到值的模式匹配一般出现在下面的 `if let` 表达式中，`match` 表达式一般不会这样用。
+
+- 6.2. The match Control Flow Construct
+> Rust also has a pattern we can use when we want a catch-all but don’t want to use the value in the catch-all pattern: `_` is a special pattern that matches any value and does not bind to that value. 
+
+- 6.3. Concise Control Flow with if let
+> The if let syntax lets you combine if and let into a less verbose way to handle values that match one pattern while ignoring the rest.
+
+`if let` 表达式本质上是执行模式匹配的 `if` 表达式
+
+> In other words, you can think of `if let` as syntax sugar for a `match` that runs code when the value matches one pattern and then ignores all other values.
+
+> We can include an `else` with an `if let`. The block of code that goes with the `else` is the same as the block of code that would go with the `_` case in the `match` expression that is equivalent to the `if let` and `else`.
 
 ## Visualizing memory layout of Rust\'s data types
 
