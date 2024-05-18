@@ -59,25 +59,19 @@ Rust 目前蓬勃发展，预测未来是很难的，但是 Rust 已经是进行
 
 ## The Rust Programming Language
 
-| Book | Video |
-| :--: | :---: |
-| https://doc.rust-lang.org/book/ | https://www.bilibili.com/video/BV1hp4y1k7SV/ |
+| Book | Video | Documentation |
+| :--: | :---: | :-----------: |
+| [The Book](https://doc.rust-lang.org/book/) | [录影](https://www.bilibili.com/video/BV1hp4y1k7SV/) | [The Standard Library](https://doc.rust-lang.org/std/index.html) |
 
 ### Getting Started
 
 ```bash
-# 创建包
-$ cargo new <package>
-# 编译、构建、调试版本
-$ cargo build
-# 编译优化、发布版本
-$ cargo build --release
-# 编译、运行
-$ cargo run
-# 静态分析检查
-$ cargo check
-# 清除构建出来的目标文件
-$ cargo clean
+$ cargo new <package>     # 创建项目
+$ cargo build             # 编译、构建、调试版本
+$ cargo build --release   # 编译优化、发布版本
+$ cargo run               # 编译、运行
+$ cargo check             # 静态分析检查
+$ cargo clean             # 清除构建出来的目标文件
 ```
 
 ### Programming a Guessing Game
@@ -346,8 +340,9 @@ Package |__ Crate (Root Module) |__ Module
 > In contrast, if we make an enum public, all of its variants are then public. We only need the pub before the enum keyword
 
 - 7.4. Bringing Paths Into Scope with the use Keyword
+> Adding use and a path in a scope is similar to creating a **symbolic link** in the filesystem.
 
-> Adding use and a path in a scope is similar to creating a symbolic link in the filesystem.
+使用 `use` 就类似与 Linux 文件系统中的「符号链接」，当然使用这种语法需要遵守一定的风格，方便多工合作:
 
 > Specifying the **parent module** when calling the **function** makes it clear that the function isn\'t locally defined while still minimizing repetition of the full path. 
 
@@ -355,11 +350,71 @@ Package |__ Crate (Root Module) |__ Module
 
 > The exception to this idiom is if we\'re bringing two **items with the same name** into scope with `use` statements, because Rust doesn’t allow that. As you can see, using the **parent modules** distinguishes the two Result types. 
 
+Rust 中也有类似于 Linux 系统的别名技巧，那就是使用 `as` 关键字来搭配 `use` 语法:
+
 > There\'s another solution to the problem of bringing two types of the same name into the same scope with `use`: after the path, we can specify `as` and a new local name, or **alias**, for the type.
 
+- 7.4. Bringing Paths Into Scope with the use Keyword
 > When we bring a name into scope with the `use` keyword, the name available in the new scope is private. To enable the code that calls our code to refer to that name as if it had been defined in that code\'s scope, we can combine `pub` and `use`. This technique is called *re-exporting* because we\'re bringing an item into scope but also making that item available for others to bring into their scope.
 
-> The common part of these two paths is `std::io`, and that’s the complete first path. To merge these two paths into one `use` statement, we can use `self` in the nested path,
+使用 `use` 语法引入的别名在当前作用域名 (scope) 是私有的 (private)，如果想让这个别名在当前作用域重新导出为公开权限，可以使用 `pub use` 语法。
+
+- 7.4. Bringing Paths Into Scope with the use Keyword
+> The common part of these two paths is `std::io`, and that\'s the complete first path. To merge these two paths into one `use` statement, we can use `self` in the nested path,
+
+`self` 关键字除了在对象的 `impl` 部分表示实例自身之外，在模块 (Module) 管理上也可以用于表示模块自身 (这个语法不常用，因为一般情况下 [LSP](https://en.wikipedia.org/wiki/Language_Server_Protocol) 会帮程序员自动处理好)。
+
+{{< admonition >}}
+Rust 对于模块的分离语法的文件管理也类似于文件系统树。可以将 `src/` 目录视为 crate (root module)，然后举个例子，对于 crate 下的模块 `horse`，如果采用分离文件写法，这个模块的内容就是 `src/horse.rs` 文件的内容；对于 `horse` 模块下的 `small_horse` 模块，该模块的内容就是 `src/horse/small_horse.rs` 文件的内容。显然这些源目录、文件之间的关系，与模块之间的父子关系相符合。
+{{< /admonition >}}
+
+### Common Collections
+
+Documentation:
+- Struct std::vec::[Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)
+- Struct std::string::[String](https://doc.rust-lang.org/std/string/struct.String.html)
+
+#### Storing Lists of Values with Vectors
+
+> Like any other struct, a vector is freed when it goes out of scope
+
+> When the vector gets dropped, all of its contents are also dropped, meaning the integers it holds will be cleaned up. The borrow checker ensures that any references to contents of a vector are only used while the vector itself is valid.
+
+引用搭配 vector 在 drop 场景比较复杂，涉及到生命周期以及借用检查机制。
+
+> Using `&` and `[]` gives us a reference to the element at the index value. When we use the `get` method with the index passed as an argument, we get an `Option<&T>` that we can use with `match`.
+
+读取 vector 的元素获得的应该是该元素的引用，因为读取一个元素大部分情况下不需要该元素的所有权，除此之外，如果获取了元素的所有权，那么对于 vector 的使用会有一些安全限制。
+
+```rs
+let mut v = vec![1, 2, 3, 4, 5];
+let first = &v[0];
+v.push(6);
+println!("The first element is: {first}");
+```
+
+> why should a reference to the first element care about changes at the end of the vector? This error is due to the way vectors work: because vectors put the values next to each other in memory, adding a new element onto the end of the vector might require allocating new memory and copying the old elements to the new space, if there isn’t enough room to put all the elements next to each other where the vector is currently stored. In that case, the reference to the first element would be pointing to deallocated memory. The borrowing rules prevent programs from ending up in that situation.
+
+借用规则在 vector 仍然成立，并且对 vector 一些看似不相关实则相关的事例的原理进行了解释。
+
+```rs
+let mut v = vec![100, 32, 57];
+for i in &mut v {
+    *i += 50;
+}
+```
+
+> To change the value that the mutable reference refers to, we have to use the `*` dereference operator to get to the value in `i` before we can use the `+=` operator. 
+
+一般来说，只有可变引用 `&mut` 才需要关心解引用 `*` 运算符，因为不可变引用只能表达所引用的数据本身，并不能修改，而可变引用既能表达所引用的数据本身，还能对这个数据进行修改，需要一个机制将这两个表达能力区分开 (方便编译器在语法分析上的实作)，Rust 采用的策略是针对修改数据这个能力需要使用 `*` 运算符。
+
+> Vectors can only store values that are the same type. 
+
+> Fortunately, the variants of an enum are defined under the same enum type, so when we need one type to represent elements of different types, we can define and use an enum!
+
+运用枚举 (enum) 搭配 vector 可以实作出比泛型更具表达力的 vector，即 vector 中的每个元素的类型可以不相同 (通过 enum 的大小类型机制即可实作)。
+
+#### Storing UTF-8 Encoded Text with Strings
 
 ## Visualizing memory layout of Rust\'s data types
 
