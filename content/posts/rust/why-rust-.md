@@ -1,6 +1,6 @@
 ---
-title: "Why Rust?"
-subtitle:
+title: "Rust 语言程序设计"
+subtitle: Why Rust?
 date: 2023-12-28T20:18:03+08:00
 draft: false
 # author:
@@ -59,8 +59,9 @@ Rust 目前蓬勃发展，预测未来是很难的，但是 Rust 已经是进行
 
 ## The Rust Programming Language
 
-- Book: https://doc.rust-lang.org/book/
-- Video: https://www.bilibili.com/video/BV1hp4y1k7SV/
+| Book | Video |
+| :--: | :---: |
+| https://doc.rust-lang.org/book/ | https://www.bilibili.com/video/BV1hp4y1k7SV/ |
 
 ### Getting Started
 
@@ -296,6 +297,69 @@ Rust 的 `Option<T>` 的设计避免了其它语言中可能会出现的 UB，�
 > In other words, you can think of `if let` as syntax sugar for a `match` that runs code when the value matches one pattern and then ignores all other values.
 
 > We can include an `else` with an `if let`. The block of code that goes with the `else` is the same as the block of code that would go with the `_` case in the `match` expression that is equivalent to the `if let` and `else`.
+
+### Managing Growing Projects with Packages, Crates, and Modules
+
+- **Packages**: A Cargo feature that lets you build, test, and share crates
+- **Crates**: A tree of modules that produces a library or executable
+- **Modules** and **use**: Let you control the organization, scope, and privacy of paths
+- **Paths**: A way of naming an item, such as a struct, function, or module
+
+```
+Package |__ Crate (Root Module) |__ Module
+                                ...
+                                |__ Module
+         
+        |__ Crate (Root Module) |__ Module
+                                ...
+                                |__ Module
+        ...
+        |__ Crate (Root Module) |__ Module
+                                ...
+                                |__ Module
+```
+
+上面就是三者的关系图，注意 Package 和 crate 是从工程管理角度而衍生来的概念，而 Module 则是从代码管理角度的概念 (文件系统树)，将这两种视角结合在一起的中间层则是: ***crate 的名字被视为该 crate 的 root module***。
+
+{{< admonition >}}
+每个 module 包括与 crate 同名的 root module，该 module 范围下的「一等公民」(无论是是不是公开的，因为公开权限只针对外部) 之间可以互相访问，但无法访问这些一等公民的私有下属，例如一等公民是 module，那么就无法访问这个 module 内部的私有下属。
+
+{{< center-quote >}}
+*我同级的下级不是我的下级*
+{{< /center-quote >}}
+
+在 Rust 模块管理中，上级是外部，所以上级无法访问下级的私有成员，但是下级的任意成员都可以访问上级的任意成员。从树的角度比较好理解，因为从枝叶节点可以向上溯源到祖先节点，而在 Rust 模块管理的准则是: ***可以被搜寻到 (即存在一条路径) 的节点都可以被访问***。向下搜寻需要考虑公开权限，向上搜寻则不需要(这里的向上向下是指绝对的发向，因为可能会出现先向上再向下的场景，这时需要地这两阶段分开考虑)，而上面的规则也可以归纳为: 访问兄弟节点无需考虑权限。
+{{< /admonition >}}
+
+- 7.1. Packages and Crates
+> If a package contains src/main.rs and src/lib.rs, it has two crates: a binary and a library, both with the same name as the package. A package can have multiple binary crates by placing files in the src/bin directory: each file will be a separate binary crate.
+
+- 7.3. Paths for Referring to an Item in the Module Tree
+> We can construct relative paths that begin in the parent module, rather than the current module or the crate root, by using `super` at the start of the path. This is like starting a filesystem path with the `..` syntax. 
+
+- Rust By Example [10.2. Struct visibility](https://doc.rust-lang.org/rust-by-example/mod/struct_visibility.html)
+> Structs have an extra level of visibility with their fields. The visibility defaults to private, and can be overridden with the `pub` modifier. This visibility only matters when a struct is accessed from outside the module where it is defined, and has the goal of hiding information (encapsulation).
+
+注意这句话 *This visibility only matters when a struct is accessed from outside the module where it is defined* 这是一个比较任意混淆的点，这句话说明只有从 **外部访问** 时这个规则才生效，**同级访问** 时 struct 的权限就类似与 C 语言，成员是公开的。这很合理，要不然结构体对应 `impl` 部分也无法访问私有字段吗？那这样怎么进行初始化构造？是不是就豁然开朗了。
+
+- 7.3. Paths for Referring to an Item in the Module Tree
+> In contrast, if we make an enum public, all of its variants are then public. We only need the pub before the enum keyword
+
+- 7.4. Bringing Paths Into Scope with the use Keyword
+
+> Adding use and a path in a scope is similar to creating a symbolic link in the filesystem.
+
+> Specifying the **parent module** when calling the **function** makes it clear that the function isn\'t locally defined while still minimizing repetition of the full path. 
+
+> On the other hand, when bringing in **structs, enums, and other items** with `use`, it\'s idiomatic to specify the **full path**. 
+
+> The exception to this idiom is if we\'re bringing two **items with the same name** into scope with `use` statements, because Rust doesn’t allow that. As you can see, using the **parent modules** distinguishes the two Result types. 
+
+> There\'s another solution to the problem of bringing two types of the same name into the same scope with `use`: after the path, we can specify `as` and a new local name, or **alias**, for the type.
+
+> When we bring a name into scope with the `use` keyword, the name available in the new scope is private. To enable the code that calls our code to refer to that name as if it had been defined in that code\'s scope, we can combine `pub` and `use`. This technique is called *re-exporting* because we\'re bringing an item into scope but also making that item available for others to bring into their scope.
+
+> The common part of these two paths is `std::io`, and that’s the complete first path. To merge these two paths into one `use` statement, we can use `self` in the nested path,
 
 ## Visualizing memory layout of Rust\'s data types
 
