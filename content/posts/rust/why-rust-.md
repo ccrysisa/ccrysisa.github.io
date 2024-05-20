@@ -59,9 +59,9 @@ Rust 目前蓬勃发展，预测未来是很难的，但是 Rust 已经是进行
 
 ## The Rust Programming Language
 
-| Book | Video | Documentation |
-| :--: | :---: | :-----------: |
-| [The Book](https://doc.rust-lang.org/book/) | [录影](https://www.bilibili.com/video/BV1hp4y1k7SV/) | [The Standard Library](https://doc.rust-lang.org/std/index.html) |
+| Book | Video | Documentation | Examples |
+| :--: | :---: | :-----------: | :------: |
+| [The Book](https://doc.rust-lang.org/book/) | [录影](https://www.bilibili.com/video/BV1hp4y1k7SV/) | [The Standard Library](https://doc.rust-lang.org/std/index.html) | [Rust by Example](https://doc.rust-lang.org/rust-by-example/) |
 
 ### Getting Started
 
@@ -343,6 +343,7 @@ Package |__ Crate (Root Module) |__ Module
 > In contrast, if we make an enum public, all of its variants are then public. We only need the pub before the enum keyword
 
 - 7.4. Bringing Paths Into Scope with the use Keyword
+
 > Adding use and a path in a scope is similar to creating a **symbolic link** in the filesystem.
 
 使用 `use` 就类似与 Linux 文件系统中的「符号链接」，当然使用这种语法需要遵守一定的风格，方便多工合作:
@@ -357,12 +358,10 @@ Rust 中也有类似于 Linux 系统的别名技巧，那就是使用 `as` 关�
 
 > There\'s another solution to the problem of bringing two types of the same name into the same scope with `use`: after the path, we can specify `as` and a new local name, or **alias**, for the type.
 
-- 7.4. Bringing Paths Into Scope with the use Keyword
 > When we bring a name into scope with the `use` keyword, the name available in the new scope is private. To enable the code that calls our code to refer to that name as if it had been defined in that code\'s scope, we can combine `pub` and `use`. This technique is called *re-exporting* because we\'re bringing an item into scope but also making that item available for others to bring into their scope.
 
 使用 `use` 语法引入的别名在当前作用域名 (scope) 是私有的 (private)，如果想让这个别名在当前作用域重新导出为公开权限，可以使用 `pub use` 语法。
 
-- 7.4. Bringing Paths Into Scope with the use Keyword
 > The common part of these two paths is `std::io`, and that\'s the complete first path. To merge these two paths into one `use` statement, we can use `self` in the nested path,
 
 `self` 关键字除了在对象的 `impl` 部分表示实例自身之外，在模块 (Module) 管理上也可以用于表示模块自身 (这个语法不常用，因为一般情况下 [LSP](https://en.wikipedia.org/wiki/Language_Server_Protocol) 会帮程序员自动处理好)。
@@ -515,6 +514,8 @@ for word in text.split_whitespace() {
 
 Rust 并没有异常机制，而是使用 `Result<T, E>` 和 `panic!` 分别来处理可恢复 (recoverable) 和不可恢复 (unrecoverable) 的错误。可恢复错误的处理策略比较特别，因为它使用了 Rust 独有的枚举类型，而对于不可恢复错误的处理就比较常规了，本质上和 C 语言的 `exit` 处理相同。
 
+- 9.1. Unrecoverable Errors with panic!
+
 > By default, when a panic occurs, the program starts *unwinding*, which means Rust walks back up the stack and cleans up the data from each function it encounters. However, this walking back and cleanup is a lot of work. Rust, therefore, allows you to choose the alternative of immediately aborting, which ends the program without cleaning up.
 
 ```toml
@@ -530,11 +531,56 @@ $ RUST_BACKTRACE=1 cargo run
 $ RUST_BACKTRACE=full cargo run
 ```
 
+- 9.2. Recoverable Errors with Result
+
 > If the `Result` value is the `Ok` variant, `unwrap` will return the value inside the `Ok`. If the `Result` is the `Err` variant, unwrap will call the `panic!` macro for us.
 
 > Similarly, the `expect` method lets us also choose the `panic!` error message. Using expect instead of `unwrap` and providing good error messages can convey your intent and make tracking down the source of a panic easier. 
 
 对于 `Result<T, E>` 一般是通过 `match` 模式匹配进行处理，而 `unwrap` 和 `expect` 本质都是对 `Result<T, E>` 的常见的 `match` 处理模式的缩写，值得一提的是，它们对于 `Option<T>` 也有类似的效果。
+
+> The `?` placed after a `Result` value is defined to work in almost the same way as the match expressions we defined to handle the `Result` values in Listing 9-6. If the value of the `Result` is an `Ok`, the value inside the `Ok` will get returned from this expression, and the program will continue. If the value is an `Err`, the `Err` will be returned from the whole function as if we had used the `return` keyword so the error value gets propagated to the calling code.
+
+> When the `?` operator calls the `from` function, the error type received is converted into the error type defined in the return type of the current function. 
+
+`?` 运算符是常用的传播错误的 `match` 模式匹配的缩写，另外相对于直接使用 `match` 模式匹配，`?` 运算符会将接收的错误类型转换成返回类型的错误类型，以匹配函数签名。类似的，`?` 对于 `Option<T>` 也有类似的效果。
+
+- 9.3. To panic! or Not to panic!
+> Therefore, returning `Result` is a good default choice when you’re defining a function that might fail.
+
+定义一个可能会失败的函数时 (即预期计划处理错误)，应该使用 `Result` 进行错误处理，其它时候一般使用 `panic!` 处理即可 (因为预期就没打算处理错误)。
+
+### Generic Types, Traits, and Lifetimes
+
+{{< admonition quote >}}
+Removing Duplication by Extracting a Function:
+1. Identify duplicate code.
+2. Extract the duplicate code into the body of the function and specify the inputs and return values of that code in the function signature.
+3. Update the two instances of duplicated code to call the function instead.
+{{< /admonition >}}
+
+{{< admonition >}}
+泛型 (generic) 和函数消除重复代码的逻辑类似，区别在于函数是在 **运行时期** 调用时才针对传入参数进行实例化，而泛型是在 **编译时期** 针对涉及的调用进行实例化。
+{{< /admonition >}}
+
+- 10.1. Generic Data Types
+> Note that we have to declare `T` just after `impl` so we can use `T` to specify that we’re implementing methods on the type `Point<T>`. By declaring `T` as a generic type after `impl`, Rust can identify that the type in the angle brackets in `Point` is a generic type rather than a concrete type.
+
+从编译器词法分析和语法分析角度来理解
+
+> The good news is that using generic types won't make your program run any slower than it would with concrete types.
+
+> Rust accomplishes this by performing monomorphization of the code using generics at compile time. Monomorphization is the process of turning generic code into specific code by filling in the concrete types that are used when compiled. 
+
+泛型在编译时期而不是运行时期进行单例化，并不影响效能
+
+- 10.2 Traits: Defining Shared Behavior
+
+> A type’s behavior consists of the methods we can call on that type. Different types share the same behavior if we can call the same methods on all of those types. Trait definitions are a way to group method signatures together to define a set of behaviors necessary to accomplish some purpose.
+
+Trait 实现的是 **行为** 的共享，而没有实现数据的共享，即它只实现了行为接口的共享。
+
+> Note that it isn’t possible to call the default implementation from an overriding implementation of that same method.
 
 ## Visualizing memory layout of Rust\'s data types
 
