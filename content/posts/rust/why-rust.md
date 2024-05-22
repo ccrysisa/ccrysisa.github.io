@@ -72,6 +72,7 @@ $ cargo build --release   # 编译优化、发布版本
 $ cargo run               # 编译、运行
 $ cargo check             # 静态分析检查
 $ cargo clean             # 清除构建出来的目标文件
+$ cargo test              # 运行测试
 ```
 
 ### Programming a Guessing Game
@@ -703,8 +704,137 @@ fn fun(s: &'a str) -> &'b str {
 
 ### Writing Automated Tests
 
+- 11.1. How to Write Tests
+> Tests are Rust functions that verify that the non-test code is functioning in the expected manner. The bodies of test functions typically perform these three actions:
+> 
+> 1. Set up any needed data or state.
+> 2. Run the code you want to test.
+> 3. Assert the results are what you expect.
+
+> Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed.
+
+自动测试模板:
+```rs
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn larger_can_hold_smaller() {}
+}
+```
+
+自动测试常用宏:
+- Macro std::[assert](https://doc.rust-lang.org/std/macro.assert.html)
+- Macro std::[assert_eq](https://doc.rust-lang.org/std/macro.assert_eq.html)
+- Macro std::[assert_ne](https://doc.rust-lang.org/std/macro.assert_ne.html)
+
+> You can also add a custom message to be printed with the failure message as optional arguments to the `assert!`, `assert_eq!`, and `assert_ne!` macros. Any arguments specified after the required arguments are passed along to the `format!` macro 
+
+上面涉及的宏都是用来对返回值进行测试的，有时我们需要测试代码在某些情况下，是否按照预期发生恐慌，这时我们就可以使用 `should_panic` 属性:
+
+> In addition to checking return values, it’s important to check that our code handles error conditions as we expect. 
+
+> We do this by adding the attribute `should_panic` to our test function. The test passes if the code inside the function panics; the test fails if the code inside the function doesn’t panic.
+
+```rs
+#[test]
+#[should_panic]
+fn greater_than_100() {
+    ...
+}
+```
+
+> Tests that use `should_panic` can be imprecise. A `should_panic` test would pass even if the test panics for a different reason from the one we were expecting. To make `should_panic` tests more precise, we can add an optional expected parameter to the `should_panic` attribute. The test harness will make sure that the failure message contains the provided text. 
+
+```rs
+#[test]
+#[should_panic(expected = "less than or equal to 100")]
+fn greater_than_100() {
+    ...
+}
+```
+
+`should_panic` 属性可附带 expected 文本，这样自动测试时，不仅会检测是否发生 panic 还会检测 panic 信息是否包含 expect 文本，这样使得 `should_panic` 对于发生 panic 的原因掌握的更加精准 (因为不同原因导致的 panic 的信息一般不相同)。
+
+除了使用 `panic` 方法来编写自动测试 (上面所提的方法本质都是测试失败时触发 `panic`)，我们还可以通过 `Result<T, E>` 来编写测试，返回 `Ok` 表示测试成功，返回 `Err` 则表示测试失败。
+
+> rather than calling the `assert_eq!` macro, we return `Ok(())` when the test passes and an `Err` with a `String` inside when the test fails.
+
+```rs
+#[test]
+fn it_works() -> Result<(), String> {
+    if 2 + 2 == 4 {
+        Ok(())
+    } else {
+        Err(String::from("two plus two does not equal four"))
+    }
+}
+```
+
+> You can’t use the `#[should_panic]` annotation on tests that use `Result<T, E>`.
+
+- 11.2. Controlling How Tests Are Run
+
+> The default behavior of the binary produced by `cargo test` is to run all the tests in parallel and capture output generated during test runs, preventing the output from being displayed and making it easier to read the output related to the test results. You can, however, specify command line options to change this default behavior.
+
+> separate these two types of arguments, you list the arguments that go to cargo test followed by the separator `--` and then the ones that go to the test binary.
+
+```bash
+$ cargo test <args1> -- <args2>
+# args1: cargo test 的参数
+# args2: cargo test 生成的二进制文件的参数
+```
+
+> When you run multiple tests, by default they run in parallel using threads, meaning they finish running faster and you get feedback quicker. Because the tests are running at the same time, you must make sure your tests don’t depend on each other or on any shared state, including a shared environment, such as the current working directory or environment variables.
+
+自动测试默认行为是并行的，所以我们在编写测试代码时，需要安装并行设计的思维进行编写，保证不会出现因为并行而导致的 UB。当然你也可以指定自动测试时使用的线程数量，甚至可以将线程数设置为 1 这样就不需要以并行设计测试代码了。
+
+> If you don’t want to run the tests in parallel or if you want more fine-grained control over the number of threads used, you can send the --test-threads flag and the number of threads you want to use to the test binary. 
+
+```bash
+$ cargo test -- --test-threads=1
+```
+
+> By default, if a test passes, Rust’s test library captures anything printed to standard output. For example, if we call println! in a test and the test passes, we won’t see the println! output in the terminal; we’ll see only the line that indicates the test passed. If a test fails, we’ll see whatever was printed to standard output with the rest of the failure message.
+
+当测试用例成功时，Rust 会捕获该成功用例中的输出，只打印测试成功这一个信息，用例代码逻辑中的打印输出均被捕获了。当用例失败时，则不会对输出进行捕获，而是将它们和测试失败信息一起打印出来。当然我们也可以设置用例成功时不捕获输出:
+
+> If we want to see printed values for passing tests as well, we can tell Rust to also show the output of successful tests with `--show-output`.
+
+```bash
+$ cargo test -- --show-output
+```
+
+> You can choose which tests to run by passing `cargo test` the name or names of the test(s) you want to run as an argument.
+
+可以指定运行某些测试，而不是运行全部测试:
+
+> We can pass the name of any test function to `cargo test` to run only that test
+
+> We can specify part of a test name, and any test whose name matches that value will be run. 
+
+> Also note that the module in which a test appears becomes part of the test’s name, so we can run all the tests in a module by filtering on the module’s name.
+
+Ignoring Some Tests Unless Specifically Requested
+
+> Sometimes a few specific tests can be very time-consuming to execute, so you might want to exclude them during most runs of `cargo test`. Rather than listing as arguments all tests you do want to run, you can instead annotate the time-consuming tests using the `ignore` attribute to exclude them
+
+```rs
+#[test]
+#[ignore]
+fn expensive_test() {
+    ...
+}
+```
+
+> If we want to run only the ignored tests, we can use:
+
+```bash
+$ cargo test -- --ignored
+```
+
 ## Visualizing memory layout of Rust\'s data types
 
 录影: [YouTube](https://www.youtube.com/watch?v=7_o-YRxf_cc&t=0s) / [中文翻译](https://www.bilibili.com/video/BV1KT4y167f1)
 
-搭配阅读: [[2022-05-04] 可视化 Rust 各数据类型的内存布局](https://github.com/rustlang-cn/Rustt/blob/main/Articles/%5B2022-05-04%5D%20%E5%8F%AF%E8%A7%86%E5%8C%96%20Rust%20%E5%90%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80.md)
