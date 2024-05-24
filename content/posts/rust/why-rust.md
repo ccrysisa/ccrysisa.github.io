@@ -389,7 +389,7 @@ Rust 对于模块的分离语法的文件管理也类似于文件系统树。可
 
 > Using `&` and `[]` gives us a reference to the element at the index value. When we use the `get` method with the index passed as an argument, we get an `Option<&T>` that we can use with `match`.
 
-读取 vector 的元素获得的应该是该元素的引用，因为读取一个元素大部分情况下不需要该元素的所有权，除此之外，如果获取了元素的所有权，那么对于 vector 的使用会有一些安全限制。
+使用 `[]` 运算符获得的是元素本身，无论容器是引用的还是拥有所有权的。但读取 vector 的元素获得的应该是该元素的引用，因为读取一个元素大部分情况下不需要该元素的所有权，除此之外，如果获取了元素的所有权，那么对于 vector 的使用会有一些安全限制。
 
 ```rs
 let mut v = vec![1, 2, 3, 4, 5];
@@ -731,7 +731,7 @@ mod tests {
 
 > You can also add a custom message to be printed with the failure message as optional arguments to the `assert!`, `assert_eq!`, and `assert_ne!` macros. Any arguments specified after the required arguments are passed along to the `format!` macro 
 
-上面涉及的宏都是用来对返回值进行测试的，有时我们需要测试代码在某些情况下，是否按照预期发生恐慌，这时我们就可以使用 `should_panic` 属性:
+上面涉及的宏都是用来对返回值进行测试的 (也可以附加错误信息)，有时我们需要测试代码在某些情况下，是否按照预期发生恐慌，这时我们就可以使用 `should_panic` 属性:
 
 > In addition to checking return values, it’s important to check that our code handles error conditions as we expect. 
 
@@ -833,6 +833,80 @@ fn expensive_test() {
 ```bash
 $ cargo test -- --ignored
 ```
+
+- 11.3. Test Organization
+
+> Unit tests are small and more focused, testing one module in isolation at a time, and can test private interfaces. Integration tests are entirely external to your library and use your code in the same way any other external code would, using only the public interface and potentially exercising multiple modules per test.
+
+Rust 有单元测试和集成测试两大类别，可以近似理解为白盒测试和黑盒测试。
+
+单元测试 (Unit Tests)
+
+> The convention is to create a module named `tests` in each file to contain the test functions and to annotate the module with `cfg(test)`.
+
+> The `#[cfg(test)]` annotation on the tests module tells Rust to compile and run the test code only when you run `cargo test,` not when you run `cargo build`.
+
+> The attribute `cfg` stands for configuration and tells Rust that the following item should only be included given a certain configuration option. In this case, the configuration option is `test`, which is provided by Rust for compiling and running tests. 
+
+对于测试模块，Rust 会进行选择编译，作用类似于 C 语言的 `#if` 宏。
+
+> Rust’s privacy rules do allow you to test private functions.
+
+单元测试可以对模块的私有成员进行测试，类似于白盒测试。
+
+集成测试 (Integration Tests)
+
+> To create integration tests, you first need a tests directory.
+
+> We create a tests directory at the top level of our project directory, next to src. Cargo knows to look for integration test files in this directory.
+
+> Each file in the tests directory is a separate crate, so we need to bring our library into each test crate’s scope. 
+
+集成测试位于 `tests/` 目录下，并且该目录下的每个测试文件都是单独的 crate，即每个测试文件都需要对要测试的库、模块进行引入。
+
+> We don’t need to annotate any code in `tests/integration_test.rs` with `#[cfg(test)]`. Cargo treats the tests directory specially and compiles files in this directory only when we run `cargo test`.
+
+因为已经通过 `tests/` 文件夹与其他的库文件区分开了了，所以集成测试不需要通过标注 `#[cfg(test)]` 来进行选择编译。
+
+> As you add more integration tests, you might want to make more files in the tests directory to help organize them
+
+> As mentioned earlier, each file in the tests directory is compiled as its own separate crate
+
+> However, this means files in the tests directory don’t share the same behavior as files in src do, as you learned in Chapter 7 regarding how to separate code into modules and files.
+
+Files in subdirectories of the tests directory don’t get compiled as separate crates or have sections in the test output.
+
+如果需要对集成测试添加一些辅助函数，我们需要在 `tests/` 目录下创建子目录以及模块，将辅助函数放置在这个目录和模块内，这样就不会被编译器视为集成测试的测试文件了。
+
+> Only library crates expose functions that other crates can use; binary crates are meant to be run on their own.
+
+### An I/O Project: Building a Command Line Program
+
+- 12.3. Refactoring to Improve Modularity and Error Handling
+
+> As a result, the Rust community has developed guidelines for splitting the separate concerns of a binary program when main starts getting large. This process has the following steps:
+
+- Split your program into a main.rs and a lib.rs and move your program’s logic to lib.rs.
+- As long as your command line parsing logic is small, it can remain in main.rs.
+- When the command line parsing logic starts getting complicated, extract it from main.rs and move it to lib.rs.
+
+> The responsibilities that remain in the `main` function after this process should be limited to the following:
+
+- Calling the command line parsing logic with the argument values
+- Setting up any other configuration
+- Calling a `run` function in lib.rs
+- Handling the error if `run` returns an error
+
+这样处理使得我们可以测试该程序的几乎全部内容，因为我们将大部分逻辑都移动到了 lib.rs 文件里面，而 lib.rs 文件的内容是可以被测试的。
+
+Documentation:
+- method std::iter::Iterator::[collect](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect)
+- method std::result::Result::[unwrap_or_else](https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap_or_else)
+- Function std::process::[exit](https://doc.rust-lang.org/std/process/fn.exit.html)
+- method str::[lines](https://doc.rust-lang.org/std/primitive.str.html#method.lines)
+- method str::[contains](https://doc.rust-lang.org/std/primitive.str.html#method.contains)
+- method str::[to_lowercase](https://doc.rust-lang.org/std/primitive.str.html#method.to_lowercase)
+- method std::result::Result::[is_err](https://doc.rust-lang.org/std/result/enum.Result.html#method.is_err)
 
 ## Visualizing memory layout of Rust\'s data types
 
