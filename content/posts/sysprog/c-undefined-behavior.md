@@ -320,6 +320,9 @@ Kugan Vivekanandarajah 和 Yvan Roux 探讨 UB 和编译器最佳化的演讲:
 
 {{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-11-2048.jpg" >}}
 
+- [Aliased pointers](https://en.wikipedia.org/wiki/Aliasing_(computing)#Aliased_pointers)
+> Another variety of aliasing can occur in any language that can refer to one location in memory with more than one name (for example, with pointers). 
+
 ### Signed integer overflow
 
 {{< image src="https://image.slidesharecdn.com/bkk16503-160212222433/75/BKK16-503-Undefined-Behavior-and-Compiler-Optimizations-Why-Your-Program-Stopped-Working-With-A-Newer-Compiler-14-2048.jpg" >}}

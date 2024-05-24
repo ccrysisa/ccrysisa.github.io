@@ -424,6 +424,18 @@ sp = (int *)((int)stack + poolsize);
 
 ## IR (Intermediate representation)
 
+- Wikipedia: []()
+
+> An intermediate representation (IR) is the data structure or code used internally by a compiler or virtual machine to represent source code. 
+
+> An intermediate language is the language of an abstract machine designed to aid in the analysis of computer programs.
+
+> A popular format for intermediate languages is three-address code.
+
+> Though not explicitly designed as an intermediate language, C's nature as an abstraction of assembly and its ubiquity as the de facto system language in Unix-like and other operating systems has made it a popular intermediate language
+
+所以一般的 IR 长得和汇编语言比较像，但是比汇编高阶，因为 IR 是建立在这样的虚拟机器 (abstract machine designed to aid in the analysis of computer programs) 之上的。
+
 - [ ] [Interpreter, Compiler, JIT from scratch](https://www.slideshare.net/jserv/jit-compiler)
 - [ ] [How to JIT - an introduction](https://eli.thegreenplace.net/2013/11/05/how-to-jit-an-introduction)
 - [ ] [How to write a very simple JIT compiler](https://github.com/spencertipping/jit-tutorial)

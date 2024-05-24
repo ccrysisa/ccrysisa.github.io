@@ -10,7 +10,7 @@
 <meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Sysprog, Linux, Concurrency' /><meta itemprop="name" content="并行程序设计: POSIX Threads">
 <meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-04-10T16:09:35+08:00" />
 <meta itemprop="dateModified" content="2024-04-25T19:49:18+08:00" />
-<meta itemprop="wordCount" content="869"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1570"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux,Concurrency," /><meta property="og:title" content="并行程序设计: POSIX Threads" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
@@ -35,7 +35,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/posix-threads\/"
-    },"genre": "posts","keywords": "Sysprog, Linux, Concurrency","wordcount":  869 ,
+    },"genre": "posts","keywords": "Sysprog, Linux, Concurrency","wordcount":  1570 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/posix-threads\/","datePublished": "2024-04-10T16:09:35+08:00","dateModified": "2024-04-25T19:49:18+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -164,7 +164,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/concurrency/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Concurrency</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-04-10 16:09:35"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-10">2024-04-10</time></span>&nbsp;<span title="更新于 2024-04-25 19:49:18"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-25">2024-04-25</time></span>&nbsp;<span title="869 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-04-10 16:09:35"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-10">2024-04-10</time></span>&nbsp;<span title="更新于 2024-04-25 19:49:18"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-25">2024-04-25</time></span>&nbsp;<span title="1570 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -185,7 +185,17 @@
         </li>
       </ul>
     </li>
-    <li><a href="#posix-threads">POSIX Threads</a></li>
+    <li><a href="#posix-threads">POSIX Threads</a>
+      <ul>
+        <li><a href="#实例-光线追踪">实例: 光线追踪</a></li>
+        <li><a href="#posix-thread">POSIX Thread</a></li>
+      </ul>
+    </li>
+    <li><a href="#synchronization">Synchronization</a>
+      <ul>
+        <li><a href="#angraves-crowd-sourced-system-programming-book-used-at-uiuc">Angrave&rsquo;s Crowd-Sourced System Programming Book used at UIUC</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><ul>
@@ -212,6 +222,7 @@
 <p><a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined" data-alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 $\rightarrow$ 在使用 coroutinues 后执行流程变成 $\rightarrow$
 <a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined" data-alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a></p>
+<p>C 语言程序中实作 coroutinue 的方法很多，例如「<a href="https://hackmd.io/@sysprog/c-control-flow"target="_blank" rel="external nofollow noopener noreferrer">C 语言: goto 和流程控制篇</a>」中提到的使用 <code>switch-case</code> 技巧进行实作。</p>
 <h3 id="thread--process">Thread &amp; Process</h3>
 <p><a class="lightgallery" href="https://imgur-backup.hackmd.io/QW1YWsC.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/QW1YWsC.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/QW1YWsC.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/QW1YWsC.png" srcset="https://imgur-backup.hackmd.io/QW1YWsC.png?size=small, https://imgur-backup.hackmd.io/QW1YWsC.png?size=medium 1.5x, https://imgur-backup.hackmd.io/QW1YWsC.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/QW1YWsC.png" data-alt="https://imgur-backup.hackmd.io/QW1YWsC.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <a class="lightgallery" href="https://imgur-backup.hackmd.io/gUF3Vz9.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/gUF3Vz9.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/gUF3Vz9.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/gUF3Vz9.png" srcset="https://imgur-backup.hackmd.io/gUF3Vz9.png?size=small, https://imgur-backup.hackmd.io/gUF3Vz9.png?size=medium 1.5x, https://imgur-backup.hackmd.io/gUF3Vz9.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/gUF3Vz9.png" data-alt="https://imgur-backup.hackmd.io/gUF3Vz9.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a></p>
@@ -274,7 +285,7 @@ $\rightarrow$ 在使用 coroutinues 后执行流程变成 $\rightarrow$
 </div>
 </div><a class="lightgallery" href="https://imgur-backup.hackmd.io/mE4l7n1.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/mE4l7n1.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/mE4l7n1.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/mE4l7n1.png" srcset="https://imgur-backup.hackmd.io/mE4l7n1.png?size=small, https://imgur-backup.hackmd.io/mE4l7n1.png?size=medium 1.5x, https://imgur-backup.hackmd.io/mE4l7n1.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/mE4l7n1.png" data-alt="https://imgur-backup.hackmd.io/mE4l7n1.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <ul>
-<li>Only the <strong id="id-5">owner</strong> can unlock a mutex. Since mutexes cannot be copied, use pointers.</li>
+<li>Only the <strong id="id-7">owner</strong> can unlock a mutex. Since mutexes cannot be copied, use pointers.</li>
 <li>If <code>pthread_mutex_trylock()</code> returns <code>EBUSY</code>, the lock is already locked. Otherwise, the calling thread becomes the owner of this lock.</li>
 <li>With <code>pthread_mutexattr_settype()</code>, the type of a mutex can be set to allow recursive locking or report deadlock if the owner locks again</li>
 </ul>
@@ -374,7 +385,89 @@ $\rightarrow$ 在使用 coroutinues 后执行流程变成 $\rightarrow$
 </ul>
 </li>
 </ul>
-<h2 id="posix-threads">POSIX Threads</h2></div><div class="post-footer" id="post-footer">
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">总结一下，<code>mutex</code> 在意的是 <strong>持有者</strong>，<code>semaphore</code> 在意的是 <strong>资源的总量</strong>，而 <code>condition variables</code> 在意的是 <strong>持有的条件</strong>。</div>
+    </div>
+  </div>
+<h2 id="posix-threads">POSIX Threads</h2>
+<a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg" data-alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<h3 id="实例-光线追踪">实例: 光线追踪</h3>
+<p>光线追踪 (Ray tracing) 相关:</p>
+<ul>
+<li><a href="http://wiki.csie.ncku.edu.tw/embedded/2016q1h2"target="_blank" rel="external nofollow noopener noreferrer">2016q1 Homework #2</a></li>
+<li><a href="https://web.cs.ucla.edu/classes/winter16/cs35L/"target="_blank" rel="external nofollow noopener noreferrer">UCLA Computer Science 35L, Winter 2016. Software Construction Laboratory</a></li>
+<li><a href="https://github.com/maxwyb/CS35L_Assign8_Multithreading"target="_blank" rel="external nofollow noopener noreferrer">CS35L_Assign8_Multithreading</a></li>
+</ul>
+<p>光线追踪需要很大的运算量，所以我们可以自然地想到，能不能使用 pthreads 对运算进行加速，上面的最后一个链接就是对这种思路的实作。</p>
+<p>编译与测试:</p>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git clone https://github.com/maxwyb/CS35L_Assign8_Multithreading.git raytracing-threads
+</span></span><span class="line"><span class="cl">$ <span class="nb">cd</span> raytracing-threads
+</span></span><span class="line"><span class="cl">$ make clean all
+</span></span><span class="line"><span class="cl">$ ./srt <span class="m">4</span> &gt; out.ppm
+</span></span><span class="line"><span class="cl">$ diff -u out.ppm baseline.ppm
+</span></span><span class="line"><span class="cl">$ open out.ppm</span></span></code></pre></td></tr></table>
+</div>
+</div><p>预期得到下面的图：</p>
+<a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png" data-alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p>可以将上面的 <code>./srt</code> 命令后面的数字改为 1, 2, 8 之类的进行尝试，这个数字代表使用的执行绪的数量。另外，在 <code>./srt</code> 命令之前使用 <code>time</code> 命令可以计算本次进行光线追踪所使用的时间，由此可以对比不同数量执行绪下的效能差异。</p>
+<p>可以看下相关的程式码 <a href="">main.c</a>:</p>
+<div class="highlight" id="id-6"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;pthread.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">pthread_t</span><span class="o">*</span> <span class="n">threadID</span> <span class="o">=</span> <span class="nf">malloc</span><span class="p">(</span><span class="n">nthreads</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">pthread_t</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="nf">pthread_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">threadID</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="n">pixelProcessing</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">intervals</span><span class="p">[</span><span class="n">t</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="nf">pthread_join</span><span class="p">(</span><span class="n">threadID</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">retVal</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>显然是经典的 <strong>fork-join</strong> 模型 (<code>pthread_create</code> 进行 &ldquo;fork&rdquo;，<code>pthread_join</code> 进行 &ldquo;join&rdquo;)，注意这里并没有使用到 mutex 之类的互斥量，这是可以做到的，只要你事先区分开不相关的区域分别进行计算即可，即不会发生数据竞争，那么久没必要使用 mutex 了。</p>
+<h3 id="posix-thread">POSIX Thread</h3>
+<ul>
+<li><a href="https://hpc-tutorials.llnl.gov/posix/"target="_blank" rel="external nofollow noopener noreferrer">POSIX Threads Programming</a></li>
+</ul>
+<blockquote>
+<p>Condition variables provide yet another way for threads to synchronize. While mutexes implement synchronization by controlling thread access to data, <strong id="id-8">condition variables allow threads to synchronize based upon the actual value of data.</strong></p>
+</blockquote>
+<p>condition variables 由两种不同的初始化方式:</p>
+<ul>
+<li>静态初始化 (static): <code>PTHREAD_COND_INITIALIZER</code></li>
+<li>动态初始化 (dynamic): <code>pthread_cond_init()</code></li>
+</ul>
+<h2 id="synchronization">Synchronization</h2>
+<p>CMU 15-213: Intro to Computer Systems</p>
+<ul>
+<li>$23^{rd}$ Lecture <a href="https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/lectures/23-concprog.pdf"target="_blank" rel="external nofollow noopener noreferrer">Concurrent	Programming</a></li>
+</ul>
+<a class="lightgallery" href="/images/c/23-concprog-24.png?size=large" data-thumbnail="/images/c/23-concprog-24.png?size=small" data-sub-html="<h2>/images/c/23-concprog-24.png</h2>"><img loading="lazy" src="/images/c/23-concprog-24.png" srcset="/images/c/23-concprog-24.png?size=small, /images/c/23-concprog-24.png?size=medium 1.5x, /images/c/23-concprog-24.png?size=large 2x" sizes="auto" data-title="/images/c/23-concprog-24.png" data-alt="/images/c/23-concprog-24.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<ul>
+<li>$24^{rd}$ Lecture <a href="https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/lectures/24-sync-basic.pdf"target="_blank" rel="external nofollow noopener noreferrer">Synchroniza+on:	Basics</a></li>
+</ul>
+<a class="lightgallery" href="/images/c/24-sync-basic-17.png?size=large" data-thumbnail="/images/c/24-sync-basic-17.png?size=small" data-sub-html="<h2>/images/c/24-sync-basic-17.png</h2>"><img loading="lazy" src="/images/c/24-sync-basic-17.png" srcset="/images/c/24-sync-basic-17.png?size=small, /images/c/24-sync-basic-17.png?size=medium 1.5x, /images/c/24-sync-basic-17.png?size=large 2x" sizes="auto" data-title="/images/c/24-sync-basic-17.png" data-alt="/images/c/24-sync-basic-17.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<blockquote>
+<p>mutual exclusion (互斥) 手段的選擇，不是根據 CS 的大小，而是根據 CS 的性質，以及有哪些部分的程式碼，也就是，仰賴於核心內部的執行路徑。</p>
+</blockquote>
+<blockquote>
+<p>semaphore 和 spinlock 屬於不同層次的互斥手段，前者的實現仰賴於後者，可類比於 HTTP 和 TCP/IP 的關係，儘管都算是網路通訊協定，但層次截然不同</p>
+</blockquote>
+<h3 id="angraves-crowd-sourced-system-programming-book-used-at-uiuc">Angrave&rsquo;s Crowd-Sourced System Programming Book used at UIUC</h3></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
@@ -418,5 +511,5 @@ $\rightarrow$ 在使用 coroutinues 后执行流程变成 $\rightarrow$
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><link rel="stylesheet" href="/css/cdfe12.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><link rel="stylesheet" href="/css/0caa95.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

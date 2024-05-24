@@ -43,7 +43,7 @@
 / 
 [投影片](https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/lectures/02-03-bits-ints.pdf) :white_check_mark:
 / 
-阅读章节: 2.2-2.3 
+阅读章节: 2.2-2.3 :white_check_mark:
 {{< /admonition >}}
 
 {{< image src="/images/c/02-03-bits-ints-41.png" >}}
@@ -126,6 +126,32 @@ int div_2pK(int x, int k) {
 / 
 阅读章节: 2.4 
 {{< /admonition >}}
+
+{{< image src="/images/c/04-float-13.png" >}}
+
+此时让 Exponent value: E = 1 – Bias (instead of E = 0 – Bias) 可以使得这时的 Exponent value 和 exp 为 1 时 (其 Exponent value 也为 E = 1 – Bias) 相同，让浮点数可以在解决 0 的部分均分表示: $1.xxxx... \times 2^{1 - Bias}$, $0.xxxx... \times 2^{1 - Bias}$
+
+{{< image src="/images/c/04-float-15.png" >}}
+
+Normalized Encoding 时，指数每次 $+ 1$，就会使得可表示的浮点数之间数值的差距 $\times 2$ (因为正如前面所说的，浮点数浮动了小数点，使得用于表示小数位的编码位变少了)。注意下面的 $(n)$ 和 $(1)$ 只是表示 Significand 部分的编码，不代表数值 (因为这部分的数值是小数...)
+$$
+1.(n+1) \times 2^{K} - 1.(n) \times 2^{K} = (1) \times 2^{K} \\\\
+1.(n+1) \times 2^{K + 1} - 1.(n) \times 2^{K + 1} = (1) \times 2^{K + 1} \\\\
+(1) \times 2^{K + 1} = 2 \times ((1) \times 2^{K})
+$$
+显然两个浮点数之间的差距变为了原先的 2 倍了。
+
+{{< image src="/images/c/04-float-24.png" >}}
+
+Nearest Even 是用于决定，当前数值是舍入的两个数值的中间值时，向哪个数值进行舍入的策略。假设当前数值为 $1.2xxxx...$ (十进制)，需要舍入到 $0.1$ 的精度:
+- 当 $xxxx... > 5000..0$ 时，即当前数值 $> 1.25$，根据精度向上取整舍入到 $1.3$
+- 当 $xxxx... < 5000..0$ 时，即当前数值 $< 1.25$，根据精度向下取整舍入到 $1.2$
+- 当 $xxxx... = 5000..0$ 时，即当前数值 $= 1.25$，根据精度舍入到最近偶数 $1.2$
+
+类似的，假设当前数值为 $1.3xxxx...$，情况如下:
+- 当 $xxxx... > 5000..0$ 时，即当前数值 $> 1.35$，根据精度向上取整舍入到 $1.4$
+- 当 $xxxx... < 5000..0$ 时，即当前数值 $< 1.35$，根据精度向下取整舍入到 $1.3$
+- 当 $xxxx... = 5000..0$ 时，即当前数值 $= 1.35$，根据精度舍入到最近偶数 $1.4$
 
 
 ---

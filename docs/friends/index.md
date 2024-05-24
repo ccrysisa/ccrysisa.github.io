@@ -7,7 +7,6 @@
 
 <!-- You can define additional content below for this page. -->
 
-{{< details "Reminder" >}}
 ## Base info
 
 ```yaml
@@ -26,7 +25,6 @@
 3. Those websites that do not respect other people's labor achievements, reprint without source, or malicious acts, please do not come to exchange.
 
 {{< /admonition >}}
-{{< /details >}}
 
 
 ---

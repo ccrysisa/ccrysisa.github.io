@@ -23,6 +23,8 @@
 $\rightarrow$ 在使用 coroutinues 后执行流程变成 $\rightarrow$
 {{< image src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined" >}}
 
+C 语言程序中实作 coroutinue 的方法很多，例如「[C 语言: goto 和流程控制篇](https://hackmd.io/@sysprog/c-control-flow)」中提到的使用 `switch-case` 技巧进行实作。
+
 ### Thread & Process
 
 {{< image src="https://imgur-backup.hackmd.io/QW1YWsC.png" >}}
@@ -136,7 +138,76 @@ int sem_post(sem_t *sem);
 - As soon as semaphore value is greater than zero, one of the blocked threads wakes up and continues
   - no guarantees as to which thread this might be
 
+{{< admonition >}}
+总结一下，`mutex` 在意的是 **持有者**，`semaphore` 在意的是 **资源的总量**，而 `condition variables` 在意的是 **持有的条件**。
+{{< /admonition >}}
+
 ## POSIX Threads
+
+{{< image src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg" >}}
+
+### 实例: 光线追踪
+
+光线追踪 (Ray tracing) 相关:
+- [2016q1 Homework #2](http://wiki.csie.ncku.edu.tw/embedded/2016q1h2)
+- [UCLA Computer Science 35L, Winter 2016. Software Construction Laboratory](https://web.cs.ucla.edu/classes/winter16/cs35L/)
+- [CS35L_Assign8_Multithreading](https://github.com/maxwyb/CS35L_Assign8_Multithreading)
+
+光线追踪需要很大的运算量，所以我们可以自然地想到，能不能使用 pthreads 对运算进行加速，上面的最后一个链接就是对这种思路的实作。
+
+编译与测试:
+
+```bash
+$ git clone https://github.com/maxwyb/CS35L_Assign8_Multithreading.git raytracing-threads
+$ cd raytracing-threads
+$ make clean all
+$ ./srt 4 > out.ppm
+$ diff -u out.ppm baseline.ppm
+$ open out.ppm
+```
+
+预期得到下面的图：
+
+{{< image src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png" >}}
+
+可以将上面的 `./srt` 命令后面的数字改为 1, 2, 8 之类的进行尝试，这个数字代表使用的执行绪的数量。另外，在 `./srt` 命令之前使用 `time` 命令可以计算本次进行光线追踪所使用的时间，由此可以对比不同数量执行绪下的效能差异。
+
+可以看下相关的程式码 [main.c]():
+```c
+#include <pthread.h>
+pthread_t* threadID = malloc(nthreads * sizeof(pthread_t));
+int res = pthread_create(&threadID[t], 0, pixelProcessing, (void *)&intervals[t]);
+int res = pthread_join(threadID[t], &retVal);
+```
+显然是经典的 **fork-join** 模型 (`pthread_create` 进行 "fork"，`pthread_join` 进行 "join")，注意这里并没有使用到 mutex 之类的互斥量，这是可以做到的，只要你事先区分开不相关的区域分别进行计算即可，即不会发生数据竞争，那么久没必要使用 mutex 了。
+
+### POSIX Thread
+
+- [POSIX Threads Programming](https://hpc-tutorials.llnl.gov/posix/)
+> Condition variables provide yet another way for threads to synchronize. While mutexes implement synchronization by controlling thread access to data, {{< style "background-color:green" "strong" >}}condition variables allow threads to synchronize based upon the actual value of data.{{< /style >}}
+
+condition variables 由两种不同的初始化方式:
+- 静态初始化 (static): `PTHREAD_COND_INITIALIZER`
+- 动态初始化 (dynamic): `pthread_cond_init()`
+
+## Synchronization
+
+CMU 15-213: Intro to Computer Systems
+
+- $23^{rd}$ Lecture [Concurrent	Programming](https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/lectures/23-concprog.pdf)
+
+{{< image src="/images/c/23-concprog-24.png" >}}
+
+- $24^{rd}$ Lecture [Synchroniza+on:	Basics](https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/lectures/24-sync-basic.pdf)
+
+{{< image src="/images/c/24-sync-basic-17.png" >}}
+
+> mutual exclusion (互斥) 手段的選擇，不是根據 CS 的大小，而是根據 CS 的性質，以及有哪些部分的程式碼，也就是，仰賴於核心內部的執行路徑。
+
+> semaphore 和 spinlock 屬於不同層次的互斥手段，前者的實現仰賴於後者，可類比於 HTTP 和 TCP/IP 的關係，儘管都算是網路通訊協定，但層次截然不同
+
+### Angrave's Crowd-Sourced System Programming Book used at UIUC
+
 
 
 
