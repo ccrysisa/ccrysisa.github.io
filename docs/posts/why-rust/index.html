@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Rust 语言程序设计 - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
+<meta name="author-link" content="https://github.com/ccrysisa">
+<meta name="description" content="Rust in 100 Seconds 观看短片: Rust in 100 Seconds &#x2705; 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello = &quot;hi" /><meta name="keywords" content='Rust, Sysprog' /><meta itemprop="name" content="Rust 语言程序设计">
+<meta itemprop="description" content="Rust in 100 Seconds 观看短片: Rust in 100 Seconds &#x2705; 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello = &quot;hi"><meta itemprop="datePublished" content="2023-12-28T20:18:03+08:00" />
+<meta itemprop="dateModified" content="2024-05-24T21:03:58+08:00" />
+<meta itemprop="wordCount" content="13448"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Rust,Sysprog," /><meta property="og:title" content="Rust 语言程序设计" />
+<meta property="og:description" content="Rust in 100 Seconds 观看短片: Rust in 100 Seconds &#x2705; 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello = &quot;hi" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ccrysisa.github.io/posts/why-rust/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-28T20:18:03+08:00" />
+<meta property="article:modified_time" content="2024-05-24T21:03:58+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Rust 语言程序设计"/>
+<meta name="twitter:description" content="Rust in 100 Seconds 观看短片: Rust in 100 Seconds &#x2705; 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello = &quot;hi"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/why-rust/" /><link rel="prev" href="https://ccrysisa.github.io/posts/git-learn/" /><link rel="next" href="https://ccrysisa.github.io/posts/binary-representation/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Rust 语言程序设计",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/ccrysisa.github.io\/posts\/why-rust\/"
+    },"genre": "posts","keywords": "Rust, Sysprog","wordcount":  13448 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/why-rust\/","datePublished": "2023-12-28T20:18:03+08:00","dateModified": "2024-05-24T21:03:58+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "ccrysisa"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-user-group fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-user-group fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Rust 语言程序设计</span>
+      </h1><p class="single-subtitle animate__animated animate__fadeIn">Why Rust?</p></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a>&ensp;<a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2023-12-28 20:18:03"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-28">2023-12-28</time></span>&nbsp;<span title="更新于 2024-05-24 21:03:58"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-24">2024-05-24</time></span>&nbsp;<span title="13448 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 13500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 27 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#rust-in-100-seconds">Rust in 100 Seconds</a></li>
+    <li><a href="#the-adoption-of-rust-in-business-2022">The adoption of Rust in Business (2022)</a></li>
+    <li><a href="#the-rust-programming-language">The Rust Programming Language</a>
+      <ul>
+        <li><a href="#getting-started">Getting Started</a></li>
+        <li><a href="#programming-a-guessing-game">Programming a Guessing Game</a></li>
+        <li><a href="#common-programming-concepts">Common Programming Concepts</a></li>
+        <li><a href="#understanding-ownership">Understanding Ownership</a>
+          <ul>
+            <li><a href="#what-is-ownership">What is Ownership?</a></li>
+            <li><a href="#references-and-borrowing">References and Borrowing</a></li>
+            <li><a href="#the-slice-type">The Slice Type</a></li>
+          </ul>
+        </li>
+        <li><a href="#using-structs-to-structure-related-data">Using Structs to Structure Related Data</a></li>
+        <li><a href="#enums-and-pattern-matching">Enums and Pattern Matching</a></li>
+        <li><a href="#managing-growing-projects-with-packages-crates-and-modules">Managing Growing Projects with Packages, Crates, and Modules</a></li>
+        <li><a href="#common-collections">Common Collections</a>
+          <ul>
+            <li><a href="#storing-lists-of-values-with-vectors">Storing Lists of Values with Vectors</a></li>
+            <li><a href="#storing-utf-8-encoded-text-with-strings">Storing UTF-8 Encoded Text with Strings</a></li>
+            <li><a href="#storing-keys-with-associated-values-in-hash-maps">Storing Keys with Associated Values in Hash Maps</a></li>
+          </ul>
+        </li>
+        <li><a href="#error-handling">Error Handling</a></li>
+        <li><a href="#generic-types-traits-and-lifetimes">Generic Types, Traits, and Lifetimes</a>
+          <ul>
+            <li><a href="#generic-data-types">Generic Data Types</a></li>
+            <li><a href="#traits-defining-shared-behavior">Traits: Defining Shared Behavior</a></li>
+            <li><a href="#validating-references-with-lifetimes">Validating References with Lifetimes</a></li>
+          </ul>
+        </li>
+        <li><a href="#writing-automated-tests">Writing Automated Tests</a></li>
+        <li><a href="#an-io-project-building-a-command-line-program">An I/O Project: Building a Command Line Program</a></li>
+      </ul>
+    </li>
+    <li><a href="#visualizing-memory-layout-of-rusts-data-types">Visualizing memory layout of Rust's data types</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="rust-in-100-seconds">Rust in 100 Seconds</h2>
+<p>观看短片: <a href="https://youtu.be/5C_HPTJg5ek"target="_blank" rel="external nofollow noopener noreferrer">Rust in 100 Seconds</a> &#x2705;</p>
+<ul>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 了解 Rust，初步了解其安全性原理</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 所有权 (ownership)</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 借用 (borrow)</li>
+</ul>
+<div class="details admonition warning open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-exclamation-triangle fa-fw" aria-hidden="true"></i>警告<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example <code>let mut hello = &quot;hi mom&quot;</code> will be stored on the stack since it&rsquo;s type is <code>&amp;'static str</code>), it depends on the type of the value (if it&rsquo;s <code>Sized</code> or not).</div>
+    </div>
+  </div>
+<h2 id="the-adoption-of-rust-in-business-2022">The adoption of Rust in Business (2022)</h2>
+<p>阅读报告: <a href="https://rustmagazine.org/issue-1/2022-review-the-adoption-of-rust-in-business/"target="_blank" rel="external nofollow noopener noreferrer">The adoption of Rust in Business (2022)</a> &#x2705;</p>
+<p>Rust 目前蓬勃发展，预测未来是很难的，但是 Rust 已经是进行时的未来了 &#x1f923;</p>
+<h2 id="the-rust-programming-language">The Rust Programming Language</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Book</th>
+<th style="text-align:center">Video</th>
+<th style="text-align:center">Documentation</th>
+<th style="text-align:center">Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://doc.rust-lang.org/book/"target="_blank" rel="external nofollow noopener noreferrer">The Book</a></td>
+<td style="text-align:center"><a href="https://www.bilibili.com/video/BV1hp4y1k7SV/"target="_blank" rel="external nofollow noopener noreferrer">教学录影</a></td>
+<td style="text-align:center"><a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">The Standard Library</a></td>
+<td style="text-align:center"><a href="https://doc.rust-lang.org/rust-by-example/"target="_blank" rel="external nofollow noopener noreferrer">Rust by Example</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="getting-started">Getting Started</h3>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cargo new &lt;package&gt;     <span class="c1"># 创建项目</span>
+</span></span><span class="line"><span class="cl">$ cargo build             <span class="c1"># 编译、构建、调试版本</span>
+</span></span><span class="line"><span class="cl">$ cargo build --release   <span class="c1"># 编译优化、发布版本</span>
+</span></span><span class="line"><span class="cl">$ cargo run               <span class="c1"># 编译、运行</span>
+</span></span><span class="line"><span class="cl">$ cargo check             <span class="c1"># 静态分析检查</span>
+</span></span><span class="line"><span class="cl">$ cargo clean             <span class="c1"># 清除构建出来的目标文件</span>
+</span></span><span class="line"><span class="cl">$ cargo <span class="nb">test</span>              <span class="c1"># 运行测试</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="programming-a-guessing-game">Programming a Guessing Game</h3>
+<ul>
+<li>Module std::<a href="https://doc.rust-lang.org/std/io/index.html"target="_blank" rel="external nofollow noopener noreferrer">io</a></li>
+<li>Module std::<a href="https://doc.rust-lang.org/std/cmp/index.html"target="_blank" rel="external nofollow noopener noreferrer">cmp</a></li>
+<li>Crate <a href="https://docs.rs/rand/latest/rand/"target="_blank" rel="external nofollow noopener noreferrer">rand</a></li>
+</ul>
+<h3 id="common-programming-concepts">Common Programming Concepts</h3>
+<p>变量明确区分可变和不可变，好处在于对于明确不可变的变量，使用引用时编译器可以进行更为激进的最佳化。常量必须满足可以在编译期计算出结果。</p>
+<p>shadow 可理解为变量名可以和储存数据的地址绑定、解绑，所以可以进行变量遮蔽。而 C 语言中的变量名一旦使用就和储存数据的地址绑死了，自然无法进行遮蔽。</p>
+<ul>
+<li>3.2. Data Types</li>
+</ul>
+<blockquote>
+<p>When you’re compiling in release mode with the <code>--release</code> flag, Rust does not include checks for integer overflow that cause panics. Instead, if overflow occurs, Rust performs two’s complement wrapping. In short, values greater than the maximum value the type can hold “wrap around” to the minimum of the values the type can hold. In the case of a u8, the value 256 becomes 0, the value 257 becomes 1, and so on. The program won’t panic, but the variable will have a value that probably isn’t what you were expecting it to have. Relying on integer overflow’s wrapping behavior is considered an error.</p>
+</blockquote>
+<p>即当使用 <code>--release</code> 编译参数时，编译器不会将 integer overflow 视为 UB</p>
+<p>模式匹配的语法主要是为了方便编辑器的实现，因为 <code>(x, y, z) = tup</code> 这样的词法、语法分析显然比 Python 风格的 <code>x, y, z = tup</code> 分析难度低。</p>
+<ul>
+<li>3.2. Data Types</li>
+</ul>
+<blockquote>
+<p>Let’s see what happens if you try to access an element of an array that is past the end of the array.
+This code compiles successfully.
+The program resulted in a runtime error at the point of using an invalid value in the indexing operation.</p>
+</blockquote>
+<p>数组元素的非法访问并不会导致编译失败，而是编译时期会在访问元素的附近加上检查有效的语句，如果运行时访问了非法的元素范围，会触发这个检测从而导致 <code>panic</code>。</p>
+<ul>
+<li>3.3. Functions</li>
+</ul>
+<blockquote>
+<p>Rust code uses snake case as the conventional style for function and variable names, in which all letters are lowercase and underscores separate words.</p>
+</blockquote>
+<p>函数的参数类型必须指明，这可以方便编译器对根据函数定义对函数调用进行检查，是否符合要求，另一方面还可以让编译器生成恰当的指令用于跳转进函数执行 (编译器可能需要在栈上给函数传入的参数分配空间，例如 x86 架构的机器的 ABI 就是这么规定的)。</p>
+<ul>
+<li>3.3. Functions</li>
+</ul>
+<blockquote>
+<p><strong>Statements</strong> are instructions that perform some action and do not return a value.<br>
+<strong>Expressions</strong> evaluate to a resultant value. Let’s look at some examples.</p>
+</blockquote>
+<blockquote>
+<p>A new scope block created with curly brackets is an expression</p>
+</blockquote>
+<p>从这个角度看，Rust 中的函数体也是表达式 (因为用 <code>{}</code> 包裹起来)，然后将函数的返回值视为表达式的结果值。好像也没毛病，毕竟 Rust 中所有函数都有返回值，没写返回值的默认为返回 <code>()</code>，表达式也类似，最后一条不是表达式的会补充一个 <code>()</code> 作为该表达式的结果。Rust 中很多语法都是表达式，例如 <code>if</code>, <code>match</code> 以及 <code>{}</code> 都是表达式，而在其他语言中一般是语句 (statement)，难怪有:</p>
+<blockquote class="blockquote-center">
+  <em><strong>Rust is an expression-based language</strong></em>
+</blockquote>
+<ul>
+<li>3.3. Functions</li>
+</ul>
+<blockquote>
+<p>You can return early from a function by using the <code>return</code> keyword and specifying a value, but most functions return the last expression implicitly.</p>
+</blockquote>
+<p>函数体的最后一个表达式视为返回值，这在编译器实作角度并不难，只需要在语法分析时加入这个逻辑即可，除此之外的返回语法，需要使用关键字 <code>return</code> 从编译器语法分析角度看来也很当然 (因为返回操作需要生成相对应的指令，所以需要指示当前是返回操作，通过最后一条表达式暗示或 <code>return</code> 关键字指示)。</p>
+<ul>
+<li>3.5. Control Flow</li>
+</ul>
+<blockquote>
+<p>You might also need to pass the result of that operation out of the loop to the rest of your code. To do this, you can add the value you want returned after the <code>break</code> expression you use to stop the loop; that value will be returned out of the loop so you can use it</p>
+</blockquote>
+<blockquote>
+<p><code>Range</code>, provided by the standard library, which generates all numbers in sequence starting from one number and ending before another number.
+<code>rev</code>, to reverse the range.</p>
+</blockquote>
+<h3 id="understanding-ownership">Understanding Ownership</h3>
+<h4 id="what-is-ownership">What is Ownership?</h4>
+<blockquote>
+<p>Rust uses a third approach: memory is managed through a system of ownership with a set of rules that the <strong>compiler checks</strong>. If any of the rules are violated, the program won't <strong>compile</strong>. None of the features of ownership will slow down your program while it's running.</p>
+</blockquote>
+<blockquote>
+<p>By the same token, a processor can do its job better if it works on data that’s close to other data (as it is on the stack) rather than farther away (as it can be on the heap).</p>
+</blockquote>
+<p>这主要是因为 cache 机制带来的效能提升</p>
+<blockquote>
+<p>Keeping track of what parts of code are using what data on the heap, minimizing the amount of duplicate data on the heap, and cleaning up unused data on the heap so you don’t run out of space are all problems that ownership addresses.</p>
+</blockquote>
+<p>从上面的描述可以看出，所有权 (ownership) 机制主要针对的是 heap 空间的管理，所以下面的 3 条规则也是针对 heap 空间上的数据:</p>
+<ul>
+<li>Each value in Rust has an owner.</li>
+<li>There can only be one owner at a time.</li>
+<li>When the owner goes out of scope, the value will be dropped.</li>
+</ul>
+<blockquote>
+<p>Rust takes a different path: the memory is automatically returned once the variable that owns it goes out of scope.</p>
+</blockquote>
+<p>也就是说，Rust 使用类似与 stack 的方式来管理 heap 空间，因为 stack 上的数在超过作用于就会自动消亡 (通过 <code>sp</code> 寄存器进行出栈操作)。Rust 对于 heap 的管理也类似，在出栈同时还回收 heap 对应的空间，这是合理的，因为 heap 上的数据都会直接/简接地被 stack 上的数据所引用，例如指针。</p>
+<p>函数参数也类似，因为从函数调用 ABI 角度来看，赋值和函数调用时参数、返回的处理都是相同的，即在 stack 空间进行入栈操作。</p>
+<blockquote>
+<p>We do not copy the data on the heap that the pointer refers to.</p>
+</blockquote>
+<p>也就是说通常情况下 移动 (Move) 只对 heap 上的数据起作用，对于 stack 上的数据，体现的是 拷贝 (Copy) 操作，当然这也不绝对，可以通过实现 <code>Copy</code> 这个 trait 来对 heap 的数据也进行拷贝操作。Rust 对于 stack 和 heap 上都有数据的 object (例如 String) 的赋值处理默认是: 拷贝 stack 上的数据，新的 stack 数据仍然指向同一个 heap 的数据，同时将原先 stack 数据所在的内存无效化。</p>
+<blockquote>
+<p>This is known as a double free error and is one of the memory safety bugs we mentioned previously. Freeing memory twice can lead to memory corruption, which can potentially lead to security vulnerabilities.</p>
+</blockquote>
+<blockquote>
+<p>To ensure memory safety, after the line <code>let s2 = s1;</code>, Rust considers <code>s1</code> as no longer valid. Therefore, Rust doesn’t need to free anything when <code>s1</code> goes out of scope.</p>
+</blockquote>
+<blockquote>
+<p>In addition, there’s a design choice that’s implied by this: Rust will never automatically create “deep” copies of your data. Therefore, any automatic copying can be assumed to be inexpensive in terms of runtime performance.</p>
+</blockquote>
+<p>移动 (Move) 操作解决了 double free 这个安全隐患，让 Rust 在内存安全的领域占据了一席之地。除此之外，Move 操作使得自动赋值的开销变得低廉，因为使用的是 Move 移动操作，而不是 Copy 拷贝操作。</p>
+<blockquote>
+<p>Rust won’t let us annotate a type with Copy if the type, or any of its parts, has implemented the Drop trait. If the type needs something special to happen when the value goes out of scope and we add the Copy annotation to that type, we’ll get a compile-time error.</p>
+</blockquote>
+<h4 id="references-and-borrowing">References and Borrowing</h4>
+<p>从内存角度来看，reference 常用的场景为:</p>
+<div class="highlight" id="id-2"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Reference            Owner
+</span></span><span class="line"><span class="cl">+-------+      +----------------+
+</span></span><span class="line"><span class="cl">| stack |  --&gt; | stack --&gt; Heap |
+</span></span><span class="line"><span class="cl">+-------+      +----------------+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Mutable references have one big restriction: if you have a mutable reference to a value, you can have no other references to that value.</p>
+</blockquote>
+<blockquote>
+<p>The benefit of having this restriction is that Rust can prevent data races at compile time. A data race is similar to a race condition and happens when these three behaviors occur:</p>
+<ul>
+<li>Two or more pointers access the same data at the same time.</li>
+<li>At least one of the pointers is being used to write to the data.</li>
+<li>There’s no mechanism being used to synchronize access to the data.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>We also cannot have a mutable reference while we have an immutable one to the same value.</p>
+</blockquote>
+<p>编译时期即可防止数据竞争，同时允许了编译器进行激进的最佳化策略 (因为保证没有非预期的数据竞争发生)。</p>
+<blockquote>
+<p>In Rust, by contrast, the compiler guarantees that references will never be dangling references: if you have a reference to some data, the compiler will ensure that the data will not go out of scope before the reference to the data does.</p>
+</blockquote>
+<p>编译器保证了我们使用引用时的正确性，同时这也是后面标注生命周期 (lifetime) 的机制基础。</p>
+<ul>
+<li>At any given time, you can have either one mutable reference or any number of immutable references.</li>
+<li>References must always be valid.</li>
+</ul>
+<h4 id="the-slice-type">The Slice Type</h4>
+<blockquote>
+<p>Slices let you reference a contiguous sequence of elements in a collection rather than the whole collection. <strong>A slice is a kind of reference, so it does not have ownership.</strong></p>
+</blockquote>
+<p>切片 (slice) 也是一种引用 (references) 类型，所以它也遵守上一节提到的规则:</p>
+<blockquote>
+<p>if you have a reference to some data, the compiler will ensure that the data will not go out of scope before the reference to the data does.</p>
+</blockquote>
+<p>对于类型为 <code>String</code> 的变量 <code>s</code>，它的一些 slice 需要注意，<code>&amp;s[..]</code> 和 <code>&amp;s[0..s.len()]</code> 是等价的，但是这两个和 <code>&amp;s</code> 是不一样的，我们可以从内存角度获得启发:</p>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">&amp;s -&gt; s -&gt; str
+</span></span><span class="line"><span class="cl">&amp;s[..] -&gt; str</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>String slice range indices must occur at valid UTF-8 character boundaries. If you attempt to create a string slice in the middle of a multibyte character, your program will exit with an error.</p>
+</blockquote>
+<blockquote>
+<p>If we have a string slice, we can pass that directly. If we have a String, we can pass a slice of the String or a reference to the String. This flexibility takes advantage of deref coercions</p>
+</blockquote>
+<blockquote>
+<p>Defining a function to take a string slice instead of a reference to a String makes our API more general and useful without losing any functionality</p>
+</blockquote>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">将 <code>&amp;String</code> 类型的参数转换成 <code>&amp;str</code> 类型从实作的角度来看，应该是由编译器负责的，原理大致是语法分析时，依据函数调用时传入的参数是 <code>&amp;String</code> 还是 <code>&amp;str</code> 类型，为了让代码生成器生成一样的指令对参数进行入栈操作 (本质都是将 <code>&amp;str</code> 类型入栈)，所以语法分析器需要对 <code>&amp;String</code> 进行一些额外的操作，让其转换成 <code>&amp;str</code> 类型 (这部分由编译器帮我们做了，无需程序员进行手工转换)，当然程序员也可以手工进行转换成切片 <code>&amp;s[..]</code> (编译器也是在做这件事情罢了)。</div>
+    </div>
+  </div>
+<p>Documentation:</p>
+<ul>
+<li>method std::string::String::<a href="https://doc.rust-lang.org/std/string/struct.String.html#method.as_bytes"target="_blank" rel="external nofollow noopener noreferrer">as_bytes</a></li>
+<li>method std::iter::Iterator::<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.enumerate"target="_blank" rel="external nofollow noopener noreferrer">enumerate</a></li>
+<li>Module std::<a href="https://doc.rust-lang.org/std/iter/index.html"target="_blank" rel="external nofollow noopener noreferrer">iter</a></li>
+</ul>
+<h3 id="using-structs-to-structure-related-data">Using Structs to Structure Related Data</h3>
+<p>Rust 不允许结构体初始化时只指定一部分字段的值，这防止了 UB 相关问题的触发。</p>
+<ul>
+<li>5.1. Defining and Instantiating Structs</li>
+</ul>
+<blockquote>
+<p>Note that the entire instance must be mutable; Rust doesn’t allow us to mark only certain fields as mutable.</p>
+</blockquote>
+<blockquote>
+<p>Tuple structs are useful when you want to give the whole tuple a name and make the tuple a different type from other tuples, and when naming each field as in a regular struct would be verbose or redundant.</p>
+</blockquote>
+<blockquote>
+<p>Unit-like structs can be useful when you need to implement a trait on some type but don’t have any data that you want to store in the type itself.</p>
+</blockquote>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">Rust 中 struct 默认是进行移动 (Move) 操作，而 tuple 默认是进行拷贝 (Copy) 操作。这是因为 struct 一般使用时都会引用 heap 中的数据 (例如 <code>String</code>)，而依据移动 (Move) 操作的语义，进行自动赋值时会拷贝 stack 上的数据并且执行同一 heap 的数据，但是原先 stack 的数据会无效化防止发生 double free。依据这个语义，就不难理解为何 Rust 中的结构体位于 stack 时也不会进行拷贝 (Copy) 操作而是进行移动 (Move) 操作了，因为需要根据常用场景对语义进行 trade-off，即使 struct 没有引用 heap 的数据，为了保障常用场景的效能，还是将这类结构体设计成 Move 操作，即会导致原先的结构体无效化。tuple 也同理，其常用场景为 stack 上的复合数据，所以默认为 Copy 操作。</div>
+    </div>
+  </div>
+<ul>
+<li>5.2. An Example Program Using Structs</li>
+</ul>
+<blockquote>
+<p>It’s not the prettiest output, but it shows the values of all the fields for this instance, which would definitely help during debugging. When we have larger structs, it’s useful to have output that’s a bit easier to read; in those cases, we can use <code>{:#?}</code> instead of <code>{:?}</code> in the println! string.</p>
+</blockquote>
+<p>调试时常使用 <code>#[derive(Debug)]</code> 搭配 <code>{:?}</code> 或 <code>{:#？}</code> 打印相关的数据信息进行除错。</p>
+<ul>
+<li>5.3. Method Syntax</li>
+</ul>
+<blockquote>
+<p>Rust doesn’t have an equivalent to the <code>-&gt;</code> operator; instead, Rust has a feature called automatic referencing and dereferencing. Calling methods is one of the few places in Rust that has this behavior.</p>
+</blockquote>
+<p>这也是为什么方法 (Method) 的第一个参数是 <code>self</code> 并且根据使用的引用类型和所有权有不同的签名，这正是为了方便编译器进行自动推断 (个人估计是语法分析时进行的)。</p>
+<ul>
+<li>5.3. Method Syntax</li>
+</ul>
+<blockquote>
+<p>The <code>Self</code> keywords in the return type and in the body of the function are aliases for the type that appears after the impl keyword</p>
+</blockquote>
+<p>这个 <code>Self</code> 关键字语法在后面“附魔”上泛型和生命周期时就十分有用了 &#x1f923;</p>
+<h3 id="enums-and-pattern-matching">Enums and Pattern Matching</h3>
+<p>这部分内容因为是从函数式编程演化而来的，可能会比较难理解。</p>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">Rust 中的枚举 (Enum) 实现了某种意义上的「大小类型」，即一个大类型涵盖有很多小类型，然后不同的小类型可以有不同的数据构成，然后最具表达力的一点是：这个大小类型关系可以不断递归下去。枚举附带的数据类型支持：结构体、匿名结构体、元组，这些通过编译器的语法分析都不难实现。</div>
+    </div>
+  </div>
+<ul>
+<li>6.1. Defining an Enum</li>
+</ul>
+<blockquote>
+<p>However, representing the same concept using just an enum is more concise: rather than an enum inside a struct, we can put data directly into each enum variant.</p>
+</blockquote>
+<p>因为枚举附带的数据在大部分场景都是引用 heap 数据的 object，所以对枚举的自动赋值操作和结构体一样，默认都是移动 (Move) 操作，即自动赋值后原先数据位于 stack 的那部分内存会失效。</p>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">Rust 的 <code>Option&lt;T&gt;</code> 的设计避免了其它语言中可能会出现的 UB，例如假设一个值存在，但实际上这个值并不存在，这允许编译器进行更激进的最佳化。在 Rust 中只要一个值不是 <code>Option&lt;T&gt;</code>，那它必然存在，并且在 Rust 中不能对 <code>Option&lt;T&gt;</code> 进行 <code>T</code> 的操作，而是需要先获取里面 <code>T</code> 的值才能进行操作，即 <code>Option&lt;T&gt;</code> 并没有继承 <code>T</code> 的行为。</div>
+    </div>
+  </div>
+<ul>
+<li>6.1. Defining an Enum</li>
+</ul>
+<blockquote>
+<p>Rust does not have nulls, but it does have an enum that can encode the concept of a value being present or absent.</p>
+</blockquote>
+<blockquote>
+<p>the compiler can’t infer the type that the corresponding Some variant will hold by looking only at a <code>None</code> value.</p>
+</blockquote>
+<p><code>None</code> 不是一种类型，而是一个大类型 <code>Option&lt;T&gt;</code> 下的一个小类型，所以会有各种各样的 <code>None</code> 类型，而不存在一个独一无二的 <code>None</code> 类型。</p>
+<ul>
+<li>6.2. The match Control Flow Construct</li>
+</ul>
+<blockquote>
+<p>Another useful feature of match arms is that they can bind to the parts of the values that match the pattern. This is how we can extract values out of enum variants.</p>
+</blockquote>
+<p>模式匹配的机制是对 <strong>枚举的类型</strong> (包括大小类型) 进行匹配，像剥洋葱一样，最后将枚举类型附带的 <strong>数据</strong> 绑定到我们想要的变量上。只需要理解一点: <em><strong>只能对值进行绑定，类型是用来匹配的</strong></em>。当然模式匹配也可以精确匹配到值，但这样没啥意义，因为你都知道值了，还进行模式匹配穷举干啥？&#x1f923; 这种精确到值的模式匹配一般出现在下面的 <code>if let</code> 表达式中，<code>match</code> 表达式一般不会这样用。</p>
+<ul>
+<li>6.2. The match Control Flow Construct</li>
+</ul>
+<blockquote>
+<p>Rust also has a pattern we can use when we want a catch-all but don’t want to use the value in the catch-all pattern: <code>_</code> is a special pattern that matches any value and does not bind to that value.</p>
+</blockquote>
+<ul>
+<li>6.3. Concise Control Flow with if let</li>
+</ul>
+<blockquote>
+<p>The if let syntax lets you combine if and let into a less verbose way to handle values that match one pattern while ignoring the rest.</p>
+</blockquote>
+<p><code>if let</code> 表达式本质上是执行模式匹配的 <code>if</code> 表达式</p>
+<blockquote>
+<p>In other words, you can think of <code>if let</code> as syntax sugar for a <code>match</code> that runs code when the value matches one pattern and then ignores all other values.</p>
+</blockquote>
+<blockquote>
+<p>We can include an <code>else</code> with an <code>if let</code>. The block of code that goes with the <code>else</code> is the same as the block of code that would go with the <code>_</code> case in the <code>match</code> expression that is equivalent to the <code>if let</code> and <code>else</code>.</p>
+</blockquote>
+<h3 id="managing-growing-projects-with-packages-crates-and-modules">Managing Growing Projects with Packages, Crates, and Modules</h3>
+<ul>
+<li><strong>Packages</strong>: A Cargo feature that lets you build, test, and share crates</li>
+<li><strong>Crates</strong>: A tree of modules that produces a library or executable</li>
+<li><strong>Modules</strong> and <strong>use</strong>: Let you control the organization, scope, and privacy of paths</li>
+<li><strong>Paths</strong>: A way of naming an item, such as a struct, function, or module</li>
+</ul>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Package |__ Crate (Root Module) |__ Module
+</span></span><span class="line"><span class="cl">                                ...
+</span></span><span class="line"><span class="cl">                                |__ Module
+</span></span><span class="line"><span class="cl">         
+</span></span><span class="line"><span class="cl">        |__ Crate (Root Module) |__ Module
+</span></span><span class="line"><span class="cl">                                ...
+</span></span><span class="line"><span class="cl">                                |__ Module
+</span></span><span class="line"><span class="cl">        ...
+</span></span><span class="line"><span class="cl">        |__ Crate (Root Module) |__ Module
+</span></span><span class="line"><span class="cl">                                ...
+</span></span><span class="line"><span class="cl">                                |__ Module</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面就是三者的关系图，注意 Package 和 crate 是从工程管理角度而衍生来的概念，而 Module 则是从代码管理角度的概念 (文件系统树)，将这两种视角结合在一起的中间层则是: <em><strong>crate 的名字被视为该 crate 的 root module</strong></em>。</p>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>每个 module 包括与 crate 同名的 root module，该 module 范围下的「一等公民」(无论是是不是公开的，因为公开权限只针对外部) 之间可以互相访问，但无法访问这些一等公民的私有下属，例如一等公民是 module，那么就无法访问这个 module 内部的私有下属。</p>
+<blockquote class="blockquote-center">
+  <em>我同级的下级不是我的下级</em>
+</blockquote>
+<p>在 Rust 模块管理中，上级是外部，所以上级无法访问下级的私有成员，但是下级的任意成员都可以访问上级的任意成员。从树的角度比较好理解，因为从枝叶节点可以向上溯源到祖先节点，而在 Rust 模块管理的准则是: <em><strong>可以被搜寻到 (即存在一条路径) 的节点都可以被访问</strong></em>。向下搜寻需要考虑公开权限，向上搜寻则不需要(这里的向上向下是指绝对的发向，因为可能会出现先向上再向下的场景，这时需要地这两阶段分开考虑)，而上面的规则也可以归纳为: 访问兄弟节点无需考虑权限。</p>
+</div>
+    </div>
+  </div>
+<ul>
+<li>7.1. Packages and Crates</li>
+</ul>
+<blockquote>
+<p>If a package contains src/main.rs and src/lib.rs, it has two crates: a binary and a library, both with the same name as the package. A package can have multiple binary crates by placing files in the src/bin directory: each file will be a separate binary crate.</p>
+</blockquote>
+<ul>
+<li>7.3. Paths for Referring to an Item in the Module Tree</li>
+</ul>
+<blockquote>
+<p>We can construct relative paths that begin in the parent module, rather than the current module or the crate root, by using <code>super</code> at the start of the path. This is like starting a filesystem path with the <code>..</code> syntax.</p>
+</blockquote>
+<ul>
+<li>Rust By Example <a href="https://doc.rust-lang.org/rust-by-example/mod/struct_visibility.html"target="_blank" rel="external nofollow noopener noreferrer">10.2. Struct visibility</a></li>
+</ul>
+<blockquote>
+<p>Structs have an extra level of visibility with their fields. The visibility defaults to private, and can be overridden with the <code>pub</code> modifier. This visibility only matters when a struct is accessed from outside the module where it is defined, and has the goal of hiding information (encapsulation).</p>
+</blockquote>
+<p>注意这句话 <em>This visibility only matters when a struct is accessed from outside the module where it is defined</em> 这是一个比较任意混淆的点，这句话说明只有从 <strong>外部访问</strong> 时这个规则才生效，<strong>同级访问</strong> 时 struct 的权限就类似与 C 语言，成员是公开的。这很合理，要不然结构体对应 <code>impl</code> 部分也无法访问私有字段吗？那这样怎么进行初始化构造？是不是就豁然开朗了。</p>
+<ul>
+<li>7.3. Paths for Referring to an Item in the Module Tree</li>
+</ul>
+<blockquote>
+<p>In contrast, if we make an enum public, all of its variants are then public. We only need the pub before the enum keyword</p>
+</blockquote>
+<ul>
+<li>7.4. Bringing Paths Into Scope with the use Keyword</li>
+</ul>
+<blockquote>
+<p>Adding use and a path in a scope is similar to creating a <strong>symbolic link</strong> in the filesystem.</p>
+</blockquote>
+<p>使用 <code>use</code> 就类似与 Linux 文件系统中的「符号链接」，当然使用这种语法需要遵守一定的风格，方便多工合作:</p>
+<blockquote>
+<p>Specifying the <strong>parent module</strong> when calling the <strong>function</strong> makes it clear that the function isn't locally defined while still minimizing repetition of the full path.</p>
+</blockquote>
+<blockquote>
+<p>On the other hand, when bringing in <strong>structs, enums, and other items</strong> with <code>use</code>, it's idiomatic to specify the <strong>full path</strong>.</p>
+</blockquote>
+<blockquote>
+<p>The exception to this idiom is if we're bringing two <strong>items with the same name</strong> into scope with <code>use</code> statements, because Rust doesn’t allow that. As you can see, using the <strong>parent modules</strong> distinguishes the two Result types.</p>
+</blockquote>
+<p>Rust 中也有类似于 Linux 系统的别名技巧，那就是使用 <code>as</code> 关键字来搭配 <code>use</code> 语法:</p>
+<blockquote>
+<p>There's another solution to the problem of bringing two types of the same name into the same scope with <code>use</code>: after the path, we can specify <code>as</code> and a new local name, or <strong>alias</strong>, for the type.</p>
+</blockquote>
+<blockquote>
+<p>When we bring a name into scope with the <code>use</code> keyword, the name available in the new scope is private. To enable the code that calls our code to refer to that name as if it had been defined in that code's scope, we can combine <code>pub</code> and <code>use</code>. This technique is called <em>re-exporting</em> because we're bringing an item into scope but also making that item available for others to bring into their scope.</p>
+</blockquote>
+<p>使用 <code>use</code> 语法引入的别名在当前作用域名 (scope) 是私有的 (private)，如果想让这个别名在当前作用域重新导出为公开权限，可以使用 <code>pub use</code> 语法。</p>
+<blockquote>
+<p>The common part of these two paths is <code>std::io</code>, and that's the complete first path. To merge these two paths into one <code>use</code> statement, we can use <code>self</code> in the nested path,</p>
+</blockquote>
+<p><code>self</code> 关键字除了在对象的 <code>impl</code> 部分表示实例自身之外，在模块 (Module) 管理上也可以用于表示模块自身 (这个语法不常用，因为一般情况下 <a href="https://en.wikipedia.org/wiki/Language_Server_Protocol"target="_blank" rel="external nofollow noopener noreferrer">LSP</a> 会帮程序员自动处理好)。</p>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">Rust 对于模块的分离语法的文件管理也类似于文件系统树。可以将 <code>src/</code> 目录视为 crate (root module)，然后举个例子，对于 crate 下的模块 <code>horse</code>，如果采用分离文件写法，这个模块的内容就是 <code>src/horse.rs</code> 文件的内容；对于 <code>horse</code> 模块下的 <code>small_horse</code> 模块，该模块的内容就是 <code>src/horse/small_horse.rs</code> 文件的内容。显然这些源目录、文件之间的关系，与模块之间的父子关系相符合。</div>
+    </div>
+  </div>
+<h3 id="common-collections">Common Collections</h3>
+<div class="details admonition info open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>Documentation<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ul>
+<li>Struct std::vec::<a href="https://doc.rust-lang.org/std/vec/struct.Vec.html"target="_blank" rel="external nofollow noopener noreferrer">Vec</a></li>
+<li>Struct std::string::<a href="https://doc.rust-lang.org/std/string/struct.String.html"target="_blank" rel="external nofollow noopener noreferrer">String</a></li>
+<li>Struct std::collections::<a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html"target="_blank" rel="external nofollow noopener noreferrer">HashMap</a></li>
+</ul>
+</div>
+    </div>
+  </div>
+<h4 id="storing-lists-of-values-with-vectors">Storing Lists of Values with Vectors</h4>
+<blockquote>
+<p>Like any other struct, a vector is freed when it goes out of scope</p>
+</blockquote>
+<blockquote>
+<p>When the vector gets dropped, all of its contents are also dropped, meaning the integers it holds will be cleaned up. The borrow checker ensures that any references to contents of a vector are only used while the vector itself is valid.</p>
+</blockquote>
+<p>引用搭配 vector 在 drop 场景比较复杂，涉及到生命周期以及借用检查机制。</p>
+<blockquote>
+<p>Using <code>&amp;</code> and <code>[]</code> gives us a reference to the element at the index value. When we use the <code>get</code> method with the index passed as an argument, we get an <code>Option&lt;&amp;T&gt;</code> that we can use with <code>match</code>.</p>
+</blockquote>
+<p>使用 <code>[]</code> 运算符获得的是元素本身，无论容器是引用的还是拥有所有权的。但读取 vector 的元素获得的应该是该元素的引用，因为读取一个元素大部分情况下不需要该元素的所有权，除此之外，如果获取了元素的所有权，那么对于 vector 的使用会有一些安全限制。</p>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">v</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="mi">6</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;The first element is: </span><span class="si">{first}</span><span class="s">&#34;</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>why should a reference to the first element care about changes at the end of the vector? This error is due to the way vectors work: because vectors put the values next to each other in memory, adding a new element onto the end of the vector might require allocating new memory and copying the old elements to the new space, if there isn’t enough room to put all the elements next to each other where the vector is currently stored. In that case, the reference to the first element would be pointing to deallocated memory. The borrowing rules prevent programs from ending up in that situation.</p>
+</blockquote>
+<p>借用规则在 vector 仍然成立，并且对 vector 一些看似不相关实则相关的事例的原理进行了解释。</p>
+<div class="highlight" id="id-6"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">57</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">*</span><span class="n">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">50</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>To change the value that the mutable reference refers to, we have to use the <code>*</code> dereference operator to get to the value in <code>i</code> before we can use the <code>+=</code> operator.</p>
+</blockquote>
+<p>一般来说，只有可变引用 <code>&amp;mut</code> 才需要关心解引用 <code>*</code> 运算符，因为不可变引用只能表达所引用的数据本身，并不能修改，而可变引用既能表达所引用的数据本身，还能对这个数据进行修改，需要一个机制将这两个表达能力区分开 (方便编译器在语法分析上的实作)，Rust 采用的策略是针对修改数据这个能力需要使用 <code>*</code> 运算符。</p>
+<p>除了区分表达行为之外，这个观点也可以帮助我们理解一些 Rust 哲学，例如查询数据的函数 / 方法一般只需要不可变引用 <code>&amp;</code> 作为参数，按照上面的解释，不可变引用 <code>&amp;</code> 只能表示所引用的数据本身，所以作为参数对于函数内部实作并无影响 (因为只需要查看数据本身而不需要对其修改)，同时避免了所有权带来的高昂成本。</p>
+<blockquote>
+<p>Vectors can only store values that are the same type.</p>
+</blockquote>
+<blockquote>
+<p>Fortunately, the variants of an enum are defined under the same enum type, so when we need one type to represent elements of different types, we can define and use an enum!</p>
+</blockquote>
+<p>运用枚举 (enum) 搭配 vector 可以实作出比泛型更具表达力的 vector，即 vector 中的每个元素的类型可以不相同 (通过 enum 的大小类型机制即可实作)。</p>
+<h4 id="storing-utf-8-encoded-text-with-strings">Storing UTF-8 Encoded Text with Strings</h4>
+<blockquote>
+<p>Rust has only one string type in the core language, which is the string slice <code>str</code> that is usually seen in its borrowed form <code>&amp;str</code>.</p>
+</blockquote>
+<blockquote>
+<p>The <code>String</code> type, which is provided by Rust’s standard library rather than coded into the core language, is a growable, mutable, owned, UTF-8 encoded string type.</p>
+</blockquote>
+<blockquote>
+<p>Although this section is largely about <code>String</code>, both types are used heavily in Rust’s standard library, and both <code>String</code> and string slices are UTF-8 encoded.</p>
+</blockquote>
+<p>Rust 中的字符串是 UTF-8 编码，注意与之前所提的 <code>char</code> 类型使用的 Unicode 编码不同。这一点很重要，因为 <code>String</code> 的 <a href="https://doc.rust-lang.org/std/string/struct.String.html#method.len"target="_blank" rel="external nofollow noopener noreferrer">len()</a> 方法是计算 byte 的数量 (URF-8 编码只占据一个 byte)。</p>
+<blockquote>
+<p>The <code>push_str</code> method takes a string slice because we don’t necessarily want to take ownership of the parameter.</p>
+</blockquote>
+<p>参数是字符串的引用而不是 <code>String</code> 的原因是，如果传入的是 <code>String</code> 会转移所有权，进而导致原先的 <code>String</code> 所在的 stack 内存失效，又因为字符串的字符拷贝操作是比较容易实现的，所以通过字符串引用也可以对字符串内容的字符进行拷贝，而不会对 <code>String</code> 的所有权造成影响。<strong>引用未必不可拷贝，拷贝不是所有权的专属</strong> (只要引用的对象的元素实现了 Copy，那就可以通过引用来进行拷贝，例如 <code>&amp;str</code> 及其元素——字符)。</p>
+<blockquote>
+<p>The version of the code using <code>format!</code> is much easier to read, and the code generated by the <code>format!</code> macro uses references so that this call doesn’t take ownership of any of its parameters.</p>
+</blockquote>
+<p><code>format!</code> 和 <code>print!</code> 宏的关系就和 C 语言中的 <code>sprintf</code> 和 <code>printf</code> 的关系类似。</p>
+<blockquote>
+<p>Rust strings don’t support indexing.</p>
+</blockquote>
+<blockquote>
+<p>A <code>String</code> is a wrapper over a <code>Vec&lt;u8&gt;</code>.</p>
+</blockquote>
+<blockquote>
+<p>A final reason Rust doesn’t allow us to index into a <code>String</code> to get a character is that indexing operations are expected to always take constant time $O(1)$. But it isn’t possible to guarantee that performance with a <code>String</code>, because Rust would have to walk through the contents from the beginning to the index to determine how many valid characters there were.</p>
+</blockquote>
+<p>字符串底层实作是使用 UTF-8 编码的，但是为了兼容，字符串也可以表示其他字符编码，但底层还是使用 UTF-8 编码构成，例如阿拉伯语的一个字符需要两个 bytes，那么底层就是要两个 UTF-8 编码的字符表示。这样就出现问题了，如果使用下标索引，该依据上面编码进行索引？如果使用 UTF-8 编码索引，那么索引获得的字符编码可能是非法的 (例如是阿拉伯字符的一半)，而采用正确的字符编码索引，在实作层面则过于低效，干脆就禁止了索引操作。</p>
+<p>Rust 对于字符串处理的哲学 (我个人认为这样处理并不是特别好，因为 <code>char</code> 和 <code>str</code> 底层编码不一致，但 <code>str</code> 底层编码是和 <code>u8</code> 匹配的，算是一种 trade-off 吧):</p>
+<blockquote>
+<p>Rust has chosen to make the correct handling of <code>String</code> data the default behavior for all Rust programs, which means programmers have to put more thought into handling UTF-8 data upfront. This trade-off exposes more of the complexity of strings than is apparent in other programming languages, but it prevents you from having to handle errors involving non-ASCII characters later in your development life cycle.</p>
+</blockquote>
+<h4 id="storing-keys-with-associated-values-in-hash-maps">Storing Keys with Associated Values in Hash Maps</h4>
+<blockquote>
+<p>Note that we need to first <code>use</code> the <code>HashMap</code> from the collections portion of the standard library. Of our three common collections, this one is the least often used, so it’s not included in the features brought into scope automatically in the prelude. Hash maps also have less support from the standard library; there’s no built-in macro to construct them, for example.</p>
+</blockquote>
+<p>与之前的 <code>Vec</code> 和 <code>String</code> 不同，<code>HashMap</code> 使用场景比较少 (因为使用场景大部分是性能要求高的，这种情况一般会选择自己开发高性能的 hash map 而不是使用标准库的)，所以需要通过 <code>use</code> 进行引入:</p>
+<div class="highlight" id="id-7"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">std</span>::<span class="n">collections</span>::<span class="n">HashMap</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Just like vectors, hash maps store their data on the heap.</p>
+</blockquote>
+<blockquote>
+<p>Like vectors, hash maps are homogeneous: all of the keys must have the same type as each other, and all of the values must have the same type.</p>
+</blockquote>
+<p>Hash map 和 vecto 类似，数据存放在 heap 并且和是同构的，当然类似的，表达力也可以通过搭配枚举来增强。</p>
+<blockquote>
+<p>For types that implement the <code>Copy</code> trait, like <code>i32</code>, the values are copied into the hash map. For owned values like <code>String</code>, the values will be moved and the hash map will be the owner of those values</p>
+</blockquote>
+<p>构造器本质也是一个函数 (关联函数)，而方法本质也是函数 (第一个参数为当前实例的特殊函数)，所以这里对于 hash map 元素所有权的处理与之前所提的准则一致 (主要是函数涉及的所有权处理部分)，并无冲突。</p>
+<ul>
+<li>Updating a Hash Map</li>
+</ul>
+<blockquote>
+<p>If we insert a key and a value into a hash map and then insert that same key with a different value, the value associated with that key will be replaced.</p>
+</blockquote>
+<div class="highlight" id="id-8"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">scores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HashMap</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">scores</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;Blue&#34;</span><span class="p">),</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">scores</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;Blue&#34;</span><span class="p">),</span><span class="w"> </span><span class="mi">25</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>if the key does exist in the hash map, the existing value should remain the way it is. If the key doesn’t exist, insert it and a value for it.</p>
+</blockquote>
+<div class="highlight" id="id-9"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">scores</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HashMap</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">scores</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;Blue&#34;</span><span class="p">),</span><span class="w"> </span><span class="mi">10</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">scores</span><span class="p">.</span><span class="n">entry</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;Yellow&#34;</span><span class="p">)).</span><span class="n">or_insert</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">scores</span><span class="p">.</span><span class="n">entry</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;Blue&#34;</span><span class="p">)).</span><span class="n">or_insert</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition quote open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">The <code>or_insert</code> method on <code>Entry</code> is defined to return a mutable reference to the value for the corresponding <code>Entry</code> key if that key exists, and if not, inserts the parameter as the new value for this key and returns a mutable reference to the new value.</div>
+    </div>
+  </div>
+<blockquote>
+<p>Another common use case for hash maps is to look up a key’s value and then update it based on the old value.</p>
+</blockquote>
+<div class="highlight" id="id-10"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HashMap</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">for</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">text</span><span class="p">.</span><span class="n">split_whitespace</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p">.</span><span class="n">entry</span><span class="p">(</span><span class="n">word</span><span class="p">).</span><span class="n">or_insert</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">*</span><span class="n">count</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="error-handling">Error Handling</h3>
+<blockquote>
+<p>Rust groups errors into two major categories: <em>recoverable</em> and <em>unrecoverable</em> errors. For a recoverable error, such as a file not found error, we most likely just want to report the problem to the user and retry the operation. Unrecoverable errors are always symptoms of bugs, like trying to access a location beyond the end of an array, and so we want to immediately stop the program.</p>
+</blockquote>
+<blockquote>
+<p>Rust doesn’t have exceptions. Instead, it has the type <code>Result&lt;T, E&gt;</code> for recoverable errors and the <code>panic!</code> macro that stops execution when the program encounters an unrecoverable error.</p>
+</blockquote>
+<p>Rust 并没有异常机制，而是使用 <code>Result&lt;T, E&gt;</code> 和 <code>panic!</code> 分别来处理可恢复 (recoverable) 和不可恢复 (unrecoverable) 的错误。可恢复错误的处理策略比较特别，因为它使用了 Rust 独有的枚举类型，而对于不可恢复错误的处理就比较常规了，本质上和 C 语言的 <code>exit</code> 处理相同。</p>
+<ul>
+<li>9.1. Unrecoverable Errors with panic!</li>
+</ul>
+<blockquote>
+<p>By default, when a panic occurs, the program starts <em>unwinding</em>, which means Rust walks back up the stack and cleans up the data from each function it encounters. However, this walking back and cleanup is a lot of work. Rust, therefore, allows you to choose the alternative of immediately aborting, which ends the program without cleaning up.</p>
+</blockquote>
+<div class="highlight" id="id-11"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="c"># abort on panic in release mode</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">profile</span><span class="p">.</span><span class="nx">release</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">panic</span> <span class="p">=</span> <span class="s1">&#39;abort&#39;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>A <em>backtrace</em> is a list of all the functions that have been called to get to this point. Backtraces in Rust work as they do in other languages: the key to reading the backtrace is to start from the top and read until you see files you wrote. That’s the spot where the problem originated.</p>
+</blockquote>
+<div class="highlight" id="id-12"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ <span class="nv">RUST_BACKTRACE</span><span class="o">=</span><span class="m">1</span> cargo run
+</span></span><span class="line"><span class="cl">$ <span class="nv">RUST_BACKTRACE</span><span class="o">=</span>full cargo run</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>9.2. Recoverable Errors with Result</li>
+</ul>
+<blockquote>
+<p>If the <code>Result</code> value is the <code>Ok</code> variant, <code>unwrap</code> will return the value inside the <code>Ok</code>. If the <code>Result</code> is the <code>Err</code> variant, unwrap will call the <code>panic!</code> macro for us.</p>
+</blockquote>
+<blockquote>
+<p>Similarly, the <code>expect</code> method lets us also choose the <code>panic!</code> error message. Using expect instead of <code>unwrap</code> and providing good error messages can convey your intent and make tracking down the source of a panic easier.</p>
+</blockquote>
+<p>对于 <code>Result&lt;T, E&gt;</code> 一般是通过 <code>match</code> 模式匹配进行处理，而 <code>unwrap</code> 和 <code>expect</code> 本质都是对 <code>Result&lt;T, E&gt;</code> 的常见的 <code>match</code> 处理模式的缩写，值得一提的是，它们对于 <code>Option&lt;T&gt;</code> 也有类似的效果。</p>
+<blockquote>
+<p>The <code>?</code> placed after a <code>Result</code> value is defined to work in almost the same way as the match expressions we defined to handle the <code>Result</code> values in Listing 9-6. If the value of the <code>Result</code> is an <code>Ok</code>, the value inside the <code>Ok</code> will get returned from this expression, and the program will continue. If the value is an <code>Err</code>, the <code>Err</code> will be returned from the whole function as if we had used the <code>return</code> keyword so the error value gets propagated to the calling code.</p>
+</blockquote>
+<blockquote>
+<p>When the <code>?</code> operator calls the <code>from</code> function, the error type received is converted into the error type defined in the return type of the current function.</p>
+</blockquote>
+<p><code>?</code> 运算符是常用的传播错误的 <code>match</code> 模式匹配的缩写，另外相对于直接使用 <code>match</code> 模式匹配，<code>?</code> 运算符会将接收的错误类型转换成返回类型的错误类型，以匹配函数签名。类似的，<code>?</code> 对于 <code>Option&lt;T&gt;</code> 也有类似的效果。</p>
+<ul>
+<li>9.3. To panic! or Not to panic!</li>
+</ul>
+<blockquote>
+<p>Therefore, returning <code>Result</code> is a good default choice when you’re defining a function that might fail.</p>
+</blockquote>
+<p>定义一个可能会失败的函数时 (即预期计划处理错误)，应该使用 <code>Result</code> 进行错误处理，其它时候一般使用 <code>panic!</code> 处理即可 (因为预期就没打算处理错误)。</p>
+<h3 id="generic-types-traits-and-lifetimes">Generic Types, Traits, and Lifetimes</h3>
+<div class="details admonition quote open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>Removing Duplication by Extracting a Function:</p>
+<ol>
+<li>Identify duplicate code.</li>
+<li>Extract the duplicate code into the body of the function and specify the inputs and return values of that code in the function signature.</li>
+<li>Update the two instances of duplicated code to call the function instead.</li>
+</ol></div>
+    </div>
+  </div>
+<h4 id="generic-data-types">Generic Data Types</h4>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">泛型 (generic) 和函数消除重复代码的逻辑类似，区别在于函数是在 <strong>运行时期</strong> 调用时才针对传入参数的 <strong>数值</strong> 进行实例化，而泛型是在 <strong>编译时期</strong> 针对涉及的调用的 <strong>类型</strong> (调用时涉及的类型是参数的类型，返回类型暂时无法使用泛型) 进行实例化。</div>
+    </div>
+  </div>
+<blockquote>
+<p>Note that we have to declare <code>T</code> just after <code>impl</code> so we can use <code>T</code> to specify that we’re implementing methods on the type <code>Point&lt;T&gt;</code>. By declaring <code>T</code> as a generic type after <code>impl</code>, Rust can identify that the type in the angle brackets in <code>Point</code> is a generic type rather than a concrete type.</p>
+</blockquote>
+<p>从编译器词法分析和语法分析角度来理解该语法</p>
+<blockquote>
+<p>The good news is that using generic types won&rsquo;t make your program run any slower than it would with concrete types.</p>
+</blockquote>
+<blockquote>
+<p>Rust accomplishes this by performing monomorphization of the code using generics at compile time. Monomorphization is the process of turning generic code into specific code by filling in the concrete types that are used when compiled.</p>
+</blockquote>
+<p>泛型在编译时期而不是运行时期进行单例化，并不影响效能</p>
+<h4 id="traits-defining-shared-behavior">Traits: Defining Shared Behavior</h4>
+<blockquote>
+<p>A type’s behavior consists of the methods we can call on that type. Different types share the same behavior if we can call the same methods on all of those types. Trait definitions are a way to group method signatures together to define a set of behaviors necessary to accomplish some purpose.</p>
+</blockquote>
+<p>Trait 实现的是 <strong>行为</strong> 的共享，而没有实现数据的共享，即它只实现了行为接口的共享。</p>
+<blockquote>
+<p>Note that it isn’t possible to call the default implementation from an overriding implementation of that same method.</p>
+</blockquote>
+<div class="highlight" id="id-13"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">notify</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nc">Summary</span><span class="o">&gt;</span><span class="p">(</span><span class="n">item</span>: <span class="kp">&amp;</span><span class="nc">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Breaking news! </span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p">.</span><span class="n">summarize</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">notify</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nc">Summary</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">Display</span><span class="o">&gt;</span><span class="p">(</span><span class="n">item</span>: <span class="kp">&amp;</span><span class="nc">T</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>The <code>impl Trait</code> syntax is convenient and makes for more concise code in simple cases, while the fuller trait bound syntax can express more complexity in other cases.</p>
+</blockquote>
+<p><em>Trait Bound</em> 本质也是泛型，只不过它限制了泛型在编译时期可以进行实例化的具体类型，例如该具体类型必须实现某个或某些 Trait。而 <code>impl Trait</code> 是它的语法糖，我个人倾向于使用 Trait Bound，因为可读性更好。除此之外，<code>impl Trait</code> 应用在返回类型时有一些限制 (Trait Bound 也暂时无法解决该问题，所以我们暂时只能将 Trait Bound 应用于函数参数):</p>
+<blockquote>
+<p>However, you can only use <code>impl Trait</code> if you’re returning a single type.</p>
+</blockquote>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">Rust 是一门注重 <strong>编译时期</strong> 的语言，所以它使用 Trait 不可能像 Java 使用 Inteface 那么灵活。因为 Rust 处理 Trait 也是在编译时期进行处理的，需要在编译时期将 Trait 转换成具体类型，所以其底层本质和泛型相同，都是编译时期实例化，只不过加上了实例化的具体类型的限制 (如果没满足限制就会编译错误)。</div>
+    </div>
+  </div>
+<div class="highlight" id="id-14"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">some_function</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nc">Display</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Clone</span><span class="p">,</span><span class="w"> </span><span class="n">U</span>: <span class="nb">Clone</span> <span class="o">+</span><span class="w"> </span><span class="n">Debug</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t</span>: <span class="kp">&amp;</span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="n">u</span>: <span class="kp">&amp;</span><span class="nc">U</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span> <span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">some_function</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t</span>: <span class="kp">&amp;</span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="n">u</span>: <span class="kp">&amp;</span><span class="nc">U</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span>
+</span></span><span class="line"><span class="cl"><span class="nc">where</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">T</span>: <span class="nc">Display</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">Clone</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">U</span>: <span class="nb">Clone</span> <span class="o">+</span><span class="w"> </span><span class="n">Debug</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">{}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Rust has alternate syntax for specifying trait bounds inside a <code>where</code> clause after the function signature.</p>
+</blockquote>
+<p><code>where</code> 语法使得使用 Trait Bound 语法的函数签名变得简洁，增强了可读性，特别是在 Trait Bound 比较复杂的情况下。</p>
+<blockquote>
+<p>By using a trait bound with an <code>impl</code> block that uses generic type parameters, we can implement methods conditionally for types that implement the specified traits.</p>
+</blockquote>
+<div class="highlight" id="id-15"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">impl</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nc">Display</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">PartialOrd</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Pair</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>We can also conditionally implement a trait for any type that implements another trait. Implementations of a trait on any type that satisfies the trait bounds are called <em>blanket implementations</em> and are extensively used in the Rust standard library.</p>
+</blockquote>
+<div class="highlight" id="id-16"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">impl</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nc">Display</span><span class="o">&gt;</span><span class="w"> </span><span class="nb">ToString</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="p">{}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>一样的还是 Trait Bound 的 <strong>泛型搭配具体类型限制</strong> 的思想</p>
+<h4 id="validating-references-with-lifetimes">Validating References with Lifetimes</h4>
+<blockquote>
+<p>The main aim of lifetimes is to prevent <em>dangling references</em>, which cause a program to reference data other than the data it’s intended to reference.</p>
+</blockquote>
+<p>主要目的就是防止 <em><strong>dangling reference</strong></em> 这个 UB</p>
+<blockquote>
+<p>Lifetime annotations don’t change how long any of the references live. Rather, they describe the relationships of the lifetimes of multiple references to each other without affecting the lifetimes.</p>
+</blockquote>
+<p>进行标注并不会影响对象本身真正的生命周期，只是 <strong>帮助编译器进行推导</strong>，同时这个标注与函数内部逻辑也无关，主要作用是帮助编译器通过 <em>函数签名</em> 和 <em>函数调用</em> 对涉及的生命周期进行检查 (有些情况需要对函数体内的返回逻辑进行检查)，防止出现 dangling reference 这个 UB。</p>
+<blockquote>
+<p>Just as functions can accept any type when the signature specifies a generic type parameter, functions can accept references with any lifetime by specifying a generic lifetime parameter.</p>
+</blockquote>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>生命周期也可以从 <strong>实例化</strong> 的角度进行思考，因为每次 <strong>调用</strong> 传入的参数的生命周期可能都不相同。当然无论是 The Book 还是教学录影在生命周期标注这里进度显得非常匆忙，建议搭配阅读下面文章:</p>
+<ul>
+<li><a href="https://www.zhihu.com/question/435470652/answer/1653231267"target="_blank" rel="external nofollow noopener noreferrer">如何理解 Rust 的生命周期标注</a></li>
+</ul>
+<p>这篇文章非常好，从 <strong>子类型</strong> 的角度对生命周期标注进行了说明，举个例子:</p>
+<div class="highlight" id="id-27"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="na">&#39;l</span>: <span class="na">&#39;s</span>      <span class="c1">// &#39;l 是 &#39;s 的子类型，即 &#39;l 表示的生命周期不小于 &#39;s 不表示的生命周期
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">x</span>: <span class="kp">&amp;</span><span class="na">&#39;l</span> <span class="kt">str</span>  <span class="c1">// x 是 &amp;&#39;l str 的子类型，即 x 表示生命周期不小于 &#39;l 的 str 的引用
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>对于函数参数，也可以通过上面说明的子类型进行对生命周期标注理解:</p>
+<div class="highlight" id="id-28"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">longest</span><span class="o">&lt;</span><span class="na">&#39;a</span><span class="o">&gt;</span><span class="p">(</span><span class="n">x</span>: <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="kt">str</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>: <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="kt">str</span> <span class="p">{}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>参数 <code>x</code>, <code>y</code> 都是 <code>&amp;'a str</code> 的子类型，即参数实例的生命周期不小于 <code>'a</code>，而返回类型 <code>&amp;'a str</code> 则是任意返回值实例的子类型，即其不小于任意返回值实例的生命周期。对于函数签名中的相同生命周期标注 <code>'a</code>，使用不等式表示如下:</p>
+<div class="fi-row">
+$$
+传入参数的生命周期 \ge\ 'a\ \ge 返回值的生命周期
+$$
+</div>
+<p>对于结构体的生命周期标注，可以从构造器这个关联函数进行思考，因为构造器必须初始化所有的成员，而结构体的生命周期标注与引用类型的成员息息相关。</p>
+</div>
+    </div>
+  </div>
+<blockquote>
+<p>The patterns programmed into Rust’s analysis of references are called the <em>lifetime elision rules</em>.</p>
+</blockquote>
+<blockquote>
+<p>Lifetimes on function or method parameters are called <em>input lifetimes</em>, and lifetimes on return values are called <em>output lifetimes</em>.</p>
+</blockquote>
+<blockquote>
+<p>The first rule is that the compiler assigns a lifetime parameter to each parameter that’s a reference.</p>
+</blockquote>
+<blockquote>
+<p>The second rule is that, if there is exactly one input lifetime parameter, that lifetime is assigned to all output lifetime parameters</p>
+</blockquote>
+<blockquote>
+<p>The third rule is that, if there are multiple input lifetime parameters, but one of them is <code>&amp;self</code> or <code>&amp;mut self</code> because this is a method, the lifetime of <code>self</code> is assigned to all output lifetime parameters.</p>
+</blockquote>
+<p>这三条生命周期消除规则都是针对比较常见的生命周期标注的场景，为了节省程序员的精力，由编译器对这些简单的场景进行推断即可。当然依赖于编译器推断有时并不能达到我们的预期，特别是编译器只能推断简单常见的生命周期标注，思考下面的例子:</p>
+<div class="highlight" id="id-17"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="c1">// wrong
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fn</span> <span class="nf">fun</span><span class="p">(</span><span class="n">s</span>: <span class="kp">&amp;</span><span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="kt">str</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s">&#34;hello&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// the same as: fn fun(s: &amp;&#39;a str) -&gt; &amp;&#39;a str
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// right
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fn</span> <span class="nf">fun</span><span class="p">(</span><span class="n">s</span>: <span class="kp">&amp;</span><span class="na">&#39;a</span> <span class="kt">str</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="na">&#39;b</span> <span class="kt">str</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="s">&#34;hello&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>输入参数的生命周期和返回值的生命周期之间并无关系 (不存在子类型的关系)，所以应该使用不同的生命周期标注</p>
+<div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">涉及到生命周期的程序，编写代码时先不需要考虑生命周期，先将代码逻辑写好，然后从防止 <em><strong>dangling reference</strong></em> 这个 UB 以及 <strong>子类型</strong> 的角度对生命周期进行标注。</div>
+    </div>
+  </div>
+<h3 id="writing-automated-tests">Writing Automated Tests</h3>
+<ul>
+<li>11.1. How to Write Tests</li>
+</ul>
+<blockquote>
+<p>Tests are Rust functions that verify that the non-test code is functioning in the expected manner. The bodies of test functions typically perform these three actions:</p>
+<ol>
+<li>Set up any needed data or state.</li>
+<li>Run the code you want to test.</li>
+<li>Assert the results are what you expect.</li>
+</ol>
+</blockquote>
+<blockquote>
+<p>Each test is run in a new thread, and when the main thread sees that a test thread has died, the test is marked as failed.</p>
+</blockquote>
+<p>自动测试模板:</p>
+<div class="highlight" id="id-18"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="cp">#[cfg(test)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">mod</span> <span class="nn">tests</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">use</span><span class="w"> </span><span class="k">super</span>::<span class="o">*</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">larger_can_hold_smaller</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>自动测试常用宏:</p>
+<ul>
+<li>Macro std::<a href="https://doc.rust-lang.org/std/macro.assert.html"target="_blank" rel="external nofollow noopener noreferrer">assert</a></li>
+<li>Macro std::<a href="https://doc.rust-lang.org/std/macro.assert_eq.html"target="_blank" rel="external nofollow noopener noreferrer">assert_eq</a></li>
+<li>Macro std::<a href="https://doc.rust-lang.org/std/macro.assert_ne.html"target="_blank" rel="external nofollow noopener noreferrer">assert_ne</a></li>
+</ul>
+<blockquote>
+<p>You can also add a custom message to be printed with the failure message as optional arguments to the <code>assert!</code>, <code>assert_eq!</code>, and <code>assert_ne!</code> macros. Any arguments specified after the required arguments are passed along to the <code>format!</code> macro</p>
+</blockquote>
+<p>上面涉及的宏都是用来对返回值进行测试的 (也可以附加错误信息)，有时我们需要测试代码在某些情况下，是否按照预期发生恐慌，这时我们就可以使用 <code>should_panic</code> 属性:</p>
+<blockquote>
+<p>In addition to checking return values, it’s important to check that our code handles error conditions as we expect.</p>
+</blockquote>
+<blockquote>
+<p>We do this by adding the attribute <code>should_panic</code> to our test function. The test passes if the code inside the function panics; the test fails if the code inside the function doesn’t panic.</p>
+</blockquote>
+<div class="highlight" id="id-19"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#[should_panic]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">greater_than_100</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">..</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Tests that use <code>should_panic</code> can be imprecise. A <code>should_panic</code> test would pass even if the test panics for a different reason from the one we were expecting. To make <code>should_panic</code> tests more precise, we can add an optional expected parameter to the <code>should_panic</code> attribute. The test harness will make sure that the failure message contains the provided text.</p>
+</blockquote>
+<div class="highlight" id="id-20"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#[should_panic(expected = </span><span class="s">&#34;less than or equal to 100&#34;</span><span class="cp">)]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">greater_than_100</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">..</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>should_panic</code> 属性可附带 expected 文本，这样自动测试时，不仅会检测是否发生 panic 还会检测 panic 信息是否包含 expect 文本，这样使得 <code>should_panic</code> 对于发生 panic 的原因掌握的更加精准 (因为不同原因导致的 panic 的信息一般不相同)。</p>
+<p>除了使用 <code>panic</code> 方法来编写自动测试 (上面所提的方法本质都是测试失败时触发 <code>panic</code>)，我们还可以通过 <code>Result&lt;T, E&gt;</code> 来编写测试，返回 <code>Ok</code> 表示测试成功，返回 <code>Err</code> 则表示测试失败。</p>
+<blockquote>
+<p>rather than calling the <code>assert_eq!</code> macro, we return <code>Ok(())</code> when the test passes and an <code>Err</code> with a <code>String</code> inside when the test fails.</p>
+</blockquote>
+<div class="highlight" id="id-21"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">it_works</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nb">Result</span><span class="o">&lt;</span><span class="p">(),</span><span class="w"> </span><span class="nb">String</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Ok</span><span class="p">(())</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Err</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;two plus two does not equal four&#34;</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>You can’t use the <code>#[should_panic]</code> annotation on tests that use <code>Result&lt;T, E&gt;</code>.</p>
+</blockquote>
+<ul>
+<li>11.2. Controlling How Tests Are Run</li>
+</ul>
+<blockquote>
+<p>The default behavior of the binary produced by <code>cargo test</code> is to run all the tests in parallel and capture output generated during test runs, preventing the output from being displayed and making it easier to read the output related to the test results. You can, however, specify command line options to change this default behavior.</p>
+</blockquote>
+<blockquote>
+<p>separate these two types of arguments, you list the arguments that go to cargo test followed by the separator <code>--</code> and then the ones that go to the test binary.</p>
+</blockquote>
+<div class="highlight" id="id-22"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cargo <span class="nb">test</span> &lt;args1&gt; -- &lt;args2&gt;
+</span></span><span class="line"><span class="cl"><span class="c1"># args1: cargo test 的参数</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># args2: cargo test 生成的二进制文件的参数</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>When you run multiple tests, by default they run in parallel using threads, meaning they finish running faster and you get feedback quicker. Because the tests are running at the same time, you must make sure your tests don’t depend on each other or on any shared state, including a shared environment, such as the current working directory or environment variables.</p>
+</blockquote>
+<p>自动测试默认行为是并行的，所以我们在编写测试代码时，需要安装并行设计的思维进行编写，保证不会出现因为并行而导致的 UB。当然你也可以指定自动测试时使用的线程数量，甚至可以将线程数设置为 1 这样就不需要以并行设计测试代码了。</p>
+<blockquote>
+<p>If you don’t want to run the tests in parallel or if you want more fine-grained control over the number of threads used, you can send the &ndash;test-threads flag and the number of threads you want to use to the test binary.</p>
+</blockquote>
+<div class="highlight" id="id-23"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cargo <span class="nb">test</span> -- --test-threads<span class="o">=</span><span class="m">1</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>By default, if a test passes, Rust’s test library captures anything printed to standard output. For example, if we call println! in a test and the test passes, we won’t see the println! output in the terminal; we’ll see only the line that indicates the test passed. If a test fails, we’ll see whatever was printed to standard output with the rest of the failure message.</p>
+</blockquote>
+<p>当测试用例成功时，Rust 会捕获该成功用例中的输出，只打印测试成功这一个信息，用例代码逻辑中的打印输出均被捕获了。当用例失败时，则不会对输出进行捕获，而是将它们和测试失败信息一起打印出来。当然我们也可以设置用例成功时不捕获输出:</p>
+<blockquote>
+<p>If we want to see printed values for passing tests as well, we can tell Rust to also show the output of successful tests with <code>--show-output</code>.</p>
+</blockquote>
+<div class="highlight" id="id-24"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cargo <span class="nb">test</span> -- --show-output</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>You can choose which tests to run by passing <code>cargo test</code> the name or names of the test(s) you want to run as an argument.</p>
+</blockquote>
+<p>可以指定运行某些测试，而不是运行全部测试:</p>
+<blockquote>
+<p>We can pass the name of any test function to <code>cargo test</code> to run only that test</p>
+</blockquote>
+<blockquote>
+<p>We can specify part of a test name, and any test whose name matches that value will be run.</p>
+</blockquote>
+<blockquote>
+<p>Also note that the module in which a test appears becomes part of the test’s name, so we can run all the tests in a module by filtering on the module’s name.</p>
+</blockquote>
+<p>Ignoring Some Tests Unless Specifically Requested</p>
+<blockquote>
+<p>Sometimes a few specific tests can be very time-consuming to execute, so you might want to exclude them during most runs of <code>cargo test</code>. Rather than listing as arguments all tests you do want to run, you can instead annotate the time-consuming tests using the <code>ignore</code> attribute to exclude them</p>
+</blockquote>
+<div class="highlight" id="id-25"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="cp">#[test]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#[ignore]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">expensive_test</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">..</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>If we want to run only the ignored tests, we can use:</p>
+</blockquote>
+<div class="highlight" id="id-26"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cargo <span class="nb">test</span> -- --ignored</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>11.3. Test Organization</li>
+</ul>
+<blockquote>
+<p>Unit tests are small and more focused, testing one module in isolation at a time, and can test private interfaces. Integration tests are entirely external to your library and use your code in the same way any other external code would, using only the public interface and potentially exercising multiple modules per test.</p>
+</blockquote>
+<p>Rust 有单元测试和集成测试两大类别，可以近似理解为白盒测试和黑盒测试。</p>
+<p>单元测试 (Unit Tests)</p>
+<blockquote>
+<p>The convention is to create a module named <code>tests</code> in each file to contain the test functions and to annotate the module with <code>cfg(test)</code>.</p>
+</blockquote>
+<blockquote>
+<p>The <code>#[cfg(test)]</code> annotation on the tests module tells Rust to compile and run the test code only when you run <code>cargo test,</code> not when you run <code>cargo build</code>.</p>
+</blockquote>
+<blockquote>
+<p>The attribute <code>cfg</code> stands for configuration and tells Rust that the following item should only be included given a certain configuration option. In this case, the configuration option is <code>test</code>, which is provided by Rust for compiling and running tests.</p>
+</blockquote>
+<p>对于测试模块，Rust 会进行选择编译，作用类似于 C 语言的 <code>#if</code> 宏。</p>
+<blockquote>
+<p>Rust’s privacy rules do allow you to test private functions.</p>
+</blockquote>
+<p>单元测试可以对模块的私有成员进行测试，类似于白盒测试。</p>
+<p>集成测试 (Integration Tests)</p>
+<blockquote>
+<p>To create integration tests, you first need a tests directory.</p>
+</blockquote>
+<blockquote>
+<p>We create a tests directory at the top level of our project directory, next to src. Cargo knows to look for integration test files in this directory.</p>
+</blockquote>
+<blockquote>
+<p>Each file in the tests directory is a separate crate, so we need to bring our library into each test crate’s scope.</p>
+</blockquote>
+<p>集成测试位于 <code>tests/</code> 目录下，并且该目录下的每个测试文件都是单独的 crate，即每个测试文件都需要对要测试的库、模块进行引入。</p>
+<blockquote>
+<p>We don’t need to annotate any code in <code>tests/integration_test.rs</code> with <code>#[cfg(test)]</code>. Cargo treats the tests directory specially and compiles files in this directory only when we run <code>cargo test</code>.</p>
+</blockquote>
+<p>因为已经通过 <code>tests/</code> 文件夹与其他的库文件区分开了了，所以集成测试不需要通过标注 <code>#[cfg(test)]</code> 来进行选择编译。</p>
+<blockquote>
+<p>As you add more integration tests, you might want to make more files in the tests directory to help organize them</p>
+</blockquote>
+<blockquote>
+<p>As mentioned earlier, each file in the tests directory is compiled as its own separate crate</p>
+</blockquote>
+<blockquote>
+<p>However, this means files in the tests directory don’t share the same behavior as files in src do, as you learned in Chapter 7 regarding how to separate code into modules and files.</p>
+</blockquote>
+<p>Files in subdirectories of the tests directory don’t get compiled as separate crates or have sections in the test output.</p>
+<p>如果需要对集成测试添加一些辅助函数，我们需要在 <code>tests/</code> 目录下创建子目录以及模块，将辅助函数放置在这个目录和模块内，这样就不会被编译器视为集成测试的测试文件了。</p>
+<blockquote>
+<p>Only library crates expose functions that other crates can use; binary crates are meant to be run on their own.</p>
+</blockquote>
+<h3 id="an-io-project-building-a-command-line-program">An I/O Project: Building a Command Line Program</h3>
+<ul>
+<li>12.3. Refactoring to Improve Modularity and Error Handling</li>
+</ul>
+<blockquote>
+<p>As a result, the Rust community has developed guidelines for splitting the separate concerns of a binary program when main starts getting large. This process has the following steps:</p>
+</blockquote>
+<ul>
+<li>Split your program into a main.rs and a lib.rs and move your program’s logic to lib.rs.</li>
+<li>As long as your command line parsing logic is small, it can remain in main.rs.</li>
+<li>When the command line parsing logic starts getting complicated, extract it from main.rs and move it to lib.rs.</li>
+</ul>
+<blockquote>
+<p>The responsibilities that remain in the <code>main</code> function after this process should be limited to the following:</p>
+</blockquote>
+<ul>
+<li>Calling the command line parsing logic with the argument values</li>
+<li>Setting up any other configuration</li>
+<li>Calling a <code>run</code> function in lib.rs</li>
+<li>Handling the error if <code>run</code> returns an error</li>
+</ul>
+<p>这样处理使得我们可以测试该程序的几乎全部内容，因为我们将大部分逻辑都移动到了 lib.rs 文件里面，而 lib.rs 文件的内容是可以被测试的。</p>
+<p>Documentation:</p>
+<ul>
+<li>method std::iter::Iterator::<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect"target="_blank" rel="external nofollow noopener noreferrer">collect</a></li>
+<li>method std::result::Result::<a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap_or_else"target="_blank" rel="external nofollow noopener noreferrer">unwrap_or_else</a></li>
+<li>Function std::process::<a href="https://doc.rust-lang.org/std/process/fn.exit.html"target="_blank" rel="external nofollow noopener noreferrer">exit</a></li>
+<li>method str::<a href="https://doc.rust-lang.org/std/primitive.str.html#method.lines"target="_blank" rel="external nofollow noopener noreferrer">lines</a></li>
+<li>method str::<a href="https://doc.rust-lang.org/std/primitive.str.html#method.contains"target="_blank" rel="external nofollow noopener noreferrer">contains</a></li>
+<li>method str::<a href="https://doc.rust-lang.org/std/primitive.str.html#method.to_lowercase"target="_blank" rel="external nofollow noopener noreferrer">to_lowercase</a></li>
+<li>method std::result::Result::<a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.is_err"target="_blank" rel="external nofollow noopener noreferrer">is_err</a></li>
+</ul>
+<h2 id="visualizing-memory-layout-of-rusts-data-types">Visualizing memory layout of Rust's data types</h2>
+<p>录影: <a href="https://www.youtube.com/watch?v=7_o-YRxf_cc&amp;t=0s"target="_blank" rel="external nofollow noopener noreferrer">YouTube</a> / <a href="https://www.bilibili.com/video/BV1KT4y167f1"target="_blank" rel="external nofollow noopener noreferrer">中文翻译</a></p>
+</div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="更新于 2024-05-24 21:03:58">更新于 2024-05-24&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/why-rust/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/why-rust/" data-title="Rust 语言程序设计" data-hashtags="Rust,Sysprog"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/why-rust/" data-hashtag="Rust"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/why-rust/" data-title="Rust 语言程序设计" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/why-rust/" data-title="Rust 语言程序设计"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/why-rust/" data-title="Rust 语言程序设计"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/why-rust/" data-title="Rust 语言程序设计" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/why-rust/" data-title="Rust 语言程序设计" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/why-rust/" data-title="Rust 语言程序设计"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/rust/' class="post-tag">Rust</a><a href='/tags/sysprog/' class="post-tag">Sysprog</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/posts/git-learn/" class="post-nav-item" rel="prev" title="Git 学习记录"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Git 学习记录</a>
+      <a href="/posts/binary-representation/" class="post-nav-item" rel="next" title="解读计算机编码">解读计算机编码<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

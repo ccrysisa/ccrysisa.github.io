@@ -50,7 +50,7 @@ https://ccrysisa.github.io/posts/nthu-computer-network/
 https://ccrysisa.github.io/posts/c-specification/
 https://ccrysisa.github.io/posts/git/
 https://ccrysisa.github.io/posts/binary-representation/
-https://ccrysisa.github.io/posts/why-rust-/
+https://ccrysisa.github.io/posts/why-rust/
 https://ccrysisa.github.io/posts/git-learn/
 https://ccrysisa.github.io/posts/ubuntu22.04lts/
 https://ccrysisa.github.io/posts/gnu-linux-dev/
