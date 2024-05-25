@@ -2,7 +2,7 @@
   <channel>
     <title>Rust - 标签 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/rust/</link>
-    <description>Rust - 标签 | KZnight&#39;s Blog</description>
+    <description>Rust - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 29 Apr 2024 16:23:33 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/rust/" rel="self" type="application/rss+xml" /><item>
   <title>Command Line Applications in Rust</title>

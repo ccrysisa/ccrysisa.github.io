@@ -1,15 +1,15 @@
 # Linux 核心设计: 发展动态回顾
 
 
-&gt; 本講座將以 Thorsten Leemhuis 在 FOSDEM 2020 開場演說 &#34;Linux kernel – Solving big problems in small steps for more than 20 years&#34; (slides) 為主軸，嘗試歸納自 21 世紀第一年開始的 Linux 核心 2.4 版到如今的 5.x 版，中間核心開發者如何克服 SMP (Symmetric multiprocessing), scalability, 及各式硬體架構和周邊裝置支援等難題，過程中提出全面移除 BKL (Big kernel lock)、實作虛擬化技術 (如 Xen 和 KVM)、提出 namespace 和 cgroups 從而確立容器化 (container) 的能力，再來是核心發展的明星技術 eBPF 會在既有的基礎之上，帶來 XDP 和哪些令人驚豔的機制呢？又，Linux 核心終於正式納入發展十餘年的 PREEMPT_RT，使得 Linux 核心得以成為硬即時的作業系統，對內部設計有哪些衝擊？AIO 後繼的 io_uring 讓 Linux 有更優雅且高效的非同步 I/O 存取，我們該如何看待？
+> 本講座將以 Thorsten Leemhuis 在 FOSDEM 2020 開場演說 "Linux kernel – Solving big problems in small steps for more than 20 years" (slides) 為主軸，嘗試歸納自 21 世紀第一年開始的 Linux 核心 2.4 版到如今的 5.x 版，中間核心開發者如何克服 SMP (Symmetric multiprocessing), scalability, 及各式硬體架構和周邊裝置支援等難題，過程中提出全面移除 BKL (Big kernel lock)、實作虛擬化技術 (如 Xen 和 KVM)、提出 namespace 和 cgroups 從而確立容器化 (container) 的能力，再來是核心發展的明星技術 eBPF 會在既有的基礎之上，帶來 XDP 和哪些令人驚豔的機制呢？又，Linux 核心終於正式納入發展十餘年的 PREEMPT_RT，使得 Linux 核心得以成為硬即時的作業系統，對內部設計有哪些衝擊？AIO 後繼的 io_uring 讓 Linux 有更優雅且高效的非同步 I/O 存取，我們該如何看待？
 
-&lt;!--more--&gt;
+<!--more-->
 
-- {{&lt; link href=&#34;https://hackmd.io/@sysprog/linux-dev-review&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
+- {{< link href="https://hackmd.io/@sysprog/linux-dev-review" content="原文地址" external-icon=true >}}
 
 ## 开篇点题
 
-&gt; 前置知识: [Linux 核心设计: 操作系统术语及概念](https://hackmd.io/@sysprog/linux-concepts)
+> 前置知识: [Linux 核心设计: 操作系统术语及概念](https://hackmd.io/@sysprog/linux-concepts)
 
 FOSDEM 2020, T. Leemhuis:
 - YouTube: [Linux kernel – Solving big problems in small steps for more than 20 years](https://www.youtube.com/watch?v=WsktXXMOg1k)
@@ -33,7 +33,7 @@ Linux 相关人物 (可在 YouTube 上找到他们的一些演讲):
 
 - [ ] [Version 2.4 of the LINUX KERNEL--Why Should a System Administrator Upgrade?](https://www.informit.com/articles/article.aspx?p=20667)
 
-&gt; 自 2004 年開始，釋出過程發生變化，新核心每隔 2-3 個月定期釋出，編號為 2.6.0, 2.6.1，直到 2.6.39
+> 自 2004 年開始，釋出過程發生變化，新核心每隔 2-3 個月定期釋出，編號為 2.6.0, 2.6.1，直到 2.6.39
 这件事对于操作系统的开发有很大的影响，是一个巨大的变革。透过这种发行机制，CPU 厂商可以直接在最新的 Linux kernel 上适配正在开发的 CPU 及相关硬体，而无需拿到真正的 CPU 硬体再进行相应的开发，这使得 Linux 获得了更多厂商的支持和投入，进而进入了飞速发展期。
 
 LInux 核心的道路: **只提供机制不提供策略**。例如 khttp (in-kernel httpd) 的弃用，通过提供更高效的系统调用来提高网页服务器的效能，而不是像 Windows NT 一样用户态性能不够就把程式搬进 kernel :rofl:
@@ -55,12 +55,12 @@ Linux 2.4 在 SMP 的效率问题也正是 BLK 所引起的:
 - 从上面的实作机制可以看出，这样的机制效率是很低的，虽然有多核 (core)，但是当一个 process 获得 BLK 时，只有该 process 所在的 core 可以执行，其他 core 只能等待
 - BLK 已于 v.6.39 版本中被彻底去除
 
-[Linux 5.5&#39;s Scheduler Sees A Load Balancing Rework For Better Perf But Risks Regressions](https://www.phoronix.com/scan.php?page=news_item&amp;px=Linux-5.5-Scheduler) :white_check_mark:
-&gt; When testing on a dual quad-core ARM64 system they found the performance ranged from less than 1% to upwards of 10% for the Hackbench scheduler test. With a 224-core ARM64 server, the performance ranged from less than 1% improvements to 12% better performance with Hackbench and up to 33% better performance with Dbench. More numbers and details via the v4 patch revision.
+[Linux 5.5's Scheduler Sees A Load Balancing Rework For Better Perf But Risks Regressions](https://www.phoronix.com/scan.php?page=news_item&px=Linux-5.5-Scheduler) :white_check_mark:
+> When testing on a dual quad-core ARM64 system they found the performance ranged from less than 1% to upwards of 10% for the Hackbench scheduler test. With a 224-core ARM64 server, the performance ranged from less than 1% improvements to 12% better performance with Hackbench and up to 33% better performance with Dbench. More numbers and details via the v4 patch revision.
 
 ## 虚拟化
 
-{{&lt; image src=&#34;https://imgur-backup.hackmd.io/bTI4zZv.png&#34; &gt;}}
+{{< image src="https://imgur-backup.hackmd.io/bTI4zZv.png" >}}
 
 - [Cloud Hypervisor](https://github.com/cloud-hypervisor/cloud-hypervisor)
 - [Xen and the Art of Virtualization](https://www.cl.cam.ac.uk/research/srg/netos/papers/2003-xensosp.pdf)
@@ -71,13 +71,13 @@ Linux 2.4 在 SMP 的效率问题也正是 BLK 所引起的:
 
 ```mermaid
 graph TD;
-    NIC--&gt;Kernel;
-    Kernel--&gt;User;
-    NIC--DPDK--&gt;User;
+    NIC-->Kernel;
+    Kernel-->User;
+    NIC--DPDK-->User;
 ```
 
 - [ ] YouTube: [Kernel-bypass networking for fun and profit](https://www.youtube.com/watch?v=noqSZorzooc)
-- Stack Overflow[&#34;zero copy networking&#34; vs &#34;kernel bypass&#34;?](https://stackoverflow.com/questions/18343365/zero-copy-networking-vs-kernel-bypass)
+- Stack Overflow["zero copy networking" vs "kernel bypass"?](https://stackoverflow.com/questions/18343365/zero-copy-networking-vs-kernel-bypass)
 
 ## XDP: eXpress Data Path
 
@@ -89,12 +89,12 @@ graph TD;
 
 Synchronous / Asynchronous I/O：在從/向核心空間讀取/寫入資料 (i.e. **實際進行 I/O 操作**) 的過程，使用者層級的行程是否會被 **blocked**。
 
-&gt; AIO 在某些情景下处理不当，性能甚至低于 blocked 的 I/O 方法，这也引导出了 io_uring
+> AIO 在某些情景下处理不当，性能甚至低于 blocked 的 I/O 方法，这也引导出了 io_uring
 
-{{&lt; admonition tip &gt;}}
+{{< admonition tip >}}
 - UNIX 哲学: Everything is a file.
 - Linux 不成文规范: Everything is a file descriptor.
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 - [ ] [Kernel Recipes 2019 - Faster IO through io_uring](https://www.youtube.com/watch?v=-5T4Cjw46ys) / [slides](https://www.slideshare.net/ennael/kernel-recipes-2019-faster-io-through-iouring)
 - [io_uring](https://hackmd.io/@sysprog/iouring)
@@ -104,44 +104,44 @@ Synchronous / Asynchronous I/O：在從/向核心空間讀取/寫入資料 (i.e.
 Container 构建在 Linux 核心的基础建设上: namespace, cgroups, capabilities, seccomp
 
 ```
-&#43;----------------------&#43;
-| &#43;------------------&#43; |
++----------------------+
+| +------------------+ |
 | | cgroup           | |
 | | namespace        | |
 | | union-capable fs | |
 | |                  | |
 | |     Container    | |
-| &#43;------------------&#43; |
+| +------------------+ |
 |                      |
-| &#43;------------------&#43; |
+| +------------------+ |
 | |     Container    | |
-| &#43;------------------&#43; |
+| +------------------+ |
 |                      |
-| &#43;------------------&#43; |
+| +------------------+ |
 | |     Container    | |
-| &#43;------------------&#43; |
+| +------------------+ |
 |                      |
 |  Linux kernel (host) |
-&#43;----------------------&#43;
++----------------------+
 ```
 
 - [x] YouTube: [Containers: cgroups, Linux kernel namespaces, ufs, Docker, and intro to Kubernetes pods](https://www.youtube.com/watch?v=el7768BNUPw)
 
 - Stack Overflow: [difference between cgroups and namespaces](https://stackoverflow.com/questions/34820558/difference-between-cgroups-and-namespaces)
-&gt; - **cgroup**: Control Groups provide a mechanism for aggregating/partitioning sets of tasks, and all their future children, into hierarchical groups with specialized behaviour.
-&gt; - **namespace**: wraps a global system resource in an abstraction that makes it appear to the processes within the namespace that they have their own isolated instance of the global resource.
+> - **cgroup**: Control Groups provide a mechanism for aggregating/partitioning sets of tasks, and all their future children, into hierarchical groups with specialized behaviour.
+> - **namespace**: wraps a global system resource in an abstraction that makes it appear to the processes within the namespace that they have their own isolated instance of the global resource.
 
 - Wikipedia: [UnionFS](https://en.wikipedia.org/wiki/UnionFS)
 - Wikipedia: [Microservices](https://en.wikipedia.org/wiki/Microservices)
 
 ## BPF/cBPF/eBPF
 
-{{&lt; admonition tip &gt;}}
+{{< admonition tip >}}
 run small programs in kernel mode    
 20 years ago, this idea would likely have been shot down immediately
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
-{{&lt; image src=&#34;https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg&#34; &gt;}}
+{{< image src="https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg" >}}
 
 - [ ] [Netflix talks about Extended BPF - A new software type](https://www.youtube.com/watch?v=7pmXdG8-7WU) / [slides](https://www.slideshare.net/brendangregg/um2019-bpf-a-new-type-of-software)
 

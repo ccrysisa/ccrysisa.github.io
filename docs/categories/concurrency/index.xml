@@ -2,7 +2,7 @@
   <channel>
     <title>Concurrency - 分类 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/categories/concurrency/</link>
-    <description>Concurrency - 分类 | KZnight&#39;s Blog</description>
+    <description>Concurrency - 分类 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 10 Apr 2024 16:09:35 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/concurrency/" rel="self" type="application/rss+xml" /><item>
   <title>并行程序设计: POSIX Threads</title>
