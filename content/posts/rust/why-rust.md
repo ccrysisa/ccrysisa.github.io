@@ -908,6 +908,118 @@ Documentation:
 - method str::[to_lowercase](https://doc.rust-lang.org/std/primitive.str.html#method.to_lowercase)
 - method std::result::Result::[is_err](https://doc.rust-lang.org/std/result/enum.Result.html#method.is_err)
 
+### Functional Language Features: Iterators and Closures
+
+> Rust’s design has taken inspiration from many existing languages and techniques, and one significant influence is functional programming. 
+
+{{< admonition success >}}
+这一章是关于函数式编程的，Rust 吸收了很多编程范式的精华，所以也可以使用函数式编程风格。关于函数式编程的资料，可以参考康奈尔大学的 [OCaml Programming: Correct + Efficient + Beautiful](https://www.youtube.com/playlist?list=PLre5AT9JnKShBOPeuiD9b-I4XROIJhkIU) 和斯坦福大学的编程范式 [CS107](https://www.bilibili.com/video/BV1Cx411S7HJ/)，以及最出名的麻省理工学院的 [SICP](https://www.bilibili.com/video/BV1Xx41117tr/) (这个版本是给 IBM 工程师培训的，MIT 还有一个 [2004 年的版本](https://www.youtube.com/playlist?list=PL7BcsI5ueSNFPCEisbaoQ0kXIDX9rR5FF) 是给学生上课的)。
+{{< /admonition >}}
+
+#### Closures: Anonymous Functions that Capture Their Environment
+
+> Rust’s closures are anonymous functions you can save in a variable or pass as arguments to other functions. 
+> You can create the closure in one place and then call the closure elsewhere to evaluate it in a different context. 
+> Unlike functions, closures can capture values from the scope in which they’re defined.
+
+严格上来讲，函数也可以捕获其定义的作用域的变量，例如 C 语言的函数就可以访问全局变量，因为全局变量和函数都是定义最顶层，作为 first-class。担任闭包的灵活性更强，例如可以将闭包定义在结构体里面，作为结构体的成员，从而可以实现懒计算的功能。
+
+> Closures don’t usually require you to annotate the types of the parameters or the return value like `fn` functions do. Type annotations are required on functions because the types are part of an explicit interface exposed to your users.
+
+> Closures, on the other hand, aren’t used in an exposed interface like this: they’re stored in variables and used without naming them and exposing them to users of our library.
+
+> Closures are typically short and relevant only within a narrow context rather than in any arbitrary scenario. Within these limited contexts, the compiler can infer the types of the parameters and the return type
+
+> As with variables, we can add type annotations if we want to increase explicitness and clarity at the cost of being more verbose than is strictly necessary.
+
+因为闭包不暴露给外部使用者，并且闭包逻辑一般比较简单，所以闭包的参数和返回值的类型由程序员自己保证即可，编译器一般可以推断出来 (类似于编译器可以推断出变量的类型)。当然也可以给闭包的参数和返回值加上类型标注 (类似于可以给变量加上类型标注)，这也是合法的。
+
+```rs
+fn  add_one_v1   (x: u32) -> u32 { x + 1 }
+let add_one_v2 = |x: u32| -> u32 { x + 1 };
+let add_one_v3 = |x|             { x + 1 };
+let add_one_v4 = |x|               x + 1  ;
+```
+
+闭包的内部逻辑必须是一个 **表达式**，使得闭包拥有返回值，例如上面的中间两行的闭包逻辑都是 `{}` 表达式，最后一行的是 `x + 1` 这个加法表达式 (函数和我们之前提到的一样，函数体必须是一个表达式，通常是 `{}` 表达式，例如第一行)。
+
+> For closure definitions, the compiler will infer one concrete type for each of their parameters and for their return value.
+
+如果依赖编译器推断闭包的相关类型，那么编译器只会推断出一个具体的类型，类似于编译器对于变量的类型也只能推断出一个，所以下面的例子会报错:
+
+```rs
+let example_closure = |x| x;
+
+let s = example_closure(String::from("hello")); // |x: String|
+let n = example_closure(5);                     // |x: i32|
+```
+
+{{< admonition quote >}}
+1. `FnOnce` applies to closures that can be called once. All closures implement at least this trait, because all closures can be called. A closure that moves captured values out of its body will only implement `FnOnce` and none of the other `Fn` traits, because it can only be called once.
+
+2. `FnMut` applies to closures that don’t move captured values out of their body, but that might mutate the captured values. These closures can be called more than once.
+
+3. `Fn` applies to closures that don’t move captured values out of their body and that don’t mutate captured values, as well as closures that capture nothing from their environment. These closures can be called more than once without mutating their environment, which is important in cases such as calling a closure multiple times concurrently.
+{{< /admonition >}}
+
+> If you want to force the closure to take ownership of the values it uses in the environment even though the body of the closure doesn’t strictly need ownership, you can use the `move` keyword before the parameter list.
+
+> This technique is mostly useful when passing a closure to a new thread to move the data so that it’s owned by the new thread.
+
+多线程编程时使用 `move` 关键字可以强制将一个变量的所有权交给另一个线程。
+
+#### Processing a Series of Items with Iterators
+
+{{< admonition >}}
+这一节简单介绍了下迭代器是什么以及迭代器的功能，如果想更进一步地了解迭代器的实作，建议观看 John Gjengset 的影片 [Crust of Rust: Iterators](https://www.youtube.com/watch?v=yozQ9C69pNs)，本人也有写相关的 [笔记]({{< relref "./Iterators.md" >}}) 来对影片内容进行解释和扩展。
+{{< /admonition >}}
+
+The Iterator Trait and the next Method
+
+> An iterator is responsible for the logic of iterating over each item and determining when the sequence has finished. 
+
+> In Rust, iterators are lazy, meaning they have no effect until you call methods that consume the iterator to use it up. 
+
+> All iterators implement a trait named `Iterator` that is defined in the standard library. The definition of the trait looks like this:
+
+```rs
+pub trait Iterator {
+    type Item;
+
+    fn next(&mut self) -> Option<Self::Item>;
+
+    // methods with default implementations elided
+}
+```
+
+> The `Iterator` trait only requires implementors to define one method: the `next` method
+
+> The `iter` method produces an iterator over immutable references. If we want to create an iterator that takes ownership of `v1` and returns owned values, we can call `into_iter` instead of `iter`. Similarly, if we want to iterate over mutable references, we can call `iter_mut` instead of `iter`.
+
+Methods that Consume the Iterator
+
+> Some of these methods call the `next` method in their definition, which is why you’re required to implement the `next` method when implementing the `Iterator` trait.
+
+> Methods that call `next` are called consuming adaptors, because calling them uses up the iterator.
+
+> One example is the `sum` method, which takes ownership of the iterator and iterates through the items by repeatedly calling `next`, thus consuming the iterator.
+
+Methods that Produce Other Iterators
+
+> Iterator adaptors are methods defined on the Iterator trait that don’t consume the iterator. Instead, they produce different iterators by changing some aspect of the original iterator.
+
+> iterator adaptor method `map`, which takes a closure to call on each item as the items are iterated through. The `map` method returns a new iterator that produces the modified items. 
+
+Using Closures that Capture Their Environment
+
+> the `filter` method that takes a closure. The closure gets an item from the iterator and returns a `bool`. If the closure returns `true`, the value will be included in the iteration produced by `filter`. If the closure returns `false`, the value won’t be included.
+
+#### Comparing Performance: Loops vs. Iterators
+
+> The point is this: iterators, although a high-level abstraction, get compiled down to roughly the same code as if you’d written the lower-level code yourself. Iterators are one of Rust’s zero-cost abstractions, by which we mean using the abstraction imposes no additional runtime overhead.
+
+零开销抽象 (Zero-Aost Abstractions): 使用抽象时不会引入额外的运行时开销
+
 ## Visualizing memory layout of Rust\'s data types
 
 录影: [YouTube](https://www.youtube.com/watch?v=7_o-YRxf_cc&t=0s) / [中文翻译](https://www.bilibili.com/video/BV1KT4y167f1)
