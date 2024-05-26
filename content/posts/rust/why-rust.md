@@ -1018,7 +1018,72 @@ Using Closures that Capture Their Environment
 
 > The point is this: iterators, although a high-level abstraction, get compiled down to roughly the same code as if you’d written the lower-level code yourself. Iterators are one of Rust’s zero-cost abstractions, by which we mean using the abstraction imposes no additional runtime overhead.
 
-零开销抽象 (Zero-Aost Abstractions): 使用抽象时不会引入额外的运行时开销
+零开销抽象 (Zero-Aost Abstractions): 使用抽象时不会引入额外的运行时开销，所以尽量使用 Rust 提供的抽象语法，因为其底层实现大概率进行了相应的优化，比自己手写的底层代码高效不少。
+
+### More About Cargo and Crates.io
+
+- 14.1. Customizing Builds with Release Profiles
+
+> Cargo has two main profiles: the `dev` profile Cargo uses when you run `cargo build` and the `release` profile Cargo uses when you run `cargo build --release`.
+
+> Cargo has default settings for each of the profiles that apply when you haven't explicitly added any `[profile.*]` sections in the project’s Cargo.toml file. By adding `[profile.*]` sections for any profile you want to customize, you override any subset of the default settings.
+
+```toml {title="Cargo.toml"}
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+opt-level = 3
+```
+
+- 14.2. Publishing a Crate to Crates.io
+
+> Rust also has a particular kind of comment for documentation, known conveniently as a documentation comment, that will generate HTML documentation.
+
+> Documentation comments use three slashes, `///`, instead of two and support Markdown notation for formatting the text. Place documentation comments just before the item they’re documenting.
+
+> We can generate the HTML documentation from this documentation comment by running `cargo doc`.
+
+> For convenience, running `cargo doc --open` will build the HTML for your current crate’s documentation (as well as the documentation for all of your crate’s dependencies) and open the result in a web browser.
+
+Documentation Comments as Tests
+> running `cargo test` will run the code examples in your documentation as tests!
+
+Commenting Contained Items
+> The style of doc comment `//!` adds documentation to the item that contains the comments rather than to the items following the comments.
+
+Exporting a Convenient Public API with pub use
+> The good news is that if the structure isn’t convenient for others to use from another library, you don’t have to rearrange your internal organization: instead, you can re-export items to make a public structure that’s different from your private structure by using `pub use`. 
+
+- 14.3. Cargo Workspaces
+
+```toml {title="Cargo.toml"}
+[workspace]
+
+members = [
+    "adder",
+]
+```
+
+```bash
+$ cargo new adder
+     Created binary (application) `adder` package
+
+├── Cargo.lock
+├── Cargo.toml
+├── adder
+│   ├── Cargo.toml
+│   └── src
+│       └── main.rs
+└── target
+```
+
+```toml {title="Cargo.toml"}
+[dependencies]
+add_one = { path = "../add_one" }
+```
+
+### Smart Pointers
 
 ## Visualizing memory layout of Rust\'s data types
 
