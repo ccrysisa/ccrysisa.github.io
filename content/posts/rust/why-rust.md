@@ -1085,7 +1085,61 @@ add_one = { path = "../add_one" }
 
 ### Smart Pointers
 
-## Visualizing memory layout of Rust\'s data types
+### Fearless Concurrency
 
-录影: [YouTube](https://www.youtube.com/watch?v=7_o-YRxf_cc&t=0s) / [中文翻译](https://www.bilibili.com/video/BV1KT4y167f1)
+### Object-Oriented Programming Features of Rust
 
+- 17.1. Characteristics of Object-Oriented Languages
+
+> Object-oriented programs are made up of objects. An object packages both data and the procedures that operate on that data. The procedures are typically called methods or operations.
+
+> Using this definition, Rust is object-oriented: structs and enums have data, and `impl` blocks provide methods on structs and enums. 
+
+Rust 中使用结构体、枚举和 `impl` 块来实现了 OOP 范式的对象、数据和行为三大要素。
+
+> Another aspect commonly associated with OOP is the idea of encapsulation, which means that the implementation details of an object aren’t accessible to code using that object.
+
+> we can use the `pub` keyword to decide which modules, types, functions, and methods in our code should be public, and by default everything else is private.
+
+Rust 使用 `pub` 关键字来控制可见性，实现了 OOP 范式的封装要求。
+
+> Inheritance is a mechanism whereby an object can inherit elements from another object’s definition, thus gaining the parent object’s data and behavior without you having to define them again.
+
+> You can do this in a limited way in Rust code using default trait method implementations
+
+> We can also override the default implementation
+
+Rust 通过使用 Trait 可以“继承”某些共有的行为，也可以覆盖实现这些默认行为。
+
+> This is also called polymorphism, which means that you can substitute multiple objects for each other at runtime if they share certain characteristics.
+
+> Rust instead uses generics to abstract over different possible types and trait bounds to impose constraints on what those types must provide. This is sometimes called bounded parametric polymorphism.
+
+Rust 通过泛型和 Trait 来实现多态
+
+- 17.2. Using Trait Objects That Allow for Values of Different Types
+
+> However, trait objects are more like objects in other languages in the sense that they combine data and behavior. But trait objects differ from traditional objects in that we can’t add data to a trait object. Trait objects aren’t as generally useful as objects in other languages: their specific purpose is to allow abstraction across common behavior.
+
+Trait 只是对行为的抽象，它并没有持有数据。这里需要注意 Trait 对象和之前所提的 Trait 约束是不同的，Trait 对象类似于 `Box<dyn Trait>`。
+
+```rs
+Vec<Box<dyn Trait>>
+Vec<T>
+```
+
+使用 Trait 对象可以实现某种意义上的多态，而使用泛型 (以及 Trait 约束) 则无法做到，因为泛型 (以及 Trait 约束) 在编译器就会被编译成具体类型，显然无法多态。可以结合上面的例子进行思考。
+
+> when we use trait bounds on generics: the compiler generates nongeneric implementations of functions and methods for each concrete type that we use in place of a generic type parameter. The code that results from monomorphization is doing static dispatch, which is when the compiler knows what method you’re calling at compile time.
+
+> This is opposed to dynamic dispatch, which is when the compiler can’t tell at compile time which method you’re calling. In dynamic dispatch cases, the compiler emits code that at runtime will figure out which method to call.
+
+> When we use trait objects, Rust must use dynamic dispatch. The compiler doesn’t know all the types that might be used with the code that’s using trait objects, so it doesn’t know which method implemented on which type to call.
+
+## References
+
+- Visualizing memory layout of Rust\'s data types
+    - 录影: [YouTube](https://www.youtube.com/watch?v=7_o-YRxf_cc&t=0s) / [中文翻译](https://www.bilibili.com/video/BV1KT4y167f1)
+- [Rust语言圣经 (Rust Course)](https://course.rs/about-book.html)
+- [Learn Rust the Dangerous Way](https://cliffle.com/p/dangerust/)
+- [pretzelhammer\'s Rust blog](https://github.com/pretzelhammer/rust-blog)
