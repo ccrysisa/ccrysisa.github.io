@@ -69,40 +69,848 @@ repost:
 - [x] [LeetCode 25. Reverse Nodes in k-Group](https://leetcode.com/problems/reverse-nodes-in-k-group/)
 - [x] [LeetCode 2487. Remove Nodes From Linked List](https://leetcode.com/problems/remove-nodes-from-linked-list/) / [参考题解](https://leetcode.com/problems/remove-nodes-from-linked-list/solutions/4188092/simple-easy-cpp-solution-with-explanation/)
 - [x] [LeetCode 23. Merge k Sorted Lists](https://leetcode.com/problems/merge-k-sorted-lists/)
+- [x] [Linked List Sort](https://npes87184.github.io/2015-09-12-linkedListSort/)
+
+### 数据结构
 
 头文件 [list.h](https://github.com/sysprog21/lab0-c/blob/master/list.h) 依据 Linux 核心风格实作了相应的 linked list 常用操作的宏，这个文件对于本次实验很重要，需要仔细阅读并在实验过程中使用这些宏来简化程式码。
+
+头文件 [queue.h](https://github.com/sysprog21/lab0-c/blob/master/queue.h) 里则定义了队列元素 element_t 和队列上下文 q_context_t 的结构。
+
+- list_head
+```mermaid
+classDiagram
+    direction LR
+
+    class list_head 0 {
+        prev: list_head*
+        next: list_head*
+    }
+    class list_head 1 {
+        prev: list_head*
+        next: list_head*
+    }
+    class list_head 2 {
+        prev: list_head*
+        next: list_head*
+    }
+    list_head 0 --> list_head 1
+    list_head 1 --> list_head 2
+    list_head 1 --> list_head 0
+    list_head 2 --> list_head 1
+```
+
+- element_t
+```mermaid
+classDiagram
+    direction LR
+
+    class element_t 0 {
+        value: char *
+        list: list_head*
+    }
+    class element_t 1 {
+        value: char *
+        list: list_head*
+    }
+    class element_t 2 {
+        value: char *
+        list: list_head*
+    }
+
+    element_t 0 --> element_t 1
+    element_t 1 --> element_t 2
+    element_t 1 --> element_t 0
+    element_t 2 --> element_t 1
+```
+
+> 队列节点中的成员 `value` 指向的字符串也是动态分配的
+
+- queue_context_t
+```mermaid
+classDiagram
+    class queue_context_t 0 {
+        q: list_head *
+        chain: list_head
+        size: int
+        id: int
+    }
+    class queue_context_t 1 {
+        q: list_head *
+        chain: list_head
+        size: int
+        id: int
+    }
+    class queue_context_t 2 {
+        q: list_head *
+        chain: list_head
+        size: int
+        id: int
+    }
+
+    queue_context_t 0 --> queue_context_t 1
+    queue_context_t 1 --> queue_context_t 2
+    queue_context_t 1 --> queue_context_t 0
+    queue_context_t 2 --> queue_context_t 1
+
+    queue_context_t 0 --> list_head 0
+    list_head 0 <--> element_t 01
+    element_t 01 <--> element_t 02
+
+    queue_context_t 1 --> list_head 1
+    list_head 1 <--> element_t 11
+    element_t 11 <--> element_t 12
+
+    queue_context_t 2 --> list_head 2
+    list_head 2 <--> element_t 21
+    element_t 21 <--> element_t 22
+```
+
+> `queue_context_t` 中的成员 `q` 的作用是指向将队列节点 `element_t` 连接起来的头节点，而成员 `chain` 的作用是将各个队列 `queue_context_t` 连接起来。
 
 ### q_size
 
 ```c
-/* Return number of elements in queue */
+/**
+ * q_size() - Get the size of the queue
+ * @head: header of queue
+ *
+ * Return: the number of elements in queue, zero if queue is NULL or empty
+ */
 int q_size(struct list_head *head)
- {
-    if (!head) return 0;
-
+{
+    if (!head)
+        return 0;
     int len = 0;
-    struct list_head *li;
-
-    list_for_each (li, head)
+    struct list_head *node;
+    list_for_each (node, head)
         len++;
     return len;
 }
 ```
 
-### q_new & q_free
+### q_new
 
-- `q_new` 使用 `malloc` 分配空间，并使用 `INIT_LIST_HEAD` 进行初始化。
-- `q_free` 遍历 queue 进行逐个节点释放，所以需要使用 `_safe` 后缀的 for_each 宏，释放时需要先释放成员 `value`，再释放节点 (回想一下 C++ 的析构函数)，可以直接使用 `q_release_element` 函数。
+```c
+/**
+ * q_new() - Create an empty queue whose next and prev pointer point to itself
+ *
+ * Return: NULL for allocation failed
+ */
+struct list_head *q_new()
+{
+    struct list_head *head = malloc(sizeof(struct list_head));
+    if (!head)
+        return NULL;
+    INIT_LIST_HEAD(head);
+    return head;
+}
+```
 
-> `q_free` 在遍历时需要释放当前节点所在元素的空间，所以需要使用 `list_for_each_entry_safe`，而 `q_size` 无需在遍历时修改当前节点，所以使用 `list_for_each` 就足够了。
+### q_free
 
-### q_insert & q_remove
+```c
+/**
+ * q_free() - Free all storage used by queue, no effect if header is NULL
+ * @head: header of queue
+ */
+void q_free(struct list_head *l)
+{
+    struct list_head *head = l, *node, *safe;
+    if (!head)
+        return;
+    list_for_each_safe (node, safe, head) {
+        list_del(node);
+        element_t *elem = list_entry(node, element_t, list);
+        q_release_element(elem);
+    }
+    free(head);
+}
+```
 
-insert 时需要特判 head 是否为 NULL 以及 malloc 分配是否成功，接下来需要使用 `strdup` 对所给参数进行复制 (`strdup` 内部是通过 `malloc` 来实现的，所以之前 `q_free` 时也需要是否 `value`)，最后根据插入的位置调用 `list_add` 或 `list_add_tail` 进行插入。
+这里使用 `list_for_each_safe` 而不是 `list_for_each_entry_safe` 来遍历链表，可以根据这两个宏的定义，以及思考链表只有一个元素时的情况。可以发现 `list_for_each_entry_safe` 认为 `list_head` 都被包裹在 `entry` 中，但是 `q_free` 的参数链表头节点 `l` 可能并没有被包裹在 `entry` 中，考虑到这种情况所以使用 `list_for_each_safe` 宏。最后需要释放头节点的空间，因为这个空间是在 `q_new` 时动态分配的。
 
-remove 时需要特判 head 是否为 NULL 以及 queue 是否为空，接下来根据需要 remove 的节点调用 `list_first_entry` 或 `list_last_entry` 获取节点对应的元素，通过 `list_del_init` 来清除出 queue，最后如果 `value` 字段不为 NULL，则通过 `memcpy` 将 `value` 字段对应的字符串复制到指定位置。
+### q_insert
 
-关于 [lab0-c]() 相关命令的使用，可以参照阅读后面的「取得程式码并进行开发」部分。
+```c
+/**
+ * q_insert_head() - Insert an element in the head
+ * @head: header of queue
+ * @s: string would be inserted
+ *
+ * Argument s points to the string to be stored.
+ * The function must explicitly allocate space and copy the string into it.
+ *
+ * Return: true for success, false for allocation failed or queue is NULL
+ */
+bool q_insert_head(struct list_head *head, char *s)
+{
+    if (!head)
+        return false;
+    element_t *elem = malloc(sizeof(element_t));
+    if (!elem)
+        return false;
+    elem->value = strdup(s);
+    if (!elem->value) {
+        free(elem);
+        return false;
+    }
+    list_add(&elem->list, head);
+    return true;
+}
+```
+
+使用 `strdup` 进行动态分配空间并拷贝字符串的内容，可从 harness[.h][.c] 文件 (因为该部分是负责定制化本实验的动态分配功能) 中获得启发，该函数具体用法可以参考 `man strdup`。因为 `strdup` 本质上也是调用了 `malloc` 动态分配 (具体见 harness.c 中的 `test_strdup` 定义)，所以也需要对 `stdup` 的返回值判断动态分配释是否成功。
+
+`q_insert_tail` 的实现类似，只需使用 `list_add_tail` 即可:
+
+```c
+/**
+ * q_insert_tail() - Insert an element at the tail
+ * @head: header of queue
+ * @s: string would be inserted
+ *
+ * Argument s points to the string to be stored.
+ * The function must explicitly allocate space and copy the string into it.
+ *
+ * Return: true for success, false for allocation failed or queue is NULL
+ */
+/* Insert an element at tail of queue */
+bool q_insert_tail(struct list_head *head, char *s)
+{
+    if (!head)
+        return false;
+    element_t *elem = malloc(sizeof(element_t));
+    if (!elem)
+        return false;
+    elem->value = strdup(s);
+    if (!elem->value) {
+        free(elem);
+        return false;
+    }
+    list_add_tail(&elem->list, head);
+    return true;
+}
+```
+
+### q_remove
+
+```c
+/**
+ * q_remove_head() - Remove the element from head of queue
+ * @head: header of queue
+ * @sp: string would be inserted
+ * @bufsize: size of the string
+ *
+ * If sp is non-NULL and an element is removed, copy the removed string to *sp
+ * (up to a maximum of bufsize-1 characters, plus a null terminator.)
+ *
+ * NOTE: "remove" is different from "delete"
+ * The space used by the list element and the string should not be freed.
+ * The only thing "remove" need to do is unlink it.
+ *
+ * Reference:
+ * https://english.stackexchange.com/questions/52508/difference-between-delete-and-remove
+ *
+ * Return: the pointer to element, %NULL if queue is NULL or empty.
+ */
+element_t *q_remove_head(struct list_head *head, char *sp, size_t bufsize)
+{
+    if (!head || list_empty(head))
+        return NULL;
+    element_t *elem = list_first_entry(head, element_t, list);
+    list_del_init(&elem->list);
+    if (sp) {
+        memcpy(sp, elem->value, bufsize - 1);
+        sp[bufsize - 1] = '\0';
+    }
+    return elem;
+}
+```
+
+使用 `list_first_entry` 来获取队列的头元素，同理可以使用 `list_last_entry` 来获取队列的尾元素:
+
+```c
+/**
+ * q_remove_tail() - Remove the element from tail of queue
+ * @head: header of queue
+ * @sp: string would be inserted
+ * @bufsize: size of the string
+ *
+ * Return: the pointer to element, %NULL if queue is NULL or empty.
+ */
+element_t *q_remove_tail(struct list_head *head, char *sp, size_t bufsize)
+{
+    if (!head || list_empty(head))
+        return NULL;
+    element_t *elem = list_last_entry(head, element_t, list);
+    list_del_init(&elem->list);
+    if (sp) {
+        memcpy(sp, elem->value, bufsize - 1);
+        sp[bufsize - 1] = '\0';
+    }
+    return elem;
+}
+```
+
+### q_delete_mid
+
+```c
+/**
+ * q_delete_mid() - Delete the middle node in queue
+ * @head: header of queue
+ *
+ * The middle node of a linked list of size n is the
+ * ⌊n / 2⌋th node from the start using 0-based indexing.
+ * If there're six elements, the third member should be returned.
+ *
+ * Reference:
+ * https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/
+ *
+ * Return: true for success, false if list is NULL or empty.
+ */
+bool q_delete_mid(struct list_head *head)
+{
+    // https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/
+    if (!head || list_empty(head))
+        return false;
+    struct list_head *p = head->next;
+    struct list_head *q = head->prev;
+    while (!(p == q || p->next == q)) {
+        p = p->next;
+        q = q->prev;
+    }
+    list_del_init(q);
+    element_t *elem = list_entry(q, element_t, list);
+    q_release_element(elem);
+    return true;
+}
+```
+
+使用双指针分别从队列的首尾进行迭代，从而获取中间节点。注意需要先对获取的中间节点进行移除 remove 在进行释放 free。
+
+### q_delete_dup
+
+```c
+/**
+ * q_delete_dup() - Delete all nodes that have duplicate string,
+ *                  leaving only distinct strings from the original queue.
+ * @head: header of queue
+ *
+ * Reference:
+ * https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
+ *
+ * Return: true for success, false if list is NULL.
+ */
+bool q_delete_dup(struct list_head *head)
+{
+    // https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
+    if (!head)
+        return false;
+    struct list_head *node, *safe;
+    list_for_each_safe (node, safe, head) {
+        element_t *e_node = list_entry(node, element_t, list);
+        while (!(safe == head)) {
+            element_t *e_safe = list_entry(safe, element_t, list);
+            if (strcmp(e_node->value, e_safe->value))
+                break;
+            safe = safe->next;
+            list_del(&e_safe->list);
+            q_release_element(e_safe);
+        }
+    }
+    return true;
+}
+```
+
+在有序队列中，对队列的每个元素进行迭代检查，需要额外注意 `safe == head` 的情形，否则使用 `list_entry` 可能会导致未定义行为 UB。
+
+### q_swap
+
+```c
+/**
+ * q_swap() - Swap every two adjacent nodes
+ * @head: header of queue
+ *
+ * Reference:
+ * https://leetcode.com/problems/swap-nodes-in-pairs/
+ */
+void q_swap(struct list_head *head)
+{
+    // https://leetcode.com/problems/swap-nodes-in-pairs/
+    if (!head)
+        return;
+    struct list_head *node, *safe, *prev, *next;
+    list_for_each_safe (node, safe, head) {
+        if (safe == head)
+            break;
+        prev = node->prev;
+        next = safe->next;
+        node->prev = safe;
+        safe->next = node;
+
+        node->next = next;
+        safe->prev = prev;
+        prev->next = safe;
+        next->prev = node;
+
+        safe = next;
+    }
+}
+```
+
+以两个节点为单位进行交换操作，然后与锚点设定相应的关系，依次逐个单位 (两个节点) 进行处理:
+
+- before swap
+```mermaid
+classDiagram
+    direction LR
+
+    class prev {
+        prev: list_head*
+        next: list_head*
+    }
+    class node {
+        prev: list_head*
+        next: list_head*
+    }
+    class safe {
+        prev: list_head*
+        next: list_head*
+    }
+    class next {
+        prev: list_head*
+        next: list_head*
+    }
+    prev --> node
+    prev <-- node
+    node --> safe
+    node <-- safe
+    safe --> next
+    safe <-- next
+```
+
+- after swap
+```mermaid
+classDiagram
+    direction LR
+
+    class prev {
+        prev: list_head*
+        next: list_head*
+    }
+    class node {
+        prev: list_head*
+        next: list_head*
+    }
+    class safe {
+        prev: list_head*
+        next: list_head*
+    }
+    class next {
+        prev: list_head*
+        next: list_head*
+    }
+    prev --> safe
+    prev <-- safe
+    safe --> node
+    safe <-- node
+    node --> next
+    node <-- next
+```
+
+### q_reverse
+
+```c
+/**
+ * q_reverse() - Reverse elements in queue
+ * @head: header of queue
+ *
+ * No effect if queue is NULL or empty.
+ * This function should not allocate or free any list elements
+ * (e.g., by calling q_insert_head, q_insert_tail, or q_remove_head).
+ * It should rearrange the existing ones.
+ */
+void q_reverse(struct list_head *head)
+{
+    if (!head)
+        return;
+    struct list_head *node, *safe, *prev;
+    list_for_each_safe (node, safe, head) {
+        prev = node->prev;
+        node->prev = safe;
+        node->next = prev;
+    }
+    prev = head->prev;
+    head->prev = head->next;
+    head->next = prev;
+}
+```
+
+对队列的每个节点依次进行如下节点 `list_head 1` 的处理，即反转指针 `prev` 和 `next` 的指向 (实心箭头表示的是 `list_head 1` 的指针成员):
+
+- before reverse
+```mermaid
+classDiagram
+    direction LR
+
+    class list_head 0 {
+        prev: list_head*
+        next: list_head*
+    }
+    class list_head 1 {
+        prev: list_head*
+        next: list_head*
+    }
+    class list_head 2 {
+        prev: list_head*
+        next: list_head*
+    }
+    list_head 0 --> list_head 1: next
+    list_head 0 <|-- list_head 1: prev
+    list_head 1 --|> list_head 2: next
+    list_head 1 <-- list_head 2: prev
+```
+
+- after reverse
+```mermaid
+classDiagram
+    direction LR
+
+    class list_head 0 {
+        prev: list_head*
+        next: list_head*
+    }
+    class list_head 1 {
+        prev: list_head*
+        next: list_head*
+    }
+    class list_head 2 {
+        prev: list_head*
+        next: list_head*
+    }
+    list_head 0 <|-- list_head 1: next
+    list_head 0 --> list_head 1: prev
+    list_head 1 <-- list_head 2: next
+    list_head 1 --|> list_head 2: prev
+```
+
+至于队列头节点 `head` 则不需要特别考虑，最后将其的 `prev` 和 `next` 成员的指向进行反转即可。
+
+### q_reverseK
+
+```c
+/**
+ * q_reverseK() - Given the head of a linked list, reverse the nodes of the list
+ * k at a time.
+ * @head: header of queue
+ * @k: is a positive integer and is less than or equal to the length of the
+ * linked list.
+ *
+ * No effect if queue is NULL or empty. If there has only one element, do
+ * nothing.
+ *
+ * Reference:
+ * https://leetcode.com/problems/reverse-nodes-in-k-group/
+ */
+void q_reverseK(struct list_head *head, int k)
+{
+    // https://leetcode.com/problems/reverse-nodes-in-k-group/
+    if (!head)
+        return;
+    struct list_head *node, *safe, *prev, *next;
+    list_for_each_safe (node, safe, head) {
+        // get prev and next nodes around K nodes
+        prev = node->prev;
+        next = node;
+        int cnt = 0;
+        while (cnt < k && next != head) {
+            cnt++;
+            next = next->next;
+        }
+        if (cnt < k)
+            break;
+        safe = next->prev;
+
+        // reverse K nodes
+        struct list_head *p = node, *q;
+        while (p != next) {
+            q = p->next;
+            p->next = p->prev;
+            p->prev = q;
+
+            p = q;
+        }
+
+        // setup node, safe, prev, next
+        node->next = next;
+        next->prev = node;
+        safe->prev = prev;
+        prev->next = safe;
+
+        safe = next;
+    }
+}
+```
+
+`q_reverseK` 相当于 `q_swap` 的增强版，解决的思路也是比较类似，先确认 K 个节点的反转区域以及相应的前后锚点: `prev` 和 `next`，接下来对反转区域的 K 个节点进行反转，这部分的操作和 `q_reverse` 相同，都是逐个节点进行成员指针反转，反转结束后，和 `q_swap` 类似，设定与锚点相应的位置关系，依次逐区域 (K 个节点) 进行处理。该过程图示如下:
+
+> 注意观察指针 `prev`, `next` 的变化
+
+- before reverse
+```mermaid
+classDiagram
+    direction LR
+
+    class prev {
+        prev: list_head*
+        next: list_head*
+    }
+    class node {
+        prev: list_head*
+        next: list_head*
+    }
+    class safe {
+        prev: list_head*
+        next: list_head*
+    }
+    class next {
+        prev: list_head*
+        next: list_head*
+    }
+    class nodes {
+        prev: list_head*
+        next: list_head*
+    }
+    prev --> node: next
+    prev <-- node: prev
+    node --> nodes: next
+    node <|-- nodes: prev
+    nodes --|> safe: next
+    nodes <-- safe: prev
+    safe --> next: next
+    safe <-- next: prev
+```
+
+- after reverse
+```mermaid
+classDiagram
+    direction LR
+
+    class prev {
+        prev: list_head*
+        next: list_head*
+    }
+    class node {
+        prev: list_head*
+        next: list_head*
+    }
+    class safe {
+        prev: list_head*
+        next: list_head*
+    }
+    class next {
+        prev: list_head*
+        next: list_head*
+    }
+    class nodes {
+        prev: list_head*
+        next: list_head*
+    }
+    prev --> node: next
+    prev <-- node: next
+    node --> nodes: prev
+    node <|-- nodes: next
+    nodes --|> safe: prev
+    nodes <-- safe: next
+    safe --> next: prev
+    safe <-- next: prev
+```
+
+- after setup `prev`, `node`, `safe`, `next`
+```mermaid
+classDiagram
+    direction LR
+
+    class prev {
+        prev: list_head*
+        next: list_head*
+    }
+    class node {
+        prev: list_head*
+        next: list_head*
+    }
+    class safe {
+        prev: list_head*
+        next: list_head*
+    }
+    class next {
+        prev: list_head*
+        next: list_head*
+    }
+    class nodes {
+        prev: list_head*
+        next: list_head*
+    }
+    prev --> safe: next
+    prev <-- safe: prev
+    safe --> nodes: next
+    safe <|-- nodes: next
+    nodes --|> node: next
+    nodes <-- node: prev
+    node --> next: next
+    node <-- next: prev
+```
+
+### q_sort
+
+- [Linked List Sort](https://npes87184.github.io/2015-09-12-linkedListSort/)
+
+```c
+/**
+ * q_sort() - Sort elements of queue in ascending/descending order
+ * @head: header of queue
+ * @descend: whether or not to sort in descending order
+ *
+ * No effect if queue is NULL or empty. If there has only one element, do
+ * nothing.
+ */ 
+void q_sort(struct list_head *head, bool descend);
+```
+
+- Bubble sort
+
+主要是通过交换 (swap) 来实现核心的冒泡，思路是将节点 `safe` 对应字符串与 `node` 对应的字符串比较，从而决定是否进行交换操作，这里实现的是 stable 的排序算法，所以比较、交换时不考虑相等的情况。需要的是注意，虽然 swap 部分和 `q_swap` 几乎一样，但是最后设定下一个节点 `safe` 时不相同，因为这里需要每个节点之间都需要进行比较，而不是以每两个节点为单位进行交换。
+
+布尔表达式 `(descend && cmp < 0) || (!descend && cmp > 0)` 表示不满足预期的 `node -> safe` 的顺序关系，需要调整成 `safe node` 顺序才满足。
+
+```c
+static void q_bubble_sort(struct list_head *head, bool descend)
+{
+    if (!head)
+        return;
+
+    bool swapped = true;
+    struct list_head *node, *safe, *prev, *next;
+
+    while (swapped) {
+        swapped = false;
+        list_for_each_safe (node, safe, head) {
+            if (safe == head)
+                break;
+
+            element_t *e_node = list_entry(node, element_t, list);
+            element_t *e_safe = list_entry(safe, element_t, list);
+
+            int cmp = strcmp(e_node->value, e_safe->value);
+            if ((descend && cmp < 0) || (!descend && cmp > 0)) {
+                swapped = true;
+
+                // swap
+                prev = node->prev;
+                next = safe->next;
+                node->prev = safe;
+                safe->next = node;
+
+                node->next = next;
+                safe->prev = prev;
+                prev->next = safe;
+                next->prev = node;
+
+                // set next node
+                safe = node;
+            }
+        }
+    }
+}
+```
+
+- Insertion sort
+
+核心是通过插入 (insertion) 操作，在左边已排序的节点中寻找合适的位置进行插入，链表的任意位置插入操作是比较直观的，移除后在对应的位置通过锚点插入固定。
+
+```c
+static void q_insertion_sort(struct list_head *head, bool descend)
+{
+    if (!head)
+        return;
+
+    struct list_head *node, *safe;
+    list_for_each_safe (node, safe, head) {
+        struct list_head *prev = node->prev, *next;
+        // one node is already sorted
+        if (prev == head)
+            continue;
+
+        // remove
+        list_del(node);
+        element_t *e_node = list_entry(node, element_t, list);
+        element_t *e_prev = list_entry(prev, element_t, list);
+
+        // find position
+        int cmp = strcmp(e_prev->value, e_node->value);
+        while ((descend && cmp < 0) || (!descend && cmp > 0)) {
+            prev = prev->prev;
+            if (prev == head)
+                break;
+            e_prev = list_entry(prev, element_t, list);
+            cmp = strcmp(e_prev->value, e_node->value);
+        }
+
+        // insertion
+        next = prev->next;
+        prev->next = node;
+        node->prev = prev;
+        node->next = next;
+        next->prev = node;
+    }
+}
+```
+
+- Selection sort
+
+这里采用的是 stable 的排序算法，所以并没有采用交换策略 (交换选择节点和当前节点)
+
+```c
+/* Selection sort */
+static void q_selection_sort(struct list_head *head, bool descend)
+{
+    if (!head)
+        return;
+
+    struct list_head *node, *safe, *prev = head;
+    list_for_each_safe (node, safe, head) {
+        struct list_head *temp = node->next, *sele = node;
+
+        // selection
+        while (temp != head) {
+            element_t *e_sele = list_entry(sele, element_t, list);
+            element_t *e_temp = list_entry(temp, element_t, list);
+
+            int cmp = strcmp(e_sele->value, e_temp->value);
+            if ((descend && cmp < 0) || (!descend && cmp > 0)) {
+                sele = temp;
+            }
+            temp = temp->next;
+        }
+
+        // insertion
+        list_del(sele);
+        prev->next->prev = sele;
+        sele->next = prev->next;
+        prev->next = sele;
+        sele->prev = prev;
+
+        // set next node
+        prev = sele;
+        safe = sele->next;
+    }
+}
+```
+
+### 命令行参数
+
+关于 [lab0-c](https://github.com/sysprog21/lab0-c) 相关命令的使用，可以参照阅读后面的「取得程式码并进行开发」部分。
 
 ```bash
 $ ./qtest
