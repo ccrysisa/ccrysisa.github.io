@@ -53,8 +53,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 
     
   "><meta itemprop="datePublished" content="2024-02-19T16:23:01+08:00" />
-<meta itemprop="dateModified" content="2024-05-05T13:47:55+08:00" />
-<meta itemprop="wordCount" content="5423"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-06-01T23:54:20+08:00" />
+<meta itemprop="wordCount" content="8116"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux,C," /><meta property="og:title" content="Linux 核心设计: lab0-c" />
 <meta property="og:description" content="
     
@@ -82,7 +82,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/linux2023-lab0/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-19T16:23:01+08:00" />
-<meta property="article:modified_time" content="2024-05-05T13:47:55+08:00" />
+<meta property="article:modified_time" content="2024-06-01T23:54:20+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Linux 核心设计: lab0-c"/>
@@ -123,8 +123,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux2023-lab0\/"
-    },"genre": "posts","keywords": "Sysprog, Linux, C","wordcount":  5423 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023-lab0\/","datePublished": "2024-02-19T16:23:01+08:00","dateModified": "2024-05-05T13:47:55+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, Linux, C","wordcount":  8116 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023-lab0\/","datePublished": "2024-02-19T16:23:01+08:00","dateModified": "2024-06-01T23:54:20+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -252,7 +252,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-19 16:23:01"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-19">2024-02-19</time></span>&nbsp;<span title="更新于 2024-05-05 13:47:55"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-05">2024-05-05</time></span>&nbsp;<span title="5423 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 5500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 11 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-19 16:23:01"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-19">2024-02-19</time></span>&nbsp;<span title="更新于 2024-06-01 23:54:20"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-01">2024-06-01</time></span>&nbsp;<span title="8116 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 8200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 17 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -262,9 +262,19 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
   <ul>
     <li><a href="#改写自-cmu-计算机系统概论的作业">改写自 CMU 计算机系统概论的作业</a>
       <ul>
+        <li><a href="#数据结构">数据结构</a></li>
         <li><a href="#q_size">q_size</a></li>
-        <li><a href="#q_new--q_free">q_new &amp; q_free</a></li>
-        <li><a href="#q_insert--q_remove">q_insert &amp; q_remove</a></li>
+        <li><a href="#q_new">q_new</a></li>
+        <li><a href="#q_free">q_free</a></li>
+        <li><a href="#q_insert">q_insert</a></li>
+        <li><a href="#q_remove">q_remove</a></li>
+        <li><a href="#q_delete_mid">q_delete_mid</a></li>
+        <li><a href="#q_delete_dup">q_delete_dup</a></li>
+        <li><a href="#q_swap">q_swap</a></li>
+        <li><a href="#q_reverse">q_reverse</a></li>
+        <li><a href="#q_reversek">q_reverseK</a></li>
+        <li><a href="#q_sort">q_sort</a></li>
+        <li><a href="#命令行参数">命令行参数</a></li>
       </ul>
     </li>
     <li><a href="#开发环境设定">开发环境设定</a></li>
@@ -337,10 +347,28 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/reverse-nodes-in-k-group/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 25. Reverse Nodes in k-Group</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/remove-nodes-from-linked-list/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 2487. Remove Nodes From Linked List</a> / <a href="https://leetcode.com/problems/remove-nodes-from-linked-list/solutions/4188092/simple-easy-cpp-solution-with-explanation/"target="_blank" rel="external nofollow noopener noreferrer">参考题解</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/merge-k-sorted-lists/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 23. Merge k Sorted Lists</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://npes87184.github.io/2015-09-12-linkedListSort/"target="_blank" rel="external nofollow noopener noreferrer">Linked List Sort</a></li>
 </ul>
+<h3 id="数据结构">数据结构</h3>
 <p>头文件 <a href="https://github.com/sysprog21/lab0-c/blob/master/list.h"target="_blank" rel="external nofollow noopener noreferrer">list.h</a> 依据 Linux 核心风格实作了相应的 linked list 常用操作的宏，这个文件对于本次实验很重要，需要仔细阅读并在实验过程中使用这些宏来简化程式码。</p>
+<p>头文件 <a href="https://github.com/sysprog21/lab0-c/blob/master/queue.h"target="_blank" rel="external nofollow noopener noreferrer">queue.h</a> 里则定义了队列元素 element_t 和队列上下文 q_context_t 的结构。</p>
+<ul>
+<li>list_head</li>
+</ul>
+<div class="mermaid" id="id-1"></div><ul>
+<li>element_t</li>
+</ul>
+<div class="mermaid" id="id-2"></div><blockquote>
+<p>队列节点中的成员 <code>value</code> 指向的字符串也是动态分配的</p>
+</blockquote>
+<ul>
+<li>queue_context_t</li>
+</ul>
+<div class="mermaid" id="id-3"></div><blockquote>
+<p><code>queue_context_t</code> 中的成员 <code>q</code> 的作用是指向将队列节点 <code>element_t</code> 连接起来的头节点，而成员 <code>chain</code> 的作用是将各个队列 <code>queue_context_t</code> 连接起来。</p>
+</blockquote>
 <h3 id="q_size">q_size</h3>
-<div class="highlight" id="id-1"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -354,34 +382,981 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span><span class="lnt">10
 </span><span class="lnt">11
 </span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* Return number of elements in queue */</span>
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * q_size() - Get the size of the queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @head: header of queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Return: the number of elements in queue, zero if queue is NULL or empty
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">q_size</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl"> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">li</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="nf">list_for_each</span> <span class="p">(</span><span class="n">li</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">list_for_each</span> <span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="n">len</span><span class="o">++</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">len</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="q_new--q_free">q_new &amp; q_free</h3>
+</div><h3 id="q_new">q_new</h3>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * q_new() - Create an empty queue whose next and prev pointer point to itself
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Return: NULL for allocation failed
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="nf">q_new</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="nf">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">INIT_LIST_HEAD</span><span class="p">(</span><span class="n">head</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q_free">q_free</h3>
+<div class="highlight" id="id-6"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * q_free() - Free all storage used by queue, no effect if header is NULL
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @head: header of queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">q_free</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">l</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span> <span class="o">=</span> <span class="n">l</span><span class="p">,</span> <span class="o">*</span><span class="n">node</span><span class="p">,</span> <span class="o">*</span><span class="n">safe</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">list_for_each_safe</span> <span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">safe</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">list_del</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">element_t</span> <span class="o">*</span><span class="n">elem</span> <span class="o">=</span> <span class="nf">list_entry</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="kt">element_t</span><span class="p">,</span> <span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">q_release_element</span><span class="p">(</span><span class="n">elem</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">free</span><span class="p">(</span><span class="n">head</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里使用 <code>list_for_each_safe</code> 而不是 <code>list_for_each_entry_safe</code> 来遍历链表，可以根据这两个宏的定义，以及思考链表只有一个元素时的情况。可以发现 <code>list_for_each_entry_safe</code> 认为 <code>list_head</code> 都被包裹在 <code>entry</code> 中，但是 <code>q_free</code> 的参数链表头节点 <code>l</code> 可能并没有被包裹在 <code>entry</code> 中，考虑到这种情况所以使用 <code>list_for_each_safe</code> 宏。最后需要释放头节点的空间，因为这个空间是在 <code>q_new</code> 时动态分配的。</p>
+<h3 id="q_insert">q_insert</h3>
+<div class="highlight" id="id-7"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * q_insert_head() - Insert an element in the head
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @head: header of queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @s: string would be inserted
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Argument s points to the string to be stored.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * The function must explicitly allocate space and copy the string into it.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Return: true for success, false for allocation failed or queue is NULL
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">q_insert_head</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">element_t</span> <span class="o">*</span><span class="n">elem</span> <span class="o">=</span> <span class="nf">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">element_t</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">elem</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">elem</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">=</span> <span class="nf">strdup</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">elem</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">free</span><span class="p">(</span><span class="n">elem</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">list_add</span><span class="p">(</span><span class="o">&amp;</span><span class="n">elem</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">,</span> <span class="n">head</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用 <code>strdup</code> 进行动态分配空间并拷贝字符串的内容，可从 harness[.h][.c] 文件 (因为该部分是负责定制化本实验的动态分配功能) 中获得启发，该函数具体用法可以参考 <code>man strdup</code>。因为 <code>strdup</code> 本质上也是调用了 <code>malloc</code> 动态分配 (具体见 harness.c 中的 <code>test_strdup</code> 定义)，所以也需要对 <code>stdup</code> 的返回值判断动态分配释是否成功。</p>
+<p><code>q_insert_tail</code> 的实现类似，只需使用 <code>list_add_tail</code> 即可:</p>
+<div class="highlight" id="id-8"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * q_insert_tail() - Insert an element at the tail
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @head: header of queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @s: string would be inserted
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Argument s points to the string to be stored.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * The function must explicitly allocate space and copy the string into it.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Return: true for success, false for allocation failed or queue is NULL
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* Insert an element at tail of queue */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">q_insert_tail</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">element_t</span> <span class="o">*</span><span class="n">elem</span> <span class="o">=</span> <span class="nf">malloc</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">element_t</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">elem</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">elem</span><span class="o">-&gt;</span><span class="n">value</span> <span class="o">=</span> <span class="nf">strdup</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">elem</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">free</span><span class="p">(</span><span class="n">elem</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">list_add_tail</span><span class="p">(</span><span class="o">&amp;</span><span class="n">elem</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">,</span> <span class="n">head</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q_remove">q_remove</h3>
+<div class="highlight" id="id-9"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * q_remove_head() - Remove the element from head of queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @head: header of queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @sp: string would be inserted
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @bufsize: size of the string
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * If sp is non-NULL and an element is removed, copy the removed string to *sp
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * (up to a maximum of bufsize-1 characters, plus a null terminator.)
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * NOTE: &#34;remove&#34; is different from &#34;delete&#34;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * The space used by the list element and the string should not be freed.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * The only thing &#34;remove&#34; need to do is unlink it.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Reference:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * https://english.stackexchange.com/questions/52508/difference-between-delete-and-remove
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Return: the pointer to element, %NULL if queue is NULL or empty.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">element_t</span> <span class="o">*</span><span class="nf">q_remove_head</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">sp</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">bufsize</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span> <span class="o">||</span> <span class="nf">list_empty</span><span class="p">(</span><span class="n">head</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">element_t</span> <span class="o">*</span><span class="n">elem</span> <span class="o">=</span> <span class="nf">list_first_entry</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="kt">element_t</span><span class="p">,</span> <span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">list_del_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">elem</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">sp</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">memcpy</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">elem</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">,</span> <span class="n">bufsize</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sp</span><span class="p">[</span><span class="n">bufsize</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">elem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用 <code>list_first_entry</code> 来获取队列的头元素，同理可以使用 <code>list_last_entry</code> 来获取队列的尾元素:</p>
+<div class="highlight" id="id-10"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * q_remove_tail() - Remove the element from tail of queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @head: header of queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @sp: string would be inserted
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @bufsize: size of the string
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Return: the pointer to element, %NULL if queue is NULL or empty.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">element_t</span> <span class="o">*</span><span class="nf">q_remove_tail</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">sp</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">bufsize</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span> <span class="o">||</span> <span class="nf">list_empty</span><span class="p">(</span><span class="n">head</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">element_t</span> <span class="o">*</span><span class="n">elem</span> <span class="o">=</span> <span class="nf">list_last_entry</span><span class="p">(</span><span class="n">head</span><span class="p">,</span> <span class="kt">element_t</span><span class="p">,</span> <span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">list_del_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">elem</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">sp</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">memcpy</span><span class="p">(</span><span class="n">sp</span><span class="p">,</span> <span class="n">elem</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">,</span> <span class="n">bufsize</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sp</span><span class="p">[</span><span class="n">bufsize</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">elem</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="q_delete_mid">q_delete_mid</h3>
+<div class="highlight" id="id-11"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * q_delete_mid() - Delete the middle node in queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @head: header of queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * The middle node of a linked list of size n is the
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * ⌊n / 2⌋th node from the start using 0-based indexing.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * If there&#39;re six elements, the third member should be returned.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Reference:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Return: true for success, false if list is NULL or empty.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">q_delete_mid</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span> <span class="o">||</span> <span class="nf">list_empty</span><span class="p">(</span><span class="n">head</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">q</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">q</span> <span class="o">||</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">==</span> <span class="n">q</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">p</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">list_del_init</span><span class="p">(</span><span class="n">q</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">element_t</span> <span class="o">*</span><span class="n">elem</span> <span class="o">=</span> <span class="nf">list_entry</span><span class="p">(</span><span class="n">q</span><span class="p">,</span> <span class="kt">element_t</span><span class="p">,</span> <span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">q_release_element</span><span class="p">(</span><span class="n">elem</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用双指针分别从队列的首尾进行迭代，从而获取中间节点。注意需要先对获取的中间节点进行移除 remove 在进行释放 free。</p>
+<h3 id="q_delete_dup">q_delete_dup</h3>
+<div class="highlight" id="id-12"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * q_delete_dup() - Delete all nodes that have duplicate string,
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *                  leaving only distinct strings from the original queue.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @head: header of queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Reference:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Return: true for success, false if list is NULL.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="nf">q_delete_dup</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">node</span><span class="p">,</span> <span class="o">*</span><span class="n">safe</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">list_for_each_safe</span> <span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">safe</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">element_t</span> <span class="o">*</span><span class="n">e_node</span> <span class="o">=</span> <span class="nf">list_entry</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="kt">element_t</span><span class="p">,</span> <span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">safe</span> <span class="o">==</span> <span class="n">head</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">element_t</span> <span class="o">*</span><span class="n">e_safe</span> <span class="o">=</span> <span class="nf">list_entry</span><span class="p">(</span><span class="n">safe</span><span class="p">,</span> <span class="kt">element_t</span><span class="p">,</span> <span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nf">strcmp</span><span class="p">(</span><span class="n">e_node</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">,</span> <span class="n">e_safe</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">safe</span> <span class="o">=</span> <span class="n">safe</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">list_del</span><span class="p">(</span><span class="o">&amp;</span><span class="n">e_safe</span><span class="o">-&gt;</span><span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">q_release_element</span><span class="p">(</span><span class="n">e_safe</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在有序队列中，对队列的每个元素进行迭代检查，需要额外注意 <code>safe == head</code> 的情形，否则使用 <code>list_entry</code> 可能会导致未定义行为 UB。</p>
+<h3 id="q_swap">q_swap</h3>
+<div class="highlight" id="id-13"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * q_swap() - Swap every two adjacent nodes
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @head: header of queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Reference:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * https://leetcode.com/problems/swap-nodes-in-pairs/
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">q_swap</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// https://leetcode.com/problems/swap-nodes-in-pairs/
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">node</span><span class="p">,</span> <span class="o">*</span><span class="n">safe</span><span class="p">,</span> <span class="o">*</span><span class="n">prev</span><span class="p">,</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">list_for_each_safe</span> <span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">safe</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">safe</span> <span class="o">==</span> <span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prev</span> <span class="o">=</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">next</span> <span class="o">=</span> <span class="n">safe</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">safe</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">safe</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">safe</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">safe</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">next</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">safe</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>以两个节点为单位进行交换操作，然后与锚点设定相应的关系，依次逐个单位 (两个节点) 进行处理:</p>
 <ul>
-<li><code>q_new</code> 使用 <code>malloc</code> 分配空间，并使用 <code>INIT_LIST_HEAD</code> 进行初始化。</li>
-<li><code>q_free</code> 遍历 queue 进行逐个节点释放，所以需要使用 <code>_safe</code> 后缀的 for_each 宏，释放时需要先释放成员 <code>value</code>，再释放节点 (回想一下 C++ 的析构函数)，可以直接使用 <code>q_release_element</code> 函数。</li>
+<li>before swap</li>
 </ul>
+<div class="mermaid" id="id-14"></div><ul>
+<li>after swap</li>
+</ul>
+<div class="mermaid" id="id-15"></div><h3 id="q_reverse">q_reverse</h3>
+<div class="highlight" id="id-16"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * q_reverse() - Reverse elements in queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @head: header of queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * No effect if queue is NULL or empty.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * This function should not allocate or free any list elements
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * (e.g., by calling q_insert_head, q_insert_tail, or q_remove_head).
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * It should rearrange the existing ones.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">q_reverse</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">node</span><span class="p">,</span> <span class="o">*</span><span class="n">safe</span><span class="p">,</span> <span class="o">*</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">list_for_each_safe</span> <span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">safe</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prev</span> <span class="o">=</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">safe</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prev</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">head</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>对队列的每个节点依次进行如下节点 <code>list_head 1</code> 的处理，即反转指针 <code>prev</code> 和 <code>next</code> 的指向 (实心箭头表示的是 <code>list_head 1</code> 的指针成员):</p>
+<ul>
+<li>before reverse</li>
+</ul>
+<div class="mermaid" id="id-17"></div><ul>
+<li>after reverse</li>
+</ul>
+<div class="mermaid" id="id-18"></div><p>至于队列头节点 <code>head</code> 则不需要特别考虑，最后将其的 <code>prev</code> 和 <code>next</code> 成员的指向进行反转即可。</p>
+<h3 id="q_reversek">q_reverseK</h3>
+<div class="highlight" id="id-19"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * q_reverseK() - Given the head of a linked list, reverse the nodes of the list
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * k at a time.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @head: header of queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @k: is a positive integer and is less than or equal to the length of the
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * linked list.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * No effect if queue is NULL or empty. If there has only one element, do
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * nothing.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Reference:
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * https://leetcode.com/problems/reverse-nodes-in-k-group/
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">q_reverseK</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// https://leetcode.com/problems/reverse-nodes-in-k-group/
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">node</span><span class="p">,</span> <span class="o">*</span><span class="n">safe</span><span class="p">,</span> <span class="o">*</span><span class="n">prev</span><span class="p">,</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">list_for_each_safe</span> <span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">safe</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// get prev and next nodes around K nodes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">prev</span> <span class="o">=</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">next</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">&lt;</span> <span class="n">k</span> <span class="o">&amp;&amp;</span> <span class="n">next</span> <span class="o">!=</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cnt</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">next</span> <span class="o">=</span> <span class="n">next</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">cnt</span> <span class="o">&lt;</span> <span class="n">k</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">safe</span> <span class="o">=</span> <span class="n">next</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// reverse K nodes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="n">node</span><span class="p">,</span> <span class="o">*</span><span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">(</span><span class="n">p</span> <span class="o">!=</span> <span class="n">next</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">p</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">p</span> <span class="o">=</span> <span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// setup node, safe, prev, next
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">node</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">next</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">safe</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">safe</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">safe</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>q_reverseK</code> 相当于 <code>q_swap</code> 的增强版，解决的思路也是比较类似，先确认 K 个节点的反转区域以及相应的前后锚点: <code>prev</code> 和 <code>next</code>，接下来对反转区域的 K 个节点进行反转，这部分的操作和 <code>q_reverse</code> 相同，都是逐个节点进行成员指针反转，反转结束后，和 <code>q_swap</code> 类似，设定与锚点相应的位置关系，依次逐区域 (K 个节点) 进行处理。该过程图示如下:</p>
 <blockquote>
-<p><code>q_free</code> 在遍历时需要释放当前节点所在元素的空间，所以需要使用 <code>list_for_each_entry_safe</code>，而 <code>q_size</code> 无需在遍历时修改当前节点，所以使用 <code>list_for_each</code> 就足够了。</p>
+<p>注意观察指针 <code>prev</code>, <code>next</code> 的变化</p>
 </blockquote>
-<h3 id="q_insert--q_remove">q_insert &amp; q_remove</h3>
-<p>insert 时需要特判 head 是否为 NULL 以及 malloc 分配是否成功，接下来需要使用 <code>strdup</code> 对所给参数进行复制 (<code>strdup</code> 内部是通过 <code>malloc</code> 来实现的，所以之前 <code>q_free</code> 时也需要是否 <code>value</code>)，最后根据插入的位置调用 <code>list_add</code> 或 <code>list_add_tail</code> 进行插入。</p>
-<p>remove 时需要特判 head 是否为 NULL 以及 queue 是否为空，接下来根据需要 remove 的节点调用 <code>list_first_entry</code> 或 <code>list_last_entry</code> 获取节点对应的元素，通过 <code>list_del_init</code> 来清除出 queue，最后如果 <code>value</code> 字段不为 NULL，则通过 <code>memcpy</code> 将 <code>value</code> 字段对应的字符串复制到指定位置。</p>
-<p>关于 <a href="">lab0-c</a> 相关命令的使用，可以参照阅读后面的「取得程式码并进行开发」部分。</p>
-<div class="highlight" id="id-2"><div class="chroma">
+<ul>
+<li>before reverse</li>
+</ul>
+<div class="mermaid" id="id-20"></div><ul>
+<li>after reverse</li>
+</ul>
+<div class="mermaid" id="id-21"></div><ul>
+<li>after setup <code>prev</code>, <code>node</code>, <code>safe</code>, <code>next</code></li>
+</ul>
+<div class="mermaid" id="id-22"></div><h3 id="q_sort">q_sort</h3>
+<ul>
+<li><a href="https://npes87184.github.io/2015-09-12-linkedListSort/"target="_blank" rel="external nofollow noopener noreferrer">Linked List Sort</a></li>
+</ul>
+<div class="highlight" id="id-23"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * q_sort() - Sort elements of queue in ascending/descending order
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @head: header of queue
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @descend: whether or not to sort in descending order
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * No effect if queue is NULL or empty. If there has only one element, do
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * nothing.
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span> 
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">q_sort</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">descend</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Bubble sort</li>
+</ul>
+<p>主要是通过交换 (swap) 来实现核心的冒泡，思路是将节点 <code>safe</code> 对应字符串与 <code>node</code> 对应的字符串比较，从而决定是否进行交换操作，这里实现的是 stable 的排序算法，所以比较、交换时不考虑相等的情况。需要的是注意，虽然 swap 部分和 <code>q_swap</code> 几乎一样，但是最后设定下一个节点 <code>safe</code> 时不相同，因为这里需要每个节点之间都需要进行比较，而不是以每两个节点为单位进行交换。</p>
+<p>布尔表达式 <code>(descend &amp;&amp; cmp &lt; 0) || (!descend &amp;&amp; cmp &gt; 0)</code> 表示不满足预期的 <code>node -&gt; safe</code> 的顺序关系，需要调整成 <code>safe node</code> 顺序才满足。</p>
+<div class="highlight" id="id-24"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">q_bubble_sort</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">descend</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">bool</span> <span class="n">swapped</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">node</span><span class="p">,</span> <span class="o">*</span><span class="n">safe</span><span class="p">,</span> <span class="o">*</span><span class="n">prev</span><span class="p">,</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">swapped</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">swapped</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">list_for_each_safe</span> <span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">safe</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">safe</span> <span class="o">==</span> <span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="kt">element_t</span> <span class="o">*</span><span class="n">e_node</span> <span class="o">=</span> <span class="nf">list_entry</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="kt">element_t</span><span class="p">,</span> <span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">element_t</span> <span class="o">*</span><span class="n">e_safe</span> <span class="o">=</span> <span class="nf">list_entry</span><span class="p">(</span><span class="n">safe</span><span class="p">,</span> <span class="kt">element_t</span><span class="p">,</span> <span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">cmp</span> <span class="o">=</span> <span class="nf">strcmp</span><span class="p">(</span><span class="n">e_node</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">,</span> <span class="n">e_safe</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">((</span><span class="n">descend</span> <span class="o">&amp;&amp;</span> <span class="n">cmp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="o">!</span><span class="n">descend</span> <span class="o">&amp;&amp;</span> <span class="n">cmp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">swapped</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c1">// swap
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">prev</span> <span class="o">=</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">next</span> <span class="o">=</span> <span class="n">safe</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">node</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">safe</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">safe</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">node</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">safe</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">safe</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">next</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c1">// set next node
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">safe</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Insertion sort</li>
+</ul>
+<p>核心是通过插入 (insertion) 操作，在左边已排序的节点中寻找合适的位置进行插入，链表的任意位置插入操作是比较直观的，移除后在对应的位置通过锚点插入固定。</p>
+<div class="highlight" id="id-25"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">q_insertion_sort</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">descend</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">node</span><span class="p">,</span> <span class="o">*</span><span class="n">safe</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">list_for_each_safe</span> <span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">safe</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">prev</span> <span class="o">=</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">,</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// one node is already sorted
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">prev</span> <span class="o">==</span> <span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// remove
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">list_del</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">element_t</span> <span class="o">*</span><span class="n">e_node</span> <span class="o">=</span> <span class="nf">list_entry</span><span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="kt">element_t</span><span class="p">,</span> <span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">element_t</span> <span class="o">*</span><span class="n">e_prev</span> <span class="o">=</span> <span class="nf">list_entry</span><span class="p">(</span><span class="n">prev</span><span class="p">,</span> <span class="kt">element_t</span><span class="p">,</span> <span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// find position
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">cmp</span> <span class="o">=</span> <span class="nf">strcmp</span><span class="p">(</span><span class="n">e_prev</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">,</span> <span class="n">e_node</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">while</span> <span class="p">((</span><span class="n">descend</span> <span class="o">&amp;&amp;</span> <span class="n">cmp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="o">!</span><span class="n">descend</span> <span class="o">&amp;&amp;</span> <span class="n">cmp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="o">-&gt;</span><span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">prev</span> <span class="o">==</span> <span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">e_prev</span> <span class="o">=</span> <span class="nf">list_entry</span><span class="p">(</span><span class="n">prev</span><span class="p">,</span> <span class="kt">element_t</span><span class="p">,</span> <span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">cmp</span> <span class="o">=</span> <span class="nf">strcmp</span><span class="p">(</span><span class="n">e_prev</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">,</span> <span class="n">e_node</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// insertion
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">next</span> <span class="o">=</span> <span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">node</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">next</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>Selection sort</li>
+</ul>
+<p>这里采用的是 stable 的排序算法，所以并没有采用交换策略 (交换选择节点和当前节点)</p>
+<div class="highlight" id="id-26"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* Selection sort */</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">void</span> <span class="nf">q_selection_sort</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">descend</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">head</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">node</span><span class="p">,</span> <span class="o">*</span><span class="n">safe</span><span class="p">,</span> <span class="o">*</span><span class="n">prev</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">list_for_each_safe</span> <span class="p">(</span><span class="n">node</span><span class="p">,</span> <span class="n">safe</span><span class="p">,</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">temp</span> <span class="o">=</span> <span class="n">node</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">,</span> <span class="o">*</span><span class="n">sele</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// selection
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">while</span> <span class="p">(</span><span class="n">temp</span> <span class="o">!=</span> <span class="n">head</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">element_t</span> <span class="o">*</span><span class="n">e_sele</span> <span class="o">=</span> <span class="nf">list_entry</span><span class="p">(</span><span class="n">sele</span><span class="p">,</span> <span class="kt">element_t</span><span class="p">,</span> <span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">element_t</span> <span class="o">*</span><span class="n">e_temp</span> <span class="o">=</span> <span class="nf">list_entry</span><span class="p">(</span><span class="n">temp</span><span class="p">,</span> <span class="kt">element_t</span><span class="p">,</span> <span class="n">list</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">cmp</span> <span class="o">=</span> <span class="nf">strcmp</span><span class="p">(</span><span class="n">e_sele</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">,</span> <span class="n">e_temp</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">((</span><span class="n">descend</span> <span class="o">&amp;&amp;</span> <span class="n">cmp</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="o">!</span><span class="n">descend</span> <span class="o">&amp;&amp;</span> <span class="n">cmp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">sele</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// insertion
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">list_del</span><span class="p">(</span><span class="n">sele</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">sele</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sele</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">prev</span><span class="o">-&gt;</span><span class="n">next</span> <span class="o">=</span> <span class="n">sele</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sele</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// set next node
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">prev</span> <span class="o">=</span> <span class="n">sele</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">safe</span> <span class="o">=</span> <span class="n">sele</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="命令行参数">命令行参数</h3>
+<p>关于 <a href="https://github.com/sysprog21/lab0-c"target="_blank" rel="external nofollow noopener noreferrer">lab0-c</a> 相关命令的使用，可以参照阅读后面的「取得程式码并进行开发」部分。</p>
+<div class="highlight" id="id-27"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -421,7 +1396,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
   </div>
 <h2 id="开发环境设定">开发环境设定</h2>
 <p>安装必要的开发工具包:</p>
-<div class="highlight" id="id-3"><div class="chroma">
+<div class="highlight" id="id-28"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -448,7 +1423,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
   </div>
 <h2 id="取得程式码并进行开发">取得程式码并进行开发</h2>
 <p>建立开发目录:</p>
-<div class="highlight" id="id-4"><div class="chroma">
+<div class="highlight" id="id-29"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -458,7 +1433,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl">$ mkdir -p linux2023</span></span></code></pre></td></tr></table>
 </div>
 </div><p>从 GItHub 获取 [lab-c] 程式码:</p>
-<div class="highlight" id="id-5"><div class="chroma">
+<div class="highlight" id="id-30"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -470,7 +1445,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl">$ git clone https://github.com/&lt;username&gt;/lab0-c</span></span></code></pre></td></tr></table>
 </div>
 </div><p>切换的 <code>lab0-c</code> 目录并进行编译:</p>
-<div class="highlight" id="id-6"><div class="chroma">
+<div class="highlight" id="id-31"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -480,7 +1455,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl">$ make</span></span></code></pre></td></tr></table>
 </div>
 </div><p>预期看到以下输出:</p>
-<div class="highlight" id="id-7"><div class="chroma">
+<div class="highlight" id="id-32"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -512,7 +1487,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl">  LD	qtest</span></span></code></pre></td></tr></table>
 </div>
 </div><p>也可以清除编译输出的档案 (一般是可执行文件和目标文件):</p>
-<div class="highlight" id="id-8"><div class="chroma">
+<div class="highlight" id="id-33"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -520,7 +1495,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ make clean</span></span></code></pre></td></tr></table>
 </div>
 </div><p>可以通过以下命令设定编译时输出的细节：</p>
-<div class="highlight" id="id-9"><div class="chroma">
+<div class="highlight" id="id-34"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -528,7 +1503,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ make <span class="nv">VERBOSE</span><span class="o">=</span><span class="m">1</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这样编译时会输出更多细节:</p>
-<div class="highlight" id="id-10"><div class="chroma">
+<div class="highlight" id="id-35"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -548,7 +1523,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl">gcc -o qtest qtest.o report.o console.o harness.o queue.o</span></span></code></pre></td></tr></table>
 </div>
 </div><p>即最终的执行档案为 <code>qtest</code>。接下来可以通过以下命令来测试 <code>qtest</code>:</p>
-<div class="highlight" id="id-11"><div class="chroma">
+<div class="highlight" id="id-36"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -581,7 +1556,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </div>
 </div><p>即将 <a href="https://github.com/sysprog21/lab0-c/blob/master/traces/trace-eg.cmd"target="_blank" rel="external nofollow noopener noreferrer">traces/trace-eg.cmd</a> 的内容作为测试命令指派给 <code>qtest</code> 执行。</p>
 <p>由输出可以得知命令 <code>make check</code> 只是对一些基本功能进行测试，可以通过以下命令进行全面覆盖的测试:</p>
-<div class="highlight" id="id-12"><div class="chroma">
+<div class="highlight" id="id-37"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -590,7 +1565,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </div>
 </div><p>这个命令也是本次实验的自动评分系统，其实际执行了 <a href="https://github.com/sysprog21/lab0-c/blob/master/scripts/driver.py"target="_blank" rel="external nofollow noopener noreferrer">scripts/driver.py</a> 这个 Python 程序，这个程序的基本逻辑就是将 traces/trace-XX-CAT.cmd 这类内容作为测试命令指派给 <code>qtest</code> 内部的命令解释器进行执行，并依据测试结果计算相应的分数。</p>
 <p>通过以下命令会开启 <a href="https://github.com/google/sanitizers/wiki/AddressSanitizer"target="_blank" rel="external nofollow noopener noreferrer">AddressSanitizer</a> 从而强化执行时期的内存检测，在进行测试时会输出相应的内存检测信息:</p>
-<div class="highlight" id="id-13"><div class="chroma">
+<div class="highlight" id="id-38"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -631,7 +1606,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </ul>
 <h3 id="clang-format-工具和一致的程序撰写风格">clang-format 工具和一致的程序撰写风格</h3>
 <p>需要在当前目录或指定路径有 <code>.clang-format</code> 文件，然后通过以下使用方式:</p>
-<div class="highlight" id="id-14"><div class="chroma">
+<div class="highlight" id="id-39"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -649,7 +1624,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>tig 可以更加方便的浏览 git repository 的信息:</p>
-<div class="highlight" id="id-28"><div class="chroma">
+<div class="highlight" id="id-53"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -693,7 +1668,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
     </div>
   </div>
 <p>设置 Git 的默认编辑器为 Vim:</p>
-<div class="highlight" id="id-15"><div class="chroma">
+<div class="highlight" id="id-40"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -716,7 +1691,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <h2 id="以-valgrind-分析内存问题">以 Valgrind 分析内存问题</h2>
 <p><a href="https://valgrind.org/"target="_blank" rel="external nofollow noopener noreferrer">Valgrind</a> is an instrumentation framework for building dynamic analysis tools. There are Valgrind tools that can automatically detect many memory management and threading bugs, and profile your programs in detail. You can also use Valgrind to build new tools.</p>
 <p>使用方式:</p>
-<div class="highlight" id="id-16"><div class="chroma">
+<div class="highlight" id="id-41"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -743,7 +1718,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>也就是說，<a href="https://valgrind.org/"target="_blank" rel="external nofollow noopener noreferrer">Valgrind</a> 主要的手法是將暫存器和主記憶體的內容自行維護副本，並在任何情況下都可以安全正確地使用，同時記錄程式的所有操作，在不影響程式執行結果前提下，輸出有用的資訊。為了實作功能，<a href="https://valgrind.org/"target="_blank" rel="external nofollow noopener noreferrer">Valgrind</a> 利用 <a href="https://en.wikipedia.org/wiki/Dynamic_recompilation"target="_blank" rel="external nofollow noopener noreferrer">dynamic binary re-compilation</a> 把測試程式 (稱為 client 程式) 的機械碼解析到 VEX 中間表示法 (intermediate representation，簡稱 IR，是種虛擬的指令集架構，規範在原始程式碼 <a href="https://sourceware.org/git/?p=valgrind.git;a=blob;f=VEX/pub/libvex_ir.h"target="_blank" rel="external nofollow noopener noreferrer">VEX/pub/libvex_ir.h</a>)。VEX IR 在 <a href="https://valgrind.org/"target="_blank" rel="external nofollow noopener noreferrer">Valgrind</a> 採用執行導向的方式，以 just-in-time (JIT) 編譯技術動態地把機械碼轉為 IR，倘若觸發特定工具感興趣的事件 (如記憶體配置)，就會跳躍到對應的處理工具，後者會插入一些分析程式碼，再把這些程式碼轉換為機械碼，儲存到 code cache 中，以利後續需要時執行。</p>
-<div class="highlight" id="id-29"><div class="chroma">
+<div class="highlight" id="id-54"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -774,7 +1749,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </ul>
 <h3 id="valgrind-使用案例">Valgrind 使用案例</h3>
 <p>安装调试工具以让 Valgrind 更好地进行分析:</p>
-<div class="highlight" id="id-17"><div class="chroma">
+<div class="highlight" id="id-42"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -791,7 +1766,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <li>still readchable</li>
 </ul>
 <p>运行 valgrind 和 gdb 类似，都需要使用 <code>-g</code> 参数来编译 C/C++ 源程序以生成调试信息，然后还可以通过 <code>-q</code> 参数指示 valgrind 进入 quite 模式，减少启动时信息的输出。</p>
-<div class="highlight" id="id-18"><div class="chroma">
+<div class="highlight" id="id-43"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -831,7 +1806,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
     </div>
   </div>
 <p>lab0-c 也引入了 Valgrind 来协助侦测实验过程中可能出现的内存相关问题，例如 <a href="https://en.wikipedia.org/wiki/Memory_leak"target="_blank" rel="external nofollow noopener noreferrer">memory leak</a>, <a href="https://en.wikipedia.org/wiki/Buffer_overflow"target="_blank" rel="external nofollow noopener noreferrer">buffer overflow</a>, <a href="https://en.wikipedia.org/wiki/Dangling_pointer"target="_blank" rel="external nofollow noopener noreferrer">Dangling pointer</a> 等等。使用方式如下:</p>
-<div class="highlight" id="id-19"><div class="chroma">
+<div class="highlight" id="id-44"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -858,7 +1833,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://frankchang0125.blogspot.com/2013/01/c-struct-hack-structure-with-variable.html"target="_blank" rel="external nofollow noopener noreferrer">C Struct Hack - Structure with variable length array</a></li>
 </ul>
 <p>相关源代码阅读 (<a href="https://github.com/sysprog21/lab0-c/blob/master/harness.h"target="_blank" rel="external nofollow noopener noreferrer">harness.h</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/harness.c"target="_blank" rel="external nofollow noopener noreferrer">harness.c</a>):</p>
-<div class="highlight" id="id-20"><div class="chroma">
+<div class="highlight" id="id-45"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -911,7 +1886,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </div>
 </div><h3 id="qtest-命令解释器">qtest 命令解释器</h3>
 <p>新增指令 hello，用于打印 <code>Hello, world&quot;</code> 的信息。调用流程:</p>
-<div class="highlight" id="id-21"><div class="chroma">
+<div class="highlight" id="id-46"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -919,7 +1894,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">main → run_console → cmd_select → interpret_cmd → interpret_cmda → do_hello</span></span></code></pre></td></tr></table>
 </div>
 </div><p>相关源代码阅读 (<a href="https://github.com/sysprog21/lab0-c/blob/master/console.h"target="_blank" rel="external nofollow noopener noreferrer">console.h</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/console.c"target="_blank" rel="external nofollow noopener noreferrer">console.c</a>):</p>
-<div class="highlight" id="id-22"><div class="chroma">
+<div class="highlight" id="id-47"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -980,7 +1955,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <blockquote>
 <p>signal() sets the disposition of the signal signum to handler, which is either SIG_IGN, SIG_DFL, or the address of a  programmer-defined  function (a &ldquo;signal handler&rdquo;).</p>
 </blockquote>
-<div class="highlight" id="id-23"><div class="chroma">
+<div class="highlight" id="id-48"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1048,7 +2023,7 @@ execution.</p>
 <p>Because a signal can be generated at any time, it may actually occur before the target of the goto has been set up by sigsetjmp() (or setjmp()). To prevent this possibility (which would cause the handler to perform a nonlocal goto using an uninitialized env buffer), we employ a guard variable, canJump, to indicate whether the env buffer has been initialized. If canJump is false, then instead of doing a nonlocal goto, the handler simply returns.</p>
 </blockquote>
 <p>在执行 <code>siglongjmp</code> 之前执行一次 <code>sigsetjmp</code> 是必须的，这用于保存 <code>sigsetjmp</code> 所处地方的上下文，而 <code>sigsetjmp</code> 所处地方正是 <code>siglongjmp</code> 执行时需要跳转到的地方，所以为了保证长跳转后执行符合预取，需要保存上下文。</p>
-<div class="highlight" id="id-24"><div class="chroma">
+<div class="highlight" id="id-49"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1096,7 +2071,7 @@ execution.</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>相关源代码阅读 (<a href="https://github.com/sysprog21/lab0-c/blob/master/qtest.c"target="_blank" rel="external nofollow noopener noreferrer">qtest.c</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/report.h"target="_blank" rel="external nofollow noopener noreferrer">report.h</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/report.c"target="_blank" rel="external nofollow noopener noreferrer">report.c</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/harness.h"target="_blank" rel="external nofollow noopener noreferrer">harness.h</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/harness.c"target="_blank" rel="external nofollow noopener noreferrer">harness.c</a>):</p>
-<div class="highlight" id="id-25"><div class="chroma">
+<div class="highlight" id="id-50"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1130,7 +2105,7 @@ execution.</p>
 </div><h3 id="检测非预期的内存操作或程序执行超时">检测非预期的内存操作或程序执行超时</h3>
 <p>由上面可知，当收到 <code>SIGSEGV</code> 或 <code>SIGALRM</code> 信号时，会通过 <code>signal handler</code> &#x27a1;&#xfe0f; <code>trigger_exception</code> &#x27a1;&#xfe0f; <code>exception_setup</code> 这一条链路执行。那么当 <code>exception_setup</code> 函数返回时会跳转到哪里呢？</p>
 <p>在 <a href="">qtest.c</a> 的形如 <code>do_&lt;operation&gt;</code> 这类函数里面，都会直接或间接的包含以下的程式码:</p>
-<div class="highlight" id="id-26"><div class="chroma">
+<div class="highlight" id="id-51"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1160,7 +2135,7 @@ execution.</p>
     </div>
   </div>
 <p>程序等待输入的调用链 (<a href="https://github.com/sysprog21/lab0-c/blob/master/linenoise.c"target="_blank" rel="external nofollow noopener noreferrer">linenoise.c</a>):</p>
-<div class="highlight" id="id-27"><div class="chroma">
+<div class="highlight" id="id-52"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -1188,7 +2163,7 @@ undefined.</p>
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-05-05 13:47:55">更新于 2024-05-05&nbsp;</span>
+        <span title="更新于 2024-06-01 23:54:20">更新于 2024-06-01&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/linux2023-lab0/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -1217,7 +2192,7 @@ undefined.</p>
       <a href="/posts/c-numerics/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: 数值系统篇">你所不知道的 C 语言: 数值系统篇<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
@@ -1228,5 +2203,5 @@ undefined.</p>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-23":{"title":"qinit.c"}},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/mermaid/mermaid.min.js"></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"classDiagram\n    direction LR\n\n    class list_head 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    list_head 0 --\u003e list_head 1\n    list_head 1 --\u003e list_head 2\n    list_head 1 --\u003e list_head 0\n    list_head 2 --\u003e list_head 1","id-14":"classDiagram\n    direction LR\n\n    class prev {\n        prev: list_head*\n        next: list_head*\n    }\n    class node {\n        prev: list_head*\n        next: list_head*\n    }\n    class safe {\n        prev: list_head*\n        next: list_head*\n    }\n    class next {\n        prev: list_head*\n        next: list_head*\n    }\n    prev --\u003e node\n    prev \u003c-- node\n    node --\u003e safe\n    node \u003c-- safe\n    safe --\u003e next\n    safe \u003c-- next","id-15":"classDiagram\n    direction LR\n\n    class prev {\n        prev: list_head*\n        next: list_head*\n    }\n    class node {\n        prev: list_head*\n        next: list_head*\n    }\n    class safe {\n        prev: list_head*\n        next: list_head*\n    }\n    class next {\n        prev: list_head*\n        next: list_head*\n    }\n    prev --\u003e safe\n    prev \u003c-- safe\n    safe --\u003e node\n    safe \u003c-- node\n    node --\u003e next\n    node \u003c-- next","id-17":"classDiagram\n    direction LR\n\n    class list_head 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    list_head 0 --\u003e list_head 1: next\n    list_head 0 \u003c|-- list_head 1: prev\n    list_head 1 --|\u003e list_head 2: next\n    list_head 1 \u003c-- list_head 2: prev","id-18":"classDiagram\n    direction LR\n\n    class list_head 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    list_head 0 \u003c|-- list_head 1: next\n    list_head 0 --\u003e list_head 1: prev\n    list_head 1 \u003c-- list_head 2: next\n    list_head 1 --|\u003e list_head 2: prev","id-2":"classDiagram\n    direction LR\n\n    class element_t 0 {\n        value: char *\n        list: list_head*\n    }\n    class element_t 1 {\n        value: char *\n        list: list_head*\n    }\n    class element_t 2 {\n        value: char *\n        list: list_head*\n    }\n\n    element_t 0 --\u003e element_t 1\n    element_t 1 --\u003e element_t 2\n    element_t 1 --\u003e element_t 0\n    element_t 2 --\u003e element_t 1","id-20":"classDiagram\n    direction LR\n\n    class prev {\n        prev: list_head*\n        next: list_head*\n    }\n    class node {\n        prev: list_head*\n        next: list_head*\n    }\n    class safe {\n        prev: list_head*\n        next: list_head*\n    }\n    class next {\n        prev: list_head*\n        next: list_head*\n    }\n    class nodes {\n        prev: list_head*\n        next: list_head*\n    }\n    prev --\u003e node: next\n    prev \u003c-- node: prev\n    node --\u003e nodes: next\n    node \u003c|-- nodes: prev\n    nodes --|\u003e safe: next\n    nodes \u003c-- safe: prev\n    safe --\u003e next: next\n    safe \u003c-- next: prev","id-21":"classDiagram\n    direction LR\n\n    class prev {\n        prev: list_head*\n        next: list_head*\n    }\n    class node {\n        prev: list_head*\n        next: list_head*\n    }\n    class safe {\n        prev: list_head*\n        next: list_head*\n    }\n    class next {\n        prev: list_head*\n        next: list_head*\n    }\n    class nodes {\n        prev: list_head*\n        next: list_head*\n    }\n    prev --\u003e node: next\n    prev \u003c-- node: next\n    node --\u003e nodes: prev\n    node \u003c|-- nodes: next\n    nodes --|\u003e safe: prev\n    nodes \u003c-- safe: next\n    safe --\u003e next: prev\n    safe \u003c-- next: prev","id-22":"classDiagram\n    direction LR\n\n    class prev {\n        prev: list_head*\n        next: list_head*\n    }\n    class node {\n        prev: list_head*\n        next: list_head*\n    }\n    class safe {\n        prev: list_head*\n        next: list_head*\n    }\n    class next {\n        prev: list_head*\n        next: list_head*\n    }\n    class nodes {\n        prev: list_head*\n        next: list_head*\n    }\n    prev --\u003e safe: next\n    prev \u003c-- safe: prev\n    safe --\u003e nodes: next\n    safe \u003c|-- nodes: next\n    nodes --|\u003e node: next\n    nodes \u003c-- node: prev\n    node --\u003e next: next\n    node \u003c-- next: prev","id-3":"classDiagram\n    class queue_context_t 0 {\n        q: list_head *\n        chain: list_head\n        size: int\n        id: int\n    }\n    class queue_context_t 1 {\n        q: list_head *\n        chain: list_head\n        size: int\n        id: int\n    }\n    class queue_context_t 2 {\n        q: list_head *\n        chain: list_head\n        size: int\n        id: int\n    }\n\n    queue_context_t 0 --\u003e queue_context_t 1\n    queue_context_t 1 --\u003e queue_context_t 2\n    queue_context_t 1 --\u003e queue_context_t 0\n    queue_context_t 2 --\u003e queue_context_t 1\n\n    queue_context_t 0 --\u003e list_head 0\n    list_head 0 \u003c--\u003e element_t 01\n    element_t 01 \u003c--\u003e element_t 02\n\n    queue_context_t 1 --\u003e list_head 1\n    list_head 1 \u003c--\u003e element_t 11\n    element_t 11 \u003c--\u003e element_t 12\n\n    queue_context_t 2 --\u003e list_head 2\n    list_head 2 \u003c--\u003e element_t 21\n    element_t 21 \u003c--\u003e element_t 22","id-48":{"title":"qinit.c"}},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"mermaid":{"themes":["default","dark"]},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>
