@@ -242,10 +242,40 @@ CMU 15-213: Intro to Computer Systems
 
 {{< image src="/images/c/24-sync-basic-17.png" >}}
 
+```
+    # 以下四句為 Head 部分，記為 H
+    movq    (%rdi), %rcx
+    testq   %rcx, %rcx
+    jle     .L2
+    movl    $0, %eax
+
+.L3:
+    movq    cnt(%rip), %rdx # 讀取 cnt，記為 L
+    addq    $1, %rdx        # 更新 cnt，記為 U
+    movq    %rdx, cnt(%rip) # 寫入 cnt，記為 S
+    # 以下為 Tail 部分，記為 T
+    addq    $1, %rax
+    cmpq    %rcx, %rax
+    jne     .L3
+.L2:
+```
+
+> cnt 使用 volatile 關鍵字聲明，意思是避免編譯器產生的程式碼中，透過暫存器來保存數值，無論是讀取還是寫入，都在主記憶體操作。
+
+> 細部的步驟分成 5 步：H -> L -> U -> S -> T，尤其要注意 LUS 這三個操作，這三個操作必須在一次執行中完成，一旦次序打亂，就會出現問題，不同執行緒拿到的值就不一定是最新的。也就是說該函式的正確執行和指令的執行順序有關
+
 > mutual exclusion (互斥) 手段的選擇，不是根據 CS 的大小，而是根據 CS 的性質，以及有哪些部分的程式碼，也就是，仰賴於核心內部的執行路徑。
 
 > semaphore 和 spinlock 屬於不同層次的互斥手段，前者的實現仰賴於後者，可類比於 HTTP 和 TCP/IP 的關係，儘管都算是網路通訊協定，但層次截然不同
 
 ### Angrave's Crowd-Sourced System Programming Book used at UIUC
 
+- [x] [Synchronization, Part 1: Mutex Locks](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-1%3A-Mutex-Locks)
 
+> You can use the macro `PTHREAD_MUTEX_INITIALIZER` only for global ('static') variables. `m = PTHREAD_MUTEX_INITIALIZER` is equivalent to the more general purpose `pthread_mutex_init(&m,NULL)`. The init version includes options to trade performance for additional error-checking and advanced sharing options.
+
+> Basically try to keep to the pattern of one thread initializing a mutex and one and only one thread destroying a mutex.
+
+> This process runs slower because we lock and unlock the mutex a million times, which is expensive - at least compared with incrementing a variable. (And in this simple example we didn't really need threads - we could have added up twice!) A faster multi-thread example would be to add one million using an automatic(local) variable and only then adding it to a shared total after the calculation loop has finished
+
+- [ ] [Synchronization, Part 2: Counting Semaphores](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-2%3A-Counting-Semaphores)
