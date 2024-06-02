@@ -45,8 +45,10 @@ POSIX 的全称是 Portable Operating System Interfaces，结合上图，所以�
 从 CPU 厂商群魔乱舞中诞生的标准，自然是要保证可移植 Portable 的啦 :rofl:
 {{< /details >}}
 
+{{< admonition success >}}
 下面的这个由 Lawrence Livermore National Laboratory 撰写的教程文档写的非常棒，值得一读 (他们还有关于 HPC 高性能计算的相关教程文档):
 - [POSIX Threads Programming](https://hpc-tutorials.llnl.gov/posix/)
+{{< /admonition >}}
 
 ### Synchronizing Threads
 
