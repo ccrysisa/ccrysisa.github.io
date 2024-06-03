@@ -270,14 +270,79 @@ CMU 15-213: Intro to Computer Systems
 
 > semaphore 和 spinlock 屬於不同層次的互斥手段，前者的實現仰賴於後者，可類比於 HTTP 和 TCP/IP 的關係，儘管都算是網路通訊協定，但層次截然不同
 
-### Angrave's Crowd-Sourced System Programming Book used at UIUC
+### System Programming wiki-book: Synchronization
 
-- [x] [Synchronization, Part 1: Mutex Locks](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-1%3A-Mutex-Locks)
+#### [Part 1: Mutex Locks](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-1%3A-Mutex-Locks)
 
 > You can use the macro `PTHREAD_MUTEX_INITIALIZER` only for global ('static') variables. `m = PTHREAD_MUTEX_INITIALIZER` is equivalent to the more general purpose `pthread_mutex_init(&m,NULL)`. The init version includes options to trade performance for additional error-checking and advanced sharing options.
 
-> Basically try to keep to the pattern of one thread initializing a mutex and one and only one thread destroying a mutex.
+静态 (static) 初始化和动态 (dynamic) 初始化，其中静态初始化创建的是一个全局 (global) 的 mutex，而动态初始化则是对已有的 mutex 进行初始化设置
+
+> - Multiple threads doing init/destroy has undefined behavior
+> - Destroying a locked mutex has undefined behavior
+> - Basically try to keep to the pattern of one thread initializing a mutex and one and only one thread destroying a mutex.
+
+mutex 的初始化和销毁需要注意只能调用一次，否则会导致 UB
 
 > This process runs slower because we lock and unlock the mutex a million times, which is expensive - at least compared with incrementing a variable. (And in this simple example we didn't really need threads - we could have added up twice!) A faster multi-thread example would be to add one million using an automatic(local) variable and only then adding it to a shared total after the calculation loop has finished
 
-- [ ] [Synchronization, Part 2: Counting Semaphores](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-2%3A-Counting-Semaphores)
+有时候并不需要每次使用 mutex，这样会导致性能降低，分析程序的逻辑从而减少 mutex 的使用次数
+
+Linux man page:
+- [pthread_mutex_lock](http://linux.die.net/man/3/pthread_mutex_lock)
+- [pthread_mutex_unlock](http://linux.die.net/man/3/pthread_mutex_unlock)
+- [pthread_mutex_init](http://linux.die.net/man/3/pthread_mutex_init)
+- [pthread_mutex_destroy](http://linux.die.net/man/3/pthread_mutex_destroy)
+
+#### [Part 2: Counting Semaphores](https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-2%3A-Counting-Semaphores)
+
+> A counting semaphore contains a value[ non negative ] and supports two operations "wait" and "post". Post increments the semaphore and immediately returns. "wait" will wait if the count is zero. If the count is non-zero the wait call decrements the count and immediately returns.
+
+信号量的定义和的两种操作: `wait` 和 `post`，本质上都是对资源总量的操作
+
+> First decide if the initial value should be zero or some other value (e.g. the number of remaining spaces in an array). 
+
+创建信号量时也是需要先确定资源总量，例如数组元素的个数
+
+> Unlike a mutex, the increment and decrement can be from different threads. 
+
+信号量和 mutex 那种持有者才有权利进行释放的设置不同，信号量不存在持有者这一说法 (因为它是从资源总量进行考量的，自然不存在信号量的持有者这一概念)，所以不同 thread 都可以对信号量进行操作 (通过 `wait` 和 `post`)
+
+> A mutex is an initialized semaphore that always `waits` before it `posts`
+
+当信号量设定的资源总量为 1 时，它和 mutex 的功能十分相似，当然还需要保证使用时先使用 `wait` 在使用 `post` 操作，其功能才和 mutex 一致，否则会造成数据竞争 (先使用 `post` 会导致资源总量由 1 变为 2)
+
+> `sem_post` is one of a handful of functions that can be correctly used inside a signal handler. This means we can release a waiting thread which can now make all of the calls that we were not allowed to call inside the signal handler itself (e.g. printf).
+
+```c
+void handler(int signal) {
+    sem_post(&s); /* Release the Kraken! */
+}
+
+void *singsong(void *param) {
+    sem_wait(&s); // see the value of semaphore  value which was used to initialize it
+    printf("I had to wait until your signal released me!\n");
+}
+```
+
+Linux man page:
+- [sem_init](http://man7.org/linux/man-pages/man3/sem_init.3.html)
+- [sem_wait](http://man7.org/linux/man-pages/man3/sem_wait.3.html)
+- [sem_post](http://man7.org/linux/man-pages/man3/sem_post.3.html)
+- [sem_destroy](http://man7.org/linux/man-pages/man3/sem_destroy.3.html)
+
+#### [Part 3: Working with Mutexes And Semaphores](https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-3:-Working-with-Mutexes-And-Semaphores)
+
+> Incrementing a variable (`i++`) is not atomic because it requires three distinct steps: Copying the bit pattern from memory into the CPU; performing a calculation using the CPU's registers; copying the bit pattern back to memory. During this increment sequence, another thread or process can still read the old value and other writes to the same memory would also be over-written when the increment sequence completes.
+
+一个常见的数据竞争的例子
+
+> We will call these two semaphores 'sremain' and 'sitems'. Remember `sem_wait` will wait if the semaphore's count has been decremented to zero (by another thread calling `sem_post`).
+
+在生产者和消费者模型中，通常是使用两个信号量来衡量资源总量，两个角度 (生产者和消费者) 来看待资源的可用量
+
+> However there is no mutual exclusion: Two threads can be in the critical section at the same time, which would corrupt the data structure (or least lead to data loss). The fix is to wrap a mutex around the critical section
+
+信号量只能保证资源总量的正确使用，但无法生成更小精度 (例如针对某个元素) 的互斥区，此时需要搭配 mutex 来使用
+
+#### [Part 4: The Critical Section Problem](https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-4:-The-Critical-Section-Problem)
