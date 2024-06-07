@@ -61,7 +61,7 @@ repost:
 - [ ] [Intro To Compiler Development](https://slide.logan.tw/compiler-intro/#/)
 - [ ] [The C++ Build Process Explained](https://github.com/green7ea/blog)
 
-{{< image src="/images/c/From-Source%20to%20-Binary-3.png" >}}
+{{< image src="/images/c/From-Source-to-Binary-3.png" >}}
 
 这个流程十分重要，不仅可以理解程序的执行流程，也可以作为理解语言设计的视角。
 

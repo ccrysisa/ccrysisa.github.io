@@ -563,3 +563,177 @@ int mutex_unlock(mutex* mtx){
 #### Part 5: Condition Variables
 
 - [原文地址](https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-5:-Condition-Variables)
+
+What are condition variables? 
+
+- Condition variables allow a set of threads to sleep until tickled! You can tickle one thread or all threads that are sleeping. If you only wake one thread then the operating system will decide which thread to wake up. You don't wake threads directly instead you 'signal' the condition variable, which then will wake up one (or all) threads that are sleeping inside the condition variable.
+
+- Condition variables are used with a mutex and with a loop (to check a condition).
+
+- Occasionally a waiting thread may appear to wake up for no reason (this is called a spurious wake)! This is not an issue because you always use `wait` inside a loop that tests a condition that must be true to continue.
+
+- Threads sleeping inside a condition variable are woken up by calling `pthread_cond_broadcast` (wake up all) or `pthread_cond_signal` (wake up one). Note despite the function name, this has nothing to do with POSIX `signals`!
+
+The call pthread_cond_wait performs three actions:
+
+1. unlock the mutex
+2. waits (sleeps until pthread_cond_signal is called on the same condition variable). It does 1 and 2 atomically.
+3. Before returning, locks the mutex
+
+Condition variables need a mutex for three reasons. 
+
+> The simplest to understand is that it prevents an early wakeup message (`signal` or `broadcast` functions) from being 'lost.' 
+
+> A second common reason is that updating the program state (`answer` variable) typically requires mutual exclusion - for example multiple threads may be updating the value of `answer`.
+
+> A third and subtle reason is to satisfy real-time scheduling concerns which we only outline here: In a time-critical application, the waiting thread with the highest priority should be allowed to continue first.
+
+Why do spurious wakes exist?
+
+> For performance. On multi-CPU systems it is possible that a race-condition could cause a wake-up (signal) request to be unnoticed. The kernel may not detect this lost wake-up call but can detect when it might occur. To avoid the potential lost signal the thread is woken up so that the program code can test the condition again.
+
+条件变量主要考虑 wait 方，即当条件不满足时需要进行 wait，又因为等待条件是双方都可以访问的，所以对于等待条件的访问/修改需要加上互斥锁 mutex 来保护，对于 signal 方就和普通的 mutex 使用类似，修改等待条件时需要加上互斥锁，然后条件满足时需要向 wit 方发送唤醒信号。总结一下条件变量的三大要素: **条件**，**互斥锁** 以及用于唤醒/睡眠机制的 **ConVar**。
+
+```c
+pthread_mutex_lock(&m);
+while (count < 10) {
+    pthread_cond_wait(&cv, &m); 
+}
+pthread_mutex_unlock(&m);
+```
+
+```c
+while (1) {
+    pthread_mutex_lock(&m);
+    count++;
+    pthread_cond_signal(&cv);
+    pthread_mutex_unlock(&m);
+}
+```
+
+上面例子的三大要素分别对应为: 
+- **条件**: `count`
+- **互斥锁**: `m`
+- **ConVar**: `cv`
+
+原文后面的使用条件变量 (condition variables) 来实现信号量 (semaphore) 页可以通过这个三大要素进行分析，下面以 `sem_t` 结构体为例进行分析，`sem_init`, `sem_post`, `sem_wait` 这些函数留作练习:
+
+```c
+typedef struct sem_t {
+    int count;              // 条件
+    pthread_mutex_t m;      // 互斥锁
+    pthread_condition_t cv; // ConVar
+} sem_t;
+```
+
+{{< admonition >}}
+可以把条件变量视为一个房子，而 signal 方可视为是房子的 **主人**，任意时候都可以直接进入房子，并且可以更改客人进入房子的条件；而 wait 方可视为 **客人**，只有在主人允许时才能被通知进入房子。
+{{< /admonition >}}
+
+#### Part 6: Implementing a barrier
+
+- [原文地址](https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-6:-Implementing-a-barrier)
+
+> We could use a synchronization method called a **barrier**. When a thread reaches a barrier, it will wait at the barrier until all the threads reach the barrier, and then they'll all proceed together.
+
+屏障 (barriers) 可以实现多执行绪程序设计中经典的 fork-join 模型
+
+> Pthreads has a function `pthread_barrier_wait()` that implements this. You'll need to declare a `pthread_barrier_t` variable and initialize it with `pthread_barrier_init()`. `pthread_barrier_init()` takes the number of threads that will be participating in the barrier as an argument. [Here's an example](https://github.com/angrave/SystemProgramming/wiki/Sample-program-using-pthread-barriers).
+
+```c
+pthread_mutex_lock(&m);
+remain--; 
+if (remain == 0) { pthread_cond_broadcast(&cv); }
+else {
+    while (remain != 0) { pthread_cond_wait(&cv, &m); }
+}
+pthread_mutex_unlock(&m);
+```
+
+多线程下的条件变量的使用，其本质和之前所提的三要素是符合的，因为每个线程只可能执行 `if-else` 部分的其中一个分支，而不同分支则分别代表了 `post` 和 `wait` 方法。
+
+#### Part 7: The Reader Writer Problem
+
+- [原文地址](https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-7:-The-Reader-Writer-Problem)
+
+What is the Reader Writer Problem?
+
+> Multiple threads should be able to look up (read) values at the same time provided the data structure is not being written to. 
+
+> to avoid data corruption, only one thread at a time may modify (write) the data structure (and no readers may be reading at that time).
+
+Rust 的不可变引用 `&T` 和可变引用 `&mut T` 实作了这一点 :rofl:
+
+```c
+read() {
+    lock(&m);
+**  while (writing)
+**      cond_wait(&cv, &m)
+**  reading++;
+    unlock(&m)
+/* Read here! */
+    lock(&m)
+**  reading--
+**  cond_signal(&cv)
+    unlock(&m)
+}
+```
+
+```c
+write() {
+    lock(&m);
+**  while (reading || writing)
+**      cond_wait(&cv, &m);
+**  writing++;
+**
+** /* Write here! */
+**  writing--;
+**  cond_signal(&cv);
+    unlock(&m);
+}
+```
+
+实际上可以将 `write` 的条件变量的使用也像 `read` 分为两部分，但这样也只有一个 `write` 可以进入到 `Write here!` 处，实质上已经互斥了，所以就没必要分为两部分了。
+
+> Candidate #3 above suffers from starvation. If readers are constantly arriving then a writer will never be able to proceed (the 'reading' count never reduces to zero). This is known as starvation and would be discovered under heavy loads.
+
+这种 **多读单写** 模型了另一个重要考量点是: `write` 线程可能会被 **饿死 (starvation)**
+
+> Our fix is to implement a bounded-wait for the writer. If a writer arrives they will still need to wait for existing readers however future readers must be placed in a "holding pen" and wait for the writer to finish. The "holding pen" can be implemented using a variable and a condition variable (so that we can wake up the threads once the writer has finished).
+
+```c
+write() {
+    lock()
+    writer++
+
+    while (reading || writing)
+        cond_wait
+    unlock()
+  ...
+}
+```
+
+```c
+read() {
+    lock()
+    // readers that arrive *after* the writer arrived will have to wait here!
+    while(writer)
+        cond_wait(&cv,&m)
+
+    // readers that arrive while there is an active writer
+    // will also wait.
+    while (writing) 
+        cond_wait(&cv,&m)
+    reading++
+    unlock
+  ...
+}
+```
+
+这样即使完成读操作的线程进行唤醒，在 write 线程后面抵达的 read 线程被唤醒也会因为不满足条件而进行睡眠等待，只有 write 线程才会对条件变量进行回应。
+
+#### Part 8: Ring Buffer Example
+
+- [原文地址](https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-8:-Ring-Buffer-Example)
+
+
