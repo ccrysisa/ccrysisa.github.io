@@ -9,14 +9,14 @@
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Sysprog, Linux, Concurrency' /><meta itemprop="name" content="并行程序设计: POSIX Threads">
 <meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-04-10T16:09:35+08:00" />
-<meta itemprop="dateModified" content="2024-05-15T15:59:01+08:00" />
-<meta itemprop="wordCount" content="1969"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-06-07T12:19:29+08:00" />
+<meta itemprop="wordCount" content="5891"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux,Concurrency," /><meta property="og:title" content="并行程序设计: POSIX Threads" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/posix-threads/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-10T16:09:35+08:00" />
-<meta property="article:modified_time" content="2024-05-15T15:59:01+08:00" />
+<meta property="article:modified_time" content="2024-06-07T12:19:29+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="并行程序设计: POSIX Threads"/>
@@ -35,8 +35,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/posix-threads\/"
-    },"genre": "posts","keywords": "Sysprog, Linux, Concurrency","wordcount":  1969 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/posix-threads\/","datePublished": "2024-04-10T16:09:35+08:00","dateModified": "2024-05-15T15:59:01+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, Linux, Concurrency","wordcount":  5891 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/posix-threads\/","datePublished": "2024-04-10T16:09:35+08:00","dateModified": "2024-06-07T12:19:29+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -164,7 +164,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/concurrency/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Concurrency</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-04-10 16:09:35"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-10">2024-04-10</time></span>&nbsp;<span title="更新于 2024-05-15 15:59:01"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-15">2024-05-15</time></span>&nbsp;<span title="1969 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-04-10 16:09:35"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-10">2024-04-10</time></span>&nbsp;<span title="更新于 2024-06-07 12:19:29"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-07">2024-06-07</time></span>&nbsp;<span title="5891 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 5900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 12 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -193,7 +193,18 @@
     </li>
     <li><a href="#synchronization">Synchronization</a>
       <ul>
-        <li><a href="#angraves-crowd-sourced-system-programming-book-used-at-uiuc">Angrave&rsquo;s Crowd-Sourced System Programming Book used at UIUC</a></li>
+        <li><a href="#system-programming-wiki-book-synchronization">System Programming wiki-book: Synchronization</a>
+          <ul>
+            <li><a href="#part-1-mutex-locks">Part 1: Mutex Locks</a></li>
+            <li><a href="#part-2-counting-semaphores">Part 2: Counting Semaphores</a></li>
+            <li><a href="#part-3-working-with-mutexes-and-semaphores">Part 3: Working with Mutexes And Semaphores</a></li>
+            <li><a href="#part-4-the-critical-section-problem">Part 4: The Critical Section Problem</a></li>
+            <li><a href="#part-5-condition-variables">Part 5: Condition Variables</a></li>
+            <li><a href="#part-6-implementing-a-barrier">Part 6: Implementing a barrier</a></li>
+            <li><a href="#part-7-the-reader-writer-problem">Part 7: The Reader Writer Problem</a></li>
+            <li><a href="#part-8-ring-buffer-example">Part 8: Ring Buffer Example</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -292,7 +303,7 @@ $\rightarrow$ 在使用 coroutinues 后执行流程变成 $\rightarrow$
 </div>
 </div><a class="lightgallery" href="https://imgur-backup.hackmd.io/mE4l7n1.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/mE4l7n1.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/mE4l7n1.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/mE4l7n1.png" srcset="https://imgur-backup.hackmd.io/mE4l7n1.png?size=small, https://imgur-backup.hackmd.io/mE4l7n1.png?size=medium 1.5x, https://imgur-backup.hackmd.io/mE4l7n1.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/mE4l7n1.png" data-alt="https://imgur-backup.hackmd.io/mE4l7n1.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <ul>
-<li>Only the <strong id="id-8">owner</strong> can unlock a mutex. Since mutexes cannot be copied, use pointers.</li>
+<li>Only the <strong id="id-29">owner</strong> can unlock a mutex. Since mutexes cannot be copied, use pointers.</li>
 <li>If <code>pthread_mutex_trylock()</code> returns <code>EBUSY</code>, the lock is already locked. Otherwise, the calling thread becomes the owner of this lock.</li>
 <li>With <code>pthread_mutexattr_settype()</code>, the type of a mutex can be set to allow recursive locking or report deadlock if the owner locks again</li>
 </ul>
@@ -451,7 +462,7 @@ $\rightarrow$ 在使用 coroutinues 后执行流程变成 $\rightarrow$
 <li><a href="https://hpc-tutorials.llnl.gov/posix/"target="_blank" rel="external nofollow noopener noreferrer">POSIX Threads Programming</a></li>
 </ul>
 <blockquote>
-<p>Condition variables provide yet another way for threads to synchronize. While mutexes implement synchronization by controlling thread access to data, <strong id="id-9">condition variables allow threads to synchronize based upon the actual value of data.</strong></p>
+<p>Condition variables provide yet another way for threads to synchronize. While mutexes implement synchronization by controlling thread access to data, <strong id="id-30">condition variables allow threads to synchronize based upon the actual value of data.</strong></p>
 </blockquote>
 <p>condition variables 由两种不同的初始化方式:</p>
 <ul>
@@ -515,26 +526,732 @@ $\rightarrow$ 在使用 coroutinues 后执行流程变成 $\rightarrow$
 <blockquote>
 <p>semaphore 和 spinlock 屬於不同層次的互斥手段，前者的實現仰賴於後者，可類比於 HTTP 和 TCP/IP 的關係，儘管都算是網路通訊協定，但層次截然不同</p>
 </blockquote>
-<h3 id="angraves-crowd-sourced-system-programming-book-used-at-uiuc">Angrave&rsquo;s Crowd-Sourced System Programming Book used at UIUC</h3>
+<h3 id="system-programming-wiki-book-synchronization">System Programming wiki-book: Synchronization</h3>
+<h4 id="part-1-mutex-locks">Part 1: Mutex Locks</h4>
 <ul>
-<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-1%3A-Mutex-Locks"target="_blank" rel="external nofollow noopener noreferrer">Synchronization, Part 1: Mutex Locks</a></li>
+<li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-1%3A-Mutex-Locks"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
 </ul>
 <blockquote>
 <p>You can use the macro <code>PTHREAD_MUTEX_INITIALIZER</code> only for global (&lsquo;static&rsquo;) variables. <code>m = PTHREAD_MUTEX_INITIALIZER</code> is equivalent to the more general purpose <code>pthread_mutex_init(&amp;m,NULL)</code>. The init version includes options to trade performance for additional error-checking and advanced sharing options.</p>
 </blockquote>
+<p>静态 (static) 初始化和动态 (dynamic) 初始化，其中静态初始化创建的是一个全局 (global) 的 mutex，而动态初始化则是对已有的 mutex 进行初始化设置</p>
 <blockquote>
-<p>Basically try to keep to the pattern of one thread initializing a mutex and one and only one thread destroying a mutex.</p>
+<ul>
+<li>Multiple threads doing init/destroy has undefined behavior</li>
+<li>Destroying a locked mutex has undefined behavior</li>
+<li>Basically try to keep to the pattern of one thread initializing a mutex and one and only one thread destroying a mutex.</li>
+</ul>
 </blockquote>
+<p>mutex 的初始化和销毁需要注意只能调用一次，否则会导致 UB</p>
 <blockquote>
 <p>This process runs slower because we lock and unlock the mutex a million times, which is expensive - at least compared with incrementing a variable. (And in this simple example we didn&rsquo;t really need threads - we could have added up twice!) A faster multi-thread example would be to add one million using an automatic(local) variable and only then adding it to a shared total after the calculation loop has finished</p>
 </blockquote>
+<p>有时候并不需要每次使用 mutex，这样会导致性能降低，分析程序的逻辑从而减少 mutex 的使用次数</p>
+<p>Linux man page:</p>
 <ul>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-2%3A-Counting-Semaphores"target="_blank" rel="external nofollow noopener noreferrer">Synchronization, Part 2: Counting Semaphores</a></li>
+<li><a href="http://linux.die.net/man/3/pthread_mutex_lock"target="_blank" rel="external nofollow noopener noreferrer">pthread_mutex_lock</a></li>
+<li><a href="http://linux.die.net/man/3/pthread_mutex_unlock"target="_blank" rel="external nofollow noopener noreferrer">pthread_mutex_unlock</a></li>
+<li><a href="http://linux.die.net/man/3/pthread_mutex_init"target="_blank" rel="external nofollow noopener noreferrer">pthread_mutex_init</a></li>
+<li><a href="http://linux.die.net/man/3/pthread_mutex_destroy"target="_blank" rel="external nofollow noopener noreferrer">pthread_mutex_destroy</a></li>
+</ul>
+<h4 id="part-2-counting-semaphores">Part 2: Counting Semaphores</h4>
+<ul>
+<li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-2%3A-Counting-Semaphores"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
+</ul>
+<blockquote>
+<p>A counting semaphore contains a value[ non negative ] and supports two operations &ldquo;wait&rdquo; and &ldquo;post&rdquo;. Post increments the semaphore and immediately returns. &ldquo;wait&rdquo; will wait if the count is zero. If the count is non-zero the wait call decrements the count and immediately returns.</p>
+</blockquote>
+<p>信号量的定义和的两种操作: <code>wait</code> 和 <code>post</code>，本质上都是对资源总量的操作</p>
+<blockquote>
+<p>First decide if the initial value should be zero or some other value (e.g. the number of remaining spaces in an array).</p>
+</blockquote>
+<p>创建信号量时也是需要先确定资源总量，例如数组元素的个数</p>
+<blockquote>
+<p>Unlike a mutex, the increment and decrement can be from different threads.</p>
+</blockquote>
+<p>信号量和 mutex 那种持有者才有权利进行释放的设置不同，信号量不存在持有者这一说法 (因为它是从资源总量进行考量的，自然不存在信号量的持有者这一概念)，所以不同 thread 都可以对信号量进行操作 (通过 <code>wait</code> 和 <code>post</code>)</p>
+<blockquote>
+<p>A mutex is an initialized semaphore that always <code>waits</code> before it <code>posts</code></p>
+</blockquote>
+<p>当信号量设定的资源总量为 1 时，它和 mutex 的功能十分相似，当然还需要保证使用时先使用 <code>wait</code> 在使用 <code>post</code> 操作，其功能才和 mutex 一致，否则会造成数据竞争 (先使用 <code>post</code> 会导致资源总量由 1 变为 2)</p>
+<blockquote>
+<p><code>sem_post</code> is one of a handful of functions that can be correctly used inside a signal handler. This means we can release a waiting thread which can now make all of the calls that we were not allowed to call inside the signal handler itself (e.g. printf).</p>
+</blockquote>
+<div class="highlight" id="id-8"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">handler</span><span class="p">(</span><span class="kt">int</span> <span class="n">signal</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">sem_post</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="p">);</span> <span class="cm">/* Release the Kraken! */</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="o">*</span><span class="nf">singsong</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">param</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">sem_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">s</span><span class="p">);</span> <span class="c1">// see the value of semaphore  value which was used to initialize it
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;I had to wait until your signal released me!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Linux man page:</p>
+<ul>
+<li><a href="http://man7.org/linux/man-pages/man3/sem_init.3.html"target="_blank" rel="external nofollow noopener noreferrer">sem_init</a></li>
+<li><a href="http://man7.org/linux/man-pages/man3/sem_wait.3.html"target="_blank" rel="external nofollow noopener noreferrer">sem_wait</a></li>
+<li><a href="http://man7.org/linux/man-pages/man3/sem_post.3.html"target="_blank" rel="external nofollow noopener noreferrer">sem_post</a></li>
+<li><a href="http://man7.org/linux/man-pages/man3/sem_destroy.3.html"target="_blank" rel="external nofollow noopener noreferrer">sem_destroy</a></li>
+</ul>
+<h4 id="part-3-working-with-mutexes-and-semaphores">Part 3: Working with Mutexes And Semaphores</h4>
+<ul>
+<li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-3:-Working-with-Mutexes-And-Semaphores"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
+</ul>
+<blockquote>
+<p>Incrementing a variable (<code>i++</code>) is not atomic because it requires three distinct steps: Copying the bit pattern from memory into the CPU; performing a calculation using the CPU&rsquo;s registers; copying the bit pattern back to memory. During this increment sequence, another thread or process can still read the old value and other writes to the same memory would also be over-written when the increment sequence completes.</p>
+</blockquote>
+<p>一个常见的数据竞争的例子</p>
+<blockquote>
+<p>We will call these two semaphores &lsquo;sremain&rsquo; and &lsquo;sitems&rsquo;. Remember <code>sem_wait</code> will wait if the semaphore&rsquo;s count has been decremented to zero (by another thread calling <code>sem_post</code>).</p>
+</blockquote>
+<p>在生产者和消费者模型中，通常是使用两个信号量来衡量资源总量，两个角度 (生产者和消费者) 来看待资源的可用量</p>
+<blockquote>
+<p>However there is no mutual exclusion: Two threads can be in the critical section at the same time, which would corrupt the data structure (or least lead to data loss). The fix is to wrap a mutex around the critical section</p>
+</blockquote>
+<p>信号量只能保证资源总量的正确使用，但无法生成更小精度 (例如针对某个元素) 的互斥区，此时需要搭配 mutex 来使用</p>
+<h4 id="part-4-the-critical-section-problem">Part 4: The Critical Section Problem</h4>
+<ul>
+<li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-4:-The-Critical-Section-Problem"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
+</ul>
+<div class="highlight" id="id-9"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// Candidate #1
+</span></span><span class="line"><span class="cl">wait until your flag is lowered
+</span></span><span class="line"><span class="cl">raise my flag
+</span></span><span class="line"><span class="cl">// Do Critical Section stuff
+</span></span><span class="line"><span class="cl">lower my flag </span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Candidate solution #1 also suffers a race condition i.e. it does not satisfy Mutual Exclusion because both threads/processes could read each other&rsquo;s flag value (=lowered) and continue.</p>
+</blockquote>
+<p>等待对方的 flag 降下，但是可能会同时看到对方的 flag 都为降下状态，进而导致都进入 CS</p>
+<div class="highlight" id="id-10"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// Candidate #2
+</span></span><span class="line"><span class="cl">raise my flag
+</span></span><span class="line"><span class="cl">wait until your flag is lowered
+</span></span><span class="line"><span class="cl">// Do Critical Section stuff
+</span></span><span class="line"><span class="cl">lower my flag </span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Candidate #2 satisfies mutual exclusion - it is impossible for two threads to be inside the critical section at the same time. However this code suffers from deadlock!</p>
+</blockquote>
+<p>谦让式: 升起自己的 flag 表示自己想要进入 CS，但如果对方的 flag 页升起的话，则进行谦让。如果双方同时升起 flag 的话，则会双方都进行谦让而导致死锁。</p>
+<div class="highlight" id="id-11"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">// Candidate #3
+</span></span><span class="line"><span class="cl">wait until my turn is myid
+</span></span><span class="line"><span class="cl">// Do Critical Section stuff
+</span></span><span class="line"><span class="cl">turn = yourid</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Candidate #3 satisfies mutual exclusion (each thread or process gets exclusive access to the Critical Section), however both threads/processes must take a strict turn-based approach to using the critical section</p>
+</blockquote>
+<p>按顺序进入 CS，类似于协作式多工，但因为需要严格遵循顺序，会导致即使对方不需要进入 CS，但为了保证顺序，需要让对方先进入 CS，然后自己才能进入 CS</p>
+<blockquote>
+<p>There are three main desirable properties that we desire in a solution the critical section problem</p>
+<ul>
+<li><strong>Mutual Exclusion</strong> - the thread/process gets exclusive access; others must wait until it exits the critical section.</li>
+<li><strong>Bounded Wait</strong> - if the thread/process has to wait, then it should only have to wait for a finite, amount of time (infinite waiting times are not allowed!). The exact definition of bounded wait is that there is an upper (non-infinite) bound on the number of times any other process can enter its critical section before the given process enters.</li>
+<li><strong>Progress</strong> - if no thread/process is inside the critical section, then the thread/process should be able to proceed (make progress) without having to wait.</li>
+</ul>
+</blockquote>
+<div class="highlight" id="id-12"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">\\ Candidate #4
+</span></span><span class="line"><span class="cl">raise my flag
+</span></span><span class="line"><span class="cl">if your flag is raised, wait until my turn
+</span></span><span class="line"><span class="cl">// Do Critical Section stuff
+</span></span><span class="line"><span class="cl">turn = yourid
+</span></span><span class="line"><span class="cl">lower my flag</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Imagine the first thread runs this code twice (so the turn flag now points to the second thread). While the first thread is still inside the Critical Section, the second thread arrives. The second thread can immediately continue into the Critical Section!</p>
+</blockquote>
+<p>想要进入 CS 的线程需要先举起自己的 flag，如果对方没有升起 flag 或生起了 flag 但没到对方的顺序时，本线程可以直接进入 CS，否则需要按照顺序等待对方。这个方案看起来无懈可击，但由于这里的顺序会赋予线程进入 CS 的优先级，所以有些状况下并不符合互斥的要求</p>
+<p><strong>Peterson&rsquo;s solution</strong></p>
+<blockquote>
+<p>Peterson published his novel and surprisingly simple solution in a 2 page paper in 1981.</p>
+</blockquote>
+<div class="highlight" id="id-13"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">\\ Candidate #5
+</span></span><span class="line"><span class="cl">raise my flag
+</span></span><span class="line"><span class="cl">turn = your_id
+</span></span><span class="line"><span class="cl">wait while your flag is raised and turn is your_id
+</span></span><span class="line"><span class="cl">// Do Critical Section stuff
+</span></span><span class="line"><span class="cl">lower my flag</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight" id="id-14"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="err">\\</span> <span class="n">Candidate</span> <span class="err">#</span><span class="mi">5</span>
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">flag1</span><span class="p">,</span> <span class="n">flag2</span>  <span class="c1">//both initially false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">flag</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nl">thread1</span><span class="p">:</span>                          <span class="nl">thread2</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">flag1</span> <span class="o">=</span> <span class="nb">true</span>                      <span class="n">flag2</span> <span class="o">=</span> <span class="nb">true</span>
+</span></span><span class="line"><span class="cl">  <span class="n">turn</span> <span class="o">=</span> <span class="mi">2</span>                          <span class="n">turn</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span><span class="p">(</span><span class="n">flag2</span> <span class="o">&amp;&amp;</span> <span class="n">turn</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{}</span>      <span class="k">while</span><span class="p">(</span><span class="n">flag1</span> <span class="o">&amp;&amp;</span> <span class="n">turn</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Critical</span> <span class="n">Section</span>                  <span class="n">Critical</span> <span class="n">Section</span>
+</span></span><span class="line"><span class="cl">  <span class="n">flag1</span> <span class="o">=</span> <span class="nb">false</span>                     <span class="n">flag2</span> <span class="o">=</span> <span class="nb">false</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>This solution satisfies Mutual Exclusion, Bounded Wait and Progress. If thread #2 has set turn to 1 and is currently inside the critical section. Thread #1 arrives, sets the turn back to 2 and now waits until thread 2 lowers the flag.</p>
+</blockquote>
+<p>Peterson 算法相比之前的方案只是将顺序的设定提前了，但却解决了之前方案的互斥问题，因为这样设定会使得 <code>your flag is raised and turn is your_id</code> 这个状态只可能出现在对方处于 CS 时，如果对方同时与自己争夺 CS 的进入权时，对方的状态是 <code>your flag is raised and turn is my_id</code>，从而将争夺进入权和已处于 CS 的状态进行了区分，解决了互斥问题。</p>
+<blockquote>
+<p>Dekkers Algorithm (1962) was the first provably correct solution. A version of the algorithm is below.</p>
+</blockquote>
+<div class="highlight" id="id-15"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">raise my flag
+</span></span><span class="line"><span class="cl">while(your flag is raised) :
+</span></span><span class="line"><span class="cl">   if it&#39;s your turn to win :
+</span></span><span class="line"><span class="cl">     lower my flag
+</span></span><span class="line"><span class="cl">     wait while your turn
+</span></span><span class="line"><span class="cl">     raise my flag
+</span></span><span class="line"><span class="cl">// Do Critical Section stuff
+</span></span><span class="line"><span class="cl">set your turn to win
+</span></span><span class="line"><span class="cl">lower my flag</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个算法中的 flag 表示 CS 的进入权: 如果对方的 flag 未升起，则可以直接进入 CS，如果对方 flag 升起但不是对方的顺序，表示对方处于 CS 并且自己拥有接下来 CS 的进入权，所以需要等待到对方 flag 降下但同时可以不降下自己的 flag；如果对方 flag 升起并且是对方的顺序，表示是对方拥有 CS 的进入权，需要降下自己的 flag 进行谦让。</p>
+<p>编译器和处理器的指令重排序功能使得纯软件的同步算法变得 too naive</p>
+<blockquote>
+<p>However in general, CPUs and C compilers can re-order CPU instructions or use CPU-core-specific local cache values that are stale if another core updates the shared variables. Thus a simple pseudo-code to C implementation is too naive for most platforms.</p>
+</blockquote>
+<ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://bartoszmilewski.com/2008/11/05/who-ordered-memory-fences-on-an-x86/"target="_blank" rel="external nofollow noopener noreferrer">Who ordered memory fences on an x86?</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://elixir.bootlin.com/linux/latest/source/Documentation/memory-barriers.txt"target="_blank" rel="external nofollow noopener noreferrer">LINUX KERNEL MEMORY BARRIERS</a></li>
+</ul>
+<p><strong>Hardware Solutions</strong></p>
+<blockquote>
+<p>If interrupts are disabled then the current thread cannot be interrupted! i.e. the CPU instructions of the critical section will complete.</p>
+</blockquote>
+<blockquote>
+<p>However most systems today have more than one CPU core and disabling interrupts is a privileged instruction - so the above technique is rarely appropriate.</p>
+</blockquote>
+<div class="highlight" id="id-16"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">my_mutex_init</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">m</span><span class="p">)</span>  <span class="p">{</span> <span class="o">*</span><span class="n">m</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">my_mutex_lock</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">q</span> <span class="p">;</span> <span class="p">)</span> <span class="p">{</span>  <span class="nf">__exch</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span> <span class="p">,</span> <span class="o">&amp;</span><span class="n">q</span><span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c1">// when this returns it is safe to enter your critical section
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// After you critical section is finished,call unlock...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">my_mutex_unlock</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">m</span><span class="p">)</span>  <span class="p">{</span> <span class="o">*</span><span class="n">m</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>The exchange instruction must be atomic i.e. it behaves as a single <strong>uninterruptable</strong> and indivisible instruction. For example, if two threads both call <code>my_mutex_lock</code> (and then __exch) at the same time, then one thread will receive a value of 0, and the other thread will loose and get the newer value of 1 (so will continue to poll).</p>
+</blockquote>
+<p>How do we really implement the Critical Section Problem on real hardware?</p>
+<blockquote>
+<p>A complete solution using C11 atomics is detailed here</p>
+</blockquote>
+<ul>
+<li>mutex_init</li>
+</ul>
+<div class="highlight" id="id-17"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">mutex_</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">atomic_int_least8_t</span> <span class="n">lock</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">pthread_t</span> <span class="n">owner</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">mutex</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#define UNLOCKED 0
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define LOCKED 1
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define UNASSIGNED_OWNER 0
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">mutex_init</span><span class="p">(</span><span class="n">mutex</span><span class="o">*</span> <span class="n">mtx</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">mtx</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">atomic_init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mtx</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">,</span> <span class="n">UNLOCKED</span><span class="p">);</span> <span class="c1">// Not thread safe the user has to take care of this
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">mtx</span><span class="o">-&gt;</span><span class="n">owner</span> <span class="o">=</span> <span class="n">UNASSIGNED_OWNER</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>mutex_lock</li>
+</ul>
+<div class="highlight" id="id-18"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">mutex_lock</span><span class="p">(</span><span class="n">mutex</span><span class="o">*</span> <span class="n">mtx</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int_least8_t</span> <span class="n">zero</span> <span class="o">=</span> <span class="n">UNLOCKED</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="nf">atomic_compare_exchange_weak_explicit</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="o">&amp;</span><span class="n">mtx</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">             <span class="o">&amp;</span><span class="n">zero</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">             <span class="n">LOCKED</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">             <span class="n">memory_order_acq_rel</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">             <span class="n">memory_order_relaxed</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">        <span class="n">zero</span> <span class="o">=</span> <span class="n">UNLOCKED</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">sched_yield</span><span class="p">();</span> <span class="c1">//Use system calls for scheduling speed
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//We have the lock now!!!!
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">mtx</span><span class="o">-&gt;</span><span class="n">owner</span> <span class="o">=</span> <span class="nf">pthread_self</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight" id="id-19"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">atomic_compare_exchange_pseudo</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">addr1</span><span class="p">,</span> <span class="kt">int</span><span class="o">*</span> <span class="n">addr2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">addr1</span> <span class="o">==</span> <span class="o">*</span><span class="n">addr2</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="o">*</span><span class="n">addr1</span> <span class="o">=</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">*</span><span class="n">addr2</span> <span class="o">=</span> <span class="o">*</span><span class="n">addr1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>mutex_unlock</li>
+</ul>
+<div class="highlight" id="id-20"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">mutex_unlock</span><span class="p">(</span><span class="n">mutex</span><span class="o">*</span> <span class="n">mtx</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nf">unlikely</span><span class="p">(</span><span class="nf">pthread_self</span><span class="p">()</span> <span class="o">!=</span> <span class="n">mtx</span><span class="o">-&gt;</span><span class="n">owner</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">//You can&#39;t unlock a mutex if you aren&#39;t the owner
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int_least8_t</span> <span class="n">one</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mtx</span><span class="o">-&gt;</span><span class="n">owner</span> <span class="o">=</span> <span class="n">UNASSIGNED_OWNER</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//Critical section ends after this atomic
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//Also this may fail, but that is fine
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nf">atomic_compare_exchange_strong_explicit</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="o">&amp;</span><span class="n">mtx</span><span class="o">-&gt;</span><span class="n">lock</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                <span class="o">&amp;</span><span class="n">one</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">UNLOCKED</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">memory_order_acq_rel</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="n">memory_order_relaxed</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//The mutex was never locked in the first place
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="part-5-condition-variables">Part 5: Condition Variables</h4>
+<ul>
+<li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-5:-Condition-Variables"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
+</ul>
+<p>What are condition variables?</p>
+<ul>
+<li>
+<p>Condition variables allow a set of threads to sleep until tickled! You can tickle one thread or all threads that are sleeping. If you only wake one thread then the operating system will decide which thread to wake up. You don&rsquo;t wake threads directly instead you &lsquo;signal&rsquo; the condition variable, which then will wake up one (or all) threads that are sleeping inside the condition variable.</p>
+</li>
+<li>
+<p>Condition variables are used with a mutex and with a loop (to check a condition).</p>
+</li>
+<li>
+<p>Occasionally a waiting thread may appear to wake up for no reason (this is called a spurious wake)! This is not an issue because you always use <code>wait</code> inside a loop that tests a condition that must be true to continue.</p>
+</li>
+<li>
+<p>Threads sleeping inside a condition variable are woken up by calling <code>pthread_cond_broadcast</code> (wake up all) or <code>pthread_cond_signal</code> (wake up one). Note despite the function name, this has nothing to do with POSIX <code>signals</code>!</p>
+</li>
+</ul>
+<p>The call pthread_cond_wait performs three actions:</p>
+<ol>
+<li>unlock the mutex</li>
+<li>waits (sleeps until pthread_cond_signal is called on the same condition variable). It does 1 and 2 atomically.</li>
+<li>Before returning, locks the mutex</li>
+</ol>
+<p>Condition variables need a mutex for three reasons.</p>
+<blockquote>
+<p>The simplest to understand is that it prevents an early wakeup message (<code>signal</code> or <code>broadcast</code> functions) from being &rsquo;lost.&rsquo;</p>
+</blockquote>
+<blockquote>
+<p>A second common reason is that updating the program state (<code>answer</code> variable) typically requires mutual exclusion - for example multiple threads may be updating the value of <code>answer</code>.</p>
+</blockquote>
+<blockquote>
+<p>A third and subtle reason is to satisfy real-time scheduling concerns which we only outline here: In a time-critical application, the waiting thread with the highest priority should be allowed to continue first.</p>
+</blockquote>
+<p>Why do spurious wakes exist?</p>
+<blockquote>
+<p>For performance. On multi-CPU systems it is possible that a race-condition could cause a wake-up (signal) request to be unnoticed. The kernel may not detect this lost wake-up call but can detect when it might occur. To avoid the potential lost signal the thread is woken up so that the program code can test the condition again.</p>
+</blockquote>
+<p>条件变量主要考虑 wait 方，即当条件不满足时需要进行 wait，又因为等待条件是双方都可以访问的，所以对于等待条件的访问/修改需要加上互斥锁 mutex 来保护，对于 signal 方就和普通的 mutex 使用类似，修改等待条件时需要加上互斥锁，然后条件满足时需要向 wit 方发送唤醒信号。总结一下条件变量的三大要素: <strong>条件</strong>，<strong>互斥锁</strong> 以及用于唤醒/睡眠机制的 <strong>ConVar</strong>。</p>
+<div class="highlight" id="id-21"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="n">count</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_cond_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cv</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nf">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight" id="id-22"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_cond_signal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面例子的三大要素分别对应为:</p>
+<ul>
+<li><strong>条件</strong>: <code>count</code></li>
+<li><strong>互斥锁</strong>: <code>m</code></li>
+<li><strong>ConVar</strong>: <code>cv</code></li>
+</ul>
+<p>原文后面的使用条件变量 (condition variables) 来实现信号量 (semaphore) 页可以通过这个三大要素进行分析，下面以 <code>sem_t</code> 结构体为例进行分析，<code>sem_init</code>, <code>sem_post</code>, <code>sem_wait</code> 这些函数留作练习:</p>
+<div class="highlight" id="id-23"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="kt">sem_t</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">count</span><span class="p">;</span>              <span class="c1">// 条件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">pthread_mutex_t</span> <span class="n">m</span><span class="p">;</span>      <span class="c1">// 互斥锁
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">pthread_condition_t</span> <span class="n">cv</span><span class="p">;</span> <span class="c1">// ConVar
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span> <span class="kt">sem_t</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">可以把条件变量视为一个房子，而 signal 方可视为是房子的 <strong>主人</strong>，任意时候都可以直接进入房子，并且可以更改客人进入房子的条件；而 wait 方可视为 <strong>客人</strong>，只有在主人允许时才能被通知进入房子。</div>
+    </div>
+  </div>
+<h4 id="part-6-implementing-a-barrier">Part 6: Implementing a barrier</h4>
+<ul>
+<li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-6:-Implementing-a-barrier"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
+</ul>
+<blockquote>
+<p>We could use a synchronization method called a <strong>barrier</strong>. When a thread reaches a barrier, it will wait at the barrier until all the threads reach the barrier, and then they&rsquo;ll all proceed together.</p>
+</blockquote>
+<p>屏障 (barriers) 可以实现多执行绪程序设计中经典的 fork-join 模型</p>
+<blockquote>
+<p>Pthreads has a function <code>pthread_barrier_wait()</code> that implements this. You&rsquo;ll need to declare a <code>pthread_barrier_t</code> variable and initialize it with <code>pthread_barrier_init()</code>. <code>pthread_barrier_init()</code> takes the number of threads that will be participating in the barrier as an argument. <a href="https://github.com/angrave/SystemProgramming/wiki/Sample-program-using-pthread-barriers"target="_blank" rel="external nofollow noopener noreferrer">Here&rsquo;s an example</a>.</p>
+</blockquote>
+<div class="highlight" id="id-24"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">remain</span><span class="o">--</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">remain</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="nf">pthread_cond_broadcast</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cv</span><span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">remain</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="nf">pthread_cond_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cv</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m</span><span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nf">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>多线程下的条件变量的使用，其本质和之前所提的三要素是符合的，因为每个线程只可能执行 <code>if-else</code> 部分的其中一个分支，而不同分支则分别代表了 <code>post</code> 和 <code>wait</code> 方法。</p>
+<h4 id="part-7-the-reader-writer-problem">Part 7: The Reader Writer Problem</h4>
+<ul>
+<li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-7:-The-Reader-Writer-Problem"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
+</ul>
+<p>What is the Reader Writer Problem?</p>
+<blockquote>
+<p>Multiple threads should be able to look up (read) values at the same time provided the data structure is not being written to.</p>
+</blockquote>
+<blockquote>
+<p>to avoid data corruption, only one thread at a time may modify (write) the data structure (and no readers may be reading at that time).</p>
+</blockquote>
+<p>Rust 的不可变引用 <code>&amp;T</code> 和可变引用 <code>&amp;mut T</code> 实作了这一点 &#x1f923;</p>
+<div class="highlight" id="id-25"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">read</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">**</span>  <span class="nf">while</span> <span class="p">(</span><span class="n">writing</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">**</span>      <span class="nf">cond_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cv</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">**</span>  <span class="n">reading</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* Read here! */</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">**</span>  <span class="n">reading</span><span class="o">--</span>
+</span></span><span class="line"><span class="cl"><span class="o">**</span>  <span class="nf">cond_signal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cv</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight" id="id-26"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">write</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">**</span>  <span class="nf">while</span> <span class="p">(</span><span class="n">reading</span> <span class="o">||</span> <span class="n">writing</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">**</span>      <span class="nf">cond_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cv</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="o">**</span>  <span class="n">writing</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">**</span>
+</span></span><span class="line"><span class="cl"><span class="o">**</span> <span class="cm">/* Write here! */</span>
+</span></span><span class="line"><span class="cl"><span class="o">**</span>  <span class="n">writing</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">**</span>  <span class="nf">cond_signal</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>实际上可以将 <code>write</code> 的条件变量的使用也像 <code>read</code> 分为两部分，但这样也只有一个 <code>write</code> 可以进入到 <code>Write here!</code> 处，实质上已经互斥了，所以就没必要分为两部分了。</p>
+<blockquote>
+<p>Candidate #3 above suffers from starvation. If readers are constantly arriving then a writer will never be able to proceed (the &lsquo;reading&rsquo; count never reduces to zero). This is known as starvation and would be discovered under heavy loads.</p>
+</blockquote>
+<p>这种 <strong>多读单写</strong> 模型了另一个重要考量点是: <code>write</code> 线程可能会被 <strong>饿死 (starvation)</strong></p>
+<blockquote>
+<p>Our fix is to implement a bounded-wait for the writer. If a writer arrives they will still need to wait for existing readers however future readers must be placed in a &ldquo;holding pen&rdquo; and wait for the writer to finish. The &ldquo;holding pen&rdquo; can be implemented using a variable and a condition variable (so that we can wake up the threads once the writer has finished).</p>
+</blockquote>
+<div class="highlight" id="id-27"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">write</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">lock</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">writer</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">reading</span> <span class="o">||</span> <span class="n">writing</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cond_wait</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">unlock</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight" id="id-28"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">read</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">lock</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// readers that arrive *after* the writer arrived will have to wait here!
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">while</span><span class="p">(</span><span class="n">writer</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">cond_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cv</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// readers that arrive while there is an active writer
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// will also wait.
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">while</span> <span class="p">(</span><span class="n">writing</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">        <span class="nf">cond_wait</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cv</span><span class="p">,</span><span class="o">&amp;</span><span class="n">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">reading</span><span class="o">++</span>
+</span></span><span class="line"><span class="cl">    <span class="n">unlock</span>
+</span></span><span class="line"><span class="cl">  <span class="p">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这样即使完成读操作的线程进行唤醒，在 write 线程后面抵达的 read 线程被唤醒也会因为不满足条件而进行睡眠等待，只有 write 线程才会对条件变量进行回应。</p>
+<h4 id="part-8-ring-buffer-example">Part 8: Ring Buffer Example</h4>
+<ul>
+<li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-8:-Ring-Buffer-Example"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
 </ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-05-15 15:59:01">更新于 2024-05-15&nbsp;</span>
+        <span title="更新于 2024-06-07 12:19:29">更新于 2024-06-07&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/posix-threads/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -574,5 +1291,5 @@ $\rightarrow$ 在使用 coroutinues 后执行流程变成 $\rightarrow$
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><link rel="stylesheet" href="/css/476b5e.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><link rel="stylesheet" href="/css/a40758.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>
