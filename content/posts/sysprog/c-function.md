@@ -137,7 +137,7 @@ int main() {
 
 `func` 函数在调用时，一个栈帧的内容包括: `x` (parameter), `y` (local variable), return address。这些数据的类型都是 `int`，即占据空间相同，这也是为什么计时器 `count` 的变化大致呈现 $x : \frac{x}{2} : \frac{x}{3}$ 的比例。
 
-### stack-based buffer overflow
+## stack-based buffer overflow
 
 ## ROP
 

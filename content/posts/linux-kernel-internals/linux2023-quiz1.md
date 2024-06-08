@@ -17,6 +17,7 @@ tags:
   - Sysprog
   - Linux
   - C
+  - Linked List
 categories:
   - Linux Kernel Internals
 hiddenFromHomePage: false
