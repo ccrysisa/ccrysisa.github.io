@@ -79,13 +79,14 @@ repost:
 ## C 程序的解析和语意
 
 - [x] [手把手教你构建 C 语言编译器](https://lotabout.me/2015/write-a-C-interpreter-0/)
-- [ ] [北大编译实践在线文档](https://pku-minic.github.io/online-doc/#/)
-- [ ] [Crafting Interpreters](https://craftinginterpreters.com/)
+- [北大编译实践在线文档](https://pku-minic.github.io/online-doc/#/)
+- [Crafting Interpreters](https://craftinginterpreters.com/)
 - [descent 點評幾本編譯器設計書籍](http://descent-incoming.blogspot.com/2017/01/blog-post.html)
 - [desent 教你逐步開發編譯器](http://descent-incoming.blogspot.com/2018/01/44.html)
 - [c4](https://github.com/rswier/c4) 是很好的切入點，原作者 Robert Swierczek 還又另一個 [更完整的 C 編譯器實作](https://github.com/rswier/swieros/blob/master/root/bin/c.c)，这个实作支持 preprocessor
 - AMaCC 在 Robert Swierczek 的基礎上，額外實作 C 語言的 struct, switch-case, for, C-style comment 支援，並且重寫了 IR 執行程式碼，得以輸出合法 GNU/Linux ELF 執行檔 (支援 [armhf](https://wiki.debian.org/ArmHardFloatPort) ABI) 和 JIT 編譯
 - [徒手写一个 RISC-V 编译器！初学者友好的实战课程](https://space.bilibili.com/296494084/channel/collectiondetail?sid=571708)
+- [Write your Own Virtual Machine](https://www.jmeiners.com/lc3-vm/) / [中文翻译](https://arthurchiao.art/blog/write-your-own-virtual-machine-zh/)
 
 {{< admonition >}}
 上面的第一个链接是关于 c4 的教程，非常值得一看和一做 (*Make your hands dirty!*)，同时它也是 AMaCC 的基础 (AMaCC 在这个基础上进行了重写和扩展)。

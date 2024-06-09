@@ -334,20 +334,32 @@ else
 
 - [klib/ksort.h](https://github.com/willemt/pearldb/blob/master/deps/klib/ksort.h) 通过宏展开实作的排序算法
 
-{{< admonition success >}}
+{{< center-quote >}}
 Linux 核心原始程式码也善用宏来扩充
-{{< /admonition >}}
+{{< /center-quote >}}
 
-## Linux 核心宏: BUILD_BUG_ON_ZERO
+## Linux 核心原始程式码宏
+
+### container_of
+
+{{< link href="https://hackmd.io/@sysprog/linux-macro-containerof" content="原文地址" external-icon=true >}}
+
+使用 C 语言进行物件导向程序设计的核心，笔者所著的解释说明的 [博文]({{< relref "./c-linked-list/#container_of" >}})。
+
+### BUILD_BUG_ON_ZERO
 
 {{< link href="https://hackmd.io/@sysprog/c-bitfield" content="原文地址" external-icon=true >}}
 
-简单来说就是编译时期就进行检查的 `assert`，我写了 [相关笔记]({{< relref "./c-bitwise.md#linux-核心-build_bug_on_zero" >}}) 来说明它的原理。
+简单来说就是编译时期就进行检查的 `assert`，笔者写了 [相关笔记]({{< relref "./c-bitwise.md#linux-核心-build_bug_on_zero" >}}) 来说明它的原理。
 
-## Linux 核心原始程式码宏: max, min
+### max, min
 
-{{< link href="https://hackmd.io/@sysprog/linux-macro-minmax" content="原文地址" external-icon=true >}}
+{{< admonition success >}}
+本文探討 Linux 核心原始程式碼 `max` 和 `min` 巨集 (macro) 的實作，除了分析實務考量，也希望看倌得以深刻感受到 Linux 核心開發者對於工程細節和 [C 語言規格](https://hackmd.io/@sysprog/c-standards) 的重視，反映於持續的淬鍊中。
+{{< /admonition >}}
 
-## Linux 核心原始程式码宏: contain_of
+- {{< link href="https://hackmd.io/@sysprog/linux-macro-minmax" content="原文地址" external-icon=true >}}
 
-{{< link href="https://hackmd.io/@sysprog/linux-macro-containerof" content="原文地址" external-icon=true >}}
+## Linux 核心模组 (挂载机制)
+
+{{< link href="https://hackmd.io/@sysprog/linux-kernel-module" content="原文地址" external-icon=true >}}
