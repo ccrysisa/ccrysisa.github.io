@@ -736,4 +736,56 @@ read() {
 
 - [原文地址](https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-8:-Ring-Buffer-Example)
 
+{{< image src="https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png" >}}
 
+```c
+void *buffer[16];
+int in = 0, out = 0;
+
+void enqueue(void *value) { /* Add one item to the front of the queue*/
+  buffer[in] = value;
+  in++; /* Advance the index for next time */
+  if (in == 16) in = 0; /* Wrap around! */
+}
+
+void *dequeue() { /* Remove one item to the end of the queue.*/
+  void *result = buffer[out];
+  out++;
+  if (out == 16) out = 0;
+  return result;
+}
+```
+
+上面这段程式码看起来可以进行如下的重写:
+
+```c
+void enqueue(void *value)
+  b[ (in++) % N ] = value;
+}
+```
+
+> This method would appear to work (pass simple tests etc) but contains a subtle bug. With enough enqueue operations (a bit more than two billion) the int value of `in` will overflow and become negative! The modulo (or 'remainder') operator % preserves the sign. Thus you might end up writing into `b[-14]` for example!
+
+这时候可以运用 bitwise 技巧来实作:
+
+> A compact form is correct uses bit masking provided N is 2^x (16,32,64,...)
+
+```c
+b[ (in++) & (N-1) ] = value;
+```
+
+{{< admonition note "Food for thougt" >}}
+What would happen if the order of `pthread_mutex_unlock` and `sem_post` calls were swapped?
+- no effect
+
+What would happen if the order of `sem_wait` and `pthread_mutex_lock` calls were swapped?
+- deadlock
+{{< /admonition >}}
+
+#### Part 9: Synchronization Across Processes
+
+- [原文地址](https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-9:-Synchronization-Across-Processes)
+
+> Most system calls can be `interrupted` meaning that the operating system can stop an ongoing system call because it needs to stop the process.
+
+> mutexes and other synchronization primitives can be shared across processes.
