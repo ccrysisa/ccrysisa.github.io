@@ -1,0 +1,18 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Floating POint - 标签 - KZnight&#39;s Blog</title>
+    <link>https://ccrysisa.github.io/tags/floating-point/</link>
+    <description>Floating POint - 标签 - KZnight&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 04 Jun 2024 23:59:50 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/floating-point/" rel="self" type="application/rss+xml" /><item>
+  <title>你所不知道的 C 语言: 浮点数</title>
+  <link>https://ccrysisa.github.io/posts/c-floating-point/</link>
+  <pubDate>Tue, 04 Jun 2024 23:59:50 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-floating-point/</guid>
+  <description><![CDATA[<blockquote>
+<p>工程領域往往是一系列的取捨結果，浮點數更是如此，在軟體發開發有太多失誤案例源自工程人員對浮點數運算的掌握不足，本議程希望藉由探討真實世界的血淋淋案例，帶著學員思考 IEEE 754 規格和相關軟硬體考量點，最後也會探討在深度學習領域為了改善資料處理效率，而引入的 BFloat16 這樣的新標準</p>
+</blockquote>]]></description>
+</item>
+</channel>
+</rss>

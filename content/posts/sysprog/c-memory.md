@@ -275,6 +275,16 @@ typedef struct node {
 
 因为 data alignment 的缘故，它的地址的最后一个 bit 必然是 0 (成员都是 4-bytes 的倍数以及必须对齐)，同理其成员 `next` 也满足这个性质 (因为这个成员表示下一个节点的地址)。所以删除节点时，可以将 `next` 的最后一个 bit 设置为 1，表示当前节点的下一个节点已经被“逻辑上”删除了。
 
+最后当没有插入或删除操作是，链表再对标识为“删除”的节点进行移除，这个机制有点类似于 GC
+
 ## glibc 的 malloc/free 实作
 
-- [Deterministic Memory Allocation for Mission-Critical Linux](https://hackmd.io/@sysprog/c-memory#data-alignment)
+背景考量: [Deterministic Memory Allocation for Mission-Critical Linux](https://hackmd.io/@sysprog/c-memory#data-alignment)
+
+*Main arena vs Thread arena* :
+
+{{< image src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_kS5wHum1S54_p.606235_1462612773104_undefined" >}}
+
+*multiple heap Thread arena* :
+
+{{< image src="https://docs.google.com/drawings/d/150bTi0uScQlnABDImLYS8rWyL82mmfpMxzRbx-45UKw/pub?w=960&h=720" >}}

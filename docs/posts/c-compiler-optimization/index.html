@@ -13,7 +13,7 @@
 <meta itemprop="description" content="
 編譯器最佳化篇將以 gcc / llvm 為探討對象，簡述編譯器如何運作，以及如何實現最佳化，佐以探究 C 編譯器原理和案例分析，相信可以釐清許多人對 C 編譯器的誤解，從而開發出更可靠、更高效的程式。
 "><meta itemprop="datePublished" content="2024-04-24T21:09:59+08:00" />
-<meta itemprop="dateModified" content="2024-06-01T10:40:34+08:00" />
+<meta itemprop="dateModified" content="2024-06-07T12:19:29+08:00" />
 <meta itemprop="wordCount" content="1266"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Compiler,Optimization," /><meta property="og:title" content="你所不知道的 C 语言: 编译器和最佳化原理篇" />
 <meta property="og:description" content="
@@ -22,7 +22,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-compiler-optimization/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-24T21:09:59+08:00" />
-<meta property="article:modified_time" content="2024-06-01T10:40:34+08:00" />
+<meta property="article:modified_time" content="2024-06-07T12:19:29+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 编译器和最佳化原理篇"/>
@@ -44,7 +44,7 @@
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-optimization\/"
     },"genre": "posts","keywords": "Sysprog, C, Compiler, Optimization","wordcount":  1266 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-optimization\/","datePublished": "2024-04-24T21:09:59+08:00","dateModified": "2024-06-01T10:40:34+08:00","publisher": {
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-optimization\/","datePublished": "2024-04-24T21:09:59+08:00","dateModified": "2024-06-07T12:19:29+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -172,7 +172,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-04-24 21:09:59"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-24">2024-04-24</time></span>&nbsp;<span title="更新于 2024-06-01 10:40:34"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-01">2024-06-01</time></span>&nbsp;<span title="1266 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-04-24 21:09:59"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-24">2024-04-24</time></span>&nbsp;<span title="更新于 2024-06-07 12:19:29"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-07">2024-06-07</time></span>&nbsp;<span title="1266 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -219,7 +219,7 @@
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://slide.logan.tw/compiler-intro/#/"target="_blank" rel="external nofollow noopener noreferrer">Intro To Compiler Development</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://github.com/green7ea/blog"target="_blank" rel="external nofollow noopener noreferrer">The C++ Build Process Explained</a></li>
 </ul>
-<a class="lightgallery" href="/images/c/From-Source%20to%20-Binary-3.png?size=large" data-thumbnail="/images/c/From-Source%20to%20-Binary-3.png?size=small" data-sub-html="<h2>/images/c/From-Source%20to%20-Binary-3.png</h2>"><img loading="lazy" src="/images/c/From-Source%20to%20-Binary-3.png" srcset="/images/c/From-Source%20to%20-Binary-3.png?size=small, /images/c/From-Source%20to%20-Binary-3.png?size=medium 1.5x, /images/c/From-Source%20to%20-Binary-3.png?size=large 2x" sizes="auto" data-title="/images/c/From-Source%20to%20-Binary-3.png" data-alt="/images/c/From-Source%20to%20-Binary-3.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="/images/c/From-Source-to-Binary-3.png?size=large" data-thumbnail="/images/c/From-Source-to-Binary-3.png?size=small" data-sub-html="<h2>/images/c/From-Source-to-Binary-3.png</h2>"><img loading="lazy" src="/images/c/From-Source-to-Binary-3.png" srcset="/images/c/From-Source-to-Binary-3.png?size=small, /images/c/From-Source-to-Binary-3.png?size=medium 1.5x, /images/c/From-Source-to-Binary-3.png?size=large 2x" sizes="auto" data-title="/images/c/From-Source-to-Binary-3.png" data-alt="/images/c/From-Source-to-Binary-3.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>这个流程十分重要，不仅可以理解程序的执行流程，也可以作为理解语言设计的视角。</p>
 <h6 id="page-5">[Page 5]</h6>
 <p>原文这部分详细解释了 C Runtime (crt) 对于 <code>main</code> 函数的参数 <code>argc</code> 和 <code>argv</code>，以及返回值 <code>return 0</code> 的关系和作用。</p>
@@ -285,7 +285,7 @@
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-06-01 10:40:34">更新于 2024-06-01&nbsp;</span>
+        <span title="更新于 2024-06-07 12:19:29">更新于 2024-06-07&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/c-compiler-optimization/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>

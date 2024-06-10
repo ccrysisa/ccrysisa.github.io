@@ -5,46 +5,46 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>Command Line Applications in Rust - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
+    <title>你所不知道的 C 语言: 浮点数 - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="
-Rust is a statically compiled, fast language with great tooling and a rapidly growing ecosystem. That makes it a great fit for writing command line applications: They should be small, portable, and quick to run. Command line applications are also a great way to get started with learning Rust; or to introduce Rust to your team!
-" /><meta name="keywords" content='Rust, CLI' /><meta itemprop="name" content="Command Line Applications in Rust">
+工程領域往往是一系列的取捨結果，浮點數更是如此，在軟體發開發有太多失誤案例源自工程人員對浮點數運算的掌握不足，本議程希望藉由探討真實世界的血淋淋案例，帶著學員思考 IEEE 754 規格和相關軟硬體考量點，最後也會探討在深度學習領域為了改善資料處理效率，而引入的 BFloat16 這樣的新標準
+" /><meta name="keywords" content='Sysprog, C, Floating POint' /><meta itemprop="name" content="你所不知道的 C 语言: 浮点数">
 <meta itemprop="description" content="
-Rust is a statically compiled, fast language with great tooling and a rapidly growing ecosystem. That makes it a great fit for writing command line applications: They should be small, portable, and quick to run. Command line applications are also a great way to get started with learning Rust; or to introduce Rust to your team!
-"><meta itemprop="datePublished" content="2024-04-29T16:23:33+08:00" />
-<meta itemprop="dateModified" content="2024-04-30T00:50:51+08:00" />
-<meta itemprop="wordCount" content="534"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="Rust,CLI," /><meta property="og:title" content="Command Line Applications in Rust" />
+工程領域往往是一系列的取捨結果，浮點數更是如此，在軟體發開發有太多失誤案例源自工程人員對浮點數運算的掌握不足，本議程希望藉由探討真實世界的血淋淋案例，帶著學員思考 IEEE 754 規格和相關軟硬體考量點，最後也會探討在深度學習領域為了改善資料處理效率，而引入的 BFloat16 這樣的新標準
+"><meta itemprop="datePublished" content="2024-06-04T23:59:50+08:00" />
+<meta itemprop="dateModified" content="2024-06-07T12:19:29+08:00" />
+<meta itemprop="wordCount" content="134"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Sysprog,C,Floating POint," /><meta property="og:title" content="你所不知道的 C 语言: 浮点数" />
 <meta property="og:description" content="
-Rust is a statically compiled, fast language with great tooling and a rapidly growing ecosystem. That makes it a great fit for writing command line applications: They should be small, portable, and quick to run. Command line applications are also a great way to get started with learning Rust; or to introduce Rust to your team!
+工程領域往往是一系列的取捨結果，浮點數更是如此，在軟體發開發有太多失誤案例源自工程人員對浮點數運算的掌握不足，本議程希望藉由探討真實世界的血淋淋案例，帶著學員思考 IEEE 754 規格和相關軟硬體考量點，最後也會探討在深度學習領域為了改善資料處理效率，而引入的 BFloat16 這樣的新標準
 " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ccrysisa.github.io/posts/rust-cli/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-04-29T16:23:33+08:00" />
-<meta property="article:modified_time" content="2024-04-30T00:50:51+08:00" />
+<meta property="og:url" content="https://ccrysisa.github.io/posts/c-floating-point/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-06-04T23:59:50+08:00" />
+<meta property="article:modified_time" content="2024-06-07T12:19:29+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Command Line Applications in Rust"/>
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 浮点数"/>
 <meta name="twitter:description" content="
-Rust is a statically compiled, fast language with great tooling and a rapidly growing ecosystem. That makes it a great fit for writing command line applications: They should be small, portable, and quick to run. Command line applications are also a great way to get started with learning Rust; or to introduce Rust to your team!
+工程領域往往是一系列的取捨結果，浮點數更是如此，在軟體發開發有太多失誤案例源自工程人員對浮點數運算的掌握不足，本議程希望藉由探討真實世界的血淋淋案例，帶著學員思考 IEEE 754 規格和相關軟硬體考量點，最後也會探討在深度學習領域為了改善資料處理效率，而引入的 BFloat16 這樣的新標準
 "/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/rust-cli/" /><link rel="prev" href="https://ccrysisa.github.io/posts/c-compiler-optimization/" /><link rel="next" href="https://ccrysisa.github.io/posts/c-floating-point/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/c-floating-point/" /><link rel="prev" href="https://ccrysisa.github.io/posts/rust-cli/" /><link rel="next" href="https://ccrysisa.github.io/posts/linux2023-quiz1/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "Command Line Applications in Rust",
+    "headline": "你所不知道的 C 语言: 浮点数",
     "inLanguage": "zh-CN",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https:\/\/ccrysisa.github.io\/posts\/rust-cli\/"
-    },"genre": "posts","keywords": "Rust, CLI","wordcount":  534 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/rust-cli\/","datePublished": "2024-04-29T16:23:33+08:00","dateModified": "2024-04-30T00:50:51+08:00","publisher": {
+      "@id": "https:\/\/ccrysisa.github.io\/posts\/c-floating-point\/"
+    },"genre": "posts","keywords": "Sysprog, C, Floating POint","wordcount":  134 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-floating-point\/","datePublished": "2024-06-04T23:59:50+08:00","dateModified": "2024-06-07T12:19:29+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -161,117 +161,53 @@ Rust is a statically compiled, fast language with great tooling and a rapidly gr
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"></aside>
 
   <aside class="aside-custom">
     </aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Command Line Applications in Rust</span>
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>你所不知道的 C 语言: 浮点数</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-04-29 16:23:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-29">2024-04-29</time></span>&nbsp;<span title="更新于 2024-04-30 00:50:51"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-30">2024-04-30</time></span>&nbsp;<span title="534 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
-    </div><div class="details toc" id="toc-static" data-kept="false">
-        <div class="details-summary toc-title">
-          <span>目录</span>
-          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
-        </div>
-        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#重点提示">重点提示</a>
-      <ul>
-        <li><a href="#arguments">Arguments</a></li>
-        <li><a href="#bufreader">BufReader</a></li>
-      </ul>
-    </li>
-    <li><a href="#documentations">Documentations</a>
-      <ul>
-        <li><a href="#crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html">std</a></a></li>
-        <li><a href="#crate-claphttpsdocsrsclaplatestclap">Crate <a href="https://docs.rs/clap/latest/clap/">clap</a></a></li>
-      </ul>
-    </li>
-    <li><a href="#references">References</a></li>
-  </ul>
-</nav></div>
-      </div><div class="content" id="content"><blockquote>
-<p>Rust is a statically compiled, fast language with great tooling and a rapidly growing ecosystem. That makes it a great fit for writing command line applications: They should be small, portable, and quick to run. Command line applications are also a great way to get started with learning Rust; or to introduce Rust to your team!</p>
+          <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-06-04 23:59:50"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-04">2024-06-04</time></span>&nbsp;<span title="更新于 2024-06-07 12:19:29"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-07">2024-06-07</time></span>&nbsp;<span title="134 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+    </div><div class="content" id="content"><blockquote>
+<p>工程領域往往是一系列的取捨結果，浮點數更是如此，在軟體發開發有太多失誤案例源自工程人員對浮點數運算的掌握不足，本議程希望藉由探討真實世界的血淋淋案例，帶著學員思考 IEEE 754 規格和相關軟硬體考量點，最後也會探討在深度學習領域為了改善資料處理效率，而引入的 BFloat16 這樣的新標準</p>
 </blockquote>
 <ul>
-<li>整理自 <a href="https://rust-cli.github.io/book/index.html"target="_blank" rel="external nofollow noopener noreferrer">Command line apps in Rust</a></li>
-</ul>
-<h2 id="重点提示">重点提示</h2>
-<h3 id="arguments">Arguments</h3>
-<p>C 语言的 CLI 程序处理参数的逻辑是过程式的，即每次执行都会通过 <code>argv</code> 来获取本次执行的参数并进行相应的处理 (Rust 的 <code>std::env::args()</code> 处理 CLI 程序的参数方式也类似，都是对每次执行实例进行过程式的处理)，而 <a href="https://docs.rs/clap/latest/clap/"target="_blank" rel="external nofollow noopener noreferrer">Clap</a> 不同，它类似于面向对象的思想，通过定义一个结构体 (object)，每次运行时通过 <code>clap::Parser::parse</code> 获取并处理本次运行的参数 (即实例化 object)，这样开发的 CLI 程序扩展性会更好。</p>
-<h3 id="bufreader">BufReader</h3>
-<p>Struct <a href="https://doc.rust-lang.org/std/io/struct.BufReader.html"target="_blank" rel="external nofollow noopener noreferrer">std::io::BufReader</a> 中关于系统调用 (syscall) 的开销，以及如何使用 buffer 这一机制减少 syscall 调用以此提高效能，进行了比较直观的描述:</p>
-<blockquote>
-<p>It can be excessively inefficient to work directly with a Read instance. For example, every call to read on TcpStream results in a system call. A BufReader<R> performs large, infrequent reads on the underlying Read and maintains an in-memory buffer of the results.</p>
-<p>BufReader<R> can improve the speed of programs that make small and repeated read calls to the same file or network socket. It does not help when reading very large amounts at once, or reading just one or a few times. It also provides no advantage when reading from a source that is already in memory, like a Vec<u8>.</p>
-<p>When the BufReader<R> is dropped, the contents of its buffer will be discarded. Creating multiple instances of a BufReader<R> on the same stream can cause data loss. Reading from the underlying reader after unwrapping the BufReader<R> with BufReader::into_inner can also cause data loss.</p>
-</blockquote>
-<h2 id="documentations">Documentations</h2>
-<p>这里列举视频中一些概念相关的 documentation</p>
-<blockquote>
-<p>学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料</p>
-</blockquote>
-<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3>
-<blockquote>
-<p>可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)</p>
-</blockquote>
-<ul>
-<li>Function <a href="https://doc.rust-lang.org/std/fs/fn.read_to_string.html"target="_blank" rel="external nofollow noopener noreferrer">std::fs::read_to_string</a></li>
-<li>Function <a href="https://doc.rust-lang.org/std/env/fn.args.html"target="_blank" rel="external nofollow noopener noreferrer">std::env::args</a></li>
-<li>Struct <a href="https://doc.rust-lang.org/std/path/struct.PathBuf.html"target="_blank" rel="external nofollow noopener noreferrer">std::path::PathBuf</a></li>
-<li>Struct <a href="https://doc.rust-lang.org/std/io/struct.BufReader.html"target="_blank" rel="external nofollow noopener noreferrer">std::io::BufReader</a></li>
-<li>method <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.nth"target="_blank" rel="external nofollow noopener noreferrer">std::iter::Iterator::nth</a></li>
-</ul>
-<p>Primitive Type str:</p>
-<ul>
-<li>method <a href="https://doc.rust-lang.org/std/primitive.str.html#method.lines"target="_blank" rel="external nofollow noopener noreferrer">str::lines</a></li>
-<li>method <a href="https://doc.rust-lang.org/std/primitive.str.html#method.contains"target="_blank" rel="external nofollow noopener noreferrer">str::contains</a></li>
-</ul>
-<p>expect:</p>
-<ul>
-<li>method <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.expect"target="_blank" rel="external nofollow noopener noreferrer">std::option::Option::expect</a></li>
-<li>method <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.expect"target="_blank" rel="external nofollow noopener noreferrer">std::result::Result::expect</a></li>
-</ul>
-<h3 id="crate-claphttpsdocsrsclaplatestclap">Crate <a href="https://docs.rs/clap/latest/clap/"target="_blank" rel="external nofollow noopener noreferrer">clap</a></h3>
-<ul>
-<li>method <a href="https://docs.rs/clap/latest/clap/trait.Parser.html#method.parse"target="_blank" rel="external nofollow noopener noreferrer">clap::Parser::parse</a></li>
-</ul>
-<h2 id="references">References</h2></div><div class="post-footer" id="post-footer">
+<li><a href="https://hackmd.io/@sysprog/c-floating-point"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
+</ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-04-30 00:50:51">更新于 2024-04-30&nbsp;</span>
+        <span title="更新于 2024-06-07 12:19:29">更新于 2024-06-07&nbsp;</span>
       </div></div>
     <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/rust-cli/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-md"><span><a href="/posts/c-floating-point/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/rust-cli/" data-title="Command Line Applications in Rust" data-hashtags="Rust,CLI"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/rust-cli/" data-hashtag="Rust"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/rust-cli/" data-title="Command Line Applications in Rust" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/rust-cli/" data-title="Command Line Applications in Rust"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/rust-cli/" data-title="Command Line Applications in Rust"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/rust-cli/" data-title="Command Line Applications in Rust" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/rust-cli/" data-title="Command Line Applications in Rust" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/rust-cli/" data-title="Command Line Applications in Rust"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-floating-point/" data-title="你所不知道的 C 语言: 浮点数" data-hashtags="Sysprog,C,Floating POint"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/c-floating-point/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-floating-point/" data-title="你所不知道的 C 语言: 浮点数" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-floating-point/" data-title="你所不知道的 C 语言: 浮点数"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/c-floating-point/" data-title="你所不知道的 C 语言: 浮点数"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/c-floating-point/" data-title="你所不知道的 C 语言: 浮点数" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-floating-point/" data-title="你所不知道的 C 语言: 浮点数" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-floating-point/" data-title="你所不知道的 C 语言: 浮点数"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
       </div>
     </div>
   </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/rust/' class="post-tag">Rust</a><a href='/tags/cli/' class="post-tag">CLI</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/c/' class="post-tag">C</a><a href='/tags/floating-point/' class="post-tag">Floating POint</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
   </div>
 
-  <div class="post-nav"><a href="/posts/c-compiler-optimization/" class="post-nav-item" rel="prev" title="你所不知道的 C 语言: 编译器和最佳化原理篇"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>你所不知道的 C 语言: 编译器和最佳化原理篇</a>
-      <a href="/posts/c-floating-point/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: 浮点数">你所不知道的 C 语言: 浮点数<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+  <div class="post-nav"><a href="/posts/rust-cli/" class="post-nav-item" rel="prev" title="Command Line Applications in Rust"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Command Line Applications in Rust</a>
+      <a href="/posts/linux2023-quiz1/" class="post-nav-item" rel="next" title="Linux 核心设计: 2023q1 第一周测验题">Linux 核心设计: 2023q1 第一周测验题<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
     <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
