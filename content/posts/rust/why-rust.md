@@ -962,6 +962,22 @@ let n = example_closure(5);                     // |x: i32|
 3. `Fn` applies to closures that don’t move captured values out of their body and that don’t mutate captured values, as well as closures that capture nothing from their environment. These closures can be called more than once without mutating their environment, which is important in cases such as calling a closure multiple times concurrently.
 {{< /admonition >}}
 
+```rs
+impl<T> Option<T> {
+    pub fn unwrap_or_else<F>(self, f: F) -> T
+    where
+        F: FnOnce() -> T
+    {
+        match self {
+            Some(x) => x,
+            None => f(),
+        }
+    }
+}
+```
+
+因为闭包是 Trait，所以闭包作为参数进行传递时，需要使用 **泛型约束** 来指定对应的 Trait
+
 > If you want to force the closure to take ownership of the values it uses in the environment even though the body of the closure doesn’t strictly need ownership, you can use the `move` keyword before the parameter list.
 
 > This technique is mostly useful when passing a closure to a new thread to move the data so that it’s owned by the new thread.
@@ -1136,6 +1152,8 @@ Vec<T> where T: Trait
 
 > When we use trait objects, Rust must use dynamic dispatch. The compiler doesn’t know all the types that might be used with the code that’s using trait objects, so it doesn’t know which method implemented on which type to call.
 
+### Patterns and Matching
+
 ### Advanced Features
 
 #### Unsafe Rust
@@ -1157,9 +1175,23 @@ Vec<T> where T: Trait
 
 > It’s important to understand that `unsafe` doesn’t turn off the borrow checker or disable any other of Rust’s safety checks: if you use a reference in `unsafe` code, it will still be checked.
 
-即使使用 `unsafe`，Rust 的借用检查机制仍然存在并起作用
+`unsafe` 有一定的特权，但是即使使用 `unsafe`，Rust 的借用检查机制仍然存在，并且起作用
 
-Dereferencing a Raw Pointer: 解引用裸指针操作只能在 `safe` 中使用
+解引用 **裸指针** 操作只能在 `unsafe` 中使用，注意这里说的是 **解引用**，如果不涉及对裸指针的解引用操作，裸指针还是可以在 `safe` 内使用的，例如:
+
+```rs
+let mut num = 5;
+let r1 = &num as *const i32;
+let r2 = &mut num as *mut i32;
+
+unsafe {
+    println!("r1: {}", *r1);
+    println!("r2: {}", *r2);
+}
+
+let address = 0x012345usize;
+let r = address as *const i32;
+```
 
 > Unsafe Rust has two new types called raw pointers that are similar to references. As with references, raw pointers can be immutable or mutable and are written as `*const T` and `*mut T`, respectively.
 
@@ -1172,10 +1204,238 @@ Different from references and smart pointers, raw pointers:
 - Are allowed to be null
 - Don’t implement any automatic cleanup
 
+Rust 中的裸指针和 C/C++ 中的原始指针类型比较相似。而 Rust 的裸指针和引用、智能指针最大的区别在于: 裸指针不需要遵循借用规则，以及引用、智能指针必定不为空并且引用的是有效的物件 (因为是对物件的引用，所以物件必须先于引用而存在，故引用的地址也是有效的)，而裸指针可以为空 (类似于 C/C++ 的 NULL)，也可以指向无效的地址。因为可以为空或指向无效区域，所以裸指针不能像智能指针那样，超出作用域就自动清理指向的内容。
+
+> With all of these dangers, why would you ever use raw pointers? One major use case is when interfacing with C code
+
+> Another case is when building up safe abstractions that the borrow checker doesn’t understand.
+
+与底层 C 代码进行交互，以及借用检查机制无法涵盖现实世界的所有关系，是 Unsafe Rust 使用的理由
+
+> Just because a function contains unsafe code doesn’t mean we need to mark the entire function as unsafe. In fact, wrapping unsafe code in a safe function is a common abstraction
+
+将不安全的代码块封装为安全的函数，这样调用该函数时就不需要特别考虑 unsafe 部分了 (unsafe 部分由函数实现方进行考虑、封装)
+
+> Sometimes, your Rust code might need to interact with code written in another language. For this, Rust has the keyword `extern` that facilitates the creation and use of a Foreign Function Interface (FFI). An FFI is a way for a programming language to define functions and enable a different (foreign) programming language to call those functions.
+
+> The `"C"` ABI is the most common and follows the C programming language’s ABI.
+
+通过 `extern` 关键字指定汇编层面使用的 ABI，可以使 Rust 程序和其他语言编写的程序进行通讯，这部分在 Rust 中叫 FFI
+
+#### Advanced Traits
+
+> ***Associated types*** connect a type placeholder with a trait such that the trait method definitions can use these placeholder types in their signatures. 
+
+关联类型相当于类型的占位符，常用于迭代器相关的 Trait 的定义中:
+
+```rs
+pub trait Iterator {
+    type Item;
+
+    fn next(&mut self) -> Option<Self::Item>;
+}
+```
+
+结合下面的例子，并与上面的例子进行对比，思考泛型参数的 Trait 和关联类型的 Trait 的区别:
+
+```rs
+pub trait Iterator<T> {
+    fn next(&mut self) -> Option<T>;
+}
+```
+
+> In other words, when a trait has a generic parameter, it can be implemented for a type multiple times, changing the concrete types of the generic type parameters each time. 
+
+> With associated types, we don’t need to annotate types because we can’t implement a trait on a type multiple times. 
+
+默认泛型参数可以在未标注具体类型时，使用默认的具体类型
+
+> When we use generic type parameters, we can specify a default concrete type for the generic type. This eliminates the need for implementors of the trait to specify a concrete type if the default type works. You specify a default type when declaring a generic type with the `<PlaceholderType=ConcreteType>` syntax.
+
+```rs
+trait Add<Rhs=Self> {
+    type Output;
+
+    fn add(self, rhs: Rhs) -> Self::Output;
+}
+```
+
+当类型的方法和实现的 Trait 的方法重名时，直接通过方法名字调用的话，调用的是类型本身实现的方法而不是 Trait 的方法，要想调用 Trait 的同名方法，需要在前面指定 Trait 名字
+
+> Nothing in Rust prevents a trait from having a method with the same name as another trait’s method, nor does Rust prevent you from implementing both traits on one type. It’s also possible to implement a method directly on the type with the same name as methods from traits.
+
+> When calling methods with the same name, you’ll need to tell Rust which one you want to use.
+
+>Specifying the trait name before the method name clarifies to Rust which implementation of `fly` we want to call. 
+
+```rs
+trait Pilot {...}
+trait Wizard {...}
+struct Human;
+
+impl Pilot for Human {
+    fn fly(&self) {...}
+}
+
+impl Wizard for Human {
+    fn fly(&self) {...}
+}
+
+impl Human {
+    fn fly(&self) {...}
+}
+
+fn main() {
+    let person = Human;
+    Pilot::fly(&person);    // trait Pilot's fly method
+    Wizard::fly(&person);   // trait Wizard's fly method
+    person.fly();           // type Human's fly method
+}
+```
+
+>  You only need to use this more verbose syntax in cases where there are multiple implementations that use the same name and Rust needs help to identify which implementation you want to call.
+
+Rust 的 Trait 可以实现 **行为** 的继承关系 (通过继承方法的行为)
+
+> Sometimes, you might write a trait definition that depends on another trait: for a type to implement the first trait, you want to require that type to also implement the second trait. You would do this so that your trait definition can make use of the associated items of the second trait. The trait your trait definition is relying on is called a supertrait of your trait.
+
+```rs
+trait OutlinePrint: std::fmt::Display {...}
+
+struct Point {...}
+
+impl OutlinePrint for Point {}
+```
+
+> the orphan rule that states we’re only allowed to implement a trait on a type if either the trait or the type are local to our crate. 
+
+> ***newtype pattern***, which involves creating a new type in a tuple struct.
+
+> The tuple struct will have one field and be a thin wrapper around the type we want to implement a trait for. Then the wrapper type is local to our crate, and we can implement the trait on the wrapper. 
+
+```rs
+struct Wrapper(Vec<String>);
+
+impl std::fmt::Display for Wrapper {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "[{}]", self.0.join(", "))
+    }
+}
+```
+
+#### Advanced Types
+
+> Rust provides the ability to declare a type alias to give an existing type another name. 
+
+```rs
+type Kilometers = i32;
+```
+
+作用类似于 C/C++ 的 `typedef` 关键字
+
+> Rust has a special type named `!` that’s known in type theory lingo as the ***empty type*** because it has no values. We prefer to call it the never type because it stands in the place of the return type when a function will never return. 
+
+>This code is read as “the function bar returns never.” Functions that return never are called diverging functions.
+
+常用于永远不会返回的函数，这个场景在系统领域还是蛮常见的，例如系统启动后的进入的函数 `kernel_main`，它就是不可能返回的 (轮询直到关机)，或者是捕获 `panic` 后的处理函数，它也是不会返回的 (直接终止程序)
+
+> The formal way of describing this behavior is that expressions of type `!` can be coerced into any other type. 
+
+```rs
+fn bar() -> ! {
+    ...
+}
+```
+
+Dynamically Sized Types and the Sized Trait
+
+> Rust needs to know certain details about its types, such as how much space to allocate for a value of a particular type. This leaves one corner of its type system a little confusing at first: the concept of dynamically sized types. Sometimes referred to as DSTs or unsized types, these types let us write code using values whose size we can know only at runtime.
+
+> To work with DSTs, Rust provides the `Sized` trait to determine whether or not a type’s size is known at compile time. This trait is automatically implemented for everything whose size is known at compile time. In addition, Rust implicitly adds a bound on `Sized` to every generic function. 
+
+```rs
+fn generic<T>(t: T) {...}
+// is actually treated as though we had written this
+fn generic<T: Sized>(t: T) {...}
+```
+
+> By default, generic functions will work only on types that have a known size at compile time. However, you can use the following special syntax to relax this restriction:
+
+```rs
+fn generic<T: ?Sized>(t: &T) {...}
+```
+
+也就是说，我们需要手动标注的只有 `?Sized` 这个 Trait (用于标识该类型不是编译时期可以确定的，而是动态类型)，`Sized` 这个 Trait 编译器会帮我们自动默认加上标注，一般不需要特别关心
+
+#### Advanced Functions and Closures
+
+> The `fn` type is called a function pointer. Passing functions with function pointers will allow you to use functions as arguments to other functions.
+
+> Unlike closures, `fn` is a type rather than a trait, so we specify `fn` as the parameter type directly rather than declaring a generic type parameter with one of the `Fn` traits as a trait bound.
+
+```rs
+fn do_twice(f: fn(i32) -> i32, arg: i32) -> i32 {
+    f(arg) + f(arg)
+}
+```
+
+> Function pointers implement all three of the closure traits (`Fn`, `FnMut`, and `FnOnce`), meaning you can always pass a function pointer as an argument for a function that expects a closure. It’s best to write functions using a generic type and one of the closure traits so your functions can accept either functions or closures.
+
+因为函数指针类型 `fn` 实现了闭包的全部三种 Trait，所以还是推荐使用 **泛型约束** 的写法来传递参数，这样既可以接收函数指针也可以接收闭包。但是当需要与其他语言交互时，其他语言可能不支持闭包，这时就只能使用函数指针 `fn` 作为参数传递了:
+
+> That said, one example of where you would want to only accept `fn` and not closures is when interfacing with external code that doesn’t have closures: C functions can accept functions as arguments, but C doesn’t have closures.
+
+> Closures are represented by traits, which means you can’t return closures directly. 
+
+所以使用类似的技巧来返回闭包，即通过 `Box` 来包装返回的闭包
+
+#### Macros
+
+> Fundamentally, macros are a way of writing code that writes other code, which is known as metaprogramming.
+
+宏是关于编程本质是 ***字符串处理*** 的最好阐释
+
+> The most widely used form of macros in Rust is the declarative macro. These are also sometimes referred to as “macros by example,” “`macro_rules!` macros,” or just plain “macros.” At their core, declarative macros allow you to write something similar to a Rust `match` expression. 
+
+```rs
+#[macro_export]
+macro_rules! vec {
+    ( $( $x:expr ),* ) => {
+        {
+            let mut temp_vec = Vec::new();
+            $(
+                temp_vec.push($x);
+            )*
+            temp_vec
+        }
+    };
+}
+```
+
+{{< admonition >}}
+延伸阅读: [Crust of Rust: Declarative Macros]({{< relref "./declarative-macros.md" >}})
+{{< /admonition >}}
+
+> The second form of macros is the procedural macro, which acts more like a function (and is a type of procedure). Procedural macros accept some code as an input, operate on that code, and produce some code as an output rather than matching against patterns and replacing the code with other code as declarative macros do.
+
+```rs
+use proc_macro;
+
+#[some_attribute]
+pub fn some_name(input: TokenStream) -> TokenStream {
+}
+```
+
+{{< admonition >}}
+延伸阅读: [Procedural Macros](https://www.youtube.com/playlist?list=PLqbS7AVVErFgwC_HByFYblghsDsD5wZDv)
+{{< /admonition >}}
+
+### Final Project: Web Server
+
 ## References
 
-- Visualizing memory layout of Rust\'s data types
-    - 录影: [YouTube](https://www.youtube.com/watch?v=7_o-YRxf_cc&t=0s) / [中文翻译](https://www.bilibili.com/video/BV1KT4y167f1)
-- [Rust语言圣经 (Rust Course)](https://course.rs/about-book.html)
+- [The Rust Programming Language - Brown University](https://rust-book.cs.brown.edu/)
+- Visualizing memory layout of Rust\'s data types: [录影](https://www.youtube.com/watch?v=7_o-YRxf_cc&t=0s) / [中文翻译](https://www.bilibili.com/video/BV1KT4y167f1)
+- [Rust 语言圣经 (Rust Course)](https://course.rs/about-book.html)
 - [Learn Rust the Dangerous Way](https://cliffle.com/p/dangerust/)
 - [pretzelhammer\'s Rust blog](https://github.com/pretzelhammer/rust-blog)
