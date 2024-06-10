@@ -75,13 +75,13 @@ $ cargo clean             # 清除构建出来的目标文件
 $ cargo test              # 运行测试
 ```
 
-### Programming a Guessing Game
+### Programming a Game
 
 - Module std::[io](https://doc.rust-lang.org/std/io/index.html)
 - Module std::[cmp](https://doc.rust-lang.org/std/cmp/index.html)
 - Crate [rand](https://docs.rs/rand/latest/rand/)
 
-### Common Programming Concepts
+### Common Concepts
 
 变量明确区分可变和不可变，好处在于对于明确不可变的变量，使用引用时编译器可以进行更为激进的最佳化。常量必须满足可以在编译期计算出结果。
 
@@ -129,7 +129,7 @@ shadow 可理解为变量名可以和储存数据的地址绑定、解绑，所�
 > `Range`, provided by the standard library, which generates all numbers in sequence starting from one number and ending before another number.
 > `rev`, to reverse the range.
 
-### Understanding Ownership
+### Ownership
 
 #### What is Ownership?
 
@@ -223,7 +223,7 @@ Documentation:
 - method std::iter::Iterator::[enumerate](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.enumerate)
 - Module std::[iter](https://doc.rust-lang.org/std/iter/index.html)
 
-### Using Structs to Structure Related Data
+### Structs
 
 Rust 不允许结构体初始化时只指定一部分字段的值，这防止了 UB 相关问题的触发。
 
@@ -296,7 +296,7 @@ Rust 的 `Option<T>` 的设计避免了其它语言中可能会出现的 UB，�
 
 > We can include an `else` with an `if let`. The block of code that goes with the `else` is the same as the block of code that would go with the `_` case in the `match` expression that is equivalent to the `if let` and `else`.
 
-### Managing Growing Projects with Packages, Crates, and Modules
+### Packages, Crates, and Modules
 
 - **Packages**: A Cargo feature that lets you build, test, and share crates
 - **Crates**: A tree of modules that produces a library or executable
@@ -379,7 +379,7 @@ Rust 对于模块的分离语法的文件管理也类似于文件系统树。可
 - Struct std::collections::[HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)
 {{< /admonition >}}
 
-#### Storing Lists of Values with Vectors
+#### Vector
 
 > Like any other struct, a vector is freed when it goes out of scope
 
@@ -421,7 +421,7 @@ for i in &mut v {
 
 运用枚举 (enum) 搭配 vector 可以实作出比泛型更具表达力的 vector，即 vector 中的每个元素的类型可以不相同 (通过 enum 的大小类型机制即可实作)。
 
-#### Storing UTF-8 Encoded Text with Strings
+#### String
 
 > Rust has only one string type in the core language, which is the string slice `str` that is usually seen in its borrowed form `&str`. 
 
@@ -429,7 +429,7 @@ for i in &mut v {
 
 > Although this section is largely about `String`, both types are used heavily in Rust’s standard library, and both `String` and string slices are UTF-8 encoded.
 
-Rust 中的字符串是 UTF-8 编码，注意与之前所提的 `char` 类型使用的 Unicode 编码不同。这一点很重要，因为 `String` 的 [len()](https://doc.rust-lang.org/std/string/struct.String.html#method.len) 方法是计算 byte 的数量 (URF-8 编码只占据一个 byte)。
+Rust 中的字符串是 UTF-8 编码，注意与之前所提的 `char` 类型使用的 Unicode 编码不同。这一点很重要，因为 `String` 的 [len()](https://doc.rust-lang.org/std/string/struct.String.html#method.len) 方法是计算 byte 的数量 (UTF-8 编码只占据一个 byte)。
 
 > The `push_str` method takes a string slice because we don’t necessarily want to take ownership of the parameter. 
 
@@ -451,7 +451,7 @@ Rust 对于字符串处理的哲学 (我个人认为这样处理并不是特别�
 
 > Rust has chosen to make the correct handling of `String` data the default behavior for all Rust programs, which means programmers have to put more thought into handling UTF-8 data upfront. This trade-off exposes more of the complexity of strings than is apparent in other programming languages, but it prevents you from having to handle errors involving non-ASCII characters later in your development life cycle.
 
-#### Storing Keys with Associated Values in Hash Maps
+#### Hash Map
 
 > Note that we need to first `use` the `HashMap` from the collections portion of the standard library. Of our three common collections, this one is the least often used, so it’s not included in the features brought into scope automatically in the prelude. Hash maps also have less support from the standard library; there’s no built-in macro to construct them, for example.
 
@@ -551,7 +551,7 @@ $ RUST_BACKTRACE=full cargo run
 
 定义一个可能会失败的函数时 (即预期计划处理错误)，应该使用 `Result` 进行错误处理，其它时候一般使用 `panic!` 处理即可 (因为预期就没打算处理错误)。
 
-### Generic Types, Traits, and Lifetimes
+### Generic, Traits, and Lifetimes
 
 {{< admonition quote >}}
 Removing Duplication by Extracting a Function:
@@ -702,7 +702,7 @@ fn fun(s: &'a str) -> &'b str {
 涉及到生命周期的程序，编写代码时先不需要考虑生命周期，先将代码逻辑写好，然后从防止 ***dangling reference*** 这个 UB 以及 **子类型** 的角度对生命周期进行标注。
 {{< /admonition >}}
 
-### Writing Automated Tests
+### Automated Tests
 
 - 11.1. How to Write Tests
 > Tests are Rust functions that verify that the non-test code is functioning in the expected manner. The bodies of test functions typically perform these three actions:
@@ -880,7 +880,7 @@ Files in subdirectories of the tests directory don’t get compiled as separate 
 
 > Only library crates expose functions that other crates can use; binary crates are meant to be run on their own.
 
-### An I/O Project: Building a Command Line Program
+### An I/O Project: minigrep
 
 - 12.3. Refactoring to Improve Modularity and Error Handling
 
@@ -908,7 +908,7 @@ Documentation:
 - method str::[to_lowercase](https://doc.rust-lang.org/std/primitive.str.html#method.to_lowercase)
 - method std::result::Result::[is_err](https://doc.rust-lang.org/std/result/enum.Result.html#method.is_err)
 
-### Functional Language Features: Iterators and Closures
+### Iterators and Closures
 
 > Rust’s design has taken inspiration from many existing languages and techniques, and one significant influence is functional programming. 
 
@@ -1020,7 +1020,7 @@ Using Closures that Capture Their Environment
 
 零开销抽象 (Zero-Aost Abstractions): 使用抽象时不会引入额外的运行时开销，所以尽量使用 Rust 提供的抽象语法，因为其底层实现大概率进行了相应的优化，比自己手写的底层代码高效不少。
 
-### More About Cargo and Crates.io
+### Cargo and Crates.io
 
 - 14.1. Customizing Builds with Release Profiles
 
@@ -1087,7 +1087,7 @@ add_one = { path = "../add_one" }
 
 ### Fearless Concurrency
 
-### Object-Oriented Programming Features of Rust
+### Object-Oriented Programming
 
 - 17.1. Characteristics of Object-Oriented Languages
 
@@ -1125,7 +1125,7 @@ Trait 只是对行为的抽象，它并没有持有数据。这里需要注意 T
 
 ```rs
 Vec<Box<dyn Trait>>
-Vec<T>
+Vec<T> where T: Trait
 ```
 
 使用 Trait 对象可以实现某种意义上的多态，而使用泛型 (以及 Trait 约束) 则无法做到，因为泛型 (以及 Trait 约束) 在编译器就会被编译成具体类型，显然无法多态。可以结合上面的例子进行思考。
@@ -1135,6 +1135,42 @@ Vec<T>
 > This is opposed to dynamic dispatch, which is when the compiler can’t tell at compile time which method you’re calling. In dynamic dispatch cases, the compiler emits code that at runtime will figure out which method to call.
 
 > When we use trait objects, Rust must use dynamic dispatch. The compiler doesn’t know all the types that might be used with the code that’s using trait objects, so it doesn’t know which method implemented on which type to call.
+
+### Advanced Features
+
+#### Unsafe Rust
+
+> Unsafe Rust exists because, by nature, static analysis is conservative. When the compiler tries to determine whether or not code upholds the guarantees, it’s better for it to reject some valid programs than to accept some invalid programs. 
+
+> if you use unsafe code incorrectly, problems can occur due to memory unsafety, such as null pointer dereferencing.
+
+> Another reason Rust has an unsafe alter ego is that the underlying computer hardware is inherently unsafe.
+
+静态分析的保守以及系统编程的需求使得 Unsafe Rust 的出现变得合理
+
+***unsafe superpowers***: 
+- Dereference a raw pointer
+- Call an unsafe function or method
+- Access or modify a mutable static variable
+- Implement an unsafe trait
+- Access fields of `union`s
+
+> It’s important to understand that `unsafe` doesn’t turn off the borrow checker or disable any other of Rust’s safety checks: if you use a reference in `unsafe` code, it will still be checked.
+
+即使使用 `unsafe`，Rust 的借用检查机制仍然存在并起作用
+
+Dereferencing a Raw Pointer: 解引用裸指针操作只能在 `safe` 中使用
+
+> Unsafe Rust has two new types called raw pointers that are similar to references. As with references, raw pointers can be immutable or mutable and are written as `*const T` and `*mut T`, respectively.
+
+> In the context of raw pointers, immutable means that the pointer can’t be directly assigned to after being dereferenced.
+
+Different from references and smart pointers, raw pointers:
+
+- Are allowed to ignore the borrowing rules by having both immutable and mutable pointers or multiple mutable pointers to the same location
+- Aren’t guaranteed to point to valid memory
+- Are allowed to be null
+- Don’t implement any automatic cleanup
 
 ## References
 
