@@ -40,6 +40,10 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
+> The year 2022 marks seven years since the stable version of the Rust language was officially released. Since its release, Rust has been popular among developers. In a Stack Overflow poll of over 73,000 developers from 180 countries, Rust was voted the most popular programming language for the seventh consecutive year, with 87% of developers expressing a desire to use it.
+
+<!--more-->
+
 ## Rust in 100 Seconds
 
 观看短片: [Rust in 100 Seconds](https://youtu.be/5C_HPTJg5ek) :white_check_mark:
@@ -1154,6 +1158,173 @@ Vec<T> where T: Trait
 
 ### Patterns and Matching
 
+{{< admonition >}}
+这一章建议搭配之前的 [6. Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) 来阅读，本章是对其的扩展。
+{{< /admonition >}}
+
+- 18.1. All the Places Patterns Can Be Used
+
+match Arms
+
+```rs
+match VALUE {
+    PATTERN => EXPRESSION,
+    PATTERN => EXPRESSION,
+    PATTERN => EXPRESSION,
+}
+```
+
+> The particular pattern `_` will match anything, but it never binds to a variable, so it’s often used in the last match arm. 
+
+`_` 在模式匹配中相当于一个占位符，常用于 `match` 匹配的最后一个，作为类似于 C/C++ `swicth-case` 的 `default` 分支。
+
+> `if let` can have a corresponding `else` containing code to run if the pattern in the `if let` doesn’t match.
+
+> Also, Rust doesn't require that the conditions in a series of `if let`, `else if`, `else if let` arms relate to each other.
+
+Rust 还可以混用 `if let` 和 `if-else` 语句，即可以将模式匹配和条件判断结合起来，十分灵活
+
+```rs
+    if let Some(color) = favorite_color {
+        println!("Using your favorite color, {color}, as the background");
+    } else if is_tuesday {
+        println!("Tuesday is green day!");
+    } else if let Ok(age) = age {
+        if age > 30 {
+            println!("Using purple as the background color");
+        } else {
+            println!("Using orange as the background color");
+        }
+    } else {
+        println!("Using blue as the background color");
+    }
+```
+
+> The downside of using `if let` expressions is that the compiler doesn’t check for exhaustiveness, whereas with `match` expressions it does.
+
+但是 `if-let` 表达式并不会检查模式匹配的全部情况，而 `match` 会强制要求检查模式匹配的所有情况
+
+> Similar in construction to `if let`, the `while let` conditional loop allows a `while` loop to run for as long as a pattern continues to match. I
+
+```rs
+    while let Some(top) = stack.pop() {
+        println!("{}", top);
+    }
+```
+
+> In a `for` loop, the value that directly follows the keyword `for` is a pattern. For example, in `for x in y` the `x` is the pattern. 
+
+```rs
+    let v = vec!['a', 'b', 'c'];
+
+    for (index, value) in v.iter().enumerate() {
+        println!("{} is at index {}", value, index);
+    }
+```
+
+模式匹配无处不在，`for` 循环中 `for` 关键字后面的 token 在语法分析时是按模式匹配进行分析的
+
+> Every time you've used a `let` statement like this you've been using patterns, although you might not have realized it! 
+
+```rs
+let PATTERN = EXPRESSION;
+```
+
+`let` 语句也是模式匹配，但是它的使用和先前的那些模式匹配相比起来不是特别灵活，这一部分在后面会进行解释
+
+> Function parameters can also be patterns. 
+
+```rs
+fn foo(x: i32) {...}
+```
+
+函数参数也是模式匹配，毕竟它本质也是一种 `let` 语句，相应的，它的灵活性也不是特别好
+
+- 18.2. Refutability: Whether a Pattern Might Fail to Match
+
+引入两个概念用于解释之前所提的，不同模式匹配语句的灵活性不同的问题
+
+> Patterns come in two forms: **refutable** and **irrefutable**.
+
+> Patterns that will match for any possible value passed are **irrefutable**. An example would be `x` in the statement `let x = 5;` because `x` matches anything and therefore cannot fail to match. 
+
+> Patterns that can fail to match for some possible value are **refutable**. An example would be `Some(x)` in the expression `if let Some(x) = a_value` because if the value in the `a_value` variable is `None` rather than `Some`, the `Some(x)` pattern will not match.
+
+简单来说，就一种模式可以对任何值无条件接受，而另一种模式对一些可能的值并不接受，这两种模式的差异导致了不同模式匹配语句的灵活性不同 (因为对于任何值都可以无条件接受的话，需要对传入的值进行一定的限制，进而导致接收值的灵活性不同)。
+
+> Function parameters, `let` statements, and `for` loops can only accept **irrefutable** patterns, because the program cannot do anything meaningful when values don’t match. 
+
+> The `if let` and `while let` expressions accept refutable and irrefutable patterns
+
+- 18.3. Pattern Syntax
+
+> Named variables are irrefutable patterns that match any value, and we’ve used them many times in the book. 
+
+在模式匹配中使用命名变量会匹配任意值，但这也会导致在模式匹配的 Block 对该变量名称进行变量遮蔽
+
+> Because match starts a new scope, variables declared as part of a pattern inside the match expression will shadow those with the same name outside the match construct, as is the case with all variables.
+
+```rs
+    let x = Some(5);
+    let y = 10;
+
+    match x {
+        Some(50) => println!("Got 50"),
+        Some(y) => println!("Matched, y = {y}"),
+        _ => println!("Default case, x = {:?}", x),
+    }
+
+    println!("at the end: x = {:?}, y = {y}", x);
+```
+
+> In match expressions, you can match multiple patterns using the `|` syntax, which is the pattern or operator.
+
+```rs
+    match x {
+        1 | 2 => println!("one or two"),
+        3 => println!("three"),
+        _ => println!("anything"),
+    }
+```
+
+> The `..=` syntax allows us to match to an inclusive range of values. 
+
+```rs
+    match x {
+        'a'..='j' => println!("early ASCII letter"),
+        'k'..='z' => println!("late ASCII letter"),
+        _ => println!("something else"),
+    }
+```
+
+`a..=b` 表示闭区间 $[a,b]$，而 `..` 表示开区间 $[a, b)$
+
+> We can also use patterns to destructure structs, enums, and tuples to use different parts of these values.
+
+```rs
+// struct
+let p = Point { x: 0, y: 7 };
+let Point { x: a, y: b } = p;
+let Point { x, y } = p;
+```
+
+> Rust has a shorthand for patterns that match struct fields: you only need to list the name of the struct field, and the variables created from the pattern will have the same names.
+
+```rs
+// enum
+match msg {
+    Message::Quit => ...
+    Message::Move { x, y } => ...
+    Message::Write(text) => ...
+    Message::ChangeColor(r, g, b) => ...
+}
+```
+
+```rs
+// tuple
+let ((feet, inches), Point { x, y }) = ((3, 10), Point { x: 3, y: -10 });
+```
+
 ### Advanced Features
 
 #### Unsafe Rust
@@ -1431,6 +1602,9 @@ pub fn some_name(input: TokenStream) -> TokenStream {
 {{< /admonition >}}
 
 ### Final Project: Web Server
+
+Documentation:
+
 
 ## References
 
