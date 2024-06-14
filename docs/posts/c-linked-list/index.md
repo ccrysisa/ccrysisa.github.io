@@ -71,7 +71,7 @@ $n$ 为 `listsSize`，$m$ 为 merge linked list 过程中产生的 linked list �
 
 - [x] [LeetCode 141. Linked List Cycle](https://leetcode.com/problems/linked-list-cycle/)
 - [x] [LeetCode 142. Linked List Cycle II](https://leetcode.com/problems/linked-list-cycle-ii/)
-- [ ] [LeetCode 146. LRU Cache](https://leetcode.com/problems/lru-cache/)
+- [x] [LeetCode 146. LRU Cache](https://leetcode.com/problems/lru-cache/)
 - [金刀的算法小册子](https://github.com/glodknife/algorithm) Linked List 专题
     - [x] [LeetCode 206. Reverse Linked List](https://leetcode.com/problems/reverse-linked-list)
 
@@ -110,7 +110,174 @@ Linux 核心使用的 linked list 是通过 Intrusive linked lists 搭配 contai
 
 ### container_of
 
-- [ ] [Linux 核心原始程式碼巨集: container_of](https://hackmd.io/@sysprog/linux-macro-containerof)
+{{< admonition success >}}
+container_of 巨集在 Linux 核心原始程式碼出現將近 7 千次 (v5.13)，不僅在 linked list 和 hash table 一類通用資料結構中可簡化程式設計，甚至是 Linux 核心達成物件導向程式設計的關鍵機制之一。
+
+若要征服 Linux 核心原始程式碼，對 container_of 巨集的掌握度絕對要充分。
+{{< /admonition >}}
+
+- [x] [Linux 核心原始程式碼巨集: container_of](https://hackmd.io/@sysprog/linux-macro-containerof)
+
+#### 跟你想象不同的 struct
+
+```c
+struct data {
+    short a;
+    char b;
+    double c;
+};
+```
+
+对于上面的结构体，下面的内存分布图示是错误的:
+
+{{< image src="https://imgur-backup.hackmd.io/NihOvLg.png" >}}
+
+原因是这样的内存分布忽略了编译器为了满足 alignment 需求，进行的 [structure padding](http://www.catb.org/esr/structure-packing/#_padding)
+
+- [6.37.1 Common Type Attributes](https://gcc.gnu.org/onlinedocs/gcc/Common-Type-Attributes.html) - packed
+> This attribute, attached to a struct, union, or C++ class type definition, specifies that each of its members (other than zero-width bit-fields) is placed to minimize the memory required. This is equivalent to specifying the packed attribute on each of the members.
+
+加上 `packed` 属性后结构体成员的内存分布就和一开始的相同，但这是 C 语言的一个陷阱，`packed` 的结构体可能会牺牲资料存取的效率，具体可以参考 [你所不知道的 C 语言: 记忆体管理、对齐及硬体特性](https://hackmd.io/@sysprog/c-memory)。
+
+C89/C99 提供 [offset](https://man7.org/linux/man-pages/man3/offsetof.3.html) 宏来提升可移植性 (portablity)，其功能为接收结构体的型态和成员的名称，返回 **成员的地址减去 struct 的起始地址得到的偏移量**:
+
+```c
+#include <stddef.h>
+
+size_t offsetof(type, member);
+```
+
+> The macro `offsetof()` returns the offset of the field *member* from the start of the structure *type*.
+
+{{< image src="https://imgur-backup.hackmd.io/DYiZ1sd.jpg" >}}
+
+[typeof](https://gcc.gnu.org/onlinedocs/gcc/Typeof.html) 也是 GNU extension，它可以在编译时期得到 object 的型态名称，例如 `x` 是 `struct data`，那么通过 `typeof(x)` 即可得到 `struct data`，这样就联通了 object 和型态的关系。
+
+> Another way to refer to the type of an expression is with typeof. The syntax of using of this keyword looks like sizeof, but the construct acts semantically like a type name defined with typedef.
+
+#### container_of 宏作为资料封装的基础
+
+`container_of` 宏在 `offsetof` 的基础上，扩充为 **给定成员的地址、struct 的型态，以及成员的名称，传回此 struct 物件的地址**:
+
+{{< image src="https://imgur-backup.hackmd.io/IgayoN9.jpg" >}}
+
+> 請不要小看這巨集，畢竟大量在 Linux 核心原始程式碼採用的巨集，應有其獨到之處。在 `container_of` 巨集出現前，程式設計的思維往往是:
+> 
+> 1. 給定結構體起始地址
+> 2. 求出結構體特定成員的記憶體內容
+> 3. 傳回結構體成員的地址，作日後存取使用
+> 
+> `container_of` 巨集則逆轉上述流程，特別在 C 語言程式設計中，我們通常會定義一系列公開介面 (interface)，從而區隔各式實作 (implementation)。
+
+- [你所不知道的 C 语言: 物件导向程序设计篇](https://hackmd.io/@sysprog/c-oop)
+
+例如对于下面的程式码，可以通过 `container_of` 搭配 `base` 成员来获得具体的类型，实现某种意义上的 **封装** (encapsulation)，**继承** (inheritance) 和 **多态** (polymorphism)
+
+```c
+typedef struct { int ref; } Object;
+typedef struct { Object base; /* Vehicle-specific members */ } Vehicle;
+typedef struct { Vehicle base; /* Car-specific members */ } Car;
+
+void vehicleStart(Vehicle *obj) {
+    if (obj) printf("%x derived from %x\n", obj, obj->base);
+}
+
+int main(void) {
+    Car c;
+    vehicleStart((Vehicle *) &c);
+}
+```
+
+在 Linux 核心的装置驱动程式里也常用到 `container_of` 进行物件导向设计，并通过搭配指针操作，用于 **清晰地界定接口和实作本体**，这是 Linux 核心开发者追求的优雅。
+
+- [drivers/media/i2c/imx214.c](https://github.com/torvalds/linux/blob/master/drivers/media/i2c/imx214.c)
+
+#### container_of 实作手法
+
+{{< image src="https://imgur-backup.hackmd.io/6h0Bgax.jpg" >}}
+
+对应的程式码:
+
+```c
+/* container_of() - Calculate address of object that contains address ptr
+ * @ptr: pointer to member variable
+ * @type: type of the structure containing ptr
+ * @member: name of the member variable in struct @type
+ *
+ * Return: @type pointer of object containing ptr
+ */
+#define container_of(ptr, type, member)                            \
+    __extension__({                                                \
+        const __typeof__(((type *) 0)->member) *(__pmember) = (ptr); \
+        (type *) ((char *) __pmember - offsetof(type, member));    \
+    })
+```
+
+这里面涉及到了 `__extension__`，参考 [6.51 Alternate Keywords](https://gcc.gnu.org/onlinedocs/gcc/Alternate-Keywords.html):
+
+> -pedantic and other options cause warnings for many GNU C extensions. You can suppress such warnings using the keyword `__extension__`.    
+> Writing `__extension__` before an expression prevents warnings about extensions within that expression.
+
+因为用到了 `typeof` 这个 GNU extension，所以需要使用 `__extension__` 来设置编译时不抛出警告
+
+{{< admonition quote >}}
+上述程式碼是從 struct 中的 member 推算出原本 struct 的位址。解析:
+
+- 先透過 `__typeof__` 得到 `type` 中的成員 `member` 的型別，並宣告一個指向該型別的指標 `__pmember`
+- 將 `ptr` 指派到 `__pmember`
+- `__pmember` 目前指向的是 `member` 的位址
+- `offsetof(type, member)` 可得知 `member` 在 `type` 這個結構體位移量，即 offset
+- 將絕對位址 `(char *) __pmember` 減去 `offsetof(type, member)`，可得到結構體的起始位址。計算 offset 時要轉成 `char *`，以確保 address 的計算符合預期 (可參考 [The (char *) casting in container_of() macro in linux kernel](https://stackoverflow.com/questions/20421910/the-char-casting-in-container-of-macro-in-linux-kernel) 的說明)
+- 最後 `(type *)` 再將起始位置轉型為指向 `type` 的指標
+{{< /admonition >}}
+
+需要注意的是，程式码的第一行乍一看感觉没什么用，此时请从 robust 的角度看待，毕竟一个有强度的系统都是 robust 的。实际上第一行是用于编译时期类型检查的，检查传入的地址 `ptr` 是否对应 `member` 的类型，这个类型检查时通过不同 object 的 data alignment 来实现的 (data alignment 会反映在地址上，进而反映到指针的值上面)。
+
+事实上，Linux 核心的 `container_of` 宏则更加复杂:
+
+```c
+#define container_of(ptr, type, member) ({				\
+    void *__mptr = (void *)(ptr);					\
+    BUILD_BUG_ON_MSG(!__same_type(*(ptr), ((type *)0)->member) &&	\
+                     !__same_type(*(ptr), void),			\
+                     "pointer type mismatch in container_of()");	\
+    ((type *)(__mptr - offsetof(type, member))); })
+```
+
+复杂增加的地方仍然是我们所提的 robust 保证，用于在 **编译时期** 进行更加严格的 **类型检查**，这里使用了 `BUILD_BUG_ON_MSA` 宏，该宏的实作与 `BUILD_BUG_ON_ZERO` 宏类似，而 `BUILD_BUG_ON_ZERO` 的功能和 `static assert` 相似，**接收的表达式为 true 时会编译失败**，即其接收的是不满足编译通过条件的表达式。具体的解释说明可以参考 [Linux 核心巨集: BUILD_BUG_ON_ZERO](https://hackmd.io/@sysprog/c-bitfield)，笔者也有相关的 [博文]({{< relref "./c-bitwise/#linux-%E6%A0%B8%E5%BF%83-build_bug_on_zero" >}}) 进行解说。
+
+除此之外还使用了 `__same_type` 宏:
+
+- [include/linux/compiler_types.h](https://github.com/torvalds/linux/blob/master/include/linux/compiler_types.h#L427)
+
+```c
+/* Are two types/vars the same type (ignoring qualifiers)? */
+#define __same_type(a, b) __builtin_types_compatible_p(typeof(a), typeof(b))
+```
+
+使用 GNU extension `__builtin_types_compatible_p` 对 `a` 和 `b` 的类型进行比较判断:
+
+- [6.63 Other Built-in Functions Provided by GCC](https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html)
+
+> You can use the built-in function `__builtin_types_compatible_p` to determine whether two types are the same.
+> 
+> This built-in function returns 1 if the unqualified versions of the types *type1* and *type2* (which are types, not expressions) are compatible, 0 otherwise. The result of this built-in function can be used in integer constant expressions.
+> 
+> This built-in function ignores top level qualifiers (e.g., `const`, `volatile`). For example, `int` is equivalent to `const int`.
+
+#### 应用案例: 双向环状链接串列
+
+- [sysprog21/linux-list](https://github.com/sysprog21/linux-list)
+
+{{< image src="https://imgur-backup.hackmd.io/kOvwKZw.png" >}}
+
+> 自 `Head` 開始，鏈結 list 各節點，個別節點皆嵌入 `list_head` 結構體，不過 `Head` 是個特例，無法藉由 `container_of` 巨集來找到對應的節點，因為後者並未嵌入到任何結構體之中，其存在是為了找到 list 整體。
+
+> 上方程式碼的好處在於，只要 `list_head` 納入新的結構體的一個成員，即可操作，且不用自行維護一套 doubly-linked list 。
+
+{{< image src="https://imgur-backup.hackmd.io/d3bG8t6.png" >}}
+
+> 注意到 `list_entry` 利用 `container_of` 巨集，藉由 `struct list_head` 這個 **公開介面**，「反向」去存取到 **自行定義的結構體** 開頭地址。
 
 ### Optimized QuickSort
 

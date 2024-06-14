@@ -15,8 +15,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。
 預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。
 "><meta itemprop="datePublished" content="2024-04-23T15:17:38+08:00" />
-<meta itemprop="dateModified" content="2024-05-13T17:18:49+08:00" />
-<meta itemprop="wordCount" content="5669"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-06-14T21:15:20+08:00" />
+<meta itemprop="wordCount" content="5688"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Compiler," /><meta property="og:title" content="你所不知道的 C 语言: 编译器原理和案例分析" />
 <meta property="og:description" content="
 AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。
@@ -25,7 +25,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-compiler-construction/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-04-23T15:17:38+08:00" />
-<meta property="article:modified_time" content="2024-05-13T17:18:49+08:00" />
+<meta property="article:modified_time" content="2024-06-14T21:15:20+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 编译器原理和案例分析"/>
@@ -47,8 +47,8 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/"
-    },"genre": "posts","keywords": "Sysprog, C, Compiler","wordcount":  5669 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/","datePublished": "2024-04-23T15:17:38+08:00","dateModified": "2024-05-13T17:18:49+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, C, Compiler","wordcount":  5688 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-compiler-construction\/","datePublished": "2024-04-23T15:17:38+08:00","dateModified": "2024-06-14T21:15:20+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -176,7 +176,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-04-23 15:17:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-23">2024-04-23</time></span>&nbsp;<span title="更新于 2024-05-13 17:18:49"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-13">2024-05-13</time></span>&nbsp;<span title="5669 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 5700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 12 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-04-23 15:17:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-23">2024-04-23</time></span>&nbsp;<span title="更新于 2024-06-14 21:15:20"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-14">2024-06-14</time></span>&nbsp;<span title="5688 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 5700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 12 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -187,27 +187,31 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     <li><a href="#如何打造一个具体而微的-c-语言编译器">如何打造一个具体而微的 C 语言编译器</a></li>
     <li><a href="#编译器和软件工业强度息息相关">编译器和软件工业强度息息相关</a></li>
     <li><a href="#背景知识">背景知识</a></li>
-    <li><a href="#c-程序的解析和语意">C 程序的解析和语意</a></li>
-    <li><a href="#手把手教你构建-c-语言编译器">手把手教你构建 C 语言编译器</a>
+    <li><a href="#c-程序的解析和语意">C 程序的解析和语意</a>
       <ul>
-        <li><a href="#设计">设计</a></li>
-        <li><a href="#虚拟机">虚拟机</a></li>
-        <li><a href="#词法分析器">词法分析器</a></li>
-        <li><a href="#递归下降">递归下降</a></li>
-        <li><a href="#变量定义">变量定义</a></li>
-        <li><a href="#函数定义">函数定义</a></li>
-        <li><a href="#语句">语句</a></li>
-        <li><a href="#表达式">表达式</a>
+        <li><a href="#手把手教你构建-c-语言编译器">手把手教你构建 C 语言编译器</a>
           <ul>
-            <li><a href="#一元运算符">一元运算符</a></li>
-            <li><a href="#二元运算符">二元运算符</a></li>
-            <li><a href="#初始化栈">初始化栈</a></li>
+            <li><a href="#设计">设计</a></li>
+            <li><a href="#虚拟机">虚拟机</a></li>
+            <li><a href="#词法分析器">词法分析器</a></li>
+            <li><a href="#递归下降">递归下降</a></li>
+            <li><a href="#变量定义">变量定义</a></li>
+            <li><a href="#函数定义">函数定义</a></li>
+            <li><a href="#语句">语句</a></li>
+            <li><a href="#表达式">表达式</a>
+              <ul>
+                <li><a href="#一元运算符">一元运算符</a></li>
+                <li><a href="#二元运算符">二元运算符</a></li>
+                <li><a href="#初始化栈">初始化栈</a></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
     </li>
     <li><a href="#ir-intermediate-representation">IR (Intermediate representation)</a>
       <ul>
+        <li><a href="#interpreter-compiler-jit-from-scratch">Interpreter, Compiler, JIT from scratch</a></li>
         <li><a href="#how-to-write-a-unix-shell">How to write a UNIX shell</a></li>
         <li><a href="#延伸阅读">延伸阅读</a></li>
       </ul>
@@ -252,13 +256,14 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <h2 id="c-程序的解析和语意">C 程序的解析和语意</h2>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://lotabout.me/2015/write-a-C-interpreter-0/"target="_blank" rel="external nofollow noopener noreferrer">手把手教你构建 C 语言编译器</a></li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://pku-minic.github.io/online-doc/#/"target="_blank" rel="external nofollow noopener noreferrer">北大编译实践在线文档</a></li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://craftinginterpreters.com/"target="_blank" rel="external nofollow noopener noreferrer">Crafting Interpreters</a></li>
+<li><a href="https://pku-minic.github.io/online-doc/#/"target="_blank" rel="external nofollow noopener noreferrer">北大编译实践在线文档</a></li>
+<li><a href="https://craftinginterpreters.com/"target="_blank" rel="external nofollow noopener noreferrer">Crafting Interpreters</a></li>
 <li><a href="http://descent-incoming.blogspot.com/2017/01/blog-post.html"target="_blank" rel="external nofollow noopener noreferrer">descent 點評幾本編譯器設計書籍</a></li>
 <li><a href="http://descent-incoming.blogspot.com/2018/01/44.html"target="_blank" rel="external nofollow noopener noreferrer">desent 教你逐步開發編譯器</a></li>
 <li><a href="https://github.com/rswier/c4"target="_blank" rel="external nofollow noopener noreferrer">c4</a> 是很好的切入點，原作者 Robert Swierczek 還又另一個 <a href="https://github.com/rswier/swieros/blob/master/root/bin/c.c"target="_blank" rel="external nofollow noopener noreferrer">更完整的 C 編譯器實作</a>，这个实作支持 preprocessor</li>
 <li>AMaCC 在 Robert Swierczek 的基礎上，額外實作 C 語言的 struct, switch-case, for, C-style comment 支援，並且重寫了 IR 執行程式碼，得以輸出合法 GNU/Linux ELF 執行檔 (支援 <a href="https://wiki.debian.org/ArmHardFloatPort"target="_blank" rel="external nofollow noopener noreferrer">armhf</a> ABI) 和 JIT 編譯</li>
 <li><a href="https://space.bilibili.com/296494084/channel/collectiondetail?sid=571708"target="_blank" rel="external nofollow noopener noreferrer">徒手写一个 RISC-V 编译器！初学者友好的实战课程</a></li>
+<li><a href="https://www.jmeiners.com/lc3-vm/"target="_blank" rel="external nofollow noopener noreferrer">Write your Own Virtual Machine</a> / <a href="https://arthurchiao.art/blog/write-your-own-virtual-machine-zh/"target="_blank" rel="external nofollow noopener noreferrer">中文翻译</a></li>
 </ul>
 <div class="details admonition note open">
     <div class="details-summary admonition-title">
@@ -271,7 +276,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     </div>
   </div>
 <a class="lightgallery" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=large" data-thumbnail="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=small" data-sub-html="<h2>https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg</h2>"><img loading="lazy" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg" srcset="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=small, https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=medium 1.5x, https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg?size=large 2x" sizes="auto" data-title="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg" data-alt="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
-<h2 id="手把手教你构建-c-语言编译器">手把手教你构建 C 语言编译器</h2>
+<h3 id="手把手教你构建-c-语言编译器">手把手教你构建 C 语言编译器</h3>
 <a href="https://github.com/lotabout/write-a-C-interpreter"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 <p>编译原理课程教导的是如何完成一个「编译器的编译器」，即 <a href="https://en.wikipedia.org/wiki/Compiler-compiler"target="_blank" rel="external nofollow noopener noreferrer">Compiler-compiler</a>，这个难度比较大，因为需要考虑通用性，但是实作一个简单的编译器并没有这么难。</p>
 <ul>
@@ -297,7 +302,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div>
     </div>
   </div>
-<h3 id="设计">设计</h3>
+<h4 id="设计">设计</h4>
 <p>一般而言，编译器的编写分为 3 个步骤：</p>
 <ol>
 <li>词法分析器，用于将字符串转化成内部的表示结构。</li>
@@ -321,7 +326,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div><p><code>main</code> 函数这部分的处理是将该进程 <code>argc</code> 和 <code>argv</code> 设定为解释执行的源程序对应的值，以让虚拟机正确地解释执行源程序 (需要看完「虚拟机」和「表达式」部分才能理解这部分处理的意义)。</p></div>
     </div>
   </div>
-<h3 id="虚拟机">虚拟机</h3>
+<h4 id="虚拟机">虚拟机</h4>
 <p>在该项目的虚拟机设计中，函数调用时 callee 的参数位于 caller 的栈帧 (frame) 内，并且函数调用需要使用到 4 条指令:</p>
 <ol>
 <li><code>CALL</code> 指令将 callee 的返回地址压入栈，然后跳转到 callee 的入口处</li>
@@ -493,7 +498,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div>
     </div>
   </div>
-<h3 id="词法分析器">词法分析器</h3>
+<h4 id="词法分析器">词法分析器</h4>
 <p>我们并不会一次性地将所有源码全部转换成标记流，原因有二：</p>
 <ol>
 <li>字符串转换成标记流有时是有状态的，即与代码的上下文是有关系的。</li>
@@ -548,13 +553,13 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div>
     </div>
   </div>
-<h3 id="递归下降">递归下降</h3>
+<h4 id="递归下降">递归下降</h4>
 <p>这一节是以四则运算表达式的语法分析为例，介绍递归下降的相关实作，并不是编译器实作的一部分 &#x1f923; 但也用到了前一节所提的词法分析，虽然简单很多 (因为四则运算只需考虑标识符为数字的情况)。</p>
 <p>语法分析的关键点在于: 它是根据词法分析获得的 token 流进行分析的，其中的 <code>match</code> 方法是用于判断当前获得的 token 是否符合语法分析的预期以及基于 token 进行向前看 (对比一下词法分析是基于字符的向前看)。</p>
 <ul>
 <li><a href="https://www.tutorialspoint.com/what-is-left-recursion-and-how-it-is-eliminated"target="_blank" rel="external nofollow noopener noreferrer">What is Left Recursion and how it is eliminated?</a></li>
 </ul>
-<h3 id="变量定义">变量定义</h3>
+<h4 id="变量定义">变量定义</h4>
 <div class="details admonition question">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>current_id[Value] and address<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -575,7 +580,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div>
     </div>
   </div>
-<h3 id="函数定义">函数定义</h3>
+<h4 id="函数定义">函数定义</h4>
 <p>代码段全局变量 <code>text</code> 表示的是当前生成的指令，所以下一条指令 (即将要生成的指令) 的地址为 <code>text + 1</code>。</p>
 <div class="details admonition question">
     <div class="details-summary admonition-title">
@@ -619,7 +624,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div></div>
     </div>
   </div>
-<h3 id="语句">语句</h3>
+<h4 id="语句">语句</h4>
 <p>这一节对于 Return 语句处理是会生成 <code>LEV</code> 指令，这与上一节函数定义部分生成的 <code>LEV</code> 指令并不冲突，因为函数定义生成的 <code>LEV</code> 指令对于函数末尾，而本节 Return 语句生成的 <code>LEV</code> 语句可以对应函数体内的其他 <code>return</code> 返回语句 (毕竟一个函数内可以存在多个返回语句)。</p>
 <div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -638,7 +643,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="o">-</span><span class="n">x</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="表达式">表达式</h3>
+</div><h4 id="表达式">表达式</h4>
 <p><code>void expression(int level)</code> 的参数 <code>level</code> 表示上一个运算符的优先级，这样可以利用程序自身的栈进行表达式优先级入栈出栈进行运算，而不需要额外实现栈来进行模拟，表达式优先级和栈的运算可以参考本节开头的例子。</p>
 <blockquote>
 <p>我们需要不断地向右扫描，直到遇到优先级 <strong>小于</strong> 当前优先级的运算符。</p>
@@ -662,7 +667,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div>
 </div><p>一个涉及两次函数调用，第一次调用处理了标识符 <code>a</code> 和运算符 <code>=</code>，第二次调用处理了数字 <code>10</code>，可以自行走访一下流程进行体会 (learn anything by tracing)，即一次 <code>expression()</code> 最多可以处理一个一元运算符和一个二元运算符。</p>
 <p>除此之外，<code>expression()</code> 执行完成之后，生成的指令流会将结果放置在寄存器 <code>ax</code> 中，可以以这个为前提进行后续的指令生成。</p>
-<h4 id="一元运算符">一元运算符</h4>
+<h5 id="一元运算符">一元运算符</h5>
 <p>根据词法分析器 <code>next()</code> 字符串部分的逻辑，扫描到字符串时对应的 token 是 <code>&quot;</code>。</p>
 <div class="details admonition question">
     <div class="details-summary admonition-title">
@@ -718,13 +723,13 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </span></span><span class="line"><span class="cl"><span class="o">*++</span><span class="n">text</span> <span class="o">=</span> <span class="n">MUL</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>「自增自减」例如 <code>++p</code> 需要需要使用变量 <code>p</code> 的地址两次：一次用于读取 <code>p</code> 的数值，一次用于将自增后的数值存储回 <code>p</code> 处，并且自增自减实质上是通过 <code>p +/- 1</code> 来实现的 。</p>
-<h4 id="二元运算符">二元运算符</h4>
+<h5 id="二元运算符">二元运算符</h5>
 <p>处理 <code>||</code> 和 <code>&amp;&amp;</code> 时，对于右边的 operand 的处理分别是 <code>expression(Lan)</code> 和 <code>expression(Or)</code>，限制的优先级刚好比当前的运算符高一级，使得遇到同级运算符时会返回，从而让外部的 <code>while</code> 循环来处理，这样可以保证生成正确的指令序列。</p>
 <p>一篇关于表达式优先级爬山的博文:</p>
 <ul>
 <li><a href="https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing/"target="_blank" rel="external nofollow noopener noreferrer">Parsing expressions by precedence climbing</a></li>
 </ul>
-<h4 id="初始化栈">初始化栈</h4>
+<h5 id="初始化栈">初始化栈</h5>
 <div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -766,7 +771,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </blockquote>
 <p>所以一般的 IR 长得和汇编语言比较像，但是比汇编高阶，因为 IR 是建立在这样的虚拟机器 (abstract machine designed to aid in the analysis of computer programs) 之上的。</p>
 <ul>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://www.slideshare.net/jserv/jit-compiler"target="_blank" rel="external nofollow noopener noreferrer">Interpreter, Compiler, JIT from scratch</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://www.slideshare.net/jserv/jit-compiler"target="_blank" rel="external nofollow noopener noreferrer">Interpreter, Compiler, JIT from scratch</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://eli.thegreenplace.net/2013/11/05/how-to-jit-an-introduction"target="_blank" rel="external nofollow noopener noreferrer">How to JIT - an introduction</a></li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://github.com/spencertipping/jit-tutorial"target="_blank" rel="external nofollow noopener noreferrer">How to write a very simple JIT compiler</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://github.com/spencertipping/shell-tutorial"target="_blank" rel="external nofollow noopener noreferrer">How to write a UNIX shell, with a lot of background</a></li>
@@ -781,6 +786,16 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div>
     </div>
   </div>
+<h3 id="interpreter-compiler-jit-from-scratch">Interpreter, Compiler, JIT from scratch</h3>
+<a href="https://www.slideshare.net/jserv/jit-compiler"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+<hr>
+<a class="lightgallery" href="/images/c/jit-compiler-151016000038-lva1-app6892-05.png?size=large" data-thumbnail="/images/c/jit-compiler-151016000038-lva1-app6892-05.png?size=small" data-sub-html="<h2>/images/c/jit-compiler-151016000038-lva1-app6892-05.png</h2>"><img loading="lazy" src="/images/c/jit-compiler-151016000038-lva1-app6892-05.png" srcset="/images/c/jit-compiler-151016000038-lva1-app6892-05.png?size=small, /images/c/jit-compiler-151016000038-lva1-app6892-05.png?size=medium 1.5x, /images/c/jit-compiler-151016000038-lva1-app6892-05.png?size=large 2x" sizes="auto" data-title="/images/c/jit-compiler-151016000038-lva1-app6892-05.png" data-alt="/images/c/jit-compiler-151016000038-lva1-app6892-05.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p><a class="lightgallery" href="/images/c/jit-compiler-151016000038-lva1-app6892-26.png?size=large" data-thumbnail="/images/c/jit-compiler-151016000038-lva1-app6892-26.png?size=small" data-sub-html="<h2>/images/c/jit-compiler-151016000038-lva1-app6892-26.png</h2>"><img loading="lazy" src="/images/c/jit-compiler-151016000038-lva1-app6892-26.png" srcset="/images/c/jit-compiler-151016000038-lva1-app6892-26.png?size=small, /images/c/jit-compiler-151016000038-lva1-app6892-26.png?size=medium 1.5x, /images/c/jit-compiler-151016000038-lva1-app6892-26.png?size=large 2x" sizes="auto" data-title="/images/c/jit-compiler-151016000038-lva1-app6892-26.png" data-alt="/images/c/jit-compiler-151016000038-lva1-app6892-26.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="/images/c/jit-compiler-151016000038-lva1-app6892-27.png?size=large" data-thumbnail="/images/c/jit-compiler-151016000038-lva1-app6892-27.png?size=small" data-sub-html="<h2>/images/c/jit-compiler-151016000038-lva1-app6892-27.png</h2>"><img loading="lazy" src="/images/c/jit-compiler-151016000038-lva1-app6892-27.png" srcset="/images/c/jit-compiler-151016000038-lva1-app6892-27.png?size=small, /images/c/jit-compiler-151016000038-lva1-app6892-27.png?size=medium 1.5x, /images/c/jit-compiler-151016000038-lva1-app6892-27.png?size=large 2x" sizes="auto" data-title="/images/c/jit-compiler-151016000038-lva1-app6892-27.png" data-alt="/images/c/jit-compiler-151016000038-lva1-app6892-27.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="/images/c/jit-compiler-151016000038-lva1-app6892-28.png?size=large" data-thumbnail="/images/c/jit-compiler-151016000038-lva1-app6892-28.png?size=small" data-sub-html="<h2>/images/c/jit-compiler-151016000038-lva1-app6892-28.png</h2>"><img loading="lazy" src="/images/c/jit-compiler-151016000038-lva1-app6892-28.png" srcset="/images/c/jit-compiler-151016000038-lva1-app6892-28.png?size=small, /images/c/jit-compiler-151016000038-lva1-app6892-28.png?size=medium 1.5x, /images/c/jit-compiler-151016000038-lva1-app6892-28.png?size=large 2x" sizes="auto" data-title="/images/c/jit-compiler-151016000038-lva1-app6892-28.png" data-alt="/images/c/jit-compiler-151016000038-lva1-app6892-28.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="/images/c/jit-compiler-151016000038-lva1-app6892-29.png?size=large" data-thumbnail="/images/c/jit-compiler-151016000038-lva1-app6892-29.png?size=small" data-sub-html="<h2>/images/c/jit-compiler-151016000038-lva1-app6892-29.png</h2>"><img loading="lazy" src="/images/c/jit-compiler-151016000038-lva1-app6892-29.png" srcset="/images/c/jit-compiler-151016000038-lva1-app6892-29.png?size=small, /images/c/jit-compiler-151016000038-lva1-app6892-29.png?size=medium 1.5x, /images/c/jit-compiler-151016000038-lva1-app6892-29.png?size=large 2x" sizes="auto" data-title="/images/c/jit-compiler-151016000038-lva1-app6892-29.png" data-alt="/images/c/jit-compiler-151016000038-lva1-app6892-29.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="/images/c/jit-compiler-151016000038-lva1-app6892-30.png?size=large" data-thumbnail="/images/c/jit-compiler-151016000038-lva1-app6892-30.png?size=small" data-sub-html="<h2>/images/c/jit-compiler-151016000038-lva1-app6892-30.png</h2>"><img loading="lazy" src="/images/c/jit-compiler-151016000038-lva1-app6892-30.png" srcset="/images/c/jit-compiler-151016000038-lva1-app6892-30.png?size=small, /images/c/jit-compiler-151016000038-lva1-app6892-30.png?size=medium 1.5x, /images/c/jit-compiler-151016000038-lva1-app6892-30.png?size=large 2x" sizes="auto" data-title="/images/c/jit-compiler-151016000038-lva1-app6892-30.png" data-alt="/images/c/jit-compiler-151016000038-lva1-app6892-30.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="/images/c/jit-compiler-151016000038-lva1-app6892-31.png?size=large" data-thumbnail="/images/c/jit-compiler-151016000038-lva1-app6892-31.png?size=small" data-sub-html="<h2>/images/c/jit-compiler-151016000038-lva1-app6892-31.png</h2>"><img loading="lazy" src="/images/c/jit-compiler-151016000038-lva1-app6892-31.png" srcset="/images/c/jit-compiler-151016000038-lva1-app6892-31.png?size=small, /images/c/jit-compiler-151016000038-lva1-app6892-31.png?size=medium 1.5x, /images/c/jit-compiler-151016000038-lva1-app6892-31.png?size=large 2x" sizes="auto" data-title="/images/c/jit-compiler-151016000038-lva1-app6892-31.png" data-alt="/images/c/jit-compiler-151016000038-lva1-app6892-31.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a></p>
 <h3 id="how-to-write-a-unix-shell">How to write a UNIX shell</h3>
 <a class="lightgallery" href="/images/c/shell.drawio.svg?size=large" data-thumbnail="/images/c/shell.drawio.svg?size=small" data-sub-html="<h2>/images/c/shell.drawio.svg</h2>"><img loading="lazy" src="/images/c/shell.drawio.svg" srcset="/images/c/shell.drawio.svg?size=small, /images/c/shell.drawio.svg?size=medium 1.5x, /images/c/shell.drawio.svg?size=large 2x" sizes="auto" data-title="/images/c/shell.drawio.svg" data-alt="/images/c/shell.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>系统编程 (System Programming) 的入门项目，阅读过程需要查询搭配 man 手册，以熟悉库函数和系统调用的原型和作用。</p>
@@ -807,7 +822,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-05-13 17:18:49">更新于 2024-05-13&nbsp;</span>
+        <span title="更新于 2024-06-14 21:15:20">更新于 2024-06-14&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/c-compiler-construction/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>

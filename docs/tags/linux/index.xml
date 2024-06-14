@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/tags/linux/</link>
     <description>Linux - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 07 Jun 2024 10:33:35 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 09 Jun 2024 19:50:03 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -12,6 +12,16 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>从 Revolution OS 看操作系统生态变化</title>
+  <link>https://ccrysisa.github.io/posts/revolution-os/</link>
+  <pubDate>Sun, 09 Jun 2024 19:50:03 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/revolution-os/</guid>
+  <description><![CDATA[<blockquote>
+<p>2001 年，J. T. S. Moore 以自由軟體和開放原始碼軟體發展為主題，導演相當可貴的紀錄片《Revolution OS》，訪談若干先鋒者，是理解黑客 (hacker)、 GNU 計畫、自由軟體基金會 (FSF)、Linux 核心 (kernel)、開放原始碼 (open source) 和自由軟體 (free software) 基於不同理念各自發展、Netscape 宣佈 Mozilla 開放原始碼專案、基於 Apache 和一系列開放原始碼技術的公司、在 NASDAQ 上市等等歷程的第一手資訊。</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -45,7 +55,10 @@
   <pubDate>Wed, 10 Apr 2024 16:09:35 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/posix-threads/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[<blockquote>
+<p>POSIX (Portable Operating System Interfaces) is a family of standards for maintaining compatibility between operating systems. POSIX is a Unix-like operating system environment and is currently available on Unix/Linux, Windows, OS/2 and DOS.</p>
+<p>Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c thread extension, defines thread creation and manipulation. This standard defines thread management, mutexes, conditions, read/write locks, barriers, etc. Except for the monitors, all features are available in Pthreads.</p>
+</blockquote>]]></description>
 </item>
 <item>
   <title>南京大学 计算机系统基础 重点提示</title>
@@ -98,16 +111,6 @@
   <description><![CDATA[<blockquote>
 <p>多執行緒環境下，程式會出問題，往往在於執行順序的不確定性。一旦顧及分散式系統 (distributed systems)，執行順序和衍生的時序 (timing) 問題更加複雜。</p>
 <p>我們將從如何定義程式執行的順序開始說起，為了簡單起見，我們先從單執行緒的觀點來看執行順序這件事，其中最關鍵知識就是 Sequenced-before，你將會發現就連單執行緒的程式，也可能會產生不確定的執行順序。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>并行程序设计: 概念</title>
-  <link>https://ccrysisa.github.io/posts/concurrency-concepts/</link>
-  <pubDate>Fri, 08 Mar 2024 17:29:25 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/concurrency-concepts/</guid>
-  <description><![CDATA[<blockquote>
-<p>透过建立 Concurrency 和 Parallelism、Mutex 与 Semaphore 的基本概念，本讲座将透过 POSIX Tread 探讨 thread pool, Lock-Free Programming, lock-free 使用的 atomic 操作, memory ordering, M:N threading model 等进阶议题。</p>
 </blockquote>]]></description>
 </item>
 </channel>
