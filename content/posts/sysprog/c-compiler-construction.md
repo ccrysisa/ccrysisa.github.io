@@ -96,7 +96,7 @@ repost:
 
 {{< image src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg" >}}
 
-## 手把手教你构建 C 语言编译器
+### 手把手教你构建 C 语言编译器
 
 {{< link href="https://github.com/lotabout/write-a-C-interpreter" content="原文地址" external-icon=true >}}
 
@@ -113,7 +113,7 @@ a = a + 1;    // instead of `a += 1;`
 这都是为了实现这个编译器的自举 (self-host)，所以在语法上没有太大的灵活性 (因为这个编译器不支持这么灵活的语法 :rofl:)
 {{< /admonition >}}
 
-### 设计
+#### 设计
 
 一般而言，编译器的编写分为 3 个步骤：
 1. 词法分析器，用于将字符串转化成内部的表示结构。
@@ -129,7 +129,7 @@ argv++;
 `main` 函数这部分的处理是将该进程 `argc` 和 `argv` 设定为解释执行的源程序对应的值，以让虚拟机正确地解释执行源程序 (需要看完「虚拟机」和「表达式」部分才能理解这部分处理的意义)。
 {{< /admonition >}}
 
-### 虚拟机
+#### 虚拟机
 
 在该项目的虚拟机设计中，函数调用时 callee 的参数位于 caller 的栈帧 (frame) 内，并且函数调用需要使用到 4 条指令:
 
@@ -233,7 +233,7 @@ Stack Overflow:
 - ["fatal error: bits/libc-header-start.h: No such file or directory" while compiling HTK](https://stackoverflow.com/questions/54082459/fatal-error-bits-libc-header-start-h-no-such-file-or-directory-while-compili)
 {{< /admonition >}}
 
-### 词法分析器
+#### 词法分析器
 
 我们并不会一次性地将所有源码全部转换成标记流，原因有二：
 1. 字符串转换成标记流有时是有状态的，即与代码的上下文是有关系的。
@@ -269,7 +269,7 @@ src = "char else enum if int return sizeof while "
 一定要注意第一行最后的 `while` 后面有一个 **空格**，这是保证字符串拼接后可以被词法分析器识别为两个 token。如果不加空格，字符串会把这一部分拼接成 `... whileopen ...`，这样就不符合我们的预期了，进而导致程序出错。
 {{< /admonition >}}
 
-### 递归下降
+#### 递归下降
 
 这一节是以四则运算表达式的语法分析为例，介绍递归下降的相关实作，并不是编译器实作的一部分 :rofl: 但也用到了前一节所提的词法分析，虽然简单很多 (因为四则运算只需考虑标识符为数字的情况)。
 
@@ -277,7 +277,7 @@ src = "char else enum if int return sizeof while "
 
 - [What is Left Recursion and how it is eliminated?](https://www.tutorialspoint.com/what-is-left-recursion-and-how-it-is-eliminated)
 
-### 变量定义
+#### 变量定义
 
 {{< admonition question "current_id[Value] and address" false >}}
 ```c
@@ -290,7 +290,7 @@ current_id[Value] = (int)data; // assign memory address
 全局变量 `text` 指向代码段当前已生成指令的位置，所以 `text + 1` 才是下一条指令的位置，`data` 表示数据段当前生成的位置。
 {{< /admonition >}}
 
-### 函数定义
+#### 函数定义
 
 代码段全局变量 `text` 表示的是当前生成的指令，所以下一条指令 (即将要生成的指令) 的地址为 `text + 1`。
 
@@ -317,7 +317,7 @@ if (id[Class] == Loc) {
 ```
 {{< /admonition >}}
 
-### 语句
+#### 语句
 
 这一节对于 Return 语句处理是会生成 `LEV` 指令，这与上一节函数定义部分生成的 `LEV` 指令并不冲突，因为函数定义生成的 `LEV` 指令对于函数末尾，而本节 Return 语句生成的 `LEV` 语句可以对应函数体内的其他 `return` 返回语句 (毕竟一个函数内可以存在多个返回语句)。
 
@@ -330,7 +330,7 @@ int func(int x) {
 }
 ```
 
-### 表达式
+#### 表达式
 
 `void expression(int level)` 的参数 `level` 表示上一个运算符的优先级，这样可以利用程序自身的栈进行表达式优先级入栈出栈进行运算，而不需要额外实现栈来进行模拟，表达式优先级和栈的运算可以参考本节开头的例子。
 
@@ -352,7 +352,7 @@ expression()  // 一元运算符: Num
 
 除此之外，`expression()` 执行完成之后，生成的指令流会将结果放置在寄存器 `ax` 中，可以以这个为前提进行后续的指令生成。
 
-#### 一元运算符
+##### 一元运算符
 
 根据词法分析器 `next()` 字符串部分的逻辑，扫描到字符串时对应的 token 是 `"`。
 
@@ -396,14 +396,14 @@ expression(Inc);
 
 「自增自减」例如 `++p` 需要需要使用变量 `p` 的地址两次：一次用于读取 `p` 的数值，一次用于将自增后的数值存储回 `p` 处，并且自增自减实质上是通过 `p +/- 1` 来实现的 。
 
-#### 二元运算符
+##### 二元运算符
 
 处理 `||` 和 `&&` 时，对于右边的 operand 的处理分别是 `expression(Lan)` 和 `expression(Or)`，限制的优先级刚好比当前的运算符高一级，使得遇到同级运算符时会返回，从而让外部的 `while` 循环来处理，这样可以保证生成正确的指令序列。
 
 一篇关于表达式优先级爬山的博文:
 - [Parsing expressions by precedence climbing](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing/)
 
-#### 初始化栈
+##### 初始化栈
 
 ```c
 // setup stack
@@ -437,7 +437,7 @@ sp = (int *)((int)stack + poolsize);
 
 所以一般的 IR 长得和汇编语言比较像，但是比汇编高阶，因为 IR 是建立在这样的虚拟机器 (abstract machine designed to aid in the analysis of computer programs) 之上的。
 
-- [ ] [Interpreter, Compiler, JIT from scratch](https://www.slideshare.net/jserv/jit-compiler)
+- [x] [Interpreter, Compiler, JIT from scratch](https://www.slideshare.net/jserv/jit-compiler)
 - [ ] [How to JIT - an introduction](https://eli.thegreenplace.net/2013/11/05/how-to-jit-an-introduction)
 - [ ] [How to write a very simple JIT compiler](https://github.com/spencertipping/jit-tutorial)
 - [x] [How to write a UNIX shell, with a lot of background](https://github.com/spencertipping/shell-tutorial)
@@ -447,6 +447,21 @@ JIT (Just in time) 表示“即时”，形象描述就是“及时雨” :rofl:
 
 最后两个链接对于提高系统编程 (System programming) 能力非常有益，Just do it!
 {{< /admonition >}}
+
+### Interpreter, Compiler, JIT from scratch
+
+{{< link href="https://www.slideshare.net/jserv/jit-compiler" content="原文地址" external-icon=true >}}
+
+---
+
+{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-05.png">}}
+
+{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-26.png">}}
+{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-27.png">}}
+{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-28.png">}}
+{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-29.png">}}
+{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-30.png">}}
+{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-31.png">}}
 
 ### How to write a UNIX shell
 
