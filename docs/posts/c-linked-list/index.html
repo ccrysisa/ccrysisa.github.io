@@ -13,8 +13,8 @@
 <meta itemprop="description" content="
 无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。
 "><meta itemprop="datePublished" content="2024-02-03T10:44:56+08:00" />
-<meta itemprop="dateModified" content="2024-04-19T17:31:37+08:00" />
-<meta itemprop="wordCount" content="2119"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-06-09T17:16:24+08:00" />
+<meta itemprop="wordCount" content="4084"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Linked List," /><meta property="og:title" content="你所不知道的 C 语言: linked list 和非连续记忆体" />
 <meta property="og:description" content="
 无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。
@@ -22,7 +22,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-linked-list/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-03T10:44:56+08:00" />
-<meta property="article:modified_time" content="2024-04-19T17:31:37+08:00" />
+<meta property="article:modified_time" content="2024-06-09T17:16:24+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: linked list 和非连续记忆体"/>
@@ -43,8 +43,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-linked-list\/"
-    },"genre": "posts","keywords": "Sysprog, C, Linked List","wordcount":  2119 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-linked-list\/","datePublished": "2024-02-03T10:44:56+08:00","dateModified": "2024-04-19T17:31:37+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, C, Linked List","wordcount":  4084 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-linked-list\/","datePublished": "2024-02-03T10:44:56+08:00","dateModified": "2024-06-09T17:16:24+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -172,7 +172,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-03 10:44:56"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-03">2024-02-03</time></span>&nbsp;<span title="更新于 2024-04-19 17:31:37"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-19">2024-04-19</time></span>&nbsp;<span title="2119 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-03 10:44:56"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-03">2024-02-03</time></span>&nbsp;<span title="更新于 2024-06-09 17:16:24"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-09">2024-06-09</time></span>&nbsp;<span title="4084 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 4100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 9 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -195,7 +195,14 @@
     <li><a href="#linux-核心的-linked-list">Linux 核心的 linked list</a>
       <ul>
         <li><a href="#intrusive-linked-lists">Intrusive linked lists</a></li>
-        <li><a href="#container_of">container_of</a></li>
+        <li><a href="#container_of">container_of</a>
+          <ul>
+            <li><a href="#跟你想象不同的-struct">跟你想象不同的 struct</a></li>
+            <li><a href="#container_of-宏作为资料封装的基础">container_of 宏作为资料封装的基础</a></li>
+            <li><a href="#container_of-实作手法">container_of 实作手法</a></li>
+            <li><a href="#应用案例-双向环状链接串列">应用案例: 双向环状链接串列</a></li>
+          </ul>
+        </li>
         <li><a href="#optimized-quicksort">Optimized QuickSort</a></li>
         <li><a href="#linux-核心的-list_sort-实作">Linux 核心的 list_sort 实作</a></li>
       </ul>
@@ -283,7 +290,7 @@
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/linked-list-cycle/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 141. Linked List Cycle</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/linked-list-cycle-ii/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 142. Linked List Cycle II</a></li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/lru-cache/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 146. LRU Cache</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/lru-cache/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 146. LRU Cache</a></li>
 <li><a href="https://github.com/glodknife/algorithm"target="_blank" rel="external nofollow noopener noreferrer">金刀的算法小册子</a> Linked List 专题
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/reverse-linked-list"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 206. Reverse Linked List</a></li>
@@ -331,9 +338,225 @@
 </ul>
 <p>这篇文章对于 Intrusive linked list 说明的非常好，解释了其在 memory allocations 和 cache thrashing 的优势，还搭配 Linux kernel 讲解了场景应用。</p>
 <h3 id="container_of">container_of</h3>
+<div class="details admonition success open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-check-circle fa-fw" aria-hidden="true"></i>成功<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>container_of 巨集在 Linux 核心原始程式碼出現將近 7 千次 (v5.13)，不僅在 linked list 和 hash table 一類通用資料結構中可簡化程式設計，甚至是 Linux 核心達成物件導向程式設計的關鍵機制之一。</p>
+<p>若要征服 Linux 核心原始程式碼，對 container_of 巨集的掌握度絕對要充分。</p>
+</div>
+    </div>
+  </div>
 <ul>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/linux-macro-containerof"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心原始程式碼巨集: container_of</a></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/linux-macro-containerof"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心原始程式碼巨集: container_of</a></li>
 </ul>
+<h4 id="跟你想象不同的-struct">跟你想象不同的 struct</h4>
+<div class="highlight" id="id-2"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">data</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">short</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">double</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>对于上面的结构体，下面的内存分布图示是错误的:</p>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/NihOvLg.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/NihOvLg.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/NihOvLg.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/NihOvLg.png" srcset="https://imgur-backup.hackmd.io/NihOvLg.png?size=small, https://imgur-backup.hackmd.io/NihOvLg.png?size=medium 1.5x, https://imgur-backup.hackmd.io/NihOvLg.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/NihOvLg.png" data-alt="https://imgur-backup.hackmd.io/NihOvLg.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p>原因是这样的内存分布忽略了编译器为了满足 alignment 需求，进行的 <a href="http://www.catb.org/esr/structure-packing/#_padding"target="_blank" rel="external nofollow noopener noreferrer">structure padding</a></p>
+<ul>
+<li><a href="https://gcc.gnu.org/onlinedocs/gcc/Common-Type-Attributes.html"target="_blank" rel="external nofollow noopener noreferrer">6.37.1 Common Type Attributes</a> - packed</li>
+</ul>
+<blockquote>
+<p>This attribute, attached to a struct, union, or C++ class type definition, specifies that each of its members (other than zero-width bit-fields) is placed to minimize the memory required. This is equivalent to specifying the packed attribute on each of the members.</p>
+</blockquote>
+<p>加上 <code>packed</code> 属性后结构体成员的内存分布就和一开始的相同，但这是 C 语言的一个陷阱，<code>packed</code> 的结构体可能会牺牲资料存取的效率，具体可以参考 <a href="https://hackmd.io/@sysprog/c-memory"target="_blank" rel="external nofollow noopener noreferrer">你所不知道的 C 语言: 记忆体管理、对齐及硬体特性</a>。</p>
+<p>C89/C99 提供 <a href="https://man7.org/linux/man-pages/man3/offsetof.3.html"target="_blank" rel="external nofollow noopener noreferrer">offset</a> 宏来提升可移植性 (portablity)，其功能为接收结构体的型态和成员的名称，返回 <strong>成员的地址减去 struct 的起始地址得到的偏移量</strong>:</p>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">size_t</span> <span class="nf">offsetof</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="n">member</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>The macro <code>offsetof()</code> returns the offset of the field <em>member</em> from the start of the structure <em>type</em>.</p>
+</blockquote>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/DYiZ1sd.jpg?size=large" data-thumbnail="https://imgur-backup.hackmd.io/DYiZ1sd.jpg?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/DYiZ1sd.jpg</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/DYiZ1sd.jpg" srcset="https://imgur-backup.hackmd.io/DYiZ1sd.jpg?size=small, https://imgur-backup.hackmd.io/DYiZ1sd.jpg?size=medium 1.5x, https://imgur-backup.hackmd.io/DYiZ1sd.jpg?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/DYiZ1sd.jpg" data-alt="https://imgur-backup.hackmd.io/DYiZ1sd.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p><a href="https://gcc.gnu.org/onlinedocs/gcc/Typeof.html"target="_blank" rel="external nofollow noopener noreferrer">typeof</a> 也是 GNU extension，它可以在编译时期得到 object 的型态名称，例如 <code>x</code> 是 <code>struct data</code>，那么通过 <code>typeof(x)</code> 即可得到 <code>struct data</code>，这样就联通了 object 和型态的关系。</p>
+<blockquote>
+<p>Another way to refer to the type of an expression is with typeof. The syntax of using of this keyword looks like sizeof, but the construct acts semantically like a type name defined with typedef.</p>
+</blockquote>
+<h4 id="container_of-宏作为资料封装的基础">container_of 宏作为资料封装的基础</h4>
+<p><code>container_of</code> 宏在 <code>offsetof</code> 的基础上，扩充为 <strong>给定成员的地址、struct 的型态，以及成员的名称，传回此 struct 物件的地址</strong>:</p>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/IgayoN9.jpg?size=large" data-thumbnail="https://imgur-backup.hackmd.io/IgayoN9.jpg?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/IgayoN9.jpg</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/IgayoN9.jpg" srcset="https://imgur-backup.hackmd.io/IgayoN9.jpg?size=small, https://imgur-backup.hackmd.io/IgayoN9.jpg?size=medium 1.5x, https://imgur-backup.hackmd.io/IgayoN9.jpg?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/IgayoN9.jpg" data-alt="https://imgur-backup.hackmd.io/IgayoN9.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<blockquote>
+<p>請不要小看這巨集，畢竟大量在 Linux 核心原始程式碼採用的巨集，應有其獨到之處。在 <code>container_of</code> 巨集出現前，程式設計的思維往往是:</p>
+<ol>
+<li>給定結構體起始地址</li>
+<li>求出結構體特定成員的記憶體內容</li>
+<li>傳回結構體成員的地址，作日後存取使用</li>
+</ol>
+<p><code>container_of</code> 巨集則逆轉上述流程，特別在 C 語言程式設計中，我們通常會定義一系列公開介面 (interface)，從而區隔各式實作 (implementation)。</p>
+</blockquote>
+<ul>
+<li><a href="https://hackmd.io/@sysprog/c-oop"target="_blank" rel="external nofollow noopener noreferrer">你所不知道的 C 语言: 物件导向程序设计篇</a></li>
+</ul>
+<p>例如对于下面的程式码，可以通过 <code>container_of</code> 搭配 <code>base</code> 成员来获得具体的类型，实现某种意义上的 <strong>封装</strong> (encapsulation)，<strong>继承</strong> (inheritance) 和 <strong>多态</strong> (polymorphism)</p>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">ref</span><span class="p">;</span> <span class="p">}</span> <span class="n">Object</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span> <span class="n">Object</span> <span class="n">base</span><span class="p">;</span> <span class="cm">/* Vehicle-specific members */</span> <span class="p">}</span> <span class="n">Vehicle</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span> <span class="n">Vehicle</span> <span class="n">base</span><span class="p">;</span> <span class="cm">/* Car-specific members */</span> <span class="p">}</span> <span class="n">Car</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">vehicleStart</span><span class="p">(</span><span class="n">Vehicle</span> <span class="o">*</span><span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">obj</span><span class="p">)</span> <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%x derived from %x</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">obj</span><span class="o">-&gt;</span><span class="n">base</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Car</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">vehicleStart</span><span class="p">((</span><span class="n">Vehicle</span> <span class="o">*</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在 Linux 核心的装置驱动程式里也常用到 <code>container_of</code> 进行物件导向设计，并通过搭配指针操作，用于 <strong>清晰地界定接口和实作本体</strong>，这是 Linux 核心开发者追求的优雅。</p>
+<ul>
+<li><a href="https://github.com/torvalds/linux/blob/master/drivers/media/i2c/imx214.c"target="_blank" rel="external nofollow noopener noreferrer">drivers/media/i2c/imx214.c</a></li>
+</ul>
+<h4 id="container_of-实作手法">container_of 实作手法</h4>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/6h0Bgax.jpg?size=large" data-thumbnail="https://imgur-backup.hackmd.io/6h0Bgax.jpg?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/6h0Bgax.jpg</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/6h0Bgax.jpg" srcset="https://imgur-backup.hackmd.io/6h0Bgax.jpg?size=small, https://imgur-backup.hackmd.io/6h0Bgax.jpg?size=medium 1.5x, https://imgur-backup.hackmd.io/6h0Bgax.jpg?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/6h0Bgax.jpg" data-alt="https://imgur-backup.hackmd.io/6h0Bgax.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p>对应的程式码:</p>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* container_of() - Calculate address of object that contains address ptr
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @ptr: pointer to member variable
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @type: type of the structure containing ptr
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @member: name of the member variable in struct @type
+</span></span></span><span class="line"><span class="cl"><span class="cm"> *
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * Return: @type pointer of object containing ptr
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define container_of(ptr, type, member)                            \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    __extension__({                                                \
+</span></span></span><span class="line"><span class="cl"><span class="cp">        const __typeof__(((type *) 0)-&gt;member) *(__pmember) = (ptr); \
+</span></span></span><span class="line"><span class="cl"><span class="cp">        (type *) ((char *) __pmember - offsetof(type, member));    \
+</span></span></span><span class="line"><span class="cl"><span class="cp">    })</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里面涉及到了 <code>__extension__</code>，参考 <a href="https://gcc.gnu.org/onlinedocs/gcc/Alternate-Keywords.html"target="_blank" rel="external nofollow noopener noreferrer">6.51 Alternate Keywords</a>:</p>
+<blockquote>
+<p>-pedantic and other options cause warnings for many GNU C extensions. You can suppress such warnings using the keyword <code>__extension__</code>. <br>
+Writing <code>__extension__</code> before an expression prevents warnings about extensions within that expression.</p>
+</blockquote>
+<p>因为用到了 <code>typeof</code> 这个 GNU extension，所以需要使用 <code>__extension__</code> 来设置编译时不抛出警告</p>
+<div class="details admonition quote open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>上述程式碼是從 struct 中的 member 推算出原本 struct 的位址。解析:</p>
+<ul>
+<li>先透過 <code>__typeof__</code> 得到 <code>type</code> 中的成員 <code>member</code> 的型別，並宣告一個指向該型別的指標 <code>__pmember</code></li>
+<li>將 <code>ptr</code> 指派到 <code>__pmember</code></li>
+<li><code>__pmember</code> 目前指向的是 <code>member</code> 的位址</li>
+<li><code>offsetof(type, member)</code> 可得知 <code>member</code> 在 <code>type</code> 這個結構體位移量，即 offset</li>
+<li>將絕對位址 <code>(char *) __pmember</code> 減去 <code>offsetof(type, member)</code>，可得到結構體的起始位址。計算 offset 時要轉成 <code>char *</code>，以確保 address 的計算符合預期 (可參考 <a href="https://stackoverflow.com/questions/20421910/the-char-casting-in-container-of-macro-in-linux-kernel"target="_blank" rel="external nofollow noopener noreferrer">The (char *) casting in container_of() macro in linux kernel</a> 的說明)</li>
+<li>最後 <code>(type *)</code> 再將起始位置轉型為指向 <code>type</code> 的指標</li>
+</ul></div>
+    </div>
+  </div>
+<p>需要注意的是，程式码的第一行乍一看感觉没什么用，此时请从 robust 的角度看待，毕竟一个有强度的系统都是 robust 的。实际上第一行是用于编译时期类型检查的，检查传入的地址 <code>ptr</code> 是否对应 <code>member</code> 的类型，这个类型检查时通过不同 object 的 data alignment 来实现的 (data alignment 会反映在地址上，进而反映到指针的值上面)。</p>
+<p>事实上，Linux 核心的 <code>container_of</code> 宏则更加复杂:</p>
+<div class="highlight" id="id-6"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define container_of(ptr, type, member) ({				\
+</span></span></span><span class="line"><span class="cl"><span class="cp">    void *__mptr = (void *)(ptr);					\
+</span></span></span><span class="line"><span class="cl"><span class="cp">    BUILD_BUG_ON_MSG(!__same_type(*(ptr), ((type *)0)-&gt;member) &amp;&amp;	\
+</span></span></span><span class="line"><span class="cl"><span class="cp">                     !__same_type(*(ptr), void),			\
+</span></span></span><span class="line"><span class="cl"><span class="cp">                     &#34;pointer type mismatch in container_of()&#34;);	\
+</span></span></span><span class="line"><span class="cl"><span class="cp">    ((type *)(__mptr - offsetof(type, member))); })</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>复杂增加的地方仍然是我们所提的 robust 保证，用于在 <strong>编译时期</strong> 进行更加严格的 <strong>类型检查</strong>，这里使用了 <code>BUILD_BUG_ON_MSA</code> 宏，该宏的实作与 <code>BUILD_BUG_ON_ZERO</code> 宏类似，而 <code>BUILD_BUG_ON_ZERO</code> 的功能和 <code>static assert</code> 相似，<strong>接收的表达式为 true 时会编译失败</strong>，即其接收的是不满足编译通过条件的表达式。具体的解释说明可以参考 <a href="https://hackmd.io/@sysprog/c-bitfield"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心巨集: BUILD_BUG_ON_ZERO</a>，笔者也有相关的 <a href="/posts/c-bitwise/#linux-核心-build_bug_on_zero">博文</a> 进行解说。</p>
+<p>除此之外还使用了 <code>__same_type</code> 宏:</p>
+<ul>
+<li><a href="https://github.com/torvalds/linux/blob/master/include/linux/compiler_types.h#L427"target="_blank" rel="external nofollow noopener noreferrer">include/linux/compiler_types.h</a></li>
+</ul>
+<div class="highlight" id="id-7"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cm">/* Are two types/vars the same type (ignoring qualifiers)? */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define __same_type(a, b) __builtin_types_compatible_p(typeof(a), typeof(b))</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用 GNU extension <code>__builtin_types_compatible_p</code> 对 <code>a</code> 和 <code>b</code> 的类型进行比较判断:</p>
+<ul>
+<li><a href="https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html"target="_blank" rel="external nofollow noopener noreferrer">6.63 Other Built-in Functions Provided by GCC</a></li>
+</ul>
+<blockquote>
+<p>You can use the built-in function <code>__builtin_types_compatible_p</code> to determine whether two types are the same.</p>
+<p>This built-in function returns 1 if the unqualified versions of the types <em>type1</em> and <em>type2</em> (which are types, not expressions) are compatible, 0 otherwise. The result of this built-in function can be used in integer constant expressions.</p>
+<p>This built-in function ignores top level qualifiers (e.g., <code>const</code>, <code>volatile</code>). For example, <code>int</code> is equivalent to <code>const int</code>.</p>
+</blockquote>
+<h4 id="应用案例-双向环状链接串列">应用案例: 双向环状链接串列</h4>
+<ul>
+<li><a href="https://github.com/sysprog21/linux-list"target="_blank" rel="external nofollow noopener noreferrer">sysprog21/linux-list</a></li>
+</ul>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/kOvwKZw.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/kOvwKZw.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/kOvwKZw.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/kOvwKZw.png" srcset="https://imgur-backup.hackmd.io/kOvwKZw.png?size=small, https://imgur-backup.hackmd.io/kOvwKZw.png?size=medium 1.5x, https://imgur-backup.hackmd.io/kOvwKZw.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/kOvwKZw.png" data-alt="https://imgur-backup.hackmd.io/kOvwKZw.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<blockquote>
+<p>自 <code>Head</code> 開始，鏈結 list 各節點，個別節點皆嵌入 <code>list_head</code> 結構體，不過 <code>Head</code> 是個特例，無法藉由 <code>container_of</code> 巨集來找到對應的節點，因為後者並未嵌入到任何結構體之中，其存在是為了找到 list 整體。</p>
+</blockquote>
+<blockquote>
+<p>上方程式碼的好處在於，只要 <code>list_head</code> 納入新的結構體的一個成員，即可操作，且不用自行維護一套 doubly-linked list 。</p>
+</blockquote>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/d3bG8t6.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/d3bG8t6.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/d3bG8t6.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/d3bG8t6.png" srcset="https://imgur-backup.hackmd.io/d3bG8t6.png?size=small, https://imgur-backup.hackmd.io/d3bG8t6.png?size=medium 1.5x, https://imgur-backup.hackmd.io/d3bG8t6.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/d3bG8t6.png" data-alt="https://imgur-backup.hackmd.io/d3bG8t6.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<blockquote>
+<p>注意到 <code>list_entry</code> 利用 <code>container_of</code> 巨集，藉由 <code>struct list_head</code> 這個 <strong>公開介面</strong>，「反向」去存取到 <strong>自行定義的結構體</strong> 開頭地址。</p>
+</blockquote>
 <h3 id="optimized-quicksort">Optimized QuickSort</h3>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://alienryderflex.com/quicksort/"target="_blank" rel="external nofollow noopener noreferrer">Optimized QuickSort: C Implementation (Non-Recursive)</a></li>
@@ -386,7 +609,7 @@
 </blockquote>
 <p>原文所说的事件复杂度，是考虑关于构造结果链表时的复杂度，并不考虑寻找指定节点的复杂度，所以对于原始方法复杂度为 $1 + 2 + &hellip; + n = O(n^2)$，对于 modern method 复杂度为 $1 + 1 + &hellip; + 1 = O(n)$</p>
 <p>原文实作虽然使用了 pointer to pointer，但是使用上并没有体现 linus 所说的 good taste，重新实作如下:</p>
-<div class="highlight" id="id-2"><div class="chroma">
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -465,7 +688,7 @@
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-04-19 17:31:37">更新于 2024-04-19&nbsp;</span>
+        <span title="更新于 2024-06-09 17:16:24">更新于 2024-06-09&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/c-linked-list/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>

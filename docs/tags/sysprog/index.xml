@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/tags/sysprog/</link>
     <description>Sysprog - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 07 Jun 2024 10:33:35 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 09 Jun 2024 19:50:03 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -13,6 +13,31 @@
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
 </blockquote>]]></description>
+</item>
+<item>
+  <title>从 Revolution OS 看操作系统生态变化</title>
+  <link>https://ccrysisa.github.io/posts/revolution-os/</link>
+  <pubDate>Sun, 09 Jun 2024 19:50:03 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/revolution-os/</guid>
+  <description><![CDATA[<blockquote>
+<p>2001 年，J. T. S. Moore 以自由軟體和開放原始碼軟體發展為主題，導演相當可貴的紀錄片《Revolution OS》，訪談若干先鋒者，是理解黑客 (hacker)、 GNU 計畫、自由軟體基金會 (FSF)、Linux 核心 (kernel)、開放原始碼 (open source) 和自由軟體 (free software) 基於不同理念各自發展、Netscape 宣佈 Mozilla 開放原始碼專案、基於 Apache 和一系列開放原始碼技術的公司、在 NASDAQ 上市等等歷程的第一手資訊。</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>Linux 核心设计: 2023q2 第二周测验题</title>
+  <link>https://ccrysisa.github.io/posts/linux2023-quiz2/</link>
+  <pubDate>Sat, 08 Jun 2024 10:52:10 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/linux2023-quiz2/</guid>
+  <description><![CDATA[<div class="details admonition abstract open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">目的: 检验学员对 bitwise 的认知</div>
+    </div>
+  </div>]]></description>
 </item>
 <item>
   <title>Linux 核心设计: 2023q1 第一周测验题</title>
@@ -88,24 +113,6 @@
   <guid>https://ccrysisa.github.io/posts/linux-rbtree/</guid>
   <description><![CDATA[<blockquote>
 <p>Linux 核心原始程式碼中，許多地方出現紅黑樹的蹤影，例如：hr_timer 使用紅黑樹來記錄計時器 (timer) 端發出的要求、ext3 檔案系統使用紅黑樹來追蹤目錄內容變更，以及 CFS (Completely Fair Scheduler) 這個 Linux 預設 CPU 排程器，由於需要頻繁地插入跟移除節點 (任務)，因此開發者選擇用紅黑樹 (搭配一些效能調整)。VMA（Virtual Memory Area）也用紅黑樹來紀錄追蹤頁面 (page) 變更，因為後者不免存在頻繁的讀取 VMA 結構，如 page fault 和 mmap 等操作，且當大量的已映射 (mapped) 區域時存在時，若要尋找某個特定的虛擬記憶體地址，鏈結串列 (linked list) 的走訪成本過高，因此需要一種資料結構以提供更有效率的尋找，於是紅黑樹就可勝任。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>并行程序设计: POSIX Threads</title>
-  <link>https://ccrysisa.github.io/posts/posix-threads/</link>
-  <pubDate>Wed, 10 Apr 2024 16:09:35 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/posix-threads/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: 技巧篇</title>
-  <link>https://ccrysisa.github.io/posts/c-trick/</link>
-  <pubDate>Wed, 10 Apr 2024 16:06:08 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-trick/</guid>
-  <description><![CDATA[<blockquote>
-<p>本次講座將選定幾個案例，藉此解說 C 語言程式設計的技巧，像是對矩陣操作進行包裝、初始化特定結構的成員、追蹤物件配置的記憶體、Smart Pointer 等等。</p>
 </blockquote>]]></description>
 </item>
 </channel>

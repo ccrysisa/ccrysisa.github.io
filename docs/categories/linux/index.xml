@@ -4,7 +4,17 @@
     <link>https://ccrysisa.github.io/categories/linux/</link>
     <description>Linux - 分类 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 12 Apr 2024 19:00:59 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/linux/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 09 Jun 2024 19:50:03 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/linux/" rel="self" type="application/rss+xml" /><item>
+  <title>从 Revolution OS 看操作系统生态变化</title>
+  <link>https://ccrysisa.github.io/posts/revolution-os/</link>
+  <pubDate>Sun, 09 Jun 2024 19:50:03 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/revolution-os/</guid>
+  <description><![CDATA[<blockquote>
+<p>2001 年，J. T. S. Moore 以自由軟體和開放原始碼軟體發展為主題，導演相當可貴的紀錄片《Revolution OS》，訪談若干先鋒者，是理解黑客 (hacker)、 GNU 計畫、自由軟體基金會 (FSF)、Linux 核心 (kernel)、開放原始碼 (open source) 和自由軟體 (free software) 基於不同理念各自發展、Netscape 宣佈 Mozilla 開放原始碼專案、基於 Apache 和一系列開放原始碼技術的公司、在 NASDAQ 上市等等歷程的第一手資訊。</p>
+</blockquote>]]></description>
+</item>
+<item>
   <title>Linux 核心的红黑树</title>
   <link>https://ccrysisa.github.io/posts/linux-rbtree/</link>
   <pubDate>Fri, 12 Apr 2024 19:00:59 &#43;0800</pubDate>

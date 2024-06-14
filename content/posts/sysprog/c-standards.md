@@ -118,6 +118,8 @@ or equivalent; or in some other implementation-defined manner.
 - C99 6.2.5 Types
 > *incomplete types* (types that describe objects but lack information needed to determine their sizes).
 
+例如指针类型暗示的就是 incomplete type，通过 `struct data *` 这个指针类型无法得知 `struct data` 这个型态所需要占用的空间大小。
+
 ### 规格不仅要看最新的，过往的也要熟悉
 
 因为很多 (嵌入式) 设备上运行的 Linux 可能是很旧的版本，那时 Linux 使用的是更旧的 C 语言规格。例如空中巴士 330 客机的娱乐系统里执行的是十几年前的 Red Hat Linux，总有人要为这些“古董”负责 :rofl:

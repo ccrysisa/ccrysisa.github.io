@@ -41,6 +41,10 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
+> POSIX (Portable Operating System Interfaces) is a family of standards for maintaining compatibility between operating systems. POSIX is a Unix-like operating system environment and is currently available on Unix/Linux, Windows, OS/2 and DOS.
+> 
+> Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c thread extension, defines thread creation and manipulation. This standard defines thread management, mutexes, conditions, read/write locks, barriers, etc. Except for the monitors, all features are available in Pthreads.
+
 <!--more-->
 
 - {{< link href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fposix-threads" content="原文地址" external-icon=true >}}
@@ -60,10 +64,14 @@ repost:
 具体一点，从函数执行流程来看:
 
 {{< image src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined" >}}
+
 $\rightarrow$ 在使用 coroutinues 后执行流程变成 $\rightarrow$
+
 {{< image src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined" >}}
 
 C 语言程序中实作 coroutinue 的方法很多，例如「[C 语言: goto 和流程控制篇](https://hackmd.io/@sysprog/c-control-flow)」中提到的使用 `switch-case` 技巧进行实作。
+
+这三个概念出现的时间与它们的复杂度正好相反，最复杂的 Process 最先出现，而最轻量的 Coroutines 反而最晚出现。
 
 ### Thread & Process
 
@@ -72,6 +80,8 @@ C 语言程序中实作 coroutinue 的方法很多，例如「[C 语言: goto �
 
 - Wikipedia: [Light-weight process](https://en.wikipedia.org/wiki/Light-weight_process)
 > On Linux, user threads are implemented by allowing certain processes to share resources, which sometimes leads to these processes to be called "light weight processes".
+
+因为 Linux 在实作上故意混淆了 Process 和 Thread，所以一般不使用 Linux 作为 Thread 的解释案例
 
 - Wikipedia: [Thread-local storage](https://en.wikipedia.org/wiki/Thread-local_storage)
 > On a modern machine, where multiple threads may be modifying the errno variable, a call of a system function on one thread may overwrite the value previously set by a call of a system function on a different thread, possibly before following code on that different thread could check for the error condition. The solution is to have errno be a variable that looks as if it is global, but is physically stored in a per-thread memory pool, the thread-local storage.
@@ -349,11 +359,13 @@ Linux man page:
 
 > However there is no mutual exclusion: Two threads can be in the critical section at the same time, which would corrupt the data structure (or least lead to data loss). The fix is to wrap a mutex around the critical section
 
-信号量只能保证资源总量的正确使用，但无法生成更小精度 (例如针对某个元素) 的互斥区，此时需要搭配 mutex 来使用
+信号量只能保证资源总量的正确使用，但无法生成更小精度 (例如针对某个元素) 的互斥区，此时需要搭配 mutex 来使用，即 **semaphore 用于控制资源总量，mutex 用于保证特定资源的互斥**。
 
 #### Part 4: The Critical Section Problem
 
 - [原文地址](https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-4:-The-Critical-Section-Problem)
+
+插旗表示此时由自己掌控，类似社团争斗，插旗表示主权:
 
 ```
 // Candidate #1
@@ -437,7 +449,7 @@ thread1:                          thread2:
 
 > This solution satisfies Mutual Exclusion, Bounded Wait and Progress. If thread #2 has set turn to 1 and is currently inside the critical section. Thread #1 arrives, sets the turn back to 2 and now waits until thread 2 lowers the flag.
 
-Peterson 算法相比之前的方案只是将顺序的设定提前了，但却解决了之前方案的互斥问题，因为这样设定会使得 `your flag is raised and turn is your_id` 这个状态只可能出现在对方处于 CS 时，如果对方同时与自己争夺 CS 的进入权时，对方的状态是 `your flag is raised and turn is my_id`，从而将争夺进入权和已处于 CS 的状态进行了区分，解决了互斥问题。
+Peterson 算法相比之前的方案只是将顺序的设定提前了，但却解决了之前方案的互斥问题，因为这样设定会使得 `your flag is raised and turn is your_id` 这个状态只可能出现在对方处于 CS 时，如果对方同时与自己争夺 CS 的进入权时，对方的状态是 `your flag is raised and turn is my_id`，从而将争夺进入权和已处于 CS 的 ***状态*** 进行了区分，解决了互斥问题。
 
 > Dekkers Algorithm (1962) was the first provably correct solution. A version of the algorithm is below.
 
@@ -454,6 +466,12 @@ lower my flag
 ```
 
 这个算法中的 flag 表示 CS 的进入权: 如果对方的 flag 未升起，则可以直接进入 CS，如果对方 flag 升起但不是对方的顺序，表示对方处于 CS 并且自己拥有接下来 CS 的进入权，所以需要等待到对方 flag 降下但同时可以不降下自己的 flag；如果对方 flag 升起并且是对方的顺序，表示是对方拥有 CS 的进入权，需要降下自己的 flag 进行谦让。
+
+{{< admonition >}}
+`turn` 在上面两种算法里的意义是不大相同的，具体请阅读论文获得背景知识的启发。
+
+实际上不太会使用这两种算法来保证同步 (因为效能比较低)，而是在设计硬件方面的同步机制 (例如同步原语) 时使用这两种算法来验证其功能的正确性
+{{< /admonition >}}
 
 编译器和处理器的指令重排序功能使得纯软件的同步算法变得 too naive
 
@@ -736,4 +754,58 @@ read() {
 
 - [原文地址](https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-8:-Ring-Buffer-Example)
 
+{{< image src="https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png" >}}
 
+```c
+void *buffer[16];
+int in = 0, out = 0;
+
+void enqueue(void *value) { /* Add one item to the front of the queue*/
+  buffer[in] = value;
+  in++; /* Advance the index for next time */
+  if (in == 16) in = 0; /* Wrap around! */
+}
+
+void *dequeue() { /* Remove one item to the end of the queue.*/
+  void *result = buffer[out];
+  out++;
+  if (out == 16) out = 0;
+  return result;
+}
+```
+
+上面这段程式码看起来可以进行如下的重写:
+
+```c
+void enqueue(void *value)
+  b[ (in++) % N ] = value;
+}
+```
+
+> This method would appear to work (pass simple tests etc) but contains a subtle bug. With enough enqueue operations (a bit more than two billion) the int value of `in` will overflow and become negative! The modulo (or 'remainder') operator % preserves the sign. Thus you might end up writing into `b[-14]` for example!
+
+这时候可以运用 bitwise 技巧来实作:
+
+> A compact form is correct uses bit masking provided N is 2^x (16,32,64,...)
+
+```c
+b[ (in++) & (N-1) ] = value;
+```
+
+{{< admonition note "Food for thougt" >}}
+What would happen if the order of `pthread_mutex_unlock` and `sem_post` calls were swapped?
+- no effect
+
+What would happen if the order of `sem_wait` and `pthread_mutex_lock` calls were swapped?
+- deadlock
+{{< /admonition >}}
+
+#### Part 9: Synchronization Across Processes
+
+- [原文地址](https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-9:-Synchronization-Across-Processes)
+
+> Most system calls can be `interrupted` meaning that the operating system can stop an ongoing system call because it needs to stop the process.
+
+> mutexes and other synchronization primitives can be shared across processes.
+
+### Mutex and Semaphore

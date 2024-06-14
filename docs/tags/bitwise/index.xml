@@ -4,7 +4,22 @@
     <link>https://ccrysisa.github.io/tags/bitwise/</link>
     <description>Bitwise - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 23 Feb 2024 13:13:33 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/bitwise/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 08 Jun 2024 10:52:10 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/bitwise/" rel="self" type="application/rss+xml" /><item>
+  <title>Linux 核心设计: 2023q2 第二周测验题</title>
+  <link>https://ccrysisa.github.io/posts/linux2023-quiz2/</link>
+  <pubDate>Sat, 08 Jun 2024 10:52:10 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/linux2023-quiz2/</guid>
+  <description><![CDATA[<div class="details admonition abstract open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">目的: 检验学员对 bitwise 的认知</div>
+    </div>
+  </div>]]></description>
+</item>
+<item>
   <title>你所不知道的 C 语言: bitwise 操作</title>
   <link>https://ccrysisa.github.io/posts/c-bitwise/</link>
   <pubDate>Fri, 23 Feb 2024 13:13:33 &#43;0800</pubDate>
