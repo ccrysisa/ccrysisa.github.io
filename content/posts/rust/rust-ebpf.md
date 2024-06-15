@@ -46,7 +46,7 @@ repost:
 
 ## 实验环境
 
-```bash
+```bash {title=Deepin}
 $ neofetch --stdout
 cai@cai-PC 
 ---------- 
@@ -70,7 +70,7 @@ Memory: 11361MiB / 15800MiB
 
 去 bpftrace 的 [Github Releases]() 页面，下载相应版本的 bpftrace，这里以 0.20.4 为例:
 
-```bash
+```bash {title=Deepin}
 $ curl --location-trusted -O https://github.com/bpftrace/bpftrace/releases/download/v0.20.4/bpftrace
 $ chmod a+x bpftrace
 $ ./bpftrace -V
@@ -82,7 +82,7 @@ bpftrace v0.20.4
 
 安装内核对应 bpftool 组件 (这个组件连接内核中的 eBPF 模块和外部的 bpf 工具，例如 bpftrace):
 
-```bash
+```bash {title=Deepin}
 $ sudo apt install -y bpftool
 $ bpftool version
 bpftool v5.15.5
