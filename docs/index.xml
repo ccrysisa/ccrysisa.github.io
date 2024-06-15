@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 09 Jun 2024 19:50:03 &#43;0800</lastBuildDate>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 15 Jun 2024 20:24:56 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
@@ -14,6 +14,33 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>手把手带你使用 Rust 实现链表</title>
+  <link>https://ccrysisa.github.io/posts/too-many-lists/</link>
+  <pubDate>Sat, 15 Jun 2024 20:24:56 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/too-many-lists/</guid>
+  <description><![CDATA[<div class="details admonition abstract open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>其它语言：兄弟，语言学了吗？来写一个链表证明你基本掌握了语法。</p>
+<p>Rust 语言: 兄弟，语言精通了吗？来写一个链表证明你已经精通了 Rust！</p>
+</div>
+    </div>
+  </div>]]></description>
+</item>
+<item>
+  <title>Rust: 透过 eBPF 探测操作系统行为</title>
+  <link>https://ccrysisa.github.io/posts/rust-ebpf/</link>
+  <pubDate>Mon, 10 Jun 2024 23:38:10 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/rust-ebpf/</guid>
+  <description><![CDATA[<blockquote>
+<p>Programming the Linux Kernel for Enhanced Observability, Networking, and Security</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -95,25 +122,6 @@
   <description><![CDATA[<blockquote>
 <p>C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化</p>
 </blockquote>]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: 编译器原理和案例分析</title>
-  <link>https://ccrysisa.github.io/posts/c-compiler-construction/</link>
-  <pubDate>Tue, 23 Apr 2024 15:17:38 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-compiler-construction/</guid>
-  <description><![CDATA[<blockquote>
-<p>AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。</p>
-<p>預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>Windows 10 WSL2 Ubuntu 22.04 配置指南</title>
-  <link>https://ccrysisa.github.io/posts/wsl2/</link>
-  <pubDate>Sat, 20 Apr 2024 12:14:18 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/wsl2/</guid>
-  <description><![CDATA[<p>今日闲来无事，刷了会 B 站，突发奇想将发灰了一年多的 WSL2 找回来折腾一下 (之前为了在 VMware 中开启嵌套虚拟化，不得以将 WSL2 打入冷宫 &#x1f923;)。由于这一年内功功力大涨，很快就完成了 WLS2 的再召集启用，下面列出配置的主要步骤和相关材料。</p>]]></description>
 </item>
 </channel>
 </rss>

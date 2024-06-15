@@ -7,20 +7,28 @@
     <meta name="robots" content="noodp" />
     <title>Rust 语言程序设计 - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
-<meta name="description" content="Rust in 100 Seconds 观看短片: Rust in 100 Seconds &#x2705; 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello = &quot;hi" /><meta name="keywords" content='Rust, Sysprog' /><meta itemprop="name" content="Rust 语言程序设计">
-<meta itemprop="description" content="Rust in 100 Seconds 观看短片: Rust in 100 Seconds &#x2705; 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello = &quot;hi"><meta itemprop="datePublished" content="2023-12-28T20:18:03+08:00" />
-<meta itemprop="dateModified" content="2024-05-24T21:03:58+08:00" />
-<meta itemprop="wordCount" content="13448"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta name="description" content="
+The year 2022 marks seven years since the stable version of the Rust language was officially released. Since its release, Rust has been popular among developers. In a Stack Overflow poll of over 73,000 developers from 180 countries, Rust was voted the most popular programming language for the seventh consecutive year, with 87% of developers expressing a desire to use it.
+" /><meta name="keywords" content='Rust, Sysprog' /><meta itemprop="name" content="Rust 语言程序设计">
+<meta itemprop="description" content="
+The year 2022 marks seven years since the stable version of the Rust language was officially released. Since its release, Rust has been popular among developers. In a Stack Overflow poll of over 73,000 developers from 180 countries, Rust was voted the most popular programming language for the seventh consecutive year, with 87% of developers expressing a desire to use it.
+"><meta itemprop="datePublished" content="2023-12-28T20:18:03+08:00" />
+<meta itemprop="dateModified" content="2024-06-11T18:54:13+08:00" />
+<meta itemprop="wordCount" content="20548"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Sysprog," /><meta property="og:title" content="Rust 语言程序设计" />
-<meta property="og:description" content="Rust in 100 Seconds 观看短片: Rust in 100 Seconds &#x2705; 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello = &quot;hi" />
+<meta property="og:description" content="
+The year 2022 marks seven years since the stable version of the Rust language was officially released. Since its release, Rust has been popular among developers. In a Stack Overflow poll of over 73,000 developers from 180 countries, Rust was voted the most popular programming language for the seventh consecutive year, with 87% of developers expressing a desire to use it.
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/why-rust/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2023-12-28T20:18:03+08:00" />
-<meta property="article:modified_time" content="2024-05-24T21:03:58+08:00" />
+<meta property="article:modified_time" content="2024-06-11T18:54:13+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Rust 语言程序设计"/>
-<meta name="twitter:description" content="Rust in 100 Seconds 观看短片: Rust in 100 Seconds &#x2705; 了解 Rust，初步了解其安全性原理 所有权 (ownership) 借用 (borrow) 警告 0:55 This is wrong, value mutability doesn&rsquo;t have anything to do with the value being stored on the stack or the heap (and the example let mut hello = &quot;hi"/>
+<meta name="twitter:description" content="
+The year 2022 marks seven years since the stable version of the Rust language was officially released. Since its release, Rust has been popular among developers. In a Stack Overflow poll of over 73,000 developers from 180 countries, Rust was voted the most popular programming language for the seventh consecutive year, with 87% of developers expressing a desire to use it.
+"/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -35,8 +43,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/why-rust\/"
-    },"genre": "posts","keywords": "Rust, Sysprog","wordcount":  13448 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/why-rust\/","datePublished": "2023-12-28T20:18:03+08:00","dateModified": "2024-05-24T21:03:58+08:00","publisher": {
+    },"genre": "posts","keywords": "Rust, Sysprog","wordcount":  20548 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/why-rust\/","datePublished": "2023-12-28T20:18:03+08:00","dateModified": "2024-06-11T18:54:13+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -164,7 +172,7 @@
       </h1><p class="single-subtitle animate__animated animate__fadeIn">Why Rust?</p></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a>&ensp;<a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2023-12-28 20:18:03"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-28">2023-12-28</time></span>&nbsp;<span title="更新于 2024-05-24 21:03:58"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-24">2024-05-24</time></span>&nbsp;<span title="13448 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 13500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 27 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2023-12-28 20:18:03"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2023-12-28">2023-12-28</time></span>&nbsp;<span title="更新于 2024-06-11 18:54:13"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-11">2024-06-11</time></span>&nbsp;<span title="20548 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 20600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 42 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -177,41 +185,66 @@
     <li><a href="#the-rust-programming-language">The Rust Programming Language</a>
       <ul>
         <li><a href="#getting-started">Getting Started</a></li>
-        <li><a href="#programming-a-guessing-game">Programming a Guessing Game</a></li>
-        <li><a href="#common-programming-concepts">Common Programming Concepts</a></li>
-        <li><a href="#understanding-ownership">Understanding Ownership</a>
+        <li><a href="#programming-a-game">Programming a Game</a></li>
+        <li><a href="#common-concepts">Common Concepts</a></li>
+        <li><a href="#ownership">Ownership</a>
           <ul>
             <li><a href="#what-is-ownership">What is Ownership?</a></li>
             <li><a href="#references-and-borrowing">References and Borrowing</a></li>
             <li><a href="#the-slice-type">The Slice Type</a></li>
           </ul>
         </li>
-        <li><a href="#using-structs-to-structure-related-data">Using Structs to Structure Related Data</a></li>
+        <li><a href="#structs">Structs</a></li>
         <li><a href="#enums-and-pattern-matching">Enums and Pattern Matching</a></li>
-        <li><a href="#managing-growing-projects-with-packages-crates-and-modules">Managing Growing Projects with Packages, Crates, and Modules</a></li>
+        <li><a href="#packages-crates-and-modules">Packages, Crates, and Modules</a></li>
         <li><a href="#common-collections">Common Collections</a>
           <ul>
-            <li><a href="#storing-lists-of-values-with-vectors">Storing Lists of Values with Vectors</a></li>
-            <li><a href="#storing-utf-8-encoded-text-with-strings">Storing UTF-8 Encoded Text with Strings</a></li>
-            <li><a href="#storing-keys-with-associated-values-in-hash-maps">Storing Keys with Associated Values in Hash Maps</a></li>
+            <li><a href="#vector">Vector</a></li>
+            <li><a href="#string">String</a></li>
+            <li><a href="#hash-map">Hash Map</a></li>
           </ul>
         </li>
         <li><a href="#error-handling">Error Handling</a></li>
-        <li><a href="#generic-types-traits-and-lifetimes">Generic Types, Traits, and Lifetimes</a>
+        <li><a href="#generic-traits-and-lifetimes">Generic, Traits, and Lifetimes</a>
           <ul>
             <li><a href="#generic-data-types">Generic Data Types</a></li>
             <li><a href="#traits-defining-shared-behavior">Traits: Defining Shared Behavior</a></li>
             <li><a href="#validating-references-with-lifetimes">Validating References with Lifetimes</a></li>
           </ul>
         </li>
-        <li><a href="#writing-automated-tests">Writing Automated Tests</a></li>
-        <li><a href="#an-io-project-building-a-command-line-program">An I/O Project: Building a Command Line Program</a></li>
+        <li><a href="#automated-tests">Automated Tests</a></li>
+        <li><a href="#an-io-project-minigrep">An I/O Project: minigrep</a></li>
+        <li><a href="#iterators-and-closures">Iterators and Closures</a>
+          <ul>
+            <li><a href="#closures-anonymous-functions-that-capture-their-environment">Closures: Anonymous Functions that Capture Their Environment</a></li>
+            <li><a href="#processing-a-series-of-items-with-iterators">Processing a Series of Items with Iterators</a></li>
+            <li><a href="#comparing-performance-loops-vs-iterators">Comparing Performance: Loops vs. Iterators</a></li>
+          </ul>
+        </li>
+        <li><a href="#cargo-and-cratesio">Cargo and Crates.io</a></li>
+        <li><a href="#smart-pointers">Smart Pointers</a></li>
+        <li><a href="#fearless-concurrency">Fearless Concurrency</a></li>
+        <li><a href="#object-oriented-programming">Object-Oriented Programming</a></li>
+        <li><a href="#patterns-and-matching">Patterns and Matching</a></li>
+        <li><a href="#advanced-features">Advanced Features</a>
+          <ul>
+            <li><a href="#unsafe-rust">Unsafe Rust</a></li>
+            <li><a href="#advanced-traits">Advanced Traits</a></li>
+            <li><a href="#advanced-types">Advanced Types</a></li>
+            <li><a href="#advanced-functions-and-closures">Advanced Functions and Closures</a></li>
+            <li><a href="#macros">Macros</a></li>
+          </ul>
+        </li>
+        <li><a href="#final-project-web-server">Final Project: Web Server</a></li>
       </ul>
     </li>
-    <li><a href="#visualizing-memory-layout-of-rusts-data-types">Visualizing memory layout of Rust's data types</a></li>
+    <li><a href="#references">References</a></li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><h2 id="rust-in-100-seconds">Rust in 100 Seconds</h2>
+      </div><div class="content" id="content"><blockquote>
+<p>The year 2022 marks seven years since the stable version of the Rust language was officially released. Since its release, Rust has been popular among developers. In a Stack Overflow poll of over 73,000 developers from 180 countries, Rust was voted the most popular programming language for the seventh consecutive year, with 87% of developers expressing a desire to use it.</p>
+</blockquote>
+<h2 id="rust-in-100-seconds">Rust in 100 Seconds</h2>
 <p>观看短片: <a href="https://youtu.be/5C_HPTJg5ek"target="_blank" rel="external nofollow noopener noreferrer">Rust in 100 Seconds</a> &#x2705;</p>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 了解 Rust，初步了解其安全性原理</li>
@@ -268,13 +301,13 @@
 </span></span><span class="line"><span class="cl">$ cargo clean             <span class="c1"># 清除构建出来的目标文件</span>
 </span></span><span class="line"><span class="cl">$ cargo <span class="nb">test</span>              <span class="c1"># 运行测试</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="programming-a-guessing-game">Programming a Guessing Game</h3>
+</div><h3 id="programming-a-game">Programming a Game</h3>
 <ul>
 <li>Module std::<a href="https://doc.rust-lang.org/std/io/index.html"target="_blank" rel="external nofollow noopener noreferrer">io</a></li>
 <li>Module std::<a href="https://doc.rust-lang.org/std/cmp/index.html"target="_blank" rel="external nofollow noopener noreferrer">cmp</a></li>
 <li>Crate <a href="https://docs.rs/rand/latest/rand/"target="_blank" rel="external nofollow noopener noreferrer">rand</a></li>
 </ul>
-<h3 id="common-programming-concepts">Common Programming Concepts</h3>
+<h3 id="common-concepts">Common Concepts</h3>
 <p>变量明确区分可变和不可变，好处在于对于明确不可变的变量，使用引用时编译器可以进行更为激进的最佳化。常量必须满足可以在编译期计算出结果。</p>
 <p>shadow 可理解为变量名可以和储存数据的地址绑定、解绑，所以可以进行变量遮蔽。而 C 语言中的变量名一旦使用就和储存数据的地址绑死了，自然无法进行遮蔽。</p>
 <ul>
@@ -332,7 +365,7 @@ The program resulted in a runtime error at the point of using an invalid value i
 <p><code>Range</code>, provided by the standard library, which generates all numbers in sequence starting from one number and ending before another number.
 <code>rev</code>, to reverse the range.</p>
 </blockquote>
-<h3 id="understanding-ownership">Understanding Ownership</h3>
+<h3 id="ownership">Ownership</h3>
 <h4 id="what-is-ownership">What is Ownership?</h4>
 <blockquote>
 <p>Rust uses a third approach: memory is managed through a system of ownership with a set of rules that the <strong>compiler checks</strong>. If any of the rules are violated, the program won't <strong>compile</strong>. None of the features of ownership will slow down your program while it's running.</p>
@@ -451,7 +484,7 @@ The program resulted in a runtime error at the point of using an invalid value i
 <li>method std::iter::Iterator::<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.enumerate"target="_blank" rel="external nofollow noopener noreferrer">enumerate</a></li>
 <li>Module std::<a href="https://doc.rust-lang.org/std/iter/index.html"target="_blank" rel="external nofollow noopener noreferrer">iter</a></li>
 </ul>
-<h3 id="using-structs-to-structure-related-data">Using Structs to Structure Related Data</h3>
+<h3 id="structs">Structs</h3>
 <p>Rust 不允许结构体初始化时只指定一部分字段的值，这防止了 UB 相关问题的触发。</p>
 <ul>
 <li>5.1. Defining and Instantiating Structs</li>
@@ -555,7 +588,7 @@ The program resulted in a runtime error at the point of using an invalid value i
 <blockquote>
 <p>We can include an <code>else</code> with an <code>if let</code>. The block of code that goes with the <code>else</code> is the same as the block of code that would go with the <code>_</code> case in the <code>match</code> expression that is equivalent to the <code>if let</code> and <code>else</code>.</p>
 </blockquote>
-<h3 id="managing-growing-projects-with-packages-crates-and-modules">Managing Growing Projects with Packages, Crates, and Modules</h3>
+<h3 id="packages-crates-and-modules">Packages, Crates, and Modules</h3>
 <ul>
 <li><strong>Packages</strong>: A Cargo feature that lets you build, test, and share crates</li>
 <li><strong>Crates</strong>: A tree of modules that produces a library or executable</li>
@@ -678,7 +711,7 @@ The program resulted in a runtime error at the point of using an invalid value i
 </div>
     </div>
   </div>
-<h4 id="storing-lists-of-values-with-vectors">Storing Lists of Values with Vectors</h4>
+<h4 id="vector">Vector</h4>
 <blockquote>
 <p>Like any other struct, a vector is freed when it goes out of scope</p>
 </blockquote>
@@ -732,7 +765,7 @@ The program resulted in a runtime error at the point of using an invalid value i
 <p>Fortunately, the variants of an enum are defined under the same enum type, so when we need one type to represent elements of different types, we can define and use an enum!</p>
 </blockquote>
 <p>运用枚举 (enum) 搭配 vector 可以实作出比泛型更具表达力的 vector，即 vector 中的每个元素的类型可以不相同 (通过 enum 的大小类型机制即可实作)。</p>
-<h4 id="storing-utf-8-encoded-text-with-strings">Storing UTF-8 Encoded Text with Strings</h4>
+<h4 id="string">String</h4>
 <blockquote>
 <p>Rust has only one string type in the core language, which is the string slice <code>str</code> that is usually seen in its borrowed form <code>&amp;str</code>.</p>
 </blockquote>
@@ -742,7 +775,7 @@ The program resulted in a runtime error at the point of using an invalid value i
 <blockquote>
 <p>Although this section is largely about <code>String</code>, both types are used heavily in Rust’s standard library, and both <code>String</code> and string slices are UTF-8 encoded.</p>
 </blockquote>
-<p>Rust 中的字符串是 UTF-8 编码，注意与之前所提的 <code>char</code> 类型使用的 Unicode 编码不同。这一点很重要，因为 <code>String</code> 的 <a href="https://doc.rust-lang.org/std/string/struct.String.html#method.len"target="_blank" rel="external nofollow noopener noreferrer">len()</a> 方法是计算 byte 的数量 (URF-8 编码只占据一个 byte)。</p>
+<p>Rust 中的字符串是 UTF-8 编码，注意与之前所提的 <code>char</code> 类型使用的 Unicode 编码不同。这一点很重要，因为 <code>String</code> 的 <a href="https://doc.rust-lang.org/std/string/struct.String.html#method.len"target="_blank" rel="external nofollow noopener noreferrer">len()</a> 方法是计算 byte 的数量 (UTF-8 编码只占据一个 byte)。</p>
 <blockquote>
 <p>The <code>push_str</code> method takes a string slice because we don’t necessarily want to take ownership of the parameter.</p>
 </blockquote>
@@ -765,7 +798,7 @@ The program resulted in a runtime error at the point of using an invalid value i
 <blockquote>
 <p>Rust has chosen to make the correct handling of <code>String</code> data the default behavior for all Rust programs, which means programmers have to put more thought into handling UTF-8 data upfront. This trade-off exposes more of the complexity of strings than is apparent in other programming languages, but it prevents you from having to handle errors involving non-ASCII characters later in your development life cycle.</p>
 </blockquote>
-<h4 id="storing-keys-with-associated-values-in-hash-maps">Storing Keys with Associated Values in Hash Maps</h4>
+<h4 id="hash-map">Hash Map</h4>
 <blockquote>
 <p>Note that we need to first <code>use</code> the <code>HashMap</code> from the collections portion of the standard library. Of our three common collections, this one is the least often used, so it’s not included in the features brought into scope automatically in the prelude. Hash maps also have less support from the standard library; there’s no built-in macro to construct them, for example.</p>
 </blockquote>
@@ -914,7 +947,7 @@ The program resulted in a runtime error at the point of using an invalid value i
 <p>Therefore, returning <code>Result</code> is a good default choice when you’re defining a function that might fail.</p>
 </blockquote>
 <p>定义一个可能会失败的函数时 (即预期计划处理错误)，应该使用 <code>Result</code> 进行错误处理，其它时候一般使用 <code>panic!</code> 处理即可 (因为预期就没打算处理错误)。</p>
-<h3 id="generic-types-traits-and-lifetimes">Generic Types, Traits, and Lifetimes</h3>
+<h3 id="generic-traits-and-lifetimes">Generic, Traits, and Lifetimes</h3>
 <div class="details admonition quote open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -1052,7 +1085,7 @@ The program resulted in a runtime error at the point of using an invalid value i
 <li><a href="https://www.zhihu.com/question/435470652/answer/1653231267"target="_blank" rel="external nofollow noopener noreferrer">如何理解 Rust 的生命周期标注</a></li>
 </ul>
 <p>这篇文章非常好，从 <strong>子类型</strong> 的角度对生命周期标注进行了说明，举个例子:</p>
-<div class="highlight" id="id-27"><div class="chroma">
+<div class="highlight" id="id-62"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1063,7 +1096,7 @@ The program resulted in a runtime error at the point of using an invalid value i
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>对于函数参数，也可以通过上面说明的子类型进行对生命周期标注理解:</p>
-<div class="highlight" id="id-28"><div class="chroma">
+<div class="highlight" id="id-63"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -1130,7 +1163,7 @@ $$
       <div class="admonition-content">涉及到生命周期的程序，编写代码时先不需要考虑生命周期，先将代码逻辑写好，然后从防止 <em><strong>dangling reference</strong></em> 这个 UB 以及 <strong>子类型</strong> 的角度对生命周期进行标注。</div>
     </div>
   </div>
-<h3 id="writing-automated-tests">Writing Automated Tests</h3>
+<h3 id="automated-tests">Automated Tests</h3>
 <ul>
 <li>11.1. How to Write Tests</li>
 </ul>
@@ -1384,7 +1417,7 @@ $$
 <blockquote>
 <p>Only library crates expose functions that other crates can use; binary crates are meant to be run on their own.</p>
 </blockquote>
-<h3 id="an-io-project-building-a-command-line-program">An I/O Project: Building a Command Line Program</h3>
+<h3 id="an-io-project-minigrep">An I/O Project: minigrep</h3>
 <ul>
 <li>12.3. Refactoring to Improve Modularity and Error Handling</li>
 </ul>
@@ -1416,13 +1449,1055 @@ $$
 <li>method str::<a href="https://doc.rust-lang.org/std/primitive.str.html#method.to_lowercase"target="_blank" rel="external nofollow noopener noreferrer">to_lowercase</a></li>
 <li>method std::result::Result::<a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.is_err"target="_blank" rel="external nofollow noopener noreferrer">is_err</a></li>
 </ul>
-<h2 id="visualizing-memory-layout-of-rusts-data-types">Visualizing memory layout of Rust's data types</h2>
-<p>录影: <a href="https://www.youtube.com/watch?v=7_o-YRxf_cc&amp;t=0s"target="_blank" rel="external nofollow noopener noreferrer">YouTube</a> / <a href="https://www.bilibili.com/video/BV1KT4y167f1"target="_blank" rel="external nofollow noopener noreferrer">中文翻译</a></p>
-</div><div class="post-footer" id="post-footer">
+<h3 id="iterators-and-closures">Iterators and Closures</h3>
+<blockquote>
+<p>Rust’s design has taken inspiration from many existing languages and techniques, and one significant influence is functional programming.</p>
+</blockquote>
+<div class="details admonition success open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-check-circle fa-fw" aria-hidden="true"></i>成功<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">这一章是关于函数式编程的，Rust 吸收了很多编程范式的精华，所以也可以使用函数式编程风格。关于函数式编程的资料，可以参考康奈尔大学的 <a href="https://www.youtube.com/playlist?list=PLre5AT9JnKShBOPeuiD9b-I4XROIJhkIU"target="_blank" rel="external nofollow noopener noreferrer">OCaml Programming: Correct + Efficient + Beautiful</a> 和斯坦福大学的编程范式 <a href="https://www.bilibili.com/video/BV1Cx411S7HJ/"target="_blank" rel="external nofollow noopener noreferrer">CS107</a>，以及最出名的麻省理工学院的 <a href="https://www.bilibili.com/video/BV1Xx41117tr/"target="_blank" rel="external nofollow noopener noreferrer">SICP</a> (这个版本是给 IBM 工程师培训的，MIT 还有一个 <a href="https://www.youtube.com/playlist?list=PL7BcsI5ueSNFPCEisbaoQ0kXIDX9rR5FF"target="_blank" rel="external nofollow noopener noreferrer">2004 年的版本</a> 是给学生上课的)。</div>
+    </div>
+  </div>
+<h4 id="closures-anonymous-functions-that-capture-their-environment">Closures: Anonymous Functions that Capture Their Environment</h4>
+<blockquote>
+<p>Rust’s closures are anonymous functions you can save in a variable or pass as arguments to other functions.
+You can create the closure in one place and then call the closure elsewhere to evaluate it in a different context.
+Unlike functions, closures can capture values from the scope in which they’re defined.</p>
+</blockquote>
+<p>严格上来讲，函数也可以捕获其定义的作用域的变量，例如 C 语言的函数就可以访问全局变量，因为全局变量和函数都是定义最顶层，作为 first-class。担任闭包的灵活性更强，例如可以将闭包定义在结构体里面，作为结构体的成员，从而可以实现懒计算的功能。</p>
+<blockquote>
+<p>Closures don’t usually require you to annotate the types of the parameters or the return value like <code>fn</code> functions do. Type annotations are required on functions because the types are part of an explicit interface exposed to your users.</p>
+</blockquote>
+<blockquote>
+<p>Closures, on the other hand, aren’t used in an exposed interface like this: they’re stored in variables and used without naming them and exposing them to users of our library.</p>
+</blockquote>
+<blockquote>
+<p>Closures are typically short and relevant only within a narrow context rather than in any arbitrary scenario. Within these limited contexts, the compiler can infer the types of the parameters and the return type</p>
+</blockquote>
+<blockquote>
+<p>As with variables, we can add type annotations if we want to increase explicitness and clarity at the cost of being more verbose than is strictly necessary.</p>
+</blockquote>
+<p>因为闭包不暴露给外部使用者，并且闭包逻辑一般比较简单，所以闭包的参数和返回值的类型由程序员自己保证即可，编译器一般可以推断出来 (类似于编译器可以推断出变量的类型)。当然也可以给闭包的参数和返回值加上类型标注 (类似于可以给变量加上类型标注)，这也是合法的。</p>
+<div class="highlight" id="id-27"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span>  <span class="nf">add_one_v1</span><span class="w">   </span><span class="p">(</span><span class="n">x</span>: <span class="kt">u32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">u32</span> <span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">add_one_v2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">|</span><span class="n">x</span>: <span class="kt">u32</span><span class="o">|</span><span class="w"> </span>-&gt; <span class="kt">u32</span> <span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">add_one_v3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w">             </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">add_one_v4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w">               </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>闭包的内部逻辑必须是一个 <strong>表达式</strong>，使得闭包拥有返回值，例如上面的中间两行的闭包逻辑都是 <code>{}</code> 表达式，最后一行的是 <code>x + 1</code> 这个加法表达式 (函数和我们之前提到的一样，函数体必须是一个表达式，通常是 <code>{}</code> 表达式，例如第一行)。</p>
+<blockquote>
+<p>For closure definitions, the compiler will infer one concrete type for each of their parameters and for their return value.</p>
+</blockquote>
+<p>如果依赖编译器推断闭包的相关类型，那么编译器只会推断出一个具体的类型，类似于编译器对于变量的类型也只能推断出一个，所以下面的例子会报错:</p>
+<div class="highlight" id="id-28"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="n">example_closure</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">|</span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">example_closure</span><span class="p">(</span><span class="nb">String</span>::<span class="n">from</span><span class="p">(</span><span class="s">&#34;hello&#34;</span><span class="p">));</span><span class="w"> </span><span class="c1">// |x: String|
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">example_closure</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w">                     </span><span class="c1">// |x: i32|
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition quote open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ol>
+<li>
+<p><code>FnOnce</code> applies to closures that can be called once. All closures implement at least this trait, because all closures can be called. A closure that moves captured values out of its body will only implement <code>FnOnce</code> and none of the other <code>Fn</code> traits, because it can only be called once.</p>
+</li>
+<li>
+<p><code>FnMut</code> applies to closures that don’t move captured values out of their body, but that might mutate the captured values. These closures can be called more than once.</p>
+</li>
+<li>
+<p><code>Fn</code> applies to closures that don’t move captured values out of their body and that don’t mutate captured values, as well as closures that capture nothing from their environment. These closures can be called more than once without mutating their environment, which is important in cases such as calling a closure multiple times concurrently.</p>
+</li>
+</ol>
+</div>
+    </div>
+  </div>
+<div class="highlight" id="id-29"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">impl</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="nb">Option</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">unwrap_or_else</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">f</span>: <span class="nc">F</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">T</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">where</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">F</span>: <span class="nb">FnOnce</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="nc">T</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">match</span><span class="w"> </span><span class="bp">self</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nb">Some</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="nb">None</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">f</span><span class="p">(),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>因为闭包是 Trait，所以闭包作为参数进行传递时，需要使用 <strong>泛型约束</strong> 来指定对应的 Trait</p>
+<blockquote>
+<p>If you want to force the closure to take ownership of the values it uses in the environment even though the body of the closure doesn’t strictly need ownership, you can use the <code>move</code> keyword before the parameter list.</p>
+</blockquote>
+<blockquote>
+<p>This technique is mostly useful when passing a closure to a new thread to move the data so that it’s owned by the new thread.</p>
+</blockquote>
+<p>多线程编程时使用 <code>move</code> 关键字可以强制将一个变量的所有权交给另一个线程。</p>
+<h4 id="processing-a-series-of-items-with-iterators">Processing a Series of Items with Iterators</h4>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">这一节简单介绍了下迭代器是什么以及迭代器的功能，如果想更进一步地了解迭代器的实作，建议观看 John Gjengset 的影片 <a href="https://www.youtube.com/watch?v=yozQ9C69pNs"target="_blank" rel="external nofollow noopener noreferrer">Crust of Rust: Iterators</a>，本人也有写相关的 <a href="/posts/iterators/">笔记</a> 来对影片内容进行解释和扩展。</div>
+    </div>
+  </div>
+<p>The Iterator Trait and the next Method</p>
+<blockquote>
+<p>An iterator is responsible for the logic of iterating over each item and determining when the sequence has finished.</p>
+</blockquote>
+<blockquote>
+<p>In Rust, iterators are lazy, meaning they have no effect until you call methods that consume the iterator to use it up.</p>
+</blockquote>
+<blockquote>
+<p>All iterators implement a trait named <code>Iterator</code> that is defined in the standard library. The definition of the trait looks like this:</p>
+</blockquote>
+<div class="highlight" id="id-30"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="nb">Iterator</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">type</span> <span class="nc">Item</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">next</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="bp">Self</span>::<span class="n">Item</span><span class="o">&gt;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// methods with default implementations elided
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>The <code>Iterator</code> trait only requires implementors to define one method: the <code>next</code> method</p>
+</blockquote>
+<blockquote>
+<p>The <code>iter</code> method produces an iterator over immutable references. If we want to create an iterator that takes ownership of <code>v1</code> and returns owned values, we can call <code>into_iter</code> instead of <code>iter</code>. Similarly, if we want to iterate over mutable references, we can call <code>iter_mut</code> instead of <code>iter</code>.</p>
+</blockquote>
+<p>Methods that Consume the Iterator</p>
+<blockquote>
+<p>Some of these methods call the <code>next</code> method in their definition, which is why you’re required to implement the <code>next</code> method when implementing the <code>Iterator</code> trait.</p>
+</blockquote>
+<blockquote>
+<p>Methods that call <code>next</code> are called consuming adaptors, because calling them uses up the iterator.</p>
+</blockquote>
+<blockquote>
+<p>One example is the <code>sum</code> method, which takes ownership of the iterator and iterates through the items by repeatedly calling <code>next</code>, thus consuming the iterator.</p>
+</blockquote>
+<p>Methods that Produce Other Iterators</p>
+<blockquote>
+<p>Iterator adaptors are methods defined on the Iterator trait that don’t consume the iterator. Instead, they produce different iterators by changing some aspect of the original iterator.</p>
+</blockquote>
+<blockquote>
+<p>iterator adaptor method <code>map</code>, which takes a closure to call on each item as the items are iterated through. The <code>map</code> method returns a new iterator that produces the modified items.</p>
+</blockquote>
+<p>Using Closures that Capture Their Environment</p>
+<blockquote>
+<p>the <code>filter</code> method that takes a closure. The closure gets an item from the iterator and returns a <code>bool</code>. If the closure returns <code>true</code>, the value will be included in the iteration produced by <code>filter</code>. If the closure returns <code>false</code>, the value won’t be included.</p>
+</blockquote>
+<h4 id="comparing-performance-loops-vs-iterators">Comparing Performance: Loops vs. Iterators</h4>
+<blockquote>
+<p>The point is this: iterators, although a high-level abstraction, get compiled down to roughly the same code as if you’d written the lower-level code yourself. Iterators are one of Rust’s zero-cost abstractions, by which we mean using the abstraction imposes no additional runtime overhead.</p>
+</blockquote>
+<p>零开销抽象 (Zero-Aost Abstractions): 使用抽象时不会引入额外的运行时开销，所以尽量使用 Rust 提供的抽象语法，因为其底层实现大概率进行了相应的优化，比自己手写的底层代码高效不少。</p>
+<h3 id="cargo-and-cratesio">Cargo and Crates.io</h3>
+<ul>
+<li>14.1. Customizing Builds with Release Profiles</li>
+</ul>
+<blockquote>
+<p>Cargo has two main profiles: the <code>dev</code> profile Cargo uses when you run <code>cargo build</code> and the <code>release</code> profile Cargo uses when you run <code>cargo build --release</code>.</p>
+</blockquote>
+<blockquote>
+<p>Cargo has default settings for each of the profiles that apply when you haven&rsquo;t explicitly added any <code>[profile.*]</code> sections in the project’s Cargo.toml file. By adding <code>[profile.*]</code> sections for any profile you want to customize, you override any subset of the default settings.</p>
+</blockquote>
+<div class="highlight" id="id-31"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">profile</span><span class="p">.</span><span class="nx">dev</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">opt-level</span> <span class="p">=</span> <span class="mi">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">profile</span><span class="p">.</span><span class="nx">release</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">opt-level</span> <span class="p">=</span> <span class="mi">3</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>14.2. Publishing a Crate to Crates.io</li>
+</ul>
+<blockquote>
+<p>Rust also has a particular kind of comment for documentation, known conveniently as a documentation comment, that will generate HTML documentation.</p>
+</blockquote>
+<blockquote>
+<p>Documentation comments use three slashes, <code>///</code>, instead of two and support Markdown notation for formatting the text. Place documentation comments just before the item they’re documenting.</p>
+</blockquote>
+<blockquote>
+<p>We can generate the HTML documentation from this documentation comment by running <code>cargo doc</code>.</p>
+</blockquote>
+<blockquote>
+<p>For convenience, running <code>cargo doc --open</code> will build the HTML for your current crate’s documentation (as well as the documentation for all of your crate’s dependencies) and open the result in a web browser.</p>
+</blockquote>
+<p>Documentation Comments as Tests</p>
+<blockquote>
+<p>running <code>cargo test</code> will run the code examples in your documentation as tests!</p>
+</blockquote>
+<p>Commenting Contained Items</p>
+<blockquote>
+<p>The style of doc comment <code>//!</code> adds documentation to the item that contains the comments rather than to the items following the comments.</p>
+</blockquote>
+<p>Exporting a Convenient Public API with pub use</p>
+<blockquote>
+<p>The good news is that if the structure isn’t convenient for others to use from another library, you don’t have to rearrange your internal organization: instead, you can re-export items to make a public structure that’s different from your private structure by using <code>pub use</code>.</p>
+</blockquote>
+<ul>
+<li>14.3. Cargo Workspaces</li>
+</ul>
+<div class="highlight" id="id-32"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">workspace</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">members</span> <span class="p">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;adder&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight" id="id-33"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ cargo new adder
+</span></span><span class="line"><span class="cl">     Created binary <span class="o">(</span>application<span class="o">)</span> <span class="sb">`</span>adder<span class="sb">`</span> package
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">├── Cargo.lock
+</span></span><span class="line"><span class="cl">├── Cargo.toml
+</span></span><span class="line"><span class="cl">├── adder
+</span></span><span class="line"><span class="cl">│   ├── Cargo.toml
+</span></span><span class="line"><span class="cl">│   └── src
+</span></span><span class="line"><span class="cl">│       └── main.rs
+</span></span><span class="line"><span class="cl">└── target</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight" id="id-34"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">dependencies</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">add_one</span> <span class="p">=</span> <span class="p">{</span> <span class="nx">path</span> <span class="p">=</span> <span class="s2">&#34;../add_one&#34;</span> <span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="smart-pointers">Smart Pointers</h3>
+<h3 id="fearless-concurrency">Fearless Concurrency</h3>
+<h3 id="object-oriented-programming">Object-Oriented Programming</h3>
+<ul>
+<li>17.1. Characteristics of Object-Oriented Languages</li>
+</ul>
+<blockquote>
+<p>Object-oriented programs are made up of objects. An object packages both data and the procedures that operate on that data. The procedures are typically called methods or operations.</p>
+</blockquote>
+<blockquote>
+<p>Using this definition, Rust is object-oriented: structs and enums have data, and <code>impl</code> blocks provide methods on structs and enums.</p>
+</blockquote>
+<p>Rust 中使用结构体、枚举和 <code>impl</code> 块来实现了 OOP 范式的对象、数据和行为三大要素。</p>
+<blockquote>
+<p>Another aspect commonly associated with OOP is the idea of encapsulation, which means that the implementation details of an object aren’t accessible to code using that object.</p>
+</blockquote>
+<blockquote>
+<p>we can use the <code>pub</code> keyword to decide which modules, types, functions, and methods in our code should be public, and by default everything else is private.</p>
+</blockquote>
+<p>Rust 使用 <code>pub</code> 关键字来控制可见性，实现了 OOP 范式的封装要求。</p>
+<blockquote>
+<p>Inheritance is a mechanism whereby an object can inherit elements from another object’s definition, thus gaining the parent object’s data and behavior without you having to define them again.</p>
+</blockquote>
+<blockquote>
+<p>You can do this in a limited way in Rust code using default trait method implementations</p>
+</blockquote>
+<blockquote>
+<p>We can also override the default implementation</p>
+</blockquote>
+<p>Rust 通过使用 Trait 可以“继承”某些共有的行为，也可以覆盖实现这些默认行为。</p>
+<blockquote>
+<p>This is also called polymorphism, which means that you can substitute multiple objects for each other at runtime if they share certain characteristics.</p>
+</blockquote>
+<blockquote>
+<p>Rust instead uses generics to abstract over different possible types and trait bounds to impose constraints on what those types must provide. This is sometimes called bounded parametric polymorphism.</p>
+</blockquote>
+<p>Rust 通过泛型和 Trait 来实现多态</p>
+<ul>
+<li>17.2. Using Trait Objects That Allow for Values of Different Types</li>
+</ul>
+<blockquote>
+<p>However, trait objects are more like objects in other languages in the sense that they combine data and behavior. But trait objects differ from traditional objects in that we can’t add data to a trait object. Trait objects aren’t as generally useful as objects in other languages: their specific purpose is to allow abstraction across common behavior.</p>
+</blockquote>
+<p>Trait 只是对行为的抽象，它并没有持有数据。这里需要注意 Trait 对象和之前所提的 Trait 约束是不同的，Trait 对象类似于 <code>Box&lt;dyn Trait&gt;</code>。</p>
+<div class="highlight" id="id-35"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">Box</span><span class="o">&lt;</span><span class="k">dyn</span><span class="w"> </span><span class="n">Trait</span><span class="o">&gt;&gt;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nb">Vec</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">T</span>: <span class="nc">Trait</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用 Trait 对象可以实现某种意义上的多态，而使用泛型 (以及 Trait 约束) 则无法做到，因为泛型 (以及 Trait 约束) 在编译器就会被编译成具体类型，显然无法多态。可以结合上面的例子进行思考。</p>
+<blockquote>
+<p>when we use trait bounds on generics: the compiler generates nongeneric implementations of functions and methods for each concrete type that we use in place of a generic type parameter. The code that results from monomorphization is doing static dispatch, which is when the compiler knows what method you’re calling at compile time.</p>
+</blockquote>
+<blockquote>
+<p>This is opposed to dynamic dispatch, which is when the compiler can’t tell at compile time which method you’re calling. In dynamic dispatch cases, the compiler emits code that at runtime will figure out which method to call.</p>
+</blockquote>
+<blockquote>
+<p>When we use trait objects, Rust must use dynamic dispatch. The compiler doesn’t know all the types that might be used with the code that’s using trait objects, so it doesn’t know which method implemented on which type to call.</p>
+</blockquote>
+<h3 id="patterns-and-matching">Patterns and Matching</h3>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">这一章建议搭配之前的 <a href="https://doc.rust-lang.org/book/ch06-00-enums.html"target="_blank" rel="external nofollow noopener noreferrer">6. Enums and Pattern Matching</a> 来阅读，本章是对其的扩展。</div>
+    </div>
+  </div>
+<ul>
+<li>18.1. All the Places Patterns Can Be Used</li>
+</ul>
+<p>match Arms</p>
+<div class="highlight" id="id-36"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">match</span><span class="w"> </span><span class="no">VALUE</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="no">PATTERN</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">EXPRESSION</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="no">PATTERN</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">EXPRESSION</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="no">PATTERN</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="no">EXPRESSION</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>The particular pattern <code>_</code> will match anything, but it never binds to a variable, so it’s often used in the last match arm.</p>
+</blockquote>
+<p><code>_</code> 在模式匹配中相当于一个占位符，常用于 <code>match</code> 匹配的最后一个，作为类似于 C/C++ <code>swicth-case</code> 的 <code>default</code> 分支。</p>
+<blockquote>
+<p><code>if let</code> can have a corresponding <code>else</code> containing code to run if the pattern in the <code>if let</code> doesn’t match.</p>
+</blockquote>
+<blockquote>
+<p>Also, Rust doesn&rsquo;t require that the conditions in a series of <code>if let</code>, <code>else if</code>, <code>else if let</code> arms relate to each other.</p>
+</blockquote>
+<p>Rust 还可以混用 <code>if let</code> 和 <code>if-else</code> 语句，即可以将模式匹配和条件判断结合起来，十分灵活</p>
+<div class="highlight" id="id-37"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">color</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">favorite_color</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Using your favorite color, </span><span class="si">{color}</span><span class="s">, as the background&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">is_tuesday</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Tuesday is green day!&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Ok</span><span class="p">(</span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Using purple as the background color&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Using orange as the background color&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Using blue as the background color&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>The downside of using <code>if let</code> expressions is that the compiler doesn’t check for exhaustiveness, whereas with <code>match</code> expressions it does.</p>
+</blockquote>
+<p>但是 <code>if-let</code> 表达式并不会检查模式匹配的全部情况，而 <code>match</code> 会强制要求检查模式匹配的所有情况</p>
+<blockquote>
+<p>Similar in construction to <code>if let</code>, the <code>while let</code> conditional loop allows a <code>while</code> loop to run for as long as a pattern continues to match. I</p>
+</blockquote>
+<div class="highlight" id="id-38"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="kd">let</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="n">top</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stack</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">top</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>In a <code>for</code> loop, the value that directly follows the keyword <code>for</code> is a pattern. For example, in <code>for x in y</code> the <code>x</code> is the pattern.</p>
+</blockquote>
+<div class="highlight" id="id-39"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;b&#39;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;c&#39;</span><span class="p">];</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">index</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">iter</span><span class="p">().</span><span class="n">enumerate</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;</span><span class="si">{}</span><span class="s"> is at index </span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">index</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>模式匹配无处不在，<code>for</code> 循环中 <code>for</code> 关键字后面的 token 在语法分析时是按模式匹配进行分析的</p>
+<blockquote>
+<p>Every time you&rsquo;ve used a <code>let</code> statement like this you&rsquo;ve been using patterns, although you might not have realized it!</p>
+</blockquote>
+<div class="highlight" id="id-40"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="no">PATTERN</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">EXPRESSION</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>let</code> 语句也是模式匹配，但是它的使用和先前的那些模式匹配相比起来不是特别灵活，这一部分在后面会进行解释</p>
+<blockquote>
+<p>Function parameters can also be patterns.</p>
+</blockquote>
+<div class="highlight" id="id-41"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">foo</span><span class="p">(</span><span class="n">x</span>: <span class="kt">i32</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>函数参数也是模式匹配，毕竟它本质也是一种 <code>let</code> 语句，相应的，它的灵活性也不是特别好</p>
+<ul>
+<li>18.2. Refutability: Whether a Pattern Might Fail to Match</li>
+</ul>
+<p>引入两个概念用于解释之前所提的，不同模式匹配语句的灵活性不同的问题</p>
+<blockquote>
+<p>Patterns come in two forms: <strong>refutable</strong> and <strong>irrefutable</strong>.</p>
+</blockquote>
+<blockquote>
+<p>Patterns that will match for any possible value passed are <strong>irrefutable</strong>. An example would be <code>x</code> in the statement <code>let x = 5;</code> because <code>x</code> matches anything and therefore cannot fail to match.</p>
+</blockquote>
+<blockquote>
+<p>Patterns that can fail to match for some possible value are <strong>refutable</strong>. An example would be <code>Some(x)</code> in the expression <code>if let Some(x) = a_value</code> because if the value in the <code>a_value</code> variable is <code>None</code> rather than <code>Some</code>, the <code>Some(x)</code> pattern will not match.</p>
+</blockquote>
+<p>简单来说，就一种模式可以对任何值无条件接受，而另一种模式对一些可能的值并不接受，这两种模式的差异导致了不同模式匹配语句的灵活性不同 (因为对于任何值都可以无条件接受的话，需要对传入的值进行一定的限制，进而导致接收值的灵活性不同)。</p>
+<blockquote>
+<p>Function parameters, <code>let</code> statements, and <code>for</code> loops can only accept <strong>irrefutable</strong> patterns, because the program cannot do anything meaningful when values don’t match.</p>
+</blockquote>
+<blockquote>
+<p>The <code>if let</code> and <code>while let</code> expressions accept refutable and irrefutable patterns</p>
+</blockquote>
+<ul>
+<li>18.3. Pattern Syntax</li>
+</ul>
+<blockquote>
+<p>Named variables are irrefutable patterns that match any value, and we’ve used them many times in the book.</p>
+</blockquote>
+<p>在模式匹配中使用命名变量会匹配任意值，但这也会导致在模式匹配的 Block 对该变量名称进行变量遮蔽</p>
+<blockquote>
+<p>Because match starts a new scope, variables declared as part of a pattern inside the match expression will shadow those with the same name outside the match construct, as is the case with all variables.</p>
+</blockquote>
+<div class="highlight" id="id-42"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Some</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Some</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Got 50&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="nb">Some</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Matched, y = </span><span class="si">{y}</span><span class="s">&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;Default case, x = </span><span class="si">{:?}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;at the end: x = </span><span class="si">{:?}</span><span class="s">, y = </span><span class="si">{y}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>In match expressions, you can match multiple patterns using the <code>|</code> syntax, which is the pattern or operator.</p>
+</blockquote>
+<div class="highlight" id="id-43"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;one or two&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="mi">3</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;three&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;anything&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>The <code>..=</code> syntax allows us to match to an inclusive range of values.</p>
+</blockquote>
+<div class="highlight" id="id-44"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="w">    </span><span class="k">match</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="sc">&#39;a&#39;</span><span class="o">..=</span><span class="sc">&#39;j&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;early ASCII letter&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="sc">&#39;k&#39;</span><span class="o">..=</span><span class="sc">&#39;z&#39;</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;late ASCII letter&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;something else&#34;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>a..=b</code> 表示闭区间 $[a,b]$，而 <code>..</code> 表示开区间 $[a, b)$</p>
+<blockquote>
+<p>We can also use patterns to destructure structs, enums, and tuples to use different parts of these values.</p>
+</blockquote>
+<div class="highlight" id="id-45"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="c1">// struct
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span>: <span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>: <span class="mi">7</span><span class="w"> </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span>: <span class="nc">a</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>: <span class="nc">b</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">p</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Rust has a shorthand for patterns that match struct fields: you only need to list the name of the struct field, and the variables created from the pattern will have the same names.</p>
+</blockquote>
+<div class="highlight" id="id-46"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="c1">// enum
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">match</span><span class="w"> </span><span class="n">msg</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Message</span>::<span class="n">Quit</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">..</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Message</span>::<span class="n">Move</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">..</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Message</span>::<span class="n">Write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">..</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Message</span>::<span class="n">ChangeColor</span><span class="p">(</span><span class="n">r</span><span class="p">,</span><span class="w"> </span><span class="n">g</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="o">..</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight" id="id-47"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="c1">// tuple
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span><span class="w"> </span><span class="p">((</span><span class="n">feet</span><span class="p">,</span><span class="w"> </span><span class="n">inches</span><span class="p">),</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">),</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span>: <span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">y</span>: <span class="o">-</span><span class="mi">10</span><span class="w"> </span><span class="p">});</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="advanced-features">Advanced Features</h3>
+<h4 id="unsafe-rust">Unsafe Rust</h4>
+<blockquote>
+<p>Unsafe Rust exists because, by nature, static analysis is conservative. When the compiler tries to determine whether or not code upholds the guarantees, it’s better for it to reject some valid programs than to accept some invalid programs.</p>
+</blockquote>
+<blockquote>
+<p>if you use unsafe code incorrectly, problems can occur due to memory unsafety, such as null pointer dereferencing.</p>
+</blockquote>
+<blockquote>
+<p>Another reason Rust has an unsafe alter ego is that the underlying computer hardware is inherently unsafe.</p>
+</blockquote>
+<p>静态分析的保守以及系统编程的需求使得 Unsafe Rust 的出现变得合理</p>
+<p><em><strong>unsafe superpowers</strong></em>:</p>
+<ul>
+<li>Dereference a raw pointer</li>
+<li>Call an unsafe function or method</li>
+<li>Access or modify a mutable static variable</li>
+<li>Implement an unsafe trait</li>
+<li>Access fields of <code>union</code>s</li>
+</ul>
+<blockquote>
+<p>It’s important to understand that <code>unsafe</code> doesn’t turn off the borrow checker or disable any other of Rust’s safety checks: if you use a reference in <code>unsafe</code> code, it will still be checked.</p>
+</blockquote>
+<p><code>unsafe</code> 有一定的特权，但是即使使用 <code>unsafe</code>，Rust 的借用检查机制仍然存在，并且起作用</p>
+<p>解引用 <strong>裸指针</strong> 操作只能在 <code>unsafe</code> 中使用，注意这里说的是 <strong>解引用</strong>，如果不涉及对裸指针的解引用操作，裸指针还是可以在 <code>safe</code> 内使用的，例如:</p>
+<div class="highlight" id="id-48"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">num</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">*</span><span class="k">const</span><span class="w"> </span><span class="kt">i32</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">*</span><span class="k">mut</span><span class="w"> </span><span class="kt">i32</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">unsafe</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;r1: </span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">r1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&#34;r2: </span><span class="si">{}</span><span class="s">&#34;</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">r2</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x012345</span><span class="k">usize</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="o">*</span><span class="k">const</span><span class="w"> </span><span class="kt">i32</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Unsafe Rust has two new types called raw pointers that are similar to references. As with references, raw pointers can be immutable or mutable and are written as <code>*const T</code> and <code>*mut T</code>, respectively.</p>
+</blockquote>
+<blockquote>
+<p>In the context of raw pointers, immutable means that the pointer can’t be directly assigned to after being dereferenced.</p>
+</blockquote>
+<p>Different from references and smart pointers, raw pointers:</p>
+<ul>
+<li>Are allowed to ignore the borrowing rules by having both immutable and mutable pointers or multiple mutable pointers to the same location</li>
+<li>Aren’t guaranteed to point to valid memory</li>
+<li>Are allowed to be null</li>
+<li>Don’t implement any automatic cleanup</li>
+</ul>
+<p>Rust 中的裸指针和 C/C++ 中的原始指针类型比较相似。而 Rust 的裸指针和引用、智能指针最大的区别在于: 裸指针不需要遵循借用规则，以及引用、智能指针必定不为空并且引用的是有效的物件 (因为是对物件的引用，所以物件必须先于引用而存在，故引用的地址也是有效的)，而裸指针可以为空 (类似于 C/C++ 的 NULL)，也可以指向无效的地址。因为可以为空或指向无效区域，所以裸指针不能像智能指针那样，超出作用域就自动清理指向的内容。</p>
+<blockquote>
+<p>With all of these dangers, why would you ever use raw pointers? One major use case is when interfacing with C code</p>
+</blockquote>
+<blockquote>
+<p>Another case is when building up safe abstractions that the borrow checker doesn’t understand.</p>
+</blockquote>
+<p>与底层 C 代码进行交互，以及借用检查机制无法涵盖现实世界的所有关系，是 Unsafe Rust 使用的理由</p>
+<blockquote>
+<p>Just because a function contains unsafe code doesn’t mean we need to mark the entire function as unsafe. In fact, wrapping unsafe code in a safe function is a common abstraction</p>
+</blockquote>
+<p>将不安全的代码块封装为安全的函数，这样调用该函数时就不需要特别考虑 unsafe 部分了 (unsafe 部分由函数实现方进行考虑、封装)</p>
+<blockquote>
+<p>Sometimes, your Rust code might need to interact with code written in another language. For this, Rust has the keyword <code>extern</code> that facilitates the creation and use of a Foreign Function Interface (FFI). An FFI is a way for a programming language to define functions and enable a different (foreign) programming language to call those functions.</p>
+</blockquote>
+<blockquote>
+<p>The <code>&quot;C&quot;</code> ABI is the most common and follows the C programming language’s ABI.</p>
+</blockquote>
+<p>通过 <code>extern</code> 关键字指定汇编层面使用的 ABI，可以使 Rust 程序和其他语言编写的程序进行通讯，这部分在 Rust 中叫 FFI</p>
+<h4 id="advanced-traits">Advanced Traits</h4>
+<blockquote>
+<p><em><strong>Associated types</strong></em> connect a type placeholder with a trait such that the trait method definitions can use these placeholder types in their signatures.</p>
+</blockquote>
+<p>关联类型相当于类型的占位符，常用于迭代器相关的 Trait 的定义中:</p>
+<div class="highlight" id="id-49"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="nb">Iterator</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">type</span> <span class="nc">Item</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">next</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="bp">Self</span>::<span class="n">Item</span><span class="o">&gt;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>结合下面的例子，并与上面的例子进行对比，思考泛型参数的 Trait 和关联类型的 Trait 的区别:</p>
+<div class="highlight" id="id-50"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">pub</span><span class="w"> </span><span class="k">trait</span><span class="w"> </span><span class="nb">Iterator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">next</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nb">Option</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>In other words, when a trait has a generic parameter, it can be implemented for a type multiple times, changing the concrete types of the generic type parameters each time.</p>
+</blockquote>
+<blockquote>
+<p>With associated types, we don’t need to annotate types because we can’t implement a trait on a type multiple times.</p>
+</blockquote>
+<p>默认泛型参数可以在未标注具体类型时，使用默认的具体类型</p>
+<blockquote>
+<p>When we use generic type parameters, we can specify a default concrete type for the generic type. This eliminates the need for implementors of the trait to specify a concrete type if the default type works. You specify a default type when declaring a generic type with the <code>&lt;PlaceholderType=ConcreteType&gt;</code> syntax.</p>
+</blockquote>
+<div class="highlight" id="id-51"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">trait</span><span class="w"> </span><span class="n">Add</span><span class="o">&lt;</span><span class="n">Rhs</span><span class="o">=</span><span class="bp">Self</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">type</span> <span class="nc">Output</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">rhs</span>: <span class="nc">Rhs</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">Self</span>::<span class="n">Output</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>当类型的方法和实现的 Trait 的方法重名时，直接通过方法名字调用的话，调用的是类型本身实现的方法而不是 Trait 的方法，要想调用 Trait 的同名方法，需要在前面指定 Trait 名字</p>
+<blockquote>
+<p>Nothing in Rust prevents a trait from having a method with the same name as another trait’s method, nor does Rust prevent you from implementing both traits on one type. It’s also possible to implement a method directly on the type with the same name as methods from traits.</p>
+</blockquote>
+<blockquote>
+<p>When calling methods with the same name, you’ll need to tell Rust which one you want to use.</p>
+</blockquote>
+<blockquote>
+<p>Specifying the trait name before the method name clarifies to Rust which implementation of <code>fly</code> we want to call.</p>
+</blockquote>
+<div class="highlight" id="id-52"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">trait</span><span class="w"> </span><span class="n">Pilot</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">trait</span><span class="w"> </span><span class="n">Wizard</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">struct</span> <span class="nc">Human</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">impl</span><span class="w"> </span><span class="n">Pilot</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Human</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">fly</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">impl</span><span class="w"> </span><span class="n">Wizard</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Human</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">fly</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">impl</span><span class="w"> </span><span class="n">Human</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">fly</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Human</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">Pilot</span>::<span class="n">fly</span><span class="p">(</span><span class="o">&amp;</span><span class="n">person</span><span class="p">);</span><span class="w">    </span><span class="c1">// trait Pilot&#39;s fly method
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="n">Wizard</span>::<span class="n">fly</span><span class="p">(</span><span class="o">&amp;</span><span class="n">person</span><span class="p">);</span><span class="w">   </span><span class="c1">// trait Wizard&#39;s fly method
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w">    </span><span class="n">person</span><span class="p">.</span><span class="n">fly</span><span class="p">();</span><span class="w">           </span><span class="c1">// type Human&#39;s fly method
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>You only need to use this more verbose syntax in cases where there are multiple implementations that use the same name and Rust needs help to identify which implementation you want to call.</p>
+</blockquote>
+<p>Rust 的 Trait 可以实现 <strong>行为</strong> 的继承关系 (通过继承方法的行为)</p>
+<blockquote>
+<p>Sometimes, you might write a trait definition that depends on another trait: for a type to implement the first trait, you want to require that type to also implement the second trait. You would do this so that your trait definition can make use of the associated items of the second trait. The trait your trait definition is relying on is called a supertrait of your trait.</p>
+</blockquote>
+<div class="highlight" id="id-53"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">trait</span><span class="w"> </span><span class="n">OutlinePrint</span>: <span class="nc">std</span>::<span class="n">fmt</span>::<span class="n">Display</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">struct</span> <span class="nc">Point</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">impl</span><span class="w"> </span><span class="n">OutlinePrint</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Point</span><span class="w"> </span><span class="p">{}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>the orphan rule that states we’re only allowed to implement a trait on a type if either the trait or the type are local to our crate.</p>
+</blockquote>
+<blockquote>
+<p><em><strong>newtype pattern</strong></em>, which involves creating a new type in a tuple struct.</p>
+</blockquote>
+<blockquote>
+<p>The tuple struct will have one field and be a thin wrapper around the type we want to implement a trait for. Then the wrapper type is local to our crate, and we can implement the trait on the wrapper.</p>
+</blockquote>
+<div class="highlight" id="id-54"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Wrapper</span><span class="p">(</span><span class="nb">Vec</span><span class="o">&lt;</span><span class="nb">String</span><span class="o">&gt;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">impl</span><span class="w"> </span><span class="n">std</span>::<span class="n">fmt</span>::<span class="n">Display</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">Wrapper</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">fn</span> <span class="nf">fmt</span><span class="p">(</span><span class="o">&amp;</span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="n">f</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="n">fmt</span>::<span class="n">Formatter</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">fmt</span>::<span class="nb">Result</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="fm">write!</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;[{}]&#34;</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="mf">0.</span><span class="n">join</span><span class="p">(</span><span class="s">&#34;, &#34;</span><span class="p">))</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="advanced-types">Advanced Types</h4>
+<blockquote>
+<p>Rust provides the ability to declare a type alias to give an existing type another name.</p>
+</blockquote>
+<div class="highlight" id="id-55"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">type</span> <span class="nc">Kilometers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">i32</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>作用类似于 C/C++ 的 <code>typedef</code> 关键字</p>
+<blockquote>
+<p>Rust has a special type named <code>!</code> that’s known in type theory lingo as the <em><strong>empty type</strong></em> because it has no values. We prefer to call it the never type because it stands in the place of the return type when a function will never return.</p>
+</blockquote>
+<blockquote>
+<p>This code is read as “the function bar returns never.” Functions that return never are called diverging functions.</p>
+</blockquote>
+<p>常用于永远不会返回的函数，这个场景在系统领域还是蛮常见的，例如系统启动后的进入的函数 <code>kernel_main</code>，它就是不可能返回的 (轮询直到关机)，或者是捕获 <code>panic</code> 后的处理函数，它也是不会返回的 (直接终止程序)</p>
+<blockquote>
+<p>The formal way of describing this behavior is that expressions of type <code>!</code> can be coerced into any other type.</p>
+</blockquote>
+<div class="highlight" id="id-56"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">bar</span><span class="p">()</span><span class="w"> </span>-&gt; <span class="o">!</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="o">..</span><span class="p">.</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>Dynamically Sized Types and the Sized Trait</p>
+<blockquote>
+<p>Rust needs to know certain details about its types, such as how much space to allocate for a value of a particular type. This leaves one corner of its type system a little confusing at first: the concept of dynamically sized types. Sometimes referred to as DSTs or unsized types, these types let us write code using values whose size we can know only at runtime.</p>
+</blockquote>
+<blockquote>
+<p>To work with DSTs, Rust provides the <code>Sized</code> trait to determine whether or not a type’s size is known at compile time. This trait is automatically implemented for everything whose size is known at compile time. In addition, Rust implicitly adds a bound on <code>Sized</code> to every generic function.</p>
+</blockquote>
+<div class="highlight" id="id-57"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">generic</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t</span>: <span class="nc">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// is actually treated as though we had written this
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">fn</span> <span class="nf">generic</span><span class="o">&lt;</span><span class="n">T</span>: <span class="nb">Sized</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t</span>: <span class="nc">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>By default, generic functions will work only on types that have a known size at compile time. However, you can use the following special syntax to relax this restriction:</p>
+</blockquote>
+<div class="highlight" id="id-58"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">generic</span><span class="o">&lt;</span><span class="n">T</span>: <span class="o">?</span><span class="nb">Sized</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t</span>: <span class="kp">&amp;</span><span class="nc">T</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">..</span><span class="p">.}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>也就是说，我们需要手动标注的只有 <code>?Sized</code> 这个 Trait (用于标识该类型不是编译时期可以确定的，而是动态类型)，<code>Sized</code> 这个 Trait 编译器会帮我们自动默认加上标注，一般不需要特别关心</p>
+<h4 id="advanced-functions-and-closures">Advanced Functions and Closures</h4>
+<blockquote>
+<p>The <code>fn</code> type is called a function pointer. Passing functions with function pointers will allow you to use functions as arguments to other functions.</p>
+</blockquote>
+<blockquote>
+<p>Unlike closures, <code>fn</code> is a type rather than a trait, so we specify <code>fn</code> as the parameter type directly rather than declaring a generic type parameter with one of the <code>Fn</code> traits as a trait bound.</p>
+</blockquote>
+<div class="highlight" id="id-59"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">fn</span> <span class="nf">do_twice</span><span class="p">(</span><span class="n">f</span>: <span class="nc">fn</span><span class="p">(</span><span class="kt">i32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span><span class="p">,</span><span class="w"> </span><span class="n">arg</span>: <span class="kt">i32</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kt">i32</span> <span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">f</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Function pointers implement all three of the closure traits (<code>Fn</code>, <code>FnMut</code>, and <code>FnOnce</code>), meaning you can always pass a function pointer as an argument for a function that expects a closure. It’s best to write functions using a generic type and one of the closure traits so your functions can accept either functions or closures.</p>
+</blockquote>
+<p>因为函数指针类型 <code>fn</code> 实现了闭包的全部三种 Trait，所以还是推荐使用 <strong>泛型约束</strong> 的写法来传递参数，这样既可以接收函数指针也可以接收闭包。但是当需要与其他语言交互时，其他语言可能不支持闭包，这时就只能使用函数指针 <code>fn</code> 作为参数传递了:</p>
+<blockquote>
+<p>That said, one example of where you would want to only accept <code>fn</code> and not closures is when interfacing with external code that doesn’t have closures: C functions can accept functions as arguments, but C doesn’t have closures.</p>
+</blockquote>
+<blockquote>
+<p>Closures are represented by traits, which means you can’t return closures directly.</p>
+</blockquote>
+<p>所以使用类似的技巧来返回闭包，即通过 <code>Box</code> 来包装返回的闭包</p>
+<h4 id="macros">Macros</h4>
+<blockquote>
+<p>Fundamentally, macros are a way of writing code that writes other code, which is known as metaprogramming.</p>
+</blockquote>
+<p>宏是关于编程本质是 <em><strong>字符串处理</strong></em> 的最好阐释</p>
+<blockquote>
+<p>The most widely used form of macros in Rust is the declarative macro. These are also sometimes referred to as “macros by example,” “<code>macro_rules!</code> macros,” or just plain “macros.” At their core, declarative macros allow you to write something similar to a Rust <code>match</code> expression.</p>
+</blockquote>
+<div class="highlight" id="id-60"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="cp">#[macro_export]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">macro_rules</span><span class="o">!</span><span class="w"> </span><span class="n">vec</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">(</span><span class="w"> </span><span class="cp">$(</span><span class="w"> </span><span class="cp">$x</span>:<span class="nc">expr</span><span class="w"> </span><span class="p">),</span><span class="o">*</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">temp_vec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Vec</span>::<span class="n">new</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="cp">$(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="n">temp_vec</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="cp">$x</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="p">)</span><span class="o">*</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">            </span><span class="n">temp_vec</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">延伸阅读: <a href="/posts/declarative-macros/">Crust of Rust: Declarative Macros</a></div>
+    </div>
+  </div>
+<blockquote>
+<p>The second form of macros is the procedural macro, which acts more like a function (and is a type of procedure). Procedural macros accept some code as an input, operate on that code, and produce some code as an output rather than matching against patterns and replacing the code with other code as declarative macros do.</p>
+</blockquote>
+<div class="highlight" id="id-61"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-rs" data-lang="rs"><span class="line"><span class="cl"><span class="k">use</span><span class="w"> </span><span class="n">proc_macro</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="cp">#[some_attribute]</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">pub</span><span class="w"> </span><span class="k">fn</span> <span class="nf">some_name</span><span class="p">(</span><span class="n">input</span>: <span class="nc">TokenStream</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="nc">TokenStream</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">延伸阅读: <a href="https://www.youtube.com/playlist?list=PLqbS7AVVErFgwC_HByFYblghsDsD5wZDv"target="_blank" rel="external nofollow noopener noreferrer">Procedural Macros</a></div>
+    </div>
+  </div>
+<h3 id="final-project-web-server">Final Project: Web Server</h3>
+<p>Documentation:</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://rust-book.cs.brown.edu/"target="_blank" rel="external nofollow noopener noreferrer">The Rust Programming Language - Brown University</a></li>
+<li>Visualizing memory layout of Rust's data types: <a href="https://www.youtube.com/watch?v=7_o-YRxf_cc&amp;t=0s"target="_blank" rel="external nofollow noopener noreferrer">录影</a> / <a href="https://www.bilibili.com/video/BV1KT4y167f1"target="_blank" rel="external nofollow noopener noreferrer">中文翻译</a></li>
+<li><a href="https://course.rs/about-book.html"target="_blank" rel="external nofollow noopener noreferrer">Rust 语言圣经 (Rust Course)</a></li>
+<li><a href="https://cliffle.com/p/dangerust/"target="_blank" rel="external nofollow noopener noreferrer">Learn Rust the Dangerous Way</a></li>
+<li><a href="https://github.com/pretzelhammer/rust-blog"target="_blank" rel="external nofollow noopener noreferrer">pretzelhammer's Rust blog</a></li>
+</ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-05-24 21:03:58">更新于 2024-05-24&nbsp;</span>
+        <span title="更新于 2024-06-11 18:54:13">更新于 2024-06-11&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/why-rust/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -1451,7 +2526,7 @@ $$
       <a href="/posts/binary-representation/" class="post-nav-item" rel="next" title="解读计算机编码">解读计算机编码<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
@@ -1462,5 +2537,5 @@ $$
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-31":{"title":"Cargo.toml"},"id-32":{"title":"Cargo.toml"},"id-34":{"title":"Cargo.toml"}},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

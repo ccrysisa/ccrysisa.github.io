@@ -1,4 +1,6 @@
 https://ccrysisa.github.io/posts/linux2023/
+https://ccrysisa.github.io/posts/too-many-lists/
+https://ccrysisa.github.io/posts/rust-ebpf/
 https://ccrysisa.github.io/posts/revolution-os/
 https://ccrysisa.github.io/posts/linux2023-quiz2/
 https://ccrysisa.github.io/posts/linux2023-quiz1/
