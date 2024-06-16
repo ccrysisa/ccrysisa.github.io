@@ -140,3 +140,67 @@ fn main() {
 {{< admonition >}}
 该实作将 链表节点的 **next 指针部分** 视为 **枚举** 进行区分，这样空元素不会占据内存空间
 {{< /admonition >}}
+
+### new
+
+```rs
+pub fn new() -> Self {
+    Self { head: Link::Empty }
+}
+```
+
+### push
+
+```rs
+pub fn push(&mut self, elem: T) {
+    let next = Box::new(Node {
+        elem,
+        next: std::mem::replace(&mut self.head, Link::Empty),
+    });
+    self.head = Link::More(next);
+}
+```
+
+### pop
+
+```rs
+pub fn pop(&mut self) -> Option<T> {
+    match std::mem::replace(&mut self.head, Link::Empty) {
+        Link::Empty => None,
+        Link::More(next) => {
+            self.head = next.next;
+            Some(next.elem)
+        }
+    }
+}
+```
+
+注意这里的 `pop` 方法并没有对被弹出的节点 node 进行释放
+
+### drop
+
+```rs
+impl<T> Drop for List<T> {
+    fn drop(&mut self) {
+        let mut link = std::mem::replace(&mut self.head, Link::Empty);
+        while let Link::More(mut node) = link {
+            link = std::mem::replace(&mut node.next, Link::Empty);
+        }
+    }
+}
+```
+
+将每个节点 node 被指向的指针 (`Box` 指针) 都清除掉，这样 Rust 的所有权机制就会将这些节点 node 占据的内存空间进行清理。
+
+## Documentations
+
+这里列举视频中一些概念相关的 documentation 
+
+> 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
+
+### Crate [std](https://doc.rust-lang.org/std/index.html) 
+
+> 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
+
+- Function [std::mem::replace](https://doc.rust-lang.org/std/mem/fn.replace.html)
+- Trait [std::ops::Drop](https://doc.rust-lang.org/std/ops/trait.Drop.html)
