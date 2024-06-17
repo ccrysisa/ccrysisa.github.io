@@ -112,28 +112,17 @@ split off 3:
 ## 实作 C/C++ 风格的链表
 
 ```rs
+type Link<T> = Option<Box<Node<T>>>;
+
+#[derive(Debug)]
+pub struct List<T> {
+    head: Link<T>,
+}
+
 #[derive(Debug)]
 struct Node<T> {
     elem: T,
     next: Link<T>,
-}
-
-#[derive(Debug)]
-enum Link<T> {
-    Empty,
-    More(Box<Node<T>>),
-}
-
-#[derive(Debug)]
-struct List<T> {
-    head: Link<T>,
-}
-
-fn main() {
-    let node2 = Node { elem: 2, next: Link::Empty };
-    let node1 = Node { elem: 1, next: Link::More(Box::new(node2)) };
-    let list  = List { head: Link::More(Box::new(node1)) };
-    println!("{:?}", list);
 }
 ```
 
@@ -145,7 +134,7 @@ fn main() {
 
 ```rs
 pub fn new() -> Self {
-    Self { head: Link::Empty }
+    Self { head: None }
 }
 ```
 
@@ -155,9 +144,9 @@ pub fn new() -> Self {
 pub fn push(&mut self, elem: T) {
     let next = Box::new(Node {
         elem,
-        next: std::mem::replace(&mut self.head, Link::Empty),
+        next: self.head.take(),
     });
-    self.head = Link::More(next);
+    self.head = Some(next);
 }
 ```
 
@@ -165,13 +154,10 @@ pub fn push(&mut self, elem: T) {
 
 ```rs
 pub fn pop(&mut self) -> Option<T> {
-    match std::mem::replace(&mut self.head, Link::Empty) {
-        Link::Empty => None,
-        Link::More(next) => {
-            self.head = next.next;
-            Some(next.elem)
-        }
-    }
+    self.head.take().map(|node| {
+        self.head = node.next;
+        node.elem
+    })
 }
 ```
 
@@ -180,17 +166,27 @@ pub fn pop(&mut self) -> Option<T> {
 ### drop
 
 ```rs
-impl<T> Drop for List<T> {
-    fn drop(&mut self) {
-        let mut link = std::mem::replace(&mut self.head, Link::Empty);
-        while let Link::More(mut node) = link {
-            link = std::mem::replace(&mut node.next, Link::Empty);
-        }
+fn drop(&mut self) {
+    let mut link = self.head.take();
+    while let Some(mut node) = link {
+        link = node.next.take();
     }
 }
 ```
 
 将每个节点 node 被指向的指针 (`Box` 指针) 都清除掉，这样 Rust 的所有权机制就会将这些节点 node 占据的内存空间进行清理。
+
+### peek
+
+```rs
+pub fn peek(&self) -> Option<&T> {
+    self.head.as_ref().map(|node| &node.elem)
+}
+
+pub fn peek_mut(&mut self) -> Option<&mut T> {
+    self.head.as_mut().map(|node| &mut node.elem)
+}
+```
 
 ## Documentations
 
@@ -204,3 +200,7 @@ impl<T> Drop for List<T> {
 
 - Function [std::mem::replace](https://doc.rust-lang.org/std/mem/fn.replace.html)
 - Trait [std::ops::Drop](https://doc.rust-lang.org/std/ops/trait.Drop.html)
+- method [std::option::Option::take](https://doc.rust-lang.org/std/option/enum.Option.html#method.take)
+- method [std::option::Option::map](https://doc.rust-lang.org/std/option/enum.Option.html#method.map)
+- method [std::option::Option::as_ref](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_ref)
+- method [std::option::Option::as_mut](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_mut)
