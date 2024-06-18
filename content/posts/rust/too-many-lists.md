@@ -166,15 +166,19 @@ pub fn pop(&mut self) -> Option<T> {
 ### drop
 
 ```rs
-fn drop(&mut self) {
-    let mut link = self.head.take();
-    while let Some(mut node) = link {
-        link = node.next.take();
+impl<T> Drop for List<T> {
+    fn drop(&mut self) {
+        let mut link = self.head.take();
+        while let Some(mut node) = link {
+            link = node.next.take();
+        }
     }
 }
 ```
 
 将每个节点 node 被指向的指针 (`Box` 指针) 都清除掉，这样 Rust 的所有权机制就会将这些节点 node 占据的内存空间进行清理。
+
+- Trait [std::ops::Drop](https://doc.rust-lang.org/std/ops/trait.Drop.html)
 
 ### peek
 
@@ -188,6 +192,79 @@ pub fn peek_mut(&mut self) -> Option<&mut T> {
 }
 ```
 
+### into_iter
+
+```rs
+impl<T> IntoIterator for List<T> {
+    type Item = T;
+    type IntoIter = IntoIter<T>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        IntoIter(self)
+    }
+}
+
+pub struct IntoIter<T>(List<T>);
+
+impl<T> Iterator for IntoIter<T> {
+    type Item = T;
+    fn next(&mut self) -> Option<Self::Item> {
+        self.0.pop()
+    }
+}
+```
+
+- Trait [std::iter::IntoIterator](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html)
+- Trait [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
+
+### iter
+
+```rs
+impl<'a, T> IntoIterator for &'a List<T> {
+    type Item = &'a T;
+    type IntoIter = Iter<'a, T>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        Iter(self.head.as_deref())
+    }
+}
+
+pub struct Iter<'a, T>(Option<&'a Node<T>>);
+
+impl<'a, T> Iterator for Iter<'a, T> {
+    type Item = &'a T;
+    fn next(&mut self) -> Option<Self::Item> {
+        self.0.take().map(|node| {
+            self.0 = node.next.as_deref();
+            &node.elem
+        })
+    }
+}
+
+impl<T> List<T> {
+    pub fn iter(&self) -> Iter<T> {
+        self.into_iter()
+    }
+}
+```
+
+- method [std::option::Option::as_deref_mut](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_deref_mut)
+> Leaves the original Option in-place, creating a new one with a reference to the original one, additionally coercing the contents via `Deref`.
+
+在这里可以一窥 `as_deref` 的作用，例如下面两条语句的作用是相同的:
+
+```rs
+self.0 = node.next.as_ref().map(|next| next.as_ref());
+self.0 = node.next.as_deref();
+```
+
+所以 `as_deref` 是在 `as_ref` 作用的基础上添加了 **自动类型转换 (Deref)** 功能
+
+### iter_mut
+
+```rs
+```
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
@@ -199,8 +276,11 @@ pub fn peek_mut(&mut self) -> Option<&mut T> {
 > 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 
 - Function [std::mem::replace](https://doc.rust-lang.org/std/mem/fn.replace.html)
-- Trait [std::ops::Drop](https://doc.rust-lang.org/std/ops/trait.Drop.html)
-- method [std::option::Option::take](https://doc.rust-lang.org/std/option/enum.Option.html#method.take)
-- method [std::option::Option::map](https://doc.rust-lang.org/std/option/enum.Option.html#method.map)
-- method [std::option::Option::as_ref](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_ref)
-- method [std::option::Option::as_mut](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_mut)
+- Enum [std::option::Option](https://doc.rust-lang.org/std/option/enum.Option.html)
+    - method [std::option::Option::take](https://doc.rust-lang.org/std/option/enum.Option.html#method.take)
+    - method [std::option::Option::map](https://doc.rust-lang.org/std/option/enum.Option.html#method.map)
+    - method [std::option::Option::as_ref](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_ref)
+    - method [std::option::Option::as_mut](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_mut)
+    - method [std::option::Option::as_deref](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_deref)
+    - method [std::option::Option::as_deref_mut](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_deref_mut)
+- method [std::boxed::Box::as_ref](https://doc.rust-lang.org/std/boxed/struct.Box.html#method.as_ref)
