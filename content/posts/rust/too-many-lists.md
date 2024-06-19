@@ -328,10 +328,32 @@ list 3: [X, C, D]
 
 上图的节点 `B` 的被多个节点 (节点 `A` 和节点 `X`) 所指向，设定其所有权是共享的比较好处理，因为使用引用的话，会被借用检查机制限制，修改时比较麻烦 (只能被一个可变引用所借用)
 
-## 实作持久化共享链表
+## 实作持久化共享节点的链表
 
 - **持久化**: 节点如果被至少一个指针指向，则不会释放；如果没有被指向，则进行释放
 - **共享**: 节点可以被多个指针所指向
+
+根据这里这两种功能需求，使用共享所有权并进行计数的智能指针 [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html) 比较适合
+
+### prepend
+
+### tail
+
+这里可以体验 `map` 和 `and_then` 的区别，在于其接受的闭包的不同，`map` 闭包的返回值会被自动的用 `Option` 包装起来，而 `and_then` 则需要自己在闭包中手动包装:
+
+```rs
+pub fn map<U, F>(self, f: F) -> Option<U>
+where
+    F: FnOnce(T) -> U,
+```
+
+```rs
+pub fn and_then<U, F>(self, f: F) -> Option<U>
+where
+    F: FnOnce(T) -> Option<U>,
+```
+
+### head
 
 ## Documentations
 
@@ -344,11 +366,17 @@ list 3: [X, C, D]
 > 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 
 - Function [std::mem::replace](https://doc.rust-lang.org/std/mem/fn.replace.html)
+
 - Enum [std::option::Option](https://doc.rust-lang.org/std/option/enum.Option.html)
     - method [std::option::Option::take](https://doc.rust-lang.org/std/option/enum.Option.html#method.take)
     - method [std::option::Option::map](https://doc.rust-lang.org/std/option/enum.Option.html#method.map)
+    - method [std::option::Option::and_then](https://doc.rust-lang.org/std/option/enum.Option.html#method.and_then)
     - method [std::option::Option::as_ref](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_ref)
     - method [std::option::Option::as_mut](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_mut)
     - method [std::option::Option::as_deref](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_deref)
     - method [std::option::Option::as_deref_mut](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_deref_mut)
-- method [std::boxed::Box::as_ref](https://doc.rust-lang.org/std/boxed/struct.Box.html#method.as_ref)
+
+- trait method [std::convert::AsRef::as_ref](https://doc.rust-lang.org/std/convert/trait.AsRef.html#tymethod.as_ref)
+    - method [std::boxed::Box::as_ref](https://doc.rust-lang.org/std/boxed/struct.Box.html#method.as_ref)
+    - method [std::rc::Rc::as_ref](https://doc.rust-lang.org/std/rc/struct.Rc.html#method.as_ref)
+    - method [std::sync::Arc::as_ref](https://doc.rust-lang.org/std/sync/struct.Arc.html#method.as_ref)
