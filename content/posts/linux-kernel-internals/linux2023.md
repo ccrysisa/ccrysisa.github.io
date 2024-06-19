@@ -94,9 +94,9 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
     * [題目5](https://hackmd.io/@sysprog/linux2022-quiz1) / [參考題解](https://hackmd.io/@qwe661234/linux2022-quiz1)
 - 佳句偶得：「大部分的人一輩子洞察力不彰，原因之一是怕講錯被笑。想了一點點就不敢繼續也沒記錄或分享，時間都花在讀書查資料看別人怎麼想。看完就真的沒有自己的洞察了」([出處](https://www.facebook.com/chtsai/posts/pfbid0Sw9Bv8GN8houyS6A6Mvg5gtWXShKFgguhTHuNFsDDGn9XZQE7C64pBy5atB9gXtJl))
 - [作業](https://hackmd.io/@sysprog/linux2023-homework1): 截止繳交日: Feb 28, 2023
-    * [ ] [lab0](https://hackmd.io/@sysprog/linux2023-lab0)`*`
+    * [x] [lab0](https://hackmd.io/@sysprog/linux2023-lab0)`*`
     * [quiz1](https://hackmd.io/@sysprog/ByiHJidps)
-- 第 1 週隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz1) (內含作答表單)
+- [x] 第 1 週隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz1) (內含作答表單)
 - [課堂問答簡記](https://hackmd.io/VIvUZemESvGUev4aCwOnWA?view)
 
 ### 第 2 週: C 語言程式設計
@@ -119,7 +119,7 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
     - 藉由研讀漏洞程式碼及 C 語言標準，討論系統程式的安全議題
     - 透過除錯器追蹤程式碼實際運行的狀況，了解其運作原理;
     - 取材自 dangling pointer, CWE-416 Use After Free, CVE-2017-16943 以及 integer overflow 的議題;
-* [ ] [C 語言：記憶體管理、對齊及硬體特性](https://hackmd.io/@sysprog/c-memory)`*`
+* [x] [C 語言：記憶體管理、對齊及硬體特性](https://hackmd.io/@sysprog/c-memory)`*`
     * [ ] 搭配閱讀: [The Lost Art of Structure Packing](http://www.catb.org/esr/structure-packing/)
     * 從虛擬記憶體談起，歸納出現代銀行和虛擬記憶體兩者高度相似: malloc 給出 valid pointer 不要太高興，等你要開始用的時候搞不好作業系統給個 OOM ——簡單來說就是一張支票，能不能拿來開等到兌現才知道。
     * 探討 heap (動態配置產生，系統會存放在另外一塊空間)、data alignment，和 malloc 實作機制等議題。這些都是理解 Linux 核心運作的關鍵概念。
@@ -179,7 +179,7 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
     - [ ] [Linus Torvalds 教你分析 gcc 行為](https://lkml.org/lkml/2019/2/25/1092)
     - [ ] [Pointers are more abstract than you might expect in C](https://pvs-studio.com/en/blog/posts/cpp/0576/) / [HackerNews 討論](https://news.ycombinator.com/item?id=17439467)
 * [ ] [C 編譯器原理和案例分析](https://hackmd.io/@sysprog/c-compiler-construction)`*`
-* [ ] [C 語言: 未定義行為](https://hackmd.io/@sysprog/c-undefined-behavior)`*`: C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化
+* [x] [C 語言: 未定義行為](https://hackmd.io/@sysprog/c-undefined-behavior)`*`: C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化
 * [ ] [C 語言: 編譯器和最佳化原理](https://hackmd.io/@sysprog/c-compiler-optimization)`*`
 * 《Demystifying the Linux CPU Scheduler》第 1 章
 * [作業](https://hackmd.io/@sysprog/linux2023-homework4): 截止繳交日: Mar 30
@@ -189,47 +189,48 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
 
 ### 第 5 週: Linux CPU scheduler
 > (Mar 13, 14, 16)
-- [教材解說](https://youtu.be/f-SprmkcOI0)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
+- [x] [教材解說](https://youtu.be/f-SprmkcOI0)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
 * 公告:
     - 本週導入客製化作業，讓學員選擇改進前四週的作業或自訂題目 (例如貢獻程式碼到 Linux 核心)，隨後安排授課教師和學員的線上一對一討論
-* [浮點數運算](https://hackmd.io/@sysprog/c-floating-point)`*`: 工程領域往往是一系列的取捨結果，浮點數更是如此，在軟體發開發有太多失誤案例源自工程人員對浮點數運算的掌握不足，本議程希望藉由探討真實世界的血淋淋案例，帶著學員思考 IEEE 754 規格和相關軟硬體考量點，最後也會探討在深度學習領域為了改善資料處理效率，而引入的 [BFloat16](https://en.wikipedia.org/wiki/Bfloat16_floating-point_format) 這樣的新標準
-    - [float16 vs. bfloat16](https://twitter.com/rasbt/status/1631679894219284480)
+* [ ] [浮點數運算](https://hackmd.io/@sysprog/c-floating-point)`*`: 工程領域往往是一系列的取捨結果，浮點數更是如此，在軟體發開發有太多失誤案例源自工程人員對浮點數運算的掌握不足，本議程希望藉由探討真實世界的血淋淋案例，帶著學員思考 IEEE 754 規格和相關軟硬體考量點，最後也會探討在深度學習領域為了改善資料處理效率，而引入的 [BFloat16](https://en.wikipedia.org/wiki/Bfloat16_floating-point_format) 這樣的新標準
+    -  [ ] [float16 vs. bfloat16](https://twitter.com/rasbt/status/1631679894219284480)
 * 記憶體配置器涉及 bitwise 操作及浮點數運算。傳統的即時系統和該領域的作業系統 (即 RTOS) 為了讓系統行為更可預測，往往捨棄動態記憶體配置的能力，但這顯然讓系統的擴充能力大幅受限。後來研究人員提出 TLSF (Two-Level Segregated Fit) 嘗試讓即時系統也能享用動態記憶體管理，其關鍵訴求是 "O(1) cost for malloc, free, realloc, aligned_alloc"
-    - [Benchmarking Malloc with Doom 3](https://www.forrestthewoods.com/blog/benchmarking-malloc-with-doom3/)
-    - [tlsf-bsd](https://github.com/jserv/tlsf-bsd)
-    - TLSF: [Part 1: Background](https://brnz.org/hbr/?p=1735), [Part 2: The floating point](https://brnz.org/hbr/?p=1744)
-* [Linux 核心模組運作原理](https://hackmd.io/@sysprog/linux-kernel-module)
-* [Linux: 不只挑選任務的排程器](https://hackmd.io/@sysprog/linux-scheduler)`*`: 排程器 (scheduler) 是任何一個多工作業系統核心都具備的機制，但彼此落差極大，考量點不僅是演算法，還有當應用規模提昇時 (所謂的 scalability) 和涉及即時處理之際，會招致不可預知的狀況 (non-determinism)，不僅即時系統在意，任何建構在 Linux 核心之上的大型服務都會深受衝擊。是此，Linux 核心的排程器經歷多次變革，需要留意的是，排程的難度不在於挑選下一個可執行的行程 (process)，而是讓執行完的行程得以安插到合適的位置，使得 runqueue 依然依據符合預期的順序。
-* [C 語言: 動態連結器](https://hackmd.io/@sysprog/c-dynamic-linkage)`*`
-* [C 語言: 連結器和執行檔資訊](https://hackmd.io/@sysprog/c-linker-loader)`*`
-* [C 語言: 執行階段程式庫 (CRT)](https://hackmd.io/@sysprog/c-runtime)`*`
+    - [ ] [Benchmarking Malloc with Doom 3](https://www.forrestthewoods.com/blog/benchmarking-malloc-with-doom3/)
+    - [ ] [tlsf-bsd](https://github.com/jserv/tlsf-bsd)
+    - [ ] TLSF: [Part 1: Background](https://brnz.org/hbr/?p=1735), [Part 2: The floating point](https://brnz.org/hbr/?p=1744)
+* [ ] [Linux 核心模組運作原理](https://hackmd.io/@sysprog/linux-kernel-module)
+* [ ] [Linux: 不只挑選任務的排程器](https://hackmd.io/@sysprog/linux-scheduler)`*`: 排程器 (scheduler) 是任何一個多工作業系統核心都具備的機制，但彼此落差極大，考量點不僅是演算法，還有當應用規模提昇時 (所謂的 scalability) 和涉及即時處理之際，會招致不可預知的狀況 (non-determinism)，不僅即時系統在意，任何建構在 Linux 核心之上的大型服務都會深受衝擊。是此，Linux 核心的排程器經歷多次變革，需要留意的是，排程的難度不在於挑選下一個可執行的行程 (process)，而是讓執行完的行程得以安插到合適的位置，使得 runqueue 依然依據符合預期的順序。
+* [ ] [C 語言: 動態連結器](https://hackmd.io/@sysprog/c-dynamic-linkage)`*`
+* [ ] [C 語言: 連結器和執行檔資訊](https://hackmd.io/@sysprog/c-linker-loader)`*`
+* [ ] [C 語言: 執行階段程式庫 (CRT)](https://hackmd.io/@sysprog/c-runtime)`*`
 * [作業](https://hackmd.io/@sysprog/linux2023-homework5): 截止繳交 Apr 10
     - [assessment](https://hackmd.io/@sysprog/r1O7Xcp12)
 * Week5 隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz5) (內含作答表單)
 - [課堂問答簡記](https://hackmd.io/@sysprog/rJVas7NJn)
 
-* 第 6 週 (Mar 20, 21, 23): System call + CPU Scheduler
-    - [教材解說](https://youtu.be/zW_MAMy7DBE)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
-    * 公告
-        - 自 3 月 22 日起，開放讓學員 (選課的學生 + 完成前二次作業過半要求的旁聽者) 跟授課教師預約一對一線上討論，請參照[課程行事曆](https://bit.ly/sysprog-calendar)裡頭標注 "Office hour" 的時段，發訊息到 [Facebook 粉絲專頁](https://www.facebook.com/JservFans/)，簡述你的學習狀況並選定偏好的時段 (建議是 30 分鐘)。留意課程發送的公告信件
-        - 選修課程的學員在本學期至少要安排一次一對一討論，否則授課教師難以評估學習狀況，從而會影響評分，請重視自己的權益。
-    * [coroutine](https://hackmd.io/@sysprog/coroutine)
-    * [Linux: 賦予應用程式生命的系統呼叫](https://hackmd.io/@sysprog/linux-syscall)
-    * [vDSO: 快速的 Linux 系統呼叫機制](https://hackmd.io/@sysprog/linux-vdso)
-    * [UNIX 作業系統 fork/exec 系統呼叫的前世今生](https://hackmd.io/@sysprog/unix-fork-exec)
-    * 《Demystifying the Linux CPU Scheduler》
-        - 1.2.1 System calls
-        - 1.2.2 A different kind of software
-        - 1.2.3 User and kernel stacks
-        - 1.3 Process management
-        - 2.1 Introduction
-        - 2.2 Prior to CFS
-        - 2.3 Completely Fair Scheduler (CFS)
-        - 3.1 Structs and their role
-    * [作業](https://hackmd.io/@sysprog/linux2023-homework6): 截止繳交 Apr 17
-        - [quiz5](https://hackmd.io/@sysprog/rJf4_1x-3), [quiz6](https://hackmd.io/@sysprog/B1rcF1e-h)
-    * Week6 隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz6) (內含作答表單)
-    - [課堂問答簡記](https://hackmd.io/@sysprog/rJVas7NJn)
+### 第 6 週: System call + CPU Scheduler
+> (Mar 20, 21, 23)
+- [教材解說](https://youtu.be/zW_MAMy7DBE)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)
+* 公告
+    - 自 3 月 22 日起，開放讓學員 (選課的學生 + 完成前二次作業過半要求的旁聽者) 跟授課教師預約一對一線上討論，請參照[課程行事曆](https://bit.ly/sysprog-calendar)裡頭標注 "Office hour" 的時段，發訊息到 [Facebook 粉絲專頁](https://www.facebook.com/JservFans/)，簡述你的學習狀況並選定偏好的時段 (建議是 30 分鐘)。留意課程發送的公告信件
+    - 選修課程的學員在本學期至少要安排一次一對一討論，否則授課教師難以評估學習狀況，從而會影響評分，請重視自己的權益。
+* [coroutine](https://hackmd.io/@sysprog/coroutine)
+* [Linux: 賦予應用程式生命的系統呼叫](https://hackmd.io/@sysprog/linux-syscall)
+* [vDSO: 快速的 Linux 系統呼叫機制](https://hackmd.io/@sysprog/linux-vdso)
+* [UNIX 作業系統 fork/exec 系統呼叫的前世今生](https://hackmd.io/@sysprog/unix-fork-exec)
+* 《Demystifying the Linux CPU Scheduler》
+    - 1.2.1 System calls
+    - 1.2.2 A different kind of software
+    - 1.2.3 User and kernel stacks
+    - 1.3 Process management
+    - 2.1 Introduction
+    - 2.2 Prior to CFS
+    - 2.3 Completely Fair Scheduler (CFS)
+    - 3.1 Structs and their role
+* [作業](https://hackmd.io/@sysprog/linux2023-homework6): 截止繳交 Apr 17
+    - [quiz5](https://hackmd.io/@sysprog/rJf4_1x-3), [quiz6](https://hackmd.io/@sysprog/B1rcF1e-h)
+* Week6 隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz6) (內含作答表單)
+- [課堂問答簡記](https://hackmd.io/@sysprog/rJVas7NJn)
 
 * 第 7 週 (Mar 27, 28, 30): Process, 並行和多執行緒
     - [教材解說-1](https://youtu.be/mnbIi82iT2A)`*`, [教材解說-2](https://youtu.be/G_BLP3tqocc)`*` (僅止於概況，請詳閱下方教材及個別的對應解說錄影)

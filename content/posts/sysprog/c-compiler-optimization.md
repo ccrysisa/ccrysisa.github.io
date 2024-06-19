@@ -46,7 +46,7 @@ repost:
 
 <!--more-->
 
-- {{< link href="https://hackmd.io/@sysprog/c-compiler-construction" content="原文地址" external-icon=true >}}
+- {{< link href="https://hackmd.io/@sysprog/c-compiler-optimization" content="原文地址" external-icon=true >}}
 
 ## From Source to Binary: How A Compiler Works: GNU Toolchain
 
@@ -59,6 +59,11 @@ repost:
 
 辅助材料:
 - [ ] [Intro To Compiler Development](https://slide.logan.tw/compiler-intro/#/)
+- [ ] [The C++ Build Process Explained](https://github.com/green7ea/blog)
+
+{{< image src="/images/c/From-Source-to-Binary-3.png" >}}
+
+这个流程十分重要，不仅可以理解程序的执行流程，也可以作为理解语言设计的视角。
 
 ###### [Page 5]
 

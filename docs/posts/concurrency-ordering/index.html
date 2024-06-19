@@ -15,8 +15,8 @@
 多執行緒環境下，程式會出問題，往往在於執行順序的不確定性。一旦顧及分散式系統 (distributed systems)，執行順序和衍生的時序 (timing) 問題更加複雜。
 我們將從如何定義程式執行的順序開始說起，為了簡單起見，我們先從單執行緒的觀點來看執行順序這件事，其中最關鍵知識就是 Sequenced-before，你將會發現就連單執行緒的程式，也可能會產生不確定的執行順序。
 "><meta itemprop="datePublished" content="2024-03-11T16:23:57+08:00" />
-<meta itemprop="dateModified" content="2024-04-25T19:49:18+08:00" />
-<meta itemprop="wordCount" content="2790"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-06-14T21:15:20+08:00" />
+<meta itemprop="wordCount" content="3174"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux,Concurrency," /><meta property="og:title" content="并行程序设计: 执行顺序" />
 <meta property="og:description" content="
 多執行緒環境下，程式會出問題，往往在於執行順序的不確定性。一旦顧及分散式系統 (distributed systems)，執行順序和衍生的時序 (timing) 問題更加複雜。
@@ -25,7 +25,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/concurrency-ordering/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-03-11T16:23:57+08:00" />
-<meta property="article:modified_time" content="2024-04-25T19:49:18+08:00" />
+<meta property="article:modified_time" content="2024-06-14T21:15:20+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="并行程序设计: 执行顺序"/>
@@ -47,8 +47,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/concurrency-ordering\/"
-    },"genre": "posts","keywords": "Sysprog, Linux, Concurrency","wordcount":  2790 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/concurrency-ordering\/","datePublished": "2024-03-11T16:23:57+08:00","dateModified": "2024-04-25T19:49:18+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, Linux, Concurrency","wordcount":  3174 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/concurrency-ordering\/","datePublished": "2024-03-11T16:23:57+08:00","dateModified": "2024-06-14T21:15:20+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -176,7 +176,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/concurrency/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Concurrency</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-11 16:23:57"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-11">2024-03-11</time></span>&nbsp;<span title="更新于 2024-04-25 19:49:18"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-25">2024-04-25</time></span>&nbsp;<span title="2790 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 6 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-11 16:23:57"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-11">2024-03-11</time></span>&nbsp;<span title="更新于 2024-06-14 21:15:20"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-14">2024-06-14</time></span>&nbsp;<span title="3174 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -198,7 +198,12 @@
         <li><a href="#深入-synchronizes-with">深入 Synchronizes-with</a></li>
       </ul>
     </li>
-    <li><a href="#memory-consistency-models">Memory Consistency Models</a></li>
+    <li><a href="#memory-consistency-models">Memory Consistency Models</a>
+      <ul>
+        <li><a href="#sequential-consistency">Sequential Consistency</a></li>
+        <li><a href="#weak-memory-model-vs-strong-memory-model">Weak Memory Model vs. Strong Memory Model</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><blockquote>
@@ -453,11 +458,33 @@ defined below.</p>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://inst.eecs.berkeley.edu/~cs252/sp17/papers/consistency-tutorial-1995.pdf"target="_blank" rel="external nofollow noopener noreferrer">Shared Memory Consistency Models: A Tutorial 1995 Sarita V. Adve, Kourosh Gharachorloo</a></li>
 </ul></div>
     </div>
-  </div></div><div class="post-footer" id="post-footer">
+  </div>
+<blockquote>
+<p>這樣的幻象要成立，在於程式設計師和該系統（硬體、編譯器等產生、執行程式的平台）達成一致的協定，系統保證程式設計師只要照著規則走，程式執行結果會是正確的。</p>
+</blockquote>
+<blockquote>
+<p>但什樣叫做正確？正確的意思不是保證只會發生一種執行結果，而是定義在所有可能發生的執行結果中，哪些是允許的。我們把這樣的約定稱為 Memory Consistency Models，系統要想辦法在保證正確的情況下，盡可能的最佳化，讓程式跑的又快又好。</p>
+</blockquote>
+<p>程序效能提高的代价是写程序变得困难，因为需要遵守上面所谓的规则</p>
+<h3 id="sequential-consistency">Sequential Consistency</h3>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Leslie_Lamport"target="_blank" rel="external nofollow noopener noreferrer">Leslie Lamport</a></li>
+</ul>
+<blockquote>
+<p>A multiprocessor system is sequentially consistent if the result of any execution is the same as if the operations of all the processors were executed in some sequential order, and the operations of each individual processor appear in this sequence in the order specified by its program.</p>
+</blockquote>
+<ol>
+<li>对于每个独立的处理单元，执行时都维持程序的顺序 (Program Order)</li>
+<li>整个程序以某种顺序在所有处理器上执行</li>
+</ol>
+<blockquote>
+<p>Lamport 的定義相當洗鍊：第一點言明程式在處理器內會照順序執行，第二點則說所有處理器會以某種順序執行程式。看似平實的話語，但真實世界卻可能不是這樣。</p>
+</blockquote>
+<h3 id="weak-memory-model-vs-strong-memory-model">Weak Memory Model vs. Strong Memory Model</h3></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-04-25 19:49:18">更新于 2024-04-25&nbsp;</span>
+        <span title="更新于 2024-06-14 21:15:20">更新于 2024-06-14&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/concurrency-ordering/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>

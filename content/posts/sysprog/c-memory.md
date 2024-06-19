@@ -49,7 +49,7 @@ repost:
 
 ## 背景知识
 
-### 你所不知道的 C 语言: [指针篇](https://hackmd.io/s/HyBPr9WGl)
+###### 你所不知道的 C 语言: [指针篇](https://hackmd.io/s/HyBPr9WGl)
 
 - C99/C11 6.2.5 Types (28)
 > A pointer to void shall have the same representation and alignment requirements as a pointer to a character type.
@@ -59,7 +59,7 @@ repost:
 
 使用 `void *` 必须通过 explict (显式) 或强制转型，才能存取最终的 object，因为 `void` 无法判断 object 的大小信息。
 
-### 你所不知道的 C 语言: [函数呼叫篇](https://hackmd.io/s/SJ6hRj-zg)
+###### 你所不知道的 C 语言: [函数呼叫篇](https://hackmd.io/s/SJ6hRj-zg)
 
 glibc 提供了 `malloc_stats()` 和 `malloc_info()` 这两个函数，可以查询 process 的 heap 空间使用情况信息。
 
@@ -163,10 +163,128 @@ malloc 分配的空间是 alignment 的:
 
 而在 [你所不知道的 C 语言: 指针篇](https://hackmd.io/@sysprog/c-pointer) 中实作的 16-bit integer 在 unalignment 情况下的存取，并没有考虑到上面利用 alignment 来提升效能。
 
-参考原文 32-bit integer 存取，实作 64-bit integer 的 get & set:
+原文 32 位架构的 unalignment 存取有些问题，修正并补充注释如下:
+```c
+uint8_t unaligned_get8(void *src) {
+    uintptr_t csrc = (uintptr_t) src;
+    uint32_t v = *(uint32_t *) (csrc & 0xfffffffc);  // align 4-bytes
+    v = (v >> (((uint32_t) csrc & 0x3) * 8)) & 0x000000ff;  // get byte
+    return v;
+}
 
-## oncurrent-II
+void unaligned_set8(void *dest, uint8_t value) {
+    uintptr_t cdest = (uintptr_t) dest;
+    uintptr_t ptr = cdest & 0xfffffffc;  // align 4-bytes
+    for (int n = 0; n < 4; n++) {
+        uint32_t v;
+        if (n == (cdest & 0x3))
+            v = value;
+        else
+            v = unaligned_get8((void *) ptr);
+        v = v << (n * 8);
+        d = d | v;
+        ptr++;
+    }
+    *(uint32_t *) (cdest & 0xfffffffc) = v;
+}
+```
 
+实作 64-bit integer (64 位架构) 的 get & set:
+```c
+uint8_t unaligned_get8(void *src) {
+    uintptr_t csrc = (uintptr_t) src;
+    uint32_t v = *(uint32_t *) (csrc & 0xfffffff0);  // align 4-bytes
+    v = (v >> (((uint32_t) csrc & 0x3) * 8)) & 0x000000ff;  // get byte
+    return v;
+}
+
+void unaligned_set8(void *dest, uint8_t value) {
+    uintptr_t cdest = (uintptr_t) dest;
+    uintptr_t ptr = cdest & 0xfffffff0;  // align 4-bytes
+    for (int n = 0; n < 8; n++) {
+        uint32_t v;
+        if (n == (cdest & 0x3))
+            v = value;
+        else
+            v = unaligned_get8((void *) ptr);
+        v = v << (n * 8);
+        d = d | v;
+        ptr++;
+    }
+    *(uint32_t *) (cdest & 0xfffffff0) = v;
+}
+```
+
+其它逻辑和 32 位机器上类似
+
+- [Data Alignment](http://www.songho.ca/misc/alignment/dataalign.html)
+- Linux kernel: [Unaligned Memory Accesses](https://www.kernel.org/doc/Documentation/unaligned-memory-access.txt)
+
+## concurrent-II
+
+{{< admonition info >}}
 - 源码: [concurrent-ll](https://github.com/jserv/concurrent-ll/tree/master/src/lockfree)
 - 论文: [A Pragmatic Implementation of Non-Blocking Linked Lists](https://www.cl.cam.ac.uk/research/srg/netos/papers/2001-caslists.pdf)
+{{< /admonition >}}
 
+使用 [CAS](https://en.wikipedia.org/wiki/Compare-and-swap) 无法确保链表插入和删除同时发生时的正确性，因为 CAS 虽然保证了原子操作，但是在进行原子操作之前，需要在链表中锚定节点以进行后续的插入、删除 (这里是通过 CAS 操作)。如果先发生插入，那么并不会影响后面的操作 (插入或删除)，因为插入的节点并不会影响后面操作锚定的节点。但如果先发生删除，那么这个删除操作很有可能就把后面操作 (插入或删除) 已经锚定的节点从链表中删掉了，这就导致了后续操作的不正确结果。***所以需要一个方法来标识「不需要的节点」，然后再进行原子操作。***
+
+{{< admonition question >}}
+只使用位运算即可实现逻辑上删除节点 (即通过位运算标记节点)？
+{{< /admonition >}}
+
+- C99 6.7.2.1 Structure and union specifiers
+> Each non-bit-field member of a structure or union object is aligned in an implementation defined manner appropriate to its type.
+
+> Within a structure object, the non-bit-field members and the units in which bit-fields reside have addresses that increase in the order in which they are declared. A pointer to a structure object, suitably converted, points to its initial member (or if that member is a bit-field, then to the unit in which it resides), and vice versa. There may be unnamed padding within a structure object, but not at its beginning.
+
+所以 C 语言中结构体的 padding 是 implementation defined 的，但是保证这些 padding 不会出现在结构体的起始处。
+
+- GCC [4.9 Structures, Unions, Enumerations, and Bit-Fields](https://gcc.gnu.org/onlinedocs/gcc/Structures-unions-enumerations-and-bit-fields-implementation.html)
+> The alignment of non-bit-field members of structures (C90 6.5.2.1, C99 and C11 6.7.2.1).
+> 
+> Determined by ABI.
+
+- C99 7.18.1.4 Integer types capable of holding object pointers
+> The following type designates a signed integer type with the property that any valid pointer to void can be converted to this type, then converted back to pointer to void, and the result will compare equal to the original pointer: intptr_t
+
+- [x86_64 ABI](https://www.uclibc.org/docs/psABI-x86_64.pdf)
+
+{{< image src="https://imgur-backup.hackmd.io/XER1MC6.png" >}}
+
+- Aggregates and Unions
+> Structures and unions assume the alignment of their most strictly aligned compo-
+> nent. Each member is assigned to the lowest available offset with the appropriate
+> alignment. The size of any object is always a multiple of the object‘s alignment.
+> An array uses the same alignment as its elements, except that a local or global
+> array variable of length at least 16 bytes or a C99 variable-length array variable
+> always has alignment of at least 16 bytes. 4
+> Structure and union objects can require padding to meet size and alignment
+> constraints. The contents of any padding is undefined.
+
+所以对于链表节点对应的结构体:
+
+```c
+typedef intptr_t val_t;
+
+typedef struct node {
+    val_t data;
+    struct node *next;
+} node_t;
+```
+
+因为 data alignment 的缘故，它的地址的最后一个 bit 必然是 0 (成员都是 4-bytes 的倍数以及必须对齐)，同理其成员 `next` 也满足这个性质 (因为这个成员表示下一个节点的地址)。所以删除节点时，可以将 `next` 的最后一个 bit 设置为 1，表示当前节点的下一个节点已经被“逻辑上”删除了。
+
+最后当没有插入或删除操作是，链表再对标识为“删除”的节点进行移除，这个机制有点类似于 GC
+
+## glibc 的 malloc/free 实作
+
+背景考量: [Deterministic Memory Allocation for Mission-Critical Linux](https://hackmd.io/@sysprog/c-memory#data-alignment)
+
+*Main arena vs Thread arena* :
+
+{{< image src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_kS5wHum1S54_p.606235_1462612773104_undefined" >}}
+
+*multiple heap Thread arena* :
+
+{{< image src="https://docs.google.com/drawings/d/150bTi0uScQlnABDImLYS8rWyL82mmfpMxzRbx-45UKw/pub?w=960&h=720" >}}

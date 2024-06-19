@@ -234,3 +234,22 @@ int main () {
 相关论文 / 技术报告 (可以用来参考理解):
 - [ ] [Shared Memory Consistency Models: A Tutorial 1995 Sarita V. Adve, Kourosh Gharachorloo](https://inst.eecs.berkeley.edu/~cs252/sp17/papers/consistency-tutorial-1995.pdf)
 {{< /admonition >}}
+
+> 這樣的幻象要成立，在於程式設計師和該系統（硬體、編譯器等產生、執行程式的平台）達成一致的協定，系統保證程式設計師只要照著規則走，程式執行結果會是正確的。
+
+> 但什樣叫做正確？正確的意思不是保證只會發生一種執行結果，而是定義在所有可能發生的執行結果中，哪些是允許的。我們把這樣的約定稱為 Memory Consistency Models，系統要想辦法在保證正確的情況下，盡可能的最佳化，讓程式跑的又快又好。
+
+程序效能提高的代价是写程序变得困难，因为需要遵守上面所谓的规则
+
+### Sequential Consistency
+
+- [Leslie Lamport](https://en.wikipedia.org/wiki/Leslie_Lamport)
+> A multiprocessor system is sequentially consistent if the result of any execution is the same as if the operations of all the processors were executed in some sequential order, and the operations of each individual processor appear in this sequence in the order specified by its program.
+
+1. 对于每个独立的处理单元，执行时都维持程序的顺序 (Program Order)
+2. 整个程序以某种顺序在所有处理器上执行
+
+> Lamport 的定義相當洗鍊：第一點言明程式在處理器內會照順序執行，第二點則說所有處理器會以某種順序執行程式。看似平實的話語，但真實世界卻可能不是這樣。
+
+### Weak Memory Model vs. Strong Memory Model
+

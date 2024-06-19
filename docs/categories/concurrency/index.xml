@@ -10,7 +10,10 @@
   <pubDate>Wed, 10 Apr 2024 16:09:35 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/posix-threads/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[<blockquote>
+<p>POSIX (Portable Operating System Interfaces) is a family of standards for maintaining compatibility between operating systems. POSIX is a Unix-like operating system environment and is currently available on Unix/Linux, Windows, OS/2 and DOS.</p>
+<p>Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c thread extension, defines thread creation and manipulation. This standard defines thread management, mutexes, conditions, read/write locks, barriers, etc. Except for the monitors, all features are available in Pthreads.</p>
+</blockquote>]]></description>
 </item>
 <item>
   <title>并行程序设计: 执行顺序</title>

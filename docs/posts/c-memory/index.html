@@ -13,8 +13,8 @@
 <meta itemprop="description" content="
 不少 C/C&#43;&#43; 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。
 "><meta itemprop="datePublished" content="2024-02-27T22:44:38+08:00" />
-<meta itemprop="dateModified" content="2024-04-19T17:31:37+08:00" />
-<meta itemprop="wordCount" content="1659"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-06-07T12:19:29+08:00" />
+<meta itemprop="wordCount" content="2755"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Memory," /><meta property="og:title" content="你所不知道的 C 语言: 记忆体管理、对齐及硬体特性" />
 <meta property="og:description" content="
 不少 C/C&#43;&#43; 开发者听过 &ldquo;内存对齐&rdquo; (memory alignment)，但不易掌握概念及规则，遑论其在执行时期的冲击。内存管理像是 malloc/free 函数的使用，是每个 C 语言程序设计开发者都会接触到，但却难保充分排除错误的难题。本讲座尝试从硬体的行为开始探讨，希望消除观众对于 alignment, padding, memory allocator 的误解，并且探讨高效能 memory pool 的设计，如何改善整体程序的效能和可靠度。也会探讨 C11 标准的 aligned_alloc。
@@ -22,7 +22,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/c-memory/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-27T22:44:38+08:00" />
-<meta property="article:modified_time" content="2024-04-19T17:31:37+08:00" />
+<meta property="article:modified_time" content="2024-06-07T12:19:29+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="你所不知道的 C 语言: 记忆体管理、对齐及硬体特性"/>
@@ -43,8 +43,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-memory\/"
-    },"genre": "posts","keywords": "Sysprog, C, Memory","wordcount":  1659 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/c-memory\/","datePublished": "2024-02-27T22:44:38+08:00","dateModified": "2024-04-19T17:31:37+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, C, Memory","wordcount":  2755 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/c-memory\/","datePublished": "2024-02-27T22:44:38+08:00","dateModified": "2024-06-07T12:19:29+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -172,7 +172,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-27 22:44:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-27">2024-02-27</time></span>&nbsp;<span title="更新于 2024-04-19 17:31:37"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-19">2024-04-19</time></span>&nbsp;<span title="1659 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-27 22:44:38"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-27">2024-02-27</time></span>&nbsp;<span title="更新于 2024-06-07 12:19:29"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-07">2024-06-07</time></span>&nbsp;<span title="2755 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 6 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -182,8 +182,15 @@
   <ul>
     <li><a href="#背景知识">背景知识</a>
       <ul>
-        <li><a href="#你所不知道的-c-语言-指针篇httpshackmdioshybpr9wgl">你所不知道的 C 语言: <a href="https://hackmd.io/s/HyBPr9WGl">指针篇</a></a></li>
-        <li><a href="#你所不知道的-c-语言-函数呼叫篇httpshackmdiossj6hrj-zg">你所不知道的 C 语言: <a href="https://hackmd.io/s/SJ6hRj-zg">函数呼叫篇</a></a></li>
+        <li>
+          <ul>
+            <li>
+              <ul>
+                <li></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
       </ul>
     </li>
     <li><a href="#memory-金字塔">Memory 金字塔</a>
@@ -202,7 +209,8 @@
         <li><a href="#unalignment-get--set">unalignment get &amp; set</a></li>
       </ul>
     </li>
-    <li><a href="#oncurrent-ii">oncurrent-II</a></li>
+    <li><a href="#concurrent-ii">concurrent-II</a></li>
+    <li><a href="#glibc-的-mallocfree-实作">glibc 的 malloc/free 实作</a></li>
   </ul>
 </nav></div>
       </div><div class="content" id="content"><blockquote>
@@ -212,7 +220,7 @@
 <li><a href="https://hackmd.io/@sysprog/c-memory"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
 <h2 id="背景知识">背景知识</h2>
-<h3 id="你所不知道的-c-语言-指针篇httpshackmdioshybpr9wgl">你所不知道的 C 语言: <a href="https://hackmd.io/s/HyBPr9WGl"target="_blank" rel="external nofollow noopener noreferrer">指针篇</a></h3>
+<h6 id="你所不知道的-c-语言-指针篇httpshackmdioshybpr9wgl">你所不知道的 C 语言: <a href="https://hackmd.io/s/HyBPr9WGl"target="_blank" rel="external nofollow noopener noreferrer">指针篇</a></h6>
 <ul>
 <li>C99/C11 6.2.5 Types (28)</li>
 </ul>
@@ -226,7 +234,7 @@
 <p>A pointer to void may be converted to or from a pointer to any object type. A pointer to any object type may be converted to a pointer to void and back again; the result shall compare equal to the original pointer.</p>
 </blockquote>
 <p>使用 <code>void *</code> 必须通过 explict (显式) 或强制转型，才能存取最终的 object，因为 <code>void</code> 无法判断 object 的大小信息。</p>
-<h3 id="你所不知道的-c-语言-函数呼叫篇httpshackmdiossj6hrj-zg">你所不知道的 C 语言: <a href="https://hackmd.io/s/SJ6hRj-zg"target="_blank" rel="external nofollow noopener noreferrer">函数呼叫篇</a></h3>
+<h6 id="你所不知道的-c-语言-函数呼叫篇httpshackmdiossj6hrj-zg">你所不知道的 C 语言: <a href="https://hackmd.io/s/SJ6hRj-zg"target="_blank" rel="external nofollow noopener noreferrer">函数呼叫篇</a></h6>
 <p>glibc 提供了 <code>malloc_stats()</code> 和 <code>malloc_info()</code> 这两个函数，可以查询 process 的 heap 空间使用情况信息。</p>
 <h2 id="memory-金字塔">Memory 金字塔</h2>
 <a class="lightgallery" href="https://hackmd.io/_uploads/ryo9Y1NAj.png?size=large" data-thumbnail="https://hackmd.io/_uploads/ryo9Y1NAj.png?size=small" data-sub-html="<h2>https://hackmd.io/_uploads/ryo9Y1NAj.png</h2>"><img loading="lazy" src="https://hackmd.io/_uploads/ryo9Y1NAj.png" srcset="https://hackmd.io/_uploads/ryo9Y1NAj.png?size=small, https://hackmd.io/_uploads/ryo9Y1NAj.png?size=medium 1.5x, https://hackmd.io/_uploads/ryo9Y1NAj.png?size=large 2x" sizes="auto" data-title="https://hackmd.io/_uploads/ryo9Y1NAj.png" data-alt="https://hackmd.io/_uploads/ryo9Y1NAj.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
@@ -344,16 +352,203 @@
 </ul>
 <a class="lightgallery" href="https://advoop.sdds.ca/assets/images/type_int-b04deb28b0b45490fcb1e70f8466d8ad.png?size=large" data-thumbnail="https://advoop.sdds.ca/assets/images/type_int-b04deb28b0b45490fcb1e70f8466d8ad.png?size=small" data-sub-html="<h2>https://advoop.sdds.ca/assets/images/type_int-b04deb28b0b45490fcb1e70f8466d8ad.png</h2>"><img loading="lazy" src="https://advoop.sdds.ca/assets/images/type_int-b04deb28b0b45490fcb1e70f8466d8ad.png" srcset="https://advoop.sdds.ca/assets/images/type_int-b04deb28b0b45490fcb1e70f8466d8ad.png?size=small, https://advoop.sdds.ca/assets/images/type_int-b04deb28b0b45490fcb1e70f8466d8ad.png?size=medium 1.5x, https://advoop.sdds.ca/assets/images/type_int-b04deb28b0b45490fcb1e70f8466d8ad.png?size=large 2x" sizes="auto" data-title="https://advoop.sdds.ca/assets/images/type_int-b04deb28b0b45490fcb1e70f8466d8ad.png" data-alt="https://advoop.sdds.ca/assets/images/type_int-b04deb28b0b45490fcb1e70f8466d8ad.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>而在 <a href="https://hackmd.io/@sysprog/c-pointer"target="_blank" rel="external nofollow noopener noreferrer">你所不知道的 C 语言: 指针篇</a> 中实作的 16-bit integer 在 unalignment 情况下的存取，并没有考虑到上面利用 alignment 来提升效能。</p>
-<p>参考原文 32-bit integer 存取，实作 64-bit integer 的 get &amp; set:</p>
-<h2 id="oncurrent-ii">oncurrent-II</h2>
+<p>原文 32 位架构的 unalignment 存取有些问题，修正并补充注释如下:</p>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="nf">unaligned_get8</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">src</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uintptr_t</span> <span class="n">csrc</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span> <span class="n">src</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">v</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">csrc</span> <span class="o">&amp;</span> <span class="mh">0xfffffffc</span><span class="p">);</span>  <span class="c1">// align 4-bytes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span> <span class="o">&gt;&gt;</span> <span class="p">(((</span><span class="kt">uint32_t</span><span class="p">)</span> <span class="n">csrc</span> <span class="o">&amp;</span> <span class="mh">0x3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">8</span><span class="p">))</span> <span class="o">&amp;</span> <span class="mh">0x000000ff</span><span class="p">;</span>  <span class="c1">// get byte
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">unaligned_set8</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">dest</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uintptr_t</span> <span class="n">cdest</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span> <span class="n">dest</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uintptr_t</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">cdest</span> <span class="o">&amp;</span> <span class="mh">0xfffffffc</span><span class="p">;</span>  <span class="c1">// align 4-bytes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint32_t</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="p">(</span><span class="n">cdest</span> <span class="o">&amp;</span> <span class="mh">0x3</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">v</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="cl">            <span class="n">v</span> <span class="o">=</span> <span class="nf">unaligned_get8</span><span class="p">((</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="n">ptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">v</span> <span class="o">=</span> <span class="n">v</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">d</span> <span class="o">=</span> <span class="n">d</span> <span class="o">|</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ptr</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">cdest</span> <span class="o">&amp;</span> <span class="mh">0xfffffffc</span><span class="p">)</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>实作 64-bit integer (64 位架构) 的 get &amp; set:</p>
+<div class="highlight" id="id-2"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="nf">unaligned_get8</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">src</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uintptr_t</span> <span class="n">csrc</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span> <span class="n">src</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">v</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">csrc</span> <span class="o">&amp;</span> <span class="mh">0xfffffff0</span><span class="p">);</span>  <span class="c1">// align 4-bytes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">v</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span> <span class="o">&gt;&gt;</span> <span class="p">(((</span><span class="kt">uint32_t</span><span class="p">)</span> <span class="n">csrc</span> <span class="o">&amp;</span> <span class="mh">0x3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">8</span><span class="p">))</span> <span class="o">&amp;</span> <span class="mh">0x000000ff</span><span class="p">;</span>  <span class="c1">// get byte
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">unaligned_set8</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">dest</span><span class="p">,</span> <span class="kt">uint8_t</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uintptr_t</span> <span class="n">cdest</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span> <span class="n">dest</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uintptr_t</span> <span class="n">ptr</span> <span class="o">=</span> <span class="n">cdest</span> <span class="o">&amp;</span> <span class="mh">0xfffffff0</span><span class="p">;</span>  <span class="c1">// align 4-bytes
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">;</span> <span class="n">n</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint32_t</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="p">(</span><span class="n">cdest</span> <span class="o">&amp;</span> <span class="mh">0x3</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">v</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span>
+</span></span><span class="line"><span class="cl">            <span class="n">v</span> <span class="o">=</span> <span class="nf">unaligned_get8</span><span class="p">((</span><span class="kt">void</span> <span class="o">*</span><span class="p">)</span> <span class="n">ptr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">v</span> <span class="o">=</span> <span class="n">v</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">d</span> <span class="o">=</span> <span class="n">d</span> <span class="o">|</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ptr</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">*</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="o">*</span><span class="p">)</span> <span class="p">(</span><span class="n">cdest</span> <span class="o">&amp;</span> <span class="mh">0xfffffff0</span><span class="p">)</span> <span class="o">=</span> <span class="n">v</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>其它逻辑和 32 位机器上类似</p>
 <ul>
+<li><a href="http://www.songho.ca/misc/alignment/dataalign.html"target="_blank" rel="external nofollow noopener noreferrer">Data Alignment</a></li>
+<li>Linux kernel: <a href="https://www.kernel.org/doc/Documentation/unaligned-memory-access.txt"target="_blank" rel="external nofollow noopener noreferrer">Unaligned Memory Accesses</a></li>
+</ul>
+<h2 id="concurrent-ii">concurrent-II</h2>
+<div class="details admonition info open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ul>
 <li>源码: <a href="https://github.com/jserv/concurrent-ll/tree/master/src/lockfree"target="_blank" rel="external nofollow noopener noreferrer">concurrent-ll</a></li>
 <li>论文: <a href="https://www.cl.cam.ac.uk/research/srg/netos/papers/2001-caslists.pdf"target="_blank" rel="external nofollow noopener noreferrer">A Pragmatic Implementation of Non-Blocking Linked Lists</a></li>
-</ul></div><div class="post-footer" id="post-footer">
+</ul>
+</div>
+    </div>
+  </div>
+<p>使用 <a href="https://en.wikipedia.org/wiki/Compare-and-swap"target="_blank" rel="external nofollow noopener noreferrer">CAS</a> 无法确保链表插入和删除同时发生时的正确性，因为 CAS 虽然保证了原子操作，但是在进行原子操作之前，需要在链表中锚定节点以进行后续的插入、删除 (这里是通过 CAS 操作)。如果先发生插入，那么并不会影响后面的操作 (插入或删除)，因为插入的节点并不会影响后面操作锚定的节点。但如果先发生删除，那么这个删除操作很有可能就把后面操作 (插入或删除) 已经锚定的节点从链表中删掉了，这就导致了后续操作的不正确结果。<em><strong>所以需要一个方法来标识「不需要的节点」，然后再进行原子操作。</strong></em></p>
+<div class="details admonition question open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>问题<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">只使用位运算即可实现逻辑上删除节点 (即通过位运算标记节点)？</div>
+    </div>
+  </div>
+<ul>
+<li>C99 6.7.2.1 Structure and union specifiers</li>
+</ul>
+<blockquote>
+<p>Each non-bit-field member of a structure or union object is aligned in an implementation defined manner appropriate to its type.</p>
+</blockquote>
+<blockquote>
+<p>Within a structure object, the non-bit-field members and the units in which bit-fields reside have addresses that increase in the order in which they are declared. A pointer to a structure object, suitably converted, points to its initial member (or if that member is a bit-field, then to the unit in which it resides), and vice versa. There may be unnamed padding within a structure object, but not at its beginning.</p>
+</blockquote>
+<p>所以 C 语言中结构体的 padding 是 implementation defined 的，但是保证这些 padding 不会出现在结构体的起始处。</p>
+<ul>
+<li>GCC <a href="https://gcc.gnu.org/onlinedocs/gcc/Structures-unions-enumerations-and-bit-fields-implementation.html"target="_blank" rel="external nofollow noopener noreferrer">4.9 Structures, Unions, Enumerations, and Bit-Fields</a></li>
+</ul>
+<blockquote>
+<p>The alignment of non-bit-field members of structures (C90 6.5.2.1, C99 and C11 6.7.2.1).</p>
+<p>Determined by ABI.</p>
+</blockquote>
+<ul>
+<li>C99 7.18.1.4 Integer types capable of holding object pointers</li>
+</ul>
+<blockquote>
+<p>The following type designates a signed integer type with the property that any valid pointer to void can be converted to this type, then converted back to pointer to void, and the result will compare equal to the original pointer: intptr_t</p>
+</blockquote>
+<ul>
+<li><a href="https://www.uclibc.org/docs/psABI-x86_64.pdf"target="_blank" rel="external nofollow noopener noreferrer">x86_64 ABI</a></li>
+</ul>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/XER1MC6.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/XER1MC6.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/XER1MC6.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/XER1MC6.png" srcset="https://imgur-backup.hackmd.io/XER1MC6.png?size=small, https://imgur-backup.hackmd.io/XER1MC6.png?size=medium 1.5x, https://imgur-backup.hackmd.io/XER1MC6.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/XER1MC6.png" data-alt="https://imgur-backup.hackmd.io/XER1MC6.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<ul>
+<li>Aggregates and Unions</li>
+</ul>
+<blockquote>
+<p>Structures and unions assume the alignment of their most strictly aligned compo-
+nent. Each member is assigned to the lowest available offset with the appropriate
+alignment. The size of any object is always a multiple of the object‘s alignment.
+An array uses the same alignment as its elements, except that a local or global
+array variable of length at least 16 bytes or a C99 variable-length array variable
+always has alignment of at least 16 bytes. 4
+Structure and union objects can require padding to meet size and alignment
+constraints. The contents of any padding is undefined.</p>
+</blockquote>
+<p>所以对于链表节点对应的结构体:</p>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="kt">intptr_t</span> <span class="kt">val_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">node</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">val_t</span> <span class="n">data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">node</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="kt">node_t</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>因为 data alignment 的缘故，它的地址的最后一个 bit 必然是 0 (成员都是 4-bytes 的倍数以及必须对齐)，同理其成员 <code>next</code> 也满足这个性质 (因为这个成员表示下一个节点的地址)。所以删除节点时，可以将 <code>next</code> 的最后一个 bit 设置为 1，表示当前节点的下一个节点已经被“逻辑上”删除了。</p>
+<p>最后当没有插入或删除操作是，链表再对标识为“删除”的节点进行移除，这个机制有点类似于 GC</p>
+<h2 id="glibc-的-mallocfree-实作">glibc 的 malloc/free 实作</h2>
+<p>背景考量: <a href="https://hackmd.io/@sysprog/c-memory#data-alignment"target="_blank" rel="external nofollow noopener noreferrer">Deterministic Memory Allocation for Mission-Critical Linux</a></p>
+<p><em>Main arena vs Thread arena</em> :</p>
+<a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_kS5wHum1S54_p.606235_1462612773104_undefined?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_kS5wHum1S54_p.606235_1462612773104_undefined?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_kS5wHum1S54_p.606235_1462612773104_undefined</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_kS5wHum1S54_p.606235_1462612773104_undefined" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_kS5wHum1S54_p.606235_1462612773104_undefined?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_kS5wHum1S54_p.606235_1462612773104_undefined?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_kS5wHum1S54_p.606235_1462612773104_undefined?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_kS5wHum1S54_p.606235_1462612773104_undefined" data-alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_kS5wHum1S54_p.606235_1462612773104_undefined" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p><em>multiple heap Thread arena</em> :</p>
+<a class="lightgallery" href="https://docs.google.com/drawings/d/150bTi0uScQlnABDImLYS8rWyL82mmfpMxzRbx-45UKw/pub?w=960&amp;h=720&amp;size=large" data-thumbnail="https://docs.google.com/drawings/d/150bTi0uScQlnABDImLYS8rWyL82mmfpMxzRbx-45UKw/pub?w=960&amp;h=720&amp;size=small" data-sub-html="<h2>https://docs.google.com/drawings/d/150bTi0uScQlnABDImLYS8rWyL82mmfpMxzRbx-45UKw/pub?w=960&amp;h=720</h2>"><img loading="lazy" src="https://docs.google.com/drawings/d/150bTi0uScQlnABDImLYS8rWyL82mmfpMxzRbx-45UKw/pub?w=960&amp;h=720" srcset="https://docs.google.com/drawings/d/150bTi0uScQlnABDImLYS8rWyL82mmfpMxzRbx-45UKw/pub?w=960&amp;h=720&amp;size=small, https://docs.google.com/drawings/d/150bTi0uScQlnABDImLYS8rWyL82mmfpMxzRbx-45UKw/pub?w=960&amp;h=720&amp;size=medium 1.5x, https://docs.google.com/drawings/d/150bTi0uScQlnABDImLYS8rWyL82mmfpMxzRbx-45UKw/pub?w=960&amp;h=720&amp;size=large 2x" sizes="auto" data-title="https://docs.google.com/drawings/d/150bTi0uScQlnABDImLYS8rWyL82mmfpMxzRbx-45UKw/pub?w=960&amp;h=720" data-alt="https://docs.google.com/drawings/d/150bTi0uScQlnABDImLYS8rWyL82mmfpMxzRbx-45UKw/pub?w=960&amp;h=720" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-04-19 17:31:37">更新于 2024-04-19&nbsp;</span>
+        <span title="更新于 2024-06-07 12:19:29">更新于 2024-06-07&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/c-memory/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>

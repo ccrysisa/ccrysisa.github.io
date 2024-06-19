@@ -1,4 +1,10 @@
 https://ccrysisa.github.io/posts/linux2023/
+https://ccrysisa.github.io/posts/too-many-lists/
+https://ccrysisa.github.io/posts/rust-ebpf/
+https://ccrysisa.github.io/posts/revolution-os/
+https://ccrysisa.github.io/posts/linux2023-quiz2/
+https://ccrysisa.github.io/posts/linux2023-quiz1/
+https://ccrysisa.github.io/posts/c-floating-point/
 https://ccrysisa.github.io/friends/
 https://ccrysisa.github.io/posts/rust-cli/
 https://ccrysisa.github.io/posts/c-compiler-optimization/

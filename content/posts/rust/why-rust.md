@@ -40,6 +40,10 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
+> The year 2022 marks seven years since the stable version of the Rust language was officially released. Since its release, Rust has been popular among developers. In a Stack Overflow poll of over 73,000 developers from 180 countries, Rust was voted the most popular programming language for the seventh consecutive year, with 87% of developers expressing a desire to use it.
+
+<!--more-->
+
 ## Rust in 100 Seconds
 
 观看短片: [Rust in 100 Seconds](https://youtu.be/5C_HPTJg5ek) :white_check_mark:
@@ -75,13 +79,13 @@ $ cargo clean             # 清除构建出来的目标文件
 $ cargo test              # 运行测试
 ```
 
-### Programming a Guessing Game
+### Programming a Game
 
 - Module std::[io](https://doc.rust-lang.org/std/io/index.html)
 - Module std::[cmp](https://doc.rust-lang.org/std/cmp/index.html)
 - Crate [rand](https://docs.rs/rand/latest/rand/)
 
-### Common Programming Concepts
+### Common Concepts
 
 变量明确区分可变和不可变，好处在于对于明确不可变的变量，使用引用时编译器可以进行更为激进的最佳化。常量必须满足可以在编译期计算出结果。
 
@@ -129,7 +133,7 @@ shadow 可理解为变量名可以和储存数据的地址绑定、解绑，所�
 > `Range`, provided by the standard library, which generates all numbers in sequence starting from one number and ending before another number.
 > `rev`, to reverse the range.
 
-### Understanding Ownership
+### Ownership
 
 #### What is Ownership?
 
@@ -223,7 +227,7 @@ Documentation:
 - method std::iter::Iterator::[enumerate](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.enumerate)
 - Module std::[iter](https://doc.rust-lang.org/std/iter/index.html)
 
-### Using Structs to Structure Related Data
+### Structs
 
 Rust 不允许结构体初始化时只指定一部分字段的值，这防止了 UB 相关问题的触发。
 
@@ -296,7 +300,7 @@ Rust 的 `Option<T>` 的设计避免了其它语言中可能会出现的 UB，�
 
 > We can include an `else` with an `if let`. The block of code that goes with the `else` is the same as the block of code that would go with the `_` case in the `match` expression that is equivalent to the `if let` and `else`.
 
-### Managing Growing Projects with Packages, Crates, and Modules
+### Packages, Crates, and Modules
 
 - **Packages**: A Cargo feature that lets you build, test, and share crates
 - **Crates**: A tree of modules that produces a library or executable
@@ -379,7 +383,7 @@ Rust 对于模块的分离语法的文件管理也类似于文件系统树。可
 - Struct std::collections::[HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)
 {{< /admonition >}}
 
-#### Storing Lists of Values with Vectors
+#### Vector
 
 > Like any other struct, a vector is freed when it goes out of scope
 
@@ -421,7 +425,7 @@ for i in &mut v {
 
 运用枚举 (enum) 搭配 vector 可以实作出比泛型更具表达力的 vector，即 vector 中的每个元素的类型可以不相同 (通过 enum 的大小类型机制即可实作)。
 
-#### Storing UTF-8 Encoded Text with Strings
+#### String
 
 > Rust has only one string type in the core language, which is the string slice `str` that is usually seen in its borrowed form `&str`. 
 
@@ -429,7 +433,7 @@ for i in &mut v {
 
 > Although this section is largely about `String`, both types are used heavily in Rust’s standard library, and both `String` and string slices are UTF-8 encoded.
 
-Rust 中的字符串是 UTF-8 编码，注意与之前所提的 `char` 类型使用的 Unicode 编码不同。这一点很重要，因为 `String` 的 [len()](https://doc.rust-lang.org/std/string/struct.String.html#method.len) 方法是计算 byte 的数量 (URF-8 编码只占据一个 byte)。
+Rust 中的字符串是 UTF-8 编码，注意与之前所提的 `char` 类型使用的 Unicode 编码不同。这一点很重要，因为 `String` 的 [len()](https://doc.rust-lang.org/std/string/struct.String.html#method.len) 方法是计算 byte 的数量 (UTF-8 编码只占据一个 byte)。
 
 > The `push_str` method takes a string slice because we don’t necessarily want to take ownership of the parameter. 
 
@@ -451,7 +455,7 @@ Rust 对于字符串处理的哲学 (我个人认为这样处理并不是特别�
 
 > Rust has chosen to make the correct handling of `String` data the default behavior for all Rust programs, which means programmers have to put more thought into handling UTF-8 data upfront. This trade-off exposes more of the complexity of strings than is apparent in other programming languages, but it prevents you from having to handle errors involving non-ASCII characters later in your development life cycle.
 
-#### Storing Keys with Associated Values in Hash Maps
+#### Hash Map
 
 > Note that we need to first `use` the `HashMap` from the collections portion of the standard library. Of our three common collections, this one is the least often used, so it’s not included in the features brought into scope automatically in the prelude. Hash maps also have less support from the standard library; there’s no built-in macro to construct them, for example.
 
@@ -551,7 +555,7 @@ $ RUST_BACKTRACE=full cargo run
 
 定义一个可能会失败的函数时 (即预期计划处理错误)，应该使用 `Result` 进行错误处理，其它时候一般使用 `panic!` 处理即可 (因为预期就没打算处理错误)。
 
-### Generic Types, Traits, and Lifetimes
+### Generic, Traits, and Lifetimes
 
 {{< admonition quote >}}
 Removing Duplication by Extracting a Function:
@@ -702,7 +706,7 @@ fn fun(s: &'a str) -> &'b str {
 涉及到生命周期的程序，编写代码时先不需要考虑生命周期，先将代码逻辑写好，然后从防止 ***dangling reference*** 这个 UB 以及 **子类型** 的角度对生命周期进行标注。
 {{< /admonition >}}
 
-### Writing Automated Tests
+### Automated Tests
 
 - 11.1. How to Write Tests
 > Tests are Rust functions that verify that the non-test code is functioning in the expected manner. The bodies of test functions typically perform these three actions:
@@ -880,7 +884,7 @@ Files in subdirectories of the tests directory don’t get compiled as separate 
 
 > Only library crates expose functions that other crates can use; binary crates are meant to be run on their own.
 
-### An I/O Project: Building a Command Line Program
+### An I/O Project: minigrep
 
 - 12.3. Refactoring to Improve Modularity and Error Handling
 
@@ -908,7 +912,704 @@ Documentation:
 - method str::[to_lowercase](https://doc.rust-lang.org/std/primitive.str.html#method.to_lowercase)
 - method std::result::Result::[is_err](https://doc.rust-lang.org/std/result/enum.Result.html#method.is_err)
 
-## Visualizing memory layout of Rust\'s data types
+### Iterators and Closures
 
-录影: [YouTube](https://www.youtube.com/watch?v=7_o-YRxf_cc&t=0s) / [中文翻译](https://www.bilibili.com/video/BV1KT4y167f1)
+> Rust’s design has taken inspiration from many existing languages and techniques, and one significant influence is functional programming. 
 
+{{< admonition success >}}
+这一章是关于函数式编程的，Rust 吸收了很多编程范式的精华，所以也可以使用函数式编程风格。关于函数式编程的资料，可以参考康奈尔大学的 [OCaml Programming: Correct + Efficient + Beautiful](https://www.youtube.com/playlist?list=PLre5AT9JnKShBOPeuiD9b-I4XROIJhkIU) 和斯坦福大学的编程范式 [CS107](https://www.bilibili.com/video/BV1Cx411S7HJ/)，以及最出名的麻省理工学院的 [SICP](https://www.bilibili.com/video/BV1Xx41117tr/) (这个版本是给 IBM 工程师培训的，MIT 还有一个 [2004 年的版本](https://www.youtube.com/playlist?list=PL7BcsI5ueSNFPCEisbaoQ0kXIDX9rR5FF) 是给学生上课的)。
+{{< /admonition >}}
+
+#### Closures: Anonymous Functions that Capture Their Environment
+
+> Rust’s closures are anonymous functions you can save in a variable or pass as arguments to other functions. 
+> You can create the closure in one place and then call the closure elsewhere to evaluate it in a different context. 
+> Unlike functions, closures can capture values from the scope in which they’re defined.
+
+严格上来讲，函数也可以捕获其定义的作用域的变量，例如 C 语言的函数就可以访问全局变量，因为全局变量和函数都是定义最顶层，作为 first-class。担任闭包的灵活性更强，例如可以将闭包定义在结构体里面，作为结构体的成员，从而可以实现懒计算的功能。
+
+> Closures don’t usually require you to annotate the types of the parameters or the return value like `fn` functions do. Type annotations are required on functions because the types are part of an explicit interface exposed to your users.
+
+> Closures, on the other hand, aren’t used in an exposed interface like this: they’re stored in variables and used without naming them and exposing them to users of our library.
+
+> Closures are typically short and relevant only within a narrow context rather than in any arbitrary scenario. Within these limited contexts, the compiler can infer the types of the parameters and the return type
+
+> As with variables, we can add type annotations if we want to increase explicitness and clarity at the cost of being more verbose than is strictly necessary.
+
+因为闭包不暴露给外部使用者，并且闭包逻辑一般比较简单，所以闭包的参数和返回值的类型由程序员自己保证即可，编译器一般可以推断出来 (类似于编译器可以推断出变量的类型)。当然也可以给闭包的参数和返回值加上类型标注 (类似于可以给变量加上类型标注)，这也是合法的。
+
+```rs
+fn  add_one_v1   (x: u32) -> u32 { x + 1 }
+let add_one_v2 = |x: u32| -> u32 { x + 1 };
+let add_one_v3 = |x|             { x + 1 };
+let add_one_v4 = |x|               x + 1  ;
+```
+
+闭包的内部逻辑必须是一个 **表达式**，使得闭包拥有返回值，例如上面的中间两行的闭包逻辑都是 `{}` 表达式，最后一行的是 `x + 1` 这个加法表达式 (函数和我们之前提到的一样，函数体必须是一个表达式，通常是 `{}` 表达式，例如第一行)。
+
+> For closure definitions, the compiler will infer one concrete type for each of their parameters and for their return value.
+
+如果依赖编译器推断闭包的相关类型，那么编译器只会推断出一个具体的类型，类似于编译器对于变量的类型也只能推断出一个，所以下面的例子会报错:
+
+```rs
+let example_closure = |x| x;
+
+let s = example_closure(String::from("hello")); // |x: String|
+let n = example_closure(5);                     // |x: i32|
+```
+
+{{< admonition quote >}}
+1. `FnOnce` applies to closures that can be called once. All closures implement at least this trait, because all closures can be called. A closure that moves captured values out of its body will only implement `FnOnce` and none of the other `Fn` traits, because it can only be called once.
+
+2. `FnMut` applies to closures that don’t move captured values out of their body, but that might mutate the captured values. These closures can be called more than once.
+
+3. `Fn` applies to closures that don’t move captured values out of their body and that don’t mutate captured values, as well as closures that capture nothing from their environment. These closures can be called more than once without mutating their environment, which is important in cases such as calling a closure multiple times concurrently.
+{{< /admonition >}}
+
+```rs
+impl<T> Option<T> {
+    pub fn unwrap_or_else<F>(self, f: F) -> T
+    where
+        F: FnOnce() -> T
+    {
+        match self {
+            Some(x) => x,
+            None => f(),
+        }
+    }
+}
+```
+
+因为闭包是 Trait，所以闭包作为参数进行传递时，需要使用 **泛型约束** 来指定对应的 Trait
+
+> If you want to force the closure to take ownership of the values it uses in the environment even though the body of the closure doesn’t strictly need ownership, you can use the `move` keyword before the parameter list.
+
+> This technique is mostly useful when passing a closure to a new thread to move the data so that it’s owned by the new thread.
+
+多线程编程时使用 `move` 关键字可以强制将一个变量的所有权交给另一个线程。
+
+#### Processing a Series of Items with Iterators
+
+{{< admonition >}}
+这一节简单介绍了下迭代器是什么以及迭代器的功能，如果想更进一步地了解迭代器的实作，建议观看 John Gjengset 的影片 [Crust of Rust: Iterators](https://www.youtube.com/watch?v=yozQ9C69pNs)，本人也有写相关的 [笔记]({{< relref "./Iterators.md" >}}) 来对影片内容进行解释和扩展。
+{{< /admonition >}}
+
+The Iterator Trait and the next Method
+
+> An iterator is responsible for the logic of iterating over each item and determining when the sequence has finished. 
+
+> In Rust, iterators are lazy, meaning they have no effect until you call methods that consume the iterator to use it up. 
+
+> All iterators implement a trait named `Iterator` that is defined in the standard library. The definition of the trait looks like this:
+
+```rs
+pub trait Iterator {
+    type Item;
+
+    fn next(&mut self) -> Option<Self::Item>;
+
+    // methods with default implementations elided
+}
+```
+
+> The `Iterator` trait only requires implementors to define one method: the `next` method
+
+> The `iter` method produces an iterator over immutable references. If we want to create an iterator that takes ownership of `v1` and returns owned values, we can call `into_iter` instead of `iter`. Similarly, if we want to iterate over mutable references, we can call `iter_mut` instead of `iter`.
+
+Methods that Consume the Iterator
+
+> Some of these methods call the `next` method in their definition, which is why you’re required to implement the `next` method when implementing the `Iterator` trait.
+
+> Methods that call `next` are called consuming adaptors, because calling them uses up the iterator.
+
+> One example is the `sum` method, which takes ownership of the iterator and iterates through the items by repeatedly calling `next`, thus consuming the iterator.
+
+Methods that Produce Other Iterators
+
+> Iterator adaptors are methods defined on the Iterator trait that don’t consume the iterator. Instead, they produce different iterators by changing some aspect of the original iterator.
+
+> iterator adaptor method `map`, which takes a closure to call on each item as the items are iterated through. The `map` method returns a new iterator that produces the modified items. 
+
+Using Closures that Capture Their Environment
+
+> the `filter` method that takes a closure. The closure gets an item from the iterator and returns a `bool`. If the closure returns `true`, the value will be included in the iteration produced by `filter`. If the closure returns `false`, the value won’t be included.
+
+#### Comparing Performance: Loops vs. Iterators
+
+> The point is this: iterators, although a high-level abstraction, get compiled down to roughly the same code as if you’d written the lower-level code yourself. Iterators are one of Rust’s zero-cost abstractions, by which we mean using the abstraction imposes no additional runtime overhead.
+
+零开销抽象 (Zero-Aost Abstractions): 使用抽象时不会引入额外的运行时开销，所以尽量使用 Rust 提供的抽象语法，因为其底层实现大概率进行了相应的优化，比自己手写的底层代码高效不少。
+
+### Cargo and Crates.io
+
+- 14.1. Customizing Builds with Release Profiles
+
+> Cargo has two main profiles: the `dev` profile Cargo uses when you run `cargo build` and the `release` profile Cargo uses when you run `cargo build --release`.
+
+> Cargo has default settings for each of the profiles that apply when you haven't explicitly added any `[profile.*]` sections in the project’s Cargo.toml file. By adding `[profile.*]` sections for any profile you want to customize, you override any subset of the default settings.
+
+```toml {title="Cargo.toml"}
+[profile.dev]
+opt-level = 0
+
+[profile.release]
+opt-level = 3
+```
+
+- 14.2. Publishing a Crate to Crates.io
+
+> Rust also has a particular kind of comment for documentation, known conveniently as a documentation comment, that will generate HTML documentation.
+
+> Documentation comments use three slashes, `///`, instead of two and support Markdown notation for formatting the text. Place documentation comments just before the item they’re documenting.
+
+> We can generate the HTML documentation from this documentation comment by running `cargo doc`.
+
+> For convenience, running `cargo doc --open` will build the HTML for your current crate’s documentation (as well as the documentation for all of your crate’s dependencies) and open the result in a web browser.
+
+Documentation Comments as Tests
+> running `cargo test` will run the code examples in your documentation as tests!
+
+Commenting Contained Items
+> The style of doc comment `//!` adds documentation to the item that contains the comments rather than to the items following the comments.
+
+Exporting a Convenient Public API with pub use
+> The good news is that if the structure isn’t convenient for others to use from another library, you don’t have to rearrange your internal organization: instead, you can re-export items to make a public structure that’s different from your private structure by using `pub use`. 
+
+- 14.3. Cargo Workspaces
+
+```toml {title="Cargo.toml"}
+[workspace]
+
+members = [
+    "adder",
+]
+```
+
+```bash
+$ cargo new adder
+     Created binary (application) `adder` package
+
+├── Cargo.lock
+├── Cargo.toml
+├── adder
+│   ├── Cargo.toml
+│   └── src
+│       └── main.rs
+└── target
+```
+
+```toml {title="Cargo.toml"}
+[dependencies]
+add_one = { path = "../add_one" }
+```
+
+### Smart Pointers
+
+### Fearless Concurrency
+
+### Object-Oriented Programming
+
+- 17.1. Characteristics of Object-Oriented Languages
+
+> Object-oriented programs are made up of objects. An object packages both data and the procedures that operate on that data. The procedures are typically called methods or operations.
+
+> Using this definition, Rust is object-oriented: structs and enums have data, and `impl` blocks provide methods on structs and enums. 
+
+Rust 中使用结构体、枚举和 `impl` 块来实现了 OOP 范式的对象、数据和行为三大要素。
+
+> Another aspect commonly associated with OOP is the idea of encapsulation, which means that the implementation details of an object aren’t accessible to code using that object.
+
+> we can use the `pub` keyword to decide which modules, types, functions, and methods in our code should be public, and by default everything else is private.
+
+Rust 使用 `pub` 关键字来控制可见性，实现了 OOP 范式的封装要求。
+
+> Inheritance is a mechanism whereby an object can inherit elements from another object’s definition, thus gaining the parent object’s data and behavior without you having to define them again.
+
+> You can do this in a limited way in Rust code using default trait method implementations
+
+> We can also override the default implementation
+
+Rust 通过使用 Trait 可以“继承”某些共有的行为，也可以覆盖实现这些默认行为。
+
+> This is also called polymorphism, which means that you can substitute multiple objects for each other at runtime if they share certain characteristics.
+
+> Rust instead uses generics to abstract over different possible types and trait bounds to impose constraints on what those types must provide. This is sometimes called bounded parametric polymorphism.
+
+Rust 通过泛型和 Trait 来实现多态
+
+- 17.2. Using Trait Objects That Allow for Values of Different Types
+
+> However, trait objects are more like objects in other languages in the sense that they combine data and behavior. But trait objects differ from traditional objects in that we can’t add data to a trait object. Trait objects aren’t as generally useful as objects in other languages: their specific purpose is to allow abstraction across common behavior.
+
+Trait 只是对行为的抽象，它并没有持有数据。这里需要注意 Trait 对象和之前所提的 Trait 约束是不同的，Trait 对象类似于 `Box<dyn Trait>`。
+
+```rs
+Vec<Box<dyn Trait>>
+Vec<T> where T: Trait
+```
+
+使用 Trait 对象可以实现某种意义上的多态，而使用泛型 (以及 Trait 约束) 则无法做到，因为泛型 (以及 Trait 约束) 在编译器就会被编译成具体类型，显然无法多态。可以结合上面的例子进行思考。
+
+> when we use trait bounds on generics: the compiler generates nongeneric implementations of functions and methods for each concrete type that we use in place of a generic type parameter. The code that results from monomorphization is doing static dispatch, which is when the compiler knows what method you’re calling at compile time.
+
+> This is opposed to dynamic dispatch, which is when the compiler can’t tell at compile time which method you’re calling. In dynamic dispatch cases, the compiler emits code that at runtime will figure out which method to call.
+
+> When we use trait objects, Rust must use dynamic dispatch. The compiler doesn’t know all the types that might be used with the code that’s using trait objects, so it doesn’t know which method implemented on which type to call.
+
+### Patterns and Matching
+
+{{< admonition >}}
+这一章建议搭配之前的 [6. Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) 来阅读，本章是对其的扩展。
+{{< /admonition >}}
+
+- 18.1. All the Places Patterns Can Be Used
+
+match Arms
+
+```rs
+match VALUE {
+    PATTERN => EXPRESSION,
+    PATTERN => EXPRESSION,
+    PATTERN => EXPRESSION,
+}
+```
+
+> The particular pattern `_` will match anything, but it never binds to a variable, so it’s often used in the last match arm. 
+
+`_` 在模式匹配中相当于一个占位符，常用于 `match` 匹配的最后一个，作为类似于 C/C++ `swicth-case` 的 `default` 分支。
+
+> `if let` can have a corresponding `else` containing code to run if the pattern in the `if let` doesn’t match.
+
+> Also, Rust doesn't require that the conditions in a series of `if let`, `else if`, `else if let` arms relate to each other.
+
+Rust 还可以混用 `if let` 和 `if-else` 语句，即可以将模式匹配和条件判断结合起来，十分灵活
+
+```rs
+    if let Some(color) = favorite_color {
+        println!("Using your favorite color, {color}, as the background");
+    } else if is_tuesday {
+        println!("Tuesday is green day!");
+    } else if let Ok(age) = age {
+        if age > 30 {
+            println!("Using purple as the background color");
+        } else {
+            println!("Using orange as the background color");
+        }
+    } else {
+        println!("Using blue as the background color");
+    }
+```
+
+> The downside of using `if let` expressions is that the compiler doesn’t check for exhaustiveness, whereas with `match` expressions it does.
+
+但是 `if-let` 表达式并不会检查模式匹配的全部情况，而 `match` 会强制要求检查模式匹配的所有情况
+
+> Similar in construction to `if let`, the `while let` conditional loop allows a `while` loop to run for as long as a pattern continues to match. I
+
+```rs
+    while let Some(top) = stack.pop() {
+        println!("{}", top);
+    }
+```
+
+> In a `for` loop, the value that directly follows the keyword `for` is a pattern. For example, in `for x in y` the `x` is the pattern. 
+
+```rs
+    let v = vec!['a', 'b', 'c'];
+
+    for (index, value) in v.iter().enumerate() {
+        println!("{} is at index {}", value, index);
+    }
+```
+
+模式匹配无处不在，`for` 循环中 `for` 关键字后面的 token 在语法分析时是按模式匹配进行分析的
+
+> Every time you've used a `let` statement like this you've been using patterns, although you might not have realized it! 
+
+```rs
+let PATTERN = EXPRESSION;
+```
+
+`let` 语句也是模式匹配，但是它的使用和先前的那些模式匹配相比起来不是特别灵活，这一部分在后面会进行解释
+
+> Function parameters can also be patterns. 
+
+```rs
+fn foo(x: i32) {...}
+```
+
+函数参数也是模式匹配，毕竟它本质也是一种 `let` 语句，相应的，它的灵活性也不是特别好
+
+- 18.2. Refutability: Whether a Pattern Might Fail to Match
+
+引入两个概念用于解释之前所提的，不同模式匹配语句的灵活性不同的问题
+
+> Patterns come in two forms: **refutable** and **irrefutable**.
+
+> Patterns that will match for any possible value passed are **irrefutable**. An example would be `x` in the statement `let x = 5;` because `x` matches anything and therefore cannot fail to match. 
+
+> Patterns that can fail to match for some possible value are **refutable**. An example would be `Some(x)` in the expression `if let Some(x) = a_value` because if the value in the `a_value` variable is `None` rather than `Some`, the `Some(x)` pattern will not match.
+
+简单来说，就一种模式可以对任何值无条件接受，而另一种模式对一些可能的值并不接受，这两种模式的差异导致了不同模式匹配语句的灵活性不同 (因为对于任何值都可以无条件接受的话，需要对传入的值进行一定的限制，进而导致接收值的灵活性不同)。
+
+> Function parameters, `let` statements, and `for` loops can only accept **irrefutable** patterns, because the program cannot do anything meaningful when values don’t match. 
+
+> The `if let` and `while let` expressions accept refutable and irrefutable patterns
+
+- 18.3. Pattern Syntax
+
+> Named variables are irrefutable patterns that match any value, and we’ve used them many times in the book. 
+
+在模式匹配中使用命名变量会匹配任意值，但这也会导致在模式匹配的 Block 对该变量名称进行变量遮蔽
+
+> Because match starts a new scope, variables declared as part of a pattern inside the match expression will shadow those with the same name outside the match construct, as is the case with all variables.
+
+```rs
+    let x = Some(5);
+    let y = 10;
+
+    match x {
+        Some(50) => println!("Got 50"),
+        Some(y) => println!("Matched, y = {y}"),
+        _ => println!("Default case, x = {:?}", x),
+    }
+
+    println!("at the end: x = {:?}, y = {y}", x);
+```
+
+> In match expressions, you can match multiple patterns using the `|` syntax, which is the pattern or operator.
+
+```rs
+    match x {
+        1 | 2 => println!("one or two"),
+        3 => println!("three"),
+        _ => println!("anything"),
+    }
+```
+
+> The `..=` syntax allows us to match to an inclusive range of values. 
+
+```rs
+    match x {
+        'a'..='j' => println!("early ASCII letter"),
+        'k'..='z' => println!("late ASCII letter"),
+        _ => println!("something else"),
+    }
+```
+
+`a..=b` 表示闭区间 $[a,b]$，而 `..` 表示开区间 $[a, b)$
+
+> We can also use patterns to destructure structs, enums, and tuples to use different parts of these values.
+
+```rs
+// struct
+let p = Point { x: 0, y: 7 };
+let Point { x: a, y: b } = p;
+let Point { x, y } = p;
+```
+
+> Rust has a shorthand for patterns that match struct fields: you only need to list the name of the struct field, and the variables created from the pattern will have the same names.
+
+```rs
+// enum
+match msg {
+    Message::Quit => ...
+    Message::Move { x, y } => ...
+    Message::Write(text) => ...
+    Message::ChangeColor(r, g, b) => ...
+}
+```
+
+```rs
+// tuple
+let ((feet, inches), Point { x, y }) = ((3, 10), Point { x: 3, y: -10 });
+```
+
+### Advanced Features
+
+#### Unsafe Rust
+
+> Unsafe Rust exists because, by nature, static analysis is conservative. When the compiler tries to determine whether or not code upholds the guarantees, it’s better for it to reject some valid programs than to accept some invalid programs. 
+
+> if you use unsafe code incorrectly, problems can occur due to memory unsafety, such as null pointer dereferencing.
+
+> Another reason Rust has an unsafe alter ego is that the underlying computer hardware is inherently unsafe.
+
+静态分析的保守以及系统编程的需求使得 Unsafe Rust 的出现变得合理
+
+***unsafe superpowers***: 
+- Dereference a raw pointer
+- Call an unsafe function or method
+- Access or modify a mutable static variable
+- Implement an unsafe trait
+- Access fields of `union`s
+
+> It’s important to understand that `unsafe` doesn’t turn off the borrow checker or disable any other of Rust’s safety checks: if you use a reference in `unsafe` code, it will still be checked.
+
+`unsafe` 有一定的特权，但是即使使用 `unsafe`，Rust 的借用检查机制仍然存在，并且起作用
+
+解引用 **裸指针** 操作只能在 `unsafe` 中使用，注意这里说的是 **解引用**，如果不涉及对裸指针的解引用操作，裸指针还是可以在 `safe` 内使用的，例如:
+
+```rs
+let mut num = 5;
+let r1 = &num as *const i32;
+let r2 = &mut num as *mut i32;
+
+unsafe {
+    println!("r1: {}", *r1);
+    println!("r2: {}", *r2);
+}
+
+let address = 0x012345usize;
+let r = address as *const i32;
+```
+
+> Unsafe Rust has two new types called raw pointers that are similar to references. As with references, raw pointers can be immutable or mutable and are written as `*const T` and `*mut T`, respectively.
+
+> In the context of raw pointers, immutable means that the pointer can’t be directly assigned to after being dereferenced.
+
+Different from references and smart pointers, raw pointers:
+
+- Are allowed to ignore the borrowing rules by having both immutable and mutable pointers or multiple mutable pointers to the same location
+- Aren’t guaranteed to point to valid memory
+- Are allowed to be null
+- Don’t implement any automatic cleanup
+
+Rust 中的裸指针和 C/C++ 中的原始指针类型比较相似。而 Rust 的裸指针和引用、智能指针最大的区别在于: 裸指针不需要遵循借用规则，以及引用、智能指针必定不为空并且引用的是有效的物件 (因为是对物件的引用，所以物件必须先于引用而存在，故引用的地址也是有效的)，而裸指针可以为空 (类似于 C/C++ 的 NULL)，也可以指向无效的地址。因为可以为空或指向无效区域，所以裸指针不能像智能指针那样，超出作用域就自动清理指向的内容。
+
+> With all of these dangers, why would you ever use raw pointers? One major use case is when interfacing with C code
+
+> Another case is when building up safe abstractions that the borrow checker doesn’t understand.
+
+与底层 C 代码进行交互，以及借用检查机制无法涵盖现实世界的所有关系，是 Unsafe Rust 使用的理由
+
+> Just because a function contains unsafe code doesn’t mean we need to mark the entire function as unsafe. In fact, wrapping unsafe code in a safe function is a common abstraction
+
+将不安全的代码块封装为安全的函数，这样调用该函数时就不需要特别考虑 unsafe 部分了 (unsafe 部分由函数实现方进行考虑、封装)
+
+> Sometimes, your Rust code might need to interact with code written in another language. For this, Rust has the keyword `extern` that facilitates the creation and use of a Foreign Function Interface (FFI). An FFI is a way for a programming language to define functions and enable a different (foreign) programming language to call those functions.
+
+> The `"C"` ABI is the most common and follows the C programming language’s ABI.
+
+通过 `extern` 关键字指定汇编层面使用的 ABI，可以使 Rust 程序和其他语言编写的程序进行通讯，这部分在 Rust 中叫 FFI
+
+#### Advanced Traits
+
+> ***Associated types*** connect a type placeholder with a trait such that the trait method definitions can use these placeholder types in their signatures. 
+
+关联类型相当于类型的占位符，常用于迭代器相关的 Trait 的定义中:
+
+```rs
+pub trait Iterator {
+    type Item;
+
+    fn next(&mut self) -> Option<Self::Item>;
+}
+```
+
+结合下面的例子，并与上面的例子进行对比，思考泛型参数的 Trait 和关联类型的 Trait 的区别:
+
+```rs
+pub trait Iterator<T> {
+    fn next(&mut self) -> Option<T>;
+}
+```
+
+> In other words, when a trait has a generic parameter, it can be implemented for a type multiple times, changing the concrete types of the generic type parameters each time. 
+
+> With associated types, we don’t need to annotate types because we can’t implement a trait on a type multiple times. 
+
+默认泛型参数可以在未标注具体类型时，使用默认的具体类型
+
+> When we use generic type parameters, we can specify a default concrete type for the generic type. This eliminates the need for implementors of the trait to specify a concrete type if the default type works. You specify a default type when declaring a generic type with the `<PlaceholderType=ConcreteType>` syntax.
+
+```rs
+trait Add<Rhs=Self> {
+    type Output;
+
+    fn add(self, rhs: Rhs) -> Self::Output;
+}
+```
+
+当类型的方法和实现的 Trait 的方法重名时，直接通过方法名字调用的话，调用的是类型本身实现的方法而不是 Trait 的方法，要想调用 Trait 的同名方法，需要在前面指定 Trait 名字
+
+> Nothing in Rust prevents a trait from having a method with the same name as another trait’s method, nor does Rust prevent you from implementing both traits on one type. It’s also possible to implement a method directly on the type with the same name as methods from traits.
+
+> When calling methods with the same name, you’ll need to tell Rust which one you want to use.
+
+>Specifying the trait name before the method name clarifies to Rust which implementation of `fly` we want to call. 
+
+```rs
+trait Pilot {...}
+trait Wizard {...}
+struct Human;
+
+impl Pilot for Human {
+    fn fly(&self) {...}
+}
+
+impl Wizard for Human {
+    fn fly(&self) {...}
+}
+
+impl Human {
+    fn fly(&self) {...}
+}
+
+fn main() {
+    let person = Human;
+    Pilot::fly(&person);    // trait Pilot's fly method
+    Wizard::fly(&person);   // trait Wizard's fly method
+    person.fly();           // type Human's fly method
+}
+```
+
+>  You only need to use this more verbose syntax in cases where there are multiple implementations that use the same name and Rust needs help to identify which implementation you want to call.
+
+Rust 的 Trait 可以实现 **行为** 的继承关系 (通过继承方法的行为)
+
+> Sometimes, you might write a trait definition that depends on another trait: for a type to implement the first trait, you want to require that type to also implement the second trait. You would do this so that your trait definition can make use of the associated items of the second trait. The trait your trait definition is relying on is called a supertrait of your trait.
+
+```rs
+trait OutlinePrint: std::fmt::Display {...}
+
+struct Point {...}
+
+impl OutlinePrint for Point {}
+```
+
+> the orphan rule that states we’re only allowed to implement a trait on a type if either the trait or the type are local to our crate. 
+
+> ***newtype pattern***, which involves creating a new type in a tuple struct.
+
+> The tuple struct will have one field and be a thin wrapper around the type we want to implement a trait for. Then the wrapper type is local to our crate, and we can implement the trait on the wrapper. 
+
+```rs
+struct Wrapper(Vec<String>);
+
+impl std::fmt::Display for Wrapper {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "[{}]", self.0.join(", "))
+    }
+}
+```
+
+#### Advanced Types
+
+> Rust provides the ability to declare a type alias to give an existing type another name. 
+
+```rs
+type Kilometers = i32;
+```
+
+作用类似于 C/C++ 的 `typedef` 关键字
+
+> Rust has a special type named `!` that’s known in type theory lingo as the ***empty type*** because it has no values. We prefer to call it the never type because it stands in the place of the return type when a function will never return. 
+
+>This code is read as “the function bar returns never.” Functions that return never are called diverging functions.
+
+常用于永远不会返回的函数，这个场景在系统领域还是蛮常见的，例如系统启动后的进入的函数 `kernel_main`，它就是不可能返回的 (轮询直到关机)，或者是捕获 `panic` 后的处理函数，它也是不会返回的 (直接终止程序)
+
+> The formal way of describing this behavior is that expressions of type `!` can be coerced into any other type. 
+
+```rs
+fn bar() -> ! {
+    ...
+}
+```
+
+Dynamically Sized Types and the Sized Trait
+
+> Rust needs to know certain details about its types, such as how much space to allocate for a value of a particular type. This leaves one corner of its type system a little confusing at first: the concept of dynamically sized types. Sometimes referred to as DSTs or unsized types, these types let us write code using values whose size we can know only at runtime.
+
+> To work with DSTs, Rust provides the `Sized` trait to determine whether or not a type’s size is known at compile time. This trait is automatically implemented for everything whose size is known at compile time. In addition, Rust implicitly adds a bound on `Sized` to every generic function. 
+
+```rs
+fn generic<T>(t: T) {...}
+// is actually treated as though we had written this
+fn generic<T: Sized>(t: T) {...}
+```
+
+> By default, generic functions will work only on types that have a known size at compile time. However, you can use the following special syntax to relax this restriction:
+
+```rs
+fn generic<T: ?Sized>(t: &T) {...}
+```
+
+也就是说，我们需要手动标注的只有 `?Sized` 这个 Trait (用于标识该类型不是编译时期可以确定的，而是动态类型)，`Sized` 这个 Trait 编译器会帮我们自动默认加上标注，一般不需要特别关心
+
+#### Advanced Functions and Closures
+
+> The `fn` type is called a function pointer. Passing functions with function pointers will allow you to use functions as arguments to other functions.
+
+> Unlike closures, `fn` is a type rather than a trait, so we specify `fn` as the parameter type directly rather than declaring a generic type parameter with one of the `Fn` traits as a trait bound.
+
+```rs
+fn do_twice(f: fn(i32) -> i32, arg: i32) -> i32 {
+    f(arg) + f(arg)
+}
+```
+
+> Function pointers implement all three of the closure traits (`Fn`, `FnMut`, and `FnOnce`), meaning you can always pass a function pointer as an argument for a function that expects a closure. It’s best to write functions using a generic type and one of the closure traits so your functions can accept either functions or closures.
+
+因为函数指针类型 `fn` 实现了闭包的全部三种 Trait，所以还是推荐使用 **泛型约束** 的写法来传递参数，这样既可以接收函数指针也可以接收闭包。但是当需要与其他语言交互时，其他语言可能不支持闭包，这时就只能使用函数指针 `fn` 作为参数传递了:
+
+> That said, one example of where you would want to only accept `fn` and not closures is when interfacing with external code that doesn’t have closures: C functions can accept functions as arguments, but C doesn’t have closures.
+
+> Closures are represented by traits, which means you can’t return closures directly. 
+
+所以使用类似的技巧来返回闭包，即通过 `Box` 来包装返回的闭包
+
+#### Macros
+
+> Fundamentally, macros are a way of writing code that writes other code, which is known as metaprogramming.
+
+宏是关于编程本质是 ***字符串处理*** 的最好阐释
+
+> The most widely used form of macros in Rust is the declarative macro. These are also sometimes referred to as “macros by example,” “`macro_rules!` macros,” or just plain “macros.” At their core, declarative macros allow you to write something similar to a Rust `match` expression. 
+
+```rs
+#[macro_export]
+macro_rules! vec {
+    ( $( $x:expr ),* ) => {
+        {
+            let mut temp_vec = Vec::new();
+            $(
+                temp_vec.push($x);
+            )*
+            temp_vec
+        }
+    };
+}
+```
+
+{{< admonition >}}
+延伸阅读: [Crust of Rust: Declarative Macros]({{< relref "./declarative-macros.md" >}})
+{{< /admonition >}}
+
+> The second form of macros is the procedural macro, which acts more like a function (and is a type of procedure). Procedural macros accept some code as an input, operate on that code, and produce some code as an output rather than matching against patterns and replacing the code with other code as declarative macros do.
+
+```rs
+use proc_macro;
+
+#[some_attribute]
+pub fn some_name(input: TokenStream) -> TokenStream {
+}
+```
+
+{{< admonition >}}
+延伸阅读: [Procedural Macros](https://www.youtube.com/playlist?list=PLqbS7AVVErFgwC_HByFYblghsDsD5wZDv)
+{{< /admonition >}}
+
+### Final Project: Web Server
+
+Documentation:
+
+
+## References
+
+- [The Rust Programming Language - Brown University](https://rust-book.cs.brown.edu/)
+- Visualizing memory layout of Rust\'s data types: [录影](https://www.youtube.com/watch?v=7_o-YRxf_cc&t=0s) / [中文翻译](https://www.bilibili.com/video/BV1KT4y167f1)
+- [Rust 语言圣经 (Rust Course)](https://course.rs/about-book.html)
+- [Learn Rust the Dangerous Way](https://cliffle.com/p/dangerust/)
+- [pretzelhammer\'s Rust blog](https://github.com/pretzelhammer/rust-blog)

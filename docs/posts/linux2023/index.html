@@ -13,8 +13,8 @@
 <meta itemprop="description" content="
 在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
 "><meta itemprop="datePublished" content="2024-02-28T20:46:33+08:00" />
-<meta itemprop="dateModified" content="2024-05-01T20:00:05+08:00" />
-<meta itemprop="wordCount" content="9359"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-06-14T21:15:20+08:00" />
+<meta itemprop="wordCount" content="9360"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux," /><meta property="og:title" content="Linux 核心设计/实作 (Linux Kernel Internals)" />
 <meta property="og:description" content="
 在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度
@@ -22,7 +22,7 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/linux2023/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-02-28T20:46:33+08:00" />
-<meta property="article:modified_time" content="2024-05-01T20:00:05+08:00" />
+<meta property="article:modified_time" content="2024-06-14T21:15:20+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Linux 核心设计/实作 (Linux Kernel Internals)"/>
@@ -32,7 +32,7 @@
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/linux2023/" /><link rel="prev" href="https://ccrysisa.github.io/posts/rust-cli/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/linux2023/" /><link rel="prev" href="https://ccrysisa.github.io/posts/too-many-lists/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -43,8 +43,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux2023\/"
-    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  9359 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023\/","datePublished": "2024-02-28T20:46:33+08:00","dateModified": "2024-05-01T20:00:05+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  9360 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023\/","datePublished": "2024-02-28T20:46:33+08:00","dateModified": "2024-06-14T21:15:20+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -172,7 +172,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-28 20:46:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="更新于 2024-05-01 20:00:05"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-05-01">2024-05-01</time></span>&nbsp;<span title="9359 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 9400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 19 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-02-28 20:46:33"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-28">2024-02-28</time></span>&nbsp;<span title="更新于 2024-06-14 21:15:20"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-14">2024-06-14</time></span>&nbsp;<span title="9360 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 9400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 19 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -187,6 +187,7 @@
         <li><a href="#第-3-週-並行和-c-語言程式設計">第 3 週: 並行和 C 語言程式設計</a></li>
         <li><a href="#第-4-週-數值系統--編譯器">第 4 週: 數值系統 + 編譯器</a></li>
         <li><a href="#第-5-週-linux-cpu-scheduler">第 5 週: Linux CPU scheduler</a></li>
+        <li><a href="#第-6-週-system-call--cpu-scheduler">第 6 週: System call + CPU Scheduler</a></li>
       </ul>
     </li>
   </ul>
@@ -275,11 +276,11 @@
 <li>佳句偶得：「大部分的人一輩子洞察力不彰，原因之一是怕講錯被笑。想了一點點就不敢繼續也沒記錄或分享，時間都花在讀書查資料看別人怎麼想。看完就真的沒有自己的洞察了」(<a href="https://www.facebook.com/chtsai/posts/pfbid0Sw9Bv8GN8houyS6A6Mvg5gtWXShKFgguhTHuNFsDDGn9XZQE7C64pBy5atB9gXtJl"target="_blank" rel="external nofollow noopener noreferrer">出處</a>)</li>
 <li><a href="https://hackmd.io/@sysprog/linux2023-homework1"target="_blank" rel="external nofollow noopener noreferrer">作業</a>: 截止繳交日: Feb 28, 2023
 <ul>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/linux2023-lab0"target="_blank" rel="external nofollow noopener noreferrer">lab0</a><code>*</code></li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/linux2023-lab0"target="_blank" rel="external nofollow noopener noreferrer">lab0</a><code>*</code></li>
 <li><a href="https://hackmd.io/@sysprog/ByiHJidps"target="_blank" rel="external nofollow noopener noreferrer">quiz1</a></li>
 </ul>
 </li>
-<li>第 1 週隨堂測驗: <a href="https://hackmd.io/@sysprog/linux2023-quiz1"target="_blank" rel="external nofollow noopener noreferrer">題目</a> (內含作答表單)</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 第 1 週隨堂測驗: <a href="https://hackmd.io/@sysprog/linux2023-quiz1"target="_blank" rel="external nofollow noopener noreferrer">題目</a> (內含作答表單)</li>
 <li><a href="https://hackmd.io/VIvUZemESvGUev4aCwOnWA?view"target="_blank" rel="external nofollow noopener noreferrer">課堂問答簡記</a></li>
 </ul>
 <h3 id="第-2-週-c-語言程式設計">第 2 週: C 語言程式設計</h3>
@@ -321,7 +322,7 @@
 <li>取材自 dangling pointer, CWE-416 Use After Free, CVE-2017-16943 以及 integer overflow 的議題;</li>
 </ul>
 </li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-memory"target="_blank" rel="external nofollow noopener noreferrer">C 語言：記憶體管理、對齊及硬體特性</a><code>*</code>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-memory"target="_blank" rel="external nofollow noopener noreferrer">C 語言：記憶體管理、對齊及硬體特性</a><code>*</code>
 <ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 搭配閱讀: <a href="http://www.catb.org/esr/structure-packing/"target="_blank" rel="external nofollow noopener noreferrer">The Lost Art of Structure Packing</a></li>
 <li>從虛擬記憶體談起，歸納出現代銀行和虛擬記憶體兩者高度相似: malloc 給出 valid pointer 不要太高興，等你要開始用的時候搞不好作業系統給個 OOM ——簡單來說就是一張支票，能不能拿來開等到兌現才知道。</li>
@@ -433,7 +434,7 @@
 </ul>
 </li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-compiler-construction"target="_blank" rel="external nofollow noopener noreferrer">C 編譯器原理和案例分析</a><code>*</code></li>
-<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-undefined-behavior"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 未定義行為</a><code>*</code>: C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-undefined-behavior"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 未定義行為</a><code>*</code>: C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化</li>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-compiler-optimization"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 編譯器和最佳化原理</a><code>*</code></li>
 <li>《Demystifying the Linux CPU Scheduler》第 1 章</li>
 <li><a href="https://hackmd.io/@sysprog/linux2023-homework4"target="_blank" rel="external nofollow noopener noreferrer">作業</a>: 截止繳交日: Mar 30
@@ -451,7 +452,7 @@
 <p>(Mar 13, 14, 16)</p>
 </blockquote>
 <ul>
-<li><a href="https://youtu.be/f-SprmkcOI0"target="_blank" rel="external nofollow noopener noreferrer">教材解說</a><code>*</code> (僅止於概況，請詳閱下方教材及個別的對應解說錄影)</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://youtu.be/f-SprmkcOI0"target="_blank" rel="external nofollow noopener noreferrer">教材解說</a><code>*</code> (僅止於概況，請詳閱下方教材及個別的對應解說錄影)</li>
 </ul>
 <ul>
 <li>公告:
@@ -459,23 +460,23 @@
 <li>本週導入客製化作業，讓學員選擇改進前四週的作業或自訂題目 (例如貢獻程式碼到 Linux 核心)，隨後安排授課教師和學員的線上一對一討論</li>
 </ul>
 </li>
-<li><a href="https://hackmd.io/@sysprog/c-floating-point"target="_blank" rel="external nofollow noopener noreferrer">浮點數運算</a><code>*</code>: 工程領域往往是一系列的取捨結果，浮點數更是如此，在軟體發開發有太多失誤案例源自工程人員對浮點數運算的掌握不足，本議程希望藉由探討真實世界的血淋淋案例，帶著學員思考 IEEE 754 規格和相關軟硬體考量點，最後也會探討在深度學習領域為了改善資料處理效率，而引入的 <a href="https://en.wikipedia.org/wiki/Bfloat16_floating-point_format"target="_blank" rel="external nofollow noopener noreferrer">BFloat16</a> 這樣的新標準
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-floating-point"target="_blank" rel="external nofollow noopener noreferrer">浮點數運算</a><code>*</code>: 工程領域往往是一系列的取捨結果，浮點數更是如此，在軟體發開發有太多失誤案例源自工程人員對浮點數運算的掌握不足，本議程希望藉由探討真實世界的血淋淋案例，帶著學員思考 IEEE 754 規格和相關軟硬體考量點，最後也會探討在深度學習領域為了改善資料處理效率，而引入的 <a href="https://en.wikipedia.org/wiki/Bfloat16_floating-point_format"target="_blank" rel="external nofollow noopener noreferrer">BFloat16</a> 這樣的新標準
 <ul>
-<li><a href="https://twitter.com/rasbt/status/1631679894219284480"target="_blank" rel="external nofollow noopener noreferrer">float16 vs. bfloat16</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://twitter.com/rasbt/status/1631679894219284480"target="_blank" rel="external nofollow noopener noreferrer">float16 vs. bfloat16</a></li>
 </ul>
 </li>
 <li>記憶體配置器涉及 bitwise 操作及浮點數運算。傳統的即時系統和該領域的作業系統 (即 RTOS) 為了讓系統行為更可預測，往往捨棄動態記憶體配置的能力，但這顯然讓系統的擴充能力大幅受限。後來研究人員提出 TLSF (Two-Level Segregated Fit) 嘗試讓即時系統也能享用動態記憶體管理，其關鍵訴求是 &ldquo;O(1) cost for malloc, free, realloc, aligned_alloc&rdquo;
 <ul>
-<li><a href="https://www.forrestthewoods.com/blog/benchmarking-malloc-with-doom3/"target="_blank" rel="external nofollow noopener noreferrer">Benchmarking Malloc with Doom 3</a></li>
-<li><a href="https://github.com/jserv/tlsf-bsd"target="_blank" rel="external nofollow noopener noreferrer">tlsf-bsd</a></li>
-<li>TLSF: <a href="https://brnz.org/hbr/?p=1735"target="_blank" rel="external nofollow noopener noreferrer">Part 1: Background</a>, <a href="https://brnz.org/hbr/?p=1744"target="_blank" rel="external nofollow noopener noreferrer">Part 2: The floating point</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://www.forrestthewoods.com/blog/benchmarking-malloc-with-doom3/"target="_blank" rel="external nofollow noopener noreferrer">Benchmarking Malloc with Doom 3</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://github.com/jserv/tlsf-bsd"target="_blank" rel="external nofollow noopener noreferrer">tlsf-bsd</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> TLSF: <a href="https://brnz.org/hbr/?p=1735"target="_blank" rel="external nofollow noopener noreferrer">Part 1: Background</a>, <a href="https://brnz.org/hbr/?p=1744"target="_blank" rel="external nofollow noopener noreferrer">Part 2: The floating point</a></li>
 </ul>
 </li>
-<li><a href="https://hackmd.io/@sysprog/linux-kernel-module"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心模組運作原理</a></li>
-<li><a href="https://hackmd.io/@sysprog/linux-scheduler"target="_blank" rel="external nofollow noopener noreferrer">Linux: 不只挑選任務的排程器</a><code>*</code>: 排程器 (scheduler) 是任何一個多工作業系統核心都具備的機制，但彼此落差極大，考量點不僅是演算法，還有當應用規模提昇時 (所謂的 scalability) 和涉及即時處理之際，會招致不可預知的狀況 (non-determinism)，不僅即時系統在意，任何建構在 Linux 核心之上的大型服務都會深受衝擊。是此，Linux 核心的排程器經歷多次變革，需要留意的是，排程的難度不在於挑選下一個可執行的行程 (process)，而是讓執行完的行程得以安插到合適的位置，使得 runqueue 依然依據符合預期的順序。</li>
-<li><a href="https://hackmd.io/@sysprog/c-dynamic-linkage"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 動態連結器</a><code>*</code></li>
-<li><a href="https://hackmd.io/@sysprog/c-linker-loader"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 連結器和執行檔資訊</a><code>*</code></li>
-<li><a href="https://hackmd.io/@sysprog/c-runtime"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 執行階段程式庫 (CRT)</a><code>*</code></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/linux-kernel-module"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心模組運作原理</a></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/linux-scheduler"target="_blank" rel="external nofollow noopener noreferrer">Linux: 不只挑選任務的排程器</a><code>*</code>: 排程器 (scheduler) 是任何一個多工作業系統核心都具備的機制，但彼此落差極大，考量點不僅是演算法，還有當應用規模提昇時 (所謂的 scalability) 和涉及即時處理之際，會招致不可預知的狀況 (non-determinism)，不僅即時系統在意，任何建構在 Linux 核心之上的大型服務都會深受衝擊。是此，Linux 核心的排程器經歷多次變革，需要留意的是，排程的難度不在於挑選下一個可執行的行程 (process)，而是讓執行完的行程得以安插到合適的位置，使得 runqueue 依然依據符合預期的順序。</li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-dynamic-linkage"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 動態連結器</a><code>*</code></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-linker-loader"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 連結器和執行檔資訊</a><code>*</code></li>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@sysprog/c-runtime"target="_blank" rel="external nofollow noopener noreferrer">C 語言: 執行階段程式庫 (CRT)</a><code>*</code></li>
 <li><a href="https://hackmd.io/@sysprog/linux2023-homework5"target="_blank" rel="external nofollow noopener noreferrer">作業</a>: 截止繳交 Apr 10
 <ul>
 <li><a href="https://hackmd.io/@sysprog/r1O7Xcp12"target="_blank" rel="external nofollow noopener noreferrer">assessment</a></li>
@@ -486,9 +487,10 @@
 <ul>
 <li><a href="https://hackmd.io/@sysprog/rJVas7NJn"target="_blank" rel="external nofollow noopener noreferrer">課堂問答簡記</a></li>
 </ul>
-<ul>
-<li>
-<p>第 6 週 (Mar 20, 21, 23): System call + CPU Scheduler</p>
+<h3 id="第-6-週-system-call--cpu-scheduler">第 6 週: System call + CPU Scheduler</h3>
+<blockquote>
+<p>(Mar 20, 21, 23)</p>
+</blockquote>
 <ul>
 <li><a href="https://youtu.be/zW_MAMy7DBE"target="_blank" rel="external nofollow noopener noreferrer">教材解說</a><code>*</code> (僅止於概況，請詳閱下方教材及個別的對應解說錄影)</li>
 </ul>
@@ -525,7 +527,7 @@
 <ul>
 <li><a href="https://hackmd.io/@sysprog/rJVas7NJn"target="_blank" rel="external nofollow noopener noreferrer">課堂問答簡記</a></li>
 </ul>
-</li>
+<ul>
 <li>
 <p>第 7 週 (Mar 27, 28, 30): Process, 並行和多執行緒</p>
 <ul>
@@ -952,7 +954,7 @@ Applications For Linux</a> / <a href="https://evlproject.org/"target="_blank" re
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-05-01 20:00:05">更新于 2024-05-01&nbsp;</span>
+        <span title="更新于 2024-06-14 21:15:20">更新于 2024-06-14&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/linux2023/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
@@ -977,7 +979,7 @@ Applications For Linux</a> / <a href="https://evlproject.org/"target="_blank" re
     </section>
   </div>
 
-  <div class="post-nav"><a href="/posts/rust-cli/" class="post-nav-item" rel="prev" title="Command Line Applications in Rust"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Command Line Applications in Rust</a></div>
+  <div class="post-nav"><a href="/posts/too-many-lists/" class="post-nav-item" rel="prev" title="手把手带你使用 Rust 实现链表"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>手把手带你使用 Rust 实现链表</a></div>
 </div>
 </article></main><footer class="footer">
     <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
