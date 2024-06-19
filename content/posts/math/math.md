@@ -42,14 +42,18 @@ repost:
 
 <!--more-->
 
-- [中大數學系開放式課程](http://www.math.ncu.edu.tw/~cchsiao/OCW/)
-- 國立台灣大學 齊震宇
-  - 數學導論：[相關講義](httbookps://equation.nidbox.com/diary/read/9028768) / [教學錄影](https://www.bilibili.com/video/BV1wx411W7vB)
-  - 數學潛水艇：[綫性代數](https://www.bilibili.com/video/BV184411F7wr/)、[拓撲](https://www.bilibili.com/video/BV1mt411u74C/)
-  - 微積分
-  - 分析
-- 國立台灣大學 謝銘倫
-  - 綫性代數
+## 资源导航
+
+[中大數學系開放式課程](http://www.math.ncu.edu.tw/~cchsiao/OCW/)
+
+國立台灣大學 齊震宇
+- 數學導論：[相關講義](httbookps://equation.nidbox.com/diary/read/9028768) / [教學錄影](https://www.bilibili.com/video/BV1wx411W7vB)
+- 數學潛水艇：[綫性代數](https://www.bilibili.com/video/BV184411F7wr/)、[拓撲](https://www.bilibili.com/video/BV1mt411u74C/)
+- 微積分: [Part 1](https://www.bilibili.com/video/BV1xY411q75M/), [Part 2](https://www.bilibili.com/video/BV1pA41167tJ/)
+- 分析
+
+國立台灣大學 謝銘倫
+- 綫性代數
 
 ## 逻辑、集合论
 

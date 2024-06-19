@@ -33,6 +33,11 @@
   url: https://github.com/angrave/SystemProgramming/wiki
   description: Angrave's crowd-sourced System Programming wiki-book
 
+- nickname: Herb Sutter
+  avatar: https://herbsutter.com/wp-content/uploads/2024/03/herb-cppcon-2021.jpg
+  url: https://herbsutter.com/
+  description: Herb Sutter on software development
+
 - nickname: vanJker
   avatar: https://avatars.githubusercontent.com/u/88960102?s=96&v=4
   url: https://github.com/vanJker
