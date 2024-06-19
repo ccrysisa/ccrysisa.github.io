@@ -74,7 +74,7 @@ fn main() {
 {{< /admonition >}}
 
 符号 `[]` 表示数据存放在 stack 上，`()` 则表示数据存放在 heap 上，上面例子的内存分布为:
-```
+```rs
 [List 1, ptr] -> (List 2, ptr) -> (Nil)
 ```
 
@@ -83,12 +83,12 @@ fn main() {
 2. 最后的空元素 `Nil` 也需要分配空间
 
 而我们预期的内存分布为:
-```
+```rs
 [ptr] -> (List 1, ptr) -> (List 2, ptr) -> (Nil)
 ```
 
 这样的内存分布更加节省 stack 空间，并且将所有的链表节点都放置在 heap 上，这样在链表拆分和合并时就不需要对头结点进行额外考量和处理，下面是两种内存布局在链表拆分时的对比:
-```
+```rs
 // first entry in stack
 [List 1, ptr] -> (List 2, ptr) -> (List 3, ptr) -> (Nil)
 split off 3:
@@ -105,7 +105,7 @@ split off 3:
 显然第一种方式在链表拆分时涉及到链表元素在 stack 和 heap 之间的位置变换，链表合并也类似，请自行思考。
 
 但是这个内存布局并不是最好的，我们想要达到类似 C/C++ 的链表的内存布局:
-```
+```rs
 [ptr] -> (List 1, ptr) -> (List 2, ptr) -> (List 3, null)
 ```
 
@@ -176,7 +176,18 @@ impl<T> Drop for List<T> {
 }
 ```
 
-将每个节点 node 被指向的指针 (`Box` 指针) 都清除掉，这样 Rust 的所有权机制就会将这些节点 node 占据的内存空间进行清理。
+将每个节点 node 被指向的指针 (`Box` 指针) 都清除掉，这样 Rust 的所有权机制就会将这些节点 node 占据的内存空间进行清理，这样空间复杂度为 $O(1)$。
+
+通过循环手动实现 `drop` 的意义在于，如果依赖自动清理的话，`drop` 机制会不断进行递归，进而可能导致栈溢出 (因为没有尾递归优化)，所以空间复杂度为 $O(N)$ ($N$ 为链表节点个数)。例如对于链表 `[a, b, c]` 的自动 `drop`，其调用栈为:
+
+```
+stack
+  | | drop(a) |
+  |     | drop(b) |
+  v         | drop(c) |
+```
+
+而我们通过循环来手动实现的 `drop` 则不会导致栈溢出，因为空间复杂度为 $O(1)$。
 
 - Trait [std::ops::Drop](https://doc.rust-lang.org/std/ops/trait.Drop.html)
 
@@ -248,7 +259,7 @@ impl<T> List<T> {
 }
 ```
 
-- method [std::option::Option::as_deref_mut](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_deref_mut)
+- method [std::option::Option::as_deref](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_deref)
 > Leaves the original Option in-place, creating a new one with a reference to the original one, additionally coercing the contents via `Deref`.
 
 在这里可以一窥 `as_deref` 的作用，例如下面两条语句的作用是相同的:
@@ -263,7 +274,64 @@ self.0 = node.next.as_deref();
 ### iter_mut
 
 ```rs
+impl<'a, T> IntoIterator for &'a mut List<T> {
+    type Item = &'a mut T;
+    type IntoIter = IterMut<'a, T>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        IterMut(self.head.as_deref_mut())
+    }
+}
+
+pub struct IterMut<'a, T>(Option<&'a mut Node<T>>);
+
+impl<'a, T> Iterator for IterMut<'a, T> {
+    type Item = &'a mut T;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.0.take().map(|node| {
+            self.0 = node.next.as_deref_mut();
+            &mut node.elem
+        })
+    }
+}
+
+impl<T> List<T> {
+    pub fn iter_mut(&mut self) -> IterMut<T> {
+        self.into_iter()
+    }
+}
 ```
+
+- method [std::option::Option::as_deref_mut](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_deref_mut)
+> Leaves the original Option in-place, creating a new one containing a mutable reference to the inner type’s `Deref::Target` type.
+
+到目前为止，我们已经通过 `Box` 指针实现了一个简单的单链表，但由于 Rust 的所有权机制，导致这个单链表的节点 `Node` 只能被一个 `Box` 指针指向，接下来我们通过智能指针来解除这个限制，实作 *持久化的共享链表*。
+
+```rs
+// current
+list -> A -> B -> C
+
+// expect
+list 1 -> A ---+
+               |
+               v
+list 2 -> B -> C -> D
+               ^
+               |
+list 3 -> X ---+
+
+list 1: [A, C, D]
+list 2: [B, C, D]
+list 3: [X, C, D]
+```
+
+上图的节点 `B` 的被多个节点 (节点 `A` 和节点 `X`) 所指向，设定其所有权是共享的比较好处理，因为使用引用的话，会被借用检查机制限制，修改时比较麻烦 (只能被一个可变引用所借用)
+
+## 持久化共享链表
+
+- **持久化**: 节点如果被至少一个指针指向，则不会释放；如果没有被指向，则进行释放
+- **共享**: 节点可以被多个指针所指向
 
 ## Documentations
 

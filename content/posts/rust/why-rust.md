@@ -1609,7 +1609,8 @@ Documentation:
 ## References
 
 - [The Rust Programming Language - Brown University](https://rust-book.cs.brown.edu/)
-- Visualizing memory layout of Rust\'s data types: [录影](https://www.youtube.com/watch?v=7_o-YRxf_cc&t=0s) / [中文翻译](https://www.bilibili.com/video/BV1KT4y167f1)
 - [Rust 语言圣经 (Rust Course)](https://course.rs/about-book.html)
-- [Learn Rust the Dangerous Way](https://cliffle.com/p/dangerust/)
+- Rust 编程视频教程: [基础](https://www.bilibili.com/video/BV1xJ411B79h/)、[进阶](https://www.bilibili.com/video/BV1FJ411Y71o/)
+- Visualizing memory layout of Rust\'s data types: [录影](https://www.youtube.com/watch?v=7_o-YRxf_cc&t=0s) / [中文翻译](https://www.bilibili.com/video/BV1KT4y167f1)
 - [pretzelhammer\'s Rust blog](https://github.com/pretzelhammer/rust-blog)
+- [Learn Rust the Dangerous Way](https://cliffle.com/p/dangerust/)
