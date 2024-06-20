@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
+<meta name="author-link" content="https://github.com/ccrysisa">
+<meta name="description" content="
+This is a two-part talk that covers the C&#43;&#43; memory model, how locks and atomics and fences interact and map to hardware, and more. Even though we’re talking about C&#43;&#43;, much of this is also applicable to Java and .NET which have similar memory models, but not all the features of C&#43;&#43; (such as relaxed atomics).
+" /><meta name="keywords" content='Sysprog, Concurrency, C&#43;&#43;' /><meta itemprop="name" content="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware">
+<meta itemprop="description" content="
+This is a two-part talk that covers the C&#43;&#43; memory model, how locks and atomics and fences interact and map to hardware, and more. Even though we’re talking about C&#43;&#43;, much of this is also applicable to Java and .NET which have similar memory models, but not all the features of C&#43;&#43; (such as relaxed atomics).
+"><meta itemprop="datePublished" content="2024-06-19T09:43:11+08:00" />
+<meta itemprop="dateModified" content="2024-06-19T12:52:01+08:00" />
+<meta itemprop="wordCount" content="540"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Sysprog,Concurrency,C&#43;&#43;," /><meta property="og:title" content="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware" />
+<meta property="og:description" content="
+This is a two-part talk that covers the C&#43;&#43; memory model, how locks and atomics and fences interact and map to hardware, and more. Even though we’re talking about C&#43;&#43;, much of this is also applicable to Java and .NET which have similar memory models, but not all the features of C&#43;&#43; (such as relaxed atomics).
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ccrysisa.github.io/posts/atomic-weapons/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-06-19T09:43:11+08:00" />
+<meta property="article:modified_time" content="2024-06-19T12:52:01+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware"/>
+<meta name="twitter:description" content="
+This is a two-part talk that covers the C&#43;&#43; memory model, how locks and atomics and fences interact and map to hardware, and more. Even though we’re talking about C&#43;&#43;, much of this is also applicable to Java and .NET which have similar memory models, but not all the features of C&#43;&#43; (such as relaxed atomics).
+"/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/atomic-weapons/" /><link rel="prev" href="https://ccrysisa.github.io/posts/too-many-lists/" /><link rel="next" href="https://ccrysisa.github.io/posts/linux2023/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Atomic Weapons: The C++ Memory Model and Modern Hardware",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/ccrysisa.github.io\/posts\/atomic-weapons\/"
+    },"genre": "posts","keywords": "Sysprog, Concurrency, C\u002b\u002b","wordcount":  540 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/atomic-weapons\/","datePublished": "2024-06-19T09:43:11+08:00","dateModified": "2024-06-19T12:52:01+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "ccrysisa"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-user-group fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-user-group fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/concurrency/" class="post-category" title="分类 - Concurrency"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Concurrency</a></span></div><div class="post-meta-line"><span title="发布于 2024-06-19 09:43:11"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-19">2024-06-19</time></span>&nbsp;<span title="更新于 2024-06-19 12:52:01"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-19">2024-06-19</time></span>&nbsp;<span title="540 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前置知识">前置知识</a></li>
+    <li><a href="#part-1">Part 1</a>
+      <ul>
+        <li><a href="#optimizations-races-and-the-memory-model">Optimizations, races, and the memory model</a></li>
+        <li><a href="#acquire-and-release-ordering">acquire and release ordering</a></li>
+        <li><a href="#mutexes-vs-atomics-vs-fences">mutexes vs. atomics vs. fences</a></li>
+      </ul>
+    </li>
+    <li><a href="#part-2">Part 2</a>
+      <ul>
+        <li><a href="#restrictions-on-compilers-and-hardware-incl-common-bugs">Restrictions on compilers and hardware (incl. common bugs)</a></li>
+        <li><a href="#code-generation-and-performance-on-x86x64-ia64-power-arm-and-more">code generation and performance on x86/x64, IA64, POWER, ARM, and more</a></li>
+        <li><a href="#relaxed-atomics-volatile">relaxed atomics; volatile</a></li>
+      </ul>
+    </li>
+    <li><a href="#加餐">加餐</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><blockquote>
+<p>This is a two-part talk that covers the C++ memory model, how locks and atomics and fences interact and map to hardware, and more. Even though we’re talking about C++, much of this is also applicable to Java and .NET which have similar memory models, but not all the features of C++ (such as relaxed atomics).</p>
+</blockquote>
+<ul>
+<li><a href="https://herbsutter.com/2013/02/11/atomic-weapons-the-c-memory-model-and-modern-hardware/"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a> (里面有解说影片链接)</li>
+</ul>
+<h2 id="前置知识" class="heading-element">
+  <a href="#%e5%89%8d%e7%bd%ae%e7%9f%a5%e8%af%86" class="heading-mark"></a>前置知识</h2><p>至少把 Jserv 的 <a href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fconcurrency-ordering"target="_blank" rel="external nofollow noopener noreferrer">并行程序设计: 执行顺序<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a> 的前半段 (即内存模型前面的那一部分) 掌握，特别是重要的概念 happens-before</p>
+<h2 id="part-1" class="heading-element">
+  <a href="#part-1" class="heading-mark"></a>Part 1</h2><h3 id="optimizations-races-and-the-memory-model" class="heading-element">
+  <a href="#optimizations-races-and-the-memory-model" class="heading-mark"></a>Optimizations, races, and the memory model</h3><p>3-1</p>
+<p>3-2</p>
+<p>5-2</p>
+<p>7-2</p>
+<p>8-2
+在没有编译器和处理器进行指令重排序的情况下，执行结果也可能不如你预期那样，因为 Store Buffer 和 Memmory 的内容可能不是一致的，这样造成的结果是:</p>
+<blockquote>
+<p>It&rsquo;s exactly as if you had reordered them and done the read before the write</p>
+</blockquote>
+<p>Damn! 去除编译器和处理器的指令重排序后，居然还会出现和重排序一样的结果！！(这是 Cache 带来的挑战: 数据不一致) 虽然 Write 操作发生在 Read 之前 (Write <strong>happeding-before</strong> Read)，但是 Write 的效果在 Read 之后才可见 (Read <strong>happens-before</strong> Write)。所以编译器、处理器和 Cache 都可以做到指令重排序的效果。</p>
+<p>BTW 这段程序里每个 thread 对 flag 的 Read 和 Write 在编译器 / 处理器看来是独立的 (independent)，它们没法推断出这两个操作之间的顺序 (ordering) 关系，所以极大可能会进行重排序，当然结果不会符合你的预期。</p>
+<p>10-1</p>
+<p>10-2 SC-DRF 提高了程序执行的效能</p>
+<p>11-1</p>
+<p>11-2
+<div class="details admonition info open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>pink elephants<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">no sequential jump, for example, you hit step next and you go up, or you hit step next and your current line disappears and you're nowhere.</div>
+    </div>
+  </div></p>
+<h3 id="acquire-and-release-ordering" class="heading-element">
+  <a href="#acquire-and-release-ordering" class="heading-mark"></a>acquire and release ordering</h3><h3 id="mutexes-vs-atomics-vs-fences" class="heading-element">
+  <a href="#mutexes-vs-atomics-vs-fences" class="heading-mark"></a>mutexes vs. atomics vs. fences</h3><h2 id="part-2" class="heading-element">
+  <a href="#part-2" class="heading-mark"></a>Part 2</h2><h3 id="restrictions-on-compilers-and-hardware-incl-common-bugs" class="heading-element">
+  <a href="#restrictions-on-compilers-and-hardware-incl-common-bugs" class="heading-mark"></a>Restrictions on compilers and hardware (incl. common bugs)</h3><h3 id="code-generation-and-performance-on-x86x64-ia64-power-arm-and-more" class="heading-element">
+  <a href="#code-generation-and-performance-on-x86x64-ia64-power-arm-and-more" class="heading-mark"></a>code generation and performance on x86/x64, IA64, POWER, ARM, and more</h3><h3 id="relaxed-atomics-volatile" class="heading-element">
+  <a href="#relaxed-atomics-volatile" class="heading-mark"></a>relaxed atomics; volatile</h3><h2 id="加餐" class="heading-element">
+  <a href="#%e5%8a%a0%e9%a4%90" class="heading-mark"></a>加餐</h2><ul>
+<li>bilibili: <a href="https://www.bilibili.com/video/BV1Qy411q7Xq/"target="_blank" rel="external nofollow noopener noreferrer">「C++11」内存序究竟是什么，彻底参悟 C++ 内存模型 (附多线程安全测试通用框架)</a></li>
+</ul></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="更新于 2024-06-19 12:52:01">更新于 2024-06-19&nbsp;</span>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/atomic-weapons/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/atomic-weapons/" data-title="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware" data-hashtags="Sysprog,Concurrency,C&#43;&#43;"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/atomic-weapons/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/atomic-weapons/" data-title="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/atomic-weapons/" data-title="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/atomic-weapons/" data-title="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/atomic-weapons/" data-title="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/atomic-weapons/" data-title="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/atomic-weapons/" data-title="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a><a href="/tags/concurrency/" class="post-tag" title="标签 - Concurrency">Concurrency</a><a href="/tags/c&#43;&#43;/" class="post-tag" title="标签 - C&#43;&#43;">C&#43;&#43;</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/posts/too-many-lists/" class="post-nav-item" rel="prev" title="手把手带你使用 Rust 实现链表"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>手把手带你使用 Rust 实现链表</a>
+      <a href="/posts/linux2023/" class="post-nav-item" rel="next" title="Linux 核心设计/实作 (Linux Kernel Internals)">Linux 核心设计/实作 (Linux Kernel Internals)<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>

@@ -14,7 +14,7 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
 In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mpsc) channels, by re-implementing some of the std::sync::mpsc types from the standard library. As part of that, we cover what channels are used for, how they work at a high level, different common channel variants, and common channel implementations. In the process, we go over some common Rust concurrency primitives like Mutex and Condvar.
 "><meta itemprop="datePublished" content="2024-02-29T20:30:30+08:00" />
 <meta itemprop="dateModified" content="2024-03-04T23:05:35+08:00" />
-<meta itemprop="wordCount" content="1527"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1543"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Channel," /><meta property="og:title" content="Crust of Rust: Channels" />
 <meta property="og:description" content="
 In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mpsc) channels, by re-implementing some of the std::sync::mpsc types from the standard library. As part of that, we cover what channels are used for, how they work at a high level, different common channel variants, and common channel implementations. In the process, we go over some common Rust concurrency primitives like Mutex and Condvar.
@@ -43,7 +43,7 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/channels\/"
-    },"genre": "posts","keywords": "Rust, Channel","wordcount":  1527 ,
+    },"genre": "posts","keywords": "Rust, Channel","wordcount":  1543 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/channels\/","datePublished": "2024-02-29T20:30:30+08:00","dateModified": "2024-03-04T23:05:35+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -55,7 +55,7 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -101,7 +101,7 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -161,18 +161,12 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Crust of Rust: Channels</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-02-29 20:30:30"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="更新于 2024-03-04 23:05:35"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="1527 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/rust/" class="post-category" title="分类 - Rust"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div><div class="post-meta-line"><span title="发布于 2024-02-29 20:30:30"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="更新于 2024-03-04 23:05:35"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="1543 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -212,8 +206,8 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
 <ul>
 <li>整理自 <a href="https://www.youtube.com/watch?v=b4mS5UPHh20"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></li>
 </ul>
-<h2 id="channel">Channel</h2>
-<ul>
+<h2 id="channel" class="heading-element">
+  <a href="#channel" class="heading-mark"></a>Channel</h2><ul>
 <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Channel_%28programming%29"target="_blank" rel="external nofollow noopener noreferrer">Channel</a></li>
 </ul>
 <div class="details admonition quote open">
@@ -227,18 +221,18 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
 <ul>
 <li>YouTube: <a href="https://www.youtube.com/watch?v=vFCTpxuGwpw"target="_blank" rel="external nofollow noopener noreferrer">Channels in Rust</a></li>
 </ul>
-<a class="lightgallery" href="https://marketsplash.com/content/images/2023/09/rust-channels.png?size=large" data-thumbnail="https://marketsplash.com/content/images/2023/09/rust-channels.png?size=small" data-sub-html="<h2>https://marketsplash.com/content/images/2023/09/rust-channels.png</h2>"><img loading="lazy" src="https://marketsplash.com/content/images/2023/09/rust-channels.png" srcset="https://marketsplash.com/content/images/2023/09/rust-channels.png?size=small, https://marketsplash.com/content/images/2023/09/rust-channels.png?size=medium 1.5x, https://marketsplash.com/content/images/2023/09/rust-channels.png?size=large 2x" sizes="auto" data-title="https://marketsplash.com/content/images/2023/09/rust-channels.png" data-alt="https://marketsplash.com/content/images/2023/09/rust-channels.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://marketsplash.com/content/images/2023/09/rust-channels.png?size=large" data-thumbnail="https://marketsplash.com/content/images/2023/09/rust-channels.png?size=small" data-sub-html="<h2>https://marketsplash.com/content/images/2023/09/rust-channels.png</h2>"><img loading="lazy" src="https://marketsplash.com/content/images/2023/09/rust-channels.png" alt="https://marketsplash.com/content/images/2023/09/rust-channels.png" srcset="https://marketsplash.com/content/images/2023/09/rust-channels.png?size=small, https://marketsplash.com/content/images/2023/09/rust-channels.png?size=medium 1.5x, https://marketsplash.com/content/images/2023/09/rust-channels.png?size=large 2x" sizes="auto" data-title="https://marketsplash.com/content/images/2023/09/rust-channels.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <blockquote>
 <p><a href="https://marketsplash.com/tutorials/rust/rust-channels/"target="_blank" rel="external nofollow noopener noreferrer">Source</a></p>
 </blockquote>
-<h3 id="concurrency-vs-parallelism">Concurrency vs Parallelism</h3>
-<ul>
+<h3 id="concurrency-vs-parallelism" class="heading-element">
+  <a href="#concurrency-vs-parallelism" class="heading-mark"></a>Concurrency vs Parallelism</h3><ul>
 <li><a href="https://stackoverflow.com/questions/1050222/what-is-the-difference-between-concurrency-and-parallelism"target="_blank" rel="external nofollow noopener noreferrer">What is the difference between concurrency and parallelism?</a></li>
 <li><a href="https://medium.com/@itIsMadhavan/concurrency-vs-parallelism-a-brief-review-b337c8dac350"target="_blank" rel="external nofollow noopener noreferrer">Concurrency vs. Parallelism — A brief view</a></li>
 </ul>
-<h2 id="影片注解">影片注解</h2>
-<h3 id="sender--receiver">Sender &amp; Receiver</h3>
-<figure><a class="lightgallery" href="/images/rust/mpsc.drawio.svg?size=large" data-thumbnail="/images/rust/mpsc.drawio.svg?size=small" data-sub-html="<h2>multi-produce/single-consumer (mpsc)</h2>"><img loading="lazy" src="/images/rust/mpsc.drawio.svg" srcset="/images/rust/mpsc.drawio.svg?size=small, /images/rust/mpsc.drawio.svg?size=medium 1.5x, /images/rust/mpsc.drawio.svg?size=large 2x" sizes="auto" data-title="/images/rust/mpsc.drawio.svg" data-alt="/images/rust/mpsc.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">multi-produce/single-consumer (mpsc)</figcaption>
+<h2 id="影片注解" class="heading-element">
+  <a href="#%e5%bd%b1%e7%89%87%e6%b3%a8%e8%a7%a3" class="heading-mark"></a>影片注解</h2><h3 id="sender--receiver" class="heading-element">
+  <a href="#sender--receiver" class="heading-mark"></a>Sender &amp; Receiver</h3><figure><a class="lightgallery" href="/images/rust/mpsc.drawio.svg?size=large" data-thumbnail="/images/rust/mpsc.drawio.svg?size=small" data-sub-html="<h2>multi-produce/single-consumer (mpsc)</h2>"><img loading="lazy" src="/images/rust/mpsc.drawio.svg" alt="/images/rust/mpsc.drawio.svg" srcset="/images/rust/mpsc.drawio.svg?size=small, /images/rust/mpsc.drawio.svg?size=medium 1.5x, /images/rust/mpsc.drawio.svg?size=large 2x" sizes="auto" data-title="/images/rust/mpsc.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">multi-produce/single-consumer (mpsc)</figcaption>
   </figure>
 <ul>
 <li>Why does the recevier type need to have an arc protected by mutex if the channel may only have a single consumer thread?</li>
@@ -254,8 +248,8 @@ In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mps
 The problem there is if the flag is currently set (someone else is in the critical section), with a boolean semaphore, you have to spin, you have to repeatedly check it.
 Whereas with a mutex, the operating system can put the thread to sleep and wake it back up when the mutex is available, which is generally more efficient although adds a little bit of latency.</p>
 </blockquote>
-<h3 id="condition-variable">Condition Variable</h3>
-<ul>
+<h3 id="condition-variable" class="heading-element">
+  <a href="#condition-variable" class="heading-mark"></a>Condition Variable</h3><ul>
 <li>method <a href="https://doc.rust-lang.org/std/sync/struct.Condvar.html#method.wait"target="_blank" rel="external nofollow noopener noreferrer">std::sync::Condvar::wait</a></li>
 </ul>
 <blockquote>
@@ -267,10 +261,10 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
 <blockquote>
 <p>If there is a blocked thread on this condition variable, then it will be woken up from its call to wait or wait_timeout. Calls to notify_one are not buffered in any way.</p>
 </blockquote>
-<figure><a class="lightgallery" href="/images/rust/send_recv.drawio.svg?size=large" data-thumbnail="/images/rust/send_recv.drawio.svg?size=small" data-sub-html="<h2>wait &amp; notify</h2>"><img loading="lazy" src="/images/rust/send_recv.drawio.svg" srcset="/images/rust/send_recv.drawio.svg?size=small, /images/rust/send_recv.drawio.svg?size=medium 1.5x, /images/rust/send_recv.drawio.svg?size=large 2x" sizes="auto" data-title="/images/rust/send_recv.drawio.svg" data-alt="/images/rust/send_recv.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">wait &amp; notify</figcaption>
+<figure><a class="lightgallery" href="/images/rust/send_recv.drawio.svg?size=large" data-thumbnail="/images/rust/send_recv.drawio.svg?size=small" data-sub-html="<h2>wait &amp; notify</h2>"><img loading="lazy" src="/images/rust/send_recv.drawio.svg" alt="/images/rust/send_recv.drawio.svg" srcset="/images/rust/send_recv.drawio.svg?size=small, /images/rust/send_recv.drawio.svg?size=medium 1.5x, /images/rust/send_recv.drawio.svg?size=large 2x" sizes="auto" data-title="/images/rust/send_recv.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">wait &amp; notify</figcaption>
   </figure>
-<h3 id="clone">Clone</h3>
-<p>对 <code>struct Sender&lt;T&gt;</code> 标注属性宏 <code>#[derive(clone)]</code> 会实现以下的 triat:</p>
+<h3 id="clone" class="heading-element">
+  <a href="#clone" class="heading-mark"></a>Clone</h3><p>对 <code>struct Sender&lt;T&gt;</code> 标注属性宏 <code>#[derive(clone)]</code> 会实现以下的 triat:</p>
 <div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -299,8 +293,8 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">Arc</span>::<span class="n">clone</span><span class="p">(</span><span class="o">&amp;</span><span class="n">inner</span><span class="p">);</span><span class="w"> </span><span class="c1">// explict Arc::clone !
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="dbg">dbg</h3>
-<ul>
+</div><h3 id="dbg" class="heading-element">
+  <a href="#dbg" class="heading-mark"></a>dbg</h3><ul>
 <li>Macro <a href="https://doc.rust-lang.org/std/macro.dbg.html"target="_blank" rel="external nofollow noopener noreferrer">std::dbg</a></li>
 </ul>
 <div class="details admonition quote open">
@@ -327,15 +321,15 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
     </div>
   </div>
 <p>调试的大杀器，作用类似于 kernel 中的 debugk 宏 &#x1f923; 常用于检测程序运行时是否执行了某些语句，以及这些语句的值如何。</p>
-<h3 id="performance-optimization">Performance optimization</h3>
-<blockquote>
+<h3 id="performance-optimization" class="heading-element">
+  <a href="#performance-optimization" class="heading-mark"></a>Performance optimization</h3><blockquote>
 <p>Every operation takes the lock and that's fine if you have a channel that is not very high performance, but if you wanted like super high performance, like you have a lot of sends that compete with each other, then you might not want the sends to contend with one another.</p>
 <p>Image that you have 10 threads are trying to send at the same time, you could perhaps write an implementation that allows them to do that. The only thing that really needs to be synchronized is the senders with the receivers, as opposed to the senders with one another, whereas we're actually locking all of them.</p>
 </blockquote>
 <p>使用 <code>VecDeque</code> 作为缓冲区，会导致 send 时的效能问题。因为 send 是使用 <code>push_back</code> 方法来将 object 加入到 <code>VecDeque</code> 中，这个过程 <code>VecDeque</code> 可能会发生 resize 操作，这会花费较长时间并且在这个过程时 sender 仍然持有 Mutex，所以导致其他 sender 和 recevier 并不能使用 <code>VecDeque</code>，所以在实作中并不使用 <code>VecDeque</code> 以避免相应的效能损失。</p>
 <p>因为只有一个 receiver，所以可以通过缓冲区来提高效能，一次性接受大批数据并进行缓存，而不是每次只接收一个数据就放弃 Mutex (Batch recv optimization)。当然这个如果使用 <code>VecDeque</code> 依然会在 recv 时出现上面的 resize 效能问题。</p>
-<h3 id="synchronous-channels">Synchronous channels</h3>
-<ul>
+<h3 id="synchronous-channels" class="heading-element">
+  <a href="#synchronous-channels" class="heading-mark"></a>Synchronous channels</h3><ul>
 <li>Module <a href="https://doc.rust-lang.org/std/sync/mpsc/index.html"target="_blank" rel="external nofollow noopener noreferrer">std::sync::mpsc</a></li>
 </ul>
 <blockquote>
@@ -349,8 +343,8 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
 </li>
 </ol>
 </blockquote>
-<h3 id="channel-flavors">Channel flavors</h3>
-<ul>
+<h3 id="channel-flavors" class="heading-element">
+  <a href="#channel-flavors" class="heading-mark"></a>Channel flavors</h3><ul>
 <li><strong>Synchronous channels</strong>: Channel where send() can block. Limited capacity.
 <ul>
 <li>Mutex + Condvar + VecDeque</li>
@@ -368,14 +362,14 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
 <li><strong>Rendezvous channels</strong>: Synchronous with capacity = 0. Used for thread synchronization.</li>
 <li><strong>Oneshot channels</strong>: Any capacity. In practice, only one call to send().</li>
 </ul>
-<h3 id="asyncawait">async/await</h3>
-<ul>
+<h3 id="asyncawait" class="heading-element">
+  <a href="#asyncawait" class="heading-mark"></a>async/await</h3><ul>
 <li>Module <a href="https://doc.rust-lang.org/std/future/index.html"target="_blank" rel="external nofollow noopener noreferrer">std::future</a></li>
 <li>Keyword <a href="https://doc.rust-lang.org/std/keyword.async.html"target="_blank" rel="external nofollow noopener noreferrer">async</a></li>
 <li>Keyword <a href="https://doc.rust-lang.org/std/keyword.await.html"target="_blank" rel="external nofollow noopener noreferrer">await</a></li>
 </ul>
-<h2 id="homework">Homework</h2>
-<div class="details admonition info open">
+<h2 id="homework" class="heading-element">
+  <a href="#homework" class="heading-mark"></a>Homework</h2><div class="details admonition info open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -406,13 +400,13 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
 </div>
     </div>
   </div>
-<h2 id="documentations">Documentations</h2>
-<p>这里列举视频中一些概念相关的 documentation</p>
+<h2 id="documentations" class="heading-element">
+  <a href="#documentations" class="heading-mark"></a>Documentations</h2><p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>
 <p>学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料</p>
 </blockquote>
-<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3>
-<blockquote>
+<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml" class="heading-element">
+  <a href="#crate-stdhttpsdocrust-langorgstdindexhtml" class="heading-mark"></a>Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3><blockquote>
 <p>可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)</p>
 </blockquote>
 <ul>
@@ -456,8 +450,8 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
 <p>Macro <a href="https://doc.rust-lang.org/std/macro.dbg.html"target="_blank" rel="external nofollow noopener noreferrer">std::dbg</a></p>
 </li>
 </ul>
-<h2 id="references">References</h2>
-<ul>
+<h2 id="references" class="heading-element">
+  <a href="#references" class="heading-mark"></a>References</h2><ul>
 <li>Go 语言也有 channel: <a href="https://www.bilibili.com/video/BV1uv4y187p6"target="_blank" rel="external nofollow noopener noreferrer">解说 Go channel 底层原理</a> [bilibili]</li>
 <li><a href="https://www.bilibili.com/video/BV1DK42147jb"target="_blank" rel="external nofollow noopener noreferrer">可能不是你看过最无聊的 Rust 入门喜剧 102 (3) 多线程并发</a> [bilibili]</li>
 </ul></div><div class="post-footer" id="post-footer">
@@ -465,11 +459,10 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-03-04 23:05:35">更新于 2024-03-04&nbsp;</span>
-      </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/channels/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/channels/" data-title="Crust of Rust: Channels" data-hashtags="Rust,Channel"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/channels/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/channels/" data-title="Crust of Rust: Channels" data-hashtags="Rust,Channel"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/channels/" data-hashtag="Rust"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/channels/" data-title="Crust of Rust: Channels" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/channels/" data-title="Crust of Rust: Channels"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -478,12 +471,11 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/channels/" data-title="Crust of Rust: Channels" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/channels/" data-title="Crust of Rust: Channels"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-      </div>
-    </div>
-  </div>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/rust/' class="post-tag">Rust</a><a href='/tags/channel/' class="post-tag">Channel</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/rust/" class="post-tag" title="标签 - Rust">Rust</a><a href="/tags/channel/" class="post-tag" title="标签 - Channel">Channel</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -492,11 +484,14 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
   <div class="post-nav"><a href="/posts/c-standards/" class="post-nav-item" rel="prev" title="你所不知道的 C 语言: 开发工具和规格标准"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>你所不知道的 C 语言: 开发工具和规格标准</a>
       <a href="/posts/riscv-optimization-guide/" class="post-nav-item" rel="next" title="RISC-V Optimization Guide 重点提示">RISC-V Optimization Guide 重点提示<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -504,5 +499,5 @@ Whereas with a mutex, the operating system can put the thread to sleep and wake 
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

@@ -2,7 +2,7 @@
   <channel>
     <title>eBPF - 标签 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/ebpf/</link>
-    <description>eBPF - 标签 - KZnight&#39;s Blog</description>
+    <description>eBPF - 标签 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 10 Jun 2024 23:38:10 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/ebpf/" rel="self" type="application/rss+xml" /><item>
   <title>Rust: 透过 eBPF 探测操作系统行为</title>
