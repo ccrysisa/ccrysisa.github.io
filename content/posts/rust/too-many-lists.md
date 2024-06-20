@@ -502,14 +502,153 @@ type Link<T> = Option<Rc<RefCell<Node<T>>>;
 - [Crust of Rust: Smart Pointers and Interior Mutability]({{< relref "./smart-pointers-and-interior-mutability.md" >}})
 
 ```rs
+#[derive(Debug)]
+pub struct List<T> {
+    head: Link<T>,
+    tail: Link<T>,
+}
 
+#[derive(Debug)]
+struct Node<T> {
+    elem: T,
+    next: Link<T>,
+    prev: Link<T>,
+}
+
+impl<T> Node<T> {
+    pub fn new(elem: T) -> Self {
+        Self {
+            elem,
+            next: None,
+            prev: None,
+        }
+    }
+}
+
+impl<T> List<T> {
+    pub fn new() -> Self {
+        Self {
+            head: None,
+            tail: None,
+        }
+    }
+}
 ```
 
 ### push
 
+```rs
+pub fn push_front(&mut self, elem: T) {
+    let node = Rc::new(RefCell::new(Node::new(elem)));
+    match self.head.take() {
+        Some(head) => {
+            node.borrow_mut().next = Some(head.clone());
+            head.borrow_mut().prev = Some(node.clone());
+            self.head = Some(node.clone());
+        }
+        None => {
+            self.head = Some(node.clone());
+            self.tail = Some(node.clone());
+        }
+    }
+}
+
+pub fn push_back(&mut self, elem: T) {
+    let node = Rc::new(RefCell::new(Node::new(elem)));
+    match self.tail.take() {
+        Some(tail) => {
+            node.borrow_mut().prev = Some(tail.clone());
+            tail.borrow_mut().next = Some(node.clone());
+            self.tail = Some(node.clone());
+        }
+        None => {
+            self.head = Some(node.clone());
+            self.tail = Some(node.clone());
+        }
+    }
+}
+```
+
 - method [std::cell::RefCell::borrow_mut](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.borrow_mut)
+
+### pop
+
+```rs
+pub fn pop_front(&mut self) -> Option<T> {
+    self.head.take().map(|node| {
+        match node.borrow_mut().next.take() {
+            Some(next) => {
+                next.borrow_mut().prev.take();
+                self.head = Some(next.clone());
+            }
+            None => {
+                self.tail.take();
+            }
+        }
+        Rc::try_unwrap(node).ok().unwrap().into_inner().elem
+    })
+}
+
+pub fn pop_back(&mut self) -> Option<T> {
+    self.tail.take().map(|node| {
+        match node.borrow_mut().prev.take() {
+            Some(prev) => {
+                prev.borrow_mut().next.take();
+                self.tail = Some(prev.clone());
+            }
+            None => {
+                self.head.take();
+            }
+        }
+        Rc::try_unwrap(node).ok().unwrap().into_inner().elem
+    })
+}
+```
+
+> Since we don't care about the case where it fails (if we wrote our program correctly, it has to succeed), we just call `unwrap` on it.
+
+正常情况下，我们不会对共享节点进行 `pop` 操作，防止出现数据不一致的情况，所以这里可以直接使用 `unwrap` 来获取内部数据 (因为我们通过 ***contract*** 来保住不会出现 `None` 的情况)。
+
 - method [std::rc::Rc::try_unwrap](https://doc.rust-lang.org/std/rc/struct.Rc.html#method.try_unwrap)
 - method [std::cell::RefCell::into_inner](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.into_inner)
+
+### peek
+
+```rs
+pub fn peek_front(&self) -> Option<Ref<T>> {
+    self.head
+        .as_ref()
+        .map(|node| Ref::map(node.borrow(), |node| &node.elem))
+}
+
+pub fn peek_back(&self) -> Option<Ref<T>> {
+    self.tail
+        .as_ref()
+        .map(|node| Ref::map(node.borrow(), |node| &node.elem))
+}
+```
+
+- method [std::cell::RefCell::borrow](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.borrow)
+- method [std::cell::Ref::map](https://doc.rust-lang.org/std/cell/struct.Ref.html#method.map)
+
+```rs
+pub fn peek_mut_front(&mut self) -> Option<RefMut<T>> {
+    self.head
+        .as_ref()
+        .map(|node| RefMut::map(node.borrow_mut(), |node| &mut node.elem))
+}
+
+pub fn peek_mut_back(&mut self) -> Option<RefMut<T>> {
+    self.tail
+        .as_ref()
+        .map(|node| RefMut::map(node.borrow_mut(), |node| &mut node.elem))
+}
+```
+
+- method [std::cell::RefCell::borrow_mut](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.borrow_mut)
+- method [std::cell::RefMut::map](https://doc.rust-lang.org/std/cell/struct.RefMut.html#method.map)
+
+### iter
 
 ## Documentations
 
@@ -531,6 +670,7 @@ type Link<T> = Option<Rc<RefCell<Node<T>>>;
     - method [std::option::Option::as_mut](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_mut)
     - method [std::option::Option::as_deref](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_deref)
     - method [std::option::Option::as_deref_mut](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_deref_mut)
+    - method [std::option::Option::is_none](https://doc.rust-lang.org/std/option/enum.Option.html#method.is_none)
 
 - trait method [std::convert::AsRef::as_ref](https://doc.rust-lang.org/std/convert/trait.AsRef.html#tymethod.as_ref)
     - method [std::boxed::Box::as_ref](https://doc.rust-lang.org/std/boxed/struct.Box.html#method.as_ref)
