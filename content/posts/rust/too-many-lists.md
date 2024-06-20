@@ -490,6 +490,27 @@ impl<T> Drop for List<T> {
 
 ## 双端链表
 
+在前面持久化链表的基础上，使用智能指针 [RefCell](https://doc.rust-lang.org/std/cell/struct.RefCell.html) 来实现节点 `Node` 的内部可变性，并搭配 `Rc` 来进行引用计数:
+
+```rs
+use std::{cell::RefCell, rc::Rc};
+
+type Link<T> = Option<Rc<RefCell<Node<T>>>;
+```
+
+延伸阅读:
+- [Crust of Rust: Smart Pointers and Interior Mutability]({{< relref "./smart-pointers-and-interior-mutability.md" >}})
+
+```rs
+
+```
+
+### push
+
+- method [std::cell::RefCell::borrow_mut](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.borrow_mut)
+- method [std::rc::Rc::try_unwrap](https://doc.rust-lang.org/std/rc/struct.Rc.html#method.try_unwrap)
+- method [std::cell::RefCell::into_inner](https://doc.rust-lang.org/std/cell/struct.RefCell.html#method.into_inner)
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
@@ -515,3 +536,5 @@ impl<T> Drop for List<T> {
     - method [std::boxed::Box::as_ref](https://doc.rust-lang.org/std/boxed/struct.Box.html#method.as_ref)
     - method [std::rc::Rc::as_ref](https://doc.rust-lang.org/std/rc/struct.Rc.html#method.as_ref)
     - method [std::sync::Arc::as_ref](https://doc.rust-lang.org/std/sync/struct.Arc.html#method.as_ref)
+
+- method [std::result::Result::ok](https://doc.rust-lang.org/std/result/enum.Result.html#method.ok)
