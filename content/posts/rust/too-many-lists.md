@@ -306,6 +306,8 @@ impl<T> List<T> {
 - method [std::option::Option::as_deref_mut](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_deref_mut)
 > Leaves the original Option in-place, creating a new one containing a mutable reference to the inner type’s `Deref::Target` type.
 
+## 持久化共享节点的链表
+
 到目前为止，我们已经通过 `Box` 指针实现了一个简单的单链表，但由于 Rust 的所有权机制，导致这个单链表的节点 `Node` 只能被一个 `Box` 指针指向，接下来我们通过智能指针来解除这个限制，实作 *持久化的共享链表*。
 
 ```rs
@@ -328,18 +330,60 @@ list 3: [X, C, D]
 
 上图的节点 `B` 的被多个节点 (节点 `A` 和节点 `X`) 所指向，设定其所有权是共享的比较好处理，因为使用引用的话，会被借用检查机制限制，修改时比较麻烦 (只能被一个可变引用所借用)
 
-## 实作持久化共享节点的链表
-
 - **持久化**: 节点如果被至少一个指针指向，则不会释放；如果没有被指向，则进行释放
 - **共享**: 节点可以被多个指针所指向
 
-根据这里这两种功能需求，使用共享所有权并进行计数的智能指针 [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html) 比较适合
+根据这里这两种功能需求，使用共享所有权并进行计数的智能指针 [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html) 比较适合。
+
+```rs
+use std::rc::Rc;
+
+type Link<T> = Option<Rc<Node<T>>>;
+
+#[derive(Debug)]
+pub struct List<T> {
+    head: Link<T>,
+}
+
+#[derive(Debug)]
+struct Node<T> {
+    elem: T,
+    next: Link<T>,
+}
+
+impl<T> List<T> {
+    pub fn new() -> Self {
+        Self { head: None }
+    }
+}
+```
 
 ### prepend
 
+```rs
+// It takes a list and an element, and returns a List.
+pub fn prepend(&mut self, elem: T) -> Self {
+    Self {
+        head: Some(Rc::new(Node {
+            elem,
+            next: self.head.clone(),
+        })),
+    }
+}
+```
+
 ### tail
 
-这里可以体验 `map` 和 `and_then` 的区别，在于其接受的闭包的不同，`map` 闭包的返回值会被自动的用 `Option` 包装起来，而 `and_then` 则需要自己在闭包中手动包装:
+```rs
+// It takes a list and returns the whole list with the first element removed.
+pub fn tail(&mut self) -> Self {
+    Self {
+        head: self.head.as_ref().and_then(|node| node.next.clone()),
+    }
+}
+```
+
+这里可以体验 [map](https://doc.rust-lang.org/std/option/enum.Option.html#method.map) 和 [and_then](https://doc.rust-lang.org/std/option/enum.Option.html#method.and_then) 的区别，在于其接受的闭包的不同，`map` 闭包的返回值会被自动的用 `Option` 包装起来，而 `and_then` 则需要自己在闭包中手动包装:
 
 ```rs
 pub fn map<U, F>(self, f: F) -> Option<U>
@@ -354,6 +398,97 @@ where
 ```
 
 ### head
+
+```rs
+// returns a reference to the first element.
+pub fn head(&self) -> Option<&T> {
+    self.head.as_ref().map(|node| &node.elem)
+}
+```
+
+### iter
+
+我们只实现 `iter` 而不是实现 `into_iter` 和 `iter_mut` 这两个方法，因为持久化共享节点的链表的某一些节点是被共享的，所以 `into_iter` 吸显然就不能被实现，假设一个链表使用了 `into_iter` 那么其他共享其节点的链表就会有一部分凭空消失了，这违反了所有权机制，而 `iter_mut` 也类似，两个链表都是使用 `iter_mut`，如果它们有共享节点，那么在共享节点上有一个迭代器就不能正常工作 (根据借用检查机制，同一时间只能存在一个可变引用)。
+
+```rs
+impl<'a, T> IntoIterator for &'a List<T> {
+    type Item = &'a T;
+    type IntoIter = Iter<'a, T>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        Iter(self.head.as_deref())
+    }
+}
+
+pub struct Iter<'a, T>(Option<&'a Node<T>>);
+
+impl<'a, T> Iterator for Iter<'a, T> {
+    type Item = &'a T;
+    fn next(&mut self) -> Option<Self::Item> {
+        self.0.take().map(|node| {
+            self.0 = node.next.as_deref();
+            &node.elem
+        })
+    }
+}
+
+impl<T> List<T> {
+    pub fn iter(&self) -> Iter<T> {
+        self.into_iter()
+    }
+}
+```
+
+### drop
+
+`drop` 方法将一个链表中只被该链表拥有的节点 `Node` 进行释放，对于共享的节点则不做处理。
+
+```rs
+impl<T> Drop for List<T> {
+    fn drop(&mut self) {
+        let mut link = self.head.take();
+        while let Some(node) = link {
+            if let Ok(ref mut node) = Rc::try_unwrap(node) {
+                link = node.next.take();
+            } else {
+                break;
+            }
+        }
+    }
+}
+```
+
+- method [std::rc::Rc::try_unwrap](https://doc.rust-lang.org/std/rc/struct.Rc.html#method.try_unwrap)
+> Returns the inner value, if the `Rc` has exactly one strong reference.
+> 
+> Otherwise, an `Err` is returned with the same `Rc` that was passed in.
+
+### 多线程安全
+
+`Rc` 不是多线程安全的，如果要让我们这个持久化链表在多线程情景下安全使用，则需要使用 `Arc` 智能指针。
+
+```rs
+use std::sync::Arc;
+
+type Link<T> = Option<Arc<Node<T>>>;
+
+impl<T> Drop for List<T> {
+    fn drop(&mut self) {
+        ...
+            if let Ok(ref mut node) = Arc::try_unwrap(node) {...}
+        ...
+    }
+}
+```
+
+- method [std::sync::Arc::try_unwrap](https://doc.rust-lang.org/std/sync/struct.Arc.html#method.try_unwrap)
+
+{{< admonition info "延伸阅读" >}}
+理解多线程安全的内部机制需要了解内存模型，下面这个讲座解释得很棒！
+- Herb Sutter: [atomic Weapons: The C++ Memory Model and Modern Hardware](https://herbsutter.com/2013/02/11/atomic-weapons-the-c-memory-model-and-modern-hardware/)
+{{< /admonition >}}
+
+## 双端链表
 
 ## Documentations
 
