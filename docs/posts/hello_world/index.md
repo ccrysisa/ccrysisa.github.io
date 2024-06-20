@@ -3,7 +3,7 @@
 
 各位好，这里是 KZnight 的博客
 
-<!--more-->
+&lt;!--more--&gt;
 
 博客（英语：Blog）是一种在线日记型式的个人网站，借由张帖子章、图片或视频来记录生活、抒发情感或分享信息。博客上的文章通常根据张贴时间，以倒序方式由新到旧排列。
 
@@ -13,53 +13,53 @@
 
 公式块：
 
-{{< raw >}}
+{{&lt; raw &gt;}}
 $$
 \int_{a}^{b}x(t)dt =
 \dfrac{b - a}{N} \\
 =\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N}
 $$
-{{< /raw >}}
+{{&lt; /raw &gt;}}
 
-{{< raw >}}
+{{&lt; raw &gt;}}
 $$
 \begin{aligned}
-\int_{a}^{b}x(t)dt &=
+\int_{a}^{b}x(t)dt &amp;=
 \dfrac{b - a}{N} \\
-&=\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N} \\
+&amp;=\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N} \\
 \end{aligned}
 $$
-{{< /raw >}}
+{{&lt; /raw &gt;}}
 
-{{< raw >}}
+{{&lt; raw &gt;}}
 $$
 \mathrm{Integrals\ are\ numerically\ approximated\ as\ finite\ series}:\\ 
 \begin{split}
-\int_{a}^{b}x(t)dt &=
+\int_{a}^{b}x(t)dt &amp;=
 \dfrac{b - a}{N} \\
-&=\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N}
+&amp;=\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N}
 \end{split} \\ 
-where\ t_k = a + (b-a)\cdot k/N
+where\ t_k = a &#43; (b-a)\cdot k/N
 $$
-{{< /raw >}}
+{{&lt; /raw &gt;}}
 
-{{< raw>}}
+{{&lt; raw&gt;}}
 $$
 \begin{align*}
-p(x) = 3x^6 + 14x^5y &+ 590x^4y^2 + 19x^3y^3 \\
-&- 12x^2y^4 - 12xy^5 + 2y^6 - a^3b^3 - a^2b - ab + c^5d^3 + c^4d^3 - cd
+p(x) = 3x^6 &#43; 14x^5y &amp;&#43; 590x^4y^2 &#43; 19x^3y^3 \\
+&amp;- 12x^2y^4 - 12xy^5 &#43; 2y^6 - a^3b^3 - a^2b - ab &#43; c^5d^3 &#43; c^4d^3 - cd
 \end{align*}
 $$
-{{< /raw >}}
+{{&lt; /raw &gt;}}
 
-{{< raw >}}
+{{&lt; raw &gt;}}
 $$
 \begin{split}
-&(X \in B) = X^{-1}(B) = {s \in S: X(s) \in B} \subset S \\
-&\Rightarrow P(x \in B) = P({s \in S: X(s) \in B})
+&amp;(X \in B) = X^{-1}(B) = {s \in S: X(s) \in B} \subset S \\
+&amp;\Rightarrow P(x \in B) = P({s \in S: X(s) \in B})
 \end{split}
 $$
-{{< /raw >}}
+{{&lt; /raw &gt;}}
 
 ## 代码块
 
@@ -67,7 +67,7 @@ $$
 let i: i32 = 13;
 let v = vec![1, 2, 3, 4, 5, 65];
 for x in v.iter() {
-    println!("{}", x);
+    println!(&#34;{}&#34;, x);
 }
 ```
 
@@ -80,11 +80,11 @@ typedef struct Block_t {
 
 ## Admonition
 
-{{< admonition >}} 
+{{&lt; admonition &gt;}} 
 [111年度資工所心得](https://hackmd.io/@ygb5JBlmSc-8GJtxiMg5Fw/B1-rO9vb9)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< admonition abstract >}} 
+{{&lt; admonition abstract &gt;}} 
 Udacity (Georgia Tech):
 
 - Advanced Operating Systems:
@@ -99,52 +99,52 @@ Udacity (Georgia Tech):
 [Part 4](https://www.youtube.com/playlist?list=PLAwxTw4SYaPn79fsplIuZG34KwbkYSedj) /
 [Part 5](https://www.youtube.com/playlist?list=PLAwxTw4SYaPkr-vo9gKBTid_BWpWEfuXe) /
 [Part 6](https://www.youtube.com/playlist?list=PLAwxTw4SYaPndXEsI4kAa6BDSTRbkCKJN)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< admonition info >}} 
+{{&lt; admonition info &gt;}} 
 Reddit: [Best book to learn in-depth knowledge about the Linux Kernel?](https://www.reddit.com/r/linux/comments/z26h5h/best_book_to_learn_indepth_knowledge_about_the/)
 - Project: [Linux From Scratch](https://www.linuxfromscratch.org/)
 - Book: [Linux Kernel Development](https://www.amazon.com/Linux-Kernel-Development-Robert-Love/dp/0672329468)
 - Video: [Steven Rostedt - Learning the Linux Kernel with tracing](https://www.youtube.com/watch?v=JRyrhsx-L5Y)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< admonition tip >}} 
+{{&lt; admonition tip &gt;}} 
 Wikipedia: 
 [Xenix](https://en.wikipedia.org/wiki/Xenix) /
 [Multics](https://en.wikipedia.org/wiki/Multics) /
 [Plan9](https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs) /
 [FreeBSD](https://en.wikipedia.org/wiki/FreeBSD)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< admonition success >}}
+{{&lt; admonition success &gt;}}
 Talks:
 
-- [Developing Kernel Drivers with Modern C++ - Pavel Yosifovich](https://www.youtube.com/watch?v=AsSMKL5vaXw)
+- [Developing Kernel Drivers with Modern C&#43;&#43; - Pavel Yosifovich](https://www.youtube.com/watch?v=AsSMKL5vaXw)
 - [Containers From Scratch • Liz Rice • GOTO 2018](https://www.youtube.com/watch?v=8fi7uSYlOdc)
 - [Rich Hickey Talks](https://www.youtube.com/playlist?list=PLZdCLR02grLrEwKaZv-5QbUzK0zGKOOcr)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< admonition question >}}
+{{&lt; admonition question &gt;}}
 - OSDI
 - PLDI
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< admonition warning >}} 一个 警告 横幅 {{< /admonition >}}
+{{&lt; admonition warning &gt;}} 一个 警告 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition failure >}} 一个 失败 横幅 {{< /admonition >}}
+{{&lt; admonition failure &gt;}} 一个 失败 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition danger >}} 一个 危险 横幅 {{< /admonition >}}
+{{&lt; admonition danger &gt;}} 一个 危险 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition bug >}} 一个 Bug 横幅 {{< /admonition >}}
+{{&lt; admonition bug &gt;}} 一个 Bug 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition example >}} 一个 示例 横幅 {{< /admonition >}}
+{{&lt; admonition example &gt;}} 一个 示例 横幅 {{&lt; /admonition &gt;}}
 
-{{< admonition quote >}} 一个 引用 横幅 {{< /admonition >}}
+{{&lt; admonition quote &gt;}} 一个 引用 横幅 {{&lt; /admonition &gt;}}
 
 ## References
 
 - [FixIt 快速上手](https://fixit.lruihao.cn/zh-cn/documentation/getting-started/)
-- [使用 Hugo + Github 搭建个人博客](https://zhuanlan.zhihu.com/p/105021100)
+- [使用 Hugo &#43; Github 搭建个人博客](https://zhuanlan.zhihu.com/p/105021100)
 - [Markdown 基本语法](https://fixit.lruihao.cn/zh-cn/documentation/content-management/markdown-syntax/basics/)
 - [Emoji 支持](https://fixit.lruihao.cn/zh-cn/guides/emoji-support/)
 - [扩展 Shortcodes 概述](https://fixit.lruihao.cn/zh-cn/documentation/content-management/shortcodes/extended/introduction/#admonition)

@@ -3,7 +3,7 @@
 
 本篇主要介绍在 deepin20.9 操作系统平台下，使用 KVM 虚拟化技术来创建和安装 Linux 发行版，并以创建安装 openEuler 22.03 LTS SP3 的 KVM 虚拟机作为示范，让学员领略 KVM 虚拟化技术的强大魅力。
 
-<!--more-->
+&lt;!--more--&gt;
 
 ## 什么是虚拟化?
 
@@ -17,7 +17,7 @@
 
 ```bash
 # intel vmx，amd svm
-$ egrep '(vmx|svm)' /proc/cpuinfo
+$ egrep &#39;(vmx|svm)&#39; /proc/cpuinfo
 ...vmx...
 
 $ lscpu | grep Virtualization
@@ -56,46 +56,46 @@ $ sudo apt install virt-manager
 
 可以在启动器看到一个虚拟机管理应用图标，如下:
 
-{{< image src="https://wiki.deepin.org/for_trans/kvm/1.png" >}}
+{{&lt; image src=&#34;https://wiki.deepin.org/for_trans/kvm/1.png&#34; &gt;}}
 
-点击打开 (需要输入密码认证，以下图片中的 "本地" 可能会显示为 "QEMU/KVM"):
+点击打开 (需要输入密码认证，以下图片中的 &#34;本地&#34; 可能会显示为 &#34;QEMU/KVM&#34;):
 
-{{< image src="https://wiki.deepin.org/for_trans/kvm/2.png" >}}
+{{&lt; image src=&#34;https://wiki.deepin.org/for_trans/kvm/2.png&#34; &gt;}}
 
 接下来创建虚拟机:
 
-{{< image src="https://wiki.deepin.org/for_trans/kvm/3.png" >}}
+{{&lt; image src=&#34;https://wiki.deepin.org/for_trans/kvm/3.png&#34; &gt;}}
 
 下图的操作系统选择对应的类型 (可以在 [这里](https://www.openeuler.org/en/download/archive/) 下载 openEuler 22.03 LTS SP3 镜像，对于 openEuler 这类未被收录的类型，选择 Generic):
 
-{{< image src="https://wiki.deepin.org/for_trans/kvm/4.png" >}}
+{{&lt; image src=&#34;https://wiki.deepin.org/for_trans/kvm/4.png&#34; &gt;}}
 
-> 这里选择 iso 镜像后可能会显示路径搜索问题，选择 "是" 将该路径加入存储池即可
+&gt; 这里选择 iso 镜像后可能会显示路径搜索问题，选择 &#34;是&#34; 将该路径加入存储池即可
 
 接下来是处理器和内存配置，建议配置 8 核 8G 内存，根据自己物理机配置选择即可:
 
-{{< image src="https://wiki.deepin.org/for_trans/kvm/5.png" >}}
+{{&lt; image src=&#34;https://wiki.deepin.org/for_trans/kvm/5.png&#34; &gt;}}
 
 接下来是虚拟磁盘的大小设置和存放位置，建议选择自定义存储路径，并搭配 [更改 KVM 虚拟机默认存储路径](https://www.cnblogs.com/hahaha111122222/p/15538763.html)，特别是如果你的根目录空间不太够的情况：
 
-{{< image src="https://wiki.deepin.org/for_trans/kvm/6.png" >}}
+{{&lt; image src=&#34;https://wiki.deepin.org/for_trans/kvm/6.png&#34; &gt;}}
 
 在对应的存储卷中创建虚拟磁盘 (**注意: 如果你更改了默认存储路径，请选择对应的存储池而不是 default**):
 
-{{< image  src="https://wiki.deepin.org/for_trans/kvm/7.png" >}}
+{{&lt; image  src=&#34;https://wiki.deepin.org/for_trans/kvm/7.png&#34; &gt;}}
 
 创建虚拟磁盘 (名称可以自定义，分配默认初始为 0，它会随着虚拟机使用而增大，当然也可以直接将分配等于最大容量，这样就会直接分配相应的磁盘空间，玩过虚拟机的学员应该很熟悉):
 
-{{< image  src="https://wiki.deepin.org/for_trans/kvm/8.png" >}}
-{{< image  src="https://wiki.deepin.org/for_trans/kvm/9.png" >}}
+{{&lt; image  src=&#34;https://wiki.deepin.org/for_trans/kvm/8.png&#34; &gt;}}
+{{&lt; image  src=&#34;https://wiki.deepin.org/for_trans/kvm/9.png&#34; &gt;}}
 
 接下来自定义虚拟机名称并生成虚拟机即可:
 
-{{< image  src="https://wiki.deepin.org/for_trans/kvm/11.png" >}}
+{{&lt; image  src=&#34;https://wiki.deepin.org/for_trans/kvm/11.png&#34; &gt;}}
 
 最后就是熟悉的安装界面:
 
-{{< image src="https://vanjker.github.io/HITsz-OS-labs-2022/site/openeuler.assets/clip_image023.png" >}}
+{{&lt; image src=&#34;https://vanjker.github.io/HITsz-OS-labs-2022/site/openeuler.assets/clip_image023.png&#34; &gt;}}
 
 参考 [这里](https://vanjker.github.io/HITsz-OS-labs-2022/site/env/#22) 安装 openEuler 即可。
 
@@ -130,7 +130,7 @@ $ ssh user@ip
 由于是最小安装，很多趁手的工具都没有，俗话说“工欲善其事，必先利其器”，所以先安装必要的开发工具。幸好 openEuler 提供了整合包 Development Tools，直接安装即可:
 
 ```bash
-$ sudo yum group install -y "Development Tools"
+$ sudo yum group install -y &#34;Development Tools&#34;
 ```
 
 ## Neofetch
@@ -144,7 +144,7 @@ $ make install
 $ neofetch
 ```
 
-{{< image src="/images/oerv/openEuler-22.03-LTS-SP3-neofetch.png" >}}
+{{&lt; image src=&#34;/images/oerv/openEuler-22.03-LTS-SP3-neofetch.png&#34; &gt;}}
 
 ## References
 

@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 15 Jun 2024 20:24:56 &#43;0800</lastBuildDate>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 19 Jun 2024 09:43:11 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
@@ -14,6 +14,16 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware</title>
+  <link>https://ccrysisa.github.io/posts/atomic-weapons/</link>
+  <pubDate>Wed, 19 Jun 2024 09:43:11 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/atomic-weapons/</guid>
+  <description><![CDATA[<blockquote>
+<p>This is a two-part talk that covers the C++ memory model, how locks and atomics and fences interact and map to hardware, and more. Even though we’re talking about C++, much of this is also applicable to Java and .NET which have similar memory models, but not all the features of C++ (such as relaxed atomics).</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -94,6 +104,14 @@
 </blockquote>]]></description>
 </item>
 <item>
+  <title>学会如何学习 Learning How to Learn</title>
+  <link>https://ccrysisa.github.io/posts/learning-how-to-learn/</link>
+  <pubDate>Tue, 14 May 2024 18:44:37 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/learning-how-to-learn/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>Command Line Applications in Rust</title>
   <link>https://ccrysisa.github.io/posts/rust-cli/</link>
   <pubDate>Mon, 29 Apr 2024 16:23:33 &#43;0800</pubDate>
@@ -101,26 +119,6 @@
   <guid>https://ccrysisa.github.io/posts/rust-cli/</guid>
   <description><![CDATA[<blockquote>
 <p>Rust is a statically compiled, fast language with great tooling and a rapidly growing ecosystem. That makes it a great fit for writing command line applications: They should be small, portable, and quick to run. Command line applications are also a great way to get started with learning Rust; or to introduce Rust to your team!</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: 编译器和最佳化原理篇</title>
-  <link>https://ccrysisa.github.io/posts/c-compiler-optimization/</link>
-  <pubDate>Wed, 24 Apr 2024 21:09:59 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-compiler-optimization/</guid>
-  <description><![CDATA[<blockquote>
-<p>編譯器最佳化篇將以 gcc / llvm 為探討對象，簡述編譯器如何運作，以及如何實現最佳化，佐以探究 C 編譯器原理和案例分析，相信可以釐清許多人對 C 編譯器的誤解，從而開發出更可靠、更高效的程式。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: 未定义/未指定行为篇</title>
-  <link>https://ccrysisa.github.io/posts/c-undefined-behavior/</link>
-  <pubDate>Wed, 24 Apr 2024 21:09:40 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-undefined-behavior/</guid>
-  <description><![CDATA[<blockquote>
-<p>C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化</p>
 </blockquote>]]></description>
 </item>
 </channel>

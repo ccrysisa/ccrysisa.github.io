@@ -14,7 +14,7 @@
 本講座將以 Thorsten Leemhuis 在 FOSDEM 2020 開場演說 &ldquo;Linux kernel – Solving big problems in small steps for more than 20 years&rdquo; (slides) 為主軸，嘗試歸納自 21 世紀第一年開始的 Linux 核心 2.4 版到如今的 5.x 版，中間核心開發者如何克服 SMP (Symmetric multiprocessing), scalability, 及各式硬體架構和周邊裝置支援等難題，過程中提出全面移除 BKL (Big kernel lock)、實作虛擬化技術 (如 Xen 和 KVM)、提出 namespace 和 cgroups 從而確立容器化 (container) 的能力，再來是核心發展的明星技術 eBPF 會在既有的基礎之上，帶來 XDP 和哪些令人驚豔的機制呢？又，Linux 核心終於正式納入發展十餘年的 PREEMPT_RT，使得 Linux 核心得以成為硬即時的作業系統，對內部設計有哪些衝擊？AIO 後繼的 io_uring 讓 Linux 有更優雅且高效的非同步 I/O 存取，我們該如何看待？
 "><meta itemprop="datePublished" content="2024-03-03T16:07:14+08:00" />
 <meta itemprop="dateModified" content="2024-03-09T20:11:06+08:00" />
-<meta itemprop="wordCount" content="1640"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1644"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux," /><meta property="og:title" content="Linux 核心设计: 发展动态回顾" />
 <meta property="og:description" content="
 本講座將以 Thorsten Leemhuis 在 FOSDEM 2020 開場演說 &ldquo;Linux kernel – Solving big problems in small steps for more than 20 years&rdquo; (slides) 為主軸，嘗試歸納自 21 世紀第一年開始的 Linux 核心 2.4 版到如今的 5.x 版，中間核心開發者如何克服 SMP (Symmetric multiprocessing), scalability, 及各式硬體架構和周邊裝置支援等難題，過程中提出全面移除 BKL (Big kernel lock)、實作虛擬化技術 (如 Xen 和 KVM)、提出 namespace 和 cgroups 從而確立容器化 (container) 的能力，再來是核心發展的明星技術 eBPF 會在既有的基礎之上，帶來 XDP 和哪些令人驚豔的機制呢？又，Linux 核心終於正式納入發展十餘年的 PREEMPT_RT，使得 Linux 核心得以成為硬即時的作業系統，對內部設計有哪些衝擊？AIO 後繼的 io_uring 讓 Linux 有更優雅且高效的非同步 I/O 存取，我們該如何看待？
@@ -43,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux-dev-review\/"
-    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  1640 ,
+    },"genre": "posts","keywords": "Sysprog, Linux","wordcount":  1644 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/linux-dev-review\/","datePublished": "2024-03-03T16:07:14+08:00","dateModified": "2024-03-09T20:11:06+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -55,7 +55,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -101,7 +101,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -161,18 +161,12 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Linux 核心设计: 发展动态回顾</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/linux/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-03 16:07:14"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-03">2024-03-03</time></span>&nbsp;<span title="更新于 2024-03-09 20:11:06"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-09">2024-03-09</time></span>&nbsp;<span title="1640 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux/" class="post-category" title="分类 - Linux"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux</a>&ensp;<a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-03-03 16:07:14"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-03">2024-03-03</time></span>&nbsp;<span title="更新于 2024-03-09 20:11:06"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-09">2024-03-09</time></span>&nbsp;<span title="1644 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -201,8 +195,8 @@
 <ul>
 <li><a href="https://hackmd.io/@sysprog/linux-dev-review"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
-<h2 id="开篇点题">开篇点题</h2>
-<blockquote>
+<h2 id="开篇点题" class="heading-element">
+  <a href="#%e5%bc%80%e7%af%87%e7%82%b9%e9%a2%98" class="heading-mark"></a>开篇点题</h2><blockquote>
 <p>前置知识: <a href="https://hackmd.io/@sysprog/linux-concepts"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心设计: 操作系统术语及概念</a></p>
 </blockquote>
 <p>FOSDEM 2020, T. Leemhuis:</p>
@@ -226,8 +220,8 @@
 <ul>
 <li>Jonathan Corbet</li>
 </ul>
-<h2 id="linux-24">Linux 2.4</h2>
-<ul>
+<h2 id="linux-24" class="heading-element">
+  <a href="#linux-24" class="heading-mark"></a>Linux 2.4</h2><ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://www.informit.com/articles/article.aspx?p=20667"target="_blank" rel="external nofollow noopener noreferrer">Version 2.4 of the LINUX KERNEL&ndash;Why Should a System Administrator Upgrade?</a></li>
 </ul>
 <blockquote>
@@ -235,8 +229,8 @@
 这件事对于操作系统的开发有很大的影响，是一个巨大的变革。透过这种发行机制，CPU 厂商可以直接在最新的 Linux kernel 上适配正在开发的 CPU 及相关硬体，而无需拿到真正的 CPU 硬体再进行相应的开发，这使得 Linux 获得了更多厂商的支持和投入，进而进入了飞速发展期。</p>
 </blockquote>
 <p>LInux 核心的道路: <strong>只提供机制不提供策略</strong>。例如 khttp (in-kernel httpd) 的弃用，通过提供更高效的系统调用来提高网页服务器的效能，而不是像 Windows NT 一样用户态性能不够就把程式搬进 kernel &#x1f923;</p>
-<h2 id="smp-支援">SMP 支援</h2>
-<p>相关故事: Digital Domain and TITANIC (泰坦尼克号)</p>
+<h2 id="smp-支援" class="heading-element">
+  <a href="#smp-%e6%94%af%e6%8f%b4" class="heading-mark"></a>SMP 支援</h2><p>相关故事: Digital Domain and TITANIC (泰坦尼克号)</p>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://www.redhat.com/en/about/press-releases/press-titanic"target="_blank" rel="external nofollow noopener noreferrer">Red Hat Sinks Titanic</a></li>
 <li><a href="https://www.linuxjournal.com/article/2494"target="_blank" rel="external nofollow noopener noreferrer">Linux Helps Bring Titanic to Life</a></li>
@@ -256,25 +250,25 @@
 <blockquote>
 <p>When testing on a dual quad-core ARM64 system they found the performance ranged from less than 1% to upwards of 10% for the Hackbench scheduler test. With a 224-core ARM64 server, the performance ranged from less than 1% improvements to 12% better performance with Hackbench and up to 33% better performance with Dbench. More numbers and details via the v4 patch revision.</p>
 </blockquote>
-<h2 id="虚拟化">虚拟化</h2>
-<a class="lightgallery" href="https://imgur-backup.hackmd.io/bTI4zZv.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/bTI4zZv.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/bTI4zZv.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/bTI4zZv.png" srcset="https://imgur-backup.hackmd.io/bTI4zZv.png?size=small, https://imgur-backup.hackmd.io/bTI4zZv.png?size=medium 1.5x, https://imgur-backup.hackmd.io/bTI4zZv.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/bTI4zZv.png" data-alt="https://imgur-backup.hackmd.io/bTI4zZv.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<h2 id="虚拟化" class="heading-element">
+  <a href="#%e8%99%9a%e6%8b%9f%e5%8c%96" class="heading-mark"></a>虚拟化</h2><a class="lightgallery" href="https://imgur-backup.hackmd.io/bTI4zZv.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/bTI4zZv.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/bTI4zZv.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/bTI4zZv.png" alt="https://imgur-backup.hackmd.io/bTI4zZv.png" srcset="https://imgur-backup.hackmd.io/bTI4zZv.png?size=small, https://imgur-backup.hackmd.io/bTI4zZv.png?size=medium 1.5x, https://imgur-backup.hackmd.io/bTI4zZv.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/bTI4zZv.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <ul>
 <li><a href="https://github.com/cloud-hypervisor/cloud-hypervisor"target="_blank" rel="external nofollow noopener noreferrer">Cloud Hypervisor</a></li>
 <li><a href="https://www.cl.cam.ac.uk/research/srg/netos/papers/2003-xensosp.pdf"target="_blank" rel="external nofollow noopener noreferrer">Xen and the Art of Virtualization</a></li>
 </ul>
-<h2 id="dpdk-data-plane-development-kit">DPDK (Data Plane Development Kit)</h2>
-<p>一言以蔽之: <strong>Kernel-bypass networking</strong>，即略过 kernel 直接让 User programs 处理网络封包，以提升效能。一般实作于高频交易的场景。</p>
+<h2 id="dpdk-data-plane-development-kit" class="heading-element">
+  <a href="#dpdk-data-plane-development-kit" class="heading-mark"></a>DPDK (Data Plane Development Kit)</h2><p>一言以蔽之: <strong>Kernel-bypass networking</strong>，即略过 kernel 直接让 User programs 处理网络封包，以提升效能。一般实作于高频交易的场景。</p>
 <div class="mermaid" id="id-1"></div><ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> YouTube: <a href="https://www.youtube.com/watch?v=noqSZorzooc"target="_blank" rel="external nofollow noopener noreferrer">Kernel-bypass networking for fun and profit</a></li>
 <li>Stack Overflow<a href="https://stackoverflow.com/questions/18343365/zero-copy-networking-vs-kernel-bypass"target="_blank" rel="external nofollow noopener noreferrer">&ldquo;zero copy networking&rdquo; vs &ldquo;kernel bypass&rdquo;?</a></li>
 </ul>
-<h2 id="xdp-express-data-path">XDP: eXpress Data Path</h2>
-<p>常和 eBPF 配合实现在 kernel 进行定制化的封包过滤，从而减少 cop to/from kernel/user 这类操作的效能损失。</p>
+<h2 id="xdp-express-data-path" class="heading-element">
+  <a href="#xdp-express-data-path" class="heading-mark"></a>XDP: eXpress Data Path</h2><p>常和 eBPF 配合实现在 kernel 进行定制化的封包过滤，从而减少 cop to/from kernel/user 这类操作的效能损失。</p>
 <ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://www.youtube.com/watch?v=JmGfJok32Kw"target="_blank" rel="external nofollow noopener noreferrer">LPC2018 - Path to DPDK speeds for AF XDP</a> / <a href="https://linuxplumbersconf.org/event/2/contributions/99/attachments/98/116/lpc18_pres_af_xdp_perf-v3.pdf"target="_blank" rel="external nofollow noopener noreferrer">slides</a></li>
 </ul>
-<h2 id="aio">AIO</h2>
-<p>Synchronous / Asynchronous I/O：在從/向核心空間讀取/寫入資料 (i.e. <strong>實際進行 I/O 操作</strong>) 的過程，使用者層級的行程是否會被 <strong>blocked</strong>。</p>
+<h2 id="aio" class="heading-element">
+  <a href="#aio" class="heading-mark"></a>AIO</h2><p>Synchronous / Asynchronous I/O：在從/向核心空間讀取/寫入資料 (i.e. <strong>實際進行 I/O 操作</strong>) 的過程，使用者層級的行程是否會被 <strong>blocked</strong>。</p>
 <blockquote>
 <p>AIO 在某些情景下处理不当，性能甚至低于 blocked 的 I/O 方法，这也引导出了 io_uring</p>
 </blockquote>
@@ -294,8 +288,8 @@
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://www.youtube.com/watch?v=-5T4Cjw46ys"target="_blank" rel="external nofollow noopener noreferrer">Kernel Recipes 2019 - Faster IO through io_uring</a> / <a href="https://www.slideshare.net/ennael/kernel-recipes-2019-faster-io-through-iouring"target="_blank" rel="external nofollow noopener noreferrer">slides</a></li>
 <li><a href="https://hackmd.io/@sysprog/iouring"target="_blank" rel="external nofollow noopener noreferrer">io_uring</a></li>
 </ul>
-<h2 id="container">Container</h2>
-<p>Container 构建在 Linux 核心的基础建设上: namespace, cgroups, capabilities, seccomp</p>
+<h2 id="container" class="heading-element">
+  <a href="#container" class="heading-mark"></a>Container</h2><p>Container 构建在 Linux 核心的基础建设上: namespace, cgroups, capabilities, seccomp</p>
 <div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -357,8 +351,8 @@
 <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/UnionFS"target="_blank" rel="external nofollow noopener noreferrer">UnionFS</a></li>
 <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Microservices"target="_blank" rel="external nofollow noopener noreferrer">Microservices</a></li>
 </ul>
-<h2 id="bpfcbpfebpf">BPF/cBPF/eBPF</h2>
-<div class="details admonition tip open">
+<h2 id="bpfcbpfebpf" class="heading-element">
+  <a href="#bpfcbpfebpf" class="heading-mark"></a>BPF/cBPF/eBPF</h2><div class="details admonition tip open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -367,35 +361,34 @@
 20 years ago, this idea would likely have been shot down immediately</div>
     </div>
   </div>
-<a class="lightgallery" href="https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg?size=large" data-thumbnail="https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg?size=small" data-sub-html="<h2>https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg</h2>"><img loading="lazy" src="https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg" srcset="https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg?size=small, https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg?size=medium 1.5x, https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg?size=large 2x" sizes="auto" data-title="https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg" data-alt="https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg?size=large" data-thumbnail="https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg?size=small" data-sub-html="<h2>https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg</h2>"><img loading="lazy" src="https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg" alt="https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg" srcset="https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg?size=small, https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg?size=medium 1.5x, https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg?size=large 2x" sizes="auto" data-title="https://www.brendangregg.com/Slides/UM2019_BPF_a_new_type_of_software/UM2019_BPF_a_new_type_of_software_012.jpg" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://www.youtube.com/watch?v=7pmXdG8-7WU"target="_blank" rel="external nofollow noopener noreferrer">Netflix talks about Extended BPF - A new software type</a> / <a href="https://www.slideshare.net/brendangregg/um2019-bpf-a-new-type-of-software"target="_blank" rel="external nofollow noopener noreferrer">slides</a></li>
 </ul>
-<h2 id="real-time">Real-Time</h2>
-<ul>
+<h2 id="real-time" class="heading-element">
+  <a href="#real-time" class="heading-mark"></a>Real-Time</h2><ul>
 <li><a href="https://hackmd.io/@sysprog/preempt-rt"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心设计: PREEMPT_RT 作为迈向硬即时操作系统的机制</a></li>
 </ul>
-<h2 id="printk">printk</h2>
-<ul>
+<h2 id="printk" class="heading-element">
+  <a href="#printk" class="heading-mark"></a>printk</h2><ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://lwn.net/Articles/800946/"target="_blank" rel="external nofollow noopener noreferrer">Why printk() is so complicated (and how to fix it)</a></li>
 </ul>
-<h2 id="zfs-btrfs-raid">ZFS, BtrFS, RAID</h2>
-<ul>
+<h2 id="zfs-btrfs-raid" class="heading-element">
+  <a href="#zfs-btrfs-raid" class="heading-mark"></a>ZFS, BtrFS, RAID</h2><ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://arstechnica.com/gadgets/2020/05/zfs-versus-raid-eight-ironwolf-disks-two-filesystems-one-winner/"target="_blank" rel="external nofollow noopener noreferrer">ZFS versus RAID: Eight Ironwolf disks, two filesystems, one winner</a></li>
 </ul>
-<h2 id="rust">Rust</h2>
-<ul>
+<h2 id="rust" class="heading-element">
+  <a href="#rust" class="heading-mark"></a>Rust</h2><ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://hackmd.io/@linD026/rust-in-linux-organize"target="_blank" rel="external nofollow noopener noreferrer">Linux 核心采纳 Rust 的状况</a></li>
 </ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-03-09 20:11:06">更新于 2024-03-09&nbsp;</span>
-      </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/linux-dev-review/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/linux-dev-review/" data-title="Linux 核心设计: 发展动态回顾" data-hashtags="Sysprog,Linux"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/linux-dev-review/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/linux-dev-review/" data-title="Linux 核心设计: 发展动态回顾" data-hashtags="Sysprog,Linux"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/linux-dev-review/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/linux-dev-review/" data-title="Linux 核心设计: 发展动态回顾" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/linux-dev-review/" data-title="Linux 核心设计: 发展动态回顾"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -404,12 +397,11 @@
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/linux-dev-review/" data-title="Linux 核心设计: 发展动态回顾" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/linux-dev-review/" data-title="Linux 核心设计: 发展动态回顾"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-      </div>
-    </div>
-  </div>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/linux/' class="post-tag">Linux</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a><a href="/tags/linux/" class="post-tag" title="标签 - Linux">Linux</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -418,11 +410,14 @@
   <div class="post-nav"><a href="/posts/riscv-optimization-guide/" class="post-nav-item" rel="prev" title="RISC-V Optimization Guide 重点提示"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>RISC-V Optimization Guide 重点提示</a>
       <a href="/posts/orst/" class="post-nav-item" rel="next" title="Crust of Rust: Sorting Algorithms">Crust of Rust: Sorting Algorithms<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -430,5 +425,5 @@
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/mermaid/mermaid.min.js"></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"graph TD;\n    NIC--\u003eKernel;\n    Kernel--\u003eUser;\n    NIC--DPDK--\u003eUser;"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"mermaid":{"themes":["default","dark"]},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/mermaid/mermaid.min.js"></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"graph TD;\n    NIC--\u003eKernel;\n    Kernel--\u003eUser;\n    NIC--DPDK--\u003eUser;"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"mermaid":{"themes":["default","dark"]},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>
