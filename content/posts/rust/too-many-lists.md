@@ -650,6 +650,285 @@ pub fn peek_mut_back(&mut self) -> Option<RefMut<T>> {
 
 ### iter
 
+```rs
+impl<T> IntoIterator for List<T> {
+    type Item = T;
+    type IntoIter = IntoIter<T>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        IntoIter(self)
+    }
+}
+
+pub struct IntoIter<T>(List<T>);
+
+impl<T> Iterator for IntoIter<T> {
+    type Item = T;
+    fn next(&mut self) -> Option<Self::Item> {
+        self.0.pop_front()
+    }
+}
+
+impl<T> DoubleEndedIterator for IntoIter<T> {
+    fn next_back(&mut self) -> Option<Self::Item> {
+        self.0.pop_back()
+    }
+}
+
+impl<T> List<T> {
+    pub fn into_iter(self) -> IntoIter<T> {
+        IntoIterator::into_iter(self)
+    }
+}
+```
+
+- Trait [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
+- Trait [std::iter::DoubleEndedIterator](https://doc.rust-lang.org/std/iter/trait.DoubleEndedIterator.html)
+
+## Unsafe Rust 实作单链表
+
+我们对之前实现的 C/C++ 风格的单链表进行改进，使其为满足 **先进先出** 性质的单链表。但是如果不使用 Unsafe Rust 来实作的话，很容易就会违反 Rust 的借用规则 (因为我们需要一个 `tail` 成员来指向尾节点)，例如我们将 `List` 的 `tail` 用可变引用来表示:
+
+```rs
+pub struct List<T> {
+    head: Link<T>,
+    tail: Option<&mut Node<T>>,
+}
+```
+
+那么对于 `List` 那些使用可变应用 `&mut self` 的方法，调用这些方法时对这个链表会存在两个可变引用，一个是 `tail` 表示可变引用，另一个则是 `&mut self` 表示的可变引用，这显然违反了 Rust 的借用检查机制，因此编译不通过。所以我们需要使用 Unsafe Rust 的裸指针 raw pointer 来实现，以避开 Rust 的借用检查机制。
+
+{{< admonition >}}
+之所以不使用 `Link<T>` 来表示 `tail`，是因为 `Box` 指针和 `Rc` 指针不一样，它只允许一个指针指向对于的数据，所以当链表只有一个节点时，`head` 和 `tail` 都指向同一个 `Node`，但这种情况 `Box` 指针无法做到。
+{{< /admonition >}}
+
+```rs
+use std::ptr;
+
+type Link<T> = Option<Box<Node<T>>>;
+
+#[derive(Debug)]
+pub struct List<T> {
+    head: Link<T>,
+    tail: *mut Node<T>,
+}
+
+#[derive(Debug)]
+struct Node<T> {
+    elem: T,
+    next: Link<T>,
+}
+
+impl<T> List<T> {
+    pub fn new() -> Self {
+        Self {
+            head: None,
+            tail: ptr::null_mut(),
+        }
+    }
+}
+```
+
+### push
+
+```rs
+pub fn push(&mut self, elem: T) {
+    let mut node = Box::new(Node { elem, next: None });
+    let raw_tail: *mut _ = &mut *node;
+    if self.tail.is_null() {
+        self.head = Some(node);
+    } else {
+        unsafe {
+            (*self.tail).next = Some(node);
+        }
+    }
+    self.tail = raw_tail;
+}
+```
+
+### pop
+
+```rs
+pub fn pop(&mut self) -> Option<T> {
+    self.head.take().map(|head| {
+        let next = head.next;
+        if next.is_none() {
+            self.tail = ptr::null_mut();
+        }
+        self.head = next;
+        head.elem
+    })
+}
+```
+
+### drop
+
+```rs
+impl<T> Drop for List<T> {
+    fn drop(&mut self) {
+        let mut link = self.head.take();
+        while let Some(mut node) = link {
+            link = node.next.take();
+        }
+    }
+}
+```
+
+### iter
+
+- into_iter
+
+```rs
+impl<T> IntoIterator for List<T> {
+    type Item = T;
+    type IntoIter = IntoIter<T>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        IntoIter(self)
+    }
+}
+
+pub struct IntoIter<T>(List<T>);
+
+impl<T> Iterator for IntoIter<T> {
+    type Item = T;
+    fn next(&mut self) -> Option<Self::Item> {
+        self.0.pop()
+    }
+}
+```
+
+- iter
+
+```rs
+impl<T> List<T> {
+    pub fn iter(&self) -> Iter<T> {
+        self.into_iter()
+    }
+}
+
+impl<'a, T> IntoIterator for &'a List<T> {
+    type Item = &'a T;
+    type IntoIter = Iter<'a, T>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        Iter(self.head.as_deref())
+    }
+}
+
+pub struct Iter<'a, T>(Option<&'a Node<T>>);
+
+impl<'a, T> Iterator for Iter<'a, T> {
+    type Item = &'a T;
+    fn next(&mut self) -> Option<Self::Item> {
+        self.0.take().map(|node| {
+            self.0 = node.next.as_deref();
+            &node.elem
+        })
+    }
+}
+```
+
+- iter_mut
+
+```rs
+impl<T> List<T> {
+    pub fn iter_mut(&mut self) -> IterMut<T> {
+        self.into_iter()
+    }
+}
+
+impl<'a, T> IntoIterator for &'a mut List<T> {
+    type Item = &'a mut T;
+    type IntoIter = IterMut<'a, T>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        IterMut(self.head.as_deref_mut())
+    }
+}
+
+pub struct IterMut<'a, T>(Option<&'a mut Node<T>>);
+
+impl<'a, T> Iterator for IterMut<'a, T> {
+    type Item = &'a mut T;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        self.0.take().map(|node| {
+            self.0 = node.next.as_deref_mut();
+            &mut node.elem
+        })
+    }
+}
+```
+
+## 其他案例实作
+
+### Stack
+
+- Wikipedia: [Stack (abstract data type)](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
+
+实作和之前的 C/C++ 风格的单链表类似，这里仅列出不同的函数:
+
+```rs
+fn push_node(&mut self, mut node: Box<Node<T>>) {
+    node.next = self.head.take();
+    self.head = Some(node);
+}
+
+fn pop_node(&mut self) -> Option<Box<Node<T>>> {
+    self.head.take().map(|mut node| {
+        self.head = node.next.take();
+        node
+    })
+}
+
+fn peek_node(&self) -> Option<&Node<T>> {
+    self.head.as_deref()
+}
+
+fn peek_mut_node(&mut self) -> Option<&mut Node<T>> {
+    self.head.as_deref_mut()
+}
+```
+
+主要是一些辅助函数，用于帮助实现 `push`, `pop`, `peek`, `peek_mut` 等等核心功能函数
+
+### Deque
+
+- Wikipedia: [Double-ended queue](https://en.wikipedia.org/wiki/Double-ended_queue)
+
+可以使用两个 `Stack` 来实作双端队列，当然这个 `Deque` 使用起来十分不便，这里仅作为展示用途:
+
+```rs
+pub struct Deque<T> {
+    left: Stack<T>,
+    right: Stack<T>,
+}
+
+impl<T> Deque<T> {
+    pub fn go_left(&mut self) -> bool {
+        self.left
+            .pop_node()
+            .map(|node| self.right.push_node(node))
+            .is_some()
+    }
+
+    pub fn go_right(&mut self) -> bool {
+        self.right
+            .pop_node()
+            .map(|node| self.left.push_node(node))
+            .is_some()
+    }
+}
+```
+
+## Homework
+
+{{< admonition info >}}
+- [ ] 教学录影中没有对 [Chapter 7](https://rust-unofficial.github.io/too-many-lists/sixth.html) 进行讲解，自行阅读并实作里面相应的内容。
+- [ ] 阅读原书 [8.2. The Stack-Allocated Linked List](https://rust-unofficial.github.io/too-many-lists/infinity-stack-allocated.html) 小节，并完成相应实作。
+{{< /admonition >}}
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
@@ -671,6 +950,7 @@ pub fn peek_mut_back(&mut self) -> Option<RefMut<T>> {
     - method [std::option::Option::as_deref](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_deref)
     - method [std::option::Option::as_deref_mut](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_deref_mut)
     - method [std::option::Option::is_none](https://doc.rust-lang.org/std/option/enum.Option.html#method.is_none)
+    - method [std::option::Option::is_some](https://doc.rust-lang.org/std/option/enum.Option.html#method.is_some)
 
 - trait method [std::convert::AsRef::as_ref](https://doc.rust-lang.org/std/convert/trait.AsRef.html#tymethod.as_ref)
     - method [std::boxed::Box::as_ref](https://doc.rust-lang.org/std/boxed/struct.Box.html#method.as_ref)
@@ -678,3 +958,7 @@ pub fn peek_mut_back(&mut self) -> Option<RefMut<T>> {
     - method [std::sync::Arc::as_ref](https://doc.rust-lang.org/std/sync/struct.Arc.html#method.as_ref)
 
 - method [std::result::Result::ok](https://doc.rust-lang.org/std/result/enum.Result.html#method.ok)
+
+- method [pointer::is_null](https://doc.rust-lang.org/std/primitive.pointer.html#method.is_null)
+
+- Function [std::ptr::null_mut](https://doc.rust-lang.org/std/ptr/fn.null_mut.html)

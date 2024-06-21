@@ -25,6 +25,14 @@
 </blockquote>]]></description>
 </item>
 <item>
+  <title>南京大学 OSDI 并发 重点提示</title>
+  <link>https://ccrysisa.github.io/posts/nju-osdi-concurrency/</link>
+  <pubDate>Sun, 16 Jun 2024 10:21:22 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/nju-osdi-concurrency/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>手把手带你使用 Rust 实现链表</title>
   <link>https://ccrysisa.github.io/posts/too-many-lists/</link>
   <pubDate>Sat, 15 Jun 2024 20:24:56 &#43;0800</pubDate>
@@ -108,16 +116,6 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/learning-how-to-learn/</guid>
   <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>Command Line Applications in Rust</title>
-  <link>https://ccrysisa.github.io/posts/rust-cli/</link>
-  <pubDate>Mon, 29 Apr 2024 16:23:33 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/rust-cli/</guid>
-  <description><![CDATA[<blockquote>
-<p>Rust is a statically compiled, fast language with great tooling and a rapidly growing ecosystem. That makes it a great fit for writing command line applications: They should be small, portable, and quick to run. Command line applications are also a great way to get started with learning Rust; or to introduce Rust to your team!</p>
-</blockquote>]]></description>
 </item>
 </channel>
 </rss>

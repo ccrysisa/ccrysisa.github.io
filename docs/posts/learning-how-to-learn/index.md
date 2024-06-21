@@ -1,7 +1,7 @@
 # 学会如何学习 Learning How to Learn
 
 
-&lt;!--more--&gt;
+<!--more-->
 
 bilibili: [加州大学公开课——学会如何学习](https://www.bilibili.com/video/BV1cy4y1p7TC)
 

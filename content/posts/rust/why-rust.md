@@ -1603,6 +1603,8 @@ pub fn some_name(input: TokenStream) -> TokenStream {
 
 ### Final Project: Web Server
 
+这部分内容推荐观看该录影 [Rust 编程小项目：Web Server](https://www.bilibili.com/video/BV177411m784/)
+
 Documentation:
 
 
