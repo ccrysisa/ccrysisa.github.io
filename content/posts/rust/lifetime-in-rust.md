@@ -43,11 +43,10 @@ repost:
 
 <!--more-->
 
-- 整理自 B 站 UP 主 [@这周你想干啥](https://space.bilibili.com/50713701) 的 [教学影片合集](https://space.bilibili.com/50713701/channel/collectiondetail?sid=1453665)
+- 整理自 B 站 UP 主 [@这周你想干啥](https://space.bilibili.com/50713701) 的 {{< link href="https://space.bilibili.com/50713701/channel/collectiondetail?sid=1453665" content="教学影片合集" external-icon=true >}}
 
 {{< admonition >}}
 学习 John Gjengset 的教学影片 [Subtying and Variance](https://www.youtube.com/watch?v=iVYWDIW71jk) 时发现自己对 Rust 生命周期 (lifetime) 还是不太理解，于是便前来补课 :rofl: 
-同时完成 [LifetimeKata](https://tfpk.github.io/lifetimekata/) 的练习。
 {{< /admonition >}}
 
 ## 引用 & 生命周期
@@ -284,7 +283,7 @@ class C extends B // C is subclass of B
 
 `T` 可以表示所有情况: ownership, immutable reference, mutable reference，例如 `T` 可以表示 `i32`, `&i32`, `&mut i32` (如果你使用过 `into_iterator` 的话应该不陌生)
 
-`T: 'a` 是说：如果 `T` 里面含有引用，那么这个引用的生命周期必须是 `'a` 的子类，即比 `'a` 长或和 `'a` 相等。`T: 'static` 也类似，表示 `T` 里面的引用 (如果有的话)，要么比 `'static` 长或和 `'static` 相等，因为不可能有比 `'static` 更长的生命周期，所以这个标注表示 **要么 `T` 里面的引用和 `'static` 一样长，要么 `T` 里面没有引用只有所有权 (owneship)**。
+`T: 'a` 是说：如果 `T` 里面含有引用，那么这个引用的生命周期必须是 `'a` 的子类，即比 `'a` 长或和 `'a` 相等。`T: 'static` 也类似，表示 `T` 里面的引用 (如果有的话)，要么比 `'static` 长或和 `'static` 相等，因为不可能有比 `'static` 更长的生命周期，所以这个标注有两种表示意义表: **要么 `T` 里面的引用和 `'static` 一样长，要么 `T` 里面没有引用只有所有权 (owneship)**。
 
 - The Rust Reference: [Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html)
 
@@ -331,6 +330,18 @@ fn foo<'short, 'long: 'short>( // long is subclass of short
 }
 ```
 
+## Homework
+
+{{< admonition info >}}
+- [ ] 阅读博客 [Common Rust Lifetime Misconceptions](https://github.com/pretzelhammer/rust-blog/blob/master/posts/common-rust-lifetime-misconceptions.md) 以对 Rust 生命周期及常见的误区有充分认知
+- [ ] 完成 [LifetimeKata](https://tfpk.github.io/lifetimekata/) 的相关练习
+{{< /admonition >}}
+
+- LifetimeKata - Chapter 1: Lifetimes Needed
+> Lifetime Annotations are used to help the compiler understand what\'s going on when it can\'t rely on scope brackets (i.e. across function boundaries; and within structs and enums).
+
+即 Rust 编译器可以通过作用范围来确定引用是否合法，进而防止悬垂引用，但是对于函数调用或者是结构体的构造，Rust 编译器就无法通过上下文来进行检查了 (因为每次函数调用或结构体构造使用的引用都可能不同)，所以需要生命周期标注，它的作用是让编译器按照标注指定的关系对引用进行检查。
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
@@ -343,7 +354,7 @@ fn foo<'short, 'long: 'short>( // long is subclass of short
 
 ## References
 
-- [LifetimeKata](https://tfpk.github.io/lifetimekata/)
+- [Common Rust Lifetime Misconceptions](https://github.com/pretzelhammer/rust-blog/blob/master/posts/common-rust-lifetime-misconceptions.md)
 - [The Rust Reference](https://doc.rust-lang.org/reference/)
 - [泛型中的型变 (协变，逆变，不可变)](https://juejin.cn/post/6952434934589947912)
 - [Variant Types and Polymorphism](https://www.cs.cornell.edu/courses/cs3110/2012sp/lectures/lec04-types/lec04.html)

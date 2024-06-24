@@ -300,6 +300,10 @@ Rust 的 `Option<T>` 的设计避免了其它语言中可能会出现的 UB，�
 
 > We can include an `else` with an `if let`. The block of code that goes with the `else` is the same as the block of code that would go with the `_` case in the `match` expression that is equivalent to the `if let` and `else`.
 
+{{< admonition tip "延伸阅读" >}}
+- Keyword [ref](https://doc.rust-lang.org/std/keyword.ref.html)
+{{< /admonition >}}
+
 ### Packages, Crates, and Modules
 
 - **Packages**: A Cargo feature that lets you build, test, and share crates
@@ -601,6 +605,12 @@ pub fn notify<T: Summary + Display>(item: &T) {}
 *Trait Bound* 本质也是泛型，只不过它限制了泛型在编译时期可以进行实例化的具体类型，例如该具体类型必须实现某个或某些 Trait。而 `impl Trait` 是它的语法糖，我个人倾向于使用 Trait Bound，因为可读性更好。除此之外，`impl Trait` 应用在返回类型时有一些限制 (Trait Bound 也暂时无法解决该问题，所以我们暂时只能将 Trait Bound 应用于函数参数):
 
 > However, you can only use `impl Trait` if you’re returning a single type. 
+
+```rs
+pub fn notify(item: &(impl Summary + Display)) {...}
+// equal
+pub fn notify<T: Summary + Display>(item: &T) {...}
+```
 
 {{< admonition >}}
 Rust 是一门注重 **编译时期** 的语言，所以它使用 Trait 不可能像 Java 使用 Inteface 那么灵活。因为 Rust 处理 Trait 也是在编译时期进行处理的，需要在编译时期将 Trait 转换成具体类型，所以其底层本质和泛型相同，都是编译时期实例化，只不过加上了实例化的具体类型的限制 (如果没满足限制就会编译错误)。
@@ -1034,6 +1044,12 @@ Using Closures that Capture Their Environment
 
 > the `filter` method that takes a closure. The closure gets an item from the iterator and returns a `bool`. If the closure returns `true`, the value will be included in the iteration produced by `filter`. If the closure returns `false`, the value won’t be included.
 
+{{< admonition >}}
+- method [std::iter::Iterator::collect](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.collect)
+
+`collect()` can also create instances of types that are not typical collections. For example, a `String` can be built from `char`s, and an iterator of `Result<T, E>` items can be collected into `Result<Collection<T>, E>`.
+{{< /admonition >}}
+
 #### Comparing Performance: Loops vs. Iterators
 
 > The point is this: iterators, although a high-level abstraction, get compiled down to roughly the same code as if you’d written the lower-level code yourself. Iterators are one of Rust’s zero-cost abstractions, by which we mean using the abstraction imposes no additional runtime overhead.
@@ -1104,6 +1120,91 @@ add_one = { path = "../add_one" }
 ```
 
 ### Smart Pointers
+
+> Rust, with its concept of ownership and borrowing, has an additional difference between references and smart pointers: while references only borrow data, in many cases, smart pointers own the data they point to.
+
+与引用不同，智能指针是可以拥有数据的所有权的
+
+- Trait [std::ops::Deref](https://doc.rust-lang.org/std/ops/trait.Deref.html)
+- Trait [std::ops::DerefMut](https://doc.rust-lang.org/std/ops/trait.DerefMut.html)
+> The `Deref` trait allows an instance of the smart pointer struct to behave like a reference so you can write your code to work with either references or smart pointers.
+
+- Trait [std::ops::Drop](https://doc.rust-lang.org/std/ops/trait.Drop.html)
+> The `Drop` trait allows you to customize the code that’s run when an instance of the smart pointer goes out of scope.
+
+#### `Box<T>`
+
+> Boxes allow you to store data on the heap rather than the stack.
+
+`Box<T>` 会将所指向的数据存储在 heap 上而不是在 stack 上
+
+> The `Box<T>` type is a smart pointer because it implements the `Deref` trait, which allows `Box<T>` values to be treated like references. When a `Box<T>` value goes out of scope, the heap data that the box is pointing to is cleaned up as well because of the `Drop` trait implementation.
+
+`Box<T>` 这种功能简单的指针也是智能指针的原因在于，它实现了必要的两个 Trait: `Deref` 和 `Drop`，使得其核心行为和其他智能指针一致
+
+#### `Deref` Trait
+
+> Implementing the `Deref` trait allows you to customize the behavior of the dereference operator `*` (not to be confused with the multiplication or glob operator). By implementing `Deref` in such a way that a smart pointer can be treated like a regular reference, you can write code that operates on references and use that code with smart pointers too.
+
+解引用运算符 `*` 是和引用运算符 `&` 搭配使用的，例如:
+
+```rs
+let x: i32 = 5;
+let y: &i32 = &x;
+assert_eq!(5, *y);
+```
+
+智能指针实现 `Deref` 的意义在于，`Deref` 的必要方法 `deref` 会将该智能指针转换成对应的引用形式 `&`，这时候解引用运算符 `*` 就可以对应上 `&` 了。这使得使用智能指针就和使用引用一样，实际上是编译器对我们隐藏了中间使用的 `deref` 转换。
+
+```rs
+let x: i32 = 5;
+let y: Box<i32> = Box::new(x);
+assert_eq!(5, *y);
+// equal
+assert_eq!(5, *y.deref()); // y.deref() -> &i32
+```
+
+连续多次隐式 `deref` 转换:
+
+```rs
+fn main() {
+    let m = MyBox::new(String::from("Rust"));
+    // &m -> &MyBox
+    // (&m).deref() -> &String          | by impl Deref for MyBox
+    // ((&m).deref()).deref() -> &str   | by impl Deref for String
+    hello(&m);
+}
+
+fn hello(name: &str) {
+    println!("Hello, {name}!");
+}
+```
+
+Rust does deref coercion when it finds types and trait implementations in three cases:
+
+- From `&T` to `&U` when `T`: `Deref<Target=U>`
+- From `&mut T` to `&mut U` when `T`: `DerefMut<Target=U>`
+- From `&mut T` to `&U` when `T`: `Deref<Target=U>`
+
+#### `Drop` Trait
+
+> Rust automatically called `drop` for us when our instances went out of scope, calling the code we specified. 
+
+> call the `std::mem::drop` function provided by the standard library if you want to force a value to be dropped before the end of its scope.
+
+#### `Rc<T>`
+
+> The `Rc<T>` type keeps track of the number of references to a value to determine whether or not the value is still in use. If there are zero references to a value, the value can be cleaned up without any references becoming invalid.
+
+#### `RefCell<T>`
+
+> But we can use the methods on `RefCell<T>` that provide access to its interior mutability so we can modify our data when we need to. The runtime checks of the borrowing rules protect us from data races, and it’s sometimes worth trading a bit of speed for this flexibility in our data structures.
+
+{{< admonition >}}
+延伸阅读: 
+- [Crust of Rust: Smart Pointers and Interior Mutability]({{< relref "./smart-pointers-and-interior-mutability.md" >}})
+- [Rust 智能指针教程](https://www.bilibili.com/video/BV1Lg4y1w7aL/)
+{{< /admonition >}}
 
 ### Fearless Concurrency
 
@@ -1607,6 +1708,8 @@ pub fn some_name(input: TokenStream) -> TokenStream {
 
 Documentation:
 
+
+## Homework
 
 ## References
 
