@@ -112,6 +112,8 @@ fn main() -> io::Result<()> {
 
 ## UDP Server/Client
 
+{{< image src="/images/rust/udp-server-client.drawio.svg" caption="UDP C/S" >}}
+
 Server:
 
 ```rs
@@ -161,6 +163,12 @@ fn main() -> io::Result<()> {
 - method [std::net::UdpSocket::send](https://doc.rust-lang.org/std/net/struct.UdpSocket.html#method.send)
 - method [std::net::UdpSocket::recv](https://doc.rust-lang.org/std/net/struct.UdpSocket.html#method.recv)
 
+## IP/Socket Address
+
+- Enum [std::net::IpAddr](https://doc.rust-lang.org/std/net/enum.IpAddr.html)
+- Enum [std::net::SocketAddr](https://doc.rust-lang.org/std/net/enum.SocketAddr.html)
+- Enum [ipnet::IpNet](https://docs.rs/ipnet/latest/ipnet/enum.IpNet.html)
+
 ## Homework
 
 {{< admonition info >}}
@@ -180,6 +188,8 @@ fn main() -> io::Result<()> {
   - Struct [std::net::TcpListener](https://doc.rust-lang.org/std/net/struct.TcpListener.html)
   - Struct [std::net::TcpStream](https://doc.rust-lang.org/std/net/struct.TcpStream.html)
   - Struct [std::net::UdpSocket](https://doc.rust-lang.org/std/net/struct.UdpSocket.html)
+  - Enum [std::net::IpAddr](https://doc.rust-lang.org/std/net/enum.IpAddr.html)
+  - Enum [std::net::SocketAddr](https://doc.rust-lang.org/std/net/enum.SocketAddr.html)
 
 - Trait [std::io::Read](https://doc.rust-lang.org/std/io/trait.Read.html)
 - Trait [std::io::Write](https://doc.rust-lang.org/std/io/trait.Write.html)
@@ -193,4 +203,10 @@ fn main() -> io::Result<()> {
 - Struct [std::time::Duration](https://doc.rust-lang.org/std/time/struct.Duration.html)
 
 - method [str::as_bytes](https://doc.rust-lang.org/std/primitive.str.html#method.as_bytes)
+
+### Crate [ipnet](https://docs.rs/ipnet/latest/ipnet/)
+
+- Enum [ipnet::IpNet](https://docs.rs/ipnet/latest/ipnet/enum.IpNet.html)
+- Struct [ipnet::Ipv4Net](https://docs.rs/ipnet/latest/ipnet/struct.Ipv4Net.html)
+- Struxt [ipnet::Ipv6Net](https://docs.rs/ipnet/latest/ipnet/struct.Ipv6Net.html)
 
