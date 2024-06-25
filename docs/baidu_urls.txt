@@ -1,4 +1,5 @@
 https://ccrysisa.github.io/posts/linux2023/
+https://ccrysisa.github.io/posts/netprog/
 https://ccrysisa.github.io/posts/atomic-weapons/
 https://ccrysisa.github.io/posts/nju-osdi-concurrency/
 https://ccrysisa.github.io/posts/too-many-lists/
@@ -18,7 +19,7 @@ https://ccrysisa.github.io/posts/csapp-ch2/
 https://ccrysisa.github.io/posts/linux-rbtree/
 https://ccrysisa.github.io/posts/posix-threads/
 https://ccrysisa.github.io/posts/c-trick/
-https://ccrysisa.github.io/posts/rust-lifetime/
+https://ccrysisa.github.io/posts/lifetime-in-rust/
 https://ccrysisa.github.io/posts/c-control-flow/
 https://ccrysisa.github.io/posts/nju-ics/
 https://ccrysisa.github.io/posts/english/

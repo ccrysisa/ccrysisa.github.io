@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 19 Jun 2024 09:43:11 &#43;0800</lastBuildDate>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 24 Jun 2024 18:35:26 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
@@ -15,6 +15,14 @@
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
 </blockquote>]]></description>
+</item>
+<item>
+  <title>通过 Rust 学习网络编程</title>
+  <link>https://ccrysisa.github.io/posts/netprog/</link>
+  <pubDate>Mon, 24 Jun 2024 18:35:26 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/netprog/</guid>
+  <description><![CDATA[]]></description>
 </item>
 <item>
   <title>Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware</title>
@@ -110,14 +118,6 @@
   <description><![CDATA[<blockquote>
 <p>工程領域往往是一系列的取捨結果，浮點數更是如此，在軟體發開發有太多失誤案例源自工程人員對浮點數運算的掌握不足，本議程希望藉由探討真實世界的血淋淋案例，帶著學員思考 IEEE 754 規格和相關軟硬體考量點，最後也會探討在深度學習領域為了改善資料處理效率，而引入的 BFloat16 這樣的新標準</p>
 </blockquote>]]></description>
-</item>
-<item>
-  <title>学会如何学习 Learning How to Learn</title>
-  <link>https://ccrysisa.github.io/posts/learning-how-to-learn/</link>
-  <pubDate>Tue, 14 May 2024 18:44:37 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/learning-how-to-learn/</guid>
-  <description><![CDATA[]]></description>
 </item>
 </channel>
 </rss>

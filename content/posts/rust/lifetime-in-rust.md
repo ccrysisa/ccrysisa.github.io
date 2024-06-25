@@ -144,9 +144,17 @@ fn insert_value<'a, 'b>(my_vec: &'a mut Vec<&'b i32>, value: &'b i32) {...}
 
 > 这样改写会包含一个隐式的生命周期规则: `'a` $\leq$ `'b`，这很好理解，容器的生命周期应该比所引用的 object 短，这个隐式规则在下一节的 struct/enum 的生命周期标注非常重要。
 
+{{< admonition >}}
+从正确写法 (有两个生命周期标注) 出发，探讨只使用一个生命周期标注的情况比较符合人类的思维，这也是原文安排的顺序。
+
+如果传入的参数的生命周期均为已知，则同一生命周期标注代表的生命周期长度为，已知生命周期的最小值。如果传入的参数的生命周期存在未知的，则同一生命周期标注的生命周期长度为已知的生命周期的最小值，并且要求未知生命周期长度的参数的生命周期不得少于该最小值。
+{{< /admonition >}}
+
 ## struct / enum 生命周期标注
 
 {{< image src="/images/rust/rust-lifetime-05.png" >}}
+
+struct / enum 的生命周期推导可以从 **构造函数** 来理解，本质上和之前所介绍的函数的生命周期标注一致。
 
 struct / enum 的生命周期标注也可以通过之前所提的 **状态机** 模型来进行理解，因为 struct / enum 本身不具备引用对应的 object 的所有权，在进行方法 (method) 调用时并不能截断引用对应的 object 的生命周期。
 
@@ -337,10 +345,15 @@ fn foo<'short, 'long: 'short>( // long is subclass of short
 - [ ] 完成 [LifetimeKata](https://tfpk.github.io/lifetimekata/) 的相关练习
 {{< /admonition >}}
 
-- LifetimeKata - Chapter 1: Lifetimes Needed
+### LifetimeKata 
+
+- Chapter 1: Lifetimes Needed
 > Lifetime Annotations are used to help the compiler understand what\'s going on when it can\'t rely on scope brackets (i.e. across function boundaries; and within structs and enums).
 
-即 Rust 编译器可以通过作用范围来确定引用是否合法，进而防止悬垂引用，但是对于函数调用或者是结构体的构造，Rust 编译器就无法通过上下文来进行检查了 (因为每次函数调用或结构体构造使用的引用都可能不同)，所以需要生命周期标注，它的作用是让编译器按照标注指定的关系对引用进行检查。
+- Chapter 3: Lifetime Elision
+> We saw that the compiler was unable to automatically tell how references in the arguments or return values might relate to each other. This is why we needed to tell the compiler that the references related to each other.
+
+即 Rust 编译器可以通过作用范围来确定引用是否合法，进而防止 **悬垂引用**，但是对于函数调用或者是结构体的构造，Rust 编译器就无法通过上下文来进行检查了 (因为每次函数调用或结构体构造使用的引用都可能不同)，所以需要生命周期标注，它的作用是让编译器按照标注指定的关系对引用进行检查。
 
 ## Documentations
 
