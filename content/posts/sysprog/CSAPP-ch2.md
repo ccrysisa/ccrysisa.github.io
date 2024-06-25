@@ -58,7 +58,7 @@ repost:
 - [x] YouTube: [老鼠和毒药问题怎么解？二进制和易经八卦有啥关系？](https://www.youtube.com/watch?v=jYQEkkwUBxQ)
 - [x] YouTube: [小精靈遊戲中的幽靈是怎麼追蹤人的? 鮮為人知的 bug](https://www.youtube.com/watch?v=jYQEkkwUBxQ)
 - [X] [解读计算机编码](https://hackmd.io/@sysprog/binary-representation)
-- [ ] [你所不知道的 C 语言: 未定义/未指定行为篇](https://hackmd.io/@sysprog/c-undefined-behavior)
+- [x] [你所不知道的 C 语言: 未定义/未指定行为篇](https://hackmd.io/@sysprog/c-undefined-behavior)
 - [x] [你所不知道的 C 语言: 数值系统篇](https://hackmd.io/@sysprog/c-numerics)
 - [x] [基于 C 语言标准研究与系统程式安全议题](https://hackmd.io/@sysprog/c-std-security)
 - 熟悉浮点数每个位的表示可以获得更大的最佳化空间
@@ -166,6 +166,8 @@ int div_2pK(int x, int k) {
 阅读章节: 2.4 
 {{< /admonition >}}
 
+浮点数名字的来源是指数部分 $E$ 可以进行调节进而影响小数点的位置，使得小数点在各种数字的表示时在浮动一般。
+
 {{< image src="/images/c/04-float-13.png" >}}
 
 此时让 Exponent value: E = 1 – Bias (instead of E = 0 – Bias) 可以使得这时的 Exponent value 和 exp 为 1 时 (其 Exponent value 也为 E = 1 – Bias) 相同，让浮点数可以在解决 0 的部分均分表示: $1.xxxx... \times 2^{1 - Bias}$, $0.xxxx... \times 2^{1 - Bias}$
@@ -191,3 +193,37 @@ Nearest Even 是用于决定，当前数值是舍入的两个数值的中间值�
 - 当 $xxxx... > 5000..0$ 时，即当前数值 $> 1.35$，根据精度向上取整舍入到 $1.4$
 - 当 $xxxx... < 5000..0$ 时，即当前数值 $< 1.35$，根据精度向下取整舍入到 $1.3$
 - 当 $xxxx... = 5000..0$ 时，即当前数值 $= 1.35$，根据精度舍入到最近偶数 $1.4$
+
+---
+
+- CSAPP 2.4.1 Fractional Binary Numbers
+> Note that numbers of the form $0.11...1_2$ represent numbers just below 1.
+
+- CSAPP 2.4.2 IEEE Floating-Point Representation
+> Having the exponent value be $1 − Bias$ rather than simply $−Bias$ might seem counterintuitive. We will see shortly that it provides for smooth transition from denormalized to normalized values.
+
+除了让浮点数在靠近 0 的部分平滑均分表示之外，使用 biased form 还可以让浮点数的大小比较变得简单，只需使用 **无符号编码** 表示 exponent field 然后进行比较即可 (如果采取二补数编码，那么编码大的可能表示负数，大小比较起来更麻烦)。
+
+> Denormalized numbers serve two purposes. First, they provide a way to represent numeric value 0
+
+> A second function of denormalized numbers is to represent numbers that are very close to 0.0.
+
+Denormalized 的作用一是表示 0，二是配合 Normalized 在靠近 0 的部分进行平滑均分表示
+
+- CSAPP 2.4.3 Example Numbers
+
+> This is no accident—the IEEE format was designed so that floating-point numbers could be sorted using an integer sorting routine. A minor difficulty occurs when dealing with negative numbers, since they have a leading 1 and occur in descending order, but this can be overcome without requiring floating-point operations to perform comparisons
+
+可以直接使用整数排序来对浮点数进行排序，而无需使用浮点数操作来进行比较，这是 IEEE 754 精心设计的
+
+> We can now see that the region of correlation corresponds to the low-order bits of the integer, stopping just before the most significant bit equal to 1 (this bit forms the implied leading 1), matching the high-order bits in the fraction part of the floating-point representation.
+
+浮点数和无符号数的编码之间的关系，其中无符号数的 MSB equal 1 被忽略，因为浮点数在 Normalized 时会有一个隐含的 1
+
+- CSAPP 2.4.4 Rounding
+
+> Rounding toward even numbers avoids this statistical bias in most real-life
+> situations. It will round upward about 50% of the time and round downward about
+> 50% of the time.
+
+Round-to-even 可以让 round 后的数据在统计上的均值与原先数据的均值误差比较小
