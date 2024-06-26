@@ -9,14 +9,14 @@
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Rust, Sysprog, Network' /><meta itemprop="name" content="通过 Rust 学习网络编程">
 <meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-06-24T18:35:26+08:00" />
-<meta itemprop="dateModified" content="2024-06-24T21:07:35+08:00" />
-<meta itemprop="wordCount" content="405"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-06-25T20:25:45+08:00" />
+<meta itemprop="wordCount" content="427"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Sysprog,Network," /><meta property="og:title" content="通过 Rust 学习网络编程" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/netprog/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-24T18:35:26+08:00" />
-<meta property="article:modified_time" content="2024-06-24T21:07:35+08:00" />
+<meta property="article:modified_time" content="2024-06-25T20:25:45+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="通过 Rust 学习网络编程"/>
@@ -35,8 +35,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/netprog\/"
-    },"genre": "posts","keywords": "Rust, Sysprog, Network","wordcount":  405 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/netprog\/","datePublished": "2024-06-24T18:35:26+08:00","dateModified": "2024-06-24T21:07:35+08:00","publisher": {
+    },"genre": "posts","keywords": "Rust, Sysprog, Network","wordcount":  427 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/netprog\/","datePublished": "2024-06-24T18:35:26+08:00","dateModified": "2024-06-25T20:25:45+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -164,7 +164,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-06-24 18:35:26"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-24">2024-06-24</time></span>&nbsp;<span title="更新于 2024-06-24 21:07:35"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-24">2024-06-24</time></span>&nbsp;<span title="405 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-06-24 18:35:26"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-24">2024-06-24</time></span>&nbsp;<span title="更新于 2024-06-25 20:25:45"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-25">2024-06-25</time></span>&nbsp;<span title="427 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -174,10 +174,12 @@
   <ul>
     <li><a href="#tcp-serverclient">TCP Server/Client</a></li>
     <li><a href="#udp-serverclient">UDP Server/Client</a></li>
+    <li><a href="#ipsocket-address">IP/Socket Address</a></li>
     <li><a href="#homework">Homework</a></li>
     <li><a href="#documentations">Documentations</a>
       <ul>
         <li><a href="#crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html">std</a></a></li>
+        <li><a href="#crate-ipnethttpsdocsrsipnetlatestipnet">Crate <a href="https://docs.rs/ipnet/latest/ipnet/">ipnet</a></a></li>
       </ul>
     </li>
   </ul>
@@ -302,6 +304,8 @@
 <li>method <a href="https://doc.rust-lang.org/std/net/struct.TcpStream.html#method.connect"target="_blank" rel="external nofollow noopener noreferrer">std::net::TcpStream::connect</a></li>
 </ul>
 <h2 id="udp-serverclient">UDP Server/Client</h2>
+<figure><a class="lightgallery" href="/images/rust/udp-server-client.drawio.svg?size=large" data-thumbnail="/images/rust/udp-server-client.drawio.svg?size=small" data-sub-html="<h2>UDP C/S</h2>"><img loading="lazy" src="/images/rust/udp-server-client.drawio.svg" srcset="/images/rust/udp-server-client.drawio.svg?size=small, /images/rust/udp-server-client.drawio.svg?size=medium 1.5x, /images/rust/udp-server-client.drawio.svg?size=large 2x" sizes="auto" data-title="/images/rust/udp-server-client.drawio.svg" data-alt="/images/rust/udp-server-client.drawio.svg" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">UDP C/S</figcaption>
+  </figure>
 <p>Server:</p>
 <div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -386,6 +390,12 @@
 <li>method <a href="https://doc.rust-lang.org/std/net/struct.UdpSocket.html#method.send"target="_blank" rel="external nofollow noopener noreferrer">std::net::UdpSocket::send</a></li>
 <li>method <a href="https://doc.rust-lang.org/std/net/struct.UdpSocket.html#method.recv"target="_blank" rel="external nofollow noopener noreferrer">std::net::UdpSocket::recv</a></li>
 </ul>
+<h2 id="ipsocket-address">IP/Socket Address</h2>
+<ul>
+<li>Enum <a href="https://doc.rust-lang.org/std/net/enum.IpAddr.html"target="_blank" rel="external nofollow noopener noreferrer">std::net::IpAddr</a></li>
+<li>Enum <a href="https://doc.rust-lang.org/std/net/enum.SocketAddr.html"target="_blank" rel="external nofollow noopener noreferrer">std::net::SocketAddr</a></li>
+<li>Enum <a href="https://docs.rs/ipnet/latest/ipnet/enum.IpNet.html"target="_blank" rel="external nofollow noopener noreferrer">ipnet::IpNet</a></li>
+</ul>
 <h2 id="homework">Homework</h2>
 <div class="details admonition info open">
     <div class="details-summary admonition-title">
@@ -412,6 +422,8 @@
 <li>Struct <a href="https://doc.rust-lang.org/std/net/struct.TcpListener.html"target="_blank" rel="external nofollow noopener noreferrer">std::net::TcpListener</a></li>
 <li>Struct <a href="https://doc.rust-lang.org/std/net/struct.TcpStream.html"target="_blank" rel="external nofollow noopener noreferrer">std::net::TcpStream</a></li>
 <li>Struct <a href="https://doc.rust-lang.org/std/net/struct.UdpSocket.html"target="_blank" rel="external nofollow noopener noreferrer">std::net::UdpSocket</a></li>
+<li>Enum <a href="https://doc.rust-lang.org/std/net/enum.IpAddr.html"target="_blank" rel="external nofollow noopener noreferrer">std::net::IpAddr</a></li>
+<li>Enum <a href="https://doc.rust-lang.org/std/net/enum.SocketAddr.html"target="_blank" rel="external nofollow noopener noreferrer">std::net::SocketAddr</a></li>
 </ul>
 </li>
 <li>
@@ -441,11 +453,17 @@
 <li>
 <p>method <a href="https://doc.rust-lang.org/std/primitive.str.html#method.as_bytes"target="_blank" rel="external nofollow noopener noreferrer">str::as_bytes</a></p>
 </li>
+</ul>
+<h3 id="crate-ipnethttpsdocsrsipnetlatestipnet">Crate <a href="https://docs.rs/ipnet/latest/ipnet/"target="_blank" rel="external nofollow noopener noreferrer">ipnet</a></h3>
+<ul>
+<li>Enum <a href="https://docs.rs/ipnet/latest/ipnet/enum.IpNet.html"target="_blank" rel="external nofollow noopener noreferrer">ipnet::IpNet</a></li>
+<li>Struct <a href="https://docs.rs/ipnet/latest/ipnet/struct.Ipv4Net.html"target="_blank" rel="external nofollow noopener noreferrer">ipnet::Ipv4Net</a></li>
+<li>Struxt <a href="https://docs.rs/ipnet/latest/ipnet/struct.Ipv6Net.html"target="_blank" rel="external nofollow noopener noreferrer">ipnet::Ipv6Net</a></li>
 </ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-06-24 21:07:35">更新于 2024-06-24&nbsp;</span>
+        <span title="更新于 2024-06-25 20:25:45">更新于 2024-06-25&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/netprog/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
