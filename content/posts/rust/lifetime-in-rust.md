@@ -338,6 +338,47 @@ fn foo<'short, 'long: 'short>( // long is subclass of short
 }
 ```
 
+## 生命周期 reborrow
+
+{{< image src="/images/rust/rust-lifetime-08.png" >}}
+
+```rs
+let mut i = 42;
+let x = &mut i; // x: &mut i32
+let y = x;      // y: &mut i32
+
+*y = 43;
+println("{}", *y);
+
+*x = 44;
+println("{}", *x);
+```
+
+按照 Rust 的借用检查机制，第 3 行处会导致后续出现两个指向 `i` 的可变引用 `x` 和 `y`，编译会失败，但实际上编译是没问题的，这是因为重引用 reborrow 机制，其使得第 3 行实质上被编译器处理为:
+
+```rs
+let y = &mut *x; // y: &mut i32
+```
+
+所以 `y` 其实是对 `x` 的重引用，在 **重引用的使用范围** 内，只要不使用 **被重引用的引用** `x` 和 **对象本身** `i`，编译器会认为这是没问题的，个人感觉相当于比较高阶的变量遮蔽。需要注意的是 reborrow 机制只应用于 **可变引用**，因为不可变引用可以同时存在多个，无需担心重引用时不能使用的问题。下面是另一个例子，也是因为 reborrow 机制从而通过编译:
+
+```rs
+fn main() {
+    let mut i = 42;
+    let x = &mut i; // x: &mut i32
+
+    change_it(x);
+    println("{}", *y);
+
+    *x = 44;
+    println("{}", *x);
+}
+
+fn change_it(mut_i32: &mut i32) {
+    *mut_i32 = 43;
+}
+```
+
 ## Homework
 
 {{< admonition info >}}
@@ -354,6 +395,16 @@ fn foo<'short, 'long: 'short>( // long is subclass of short
 > We saw that the compiler was unable to automatically tell how references in the arguments or return values might relate to each other. This is why we needed to tell the compiler that the references related to each other.
 
 即 Rust 编译器可以通过作用范围来确定引用是否合法，进而防止 **悬垂引用**，但是对于函数调用或者是结构体的构造，Rust 编译器就无法通过上下文来进行检查了 (因为每次函数调用或结构体构造使用的引用都可能不同)，所以需要生命周期标注，它的作用是让编译器按照标注指定的关系对引用进行检查。
+
+- Chapter 7: Special Lifetimes
+> Lifetime bounds can be applied to types or to other lifetimes. The bound `'a: 'b` is usually read as `'a` outlives `'b`. `'a: 'b` means that `'a` lasts at least as long as `'b`, so a reference `&'a ()` is valid whenever `&'b ()` is valid.
+
+生命周期约束，实质上是用于规定 Variance 的关系
+
+- Chapter 10: Footnote on Trait Lifetime Bounds
+> It's important to realise that since trait objects might or might not contain a reference (or any number of references), all trait objects have lifetimes. This is true, even if no implementors of the trait contain references.
+
+Trait 对象的生命周期比较复杂，但一般不会太多涉及到，比较常见的例子是 `Box<dyn Trait>` 等价于 `Box<dyn 'static Trait>`
 
 ## Documentations
 
