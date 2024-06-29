@@ -39,7 +39,7 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-> We're writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you'd make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you're a newcomer to the language or not.
+> We\'re writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you\'d make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you\'re a newcomer to the language or not.
 
 <!--more-->
 
@@ -61,7 +61,7 @@ where
     S: BuildHasher,
 ```
 
-### Hash an Eq
+### Hash and Eq
 
 - Trait [std::hash\::Hash](https://doc.rust-lang.org/std/hash/trait.Hash.html)
 
@@ -110,7 +110,7 @@ vec![a, f, c, d, e]
 
 因为 Rust 编译器并没有针对尾递归的最优化，所以尽量不要使用尾递归的逻辑，使用循环改写比较好，这样可以将空间复杂度从 $O(n)$ 降到 $O(1)$。在 `drop` 方法的实现中特别明显，手动实现 `drop` 方法时，应尽量使用循环而不是递归逻辑。
 
-### tuple
+### tuple references
 
 ```rs
 (&'a K, &'a V)
@@ -118,6 +118,50 @@ vec![a, f, c, d, e]
 ```
 
 这两种表示方式是不完全相同的，对于第二种方式，隐含了一个前提: `K, V` 是在同一个 tuple 里面，即它们在内存的位置是相邻的，这种方式表示引用的是一个 tuple。而第一种仅表示两个引用组成了一个 tuple，而对于 `K, V` 这两个数据在内存的位置关系并无限制，`K, V` 本身是否组成 tuple 也不在乎。
+
+### borrow
+
+- Trait [std::borrow::Borrow](https://doc.rust-lang.org/std/borrow/trait.Borrow.html)
+
+> Types express that they can be borrowed as some type `T` by implementing `Borrow<T>`, providing a reference to a `T` in the trait’s borrow method. A type is free to borrow as several different types. If it wishes to mutably borrow as the type, allowing the underlying data to be modified, it can additionally implement `BorrowMut<T>`.
+
+> In particular  `Eq`, `Ord` and `Hash` must be equivalent for borrowed and owned values: `x.borrow() == y.borrow()` should give the same result as `x == y`.
+
+> If generic code merely needs to work for all types that can provide a reference to related type `T`, it is often better to use `AsRef<T>` as more types can safely implement it.
+
+> By additionally requiring `Q: Hash + Eq`, it signals the requirement that `K` and `Q` have implementations of the `Hash` and `Eq` traits that produce identical results.
+
+- [Borrow and AsRef](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/borrow-and-asref.html)
+
+{{< admonition quote >}}
+We can see how they’re kind of the same: they both deal with owned and borrowed versions of some type. However, they’re a bit different.
+
+Choose `Borrow` when you want to abstract over different kinds of borrowing, or when you’re building a data structure that treats owned and borrowed values in equivalent ways, such as hashing and comparison.
+
+Choose `AsRef` when you want to convert something to a reference directly, and you’re writing generic code.
+{{< /admonition >}}
+
+### entry
+
+- Enum [std::collections::hash_map::Entry](https://doc.rust-lang.org/std/collections/hash_map/enum.Entry.html)
+
+```rs
+pub enum Entry<'a, K: 'a, V: 'a> {
+    Occupied(OccupiedEntry<'a, K, V>),
+    Vacant(VacantEntry<'a, K, V>),
+}
+```
+
+A view into a single entry in a map, which may either be vacant or occupied.
+
+`or_insert` 和 `or_insert_with` 的可以从下面的例子一窥区别:
+
+```rs
+x.or_insert(vec::new())
+x.or_insert_with(vec::new)
+```
+
+`or_insert` 会在调用前对参数进行计算，所以不管 `x` 是哪个枚举子类型，`vec::new()` 都会被调用，而 `or_insert_with` 的参数是一个闭包，仅当 `x` 是 `Vacant` 时才会对参数进行调用操作，即 `vec::new()` 操作。
 
 ## Documentations
 
@@ -129,9 +173,14 @@ vec![a, f, c, d, e]
 
 - Struct [std::collections::HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)
 - Struct [std::collections::hash_map::DefaultHasher](https://doc.rust-lang.org/std/collections/hash_map/struct.DefaultHasher.html)
+
 - Trait [std::hash\::Hasher](https://doc.rust-lang.org/std/hash/trait.Hasher.html)
 - Trait [std::hash\::Hash](https://doc.rust-lang.org/std/hash/trait.Hash.html)
+- Enum [std::collections::hash_map::Entry](https://doc.rust-lang.org/std/collections/hash_map/enum.Entry.html)
+
 - Trait [std::borrow::Borrow](https://doc.rust-lang.org/std/borrow/trait.Borrow.html)
+- Trait [std::borrow::BorrowMut](https://doc.rust-lang.org/std/borrow/trait.BorrowMut.html)
+
 - Function [std::mem::replace](https://doc.rust-lang.org/std/mem/fn.replace.html)
 
 - Struct [std::vec::Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)
@@ -149,7 +198,9 @@ vec![a, f, c, d, e]
 
 - trait method [std::iter::Extend::extend](https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend)
 - method [std::option::Option::is_some](https://doc.rust-lang.org/std/option/enum.Option.html#method.is_some)
+- method [slice::last_mut](https://doc.rust-lang.org/std/primitive.slice.html#method.last_mut)
 
 ## References
 
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/about.html)
+- [The Cargo Book](https://doc.rust-lang.org/cargo/index.html)
