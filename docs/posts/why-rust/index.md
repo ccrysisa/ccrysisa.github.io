@@ -1673,7 +1673,7 @@ Documentation:
 ## Homework
 
 {{< admonition info "作业" >}}
-- [x] 完成 [rustlings](https://github.com/rust-lang/rustlings) 的全部练习题 / [我的题解](https://github.com/ccrysisa/rustlings)
+- [x] 完成 [rustlings](https://github.com/rust-lang/rustlings) 的全部练习题 / [参考题解](https://space.bilibili.com/50713701/channel/collectiondetail?sid=1409071) / [我的题解](https://github.com/ccrysisa/rustlings)
 - [ ] 阅读并完成 [LifetimeKata](https://github.com/tfpk/lifetimekata/) 的所有章节、练习题
 - [ ] 阅读并完成 [MacroKata](https://github.com/tfpk/macrokata) 的所有章节、练习题
 {{< /admonition >}}

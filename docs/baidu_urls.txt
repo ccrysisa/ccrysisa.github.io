@@ -1,4 +1,5 @@
 https://ccrysisa.github.io/posts/linux2023/
+https://ccrysisa.github.io/posts/rust-linked-hashmap/
 https://ccrysisa.github.io/posts/netprog/
 https://ccrysisa.github.io/posts/atomic-weapons/
 https://ccrysisa.github.io/posts/nju-osdi-concurrency/

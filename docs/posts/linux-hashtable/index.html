@@ -9,20 +9,20 @@
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="
 Linux 核心如同其它复杂的资讯系统，也提供 hash table 的实作，但其原始程式码中却藏有间接指针 (可参见 你所不知道的 C 语言: linked list 和非连续内存) 的巧妙和数学奥秘。
-" /><meta name="keywords" content='Sysprog, Linux, Hash table' /><meta itemprop="name" content="Linux 核心的 hash table 实作">
+" /><meta name="keywords" content='Sysprog, Linux, Hash' /><meta itemprop="name" content="Linux 核心的 hash table 实作">
 <meta itemprop="description" content="
 Linux 核心如同其它复杂的资讯系统，也提供 hash table 的实作，但其原始程式码中却藏有间接指针 (可参见 你所不知道的 C 语言: linked list 和非连续内存) 的巧妙和数学奥秘。
 "><meta itemprop="datePublished" content="2024-03-16T10:59:36+08:00" />
-<meta itemprop="dateModified" content="2024-06-02T19:41:17+08:00" />
+<meta itemprop="dateModified" content="2024-06-28T18:26:51+08:00" />
 <meta itemprop="wordCount" content="786"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="Sysprog,Linux,Hash table," /><meta property="og:title" content="Linux 核心的 hash table 实作" />
+<meta itemprop="keywords" content="Sysprog,Linux,Hash," /><meta property="og:title" content="Linux 核心的 hash table 实作" />
 <meta property="og:description" content="
 Linux 核心如同其它复杂的资讯系统，也提供 hash table 的实作，但其原始程式码中却藏有间接指针 (可参见 你所不知道的 C 语言: linked list 和非连续内存) 的巧妙和数学奥秘。
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/linux-hashtable/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-03-16T10:59:36+08:00" />
-<meta property="article:modified_time" content="2024-06-02T19:41:17+08:00" />
+<meta property="article:modified_time" content="2024-06-28T18:26:51+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Linux 核心的 hash table 实作"/>
@@ -43,8 +43,8 @@ Linux 核心如同其它复杂的资讯系统，也提供 hash table 的实作�
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux-hashtable\/"
-    },"genre": "posts","keywords": "Sysprog, Linux, Hash table","wordcount":  786 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/linux-hashtable\/","datePublished": "2024-03-16T10:59:36+08:00","dateModified": "2024-06-02T19:41:17+08:00","publisher": {
+    },"genre": "posts","keywords": "Sysprog, Linux, Hash","wordcount":  786 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/linux-hashtable\/","datePublished": "2024-03-16T10:59:36+08:00","dateModified": "2024-06-28T18:26:51+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -172,7 +172,7 @@ Linux 核心如同其它复杂的资讯系统，也提供 hash table 的实作�
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-16 10:59:36"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="更新于 2024-06-02 19:41:17"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-02">2024-06-02</time></span>&nbsp;<span title="786 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-16 10:59:36"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-16">2024-03-16</time></span>&nbsp;<span title="更新于 2024-06-28 18:26:51"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-28">2024-06-28</time></span>&nbsp;<span title="786 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -308,12 +308,12 @@ $2^{32} = 4294967296$</p>
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-06-02 19:41:17">更新于 2024-06-02&nbsp;</span>
+        <span title="更新于 2024-06-28 18:26:51">更新于 2024-06-28&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/linux-hashtable/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/linux-hashtable/" data-title="Linux 核心的 hash table 实作" data-hashtags="Sysprog,Linux,Hash table"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/linux-hashtable/" data-title="Linux 核心的 hash table 实作" data-hashtags="Sysprog,Linux,Hash"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/linux-hashtable/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/linux-hashtable/" data-title="Linux 核心的 hash table 实作" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/linux-hashtable/" data-title="Linux 核心的 hash table 实作"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -327,7 +327,7 @@ $2^{32} = 4294967296$</p>
   </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/linux/' class="post-tag">Linux</a><a href='/tags/hash-table/' class="post-tag">Hash table</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/linux/' class="post-tag">Linux</a><a href='/tags/hash/' class="post-tag">Hash</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>

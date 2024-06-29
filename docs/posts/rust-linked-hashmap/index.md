@@ -1,43 +1,5 @@
----
-title: "Build a linked hash map in Rust"
-subtitle:
-date: 2024-06-28T11:16:51+08:00
-# draft: true
-# author:
-#   name:
-#   link:
-#   email:
-#   avatar:
-description:
-keywords:
-license:
-comment: false
-weight: 0
-tags:
-  - Rust
-  - Hash
-categories:
-  - Rust
-hiddenFromHomePage: false
-hiddenFromSearch: false
-hiddenFromRss: false
-summary:
-resources:
-  - name: featured-image
-    src: featured-image.jpg
-  - name: featured-image-preview
-    src: featured-image-preview.jpg
-toc: true
-math: true
-lightgallery: true
-password:
-message:
-repost:
-  enable: true
-  url:
+# Build a linked hash map in Rust
 
-# See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
----
 
 > We're writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you'd make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you're a newcomer to the language or not.
 
@@ -153,3 +115,10 @@ vec![a, f, c, d, e]
 ## References
 
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/about.html)
+
+
+---
+
+> 作者: [ccrysisa](https://github.com/ccrysisa)  
+> URL: https://ccrysisa.github.io/posts/rust-linked-hashmap/  
+
