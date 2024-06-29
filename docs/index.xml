@@ -23,7 +23,7 @@
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/rust-linked-hashmap/</guid>
   <description><![CDATA[<blockquote>
-<p>We&rsquo;re writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you&rsquo;d make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you&rsquo;re a newcomer to the language or not.</p>
+<p>We're writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you'd make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you're a newcomer to the language or not.</p>
 </blockquote>]]></description>
 </item>
 <item>
