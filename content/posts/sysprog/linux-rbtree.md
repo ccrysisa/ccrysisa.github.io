@@ -149,15 +149,17 @@ LLRB tree:
 
 - 第一种情况
 
-{{< image sc="https://hackmd.io/_uploads/BJatA4Q1h.png" >}}
+{{< image src="https://hackmd.io/_uploads/BJatA4Q1h.png" >}}
 
 - 第二种情况
 
-{{< image sc="https://hackmd.io/_uploads/ByocCVQ1h.png" >}}
+{{< image src="https://hackmd.io/_uploads/ByocCVQ1h.png" >}}
 
 - 第三种情况
 
-{{< image sc="https://hackmd.io/_uploads/SyYjAEmJ3.png" >}}
+{{< image src="https://hackmd.io/_uploads/SyYjAEmJ3.png" >}}
+
+因为红黑树和 2-3-4 树一样，都是从叶子节点处插入新节点，如果新插入的节点使得叶子节点变成了 4 树节点，那么此时就会从下往上对 4 树节点进行分裂颜色翻转，如果这个过程使得父节点成为了新的 4 树节点，那么继续对父节点进行分裂颜色翻转，依次处理，直到父节点不是 4 树节点或达到了根节点，如果根节点被这个过程变成了 4 树节点，那么同样的对父节点进行分裂颜色翻转，这个操作会使得红黑树树高加 1。所以正常情况下，4 树节点只会在插入节点后某个时间点短暂存在于红黑树中，所以不需要考虑父节点为 4 树节点的插入情况。
 
 ### 红黑树的移除
 

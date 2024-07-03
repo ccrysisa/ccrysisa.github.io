@@ -14,7 +14,7 @@
 本讲座将带着学员重新探索函数呼叫背后的原理，从程序语言和计算机结构的发展简史谈起，让学员自电脑软硬件演化过程去掌握 calling convention 的考量，伴随着 stack 和 heap 的操作，再探讨 C 程序如何处理函数呼叫、跨越函数间的跳跃 (如 setjmp 和 longjmp)，再来思索资讯安全和执行效率的议题。着重在计算机架构对应的支援和行为分析。
 "><meta itemprop="datePublished" content="2024-03-15T10:40:59+08:00" />
 <meta itemprop="dateModified" content="2024-06-08T12:40:14+08:00" />
-<meta itemprop="wordCount" content="1973"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="2317"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Function," /><meta property="og:title" content="你所不知道的 C 语言: 函数调用篇" />
 <meta property="og:description" content="
 本讲座将带着学员重新探索函数呼叫背后的原理，从程序语言和计算机结构的发展简史谈起，让学员自电脑软硬件演化过程去掌握 calling convention 的考量，伴随着 stack 和 heap 的操作，再探讨 C 程序如何处理函数呼叫、跨越函数间的跳跃 (如 setjmp 和 longjmp)，再来思索资讯安全和执行效率的议题。着重在计算机架构对应的支援和行为分析。
@@ -43,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-function\/"
-    },"genre": "posts","keywords": "Sysprog, C, Function","wordcount":  1973 ,
+    },"genre": "posts","keywords": "Sysprog, C, Function","wordcount":  2317 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-function\/","datePublished": "2024-03-15T10:40:59+08:00","dateModified": "2024-06-08T12:40:14+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -172,7 +172,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-15 10:40:59"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-15">2024-03-15</time></span>&nbsp;<span title="更新于 2024-06-08 12:40:14"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-08">2024-06-08</time></span>&nbsp;<span title="1973 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 4 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-15 10:40:59"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-15">2024-03-15</time></span>&nbsp;<span title="更新于 2024-06-08 12:40:14"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-08">2024-06-08</time></span>&nbsp;<span title="2317 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -328,6 +328,52 @@
 </div>
 </div><p><code>func</code> 函数在调用时，一个栈帧的内容包括: <code>x</code> (parameter), <code>y</code> (local variable), return address。这些数据的类型都是 <code>int</code>，即占据空间相同，这也是为什么计时器 <code>count</code> 的变化大致呈现 $x : \frac{x}{2} : \frac{x}{3}$ 的比例。</p>
 <h2 id="stack-based-buffer-overflow">stack-based buffer overflow</h2>
+<ul>
+<li><a href="https://access.redhat.com/security/cve/cve-2015-7547"target="_blank" rel="external nofollow noopener noreferrer">CVE-2015-7547</a> / <a href="http://thehackernews.com/2016/02/glibc-linux-flaw.html"target="_blank" rel="external nofollow noopener noreferrer">解说</a></li>
+</ul>
+<blockquote>
+<p>vulnerability in glibc’s DNS client-side resolver that is used to translate human-readable domain names, like google.com, into a network IP address.</p>
+</blockquote>
+<ul>
+<li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Buffer_overflow"target="_blank" rel="external nofollow noopener noreferrer">Buffer overflow</a></li>
+</ul>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">evil</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">system</span><span class="p">(</span><span class="s">&#34;/bin/sh&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="n">input</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="s">&#34;Input:&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">gets</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">puts</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>需要向 gcc 指定 <code>-fno-stack-protector</code> 参数来关闭栈内存保护机制，要不然无法实现栈溢出攻击:</p>
+<div class="highlight" id="id-5"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gcc -o bof -fno-stack-protector -g -no-pie bof.c</span></span></code></pre></td></tr></table>
+</div>
+</div><p>该实验本质上是利用了函数内定义的数组，是存储在 stack 上，并且数组下标和存储地址的对应关系是「小/低 -&gt; 大/高」即下标小的数组元素位于低地址处，所以数组的元素是从低地址往高地址存储的，这和 sp 的方向刚好相反，并且如果使用的是 <code>gets</code> 这种不安全函数，当接收的输入超过定义的数组的长度时，会覆盖不属于定义的数组，并且比数组更高地址部分的内容，这可能会改写当前函数的返回地址，从而导致段错误。</p>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/qeuZwPx.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/qeuZwPx.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/qeuZwPx.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/qeuZwPx.png" srcset="https://imgur-backup.hackmd.io/qeuZwPx.png?size=small, https://imgur-backup.hackmd.io/qeuZwPx.png?size=medium 1.5x, https://imgur-backup.hackmd.io/qeuZwPx.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/qeuZwPx.png" data-alt="https://imgur-backup.hackmd.io/qeuZwPx.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<p>因为可以通过输入来改写当前函数的返回地址，那么就可以构造一个输入使得当前 <code>main</code> 会返回到 <code>evil</code> 函数，这部分根据原文完成实验即可。</p>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/y5qUs7Y.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/y5qUs7Y.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/y5qUs7Y.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/y5qUs7Y.png" srcset="https://imgur-backup.hackmd.io/y5qUs7Y.png?size=small, https://imgur-backup.hackmd.io/y5qUs7Y.png?size=medium 1.5x, https://imgur-backup.hackmd.io/y5qUs7Y.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/y5qUs7Y.png" data-alt="https://imgur-backup.hackmd.io/y5qUs7Y.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <h2 id="rop">ROP</h2>
 <h2 id="heap">heap</h2>
 <p>使用 malloc 时操作系统可能会 overcommit，而正因为这个 overcommit 的特性，malloc 返回有效地址也不见得是安全的。除此之外，因为 overcommit，使用 malloc 后立即搭配使用 memset 代价也很高 (因为操作系统 overcommit 可能会先分配一个小空间而不是一下子分配全部，因为它优先重复使用之前已使用过的小块空间)，并且如果是设置为 0，则有可能会对原本为 0 的空间进行重复设置，降低效能。此时可以应该善用 calloc，虽然也会 overcommit，但是会保证分配空间的前面都是 0 (因为优先分配的是需要操作系统参与的大块空间)，无需使用 memset 这类操作而降低效能。</p>
@@ -378,7 +424,7 @@ execution.</p>
       <a href="/posts/linux-hashtable/" class="post-nav-item" rel="next" title="Linux 核心的 hash table 实作">Linux 核心的 hash table 实作<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">

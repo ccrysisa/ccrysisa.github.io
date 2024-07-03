@@ -99,6 +99,38 @@ int main() {
 
 ## stack-based buffer overflow
 
+- [CVE-2015-7547](https://access.redhat.com/security/cve/cve-2015-7547) / [解说](http://thehackernews.com/2016/02/glibc-linux-flaw.html)
+> vulnerability in glibc’s DNS client-side resolver that is used to translate human-readable domain names, like google.com, into a network IP address.
+
+- Wikipedia: [Buffer overflow](https://en.wikipedia.org/wiki/Buffer_overflow)
+
+```c
+int evil() {
+    system("/bin/sh");
+}
+
+int main() {
+    char input[10];
+    puts("Input:");
+    gets(input);
+    puts(input);
+}
+```
+
+需要向 gcc 指定 `-fno-stack-protector` 参数来关闭栈内存保护机制，要不然无法实现栈溢出攻击:
+
+```bash
+$ gcc -o bof -fno-stack-protector -g -no-pie bof.c
+```
+
+该实验本质上是利用了函数内定义的数组，是存储在 stack 上，并且数组下标和存储地址的对应关系是「小/低 -> 大/高」即下标小的数组元素位于低地址处，所以数组的元素是从低地址往高地址存储的，这和 sp 的方向刚好相反，并且如果使用的是 `gets` 这种不安全函数，当接收的输入超过定义的数组的长度时，会覆盖不属于定义的数组，并且比数组更高地址部分的内容，这可能会改写当前函数的返回地址，从而导致段错误。
+
+{{< image src="https://imgur-backup.hackmd.io/qeuZwPx.png" >}}
+
+因为可以通过输入来改写当前函数的返回地址，那么就可以构造一个输入使得当前 `main` 会返回到 `evil` 函数，这部分根据原文完成实验即可。
+
+{{< image src="https://imgur-backup.hackmd.io/y5qUs7Y.png" >}}
+
 ## ROP
 
 ## heap

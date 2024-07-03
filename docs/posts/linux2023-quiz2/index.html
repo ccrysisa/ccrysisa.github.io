@@ -24,7 +24,7 @@
     
   "><meta itemprop="datePublished" content="2024-06-08T10:52:10+08:00" />
 <meta itemprop="dateModified" content="2024-06-08T12:40:14+08:00" />
-<meta itemprop="wordCount" content="18"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="1250"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Bitwise," /><meta property="og:title" content="Linux 核心设计: 2023q2 第二周测验题" />
 <meta property="og:description" content="
     
@@ -63,7 +63,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux2023-quiz2\/"
-    },"genre": "posts","keywords": "Sysprog, C, Bitwise","wordcount":  18 ,
+    },"genre": "posts","keywords": "Sysprog, C, Bitwise","wordcount":  1250 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023-quiz2\/","datePublished": "2024-06-08T10:52:10+08:00","dateModified": "2024-06-08T12:40:14+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -181,7 +181,8 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
 
   <aside class="aside-custom">
     </aside>
@@ -191,8 +192,19 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-06-08 10:52:10"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-08">2024-06-08</time></span>&nbsp;<span title="更新于 2024-06-08 12:40:14"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-08">2024-06-08</time></span>&nbsp;<span title="18 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 1 分钟</span>&nbsp;</div>
-    </div><div class="content" id="content"><div class="details admonition abstract open">
+      <div class="post-meta-line"><span title="发布于 2024-06-08 10:52:10"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-08">2024-06-08</time></span>&nbsp;<span title="更新于 2024-06-08 12:40:14"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-08">2024-06-08</time></span>&nbsp;<span title="1250 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#测验-1">测验 1</a></li>
+    <li><a href="#测验-2">测验 2</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><div class="details admonition abstract open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -202,7 +214,179 @@
   </div>
 <ul>
 <li><a href="https://hackmd.io/@sysprog/linux2023-quiz2"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
-</ul></div><div class="post-footer" id="post-footer">
+</ul>
+<h2 id="测验-1">测验 1</h2>
+<p>原文对于本题的目的说明有一点小错误，原文声称函数 <code>next_pow2(x)</code> 的功能为「找出最接近且 <strong>大于等于</strong> 2 的幂的值」，但实际应为「找出最接近且 <strong>大于</strong> 2 的幂的值」</p>
+<p>定义 MSB1(x) 为 <code>x</code> 的二进制表示法的值为 1 的最高位元，例如对于 8-bit 的二进制数 <code>00001000</code>，其 MSB1(x) 为 3 (从右往左并且从 0 开始计数)。</p>
+<p>因为在二进制编码表示中，任意一个位元表示的值都是 2 的幂。以 8-bit 无符号数为例，对于 <code>x</code> (二进制表示为 <code>00001xxx</code>)，其最接近且大于 2 的幂的值的二进制表示为 <code>00010000</code>，即 MSB1(x) 向左前进了一位，<code>MSB1(next_pow2(x))</code> = <code>MSB1(x)</code> + 1，并且将 $[MSB1(x)&hellip;0]$ 这个区间的位元全部置为 0 即可。从这个角度出发，只需要将参数 <code>x</code> 从第 MSB(x) bit 开始从左往右全部置为 1，即$[MSB1(x)&hellip;0]$ 这个区间的位元全部置为 1，然后对该值加 1 即可得到 <code>next_pow2(x)</code>，因为此时$[MSB1(x)&hellip;0]$ 这个区间的位元全部为 0，并且第 MSB1(x) + 1 bit 的值为 1。</p>
+<div class="highlight" id="id-1"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">uint64_t</span> <span class="nf">next_pow2</span><span class="p">(</span><span class="kt">uint64_t</span> <span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">|=</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">|=</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">|=</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">|=</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">|=</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">|=</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">|=</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// x |= x &gt;&gt; AAAA;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">x</span> <span class="o">|=</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span> <span class="o">|=</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">16</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// x |= x &gt;&gt; BBBB;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">x</span> <span class="o">|=</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">32</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// return CCCC;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个做法是先使用 MSB1(x) 填充 $[MSB1(x)&hellip;(MSB1(x)-7)]$ 这个区间的 8 个位元全部为 1，因为 MSB1(x) 本身值就为 1，所以只需要使用 7 次右移运算 + 或运算即可。然后使用该位元全为 1 的这 8-bit 继续填充后面的 8 个位元得到 16 个连续且值为 1 的位元，然后是使用 16-bit 填充，最后是 32-bit，因为 <code>x</code> 是 64-bit 的无符号数，所以使用 32-bit 进行填充操作时已经覆盖了最极端的情况 (MSB1(x) = 63)。最后加一即可得到预期结果。</p>
+<div class="details admonition question open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>延伸问题<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ol>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 解释上述程式码原理，并用 <a href="https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html"target="_blank" rel="external nofollow noopener noreferrer">__builtin_clzl</a> 改写</li>
+</ol>
+<blockquote>
+<p><code>int __builtin_clz (unsigned int x)</code><br>
+Returns the number of leading 0-bits in x, starting at the most significant bit position. If x is 0, the result is undefined.<br>
+<code>int __builtin_clzl (unsigned long)</code><br>
+Similar to __builtin_clz, except the argument type is unsigned long.</p>
+</blockquote></div>
+    </div>
+  </div>
+<p>使用 <code>__builtin_clzl</code> 来改写:</p>
+<div class="highlight" id="id-2"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">uint64_t</span> <span class="nf">next_pow2</span><span class="p">(</span><span class="kt">uint64_t</span> <span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">64</span> <span class="o">-</span> <span class="nf">__builtin_clzl</span><span class="p">(</span><span class="n">x</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用 <code>__builtin_clzl</code> 配合位移运算，可以直接构造出满足预期结果 (MSB1(x) + 1) 的结果。</p>
+<h2 id="测验-2">测验 2</h2>
+<div class="highlight" id="id-3"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">concatenatedBinary</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int</span> <span class="n">M</span> <span class="o">=</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* the bit length to be shifted */</span>
+</span></span><span class="line"><span class="cl">    <span class="cm">/* use long here as it potentially could overflow for int */</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="cm">/* removing the rightmost set bit
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * e.g. 100100 -&gt; 100000
+</span></span></span><span class="line"><span class="cl"><span class="cm">         *      000001 -&gt; 000000
+</span></span></span><span class="line"><span class="cl"><span class="cm">         *      000000 -&gt; 000000
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * after removal, if it is 0, then it means it is power of 2
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * as all power of 2 only contains 1 set bit
+</span></span></span><span class="line"><span class="cl"><span class="cm">         * if it is power of 2, we increase the bit length
+</span></span></span><span class="line"><span class="cl"><span class="cm">         */</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// if (!(DDDD))
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">i</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">len</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// ans = (i | (EEEE)) % M;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">|</span> <span class="p">(</span><span class="n">ans</span> <span class="o">&lt;&lt;</span> <span class="n">len</span><span class="p">))</span> <span class="o">%</span> <span class="n">M</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过判断 <code>i &amp; (i - 1)</code> 是否为 0 可以判断二进制数 <code>i</code> 的值是否为 2 的幂，如果是，则适当扩大表示该二进制数所需要的长度 (因为这对应于二进制的进位概念)，例如 <code>11</code> 只需要长度 2，而 <code>100</code> 则需要长度 3 来表示该值。</p>
+<p>然后可以通过左移来讲对应的数值补充至 <code>ans</code> 二进制表示的末尾 <code>i | (ans &lt;&lt; len)</code>，最后借助同余的概念来进行取模。</p>
+<div class="details admonition question open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>延伸问题<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><ol>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 解释上述程式码运作原理</li>
+<li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 尝试使用 <a href="https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html"target="_blank" rel="external nofollow noopener noreferrer">__builtin_clzl</a> 改写，并改进 mod $10^9 + 7$ 的运算</li>
+</ol>
+</div>
+    </div>
+  </div>
+<p>使用 <code>__builtin_clzl</code> 来改写:</p>
+<div class="highlight" id="id-4"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">concatenatedBinary</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">int</span> <span class="n">M</span> <span class="o">=</span> <span class="mf">1e9</span> <span class="o">+</span> <span class="mi">7</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">         <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">31</span> <span class="o">-</span> <span class="nf">__builtin_clz</span><span class="p">(</span><span class="n">i</span><span class="p">))))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">len</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ans</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span> <span class="o">%</span> <span class="n">M</span> <span class="o">|</span> <span class="p">(</span><span class="n">ans</span> <span class="o">&lt;&lt;</span> <span class="n">len</span><span class="p">)</span> <span class="o">%</span> <span class="n">M</span><span class="p">)</span> <span class="o">%</span> <span class="n">M</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ans</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过 <code>__builtin_clz</code> 可以更加直观的判断 <code>i</code> 的值是否为 2 的幂次方，除此之外运用同余的性质改进取模运算。</p></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
@@ -235,7 +419,7 @@
       <a href="/posts/revolution-os/" class="post-nav-item" rel="next" title="从 Revolution OS 看操作系统生态变化">从 Revolution OS 看操作系统生态变化<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
 </article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
               <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
