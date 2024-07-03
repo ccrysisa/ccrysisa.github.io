@@ -47,11 +47,24 @@ repost:
 
 - {{< link href="https://hackmd.io/@sysprog/linux-rbtree" content="原文地址" external-icon=true >}}
 
+## 开篇点题
+
+相关讨论: [Red-black tree over AVL tree](https://stackoverflow.com/questions/13852870/red-black-tree-over-avl-tree)
+
+效能表现的差异，参考 [Performance Analysis of BSTs in System Software](https://benpfaff.org/papers/libavl.pdf):
+
+> The results indicate that when input is expected to be randomly ordered with occasional runs of sorted order, red-black trees are preferred; when insertions often occur in sorted order, AVL trees excel for later random access, whereas splay trees perform best for later sequential or clustered access.
+
+以及 [Red-black Trees (rbtree) in Linux](https://docs.kernel.org/core-api/rbtree.html):
+
+> Red-black trees are a type of self-balancing binary search tree, used for storing sortable key/value data pairs. This differs from radix trees (which are used to efficiently store sparse arrays and thus use long integer indexes to insert/access/delete nodes) and hash tables (which are not kept sorted to be easily traversed in order, and must be tuned for a specific size and hash function where rbtrees scale gracefully storing arbitrary keys).
+
 ## 简述红黑树
 
-Left-Leaning Red-Black Trees:
-- [论文](https://sedgewick.io/wp-content/themes/sedgewick/papers/2008LLRB.pdf) by Robert Sedgewick
-- [投影片](https://sedgewick.io/wp-content/uploads/2022/03/2008-09LLRB.pdf) by Robert Sedgewick
+Left-Leaning Red-Black Trees (by Robert Sedgewick): 
+[论文](https://sedgewick.io/wp-content/themes/sedgewick/papers/2008LLRB.pdf) 
+/
+[投影片](https://sedgewick.io/wp-content/uploads/2022/03/2008-09LLRB.pdf) 
 
 解说录影:
 - [x] [Left Leaning Red Black Trees (Part 1)](https://www.youtube.com/watch?v=0BeIo4JB0Z4)
@@ -78,6 +91,75 @@ LLRB tree:
 {{< admonition >}}
 红黑树的 perfect-balance 的特性在于：它随着节点的增多而逐渐将 4-nodes (因为新增节点都是 red 边，所以叶节点很大概率在插入结束后会是 4-node) 从根节点方向移动 (on the way down 时 split 4-nodes 的效果)，当 4-node 移动到根节点时，进行颜色反转并不会破坏树的平衡，只是树高加 1 (这很好理解，因为根节点是唯一的，只要保证 4-node 的根节点拆分操作保持平衡即可，显然成立)。
 {{< /admonition >}}
+
+### 红黑树的定义
+
+{{< image src="https://hackmd.io/_uploads/HJfaeBQJn.png" >}}
+
+2-3-4 数和红黑树的转换关系:
+
+{{< image src="https://hackmd.io/_uploads/HJ6Cp4mk2.png" >}}
+
+{{< image src="https://hackmd.io/_uploads/Hybe0V712.png" >}}
+
+### 红黑树的插入
+
+{{< admonition >}}
+1. 像普通的树一样寻找合适的位置插入 **红节点**
+2. **自底向上** 通过旋转、分裂、合并等操作进行调整
+{{< /admonition >}}
+
+***Definition: $n$ 树节点表示该节点有 $n$ 个子树分支***
+
+红黑树向 2 树节点插入得到 3 树节点，通过旋转操作即可完成，也不涉及树高变化 (因为从 2-3-4 树的角度来看，树的节点数不变):
+
+{{< image src="https://hackmd.io/_uploads/BkHf0E712.png" >}}
+
+红黑树向 3 树节点插入得到 4 树节点共有 3 种情形，通过旋转操作即可完成，不会导致树高变化 (因为从 2-3-4 树的角度来看，树的节点数不变):
+
+- 第一种情况
+
+{{< image src="https://hackmd.io/_uploads/SJ5EQDinn.png" >}}
+
+- 第二种情况
+
+{{< image src="https://hackmd.io/_uploads/SyMECNmkh.png" >}}
+
+- 第三种情况
+
+{{< image src="https://hackmd.io/_uploads/BkXB0Vmkh.png" >}}
+
+如果红黑树要插入的节点是 4 树节点，这是不被运行的 (因为红黑树的节点不允许超过 4 树节点)，此时需要旋转操作搭配分裂和合并 (通过改变边的颜色) 操作，将该 4 树节点不断地向上分裂成对应等价的 2 树节点 (这可能会导致树高增加)，然后依据上面的插入方法对剩下的 2 树节点 / 3 树节点进行插入即可 (因为原先的 4 树节点已被分裂，所以要插入的节点不可能是 4 树节点):
+
+4 树节点翻转连接父节点的边颜色进行分裂:
+
+{{< image src="https://hackmd.io/_uploads/H1ULRVmkh.png" >}}
+
+父节点为 2 树节点时的颜色翻转分裂，有 2 种情况:
+
+- 情况 1: 4 树节点为父节点的左节点
+
+{{< image src="https://hackmd.io/_uploads/ryOPAN7kn.png" >}}
+
+- 情况 2: 4 树节点为父节点的右节点
+
+{{< image src="https://hackmd.io/_uploads/HJLdCV7kh.png" >}}
+
+父节点为 3 树节点时的颜色翻转分裂，比较复杂，有 3 种情况:
+
+- 第一种情况
+
+{{< image sc="https://hackmd.io/_uploads/BJatA4Q1h.png" >}}
+
+- 第二种情况
+
+{{< image sc="https://hackmd.io/_uploads/ByocCVQ1h.png" >}}
+
+- 第三种情况
+
+{{< image sc="https://hackmd.io/_uploads/SyYjAEmJ3.png" >}}
+
+### 红黑树的移除
 
 ## Maple tree
 

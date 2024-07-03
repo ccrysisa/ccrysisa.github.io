@@ -218,7 +218,7 @@ Denormalized 的作用一是表示 0，二是配合 Normalized 在靠近 0 的�
 
 > We can now see that the region of correlation corresponds to the low-order bits of the integer, stopping just before the most significant bit equal to 1 (this bit forms the implied leading 1), matching the high-order bits in the fraction part of the floating-point representation.
 
-浮点数和无符号数的编码之间的关系，其中无符号数的 MSB equal 1 被忽略，因为浮点数在 Normalized 时会有一个隐含的 1
+浮点数和无符号数的编码之间的关系，其中无符号数的 MSB which equal 1 被忽略，因为浮点数在 Normalized 时会有一个隐含的 1
 
 - CSAPP 2.4.4 Rounding
 
