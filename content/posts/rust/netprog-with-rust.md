@@ -167,7 +167,57 @@ fn main() -> io::Result<()> {
 
 - Enum [std::net::IpAddr](https://doc.rust-lang.org/std/net/enum.IpAddr.html)
 - Enum [std::net::SocketAddr](https://doc.rust-lang.org/std/net/enum.SocketAddr.html)
+
+```rs
+fn main() {
+    let v4 = IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1));
+    let v6 = IpAddr::V6(Ipv6Addr::new(0, 0, 0, 0, 0, 0, 0, 1));
+
+    let mut s4 = SocketAddr::new(v4, 8080);
+    let mut s6 = SocketAddr::new(v6, 8080);
+
+    assert_eq!(s4.ip(), v4);
+    assert_eq!(s6.ip(), v6);
+
+    s4.set_ip(IpAddr::V4(Ipv4Addr::new(192, 168, 0, 1)));
+    s6.set_ip(IpAddr::V6(Ipv6Addr::new(0, 0, 0, 0, 0, 65535, 1, 1)));
+
+    assert_eq!(s4.port(), 8080);
+    assert_eq!(s6.port(), 8080);
+
+    s4.set_port(1026);
+    s6.set_port(1026);
+
+    assert!(s4.is_ipv4() && !s4.is_ipv6());
+    assert!(s6.is_ipv6() && !s6.is_ipv4());
+
+    println!("{}", s4);
+    println!("{}", s6);
+}
+```
+
 - Enum [ipnet::IpNet](https://docs.rs/ipnet/latest/ipnet/enum.IpNet.html)
+
+```rs
+fn main() {
+    let net = "10.1.1.7/24".parse::<IpNet>().map(|x| x.trunc()).unwrap();
+    println!(
+        "{}, hostmask: {}, netmask: {}",
+        net,
+        net.hostmask(),
+        net.netmask()
+    );
+}
+```
+
+## mio & pnet
+
+- Crate [mio](https://docs.rs/mio/latest/mio/)
+
+> Mio is a fast, low-level I/O library for Rust focusing on non-blocking APIs and event notification for building high performance I/O apps with as little overhead as possible over the OS abstractions.
+
+```rs
+```
 
 ## Homework
 
@@ -210,3 +260,4 @@ fn main() -> io::Result<()> {
 - Struct [ipnet::Ipv4Net](https://docs.rs/ipnet/latest/ipnet/struct.Ipv4Net.html)
 - Struxt [ipnet::Ipv6Net](https://docs.rs/ipnet/latest/ipnet/struct.Ipv6Net.html)
 
+### Crate [mio](https://docs.rs/mio/latest/mio/)
