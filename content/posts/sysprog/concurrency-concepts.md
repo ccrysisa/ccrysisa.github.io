@@ -100,4 +100,27 @@ $\rightarrow$
 {{< image src="/images/c/cnp.png" caption="Concurrent, non-parallel execution" >}}
 {{< image src="/images/c/cp.png" caption="Concurrent, parallel execution" >}}
 
+{{< admonition info >}}
 - Tim Mattson (Intel): [Introduction to OpenMP](https://www.youtube.com/playlist?list=PLLX-Q6B8xqZ8n8bwjGdzBJ25X2utwnoEG) [YouTube]
+{{< /admonition >}}
+
+## Concurrency Is Not Parallelism
+
+Rob Pike: [Concurrency Is Not Parallelism](https://www.youtube.com/watch?v=qmg1CF3gZQ0) 
+/ 
+[slides](https://go.dev/talks/2012/waza.slide#1)
+/ 
+[Stack Overflow 上的相关讨论](https://stackoverflow.com/questions/11700953/concurrency-is-not-parallelism)
+
+Page 6 的 process 是一个 general and abstract 的概念，不特指 Linux 上的 process，而是包括 process, thread, coroutine 这些可以被调度的资源的统称 (例如也可以指代 goroutine)。
+
+{{< admonition >}}
+Concurrent 的目标是提供一种程序结构，对原程序进行切割得到某个程序结构，该结构使得程序是由不同的独立的程序块组成，进而使得该程序在单核或多核的处理器上都能运行，并且在多核处理器上该结构可以比较高效的运用 parallelism 来增强效能，即 Concurrent 提供的程序结构可以使程序在对应的 $n$ 核处理器上效率随 $n$ 而依次提高，以充分利用硬件资源 (不一定需要完全符合成比例增强，也可以是类似流水线这种近似比例增长)。
+
+- 相关论文: [C. A. R. Hoare: Communicating Sequential Processes (CACM 1978)](https://www.cs.cmu.edu/~crary/819-f09/Hoare78.pdf)
+{{< /admonition >}}
+
+Page 28's Lesson:
+- There are many ways to break the processing down.
+- That's concurrent design.
+- Once we have the breakdown, parallelization can fall out and correctness is easy.
