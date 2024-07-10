@@ -115,7 +115,7 @@ Rob Pike: [Concurrency Is Not Parallelism](https://www.youtube.com/watch?v=qmg1C
 Page 6 的 process 是一个 general and abstract 的概念，不特指 Linux 上的 process，而是包括 process, thread, coroutine 这些可以被调度的资源的统称 (例如也可以指代 goroutine)。
 
 {{< admonition >}}
-Concurrent 的目标是提供一种程序结构，对原程序进行切割得到某个程序结构，该结构使得程序是由不同的独立的程序块组成，进而使得该程序在单核或多核的处理器上都能运行，并且在多核处理器上该结构可以比较高效的运用 parallelism 来增强效能，即 Concurrent 提供的程序结构可以使程序在对应的 $n$ 核处理器上效率随 $n$ 而依次提高，以充分利用硬件资源 (不一定需要完全符合成比例增强，也可以是类似流水线这种近似比例增长)。
+Concurrent 的目标是提供一种程序结构，对原程序进行切割得到某个程序结构，该结构使得程序是由不同的独立的程序块组成，进而使得该程序在单核或多核的处理器上都能运行，并且在多核处理器上该结构可以比较高效的运用 parallelism 来增强效能，即 Concurrent 提供的程序结构可以使程序在对应的 $n$ 核处理器上效率随 $n$ 而依次提高 (Scalable)，以充分利用硬件资源 (不一定需要完全符合成比例增强，也可以是类似流水线这种近似比例增长)。
 
 - 相关论文: [C. A. R. Hoare: Communicating Sequential Processes (CACM 1978)](https://www.cs.cmu.edu/~crary/819-f09/Hoare78.pdf)
 {{< /admonition >}}
@@ -124,3 +124,9 @@ Page 28's Lesson:
 - There are many ways to break the processing down.
 - That's concurrent design.
 - Once we have the breakdown, parallelization can fall out and correctness is easy.
+
+Page 43 - Concurrency simplifies synchronization
+- No explicit synchronization needed.
+- The structure of the program is implicitly synchronized.
+
+因为 Concurrent 提供的程序结构在单执行绪或多执行绪都可以正确运行，所以不需要显示使用 sync 的工具 (该程序结构就隐含了相应的 sync 逻辑/机制了)
