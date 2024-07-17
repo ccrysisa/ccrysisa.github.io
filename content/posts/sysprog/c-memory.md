@@ -288,3 +288,49 @@ typedef struct node {
 *multiple heap Thread arena* :
 
 {{< image src="https://docs.google.com/drawings/d/150bTi0uScQlnABDImLYS8rWyL82mmfpMxzRbx-45UKw/pub?w=960&h=720" >}}
+
+## 实作案例: GC in C
+
+YouTube: [GC in C](https://www.youtube.com/playlist?list=PLpM-Dvs8t0VYuYxRxjfnkdHvosHH8faqc)
+- [Writing My Own Malloc in C](https://www.youtube.com/watch?v=sZ8GJ1TiMdk)
+- [Writing Garbage Collector in C](https://www.youtube.com/watch?v=2JgEKEd3tw8)
+
+### alloc & free
+
+如果允许分配 0 字节的内存空间，那么会造成分配的不同内存块的起始地址一样的情形，实作时应当避免这种情形:
+
+```bash
+Allocated Chunks (100):
+  start: 0x648cadc3c040, size: 0
+  start: 0x648cadc3c040, size: 1
+  ...
+```
+
+- man 3 malloc
+
+> If size is 0, then malloc() returns either NULL, or a unique pointer value that can  later be successfully passed to free().
+
+### function name
+
+- C99/C11 6.4.2.2
+
+> The identifier `__func__` shall be implicitly declared by the translator as if, immediately following the opening brace of each function definition
+
+### pointer substraction
+
+影片最后 `chunk_list_find` 没有起到预期的作用，但这个和 `bsearch` 无关，原因为影片博主未掌握指针减法的定义，在最后进行了错误的运算
+
+- C11 6.5.6
+
+> When two pointers are subtracted, both shall point to elements of the same array object, or one past the last element of the array object; the result is the difference of the subscripts of the two array elements. 
+
+所以只需要计算 `result - list->chunks` 即可，无需再除以 `list->chunks[0]`
+
+### References
+
+- Wikipedia: [XOR linked list](https://en.wikipedia.org/wiki/XOR_linked_list)
+- Wikipedia: [Binary search](https://en.wikipedia.org/wiki/Binary_search)
+- Linux manual page: [memmove(3)](https://man7.org/linux/man-pages/man3/memmove.3.html)
+- Linux manual page: [bsearch(3)](https://www.man7.org/linux/man-pages/man3/bsearch.3.html)
+- GitHub: [nothings/stb](https://github.com/nothings/stb)
+- GitHub: [gcc-mirror/gcc](https://github.com/gcc-mirror/gcc)
