@@ -2,9 +2,27 @@
   <channel>
     <title>Rust - 分类 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/categories/rust/</link>
-    <description>Rust - 分类 | KZnight&#39;s Blog</description>
+    <description>Rust - 分类 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 15 Jun 2024 20:24:56 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/rust/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 28 Jun 2024 11:16:51 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/rust/" rel="self" type="application/rss+xml" /><item>
+  <title>Build a linked hash map in Rust</title>
+  <link>https://ccrysisa.github.io/posts/rust-linked-hashmap/</link>
+  <pubDate>Fri, 28 Jun 2024 11:16:51 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/rust-linked-hashmap/</guid>
+  <description><![CDATA[<blockquote>
+<p>We're writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you'd make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you're a newcomer to the language or not.</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>通过 Rust 学习网络编程</title>
+  <link>https://ccrysisa.github.io/posts/netprog/</link>
+  <pubDate>Mon, 24 Jun 2024 18:35:26 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/netprog/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>手把手带你使用 Rust 实现链表</title>
   <link>https://ccrysisa.github.io/posts/too-many-lists/</link>
   <pubDate>Sat, 15 Jun 2024 20:24:56 &#43;0800</pubDate>
@@ -43,10 +61,10 @@
 </item>
 <item>
   <title>Rust Lifetime: 由浅入深理解生命周期</title>
-  <link>https://ccrysisa.github.io/posts/rust-lifetime/</link>
+  <link>https://ccrysisa.github.io/posts/lifetime-in-rust/</link>
   <pubDate>Fri, 05 Apr 2024 17:52:13 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/rust-lifetime/</guid>
+  <guid>https://ccrysisa.github.io/posts/lifetime-in-rust/</guid>
   <description><![CDATA[<blockquote>
 <p>从基础到进阶讲解探讨 Rust 生命周期，不仅仅是 lifetime kata，还有更多的 lifetime 资料，都来讲解和探讨，从「入门 Rust」到「进阶 Rust」</p>
 </blockquote>]]></description>
@@ -89,26 +107,6 @@
   <guid>https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/</guid>
   <description><![CDATA[<blockquote>
 <p>In this fourth Crust of Rust video, we cover smart pointers and interior mutability, by re-implementing the Cell, RefCell, and Rc types from the standard library. As part of that, we cover when those types are useful, how they work, and what the equivalent thread-safe versions of these types are. In the process, we go over some of the finer details of Rust's ownership model, and the UnsafeCell type. We also dive briefly into the Drop Check rabbit hole (<a href="https://doc.rust-lang.org/nightly/nomicon/dropck.html"target="_blank" rel="external nofollow noopener noreferrer">https://doc.rust-lang.org/nightly/nomicon/dropck.html</a>) before coming back up for air.</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>Impl Rust: TCP/IP</title>
-  <link>https://ccrysisa.github.io/posts/rust-tcp/</link>
-  <pubDate>Sat, 17 Feb 2024 19:01:53 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/rust-tcp/</guid>
-  <description><![CDATA[<blockquote>
-<p>In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — <a href="https://tools.ietf.org/html/rfc793"target="_blank" rel="external nofollow noopener noreferrer">https://tools.ietf.org/html/rfc793</a> — which describes the original protocol, with the goal of being able to set up and tear down a connection with a &ldquo;real&rdquo; TCP stack at the other end (netcat in particular). We&rsquo;re writing it using a user-space networking interface (see <a href="https://www.kernel.org/doc/Documentation/networking/tuntap.txt"target="_blank" rel="external nofollow noopener noreferrer">https://www.kernel.org/doc/Documentation/networking/tuntap.txt</a> and the Rust bindings at <a href="https://docs.rs/tun-tap/%29"target="_blank" rel="external nofollow noopener noreferrer">https://docs.rs/tun-tap/)</a>.</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>Crust of Rust: Iterators</title>
-  <link>https://ccrysisa.github.io/posts/iterators/</link>
-  <pubDate>Mon, 05 Feb 2024 17:18:34 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/iterators/</guid>
-  <description><![CDATA[<blockquote>
-<p>In this third Crust of Rust video, we cover iterators and trait bounds, by re-implementing the &ldquo;flatten&rdquo; Iterator method from the standard library. As part of that, we cover some of the weirder trait bounds that are required, including what&rsquo;s needed to extend the implementation to support backwards iteration.</p>
 </blockquote>]]></description>
 </item>
 </channel>

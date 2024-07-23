@@ -95,7 +95,7 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
 - 佳句偶得：「大部分的人一輩子洞察力不彰，原因之一是怕講錯被笑。想了一點點就不敢繼續也沒記錄或分享，時間都花在讀書查資料看別人怎麼想。看完就真的沒有自己的洞察了」([出處](https://www.facebook.com/chtsai/posts/pfbid0Sw9Bv8GN8houyS6A6Mvg5gtWXShKFgguhTHuNFsDDGn9XZQE7C64pBy5atB9gXtJl))
 - [作業](https://hackmd.io/@sysprog/linux2023-homework1): 截止繳交日: Feb 28, 2023
     * [x] [lab0](https://hackmd.io/@sysprog/linux2023-lab0)`*`
-    * [quiz1](https://hackmd.io/@sysprog/ByiHJidps)
+    * [x] [quiz1](https://hackmd.io/@sysprog/ByiHJidps)
 - [x] 第 1 週隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz1) (內含作答表單)
 - [課堂問答簡記](https://hackmd.io/VIvUZemESvGUev4aCwOnWA?view)
 
@@ -127,7 +127,7 @@ Linux 核心設計/實作 (Spring 2023) 課程進度表暨線上資源
     - bit field 是 C 語言一個很被忽略的特徵，但在 Linux 和 gcc 這類系統軟體很常出現，不僅是精準規範每個 bit 的作用，甚至用來「擴充」C 語言
 - [參考題目](https://hackmd.io/@sysprog/linux2022-quiz2) / [參考題目](https://hackmd.io/@sysprog/linux2021-quiz2)`*` / [參考題解 1](https://hackmd.io/@93i7xo2/sysprog2021q1-hw2-quiz2), [參考題解 2](https://hackmd.io/@hankluo6/2021q1quiz2), [參考題解 3](https://hackmd.io/@bakudr18/SkS-Y_lX_)
 - [作業](https://hackmd.io/@sysprog/linux2023-homework2): 截止繳交日 Mar 7
-    - [quiz2](https://hackmd.io/@sysprog/H143OpNCo)
+    - [x] [quiz2](https://hackmd.io/@sysprog/H143OpNCo)
 - 第 2 週隨堂測驗: [題目](https://hackmd.io/@sysprog/linux2023-quiz2) (內含作答表單)
 - [課堂問答簡記](https://hackmd.io/VIvUZemESvGUev4aCwOnWA?view)
 

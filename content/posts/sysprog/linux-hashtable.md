@@ -16,7 +16,7 @@ weight: 0
 tags:
   - Sysprog
   - Linux
-  - Hash table
+  - Hash
 categories:
   - Linux
   - Linux Kernel Internals

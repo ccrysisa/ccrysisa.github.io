@@ -1,20 +1,20 @@
 # 你所不知道的 C 语言: 函数调用篇
 
 
-&gt; 本讲座将带着学员重新探索函数呼叫背后的原理，从程序语言和计算机结构的发展简史谈起，让学员自电脑软硬件演化过程去掌握 calling convention 的考量，伴随着 stack 和 heap 的操作，再探讨 C 程序如何处理函数呼叫、跨越函数间的跳跃 (如 [setjmp](https://man7.org/linux/man-pages/man3/setjmp.3.html) 和 [longjmp](https://linux.die.net/man/3/longjmp))，再来思索资讯安全和执行效率的议题。着重在计算机架构对应的支援和行为分析。
+> 本讲座将带着学员重新探索函数呼叫背后的原理，从程序语言和计算机结构的发展简史谈起，让学员自电脑软硬件演化过程去掌握 calling convention 的考量，伴随着 stack 和 heap 的操作，再探讨 C 程序如何处理函数呼叫、跨越函数间的跳跃 (如 [setjmp](https://man7.org/linux/man-pages/man3/setjmp.3.html) 和 [longjmp](https://linux.die.net/man/3/longjmp))，再来思索资讯安全和执行效率的议题。着重在计算机架构对应的支援和行为分析。
 
-&lt;!--more--&gt;
+<!--more-->
 
-- {{&lt; link href=&#34;https://hackmd.io/@sysprog/c-function&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
+- {{< link href="https://hackmd.io/@sysprog/c-function" content="原文地址" external-icon=true >}}
 
 ## function prototype
 
 - [ ] [Very early C compilers and language](https://www.bell-labs.com/usr/dmr/www/primevalC.html)
-&gt; 一个小故事，可以解释 C 语言的一些设计理念，例如 `switch-case` 中每个 case 都需要 `break`
+> 一个小故事，可以解释 C 语言的一些设计理念，例如 `switch-case` 中每个 case 都需要 `break`
 - [ ] [The Development of the C Language](https://www.bell-labs.com/usr/dmr/www/chist.html)
-&gt; Dennis M. Ritchie 讲述 C 语言漫长的发展史，并搭配程式码来说明当初为何如此设计、取舍考量。了解这些历史背景可以让我们成为更专业的 C 语言 Programmer
+> Dennis M. Ritchie 讲述 C 语言漫长的发展史，并搭配程式码来说明当初为何如此设计、取舍考量。了解这些历史背景可以让我们成为更专业的 C 语言 Programmer
 - [ ] [Rationale for International Standard – Programming Languages – C](https://pllab.cs.nthu.edu.tw/cs340402/readings/c/c9x_standard.pdf)
-&gt; 讲述 C 语言标准的变更，并搭配程式码解释变更的原理和考量
+> 讲述 C 语言标准的变更，并搭配程式码解释变更的原理和考量
 
 在早期的 C 语言中，并不需要 function prototype，因为当编译器发现一个函数名出现在表达式并且后面跟着左括号 `(`，例如 `a = func(...)`，就会将该函数解读为：返回值类型预设为 `int`，参数类型和个数由调用者提供来决定，按照这样规则编写程式码，可以在无需事先定义函数即可先写调用函数的逻辑。但是这样设计也会造成潜在问题：程序员在调用函数时需要谨慎处理，需要自己检查调用时的参数类型和个数符合函数定义 (因为当时的编译器无法正确判断调用函数时的参数是否符合预期的类型和个数，当时编译器的能力与先前提到的规则是一体两面)，并且返回值类型预设为 `int` (当时还没有 `void` 类型)，所以对于函数返回值，也需要谨慎处理。
 
@@ -31,13 +31,13 @@ void func2(int x) {
 }
 ```
 
-&gt; Rust 的不可变引用也是编译器可以进行更激进的最优化处理的一个例子
+> Rust 的不可变引用也是编译器可以进行更激进的最优化处理的一个例子
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 为什么早期的 C 语言没有 function prototype 呢？因为早期的 C 语言，不管有多少个源程序文件，都是先通过 `cat` 合并成一个单元文件，在进行编译链接生成目标文件。这样就导致了就算写了 function prototye，使用 `cat` 合并时，这些 prototype 不一定会出现在我们期望的程序开始处，即无法利用 prototype 对于函数调用进行检查，所以干脆不写 prototype。
 
 在 preprocessor 出现后，通过 `#include` 这类语法并搭配 preprocessor 可以保证对于每个源文件，都可以通过 function prototype 对函数调用进行参数个数、类型检查，因为 `#include` 语句位于源文件起始处，并且此时 C 语言程序的编译过程改变了: 对单一源文件进行预处理、编译，然后再对得到的目标文件进行链接。所以此时透过 preprocessor 可以保证 function prototype 位于函数调用之前，可以进行严格地检查。
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ## 编程语言的 function
 
@@ -47,12 +47,12 @@ C 语言不允许 nested function 以简化编译器的设计 (当然现在的 g
 
 ## Process 与 C 程序
 
-***程序存放在磁盘时叫 Program，加载到内存后叫 &#34;Process&#34;***
+***程序存放在磁盘时叫 Program，加载到内存后叫 "Process"***
 
-{{&lt; image src=&#34;https://imgur-backup.hackmd.io/DpZOmhb.png&#34; &gt;}}
+{{< image src="https://imgur-backup.hackmd.io/DpZOmhb.png" >}}
 
 - Wikipedia: [Application binary interface](https://en.wikipedia.org/wiki/Application_binary_interface)
-&gt; In computer software, an application binary interface (ABI) is an interface between two binary program modules. Often, one of these modules is a library or operating system facility, and the other is a program that is being run by a user.
+> In computer software, an application binary interface (ABI) is an interface between two binary program modules. Often, one of these modules is a library or operating system facility, and the other is a program that is being run by a user.
 
 在 Intel x86 架构中，当返回值可以放在寄存器时就放在寄存器中返回，以提高效能，如果放不下，则将返回值的起始地址放在寄存器中返回。
 
@@ -60,34 +60,34 @@ C 语言不允许 nested function 以简化编译器的设计 (当然现在的 g
 
 ### Layout
 
-{{&lt; image src=&#34;https://imgur-backup.hackmd.io/S5QUT5I.png&#34; &gt;}}
+{{< image src="https://imgur-backup.hackmd.io/S5QUT5I.png" >}}
 
 [System V Application Binary Interface AMD64 Architecture Processor Supplement](https://github.com/hjl-tools/x86-psABI/wiki/x86-64-psABI-1.0.pdf) [PDF]
 
-{{&lt; image src=&#34;https://imgur-backup.hackmd.io/Fec7Vyx.png&#34; &gt;}}
+{{< image src="https://imgur-backup.hackmd.io/Fec7Vyx.png" >}}
 
 ### PEDA
 
 实验需要使用到 GDB 的 PEDA 扩展:
 
-&gt; Enhance the display of gdb: colorize and display disassembly codes, registers, memory information during debugging.
+> Enhance the display of gdb: colorize and display disassembly codes, registers, memory information during debugging.
 
 ```bash
 $ git clone https://github.com/longld/peda.git ~/peda
-$ echo &#34;source ~/peda/peda.py&#34; &gt;&gt; ~/.gdbinit
+$ echo "source ~/peda/peda.py" >> ~/.gdbinit
 ```
 
-{{&lt; admonition tip &gt;}}
+{{< admonition tip >}}
 动态追踪 Stack 实验的 call funcA 可以通过 GDB 指令 `stepi` 或 `si` 来实现
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ## 从递归观察函数调用
 
-```c {title=&#34;infinite.c&#34;}
+```c {title="infinite.c"}
 int func(int x) {
     static int count = 0;
     int y = x; // local var
-    return &#43;&#43;count &amp;&amp; func(x&#43;&#43;);
+    return ++count && func(x++);
 }
 
 int main() {
@@ -99,6 +99,38 @@ int main() {
 
 ## stack-based buffer overflow
 
+- [CVE-2015-7547](https://access.redhat.com/security/cve/cve-2015-7547) / [解说](http://thehackernews.com/2016/02/glibc-linux-flaw.html)
+> vulnerability in glibc’s DNS client-side resolver that is used to translate human-readable domain names, like google.com, into a network IP address.
+
+- Wikipedia: [Buffer overflow](https://en.wikipedia.org/wiki/Buffer_overflow)
+
+```c
+int evil() {
+    system("/bin/sh");
+}
+
+int main() {
+    char input[10];
+    puts("Input:");
+    gets(input);
+    puts(input);
+}
+```
+
+需要向 gcc 指定 `-fno-stack-protector` 参数来关闭栈内存保护机制，要不然无法实现栈溢出攻击:
+
+```bash
+$ gcc -o bof -fno-stack-protector -g -no-pie bof.c
+```
+
+该实验本质上是利用了函数内定义的数组，是存储在 stack 上，并且数组下标和存储地址的对应关系是「小/低 -> 大/高」即下标小的数组元素位于低地址处，所以数组的元素是从低地址往高地址存储的，这和 sp 的方向刚好相反，并且如果使用的是 `gets` 这种不安全函数，当接收的输入超过定义的数组的长度时，会覆盖不属于定义的数组，并且比数组更高地址部分的内容，这可能会改写当前函数的返回地址，从而导致段错误。
+
+{{< image src="https://imgur-backup.hackmd.io/qeuZwPx.png" >}}
+
+因为可以通过输入来改写当前函数的返回地址，那么就可以构造一个输入使得当前 `main` 会返回到 `evil` 函数，这部分根据原文完成实验即可。
+
+{{< image src="https://imgur-backup.hackmd.io/y5qUs7Y.png" >}}
+
 ## ROP
 
 ## heap
@@ -109,15 +141,15 @@ int main() {
 
 ## RAII
 
-## setjmp &amp; longjmp
+## setjmp & longjmp
 
 - [setjmp(3) — Linux manual page](https://man7.org/linux/man-pages/man3/longjmp.3.html)
-&gt; The functions described on this page are used for performing
-&gt; &#34;nonlocal gotos&#34;: transferring execution from one function to a
-&gt; predetermined location in another function.  The setjmp()
-&gt; function dynamically establishes the target to which control will
-&gt; later be transferred, and longjmp() performs the transfer of
-&gt; execution.
+> The functions described on this page are used for performing
+> "nonlocal gotos": transferring execution from one function to a
+> predetermined location in another function.  The setjmp()
+> function dynamically establishes the target to which control will
+> later be transferred, and longjmp() performs the transfer of
+> execution.
 
 具体解说可以阅读 [lab0-c](https://hackmd.io/@sysprog/linux2023-lab0) 的「自動測試程式」部分
 

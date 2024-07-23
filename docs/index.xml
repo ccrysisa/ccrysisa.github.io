@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 19 Jun 2024 09:43:11 &#43;0800</lastBuildDate>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 28 Jun 2024 11:16:51 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
@@ -17,6 +17,24 @@
 </blockquote>]]></description>
 </item>
 <item>
+  <title>Build a linked hash map in Rust</title>
+  <link>https://ccrysisa.github.io/posts/rust-linked-hashmap/</link>
+  <pubDate>Fri, 28 Jun 2024 11:16:51 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/rust-linked-hashmap/</guid>
+  <description><![CDATA[<blockquote>
+<p>We're writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you'd make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you're a newcomer to the language or not.</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>通过 Rust 学习网络编程</title>
+  <link>https://ccrysisa.github.io/posts/netprog/</link>
+  <pubDate>Mon, 24 Jun 2024 18:35:26 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/netprog/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware</title>
   <link>https://ccrysisa.github.io/posts/atomic-weapons/</link>
   <pubDate>Wed, 19 Jun 2024 09:43:11 &#43;0800</pubDate>
@@ -25,6 +43,14 @@
   <description><![CDATA[<blockquote>
 <p>This is a two-part talk that covers the C++ memory model, how locks and atomics and fences interact and map to hardware, and more. Even though we’re talking about C++, much of this is also applicable to Java and .NET which have similar memory models, but not all the features of C++ (such as relaxed atomics).</p>
 </blockquote>]]></description>
+</item>
+<item>
+  <title>南京大学 OSDI 并发 重点提示</title>
+  <link>https://ccrysisa.github.io/posts/nju-osdi-concurrency/</link>
+  <pubDate>Sun, 16 Jun 2024 10:21:22 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/nju-osdi-concurrency/</guid>
+  <description><![CDATA[]]></description>
 </item>
 <item>
   <title>手把手带你使用 Rust 实现链表</title>
@@ -92,34 +118,6 @@
       <div class="admonition-content">目的: 检验学员对 linked list 的认知</div>
     </div>
   </div>]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: 浮点数</title>
-  <link>https://ccrysisa.github.io/posts/c-floating-point/</link>
-  <pubDate>Tue, 04 Jun 2024 23:59:50 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-floating-point/</guid>
-  <description><![CDATA[<blockquote>
-<p>工程領域往往是一系列的取捨結果，浮點數更是如此，在軟體發開發有太多失誤案例源自工程人員對浮點數運算的掌握不足，本議程希望藉由探討真實世界的血淋淋案例，帶著學員思考 IEEE 754 規格和相關軟硬體考量點，最後也會探討在深度學習領域為了改善資料處理效率，而引入的 BFloat16 這樣的新標準</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>学会如何学习 Learning How to Learn</title>
-  <link>https://ccrysisa.github.io/posts/learning-how-to-learn/</link>
-  <pubDate>Tue, 14 May 2024 18:44:37 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/learning-how-to-learn/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>Command Line Applications in Rust</title>
-  <link>https://ccrysisa.github.io/posts/rust-cli/</link>
-  <pubDate>Mon, 29 Apr 2024 16:23:33 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/rust-cli/</guid>
-  <description><![CDATA[<blockquote>
-<p>Rust is a statically compiled, fast language with great tooling and a rapidly growing ecosystem. That makes it a great fit for writing command line applications: They should be small, portable, and quick to run. Command line applications are also a great way to get started with learning Rust; or to introduce Rust to your team!</p>
-</blockquote>]]></description>
 </item>
 </channel>
 </rss>

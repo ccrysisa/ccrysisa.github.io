@@ -63,7 +63,27 @@ repost:
 
 安装文档进行配置即可，我使用的 Linux 发行版是 deepin 20.9
 
-{{< image src="/images/tools/neofetch.png" >}}
+```bash
+$ neofetch --stdout
+cai@cai-PC 
+---------- 
+OS: Deepin 20.9 x86_64 
+Host: RedmiBook 14 II 
+Kernel: 5.15.77-amd64-desktop 
+Uptime: 45 mins 
+Packages: 2146 (dpkg) 
+Shell: bash 5.0.3 
+Resolution: 1920x1080 
+DE: Deepin 
+WM: KWin 
+Theme: deepin-dark [GTK2/3] 
+Icons: bloom-classic-dark [GTK2/3] 
+Terminal: deepin-terminal 
+CPU: Intel i7-1065G7 (8) @ 3.900GHz 
+GPU: NVIDIA GeForce MX350 
+GPU: Intel Iris Plus Graphics G7 
+Memory: 3967MiB / 15800MiB 
+```
 
 一些有意思的超链接:
 - Wikipedia: [Unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy)

@@ -188,7 +188,7 @@ Struct [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html#)
 
 {{< admonition info >}}
 实作说明:
-- [ ] 尝试使用 RefCell 来实现 Linux kernel 风格的 linked list
+- [ ] 尝试使用 RefCell 和 Rc 来实现 Linux kernel 风格的 linked list
   - 数据结构为 circular doubly linked list
   - 实现 insert_head, remove_head 方法
   - 实现 insert_tail, remove_tail 方法

@@ -43,11 +43,10 @@ repost:
 
 <!--more-->
 
-- 整理自 B 站 UP 主 [@这周你想干啥](https://space.bilibili.com/50713701) 的 [教学影片合集](https://space.bilibili.com/50713701/channel/collectiondetail?sid=1453665)
+- 整理自 B 站 UP 主 [@这周你想干啥](https://space.bilibili.com/50713701) 的 {{< link href="https://space.bilibili.com/50713701/channel/collectiondetail?sid=1453665" content="教学影片合集" external-icon=true >}}
 
 {{< admonition >}}
 学习 John Gjengset 的教学影片 [Subtying and Variance](https://www.youtube.com/watch?v=iVYWDIW71jk) 时发现自己对 Rust 生命周期 (lifetime) 还是不太理解，于是便前来补课 :rofl: 
-同时完成 [LifetimeKata](https://tfpk.github.io/lifetimekata/) 的练习。
 {{< /admonition >}}
 
 ## 引用 & 生命周期
@@ -145,9 +144,17 @@ fn insert_value<'a, 'b>(my_vec: &'a mut Vec<&'b i32>, value: &'b i32) {...}
 
 > 这样改写会包含一个隐式的生命周期规则: `'a` $\leq$ `'b`，这很好理解，容器的生命周期应该比所引用的 object 短，这个隐式规则在下一节的 struct/enum 的生命周期标注非常重要。
 
+{{< admonition >}}
+从正确写法 (有两个生命周期标注) 出发，探讨只使用一个生命周期标注的情况比较符合人类的思维，这也是原文安排的顺序。
+
+如果传入的参数的生命周期均为已知，则同一生命周期标注代表的生命周期长度为，已知生命周期的最小值。如果传入的参数的生命周期存在未知的，则同一生命周期标注的生命周期长度为已知的生命周期的最小值，并且要求未知生命周期长度的参数的生命周期不得少于该最小值。
+{{< /admonition >}}
+
 ## struct / enum 生命周期标注
 
 {{< image src="/images/rust/rust-lifetime-05.png" >}}
+
+struct / enum 的生命周期推导可以从 **构造函数** 来理解，本质上和之前所介绍的函数的生命周期标注一致。
 
 struct / enum 的生命周期标注也可以通过之前所提的 **状态机** 模型来进行理解，因为 struct / enum 本身不具备引用对应的 object 的所有权，在进行方法 (method) 调用时并不能截断引用对应的 object 的生命周期。
 
@@ -284,7 +291,7 @@ class C extends B // C is subclass of B
 
 `T` 可以表示所有情况: ownership, immutable reference, mutable reference，例如 `T` 可以表示 `i32`, `&i32`, `&mut i32` (如果你使用过 `into_iterator` 的话应该不陌生)
 
-`T: 'a` 是说：如果 `T` 里面含有引用，那么这个引用的生命周期必须是 `'a` 的子类，即比 `'a` 长或和 `'a` 相等。`T: 'static` 也类似，表示 `T` 里面的引用 (如果有的话)，要么比 `'static` 长或和 `'static` 相等，因为不可能有比 `'static` 更长的生命周期，所以这个标注表示 **要么 `T` 里面的引用和 `'static` 一样长，要么 `T` 里面没有引用只有所有权 (owneship)**。
+`T: 'a` 是说：如果 `T` 里面含有引用，那么这个引用的生命周期必须是 `'a` 的子类，即比 `'a` 长或和 `'a` 相等。`T: 'static` 也类似，表示 `T` 里面的引用 (如果有的话)，要么比 `'static` 长或和 `'static` 相等，因为不可能有比 `'static` 更长的生命周期，所以这个标注有两种表示意义表: **要么 `T` 里面的引用和 `'static` 一样长，要么 `T` 里面没有引用只有所有权 (owneship)**。
 
 - The Rust Reference: [Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html)
 
@@ -331,6 +338,74 @@ fn foo<'short, 'long: 'short>( // long is subclass of short
 }
 ```
 
+## 生命周期 reborrow
+
+{{< image src="/images/rust/rust-lifetime-08.png" >}}
+
+```rs
+let mut i = 42;
+let x = &mut i; // x: &mut i32
+let y = x;      // y: &mut i32
+
+*y = 43;
+println("{}", *y);
+
+*x = 44;
+println("{}", *x);
+```
+
+按照 Rust 的借用检查机制，第 3 行处会导致后续出现两个指向 `i` 的可变引用 `x` 和 `y`，编译会失败，但实际上编译是没问题的，这是因为重引用 reborrow 机制，其使得第 3 行实质上被编译器处理为:
+
+```rs
+let y = &mut *x; // y: &mut i32
+```
+
+所以 `y` 其实是对 `x` 的重引用，在 **重引用的使用范围** 内，只要不使用 **被重引用的引用** `x` 和 **对象本身** `i`，编译器会认为这是没问题的，个人感觉相当于比较高阶的变量遮蔽。需要注意的是 reborrow 机制只应用于 **可变引用**，因为不可变引用可以同时存在多个，无需担心重引用时不能使用的问题。下面是另一个例子，也是因为 reborrow 机制从而通过编译:
+
+```rs
+fn main() {
+    let mut i = 42;
+    let x = &mut i; // x: &mut i32
+
+    change_it(x);
+    println("{}", *y);
+
+    *x = 44;
+    println("{}", *x);
+}
+
+fn change_it(mut_i32: &mut i32) {
+    *mut_i32 = 43;
+}
+```
+
+## Homework
+
+{{< admonition info >}}
+- [ ] 阅读博客 [Common Rust Lifetime Misconceptions](https://github.com/pretzelhammer/rust-blog/blob/master/posts/common-rust-lifetime-misconceptions.md) 以对 Rust 生命周期及常见的误区有充分认知
+- [ ] 完成 [LifetimeKata](https://tfpk.github.io/lifetimekata/) 的相关练习
+{{< /admonition >}}
+
+### LifetimeKata 
+
+- Chapter 1: Lifetimes Needed
+> Lifetime Annotations are used to help the compiler understand what\'s going on when it can\'t rely on scope brackets (i.e. across function boundaries; and within structs and enums).
+
+- Chapter 3: Lifetime Elision
+> We saw that the compiler was unable to automatically tell how references in the arguments or return values might relate to each other. This is why we needed to tell the compiler that the references related to each other.
+
+即 Rust 编译器可以通过作用范围来确定引用是否合法，进而防止 **悬垂引用**，但是对于函数调用或者是结构体的构造，Rust 编译器就无法通过上下文来进行检查了 (因为每次函数调用或结构体构造使用的引用都可能不同)，所以需要生命周期标注，它的作用是让编译器按照标注指定的关系对引用进行检查。
+
+- Chapter 7: Special Lifetimes
+> Lifetime bounds can be applied to types or to other lifetimes. The bound `'a: 'b` is usually read as `'a` outlives `'b`. `'a: 'b` means that `'a` lasts at least as long as `'b`, so a reference `&'a ()` is valid whenever `&'b ()` is valid.
+
+生命周期约束，实质上是用于规定 Variance 的关系
+
+- Chapter 10: Footnote on Trait Lifetime Bounds
+> It's important to realise that since trait objects might or might not contain a reference (or any number of references), all trait objects have lifetimes. This is true, even if no implementors of the trait contain references.
+
+Trait 对象的生命周期比较复杂，但一般不会太多涉及到，比较常见的例子是 `Box<dyn Trait>` 等价于 `Box<dyn 'static Trait>`
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
@@ -343,7 +418,7 @@ fn foo<'short, 'long: 'short>( // long is subclass of short
 
 ## References
 
-- [LifetimeKata](https://tfpk.github.io/lifetimekata/)
+- [Common Rust Lifetime Misconceptions](https://github.com/pretzelhammer/rust-blog/blob/master/posts/common-rust-lifetime-misconceptions.md)
 - [The Rust Reference](https://doc.rust-lang.org/reference/)
 - [泛型中的型变 (协变，逆变，不可变)](https://juejin.cn/post/6952434934589947912)
 - [Variant Types and Polymorphism](https://www.cs.cornell.edu/courses/cs3110/2012sp/lectures/lec04-types/lec04.html)

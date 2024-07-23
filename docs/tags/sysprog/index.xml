@@ -2,9 +2,9 @@
   <channel>
     <title>Sysprog - 标签 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/sysprog/</link>
-    <description>Sysprog - 标签 | KZnight&#39;s Blog</description>
+    <description>Sysprog - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Wed, 19 Jun 2024 09:43:11 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 24 Jun 2024 18:35:26 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/sysprog/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -13,6 +13,14 @@
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
 </blockquote>]]></description>
+</item>
+<item>
+  <title>通过 Rust 学习网络编程</title>
+  <link>https://ccrysisa.github.io/posts/netprog/</link>
+  <pubDate>Mon, 24 Jun 2024 18:35:26 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/netprog/</guid>
+  <description><![CDATA[]]></description>
 </item>
 <item>
   <title>Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware</title>
@@ -109,16 +117,6 @@
   <guid>https://ccrysisa.github.io/posts/c-compiler-optimization/</guid>
   <description><![CDATA[<blockquote>
 <p>編譯器最佳化篇將以 gcc / llvm 為探討對象，簡述編譯器如何運作，以及如何實現最佳化，佐以探究 C 編譯器原理和案例分析，相信可以釐清許多人對 C 編譯器的誤解，從而開發出更可靠、更高效的程式。</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: 未定义/未指定行为篇</title>
-  <link>https://ccrysisa.github.io/posts/c-undefined-behavior/</link>
-  <pubDate>Wed, 24 Apr 2024 21:09:40 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-undefined-behavior/</guid>
-  <description><![CDATA[<blockquote>
-<p>C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化</p>
 </blockquote>]]></description>
 </item>
 </channel>
