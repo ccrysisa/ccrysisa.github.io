@@ -1,39 +1,39 @@
 # 通过 Rust 学习网络编程
 
 
-<!--more-->
+&lt;!--more--&gt;
 
-- {{< link href="https://www.bilibili.com/video/BV1b54y1X7my/" content="教学录影" external-icon=true >}}
+- {{&lt; link href=&#34;https://www.bilibili.com/video/BV1b54y1X7my/&#34; content=&#34;教学录影&#34; external-icon=true &gt;}}
 
 ## TCP Server/Client
 
-{{< image src="/images/rust/tcp-server-client.drawio.svg" caption="TCP C/S" >}}
+{{&lt; image src=&#34;/images/rust/tcp-server-client.drawio.svg&#34; caption=&#34;TCP C/S&#34; &gt;}}
 
 Server: 
 
 ```rs
-fn handle_client(mut stream: TcpStream) -> io::Result<()> {
+fn handle_client(mut stream: TcpStream) -&gt; io::Result&lt;()&gt; {
     let mut buf = [0; 512];
     for _ in 0..1000 {
-        let bytes_read = stream.read(&mut buf)?;
+        let bytes_read = stream.read(&amp;mut buf)?;
         if bytes_read == 0 {
             return Ok(());
         }
 
-        stream.write(&buf[..bytes_read])?;
+        stream.write(&amp;buf[..bytes_read])?;
         thread::sleep(Duration::from_secs(1));
     }
     Ok(())
 }
 
-fn main() -> io::Result<()> {
-    let listener = TcpListener::bind("127.0.0.1:8080")?;
-    println!("TCP Server is running...");
+fn main() -&gt; io::Result&lt;()&gt; {
+    let listener = TcpListener::bind(&#34;127.0.0.1:8080&#34;)?;
+    println!(&#34;TCP Server is running...&#34;);
 
     for stream in listener.incoming() {
-        let stream = stream.expect("failed");
+        let stream = stream.expect(&#34;failed&#34;);
         thread::spawn(move || {
-            handle_client(stream).unwrap_or_else(|error| eprintln!("{}", error));
+            handle_client(stream).unwrap_or_else(|error| eprintln!(&#34;{}&#34;, error));
         });
     }
     Ok(())
@@ -46,23 +46,23 @@ fn main() -> io::Result<()> {
 Client:
 
 ```rs
-fn main() -> io::Result<()> {
-    let mut stream = TcpStream::connect("127.0.0.1:8080")?;
-    println!("TCP Client is running...");
+fn main() -&gt; io::Result&lt;()&gt; {
+    let mut stream = TcpStream::connect(&#34;127.0.0.1:8080&#34;)?;
+    println!(&#34;TCP Client is running...&#34;);
 
     for _ in 0..10 {
         let mut input = String::new();
-        io::stdin().read_line(&mut input).expect("Failed to read");
-        stream.write(input.as_bytes()).expect("Failed to write");
+        io::stdin().read_line(&amp;mut input).expect(&#34;Failed to read&#34;);
+        stream.write(input.as_bytes()).expect(&#34;Failed to write&#34;);
 
-        let mut reader = BufReader::new(&stream);
+        let mut reader = BufReader::new(&amp;stream);
         let mut buffer = vec![];
         reader
-            .read_until(b'\n', &mut buffer)
-            .expect("Failed to read");
+            .read_until(b&#39;\n&#39;, &amp;mut buffer)
+            .expect(&#34;Failed to read&#34;);
         println!(
-            "Read from server: {}",
-            std::str::from_utf8(&buffer).expect("Failed to accept")
+            &#34;Read from server: {}&#34;,
+            std::str::from_utf8(&amp;buffer).expect(&#34;Failed to accept&#34;)
         );
     }
     Ok(())
@@ -73,20 +73,20 @@ fn main() -> io::Result<()> {
 
 ## UDP Server/Client
 
-{{< image src="/images/rust/udp-server-client.drawio.svg" caption="UDP C/S" >}}
+{{&lt; image src=&#34;/images/rust/udp-server-client.drawio.svg&#34; caption=&#34;UDP C/S&#34; &gt;}}
 
 Server:
 
 ```rs
-fn main() -> io::Result<()> {
-    let socket = UdpSocket::bind("127.0.0.1:8080")?;
-    println!("UDP socket is running...");
+fn main() -&gt; io::Result&lt;()&gt; {
+    let socket = UdpSocket::bind(&#34;127.0.0.1:8080&#34;)?;
+    println!(&#34;UDP socket is running...&#34;);
 
     loop {
         let mut buf = [0; 1500];
-        let (amt, src) = socket.recv_from(&mut buf)?;
+        let (amt, src) = socket.recv_from(&amp;mut buf)?;
 
-        let buf = &mut buf[..amt];
+        let buf = &amp;mut buf[..amt];
         buf.reverse();
         socket.send_to(buf, src)?;
     }
@@ -100,21 +100,21 @@ fn main() -> io::Result<()> {
 Client:
 
 ```rs
-fn main() -> io::Result<()> {
-    let socket = UdpSocket::bind("127.0.0.1:8081")?;
-    println!("UDP socket is running...");
-    socket.connect("127.0.0.1:8080")?;
+fn main() -&gt; io::Result&lt;()&gt; {
+    let socket = UdpSocket::bind(&#34;127.0.0.1:8081&#34;)?;
+    println!(&#34;UDP socket is running...&#34;);
+    socket.connect(&#34;127.0.0.1:8080&#34;)?;
 
     loop {
         let mut input = String::new();
-        io::stdin().read_line(&mut input)?;
+        io::stdin().read_line(&amp;mut input)?;
         socket.send(input.as_bytes())?;
 
         let mut buf = [0; 1500];
-        let bytes_read = socket.recv(&mut buf)?;
+        let bytes_read = socket.recv(&amp;mut buf)?;
         println!(
-            "Receive: {}",
-            std::str::from_utf8(&buf[..bytes_read]).expect("Invaild message")
+            &#34;Receive: {}&#34;,
+            std::str::from_utf8(&amp;buf[..bytes_read]).expect(&#34;Invaild message&#34;)
         );
     }
 }
@@ -132,16 +132,16 @@ fn main() -> io::Result<()> {
 
 ## Homework
 
-{{< admonition info >}}
+{{&lt; admonition info &gt;}}
 - [ ] [Building a DNS server in Rust](https://github.com/EmilHernvall/dnsguide/tree/master)
 - Brown: [CSCI1680: Computer Networks](https://cs.brown.edu/courses/csci1680/f22/schedule/)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
 
-> 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
+&gt; 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
 
 ### Crate [std](https://doc.rust-lang.org/std/index.html) 
 

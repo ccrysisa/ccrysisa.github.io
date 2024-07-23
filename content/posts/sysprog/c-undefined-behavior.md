@@ -18,6 +18,7 @@ tags:
   - C
 categories:
   - C
+  - C++
   - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false
