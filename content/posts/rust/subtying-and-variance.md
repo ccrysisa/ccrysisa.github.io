@@ -309,7 +309,7 @@ struct Deserializer4<T> {
 ## Homework
 
 {{< admonition info >}}
-- [ ] 完善 `strtok` 函数使其可以接受多个分隔符作为参数
+- [x] 完善 `strtok` 函数使其可以接受多个分隔符作为参数 / [我的题解](https://github.com/ccrysisa/rusty/blob/main/strtok/src/lib.rs#L20)
 {{< /admonition >}}
 
 ## Documentations

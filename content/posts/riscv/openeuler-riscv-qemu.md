@@ -293,6 +293,7 @@ $ echo $?
 - openEuler RISC-V: [通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统](https://github.com/openeuler-mirror/RISC-V/blob/master/doc/tutorials/vm-qemu-oErv.md)
 - openEuler RISC-V: [使用 QEMU 安装 openEuler RISC-V 23.03](https://gitee.com/openeuler/RISC-V/blob/master/release/openEuler-23.03/Installation_Book/QEMU/README.md)
 - Ariel Heleneto: [通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统](https://github.com/ArielHeleneto/Work-PLCT/tree/master/awesomeqemu)
+- [How to Install Python 3.8 on Ubuntu and Debian](https://gist.github.com/dev-sareno/1d2bf9cad3a0dc281f0bb16d501a4388)
 - openEuler: [mugen](https://gitee.com/openeuler/mugen)
 - openEuler Docs: [使用 DNF 管理软件包](https://docs.openeuler.org/zh/docs/22.03_LTS_SP2/docs/Administration/%E4%BD%BF%E7%94%A8DNF%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E5%8C%85.html)
 - [基于 openEuler 虚拟机本地执行 mugen 测试脚本](http://devops-dev.com/article/438)
