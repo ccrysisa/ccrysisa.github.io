@@ -20,6 +20,7 @@ tags:
   - C++
 categories:
   - Concurrency
+  - C++
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -31,8 +32,8 @@ resources:
   - name: featured-image-preview
     src: featured-image-preview.jpg
 toc: true
-math: false
-lightgallery: false
+math: true
+lightgallery: true
 password:
 message:
 repost:
@@ -50,11 +51,11 @@ repost:
 
 ## 前置知识
 
-至少把 Jserv 的 {{< link href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fconcurrency-ordering" content="并行程序设计: 执行顺序" external-icon=true >}} 的前半段 (即内存模型前面的那一部分) 掌握，特别是重要的概念 happens-before
+至少把 Jserv 的「{{< link href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fconcurrency-ordering" content="并行程序设计: 执行顺序" external-icon=true >}}」的前半段 (即内存模型前面的那一部分) 掌握，特别是重要的概念 happens-before 必须要深刻理解
 
 ## Part 1
 
-### Optimizations, races, and the memory model  
+### Optimizations, Races, and the Memory Model
 
 3-1
 
@@ -80,11 +81,19 @@ BTW 这段程序里每个 thread 对 flag 的 Read 和 Write 在编译器 / 处�
 11-1
 
 11-2
-{{< admonition info "pink elephants" >}}
+{{< admonition info "Pink elephants" >}}
 no sequential jump, for example, you hit step next and you go up, or you hit step next and your current line disappears and you\'re nowhere.
 {{< /admonition >}}
 
-### acquire and release ordering
+### Ordering - What: Acquire and Release
+
+12-2
+
+13-2 与之前所提的 Memory Model 不同，Critical region 内部的指令不会被编译器、处理器重排序到 CS 外部，即将 CS 视为一个整体然后对程序进行指令重排序，但是 CS 外部的指令也可以被重排序到 CS 内部，见 14-1 的例子。除此之外 CS 外部的指令也可以进行重排序 (SC-DRF，只有 CS 内部的指令比较特殊，会被编译器、处理器特别对待，因为这是我们告知它们的信息)
+
+14-2 acquire 和 release 提供了一个单向的屏障 (barrier)，即只能从 acquire 到 release，而不能反过来。编译器、处理器在处理程序时也会根据我们提供的这个信息，来保证相关指令的顺序，这样多线程竞争 (race) 时，对方线程的执行顺序是可以预测的，而不是 Pink elephants (当然这个保证仅限于 CS)。
+
+即保证了这样的 Partial Order: $Acquire < Instructions in CS < Release$
 
 ### mutexes vs. atomics vs. fences
 

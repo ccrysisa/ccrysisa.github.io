@@ -1,9 +1,9 @@
 ---
-title: "國立陽明交通大學 統計學 重點提示"
+title: "概率论 & 统计学"
 subtitle:
 date: 2024-01-20T17:20:09+08:00
 slug: 7592e7c
-draft: true
+# draft: true
 author:
   name: vanJker
   link: https://github.com/vanJker
@@ -15,9 +15,8 @@ license:
 comment: false
 weight: 0
 tags:
-  - Mathematics
-  - Statistics
   - Probility
+  - Statistics
   - Random Variable
 categories:
   - Mathematics
@@ -47,7 +46,23 @@ repost:
 
 <!--more-->
 
----
+## NTHU 概率论
+
+- [概率论](http://www.stat.nthu.edu.tw/~swcheng/Teaching/math2810/index.php)
+
+### Combinatorial Analysis 
+
+如果物件之间不平等，即存在 Order，此时需要使用 vector 来进行区分，反之则使用 set
+
+除了 List 之外的模型，有时可以将 **可分配的资源** 视为资源总量，例如位于排序中的位置。从这个角度出发，会比较好的理解 Partition 和 Integer Solution 的构造 (此时可以使用 Permuatation 搭配 List 来推导出 Partition 的公式)
+
+{{< raw >}}
+$$
+C^n_{n_1} \cdot C^{n - n_1}_{n_2} \cdot ... C^{n_r}_{n_r} = \frac{A^n_n}{A^{n_1}_{n_1} \cdot A^{n_2}_{n_2} \cdot ... A^{n_r}_{n_r}},\ where\ n_1 + n_2 + ... n_r = n
+$$
+{{< /raw >}}
+
+## NCTU 统计学
 
 国立阳明交通大学 陈邻安老师，开设了两学期的统计课程，分别是上学期的 **统计学** 和下学期的 **高等统计学**。
 
@@ -57,8 +72,6 @@ repost:
 | 高等统计学 | Advanced Statistics | [课程资讯][astat] | [YouTube][astat-video] |
 
 这两个学期课程的作业、习题以及解答都可以在 [这里](https://stat.nycu.edu.tw/zh_tw/course/community/info7) 找到。
-
----
 
 {{< center-quote >}}
 ***学习一门课，要学习其“精神”，而不是学习其方法。***
