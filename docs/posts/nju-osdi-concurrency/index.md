@@ -1,17 +1,17 @@
 # 南京大学 OSDI 并发 重点提示
 
 
-<!--more-->
+&lt;!--more--&gt;
 
 ## 多处理器编程: 从入门到放弃
 
-{{< admonition info "线程库；现代处理器和宽松内存模型" >}}
+{{&lt; admonition info &#34;线程库；现代处理器和宽松内存模型&#34; &gt;}}
 [直播录影](https://www.bilibili.com/video/BV13u411X72Q/)
 /
 [讲义页面](https://jyywiki.cn/OS/2022/slides/3.slides.html)
 /
 [阅读材料](https://jyywiki.cn/OS/2022/notes/2.html)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 - 程序 (源代码 S、二进制代码 C) = 状态机   
 - 编译器 C = compile(S)
@@ -24,13 +24,13 @@
 
 应用程序对应的状态机自身可转换的状态有限，很多状态都无法仅通过自己达到，所以需要操作系统外加干涉转换成新的状态
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 单线程程序是 deterministic 状态机，而多线程程序则是 non-deterministic 状态机，这是因为某个时刻，选择哪一个线程执行是不确定的，而一个线程执行对应了一个状态转换 (因为内存状态发生了变化)，所以是 non-deterministic 状态机。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< admonition tip >}}
+{{&lt; admonition tip &gt;}}
 对于新事物的学习，先在网上搜寻 Tutorial 教程阅读，再查阅 Manual 手册，这样效果比较好
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 虽然 `printf` 有缓冲区，但它是多线程安全的:
 
@@ -40,7 +40,7 @@
 |printf(), fprintf(),    │ Thread safety |
 ```
 
-> 编译器对内存访问 “eventually consistent” 的处理导致共享内存作为线程同步工具的失效。
+&gt; 编译器对内存访问 “eventually consistent” 的处理导致共享内存作为线程同步工具的失效。
 
 *编译器* 和 *处理器* 都可以进行 **指令重排序**，这导致了写并发程序的困难
 
@@ -50,13 +50,13 @@
 
 ## 理解并发程序执行 
 
-{{< admonition info "Peterson算法、模型检验与软件自动化工具" >}}
+{{&lt; admonition info &#34;Peterson算法、模型检验与软件自动化工具&#34; &gt;}}
 [直播录影](https://www.bilibili.com/video/BV15T4y1Q76V/)
 /
 [讲义页面](https://jyywiki.cn/OS/2022/slides/4.slides.html)
 /
 [阅读材料](https://jyywiki.cn/OS/2022/notes/2.html)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ---
 

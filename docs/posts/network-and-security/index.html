@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>计算机网络 - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
+<meta name="author-link" content="https://github.com/ccrysisa">
+<meta name="description" content="这是我的 Hugo FixIt 博客网站" /><meta name="keywords" content='Network, Security' /><meta itemprop="name" content="计算机网络">
+<meta itemprop="description" content=""><meta itemprop="datePublished" content="2024-01-14T12:09:38+08:00" />
+<meta itemprop="dateModified" content="2024-07-23T18:20:01+08:00" />
+<meta itemprop="wordCount" content="2891"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Network,Security," /><meta property="og:title" content="计算机网络" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ccrysisa.github.io/posts/network-and-security/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-01-14T12:09:38+08:00" />
+<meta property="article:modified_time" content="2024-07-23T18:20:01+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="计算机网络"/>
+<meta name="twitter:description" content=""/>
+<meta name="application-name" content="FixIt">
+<meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/network-and-security/" /><link rel="prev" href="https://ccrysisa.github.io/posts/c-specification/" /><link rel="next" href="https://ccrysisa.github.io/posts/c-pointer/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "计算机网络",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https:\/\/ccrysisa.github.io\/posts\/network-and-security\/"
+    },"genre": "posts","keywords": "Network, Security","wordcount":  2891 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/network-and-security\/","datePublished": "2024-01-14T12:09:38+08:00","dateModified": "2024-07-23T18:20:01+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "vanJker"
+      },"description": ""
+  }
+  </script></head>
+  <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/posts/"
+                
+                
+              ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/categories/"
+                
+                
+              ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/tags/"
+                
+                
+              ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li class="menu-item">
+              <a
+                class="menu-link"
+                href="/friends/"
+                
+                
+              ><i class="fa-solid fa-user-group fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" title="切换主题">
+          <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+        </li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <div class="menu-toggle" id="menu-toggle-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search fa-fw" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle fa-fw" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-fw fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/posts/"
+                  
+                  
+                ><i class="fa-solid fa-archive fa-fw fa-sm" aria-hidden="true"></i> Posts</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/categories/"
+                  
+                  
+                ><i class="fa-solid fa-th fa-fw fa-sm" aria-hidden="true"></i> Categories</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/tags/"
+                  
+                  
+                ><i class="fa-solid fa-tags fa-fw fa-sm" aria-hidden="true"></i> Tags</a></li><li
+              class="menu-item"
+            ><a
+                  class="menu-link"
+                  href="/friends/"
+                  
+                  
+                ><i class="fa-solid fa-user-group fa-fw fa-sm" aria-hidden="true"></i> Friends</a></li><li class="menu-item menu-system">
+          <span class="menu-system-item theme-switch" title="切换主题"><i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i></span></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>计算机网络</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" alt="vanJker" data-title="vanJker" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/systems/" class="post-category" title="分类 - Systems"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Systems</a></span></div><div class="post-meta-line"><span title="发布于 2024-01-14 12:09:38"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-01-14">2024-01-14</time></span>&nbsp;<span title="更新于 2024-07-23 18:20:01"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-07-23">2024-07-23</time></span>&nbsp;<span title="2891 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 6 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#nthu-计算机网络概论">NTHU 计算机网络概论</a>
+      <ul>
+        <li><a href="#foundation">Foundation</a>
+          <ul>
+            <li><a href="#applications">Applications</a></li>
+            <li><a href="#network-connectivity">Network Connectivity</a></li>
+            <li><a href="#network-architecture">Network Architecture</a></li>
+            <li><a href="#network-performance">Network Performance</a></li>
+            <li><a href="#homework">Homework</a></li>
+          </ul>
+        </li>
+        <li><a href="#ieee-8023-ethernet">IEEE 802.3 Ethernet</a>
+          <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#ethernet-topologies">Ethernet Topologies</a></li>
+            <li><a href="#ethernet-frame-format">Ethernet Frame Format</a></li>
+            <li><a href="#csmacd">CSMA/CD</a></li>
+          </ul>
+        </li>
+        <li><a href="#ieee-80211-wireless-lan">IEEE 802.11 Wireless LAN</a></li>
+      </ul>
+    </li>
+    <li><a href="#stanford-cs144">Stanford CS144</a>
+      <ul>
+        <li><a href="#tcp">TCP</a></li>
+        <li><a href="#packet-switching">Packet Switching</a></li>
+      </ul>
+    </li>
+    <li><a href="#ustc-计算机网络-自顶向下">USTC 计算机网络: 自顶向下</a></li>
+    <li><a href="#comptia-network">CompTIA Network+</a></li>
+    <li><a href="#comptia-network-1">CompTIA Network+</a></li>
+    <li><a href="#referenecs">Referenecs</a></li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 id="nthu-计算机网络概论" class="heading-element">
+  <a href="#nthu-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c%e6%a6%82%e8%ae%ba" class="heading-mark"></a>NTHU 计算机网络概论</h2><div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">必看部分为 L2 IEEE 802.3 Ethernet，即学习数据链路层，其它部分可以选择来看。后续可以看 Stanford 的 CS144，它是从 IP Level 开始讲的，所以需要我们对数据链路层有一定的认知。</div>
+    </div>
+  </div>
+<p>之前学校的计网理论课学得云里雾里，对于物理层和数据链路层并没有清晰的逻辑框架，而这学期的计网课设内容为数据链路层和网络层的相关内容，写起来还是云里雾里。虽然最终艰难地把课设水过去了，但是个人认为网络对于 CSer 非常重要，特别是在互联网行业，网络知识是必不可少的。
+所以决定寒假重学计网，于是在 <a href="https://hackmd.io/"target="_blank" rel="external nofollow noopener noreferrer">HackMD</a> 上冲浪寻找相关资料。然后发现了这篇笔记 <a href="https://hackmd.io/@0xff07/network/https%3A%2F%2Fhackmd.io%2F%400xff07%2FByADDQ57Y"target="_blank" rel="external nofollow noopener noreferrer">110-1 計算機網路 (清大開放式課程)</a>，里面提到清大计网主要介绍 L2 ~ L4 一些著名的协议和算法，这完美符合个人的需求，而且该笔记还补充了一些额外的内容，例如 IPv6，所以当即决定搭配这篇笔记来学习清大的计算机网络概论。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">开课学校</th>
+<th style="text-align:center">课程主页</th>
+<th style="text-align:center">课程资料</th>
+<th style="text-align:center">课程影片</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">國立清華大學</td>
+<td style="text-align:center"><a href="https://ocw.nthu.edu.tw/ocw/index.php?page=course&amp;cid=291&amp;"target="_blank" rel="external nofollow noopener noreferrer">計算機網路概論</a></td>
+<td style="text-align:center"><a href="https://ocw.nthu.edu.tw/ocw/index.php?page=course_news_content&amp;cid=291&amp;id=1015"target="_blank" rel="external nofollow noopener noreferrer">課程講義與練習題</a></td>
+<td style="text-align:center"><a href="https://www.youtube.com/playlist?list=PLS0SUwlYe8cxktXNovos9xleroaWyb-z5"target="_blank" rel="external nofollow noopener noreferrer">Youtube</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="foundation" class="heading-element">
+  <a href="#foundation" class="heading-mark"></a>Foundation</h3><p>Outline:</p>
+<ul>
+<li>Applications</li>
+<li>Network Connectivity</li>
+<li>Network Architecture</li>
+<li>Network Performance</li>
+</ul>
+<h4 id="applications" class="heading-element">
+  <a href="#applications" class="heading-mark"></a>Applications</h4><figure><a class="lightgallery" href="/images/network/L1-05.png?size=large" data-thumbnail="/images/network/L1-05.png?size=small" data-sub-html="<h2>Foundation - 5</h2>"><img loading="lazy" src="/images/network/L1-05.png" alt="/images/network/L1-05.png" srcset="/images/network/L1-05.png?size=small, /images/network/L1-05.png?size=medium 1.5x, /images/network/L1-05.png?size=large 2x" sizes="auto" data-title="/images/network/L1-05.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Foundation - 5</figcaption>
+  </figure>
+<p>进行 1 次 URL request 需要进行 17 次的讯息交换：</p>
+<ul>
+<li>6 次讯息交换用于查询 URL 对应的 IP Address</li>
+<li>3 次讯息交换用于建立 TCP 连接（TCP 的 3 次握手）</li>
+<li>4 次讯息交换用于 HTTP 协议的请求和回复</li>
+<li>4 次讯息交换用于关闭 TCP 连接（TCP 的 4 次握手）</li>
+</ul>
+<h4 id="network-connectivity" class="heading-element">
+  <a href="#network-connectivity" class="heading-mark"></a>Network Connectivity</h4><figure><a class="lightgallery" href="/images/network/L1-08.png?size=large" data-thumbnail="/images/network/L1-08.png?size=small" data-sub-html="<h2>Foundation - 8</h2>"><img loading="lazy" src="/images/network/L1-08.png" alt="/images/network/L1-08.png" srcset="/images/network/L1-08.png?size=small, /images/network/L1-08.png?size=medium 1.5x, /images/network/L1-08.png?size=large 2x" sizes="auto" data-title="/images/network/L1-08.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Foundation - 8</figcaption>
+  </figure>
+<p>交换机 (Switches) 可以分为很多层级，即可以有不同层级的交换机，例如 L2 层的交换机，L3 层的交换机以及 L4 层的交换机。如何判断交换机是哪个层级？很简单，只需要根据交换机所处理的讯息，L2 层交换机处理的是 MAC Address，L3 层交换机处理的是 IP Address，而 L4 层交换机处理的是 TCP 或者 UDP 相关的讯息。</p>
+<p>交换机 (Switches) 用于网络 (Network) 内部的连接，路由 (Router) 用于连接不同的网络 (Network)，从而形成 Internetwork。</p>
+<p>地址 (Address)，对于网卡来说是指 MAC Address，对于主机来说是指 IP Address。Host-to-Host connectivity 是指不同网络 (Network) 的主机，即位于 Internetwork 的不同主机之间，进行连接。</p>
+<h4 id="network-architecture" class="heading-element">
+  <a href="#network-architecture" class="heading-mark"></a>Network Architecture</h4><figure><a class="lightgallery" href="/images/network/L1-22.png?size=large" data-thumbnail="/images/network/L1-22.png?size=small" data-sub-html="<h2>Foundation - 22</h2>"><img loading="lazy" src="/images/network/L1-22.png" alt="/images/network/L1-22.png" srcset="/images/network/L1-22.png?size=small, /images/network/L1-22.png?size=medium 1.5x, /images/network/L1-22.png?size=large 2x" sizes="auto" data-title="/images/network/L1-22.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Foundation - 22</figcaption>
+  </figure>
+<p><strong>Physical Layer:</strong> 如何将原始资料在 link 上传输，例如不同介质、信息编码。(P25)</p>
+<p><strong>Data Link Layer:</strong> 在 Physical Layer 基础上，如何将 frame 传给直接相连的主机或设备，核心是通过 <em>Media Access Control Protocol</em> 解决 Multiple access 产生的碰撞问题。这一层交换的数据被称为 <em>frame</em>。(P26)</p>
+<p><strong>Network Layer:</strong> 在 Data Link Layer 基础上，如何将 packet 通过 Internet 送给目的地主机。核心是通过 <em>Routing Protocols</em> 动态转发 packet。这一层交换的数据被称为 <em>packet</em>。(P27)</p>
+<p><strong>Transport Layer:</strong> 在 Network Layer 基础上，提供不同主机 processes 之间的资料传送。由于 Networkd Layer 是主机间进行资料传送，所以在 Transport Layer 不论是可靠还是不可靠的传输协议，都必须要实现最基本的机制：主机与 process 之间数据的复用和分解。这一层交换的数据被称为 <em>message</em>。(P28)</p>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>Switch 一般处于 L2 Layer，Router 一般处于 L3 Layer。L4 Layer 及以上的 layers 通常只存在于 hosts，switches 和 routers 内部一般不具有这些 layers。(P29)</p>
+<p>Internet Architecture 的层级并不是严格的，Host 可以略过 Application Layer 而直接使用 Transport Layer、Network Layer 中的协议。(P30)</p>
+<p>Internet Architecture 的核心是 IP 协议，它作为沙漏形状的中心位置，为处于其上层的协议与处于其下层协议之间提供了一个映射关系。(P31)</p>
+</div>
+    </div>
+  </div>
+<h4 id="network-performance" class="heading-element">
+  <a href="#network-performance" class="heading-mark"></a>Network Performance</h4><p><figure><a class="lightgallery" href="/images/network/L1-36.png?size=large" data-thumbnail="/images/network/L1-36.png?size=small" data-sub-html="<h2>Foundation - 36</h2>"><img loading="lazy" src="/images/network/L1-36.png" alt="/images/network/L1-36.png" srcset="/images/network/L1-36.png?size=small, /images/network/L1-36.png?size=medium 1.5x, /images/network/L1-36.png?size=large 2x" sizes="auto" data-title="/images/network/L1-36.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Foundation - 36</figcaption>
+  </figure>
+<figure><a class="lightgallery" href="/images/network/L1-37.png?size=large" data-thumbnail="/images/network/L1-37.png?size=small" data-sub-html="<h2>Foundation - 37</h2>"><img loading="lazy" src="/images/network/L1-37.png" alt="/images/network/L1-37.png" srcset="/images/network/L1-37.png?size=small, /images/network/L1-37.png?size=medium 1.5x, /images/network/L1-37.png?size=large 2x" sizes="auto" data-title="/images/network/L1-37.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Foundation - 37</figcaption>
+  </figure></p>
+<p><strong>Bandwidth:</strong> Number of bits per second (P34)</p>
+<p><strong>Delay</strong> 可以近似理解为 Propagation time。有效利用 network 的标志是在接收对方的回应之前，发送方传送的资料充满了 pipe，即发送了 Delay $\times$ Bandwitdh bits 的资料量。(P39)</p>
+<figure><a class="lightgallery" href="/images/network/L1-40.png?size=large" data-thumbnail="/images/network/L1-40.png?size=small" data-sub-html="<h2>Foundation - 40</h2>"><img loading="lazy" src="/images/network/L1-40.png" alt="/images/network/L1-40.png" srcset="/images/network/L1-40.png?size=small, /images/network/L1-40.png?size=medium 1.5x, /images/network/L1-40.png?size=large 2x" sizes="auto" data-title="/images/network/L1-40.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Foundation - 40</figcaption>
+  </figure>
+<p><strong>RTT</strong> 可以近似理解为 2 $\times$ Propagation time，因为一个来回需要从 sender 到 reciever，再从 reciever 到 sender。</p>
+<h4 id="homework" class="heading-element">
+  <a href="#homework" class="heading-mark"></a>Homework</h4><div class="details admonition info open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>Redis 作者 Salvatore Sanfilippo 的聊天室项目: <a href="https://github.com/antirez/smallchat"target="_blank" rel="external nofollow noopener noreferrer">smallchat</a>，通过该项目可以入门学习网络编程 (Network Programming)，请复现该项目。</p>
+<p>Salvatore Sanfilippo 在 YouTube 上对 smallchat 的讲解：</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=eT02gzeLmF0"target="_blank" rel="external nofollow noopener noreferrer">Smallchat intro</a></li>
+<li><a href="https://www.youtube.com/watch?v=yogoUJ2zVYY"target="_blank" rel="external nofollow noopener noreferrer">smallchat client &amp; raw line input</a></li>
+</ul>
+<p>GitHub 上也有使用 Go 和 Rust 实现该项目的仓库，如果你对 Go 或 Rust 的网络编程 (Network Programming) 感兴趣，可以参考这个<a href="https://github.com/smallnest/smallchat"target="_blank" rel="external nofollow noopener noreferrer">仓库</a>。</p>
+</div>
+    </div>
+  </div>
+<h3 id="ieee-8023-ethernet" class="heading-element">
+  <a href="#ieee-8023-ethernet" class="heading-mark"></a>IEEE 802.3 Ethernet</h3><p><strong>Outline:</strong></p>
+<ul>
+<li>Introduction</li>
+<li>Ethernet Topologies</li>
+<li>Ethernet Frame Format</li>
+<li>Ethernet MAC Protocol &ndash; CSMA/CD</li>
+<li>802.3 Ethernet Standards</li>
+</ul>
+<p><strong>Summary:</strong></p>
+<ul>
+<li>MAC Protocol &ndash; CSMA/CD</li>
+<li>Connection less, unreliable transmission</li>
+<li>Topology from <strong>Bus</strong> to <strong>Star (switches)</strong></li>
+<li>Half-duplex transmission in Bus topology
+<ul>
+<li>Work best under <strong>lightly loaded</strong> conditions</li>
+<li>Too much collision under <strong>heavy load</strong></li>
+</ul>
+</li>
+<li>Full-duplex transmission in Switch topology (point-to-point)
+<ul>
+<li>No more collisions !!</li>
+<li>Excellent performance (wired speed)</li>
+</ul>
+</li>
+</ul>
+<h4 id="introduction" class="heading-element">
+  <a href="#introduction" class="heading-mark"></a>Introduction</h4><figure><a class="lightgallery" href="/images/network/L2-03.png?size=large" data-thumbnail="/images/network/L2-03.png?size=small" data-sub-html="<h2>Ethernet - 03</h2>"><img loading="lazy" src="/images/network/L2-03.png" alt="/images/network/L2-03.png" srcset="/images/network/L2-03.png?size=small, /images/network/L2-03.png?size=medium 1.5x, /images/network/L2-03.png?size=large 2x" sizes="auto" data-title="/images/network/L2-03.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Ethernet - 03</figcaption>
+  </figure>
+<p>Ethernet 发展过程: 传输速度从 10Mb 发展到 100Gb (P4)
+Ethernet 的特点: Unreliable, Connectionless, CSMA/CD (P5)</p>
+<h4 id="ethernet-topologies" class="heading-element">
+  <a href="#ethernet-topologies" class="heading-mark"></a>Ethernet Topologies</h4><p><figure><a class="lightgallery" href="/images/network/L2-07.png?size=large" data-thumbnail="/images/network/L2-07.png?size=small" data-sub-html="<h2>Ethernet - 07</h2>"><img loading="lazy" src="/images/network/L2-07.png" alt="/images/network/L2-07.png" srcset="/images/network/L2-07.png?size=small, /images/network/L2-07.png?size=medium 1.5x, /images/network/L2-07.png?size=large 2x" sizes="auto" data-title="/images/network/L2-07.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Ethernet - 07</figcaption>
+  </figure>
+<figure><a class="lightgallery" href="/images/network/L2-18.png?size=large" data-thumbnail="/images/network/L2-18.png?size=small" data-sub-html="<h2>Ethernet - 18</h2>"><img loading="lazy" src="/images/network/L2-18.png" alt="/images/network/L2-18.png" srcset="/images/network/L2-18.png?size=small, /images/network/L2-18.png?size=medium 1.5x, /images/network/L2-18.png?size=large 2x" sizes="auto" data-title="/images/network/L2-18.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Ethernet - 18</figcaption>
+  </figure></p>
+<ul>
+<li>10Base5: 10Mbps, segment up to 500m (P8)</li>
+<li>10Base2: 10Mbps, segment up to 200m (P8)</li>
+<li>10BaseT: 10Mbps, Twisted pair, segment up to 100m (P16)</li>
+</ul>
+<ul>
+<li>Repeater, Hub 都是 physical layer 的设备，只负责 <strong>转发信号</strong>，无法防止 collision (P12, P16)</li>
+<li>Switch 则是 data-link layer 的设备，内置芯片进行 <strong>数据转发</strong>，可以防止 collision (P19)</li>
+</ul>
+<p><strong>Manchester Encoding</strong> (P11): <br>
+Ethernet 下层的 physical layer 使用的编码方式是 Manchester Encoding: 在一个时钟周期内，信号从低到高表示 1，从高到低表示 0</p>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>Manchester Encoding 发送方在进行数据传输之前需要发送一些 bits 来进行时钟同步 (例如 P22 的 Preamble 部分)，接收方完成时钟同步后，可以对一个时钟周期进行两次采样：一次前半段，一次后半段，然后可以通过两次取样电位信号的变化来获取对应的 bit (低到高表示 1，高到低表示 0)。</p>
+<p>有些读者可能会疑惑，既然都进行时钟同步了，为什么不直接使用高电位信号表示 1，低电位信号表示 0 这样直观的编码方式？这是因为如果采取这种编码方式，那么在一个时钟周期内信号不会有变化，如果接收的是一系列的 1 或 0，信号也不会变化。这样可能会导致漏采样，或者编码出错却无法及时侦测。而采用 Manchester Encoding 接收方每个时钟周期内信号都会变化，如果接收方在一次时钟周期内的两次采样，信号没有发生变化，那么可以立即侦测到出错了 (要么是漏采样了，要么是编码出错了)。</p>
+</div>
+    </div>
+  </div>
+<h4 id="ethernet-frame-format" class="heading-element">
+  <a href="#ethernet-frame-format" class="heading-mark"></a>Ethernet Frame Format</h4><figure><a class="lightgallery" href="/images/network/L2-23.png?size=large" data-thumbnail="/images/network/L2-23.png?size=small" data-sub-html="<h2>Ethernet - 23</h2>"><img loading="lazy" src="/images/network/L2-23.png" alt="/images/network/L2-23.png" srcset="/images/network/L2-23.png?size=small, /images/network/L2-23.png?size=medium 1.5x, /images/network/L2-23.png?size=large 2x" sizes="auto" data-title="/images/network/L2-23.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Ethernet - 23</figcaption>
+  </figure>
+<p>除开 Preamble, SFD 之外，一个 Frame 的大小为 $64 \sim 1518$ bytes。因为 DA, SA, TYPE, FCS 占据了 $6 + 6 + 2 + 4 = 18$ bytes，所以 Data 部分的大小为 $48 ~\sim 1500$ bytes (P43)</p>
+<p>MAC Address 是 unique 并且是与 Adaptor 相关的，所以一个主机可能没有 MAC Address (没有 Adaptor)，可能有两个 MAC Address (有两个 Adaptor)。MAC Address 是由 Adaptor 的生产商来决定的。(P24)</p>
+<p>unicast address, broadcast address, multicast address (P26)</p>
+<h4 id="csmacd" class="heading-element">
+  <a href="#csmacd" class="heading-mark"></a>CSMA/CD</h4><p><figure><a class="lightgallery" href="/images/network/L2-46.png?size=large" data-thumbnail="/images/network/L2-46.png?size=small" data-sub-html="<h2>Ethernet - 46</h2>"><img loading="lazy" src="/images/network/L2-46.png" alt="/images/network/L2-46.png" srcset="/images/network/L2-46.png?size=small, /images/network/L2-46.png?size=medium 1.5x, /images/network/L2-46.png?size=large 2x" sizes="auto" data-title="/images/network/L2-46.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Ethernet - 46</figcaption>
+  </figure>
+<figure><a class="lightgallery" href="/images/network/L2-41.png?size=large" data-thumbnail="/images/network/L2-41.png?size=small" data-sub-html="<h2>Ethernet - 41</h2>"><img loading="lazy" src="/images/network/L2-41.png" alt="/images/network/L2-41.png" srcset="/images/network/L2-41.png?size=small, /images/network/L2-41.png?size=medium 1.5x, /images/network/L2-41.png?size=large 2x" sizes="auto" data-title="/images/network/L2-41.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Ethernet - 41</figcaption>
+  </figure>
+<figure><a class="lightgallery" href="/images/network/L2-45.png?size=large" data-thumbnail="/images/network/L2-45.png?size=small" data-sub-html="<h2>Ethernet - 45</h2>"><img loading="lazy" src="/images/network/L2-45.png" alt="/images/network/L2-45.png" srcset="/images/network/L2-45.png?size=small, /images/network/L2-45.png?size=medium 1.5x, /images/network/L2-45.png?size=large 2x" sizes="auto" data-title="/images/network/L2-45.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Ethernet - 45</figcaption>
+  </figure>
+<figure><a class="lightgallery" href="/images/network/L2-49.png?size=large" data-thumbnail="/images/network/L2-49.png?size=small" data-sub-html="<h2>Ethernet - 49</h2>"><img loading="lazy" src="/images/network/L2-49.png" alt="/images/network/L2-49.png" srcset="/images/network/L2-49.png?size=small, /images/network/L2-49.png?size=medium 1.5x, /images/network/L2-49.png?size=large 2x" sizes="auto" data-title="/images/network/L2-49.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">Ethernet - 49</figcaption>
+  </figure></p>
+<ul>
+<li>关于 CSMA/CD 的详细介绍可以查看 P34 ~ P38</li>
+<li>关于 Ethernet Frame 的大小限制设计可以查看 P39 ~ P43</li>
+<li>关于 CSMA/CD Collision Handling 的策略机制可以查看 P44 ~ P45, P47 ~ P48</li>
+</ul>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">Host 在 detect collision 之后进行 backoff random delay，delay 结束后按照 1-persistent protocol (P35) 继续等待到  busy channel goes idle 后立刻进行传输。</div>
+    </div>
+  </div>
+<h3 id="ieee-80211-wireless-lan" class="heading-element">
+  <a href="#ieee-80211-wireless-lan" class="heading-mark"></a>IEEE 802.11 Wireless LAN</h3><p>无线网络这章太难了，战术性放弃</p>
+<h2 id="stanford-cs144" class="heading-element">
+  <a href="#stanford-cs144" class="heading-mark"></a>Stanford CS144</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">开课学校</th>
+<th style="text-align:center">课程主页</th>
+<th style="text-align:center">课程资料</th>
+<th style="text-align:center">课程影片</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Stanford University</td>
+<td style="text-align:center"><a href="https://vixbob.github.io/cs144-web-page/"target="_blank" rel="external nofollow noopener noreferrer">Website</a></td>
+<td style="text-align:center"><a href="https://github.com/lawliet9712/Stanford-CS144-2021"target="_blank" rel="external nofollow noopener noreferrer">GitHub</a></td>
+<td style="text-align:center"><a href="https://space.bilibili.com/457173750/channel/collectiondetail?sid=1445483"target="_blank" rel="external nofollow noopener noreferrer">bilibili</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="tcp" class="heading-element">
+  <a href="#tcp" class="heading-mark"></a>TCP</h3><ul>
+<li><a href="http://tcpipguide.com/free/t_TCPOperationalOverviewandtheTCPFiniteStateMachineF-2.htm"target="_blank" rel="external nofollow noopener noreferrer">TCP Operational Overview and the TCP Finite State Machine (FSM)</a></li>
+</ul>
+<figure><a class="lightgallery" href="http://tcpipguide.com/free/diagrams/tcpfsm.png?size=large" data-thumbnail="http://tcpipguide.com/free/diagrams/tcpfsm.png?size=small" data-sub-html="<h2>TCP FSM</h2>"><img loading="lazy" src="http://tcpipguide.com/free/diagrams/tcpfsm.png" alt="http://tcpipguide.com/free/diagrams/tcpfsm.png" srcset="http://tcpipguide.com/free/diagrams/tcpfsm.png?size=small, http://tcpipguide.com/free/diagrams/tcpfsm.png?size=medium 1.5x, http://tcpipguide.com/free/diagrams/tcpfsm.png?size=large 2x" sizes="auto" data-title="http://tcpipguide.com/free/diagrams/tcpfsm.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">TCP FSM</figcaption>
+  </figure>
+<h3 id="packet-switching" class="heading-element">
+  <a href="#packet-switching" class="heading-mark"></a>Packet Switching</h3><p>Circuit Switching 相对于 Packet Switching，它对于中间的交换网络的拓扑设计需要更加谨慎，防止某些极端情况下，在建立某条专用路线后，其它通信双方就无法使用该中间交换网络了，同理对于这种交换网络，只需攻击某个核心交换节点，即可瘫痪该交换网络。</p>
+<p>Packet Swicthing 上的数据报交换机一般是接收完整个数据报之后，才进行下一跳的转发，当然也可以进行快速传播，只不过一般不启用 (因为在数据报交换机处可能需要做一些校验工作，这需要拥有完整数据报方可进行)</p>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><p>CS 144 听前 4 单元 (Unit) 就可以了，第二单元 TCP 讲的特别清除，后面就一般般了。关于网络的应用部分可以参考 <a href="https://www.youtube.com/@professormesser"target="_blank" rel="external nofollow noopener noreferrer">Professor Messer</a> 的频道</p>
+<p>Unit 3 分组交换的队列模型那部分听的不是很明白&hellip; 毕竟涉及到排队论 (Queuing Theory)</p>
+<p>Unit 4 拥塞控制，讲的也比较一般，参考清大或中科大相关的教学录影会比较好&hellip;</p>
+</div>
+    </div>
+  </div>
+<h2 id="ustc-计算机网络-自顶向下" class="heading-element">
+  <a href="#ustc-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c-%e8%87%aa%e9%a1%b6%e5%90%91%e4%b8%8b" class="heading-mark"></a>USTC 计算机网络: 自顶向下</h2><table>
+<thead>
+<tr>
+<th style="text-align:center">开课学校</th>
+<th style="text-align:center">课程主页</th>
+<th style="text-align:center">课程资料</th>
+<th style="text-align:center">课程影片</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">中国科学技术大学</td>
+<td style="text-align:center">无</td>
+<td style="text-align:center"><a href="https://pan.baidu.com/s/1EElOrkkY4WQqgeKHuGm-bg"target="_blank" rel="external nofollow noopener noreferrer">课件</a> (密码: 1958)</td>
+<td style="text-align:center"><a href="https://www.bilibili.com/video/BV1JV411t7ow"target="_blank" rel="external nofollow noopener noreferrer">bilibili</a></td>
+</tr>
+</tbody>
+</table>
+<p>CS 144 的 <strong>拥塞控制</strong> 讲的不是很好，科大讲的相对比较好</p>
+<h2 id="comptia-network" class="heading-element">
+  <a href="#comptia-network" class="heading-mark"></a>CompTIA Network+</h2><ul>
+<li>Professor Messer: <a href="https://www.youtube.com/playlist?list=PLG49S3nxzAnnXcPUJbwikr2xAcmKljbnQ"target="_blank" rel="external nofollow noopener noreferrer">CompTIA Network+ N10-006 Training Course</a></li>
+</ul>
+<h2 id="comptia-network-1" class="heading-element">
+  <a href="#comptia-network-1" class="heading-mark"></a>CompTIA Network+</h2><h2 id="referenecs" class="heading-element">
+  <a href="#referenecs" class="heading-mark"></a>Referenecs</h2><ul>
+<li><a href="https://fasionchan.com/network/"target="_blank" rel="external nofollow noopener noreferrer">小菜学网络</a></li>
+<li><a href="https://luzhixing12345.github.io/netlab/"target="_blank" rel="external nofollow noopener noreferrer">NUDT 高级计算机网络实验: 基于UDP的可靠传输</a></li>
+<li><a href="https://sunyunqiang.com/blog/reliable_udp_protocol/"target="_blank" rel="external nofollow noopener noreferrer">可靠 UDP 的实现 (KCP over UDP)</a></li>
+<li><a href="https://www.bilibili.com/video/BV1di4y1z7Mn"target="_blank" rel="external nofollow noopener noreferrer">基于 UDP 的可靠传输</a> [bilibili]</li>
+<li><a href="https://www.bilibili.com/video/BV12P411T78X"target="_blank" rel="external nofollow noopener noreferrer">实现基于 UDP 的网络文件传输器</a> [bilibili]</li>
+<li><a href="https://www.bilibili.com/video/BV1Wd4y1b7b4"target="_blank" rel="external nofollow noopener noreferrer">ping 命令也可以用来通信</a> [bilibili]</li>
+<li><a href="https://www.youtube.com/playlist?list=PLqbS7AVVErFivDY3iKAQk3_VAm8SXwt1X"target="_blank" rel="external nofollow noopener noreferrer">Implementing TCP in Rust</a> [YouTube]</li>
+<li><a href="http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/"target="_blank" rel="external nofollow noopener noreferrer">Let's code a TCP/IP stack</a></li>
+</ul></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod">
+        <span title="更新于 2024-07-23 18:20:01">更新于 2024-07-23&nbsp;</span>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/network-and-security/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/network-and-security/" data-title="计算机网络" data-hashtags="Network,Security"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/network-and-security/" data-hashtag="Network"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/network-and-security/" data-title="计算机网络" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/network-and-security/" data-title="计算机网络"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/network-and-security/" data-title="计算机网络"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/network-and-security/" data-title="计算机网络" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/network-and-security/" data-title="计算机网络" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/network-and-security/" data-title="计算机网络"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  </span>
+        </div>
+      </div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/network/" class="post-tag" title="标签 - Network">Network</a><a href="/tags/security/" class="post-tag" title="标签 - Security">Security</a></section>
+    <section>
+      <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div>
+
+  <div class="post-nav"><a href="/posts/c-specification/" class="post-nav-item" rel="prev" title="C 语言规格书 重点提示"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>C 语言规格书 重点提示</a>
+      <a href="/posts/c-pointer/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: 指针篇">你所不知道的 C 语言: 指针篇<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+        </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+          <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
+        </div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
+        </div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":30},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+</html>
