@@ -246,7 +246,13 @@ CS 144 的 **拥塞控制** 讲的不是很好，科大讲的相对比较好
 
 - Professor Messer: [CompTIA Network+ N10-006 Training Course](https://www.youtube.com/playlist?list=PLG49S3nxzAnnXcPUJbwikr2xAcmKljbnQ)
 
-## CompTIA Network+
+## CompTIA Security+
+
+## 实作案例: Build Your Own Redis with C/C++
+
+- [ ] [Build Your Own Redis with C/C++](https://build-your-own.org/redis/)
+
+这个教程偏向于网络的应用方面，即所谓的网络编程 (Network Programming)
 
 ## Referenecs
 

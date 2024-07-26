@@ -47,12 +47,50 @@ repost:
 
 ## 影片注解
 
+### where
+
+drop check 和之前的 subtyping and variance 主题类似，是一个比较奇特的主题，但它比较少见，一般出现在 unsafe 的代码里
+
 ### from_raw vs. drop_in_place
 
 ```rs
+impl<T> Drop for Boks<T> {
+    fn drop(&mut self) {
+        unsafe { Box::from_raw(self.p) };
+        // vs.
+        unsafe { std::ptr::drop_in_place(self.p) };
+    }
+}
 ```
 
-直接使用 `drop_in_place` 只会 drop 被 `p` 指向的那部分数据 (位于 heap 中)，而不会 drop `Boks` 本身，而使用 `from_raw` 则两者都可以 drop 掉。
+直接使用 `drop_in_place` 只会 drop 被 `p` 指向的那部分数据 (位于 heap 中)，而不会 drop `Boks` 本身 (即成员 `p` 没被 drop)，而使用 `from_raw` 则两者都可以 drop 掉。
+
+- Function [std::ptr::drop_in_place](https://doc.rust-lang.org/std/ptr/fn.drop_in_place.html)
+> Executes the destructor (if any) of the pointed-to value.
+
+- method [std::boxed::Box::from_raw](https://doc.rust-lang.org/std/boxed/struct.Box.html#method.from_raw)
+> After calling this function, the raw pointer is owned by the resulting Box. Specifically, the Box destructor will call the destructor of T and free the allocated memory. 
+
+### drop check and eyepatch
+
+If you have a generic type over `T`, the **drop check** is going to assume that if this type implements `drop`, then the `drop` will access `T`.
+
+And what the `dropck_eyepatch` does is it lets us sort of opt out of that part of the **drop check**， it lets us mask a given type parameter from the **drop check**.
+
+```rs
+#![feature(dropck_eyepatch)]
+
+unsafe impl<#[may_dangle] T> Drop for Boks<T> {
+    fn drop(&mut self) {
+        // unsafe { Box::from_raw(self.p) };
+        unsafe { std::ptr::drop_in_place(self.p) };
+    }
+}
+```
+
+And what this tells the compiler is that even though `Boks` holds a `T`, and then those generic over `T`, I promise since the `unsafe` keyword here that the code inside the `drop` does not access the `T`.
+
+即在 `drop` 时结构体的泛型成员 `T` 是引用的情况下，可以允许 `T` 此时为悬垂引用 (dangle reference)
 
 ## Documentations
 
@@ -69,6 +107,12 @@ repost:
   - method [std::boxed::Box::from_raw](https://doc.rust-lang.org/std/boxed/struct.Box.html#method.from_raw)
 
 - Function [std::ptr::drop_in_place](https://doc.rust-lang.org/std/ptr/fn.drop_in_place.html)
+
+- Trait [std::ops::Drop](https://doc.rust-lang.org/std/ops/trait.Drop.html)
+
+- Trait [std::ops::Deref](https://doc.rust-lang.org/std/ops/trait.Deref.html)
+
+- Trait [std::ops::DerefMut](https://doc.rust-lang.org/std/ops/trait.DerefMut.html)
 
 ## References
 
