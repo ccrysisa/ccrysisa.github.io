@@ -153,7 +153,9 @@ Breakpoint & Memory
 
 调试过程中，通过「右键 $\rightarrow$ 转到反汇编」即可查看对应的汇编代码
 
-### Project Setup 
+### Projects
+
+#### Setup 
 
 filter 类似于一种虚拟的文件系统组织，不过只能在 VS 才能表示为层次形式 (通过解析 XML 格式的配置文件)，在主机的文件系统上没有影响
 
@@ -161,15 +163,95 @@ filter 类似于一种虚拟的文件系统组织，不过只能在 VS 才能表
 
 主机文件系统和 VS 的虚拟项目组织是解耦的，所以在主机移动源文件并不会影响其在 VS 的虚拟项目组织所在的位置
 
-VS 默认设置是将构建 / 编译得到的中间文件放在 Project 的 Debug 目录，但是得到的可执行文件却放在 Solution 的 Debug 目录下，这十分奇怪。可以通过修改 Project 的属性 (右键选择属性这一选项) 里的输出目录，使得其与中间目录一致为 `$(Configuration)\`。也可以将 Solution 内的全部 Projects 的可执行文件均放置在 Solution 下的同一目录
+VS 默认设置是将构建 / 编译得到的中间文件放在 Project 的 Debug 目录，但是得到的可执行文件却放在 Solution 的 Debug 目录下，这十分奇怪。可以通过修改 **Project 的属性** (右键选择属性这一选项) 里的输出目录，使得其与中间目录一致为 `$(Configuration)\`。也可以将 Solution 内的全部 Projects 的可执行文件均放置在 Solution 下的同一目录
 
 推荐设定如下:
 - Output Directory: `$(SolutionDir)\bin\$(Platform)\$(Configuration)\`
 - Intermediate Directory: `$(SolutionDir)\bin\intermidiate\$(Platform)\$(Configuration)\`
 
 {{< admonition >}}
-在编辑这些目录设定时，其下拉框中选择「编辑」字段可以查看形如 `$(SolutionDir)` 这些宏的定义
+在编辑这些目录设定时，其下拉框中选择「编辑 -> 宏」可以查看形如 `$(SolutionDir)` 这些宏的定义
 {{< /admonition >}}
+
+```
+SolutionDir
+    |__ bin
+          |__ Platform
+          |         |__ Configuration
+          |__ intermidiate
+                    |__ Platform
+                            |__ Configuration
+```
+
+### Libraries
+
+- Unix 哲学: 自己编译代码进行构建 (例如 [LFS](https://www.linuxfromscratch.org/lfs/))
+- Windows 哲学: 能用就行，最好双击就可运行 :rofl:
+
+接下来以 [GLFW](https://www.glfw.org/) 这个库为例来说明 C++ 项目中如何使用 **静态链接** ([static linking](https://en.wikipedia.org/wiki/Static_library)) 和 **动态链接库** ([dynamic libraries](https://en.wikipedia.org/wiki/Dynamic-link_library))，以及这两者的区别。
+
+- Stack Overflow: [Static linking vs dynamic linking](https://stackoverflow.com/questions/1993390/static-linking-vs-dynamic-linking)
+
+在 GLFW 的 [Download](https://www.glfw.org/download.html) 页面有源代码、预构建好的二进制，注意这个预构建好的二进制分为 32-bit 和 64-bit，但是这个与我们使用的操作系统和 CPU 架构无关，选择它们取决于想构建 32-bit 还是 64-bit 的 **应用程序** (一般来说，构建 32-bit 的 Win 程序比较普遍)。在这个页面我们可以看到 Linux / BSD 并没有提供二进制，符合我们之前所提的 Unix 哲学 XD (事实上，使用 Unix 类的操作系统并不需要都自己手动构建，可以使用包管理器进行下载别人打好包的二进制，例如 Ubuntu / Debian 的 `apt`、openSUSE 的 `zypper`、Arch Linux 的 `pacman`)
+
+库 (Library) 的组织结构为: include 目录 (包含头文件) 和 lib 目录 (包含源文件对应的二进制，分为静态库 (后缀为 `.lib`) 和动态库 (后缀为 `.dll`)，但不是每个库都会提供这两种类型 (这可能是因为受限于开源协议))。通过 include 目录下的头文件和链接器 (Linker)，我们可以使用 lib 目录对应源代码所提供的函数 (`include` 目录与项目采用何种链接方式无关，因为头文件仅仅与编译相关)。
+
+```
+SolutionDir
+    |__ Dependencies
+            |__ GLFW
+                  |__ include
+                  |__ lib
+```
+
+管理依赖项设置:
+
+1. Solution 目录下创建一个 Dependencies 目录 (与 Projects 的目录评级)，用于存放所依赖的库
+2. 设定 **Project 的属性**: C/C++ -> Additional Include Directoris 为上一步存放依赖库的路径
+   - `$(SolutionDir)\Dependencies\GLFW\include`
+   - 指定完成后编译器就知道如何去寻找相关的头文件和二进制了，不会导致编译错误
+   - 但是链接器还没有设定，会导致链接错误
+3. 设定 Linker -> Additional Library Directories 为依赖库文件所处路径
+   - `$(SolutionDir)\Dependencies\GLFW\lib-vc2019`
+   - 该路径可包含静态库和动态库
+
+#### Static Linking
+
+在 Linker -> input -> Addtional Dependencies 处添加相对于之前依赖库目录的静态库文件路径: `glfw3.lib` (注意这里的依赖项不能包含相应的动态库相关文件)
+
+```c++
+#include <iostream>
+#include "GLFW\glfw3.h"
+
+int main()
+{
+    int a = glfwInit();
+    std::cout << a << std::endl; // ouput 1
+}
+```
+
+#### Dynamic Linking
+
+{{< admonition quote >}}
+C++ 在使用动态库的时候，一般提供两个文件：一个引入库 (后缀为 `dll.lib`，本质为静态链接文件) 和一个 DLL (后缀为 `.dll`，为动态链接文件)。引入库包含被 DLL 导出的函数和变量的符号名以及相应的寻址位置，而 DLL 包含实际的函数和数据。在编译链接可执行文件时，只需要链接引入库，DLL 中的函数代码和数据并不复制到可执行文件中，在运行的时候，再去加载 DLL 以访问 DLL 中导出的函数。不需要引入库也可以使用 DLL，但是效率会低，因为 **运行时** 每次访问 DLL 的资源都需要进行遍历 DLL 查询资源的具体位置 (类似于顺序遍历) 再进行链接，而如果有引入库，因为引入库记录了 DLL 所有公开资源的具体位置，可以直接在 **链接时** 在引入库查询 (类似于哈希表查找) 然后运行时直接对具体位置进行链接即可。
+{{< /admonition >}}
+
+- 以上整理自 [神经元猫](https://space.bilibili.com/364152971) 的评论
+
+在 Linker -> input -> Addtional Dependencies 处添加相对于之前依赖库目录的动态链接引入库文件路径: `glfw3dll.lib` (注意这里的依赖项不能包含相应的静态库相关文件)
+
+将 `glfw3.dll` 这个动态库文件 (后缀为 `.dll`) 放置在可执行文件目录下 (Ouput Directory)，让该 DLL 可以被可执行文件 (后缀为 `.exe`) 在执行时搜索到
+
+```c++
+#include <iostream>
+#include "GLFW\glfw3.h"
+
+int main()
+{
+    int a = glfwInit();
+    std::cout << a << std::endl; // ouput 1
+}
+```
 
 ## Header File
 
@@ -204,7 +286,7 @@ GCC, Clang 和 MSVC 这些主流的编译器都支持 `#program once` 这个语�
 #include "../include/HEADER.h"
 ```
 
-## Pointer and Reference
+## Pointers and References
 
 > ***这两大主题可以使用 VS 调试功能的查看内存窗口进行实践***
  
@@ -548,12 +630,98 @@ public:
 
 #### Copy Constructor
 
+- Stack Overflow: [What is the difference between a deep copy and a shallow copy?](https://stackoverflow.com/questions/184710/what-is-the-difference-between-a-deep-copy-and-a-shallow-copy)
+
+> Shallow copies duplicate as little as possible. A shallow copy of a collection is a copy of the collection structure, not the elements. With a shallow copy, two collections now share the individual elements.
+
+> Deep copies duplicate everything. A deep copy of a collection is two collections with all of the elements in the original collection duplicated.
+
 - cppreference: [Copy constructors](https://en.cppreference.com/w/cpp/language/copy_constructor)
 
 > A copy constructor is a constructor which can be called with an argument of the same class type and copies the content of the argument without mutating the argument.
 
+C++ 编译器会提供一个默认的复制构造函数 (Copy Constructor)，如果你想禁止这种复制构造的行为，可以使用 `delete` 关键字:
+
 ```c++
+Class Type
+{
+    Type(const Type& other) = delete;
+};
 ```
+
+C++ 的智能指针 `unique_ptr` 也是通过这种方式来实作禁止复制行为的:
+
+- Standard library header <[memory](https://en.cppreference.com/w/cpp/header/memory)>
+
+```c++
+class unique_ptr { // non-copyable pointer to an object
+public:
+    ...
+    unique_ptr(const unique_ptr&) = delete;
+    ...
+};
+```
+
+下面是一个自定义 String 类的实作案例，用于加深对 Copy 行为和 Copy Construtor 的理解:
+
+```c++
+#include <iostream>
+#include <string>
+
+class String
+{
+private:
+    char* m_Buffer;
+    unsigned int m_Size;
+public:
+    String(const char* string)
+    {
+        m_Size = strlen(string);
+        m_Buffer = new char[m_Size + 1];
+        memcpy(m_Buffer, string, m_Size);
+        m_Buffer[m_Size] = 0 /* or '\0` */;
+    }
+
+    String(const String& other)
+        : m_Size(other.m_Size)
+    {
+        m_Buffer = new char[m_Size + 1];
+        memcpy(m_Buffer, other.m_Buffer, m_Size + 1);
+    }
+
+    ~String()
+    {
+        delete[] m_Buffer;
+    }
+
+    char& operator[](unsigned int index)
+    {
+        return m_Buffer[index];
+    }
+
+    friend std::ostream& operator<<(std::ostream& stream, const String& string);
+};
+
+std::ostream& operator<<(std::ostream& stream, const String& string)
+{
+    stream << string.m_Buffer;
+    return stream;
+}
+
+int main() {
+    String string = "Hello";
+    String second = string;
+
+    second[1] = 'a';
+
+    std::cout << string << std::endl;
+    std::cout << second << std::endl;
+}
+```
+
+{{< admonition >}}
+复制构造 (Copy Structor) 和引用 (Reference) 的联系也比较紧密，因为一般情况下进行函数调用，不使用引用的话，会进行复制操作 (可以通过观察复制构造函数的调用)，这会造成性能损耗。所以一般情况下建议使用常量引用 (`const Type&`) 以避免不必要的性能损耗 (当然这样你在函数内部也可以决定是否进行复制操作，并没有限制了不能使用复制)，但是某些场景下使用复制会更快，这时候就需要进行衡量了。
+{{< /admonition >}}
 
 ### Inheritance and Polymorphism
 
@@ -732,8 +900,7 @@ public:
 };
 ```
 
-
-## Static, Const and Mutable
+## Specifiers
 
 ### Static
 
@@ -907,128 +1074,6 @@ auto f = [=]()
 }
 ```
 
-## Collections
-
-### Array
-
-- cppreference: [Array declaration](https://en.cppreference.com/w/cpp/language/array)
-
-```c++
-int main()
-{
-    // Array and Pointer are mostly same thing
-    int example[5];
-    int* ptr = example;
-    for (int i = 0; i < 5; i++)
-    {
-        example[i] = 2;
-    }                               // [2, 2, 2, 2, 2]
-    example[2] = 5;                 // [2, 2, 5, 2, 2]
-    *(int*)((char*)ptr + 8) = 6;    // [2, 2, 6, 2, 2]
-}
-```
-
-```c++
-int main()
-{
-    // Allocate array in stack
-    int example[5];
-    for (int i = 0; i < 5; i++)
-        example[i] = 2;
-
-    // Allocate array in heap
-    int* another = new int[5];
-    for (int i = 0; i < 5; i++)
-        another[i] = 3;
-    delete[] another;
-}
-```
-
-- cppreference: [std::array](https://en.cppreference.com/w/cpp/container/array)
-
-> std::array is a container that encapsulates fixed size arrays.
-
-### String
-
-- cppreference: [std::basic_string](https://en.cppreference.com/w/cpp/string/basic_string)
-- [ASCII Table](https://www.ascii-code.com/)
-- cppreference: [std::basic_string<CharT,Traits,Allocator>::npos](https://en.cppreference.com/w/cpp/string/basic_string/npos)
-
-```c++
-int main()
-{
-    // C style
-    const char* hello = "Hello";
-    hello[2] = 'a'; // error! since it was allocated at text section
-
-    char word[6] = { 'w', 'o', 'r', 'l', 'd', '\0' /* or 0 */ };
-    // or
-    char word[6] = "world";
-    world[2] = 'a'; // pass! since it was allocated at stack
-}
-```
-
-```c++
-#include <string>
-
-int main()
-{
-    // C++ style
-    std::string hello = "Hello";
-    hello[2] = 'a';
-    hello += ", world";
-
-    // or
-    std::string hello = std::string("Hello") + ", world";
-    bool contains = hello.find("lo") != std::string::nops;
-}
-```
-
-{{< admonition >}}
-经验法则: 如果你没使用 `new` 关键字来获取对象，那么就不要使用 `delete` 关键字来删除它
-
-VS 在调试模式下进行编译，会对内存分配的对象额外分配 **内存守卫者**，以方便提醒开发者内存访问是否越界
-
-`std::string` 在函数参数中使用时，需要特别考虑是否应该使用引用 `&` 操作，以避免无效的拷贝开销
-{{< /admonition >}}
-
-#### 字符类型
-
-- cppreference: [Fundamental types](https://en.cppreference.com/w/cpp/language/types)
-- cppreference: [C++ keyword: wchar_t](https://en.cppreference.com/w/cpp/keyword/wchar_t)
-- cppreference: [C++ keyword: char16_t (since C++11)](https://en.cppreference.com/w/cpp/keyword/char16_t) / [char16_t](https://en.cppreference.com/w/c/string/multibyte/char16_t)
-- cppreference: [C++ keyword: char32_t (since C++11)](https://en.cppreference.com/w/cpp/keyword/char32_t) / [char32_t](https://en.cppreference.com/w/c/string/multibyte/char32_t)
-
-```c++
-int main()
-{
-    const char* hello = u8"Hello"; // 'u8' represent char, it's optional
-    const wchar_t* hello = L"Hello"; // 'L' represent wide char
-    const char16_t* hello = u"Hello"; // 'u' represent char16_t
-    const char32_t* hello = U"Hello"; // 'U' represent char32_t
-}
-```
-
-{{< admonition >}}
-`char` 类型的具体字节数是由操作系统额 CPU 架构来决定的，如果需要跨系统使用固定字节数的字符类型，请按需使用 `wchar_t`, `char16_t` 和 `char32_t` 
-{{< /admonition >}}
-
-#### String Literals
-
-- cppreference: [String literal](https://en.cppreference.com/w/cpp/language/string_literal)
-
-> Raw string literals are string literals with a prefix containing `R` (syntaxes (2,4,6,8,10)). They do not escape any character, which means anything between the delimiters `d-char-seq (` and `)d-char-seq` becomes part of the string. The terminating `d-char-seq` is the same sequence of characters as the initial `d-char-seq`.
-
-- cppreference: [std::literals::string_literals::operator""s](https://en.cppreference.com/w/cpp/string/basic_string/operator%22%22s)
-
-```c++
-#include <string>
-int main()
-{
-    std::string hello = "Hello"s + ", world";
-    const char* raw = "hello\nAp\tple";
-}
-```
 
 ## Operators
 
@@ -1056,6 +1101,29 @@ let speed: i32 = if level > 5 {
     5
 };
 ```
+
+### Arrow Operator
+
+可以通过 `->` 运算符来计算某个 Class / Struct 对象的成员的偏移值:
+
+```c++
+#include <iostream>
+
+struct Vector3
+{
+    float x, y, z;
+};
+
+int main()
+{
+    int offset = (int)&((Vector3*)nullptr)->y;
+    std::cout << offset << std::endl; // should be 4
+}
+```
+
+这种技巧在工程上也很常用，最为著名的即为 Linux 核心的 `container_of` 宏:
+
+- Stack Overflow: [Understanding container_of macro in the Linux kernel](https://stackoverflow.com/questions/15832301/understanding-container-of-macro-in-the-linux-kernel)
 
 ### Overloading
 
@@ -1173,6 +1241,237 @@ int main()
 }
 ```
 
+## Containers
+
+### Array
+
+- cppreference: [Array declaration](https://en.cppreference.com/w/cpp/language/array)
+
+```c++
+int main()
+{
+    // Array and Pointer are mostly same thing
+    int example[5];
+    int* ptr = example;
+    for (int i = 0; i < 5; i++)
+    {
+        example[i] = 2;
+    }                               // [2, 2, 2, 2, 2]
+    example[2] = 5;                 // [2, 2, 5, 2, 2]
+    *(int*)((char*)ptr + 8) = 6;    // [2, 2, 6, 2, 2]
+}
+```
+
+```c++
+int main()
+{
+    // Allocate array in stack
+    int example[5];
+    for (int i = 0; i < 5; i++)
+        example[i] = 2;
+
+    // Allocate array in heap
+    int* another = new int[5];
+    for (int i = 0; i < 5; i++)
+        another[i] = 3;
+    delete[] another;
+}
+```
+
+- cppreference: [std::array](https://en.cppreference.com/w/cpp/container/array)
+
+> std::array is a container that encapsulates fixed size arrays.
+
+### String
+
+- cppreference: [std::basic_string](https://en.cppreference.com/w/cpp/string/basic_string)
+- [ASCII Table](https://www.ascii-code.com/)
+- cppreference: [std::basic_string<CharT,Traits,Allocator>::npos](https://en.cppreference.com/w/cpp/string/basic_string/npos)
+
+```c++
+int main()
+{
+    // C style
+    const char* hello = "Hello";
+    hello[2] = 'a'; // error! since it was allocated at text section
+
+    char word[6] = { 'w', 'o', 'r', 'l', 'd', '\0' /* or 0 */ };
+    // or
+    char word[6] = "world";
+    world[2] = 'a'; // pass! since it was allocated at stack
+}
+```
+
+```c++
+#include <string>
+
+int main()
+{
+    // C++ style
+    std::string hello = "Hello";
+    hello[2] = 'a';
+    hello += ", world";
+
+    // or
+    std::string hello = std::string("Hello") + ", world";
+    bool contains = hello.find("lo") != std::string::nops;
+}
+```
+
+{{< admonition >}}
+经验法则: 如果你没使用 `new` 关键字来获取对象，那么就不要使用 `delete` 关键字来删除它
+
+VS 在调试模式下进行编译，会对内存分配的对象额外分配 **内存守卫者**，以方便提醒开发者内存访问是否越界
+
+`std::string` 在函数参数中使用时，需要特别考虑是否应该使用引用 `&` 操作，以避免无效的拷贝开销
+{{< /admonition >}}
+
+#### char types
+
+- cppreference: [Fundamental types](https://en.cppreference.com/w/cpp/language/types)
+- cppreference: [C++ keyword: wchar_t](https://en.cppreference.com/w/cpp/keyword/wchar_t)
+- cppreference: [C++ keyword: char16_t (since C++11)](https://en.cppreference.com/w/cpp/keyword/char16_t) / [char16_t](https://en.cppreference.com/w/c/string/multibyte/char16_t)
+- cppreference: [C++ keyword: char32_t (since C++11)](https://en.cppreference.com/w/cpp/keyword/char32_t) / [char32_t](https://en.cppreference.com/w/c/string/multibyte/char32_t)
+
+```c++
+int main()
+{
+    const char* hello = u8"Hello"; // 'u8' represent char, it's optional
+    const wchar_t* hello = L"Hello"; // 'L' represent wide char
+    const char16_t* hello = u"Hello"; // 'u' represent char16_t
+    const char32_t* hello = U"Hello"; // 'U' represent char32_t
+}
+```
+
+{{< admonition >}}
+`char` 类型的具体字节数是由操作系统额 CPU 架构来决定的，如果需要跨系统使用固定字节数的字符类型，请按需使用 `wchar_t`, `char16_t` 和 `char32_t` 
+{{< /admonition >}}
+
+#### String Literals
+
+- cppreference: [String literal](https://en.cppreference.com/w/cpp/language/string_literal)
+
+> Raw string literals are string literals with a prefix containing `R` (syntaxes (2,4,6,8,10)). They do not escape any character, which means anything between the delimiters `d-char-seq (` and `)d-char-seq` becomes part of the string. The terminating `d-char-seq` is the same sequence of characters as the initial `d-char-seq`.
+
+- cppreference: [std::literals::string_literals::operator""s](https://en.cppreference.com/w/cpp/string/basic_string/operator%22%22s)
+
+```c++
+#include <string>
+int main()
+{
+    std::string hello = "Hello"s + ", world";
+    const char* raw = "hello\nAp\tple";
+}
+```
+
+### Vector
+
+- Stack Overflow: [Why is a C++ Vector called a Vector?](https://stackoverflow.com/questions/581426/why-is-a-c-vector-called-a-vector)
+
+> It's called a vector because Alex Stepanov, the designer of the Standard Template Library, was looking for a name to distinguish it from built-in arrays. He admits now that he made a mistake, because mathematics already uses the term 'vector' for a fixed-length sequence of numbers. C++11 compounds this mistake by introducing a class 'array' that behaves similarly to a mathematical vector.
+
+- cppreference: [std::vector](https://en.cppreference.com/w/cpp/container/vector)
+
+```c++
+#include <iostream>
+
+struct Vertex
+{
+    float x, y, z;
+};
+
+std::ostream& operator<<(std::ostream& stream. const Vertx& vertex)
+{
+    stream << vertex.x << ", " << vertex.y << ", " << vertex.z << std::endl; 
+    return stream;
+}
+
+void Function(const vector<Vertex>& vertices)
+{
+
+}
+
+int main()
+{
+    std::vector<Vertex> vertices;
+    vertices.push_back({ 1, 2, 3 });
+    vertices.push_back({ 4, 5, 6 });
+
+    for (int i = 0; i < vertices.size(); i++)
+        std::cout << vertices[i] << std::endl;
+    // or
+    for (const Vertex& v : vertices)
+        std::cout << v << std::endl;
+    
+    Function(vertices);
+
+    vertices.erase(vertices.begin() + 1);
+}
+```
+
+{{< admonition >}}
+STL 的容器，它们在被设计时，速度不是优先考虑的因素，所以我们可以设计出比 STL 里的容器性能更强的类似容器，这也是为什么很多工作室会自己设计容器库而不采用 STL，例如 [Qt Container Classes](https://doc.qt.io/qt-6/containers.html)、[EASTL](https://github.com/electronicarts/EASTL)。
+{{< /admonition >}}
+
+#### Optimizing Usage
+
+一般情况下，STL 的 `vector` 是比较慢的 (因为它倾向于经常分配内存空间，这会导致大量的性能开销)，所以我们需要通过一些策略来压榨出 `vector` 的全部性能。下面通过之前的例子来展示这些优化策略。
+
+通过复制构造函数确认什么时候发生了大量的复制，以应用相应的复制优化策略:
+
+```c++
+struct Vertex
+{
+    ...
+    Vertex(float x, float y, float z)
+        : x(x), y(y), z(z) {}
+    Vertex(const Vertex& other)
+        : x(other.x), y(other.y), z(other.z)
+    {
+        std::cout << "Copied!" << std::endl;
+    }
+};
+```
+
+运行后发现之前的例子总共进行了 6 次复制
+
+1. **优化复制**。预先分配内存，防止过多的内存分配和复制操作造成性能损耗。
+
+```c++
+    std::vector<Vertex> vertices;
+    vertices.resize(3); // pre-allocation
+    vertices.push_back(Vertex(1, 2, 3));
+    vertices.push_back(Vertex(4, 5, 6));
+    vertices.push_back(Vertex(7, 8, 9));
+```
+
+现在减少为 3 次复制了
+
+注意 `reserve` 方法和 `vector` 构造函数中指定元素数量这两者是不太一样的:
+
+- [std::vector<T,Allocator>::reserve](https://en.cppreference.com/w/cpp/container/vector/reserve)
+> Increase the capacity of the vector (the total number of elements that the vector can hold without requiring reallocation) to a value that's greater or equal to `new_cap`.
+
+- [std::vector<T,Allocator>::vector](https://en.cppreference.com/w/cpp/container/vector/vector)
+> 4\) Constructs the container with `count` default-inserted instances of `T`. No copies are made.
+
+即构造函数指定元素数量会构造相应的默认实例，而 `reserve` 不会，所以 `reserve` 的性能开销更低。
+
+2. **避免复制**。直接在 `vector` 合适的位置构造对象，而不是先在栈上构造再复制到 `vector` 里。
+
+- [std::vector<T,Allocator>::emplace_back](https://en.cppreference.com/w/cpp/container/vector/emplace_back)
+> Appends a new element to the end of the container. ...  which typically uses placement-new to construct the element **in-place** at the location provided by the container. 
+
+```c++
+    std::vector<Vertex> vertices;
+    vertices.resize(3); // pre-allocation
+    vertices.emplace_back(Vertex(1, 2, 3));
+    vertices.emplace_back(Vertex(4, 5, 6));
+    vertices.emplace_back(Vertex(7, 8, 9));
+```
+
+现在没有复制操作了
+
 ## Memory Model
 
 ### Lifetime
@@ -1190,8 +1489,9 @@ Rust 的生命周期机制本质上就是让堆 (Heap) 分配的对象 (Object) 
 class Entity
 {
 public:
-    Entity() { std::cout << "Created Entity!" << std::endl; }
-    Entity() { std::cout << "Destroyed Entity!" << std::endl; }
+    Entity()  { std::cout << "Created Entity!" << std::endl; }
+    ~Entity() { std::cout << "Destroyed Entity!" << std::endl; }
+    void Print() const { std::cout << "Hello" << std::endl; }
 };
 
 int main()
@@ -1214,8 +1514,10 @@ class ScopedPtr
 private:
     Entity* m_Ptr;
 public:
-    ScopedPtr(Entity* ptr) : m_ptr(ptr) {}
+    ScopedPtr(Entity* ptr) : m_Ptr(ptr) {}
     ~ScopedPtr() { delete m_Ptr; }
+    Entity* operator->() { return m_Ptr; }
+    const Entity* operator->() const { return m_Ptr; }
 };
 
 int main()
@@ -1225,8 +1527,18 @@ int main()
         // or by implicit conversion
         ScopedPtr e = new Entity();
     }
+    const ScopedPtr e = new Entity();
+    e->Print();
 }
 ```
+
+智能指针一般都会重载 `->` 运算符，以使得智能指针使用起来和普通指针相同
+
+- cppreference: [operator overloading](https://en.cppreference.com/w/cpp/language/operators)
+
+> The overload of operator `->` must either return a raw pointer, or return an object (by reference or by value) for which operator `->` is in turn overloaded.
+
+按照这个描述，碰到 `->` 运算符时会不断调用相应的操作函数 (例如 `->` 的运算符重载函数)，直到 `->` 被推导到对应的类型 (符合 `->` 右边的操作数的类型要求)
 
 {{< admonition tip >}}
 这种自动变量和作用域特性在很多地方都可以用到，例如计时器，配合 Constructor 和 Destructor 可以实现对特定时间段 (该计时器存活的生命周期) 进行自动计时，实现逻辑为：调用构造函数时启动计时，调用析构函数时结束计时并记录或打印。
@@ -1297,8 +1609,24 @@ int main()
 ```
 
 {{< admonition tip >}}
-推荐使用 `std::make_XYZ` 这个标准库函数，这也你就可以在你的代码里永远摆脱 `new` 关键字了 :rofl: 
+推荐使用 `std::make_XYZ` 这这种风格标准库函数来构造智能指针实例，这样你就可以在你的代码里永远摆脱 `new` 关键字了 :rofl: 
 {{< /admonition >}}
+
+## Advanced Topics
+
+### Multiple Return Values
+
+在 C++ 中，实现函数可以返回多个值有很多种方式:
+
+- 适用性最强的是返回自定义的结构体使用结构体包装返回的多个值)
+- 如果返回的多个值类型相同，可以返回 `vector` 或数组
+- 如果返回的多个值类型不同，可以返回 `tuple` 或 `pair`
+- 也可以使用引用或指针作为参数，在函数体内进行相应修改 (这是 C 语言风格的处理)
+
+使用哪个方法需要依据具体情况而定，不能一概而论。因为在语法层面，涉及多返回值，或多或少都会有性能问题。
+
+- cppreference: [std::tuple](https://en.cppreference.com/w/cpp/utility/tuple)
+- cppreference: [std::pair](https://en.cppreference.com/w/cpp/utility/pair)
 
 ## References
 
