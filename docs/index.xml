@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/</link>
     <description>这是我的 Hugo FixIt 博客网站</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 30 Jun 2024 00:19:25 &#43;0800</lastBuildDate>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 08 Jul 2024 11:21:32 &#43;0800</lastBuildDate>
       <atom:link href="https://ccrysisa.github.io/index.xml" rel="self" type="application/rss+xml" />
     <item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
@@ -14,6 +14,16 @@
   <guid>https://ccrysisa.github.io/posts/linux2023/</guid>
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>Crust of Rust: The Drop Check</title>
+  <link>https://ccrysisa.github.io/posts/drop-check/</link>
+  <pubDate>Mon, 08 Jul 2024 11:21:32 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/drop-check/</guid>
+  <description><![CDATA[<blockquote>
+<p>In this episode of Crust of Rust, we go over the &quot;drop check&quot; — another niche part of Rust that most people don't have to think about, but which rears its moderately attractive head occasionally when you use generic types in semi-weird ways. In particular, we explore how to implement a Norwegian version of <code>Box</code> (which is really just <code>Box</code> with a different name), and find that the straightforward implementation is not quite as flexible as the standard <code>Box</code> is due to the drop check. When we fix it, we then make it too flexible, and open ourselves the type up to undefined behavior. Which, in turn, we use the drop check to fix. Towards the end, we go through a particularly interesting example at the intersection of the drop check and variance in the form of (ab)using <code>std::iter::Empty</code>.</p>
 </blockquote>]]></description>
 </item>
 <item>
@@ -42,21 +52,13 @@
 </item>
 <item>
   <title>Build a linked hash map in Rust</title>
-  <link>https://ccrysisa.github.io/posts/rust-linked-hashmap/</link>
+  <link>https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/</link>
   <pubDate>Fri, 28 Jun 2024 11:16:51 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/rust-linked-hashmap/</guid>
+  <guid>https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/</guid>
   <description><![CDATA[<blockquote>
 <p>We're writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you'd make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you're a newcomer to the language or not.</p>
 </blockquote>]]></description>
-</item>
-<item>
-  <title>通过 Rust 学习网络编程</title>
-  <link>https://ccrysisa.github.io/posts/netprog/</link>
-  <pubDate>Mon, 24 Jun 2024 18:35:26 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/netprog/</guid>
-  <description><![CDATA[]]></description>
 </item>
 <item>
   <title>Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware</title>

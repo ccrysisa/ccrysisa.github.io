@@ -2,25 +2,27 @@
   <channel>
     <title>Rust - 标签 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/rust/</link>
-    <description>Rust - 标签 | KZnight&#39;s Blog</description>
+    <description>Rust - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Fri, 28 Jun 2024 11:16:51 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/rust/" rel="self" type="application/rss+xml" /><item>
-  <title>Build a linked hash map in Rust</title>
-  <link>https://ccrysisa.github.io/posts/rust-linked-hashmap/</link>
-  <pubDate>Fri, 28 Jun 2024 11:16:51 &#43;0800</pubDate>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 08 Jul 2024 11:21:32 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/rust/" rel="self" type="application/rss+xml" /><item>
+  <title>Crust of Rust: The Drop Check</title>
+  <link>https://ccrysisa.github.io/posts/drop-check/</link>
+  <pubDate>Mon, 08 Jul 2024 11:21:32 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/rust-linked-hashmap/</guid>
+  <guid>https://ccrysisa.github.io/posts/drop-check/</guid>
   <description><![CDATA[<blockquote>
-<p>We're writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you'd make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you're a newcomer to the language or not.</p>
+<p>In this episode of Crust of Rust, we go over the &quot;drop check&quot; — another niche part of Rust that most people don't have to think about, but which rears its moderately attractive head occasionally when you use generic types in semi-weird ways. In particular, we explore how to implement a Norwegian version of <code>Box</code> (which is really just <code>Box</code> with a different name), and find that the straightforward implementation is not quite as flexible as the standard <code>Box</code> is due to the drop check. When we fix it, we then make it too flexible, and open ourselves the type up to undefined behavior. Which, in turn, we use the drop check to fix. Towards the end, we go through a particularly interesting example at the intersection of the drop check and variance in the form of (ab)using <code>std::iter::Empty</code>.</p>
 </blockquote>]]></description>
 </item>
 <item>
-  <title>通过 Rust 学习网络编程</title>
-  <link>https://ccrysisa.github.io/posts/netprog/</link>
-  <pubDate>Mon, 24 Jun 2024 18:35:26 &#43;0800</pubDate>
+  <title>Build a linked hash map in Rust</title>
+  <link>https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/</link>
+  <pubDate>Fri, 28 Jun 2024 11:16:51 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/netprog/</guid>
-  <description><![CDATA[]]></description>
+  <guid>https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/</guid>
+  <description><![CDATA[<blockquote>
+<p>We're writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you'd make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you're a newcomer to the language or not.</p>
+</blockquote>]]></description>
 </item>
 <item>
   <title>手把手带你使用 Rust 实现链表</title>
@@ -80,6 +82,14 @@
 </blockquote>]]></description>
 </item>
 <item>
+  <title>Build a Ranked-choice voting site in Rust</title>
+  <link>https://ccrysisa.github.io/posts/build-a-ranked-choice-voting-site-in-rust/</link>
+  <pubDate>Fri, 08 Mar 2024 21:14:30 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/build-a-ranked-choice-voting-site-in-rust/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>Crust of Rust: Sorting Algorithms</title>
   <link>https://ccrysisa.github.io/posts/orst/</link>
   <pubDate>Mon, 04 Mar 2024 15:02:28 &#43;0800</pubDate>
@@ -97,16 +107,6 @@
   <guid>https://ccrysisa.github.io/posts/channels/</guid>
   <description><![CDATA[<blockquote>
 <p>In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mpsc) channels, by re-implementing some of the std::sync::mpsc types from the standard library. As part of that, we cover what channels are used for, how they work at a high level, different common channel variants, and common channel implementations. In the process, we go over some common Rust concurrency primitives like Mutex and Condvar.</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>Crust of Rust: Smart Pointers and Interior Mutability</title>
-  <link>https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/</link>
-  <pubDate>Tue, 20 Feb 2024 17:33:06 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/</guid>
-  <description><![CDATA[<blockquote>
-<p>In this fourth Crust of Rust video, we cover smart pointers and interior mutability, by re-implementing the Cell, RefCell, and Rc types from the standard library. As part of that, we cover when those types are useful, how they work, and what the equivalent thread-safe versions of these types are. In the process, we go over some of the finer details of Rust's ownership model, and the UnsafeCell type. We also dive briefly into the Drop Check rabbit hole (<a href="https://doc.rust-lang.org/nightly/nomicon/dropck.html"target="_blank" rel="external nofollow noopener noreferrer">https://doc.rust-lang.org/nightly/nomicon/dropck.html</a>) before coming back up for air.</p>
 </blockquote>]]></description>
 </item>
 </channel>

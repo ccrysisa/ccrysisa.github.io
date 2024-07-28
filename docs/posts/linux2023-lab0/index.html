@@ -54,7 +54,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
     
   "><meta itemprop="datePublished" content="2024-02-19T16:23:01+08:00" />
 <meta itemprop="dateModified" content="2024-06-02T19:41:17+08:00" />
-<meta itemprop="wordCount" content="9897"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="9861"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Linux,C," /><meta property="og:title" content="Linux 核心设计: lab0-c" />
 <meta property="og:description" content="
     
@@ -112,7 +112,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/linux2023-lab0/" /><link rel="prev" href="https://ccrysisa.github.io/posts/rust-tcp/" /><link rel="next" href="https://ccrysisa.github.io/posts/c-numerics/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/linux2023-lab0/" /><link rel="prev" href="https://ccrysisa.github.io/posts/impl-tcp-in-rust/" /><link rel="next" href="https://ccrysisa.github.io/posts/c-numerics/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -123,7 +123,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/linux2023-lab0\/"
-    },"genre": "posts","keywords": "Sysprog, Linux, C","wordcount":  9897 ,
+    },"genre": "posts","keywords": "Sysprog, Linux, C","wordcount":  9861 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/linux2023-lab0\/","datePublished": "2024-02-19T16:23:01+08:00","dateModified": "2024-06-02T19:41:17+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -135,7 +135,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -181,7 +181,7 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -241,12 +241,18 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Linux 核心设计: lab0-c</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-02-19 16:23:01"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-19">2024-02-19</time></span>&nbsp;<span title="更新于 2024-06-02 19:41:17"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-02">2024-06-02</time></span>&nbsp;<span title="9897 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 9900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 20 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-02-19 16:23:01"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-19">2024-02-19</time></span>&nbsp;<span title="更新于 2024-06-02 19:41:17"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-02">2024-06-02</time></span>&nbsp;<span title="9861 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 9900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 20 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -341,8 +347,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <ul>
 <li><a href="https://hackmd.io/@sysprog/linux2023-lab0"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
-<h2 id="改写自-cmu-计算机系统概论的作业" class="heading-element">
-  <a href="#%e6%94%b9%e5%86%99%e8%87%aa-cmu-%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%b3%bb%e7%bb%9f%e6%a6%82%e8%ae%ba%e7%9a%84%e4%bd%9c%e4%b8%9a" class="heading-mark"></a>改写自 CMU 计算机系统概论的作业</h2><p><a href="https://github.com/sysprog21/lab0-c"target="_blank" rel="external nofollow noopener noreferrer">lab0-c</a> 改写自 CMU 的 <a href="http://www.cs.cmu.edu/~213/index.html"target="_blank" rel="external nofollow noopener noreferrer">15-213/15-513 Introduction to Computer Systems (ICS)</a> 课程的 <a href="https://www.cs.cmu.edu/afs/cs/academic/class/15213-s20/www/labs/cprogramminglab.pdf"target="_blank" rel="external nofollow noopener noreferrer">C Programming Lab: Assessing Your C Programming Skills</a>，用于检验学生对于 C 语言程序设计认知。</p>
+<h2 id="改写自-cmu-计算机系统概论的作业">改写自 CMU 计算机系统概论的作业</h2>
+<p><a href="https://github.com/sysprog21/lab0-c"target="_blank" rel="external nofollow noopener noreferrer">lab0-c</a> 改写自 CMU 的 <a href="http://www.cs.cmu.edu/~213/index.html"target="_blank" rel="external nofollow noopener noreferrer">15-213/15-513 Introduction to Computer Systems (ICS)</a> 课程的 <a href="https://www.cs.cmu.edu/afs/cs/academic/class/15213-s20/www/labs/cprogramminglab.pdf"target="_blank" rel="external nofollow noopener noreferrer">C Programming Lab: Assessing Your C Programming Skills</a>，用于检验学生对于 C 语言程序设计认知。</p>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 2095. Delete the Middle Node of a Linked List</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 82. Remove Duplicates from Sorted List II</a></li>
@@ -352,8 +358,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://leetcode.com/problems/merge-k-sorted-lists/"target="_blank" rel="external nofollow noopener noreferrer">LeetCode 23. Merge k Sorted Lists</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://npes87184.github.io/2015-09-12-linkedListSort/"target="_blank" rel="external nofollow noopener noreferrer">Linked List Sort</a></li>
 </ul>
-<h3 id="数据结构" class="heading-element">
-  <a href="#%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84" class="heading-mark"></a>数据结构</h3><p>头文件 <a href="https://github.com/sysprog21/lab0-c/blob/master/list.h"target="_blank" rel="external nofollow noopener noreferrer">list.h</a> 依据 Linux 核心风格实作了相应的 linked list 常用操作的宏，这个文件对于本次实验很重要，需要仔细阅读并在实验过程中使用这些宏来简化程式码。</p>
+<h3 id="数据结构">数据结构</h3>
+<p>头文件 <a href="https://github.com/sysprog21/lab0-c/blob/master/list.h"target="_blank" rel="external nofollow noopener noreferrer">list.h</a> 依据 Linux 核心风格实作了相应的 linked list 常用操作的宏，这个文件对于本次实验很重要，需要仔细阅读并在实验过程中使用这些宏来简化程式码。</p>
 <p>头文件 <a href="https://github.com/sysprog21/lab0-c/blob/master/queue.h"target="_blank" rel="external nofollow noopener noreferrer">queue.h</a> 里则定义了队列元素 element_t 和队列上下文 q_context_t 的结构。</p>
 <ul>
 <li>list_head</li>
@@ -370,8 +376,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <div class="mermaid" id="id-3"></div><blockquote>
 <p><code>queue_context_t</code> 中的成员 <code>q</code> 的作用是指向将队列节点 <code>element_t</code> 连接起来的头节点，而成员 <code>chain</code> 的作用是将各个队列 <code>queue_context_t</code> 连接起来。</p>
 </blockquote>
-<h3 id="q_size" class="heading-element">
-  <a href="#q_size" class="heading-mark"></a>q_size</h3><div class="highlight" id="id-4"><div class="chroma">
+<h3 id="q_size">q_size</h3>
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -408,8 +414,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">len</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="q_new" class="heading-element">
-  <a href="#q_new" class="heading-mark"></a>q_new</h3><div class="highlight" id="id-5"><div class="chroma">
+</div><h3 id="q_new">q_new</h3>
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -440,8 +446,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">head</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="q_free" class="heading-element">
-  <a href="#q_free" class="heading-mark"></a>q_free</h3><div class="highlight" id="id-6"><div class="chroma">
+</div><h3 id="q_free">q_free</h3>
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -479,8 +485,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这里使用 <code>list_for_each_safe</code> 而不是 <code>list_for_each_entry_safe</code> 来遍历链表，可以根据这两个宏的定义，以及思考链表只有一个元素时的情况。可以发现 <code>list_for_each_entry_safe</code> 认为 <code>list_head</code> 都被包裹在 <code>entry</code> 中，但是 <code>q_free</code> 的参数链表头节点 <code>l</code> 可能并没有被包裹在 <code>entry</code> 中，考虑到这种情况所以使用 <code>list_for_each_safe</code> 宏。最后需要释放头节点的空间，因为这个空间是在 <code>q_new</code> 时动态分配的。</p>
-<h3 id="q_insert" class="heading-element">
-  <a href="#q_insert" class="heading-mark"></a>q_insert</h3><div class="highlight" id="id-7"><div class="chroma">
+<h3 id="q_insert">q_insert</h3>
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -594,8 +600,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="q_remove" class="heading-element">
-  <a href="#q_remove" class="heading-mark"></a>q_remove</h3><div class="highlight" id="id-9"><div class="chroma">
+</div><h3 id="q_remove">q_remove</h3>
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -706,8 +712,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">elem</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="q_delete_mid" class="heading-element">
-  <a href="#q_delete_mid" class="heading-mark"></a>q_delete_mid</h3><div class="highlight" id="id-11"><div class="chroma">
+</div><h3 id="q_delete_mid">q_delete_mid</h3>
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -771,8 +777,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用双指针分别从队列的首尾进行迭代，从而获取中间节点。注意需要先对获取的中间节点进行移除 remove 在进行释放 free。</p>
-<h3 id="q_delete_dup" class="heading-element">
-  <a href="#q_delete_dup" class="heading-mark"></a>q_delete_dup</h3><div class="highlight" id="id-12"><div class="chroma">
+<h3 id="q_delete_dup">q_delete_dup</h3>
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -844,8 +850,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>在有序队列中，对队列的每个元素进行迭代检查，需要额外注意 <code>safe == head</code> 的情形，否则使用 <code>list_entry</code> 可能会导致未定义行为 UB。需要注意保留下来的节点搜独特 (distinct) 的节点，即凡是出现重复的节点都需要被全部删除掉，而不是删除到仅剩一个。</p>
-<h3 id="q_swap" class="heading-element">
-  <a href="#q_swap" class="heading-mark"></a>q_swap</h3><div class="highlight" id="id-13"><div class="chroma">
+<h3 id="q_swap">q_swap</h3>
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -915,8 +921,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <div class="mermaid" id="id-14"></div><ul>
 <li>after swap</li>
 </ul>
-<div class="mermaid" id="id-15"></div><h3 id="q_reverse" class="heading-element">
-  <a href="#q_reverse" class="heading-mark"></a>q_reverse</h3><div class="highlight" id="id-16"><div class="chroma">
+<div class="mermaid" id="id-15"></div><h3 id="q_reverse">q_reverse</h3>
+<div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -975,8 +981,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <li>after reverse</li>
 </ul>
 <div class="mermaid" id="id-18"></div><p>至于队列头节点 <code>head</code> 则不需要特别考虑，最后将其的 <code>prev</code> 和 <code>next</code> 成员的指向进行反转即可。</p>
-<h3 id="q_reversek" class="heading-element">
-  <a href="#q_reversek" class="heading-mark"></a>q_reverseK</h3><div class="highlight" id="id-19"><div class="chroma">
+<h3 id="q_reversek">q_reverseK</h3>
+<div class="highlight" id="id-19"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1096,8 +1102,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 <div class="mermaid" id="id-21"></div><ul>
 <li>after setup <code>prev</code>, <code>node</code>, <code>safe</code>, <code>next</code></li>
 </ul>
-<div class="mermaid" id="id-22"></div><h3 id="q_sort" class="heading-element">
-  <a href="#q_sort" class="heading-mark"></a>q_sort</h3><ul>
+<div class="mermaid" id="id-22"></div><h3 id="q_sort">q_sort</h3>
+<ul>
 <li><a href="https://npes87184.github.io/2015-09-12-linkedListSort/"target="_blank" rel="external nofollow noopener noreferrer">Linked List Sort</a></li>
 </ul>
 <div class="highlight" id="id-23"><div class="chroma">
@@ -1123,8 +1129,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span></span><span class="line"><span class="cl"><span class="cm"> */</span> 
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">q_sort</span><span class="p">(</span><span class="k">struct</span> <span class="n">list_head</span> <span class="o">*</span><span class="n">head</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">descend</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="bubble-sort" class="heading-element">
-  <a href="#bubble-sort" class="heading-mark"></a>Bubble sort</h4><p>主要是通过交换 (swap) 来实现核心的冒泡，思路是将节点 <code>safe</code> 对应字符串与 <code>node</code> 对应的字符串比较，从而决定是否进行交换操作，这里实现的是 stable 的排序算法，所以比较、交换时不考虑相等的情况。需要的是注意，虽然 swap 部分和 <code>q_swap</code> 几乎一样，但是最后设定下一个节点 <code>safe</code> 时不相同，因为这里需要每个节点之间都需要进行比较，而不是以每两个节点为单位进行交换。</p>
+</div><h4 id="bubble-sort">Bubble sort</h4>
+<p>主要是通过交换 (swap) 来实现核心的冒泡，思路是将节点 <code>safe</code> 对应字符串与 <code>node</code> 对应的字符串比较，从而决定是否进行交换操作，这里实现的是 stable 的排序算法，所以比较、交换时不考虑相等的情况。需要的是注意，虽然 swap 部分和 <code>q_swap</code> 几乎一样，但是最后设定下一个节点 <code>safe</code> 时不相同，因为这里需要每个节点之间都需要进行比较，而不是以每两个节点为单位进行交换。</p>
 <p>布尔表达式 <code>(descend &amp;&amp; cmp &lt; 0) || (!descend &amp;&amp; cmp &gt; 0)</code> 表示不满足预期的 <code>node -&gt; safe</code> 的顺序关系，需要调整成 <code>safe node</code> 顺序才满足。</p>
 <div class="highlight" id="id-24"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1207,8 +1213,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="insertion-sort" class="heading-element">
-  <a href="#insertion-sort" class="heading-mark"></a>Insertion sort</h4><p>核心是通过插入 (insertion) 操作，在左边已排序的节点中寻找合适的位置进行插入，链表的任意位置插入操作是比较直观的，移除后在对应的位置通过锚点插入固定。</p>
+</div><h4 id="insertion-sort">Insertion sort</h4>
+<p>核心是通过插入 (insertion) 操作，在左边已排序的节点中寻找合适的位置进行插入，链表的任意位置插入操作是比较直观的，移除后在对应的位置通过锚点插入固定。</p>
 <div class="highlight" id="id-25"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1284,8 +1290,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="selection-sort" class="heading-element">
-  <a href="#selection-sort" class="heading-mark"></a>Selection sort</h4><p>这里采用的是 stable 的排序算法，所以并没有采用交换策略 (交换选择节点和当前节点)</p>
+</div><h4 id="selection-sort">Selection sort</h4>
+<p>这里采用的是 stable 的排序算法，所以并没有采用交换策略 (交换选择节点和当前节点)</p>
 <div class="highlight" id="id-26"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1359,8 +1365,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="merge-sort" class="heading-element">
-  <a href="#merge-sort" class="heading-mark"></a>Merge sort</h4><p>将队列的双端链表视为普通的单链表，然后通过「快慢指针」来获取中间节点 (因为使用的是单链表，没法保证 <code>prev</code> 指向的正确性)，通过中间节点切分成两个普通的单链表，分别进行归并排序，最后进行单链表的归并操作。这里需要注意的是，过程中使用的单链表并不具备一个仅做为头节点使用的节点 (即 <code>q_new</code> 中分配的头节点)，并且使用的是 indirect pointer 作为参数，这样排序完成后 <code>head</code> 节点的 <code>next</code> 指向的就是正确顺序的链表，最后再根据该顺序补充 <code>prev</code> 关系即可。配合以下图示进行理解:</p>
+</div><h4 id="merge-sort">Merge sort</h4>
+<p>将队列的双端链表视为普通的单链表，然后通过「快慢指针」来获取中间节点 (因为使用的是单链表，没法保证 <code>prev</code> 指向的正确性)，通过中间节点切分成两个普通的单链表，分别进行归并排序，最后进行单链表的归并操作。这里需要注意的是，过程中使用的单链表并不具备一个仅做为头节点使用的节点 (即 <code>q_new</code> 中分配的头节点)，并且使用的是 indirect pointer 作为参数，这样排序完成后 <code>head</code> 节点的 <code>next</code> 指向的就是正确顺序的链表，最后再根据该顺序补充 <code>prev</code> 关系即可。配合以下图示进行理解:</p>
 <ul>
 <li>origin queue</li>
 </ul>
@@ -1508,8 +1514,8 @@ Valgrind: 动态 程序分析工具，即需要将程序运行起来再进行分
 </span></span><span class="line"><span class="cl">    <span class="n">head</span><span class="o">-&gt;</span><span class="n">prev</span> <span class="o">=</span> <span class="n">prev</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="q_ascend--q_descend" class="heading-element">
-  <a href="#q_ascend--q_descend" class="heading-mark"></a>q_ascend &amp; q_descend</h3><div class="mermaid" id="id-32"></div><ul>
+</div><h3 id="q_ascend--q_descend">q_ascend &amp; q_descend</h3>
+<div class="mermaid" id="id-32"></div><ul>
 <li>ascend 结果的节点大小顺序:
 $$node 0 &lt; node 1 &lt; node 2 &lt; node 3$$</li>
 <li>descend 结果的节点大小顺序:
@@ -1674,8 +1680,8 @@ $$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$</li>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nf">q_size</span><span class="p">(</span><span class="n">head</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="q_merge" class="heading-element">
-  <a href="#q_merge" class="heading-mark"></a>q_merge</h3><div class="highlight" id="id-35"><div class="chroma">
+</div><h3 id="q_merge">q_merge</h3>
+<div class="highlight" id="id-35"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1866,8 +1872,8 @@ $$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$</li>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nf">list_entry</span><span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">,</span> <span class="kt">queue_contex_t</span><span class="p">,</span> <span class="n">chain</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="命令行参数" class="heading-element">
-  <a href="#%e5%91%bd%e4%bb%a4%e8%a1%8c%e5%8f%82%e6%95%b0" class="heading-mark"></a>命令行参数</h3><p>关于 <a href="https://github.com/sysprog21/lab0-c"target="_blank" rel="external nofollow noopener noreferrer">lab0-c</a> 相关命令的使用，可以参照阅读后面的「取得程式码并进行开发」部分。</p>
+</div><h3 id="命令行参数">命令行参数</h3>
+<p>关于 <a href="https://github.com/sysprog21/lab0-c"target="_blank" rel="external nofollow noopener noreferrer">lab0-c</a> 相关命令的使用，可以参照阅读后面的「取得程式码并进行开发」部分。</p>
 <div class="highlight" id="id-37"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1930,8 +1936,8 @@ $$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$</li>
 </span></span><span class="line"><span class="cl">&gt; size
 </span></span><span class="line"><span class="cl"><span class="m">2</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="开发环境设定" class="heading-element">
-  <a href="#%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83%e8%ae%be%e5%ae%9a" class="heading-mark"></a>开发环境设定</h2><div class="highlight" id="id-39"><div class="chroma">
+</div><h2 id="开发环境设定">开发环境设定</h2>
+<div class="highlight" id="id-39"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -2002,8 +2008,8 @@ $$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$</li>
 </div>
     </div>
   </div>
-<h2 id="取得程式码并进行开发" class="heading-element">
-  <a href="#%e5%8f%96%e5%be%97%e7%a8%8b%e5%bc%8f%e7%a0%81%e5%b9%b6%e8%bf%9b%e8%a1%8c%e5%bc%80%e5%8f%91" class="heading-mark"></a>取得程式码并进行开发</h2><p>建立开发目录:</p>
+<h2 id="取得程式码并进行开发">取得程式码并进行开发</h2>
+<p>建立开发目录:</p>
 <div class="highlight" id="id-41"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2185,8 +2191,8 @@ $$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$</li>
 <li><a href="https://www.slideshare.net/sermp/sanitizer-cppcon-russia"target="_blank" rel="external nofollow noopener noreferrer">Address/Thread/Memory Sanitizer</a></li>
 <li><a href="https://www.slideshare.net/slideshow/a-look-into-the-sanitizer-family-asan-ubsan-by-akul-pillai/135506952"target="_blank" rel="external nofollow noopener noreferrer">A look into the sanitizer family (ASAN &amp; UBSAN) by Akul Pillai</a></li>
 </ul>
-<h3 id="clang-format-工具和一致的程序撰写风格" class="heading-element">
-  <a href="#clang-format-%e5%b7%a5%e5%85%b7%e5%92%8c%e4%b8%80%e8%87%b4%e7%9a%84%e7%a8%8b%e5%ba%8f%e6%92%b0%e5%86%99%e9%a3%8e%e6%a0%bc" class="heading-mark"></a>clang-format 工具和一致的程序撰写风格</h3><p>需要在当前目录或指定路径有 <code>.clang-format</code> 文件，然后通过以下使用方式:</p>
+<h3 id="clang-format-工具和一致的程序撰写风格">clang-format 工具和一致的程序撰写风格</h3>
+<p>需要在当前目录或指定路径有 <code>.clang-format</code> 文件，然后通过以下使用方式:</p>
 <div class="highlight" id="id-51"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2197,8 +2203,8 @@ $$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$</li>
 </div><blockquote>
 <p>相关程序风格查看原文即可</p>
 </blockquote>
-<h3 id="git-hooks-进行自动程式码排版检查" class="heading-element">
-  <a href="#git-hooks-%e8%bf%9b%e8%a1%8c%e8%87%aa%e5%8a%a8%e7%a8%8b%e5%bc%8f%e7%a0%81%e6%8e%92%e7%89%88%e6%a3%80%e6%9f%a5" class="heading-mark"></a>Git Hooks 进行自动程式码排版检查</h3><p>第一次 make 后，Git pre-commit / pre-push hook 将被自动安装到当前的工作区 (workspace)，之后每次执行 git commit 時，<a href="https://www.atlassian.com/git/tutorials/git-hooks"target="_blank" rel="external nofollow noopener noreferrer">Git hook</a> 都会检查 C/C++ 的代码风格是否与 <code>.clang-format</code> 要求的一致，并同时通过 <a href="http://cppcheck.sourceforge.net/"target="_blank" rel="external nofollow noopener noreferrer">Cppcheck</a> 进行静态程序分析检查。</p>
+<h3 id="git-hooks-进行自动程式码排版检查">Git Hooks 进行自动程式码排版检查</h3>
+<p>第一次 make 后，Git pre-commit / pre-push hook 将被自动安装到当前的工作区 (workspace)，之后每次执行 git commit 時，<a href="https://www.atlassian.com/git/tutorials/git-hooks"target="_blank" rel="external nofollow noopener noreferrer">Git hook</a> 都会检查 C/C++ 的代码风格是否与 <code>.clang-format</code> 要求的一致，并同时通过 <a href="http://cppcheck.sourceforge.net/"target="_blank" rel="external nofollow noopener noreferrer">Cppcheck</a> 进行静态程序分析检查。</p>
 <div class="details admonition tip open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -2256,8 +2262,8 @@ $$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$</li>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ git config --global core.editor vim</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="github-actions-设定" class="heading-element">
-  <a href="#github-actions-%e8%ae%be%e5%ae%9a" class="heading-mark"></a>GitHub Actions 设定</h3><blockquote>
+</div><h3 id="github-actions-设定">GitHub Actions 设定</h3>
+<blockquote>
 <p>GitHub Actions 是 GitHub 提供的 CI/CD 服務，CI/CD 代表的是 Continuous Integration 持續整合與 Continuous Deployment 持續部署，簡單來說就是將程式流程自動化。lab0-c 提供幾項自動化測試，包含：檢查排版、編譯結果和自動評分等等。這裡需要注意的是 fork 完成後，預設情況下 GitHub Action 不會被啟動，所以需要 <strong>手動開啟 GitHub Actions</strong>，在你所 fork 出的 repository 的 Actions 內點選 <code>I understand my workflows, go ahead and enable them</code></p>
 </blockquote>
 <blockquote>
@@ -2269,8 +2275,8 @@ $$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$</li>
 <blockquote>
 <p>點擊信件中的 <code>View workflow run</code> 即可在 GitHub 網站中得知 GitHub Actions 的測試狀況。</p>
 </blockquote>
-<h2 id="以-valgrind-分析内存问题" class="heading-element">
-  <a href="#%e4%bb%a5-valgrind-%e5%88%86%e6%9e%90%e5%86%85%e5%ad%98%e9%97%ae%e9%a2%98" class="heading-mark"></a>以 Valgrind 分析内存问题</h2><p><a href="https://valgrind.org/"target="_blank" rel="external nofollow noopener noreferrer">Valgrind</a> is an instrumentation framework for building dynamic analysis tools. There are Valgrind tools that can automatically detect many memory management and threading bugs, and profile your programs in detail. You can also use Valgrind to build new tools.</p>
+<h2 id="以-valgrind-分析内存问题">以 Valgrind 分析内存问题</h2>
+<p><a href="https://valgrind.org/"target="_blank" rel="external nofollow noopener noreferrer">Valgrind</a> is an instrumentation framework for building dynamic analysis tools. There are Valgrind tools that can automatically detect many memory management and threading bugs, and profile your programs in detail. You can also use Valgrind to build new tools.</p>
 <p>使用方式:</p>
 <div class="highlight" id="id-53"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2328,8 +2334,8 @@ $$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$</li>
 <li>2007 年的论文: <a href="https://valgrind.org/docs/valgrind2007.pdf"target="_blank" rel="external nofollow noopener noreferrer">Valgrind: A Framework for Heavyweight Dynamic Binary Instrumentation</a></li>
 <li>繁体中文版本的 <a href="https://wdv4758h-notes.readthedocs.io/zh_TW/latest/valgrind/dynamic-binary-instrumentation.html"target="_blank" rel="external nofollow noopener noreferrer">论文导读</a></li>
 </ul>
-<h3 id="valgrind-使用案例" class="heading-element">
-  <a href="#valgrind-%e4%bd%bf%e7%94%a8%e6%a1%88%e4%be%8b" class="heading-mark"></a>Valgrind 使用案例</h3><p>安装调试工具以让 Valgrind 更好地进行分析:</p>
+<h3 id="valgrind-使用案例">Valgrind 使用案例</h3>
+<p>安装调试工具以让 Valgrind 更好地进行分析:</p>
 <div class="highlight" id="id-54"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2337,8 +2343,8 @@ $$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$</li>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install libc6-dbg</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="memory-leak" class="heading-element">
-  <a href="#memory-leak" class="heading-mark"></a>Memory Leak</h4><p>常见错误有: <code>malloc</code> 了一个空间但没 <code>free</code> 导致内存泄露</p>
+</div><h4 id="memory-leak">Memory Leak</h4>
+<p>常见错误有: <code>malloc</code> 了一个空间但没 <code>free</code> 导致内存泄露</p>
 <p>memory lost:</p>
 <ul>
 <li>definitely lost</li>
@@ -2359,21 +2365,21 @@ $$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$</li>
 <li><code>--show-possibly-lost=no</code>: 不输出 possibly lost 相关报告</li>
 <li><code>--track-fds=yes</code>: 侦测 file descriptor 开了没关的情况</li>
 </ul>
-<h4 id="invalid-memory-access" class="heading-element">
-  <a href="#invalid-memory-access" class="heading-mark"></a>Invalid Memory Access</h4><p>常见错误有: <code>malloc</code> 了并 <code>free</code> 但又对这个已经被 free 的空间进行操作，即 <a href="https://cwe.mitre.org/data/definitions/416.html"target="_blank" rel="external nofollow noopener noreferrer">Use After Free</a></p>
+<h4 id="invalid-memory-access">Invalid Memory Access</h4>
+<p>常见错误有: <code>malloc</code> 了并 <code>free</code> 但又对这个已经被 free 的空间进行操作，即 <a href="https://cwe.mitre.org/data/definitions/416.html"target="_blank" rel="external nofollow noopener noreferrer">Use After Free</a></p>
 <blockquote>
 <p>valgrind 输出的报告 invalid write/read 这类的单位是 Byte，即 size of X (bytes)</p>
 </blockquote>
-<h4 id="other" class="heading-element">
-  <a href="#other" class="heading-mark"></a>Other</h4><ul>
+<h4 id="other">Other</h4>
+<ul>
 <li><code>Conditional jump or move depends on uninitialised value(s)</code> 这个错误一般是因为使用了没有结束字符 (null-terminated string) 的字符串</li>
 <li>不同函数使用了不合法的栈空间，例如函数 A 使用了已经返回了的函数 B 的栈空间，这样的操作是不合法的</li>
 <li>对局部变量的存取超过范围会导致 <code>stack corrupt</code> (个人感觉等同 stack overflow)</li>
 </ul>
 <p>程序运行时的内存布局:</p>
-<a class="lightgallery" href="https://i.imgur.com/OhqUECc.png?size=large" data-thumbnail="https://i.imgur.com/OhqUECc.png?size=small" data-sub-html="<h2>https://i.imgur.com/OhqUECc.png</h2>"><img loading="lazy" src="https://i.imgur.com/OhqUECc.png" alt="https://i.imgur.com/OhqUECc.png" srcset="https://i.imgur.com/OhqUECc.png?size=small, https://i.imgur.com/OhqUECc.png?size=medium 1.5x, https://i.imgur.com/OhqUECc.png?size=large 2x" sizes="auto" data-title="https://i.imgur.com/OhqUECc.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://i.imgur.com/OhqUECc.png?size=large" data-thumbnail="https://i.imgur.com/OhqUECc.png?size=small" data-sub-html="<h2>https://i.imgur.com/OhqUECc.png</h2>"><img loading="lazy" src="https://i.imgur.com/OhqUECc.png" srcset="https://i.imgur.com/OhqUECc.png?size=small, https://i.imgur.com/OhqUECc.png?size=medium 1.5x, https://i.imgur.com/OhqUECc.png?size=large 2x" sizes="auto" data-title="https://i.imgur.com/OhqUECc.png" data-alt="https://i.imgur.com/OhqUECc.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>Valgrind 配合 <a href="https://valgrind.org/docs/manual/ms-manual.html"target="_blank" rel="external nofollow noopener noreferrer">Massif</a> 可以对程序运行时的内存行为进行可视化:</p>
-<a class="lightgallery" href="https://imgur.com/F7hbcsN.png?size=large" data-thumbnail="https://imgur.com/F7hbcsN.png?size=small" data-sub-html="<h2>https://imgur.com/F7hbcsN.png</h2>"><img loading="lazy" src="https://imgur.com/F7hbcsN.png" alt="https://imgur.com/F7hbcsN.png" srcset="https://imgur.com/F7hbcsN.png?size=small, https://imgur.com/F7hbcsN.png?size=medium 1.5x, https://imgur.com/F7hbcsN.png?size=large 2x" sizes="auto" data-title="https://imgur.com/F7hbcsN.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://imgur.com/F7hbcsN.png?size=large" data-thumbnail="https://imgur.com/F7hbcsN.png?size=small" data-sub-html="<h2>https://imgur.com/F7hbcsN.png</h2>"><img loading="lazy" src="https://imgur.com/F7hbcsN.png" srcset="https://imgur.com/F7hbcsN.png?size=small, https://imgur.com/F7hbcsN.png?size=medium 1.5x, https://imgur.com/F7hbcsN.png?size=large 2x" sizes="auto" data-title="https://imgur.com/F7hbcsN.png" data-alt="https://imgur.com/F7hbcsN.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <div class="details admonition info open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -2394,13 +2400,13 @@ $$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$</li>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ make valgrind</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="自动测试程序" class="heading-element">
-  <a href="#%e8%87%aa%e5%8a%a8%e6%b5%8b%e8%af%95%e7%a8%8b%e5%ba%8f" class="heading-mark"></a>自动测试程序</h2><ul>
+</div><h2 id="自动测试程序">自动测试程序</h2>
+<ul>
 <li><a href="https://man7.org/linux/man-pages/man7/signal.7.html"target="_blank" rel="external nofollow noopener noreferrer">signal</a></li>
 <li>异常执行流</li>
 </ul>
-<h3 id="追踪内存的分配和释放" class="heading-element">
-  <a href="#%e8%bf%bd%e8%b8%aa%e5%86%85%e5%ad%98%e7%9a%84%e5%88%86%e9%85%8d%e5%92%8c%e9%87%8a%e6%94%be" class="heading-mark"></a>追踪内存的分配和释放</h3><ul>
+<h3 id="追踪内存的分配和释放">追踪内存的分配和释放</h3>
+<ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> Wikipedia: <a href="https://en.wikipedia.org/wiki/Hooking"target="_blank" rel="external nofollow noopener noreferrer">Hooking</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> Wikipedia: <a href="https://en.wikipedia.org/wiki/Test_harness"target="_blank" rel="external nofollow noopener noreferrer">Test harness</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> GCC: <a href="https://gcc.gnu.org/onlinedocs/gcc/Zero-Length.html"target="_blank" rel="external nofollow noopener noreferrer">Arrays of Length Zero</a></li>
@@ -2408,8 +2414,8 @@ $$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$</li>
 <blockquote>
 <p>The alignment of a zero-length array is the same as the alignment of its elements.</p>
 </blockquote>
-<p><a class="lightgallery" href="https://imgur-backup.hackmd.io/j1fRN0B.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/j1fRN0B.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/j1fRN0B.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/j1fRN0B.png" alt="https://imgur-backup.hackmd.io/j1fRN0B.png" srcset="https://imgur-backup.hackmd.io/j1fRN0B.png?size=small, https://imgur-backup.hackmd.io/j1fRN0B.png?size=medium 1.5x, https://imgur-backup.hackmd.io/j1fRN0B.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/j1fRN0B.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
-<a class="lightgallery" href="https://imgur-backup.hackmd.io/nkCgAZL.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/nkCgAZL.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/nkCgAZL.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/nkCgAZL.png" alt="https://imgur-backup.hackmd.io/nkCgAZL.png" srcset="https://imgur-backup.hackmd.io/nkCgAZL.png?size=small, https://imgur-backup.hackmd.io/nkCgAZL.png?size=medium 1.5x, https://imgur-backup.hackmd.io/nkCgAZL.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/nkCgAZL.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></p>
+<p><a class="lightgallery" href="https://imgur-backup.hackmd.io/j1fRN0B.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/j1fRN0B.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/j1fRN0B.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/j1fRN0B.png" srcset="https://imgur-backup.hackmd.io/j1fRN0B.png?size=small, https://imgur-backup.hackmd.io/j1fRN0B.png?size=medium 1.5x, https://imgur-backup.hackmd.io/j1fRN0B.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/j1fRN0B.png" data-alt="https://imgur-backup.hackmd.io/j1fRN0B.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/nkCgAZL.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/nkCgAZL.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/nkCgAZL.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/nkCgAZL.png" srcset="https://imgur-backup.hackmd.io/nkCgAZL.png?size=small, https://imgur-backup.hackmd.io/nkCgAZL.png?size=medium 1.5x, https://imgur-backup.hackmd.io/nkCgAZL.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/nkCgAZL.png" data-alt="https://imgur-backup.hackmd.io/nkCgAZL.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a></p>
 <ul>
 <li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> <a href="https://frankchang0125.blogspot.com/2013/01/c-struct-hack-structure-with-variable.html"target="_blank" rel="external nofollow noopener noreferrer">C Struct Hack - Structure with variable length array</a></li>
 </ul>
@@ -2465,8 +2471,8 @@ $$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$</li>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test_free</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="qtest-命令解释器" class="heading-element">
-  <a href="#qtest-%e5%91%bd%e4%bb%a4%e8%a7%a3%e9%87%8a%e5%99%a8" class="heading-mark"></a>qtest 命令解释器</h3><p>新增指令 hello，用于打印 <code>Hello, world&quot;</code> 的信息。调用流程:</p>
+</div><h3 id="qtest-命令解释器">qtest 命令解释器</h3>
+<p>新增指令 hello，用于打印 <code>Hello, world&quot;</code> 的信息。调用流程:</p>
 <div class="highlight" id="id-58"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2528,8 +2534,8 @@ $$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$</li>
       <div class="admonition-content">原文的「命令直译器的初始化准备」部分，示例的代码片段与最新的代码有许多差别 (特别是结构体的名称)，一定要搭配阅读最新的源码，否则会十分迷糊。</div>
     </div>
   </div>
-<h3 id="signal-处理和应用" class="heading-element">
-  <a href="#signal-%e5%a4%84%e7%90%86%e5%92%8c%e5%ba%94%e7%94%a8" class="heading-mark"></a>Signal 处理和应用</h3><p>Linux manual page:</p>
+<h3 id="signal-处理和应用">Signal 处理和应用</h3>
+<p>Linux manual page:</p>
 <ul>
 <li><a href="https://man7.org/linux/man-pages/man2/signal.2.html"target="_blank" rel="external nofollow noopener noreferrer">signal(2)</a></li>
 </ul>
@@ -2683,8 +2689,8 @@ execution.</p>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">report_event</span><span class="p">(</span><span class="kt">message_t</span> <span class="n">msg</span><span class="p">,</span> <span class="kt">char</span> <span class="o">*</span><span class="n">fmt</span><span class="p">,</span> <span class="p">...);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="检测非预期的内存操作或程序执行超时" class="heading-element">
-  <a href="#%e6%a3%80%e6%b5%8b%e9%9d%9e%e9%a2%84%e6%9c%9f%e7%9a%84%e5%86%85%e5%ad%98%e6%93%8d%e4%bd%9c%e6%88%96%e7%a8%8b%e5%ba%8f%e6%89%a7%e8%a1%8c%e8%b6%85%e6%97%b6" class="heading-mark"></a>检测非预期的内存操作或程序执行超时</h3><p>由上面可知，当收到 <code>SIGSEGV</code> 或 <code>SIGALRM</code> 信号时，会通过 <code>signal handler</code> &#x27a1;&#xfe0f; <code>trigger_exception</code> &#x27a1;&#xfe0f; <code>exception_setup</code> 这一条链路执行。那么当 <code>exception_setup</code> 函数返回时会跳转到哪里呢？</p>
+</div><h3 id="检测非预期的内存操作或程序执行超时">检测非预期的内存操作或程序执行超时</h3>
+<p>由上面可知，当收到 <code>SIGSEGV</code> 或 <code>SIGALRM</code> 信号时，会通过 <code>signal handler</code> &#x27a1;&#xfe0f; <code>trigger_exception</code> &#x27a1;&#xfe0f; <code>exception_setup</code> 这一条链路执行。那么当 <code>exception_setup</code> 函数返回时会跳转到哪里呢？</p>
 <p>在 <a href="">qtest.c</a> 的形如 <code>do_&lt;operation&gt;</code> 这类函数里面，都会直接或间接的包含以下的程式码:</p>
 <div class="highlight" id="id-63"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -2702,9 +2708,9 @@ execution.</p>
 </div><blockquote>
 <p>回到稍早提及的 <code>if (exception_setup(true))</code> 敘述中，若是第一次回傳，那麼會開始測試函式。若測試函式的過程中，發生任何錯誤 (亦即觸發 <code>SIGSEGV</code> 或 SIGALRM 一類的 <code>signal</code>)，就會立刻跳回 signal handler。signal handler 會印出錯誤訊息，並進行 <code>siglongjmp</code>。由 <code>exception_setup</code> 的程式可以知道又是跳到 <code>exception_setup(true)</code> 裡面，但這時會回傳 <code>false</code>，因而跳過測試函式，直接結束測試並回傳 <code>ok</code> 內含值。換言之，<code>exception_cancel()</code> 後就算再發生 <code>SIGALRM</code> 或 <code>SIGSEGV</code>，也不會再有機會回到 exception_setup() 裡面。</p>
 </blockquote>
-<h2 id="整合网页服务器" class="heading-element">
-  <a href="#%e6%95%b4%e5%90%88%e7%bd%91%e9%a1%b5%e6%9c%8d%e5%8a%a1%e5%99%a8" class="heading-mark"></a>整合网页服务器</h2><h3 id="整合-tiny-web-server" class="heading-element">
-  <a href="#%e6%95%b4%e5%90%88-tiny-web-server" class="heading-mark"></a>整合 tiny-web-server</h3><ul>
+<h2 id="整合网页服务器">整合网页服务器</h2>
+<h3 id="整合-tiny-web-server">整合 tiny-web-server</h3>
+<ul>
 <li><a href="https://github.com/7890/tiny-web-server"target="_blank" rel="external nofollow noopener noreferrer">tiny-web-server</a></li>
 </ul>
 <div class="details admonition danger open">
@@ -2737,19 +2743,19 @@ before any file descriptors became ready.</p>
 the file descriptor sets are unmodified, and timeout becomes
 undefined.</p>
 </blockquote>
-<a class="lightgallery" href="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg?size=large" data-thumbnail="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg?size=small" data-sub-html="<h2>https://hackmd.io/_uploads/HJ0_t8Kf9.jpg</h2>"><img loading="lazy" src="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg" alt="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg" srcset="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg?size=small, https://hackmd.io/_uploads/HJ0_t8Kf9.jpg?size=medium 1.5x, https://hackmd.io/_uploads/HJ0_t8Kf9.jpg?size=large 2x" sizes="auto" data-title="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg?size=large" data-thumbnail="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg?size=small" data-sub-html="<h2>https://hackmd.io/_uploads/HJ0_t8Kf9.jpg</h2>"><img loading="lazy" src="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg" srcset="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg?size=small, https://hackmd.io/_uploads/HJ0_t8Kf9.jpg?size=medium 1.5x, https://hackmd.io/_uploads/HJ0_t8Kf9.jpg?size=large 2x" sizes="auto" data-title="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg" data-alt="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p><code>select</code> 和 <code>poll</code> 都是上图所示的多路 I/O 复用的模型，优势在于可以同时处理多个 file descriptor，但缺点在于需要使用 2 次 syscall，第一次是等待 kernel 发出通知，第二次是从 kernel 拷贝数据，每次 syscall 都需要进行 context switch，导致这个模型比其他的 I/O 模型开销大 (context switch 开销是很大的)。</p>
 <p>相关源代码阅读 (<a href="https://github.com/sysprog21/lab0-c/blob/master/linenoise.h"target="_blank" rel="external nofollow noopener noreferrer">linenoise.h</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/linenoise.c"target="_blank" rel="external nofollow noopener noreferrer">linenoise.c</a>, <a href="https://github.com/sysprog21/lab0-c/blob/master/console.c"target="_blank" rel="external nofollow noopener noreferrer">console.c</a>):</p>
-<h2 id="在-qtest-提供新命令-shuffle" class="heading-element">
-  <a href="#%e5%9c%a8-qtest-%e6%8f%90%e4%be%9b%e6%96%b0%e5%91%bd%e4%bb%a4-shuffle" class="heading-mark"></a>在 qtest 提供新命令 shuffle</h2></div><div class="post-footer" id="post-footer">
+<h2 id="在-qtest-提供新命令-shuffle">在 qtest 提供新命令 shuffle</h2></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-06-02 19:41:17">更新于 2024-06-02&nbsp;</span>
-      </div></div><div class="post-info-line">
-        <div class="post-info-md"><span><a href="/posts/linux2023-lab0/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-        <div class="post-info-share">
-          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: lab0-c" data-hashtags="Sysprog,Linux,C"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/linux2023-lab0/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: lab0-c" data-hashtags="Sysprog,Linux,C"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: lab0-c" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: lab0-c"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -2758,27 +2764,25 @@ undefined.</p>
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: lab0-c" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/linux2023-lab0/" data-title="Linux 核心设计: lab0-c"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-        </div>
-      </div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a><a href="/tags/linux/" class="post-tag" title="标签 - Linux">Linux</a><a href="/tags/c/" class="post-tag" title="标签 - C">C</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/linux/' class="post-tag">Linux</a><a href='/tags/c/' class="post-tag">C</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
   </div>
 
-  <div class="post-nav"><a href="/posts/rust-tcp/" class="post-nav-item" rel="prev" title="Impl Rust: TCP/IP"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Impl Rust: TCP/IP</a>
+  <div class="post-nav"><a href="/posts/impl-tcp-in-rust/" class="post-nav-item" rel="prev" title="Impl Rust: TCP/IP"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Impl Rust: TCP/IP</a>
       <a href="/posts/c-numerics/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: 数值系统篇">你所不知道的 C 语言: 数值系统篇<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article>
-
-  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -2786,5 +2790,5 @@ undefined.</p>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/mermaid/mermaid.min.js"></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"classDiagram\n    direction LR\n\n    class list_head 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    list_head 0 --\u003e list_head 1\n    list_head 1 --\u003e list_head 2\n    list_head 1 --\u003e list_head 0\n    list_head 2 --\u003e list_head 1","id-14":"classDiagram\n    direction LR\n\n    class prev {\n        prev: list_head*\n        next: list_head*\n    }\n    class node {\n        prev: list_head*\n        next: list_head*\n    }\n    class safe {\n        prev: list_head*\n        next: list_head*\n    }\n    class next {\n        prev: list_head*\n        next: list_head*\n    }\n    prev --\u003e node\n    prev \u003c-- node\n    node --\u003e safe\n    node \u003c-- safe\n    safe --\u003e next\n    safe \u003c-- next","id-15":"classDiagram\n    direction LR\n\n    class prev {\n        prev: list_head*\n        next: list_head*\n    }\n    class node {\n        prev: list_head*\n        next: list_head*\n    }\n    class safe {\n        prev: list_head*\n        next: list_head*\n    }\n    class next {\n        prev: list_head*\n        next: list_head*\n    }\n    prev --\u003e safe\n    prev \u003c-- safe\n    safe --\u003e node\n    safe \u003c-- node\n    node --\u003e next\n    node \u003c-- next","id-17":"classDiagram\n    direction LR\n\n    class list_head 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    list_head 0 --\u003e list_head 1: next\n    list_head 0 \u003c|-- list_head 1: prev\n    list_head 1 --|\u003e list_head 2: next\n    list_head 1 \u003c-- list_head 2: prev","id-18":"classDiagram\n    direction LR\n\n    class list_head 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    list_head 0 \u003c|-- list_head 1: next\n    list_head 0 --\u003e list_head 1: prev\n    list_head 1 \u003c-- list_head 2: next\n    list_head 1 --|\u003e list_head 2: prev","id-2":"classDiagram\n    direction LR\n\n    class element_t 0 {\n        value: char *\n        list: list_head*\n    }\n    class element_t 1 {\n        value: char *\n        list: list_head*\n    }\n    class element_t 2 {\n        value: char *\n        list: list_head*\n    }\n\n    element_t 0 --\u003e element_t 1\n    element_t 1 --\u003e element_t 2\n    element_t 1 --\u003e element_t 0\n    element_t 2 --\u003e element_t 1","id-20":"classDiagram\n    direction LR\n\n    class prev {\n        prev: list_head*\n        next: list_head*\n    }\n    class node {\n        prev: list_head*\n        next: list_head*\n    }\n    class safe {\n        prev: list_head*\n        next: list_head*\n    }\n    class next {\n        prev: list_head*\n        next: list_head*\n    }\n    class nodes {\n        prev: list_head*\n        next: list_head*\n    }\n    prev --\u003e node: next\n    prev \u003c-- node: prev\n    node --\u003e nodes: next\n    node \u003c|-- nodes: prev\n    nodes --|\u003e safe: next\n    nodes \u003c-- safe: prev\n    safe --\u003e next: next\n    safe \u003c-- next: prev","id-21":"classDiagram\n    direction LR\n\n    class prev {\n        prev: list_head*\n        next: list_head*\n    }\n    class node {\n        prev: list_head*\n        next: list_head*\n    }\n    class safe {\n        prev: list_head*\n        next: list_head*\n    }\n    class next {\n        prev: list_head*\n        next: list_head*\n    }\n    class nodes {\n        prev: list_head*\n        next: list_head*\n    }\n    prev --\u003e node: next\n    prev \u003c-- node: next\n    node --\u003e nodes: prev\n    node \u003c|-- nodes: next\n    nodes --|\u003e safe: prev\n    nodes \u003c-- safe: next\n    safe --\u003e next: prev\n    safe \u003c-- next: prev","id-22":"classDiagram\n    direction LR\n\n    class prev {\n        prev: list_head*\n        next: list_head*\n    }\n    class node {\n        prev: list_head*\n        next: list_head*\n    }\n    class safe {\n        prev: list_head*\n        next: list_head*\n    }\n    class next {\n        prev: list_head*\n        next: list_head*\n    }\n    class nodes {\n        prev: list_head*\n        next: list_head*\n    }\n    prev --\u003e safe: next\n    prev \u003c-- safe: prev\n    safe --\u003e nodes: next\n    safe \u003c|-- nodes: next\n    nodes --|\u003e node: next\n    nodes \u003c-- node: prev\n    node --\u003e next: next\n    node \u003c-- next: prev","id-27":"classDiagram\n    direction LR\n\n    class head {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 3 {\n        prev: list_head*\n        next: list_head*\n    }\n    head --\u003e node 0: next\n    head \u003c-- node 0: prev\n    node 0 --\u003e node 1: next\n    node 0 \u003c-- node 1: prev\n    node 1 --\u003e node 2: next\n    node 1 \u003c-- node 2: prev\n    node 2 --\u003e node 3: next\n    node 2 \u003c-- node 3: prev\n    node 3 --\u003e head: next\n    node 3 \u003c-- head: prev","id-28":"classDiagram\n    direction LR\n\n    class head {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 3 {\n        prev: list_head*\n        next: list_head*\n    }\n    head --\u003e node 0: next\n    node 0 --\u003e node 1: next\n    node 1 --\u003e node 2: next\n    node 2 --\u003e node 3: next","id-29":"classDiagram\n    direction LR\n\n    class head {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 3 {\n        prev: list_head*\n        next: list_head*\n    }\n    head --\u003e node 0: next\n    node 0 --\u003e node 1: next\n    node 2 --\u003e node 3: next","id-3":"classDiagram\n    class queue_context_t 0 {\n        q: list_head *\n        chain: list_head\n        size: int\n        id: int\n    }\n    class queue_context_t 1 {\n        q: list_head *\n        chain: list_head\n        size: int\n        id: int\n    }\n    class queue_context_t 2 {\n        q: list_head *\n        chain: list_head\n        size: int\n        id: int\n    }\n\n    queue_context_t 0 --\u003e queue_context_t 1\n    queue_context_t 1 --\u003e queue_context_t 2\n    queue_context_t 1 --\u003e queue_context_t 0\n    queue_context_t 2 --\u003e queue_context_t 1\n\n    queue_context_t 0 --\u003e list_head 0\n    list_head 0 \u003c--\u003e element_t 01\n    element_t 01 \u003c--\u003e element_t 02\n\n    queue_context_t 1 --\u003e list_head 1\n    list_head 1 \u003c--\u003e element_t 11\n    element_t 11 \u003c--\u003e element_t 12\n\n    queue_context_t 2 --\u003e list_head 2\n    list_head 2 \u003c--\u003e element_t 21\n    element_t 21 \u003c--\u003e element_t 22","id-30":"classDiagram\n    direction LR\n\n    class head {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 3 {\n        prev: list_head*\n        next: list_head*\n    }\n    class temp {\n        list_head*\n    }\n    class l1 {\n        list_head**\n    }\n    class l2 {\n        list_head**\n    }\n    head --\u003e node 0: next\n    node 0 --\u003e node 1: next\n    node 2 --\u003e node 3: next\n    l1 --\u003e head: \u0026next\n    temp --\u003e node2\n    l2 --\u003e temp: \u0026temp","id-32":"classDiagram\n    direction LR\n\n    class head {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 3 {\n        prev: list_head*\n        next: list_head*\n    }\n    head --\u003e node 0: next\n    head \u003c-- node 0: prev\n    node 0 --\u003e node 1: next\n    node 0 \u003c-- node 1: prev\n    node 1 --\u003e node 2: next\n    node 1 \u003c-- node 2: prev\n    node 2 --\u003e node 3: next\n    node 2 \u003c-- node 3: prev","id-60":{"title":"qinit.c"}},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"mermaid":{"themes":["default","dark"]},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/mermaid/mermaid.min.js"></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-1":"classDiagram\n    direction LR\n\n    class list_head 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    list_head 0 --\u003e list_head 1\n    list_head 1 --\u003e list_head 2\n    list_head 1 --\u003e list_head 0\n    list_head 2 --\u003e list_head 1","id-14":"classDiagram\n    direction LR\n\n    class prev {\n        prev: list_head*\n        next: list_head*\n    }\n    class node {\n        prev: list_head*\n        next: list_head*\n    }\n    class safe {\n        prev: list_head*\n        next: list_head*\n    }\n    class next {\n        prev: list_head*\n        next: list_head*\n    }\n    prev --\u003e node\n    prev \u003c-- node\n    node --\u003e safe\n    node \u003c-- safe\n    safe --\u003e next\n    safe \u003c-- next","id-15":"classDiagram\n    direction LR\n\n    class prev {\n        prev: list_head*\n        next: list_head*\n    }\n    class node {\n        prev: list_head*\n        next: list_head*\n    }\n    class safe {\n        prev: list_head*\n        next: list_head*\n    }\n    class next {\n        prev: list_head*\n        next: list_head*\n    }\n    prev --\u003e safe\n    prev \u003c-- safe\n    safe --\u003e node\n    safe \u003c-- node\n    node --\u003e next\n    node \u003c-- next","id-17":"classDiagram\n    direction LR\n\n    class list_head 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    list_head 0 --\u003e list_head 1: next\n    list_head 0 \u003c|-- list_head 1: prev\n    list_head 1 --|\u003e list_head 2: next\n    list_head 1 \u003c-- list_head 2: prev","id-18":"classDiagram\n    direction LR\n\n    class list_head 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class list_head 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    list_head 0 \u003c|-- list_head 1: next\n    list_head 0 --\u003e list_head 1: prev\n    list_head 1 \u003c-- list_head 2: next\n    list_head 1 --|\u003e list_head 2: prev","id-2":"classDiagram\n    direction LR\n\n    class element_t 0 {\n        value: char *\n        list: list_head*\n    }\n    class element_t 1 {\n        value: char *\n        list: list_head*\n    }\n    class element_t 2 {\n        value: char *\n        list: list_head*\n    }\n\n    element_t 0 --\u003e element_t 1\n    element_t 1 --\u003e element_t 2\n    element_t 1 --\u003e element_t 0\n    element_t 2 --\u003e element_t 1","id-20":"classDiagram\n    direction LR\n\n    class prev {\n        prev: list_head*\n        next: list_head*\n    }\n    class node {\n        prev: list_head*\n        next: list_head*\n    }\n    class safe {\n        prev: list_head*\n        next: list_head*\n    }\n    class next {\n        prev: list_head*\n        next: list_head*\n    }\n    class nodes {\n        prev: list_head*\n        next: list_head*\n    }\n    prev --\u003e node: next\n    prev \u003c-- node: prev\n    node --\u003e nodes: next\n    node \u003c|-- nodes: prev\n    nodes --|\u003e safe: next\n    nodes \u003c-- safe: prev\n    safe --\u003e next: next\n    safe \u003c-- next: prev","id-21":"classDiagram\n    direction LR\n\n    class prev {\n        prev: list_head*\n        next: list_head*\n    }\n    class node {\n        prev: list_head*\n        next: list_head*\n    }\n    class safe {\n        prev: list_head*\n        next: list_head*\n    }\n    class next {\n        prev: list_head*\n        next: list_head*\n    }\n    class nodes {\n        prev: list_head*\n        next: list_head*\n    }\n    prev --\u003e node: next\n    prev \u003c-- node: next\n    node --\u003e nodes: prev\n    node \u003c|-- nodes: next\n    nodes --|\u003e safe: prev\n    nodes \u003c-- safe: next\n    safe --\u003e next: prev\n    safe \u003c-- next: prev","id-22":"classDiagram\n    direction LR\n\n    class prev {\n        prev: list_head*\n        next: list_head*\n    }\n    class node {\n        prev: list_head*\n        next: list_head*\n    }\n    class safe {\n        prev: list_head*\n        next: list_head*\n    }\n    class next {\n        prev: list_head*\n        next: list_head*\n    }\n    class nodes {\n        prev: list_head*\n        next: list_head*\n    }\n    prev --\u003e safe: next\n    prev \u003c-- safe: prev\n    safe --\u003e nodes: next\n    safe \u003c|-- nodes: next\n    nodes --|\u003e node: next\n    nodes \u003c-- node: prev\n    node --\u003e next: next\n    node \u003c-- next: prev","id-27":"classDiagram\n    direction LR\n\n    class head {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 3 {\n        prev: list_head*\n        next: list_head*\n    }\n    head --\u003e node 0: next\n    head \u003c-- node 0: prev\n    node 0 --\u003e node 1: next\n    node 0 \u003c-- node 1: prev\n    node 1 --\u003e node 2: next\n    node 1 \u003c-- node 2: prev\n    node 2 --\u003e node 3: next\n    node 2 \u003c-- node 3: prev\n    node 3 --\u003e head: next\n    node 3 \u003c-- head: prev","id-28":"classDiagram\n    direction LR\n\n    class head {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 3 {\n        prev: list_head*\n        next: list_head*\n    }\n    head --\u003e node 0: next\n    node 0 --\u003e node 1: next\n    node 1 --\u003e node 2: next\n    node 2 --\u003e node 3: next","id-29":"classDiagram\n    direction LR\n\n    class head {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 3 {\n        prev: list_head*\n        next: list_head*\n    }\n    head --\u003e node 0: next\n    node 0 --\u003e node 1: next\n    node 2 --\u003e node 3: next","id-3":"classDiagram\n    class queue_context_t 0 {\n        q: list_head *\n        chain: list_head\n        size: int\n        id: int\n    }\n    class queue_context_t 1 {\n        q: list_head *\n        chain: list_head\n        size: int\n        id: int\n    }\n    class queue_context_t 2 {\n        q: list_head *\n        chain: list_head\n        size: int\n        id: int\n    }\n\n    queue_context_t 0 --\u003e queue_context_t 1\n    queue_context_t 1 --\u003e queue_context_t 2\n    queue_context_t 1 --\u003e queue_context_t 0\n    queue_context_t 2 --\u003e queue_context_t 1\n\n    queue_context_t 0 --\u003e list_head 0\n    list_head 0 \u003c--\u003e element_t 01\n    element_t 01 \u003c--\u003e element_t 02\n\n    queue_context_t 1 --\u003e list_head 1\n    list_head 1 \u003c--\u003e element_t 11\n    element_t 11 \u003c--\u003e element_t 12\n\n    queue_context_t 2 --\u003e list_head 2\n    list_head 2 \u003c--\u003e element_t 21\n    element_t 21 \u003c--\u003e element_t 22","id-30":"classDiagram\n    direction LR\n\n    class head {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 3 {\n        prev: list_head*\n        next: list_head*\n    }\n    class temp {\n        list_head*\n    }\n    class l1 {\n        list_head**\n    }\n    class l2 {\n        list_head**\n    }\n    head --\u003e node 0: next\n    node 0 --\u003e node 1: next\n    node 2 --\u003e node 3: next\n    l1 --\u003e head: \u0026next\n    temp --\u003e node2\n    l2 --\u003e temp: \u0026temp","id-32":"classDiagram\n    direction LR\n\n    class head {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 0 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 1 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 2 {\n        prev: list_head*\n        next: list_head*\n    }\n    class node 3 {\n        prev: list_head*\n        next: list_head*\n    }\n    head --\u003e node 0: next\n    head \u003c-- node 0: prev\n    node 0 --\u003e node 1: next\n    node 0 \u003c-- node 1: prev\n    node 1 --\u003e node 2: next\n    node 1 \u003c-- node 2: prev\n    node 2 --\u003e node 3: next\n    node 2 \u003c-- node 3: prev","id-60":{"title":"qinit.c"}},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"mermaid":{"themes":["default","dark"]},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>
