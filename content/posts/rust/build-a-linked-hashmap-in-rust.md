@@ -15,7 +15,7 @@ comment: false
 weight: 0
 tags:
   - Rust
-  - Hash
+  - Hash Map
 categories:
   - Rust
 hiddenFromHomePage: false
@@ -274,14 +274,15 @@ let solar_distance = HashMap::from([
 
 - [ ] 在方法 [from_iter](https://doc.rust-lang.org/std/iter/trait.FromIterator.html#tymethod.from_iter) 的实作中采用对 `HashMap` 进行预分配的策略，增强该方法的效能
 
-- [ ] 为 `HashMap` 实现 `&mut` 的迭代器
+- [ ] 为 `HashMap` 实现 `&mut` 的迭代器 ***这个很难，因为涉及到可变引用的生命周期***
 
-- [ ] 为 `HashMap` 实现 [drain](https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html#method.drain) 方法
+- [x] 为 `HashMap` 实现 [drain](https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html#method.drain) 方法
 
 - [x] 为 `HashMap` 实现 [remove_entry](https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html#method.remove_entry) 方法
 
-- [ ] 为 `HashMap` 实现 [get_mut](https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.get_mut) 方法
+- [x] 为 `HashMap` 实现 [get_mut](https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.get_mut) 方法
 
+- [x] 为 `HashMap` 实现 [clear](https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html#method.clear) 方法
 
 {{< /admonition >}}
 
@@ -311,6 +312,7 @@ let solar_distance = HashMap::from([
   - method [std::vec::Vec::is_empty](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.is_empty)
   - method [std::vec::Vec::retain](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.retain)
   - method [std::vec::Vec::swap_remove](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.swap_remove)
+  - method [std::vec::Vec::clear](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.clear)
 
 - Trait [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
   - method [std::iter::Iterator::find](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.find)
@@ -322,11 +324,14 @@ let solar_distance = HashMap::from([
 
 - Trait [std::iter::FromIterator](https://doc.rust-lang.org/std/iter/trait.FromIterator.html)
 
+- Trait [std::ops::Drop](https://doc.rust-lang.org/std/ops/trait.Drop.html)
+
 - trait method [std::iter::Extend::extend](https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend)
 - method [std::option::Option::is_some](https://doc.rust-lang.org/std/option/enum.Option.html#method.is_some)
 - method [slice::last_mut](https://doc.rust-lang.org/std/primitive.slice.html#method.last_mut)
 
 ## References
 
+- Tsoding: [Hash Table in Rust](https://www.youtube.com/watch?v=YBzNFt4wapA)
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/about.html)
 - [The Cargo Book](https://doc.rust-lang.org/cargo/index.html)
