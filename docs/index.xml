@@ -22,7 +22,23 @@
   <pubDate>Sun, 30 Jun 2024 00:19:25 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/modern-cpp/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[<p>&ldquo;Modern&rdquo; C++ isn&rsquo;t afraid to use any or all of the following:</p>
+<ul>
+<li>RAII</li>
+<li>standard library containers and algorithms</li>
+<li>templates</li>
+<li>metaprogramming</li>
+<li>exceptions</li>
+<li>Boost</li>
+</ul>
+<p>&ldquo;Old&rdquo; C++ tends to avoid these things due to a perceived lack of compiler support or run-time performance. Instead, you&rsquo;ll find&hellip;</p>
+<ul>
+<li>lots of <code>new</code> and <code>delete</code></li>
+<li>roll-your-own linked lists and other data structures</li>
+<li>return codes as a mechanism for error handling</li>
+<li>one of the millions of custom string classes that aren&rsquo;t std::string</li>
+</ul>
+<p>As with all this-vs-that arguments, there are merits to both approaches. Modern C++ isn&rsquo;t universally better. Embedded enviornments, for example, often require extra restrictions that most people never need, so you&rsquo;ll see a lot of old-style code there. Overall though, I think you&rsquo;ll find that most of the modern features are worth using regularly. Moore&rsquo;s Law and compiler improvements have taken care of the majority of reasons to avoid the new stuff.</p>]]></description>
 </item>
 <item>
   <title>Build a linked hash map in Rust</title>
