@@ -1,5 +1,5 @@
 ---
-title: "Modern C++"
+title: "Modern C++ (MSVC)"
 subtitle:
 date: 2024-06-30T00:19:25+08:00
 slug: f341f9f
@@ -16,6 +16,7 @@ comment: false
 weight: 0
 tags:
   - C++
+  - MSVC
 categories:
   - C++
 hiddenFromHomePage: false
@@ -40,7 +41,7 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-"Modern" C++ isn't afraid to use any or all of the following:
+"Modern" [C++](https://en.wikipedia.org/wiki/C%2B%2B) isn't afraid to use any or all of the following:
 
 - RAII
 - standard library containers and algorithms
@@ -49,7 +50,7 @@ repost:
 - exceptions
 - Boost
 
-"Old" C++ tends to avoid these things due to a perceived lack of compiler support or run-time performance. Instead, you'll find...
+"Old" [C++](https://en.wikipedia.org/wiki/C%2B%2B) tends to avoid these things due to a perceived lack of compiler support or run-time performance. Instead, you'll find...
 
 - lots of `new` and `delete`
 - roll-your-own linked lists and other data structures
@@ -60,9 +61,11 @@ As with all this-vs-that arguments, there are merits to both approaches. Modern 
 
 <!--more-->
 
----
+> 以上整理自 Stack Overflow: [What is modern C++?](https://stackoverflow.com/questions/3661237/what-is-modern-c)
 
-整理自 Stack Overflow: [What is modern C++?](https://stackoverflow.com/questions/3661237/what-is-modern-c)
+{{< admonition success >}}
+写出好的 C++ 代码，而不是炫耀你所会的 C++ 的特性。不要为了炫技而炫技！
+{{< /admonition >}}
 
 ## Toolchain
 
@@ -70,12 +73,13 @@ As with all this-vs-that arguments, there are merits to both approaches. Modern 
 
 - OS: Windows 10
 - IDE: [Visual Studio](https://visualstudio.microsoft.com/) 2019 Community edition
-  - Clang Power Tools
-  - [cppcheck-vs-addin](https://github.com/VioletGiraffe/cppcheck-vs-addin) vsix
-  - ClangFormat
+    - [MSVC](https://en.wikipedia.org/wiki/Microsoft_Visual_C%2B%2B)
+    - Clang Power Tools
+    - [cppcheck-vs-addin](https://github.com/VioletGiraffe/cppcheck-vs-addin) vsix
+    - ClangFormat
 - [LLVM](https://releases.llvm.org/download.html) 17.0.1 Win64
 - [Cppcheck](https://cppcheck.sourceforge.io/) 2.13 Win64
-- [HxD](https://mh-nexus.de/en/hxd/)
+- [HxD](https://mh-nexus.de/en/hxd/) Editor
 
 ### Compiler
 
@@ -155,8 +159,6 @@ Breakpoint & Memory
 
 ### Projects
 
-#### Setup 
-
 filter 类似于一种虚拟的文件系统组织，不过只能在 VS 才能表示为层次形式 (通过解析 XML 格式的配置文件)，在主机的文件系统上没有影响
 
 解决方案栏的「显示所有文件」可以展示当前 Project 在主机文件系统下的组织层次结构，也可以在这个视图下创建目录 / 文件，这样也会在主机文件系统创建对应的目录 / 文件
@@ -171,6 +173,8 @@ VS 默认设置是将构建 / 编译得到的中间文件放在 Project 的 Debu
 
 {{< admonition >}}
 在编辑这些目录设定时，其下拉框中选择「编辑 -> 宏」可以查看形如 `$(SolutionDir)` 这些宏的定义
+
+设定 Solution 或 Project 的属性时，需要注意选择合适的 Configuration (配置) 和 Platform (平台) 进行应用
 {{< /admonition >}}
 
 ```
@@ -209,7 +213,7 @@ SolutionDir
 1. Solution 目录下创建一个 Dependencies 目录 (与 Projects 的目录评级)，用于存放所依赖的库
 2. 设定 **Project 的属性**: C/C++ -> Additional Include Directoris 为上一步存放依赖库的路径
    - `$(SolutionDir)\Dependencies\GLFW\include`
-   - 指定完成后编译器就知道如何去寻找相关的头文件和二进制了，不会导致编译错误
+   - 指定完成后编译器就知道如何去寻找相关的头文件了，不会导致编译错误
    - 但是链接器还没有设定，会导致链接错误
 3. 设定 Linker -> Additional Library Directories 为依赖库文件所处路径
    - `$(SolutionDir)\Dependencies\GLFW\lib-vc2019`
@@ -252,6 +256,25 @@ int main()
     std::cout << a << std::endl; // ouput 1
 }
 ```
+
+### Managing Multiple Projects and Libraries
+
+同一 Solution 创建多个 Project:
+
+- Solution 资源管理器 -> 右击 Solution 名称 -> Add (**New Project**)
+
+一般来说，一个 Solution 只有一个生成可运行文件的 Project，其它 Project 应该作为静态链接存在 (当然测试作用的 Project 也应该是可执行文件类型)。设定 Project 类型:
+
+右击 Project 名称 -> Properties -> Configuration Properties -> General -> Configuration Type 
+
+- 可执行 Project: **Application (.exe)**
+- 其余的 Project: **Static library (.lib)**
+
+这样即可将整个 Solution 构建成一个可执行文件，但是这样引用其它 Project 的头文件比较麻烦，我们还是需要使用真实文件系统的路径进行引用，为了避免繁杂的头文件路径以及防止路径变更导致构建失败，我们使用和上一节类似的技术：设定 Project 的属性: C/C++ -> Additional Include Directoris，在里面添加我们想要引用的 Project 头文件所在的目录路径 (一般为 `$(SolutionDir)\ProjectName\src`)。
+
+{{< admonition >}}
+这个设定 Include 目录的过程实际上也设置了 Projects 之间的依赖关系 (某种意义上的 CMake)
+{{< /admonition >}}
 
 ## Header File
 
@@ -407,7 +430,7 @@ struct Player
 从实践角度来看，在 C++ 中定义一个 *集合体*，它的成员字段默认都是 public 并且无需我们手动设定时，应当使用 `struct` 而不是 `class`，例如表示 TCP 数据报的 Header 应该使用 `struct`。也尽量不要在 `struct` 中使用继承，让 `struct` 作为一种相对纯粹的数据的组合
 {{< /admonition >}}
 
-#### 实作案例: Log System
+**实作案例**: 日志系统 Log System
 
 实作一个日志系统 (Log System) 来加深对 C++ 的 Class 的理解
 
@@ -904,6 +927,8 @@ public:
 
 ### Static
 
+#### Static vs. Extern
+
 - cppreference: [C++ keyword: static](https://en.cppreference.com/w/cpp/keyword/static)
 
 > **Usage**
@@ -947,6 +972,12 @@ void Func() {}
 尽量不要使用全局变量 (Global Variable) 除非你有必要的理由，一般情况下应当使用 `static` 修饰位于文件作用域的变量 (即变量所在的作用域和函数相同)，使其仅在当前的 Transilation Unit 进行内部链接
 {{< /admonition >}}
 
+#### Local Static
+
+- cppreference: [static members](https://en.cppreference.com/w/cpp/language/static)
+
+> Inside a class definition, the keyword static declares members that are not bound to class instances.
+
 在 Class 或 Struct 内使用 `static`，其作用是将被 `static` 修饰的变量或函数被该 Class 或 Struct 所共享，需要注意的是 `static` 修饰的函数不能使用与 Class 或 Struct 的具体实例相关的数据，例如可以使用 `static` 被修饰的变量
 
 ```c++
@@ -962,6 +993,58 @@ class Entry
 
 int Entry::x;
 int Entry::y;
+```
+
+局部作用域使用 `static` 修饰变量，例如在函数内部或类内部声明 `static` 修饰的变量，这类变量被称为 Local Static。它的生命周期和程序运行时期相同，但它的作用范围被限制在声明所处的作用域内:
+
+```c++
+#include <iostream>
+
+void Function()
+{
+    static int i = 0;
+    i++;
+    std::cout << i << std::endl;
+}
+
+int main()
+{
+    Function(); // should print 1
+    Function(); // should print 2
+    Function(); // should print 3
+}
+```
+
+**实作案例**: 单例设计模式的单例类 `Singleton`
+
+```c++
+class Singleton
+{
+private:
+    static Singleton* s_Instance;
+public:
+    static Singleton& Get() { return *s_Instance; }
+    
+    void Hello() {}
+};
+Singleton* Singleton::s_Instance = nullptr;
+// or
+class Singleton
+{
+public:
+    static Singleton& Get() 
+    { 
+        static Singleton instance;
+        return instance;
+    }
+    
+    void Hello() {}
+};
+
+int main()
+{
+    Singleton::Get().Hello();
+}
 ```
 
 ### Const
@@ -1074,6 +1157,125 @@ auto f = [=]()
 }
 ```
 
+### Explicit
+
+隐式转换一般不建议用，因为表达不够清晰，会造成误解，特别是用在构造函数 Constructor 上，例如下面是完全合法的 C++ 代码:
+
+```c++
+#include <iostream>
+class Entity
+{
+public:
+    Entity(int age) {}
+    Entity(std::string name) {}
+};
+
+int main()
+{
+    Entity entity = "hello"; // Pass! call `Entity(int age)`
+    Entity entity = 22;      // Pass! call `Entity(std::string name)`
+}
+```
+
+可以使用 `explicit` 关键字来禁止构造函数的这种隐式转换规则:
+
+- cppreference: [explicit specifier](https://en.cppreference.com/w/cpp/language/explicit)
+
+> Specifies that a constructor or conversion function(since C++11)or deduction guide(since C++17) is explicit, that is, it cannot be used for implicit conversions and copy-initialization.
+
+```c++
+#include <iostream>
+class Entity
+{
+public:
+    explicit Entity(int age) {}
+    explicit Entity(std::string name) {}
+};
+
+int main()
+{
+    Entity entity = "hello"; // Error! Now it is not allowed
+    Entity entity = 22;      // Error! Now it is not allowed
+}
+```
+
+### Auto
+
+- cppreference: [Placeholder type specifiers (since C++11)](https://en.cppreference.com/w/cpp/language/auto)
+
+在函数 API 返回场景处使用，这样就不需要因为 API 改变而手动修改返回值的类型标注:
+
+```c++
+const char* GetName() { return "Hello"; }
+// or
+std::string GetName() { return "Hello"; }
+
+int main()
+{
+    auto name = GetName();
+}
+```
+
+但这是一把双刃剑，这也会导致虽然 API 改变了但仍然构建成功，但 API 改变可能破坏了代码导致项目运行时的奇怪行为 (冷笑话: Linux kernel 表示对这样的 C++ 代码进行 Code Review 实在是...)
+
+比较适合 `auto` 使用的场景：使用迭代器循环遍历，迭代器的类型比较复杂，但我们并不关心迭代器的类型，只需要知道它是个迭代器即可:
+
+```c++
+std::vector<std::string> strings;
+
+for (std::vector<std::string>::iterator it = strings.begin();
+    it != strings.end(); it++)
+{
+    std::cout << *it << std::endl;
+}
+// more readable
+for (auto it = strings.begin(); it != strings.end(); it++)
+{
+    std::cout << *it << std::endl;
+}
+```
+
+类型名很长时也是 `auto` 的另一个比较好的应用场景:
+
+```c++
+#include <vector>
+#include <string>
+#include <unordered_map>
+
+class DeviceManager
+{
+private:
+    std::unordered_map<std::string, std::vector<Device*>> m_Devices;
+public:
+    const std::unordered_map<std::string, std::vector<Device*>>& GetDevices() const
+    {
+        return m_Devices;
+    }
+};
+
+int mainn()
+{
+    DeviceManager dm;
+    const auto& devices = dm.GetDevices();
+    // -> const std::unordered_map<std::string, std::vector<Device*>>& devices = dm.GetDevices();
+}
+```
+
+**注意 `auto` 并不会推导出引用 `&`，所以需要手动标注**，否则会导致复制行为产生一个新的局部变量。例如上面的例子如果没有标注 `&`，那么会等价于:
+
+```c++
+auto devices = dm.GetDevices();
+// -> const std::unordered_map<std::string, std::vector<Device*>> devices = dm.GetDevices();
+```
+
+除了上面说明的两种应用场景之外，不建议在其它地方滥用 `auto`，这会导致代码可读写变差，还可能会导致不必要的复制行为造成性能开销。尽量不要让自己的代码变成不得不使用 `auto` 的复杂程度！
+
+函数返回类型的 `auto` 推导:
+
+```c++
+auto GetName() -> const char* {}
+auto main() -> int {}
+```
 
 ## Operators
 
@@ -1195,55 +1397,95 @@ std::ostream& operator<<(std::ostream& stream, const Vector2& other)
 
 {{< admonition >}}
 运算符重载 (Operators Overloading) 只能重载运算符的执行语义，但运算符的优先级是不变的。这很因为运算符的优先级是编译器在进行语法分析时进行处理的，显然不能进行重载 (除非你重写了编译器 :rofl:)
+
+Copy Constructor vs. `=` operator overloading:
+
+- Stack Overflow: [The copy constructor and assignment operator](https://stackoverflow.com/questions/5368258/the-copy-constructor-and-assignment-operator)
+
+```c++
+Entity a, b;
+Entity e = a;   // Copy Constructor
+e = c;          // `=` operator overloading
+```
 {{< /admonition >}}
 
-## Conversions
 
-### Implicit and Explicit
 
-隐式转换一般不建议用，因为表达不够清晰，会造成误解，特别是用在构造函数 Constructor 上，例如下面是完全合法的 C++ 代码:
+## Templates
+
+{{< admonition tip >}}
+模板和宏类似，它允许你定义一个可以根据你的用途进行编译的蓝图。简单来说，所谓模拟，就是 **让编译器基于你给它的规则为你写代码**。
+{{< /admonition >}}
+
+- cppreference: [Templates](https://en.cppreference.com/w/cpp/language/templates)
+- cppreference: [Template parameters and template arguments](https://en.cppreference.com/w/cpp/language/template_parameters)
 
 ```c++
 #include <iostream>
-class Entity
+
+template<typename T>
+void Print(T value)
 {
-public:
-    Entity(int age) {}
-    Entity(std::string name) {}
-};
+    std::cout << value << std::endl;
+}
 
 int main()
 {
-    Entity entity = "hello"; // Pass! call `Entity(int age)`
-    Entity entity = 22;      // Pass! call `Entity(std::string name)`
+    Print(5); // or `Print<int>(5)`
+    Print("Hello");
+    Print(5.5f);
 }
 ```
 
-可以使用 `explicit` 关键字来禁止构造函数的这种隐式转换规则:
+MSVC 不会对未使用的模板进行报错，但其他编译器可能会 (例如 clang)
 
-- cppreference: [explicit specifier](https://en.cppreference.com/w/cpp/language/explicit)
-
-> Specifies that a constructor or conversion function(since C++11)or deduction guide(since C++17) is explicit, that is, it cannot be used for implicit conversions and copy-initialization.
+Template non-type arguments 可在模板指定类型处指定常量作为编译规则:
 
 ```c++
 #include <iostream>
-class Entity
+
+template<int N>
+class Array 
 {
+private:
+    int m_Array[N];
 public:
-    explicit Entity(int age) {}
-    explicit Entity(std::string name) {}
+    int GetSize() const { return N; }
 };
 
 int main()
 {
-    Entity entity = "hello"; // Error! Now it is not allowed
-    Entity entity = 22;      // Error! Now it is not allowed
+    Array<5> array;
+    std::cout << array.GetSize() << std::endl; // should be 5
+}
+```
+
+进一步将类型指定规则和常量指定规则结合起来，实作一个泛型的栈分配的 `Array` (类似于标准库的 `std::array`):
+
+```c++
+#include <iostream>
+
+template<typename T, int N>
+class Array 
+{
+private:
+    T m_Array[N];
+public:
+    int GetSize() const { return N; }
+};
+
+int main()
+{
+    Array<int, 5> array;
+    std::cout << array.GetSize() << std::endl; // should be 5
 }
 ```
 
 ## Containers
 
 ### Array
+
+#### array
 
 - cppreference: [Array declaration](https://en.cppreference.com/w/cpp/language/array)
 
@@ -1278,9 +1520,67 @@ int main()
 }
 ```
 
+#### std::array
+
 - cppreference: [std::array](https://en.cppreference.com/w/cpp/container/array)
 
-> std::array is a container that encapsulates fixed size arrays.
+> `std::array` is a container that encapsulates fixed size arrays.
+
+> This container is an aggregate type with the same semantics as a struct holding a C-style array `T[N]` as its only non-static data member. Unlike a C-style array, it doesn't decay to `T*` automatically.
+
+> The struct combines the performance and accessibility of a C-style array with the benefits of a standard container, such as knowing its own size, supporting assignment, random access iterators, etc.
+
+`std::array` 和普通数组一样，都是分配在栈 (Stack) 上的，与 `std::vector` 这种底层数据存储分配在堆 (Heap) 上的数据结构不同，所以 `std::array` 的性能比 `std::vector` 表现要好，实际上在编译器最佳化的条件下，它的性能表现和普通数组一样好。另外，与普通数组相比，`std::array` 拥有边界检查，更加安全。在存储空间方面，`std::array` 占用的空间与普通数组并无区别，因为它实际上并不存储 `size` 这个变量 (因为这个是通过常量模板规则传递的，并不占据空间，而是直接生成了对应的代码)。
+
+```c++
+#include <array>
+
+int main()
+{
+    // old style
+    int data_old[5];
+    data_old[0] = 1;
+
+    // new style
+    std::array<int, 5> data;
+    data[0] = 1;
+}
+```
+
+`std::array` 在作为函数参数时可知数组的长度 (因为 `std::array` 是一个类)，这一点比起普通数组是优势 (普通数组作为函数参数时会退化为指针，使用 `sizeof` 无法获得正确的数组长度):
+
+```c++
+template<std::size_t N>
+void PrintArray(std::array<int, N>& data)
+{
+    for (int i = 0; i < data.size(); i++) {}
+}
+```
+
+使用常量模板规则生成对应的 `PrintArray` 函数
+
+- Stack Overflow: [Passing a std::array of unknown size to a function](https://stackoverflow.com/questions/17156282/passing-a-stdarray-of-unknown-size-to-a-function)
+- Stack Overflow: [Difference between size_t and std::size_t](https://stackoverflow.com/questions/5813700/difference-between-size-t-and-stdsize-t)
+
+{{< admonition question "为什么 `std::array` 不需要存储 `size` 变量？" false >}}
+这是因为常量模板规则，在编译时期即可确定 `size()` 函数的具体实现了，无需额外存储变量:
+
+```c++
+std::array<int, 5> arr;
+// this will generate
+class array...
+{
+    ...
+    size_t size() const
+    {
+        return 5;
+    }
+    ...
+}
+```
+
+边界检查的具体代码实现也是类似的，是通过常量模板规则生成的
+{{< /admonition >}}
 
 ### String
 
@@ -1336,10 +1636,10 @@ VS 在调试模式下进行编译，会对内存分配的对象额外分配 **�
 ```c++
 int main()
 {
-    const char* hello = u8"Hello"; // 'u8' represent char, it's optional
-    const wchar_t* hello = L"Hello"; // 'L' represent wide char
-    const char16_t* hello = u"Hello"; // 'u' represent char16_t
-    const char32_t* hello = U"Hello"; // 'U' represent char32_t
+    const char* hello = u8"Hello";      // 'u8' represent utf-8, it's optional
+    const wchar_t* hello = L"Hello";    // 'L' represent wide char
+    const char16_t* hello = u"Hello";   // 'u' represent char16_t
+    const char32_t* hello = U"Hello";   // 'U' represent char32_t
 }
 ```
 
@@ -1627,6 +1927,179 @@ int main()
 
 - cppreference: [std::tuple](https://en.cppreference.com/w/cpp/utility/tuple)
 - cppreference: [std::pair](https://en.cppreference.com/w/cpp/utility/pair)
+
+### Macros
+
+- cppreference: [Replacing text macros](https://en.cppreference.com/w/cpp/preprocessor/replace)
+- cppreference: [Preprocessor](https://en.cppreference.com/w/cpp/preprocessor)
+
+宏和预处理的本质其实是文本替换:
+
+```c++
+#define WAIT std::cin.get()
+```
+
+"专门从事编写迷惑性代码":
+
+```c++
+#define OPEN_CURLY {
+int main()
+OPEN_CURLY
+    return 0;
+}
+```
+
+比较有意义的宏使用场景: Project 属性 -> C/C++ -> Preprocessor -> Preprocessor Definitions: 添加自定义的宏 (作用有些类似于 gcc 的 `-D` 参数)
+
+这样可以实现不同模式下日志系统的输出不相同，例如 Debug 模式下定义 `PR_DEBUG` 宏，Release 模式下定义 `PR_RELEASE` 宏。然后在日志系统针对这两个宏是否被定义进行不同的处理，以让日志系统针对不同模式进行不同处理。
+
+```c++
+#ifdef PR_DEBUG
+#define LOG(x) std::cout << x << std::endl;
+#else
+#define LOG(x)
+#endif
+```
+
+`ifdef` 在很多情况下表现比较糟糕，使用 `if` 改写上面的代码 (搭配 `defined` 进行定义判定):
+
+```c++
+#if PR_DEBUG == 1
+#define LOG(x) std::cout << x << std::endl;
+#else defined(PR_RELEASE)
+#define LOG(x)
+#endif
+```
+
+`#if 0` 可以用于删除特定代码 (本质上是条件编译)
+
+可以通过 `\` 来编写多行的宏，但是注意不要在 `\` 后面多按了空格，这样会导致是对空格的转义，一点要确保 `\` 后面是换行，这才是对换行符的转义:
+
+```c++
+#define MAIN int main() \
+{ \
+    std::cin.get(); \
+}
+```
+
+{{< admonition >}}
+宏常用于跟踪、调试，例如追踪内存分配 (e.g. 那哪一行、哪个函数分配了多少字节)、日志系统的输出
+{{< /admonition >}}
+
+### Function Pointers
+
+#### Pointer to Function in C
+
+- cppreference: [Pointer declaration](https://en.cppreference.com/w/cpp/language/pointer) - **Pointers to functions**
+
+> A pointer to function can be initialized with an address of a non-member function or a static member function. Because of the function-to-pointer implicit conversion, the address-of operator is optional
+
+```c++
+#include <iostream>
+void HelloWorld(int a) 
+{ 
+    std::cout << "Hello, world!" << << a << std::endl; 
+}
+int main()
+{
+    void(*function)(int) = HelloWorld; // C style
+    auto function = HelloWorld; // or &HelloWorld;
+    function(5); // same as call `HelloWorld(5)`
+}
+```
+
+`auto` 在推导裸函数指针 (raw function pointer) 上特别有用 (因为裸函数指针类型实在是太复杂了)。也可以使用 `using` 或 `typedef` 为函数指针取别名，增加可读性:
+
+```c++
+typedef void(*HelloWorldFunction)(int);  // by `typedef`
+using HelloWroldFunction = void(*)(int); // by `using`
+
+HelloWorldFunction function = HelloWorld;
+function(5);
+function(6);
+function(7);
+```
+
+函数指针作为函数参数传递:
+
+```c++
+#include <iostream>
+#include <vector>
+
+void PrintValue(int value)
+{
+    std::cout << "Value: " << value << std::endl;
+}
+
+void ForEach(const std::vector<int>& values, void(*func)(int))
+{
+    for (int value : values)
+        func(value);
+}
+
+int main()
+{
+    std::vector<int> values = { 1, 5, 4, 2, 3 };
+    ForEach(values, PrintValue); // should print 1, 5, 4, 2, 3 line by line
+}
+```
+
+#### Lambdas
+
+- cppreference: [Lambda expressions (since C++11)](https://en.cppreference.com/w/cpp/language/lambda)
+
+> Constructs a closure: an unnamed function object capable of capturing variables in scope.
+
+只要你有一个函数指针，你都可以在 C++ 中使用 Lambda 表达式。即我们会在设置函数指针以指向函数的地方，我们都可以使用 Lambda 表达式来代替函数指针使用 (例如函数参数)。但这个规则是有前提的，仅限于非捕获类的 Lambda 表达式，如果是捕获类的 Lambda 表达式，则需要使用 `std::function`。
+
+使用 Lambda 表达式改写之前的函数指针作为函数参数的例子:
+
+```c++
+int main()
+{
+    std::vector<int> values = { 1, 5, 4, 2, 3 };
+    ForEach(values, [](int value) { std::cout << "Value: " << value << std::endl; });
+}
+```
+
+> The captures is a comma-separated list of zero or more captures, optionally beginning with the *capture-default*. The capture list defines the outside variables that are accessible from within the lambda function body. The only *capture-defaults* are
+> 
+> - `&` (implicitly capture the used variables with automatic storage duration by reference) and
+> - `=` (implicitly capture the used variables with automatic storage duration by copy).
+>
+> The syntax of an individual capture in captures is ...
+
+Lambda 表达式的捕获分为 capture-default 和 individual capture，这两者都是可选的。capture-default 指定的是该 Lambda 表达式默认的捕获规则，而 individual capture 指定的是单独变量的捕获规则。
+
+- cppreference: [std::function](https://en.cppreference.com/w/cpp/utility/functional/function)
+
+```c++
+#include <iostream>
+#include <vector>
+#include <functional>
+#include <algorithm>
+
+void ForEach(const std::vector<int>& values, const std::function<void(int)>& func)
+{
+    for (int value : values)
+        func(value);
+}
+
+int main()
+{
+    std::vector<int> values = { 1, 5, 4, 2, 3 };
+    int a = 5;
+    auto lambda = [=](int value) { std::cout << "Value: " << a << std::endl; };
+    ForEach(values, lambda); // should print 5 five times line by line
+
+    auto it = std::find_if(values.begin(), values.end(), [](int value) { return value > 3; });
+    std::cout << *it << std::endl; // should print 5
+}
+```
+
+- cppreference: [std::find, std::find_if, std::find_if_not](https://en.cppreference.com/w/cpp/algorithm/find)
+
+### Namespaces
 
 ## References
 
