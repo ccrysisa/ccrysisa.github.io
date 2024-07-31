@@ -272,9 +272,9 @@ let solar_distance = HashMap::from([
 
 - [x] 修正 `bucket` 方法，使得其对于空的 `HashMap` 也可以正常工作
 
-- [ ] 在方法 [from_iter](https://doc.rust-lang.org/std/iter/trait.FromIterator.html#tymethod.from_iter) 的实作中采用对 `HashMap` 进行预分配的策略，增强该方法的效能
-
-- [ ] 为 `HashMap` 实现 `&mut` 的迭代器 ***这个很难，因为涉及到可变引用的生命周期***
+- [x] 在方法 [from_iter](https://doc.rust-lang.org/std/iter/trait.FromIterator.html#tymethod.from_iter) 的实作中采用对 `HashMap` 进行预分配的策略，增强该方法的效能 
+    + Hint: [std::iter::Iterator::size_hint](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.size_hint)
+    + Hint: [std::vec::Vec::with_capacity](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.with_capacity)
 
 - [x] 为 `HashMap` 实现 [drain](https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html#method.drain) 方法
 
@@ -283,6 +283,8 @@ let solar_distance = HashMap::from([
 - [x] 为 `HashMap` 实现 [get_mut](https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.get_mut) 方法
 
 - [x] 为 `HashMap` 实现 [clear](https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html#method.clear) 方法
+
+- [ ] 为 `HashMap` 实现 `&mut` 的迭代器 ***这个很难，因为涉及到可变引用的生命周期***
 
 {{< /admonition >}}
 

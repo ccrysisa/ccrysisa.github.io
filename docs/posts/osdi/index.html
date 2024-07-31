@@ -5,94 +5,38 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>南京大学 操作系统: 设计与实现 重点提示 - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
+    <title>操作系统: 设计与实现 - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
-<meta name="description" content="
-    
-      摘要
-    
-    
-      操作系统使用正确的抽象使构造庞大的计算机软件/硬件生态从不可能变为可能。这门课围绕操作系统是 如何设计 (应用程序视角)、怎样实现 (硬件视角) 两个角度展开，分为两个主要部分：
-原理课 (并发/虚拟化/持久化)：以教科书内容为主，介绍操作系统的原理性内容。课程同时注重讲解操作系统相关的代码实现和编程技巧，包括操作系统中常用的命令行/代码工具、教学操作系统 xv6 的代码讲解等
-理解操作系统最重要的实验部分:
-
-Mini labs (应用程序视角；设计)：通过实现一系列有趣的 (黑科技) 代码理解操作系统中对象存在的意义和操作系统 API 的使用方法、设计理念
-OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层实现多处理器操作系统内核，向应用程序提供一些基础操作系统 API
-
-
-    
-  " /><meta name="keywords" content='Linux, OS' /><meta itemprop="name" content="南京大学 操作系统: 设计与实现 重点提示">
-<meta itemprop="description" content="
-    
-      摘要
-    
-    
-      操作系统使用正确的抽象使构造庞大的计算机软件/硬件生态从不可能变为可能。这门课围绕操作系统是 如何设计 (应用程序视角)、怎样实现 (硬件视角) 两个角度展开，分为两个主要部分：
-原理课 (并发/虚拟化/持久化)：以教科书内容为主，介绍操作系统的原理性内容。课程同时注重讲解操作系统相关的代码实现和编程技巧，包括操作系统中常用的命令行/代码工具、教学操作系统 xv6 的代码讲解等
-理解操作系统最重要的实验部分:
-
-Mini labs (应用程序视角；设计)：通过实现一系列有趣的 (黑科技) 代码理解操作系统中对象存在的意义和操作系统 API 的使用方法、设计理念
-OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层实现多处理器操作系统内核，向应用程序提供一些基础操作系统 API
-
-
-    
-  "><meta itemprop="datePublished" content="2024-03-24T10:01:43+08:00" />
-<meta itemprop="dateModified" content="2024-06-16T20:57:36+08:00" />
-<meta itemprop="wordCount" content="2093"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="Linux,OS," /><meta property="og:title" content="南京大学 操作系统: 设计与实现 重点提示" />
-<meta property="og:description" content="
-    
-      摘要
-    
-    
-      操作系统使用正确的抽象使构造庞大的计算机软件/硬件生态从不可能变为可能。这门课围绕操作系统是 如何设计 (应用程序视角)、怎样实现 (硬件视角) 两个角度展开，分为两个主要部分：
-原理课 (并发/虚拟化/持久化)：以教科书内容为主，介绍操作系统的原理性内容。课程同时注重讲解操作系统相关的代码实现和编程技巧，包括操作系统中常用的命令行/代码工具、教学操作系统 xv6 的代码讲解等
-理解操作系统最重要的实验部分:
-
-Mini labs (应用程序视角；设计)：通过实现一系列有趣的 (黑科技) 代码理解操作系统中对象存在的意义和操作系统 API 的使用方法、设计理念
-OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层实现多处理器操作系统内核，向应用程序提供一些基础操作系统 API
-
-
-    
-  " />
+<meta name="description" content="Operating Systems: Design and Implementation" /><meta name="keywords" content='Linux, OS' /><meta itemprop="name" content="操作系统: 设计与实现">
+<meta itemprop="description" content="Operating Systems: Design and Implementation"><meta itemprop="datePublished" content="2024-03-24T10:01:43+08:00" />
+<meta itemprop="dateModified" content="2024-07-31T12:33:36+08:00" />
+<meta itemprop="wordCount" content="2818"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Linux,OS," /><meta property="og:title" content="操作系统: 设计与实现" />
+<meta property="og:description" content="Operating Systems: Design and Implementation" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://ccrysisa.github.io/posts/nju-osdi/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://ccrysisa.github.io/posts/osdi/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-03-24T10:01:43+08:00" />
-<meta property="article:modified_time" content="2024-06-16T20:57:36+08:00" />
+<meta property="article:modified_time" content="2024-07-31T12:33:36+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="南京大学 操作系统: 设计与实现 重点提示"/>
-<meta name="twitter:description" content="
-    
-      摘要
-    
-    
-      操作系统使用正确的抽象使构造庞大的计算机软件/硬件生态从不可能变为可能。这门课围绕操作系统是 如何设计 (应用程序视角)、怎样实现 (硬件视角) 两个角度展开，分为两个主要部分：
-原理课 (并发/虚拟化/持久化)：以教科书内容为主，介绍操作系统的原理性内容。课程同时注重讲解操作系统相关的代码实现和编程技巧，包括操作系统中常用的命令行/代码工具、教学操作系统 xv6 的代码讲解等
-理解操作系统最重要的实验部分:
-
-Mini labs (应用程序视角；设计)：通过实现一系列有趣的 (黑科技) 代码理解操作系统中对象存在的意义和操作系统 API 的使用方法、设计理念
-OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层实现多处理器操作系统内核，向应用程序提供一些基础操作系统 API
-
-
-    
-  "/>
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="操作系统: 设计与实现"/>
+<meta name="twitter:description" content="Operating Systems: Design and Implementation"/>
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/nju-osdi/" /><link rel="prev" href="https://ccrysisa.github.io/posts/subtying-and-variance/" /><link rel="next" href="https://ccrysisa.github.io/posts/c-preprocessor/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://ccrysisa.github.io/posts/osdi/" /><link rel="prev" href="https://ccrysisa.github.io/posts/subtying-and-variance/" /><link rel="next" href="https://ccrysisa.github.io/posts/c-preprocessor/" /><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "南京大学 操作系统: 设计与实现 重点提示",
+    "headline": "操作系统: 设计与实现",
     "inLanguage": "zh-CN",
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": "https:\/\/ccrysisa.github.io\/posts\/nju-osdi\/"
-    },"genre": "posts","keywords": "Linux, OS","wordcount":  2093 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/nju-osdi\/","datePublished": "2024-03-24T10:01:43+08:00","dateModified": "2024-06-16T20:57:36+08:00","publisher": {
+      "@id": "https:\/\/ccrysisa.github.io\/posts\/osdi\/"
+    },"genre": "posts","keywords": "Linux, OS","wordcount":  2818 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/osdi\/","datePublished": "2024-03-24T10:01:43+08:00","dateModified": "2024-07-31T12:33:36+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -216,11 +160,11 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
     </aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>南京大学 操作系统: 设计与实现 重点提示</span>
-      </h1><p class="single-subtitle animate__animated animate__fadeIn">绪论</p></div><div class="post-meta">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>操作系统: 设计与实现</span>
+      </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" data-title="vanJker" data-alt="vanJker" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span>
           <span class="post-category">收录于 <a href="/categories/systems/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Systems</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-24 10:01:43"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-24">2024-03-24</time></span>&nbsp;<span title="更新于 2024-06-16 20:57:36"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-16">2024-06-16</time></span>&nbsp;<span title="2093 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-24 10:01:43"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-24">2024-03-24</time></span>&nbsp;<span title="更新于 2024-07-31 12:33:36"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-07-31">2024-07-31</time></span>&nbsp;<span title="2818 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 6 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -228,17 +172,29 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
         </div>
         <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#操作系统概述">操作系统概述</a></li>
-    <li><a href="#操作系统上的程序">操作系统上的程序</a>
+    <li><a href="#操作系统概述--操作系统上的程序">操作系统概述 | 操作系统上的程序</a>
       <ul>
-        <li><a href="#什么是程序">什么是程序</a></li>
-        <li><a href="#如何在程序的两个视角之间切换">如何在程序的两个视角之间切换？</a></li>
-        <li><a href="#操作系统中的一般程序">操作系统中的一般程序</a></li>
+        <li><a href="#操作系统概述-为什么要学操作系统">操作系统概述 (为什么要学操作系统)</a></li>
+        <li><a href="#操作系统上的程序-什么是程序和编译器">操作系统上的程序 (什么是程序和编译器)</a>
+          <ul>
+            <li><a href="#什么是程序">什么是程序</a></li>
+            <li><a href="#如何在程序的两个视角之间切换">如何在程序的两个视角之间切换？</a></li>
+            <li><a href="#操作系统中的一般程序">操作系统中的一般程序</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#多处理器编程--理解并发程序执行">多处理器编程 | 理解并发程序执行</a>
+      <ul>
+        <li><a href="#多处理器编程从入门到放弃-线程库现代处理器和宽松内存模型">多处理器编程：从入门到放弃 (线程库；现代处理器和宽松内存模型)</a></li>
+        <li><a href="#peterson算法模型检验与软件自动化工具">Peterson算法、模型检验与软件自动化工具</a></li>
       </ul>
     </li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><div class="details admonition abstract open">
+      </div><div class="content" id="content"><p>Operating Systems: Design and Implementation</p>
+<p>时隔一年，在跟随 B 站 up 主 <a href="https://space.bilibili.com/491131440/"target="_blank" rel="external nofollow noopener noreferrer">@踌躇月光</a> 从零编写一个基于 x86 架构的内核 <a href="https://github.com/vanJker/TXOS"target="_blank" rel="external nofollow noopener noreferrer">Txics</a> 后，终于可以跟得上 <a href="https://space.bilibili.com/202224425"target="_blank" rel="external nofollow noopener noreferrer">@绿导师</a> 的课程了 &#x1f923; 这次以 <a href="https://jyywiki.cn/OS/2022/index.html"target="_blank" rel="external nofollow noopener noreferrer">2022 年的 OS 课程</a> 作为主线学习，辅以 <a href="https://jyywiki.cn/OS/2023/index.html"target="_blank" rel="external nofollow noopener noreferrer">2023 年课程</a> 和 <a href="https://jyywiki.cn/OS/2024/index.html"target="_blank" rel="external nofollow noopener noreferrer">2024 年课程</a> 的内容加以补充、扩展，并搭配南大的 ICS 课程进行作业，后期可能会加入清华大学的 rCore 实验 (待定)。</p>
+<div class="details admonition abstract open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -253,9 +209,7 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
 </div>
     </div>
   </div>
-<p>时隔一年，在跟随 B 站 up 主 <a href="https://space.bilibili.com/491131440/"target="_blank" rel="external nofollow noopener noreferrer">@踌躇月光</a> 从零编写一个基于 x86 架构的内核 <a href="https://github.com/vanJker/TXOS"target="_blank" rel="external nofollow noopener noreferrer">Txics</a> 后，终于可以跟得上 <a href="https://space.bilibili.com/202224425"target="_blank" rel="external nofollow noopener noreferrer">@绿导师</a> 的课程了 &#x1f923; 这次以 <a href="https://jyywiki.cn/OS/2022/index.html"target="_blank" rel="external nofollow noopener noreferrer">2022 年的 OS 课程</a> 作为主线学习，辅以 <a href="https://jyywiki.cn/OS/2023/index.html"target="_blank" rel="external nofollow noopener noreferrer">2023 年课程</a> 和 <a href="https://jyywiki.cn/OS/2024/index.html"target="_blank" rel="external nofollow noopener noreferrer">2024 年课程</a> 的内容加以补充、扩展，并搭配南大的 ICS 课程进行作业，后期可能会加入清华大学的 rCore 实验 (待定)。</p>
-<figure><a class="lightgallery" href="https://jyywiki.cn/pages/OS/img/tux-source.jpg?size=large" data-thumbnail="https://jyywiki.cn/pages/OS/img/tux-source.jpg?size=small" data-sub-html="<h2>tux</h2>"><img loading="lazy" src="https://jyywiki.cn/pages/OS/img/tux-source.jpg" srcset="https://jyywiki.cn/pages/OS/img/tux-source.jpg?size=small, https://jyywiki.cn/pages/OS/img/tux-source.jpg?size=medium 1.5x, https://jyywiki.cn/pages/OS/img/tux-source.jpg?size=large 2x" sizes="auto" data-title="https://jyywiki.cn/pages/OS/img/tux-source.jpg" data-alt="https://jyywiki.cn/pages/OS/img/tux-source.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a><figcaption class="image-caption">tux</figcaption>
-  </figure>
+<a class="lightgallery" href="https://jyywiki.cn/pages/OS/img/tux-source.jpg?size=large" data-thumbnail="https://jyywiki.cn/pages/OS/img/tux-source.jpg?size=small" data-sub-html="<h2>https://jyywiki.cn/pages/OS/img/tux-source.jpg</h2>"><img loading="lazy" src="https://jyywiki.cn/pages/OS/img/tux-source.jpg" srcset="https://jyywiki.cn/pages/OS/img/tux-source.jpg?size=small, https://jyywiki.cn/pages/OS/img/tux-source.jpg?size=medium 1.5x, https://jyywiki.cn/pages/OS/img/tux-source.jpg?size=large 2x" sizes="auto" data-title="https://jyywiki.cn/pages/OS/img/tux-source.jpg" data-alt="https://jyywiki.cn/pages/OS/img/tux-source.jpg" width="625" height="640" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
 <div class="details admonition question open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>问题<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -264,10 +218,11 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
       <div class="admonition-content">JYY 2022 年的 OSDI 课程讲义和阅读材料是分开的，2023 年和 2024 年进行了改进，讲义和阅读材料合并成类似于共笔的材料，所以下面有一些 lectures 是没有阅读材料链接的。</div>
     </div>
   </div>
-<h2 id="操作系统概述">操作系统概述</h2>
+<h2 id="操作系统概述--操作系统上的程序">操作系统概述 | 操作系统上的程序</h2>
+<h3 id="操作系统概述-为什么要学操作系统">操作系统概述 (为什么要学操作系统)</h3>
 <div class="details admonition info open">
     <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>为什么要学操作系统<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
       <div class="admonition-content"><a href="https://www.bilibili.com/video/BV1Cm4y1d7Ur/"target="_blank" rel="external nofollow noopener noreferrer">直播录影</a>
@@ -304,8 +259,8 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ uname -a
-</span></span><span class="line"><span class="cl">Linux cai-PC 5.15.77-amd64-desktop <span class="c1">#2 SMP Thu Jun 15 16:06:18 CST 2023 x86_64 GNU/Linux</span></span></span></code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ uname -a
+</span></span><span class="line"><span class="cl">Linux cai-PC 5.15.77-amd64-desktop #2 SMP Thu Jun 15 16:06:18 CST 2023 x86_64 GNU/Linux</span></span></code></pre></td></tr></table>
 </div>
 </div><p>安装 tldr:</p>
 <div class="highlight" id="id-2"><div class="chroma">
@@ -323,10 +278,10 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ sudo apt install manpages manpages-de manpages-de-dev manpages-dev manpages-posix manpages-posix-dev glibc-doc</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="操作系统上的程序">操作系统上的程序</h2>
+</div><h3 id="操作系统上的程序-什么是程序和编译器">操作系统上的程序 (什么是程序和编译器)</h3>
 <div class="details admonition info open">
     <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>什么是程序和编译器<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
       <div class="admonition-content"><a href="https://www.bilibili.com/video/BV12L4y1379V/"target="_blank" rel="external nofollow noopener noreferrer">直播录影</a>
@@ -341,7 +296,7 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
 <li>Make each program do one thing well</li>
 <li>Expect the output of every program to become the input to another</li>
 </ul>
-<h3 id="什么是程序">什么是程序</h3>
+<h4 id="什么是程序">什么是程序</h4>
 <p>计算机是构建在状态机 (数字电路) 之上的，所以运行在计算机之上的程序 (不管是操作系统还是应用，无论是源代码还是二进制) 都是状态机。C程序的状态机模型中，状态是由堆栈确定的，所以函数调用是状态迁移，因为它改变了堆栈，即改变了状态机的状态。明确这一点之后，我们可以通过模拟堆栈的方式，来将任意的递归程序改写为非递归程序，例如经典的汉诺塔程序。</p>
 <blockquote>
 <p>程序 = 状态机</p>
@@ -409,7 +364,7 @@ OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层�
 </div><ul>
 <li><a href="https://man7.org/linux/man-pages/man2/syscall.2.html"target="_blank" rel="external nofollow noopener noreferrer">System Calls Manual</a></li>
 </ul>
-<h3 id="如何在程序的两个视角之间切换">如何在程序的两个视角之间切换？</h3>
+<h4 id="如何在程序的两个视角之间切换">如何在程序的两个视角之间切换？</h4>
 <p>从“状态机”的角度可以帮我们解决一个重要的基本问题: <strong>什么是编译器？？？</strong></p>
 <blockquote>
 <p>编译器: 源代码 S (状态机) $\rightarrow$ 二进制代码 C (状态机)
@@ -429,7 +384,7 @@ $$C=compile(S)$$</p>
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">$ gcc -On -c a.c <span class="c1"># n couldbe 0, 1, 2, 3</span>
 </span></span><span class="line"><span class="cl">$ objdump -d a.o</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="操作系统中的一般程序">操作系统中的一般程序</h3>
+</div><h4 id="操作系统中的一般程序">操作系统中的一般程序</h4>
 <p>对于操作系统之上的程序，它们看待操作系统的视角是 API (syscall)，所以这门课中有一个很重要的工具：<strong>strace</strong> (system call trace 追踪程序运行时使用的系统调用，可以查看程序和操作系统的交互):</p>
 <div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -449,7 +404,7 @@ $$C=compile(S)$$</p>
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>可以通过 <code>apt-file</code> 来检索文件名可能在那些 package 里，例如:</p>
-<div class="highlight" id="id-8"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -462,23 +417,98 @@ $$C=compile(S)$$</p>
 </div>
 </div></div>
     </div>
+  </div>
+<h2 id="多处理器编程--理解并发程序执行">多处理器编程 | 理解并发程序执行</h2>
+<h3 id="多处理器编程从入门到放弃-线程库现代处理器和宽松内存模型">多处理器编程：从入门到放弃 (线程库；现代处理器和宽松内存模型)</h3>
+<div class="details admonition info open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><a href="https://www.bilibili.com/video/BV13u411X72Q/"target="_blank" rel="external nofollow noopener noreferrer">直播录影</a>
+/
+<a href="https://jyywiki.cn/OS/2022/slides/3.slides.html"target="_blank" rel="external nofollow noopener noreferrer">讲义页面</a>
+/
+<a href="https://jyywiki.cn/OS/2022/notes/2.html"target="_blank" rel="external nofollow noopener noreferrer">阅读材料</a></div>
+    </div>
+  </div>
+<ul>
+<li>程序 (源代码 S、二进制代码 C) = 状态机</li>
+<li>编译器 C = compile(S)</li>
+</ul>
+<p>实际上源代码和二进制代码涉及状态转换的操作只有 <strong>内存操作</strong>，即只有内存操作才会改变状态，因为编译器的最佳化策略可能会对源代码对应的指令进行重排序，所以也可能对其中的内存操作指令 <code>load</code>, <code>store</code> 进行重排序，这就使得源代码状态机 $S$ 和二进制状态机 $C$ 并不完全等价，但只要保证二者的可观测行为是一致的即可，这也是编译器最佳化的理论基础。</p>
+<p>函数调用相关的 <code>call</code> 和 <code>return</code> 语句分别对应状态机的进入新状态和返回原状态 (一般情况下，如果没有 side-affect 的话)，可以从上面所说的内存操作/内存状态变化的角度来思考。</p>
+<ul>
+<li>应用视角的操作系统 = syscall 指令</li>
+</ul>
+<p>应用程序对应的状态机自身可转换的状态有限，很多状态都无法仅通过自己达到，所以需要操作系统外加干涉转换成新的状态</p>
+<div class="details admonition note open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">单线程程序是 deterministic 状态机，而多线程程序则是 non-deterministic 状态机，这是因为某个时刻，选择哪一个线程执行是不确定的，而一个线程执行对应了一个状态转换 (因为内存状态发生了变化)，所以是 non-deterministic 状态机。</div>
+    </div>
+  </div>
+<div class="details admonition tip open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content">对于新事物的学习，先在网上搜寻 Tutorial 教程阅读，再查阅 Manual 手册，这样效果比较好</div>
+    </div>
+  </div>
+<p>虽然 <code>printf</code> 有缓冲区，但它是多线程安全的:</p>
+<ul>
+<li>man 3 printf</li>
+</ul>
+<div class="highlight" id="id-8"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">|Interface               │ Attribute     |
+</span></span><span class="line"><span class="cl">|printf(), fprintf(),    │ Thread safety |</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>编译器对内存访问 “eventually consistent” 的处理导致共享内存作为线程同步工具的失效。</p>
+</blockquote>
+<p><em>编译器</em> 和 <em>处理器</em> 都可以进行 <strong>指令重排序</strong>，这导致了写并发程序的困难</p>
+<p>延伸阅读:</p>
+<ul>
+<li><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> Intel 中国: <a href="https://www.bilibili.com/video/BV1844y1z7Dx/"target="_blank" rel="external nofollow noopener noreferrer">CPU架构全览: CPU微架构又是啥？</a></li>
+<li><a href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fconcurrency-ordering"target="_blank" rel="external nofollow noopener noreferrer">並行程式設計: 執行順序</a></li>
+</ul>
+<h3 id="peterson算法模型检验与软件自动化工具">Peterson算法、模型检验与软件自动化工具</h3>
+<div class="details admonition info open">
+    <div class="details-summary admonition-title">
+      <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
+    </div>
+    <div class="details-content">
+      <div class="admonition-content"><a href="https://www.bilibili.com/video/BV15T4y1Q76V/"target="_blank" rel="external nofollow noopener noreferrer">直播录影</a>
+/
+<a href="https://jyywiki.cn/OS/2022/slides/4.slides.html"target="_blank" rel="external nofollow noopener noreferrer">讲义页面</a>
+/
+<a href="https://jyywiki.cn/OS/2022/notes/2.html"target="_blank" rel="external nofollow noopener noreferrer">阅读材料</a></div>
+    </div>
   </div></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-06-16 20:57:36">更新于 2024-06-16&nbsp;</span>
+        <span title="更新于 2024-07-31 12:33:36">更新于 2024-07-31&nbsp;</span>
       </div></div>
     <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/nju-osdi/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-md"><span><a href="/posts/osdi/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/nju-osdi/" data-title="南京大学 操作系统: 设计与实现 重点提示" data-hashtags="Linux,OS"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/nju-osdi/" data-hashtag="Linux"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/nju-osdi/" data-title="南京大学 操作系统: 设计与实现 重点提示" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/nju-osdi/" data-title="南京大学 操作系统: 设计与实现 重点提示"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/nju-osdi/" data-title="南京大学 操作系统: 设计与实现 重点提示"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/nju-osdi/" data-title="南京大学 操作系统: 设计与实现 重点提示" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/nju-osdi/" data-title="南京大学 操作系统: 设计与实现 重点提示" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/nju-osdi/" data-title="南京大学 操作系统: 设计与实现 重点提示"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/osdi/" data-title="操作系统: 设计与实现" data-hashtags="Linux,OS"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/osdi/" data-hashtag="Linux"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/osdi/" data-title="操作系统: 设计与实现" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/osdi/" data-title="操作系统: 设计与实现"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/osdi/" data-title="操作系统: 设计与实现"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/osdi/" data-title="操作系统: 设计与实现" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/osdi/" data-title="操作系统: 设计与实现" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/osdi/" data-title="操作系统: 设计与实现"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
       </div>
     </div>

@@ -4,62 +4,28 @@
     <link>https://ccrysisa.github.io/categories/systems/</link>
     <description>Systems - 分类 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 16 Jun 2024 10:21:22 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/systems/" rel="self" type="application/rss+xml" /><item>
-  <title>南京大学 OSDI 并发 重点提示</title>
-  <link>https://ccrysisa.github.io/posts/nju-osdi-concurrency/</link>
-  <pubDate>Sun, 16 Jun 2024 10:21:22 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/nju-osdi-concurrency/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>南京大学 计算机系统基础 重点提示</title>
-  <link>https://ccrysisa.github.io/posts/nju-ics/</link>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 31 Mar 2024 16:03:59 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/systems/" rel="self" type="application/rss+xml" /><item>
+  <title>计算机系统基础</title>
+  <link>https://ccrysisa.github.io/posts/ics/</link>
   <pubDate>Sun, 31 Mar 2024 16:03:59 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/nju-ics/</guid>
-  <description><![CDATA[<blockquote>
-<p>理解一个系统的最佳实践就是去实现它。因此在本课程的PA 部分，你将会在框架代码的基础上实现一个 RISC-V 全系统模拟器 NEMU，它不仅能运行各类测试程序，甚至还可以运行操作系统和 “仙剑奇侠传”。模拟过硬件的执行，自然就能深 (痛) 入 (苦) 理解计算机系统了。</p>
-</blockquote>]]></description>
+  <guid>https://ccrysisa.github.io/posts/ics/</guid>
+  <description><![CDATA[<p>Introduction to Computer Systems (ICS)</p>]]></description>
 </item>
 <item>
-  <title>南京大学 操作系统: 设计与实现 重点提示</title>
-  <link>https://ccrysisa.github.io/posts/nju-osdi/</link>
+  <title>操作系统: 设计与实现</title>
+  <link>https://ccrysisa.github.io/posts/osdi/</link>
   <pubDate>Sun, 24 Mar 2024 10:01:43 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/nju-osdi/</guid>
-  <description><![CDATA[<div class="details admonition abstract open">
-    <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content"><p>操作系统使用正确的抽象使构造庞大的计算机软件/硬件生态从不可能变为可能。这门课围绕操作系统是 <strong>如何设计</strong> (应用程序视角)、<strong>怎样实现</strong> (硬件视角) 两个角度展开，分为两个主要部分：</p>
-<p>原理课 (并发/虚拟化/持久化)：以教科书内容为主，介绍操作系统的原理性内容。课程同时注重讲解操作系统相关的代码实现和编程技巧，包括操作系统中常用的命令行/代码工具、教学操作系统 xv6 的代码讲解等</p>
-<p>理解操作系统最重要的实验部分:</p>
-<ul>
-<li>Mini labs (应用程序视角；设计)：通过实现一系列有趣的 (黑科技) 代码理解操作系统中对象存在的意义和操作系统 API 的使用方法、设计理念</li>
-<li>OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层实现多处理器操作系统内核，向应用程序提供一些基础操作系统 API</li>
-</ul>
-</div>
-    </div>
-  </div>]]></description>
-</item>
-<item>
-  <title>Impl Rust: TCP/IP</title>
-  <link>https://ccrysisa.github.io/posts/impl-tcp-in-rust/</link>
-  <pubDate>Sat, 17 Feb 2024 19:01:53 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/impl-tcp-in-rust/</guid>
-  <description><![CDATA[<blockquote>
-<p>In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — <a href="https://tools.ietf.org/html/rfc793"target="_blank" rel="external nofollow noopener noreferrer">https://tools.ietf.org/html/rfc793</a> — which describes the original protocol, with the goal of being able to set up and tear down a connection with a &ldquo;real&rdquo; TCP stack at the other end (netcat in particular). We&rsquo;re writing it using a user-space networking interface (see <a href="https://www.kernel.org/doc/Documentation/networking/tuntap.txt"target="_blank" rel="external nofollow noopener noreferrer">https://www.kernel.org/doc/Documentation/networking/tuntap.txt</a> and the Rust bindings at <a href="https://docs.rs/tun-tap/%29"target="_blank" rel="external nofollow noopener noreferrer">https://docs.rs/tun-tap/)</a>.</p>
-</blockquote>]]></description>
+  <guid>https://ccrysisa.github.io/posts/osdi/</guid>
+  <description><![CDATA[<p>Operating Systems: Design and Implementation</p>]]></description>
 </item>
 <item>
   <title>计算机网络</title>
-  <link>https://ccrysisa.github.io/posts/network-and-security/</link>
+  <link>https://ccrysisa.github.io/posts/network/</link>
   <pubDate>Sun, 14 Jan 2024 12:09:38 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/network-and-security/</guid>
+  <guid>https://ccrysisa.github.io/posts/network/</guid>
   <description><![CDATA[]]></description>
 </item>
 </channel>

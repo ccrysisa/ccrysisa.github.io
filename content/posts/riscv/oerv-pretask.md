@@ -22,7 +22,7 @@ tags:
   - chroot
   - nspawn
 categories:
-  - RISC-V
+  - Architecture
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

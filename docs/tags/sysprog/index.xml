@@ -42,16 +42,6 @@
   </div>]]></description>
 </item>
 <item>
-  <title>Rust: 透过 eBPF 探测操作系统行为</title>
-  <link>https://ccrysisa.github.io/posts/rust-ebpf/</link>
-  <pubDate>Mon, 10 Jun 2024 23:38:10 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/rust-ebpf/</guid>
-  <description><![CDATA[<blockquote>
-<p>Programming the Linux Kernel for Enhanced Observability, Networking, and Security</p>
-</blockquote>]]></description>
-</item>
-<item>
   <title>从 Revolution OS 看操作系统生态变化</title>
   <link>https://ccrysisa.github.io/posts/revolution-os/</link>
   <pubDate>Sun, 09 Jun 2024 19:50:03 &#43;0800</pubDate>
@@ -119,6 +109,17 @@
   <guid>https://ccrysisa.github.io/posts/c-undefined-behavior/</guid>
   <description><![CDATA[<blockquote>
 <p>C 語言最初為了開發 UNIX 和系統軟體而生，本質是低階的程式語言，在語言規範層級存在 undefined behavior，可允許編譯器引入更多最佳化</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>你所不知道的 C 语言: 编译器原理和案例分析</title>
+  <link>https://ccrysisa.github.io/posts/c-compiler-construction/</link>
+  <pubDate>Tue, 23 Apr 2024 15:17:38 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/c-compiler-construction/</guid>
+  <description><![CDATA[<blockquote>
+<p>AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。</p>
+<p>預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。</p>
 </blockquote>]]></description>
 </item>
 </channel>

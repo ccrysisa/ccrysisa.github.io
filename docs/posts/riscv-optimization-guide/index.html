@@ -5,19 +5,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
-    <title>RISC-V Optimization Guide 重点提示 - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
+    <title>RISC-V Optimization Guide - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="
 The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.
 近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。
-" /><meta name="keywords" content='RISC-V, Optimization, Architecture' /><meta itemprop="name" content="RISC-V Optimization Guide 重点提示">
+" /><meta name="keywords" content='RISC-V, Optimization, Architecture' /><meta itemprop="name" content="RISC-V Optimization Guide">
 <meta itemprop="description" content="
 The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.
 近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。
 "><meta itemprop="datePublished" content="2024-02-29T23:44:29+08:00" />
 <meta itemprop="dateModified" content="2024-04-10T20:11:10+08:00" />
 <meta itemprop="wordCount" content="1375"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="RISC-V,Optimization,Architecture," /><meta property="og:title" content="RISC-V Optimization Guide 重点提示" />
+<meta itemprop="keywords" content="RISC-V,Optimization,Architecture," /><meta property="og:title" content="RISC-V Optimization Guide" />
 <meta property="og:description" content="
 The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.
 近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。
@@ -28,7 +28,7 @@ The intention is to give specific actionable optimization recommendations for so
 <meta property="article:modified_time" content="2024-04-10T20:11:10+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="RISC-V Optimization Guide 重点提示"/>
+<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="RISC-V Optimization Guide"/>
 <meta name="twitter:description" content="
 The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.
 近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。
@@ -42,7 +42,7 @@ The intention is to give specific actionable optimization recommendations for so
   {
     "@context": "http://schema.org",
     "@type": "BlogPosting",
-    "headline": "RISC-V Optimization Guide 重点提示",
+    "headline": "RISC-V Optimization Guide",
     "inLanguage": "zh-CN",
     "mainEntityOfPage": {
       "@type": "WebPage",
@@ -172,10 +172,10 @@ The intention is to give specific actionable optimization recommendations for so
     </aside>
 
   <article class="page single">
-    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>RISC-V Optimization Guide 重点提示</span>
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>RISC-V Optimization Guide</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/risc-v/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> RISC-V</a></span></div>
+          <span class="post-category">收录于 <a href="/categories/architecture/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Architecture</a></span></div>
       <div class="post-meta-line"><span title="发布于 2024-02-29 23:44:29"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="更新于 2024-04-10 20:11:10"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-10">2024-04-10</time></span>&nbsp;<span title="1375 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
@@ -389,14 +389,14 @@ $$
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/riscv-optimization-guide/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide 重点提示" data-hashtags="RISC-V,Optimization,Architecture"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide" data-hashtags="RISC-V,Optimization,Architecture"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-hashtag="RISC-V"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide 重点提示" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide 重点提示"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide 重点提示"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide 重点提示" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide 重点提示" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
-  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide 重点提示"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide"><i class="fa-brands fa-weibo fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Myspace" data-sharer="myspace" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide" data-description=""><i data-svg-src="/lib/simple-icons/icons/myspace.min.svg" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
+  <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
       </div>
     </div>

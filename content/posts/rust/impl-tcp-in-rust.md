@@ -19,7 +19,6 @@ tags:
   - Network
 categories:
   - Rust
-  - Systems
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

@@ -14,7 +14,7 @@
 本文对通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统的流程进行详细介绍，以及介绍如何通过 mugen 测试框架来对 RISC-V 版本的 openEuler 进行系统、软件等方面测试，并根据测试日志对错误原因进行分析。
 "><meta itemprop="datePublished" content="2024-03-07T14:48:21+08:00" />
 <meta itemprop="dateModified" content="2024-07-23T23:49:04+08:00" />
-<meta itemprop="wordCount" content="2264"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="2517"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="RISC-V,openEuler,QEMU,Mugen," /><meta property="og:title" content="openEuler RISC-V 系统: QEMU 仿真" />
 <meta property="og:description" content="
 本文对通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统的流程进行详细介绍，以及介绍如何通过 mugen 测试框架来对 RISC-V 版本的 openEuler 进行系统、软件等方面测试，并根据测试日志对错误原因进行分析。
@@ -43,7 +43,7 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/openeuler-riscv-qemu\/"
-    },"genre": "posts","keywords": "RISC-V, openEuler, QEMU, Mugen","wordcount":  2264 ,
+    },"genre": "posts","keywords": "RISC-V, openEuler, QEMU, Mugen","wordcount":  2517 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/openeuler-riscv-qemu\/","datePublished": "2024-03-07T14:48:21+08:00","dateModified": "2024-07-23T23:49:04+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -171,8 +171,8 @@
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>openEuler RISC-V 系统: QEMU 仿真</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/risc-v/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> RISC-V</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-07 14:48:21"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-07">2024-03-07</time></span>&nbsp;<span title="更新于 2024-07-23 23:49:04"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-07-23">2024-07-23</time></span>&nbsp;<span title="2264 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2300 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+          <span class="post-category">收录于 <a href="/categories/architecture/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Architecture</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-03-07 14:48:21"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-07">2024-03-07</time></span>&nbsp;<span title="更新于 2024-07-23 23:49:04"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-07-23">2024-07-23</time></span>&nbsp;<span title="2517 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 6 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -191,6 +191,11 @@
         <li><a href="#配置测试套环境变量">配置测试套环境变量</a></li>
         <li><a href="#用例执行--结果分析">用例执行 &amp; 结果分析</a></li>
         <li><a href="#实验总结和讨论">实验总结和讨论</a></li>
+      </ul>
+    </li>
+    <li><a href="#oerv-2403">OERV 24.03</a>
+      <ul>
+        <li><a href="#时间同步">时间同步</a></li>
       </ul>
     </li>
     <li><a href="#references">References</a></li>
@@ -549,12 +554,40 @@ When -D is used, Cppcheck will only check 1 configuration unless these are used.
 <h3 id="实验总结和讨论">实验总结和讨论</h3>
 <p>初步体验了使用 QEMU 构建 openEuler RISC-V 系统虚拟机的流程，以及使用 ssh 连接 QEMU 虚拟机的技巧。实验过程中最大感触是 mugen 的文档，相对于 cppcheck 这类产品的文档，不够详细，很多内容需要阅读源码来理解 (好处是精进了我对 shell 脚本编程的理解 &#x1f923;)。</p>
 <p>我个人比较期待 RISC-V 配合 nommu 在嵌入式这类低功耗领域的发展，同时也对 <a href="https://riscv.org/wp-content/uploads/2017/12/Tue0942-riscv-hypervisor-waterman.pdf"target="_blank" rel="external nofollow noopener noreferrer">RISC-V Hypervisor	Extension</a> 在虚拟化方面的发展感兴趣。</p>
+<h2 id="oerv-2403">OERV 24.03</h2>
+<p><a href="https://www.openeuler.org/zh/blog/20240628-2403/20240628-2403.html"target="_blank" rel="external nofollow noopener noreferrer">openEuler 24.03 LTS 发布，首次实现 RISC-V 原生支持</a></p>
+<ul>
+<li>OERV 24.03 LTS <a href="https://repo.openeuler.org/openEuler-24.03-LTS/"target="_blank" rel="external nofollow noopener noreferrer">下载地址</a></li>
+</ul>
+<p>安装 OERV 24.03 需要 QEMU 8.1 及以上版本，而安装 QEMU 8.1 及以上版本需要 Python 3.8 及以上的版本，但是 deepin 20.9 预装的 Python3 仅为 3.7，参照下面教程手动安装 Python 3.8 及以上版本:</p>
+<ul>
+<li><a href="https://gist.github.com/dev-sareno/1d2bf9cad3a0dc281f0bb16d501a4388"target="_blank" rel="external nofollow noopener noreferrer">How to Install Python 3.8 on Ubuntu and Debian</a></li>
+</ul>
+<p>参照上面安装 QEMU 7.2 安装 QEMU 8.2，并下载 OERV 24.03 LTS RICS-V 的虚拟机 <a href="https://repo.openeuler.org/openEuler-24.03-LTS/virtual_machine_img/riscv64/"target="_blank" rel="external nofollow noopener noreferrer">镜像相关文件</a>，最终启动相应的 QEMU 虚拟机:</p>
+<blockquote>
+<p>注意该虚拟机镜像内只预置了 <code>root</code> 用户，密码为 <code>openEuler12#$</code></p>
+</blockquote>
+<div class="highlight" id="id-25"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">$ uname -a
+</span></span><span class="line"><span class="cl">uname -a
+</span></span><span class="line"><span class="cl">Linux localhost.localdomain 6.6.0-27.0.0.31.oe2403.riscv64 #1 SMP Fri May 24 21:52:58 CST 2024 riscv64 riscv64 riscv64 GNU/Linux</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="时间同步">时间同步</h3>
+<p>QEMU 虚拟机很有可能出现时间日期与宿主机不同步的现象，如果该虚拟机可以访问外部网络的话，可以通过配置 NTP 时间同步服务来解决:</p>
+<ul>
+<li><a href="https://www.cnblogs.com/fanqisoft/p/17891260.html"target="_blank" rel="external nofollow noopener noreferrer">Linux 配置 NTP 时间同步服务</a></li>
+</ul>
 <h2 id="references">References</h2>
 <ul>
 <li>openEuler RISC-V: <a href="https://github.com/openeuler-mirror/RISC-V/blob/master/doc/tutorials/vm-qemu-oErv.md"target="_blank" rel="external nofollow noopener noreferrer">通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统</a></li>
 <li>openEuler RISC-V: <a href="https://gitee.com/openeuler/RISC-V/blob/master/release/openEuler-23.03/Installation_Book/QEMU/README.md"target="_blank" rel="external nofollow noopener noreferrer">使用 QEMU 安装 openEuler RISC-V 23.03</a></li>
 <li>Ariel Heleneto: <a href="https://github.com/ArielHeleneto/Work-PLCT/tree/master/awesomeqemu"target="_blank" rel="external nofollow noopener noreferrer">通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统</a></li>
-<li><a href="https://gist.github.com/dev-sareno/1d2bf9cad3a0dc281f0bb16d501a4388"target="_blank" rel="external nofollow noopener noreferrer">How to Install Python 3.8 on Ubuntu and Debian</a></li>
 <li>openEuler: <a href="https://gitee.com/openeuler/mugen"target="_blank" rel="external nofollow noopener noreferrer">mugen</a></li>
 <li>openEuler Docs: <a href="https://docs.openeuler.org/zh/docs/22.03_LTS_SP2/docs/Administration/%E4%BD%BF%E7%94%A8DNF%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E5%8C%85.html"target="_blank" rel="external nofollow noopener noreferrer">使用 DNF 管理软件包</a></li>
 <li><a href="http://devops-dev.com/article/438"target="_blank" rel="external nofollow noopener noreferrer">基于 openEuler 虚拟机本地执行 mugen 测试脚本</a></li>

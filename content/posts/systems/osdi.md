@@ -1,6 +1,6 @@
 ---
-title: "南京大学 操作系统: 设计与实现 重点提示"
-subtitle: 绪论
+title: "操作系统: 设计与实现"
+subtitle:
 date: 2024-03-24T10:01:43+08:00
 # draft: true
 author:
@@ -39,6 +39,12 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
+Operating Systems: Design and Implementation
+
+<!--more-->
+
+时隔一年，在跟随 B 站 up 主 [@踌躇月光](https://space.bilibili.com/491131440/) 从零编写一个基于 x86 架构的内核 [Txics](https://github.com/vanJker/TXOS) 后，终于可以跟得上 [@绿导师](https://space.bilibili.com/202224425) 的课程了 :rofl: 这次以 [2022 年的 OS 课程](https://jyywiki.cn/OS/2022/index.html) 作为主线学习，辅以 [2023 年课程](https://jyywiki.cn/OS/2023/index.html) 和 [2024 年课程](https://jyywiki.cn/OS/2024/index.html) 的内容加以补充、扩展，并搭配南大的 ICS 课程进行作业，后期可能会加入清华大学的 rCore 实验 (待定)。
+
 {{< admonition abstract >}}
 操作系统使用正确的抽象使构造庞大的计算机软件/硬件生态从不可能变为可能。这门课围绕操作系统是 **如何设计** (应用程序视角)、**怎样实现** (硬件视角) 两个角度展开，分为两个主要部分：
 
@@ -49,19 +55,17 @@ repost:
 - OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层实现多处理器操作系统内核，向应用程序提供一些基础操作系统 API
 {{< /admonition >}}
 
-<!--more-->
-
-时隔一年，在跟随 B 站 up 主 [@踌躇月光](https://space.bilibili.com/491131440/) 从零编写一个基于 x86 架构的内核 [Txics](https://github.com/vanJker/TXOS) 后，终于可以跟得上 [@绿导师](https://space.bilibili.com/202224425) 的课程了 :rofl: 这次以 [2022 年的 OS 课程](https://jyywiki.cn/OS/2022/index.html) 作为主线学习，辅以 [2023 年课程](https://jyywiki.cn/OS/2023/index.html) 和 [2024 年课程](https://jyywiki.cn/OS/2024/index.html) 的内容加以补充、扩展，并搭配南大的 ICS 课程进行作业，后期可能会加入清华大学的 rCore 实验 (待定)。
-
-{{< image src="https://jyywiki.cn/pages/OS/img/tux-source.jpg" caption="tux" >}}
+{{< image src="https://jyywiki.cn/pages/OS/img/tux-source.jpg" width=625 height=640 >}}
 
 {{< admonition question >}}
 JYY 2022 年的 OSDI 课程讲义和阅读材料是分开的，2023 年和 2024 年进行了改进，讲义和阅读材料合并成类似于共笔的材料，所以下面有一些 lectures 是没有阅读材料链接的。
 {{< /admonition >}}
 
-## 操作系统概述 
+## 操作系统概述 | 操作系统上的程序
 
-{{< admonition info "为什么要学操作系统" >}}
+### 操作系统概述 (为什么要学操作系统) 
+
+{{< admonition info >}}
 [直播录影](https://www.bilibili.com/video/BV1Cm4y1d7Ur/)
 /
 [讲义页面](https://jyywiki.cn/OS/2022/slides/1.slides.html)
@@ -89,7 +93,7 @@ JYY 2022 年的 OSDI 课程讲义和阅读材料是分开的，2023 年和 2024 
 - 硬件视角：一个 C 程序
 
 实验环境: deepin 20.9
-```bash
+```
 $ uname -a
 Linux cai-PC 5.15.77-amd64-desktop #2 SMP Thu Jun 15 16:06:18 CST 2023 x86_64 GNU/Linux
 ```
@@ -104,9 +108,9 @@ $ sudo apt install tldr
 $ sudo apt install manpages manpages-de manpages-de-dev manpages-dev manpages-posix manpages-posix-dev glibc-doc
 ```
 
-## 操作系统上的程序 
+### 操作系统上的程序 (什么是程序和编译器)
 
-{{< admonition info "什么是程序和编译器" >}}
+{{< admonition info >}}
 [直播录影](https://www.bilibili.com/video/BV12L4y1379V/)
 /
 [讲义页面](https://jyywiki.cn/OS/2022/slides/2.slides.html)
@@ -118,7 +122,7 @@ UNIX 哲学:
 - Make each program do one thing well
 - Expect the output of every program to become the input to another
 
-### 什么是程序
+#### 什么是程序
 
 计算机是构建在状态机 (数字电路) 之上的，所以运行在计算机之上的程序 (不管是操作系统还是应用，无论是源代码还是二进制) 都是状态机。C程序的状态机模型中，状态是由堆栈确定的，所以函数调用是状态迁移，因为它改变了堆栈，即改变了状态机的状态。明确这一点之后，我们可以通过模拟堆栈的方式，来将任意的递归程序改写为非递归程序，例如经典的汉诺塔程序。
 
@@ -161,7 +165,7 @@ int main() {
 
 - [System Calls Manual](https://man7.org/linux/man-pages/man2/syscall.2.html)
 
-### 如何在程序的两个视角之间切换？
+#### 如何在程序的两个视角之间切换？
 
 从“状态机”的角度可以帮我们解决一个重要的基本问题: **什么是编译器？？？**
 
@@ -179,7 +183,7 @@ $ gcc -On -c a.c # n couldbe 0, 1, 2, 3
 $ objdump -d a.o
 ```
 
-### 操作系统中的一般程序
+#### 操作系统中的一般程序
 
 对于操作系统之上的程序，它们看待操作系统的视角是 API (syscall)，所以这门课中有一个很重要的工具：**strace** (system call trace 追踪程序运行时使用的系统调用，可以查看程序和操作系统的交互):
 
@@ -200,5 +204,59 @@ $ sudo apt-file search <filename>
 ```
 {{< /admonition >}}
 
+## 多处理器编程 | 理解并发程序执行
 
+### 多处理器编程：从入门到放弃 (线程库；现代处理器和宽松内存模型) 
 
+{{< admonition info >}}
+[直播录影](https://www.bilibili.com/video/BV13u411X72Q/)
+/
+[讲义页面](https://jyywiki.cn/OS/2022/slides/3.slides.html)
+/
+[阅读材料](https://jyywiki.cn/OS/2022/notes/2.html)
+{{< /admonition >}}
+
+- 程序 (源代码 S、二进制代码 C) = 状态机   
+- 编译器 C = compile(S)
+
+实际上源代码和二进制代码涉及状态转换的操作只有 **内存操作**，即只有内存操作才会改变状态，因为编译器的最佳化策略可能会对源代码对应的指令进行重排序，所以也可能对其中的内存操作指令 `load`, `store` 进行重排序，这就使得源代码状态机 $S$ 和二进制状态机 $C$ 并不完全等价，但只要保证二者的可观测行为是一致的即可，这也是编译器最佳化的理论基础。
+
+函数调用相关的 `call` 和 `return` 语句分别对应状态机的进入新状态和返回原状态 (一般情况下，如果没有 side-affect 的话)，可以从上面所说的内存操作/内存状态变化的角度来思考。
+
+- 应用视角的操作系统 = syscall 指令
+
+应用程序对应的状态机自身可转换的状态有限，很多状态都无法仅通过自己达到，所以需要操作系统外加干涉转换成新的状态
+
+{{< admonition >}}
+单线程程序是 deterministic 状态机，而多线程程序则是 non-deterministic 状态机，这是因为某个时刻，选择哪一个线程执行是不确定的，而一个线程执行对应了一个状态转换 (因为内存状态发生了变化)，所以是 non-deterministic 状态机。
+{{< /admonition >}}
+
+{{< admonition tip >}}
+对于新事物的学习，先在网上搜寻 Tutorial 教程阅读，再查阅 Manual 手册，这样效果比较好
+{{< /admonition >}}
+
+虽然 `printf` 有缓冲区，但它是多线程安全的:
+
+- man 3 printf
+```
+|Interface               │ Attribute     |
+|printf(), fprintf(),    │ Thread safety |
+```
+
+> 编译器对内存访问 “eventually consistent” 的处理导致共享内存作为线程同步工具的失效。
+
+*编译器* 和 *处理器* 都可以进行 **指令重排序**，这导致了写并发程序的困难
+
+延伸阅读:
+- [ ] Intel 中国: [CPU架构全览: CPU微架构又是啥？](https://www.bilibili.com/video/BV1844y1z7Dx/)
+- [並行程式設計: 執行順序](https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fconcurrency-ordering) 
+
+### Peterson算法、模型检验与软件自动化工具
+
+{{< admonition info >}}
+[直播录影](https://www.bilibili.com/video/BV15T4y1Q76V/)
+/
+[讲义页面](https://jyywiki.cn/OS/2022/slides/4.slides.html)
+/
+[阅读材料](https://jyywiki.cn/OS/2022/notes/2.html)
+{{< /admonition >}}

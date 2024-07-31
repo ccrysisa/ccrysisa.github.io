@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/tags/linux/</link>
     <description>Linux - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 16 Jun 2024 10:21:22 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 09 Jun 2024 19:50:03 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/linux/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -13,14 +13,6 @@
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
 </blockquote>]]></description>
-</item>
-<item>
-  <title>南京大学 OSDI 并发 重点提示</title>
-  <link>https://ccrysisa.github.io/posts/nju-osdi-concurrency/</link>
-  <pubDate>Sun, 16 Jun 2024 10:21:22 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/nju-osdi-concurrency/</guid>
-  <description><![CDATA[]]></description>
 </item>
 <item>
   <title>从 Revolution OS 看操作系统生态变化</title>
@@ -69,14 +61,12 @@
 </blockquote>]]></description>
 </item>
 <item>
-  <title>南京大学 计算机系统基础 重点提示</title>
-  <link>https://ccrysisa.github.io/posts/nju-ics/</link>
+  <title>计算机系统基础</title>
+  <link>https://ccrysisa.github.io/posts/ics/</link>
   <pubDate>Sun, 31 Mar 2024 16:03:59 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/nju-ics/</guid>
-  <description><![CDATA[<blockquote>
-<p>理解一个系统的最佳实践就是去实现它。因此在本课程的PA 部分，你将会在框架代码的基础上实现一个 RISC-V 全系统模拟器 NEMU，它不仅能运行各类测试程序，甚至还可以运行操作系统和 “仙剑奇侠传”。模拟过硬件的执行，自然就能深 (痛) 入 (苦) 理解计算机系统了。</p>
-</blockquote>]]></description>
+  <guid>https://ccrysisa.github.io/posts/ics/</guid>
+  <description><![CDATA[<p>Introduction to Computer Systems (ICS)</p>]]></description>
 </item>
 <item>
   <title>Deepin 20.9 KVM 安装和管理</title>
@@ -87,26 +77,12 @@
   <description><![CDATA[<p>本篇主要介绍在 deepin20.9 操作系统平台下，使用 KVM 虚拟化技术来创建和安装 Linux 发行版，并以创建安装 openEuler 22.03 LTS SP3 的 KVM 虚拟机作为示范，让学员领略 KVM 虚拟化技术的强大魅力。</p>]]></description>
 </item>
 <item>
-  <title>南京大学 操作系统: 设计与实现 重点提示</title>
-  <link>https://ccrysisa.github.io/posts/nju-osdi/</link>
+  <title>操作系统: 设计与实现</title>
+  <link>https://ccrysisa.github.io/posts/osdi/</link>
   <pubDate>Sun, 24 Mar 2024 10:01:43 &#43;0800</pubDate>
   <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/nju-osdi/</guid>
-  <description><![CDATA[<div class="details admonition abstract open">
-    <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content"><p>操作系统使用正确的抽象使构造庞大的计算机软件/硬件生态从不可能变为可能。这门课围绕操作系统是 <strong>如何设计</strong> (应用程序视角)、<strong>怎样实现</strong> (硬件视角) 两个角度展开，分为两个主要部分：</p>
-<p>原理课 (并发/虚拟化/持久化)：以教科书内容为主，介绍操作系统的原理性内容。课程同时注重讲解操作系统相关的代码实现和编程技巧，包括操作系统中常用的命令行/代码工具、教学操作系统 xv6 的代码讲解等</p>
-<p>理解操作系统最重要的实验部分:</p>
-<ul>
-<li>Mini labs (应用程序视角；设计)：通过实现一系列有趣的 (黑科技) 代码理解操作系统中对象存在的意义和操作系统 API 的使用方法、设计理念</li>
-<li>OS labs (计算机硬件视角；实现)：基于一个简化的硬件抽象层实现多处理器操作系统内核，向应用程序提供一些基础操作系统 API</li>
-</ul>
-</div>
-    </div>
-  </div>]]></description>
+  <guid>https://ccrysisa.github.io/posts/osdi/</guid>
+  <description><![CDATA[<p>Operating Systems: Design and Implementation</p>]]></description>
 </item>
 <item>
   <title>Linux 核心的 hash table 实作</title>
@@ -116,6 +92,17 @@
   <guid>https://ccrysisa.github.io/posts/linux-hashtable/</guid>
   <description><![CDATA[<blockquote>
 <p>Linux 核心如同其它复杂的资讯系统，也提供 <a href="https://en.wikipedia.org/wiki/Hash_table"target="_blank" rel="external nofollow noopener noreferrer">hash table</a> 的实作，但其原始程式码中却藏有间接指针 (可参见 <a href="https://hackmd.io/@sysprog/c-linked-list"target="_blank" rel="external nofollow noopener noreferrer">你所不知道的 C 语言: linked list 和非连续内存</a>) 的巧妙和数学奥秘。</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>并行程序设计: 执行顺序</title>
+  <link>https://ccrysisa.github.io/posts/concurrency-ordering/</link>
+  <pubDate>Mon, 11 Mar 2024 16:23:57 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/concurrency-ordering/</guid>
+  <description><![CDATA[<blockquote>
+<p>多執行緒環境下，程式會出問題，往往在於執行順序的不確定性。一旦顧及分散式系統 (distributed systems)，執行順序和衍生的時序 (timing) 問題更加複雜。</p>
+<p>我們將從如何定義程式執行的順序開始說起，為了簡單起見，我們先從單執行緒的觀點來看執行順序這件事，其中最關鍵知識就是 Sequenced-before，你將會發現就連單執行緒的程式，也可能會產生不確定的執行順序。</p>
 </blockquote>]]></description>
 </item>
 </channel>

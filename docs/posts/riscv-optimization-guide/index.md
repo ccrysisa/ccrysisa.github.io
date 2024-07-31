@@ -1,4 +1,4 @@
-# RISC-V Optimization Guide 重点提示
+# RISC-V Optimization Guide
 
 
 > The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.

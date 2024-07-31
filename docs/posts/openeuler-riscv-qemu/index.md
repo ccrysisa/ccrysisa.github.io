@@ -248,12 +248,37 @@ $ echo $?
 
 我个人比较期待 RISC-V 配合 nommu 在嵌入式这类低功耗领域的发展，同时也对 [RISC-V Hypervisor	Extension](https://riscv.org/wp-content/uploads/2017/12/Tue0942-riscv-hypervisor-waterman.pdf) 在虚拟化方面的发展感兴趣。
 
+## OERV 24.03
+
+[openEuler 24.03 LTS 发布，首次实现 RISC-V 原生支持](https://www.openeuler.org/zh/blog/20240628-2403/20240628-2403.html)
+
+- OERV 24.03 LTS [下载地址](https://repo.openeuler.org/openEuler-24.03-LTS/)
+
+安装 OERV 24.03 需要 QEMU 8.1 及以上版本，而安装 QEMU 8.1 及以上版本需要 Python 3.8 及以上的版本，但是 deepin 20.9 预装的 Python3 仅为 3.7，参照下面教程手动安装 Python 3.8 及以上版本:
+
+- [How to Install Python 3.8 on Ubuntu and Debian](https://gist.github.com/dev-sareno/1d2bf9cad3a0dc281f0bb16d501a4388)
+
+参照上面安装 QEMU 7.2 安装 QEMU 8.2，并下载 OERV 24.03 LTS RICS-V 的虚拟机 [镜像相关文件](https://repo.openeuler.org/openEuler-24.03-LTS/virtual_machine_img/riscv64/)，最终启动相应的 QEMU 虚拟机:
+
+> 注意该虚拟机镜像内只预置了 `root` 用户，密码为 `openEuler12#$`
+
+```
+$ uname -a
+uname -a
+Linux localhost.localdomain 6.6.0-27.0.0.31.oe2403.riscv64 #1 SMP Fri May 24 21:52:58 CST 2024 riscv64 riscv64 riscv64 GNU/Linux
+```
+
+### 时间同步
+
+QEMU 虚拟机很有可能出现时间日期与宿主机不同步的现象，如果该虚拟机可以访问外部网络的话，可以通过配置 NTP 时间同步服务来解决:
+
+- [Linux 配置 NTP 时间同步服务](https://www.cnblogs.com/fanqisoft/p/17891260.html)
+
 ## References
 
 - openEuler RISC-V: [通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统](https://github.com/openeuler-mirror/RISC-V/blob/master/doc/tutorials/vm-qemu-oErv.md)
 - openEuler RISC-V: [使用 QEMU 安装 openEuler RISC-V 23.03](https://gitee.com/openeuler/RISC-V/blob/master/release/openEuler-23.03/Installation_Book/QEMU/README.md)
 - Ariel Heleneto: [通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统](https://github.com/ArielHeleneto/Work-PLCT/tree/master/awesomeqemu)
-- [How to Install Python 3.8 on Ubuntu and Debian](https://gist.github.com/dev-sareno/1d2bf9cad3a0dc281f0bb16d501a4388)
 - openEuler: [mugen](https://gitee.com/openeuler/mugen)
 - openEuler Docs: [使用 DNF 管理软件包](https://docs.openeuler.org/zh/docs/22.03_LTS_SP2/docs/Administration/%E4%BD%BF%E7%94%A8DNF%E7%AE%A1%E7%90%86%E8%BD%AF%E4%BB%B6%E5%8C%85.html)
 - [基于 openEuler 虚拟机本地执行 mugen 测试脚本](http://devops-dev.com/article/438)

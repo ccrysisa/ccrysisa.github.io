@@ -42,16 +42,6 @@
   </div>]]></description>
 </item>
 <item>
-  <title>Rust: 透过 eBPF 探测操作系统行为</title>
-  <link>https://ccrysisa.github.io/posts/rust-ebpf/</link>
-  <pubDate>Mon, 10 Jun 2024 23:38:10 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/rust-ebpf/</guid>
-  <description><![CDATA[<blockquote>
-<p>Programming the Linux Kernel for Enhanced Observability, Networking, and Security</p>
-</blockquote>]]></description>
-</item>
-<item>
   <title>Command Line Applications in Rust</title>
   <link>https://ccrysisa.github.io/posts/rust-cli/</link>
   <pubDate>Mon, 29 Apr 2024 16:23:33 &#43;0800</pubDate>
@@ -82,14 +72,6 @@
 </blockquote>]]></description>
 </item>
 <item>
-  <title>Build a Ranked-choice voting site in Rust</title>
-  <link>https://ccrysisa.github.io/posts/build-a-ranked-choice-voting-site-in-rust/</link>
-  <pubDate>Fri, 08 Mar 2024 21:14:30 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/build-a-ranked-choice-voting-site-in-rust/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
   <title>Crust of Rust: Sorting Algorithms</title>
   <link>https://ccrysisa.github.io/posts/orst/</link>
   <pubDate>Mon, 04 Mar 2024 15:02:28 &#43;0800</pubDate>
@@ -107,6 +89,26 @@
   <guid>https://ccrysisa.github.io/posts/channels/</guid>
   <description><![CDATA[<blockquote>
 <p>In this (fifth) Crust of Rust video, we cover multi-produce/single-consumer (mpsc) channels, by re-implementing some of the std::sync::mpsc types from the standard library. As part of that, we cover what channels are used for, how they work at a high level, different common channel variants, and common channel implementations. In the process, we go over some common Rust concurrency primitives like Mutex and Condvar.</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>Crust of Rust: Smart Pointers and Interior Mutability</title>
+  <link>https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/</link>
+  <pubDate>Tue, 20 Feb 2024 17:33:06 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/</guid>
+  <description><![CDATA[<blockquote>
+<p>In this fourth Crust of Rust video, we cover smart pointers and interior mutability, by re-implementing the Cell, RefCell, and Rc types from the standard library. As part of that, we cover when those types are useful, how they work, and what the equivalent thread-safe versions of these types are. In the process, we go over some of the finer details of Rust's ownership model, and the UnsafeCell type. We also dive briefly into the Drop Check rabbit hole (<a href="https://doc.rust-lang.org/nightly/nomicon/dropck.html"target="_blank" rel="external nofollow noopener noreferrer">https://doc.rust-lang.org/nightly/nomicon/dropck.html</a>) before coming back up for air.</p>
+</blockquote>]]></description>
+</item>
+<item>
+  <title>Impl Rust: TCP/IP</title>
+  <link>https://ccrysisa.github.io/posts/impl-tcp-in-rust/</link>
+  <pubDate>Sat, 17 Feb 2024 19:01:53 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/impl-tcp-in-rust/</guid>
+  <description><![CDATA[<blockquote>
+<p>In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — <a href="https://tools.ietf.org/html/rfc793"target="_blank" rel="external nofollow noopener noreferrer">https://tools.ietf.org/html/rfc793</a> — which describes the original protocol, with the goal of being able to set up and tear down a connection with a &ldquo;real&rdquo; TCP stack at the other end (netcat in particular). We&rsquo;re writing it using a user-space networking interface (see <a href="https://www.kernel.org/doc/Documentation/networking/tuntap.txt"target="_blank" rel="external nofollow noopener noreferrer">https://www.kernel.org/doc/Documentation/networking/tuntap.txt</a> and the Rust bindings at <a href="https://docs.rs/tun-tap/%29"target="_blank" rel="external nofollow noopener noreferrer">https://docs.rs/tun-tap/)</a>.</p>
 </blockquote>]]></description>
 </item>
 </channel>

@@ -9,20 +9,20 @@
 <meta name="author-link" content="https://github.com/ccrysisa">
 <meta name="description" content="
 We&#39;re writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you&#39;d make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you&#39;re a newcomer to the language or not.
-" /><meta name="keywords" content='Rust, Hash' /><meta itemprop="name" content="Build a linked hash map in Rust">
+" /><meta name="keywords" content='Rust, Hash Map' /><meta itemprop="name" content="Build a linked hash map in Rust">
 <meta itemprop="description" content="
 We&#39;re writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you&#39;d make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you&#39;re a newcomer to the language or not.
 "><meta itemprop="datePublished" content="2024-06-28T11:16:51+08:00" />
-<meta itemprop="dateModified" content="2024-06-30T22:21:01+08:00" />
-<meta itemprop="wordCount" content="2033"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="Rust,Hash," /><meta property="og:title" content="Build a linked hash map in Rust" />
+<meta itemprop="dateModified" content="2024-07-28T23:34:04+08:00" />
+<meta itemprop="wordCount" content="2072"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="keywords" content="Rust,Hash Map," /><meta property="og:title" content="Build a linked hash map in Rust" />
 <meta property="og:description" content="
 We&#39;re writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you&#39;d make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you&#39;re a newcomer to the language or not.
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-28T11:16:51+08:00" />
-<meta property="article:modified_time" content="2024-06-30T22:21:01+08:00" />
+<meta property="article:modified_time" content="2024-07-28T23:34:04+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Build a linked hash map in Rust"/>
@@ -43,8 +43,8 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/build-a-linked-hashmap-in-rust\/"
-    },"genre": "posts","keywords": "Rust, Hash","wordcount":  2033 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/build-a-linked-hashmap-in-rust\/","datePublished": "2024-06-28T11:16:51+08:00","dateModified": "2024-06-30T22:21:01+08:00","publisher": {
+    },"genre": "posts","keywords": "Rust, Hash Map","wordcount":  2072 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/build-a-linked-hashmap-in-rust\/","datePublished": "2024-06-28T11:16:51+08:00","dateModified": "2024-07-28T23:34:04+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -172,7 +172,7 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-06-28 11:16:51"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-28">2024-06-28</time></span>&nbsp;<span title="更新于 2024-06-30 22:21:01"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-30">2024-06-30</time></span>&nbsp;<span title="2033 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-06-28 11:16:51"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-28">2024-06-28</time></span>&nbsp;<span title="更新于 2024-07-28 23:34:04"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-07-28">2024-07-28</time></span>&nbsp;<span title="2072 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -560,19 +560,26 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 <p><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 修正 <code>bucket</code> 方法，使得其对于空的 <code>HashMap</code> 也可以正常工作</p>
 </li>
 <li>
-<p><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 在方法 <a href="https://doc.rust-lang.org/std/iter/trait.FromIterator.html#tymethod.from_iter"target="_blank" rel="external nofollow noopener noreferrer">from_iter</a> 的实作中采用对 <code>HashMap</code> 进行预分配的策略，增强该方法的效能</p>
+<p><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 在方法 <a href="https://doc.rust-lang.org/std/iter/trait.FromIterator.html#tymethod.from_iter"target="_blank" rel="external nofollow noopener noreferrer">from_iter</a> 的实作中采用对 <code>HashMap</code> 进行预分配的策略，增强该方法的效能</p>
+<ul>
+<li>Hint: <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.size_hint"target="_blank" rel="external nofollow noopener noreferrer">std::iter::Iterator::size_hint</a></li>
+<li>Hint: <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.with_capacity"target="_blank" rel="external nofollow noopener noreferrer">std::vec::Vec::with_capacity</a></li>
+</ul>
 </li>
 <li>
-<p><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 为 <code>HashMap</code> 实现 <code>&amp;mut</code> 的迭代器</p>
-</li>
-<li>
-<p><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 为 <code>HashMap</code> 实现 <a href="https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html#method.drain"target="_blank" rel="external nofollow noopener noreferrer">drain</a> 方法</p>
+<p><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 为 <code>HashMap</code> 实现 <a href="https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html#method.drain"target="_blank" rel="external nofollow noopener noreferrer">drain</a> 方法</p>
 </li>
 <li>
 <p><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 为 <code>HashMap</code> 实现 <a href="https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html#method.remove_entry"target="_blank" rel="external nofollow noopener noreferrer">remove_entry</a> 方法</p>
 </li>
 <li>
-<p><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 为 <code>HashMap</code> 实现 <a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.get_mut"target="_blank" rel="external nofollow noopener noreferrer">get_mut</a> 方法</p>
+<p><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 为 <code>HashMap</code> 实现 <a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.get_mut"target="_blank" rel="external nofollow noopener noreferrer">get_mut</a> 方法</p>
+</li>
+<li>
+<p><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 为 <code>HashMap</code> 实现 <a href="https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html#method.clear"target="_blank" rel="external nofollow noopener noreferrer">clear</a> 方法</p>
+</li>
+<li>
+<p><i class="fa-regular fa-square fa-fw" aria-hidden="true"></i> 为 <code>HashMap</code> 实现 <code>&amp;mut</code> 的迭代器 <em><strong>这个很难，因为涉及到可变引用的生命周期</strong></em></p>
 </li>
 </ul>
 </div>
@@ -617,6 +624,7 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 <li>method <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.is_empty"target="_blank" rel="external nofollow noopener noreferrer">std::vec::Vec::is_empty</a></li>
 <li>method <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.retain"target="_blank" rel="external nofollow noopener noreferrer">std::vec::Vec::retain</a></li>
 <li>method <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.swap_remove"target="_blank" rel="external nofollow noopener noreferrer">std::vec::Vec::swap_remove</a></li>
+<li>method <a href="https://doc.rust-lang.org/std/vec/struct.Vec.html#method.clear"target="_blank" rel="external nofollow noopener noreferrer">std::vec::Vec::clear</a></li>
 </ul>
 </li>
 <li>
@@ -634,6 +642,9 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 <p>Trait <a href="https://doc.rust-lang.org/std/iter/trait.FromIterator.html"target="_blank" rel="external nofollow noopener noreferrer">std::iter::FromIterator</a></p>
 </li>
 <li>
+<p>Trait <a href="https://doc.rust-lang.org/std/ops/trait.Drop.html"target="_blank" rel="external nofollow noopener noreferrer">std::ops::Drop</a></p>
+</li>
+<li>
 <p>trait method <a href="https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend"target="_blank" rel="external nofollow noopener noreferrer">std::iter::Extend::extend</a></p>
 </li>
 <li>
@@ -645,18 +656,19 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 </ul>
 <h2 id="references">References</h2>
 <ul>
+<li>Tsoding: <a href="https://www.youtube.com/watch?v=YBzNFt4wapA"target="_blank" rel="external nofollow noopener noreferrer">Hash Table in Rust</a></li>
 <li><a href="https://rust-lang.github.io/api-guidelines/about.html"target="_blank" rel="external nofollow noopener noreferrer">Rust API Guidelines</a></li>
 <li><a href="https://doc.rust-lang.org/cargo/index.html"target="_blank" rel="external nofollow noopener noreferrer">The Cargo Book</a></li>
 </ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-06-30 22:21:01">更新于 2024-06-30&nbsp;</span>
+        <span title="更新于 2024-07-28 23:34:04">更新于 2024-07-28&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/build-a-linked-hashmap-in-rust/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
       <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/" data-title="Build a linked hash map in Rust" data-hashtags="Rust,Hash"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/" data-title="Build a linked hash map in Rust" data-hashtags="Rust,Hash Map"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/" data-hashtag="Rust"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/" data-title="Build a linked hash map in Rust" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/" data-title="Build a linked hash map in Rust"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -670,7 +682,7 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
   </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/rust/' class="post-tag">Rust</a><a href='/tags/hash/' class="post-tag">Hash</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/rust/' class="post-tag">Rust</a><a href='/tags/hash-map/' class="post-tag">Hash Map</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
