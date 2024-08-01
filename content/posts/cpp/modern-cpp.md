@@ -1027,7 +1027,7 @@ public:
     
     void Hello() {}
 };
-Singleton* Singleton::s_Instance = nullptr;
+Singleton* Singleton::s_Instance = nullptr; // or `new Singleton`
 // or
 class Singleton
 {
@@ -1626,7 +1626,7 @@ VS 在调试模式下进行编译，会对内存分配的对象额外分配 **�
 `std::string` 在函数参数中使用时，需要特别考虑是否应该使用引用 `&` 操作，以避免无效的拷贝开销
 {{< /admonition >}}
 
-#### char types
+#### Char Types
 
 - cppreference: [Fundamental types](https://en.cppreference.com/w/cpp/language/types)
 - cppreference: [C++ keyword: wchar_t](https://en.cppreference.com/w/cpp/keyword/wchar_t)
@@ -2100,6 +2100,186 @@ int main()
 - cppreference: [std::find, std::find_if, std::find_if_not](https://en.cppreference.com/w/cpp/algorithm/find)
 
 ### Namespaces
+
+- cppreference: [Namespaces](https://en.cppreference.com/w/cpp/language/namespace)
+
+> Namespaces provide a method for preventing name conflicts in large projects.
+
+Rust 中的 [Module](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html) 也是类似的语法
+
+类本身也是一个 namespace，所以使用类似的操作符 `::` 访问内部成员
+
+#### Don't "using namspace std" 
+
+不推荐使用 `using namespace std;` 类似的语句，使用 `std;:xxx` 这样的风格。因为现实中比较少用 STL，都是工作室自己开发类似 STL 的库来使用，这样可以区分代码中使用的是哪个库的 API。
+
+实作案例: EASTL [vector.h](https://github.com/electronicarts/EASTL/blob/master/include/EASTL/vector.h#L77)
+
+```c++
+vector<int> vec; // what about vector? std::vector or eastl::vector?
+```
+
+滥用 `using namespace xxx;` 也可能会造成 API 名字冲突，例如上面的例子如果同时使用了:
+
+```c++
+using namespace std;
+using namespace eastl;
+```
+
+会因为指定调用函数不明确而导致编译失败。这种会导致编译失败的情景还算比较好的了 (因为编译时期就报错了)，下面这种情景更是灾难性的:
+
+```c++
+#include <iostream>
+#include <string>
+
+namespace apple {
+    void Print(const std::string& text)
+    {
+        std::cout << text << std::endl;
+    }
+}
+
+namespace purple {
+    void Print(const char* text)
+    {
+        std::string temp = text;
+        std::reverse(temp.begin(), temp.end());
+        std::cout << temp << std::endl;
+    }
+}
+
+int main()
+{
+    using namespace apple;
+    using namespace purple;
+    Print("Hello"); // we want to print "Hello" but print "olleH"
+}
+```
+
+这段代码没有编译错误也没有警告，但是运行起来不符合预期，是灾难性的运行时错误。这是因为不同库不能保证相同 API 接口是互斥的，所以会导致如上这种情况，调用的 API 不如我们预期。
+
+{{< admonition tip >}}
+另外需要特别注意，千万不要在头文件中使用 `using namspace`！这会导致将 namespace 引入到不必要的地方，编译失败时很难追踪。
+
+尽量在比较小的作用域中使用 `using namespace`，例如 `if` 语句的作用域，函数体内，这样使用是没问题的。最大作用域的使用场景就是一个单独的 cpp 文件中使用了，以控制 namespace 的扩散范围。
+
+大项目尽量将函数、类等等定义在 namspace 内，防止出现 API 冲突。
+{{< /admonition >}}
+
+### Threads
+
+- cppreference: [Concurrency support library (since C++11)](https://en.cppreference.com/w/cpp/thread)
+- cppreference: [std::thread](https://en.cppreference.com/w/cpp/thread/thread)
+
+> The class `thread` represents a single thread of execution. Threads allow multiple functions to execute concurrently.
+
+```c++
+#include <iostream>
+#include <thread>
+
+static bool s_Finished = false;
+
+void DoWork()
+{
+    using namespace std::literals::chrono_literals;
+
+    std::cout << "Start thread id=" << std::this_thread::get_id() << std::endl;
+
+    while (!s_Finished)
+    {
+        std::cout << "Working...\n";
+        std::this_thread::sleep_for(1s);
+    }
+}
+
+int main()
+{
+    std::thread worker(DoWork);
+
+    std::cin.get();
+    s_Finished = true;
+
+    worker.join();
+
+    std::cout << "Finished." << std::endl;
+    std::cout << "Start thread id=" << std::this_thread::get_id() << std::endl;
+}
+```
+
+### Benchmarks
+
+#### Timing
+
+- cppreference: [Date and time utilities](https://en.cppreference.com/w/cpp/chrono)
+- cppreference: [Standard library header <chrono> (C++11)](https://en.cppreference.com/w/cpp/header/chrono)
+
+chrono 是一个平台无关的计时库，如果不是特定平台高精度的计时需求，使用这个库就足够了。
+
+```c++
+#include <iostream>
+#include <thread>
+#include <chrono>
+
+int main()
+{
+    using namespace std::literals::chrono_literals;
+
+    auto start = std::chrono::high_resolution_clock::now();
+    std::this_thread::sleep_for(1s);
+    auto end = std::chrono::high_resolution_clock::now();
+
+    std::chrono::duration<float> duration = end - start;
+    std::cout << duration << "s" << std::endl;
+}
+```
+
+运用作用域、生命周期以及析构函数来实现自动计时:
+
+```c++
+#include <iostream>
+#include <thread>
+#include <chrono>
+
+struct Timer
+{
+    std::chrono::steady_clock::time_point start, end;
+    std::chrono::duration<float> duration;
+
+    Timer()
+    {
+        start = std::chrono::high_resolution_clock::now();
+    }
+
+    ~Timer()
+    {
+        end = std::chrono::high_resolution_clock::now();
+        duration = end - start;
+
+        float ms = duration.count() * 1000.0f;
+        std::cout << "Timer took " << ms << "ms" << std::endl;
+    }
+};
+
+void Function()
+{
+    Timer timer;
+
+    for (int i = 0; i < 100; i++)
+        std::cout << "Hello\n" /* << std::endl */;
+}
+
+int main()
+{
+    Function();
+}
+```
+
+### Coding Style
+
+个人偏好如下:
+
+- 函数名: [PscalCase](https://en.wikipedia.org/wiki/Naming_convention_(programming)#Letter_case-separated_words) 命名法 e.g. `ForEach`
+- 类成员: [Hungarian](https://en.wikipedia.org/wiki/Hungarian_notation) 命名法 e.g. `m_Devices`
 
 ## References
 
