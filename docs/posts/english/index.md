@@ -3,19 +3,19 @@
 
 This post is used to record the process of my English learning.
 
-<!--more-->
+&lt;!--more--&gt;
 
 ## Preface
 
 ***工欲善其事，必先利其器***   
 ***If I had eight hours to chop down a tree, I’d spend six hours sharpening my axe.***
 
-- 单词书: Merriam-Webster's Vocabulary Builder
+- 单词书: Merriam-Webster&#39;s Vocabulary Builder
 - 写作书: The Elements of Style
 - 语法书: https://grammar.codeyu.com/
 - 发音教学:
 
-{{< youtube QxQUapA-2w4 >}}
+{{&lt; youtube QxQUapA-2w4 &gt;}}
 
 一些 YouTube channels:
 
@@ -36,7 +36,7 @@ This post is used to record the process of my English learning.
 - https://github.com/IammyselfBOOKS/New_concept_English
 - https://github.com/protogenesis/NewConceptEnglish
 
-> 仓库中关于新概念英语的网址，录音是正确的，但是有一些正文不太准确，可以下载书籍进行对比
+&gt; 仓库中关于新概念英语的网址，录音是正确的，但是有一些正文不太准确，可以下载书籍进行对比
 
 ## New Concept English
 
@@ -54,19 +54,19 @@ This post is used to record the process of my English learning.
 - [x] 019: Tired and thirsty
 - [x] 021: Which book?
 - [x] 023: Which glasses?
-- [x] 025: Mrs. Smith's kitchen
-- [x] 027: Mrs. Smith's living room
+- [x] 025: Mrs. Smith&#39;s kitchen
+- [x] 027: Mrs. Smith&#39;s living room
 - [x] 029: Come in, Amy
-- [x] 031: Where's Sally
+- [x] 031: Where&#39;s Sally
 - [x] 033: A fine day
 - [x] 035: Our village
 - [x] 037: Making a bookcase
-- [x] 039: Don't drop it!
-- [x] 041: Penny's bag
+- [x] 039: Don&#39;t drop it!
+- [x] 041: Penny&#39;s bag
 - [x] 043: Hurry up!
-- [x] 045: The boss's letter
+- [x] 045: The boss&#39;s letter
 - [x] 047: A cup of coffee
-- [x] 049: At the butcher's
+- [x] 049: At the butcher&#39;s
 - [x] 051: A pleasant climate
 - [x] 053: An interesting climate
 - [x] 055: The Sawyer family
@@ -76,11 +76,11 @@ This post is used to record the process of my English learning.
 - [x] 065: Not a baby.
 - [x] 067: The weekend
 - [x] 069: The car race
-- [x] 071: He's awful
+- [x] 071: He&#39;s awful
 - [x] 073: The way to King Street
 - [x] 075: Uncomfortable shoes
 - [x] 077: Terrible toothache
-- [x] 079: Peggy's shopping list
+- [x] 079: Peggy&#39;s shopping list
 - [x] 081: Roast beef and potato
 - [x] 083: Going on a holiday
 

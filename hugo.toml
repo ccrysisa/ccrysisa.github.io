@@ -274,7 +274,8 @@ avatarMenu = ""
 #  主页显示的网站标题（支持 HTML 格式）
 title = "KZnight"
 # 主页显示的网站副标题
-subtitle = "What I cannot create, I do not understand."
+# subtitle = "What I cannot create, I do not understand."
+subtitle = "Don't look back with regret. Look forward with hope."
 # 是否为副标题显示打字机动画
 typeit = true
 # 是否显示社交账号
@@ -295,7 +296,7 @@ Twitter = ""
 Instagram = ""
 Facebook = ""
 Telegram = ""
-Medium = ""
+Medium = "@gshinevon"
 Gitlab = ""
 Youtubelegacy = ""
 Youtubecustom = ""
@@ -306,7 +307,7 @@ Keybase = ""
 Pinterest = ""
 Reddit = ""
 Codepen = ""
-FreeCodeCamp = ""
+FreeCodeCamp = "fcc1d8a1f14-aae4-457b-9fb5-515b3ee80bfd"
 Bitbucket = ""
 Stackoverflow = ""
 Weibo = ""

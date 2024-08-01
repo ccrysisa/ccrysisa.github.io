@@ -14,7 +14,7 @@ This is a two-part talk that covers the C&#43;&#43; memory model, how locks and 
 This is a two-part talk that covers the C&#43;&#43; memory model, how locks and atomics and fences interact and map to hardware, and more. Even though we’re talking about C&#43;&#43;, much of this is also applicable to Java and .NET which have similar memory models, but not all the features of C&#43;&#43; (such as relaxed atomics).
 "><meta itemprop="datePublished" content="2024-06-19T09:43:11+08:00" />
 <meta itemprop="dateModified" content="2024-07-23T18:20:01+08:00" />
-<meta itemprop="wordCount" content="856"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="854"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,Concurrency,C&#43;&#43;," /><meta property="og:title" content="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware" />
 <meta property="og:description" content="
 This is a two-part talk that covers the C&#43;&#43; memory model, how locks and atomics and fences interact and map to hardware, and more. Even though we’re talking about C&#43;&#43;, much of this is also applicable to Java and .NET which have similar memory models, but not all the features of C&#43;&#43; (such as relaxed atomics).
@@ -43,7 +43,7 @@ This is a two-part talk that covers the C&#43;&#43; memory model, how locks and 
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/atomic-weapons\/"
-    },"genre": "posts","keywords": "Sysprog, Concurrency, C\u002b\u002b","wordcount":  856 ,
+    },"genre": "posts","keywords": "Sysprog, Concurrency, C\u002b\u002b","wordcount":  854 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/atomic-weapons\/","datePublished": "2024-06-19T09:43:11+08:00","dateModified": "2024-07-23T18:20:01+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -55,7 +55,7 @@ This is a two-part talk that covers the C&#43;&#43; memory model, how locks and 
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -101,7 +101,7 @@ This is a two-part talk that covers the C&#43;&#43; memory model, how locks and 
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -161,18 +161,12 @@ This is a two-part talk that covers the C&#43;&#43; memory model, how locks and 
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/concurrency/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Concurrency</a>&ensp;<a href="/categories/c++/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C++</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-06-19 09:43:11"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-19">2024-06-19</time></span>&nbsp;<span title="更新于 2024-07-23 18:20:01"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-07-23">2024-07-23</time></span>&nbsp;<span title="856 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/concurrency/" class="post-category" title="分类 - Concurrency"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Concurrency</a>&ensp;<a href="/categories/c++/" class="post-category" title="分类 - C++"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C++</a></span></div><div class="post-meta-line"><span title="发布于 2024-06-19 09:43:11"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-19">2024-06-19</time></span>&nbsp;<span title="更新于 2024-07-23 18:20:01"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-07-23">2024-07-23</time></span>&nbsp;<span title="854 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -204,11 +198,11 @@ This is a two-part talk that covers the C&#43;&#43; memory model, how locks and 
 <ul>
 <li><a href="https://herbsutter.com/2013/02/11/atomic-weapons-the-c-memory-model-and-modern-hardware/"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a> (里面有解说影片链接)</li>
 </ul>
-<h2 id="前置知识">前置知识</h2>
-<p>至少把 Jserv 的「<a href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fconcurrency-ordering"target="_blank" rel="external nofollow noopener noreferrer">并行程序设计: 执行顺序<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>」的前半段 (即内存模型前面的那一部分) 掌握，特别是重要的概念 happens-before 必须要深刻理解</p>
-<h2 id="part-1">Part 1</h2>
-<h3 id="optimizations-races-and-the-memory-model">Optimizations, Races, and the Memory Model</h3>
-<p>3-1</p>
+<h2 id="前置知识" class="heading-element">
+  <a href="#%e5%89%8d%e7%bd%ae%e7%9f%a5%e8%af%86" class="heading-mark"></a>前置知识</h2><p>至少把 Jserv 的「<a href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fconcurrency-ordering"target="_blank" rel="external nofollow noopener noreferrer">并行程序设计: 执行顺序<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>」的前半段 (即内存模型前面的那一部分) 掌握，特别是重要的概念 happens-before 必须要深刻理解</p>
+<h2 id="part-1" class="heading-element">
+  <a href="#part-1" class="heading-mark"></a>Part 1</h2><h3 id="optimizations-races-and-the-memory-model" class="heading-element">
+  <a href="#optimizations-races-and-the-memory-model" class="heading-mark"></a>Optimizations, Races, and the Memory Model</h3><p>3-1</p>
 <p>3-2</p>
 <p>5-2</p>
 <p>7-2</p>
@@ -231,29 +225,28 @@ This is a two-part talk that covers the C&#43;&#43; memory model, how locks and 
       <div class="admonition-content">no sequential jump, for example, you hit step next and you go up, or you hit step next and your current line disappears and you're nowhere.</div>
     </div>
   </div></p>
-<h3 id="ordering---what-acquire-and-release">Ordering - What: Acquire and Release</h3>
-<p>12-2</p>
+<h3 id="ordering---what-acquire-and-release" class="heading-element">
+  <a href="#ordering---what-acquire-and-release" class="heading-mark"></a>Ordering - What: Acquire and Release</h3><p>12-2</p>
 <p>13-2 与之前所提的 Memory Model 不同，Critical region 内部的指令不会被编译器、处理器重排序到 CS 外部，即将 CS 视为一个整体然后对程序进行指令重排序，但是 CS 外部的指令也可以被重排序到 CS 内部，见 14-1 的例子。除此之外 CS 外部的指令也可以进行重排序 (SC-DRF，只有 CS 内部的指令比较特殊，会被编译器、处理器特别对待，因为这是我们告知它们的信息)</p>
 <p>14-2 acquire 和 release 提供了一个单向的屏障 (barrier)，即只能从 acquire 到 release，而不能反过来。编译器、处理器在处理程序时也会根据我们提供的这个信息，来保证相关指令的顺序，这样多线程竞争 (race) 时，对方线程的执行顺序是可以预测的，而不是 Pink elephants (当然这个保证仅限于 CS)。</p>
 <p>即保证了这样的 Partial Order: $Acquire &lt; Instructions in CS &lt; Release$</p>
-<h3 id="mutexes-vs-atomics-vs-fences">mutexes vs. atomics vs. fences</h3>
-<h2 id="part-2">Part 2</h2>
-<h3 id="restrictions-on-compilers-and-hardware-incl-common-bugs">Restrictions on compilers and hardware (incl. common bugs)</h3>
-<h3 id="code-generation-and-performance-on-x86x64-ia64-power-arm-and-more">code generation and performance on x86/x64, IA64, POWER, ARM, and more</h3>
-<h3 id="relaxed-atomics-volatile">relaxed atomics; volatile</h3>
-<h2 id="加餐">加餐</h2>
-<ul>
+<h3 id="mutexes-vs-atomics-vs-fences" class="heading-element">
+  <a href="#mutexes-vs-atomics-vs-fences" class="heading-mark"></a>mutexes vs. atomics vs. fences</h3><h2 id="part-2" class="heading-element">
+  <a href="#part-2" class="heading-mark"></a>Part 2</h2><h3 id="restrictions-on-compilers-and-hardware-incl-common-bugs" class="heading-element">
+  <a href="#restrictions-on-compilers-and-hardware-incl-common-bugs" class="heading-mark"></a>Restrictions on compilers and hardware (incl. common bugs)</h3><h3 id="code-generation-and-performance-on-x86x64-ia64-power-arm-and-more" class="heading-element">
+  <a href="#code-generation-and-performance-on-x86x64-ia64-power-arm-and-more" class="heading-mark"></a>code generation and performance on x86/x64, IA64, POWER, ARM, and more</h3><h3 id="relaxed-atomics-volatile" class="heading-element">
+  <a href="#relaxed-atomics-volatile" class="heading-mark"></a>relaxed atomics; volatile</h3><h2 id="加餐" class="heading-element">
+  <a href="#%e5%8a%a0%e9%a4%90" class="heading-mark"></a>加餐</h2><ul>
 <li>bilibili: <a href="https://www.bilibili.com/video/BV1Qy411q7Xq/"target="_blank" rel="external nofollow noopener noreferrer">「C++11」内存序究竟是什么，彻底参悟 C++ 内存模型 (附多线程安全测试通用框架)</a></li>
 </ul></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-07-23 18:20:01">更新于 2024-07-23&nbsp;</span>
-      </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/atomic-weapons/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/atomic-weapons/" data-title="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware" data-hashtags="Sysprog,Concurrency,C&#43;&#43;"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/atomic-weapons/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/atomic-weapons/" data-title="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware" data-hashtags="Sysprog,Concurrency,C&#43;&#43;"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/atomic-weapons/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/atomic-weapons/" data-title="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/atomic-weapons/" data-title="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -262,12 +255,11 @@ This is a two-part talk that covers the C&#43;&#43; memory model, how locks and 
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/atomic-weapons/" data-title="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/atomic-weapons/" data-title="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-      </div>
-    </div>
-  </div>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/concurrency/' class="post-tag">Concurrency</a><a href='/tags/c&#43;&#43;/' class="post-tag">C&#43;&#43;</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a><a href="/tags/concurrency/" class="post-tag" title="标签 - Concurrency">Concurrency</a><a href="/tags/c&#43;&#43;/" class="post-tag" title="标签 - C&#43;&#43;">C&#43;&#43;</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -276,11 +268,14 @@ This is a two-part talk that covers the C&#43;&#43; memory model, how locks and 
   <div class="post-nav"><a href="/posts/too-many-lists/" class="post-nav-item" rel="prev" title="手把手带你使用 Rust 实现链表"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>手把手带你使用 Rust 实现链表</a>
       <a href="/posts/build-a-linked-hashmap-in-rust/" class="post-nav-item" rel="next" title="Build a linked hash map in Rust">Build a linked hash map in Rust<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -288,5 +283,5 @@ This is a two-part talk that covers the C&#43;&#43; memory model, how locks and 
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

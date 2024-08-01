@@ -1,7 +1,7 @@
-# Modern C++
+# Modern C&#43;&#43; (MSVC)
 
 
-"Modern" C++ isn't afraid to use any or all of the following:
+&#34;Modern&#34; [C&#43;&#43;](https://en.wikipedia.org/wiki/C%2B%2B) isn&#39;t afraid to use any or all of the following:
 
 - RAII
 - standard library containers and algorithms
@@ -10,51 +10,54 @@
 - exceptions
 - Boost
 
-"Old" C++ tends to avoid these things due to a perceived lack of compiler support or run-time performance. Instead, you'll find...
+&#34;Old&#34; [C&#43;&#43;](https://en.wikipedia.org/wiki/C%2B%2B) tends to avoid these things due to a perceived lack of compiler support or run-time performance. Instead, you&#39;ll find...
 
 - lots of `new` and `delete`
 - roll-your-own linked lists and other data structures
 - return codes as a mechanism for error handling
-- one of the millions of custom string classes that aren't std::string
+- one of the millions of custom string classes that aren&#39;t `std::string`
 
-As with all this-vs-that arguments, there are merits to both approaches. Modern C++ isn't universally better. Embedded enviornments, for example, often require extra restrictions that most people never need, so you'll see a lot of old-style code there. Overall though, I think you'll find that most of the modern features are worth using regularly. Moore's Law and compiler improvements have taken care of the majority of reasons to avoid the new stuff.
+As with all this-vs-that arguments, there are merits to both approaches. Modern C&#43;&#43; isn&#39;t universally better. Embedded enviornments, for example, often require extra restrictions that most people never need, so you&#39;ll see a lot of old-style code there. Overall though, I think you&#39;ll find that most of the modern features are worth using regularly. Moore&#39;s Law and compiler improvements have taken care of the majority of reasons to avoid the new stuff.
 
-<!--more-->
+&lt;!--more--&gt;
 
----
+&gt; 以上整理自 Stack Overflow: [What is modern C&#43;&#43;?](https://stackoverflow.com/questions/3661237/what-is-modern-c)
 
-整理自 Stack Overflow: [What is modern C++?](https://stackoverflow.com/questions/3661237/what-is-modern-c)
+{{&lt; admonition success &gt;}}
+写出好的 C&#43;&#43; 代码，而不是炫耀你所会的 C&#43;&#43; 的特性。不要为了炫技而炫技！
+{{&lt; /admonition &gt;}}
 
 ## Toolchain
 
-> Wikipedia: [Toolchain](https://en.wikipedia.org/wiki/Toolchain)
+&gt; Wikipedia: [Toolchain](https://en.wikipedia.org/wiki/Toolchain)
 
 - OS: Windows 10
 - IDE: [Visual Studio](https://visualstudio.microsoft.com/) 2019 Community edition
-  - Clang Power Tools
-  - [cppcheck-vs-addin](https://github.com/VioletGiraffe/cppcheck-vs-addin) vsix
-  - ClangFormat
+    - [MSVC](https://en.wikipedia.org/wiki/Microsoft_Visual_C%2B%2B)
+    - Clang Power Tools
+    - [cppcheck-vs-addin](https://github.com/VioletGiraffe/cppcheck-vs-addin) vsix
+    - ClangFormat
 - [LLVM](https://releases.llvm.org/download.html) 17.0.1 Win64
 - [Cppcheck](https://cppcheck.sourceforge.io/) 2.13 Win64
-- [HxD](https://mh-nexus.de/en/hxd/)
+- [HxD](https://mh-nexus.de/en/hxd/) Editor
 
 ### Compiler
 
 #### Preprocess
 
-> Visual Studio 2019
+&gt; Visual Studio 2019
 $\rightarrow$
 右键项目然后 properties 
 $\rightarrow$
-C/C++ 
+C/C&#43;&#43; 
 $\rightarrow$
 Preprocess to File (Yes) 
 
 编译 / 构建后可以得到产生后缀为 `.i` 的预处理中间文件
 
 #### 条件编译
-```c++
-#if <condition>
+```c&#43;&#43;
+#if &lt;condition&gt;
   ...
 #else
   ...
@@ -63,11 +66,11 @@ Preprocess to File (Yes)
 
 #### Assembly
 
-> Visual Studio 2019
+&gt; Visual Studio 2019
 $\rightarrow$
 右键项目然后 properties 
 $\rightarrow$
-C/C++ 
+C/C&#43;&#43; 
 $\rightarrow$
 Output Files
 $\rightarrow$
@@ -77,11 +80,11 @@ Assembler Output (Assembly-Only Listing)
 
 #### Optimization
 
-> Visual Studio 2019
+&gt; Visual Studio 2019
 $\rightarrow$
 右键项目然后 properties 
 $\rightarrow$
-C/C++ 
+C/C&#43;&#43; 
 $\rightarrow$
 Optimization
 $\rightarrow$
@@ -89,34 +92,32 @@ Optimization (Maximize Speed)
 
 可以改变当前构建环境 (一般是 Debug 模式) 所使用的编译器最优化策略
 
-{{< admonition note "快捷键" >}}
+{{&lt; admonition note &#34;快捷键&#34; &gt;}}
 - F7: Compile / Build
 - F5: Run (Compile and Link)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ### Linker
 
 Linker 的一个重要作用是 **定位程序的入口 (entry point)**，所以对于单源文件的项目来说，Linker 也会起作用
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 Visual Studio 的错误提示中，`C` 开头的错误 (error) 表示的是编译 (Compile) 时期的错误，`LNK` 开头的错误 (error) 表示的是链接 (Link) 时期的错误
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 解决函数重复定义这个问题，可以给其中一个函数的签名加上 `static` 或 `inline` 的修饰
 
 ### Debug
 
-Breakpoint & Memory
+Breakpoint &amp; Memory
 
 调试时相关信息的窗口在「调试 $\rightarrow$ 窗口」处可以开启显示
 
-在内存查看窗口，可以通过 `&var` (`var` 为当前上下文变量的名字) 来快速获取该变量对应的地址，以及查看该地址所所储存的值
+在内存查看窗口，可以通过 `&amp;var` (`var` 为当前上下文变量的名字) 来快速获取该变量对应的地址，以及查看该地址所所储存的值
 
 调试过程中，通过「右键 $\rightarrow$ 转到反汇编」即可查看对应的汇编代码
 
 ### Projects
-
-#### Setup 
 
 filter 类似于一种虚拟的文件系统组织，不过只能在 VS 才能表示为层次形式 (通过解析 XML 格式的配置文件)，在主机的文件系统上没有影响
 
@@ -130,9 +131,11 @@ VS 默认设置是将构建 / 编译得到的中间文件放在 Project 的 Debu
 - Output Directory: `$(SolutionDir)\bin\$(Platform)\$(Configuration)\`
 - Intermediate Directory: `$(SolutionDir)\bin\intermidiate\$(Platform)\$(Configuration)\`
 
-{{< admonition >}}
-在编辑这些目录设定时，其下拉框中选择「编辑 -> 宏」可以查看形如 `$(SolutionDir)` 这些宏的定义
-{{< /admonition >}}
+{{&lt; admonition &gt;}}
+在编辑这些目录设定时，其下拉框中选择「编辑 -&gt; 宏」可以查看形如 `$(SolutionDir)` 这些宏的定义
+
+设定 Solution 或 Project 的属性时，需要注意选择合适的 Configuration (配置) 和 Platform (平台) 进行应用
+{{&lt; /admonition &gt;}}
 
 ```
 SolutionDir
@@ -149,7 +152,7 @@ SolutionDir
 - Unix 哲学: 自己编译代码进行构建 (例如 [LFS](https://www.linuxfromscratch.org/lfs/))
 - Windows 哲学: 能用就行，最好双击就可运行 :rofl:
 
-接下来以 [GLFW](https://www.glfw.org/) 这个库为例来说明 C++ 项目中如何使用 **静态链接** ([static linking](https://en.wikipedia.org/wiki/Static_library)) 和 **动态链接库** ([dynamic libraries](https://en.wikipedia.org/wiki/Dynamic-link_library))，以及这两者的区别。
+接下来以 [GLFW](https://www.glfw.org/) 这个库为例来说明 C&#43;&#43; 项目中如何使用 **静态链接** ([static linking](https://en.wikipedia.org/wiki/Static_library)) 和 **动态链接库** ([dynamic libraries](https://en.wikipedia.org/wiki/Dynamic-link_library))，以及这两者的区别。
 
 - Stack Overflow: [Static linking vs dynamic linking](https://stackoverflow.com/questions/1993390/static-linking-vs-dynamic-linking)
 
@@ -168,63 +171,82 @@ SolutionDir
 管理依赖项设置:
 
 1. Solution 目录下创建一个 Dependencies 目录 (与 Projects 的目录评级)，用于存放所依赖的库
-2. 设定 **Project 的属性**: C/C++ -> Additional Include Directoris 为上一步存放依赖库的路径
+2. 设定 **Project 的属性**: C/C&#43;&#43; -&gt; Additional Include Directoris 为上一步存放依赖库的路径
    - `$(SolutionDir)\Dependencies\GLFW\include`
-   - 指定完成后编译器就知道如何去寻找相关的头文件和二进制了，不会导致编译错误
+   - 指定完成后编译器就知道如何去寻找相关的头文件了，不会导致编译错误
    - 但是链接器还没有设定，会导致链接错误
-3. 设定 Linker -> Additional Library Directories 为依赖库文件所处路径
+3. 设定 Linker -&gt; Additional Library Directories 为依赖库文件所处路径
    - `$(SolutionDir)\Dependencies\GLFW\lib-vc2019`
    - 该路径可包含静态库和动态库
 
 #### Static Linking
 
-在 Linker -> input -> Addtional Dependencies 处添加相对于之前依赖库目录的静态库文件路径: `glfw3.lib` (注意这里的依赖项不能包含相应的动态库相关文件)
+在 Linker -&gt; input -&gt; Addtional Dependencies 处添加相对于之前依赖库目录的静态库文件路径: `glfw3.lib` (注意这里的依赖项不能包含相应的动态库相关文件)
 
-```c++
-#include <iostream>
-#include "GLFW\glfw3.h"
+```c&#43;&#43;
+#include &lt;iostream&gt;
+#include &#34;GLFW\glfw3.h&#34;
 
 int main()
 {
     int a = glfwInit();
-    std::cout << a << std::endl; // ouput 1
+    std::cout &lt;&lt; a &lt;&lt; std::endl; // ouput 1
 }
 ```
 
 #### Dynamic Linking
 
-{{< admonition quote >}}
-C++ 在使用动态库的时候，一般提供两个文件：一个引入库 (后缀为 `dll.lib`，本质为静态链接文件) 和一个 DLL (后缀为 `.dll`，为动态链接文件)。引入库包含被 DLL 导出的函数和变量的符号名以及相应的寻址位置，而 DLL 包含实际的函数和数据。在编译链接可执行文件时，只需要链接引入库，DLL 中的函数代码和数据并不复制到可执行文件中，在运行的时候，再去加载 DLL 以访问 DLL 中导出的函数。不需要引入库也可以使用 DLL，但是效率会低，因为 **运行时** 每次访问 DLL 的资源都需要进行遍历 DLL 查询资源的具体位置 (类似于顺序遍历) 再进行链接，而如果有引入库，因为引入库记录了 DLL 所有公开资源的具体位置，可以直接在 **链接时** 在引入库查询 (类似于哈希表查找) 然后运行时直接对具体位置进行链接即可。
-{{< /admonition >}}
+{{&lt; admonition quote &gt;}}
+C&#43;&#43; 在使用动态库的时候，一般提供两个文件：一个引入库 (后缀为 `dll.lib`，本质为静态链接文件) 和一个 DLL (后缀为 `.dll`，为动态链接文件)。引入库包含被 DLL 导出的函数和变量的符号名以及相应的寻址位置，而 DLL 包含实际的函数和数据。在编译链接可执行文件时，只需要链接引入库，DLL 中的函数代码和数据并不复制到可执行文件中，在运行的时候，再去加载 DLL 以访问 DLL 中导出的函数。不需要引入库也可以使用 DLL，但是效率会低，因为 **运行时** 每次访问 DLL 的资源都需要进行遍历 DLL 查询资源的具体位置 (类似于顺序遍历) 再进行链接，而如果有引入库，因为引入库记录了 DLL 所有公开资源的具体位置，可以直接在 **链接时** 在引入库查询 (类似于哈希表查找) 然后运行时直接对具体位置进行链接即可。
+{{&lt; /admonition &gt;}}
 
 - 以上整理自 [神经元猫](https://space.bilibili.com/364152971) 的评论
 
-在 Linker -> input -> Addtional Dependencies 处添加相对于之前依赖库目录的动态链接引入库文件路径: `glfw3dll.lib` (注意这里的依赖项不能包含相应的静态库相关文件)
+在 Linker -&gt; input -&gt; Addtional Dependencies 处添加相对于之前依赖库目录的动态链接引入库文件路径: `glfw3dll.lib` (注意这里的依赖项不能包含相应的静态库相关文件)
 
 将 `glfw3.dll` 这个动态库文件 (后缀为 `.dll`) 放置在可执行文件目录下 (Ouput Directory)，让该 DLL 可以被可执行文件 (后缀为 `.exe`) 在执行时搜索到
 
-```c++
-#include <iostream>
-#include "GLFW\glfw3.h"
+```c&#43;&#43;
+#include &lt;iostream&gt;
+#include &#34;GLFW\glfw3.h&#34;
 
 int main()
 {
     int a = glfwInit();
-    std::cout << a << std::endl; // ouput 1
+    std::cout &lt;&lt; a &lt;&lt; std::endl; // ouput 1
 }
 ```
+
+### Managing Multiple Projects and Libraries
+
+同一 Solution 创建多个 Project:
+
+- Solution 资源管理器 -&gt; 右击 Solution 名称 -&gt; Add (**New Project**)
+
+一般来说，一个 Solution 只有一个生成可运行文件的 Project，其它 Project 应该作为静态链接存在 (当然测试作用的 Project 也应该是可执行文件类型)。设定 Project 类型:
+
+右击 Project 名称 -&gt; Properties -&gt; Configuration Properties -&gt; General -&gt; Configuration Type 
+
+- 可执行 Project: **Application (.exe)**
+- 其余的 Project: **Static library (.lib)**
+
+这样即可将整个 Solution 构建成一个可执行文件，但是这样引用其它 Project 的头文件比较麻烦，我们还是需要使用真实文件系统的路径进行引用，为了避免繁杂的头文件路径以及防止路径变更导致构建失败，我们使用和上一节类似的技术：设定 Project 的属性: C/C&#43;&#43; -&gt; Additional Include Directoris，在里面添加我们想要引用的 Project 头文件所在的目录路径 (一般为 `$(SolutionDir)\ProjectName\src`)。
+
+{{&lt; admonition &gt;}}
+这个设定 Include 目录的过程实际上也设置了 Projects 之间的依赖关系 (某种意义上的 CMake)
+{{&lt; /admonition &gt;}}
 
 ## Header File
 
 Header Guard:
 
-```c++
+```c&#43;&#43;
 #program once
 ```
 
 is equivalent to:
 
-```c++
+```c&#43;&#43;
 #ifndef _XXX_H
 #define _XXX_H
 ...
@@ -235,37 +257,37 @@ Make sure it just into a single translation unit.
 
 GCC, Clang 和 MSVC 这些主流的编译器都支持 `#program once` 这个语法
 
-```c++
-#include <HEADER_FILE>
-#include "HEADER_FILE"
+```c&#43;&#43;
+#include &lt;HEADER_FILE&gt;
+#include &#34;HEADER_FILE&#34;
 ```
 
-`<>` 只能用于搜索标准库所在路径的头文件，而 `""` 不仅可以搜索标准库所在路径，还可以搜索当前文件的相对路径的头文件，例如:
+`&lt;&gt;` 只能用于搜索标准库所在路径的头文件，而 `&#34;&#34;` 不仅可以搜索标准库所在路径，还可以搜索当前文件的相对路径的头文件，例如:
 
-```c++
-#include "../HEADER.h"
-#include "../include/HEADER.h"
+```c&#43;&#43;
+#include &#34;../HEADER.h&#34;
+#include &#34;../include/HEADER.h&#34;
 ```
 
 ## Pointers and References
 
-> ***这两大主题可以使用 VS 调试功能的查看内存窗口进行实践***
+&gt; ***这两大主题可以使用 VS 调试功能的查看内存窗口进行实践***
  
 - cppreference: [nullptr](https://en.cppreference.com/w/cpp/language/nullptr)
 
-指针可以置为空，空指针可以通过 `0`, `NULL` 或 C++11 引入的关键字 `nullptr` 来表示
+指针可以置为空，空指针可以通过 `0`, `NULL` 或 C&#43;&#43;11 引入的关键字 `nullptr` 来表示
 
 - cppreference: [Pointers to void](https://en.cppreference.com/w/cpp/language/pointer#Pointers_to_void)
-> Pointers to void have the same size, representation and alignment as pointers to char.
+&gt; Pointers to void have the same size, representation and alignment as pointers to char.
 
 `void*` 一般只用于表示地址 (因为其内存对齐要求的单位为字节，并且内存寻址的单位也是字节)，一般不用于修改所指向地址处的数据 (因为它和 `int*` 这类指针不同，并没有表示偏移量的信息)，其它指针的类型记录了其偏移量信息，例如 `double*` 这个指针类型的偏移量信息为 8 个字节 (因为 `double` 占据的内存空间为连续的 8 个字节)
 
-```c++
+```c&#43;&#43;
 itn main()
 {
     char* buffer = new char[8]; 
     memset(buffer, 0, 8);
-    char** ptr = &buffer;
+    char** ptr = &amp;buffer;
     delete[] buffer;
 }
 ```
@@ -275,18 +297,18 @@ itn main()
 - cppreference: [delete expression](https://en.cppreference.com/w/cpp/language/delete)
 - cppreference: [operator delete, operator delete[]](https://en.cppreference.com/w/cpp/memory/new/operator_delete)
 
-C++ 的 Reference 和 Pointer 几乎是同样的东西，除了 Reference 在使用上等价于 Pointer 解引用后的使用。Reference 不能为空以及只能依赖于已存在 object (即必须先有 object 再有 Reference) 其实也是这一点的衍生，因为 Refernece 的使用等价于 Pointer 解引用后的使用，所以 Reference 必须指向已存在的 object，否则会造成 UB，同理 Reference 也不能为空
+C&#43;&#43; 的 Reference 和 Pointer 几乎是同样的东西，除了 Reference 在使用上等价于 Pointer 解引用后的使用。Reference 不能为空以及只能依赖于已存在 object (即必须先有 object 再有 Reference) 其实也是这一点的衍生，因为 Refernece 的使用等价于 Pointer 解引用后的使用，所以 Reference 必须指向已存在的 object，否则会造成 UB，同理 Reference 也不能为空
 
-```c++
-void increment(int& value)
+```c&#43;&#43;
+void increment(int&amp; value)
 {
-    value++;
+    value&#43;&#43;;
 }
 
 int main()
 {
     int a = 5;
-    int& ref = a;
+    int&amp; ref = a;
     ref = 2;
 
     increment(a);
@@ -299,23 +321,23 @@ int main()
 
 即上面程式码的 `increment` 函数和下面函数在编译器层面是一致的，都会被编译成相同的机器码:
 
-```c++
+```c&#43;&#43;
 void increment(int* value)
 {
-    (*value)++;
+    (*value)&#43;&#43;;
 }
 ```
 
 除此之外，Reference 与 Pointer 不同之处还在于，在初始化之后它不能改变所指向的 object
 
-```c++
+```c&#43;&#43;
 int main()
 {
     int a = 5;
     int b = 8;
 
-    int& ref = a; // ref point to a
-    ref = b;      // set a's value to be b's value (8)!!!
+    int&amp; ref = a; // ref point to a
+    ref = b;      // set a&#39;s value to be b&#39;s value (8)!!!
 }
 ```
 
@@ -323,9 +345,9 @@ int main()
 
 ### Class and Struct
 
-C++ 的 Class 和 Struct 是相同的东西，只不过 Class 默认成员字段的外部可见性为 private，而 Struct 默认成员字段的外部可见性为 public，仅仅这个区别而已
+C&#43;&#43; 的 Class 和 Struct 是相同的东西，只不过 Class 默认成员字段的外部可见性为 private，而 Struct 默认成员字段的外部可见性为 public，仅仅这个区别而已
 
-```c++
+```c&#43;&#43;
 class Player
 {
 public:
@@ -334,8 +356,8 @@ public:
 
     void Move(int xa, int ya)
     {
-        x += xa * speed;
-        y += ya * speed;
+        x &#43;= xa * speed;
+        y &#43;= ya * speed;
     }
 };
 
@@ -350,7 +372,7 @@ int main() {
 
 上面程式码的 `Player` 类与下面定义的结构体在底层是完全相同的:
 
-```c++
+```c&#43;&#43;
 struct Player
 {
     int x, y;
@@ -358,22 +380,22 @@ struct Player
 
     void Move(int xa, int ya)
     {
-	    x += xa * speed;
-	    y += ya * speed;
+	    x &#43;= xa * speed;
+	    y &#43;= ya * speed;
     }
 };
 ```
 
-{{< admonition >}}
-从实践角度来看，在 C++ 中定义一个 *集合体*，它的成员字段默认都是 public 并且无需我们手动设定时，应当使用 `struct` 而不是 `class`，例如表示 TCP 数据报的 Header 应该使用 `struct`。也尽量不要在 `struct` 中使用继承，让 `struct` 作为一种相对纯粹的数据的组合
-{{< /admonition >}}
+{{&lt; admonition &gt;}}
+从实践角度来看，在 C&#43;&#43; 中定义一个 *集合体*，它的成员字段默认都是 public 并且无需我们手动设定时，应当使用 `struct` 而不是 `class`，例如表示 TCP 数据报的 Header 应该使用 `struct`。也尽量不要在 `struct` 中使用继承，让 `struct` 作为一种相对纯粹的数据的组合
+{{&lt; /admonition &gt;}}
 
-#### 实作案例: Log System
+**实作案例**: 日志系统 Log System
 
-实作一个日志系统 (Log System) 来加深对 C++ 的 Class 的理解
+实作一个日志系统 (Log System) 来加深对 C&#43;&#43; 的 Class 的理解
 
-```c++
-#include <iostream>
+```c&#43;&#43;
+#include &lt;iostream&gt;
 
 class Log
 {
@@ -394,38 +416,38 @@ public:
 
     void error(const char* message)
     {
-        if (m_LogLevel >= Error)
+        if (m_LogLevel &gt;= Error)
         {
-            std::cout << "[ERROR]: " << message << std::endl;
+            std::cout &lt;&lt; &#34;[ERROR]: &#34; &lt;&lt; message &lt;&lt; std::endl;
         }
     }
 
     void warn(const char* message)
     {
-        if (m_LogLevel >= Warning)
+        if (m_LogLevel &gt;= Warning)
         {
-            std::cout << "[WARNING]: " << message << std::endl;
+            std::cout &lt;&lt; &#34;[WARNING]: &#34; &lt;&lt; message &lt;&lt; std::endl;
         }
     }
 
     void info(const char* message)
     {
-        if (m_LogLevel >= Info)
+        if (m_LogLevel &gt;= Info)
         {
-            std::cout << "[INFO]: " << message << std::endl;
+            std::cout &lt;&lt; &#34;[INFO]: &#34; &lt;&lt; message &lt;&lt; std::endl;
         }
     }
 };
 
 int main() {
     using std::cout;
-    cout << "Hello world" << '\n';
+    cout &lt;&lt; &#34;Hello world&#34; &lt;&lt; &#39;\n&#39;;
 
     Log log;
     log.SetLogLevel(Log::Level::Info);
-    log.warn("Hello");
-    log.error("Hello");
-    log.info("Hello");
+    log.warn(&#34;Hello&#34;);
+    log.error(&#34;Hello&#34;);
+    log.info(&#34;Hello&#34;);
 
     return 0;
 }
@@ -435,7 +457,7 @@ int main() {
 
 - cppreference: [Enumeration declaration](https://en.cppreference.com/w/cpp/language/enum)
 
-```c++
+```c&#43;&#43;
 enum Example : unsigned char
 {
     A = 5, B, C
@@ -451,9 +473,9 @@ int main()
 
 - cppreference: [Access specifiers](https://en.cppreference.com/w/cpp/language/access)
 
-> In a member-specification of a class/struct or union, define the accessibility of subsequent members.
-> 
-> In a base-specifier of a derived class declaration, define the accessibility of inherited members of the subsequent base class.
+&gt; In a member-specification of a class/struct or union, define the accessibility of subsequent members.
+&gt; 
+&gt; In a base-specifier of a derived class declaration, define the accessibility of inherited members of the subsequent base class.
 
 A **public** member of a class is accessible anywhere
 
@@ -463,11 +485,11 @@ A **protected** member of a class is only accessible:
 
 A **private** member of a class is only accessible to the members and friends of that class, regardless of whether the members are on the same or different instances
 
-- Stack Overflow: [What is the difference between private and protected members of C++ classes?](https://stackoverflow.com/questions/224966/what-is-the-difference-between-private-and-protected-members-of-c-classes)
+- Stack Overflow: [What is the difference between private and protected members of C&#43;&#43; classes?](https://stackoverflow.com/questions/224966/what-is-the-difference-between-private-and-protected-members-of-c-classes)
 
 ### Constructor and Destructor
 
-```c++
+```c&#43;&#43;
 class Entity
 {
 public:
@@ -489,9 +511,9 @@ int main()
 }
 ```
 
-有时候可以借助 `private` 来隐藏 Class 或 Struct 的 Constructor，防止用户创建该 Class 或 Struct 的实例 (例如 Java 中的 Math 类，使用 C++ 实作的话就需要使用到这种技巧)，这是因为 C++ 会自动帮我们创建一个 `public` 的默认 Constructor。除此之外还可以使用 `delete` 关键字来删除默认的 Constructor
+有时候可以借助 `private` 来隐藏 Class 或 Struct 的 Constructor，防止用户创建该 Class 或 Struct 的实例 (例如 Java 中的 Math 类，使用 C&#43;&#43; 实作的话就需要使用到这种技巧)，这是因为 C&#43;&#43; 会自动帮我们创建一个 `public` 的默认 Constructor。除此之外还可以使用 `delete` 关键字来删除默认的 Constructor
 
-```c++
+```c&#43;&#43;
 class Math
 {
 private:
@@ -518,18 +540,18 @@ public:
 
 手动实现 Destructor 用于正确释放该 Class 或 Struct 实例拥有的内存空间，以防止内存泄漏。与 Rust 类似，Class 或 Struct 实例 (分配在 stack 的自动变量) 在超出作用域后，会自动调用 Destructor 函数 (但是对于分配在 heap 的动态变量，需要 `delete` 对应实例时才会自动调用 Destructor)。也可以对实例手动调用 Destructor 来实现提前释放的效果 (类似于 Rust 的 `drop` 机制)
 
-```c++
+```c&#43;&#43;
 struct Entity
 {
     float X, Y;
     Entity()
     {
         X = 0; Y = 0;
-        std::cout << "Call the Constructor!" << std::endl;
+        std::cout &lt;&lt; &#34;Call the Constructor!&#34; &lt;&lt; std::endl;
     }
     ~Entity()
     {
-        std::cout << "Call the Destructor!" << std::endl;
+        std::cout &lt;&lt; &#34;Call the Destructor!&#34; &lt;&lt; std::endl;
     } 
 };
 
@@ -549,30 +571,30 @@ int main()
 
 - cppreference: [Constructors and member initializer lists](https://en.cppreference.com/w/cpp/language/constructor)
 
-```c++
-#include <string>
+```c&#43;&#43;
+#include &lt;string&gt;
 class Entity
 {
 private:
     std::string m_Name;
 public:
-    Entity() : m_Name("Unknown") { ... }
-    Entity(const std::string& name) : m_Name(name) { ... }
+    Entity() : m_Name(&#34;Unknown&#34;) { ... }
+    Entity(const std::string&amp; name) : m_Name(name) { ... }
 };
 ```
 
-{{< admonition >}}
-使用 *初始化参数列表* 会节约性能，不会丢弃默认构造的对象，具体见视频的例子。原理也很简单，初始化参数列表是在执行函数体之前进行初始化的，不会事先创建对象。而如果在函数体内对对象进行赋值，因为不论是否在初始化参数列表中是否指定了成员变量，编译器都会在执行函数体之前先对每个成员变量进行构造 (当然初始化参数列表指定的就按列表构造)，导致在函数体内对成员变量赋值时，会丢掉先前构造好的对象，从而导致性能损失。(这很好理解，因为 Rust 要求构造对象时必须指定所有成员的值，C++ 的初始化列表的作用是类似的，给对象的每个成员都分配值，这样构造函数就无需指定每个成员的值了)
+{{&lt; admonition &gt;}}
+使用 *初始化参数列表* 会节约性能，不会丢弃默认构造的对象，具体见视频的例子。原理也很简单，初始化参数列表是在执行函数体之前进行初始化的，不会事先创建对象。而如果在函数体内对对象进行赋值，因为不论是否在初始化参数列表中是否指定了成员变量，编译器都会在执行函数体之前先对每个成员变量进行构造 (当然初始化参数列表指定的就按列表构造)，导致在函数体内对成员变量赋值时，会丢掉先前构造好的对象，从而导致性能损失。(这很好理解，因为 Rust 要求构造对象时必须指定所有成员的值，C&#43;&#43; 的初始化列表的作用是类似的，给对象的每个成员都分配值，这样构造函数就无需指定每个成员的值了)
 
-```c++
-#include <iostream>
-#include <string>
+```c&#43;&#43;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
 
 class Example
 {
 public:
-    Example() { std::cout << "Created Entity!" << std::endl; }
-    Example(int x) { std::cout << "Created Entity with " << x << "!" << std::endl; }
+    Example() { std::cout &lt;&lt; &#34;Created Entity!&#34; &lt;&lt; std::endl; }
+    Example(int x) { std::cout &lt;&lt; &#34;Created Entity with &#34; &lt;&lt; x &lt;&lt; &#34;!&#34; &lt;&lt; std::endl; }
 };
 
 class Entity
@@ -582,52 +604,52 @@ private:
     Example m_Example;
 public:
     // call this constructor should print 2 lines (call 2 times of constructor of Example)
-    Entity(const std::string& name) : m_Name(name) {}
+    Entity(const std::string&amp; name) : m_Name(name) {}
     // call this constructor should print only 1 line (call once of constructor of Example)
-    Entity(const std::string& name) { m_Name(name); }
+    Entity(const std::string&amp; name) { m_Name(name); }
 };
 ```
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 #### Copy Constructor
 
 - Stack Overflow: [What is the difference between a deep copy and a shallow copy?](https://stackoverflow.com/questions/184710/what-is-the-difference-between-a-deep-copy-and-a-shallow-copy)
 
-> Shallow copies duplicate as little as possible. A shallow copy of a collection is a copy of the collection structure, not the elements. With a shallow copy, two collections now share the individual elements.
+&gt; Shallow copies duplicate as little as possible. A shallow copy of a collection is a copy of the collection structure, not the elements. With a shallow copy, two collections now share the individual elements.
 
-> Deep copies duplicate everything. A deep copy of a collection is two collections with all of the elements in the original collection duplicated.
+&gt; Deep copies duplicate everything. A deep copy of a collection is two collections with all of the elements in the original collection duplicated.
 
 - cppreference: [Copy constructors](https://en.cppreference.com/w/cpp/language/copy_constructor)
 
-> A copy constructor is a constructor which can be called with an argument of the same class type and copies the content of the argument without mutating the argument.
+&gt; A copy constructor is a constructor which can be called with an argument of the same class type and copies the content of the argument without mutating the argument.
 
-C++ 编译器会提供一个默认的复制构造函数 (Copy Constructor)，如果你想禁止这种复制构造的行为，可以使用 `delete` 关键字:
+C&#43;&#43; 编译器会提供一个默认的复制构造函数 (Copy Constructor)，如果你想禁止这种复制构造的行为，可以使用 `delete` 关键字:
 
-```c++
+```c&#43;&#43;
 Class Type
 {
-    Type(const Type& other) = delete;
+    Type(const Type&amp; other) = delete;
 };
 ```
 
-C++ 的智能指针 `unique_ptr` 也是通过这种方式来实作禁止复制行为的:
+C&#43;&#43; 的智能指针 `unique_ptr` 也是通过这种方式来实作禁止复制行为的:
 
-- Standard library header <[memory](https://en.cppreference.com/w/cpp/header/memory)>
+- Standard library header &lt;[memory](https://en.cppreference.com/w/cpp/header/memory)&gt;
 
-```c++
+```c&#43;&#43;
 class unique_ptr { // non-copyable pointer to an object
 public:
     ...
-    unique_ptr(const unique_ptr&) = delete;
+    unique_ptr(const unique_ptr&amp;) = delete;
     ...
 };
 ```
 
 下面是一个自定义 String 类的实作案例，用于加深对 Copy 行为和 Copy Construtor 的理解:
 
-```c++
-#include <iostream>
-#include <string>
+```c&#43;&#43;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
 
 class String
 {
@@ -638,16 +660,16 @@ public:
     String(const char* string)
     {
         m_Size = strlen(string);
-        m_Buffer = new char[m_Size + 1];
+        m_Buffer = new char[m_Size &#43; 1];
         memcpy(m_Buffer, string, m_Size);
-        m_Buffer[m_Size] = 0 /* or '\0` */;
+        m_Buffer[m_Size] = 0 /* or &#39;\0` */;
     }
 
-    String(const String& other)
+    String(const String&amp; other)
         : m_Size(other.m_Size)
     {
-        m_Buffer = new char[m_Size + 1];
-        memcpy(m_Buffer, other.m_Buffer, m_Size + 1);
+        m_Buffer = new char[m_Size &#43; 1];
+        memcpy(m_Buffer, other.m_Buffer, m_Size &#43; 1);
     }
 
     ~String()
@@ -655,60 +677,60 @@ public:
         delete[] m_Buffer;
     }
 
-    char& operator[](unsigned int index)
+    char&amp; operator[](unsigned int index)
     {
         return m_Buffer[index];
     }
 
-    friend std::ostream& operator<<(std::ostream& stream, const String& string);
+    friend std::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, const String&amp; string);
 };
 
-std::ostream& operator<<(std::ostream& stream, const String& string)
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, const String&amp; string)
 {
-    stream << string.m_Buffer;
+    stream &lt;&lt; string.m_Buffer;
     return stream;
 }
 
 int main() {
-    String string = "Hello";
+    String string = &#34;Hello&#34;;
     String second = string;
 
-    second[1] = 'a';
+    second[1] = &#39;a&#39;;
 
-    std::cout << string << std::endl;
-    std::cout << second << std::endl;
+    std::cout &lt;&lt; string &lt;&lt; std::endl;
+    std::cout &lt;&lt; second &lt;&lt; std::endl;
 }
 ```
 
-{{< admonition >}}
-复制构造 (Copy Structor) 和引用 (Reference) 的联系也比较紧密，因为一般情况下进行函数调用，不使用引用的话，会进行复制操作 (可以通过观察复制构造函数的调用)，这会造成性能损耗。所以一般情况下建议使用常量引用 (`const Type&`) 以避免不必要的性能损耗 (当然这样你在函数内部也可以决定是否进行复制操作，并没有限制了不能使用复制)，但是某些场景下使用复制会更快，这时候就需要进行衡量了。
-{{< /admonition >}}
+{{&lt; admonition &gt;}}
+复制构造 (Copy Structor) 和引用 (Reference) 的联系也比较紧密，因为一般情况下进行函数调用，不使用引用的话，会进行复制操作 (可以通过观察复制构造函数的调用)，这会造成性能损耗。所以一般情况下建议使用常量引用 (`const Type&amp;`) 以避免不必要的性能损耗 (当然这样你在函数内部也可以决定是否进行复制操作，并没有限制了不能使用复制)，但是某些场景下使用复制会更快，这时候就需要进行衡量了。
+{{&lt; /admonition &gt;}}
 
 ### Inheritance and Polymorphism
 
 - Stack Overflow: [What is the main difference between Inheritance and Polymorphism?](https://stackoverflow.com/questions/6308178/what-is-the-main-difference-between-inheritance-and-polymorphism)
 
-> Inheritance is when a 'class' derives from an existing 'class'.
-> 
-> Polymorphism deals with how the program decides which methods it should use, depending on what type of thing it has.
+&gt; Inheritance is when a &#39;class&#39; derives from an existing &#39;class&#39;.
+&gt; 
+&gt; Polymorphism deals with how the program decides which methods it should use, depending on what type of thing it has.
 
 - cppreference: [Derived classes](https://en.cppreference.com/w/cpp/language/derived_class)
 
-> Any class type (whether declared with class-key class or struct) may be declared as derived from one or more base classes which, in turn, may be derived from their own base classes, forming an inheritance hierarchy.
+&gt; Any class type (whether declared with class-key class or struct) may be declared as derived from one or more base classes which, in turn, may be derived from their own base classes, forming an inheritance hierarchy.
 
-C++ 中的继承 (Inheritance) 是 **数据** 和 **行为** 都会被继承 (而 Rust 中的 Trait 只会继承行为)
+C&#43;&#43; 中的继承 (Inheritance) 是 **数据** 和 **行为** 都会被继承 (而 Rust 中的 Trait 只会继承行为)
 
-> When a class uses public member access specifier to derive from a base, all public members of the base class are accessible as public members of the derived class and all protected members of the base class are accessible as protected members of the derived class (private members of the base are never accessible unless friended).
+&gt; When a class uses public member access specifier to derive from a base, all public members of the base class are accessible as public members of the derived class and all protected members of the base class are accessible as protected members of the derived class (private members of the base are never accessible unless friended).
 
-```c++
+```c&#43;&#43;
 class Entity
 {
 public:
     float X, Y;
     void Move(float xa, float ya)
     {
-        X += xa;
-        Y += ya;
+        X &#43;= xa;
+        Y &#43;= ya;
     }
 };
 
@@ -719,13 +741,13 @@ public:
     const char* Name;
     void PrintName()
     {
-        std::cout << Name << std::endl;
+        std::cout &lt;&lt; Name &lt;&lt; std::endl;
     }
 };
 
 int main() {
-    std::cout << sizeof(Entity) << std::endl; // output 8 which equal 2 * sizeof(float)
-    std::cout << sizeof(Player) << std::endl; // output 12 which equal 8 + sizeof(char*)
+    std::cout &lt;&lt; sizeof(Entity) &lt;&lt; std::endl; // output 8 which equal 2 * sizeof(float)
+    std::cout &lt;&lt; sizeof(Player) &lt;&lt; std::endl; // output 12 which equal 8 &#43; sizeof(char*)
 }
 ```
 
@@ -733,15 +755,15 @@ int main() {
 
 - cppreference: [virtual function specifier](https://en.cppreference.com/w/cpp/language/virtual)
 
-> Virtual functions are member functions whose behavior can be overridden in derived classes. As opposed to non-virtual functions, the overriding behavior is preserved even if there is no compile-time information about the actual type of the class.
+&gt; Virtual functions are member functions whose behavior can be overridden in derived classes. As opposed to non-virtual functions, the overriding behavior is preserved even if there is no compile-time information about the actual type of the class.
 
 虚函数 (Virtual Function) 用于多态时提醒编译器对调用的函数进行动态查找，以调用最符合实例类型的同名函数 (这个过程可能会有一些性能损耗，因为编译器需要查表来确定最终调用的函数)
 
-```c++
+```c&#43;&#43;
 class Entity
 {
 public:
-    virtual std::string GetName() { return "Entity"; }
+    virtual std::string GetName() { return &#34;Entity&#34;; }
 };
 
 class Player
@@ -749,19 +771,19 @@ class Player
 private:
     std::string Name;
 public:
-    std::string GetName() override /* 'override' is optional */ { return Name; }
+    std::string GetName() override /* &#39;override&#39; is optional */ { return Name; }
 };
 
 int main()
 {
     Entity* e = new Entity();
-    std::cout << e->GetName() << std::endl;         // should output "Entity"
+    std::cout &lt;&lt; e-&gt;GetName() &lt;&lt; std::endl;         // should output &#34;Entity&#34;
 
-    Player* p = new Player("Player");
-    std::cout << p->GetName() << std::endl;         // should output "Player"
+    Player* p = new Player(&#34;Player&#34;);
+    std::cout &lt;&lt; p-&gt;GetName() &lt;&lt; std::endl;         // should output &#34;Player&#34;
 
     Entity* entity = p;
-    std::cout << entity->GetName() << std::endl;    // should output "Player"
+    std::cout &lt;&lt; entity-&gt;GetName() &lt;&lt; std::endl;    // should output &#34;Player&#34;
 }
 ```
 
@@ -769,7 +791,7 @@ int main()
 
 下面实作一个类似于 Rust 的 Trait `Display` 的接口类 `Printable` :
 
-```c++
+```c&#43;&#43;
 class Printable
 {
 public:
@@ -779,7 +801,7 @@ public:
 class Entity : public Printable
 {
 public:
-    virtual std::string GetName() override { return "Entity"; }
+    virtual std::string GetName() override { return &#34;Entity&#34;; }
 };
 
 class Player : public Entity
@@ -788,7 +810,7 @@ private:
     std::string Name;
 public:
     std::string GetName() override { return Name; }
-    std::string GetClassName() override { return "Player"; }
+    std::string GetClassName() override { return &#34;Player&#34;; }
 };
 ```
 
@@ -796,7 +818,7 @@ public:
 
 将对象 Object 分配在栈 Stack 上的方式:
 
-```c++
+```c&#43;&#43;
 using String = std::string;
 
 // call `Entity()` which is default constructor and allocated in stack
@@ -806,15 +828,15 @@ Entity entity = Entity();
 // or just
 Entity entity();
 
-// call `Entity(const String& name)` and allocated in stack
-Entity entity = Entity("Hello"); 
+// call `Entity(const String&amp; name)` and allocated in stack
+Entity entity = Entity(&#34;Hello&#34;); 
 // or you can just
-Entity entity("Hello");
+Entity entity(&#34;Hello&#34;);
 ```
 
 将对象 Object 分配在堆 heap 上的方式:
 
-```c++
+```c&#43;&#43;
 using String = std::string;
 
 // call `Entity()` which is default constructor and allocated in heap
@@ -822,8 +844,8 @@ Entity* entity = new Entity;
 // equals
 Entity* entity = new Entity();
 
-// call `Entity(const String& name)` and allocated in heap
-Entity* entity = new Entity("Hello"); 
+// call `Entity(const String&amp; name)` and allocated in heap
+Entity* entity = new Entity(&#34;Hello&#34;); 
 ```
 
 - cppreference: [new expression](https://en.cppreference.com/w/cpp/language/new)
@@ -835,28 +857,28 @@ Entity* entity = new Entity("Hello");
 
 - cppreference: [The this pointer](https://en.cppreference.com/w/cpp/language/this)
 
-> The expression `this` is a prvalue expression whose value is the address of the implicit object parameter (object on which the non-static member function(until C++23)implicit object member function(since C++23) is being called).
+&gt; The expression `this` is a prvalue expression whose value is the address of the implicit object parameter (object on which the non-static member function(until C&#43;&#43;23)implicit object member function(since C&#43;&#43;23) is being called).
 
 `this` 本质上是 `Type* const` 的指针类型，使用引用 (Reference) 时需要注意这一点。另外，在 `const` 修饰的方法中，`this` 会进一步表示为 `const Type* const` 的指针类型
 
-```c++
+```c&#43;&#43;
 class Entity
 {
 public:
     int x, y;
     Entity(int x, int y)
     {
-        Entity* const& e = this; // Pass
-        Entity*& e = this;       // Error
-        this->x = x;
-        this->y = y;
+        Entity* const&amp; e = this; // Pass
+        Entity*&amp; e = this;       // Error
+        this-&gt;x = x;
+        this-&gt;y = y;
     }
 
     int GetX() const
     {
-        const Entity* const& e = this; // Pass
-        Entity* const& e = this;       // Error
-        return this->x;
+        const Entity* const&amp; e = this; // Pass
+        Entity* const&amp; e = this;       // Error
+        return this-&gt;x;
     }
 };
 ```
@@ -865,14 +887,16 @@ public:
 
 ### Static
 
-- cppreference: [C++ keyword: static](https://en.cppreference.com/w/cpp/keyword/static)
+#### Static vs. Extern
 
-> **Usage**
-> - declarations of namespace members with static storage duration and internal linkage
-> - definitions of block scope variables with static storage duration and initialized once
-> - declarations of class members not bound to specific instances
+- cppreference: [C&#43;&#43; keyword: static](https://en.cppreference.com/w/cpp/keyword/static)
 
-```c++
+&gt; **Usage**
+&gt; - declarations of namespace members with static storage duration and internal linkage
+&gt; - definitions of block scope variables with static storage duration and initialized once
+&gt; - declarations of class members not bound to specific instances
+
+```c&#43;&#43;
 // Main.cpp
 int s_Variable = 10;
 void Func() {}
@@ -886,13 +910,13 @@ static void Func() {}
 
 也可以使用外部链接关键字 `extern` 来通过编译:
 
-- cppreference: [C++ keyword: extern](https://en.cppreference.com/w/cpp/keyword/extern)
+- cppreference: [C&#43;&#43; keyword: extern](https://en.cppreference.com/w/cpp/keyword/extern)
 
-> **Usage**
-> - static storage duration with external linkage specifier
-> - language linkage specification
+&gt; **Usage**
+&gt; - static storage duration with external linkage specifier
+&gt; - language linkage specification
 
-```c++
+```c&#43;&#43;
 // Main.cpp
 extern int s_Variable;
 void Func();
@@ -904,20 +928,26 @@ void Func() {}
 
 这样也会编译通过，注意这个实作和之前的实作不同之处在于: Main.cpp 所指向的 `s_Variable` 正是 Static.cpp 文件的同名变量，即这两个东西是相同的，位于同一内存地址处。类似的，这两个文件的同名函数所在的内存地址也是相同的
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 尽量不要使用全局变量 (Global Variable) 除非你有必要的理由，一般情况下应当使用 `static` 修饰位于文件作用域的变量 (即变量所在的作用域和函数相同)，使其仅在当前的 Transilation Unit 进行内部链接
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
+
+#### Local Static
+
+- cppreference: [static members](https://en.cppreference.com/w/cpp/language/static)
+
+&gt; Inside a class definition, the keyword static declares members that are not bound to class instances.
 
 在 Class 或 Struct 内使用 `static`，其作用是将被 `static` 修饰的变量或函数被该 Class 或 Struct 所共享，需要注意的是 `static` 修饰的函数不能使用与 Class 或 Struct 的具体实例相关的数据，例如可以使用 `static` 被修饰的变量
 
-```c++
+```c&#43;&#43;
 class Entry
 {
     static int x, y;
     
     static Print()
     {
-        std::cout << x << ", " << y << std::endl;
+        std::cout &lt;&lt; x &lt;&lt; &#34;, &#34; &lt;&lt; y &lt;&lt; std::endl;
     }
 };
 
@@ -925,46 +955,98 @@ int Entry::x;
 int Entry::y;
 ```
 
+局部作用域使用 `static` 修饰变量，例如在函数内部或类内部声明 `static` 修饰的变量，这类变量被称为 Local Static。它的生命周期和程序运行时期相同，但它的作用范围被限制在声明所处的作用域内:
+
+```c&#43;&#43;
+#include &lt;iostream&gt;
+
+void Function()
+{
+    static int i = 0;
+    i&#43;&#43;;
+    std::cout &lt;&lt; i &lt;&lt; std::endl;
+}
+
+int main()
+{
+    Function(); // should print 1
+    Function(); // should print 2
+    Function(); // should print 3
+}
+```
+
+**实作案例**: 单例设计模式的单例类 `Singleton`
+
+```c&#43;&#43;
+class Singleton
+{
+private:
+    static Singleton* s_Instance;
+public:
+    static Singleton&amp; Get() { return *s_Instance; }
+    
+    void Hello() {}
+};
+Singleton* Singleton::s_Instance = nullptr; // or `new Singleton`
+// or
+class Singleton
+{
+public:
+    static Singleton&amp; Get() 
+    { 
+        static Singleton instance;
+        return instance;
+    }
+    
+    void Hello() {}
+};
+
+int main()
+{
+    Singleton::Get().Hello();
+}
+```
+
 ### Const
 
-- cppreference: [C++ keyword: const](https://en.cppreference.com/w/cpp/keyword/const)
+- cppreference: [C&#43;&#43; keyword: const](https://en.cppreference.com/w/cpp/keyword/const)
 
-C++ 中的 `const` 关键字只是一种弱承诺，可以通过解引用来绕开 (不过这也取决于编译器，有些编译器会把 `const` 修饰的数据设置为只读，这样即使可以绕开但会执行时造成程序崩溃):
+C&#43;&#43; 中的 `const` 关键字只是一种弱承诺，可以通过解引用来绕开 (不过这也取决于编译器，有些编译器会把 `const` 修饰的数据设置为只读，这样即使可以绕开但会执行时造成程序崩溃):
 
-```c++
+```c&#43;&#43;
 int main()
 {
     const int MAX_CONST = 100;
-    int* a = (int*)&MAX_CONST;
+    int* a = (int*)&amp;MAX_CONST;
     *a = 90;
 }
 ```
 
 `const` 修饰指针:
 
-```c++
-const int* a = new int; // can't modify `*a` (data be pointed to)
-int* const a = new int; // can't modify `a`  (pointer itself)
-const int* const a = new int; // can't modify both `*a` and `a`
+```c&#43;&#43;
+const int* a = new int; // can&#39;t modify `*a` (data be pointed to)
+int* const a = new int; // can&#39;t modify `a`  (pointer itself)
+const int* const a = new int; // can&#39;t modify both `*a` and `a`
 
 // return a pointer which both pointer itself and data pointed are read-only
 const int* const get_ptr() {}
 ```
 
-在 Class 或 Struct 中使用 `const` 关键字，在方法名的右边添加 `const` 表示该方法不能修改 Class 或 Struct 的成员，只能读取数据，即调用中国方法不会改变 Class 或 Struct 的成员数据 (类似于 Rust 的 `&self` 参数的限制)
+在 Class 或 Struct 中使用 `const` 关键字，在方法名的右边添加 `const` 表示该方法不能修改 Class 或 Struct 的成员，只能读取数据，即调用中国方法不会改变 Class 或 Struct 的成员数据 (类似于 Rust 的 `&amp;self` 参数的限制)
 
-```c++
+```c&#43;&#43;
 class Entity
 {
 private:
     int m_X, m_Y;
 public:
-    int GetX() const // Rust: fn get_x(&self) -> i32 {
+    int GetX() const // Rust: fn get_x(&amp;self) -&gt; i32 {
     {
         return m_X;
     }
 
-    void SetX(int x) // Rust: fn set_x(&mut self, x: i32) {
+    void SetX(int x) // Rust: fn set_x(&amp;mut self, x: i32) {
     {
         m_X = x;
     }
@@ -973,15 +1055,15 @@ public:
 
 函数参数的 `const` 修饰的引用，其作用和使用两个 `const` 修饰的指针相同。原理很简单，引用被限制了不能改变所引用的对象，等价于 `type* const` 的指针类型，所以只需再限制不能修改所引用的对象即可:
 
-```c++
-void func(const Entity& e) {}
+```c&#43;&#43;
+void func(const Entity&amp; e) {}
 // equals
 void func(const Entity* const e) {}
 ```
 
-这种参数需要配合之前所提的 `const` 修饰的方法来使用，类似于 Rust 的 `&self` 参数的方法的使用限制
+这种参数需要配合之前所提的 `const` 修饰的方法来使用，类似于 Rust 的 `&amp;self` 参数的方法的使用限制
 
-```c++
+```c&#43;&#43;
 int main()
 {
     const Entity e;
@@ -991,14 +1073,14 @@ int main()
 
 ### Mutable
 
-- cppreference: [C++ keyword: mutable](https://en.cppreference.com/w/cpp/keyword/mutable)
+- cppreference: [C&#43;&#43; keyword: mutable](https://en.cppreference.com/w/cpp/keyword/mutable)
 
 在 Class 或 Struct 的 `const` 修饰的方法中使用，使得该方法能修改被 `mutable` 的成员变量
 
 - [cv (`const` and `volatile`) type qualifiers](https://en.cppreference.com/w/cpp/language/cv)
-> mutable - permits modification of the class member declared mutable even if the containing object is declared const (i.e., the class member is mutable).
+&gt; mutable - permits modification of the class member declared mutable even if the containing object is declared const (i.e., the class member is mutable).
 
-```c++
+```c&#43;&#43;
 class Entity
 {
 private:
@@ -1007,7 +1089,7 @@ private:
 public:
     int GetX() const
     {
-        count++;
+        count&#43;&#43;;
         return m_X;
     }
 };`
@@ -1015,40 +1097,159 @@ public:
 
 也可以在 lambda 表达式中使用 `mutable` 进行修饰，但一般比较少 (因为实践中不太可能出现)
 
-- cppreference: [Lambda expressions (since C++11)](https://en.cppreference.com/w/cpp/language/lambda)
+- cppreference: [Lambda expressions (since C&#43;&#43;11)](https://en.cppreference.com/w/cpp/language/lambda)
 
-> Allows body to modify the objects captured by copy, and to call their non-const member functions.
-> Cannot be used if an explicit object parameter is present.(since C++23)
+&gt; Allows body to modify the objects captured by copy, and to call their non-const member functions.
+&gt; Cannot be used if an explicit object parameter is present.(since C&#43;&#43;23)
 
-```c++
+```c&#43;&#43;
 auto f = [=]() mutable
 {
-    x++;
+    x&#43;&#43;;
     ...
 }
 // equals
 auto f = [=]()
 {
     int y = x;
-    y++;
+    y&#43;&#43;;
     ...
 }
 ```
 
+### Explicit
+
+隐式转换一般不建议用，因为表达不够清晰，会造成误解，特别是用在构造函数 Constructor 上，例如下面是完全合法的 C&#43;&#43; 代码:
+
+```c&#43;&#43;
+#include &lt;iostream&gt;
+class Entity
+{
+public:
+    Entity(int age) {}
+    Entity(std::string name) {}
+};
+
+int main()
+{
+    Entity entity = &#34;hello&#34;; // Pass! call `Entity(int age)`
+    Entity entity = 22;      // Pass! call `Entity(std::string name)`
+}
+```
+
+可以使用 `explicit` 关键字来禁止构造函数的这种隐式转换规则:
+
+- cppreference: [explicit specifier](https://en.cppreference.com/w/cpp/language/explicit)
+
+&gt; Specifies that a constructor or conversion function(since C&#43;&#43;11)or deduction guide(since C&#43;&#43;17) is explicit, that is, it cannot be used for implicit conversions and copy-initialization.
+
+```c&#43;&#43;
+#include &lt;iostream&gt;
+class Entity
+{
+public:
+    explicit Entity(int age) {}
+    explicit Entity(std::string name) {}
+};
+
+int main()
+{
+    Entity entity = &#34;hello&#34;; // Error! Now it is not allowed
+    Entity entity = 22;      // Error! Now it is not allowed
+}
+```
+
+### Auto
+
+- cppreference: [Placeholder type specifiers (since C&#43;&#43;11)](https://en.cppreference.com/w/cpp/language/auto)
+
+在函数 API 返回场景处使用，这样就不需要因为 API 改变而手动修改返回值的类型标注:
+
+```c&#43;&#43;
+const char* GetName() { return &#34;Hello&#34;; }
+// or
+std::string GetName() { return &#34;Hello&#34;; }
+
+int main()
+{
+    auto name = GetName();
+}
+```
+
+但这是一把双刃剑，这也会导致虽然 API 改变了但仍然构建成功，但 API 改变可能破坏了代码导致项目运行时的奇怪行为 (冷笑话: Linux kernel 表示对这样的 C&#43;&#43; 代码进行 Code Review 实在是...)
+
+比较适合 `auto` 使用的场景：使用迭代器循环遍历，迭代器的类型比较复杂，但我们并不关心迭代器的类型，只需要知道它是个迭代器即可:
+
+```c&#43;&#43;
+std::vector&lt;std::string&gt; strings;
+
+for (std::vector&lt;std::string&gt;::iterator it = strings.begin();
+    it != strings.end(); it&#43;&#43;)
+{
+    std::cout &lt;&lt; *it &lt;&lt; std::endl;
+}
+// more readable
+for (auto it = strings.begin(); it != strings.end(); it&#43;&#43;)
+{
+    std::cout &lt;&lt; *it &lt;&lt; std::endl;
+}
+```
+
+类型名很长时也是 `auto` 的另一个比较好的应用场景:
+
+```c&#43;&#43;
+#include &lt;vector&gt;
+#include &lt;string&gt;
+#include &lt;unordered_map&gt;
+
+class DeviceManager
+{
+private:
+    std::unordered_map&lt;std::string, std::vector&lt;Device*&gt;&gt; m_Devices;
+public:
+    const std::unordered_map&lt;std::string, std::vector&lt;Device*&gt;&gt;&amp; GetDevices() const
+    {
+        return m_Devices;
+    }
+};
+
+int mainn()
+{
+    DeviceManager dm;
+    const auto&amp; devices = dm.GetDevices();
+    // -&gt; const std::unordered_map&lt;std::string, std::vector&lt;Device*&gt;&gt;&amp; devices = dm.GetDevices();
+}
+```
+
+**注意 `auto` 并不会推导出引用 `&amp;`，所以需要手动标注**，否则会导致复制行为产生一个新的局部变量。例如上面的例子如果没有标注 `&amp;`，那么会等价于:
+
+```c&#43;&#43;
+auto devices = dm.GetDevices();
+// -&gt; const std::unordered_map&lt;std::string, std::vector&lt;Device*&gt;&gt; devices = dm.GetDevices();
+```
+
+除了上面说明的两种应用场景之外，不建议在其它地方滥用 `auto`，这会导致代码可读写变差，还可能会导致不必要的复制行为造成性能开销。尽量不要让自己的代码变成不得不使用 `auto` 的复杂程度！
+
+函数返回类型的 `auto` 推导:
+
+```c&#43;&#43;
+auto GetName() -&gt; const char* {}
+auto main() -&gt; int {}
+```
 
 ## Operators
 
 ### Ternary Operators
 
-C++ 中的 `?` 和 `:` 搭配的三元运算符存在的本质原因是，C++ 中的 if-else 控制流是语句 (statement) 而不是表达式 (expression)，所以需要功能类似于 if-else 的三元运算表达式来增强语言的表达能力 (否则表达会十分冗余，还会有额外开销，因为没有返回值优化，会产生中间临时数据)，如果是 Rust 这样的表达式为主的语言，就不需要这种三元运算符了
+C&#43;&#43; 中的 `?` 和 `:` 搭配的三元运算符存在的本质原因是，C&#43;&#43; 中的 if-else 控制流是语句 (statement) 而不是表达式 (expression)，所以需要功能类似于 if-else 的三元运算表达式来增强语言的表达能力 (否则表达会十分冗余，还会有额外开销，因为没有返回值优化，会产生中间临时数据)，如果是 Rust 这样的表达式为主的语言，就不需要这种三元运算符了
 
-```c++
+```c&#43;&#43;
 int level/* = somthing */;
 // ternary operator
-std::string speed = level > 5 ? 10 : 5;
+std::string speed = level &gt; 5 ? 10 : 5;
 // if-else
 std::string speed;
-if (level > 5)
+if (level &gt; 5)
     speed = 10;
 else
     speed = 5;
@@ -1056,7 +1257,7 @@ else
 
 ```rs
 let level: i32/* = somthing*/;
-let speed: i32 = if level > 5 {
+let speed: i32 = if level &gt; 5 {
     10
 } else {
     5
@@ -1065,10 +1266,10 @@ let speed: i32 = if level > 5 {
 
 ### Arrow Operator
 
-可以通过 `->` 运算符来计算某个 Class / Struct 对象的成员的偏移值:
+可以通过 `-&gt;` 运算符来计算某个 Class / Struct 对象的成员的偏移值:
 
-```c++
-#include <iostream>
+```c&#43;&#43;
+#include &lt;iostream&gt;
 
 struct Vector3
 {
@@ -1077,8 +1278,8 @@ struct Vector3
 
 int main()
 {
-    int offset = (int)&((Vector3*)nullptr)->y;
-    std::cout << offset << std::endl; // should be 4
+    int offset = (int)&amp;((Vector3*)nullptr)-&gt;y;
+    std::cout &lt;&lt; offset &lt;&lt; std::endl; // should be 4
 }
 ```
 
@@ -1090,7 +1291,7 @@ int main()
 
 - cppreference: [operator overloading](https://en.cppreference.com/w/cpp/language/operators)
 
-```c++
+```c&#43;&#43;
 struct Vector2
 {
     float x, y;
@@ -1098,32 +1299,32 @@ struct Vector2
     Vector2(float x, float y)
         : x(x), y(y) {}
 
-    Vector2 Add(const Vector2& other) const
+    Vector2 Add(const Vector2&amp; other) const
     {
-        return Vector2(x + other.x, y + other.y);
+        return Vector2(x &#43; other.x, y &#43; other.y);
     }
 
-    Vector2 operator+(const Vector2& other) const
-    {   // overload `+` of `Vector2 + Vector2`
+    Vector2 operator&#43;(const Vector2&amp; other) const
+    {   // overload `&#43;` of `Vector2 &#43; Vector2`
         return Add(other);
     }
 
-    Vector2 Multiply(const Vector2& other) const
+    Vector2 Multiply(const Vector2&amp; other) const
     {
         return Vector2(x * other.x, y * other.y);
     }
 
-    Vector2 operator*(const Vector2& other) const
+    Vector2 operator*(const Vector2&amp; other) const
     {   // overload `*` of `Vector2 * Vector2`
         return Multiply(other);
     }
 
-    bool operator==(const Vector2& other) const
+    bool operator==(const Vector2&amp; other) const
     {
-        return x == other.x && y == other.y;
+        return x == other.x &amp;&amp; y == other.y;
     }
 
-    bool operator!=(const Vector2& other) const
+    bool operator!=(const Vector2&amp; other) const
     {
         return !(*this == other);
     }
@@ -1136,7 +1337,7 @@ int main()
     Vector2 powerup(1.1f, 1.1f);
 
     Vector2 result1 = position.Add(speed.Multiply(powerup));
-    Vector2 result2 = position + speed * powerup;
+    Vector2 result2 = position &#43; speed * powerup;
 
     if (result1 == result2) {}
 }
@@ -1144,61 +1345,99 @@ int main()
 
 运算符重载 (Operators Overloading) 不一定应用于类的方法，也可以用于函数 (其实运算符重载的语义为，重载表达式 `函数第一个参数 运算符 函数第二个参数` 的语义，而在方法中 `this` 作为第一个参数存在)
 
-```c++
-std::ostream& operator<<(std::ostream& stream, const Vector2& other)
+```c&#43;&#43;
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream, const Vector2&amp; other)
 {
-    stream << other.x << ", " << other.y;
+    stream &lt;&lt; other.x &lt;&lt; &#34;, &#34; &lt;&lt; other.y;
     return stream;
 }
 ```
 
-运算符 `<<` 的重载语义会返回 `std::ostream` 对象，这样可以保证 `<<` 运算符的链式调用
+运算符 `&lt;&lt;` 的重载语义会返回 `std::ostream` 对象，这样可以保证 `&lt;&lt;` 运算符的链式调用
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 运算符重载 (Operators Overloading) 只能重载运算符的执行语义，但运算符的优先级是不变的。这很因为运算符的优先级是编译器在进行语法分析时进行处理的，显然不能进行重载 (除非你重写了编译器 :rofl:)
-{{< /admonition >}}
 
-## Conversions
+Copy Constructor vs. `=` operator overloading:
 
-### Implicit and Explicit
+- Stack Overflow: [The copy constructor and assignment operator](https://stackoverflow.com/questions/5368258/the-copy-constructor-and-assignment-operator)
 
-隐式转换一般不建议用，因为表达不够清晰，会造成误解，特别是用在构造函数 Constructor 上，例如下面是完全合法的 C++ 代码:
+```c&#43;&#43;
+Entity a, b;
+Entity e = a;   // Copy Constructor
+e = c;          // `=` operator overloading
+```
+{{&lt; /admonition &gt;}}
 
-```c++
-#include <iostream>
-class Entity
+
+
+## Templates
+
+{{&lt; admonition tip &gt;}}
+模板和宏类似，它允许你定义一个可以根据你的用途进行编译的蓝图。简单来说，所谓模拟，就是 **让编译器基于你给它的规则为你写代码**。
+{{&lt; /admonition &gt;}}
+
+- cppreference: [Templates](https://en.cppreference.com/w/cpp/language/templates)
+- cppreference: [Template parameters and template arguments](https://en.cppreference.com/w/cpp/language/template_parameters)
+
+```c&#43;&#43;
+#include &lt;iostream&gt;
+
+template&lt;typename T&gt;
+void Print(T value)
 {
-public:
-    Entity(int age) {}
-    Entity(std::string name) {}
-};
+    std::cout &lt;&lt; value &lt;&lt; std::endl;
+}
 
 int main()
 {
-    Entity entity = "hello"; // Pass! call `Entity(int age)`
-    Entity entity = 22;      // Pass! call `Entity(std::string name)`
+    Print(5); // or `Print&lt;int&gt;(5)`
+    Print(&#34;Hello&#34;);
+    Print(5.5f);
 }
 ```
 
-可以使用 `explicit` 关键字来禁止构造函数的这种隐式转换规则:
+MSVC 不会对未使用的模板进行报错，但其他编译器可能会 (例如 clang)
 
-- cppreference: [explicit specifier](https://en.cppreference.com/w/cpp/language/explicit)
+Template non-type arguments 可在模板指定类型处指定常量作为编译规则:
 
-> Specifies that a constructor or conversion function(since C++11)or deduction guide(since C++17) is explicit, that is, it cannot be used for implicit conversions and copy-initialization.
+```c&#43;&#43;
+#include &lt;iostream&gt;
 
-```c++
-#include <iostream>
-class Entity
+template&lt;int N&gt;
+class Array 
 {
+private:
+    int m_Array[N];
 public:
-    explicit Entity(int age) {}
-    explicit Entity(std::string name) {}
+    int GetSize() const { return N; }
 };
 
 int main()
 {
-    Entity entity = "hello"; // Error! Now it is not allowed
-    Entity entity = 22;      // Error! Now it is not allowed
+    Array&lt;5&gt; array;
+    std::cout &lt;&lt; array.GetSize() &lt;&lt; std::endl; // should be 5
+}
+```
+
+进一步将类型指定规则和常量指定规则结合起来，实作一个泛型的栈分配的 `Array` (类似于标准库的 `std::array`):
+
+```c&#43;&#43;
+#include &lt;iostream&gt;
+
+template&lt;typename T, int N&gt;
+class Array 
+{
+private:
+    T m_Array[N];
+public:
+    int GetSize() const { return N; }
+};
+
+int main()
+{
+    Array&lt;int, 5&gt; array;
+    std::cout &lt;&lt; array.GetSize() &lt;&lt; std::endl; // should be 5
 }
 ```
 
@@ -1206,173 +1445,291 @@ int main()
 
 ### Array
 
+#### array
+
 - cppreference: [Array declaration](https://en.cppreference.com/w/cpp/language/array)
 
-```c++
+```c&#43;&#43;
 int main()
 {
     // Array and Pointer are mostly same thing
     int example[5];
     int* ptr = example;
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i &lt; 5; i&#43;&#43;)
     {
         example[i] = 2;
     }                               // [2, 2, 2, 2, 2]
     example[2] = 5;                 // [2, 2, 5, 2, 2]
-    *(int*)((char*)ptr + 8) = 6;    // [2, 2, 6, 2, 2]
+    *(int*)((char*)ptr &#43; 8) = 6;    // [2, 2, 6, 2, 2]
 }
 ```
 
-```c++
+```c&#43;&#43;
 int main()
 {
     // Allocate array in stack
     int example[5];
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i &lt; 5; i&#43;&#43;)
         example[i] = 2;
 
     // Allocate array in heap
     int* another = new int[5];
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i &lt; 5; i&#43;&#43;)
         another[i] = 3;
     delete[] another;
 }
 ```
 
+#### std::array
+
 - cppreference: [std::array](https://en.cppreference.com/w/cpp/container/array)
 
-> std::array is a container that encapsulates fixed size arrays.
+&gt; `std::array` is a container that encapsulates fixed size arrays.
+
+&gt; This container is an aggregate type with the same semantics as a struct holding a C-style array `T[N]` as its only non-static data member. Unlike a C-style array, it doesn&#39;t decay to `T*` automatically.
+
+&gt; The struct combines the performance and accessibility of a C-style array with the benefits of a standard container, such as knowing its own size, supporting assignment, random access iterators, etc.
+
+`std::array` 和普通数组一样，都是分配在栈 (Stack) 上的，与 `std::vector` 这种底层数据存储分配在堆 (Heap) 上的数据结构不同，所以 `std::array` 的性能比 `std::vector` 表现要好，实际上在编译器最佳化的条件下，它的性能表现和普通数组一样好。另外，与普通数组相比，`std::array` 拥有边界检查，更加安全。在存储空间方面，`std::array` 占用的空间与普通数组并无区别，因为它实际上并不存储 `size` 这个变量 (因为这个是通过常量模板规则传递的，并不占据空间，而是直接生成了对应的代码)。
+
+```c&#43;&#43;
+#include &lt;array&gt;
+
+int main()
+{
+    // old style
+    int data_old[5];
+    data_old[0] = 1;
+
+    // new style
+    std::array&lt;int, 5&gt; data;
+    data[0] = 1;
+}
+```
+
+`std::array` 在作为函数参数时可知数组的长度 (因为 `std::array` 是一个类)，这一点比起普通数组是优势 (普通数组作为函数参数时会退化为指针，使用 `sizeof` 无法获得正确的数组长度):
+
+```c&#43;&#43;
+template&lt;std::size_t N&gt;
+void PrintArray(std::array&lt;int, N&gt;&amp; data)
+{
+    for (int i = 0; i &lt; data.size(); i&#43;&#43;) {}
+}
+```
+
+使用常量模板规则生成对应的 `PrintArray` 函数
+
+- Stack Overflow: [Passing a std::array of unknown size to a function](https://stackoverflow.com/questions/17156282/passing-a-stdarray-of-unknown-size-to-a-function)
+- Stack Overflow: [Difference between size_t and std::size_t](https://stackoverflow.com/questions/5813700/difference-between-size-t-and-stdsize-t)
+
+{{&lt; admonition question &#34;为什么 `std::array` 不需要存储 `size` 变量？&#34; false &gt;}}
+这是因为常量模板规则，在编译时期即可确定 `size()` 函数的具体实现了，无需额外存储变量:
+
+```c&#43;&#43;
+std::array&lt;int, 5&gt; arr;
+// this will generate
+class array...
+{
+    ...
+    size_t size() const
+    {
+        return 5;
+    }
+    ...
+}
+```
+
+边界检查的具体代码实现也是类似的，是通过常量模板规则生成的
+{{&lt; /admonition &gt;}}
+
+#### Multidimensional Arrays
+
+```c&#43;&#43;
+int main()
+{
+    // 1 Dimension
+    int* array = new int[50];
+
+    // 2 Dimension
+    int** a2d = new int*[50];
+    for (int i = 0; i &lt; 50; i&#43;&#43;)
+        a2d[i] = new int[50];
+
+    a2d[0][0] = 0; // a2d[0] -&gt; int*, a2d[0][0] -&gt; int
+    a2d[0][1] = 1;
+    a2d[0][2] = 2;
+
+    for (int i = 0; i &lt; 50; i&#43;&#43;)
+        delete[] a2d[i];
+    delete[] a2d;
+
+    // 3 Dimension, it&#39;s too complex!
+    int*** a3d = new int**[50];
+    for (int i = 0; i &lt; 50; i&#43;&#43;)
+    {
+        a3d[i] = new int*[50];
+        for (int j = 0; j &lt; 50; j&#43;&#43;)
+            a3d[i][j] = new int[50];
+    }
+}
+```
+
+- Stack Overflow: [C&#43;&#43; multidimensional array on heap](https://stackoverflow.com/questions/72018905/c-multidimensional-array-on-heap)
+
+上面这种形式的多维数组会极大可能导致 cache miss，进而导致性能表现不如等价的一维数组。下面是二维数组和等价的一维数组在顺序读取时的性能表现对比:
+
+```c&#43;&#43;
+int main()
+{
+    // slower
+    int** a2d = new int*[5];
+    for (int i = 0; i &lt; 5; i&#43;&#43;)
+        a2d[i] = new int[5];
+
+    for (int i = 0; i &lt; 5; i&#43;&#43;)
+        for (int j = 0; j &lt; 5; i&#43;&#43;)
+            a2d[i][j] = 2;
+    
+    // faster
+    int* array = new int[5 * 5];
+    for (int i = 0; i &lt; 5; i&#43;&#43;)
+        for (int j = 0; j &lt; 5; i&#43;&#43;)
+            a2d[i &#43; 5*j] = 1;
+}
+```
+
+尽量避免使用二维数组 (以及二维以上维度)，推荐将其转换为等价的一维数组，利用 cache 的特性增强性能。
 
 ### String
 
 - cppreference: [std::basic_string](https://en.cppreference.com/w/cpp/string/basic_string)
 - [ASCII Table](https://www.ascii-code.com/)
-- cppreference: [std::basic_string<CharT,Traits,Allocator>::npos](https://en.cppreference.com/w/cpp/string/basic_string/npos)
+- cppreference: [std::basic_string&lt;CharT,Traits,Allocator&gt;::npos](https://en.cppreference.com/w/cpp/string/basic_string/npos)
 
-```c++
+```c&#43;&#43;
 int main()
 {
     // C style
-    const char* hello = "Hello";
-    hello[2] = 'a'; // error! since it was allocated at text section
+    const char* hello = &#34;Hello&#34;;
+    hello[2] = &#39;a&#39;; // error! since it was allocated at text section
 
-    char word[6] = { 'w', 'o', 'r', 'l', 'd', '\0' /* or 0 */ };
+    char word[6] = { &#39;w&#39;, &#39;o&#39;, &#39;r&#39;, &#39;l&#39;, &#39;d&#39;, &#39;\0&#39; /* or 0 */ };
     // or
-    char word[6] = "world";
-    world[2] = 'a'; // pass! since it was allocated at stack
+    char word[6] = &#34;world&#34;;
+    world[2] = &#39;a&#39;; // pass! since it was allocated at stack
 }
 ```
 
-```c++
-#include <string>
+```c&#43;&#43;
+#include &lt;string&gt;
 
 int main()
 {
-    // C++ style
-    std::string hello = "Hello";
-    hello[2] = 'a';
-    hello += ", world";
+    // C&#43;&#43; style
+    std::string hello = &#34;Hello&#34;;
+    hello[2] = &#39;a&#39;;
+    hello &#43;= &#34;, world&#34;;
 
     // or
-    std::string hello = std::string("Hello") + ", world";
-    bool contains = hello.find("lo") != std::string::nops;
+    std::string hello = std::string(&#34;Hello&#34;) &#43; &#34;, world&#34;;
+    bool contains = hello.find(&#34;lo&#34;) != std::string::nops;
 }
 ```
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 经验法则: 如果你没使用 `new` 关键字来获取对象，那么就不要使用 `delete` 关键字来删除它
 
 VS 在调试模式下进行编译，会对内存分配的对象额外分配 **内存守卫者**，以方便提醒开发者内存访问是否越界
 
-`std::string` 在函数参数中使用时，需要特别考虑是否应该使用引用 `&` 操作，以避免无效的拷贝开销
-{{< /admonition >}}
+`std::string` 在函数参数中使用时，需要特别考虑是否应该使用引用 `&amp;` 操作，以避免无效的拷贝开销
+{{&lt; /admonition &gt;}}
 
-#### char types
+#### Char Types
 
 - cppreference: [Fundamental types](https://en.cppreference.com/w/cpp/language/types)
-- cppreference: [C++ keyword: wchar_t](https://en.cppreference.com/w/cpp/keyword/wchar_t)
-- cppreference: [C++ keyword: char16_t (since C++11)](https://en.cppreference.com/w/cpp/keyword/char16_t) / [char16_t](https://en.cppreference.com/w/c/string/multibyte/char16_t)
-- cppreference: [C++ keyword: char32_t (since C++11)](https://en.cppreference.com/w/cpp/keyword/char32_t) / [char32_t](https://en.cppreference.com/w/c/string/multibyte/char32_t)
+- cppreference: [C&#43;&#43; keyword: wchar_t](https://en.cppreference.com/w/cpp/keyword/wchar_t)
+- cppreference: [C&#43;&#43; keyword: char16_t (since C&#43;&#43;11)](https://en.cppreference.com/w/cpp/keyword/char16_t) / [char16_t](https://en.cppreference.com/w/c/string/multibyte/char16_t)
+- cppreference: [C&#43;&#43; keyword: char32_t (since C&#43;&#43;11)](https://en.cppreference.com/w/cpp/keyword/char32_t) / [char32_t](https://en.cppreference.com/w/c/string/multibyte/char32_t)
 
-```c++
+```c&#43;&#43;
 int main()
 {
-    const char* hello = u8"Hello"; // 'u8' represent char, it's optional
-    const wchar_t* hello = L"Hello"; // 'L' represent wide char
-    const char16_t* hello = u"Hello"; // 'u' represent char16_t
-    const char32_t* hello = U"Hello"; // 'U' represent char32_t
+    const char* hello = u8&#34;Hello&#34;;      // &#39;u8&#39; represent utf-8, it&#39;s optional
+    const wchar_t* hello = L&#34;Hello&#34;;    // &#39;L&#39; represent wide char
+    const char16_t* hello = u&#34;Hello&#34;;   // &#39;u&#39; represent char16_t
+    const char32_t* hello = U&#34;Hello&#34;;   // &#39;U&#39; represent char32_t
 }
 ```
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 `char` 类型的具体字节数是由操作系统额 CPU 架构来决定的，如果需要跨系统使用固定字节数的字符类型，请按需使用 `wchar_t`, `char16_t` 和 `char32_t` 
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 #### String Literals
 
 - cppreference: [String literal](https://en.cppreference.com/w/cpp/language/string_literal)
 
-> Raw string literals are string literals with a prefix containing `R` (syntaxes (2,4,6,8,10)). They do not escape any character, which means anything between the delimiters `d-char-seq (` and `)d-char-seq` becomes part of the string. The terminating `d-char-seq` is the same sequence of characters as the initial `d-char-seq`.
+&gt; Raw string literals are string literals with a prefix containing `R` (syntaxes (2,4,6,8,10)). They do not escape any character, which means anything between the delimiters `d-char-seq (` and `)d-char-seq` becomes part of the string. The terminating `d-char-seq` is the same sequence of characters as the initial `d-char-seq`.
 
-- cppreference: [std::literals::string_literals::operator""s](https://en.cppreference.com/w/cpp/string/basic_string/operator%22%22s)
+- cppreference: [std::literals::string_literals::operator&#34;&#34;s](https://en.cppreference.com/w/cpp/string/basic_string/operator%22%22s)
 
-```c++
-#include <string>
+```c&#43;&#43;
+#include &lt;string&gt;
 int main()
 {
-    std::string hello = "Hello"s + ", world";
-    const char* raw = "hello\nAp\tple";
+    std::string hello = &#34;Hello&#34;s &#43; &#34;, world&#34;;
+    const char* raw = &#34;hello\nAp\tple&#34;;
 }
 ```
 
 ### Vector
 
-- Stack Overflow: [Why is a C++ Vector called a Vector?](https://stackoverflow.com/questions/581426/why-is-a-c-vector-called-a-vector)
+- Stack Overflow: [Why is a C&#43;&#43; Vector called a Vector?](https://stackoverflow.com/questions/581426/why-is-a-c-vector-called-a-vector)
 
-> It's called a vector because Alex Stepanov, the designer of the Standard Template Library, was looking for a name to distinguish it from built-in arrays. He admits now that he made a mistake, because mathematics already uses the term 'vector' for a fixed-length sequence of numbers. C++11 compounds this mistake by introducing a class 'array' that behaves similarly to a mathematical vector.
+&gt; It&#39;s called a vector because Alex Stepanov, the designer of the Standard Template Library, was looking for a name to distinguish it from built-in arrays. He admits now that he made a mistake, because mathematics already uses the term &#39;vector&#39; for a fixed-length sequence of numbers. C&#43;&#43;11 compounds this mistake by introducing a class &#39;array&#39; that behaves similarly to a mathematical vector.
 
 - cppreference: [std::vector](https://en.cppreference.com/w/cpp/container/vector)
 
-```c++
-#include <iostream>
+```c&#43;&#43;
+#include &lt;iostream&gt;
 
 struct Vertex
 {
     float x, y, z;
 };
 
-std::ostream& operator<<(std::ostream& stream. const Vertx& vertex)
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp; stream. const Vertx&amp; vertex)
 {
-    stream << vertex.x << ", " << vertex.y << ", " << vertex.z << std::endl; 
+    stream &lt;&lt; vertex.x &lt;&lt; &#34;, &#34; &lt;&lt; vertex.y &lt;&lt; &#34;, &#34; &lt;&lt; vertex.z &lt;&lt; std::endl; 
     return stream;
 }
 
-void Function(const vector<Vertex>& vertices)
+void Function(const vector&lt;Vertex&gt;&amp; vertices)
 {
 
 }
 
 int main()
 {
-    std::vector<Vertex> vertices;
+    std::vector&lt;Vertex&gt; vertices;
     vertices.push_back({ 1, 2, 3 });
     vertices.push_back({ 4, 5, 6 });
 
-    for (int i = 0; i < vertices.size(); i++)
-        std::cout << vertices[i] << std::endl;
+    for (int i = 0; i &lt; vertices.size(); i&#43;&#43;)
+        std::cout &lt;&lt; vertices[i] &lt;&lt; std::endl;
     // or
-    for (const Vertex& v : vertices)
-        std::cout << v << std::endl;
+    for (const Vertex&amp; v : vertices)
+        std::cout &lt;&lt; v &lt;&lt; std::endl;
     
     Function(vertices);
 
-    vertices.erase(vertices.begin() + 1);
+    vertices.erase(vertices.begin() &#43; 1);
 }
 ```
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 STL 的容器，它们在被设计时，速度不是优先考虑的因素，所以我们可以设计出比 STL 里的容器性能更强的类似容器，这也是为什么很多工作室会自己设计容器库而不采用 STL，例如 [Qt Container Classes](https://doc.qt.io/qt-6/containers.html)、[EASTL](https://github.com/electronicarts/EASTL)。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 #### Optimizing Usage
 
@@ -1380,16 +1737,16 @@ STL 的容器，它们在被设计时，速度不是优先考虑的因素，所�
 
 通过复制构造函数确认什么时候发生了大量的复制，以应用相应的复制优化策略:
 
-```c++
+```c&#43;&#43;
 struct Vertex
 {
     ...
     Vertex(float x, float y, float z)
         : x(x), y(y), z(z) {}
-    Vertex(const Vertex& other)
+    Vertex(const Vertex&amp; other)
         : x(other.x), y(other.y), z(other.z)
     {
-        std::cout << "Copied!" << std::endl;
+        std::cout &lt;&lt; &#34;Copied!&#34; &lt;&lt; std::endl;
     }
 };
 ```
@@ -1398,8 +1755,8 @@ struct Vertex
 
 1. **优化复制**。预先分配内存，防止过多的内存分配和复制操作造成性能损耗。
 
-```c++
-    std::vector<Vertex> vertices;
+```c&#43;&#43;
+    std::vector&lt;Vertex&gt; vertices;
     vertices.resize(3); // pre-allocation
     vertices.push_back(Vertex(1, 2, 3));
     vertices.push_back(Vertex(4, 5, 6));
@@ -1410,21 +1767,21 @@ struct Vertex
 
 注意 `reserve` 方法和 `vector` 构造函数中指定元素数量这两者是不太一样的:
 
-- [std::vector<T,Allocator>::reserve](https://en.cppreference.com/w/cpp/container/vector/reserve)
-> Increase the capacity of the vector (the total number of elements that the vector can hold without requiring reallocation) to a value that's greater or equal to `new_cap`.
+- [std::vector&lt;T,Allocator&gt;::reserve](https://en.cppreference.com/w/cpp/container/vector/reserve)
+&gt; Increase the capacity of the vector (the total number of elements that the vector can hold without requiring reallocation) to a value that&#39;s greater or equal to `new_cap`.
 
-- [std::vector<T,Allocator>::vector](https://en.cppreference.com/w/cpp/container/vector/vector)
-> 4\) Constructs the container with `count` default-inserted instances of `T`. No copies are made.
+- [std::vector&lt;T,Allocator&gt;::vector](https://en.cppreference.com/w/cpp/container/vector/vector)
+&gt; 4\) Constructs the container with `count` default-inserted instances of `T`. No copies are made.
 
 即构造函数指定元素数量会构造相应的默认实例，而 `reserve` 不会，所以 `reserve` 的性能开销更低。
 
 2. **避免复制**。直接在 `vector` 合适的位置构造对象，而不是先在栈上构造再复制到 `vector` 里。
 
-- [std::vector<T,Allocator>::emplace_back](https://en.cppreference.com/w/cpp/container/vector/emplace_back)
-> Appends a new element to the end of the container. ...  which typically uses placement-new to construct the element **in-place** at the location provided by the container. 
+- [std::vector&lt;T,Allocator&gt;::emplace_back](https://en.cppreference.com/w/cpp/container/vector/emplace_back)
+&gt; Appends a new element to the end of the container. ...  which typically uses placement-new to construct the element **in-place** at the location provided by the container. 
 
-```c++
-    std::vector<Vertex> vertices;
+```c&#43;&#43;
+    std::vector&lt;Vertex&gt; vertices;
     vertices.resize(3); // pre-allocation
     vertices.emplace_back(Vertex(1, 2, 3));
     vertices.emplace_back(Vertex(4, 5, 6));
@@ -1439,20 +1796,20 @@ struct Vertex
 
 主要是理解 **栈 (Stack)** 和 **堆 (Heap)** 上分配的对象 (Object) 的生命周期 (Lifetime) 的机制，栈 (Stack) 上分配的对象 (Object) 的生命周期无需我们关系，超出作用域会自动销毁，这就是为什么它们被称为 **自动变量** 的原因，而堆 (Heap) 上的生命周期则需要我们手动进行管理，以决定什么时候销毁它们结束它们的生命周期，当然我们也可以使用其它程序员封装好的容器，这样手动管理这些对象的生命周期的责任就交给封装这个容器的程序员的 (但还是需要人手动管理 :rofl:)。简单来说，栈上的变量不需要人来关心 (编译器会帮我们完成)，而堆上的对象则需要人来管理 (不论是直接的还是间接的)。
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 Rust 的生命周期机制本质上就是让堆 (Heap) 分配的对象 (Object) 的生命周期也由编译器来管理，超出作用域就会销毁，无需人们操心手动管理，从某种意义上说，编写 Rust 代码时无需关心对象分配在栈上或堆上，只需知道分配在内存即可。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 这个机制可以通过 Construtor 和 Destructor 的调用，以及搭配调试器来观察:
 
-```c++
-#include <iostream>
+```c&#43;&#43;
+#include &lt;iostream&gt;
 class Entity
 {
 public:
-    Entity()  { std::cout << "Created Entity!" << std::endl; }
-    ~Entity() { std::cout << "Destroyed Entity!" << std::endl; }
-    void Print() const { std::cout << "Hello" << std::endl; }
+    Entity()  { std::cout &lt;&lt; &#34;Created Entity!&#34; &lt;&lt; std::endl; }
+    ~Entity() { std::cout &lt;&lt; &#34;Destroyed Entity!&#34; &lt;&lt; std::endl; }
+    void Print() const { std::cout &lt;&lt; &#34;Hello&#34; &lt;&lt; std::endl; }
 };
 
 int main()
@@ -1467,9 +1824,9 @@ int main()
 }
 ```
 
-我们可以利用自动变量和作用域的特性来设计类似 Rust 的生命周期机制 (实现了一个类似于 C++ 的 `unique_ptr` 的智能指针):
+我们可以利用自动变量和作用域的特性来设计类似 Rust 的生命周期机制 (实现了一个类似于 C&#43;&#43; 的 `unique_ptr` 的智能指针):
 
-```c++
+```c&#43;&#43;
 class ScopedPtr
 {
 private:
@@ -1477,8 +1834,8 @@ private:
 public:
     ScopedPtr(Entity* ptr) : m_Ptr(ptr) {}
     ~ScopedPtr() { delete m_Ptr; }
-    Entity* operator->() { return m_Ptr; }
-    const Entity* operator->() const { return m_Ptr; }
+    Entity* operator-&gt;() { return m_Ptr; }
+    const Entity* operator-&gt;() const { return m_Ptr; }
 };
 
 int main()
@@ -1489,61 +1846,61 @@ int main()
         ScopedPtr e = new Entity();
     }
     const ScopedPtr e = new Entity();
-    e->Print();
+    e-&gt;Print();
 }
 ```
 
-智能指针一般都会重载 `->` 运算符，以使得智能指针使用起来和普通指针相同
+智能指针一般都会重载 `-&gt;` 运算符，以使得智能指针使用起来和普通指针相同
 
 - cppreference: [operator overloading](https://en.cppreference.com/w/cpp/language/operators)
 
-> The overload of operator `->` must either return a raw pointer, or return an object (by reference or by value) for which operator `->` is in turn overloaded.
+&gt; The overload of operator `-&gt;` must either return a raw pointer, or return an object (by reference or by value) for which operator `-&gt;` is in turn overloaded.
 
-按照这个描述，碰到 `->` 运算符时会不断调用相应的操作函数 (例如 `->` 的运算符重载函数)，直到 `->` 被推导到对应的类型 (符合 `->` 右边的操作数的类型要求)
+按照这个描述，碰到 `-&gt;` 运算符时会不断调用相应的操作函数 (例如 `-&gt;` 的运算符重载函数)，直到 `-&gt;` 被推导到对应的类型 (符合 `-&gt;` 右边的操作数的类型要求)
 
-{{< admonition tip >}}
+{{&lt; admonition tip &gt;}}
 这种自动变量和作用域特性在很多地方都可以用到，例如计时器，配合 Constructor 和 Destructor 可以实现对特定时间段 (该计时器存活的生命周期) 进行自动计时，实现逻辑为：调用构造函数时启动计时，调用析构函数时结束计时并记录或打印。
 
 也可以用于互斥锁 (Mutex Lock)，在特定函数的起始处自动创建锁守卫 (Lock Guard)，在该函数的结束后自动销毁该锁守卫，这使得多线程执行时会有序执行该函数。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ### Smart Pointers
 
 - cppreference: [std::unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr)
 
-> `std::unique_ptr` is a smart pointer that owns and manages another object through a pointer and disposes of that object when the `unique_ptr` goes out of scope.
+&gt; `std::unique_ptr` is a smart pointer that owns and manages another object through a pointer and disposes of that object when the `unique_ptr` goes out of scope.
 
 `unique_ptr` 不能被复制，因为这样违反了它的所有权 (ownership) 机制，它只能被移动 (move) 即转移所有权
 
-```c++
-#include <memory>
+```c&#43;&#43;
+#include &lt;memory&gt;
 int main()
 {
-    std::unqiue_ptr<Entity> e(new Entity);
+    std::unqiue_ptr&lt;Entity&gt; e(new Entity);
     // last may cause exception, thus recommend follow
-    std::unique_ptr<Entity> e = std::make_unique<Entity>(); // call Entity()
-    e->Print(); // unique_ptr has overloaded `->` operator
+    std::unique_ptr&lt;Entity&gt; e = std::make_unique&lt;Entity&gt;(); // call Entity()
+    e-&gt;Print(); // unique_ptr has overloaded `-&gt;` operator
 }
 ```
 
 - cppreference: [std::shared_ptr](https://en.cppreference.com/w/cpp/memory/shared_ptr)
 
-> `std::shared_ptr` is a smart pointer that retains shared ownership of an object through a pointer. Several `shared_ptr` objects may own the same object. The object is destroyed and its memory deallocated when either of the following happens:
-> 
-> - the last remaining `shared_ptr` owning the object is destroyed;
-> - the last remaining `shared_ptr` owning the object is assigned another pointer via `operator=` or `reset()`.
+&gt; `std::shared_ptr` is a smart pointer that retains shared ownership of an object through a pointer. Several `shared_ptr` objects may own the same object. The object is destroyed and its memory deallocated when either of the following happens:
+&gt; 
+&gt; - the last remaining `shared_ptr` owning the object is destroyed;
+&gt; - the last remaining `shared_ptr` owning the object is assigned another pointer via `operator=` or `reset()`.
 
 底层机制是通过 **循环计数** ([Reference counting](https://en.wikipedia.org/wiki/Reference_counting)) 来实现的
 
 类似的实作案例: Rust [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html)
 
-```c++
-#include <memory>
+```c&#43;&#43;
+#include &lt;memory&gt;
 int main()
 {
-    std::shared_ptr<Entity> e;
+    std::shared_ptr&lt;Entity&gt; e;
     {
-        std::shared_ptr<Entity> sharedEntity = std::make_shared<Entity>(); // call Entity()
+        std::shared_ptr&lt;Entity&gt; sharedEntity = std::make_shared&lt;Entity&gt;(); // call Entity()
         e = sharedEntity;
     }
 }
@@ -1551,33 +1908,103 @@ int main()
 
 - cppreference: [std::weak_ptr](https://en.cppreference.com/w/cpp/memory/weak_ptr)
 
-> `std::weak_ptr` is a smart pointer that holds a non-owning ("weak") reference to an object that is managed by `std::shared_ptr`. It must be converted to `std::shared_ptr` in order to access the referenced object.
+&gt; `std::weak_ptr` is a smart pointer that holds a non-owning (&#34;weak&#34;) reference to an object that is managed by `std::shared_ptr`. It must be converted to `std::shared_ptr` in order to access the referenced object.
 
 `weak_ptr` 对所指向的对象没有所有权，它是用于解决 **循环引用** 问题 (例如树状结构的亲代关系会导致循环引用)。
 
 类似的实作案例: Rust [std::rc::Weak](https://doc.rust-lang.org/std/rc/struct.Weak.html)
 
-```c++
-#include <memory>
+```c&#43;&#43;
+#include &lt;memory&gt;
 int main()
 {
-    std::weak_ptr<Entity> e;
+    std::weak_ptr&lt;Entity&gt; e;
     {
-        std::shared_ptr<Entity> sharedEntity = std::make_shared<Entity>(); // call Entity()
+        std::shared_ptr&lt;Entity&gt; sharedEntity = std::make_shared&lt;Entity&gt;(); // call Entity()
         e = sharedEntity;
     }
 }
 ```
 
-{{< admonition tip >}}
+{{&lt; admonition tip &gt;}}
 推荐使用 `std::make_XYZ` 这这种风格标准库函数来构造智能指针实例，这样你就可以在你的代码里永远摆脱 `new` 关键字了 :rofl: 
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
+
+## Benchmarking
+
+Wikipedia: [Benchmark](https://en.wikipedia.org/wiki/Benchmark_(computing))
+
+### Timing
+
+- cppreference: [Date and time utilities](https://en.cppreference.com/w/cpp/chrono)
+- cppreference: [Standard library header &lt;chrono&gt; (C&#43;&#43;11)](https://en.cppreference.com/w/cpp/header/chrono)
+
+chrono 是一个平台无关的计时库，如果不是特定平台高精度的计时需求，使用这个库就足够了。
+
+```c&#43;&#43;
+#include &lt;iostream&gt;
+#include &lt;thread&gt;
+#include &lt;chrono&gt;
+
+int main()
+{
+    using namespace std::literals::chrono_literals;
+
+    auto start = std::chrono::high_resolution_clock::now();
+    std::this_thread::sleep_for(1s);
+    auto end = std::chrono::high_resolution_clock::now();
+
+    std::chrono::duration&lt;float&gt; duration = end - start;
+    std::cout &lt;&lt; duration &lt;&lt; &#34;s&#34; &lt;&lt; std::endl;
+}
+```
+
+运用作用域、生命周期以及析构函数来实现自动计时:
+
+```c&#43;&#43;
+#include &lt;iostream&gt;
+#include &lt;thread&gt;
+#include &lt;chrono&gt;
+
+struct Timer
+{
+    std::chrono::steady_clock::time_point start, end;
+    std::chrono::duration&lt;float&gt; duration;
+
+    Timer()
+    {
+        start = std::chrono::high_resolution_clock::now();
+    }
+
+    ~Timer()
+    {
+        end = std::chrono::high_resolution_clock::now();
+        duration = end - start;
+
+        float ms = duration.count() * 1000.0f;
+        std::cout &lt;&lt; &#34;Timer took &#34; &lt;&lt; ms &lt;&lt; &#34;ms&#34; &lt;&lt; std::endl;
+    }
+};
+
+void Function()
+{
+    Timer timer;
+
+    for (int i = 0; i &lt; 100; i&#43;&#43;)
+        std::cout &lt;&lt; &#34;Hello\n&#34; /* &lt;&lt; std::endl */;
+}
+
+int main()
+{
+    Function();
+}
+```
 
 ## Advanced Topics
 
 ### Multiple Return Values
 
-在 C++ 中，实现函数可以返回多个值有很多种方式:
+在 C&#43;&#43; 中，实现函数可以返回多个值有很多种方式:
 
 - 适用性最强的是返回自定义的结构体使用结构体包装返回的多个值)
 - 如果返回的多个值类型相同，可以返回 `vector` 或数组
@@ -1589,17 +2016,344 @@ int main()
 - cppreference: [std::tuple](https://en.cppreference.com/w/cpp/utility/tuple)
 - cppreference: [std::pair](https://en.cppreference.com/w/cpp/utility/pair)
 
+### Macros
+
+- cppreference: [Replacing text macros](https://en.cppreference.com/w/cpp/preprocessor/replace)
+- cppreference: [Preprocessor](https://en.cppreference.com/w/cpp/preprocessor)
+
+宏和预处理的本质其实是文本替换:
+
+```c&#43;&#43;
+#define WAIT std::cin.get()
+```
+
+&#34;专门从事编写迷惑性代码&#34;:
+
+```c&#43;&#43;
+#define OPEN_CURLY {
+int main()
+OPEN_CURLY
+    return 0;
+}
+```
+
+比较有意义的宏使用场景: Project 属性 -&gt; C/C&#43;&#43; -&gt; Preprocessor -&gt; Preprocessor Definitions: 添加自定义的宏 (作用有些类似于 gcc 的 `-D` 参数)
+
+这样可以实现不同模式下日志系统的输出不相同，例如 Debug 模式下定义 `PR_DEBUG` 宏，Release 模式下定义 `PR_RELEASE` 宏。然后在日志系统针对这两个宏是否被定义进行不同的处理，以让日志系统针对不同模式进行不同处理。
+
+```c&#43;&#43;
+#ifdef PR_DEBUG
+#define LOG(x) std::cout &lt;&lt; x &lt;&lt; std::endl;
+#else
+#define LOG(x)
+#endif
+```
+
+`ifdef` 在很多情况下表现比较糟糕，使用 `if` 改写上面的代码 (搭配 `defined` 进行定义判定):
+
+```c&#43;&#43;
+#if PR_DEBUG == 1
+#define LOG(x) std::cout &lt;&lt; x &lt;&lt; std::endl;
+#else defined(PR_RELEASE)
+#define LOG(x)
+#endif
+```
+
+`#if 0` 可以用于删除特定代码 (本质上是条件编译)
+
+可以通过 `\` 来编写多行的宏，但是注意不要在 `\` 后面多按了空格，这样会导致是对空格的转义，一点要确保 `\` 后面是换行，这才是对换行符的转义:
+
+```c&#43;&#43;
+#define MAIN int main() \
+{ \
+    std::cin.get(); \
+}
+```
+
+{{&lt; admonition &gt;}}
+宏常用于跟踪、调试，例如追踪内存分配 (e.g. 那哪一行、哪个函数分配了多少字节)、日志系统的输出
+{{&lt; /admonition &gt;}}
+
+### Function Pointers
+
+#### Pointer to Function in C
+
+- cppreference: [Pointer declaration](https://en.cppreference.com/w/cpp/language/pointer) - **Pointers to functions**
+
+&gt; A pointer to function can be initialized with an address of a non-member function or a static member function. Because of the function-to-pointer implicit conversion, the address-of operator is optional
+
+```c&#43;&#43;
+#include &lt;iostream&gt;
+void HelloWorld(int a) 
+{ 
+    std::cout &lt;&lt; &#34;Hello, world!&#34; &lt;&lt; &lt;&lt; a &lt;&lt; std::endl; 
+}
+int main()
+{
+    void(*function)(int) = HelloWorld; // C style
+    auto function = HelloWorld; // or &amp;HelloWorld;
+    function(5); // same as call `HelloWorld(5)`
+}
+```
+
+`auto` 在推导裸函数指针 (raw function pointer) 上特别有用 (因为裸函数指针类型实在是太复杂了)。也可以使用 `using` 或 `typedef` 为函数指针取别名，增加可读性:
+
+```c&#43;&#43;
+typedef void(*HelloWorldFunction)(int);  // by `typedef`
+using HelloWroldFunction = void(*)(int); // by `using`
+
+HelloWorldFunction function = HelloWorld;
+function(5);
+function(6);
+function(7);
+```
+
+函数指针作为函数参数传递:
+
+```c&#43;&#43;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+
+void PrintValue(int value)
+{
+    std::cout &lt;&lt; &#34;Value: &#34; &lt;&lt; value &lt;&lt; std::endl;
+}
+
+void ForEach(const std::vector&lt;int&gt;&amp; values, void(*func)(int))
+{
+    for (int value : values)
+        func(value);
+}
+
+int main()
+{
+    std::vector&lt;int&gt; values = { 1, 5, 4, 2, 3 };
+    ForEach(values, PrintValue); // should print 1, 5, 4, 2, 3 line by line
+}
+```
+
+#### Lambdas
+
+- cppreference: [Lambda expressions (since C&#43;&#43;11)](https://en.cppreference.com/w/cpp/language/lambda)
+
+&gt; Constructs a closure: an unnamed function object capable of capturing variables in scope.
+
+只要你有一个函数指针，你都可以在 C&#43;&#43; 中使用 Lambda 表达式。即我们会在设置函数指针以指向函数的地方，我们都可以使用 Lambda 表达式来代替函数指针使用 (例如函数参数)。但这个规则是有前提的，仅限于非捕获类的 Lambda 表达式，如果是捕获类的 Lambda 表达式，则需要使用 `std::function`。
+
+使用 Lambda 表达式改写之前的函数指针作为函数参数的例子:
+
+```c&#43;&#43;
+int main()
+{
+    std::vector&lt;int&gt; values = { 1, 5, 4, 2, 3 };
+    ForEach(values, [](int value) { std::cout &lt;&lt; &#34;Value: &#34; &lt;&lt; value &lt;&lt; std::endl; });
+}
+```
+
+&gt; The captures is a comma-separated list of zero or more captures, optionally beginning with the *capture-default*. The capture list defines the outside variables that are accessible from within the lambda function body. The only *capture-defaults* are
+&gt; 
+&gt; - `&amp;` (implicitly capture the used variables with automatic storage duration by reference) and
+&gt; - `=` (implicitly capture the used variables with automatic storage duration by copy).
+&gt;
+&gt; The syntax of an individual capture in captures is ...
+
+Lambda 表达式的捕获分为 capture-default 和 individual capture，这两者都是可选的。capture-default 指定的是该 Lambda 表达式默认的捕获规则，而 individual capture 指定的是单独变量的捕获规则。
+
+- cppreference: [std::function](https://en.cppreference.com/w/cpp/utility/functional/function)
+
+```c&#43;&#43;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;functional&gt;
+#include &lt;algorithm&gt;
+
+void ForEach(const std::vector&lt;int&gt;&amp; values, const std::function&lt;void(int)&gt;&amp; func)
+{
+    for (int value : values)
+        func(value);
+}
+
+int main()
+{
+    std::vector&lt;int&gt; values = { 1, 5, 4, 2, 3 };
+    int a = 5;
+    auto lambda = [=](int value) { std::cout &lt;&lt; &#34;Value: &#34; &lt;&lt; a &lt;&lt; std::endl; };
+    ForEach(values, lambda); // should print 5 five times line by line
+
+    auto it = std::find_if(values.begin(), values.end(), [](int value) { return value &gt; 3; });
+    std::cout &lt;&lt; *it &lt;&lt; std::endl; // should print 5
+}
+```
+
+- cppreference: [std::find, std::find_if, std::find_if_not](https://en.cppreference.com/w/cpp/algorithm/find)
+
+### Namespaces
+
+- cppreference: [Namespaces](https://en.cppreference.com/w/cpp/language/namespace)
+
+&gt; Namespaces provide a method for preventing name conflicts in large projects.
+
+Rust 中的 [Module](https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html) 也是类似的语法
+
+类本身也是一个 namespace，所以使用类似的操作符 `::` 访问内部成员
+
+#### Don&#39;t &#34;using namspace std&#34; 
+
+不推荐使用 `using namespace std;` 类似的语句，使用 `std;:xxx` 这样的风格。因为现实中比较少用 STL，都是工作室自己开发类似 STL 的库来使用，这样可以区分代码中使用的是哪个库的 API。
+
+实作案例: EASTL [vector.h](https://github.com/electronicarts/EASTL/blob/master/include/EASTL/vector.h#L77)
+
+```c&#43;&#43;
+vector&lt;int&gt; vec; // what about vector? std::vector or eastl::vector?
+```
+
+滥用 `using namespace xxx;` 也可能会造成 API 名字冲突，例如上面的例子如果同时使用了:
+
+```c&#43;&#43;
+using namespace std;
+using namespace eastl;
+```
+
+会因为指定调用函数不明确而导致编译失败。这种会导致编译失败的情景还算比较好的了 (因为编译时期就报错了)，下面这种情景更是灾难性的:
+
+```c&#43;&#43;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+
+namespace apple {
+    void Print(const std::string&amp; text)
+    {
+        std::cout &lt;&lt; text &lt;&lt; std::endl;
+    }
+}
+
+namespace purple {
+    void Print(const char* text)
+    {
+        std::string temp = text;
+        std::reverse(temp.begin(), temp.end());
+        std::cout &lt;&lt; temp &lt;&lt; std::endl;
+    }
+}
+
+int main()
+{
+    using namespace apple;
+    using namespace purple;
+    Print(&#34;Hello&#34;); // we want to print &#34;Hello&#34; but print &#34;olleH&#34;
+}
+```
+
+这段代码没有编译错误也没有警告，但是运行起来不符合预期，是灾难性的运行时错误。这是因为不同库不能保证相同 API 接口是互斥的，所以会导致如上这种情况，调用的 API 不如我们预期。
+
+{{&lt; admonition tip &gt;}}
+另外需要特别注意，千万不要在头文件中使用 `using namspace`！这会导致将 namespace 引入到不必要的地方，编译失败时很难追踪。
+
+尽量在比较小的作用域中使用 `using namespace`，例如 `if` 语句的作用域，函数体内，这样使用是没问题的。最大作用域的使用场景就是一个单独的 cpp 文件中使用了，以控制 namespace 的扩散范围。
+
+大项目尽量将函数、类等等定义在 namspace 内，防止出现 API 冲突。
+{{&lt; /admonition &gt;}}
+
+### Threads
+
+- cppreference: [Concurrency support library (since C&#43;&#43;11)](https://en.cppreference.com/w/cpp/thread)
+- cppreference: [std::thread](https://en.cppreference.com/w/cpp/thread/thread)
+
+&gt; The class `thread` represents a single thread of execution. Threads allow multiple functions to execute concurrently.
+
+```c&#43;&#43;
+#include &lt;iostream&gt;
+#include &lt;thread&gt;
+
+static bool s_Finished = false;
+
+void DoWork()
+{
+    using namespace std::literals::chrono_literals;
+
+    std::cout &lt;&lt; &#34;Start thread id=&#34; &lt;&lt; std::this_thread::get_id() &lt;&lt; std::endl;
+
+    while (!s_Finished)
+    {
+        std::cout &lt;&lt; &#34;Working...\n&#34;;
+        std::this_thread::sleep_for(1s);
+    }
+}
+
+int main()
+{
+    std::thread worker(DoWork);
+
+    std::cin.get();
+    s_Finished = true;
+
+    worker.join();
+
+    std::cout &lt;&lt; &#34;Finished.&#34; &lt;&lt; std::endl;
+    std::cout &lt;&lt; &#34;Start thread id=&#34; &lt;&lt; std::this_thread::get_id() &lt;&lt; std::endl;
+}
+```
+
+### Algorithms
+
+- cppreference: [Algorithms library](https://en.cppreference.com/w/cpp/algorithm)
+
+&gt; The algorithms library defines functions for a variety of purposes (e.g. searching, sorting, counting, manipulating) that operate on ranges of elements. Note that a range is defined as **[`first`, `last`)** where `last` refers to the element past the last element to inspect or modify.
+
+#### Sorting
+
+- cppreference: [std::sort](https://en.cppreference.com/w/cpp/algorithm/sort)
+
+&gt; Sorts the elements in the range **[`first`, `last`)** in non-descending order. The order of equal elements is not guaranteed to be preserved.
+
+&gt; **comp**	-	comparison function object (i.e. an object that satisfies the requirements of Compare) which returns `​true` if the first argument is less than (i.e. is ordered before) the second.
+
+```c&#43;&#43;
+#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;algorithm&gt;
+#include &lt;functional&gt;
+
+int main()
+{
+    std::vector&lt;int&gt; values = { 3, 5, 1, 4, 2 };
+    std::sort(values.begin(), values.end()); // [1, 2, 3, 4, 5]
+    std::sort(values.begin(), values.end(), std::greater&lt;int&gt;()); // [5, 4, 3, 2, 1]
+    std::sort(values.begin(), values.end(), [](int a, int b) {
+        return a &lt; b;
+    }); // [1, 2, 3, 4, 5]
+    std::sort(values.begin(), values.end(), [](int a, int b) {
+        if (a == 1)
+            return false;
+        if (b == 1)
+            return true;
+        return a &lt; b;
+    }); // [2, 3, 4, 5, 1]
+
+    for (int value : values)
+        std::cout &lt;&lt; value &lt;&lt; std::endl;
+}
+```
+
+### Coding Style
+
+个人偏好如下:
+
+- 函数名: [PscalCase](https://en.wikipedia.org/wiki/Naming_convention_(programming)#Letter_case-separated_words) 命名法 e.g. `ForEach`
+- 类成员: [Hungarian](https://en.wikipedia.org/wiki/Hungarian_notation) 命名法 e.g. `m_Devices`
+
 ## References
 
-- The Cherno: [C++](https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb) / [中文翻译](https://space.bilibili.com/364152971/channel/collectiondetail?sid=13909): 主要介绍 C++11 及以上版本的语法
-- 我是龙套小果丁: [现代 C++ 基础](https://space.bilibili.com/18874763/channel/collectiondetail?sid=2192185)
-- [C++ Weekly With Jason Turner](https://www.youtube.com/@cppweekly)
-- [C++ 矿坑系列](https://github.com/Mes0903/Cpp-Miner)
-- 南方科技大学: [快速学习 C 和 C++，基础语法和优化策略](https://www.bilibili.com/video/BV1Vf4y1P7pq/)
-- 原子之音: [C++ 现代实用教程](https://space.bilibili.com/437860379/channel/seriesdetail?sid=2352475)
-/ [C++ 智能指针](https://www.bilibili.com/video/BV18B4y187uL)
+- The Cherno: [C&#43;&#43;](https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb) / [中文翻译](https://space.bilibili.com/364152971/channel/collectiondetail?sid=13909): 主要介绍 C&#43;&#43;11 及以上版本的语法
+- [C&#43;&#43; Weekly With Jason Turner](https://www.youtube.com/@cppweekly): 这个博主超级猛
+- [CppCon](https://www.youtube.com/@CppCon): 强烈推荐 [Back To Basics](https://www.youtube.com/@CppCon/search?query=Back%20to%20Basics) 专题
+- [C&#43;&#43; 矿坑系列](https://github.com/Mes0903/Cpp-Miner)
+- 我是龙套小果丁: [现代 C&#43;&#43; 基础](https://space.bilibili.com/18874763/channel/collectiondetail?sid=2192185)
+- 南方科技大学: [快速学习 C 和 C&#43;&#43;，基础语法和优化策略](https://www.bilibili.com/video/BV1Vf4y1P7pq/)
+- 原子之音: [C&#43;&#43; 现代实用教程](https://space.bilibili.com/437860379/channel/seriesdetail?sid=2352475)
+/ [C&#43;&#43; 智能指针](https://www.bilibili.com/video/BV18B4y187uL)
 / [CMake 简明教程](https://www.bilibili.com/video/BV1xa4y1R7vT)
-- [learncpp.com](https://www.learncpp.com/)
+- [Learn C&#43;&#43;](https://www.learncpp.com/)
 
 
 ---

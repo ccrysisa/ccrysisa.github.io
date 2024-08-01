@@ -13,8 +13,8 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 <meta itemprop="description" content="
 We&#39;re writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you&#39;d make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you&#39;re a newcomer to the language or not.
 "><meta itemprop="datePublished" content="2024-06-28T11:16:51+08:00" />
-<meta itemprop="dateModified" content="2024-07-28T23:34:04+08:00" />
-<meta itemprop="wordCount" content="2072"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="dateModified" content="2024-07-31T12:50:00+08:00" />
+<meta itemprop="wordCount" content="2106"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Rust,Hash Map," /><meta property="og:title" content="Build a linked hash map in Rust" />
 <meta property="og:description" content="
 We&#39;re writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you&#39;d make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you&#39;re a newcomer to the language or not.
@@ -22,7 +22,7 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2024-06-28T11:16:51+08:00" />
-<meta property="article:modified_time" content="2024-07-28T23:34:04+08:00" />
+<meta property="article:modified_time" content="2024-07-31T12:50:00+08:00" />
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Build a linked hash map in Rust"/>
@@ -43,8 +43,8 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/build-a-linked-hashmap-in-rust\/"
-    },"genre": "posts","keywords": "Rust, Hash Map","wordcount":  2072 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/build-a-linked-hashmap-in-rust\/","datePublished": "2024-06-28T11:16:51+08:00","dateModified": "2024-07-28T23:34:04+08:00","publisher": {
+    },"genre": "posts","keywords": "Rust, Hash Map","wordcount":  2106 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/build-a-linked-hashmap-in-rust\/","datePublished": "2024-06-28T11:16:51+08:00","dateModified": "2024-07-31T12:50:00+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -55,7 +55,7 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -101,7 +101,7 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -161,18 +161,12 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Build a linked hash map in Rust</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-06-28 11:16:51"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-28">2024-06-28</time></span>&nbsp;<span title="更新于 2024-07-28 23:34:04"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-07-28">2024-07-28</time></span>&nbsp;<span title="2072 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/rust/" class="post-category" title="分类 - Rust"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div><div class="post-meta-line"><span title="发布于 2024-06-28 11:16:51"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-28">2024-06-28</time></span>&nbsp;<span title="更新于 2024-07-31 12:50:00"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-07-31">2024-07-31</time></span>&nbsp;<span title="2106 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2200 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -209,9 +203,9 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 <ul>
 <li>整理自 <a href="https://www.youtube.com/watch?v=k6xR2kf9hlA"target="_blank" rel="external nofollow noopener noreferrer">John Gjengset 的影片</a></li>
 </ul>
-<h2 id="影片注解">影片注解</h2>
-<h3 id="data-structure-and-api">Data structure and API</h3>
-<blockquote>
+<h2 id="影片注解" class="heading-element">
+  <a href="#%e5%bd%b1%e7%89%87%e6%b3%a8%e8%a7%a3" class="heading-mark"></a>影片注解</h2><h3 id="data-structure-and-api" class="heading-element">
+  <a href="#data-structure-and-api" class="heading-mark"></a>Data structure and API</h3><blockquote>
 <p>Usually it is nicer tosepecify the bounds only on the places where you need them (e.g. methods) rather than on the data structure.</p>
 </blockquote>
 <ul>
@@ -234,8 +228,8 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">K</span>: <span class="nb">Eq</span> <span class="o">+</span><span class="w"> </span><span class="n">Hash</span><span class="p">,</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">S</span>: <span class="nc">BuildHasher</span><span class="p">,</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="hash-and-eq">Hash and Eq</h3>
-<ul>
+</div><h3 id="hash-and-eq" class="heading-element">
+  <a href="#hash-and-eq" class="heading-mark"></a>Hash and Eq</h3><ul>
 <li>Trait <a href="https://doc.rust-lang.org/std/hash/trait.Hash.html"target="_blank" rel="external nofollow noopener noreferrer">std::hash::Hash</a></li>
 </ul>
 <div class="details admonition quote open">
@@ -255,8 +249,8 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 </div>
     </div>
   </div>
-<h3 id="usize-vs-u64">usize vs. u64</h3>
-<div class="highlight" id="id-2"><div class="chroma">
+<h3 id="usize-vs-u64" class="heading-element">
+  <a href="#usize-vs-u64" class="heading-mark"></a>usize vs. u64</h3><div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -266,8 +260,8 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">let</span><span class="w"> </span><span class="n">bucket</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="bp">self</span><span class="p">.</span><span class="n">buckets</span><span class="p">[</span><span class="n">bucket</span><span class="p">];</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>因为取模 <code>%</code> 运算后的数值不大于 <code>buckets.len()</code>，并且 <code>buckets.len()</code> 的类型是 <code>usize</code>，所以可以将取模运算的结果安全第转换成 <code>usize</code>，当然进行取模运算时需要将 <code>buckets.len()</code> 转换成和 <code>finish()</code> 的返回值类型 <code>u64</code> 再进行运算。</p>
-<h3 id="swap_remove">swap_remove</h3>
-<p>对于普通的 vector 的 <code>remove</code> 方法来说，处理过程如下:</p>
+<h3 id="swap_remove" class="heading-element">
+  <a href="#swap_remove" class="heading-mark"></a>swap_remove</h3><p>对于普通的 vector 的 <code>remove</code> 方法来说，处理过程如下:</p>
 <div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -296,10 +290,10 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="fm">vec!</span><span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">d</span><span class="p">,</span><span class="w"> </span><span class="n">e</span><span class="p">]</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>先将被删除元素和最后一个元素交换位置，然后再丢弃最后一个元素 (此时该位置上为被删除元素)，这样的时间复杂度仅为 $O(1)$</p>
-<h3 id="tail-recursion">tail recursion</h3>
-<p>因为 Rust 编译器并没有针对尾递归的最优化，所以尽量不要使用尾递归的逻辑，使用循环改写比较好，这样可以将空间复杂度从 $O(n)$ 降到 $O(1)$。在 <code>drop</code> 方法的实现中特别明显，手动实现 <code>drop</code> 方法时，应尽量使用循环而不是递归逻辑。</p>
-<h3 id="tuple-references">tuple references</h3>
-<div class="highlight" id="id-5"><div class="chroma">
+<h3 id="tail-recursion" class="heading-element">
+  <a href="#tail-recursion" class="heading-mark"></a>tail recursion</h3><p>因为 Rust 编译器并没有针对尾递归的最优化，所以尽量不要使用尾递归的逻辑，使用循环改写比较好，这样可以将空间复杂度从 $O(n)$ 降到 $O(1)$。在 <code>drop</code> 方法的实现中特别明显，手动实现 <code>drop</code> 方法时，应尽量使用循环而不是递归逻辑。</p>
+<h3 id="tuple-references" class="heading-element">
+  <a href="#tuple-references" class="heading-mark"></a>tuple references</h3><div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -309,8 +303,8 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="o">&amp;</span><span class="na">&#39;a</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="p">)</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这两种表示方式是不完全相同的，对于第二种方式，隐含了一个前提: <code>K, V</code> 是在同一个 tuple 里面，即它们在内存的位置是相邻的，这种方式表示引用的是一个 tuple。而第一种仅表示两个引用组成了一个 tuple，而对于 <code>K, V</code> 这两个数据在内存的位置关系并无限制，<code>K, V</code> 本身是否组成 tuple 也不在乎。</p>
-<h3 id="borrow">borrow</h3>
-<ul>
+<h3 id="borrow" class="heading-element">
+  <a href="#borrow" class="heading-mark"></a>borrow</h3><ul>
 <li>Trait <a href="https://doc.rust-lang.org/std/borrow/trait.Borrow.html"target="_blank" rel="external nofollow noopener noreferrer">std::borrow::Borrow</a></li>
 </ul>
 <blockquote>
@@ -339,8 +333,8 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 </div>
     </div>
   </div>
-<h3 id="entry">entry</h3>
-<ul>
+<h3 id="entry" class="heading-element">
+  <a href="#entry" class="heading-mark"></a>entry</h3><ul>
 <li>Enum <a href="https://doc.rust-lang.org/std/collections/hash_map/enum.Entry.html"target="_blank" rel="external nofollow noopener noreferrer">std::collections::hash_map::Entry</a></li>
 </ul>
 <div class="highlight" id="id-6"><div class="chroma">
@@ -405,8 +399,8 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="reborrow">reborrow</h3>
-<div class="highlight" id="id-9"><div class="chroma">
+</div><h3 id="reborrow" class="heading-element">
+  <a href="#reborrow" class="heading-mark"></a>reborrow</h3><div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -486,10 +480,10 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="sorted-list">sorted list</h3>
-<p>可以给 hash map 的 linked 部分进行排序，这样查找的效能会比较高 (使用二分查找，时间复杂度由原先的 $O(n)$ 降低为 $O(log n)$)，但是这样会降低插入的效能 (时间复杂度由原先的 $O(1)$ 提高至 $O(n)$)。所以需要根据应用场景进行 trade-off，如果是应用场景是查询操作比较多的，就将 linked 部分设置为有序。</p>
-<h2 id="homework">Homework</h2>
-<div class="details admonition info open">
+</div><h3 id="sorted-list" class="heading-element">
+  <a href="#sorted-list" class="heading-mark"></a>sorted list</h3><p>可以给 hash map 的 linked 部分进行排序，这样查找的效能会比较高 (使用二分查找，时间复杂度由原先的 $O(n)$ 降低为 $O(log n)$)，但是这样会降低插入的效能 (时间复杂度由原先的 $O(1)$ 提高至 $O(n)$)。所以需要根据应用场景进行 trade-off，如果是应用场景是查询操作比较多的，就将 linked 部分设置为有序。</p>
+<h2 id="homework" class="heading-element">
+  <a href="#homework" class="heading-mark"></a>Homework</h2><div class="details admonition info open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -585,13 +579,13 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 </div>
     </div>
   </div>
-<h2 id="documentations">Documentations</h2>
-<p>这里列举视频中一些概念相关的 documentation</p>
+<h2 id="documentations" class="heading-element">
+  <a href="#documentations" class="heading-mark"></a>Documentations</h2><p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>
 <p>学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料</p>
 </blockquote>
-<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3>
-<ul>
+<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml" class="heading-element">
+  <a href="#crate-stdhttpsdocrust-langorgstdindexhtml" class="heading-mark"></a>Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3><ul>
 <li>
 <p>Struct <a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html"target="_blank" rel="external nofollow noopener noreferrer">std::collections::HashMap</a></p>
 </li>
@@ -654,8 +648,8 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 <p>method <a href="https://doc.rust-lang.org/std/primitive.slice.html#method.last_mut"target="_blank" rel="external nofollow noopener noreferrer">slice::last_mut</a></p>
 </li>
 </ul>
-<h2 id="references">References</h2>
-<ul>
+<h2 id="references" class="heading-element">
+  <a href="#references" class="heading-mark"></a>References</h2><ul>
 <li>Tsoding: <a href="https://www.youtube.com/watch?v=YBzNFt4wapA"target="_blank" rel="external nofollow noopener noreferrer">Hash Table in Rust</a></li>
 <li><a href="https://rust-lang.github.io/api-guidelines/about.html"target="_blank" rel="external nofollow noopener noreferrer">Rust API Guidelines</a></li>
 <li><a href="https://doc.rust-lang.org/cargo/index.html"target="_blank" rel="external nofollow noopener noreferrer">The Cargo Book</a></li>
@@ -663,12 +657,11 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-07-28 23:34:04">更新于 2024-07-28&nbsp;</span>
-      </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/build-a-linked-hashmap-in-rust/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/" data-title="Build a linked hash map in Rust" data-hashtags="Rust,Hash Map"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+        <span title="更新于 2024-07-31 12:50:00">更新于 2024-07-31&nbsp;</span>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/build-a-linked-hashmap-in-rust/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/" data-title="Build a linked hash map in Rust" data-hashtags="Rust,Hash Map"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/" data-hashtag="Rust"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/" data-title="Build a linked hash map in Rust" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/" data-title="Build a linked hash map in Rust"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -677,25 +670,27 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/" data-title="Build a linked hash map in Rust" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/build-a-linked-hashmap-in-rust/" data-title="Build a linked hash map in Rust"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-      </div>
-    </div>
-  </div>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/rust/' class="post-tag">Rust</a><a href='/tags/hash-map/' class="post-tag">Hash Map</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/rust/" class="post-tag" title="标签 - Rust">Rust</a><a href="/tags/hash-map/" class="post-tag" title="标签 - Hash Map">Hash Map</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
   </div>
 
   <div class="post-nav"><a href="/posts/atomic-weapons/" class="post-nav-item" rel="prev" title="Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware</a>
-      <a href="/posts/modern-cpp/" class="post-nav-item" rel="next" title="Modern C&#43;&#43;">Modern C&#43;&#43;<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
+      <a href="/posts/modern-cpp/" class="post-nav-item" rel="next" title="Modern C&#43;&#43; (MSVC)">Modern C&#43;&#43; (MSVC)<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -703,5 +698,5 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-12":{"title":"examples/std-1.rs"},"id-13":{"title":"examples/std-2.rs"},"id-14":{"title":"examples/std-3.rs"},"id-15":{"title":"examples/std-4.rs"}},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-12":{"title":"examples/std-1.rs"},"id-13":{"title":"examples/std-2.rs"},"id-14":{"title":"examples/std-3.rs"},"id-15":{"title":"examples/std-4.rs"}},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

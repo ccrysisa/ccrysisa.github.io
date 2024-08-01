@@ -55,7 +55,7 @@ repost:
 - lots of `new` and `delete`
 - roll-your-own linked lists and other data structures
 - return codes as a mechanism for error handling
-- one of the millions of custom string classes that aren't std::string
+- one of the millions of custom string classes that aren't `std::string`
 
 As with all this-vs-that arguments, there are merits to both approaches. Modern C++ isn't universally better. Embedded enviornments, for example, often require extra restrictions that most people never need, so you'll see a lot of old-style code there. Overall though, I think you'll find that most of the modern features are worth using regularly. Moore's Law and compiler improvements have taken care of the majority of reasons to avoid the new stuff.
 
@@ -1582,6 +1582,64 @@ class array...
 边界检查的具体代码实现也是类似的，是通过常量模板规则生成的
 {{< /admonition >}}
 
+#### Multidimensional Arrays
+
+```c++
+int main()
+{
+    // 1 Dimension
+    int* array = new int[50];
+
+    // 2 Dimension
+    int** a2d = new int*[50];
+    for (int i = 0; i < 50; i++)
+        a2d[i] = new int[50];
+
+    a2d[0][0] = 0; // a2d[0] -> int*, a2d[0][0] -> int
+    a2d[0][1] = 1;
+    a2d[0][2] = 2;
+
+    for (int i = 0; i < 50; i++)
+        delete[] a2d[i];
+    delete[] a2d;
+
+    // 3 Dimension, it's too complex!
+    int*** a3d = new int**[50];
+    for (int i = 0; i < 50; i++)
+    {
+        a3d[i] = new int*[50];
+        for (int j = 0; j < 50; j++)
+            a3d[i][j] = new int[50];
+    }
+}
+```
+
+- Stack Overflow: [C++ multidimensional array on heap](https://stackoverflow.com/questions/72018905/c-multidimensional-array-on-heap)
+
+上面这种形式的多维数组会极大可能导致 cache miss，进而导致性能表现不如等价的一维数组。下面是二维数组和等价的一维数组在顺序读取时的性能表现对比:
+
+```c++
+int main()
+{
+    // slower
+    int** a2d = new int*[5];
+    for (int i = 0; i < 5; i++)
+        a2d[i] = new int[5];
+
+    for (int i = 0; i < 5; i++)
+        for (int j = 0; j < 5; i++)
+            a2d[i][j] = 2;
+    
+    // faster
+    int* array = new int[5 * 5];
+    for (int i = 0; i < 5; i++)
+        for (int j = 0; j < 5; i++)
+            a2d[i + 5*j] = 1;
+}
+```
+
+尽量避免使用二维数组 (以及二维以上维度)，推荐将其转换为等价的一维数组，利用 cache 的特性增强性能。
+
 ### String
 
 - cppreference: [std::basic_string](https://en.cppreference.com/w/cpp/string/basic_string)
@@ -1912,6 +1970,76 @@ int main()
 推荐使用 `std::make_XYZ` 这这种风格标准库函数来构造智能指针实例，这样你就可以在你的代码里永远摆脱 `new` 关键字了 :rofl: 
 {{< /admonition >}}
 
+## Benchmarking
+
+Wikipedia: [Benchmark](https://en.wikipedia.org/wiki/Benchmark_(computing))
+
+### Timing
+
+- cppreference: [Date and time utilities](https://en.cppreference.com/w/cpp/chrono)
+- cppreference: [Standard library header <chrono> (C++11)](https://en.cppreference.com/w/cpp/header/chrono)
+
+chrono 是一个平台无关的计时库，如果不是特定平台高精度的计时需求，使用这个库就足够了。
+
+```c++
+#include <iostream>
+#include <thread>
+#include <chrono>
+
+int main()
+{
+    using namespace std::literals::chrono_literals;
+
+    auto start = std::chrono::high_resolution_clock::now();
+    std::this_thread::sleep_for(1s);
+    auto end = std::chrono::high_resolution_clock::now();
+
+    std::chrono::duration<float> duration = end - start;
+    std::cout << duration << "s" << std::endl;
+}
+```
+
+运用作用域、生命周期以及析构函数来实现自动计时:
+
+```c++
+#include <iostream>
+#include <thread>
+#include <chrono>
+
+struct Timer
+{
+    std::chrono::steady_clock::time_point start, end;
+    std::chrono::duration<float> duration;
+
+    Timer()
+    {
+        start = std::chrono::high_resolution_clock::now();
+    }
+
+    ~Timer()
+    {
+        end = std::chrono::high_resolution_clock::now();
+        duration = end - start;
+
+        float ms = duration.count() * 1000.0f;
+        std::cout << "Timer took " << ms << "ms" << std::endl;
+    }
+};
+
+void Function()
+{
+    Timer timer;
+
+    for (int i = 0; i < 100; i++)
+        std::cout << "Hello\n" /* << std::endl */;
+}
+
+int main()
+{
+    Function();
+}
+```
+
 ## Advanced Topics
 
 ### Multiple Return Values
@@ -2206,71 +2334,44 @@ int main()
 }
 ```
 
-### Benchmarks
+### Algorithms
 
-#### Timing
+- cppreference: [Algorithms library](https://en.cppreference.com/w/cpp/algorithm)
 
-- cppreference: [Date and time utilities](https://en.cppreference.com/w/cpp/chrono)
-- cppreference: [Standard library header <chrono> (C++11)](https://en.cppreference.com/w/cpp/header/chrono)
+> The algorithms library defines functions for a variety of purposes (e.g. searching, sorting, counting, manipulating) that operate on ranges of elements. Note that a range is defined as **[`first`, `last`)** where `last` refers to the element past the last element to inspect or modify.
 
-chrono 是一个平台无关的计时库，如果不是特定平台高精度的计时需求，使用这个库就足够了。
+#### Sorting
 
-```c++
-#include <iostream>
-#include <thread>
-#include <chrono>
+- cppreference: [std::sort](https://en.cppreference.com/w/cpp/algorithm/sort)
 
-int main()
-{
-    using namespace std::literals::chrono_literals;
+> Sorts the elements in the range **[`first`, `last`)** in non-descending order. The order of equal elements is not guaranteed to be preserved.
 
-    auto start = std::chrono::high_resolution_clock::now();
-    std::this_thread::sleep_for(1s);
-    auto end = std::chrono::high_resolution_clock::now();
-
-    std::chrono::duration<float> duration = end - start;
-    std::cout << duration << "s" << std::endl;
-}
-```
-
-运用作用域、生命周期以及析构函数来实现自动计时:
+> **comp**	-	comparison function object (i.e. an object that satisfies the requirements of Compare) which returns `​true` if the first argument is less than (i.e. is ordered before) the second.
 
 ```c++
 #include <iostream>
-#include <thread>
-#include <chrono>
-
-struct Timer
-{
-    std::chrono::steady_clock::time_point start, end;
-    std::chrono::duration<float> duration;
-
-    Timer()
-    {
-        start = std::chrono::high_resolution_clock::now();
-    }
-
-    ~Timer()
-    {
-        end = std::chrono::high_resolution_clock::now();
-        duration = end - start;
-
-        float ms = duration.count() * 1000.0f;
-        std::cout << "Timer took " << ms << "ms" << std::endl;
-    }
-};
-
-void Function()
-{
-    Timer timer;
-
-    for (int i = 0; i < 100; i++)
-        std::cout << "Hello\n" /* << std::endl */;
-}
+#include <vector>
+#include <algorithm>
+#include <functional>
 
 int main()
 {
-    Function();
+    std::vector<int> values = { 3, 5, 1, 4, 2 };
+    std::sort(values.begin(), values.end()); // [1, 2, 3, 4, 5]
+    std::sort(values.begin(), values.end(), std::greater<int>()); // [5, 4, 3, 2, 1]
+    std::sort(values.begin(), values.end(), [](int a, int b) {
+        return a < b;
+    }); // [1, 2, 3, 4, 5]
+    std::sort(values.begin(), values.end(), [](int a, int b) {
+        if (a == 1)
+            return false;
+        if (b == 1)
+            return true;
+        return a < b;
+    }); // [2, 3, 4, 5, 1]
+
+    for (int value : values)
+        std::cout << value << std::endl;
 }
 ```
 
@@ -2284,11 +2385,12 @@ int main()
 ## References
 
 - The Cherno: [C++](https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb) / [中文翻译](https://space.bilibili.com/364152971/channel/collectiondetail?sid=13909): 主要介绍 C++11 及以上版本的语法
-- 我是龙套小果丁: [现代 C++ 基础](https://space.bilibili.com/18874763/channel/collectiondetail?sid=2192185)
-- [C++ Weekly With Jason Turner](https://www.youtube.com/@cppweekly)
+- [C++ Weekly With Jason Turner](https://www.youtube.com/@cppweekly): 这个博主超级猛
+- [CppCon](https://www.youtube.com/@CppCon): 强烈推荐 [Back To Basics](https://www.youtube.com/@CppCon/search?query=Back%20to%20Basics) 专题
 - [C++ 矿坑系列](https://github.com/Mes0903/Cpp-Miner)
+- 我是龙套小果丁: [现代 C++ 基础](https://space.bilibili.com/18874763/channel/collectiondetail?sid=2192185)
 - 南方科技大学: [快速学习 C 和 C++，基础语法和优化策略](https://www.bilibili.com/video/BV1Vf4y1P7pq/)
 - 原子之音: [C++ 现代实用教程](https://space.bilibili.com/437860379/channel/seriesdetail?sid=2352475)
 / [C++ 智能指针](https://www.bilibili.com/video/BV18B4y187uL)
 / [CMake 简明教程](https://www.bilibili.com/video/BV1xa4y1R7vT)
-- [learncpp.com](https://www.learncpp.com/)
+- [Learn C++](https://www.learncpp.com/)

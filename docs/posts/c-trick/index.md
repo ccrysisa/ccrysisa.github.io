@@ -1,21 +1,21 @@
 # 你所不知道的 C 语言: 技巧篇
 
 
-> 本次講座將選定幾個案例，藉此解說 C 語言程式設計的技巧，像是對矩陣操作進行包裝、初始化特定結構的成員、追蹤物件配置的記憶體、Smart Pointer 等等。
+&gt; 本次講座將選定幾個案例，藉此解說 C 語言程式設計的技巧，像是對矩陣操作進行包裝、初始化特定結構的成員、追蹤物件配置的記憶體、Smart Pointer 等等。
 
-<!--more-->
+&lt;!--more--&gt;
 
-- {{< link href="https://hackmd.io/@sysprog/c-trick" content="原文地址" external-icon=true >}}
+- {{&lt; link href=&#34;https://hackmd.io/@sysprog/c-trick&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
 
-{{< image src="https://imgur-backup.hackmd.io/KC1dCXq.jpg" >}}
+{{&lt; image src=&#34;https://imgur-backup.hackmd.io/KC1dCXq.jpg&#34; &gt;}}
 
 ## 从矩阵操作谈起
 
 C 语言也可作实现 [Object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming) (需要搭配前置处理器扩充语法)
 
 - [ ] GNU Manual [6.29 Designated Initializers](https://gcc.gnu.org/onlinedocs/gcc/Designated-Inits.html)
-- [ ] Stack Overflow: [Why does C++11 not support designated initializer lists as C99?](https://stackoverflow.com/questions/18731707/why-does-c11-not-support-designated-initializer-lists-as-c99)
-- **从 C99 (含) 以后，C 和 C++ 就分道扬镳了**。相关差异可以参考: [Incompatibilities Between ISO C and ISO C++](http://david.tribble.com/text/cdiffs.htm)
+- [ ] Stack Overflow: [Why does C&#43;&#43;11 not support designated initializer lists as C99?](https://stackoverflow.com/questions/18731707/why-does-c11-not-support-designated-initializer-lists-as-c99)
+- **从 C99 (含) 以后，C 和 C&#43;&#43; 就分道扬镳了**。相关差异可以参考: [Incompatibilities Between ISO C and ISO C&#43;&#43;](http://david.tribble.com/text/cdiffs.htm)
 - 结构体的成员函数实作时使用 `static`，并搭配 [API gateway](https://github.com/embedded2016/server-framework/blob/master/async.c#L258) 可以获得一部分 namespace 的功能
 - [ ] [Fun with C99 Syntax](https://www.dribin.org/dave/blog/archives/2010/05/15/c99_syntax/)
 
@@ -53,7 +53,7 @@ C 语言也可作实现 [Object-oriented programming](https://en.wikipedia.org/w
 
 - [ ] GCC [6.7 Referring to a Type with typeof](https://gcc.gnu.org/onlinedocs/gcc/Typeof.html)
 
-> `typeof` 在 C23 中已由 GNU extenison 转正为 C 语言标准
+&gt; `typeof` 在 C23 中已由 GNU extenison 转正为 C 语言标准
 
 
 ---

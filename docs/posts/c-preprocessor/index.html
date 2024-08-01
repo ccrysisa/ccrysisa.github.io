@@ -14,7 +14,7 @@ C 语言之所以不需要时常发布新的语言特性又可以保持活力，
 C 语言之所以不需要时常发布新的语言特性又可以保持活力，前置处理器 (preprocessor) 是很重要的因素，有心者可进行「扩充」C 语言。
 "><meta itemprop="datePublished" content="2024-03-25T22:55:44+08:00" />
 <meta itemprop="dateModified" content="2024-06-09T17:16:24+08:00" />
-<meta itemprop="wordCount" content="2978"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
+<meta itemprop="wordCount" content="3031"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
 <meta itemprop="keywords" content="Sysprog,C,Preprocessor," /><meta property="og:title" content="你所不知道的 C 语言: 前置处理器应用篇" />
 <meta property="og:description" content="
 C 语言之所以不需要时常发布新的语言特性又可以保持活力，前置处理器 (preprocessor) 是很重要的因素，有心者可进行「扩充」C 语言。
@@ -43,7 +43,7 @@ C 语言之所以不需要时常发布新的语言特性又可以保持活力，
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/c-preprocessor\/"
-    },"genre": "posts","keywords": "Sysprog, C, Preprocessor","wordcount":  2978 ,
+    },"genre": "posts","keywords": "Sysprog, C, Preprocessor","wordcount":  3031 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/c-preprocessor\/","datePublished": "2024-03-25T22:55:44+08:00","dateModified": "2024-06-09T17:16:24+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -55,7 +55,7 @@ C 语言之所以不需要时常发布新的语言特性又可以保持活力，
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -101,7 +101,7 @@ C 语言之所以不需要时常发布新的语言特性又可以保持活力，
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -161,18 +161,12 @@ C 语言之所以不需要时常发布新的语言特性又可以保持活力，
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>你所不知道的 C 语言: 前置处理器应用篇</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/c/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-25 22:55:44"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-25">2024-03-25</time></span>&nbsp;<span title="更新于 2024-06-09 17:16:24"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-09">2024-06-09</time></span>&nbsp;<span title="2978 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3000 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 6 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/c/" class="post-category" title="分类 - C"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C</a>&ensp;<a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-03-25 22:55:44"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-25">2024-03-25</time></span>&nbsp;<span title="更新于 2024-06-09 17:16:24"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-09">2024-06-09</time></span>&nbsp;<span title="3031 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 3100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -212,8 +206,8 @@ C 语言之所以不需要时常发布新的语言特性又可以保持活力，
 <ul>
 <li><a href="https://hackmd.io/@sysprog/c-preprocessor"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
-<h2 id="不要小看-preprocessor">不要小看 preprocessor</h2>
-<ul>
+<h2 id="不要小看-preprocessor" class="heading-element">
+  <a href="#%e4%b8%8d%e8%a6%81%e5%b0%8f%e7%9c%8b-preprocessor" class="heading-mark"></a>不要小看 preprocessor</h2><ul>
 <li>man gcc</li>
 </ul>
 <div class="highlight" id="id-1"><div class="chroma">
@@ -242,12 +236,12 @@ C 语言之所以不需要时常发布新的语言特性又可以保持活力，
 <blockquote>
 <p>体验一下 C++ 模版 (template) 的威力 &#x274c; 丑陋 &#x2714;&#xfe0f; :</p>
 </blockquote>
-<a class="lightgallery" href="https://i.imgur.com/MVZVuDt.png?size=large" data-thumbnail="https://i.imgur.com/MVZVuDt.png?size=small" data-sub-html="<h2>https://i.imgur.com/MVZVuDt.png</h2>"><img loading="lazy" src="https://i.imgur.com/MVZVuDt.png" srcset="https://i.imgur.com/MVZVuDt.png?size=small, https://i.imgur.com/MVZVuDt.png?size=medium 1.5x, https://i.imgur.com/MVZVuDt.png?size=large 2x" sizes="auto" data-title="https://i.imgur.com/MVZVuDt.png" data-alt="https://i.imgur.com/MVZVuDt.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://i.imgur.com/MVZVuDt.png?size=large" data-thumbnail="https://i.imgur.com/MVZVuDt.png?size=small" data-sub-html="<h2>https://i.imgur.com/MVZVuDt.png</h2>"><img loading="lazy" src="https://i.imgur.com/MVZVuDt.png" alt="https://i.imgur.com/MVZVuDt.png" srcset="https://i.imgur.com/MVZVuDt.png?size=small, https://i.imgur.com/MVZVuDt.png?size=medium 1.5x, https://i.imgur.com/MVZVuDt.png?size=large 2x" sizes="auto" data-title="https://i.imgur.com/MVZVuDt.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <blockquote>
 <p>C 语言: 大道至简 &#x2705;</p>
 </blockquote>
-<h2 id="object-oriented-programming">Object Oriented Programming</h2>
-<p>面向对象编程时，善用前置处理器可大幅简化和开发</p>
+<h2 id="object-oriented-programming" class="heading-element">
+  <a href="#object-oriented-programming" class="heading-mark"></a>Object Oriented Programming</h2><p>面向对象编程时，善用前置处理器可大幅简化和开发</p>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <code>#</code>: <a href="https://gcc.gnu.org/onlinedocs/cpp/Stringizing.html"target="_blank" rel="external nofollow noopener noreferrer">Stringizing</a> convert a macro argument into a string constant</li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <code>##</code>: <a href="https://gcc.gnu.org/onlinedocs/cpp/Concatenation.html"target="_blank" rel="external nofollow noopener noreferrer">Concatenation</a> merge two tokens into one while expanding macros.</li>
@@ -298,8 +292,8 @@ C 语言之所以不需要时常发布新的语言特性又可以保持活力，
 </ul>
 <p>object oriented programming 不等于 class based programming, 只需要满足 Object-oriented programming (OOP) is a computer programming model that organizes software design around data, or objects, rather than functions and logic. 这个概念的就是 OOP。</p>
 <a href="https://github.com/ccrysisa/LKI/blob/main/c-recursion"target="_blank" rel="external nofollow noopener noreferrer">Source<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
-<h2 id="c11-_generic">C11: _Generic</h2>
-<ul>
+<h2 id="c11-_generic" class="heading-element">
+  <a href="#c11-_generic" class="heading-mark"></a>C11: _Generic</h2><ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 阅读 <a href="https://www.open-std.org/jtc1/sc22/WG14/www/docs/n1570.pdf"target="_blank" rel="external nofollow noopener noreferrer">C11 规格书</a> 6.5.1.1 Generic selection</li>
 </ul>
 <blockquote>
@@ -333,8 +327,8 @@ from any other generic association of the generic selection is evaluated.</p>
 <ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/76701502/what-to-do-to-make-generica-char-1-int-2-1-true"target="_blank" rel="external nofollow noopener noreferrer">What to do to make &lsquo;_Generic(&lsquo;a&rsquo;, char : 1, int : 2) == 1&rsquo; true</a></li>
 </ul>
-<h2 id="block">Block</h2>
-<ul>
+<h2 id="block" class="heading-element">
+  <a href="#block" class="heading-mark"></a>Block</h2><ul>
 <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Blocks_%28C_language_extension%29"target="_blank" rel="external nofollow noopener noreferrer">Blocks (C language extension)</a></li>
 </ul>
 <blockquote>
@@ -393,8 +387,8 @@ from any other generic association of the generic selection is evaluated.</p>
 </span></span></span><span class="line"><span class="cl"><span class="cp">    _x_in_DOUBLE + _x_in_DOUBLE; \
 </span></span></span><span class="line"><span class="cl"><span class="cp">})</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="array_size-宏">ARRAY_SIZE 宏</h2>
-<div class="highlight" id="id-7"><div class="chroma">
+</div><h2 id="array_size-宏" class="heading-element">
+  <a href="#array_size-%e5%ae%8f" class="heading-mark"></a>ARRAY_SIZE 宏</h2><div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -463,8 +457,8 @@ from any other generic association of the generic selection is evaluated.</p>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 从 Linux 核心 「提炼」 出的 <a href="http://ccodearchive.net/info/array_size.html"target="_blank" rel="external nofollow noopener noreferrer">array_size</a></li>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://msdn.microsoft.com/en-us/library/ms175773.aspx"target="_blank" rel="external nofollow noopener noreferrer">_countof Macro</a></li>
 </ul>
-<h2 id="do----while-0-宏">do { &hellip; } while (0) 宏</h2>
-<p><strong>用于避免 dangling else，即 if 和 else 未符合预期的配对 (常见于未使用 <code>{}</code> 包裹)</strong></p>
+<h2 id="do----while-0-宏" class="heading-element">
+  <a href="#do----while-0-%e5%ae%8f" class="heading-mark"></a>do { &hellip; } while (0) 宏</h2><p><strong>用于避免 dangling else，即 if 和 else 未符合预期的配对 (常见于未使用 <code>{}</code> 包裹)</strong></p>
 <p>考虑以下情形:</p>
 <div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -515,8 +509,8 @@ from any other generic association of the generic selection is evaluated.</p>
 <p>The more elegant solution is to make sure that macro expand into a regular statement, not into a compound one.</p>
 </blockquote>
 <p>主要是考虑到对包含 <code>{}</code> 的宏，像一般的 statement 一样加上 <code>;</code> 会导致之前的 <code>if</code> 语句结束，从而导致后面的 <code>else</code> 语句无法配对进而编译失败，而使用 <code>do {...} while (0)</code> 后面加上 <code>;</code> 并不会导致这个问题。</p>
-<h2 id="应用-string-switch-in-c">应用: String switch in C</h2>
-<p>这篇博文展示了如何在 C 语言中对 string 使用 switch case:</p>
+<h2 id="应用-string-switch-in-c" class="heading-element">
+  <a href="#%e5%ba%94%e7%94%a8-string-switch-in-c" class="heading-mark"></a>应用: String switch in C</h2><p>这篇博文展示了如何在 C 语言中对 string 使用 switch case:</p>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://tia.mat.br/posts/2012/08/09/string_switch_in_c.html"target="_blank" rel="external nofollow noopener noreferrer">String switch in C</a></li>
 </ul>
@@ -538,12 +532,12 @@ from any other generic association of the generic selection is evaluated.</p>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://tia.mat.br/posts/2018/02/01/more_on_string_switch_in_c.html"target="_blank" rel="external nofollow noopener noreferrer">More on string switch in C</a></li>
 </ul>
-<h2 id="应用-linked-list-的各式变种">应用: Linked List 的各式变种</h2>
-<p>宏和函数调用的效能对比:</p>
+<h2 id="应用-linked-list-的各式变种" class="heading-element">
+  <a href="#%e5%ba%94%e7%94%a8-linked-list-%e7%9a%84%e5%90%84%e5%bc%8f%e5%8f%98%e7%a7%8d" class="heading-mark"></a>应用: Linked List 的各式变种</h2><p>宏和函数调用的效能对比:</p>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://gist.github.com/afcidk/441abae865be13c599b8f749792908b6"target="_blank" rel="external nofollow noopener noreferrer">Simple code for checking the speed difference between function call and macro</a></li>
 </ul>
-<a class="lightgallery" href="https://imgur-backup.hackmd.io/6taKMzN.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/6taKMzN.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/6taKMzN.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/6taKMzN.png" srcset="https://imgur-backup.hackmd.io/6taKMzN.png?size=small, https://imgur-backup.hackmd.io/6taKMzN.png?size=medium 1.5x, https://imgur-backup.hackmd.io/6taKMzN.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/6taKMzN.png" data-alt="https://imgur-backup.hackmd.io/6taKMzN.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/6taKMzN.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/6taKMzN.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/6taKMzN.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/6taKMzN.png" alt="https://imgur-backup.hackmd.io/6taKMzN.png" srcset="https://imgur-backup.hackmd.io/6taKMzN.png?size=small, https://imgur-backup.hackmd.io/6taKMzN.png?size=medium 1.5x, https://imgur-backup.hackmd.io/6taKMzN.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/6taKMzN.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <blockquote>
 <p>在進行函式呼叫時，我們除了需要把參數推入特定的暫存器或是堆疊，還要儲存目前暫存器的值到堆疊。在函式呼叫數量少的狀況，影響不顯著，但隨著數量增長，就會導致程式運作比用 macro 實作時慢。</p>
 </blockquote>
@@ -571,26 +565,26 @@ designation causes the following initializer to begin initialization of the subo
 described by the designator. Initialization then continues forward in order, beginning
 with the next subobject after that described by the designator.</p>
 </blockquote>
-<h2 id="其它应用">其它应用</h2>
-<h3 id="unit-test">Unit Test</h3>
-<p>测试框架本质是提供一个框架模版，让程序员将精力放在测试逻辑的编写上。使用 C 语言的宏配合前置处理器，可以很方便地实现这个功能。</p>
+<h2 id="其它应用" class="heading-element">
+  <a href="#%e5%85%b6%e5%ae%83%e5%ba%94%e7%94%a8" class="heading-mark"></a>其它应用</h2><h3 id="unit-test" class="heading-element">
+  <a href="#unit-test" class="heading-mark"></a>Unit Test</h3><p>测试框架本质是提供一个框架模版，让程序员将精力放在测试逻辑的编写上。使用 C 语言的宏配合前置处理器，可以很方便地实现这个功能。</p>
 <ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> <a href="https://github.com/ThrowTheSwitch/Unity/blob/master/extras/fixture/src/unity_fixture.h"target="_blank" rel="external nofollow noopener noreferrer">unity/unity_fixture.h</a></li>
 <li><a href="https://github.com/google/googletest"target="_blank" rel="external nofollow noopener noreferrer">Google Test</a></li>
 </ul>
-<h3 id="object-model">Object Model</h3>
-<p>同样的，使用 C 语言的宏和前置处理器，可以让 C 语言拥有 OOP 的表达能力:</p>
+<h3 id="object-model" class="heading-element">
+  <a href="#object-model" class="heading-mark"></a>Object Model</h3><p>同样的，使用 C 语言的宏和前置处理器，可以让 C 语言拥有 OOP 的表达能力:</p>
 <ul>
 <li><a href="https://github.com/DaemonSnake/ObjectC"target="_blank" rel="external nofollow noopener noreferrer">ObjectC</a>: use as a superset of the C language adding a lot of modern concepts missing in C</li>
 </ul>
-<h3 id="exception-handling">Exception Handling</h3>
-<p>通过宏和 <code>setjmp/longjmp</code> 可以很轻松地实作出 C 语言的异常机制:</p>
+<h3 id="exception-handling" class="heading-element">
+  <a href="#exception-handling" class="heading-mark"></a>Exception Handling</h3><p>通过宏和 <code>setjmp/longjmp</code> 可以很轻松地实作出 C 语言的异常机制:</p>
 <p><a href="https://github.com/jspahrsummers/libextc"target="_blank" rel="external nofollow noopener noreferrer">ExtendedC</a> library extends the C programming language through complex macros and other tricks that increase productivity, safety, and code reuse without needing to use a higher-level language such as C++, Objective-C, or D.</p>
 <ul>
 <li><a href="https://github.com/jspahrsummers/libextc/blob/master/include/exception.h"target="_blank" rel="external nofollow noopener noreferrer">include/exception.h</a></li>
 </ul>
-<h3 id="adt">ADT</h3>
-<p>与之前所提的 Linux 核心的 linked list 类似，使用宏取代函数调用可以降低 <strong>抽象数据类型</strong> (ADT) 的相关操作的效能损失:</p>
+<h3 id="adt" class="heading-element">
+  <a href="#adt" class="heading-mark"></a>ADT</h3><p>与之前所提的 Linux 核心的 linked list 类似，使用宏取代函数调用可以降低 <strong>抽象数据类型</strong> (ADT) 的相关操作的效能损失:</p>
 <p><a href="https://github.com/willemt/pearldb"target="_blank" rel="external nofollow noopener noreferrer">pearldb</a>: A Lightweight Durable HTTP Key-Value Pair Database in C</p>
 <ul>
 <li><a href="https://github.com/willemt/pearldb/blob/master/deps/klib/ksort.h"target="_blank" rel="external nofollow noopener noreferrer">klib/ksort.h</a> 通过宏展开实作的排序算法</li>
@@ -598,15 +592,15 @@ with the next subobject after that described by the designator.</p>
 <blockquote class="blockquote-center">
   Linux 核心原始程式码也善用宏来扩充
 </blockquote>
-<h2 id="linux-核心原始程式码宏">Linux 核心原始程式码宏</h2>
-<h3 id="container_of">container_of</h3>
-<a href="https://hackmd.io/@sysprog/linux-macro-containerof"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+<h2 id="linux-核心原始程式码宏" class="heading-element">
+  <a href="#linux-%e6%a0%b8%e5%bf%83%e5%8e%9f%e5%a7%8b%e7%a8%8b%e5%bc%8f%e7%a0%81%e5%ae%8f" class="heading-mark"></a>Linux 核心原始程式码宏</h2><h3 id="container_of" class="heading-element">
+  <a href="#container_of" class="heading-mark"></a>container_of</h3><a href="https://hackmd.io/@sysprog/linux-macro-containerof"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 <p>使用 C 语言进行物件导向程序设计的核心，笔者所著的解释说明的 <a href="/posts/c-linked-list/#container_of">博文</a>。</p>
-<h3 id="build_bug_on_zero">BUILD_BUG_ON_ZERO</h3>
-<a href="https://hackmd.io/@sysprog/c-bitfield"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
+<h3 id="build_bug_on_zero" class="heading-element">
+  <a href="#build_bug_on_zero" class="heading-mark"></a>BUILD_BUG_ON_ZERO</h3><a href="https://hackmd.io/@sysprog/c-bitfield"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a>
 <p>简单来说就是编译时期就进行检查的 <code>assert</code>，笔者写了 <a href="/posts/c-bitwise/#linux-核心-build_bug_on_zero">相关笔记</a> 来说明它的原理。</p>
-<h3 id="max-min">max, min</h3>
-<div class="details admonition success open">
+<h3 id="max-min" class="heading-element">
+  <a href="#max-min" class="heading-mark"></a>max, min</h3><div class="details admonition success open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-check-circle fa-fw" aria-hidden="true"></i>成功<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -617,17 +611,16 @@ with the next subobject after that described by the designator.</p>
 <ul>
 <li><a href="https://hackmd.io/@sysprog/linux-macro-minmax"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
-<h2 id="linux-核心模组-挂载机制">Linux 核心模组 (挂载机制)</h2>
-<a href="https://hackmd.io/@sysprog/linux-kernel-module"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></div><div class="post-footer" id="post-footer">
+<h2 id="linux-核心模组-挂载机制" class="heading-element">
+  <a href="#linux-%e6%a0%b8%e5%bf%83%e6%a8%a1%e7%bb%84-%e6%8c%82%e8%bd%bd%e6%9c%ba%e5%88%b6" class="heading-mark"></a>Linux 核心模组 (挂载机制)</h2><a href="https://hackmd.io/@sysprog/linux-kernel-module"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-06-09 17:16:24">更新于 2024-06-09&nbsp;</span>
-      </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/c-preprocessor/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-preprocessor/" data-title="你所不知道的 C 语言: 前置处理器应用篇" data-hashtags="Sysprog,C,Preprocessor"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/c-preprocessor/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/c-preprocessor/" data-title="你所不知道的 C 语言: 前置处理器应用篇" data-hashtags="Sysprog,C,Preprocessor"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/c-preprocessor/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/c-preprocessor/" data-title="你所不知道的 C 语言: 前置处理器应用篇" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/c-preprocessor/" data-title="你所不知道的 C 语言: 前置处理器应用篇"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -636,12 +629,11 @@ with the next subobject after that described by the designator.</p>
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/c-preprocessor/" data-title="你所不知道的 C 语言: 前置处理器应用篇" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/c-preprocessor/" data-title="你所不知道的 C 语言: 前置处理器应用篇"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-      </div>
-    </div>
-  </div>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/c/' class="post-tag">C</a><a href='/tags/preprocessor/' class="post-tag">Preprocessor</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a><a href="/tags/c/" class="post-tag" title="标签 - C">C</a><a href="/tags/preprocessor/" class="post-tag" title="标签 - Preprocessor">Preprocessor</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -650,11 +642,14 @@ with the next subobject after that described by the designator.</p>
   <div class="post-nav"><a href="/posts/osdi/" class="post-nav-item" rel="prev" title="操作系统: 设计与实现"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>操作系统: 设计与实现</a>
       <a href="/posts/deepin-kvm/" class="post-nav-item" rel="next" title="Deepin 20.9 KVM 安装和管理">Deepin 20.9 KVM 安装和管理<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.2">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -662,5 +657,5 @@ with the next subobject after that described by the designator.</p>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-10":{"title":"include/linux/compiler.h"},"id-8":{"title":"include/linux/kernel.h"},"id-9":{"title":"include/linux/compiler-gcc.h"}},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-10":{"title":"include/linux/compiler.h"},"id-8":{"title":"include/linux/kernel.h"},"id-9":{"title":"include/linux/compiler-gcc.h"}},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

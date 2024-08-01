@@ -1,7 +1,7 @@
 # Linux 核心设计: lab0-c
 
 
-{{< admonition abstract  "预期目标" >}}
+{{&lt; admonition abstract  &#34;预期目标&#34; &gt;}}
 
 - [C 语言程序设计](https://hackmd.io/@sysprog/c-programming) 议题，如 [不定个参数的处理](https://en.wikibooks.org/wiki/C_Programming/stdarg.h)，[signal](https://en.wikibooks.org/wiki/C_Programming/signal.h)，[setjmp/longjmp](https://en.wikibooks.org/wiki/C_Programming/setjmp.h)
 - 学习 [GNU/Linux 开发工具](https://hackmd.io/@sysprog/gnu-linux-dev):
@@ -14,11 +14,11 @@
 - 理解电脑乱数原理、应用场景，和相关的验证
 - 研究 Linux 核心链表的实作机制，及其高效的排序实作
 
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-<!--more-->
+&lt;!--more--&gt;
 
-- {{< link href="https://hackmd.io/@sysprog/linux2023-lab0" content="原文地址" external-icon=true >}}
+- {{&lt; link href=&#34;https://hackmd.io/@sysprog/linux2023-lab0&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
 
 ## 改写自 CMU 计算机系统概论的作业
 
@@ -55,10 +55,10 @@ classDiagram
         prev: list_head*
         next: list_head*
     }
-    list_head 0 --> list_head 1
-    list_head 1 --> list_head 2
-    list_head 1 --> list_head 0
-    list_head 2 --> list_head 1
+    list_head 0 --&gt; list_head 1
+    list_head 1 --&gt; list_head 2
+    list_head 1 --&gt; list_head 0
+    list_head 2 --&gt; list_head 1
 ```
 
 - element_t
@@ -79,13 +79,13 @@ classDiagram
         list: list_head*
     }
 
-    element_t 0 --> element_t 1
-    element_t 1 --> element_t 2
-    element_t 1 --> element_t 0
-    element_t 2 --> element_t 1
+    element_t 0 --&gt; element_t 1
+    element_t 1 --&gt; element_t 2
+    element_t 1 --&gt; element_t 0
+    element_t 2 --&gt; element_t 1
 ```
 
-> 队列节点中的成员 `value` 指向的字符串也是动态分配的
+&gt; 队列节点中的成员 `value` 指向的字符串也是动态分配的
 
 - queue_context_t
 ```mermaid
@@ -109,25 +109,25 @@ classDiagram
         id: int
     }
 
-    queue_context_t 0 --> queue_context_t 1
-    queue_context_t 1 --> queue_context_t 2
-    queue_context_t 1 --> queue_context_t 0
-    queue_context_t 2 --> queue_context_t 1
+    queue_context_t 0 --&gt; queue_context_t 1
+    queue_context_t 1 --&gt; queue_context_t 2
+    queue_context_t 1 --&gt; queue_context_t 0
+    queue_context_t 2 --&gt; queue_context_t 1
 
-    queue_context_t 0 --> list_head 0
-    list_head 0 <--> element_t 01
-    element_t 01 <--> element_t 02
+    queue_context_t 0 --&gt; list_head 0
+    list_head 0 &lt;--&gt; element_t 01
+    element_t 01 &lt;--&gt; element_t 02
 
-    queue_context_t 1 --> list_head 1
-    list_head 1 <--> element_t 11
-    element_t 11 <--> element_t 12
+    queue_context_t 1 --&gt; list_head 1
+    list_head 1 &lt;--&gt; element_t 11
+    element_t 11 &lt;--&gt; element_t 12
 
-    queue_context_t 2 --> list_head 2
-    list_head 2 <--> element_t 21
-    element_t 21 <--> element_t 22
+    queue_context_t 2 --&gt; list_head 2
+    list_head 2 &lt;--&gt; element_t 21
+    element_t 21 &lt;--&gt; element_t 22
 ```
 
-> `queue_context_t` 中的成员 `q` 的作用是指向将队列节点 `element_t` 连接起来的头节点，而成员 `chain` 的作用是将各个队列 `queue_context_t` 连接起来。
+&gt; `queue_context_t` 中的成员 `q` 的作用是指向将队列节点 `element_t` 连接起来的头节点，而成员 `chain` 的作用是将各个队列 `queue_context_t` 连接起来。
 
 ### q_size
 
@@ -145,7 +145,7 @@ int q_size(struct list_head *head)
     int len = 0;
     struct list_head *node;
     list_for_each (node, head)
-        len++;
+        len&#43;&#43;;
     return len;
 }
 ```
@@ -211,12 +211,12 @@ bool q_insert_head(struct list_head *head, char *s)
     element_t *elem = malloc(sizeof(element_t));
     if (!elem)
         return false;
-    elem->value = strdup(s);
-    if (!elem->value) {
+    elem-&gt;value = strdup(s);
+    if (!elem-&gt;value) {
         free(elem);
         return false;
     }
-    list_add(&elem->list, head);
+    list_add(&amp;elem-&gt;list, head);
     return true;
 }
 ```
@@ -244,12 +244,12 @@ bool q_insert_tail(struct list_head *head, char *s)
     element_t *elem = malloc(sizeof(element_t));
     if (!elem)
         return false;
-    elem->value = strdup(s);
-    if (!elem->value) {
+    elem-&gt;value = strdup(s);
+    if (!elem-&gt;value) {
         free(elem);
         return false;
     }
-    list_add_tail(&elem->list, head);
+    list_add_tail(&amp;elem-&gt;list, head);
     return true;
 }
 ```
@@ -266,9 +266,9 @@ bool q_insert_tail(struct list_head *head, char *s)
  * If sp is non-NULL and an element is removed, copy the removed string to *sp
  * (up to a maximum of bufsize-1 characters, plus a null terminator.)
  *
- * NOTE: "remove" is different from "delete"
+ * NOTE: &#34;remove&#34; is different from &#34;delete&#34;
  * The space used by the list element and the string should not be freed.
- * The only thing "remove" need to do is unlink it.
+ * The only thing &#34;remove&#34; need to do is unlink it.
  *
  * Reference:
  * https://english.stackexchange.com/questions/52508/difference-between-delete-and-remove
@@ -280,10 +280,10 @@ element_t *q_remove_head(struct list_head *head, char *sp, size_t bufsize)
     if (!head || list_empty(head))
         return NULL;
     element_t *elem = list_first_entry(head, element_t, list);
-    list_del_init(&elem->list);
+    list_del_init(&amp;elem-&gt;list);
     if (sp) {
-        memcpy(sp, elem->value, bufsize - 1);
-        sp[bufsize - 1] = '\0';
+        memcpy(sp, elem-&gt;value, bufsize - 1);
+        sp[bufsize - 1] = &#39;\0&#39;;
     }
     return elem;
 }
@@ -305,10 +305,10 @@ element_t *q_remove_tail(struct list_head *head, char *sp, size_t bufsize)
     if (!head || list_empty(head))
         return NULL;
     element_t *elem = list_last_entry(head, element_t, list);
-    list_del_init(&elem->list);
+    list_del_init(&amp;elem-&gt;list);
     if (sp) {
-        memcpy(sp, elem->value, bufsize - 1);
-        sp[bufsize - 1] = '\0';
+        memcpy(sp, elem-&gt;value, bufsize - 1);
+        sp[bufsize - 1] = &#39;\0&#39;;
     }
     return elem;
 }
@@ -323,7 +323,7 @@ element_t *q_remove_tail(struct list_head *head, char *sp, size_t bufsize)
  *
  * The middle node of a linked list of size n is the
  * ⌊n / 2⌋th node from the start using 0-based indexing.
- * If there're six elements, the third member should be returned.
+ * If there&#39;re six elements, the third member should be returned.
  *
  * Reference:
  * https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/
@@ -335,11 +335,11 @@ bool q_delete_mid(struct list_head *head)
     // https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/
     if (!head || list_empty(head))
         return false;
-    struct list_head *p = head->next;
-    struct list_head *q = head->prev;
-    while (!(p == q || p->next == q)) {
-        p = p->next;
-        q = q->prev;
+    struct list_head *p = head-&gt;next;
+    struct list_head *q = head-&gt;prev;
+    while (!(p == q || p-&gt;next == q)) {
+        p = p-&gt;next;
+        q = q-&gt;prev;
     }
     list_del_init(q);
     element_t *elem = list_entry(q, element_t, list);
@@ -373,10 +373,10 @@ bool q_delete_dup(struct list_head *head)
         element_t *e_node = list_entry(node, element_t, list);
         while (!(safe == head)) {
             element_t *e_safe = list_entry(safe, element_t, list);
-            if (strcmp(e_node->value, e_safe->value))
+            if (strcmp(e_node-&gt;value, e_safe-&gt;value))
                 break;
-            safe = safe->next;
-            list_del(&e_safe->list);
+            safe = safe-&gt;next;
+            list_del(&amp;e_safe-&gt;list);
             q_release_element(e_safe);
         }
         if (temp != safe) {
@@ -409,15 +409,15 @@ void q_swap(struct list_head *head)
     list_for_each_safe (node, safe, head) {
         if (safe == head)
             break;
-        prev = node->prev;
-        next = safe->next;
-        node->prev = safe;
-        safe->next = node;
+        prev = node-&gt;prev;
+        next = safe-&gt;next;
+        node-&gt;prev = safe;
+        safe-&gt;next = node;
 
-        node->next = next;
-        safe->prev = prev;
-        prev->next = safe;
-        next->prev = node;
+        node-&gt;next = next;
+        safe-&gt;prev = prev;
+        prev-&gt;next = safe;
+        next-&gt;prev = node;
 
         safe = next;
     }
@@ -447,12 +447,12 @@ classDiagram
         prev: list_head*
         next: list_head*
     }
-    prev --> node
-    prev <-- node
-    node --> safe
-    node <-- safe
-    safe --> next
-    safe <-- next
+    prev --&gt; node
+    prev &lt;-- node
+    node --&gt; safe
+    node &lt;-- safe
+    safe --&gt; next
+    safe &lt;-- next
 ```
 
 - after swap
@@ -476,12 +476,12 @@ classDiagram
         prev: list_head*
         next: list_head*
     }
-    prev --> safe
-    prev <-- safe
-    safe --> node
-    safe <-- node
-    node --> next
-    node <-- next
+    prev --&gt; safe
+    prev &lt;-- safe
+    safe --&gt; node
+    safe &lt;-- node
+    node --&gt; next
+    node &lt;-- next
 ```
 
 ### q_reverse
@@ -502,13 +502,13 @@ void q_reverse(struct list_head *head)
         return;
     struct list_head *node, *safe, *prev;
     list_for_each_safe (node, safe, head) {
-        prev = node->prev;
-        node->prev = safe;
-        node->next = prev;
+        prev = node-&gt;prev;
+        node-&gt;prev = safe;
+        node-&gt;next = prev;
     }
-    prev = head->prev;
-    head->prev = head->next;
-    head->next = prev;
+    prev = head-&gt;prev;
+    head-&gt;prev = head-&gt;next;
+    head-&gt;next = prev;
 }
 ```
 
@@ -531,10 +531,10 @@ classDiagram
         prev: list_head*
         next: list_head*
     }
-    list_head 0 --> list_head 1: next
-    list_head 0 <|-- list_head 1: prev
-    list_head 1 --|> list_head 2: next
-    list_head 1 <-- list_head 2: prev
+    list_head 0 --&gt; list_head 1: next
+    list_head 0 &lt;|-- list_head 1: prev
+    list_head 1 --|&gt; list_head 2: next
+    list_head 1 &lt;-- list_head 2: prev
 ```
 
 - after reverse
@@ -554,10 +554,10 @@ classDiagram
         prev: list_head*
         next: list_head*
     }
-    list_head 0 <|-- list_head 1: next
-    list_head 0 --> list_head 1: prev
-    list_head 1 <-- list_head 2: next
-    list_head 1 --|> list_head 2: prev
+    list_head 0 &lt;|-- list_head 1: next
+    list_head 0 --&gt; list_head 1: prev
+    list_head 1 &lt;-- list_head 2: next
+    list_head 1 --|&gt; list_head 2: prev
 ```
 
 至于队列头节点 `head` 则不需要特别考虑，最后将其的 `prev` 和 `next` 成员的指向进行反转即可。
@@ -586,32 +586,32 @@ void q_reverseK(struct list_head *head, int k)
     struct list_head *node, *safe, *prev, *next;
     list_for_each_safe (node, safe, head) {
         // get prev and next nodes around K nodes
-        prev = node->prev;
+        prev = node-&gt;prev;
         next = node;
         int cnt = 0;
-        while (cnt < k && next != head) {
-            cnt++;
-            next = next->next;
+        while (cnt &lt; k &amp;&amp; next != head) {
+            cnt&#43;&#43;;
+            next = next-&gt;next;
         }
-        if (cnt < k)
+        if (cnt &lt; k)
             break;
-        safe = next->prev;
+        safe = next-&gt;prev;
 
         // reverse K nodes
         struct list_head *p = node, *q;
         while (p != next) {
-            q = p->next;
-            p->next = p->prev;
-            p->prev = q;
+            q = p-&gt;next;
+            p-&gt;next = p-&gt;prev;
+            p-&gt;prev = q;
 
             p = q;
         }
 
         // setup node, safe, prev, next
-        node->next = next;
-        next->prev = node;
-        safe->prev = prev;
-        prev->next = safe;
+        node-&gt;next = next;
+        next-&gt;prev = node;
+        safe-&gt;prev = prev;
+        prev-&gt;next = safe;
 
         safe = next;
     }
@@ -620,7 +620,7 @@ void q_reverseK(struct list_head *head, int k)
 
 `q_reverseK` 相当于 `q_swap` 的增强版，解决的思路也是比较类似，先确认 K 个节点的反转区域以及相应的前后锚点: `prev` 和 `next`，接下来对反转区域的 K 个节点进行反转，这部分的操作和 `q_reverse` 相同，都是逐个节点进行成员指针反转，反转结束后，和 `q_swap` 类似，设定与锚点相应的位置关系，依次逐区域 (K 个节点) 进行处理。该过程图示如下:
 
-> 注意观察指针 `prev`, `next` 的变化
+&gt; 注意观察指针 `prev`, `next` 的变化
 
 - before reverse
 ```mermaid
@@ -647,14 +647,14 @@ classDiagram
         prev: list_head*
         next: list_head*
     }
-    prev --> node: next
-    prev <-- node: prev
-    node --> nodes: next
-    node <|-- nodes: prev
-    nodes --|> safe: next
-    nodes <-- safe: prev
-    safe --> next: next
-    safe <-- next: prev
+    prev --&gt; node: next
+    prev &lt;-- node: prev
+    node --&gt; nodes: next
+    node &lt;|-- nodes: prev
+    nodes --|&gt; safe: next
+    nodes &lt;-- safe: prev
+    safe --&gt; next: next
+    safe &lt;-- next: prev
 ```
 
 - after reverse
@@ -682,14 +682,14 @@ classDiagram
         prev: list_head*
         next: list_head*
     }
-    prev --> node: next
-    prev <-- node: next
-    node --> nodes: prev
-    node <|-- nodes: next
-    nodes --|> safe: prev
-    nodes <-- safe: next
-    safe --> next: prev
-    safe <-- next: prev
+    prev --&gt; node: next
+    prev &lt;-- node: next
+    node --&gt; nodes: prev
+    node &lt;|-- nodes: next
+    nodes --|&gt; safe: prev
+    nodes &lt;-- safe: next
+    safe --&gt; next: prev
+    safe &lt;-- next: prev
 ```
 
 - after setup `prev`, `node`, `safe`, `next`
@@ -717,14 +717,14 @@ classDiagram
         prev: list_head*
         next: list_head*
     }
-    prev --> safe: next
-    prev <-- safe: prev
-    safe --> nodes: next
-    safe <|-- nodes: next
-    nodes --|> node: next
-    nodes <-- node: prev
-    node --> next: next
-    node <-- next: prev
+    prev --&gt; safe: next
+    prev &lt;-- safe: prev
+    safe --&gt; nodes: next
+    safe &lt;|-- nodes: next
+    nodes --|&gt; node: next
+    nodes &lt;-- node: prev
+    node --&gt; next: next
+    node &lt;-- next: prev
 ```
 
 ### q_sort
@@ -747,7 +747,7 @@ void q_sort(struct list_head *head, bool descend);
 
 主要是通过交换 (swap) 来实现核心的冒泡，思路是将节点 `safe` 对应字符串与 `node` 对应的字符串比较，从而决定是否进行交换操作，这里实现的是 stable 的排序算法，所以比较、交换时不考虑相等的情况。需要的是注意，虽然 swap 部分和 `q_swap` 几乎一样，但是最后设定下一个节点 `safe` 时不相同，因为这里需要每个节点之间都需要进行比较，而不是以每两个节点为单位进行交换。
 
-布尔表达式 `(descend && cmp < 0) || (!descend && cmp > 0)` 表示不满足预期的 `node -> safe` 的顺序关系，需要调整成 `safe node` 顺序才满足。
+布尔表达式 `(descend &amp;&amp; cmp &lt; 0) || (!descend &amp;&amp; cmp &gt; 0)` 表示不满足预期的 `node -&gt; safe` 的顺序关系，需要调整成 `safe node` 顺序才满足。
 
 ```c
 static void q_bubble_sort(struct list_head *head, bool descend)
@@ -767,20 +767,20 @@ static void q_bubble_sort(struct list_head *head, bool descend)
             element_t *e_node = list_entry(node, element_t, list);
             element_t *e_safe = list_entry(safe, element_t, list);
 
-            int cmp = strcmp(e_node->value, e_safe->value);
-            if ((descend && cmp < 0) || (!descend && cmp > 0)) {
+            int cmp = strcmp(e_node-&gt;value, e_safe-&gt;value);
+            if ((descend &amp;&amp; cmp &lt; 0) || (!descend &amp;&amp; cmp &gt; 0)) {
                 swapped = true;
 
                 // swap
-                prev = node->prev;
-                next = safe->next;
-                node->prev = safe;
-                safe->next = node;
+                prev = node-&gt;prev;
+                next = safe-&gt;next;
+                node-&gt;prev = safe;
+                safe-&gt;next = node;
 
-                node->next = next;
-                safe->prev = prev;
-                prev->next = safe;
-                next->prev = node;
+                node-&gt;next = next;
+                safe-&gt;prev = prev;
+                prev-&gt;next = safe;
+                next-&gt;prev = node;
 
                 // set next node
                 safe = node;
@@ -802,7 +802,7 @@ static void q_insertion_sort(struct list_head *head, bool descend)
 
     struct list_head *node, *safe;
     list_for_each_safe (node, safe, head) {
-        struct list_head *prev = node->prev, *next;
+        struct list_head *prev = node-&gt;prev, *next;
         // one node is already sorted
         if (prev == head)
             continue;
@@ -813,21 +813,21 @@ static void q_insertion_sort(struct list_head *head, bool descend)
         element_t *e_prev = list_entry(prev, element_t, list);
 
         // find position
-        int cmp = strcmp(e_prev->value, e_node->value);
-        while ((descend && cmp < 0) || (!descend && cmp > 0)) {
-            prev = prev->prev;
+        int cmp = strcmp(e_prev-&gt;value, e_node-&gt;value);
+        while ((descend &amp;&amp; cmp &lt; 0) || (!descend &amp;&amp; cmp &gt; 0)) {
+            prev = prev-&gt;prev;
             if (prev == head)
                 break;
             e_prev = list_entry(prev, element_t, list);
-            cmp = strcmp(e_prev->value, e_node->value);
+            cmp = strcmp(e_prev-&gt;value, e_node-&gt;value);
         }
 
         // insertion
-        next = prev->next;
-        prev->next = node;
-        node->prev = prev;
-        node->next = next;
-        next->prev = node;
+        next = prev-&gt;next;
+        prev-&gt;next = node;
+        node-&gt;prev = prev;
+        node-&gt;next = next;
+        next-&gt;prev = node;
     }
 }
 ```
@@ -845,30 +845,30 @@ static void q_selection_sort(struct list_head *head, bool descend)
 
     struct list_head *node, *safe, *prev = head;
     list_for_each_safe (node, safe, head) {
-        struct list_head *temp = node->next, *sele = node;
+        struct list_head *temp = node-&gt;next, *sele = node;
 
         // selection
         while (temp != head) {
             element_t *e_sele = list_entry(sele, element_t, list);
             element_t *e_temp = list_entry(temp, element_t, list);
 
-            int cmp = strcmp(e_sele->value, e_temp->value);
-            if ((descend && cmp < 0) || (!descend && cmp > 0)) {
+            int cmp = strcmp(e_sele-&gt;value, e_temp-&gt;value);
+            if ((descend &amp;&amp; cmp &lt; 0) || (!descend &amp;&amp; cmp &gt; 0)) {
                 sele = temp;
             }
-            temp = temp->next;
+            temp = temp-&gt;next;
         }
 
         // insertion
         list_del(sele);
-        prev->next->prev = sele;
-        sele->next = prev->next;
-        prev->next = sele;
-        sele->prev = prev;
+        prev-&gt;next-&gt;prev = sele;
+        sele-&gt;next = prev-&gt;next;
+        prev-&gt;next = sele;
+        sele-&gt;prev = prev;
 
         // set next node
         prev = sele;
-        safe = sele->next;
+        safe = sele-&gt;next;
     }
 }
 ```
@@ -902,16 +902,16 @@ classDiagram
         prev: list_head*
         next: list_head*
     }
-    head --> node 0: next
-    head <-- node 0: prev
-    node 0 --> node 1: next
-    node 0 <-- node 1: prev
-    node 1 --> node 2: next
-    node 1 <-- node 2: prev
-    node 2 --> node 3: next
-    node 2 <-- node 3: prev
-    node 3 --> head: next
-    node 3 <-- head: prev
+    head --&gt; node 0: next
+    head &lt;-- node 0: prev
+    node 0 --&gt; node 1: next
+    node 0 &lt;-- node 1: prev
+    node 1 --&gt; node 2: next
+    node 1 &lt;-- node 2: prev
+    node 2 --&gt; node 3: next
+    node 2 &lt;-- node 3: prev
+    node 3 --&gt; head: next
+    node 3 &lt;-- head: prev
 ```
 
 - convert to singly linked list
@@ -939,10 +939,10 @@ classDiagram
         prev: list_head*
         next: list_head*
     }
-    head --> node 0: next
-    node 0 --> node 1: next
-    node 1 --> node 2: next
-    node 2 --> node 3: next
+    head --&gt; node 0: next
+    node 0 --&gt; node 1: next
+    node 1 --&gt; node 2: next
+    node 2 --&gt; node 3: next
 ```
 
 - split into two lists
@@ -970,9 +970,9 @@ classDiagram
         prev: list_head*
         next: list_head*
     }
-    head --> node 0: next
-    node 0 --> node 1: next
-    node 2 --> node 3: next
+    head --&gt; node 0: next
+    node 0 --&gt; node 1: next
+    node 2 --&gt; node 3: next
 ```
 
 - indirect pointers
@@ -1009,12 +1009,12 @@ classDiagram
     class l2 {
         list_head**
     }
-    head --> node 0: next
-    node 0 --> node 1: next
-    node 2 --> node 3: next
-    l1 --> head: &next
-    temp --> node2
-    l2 --> temp: &temp
+    head --&gt; node 0: next
+    node 0 --&gt; node 1: next
+    node 2 --&gt; node 3: next
+    l1 --&gt; head: &amp;next
+    temp --&gt; node2
+    l2 --&gt; temp: &amp;temp
 ```
 
 ```c
@@ -1027,19 +1027,19 @@ static void merge(struct list_head **l1,
     struct list_head *node1 = *l1;
     struct list_head *node2 = *l2;
 
-    while (node1 && node2) {
+    while (node1 &amp;&amp; node2) {
         element_t *elem1 = list_entry(node1, element_t, list);
         element_t *elem2 = list_entry(node2, element_t, list);
 
-        int cmp = strcmp(elem1->value, elem2->value);
-        if ((descend && cmp < 0) || (!descend && cmp > 0)) {
+        int cmp = strcmp(elem1-&gt;value, elem2-&gt;value);
+        if ((descend &amp;&amp; cmp &lt; 0) || (!descend &amp;&amp; cmp &gt; 0)) {
             *temp = node2;
-            node2 = node2->next;
+            node2 = node2-&gt;next;
         } else {
             *temp = node1;
-            node1 = node1->next;
+            node1 = node1-&gt;next;
         }
-        temp = &(*temp)->next;
+        temp = &amp;(*temp)-&gt;next;
     }
 
     *temp = node1 ? node1 : node2;
@@ -1048,24 +1048,24 @@ static void merge(struct list_head **l1,
 /* Merge sort */
 static void q_merge_sort(struct list_head **head, bool descend)
 {
-    if (!(*head) || !(*head)->next)
+    if (!(*head) || !(*head)-&gt;next)
         return;
 
     // get the middle node by fast and slow pointers
     struct list_head *p = *head;
-    struct list_head *q = (*head)->next;
-    while (q && q->next) {
-        p = p->next;
-        q = q->next->next;
+    struct list_head *q = (*head)-&gt;next;
+    while (q &amp;&amp; q-&gt;next) {
+        p = p-&gt;next;
+        q = q-&gt;next-&gt;next;
     }
 
     // set an additional list head
-    struct list_head *l2 = p->next;
-    p->next = NULL;
+    struct list_head *l2 = p-&gt;next;
+    p-&gt;next = NULL;
 
     q_merge_sort(head, descend);
-    q_merge_sort(&l2, descend);
-    merge(head, &l2, descend);
+    q_merge_sort(&amp;l2, descend);
+    merge(head, &amp;l2, descend);
 }
 
 /* Sort elements of queue in ascending/descending order */
@@ -1073,19 +1073,19 @@ void q_sort(struct list_head *head, bool descend)
 {
     if (!head)
         return;
-    head->prev->next = NULL;
-    q_merge_sort(&head->next, descend);
+    head-&gt;prev-&gt;next = NULL;
+    q_merge_sort(&amp;head-&gt;next, descend);
     struct list_head *node, *prev = head;
-    for (node = head->next; node; node = node->next) {
-        node->prev = prev;
+    for (node = head-&gt;next; node; node = node-&gt;next) {
+        node-&gt;prev = prev;
         prev = node;
     }
-    prev->next = head;
-    head->prev = prev;
+    prev-&gt;next = head;
+    head-&gt;prev = prev;
 }
 ```
 
-### q_ascend & q_descend
+### q_ascend &amp; q_descend
 
 ```mermaid
 classDiagram
@@ -1111,20 +1111,20 @@ classDiagram
         prev: list_head*
         next: list_head*
     }
-    head --> node 0: next
-    head <-- node 0: prev
-    node 0 --> node 1: next
-    node 0 <-- node 1: prev
-    node 1 --> node 2: next
-    node 1 <-- node 2: prev
-    node 2 --> node 3: next
-    node 2 <-- node 3: prev
+    head --&gt; node 0: next
+    head &lt;-- node 0: prev
+    node 0 --&gt; node 1: next
+    node 0 &lt;-- node 1: prev
+    node 1 --&gt; node 2: next
+    node 1 &lt;-- node 2: prev
+    node 2 --&gt; node 3: next
+    node 2 &lt;-- node 3: prev
 ```
 
 - ascend 结果的节点大小顺序: 
-$$node 0 < node 1 < node 2 < node 3$$
+$$node 0 &lt; node 1 &lt; node 2 &lt; node 3$$
 - descend 结果的节点大小顺序: 
-$$node 0 > node 1 > node 2 > node 3$$
+$$node 0 &gt; node 1 &gt; node 2 &gt; node 3$$
 
 依据这个特性，将链表进行反转后进行操作比较直观，参考 [这个题解](https://leetcode.com/problems/remove-nodes-from-linked-list/solutions/4188092/simple-easy-cpp-solution-with-explanation/)。需要注意的是，这里对节点的操作是删除 (delete) 而不只是移除 (remove)，所以记得移除 (remove) 之后及时释放 (free)。
 
@@ -1154,9 +1154,9 @@ int q_ascend(struct list_head *head)
             break;
         element_t *e_node = list_entry(node, element_t, list);
         element_t *e_safe = list_entry(safe, element_t, list);
-        while (strcmp(e_node->value, e_safe->value) < 0) {
-            safe = safe->next;
-            list_del(safe->prev);
+        while (strcmp(e_node-&gt;value, e_safe-&gt;value) &lt; 0) {
+            safe = safe-&gt;next;
+            list_del(safe-&gt;prev);
             q_release_element(e_safe);
             if (safe == head)
                 break;
@@ -1194,9 +1194,9 @@ int q_descend(struct list_head *head)
             break;
         element_t *e_node = list_entry(node, element_t, list);
         element_t *e_safe = list_entry(safe, element_t, list);
-        while (strcmp(e_node->value, e_safe->value) > 0) {
-            safe = safe->next;
-            list_del(safe->prev);
+        while (strcmp(e_node-&gt;value, e_safe-&gt;value) &gt; 0) {
+            safe = safe-&gt;next;
+            list_del(safe-&gt;prev);
             q_release_element(e_safe);
             if (safe == head)
                 break;
@@ -1220,8 +1220,8 @@ int q_descend(struct list_head *head)
  * This function merge the second to the last queues in the chain into the first
  * queue. The queues are guaranteed to be sorted before this function is called.
  * No effect if there is only one queue in the chain. Allocation is disallowed
- * in this function. There is no need to free the 'qcontext_t' and its member
- * 'q' since they will be released externally. However, q_merge() is responsible
+ * in this function. There is no need to free the &#39;qcontext_t&#39; and its member
+ * &#39;q&#39; since they will be released externally. However, q_merge() is responsible
  * for making the queues to be NULL-queue, except the first one.
  *
  * Reference:
@@ -1239,42 +1239,42 @@ static void q_merge2(struct list_head *l1, struct list_head *l2, bool descend)
 {
     queue_contex_t *q1 = list_entry(l1, queue_contex_t, chain);
     queue_contex_t *q2 = list_entry(l2, queue_contex_t, chain);
-    struct list_head *h1 = q1->q->next;
-    struct list_head *h2 = q2->q->next;
-    struct list_head **head = &q1->q;
+    struct list_head *h1 = q1-&gt;q-&gt;next;
+    struct list_head *h2 = q2-&gt;q-&gt;next;
+    struct list_head **head = &amp;q1-&gt;q;
 
-    while (h1 != q1->q && h2 != q2->q) {
+    while (h1 != q1-&gt;q &amp;&amp; h2 != q2-&gt;q) {
         element_t *e1 = list_entry(h1, element_t, list);
         element_t *e2 = list_entry(h2, element_t, list);
 
-        int cmp = strcmp(e1->value, e2->value);
-        if ((descend && cmp < 0) || (!descend && cmp > 0)) {
-            (*head)->next = h2;
-            h2->prev = (*head);
-            h2 = h2->next;
+        int cmp = strcmp(e1-&gt;value, e2-&gt;value);
+        if ((descend &amp;&amp; cmp &lt; 0) || (!descend &amp;&amp; cmp &gt; 0)) {
+            (*head)-&gt;next = h2;
+            h2-&gt;prev = (*head);
+            h2 = h2-&gt;next;
         } else {
-            (*head)->next = h1;
-            h1->prev = (*head);
-            h1 = h1->next;
+            (*head)-&gt;next = h1;
+            h1-&gt;prev = (*head);
+            h1 = h1-&gt;next;
         }
-        head = &(*head)->next;
+        head = &amp;(*head)-&gt;next;
     }
 
-    if (h1 != q1->q) {
-        (*head)->next = h1;
-        h1->prev = (*head);
-        head = &q1->q->prev;
+    if (h1 != q1-&gt;q) {
+        (*head)-&gt;next = h1;
+        h1-&gt;prev = (*head);
+        head = &amp;q1-&gt;q-&gt;prev;
     }
-    if (h2 != q2->q) {
-        (*head)->next = h2;
-        h2->prev = (*head);
-        head = &q2->q->prev;
+    if (h2 != q2-&gt;q) {
+        (*head)-&gt;next = h2;
+        h2-&gt;prev = (*head);
+        head = &amp;q2-&gt;q-&gt;prev;
     }
 
-    (*head)->next = q1->q;
-    q1->q->prev = (*head);
-    INIT_LIST_HEAD(q2->q);
-    q1->size += q2->size;
+    (*head)-&gt;next = q1-&gt;q;
+    q1-&gt;q-&gt;prev = (*head);
+    INIT_LIST_HEAD(q2-&gt;q);
+    q1-&gt;size &#43;= q2-&gt;size;
 
     return;
 }
@@ -1282,14 +1282,14 @@ static void q_merge2(struct list_head *l1, struct list_head *l2, bool descend)
 /* Merge lists in region [lh, rh) */
 static void q_mergeK(struct list_head *lh, struct list_head *rh, bool descend)
 {
-    if (lh == rh || lh->next == rh)
+    if (lh == rh || lh-&gt;next == rh)
         return;
     // get middle node by two pointers
     struct list_head *p = lh;
-    struct list_head *q = rh->prev;
-    while (!(p == q || p->next == q)) {
-        p = p->next;
-        q = q->prev;
+    struct list_head *q = rh-&gt;prev;
+    while (!(p == q || p-&gt;next == q)) {
+        p = p-&gt;next;
+        q = q-&gt;prev;
     }
     q_mergeK(lh, q, descend);
     q_mergeK(q, rh, descend);
@@ -1303,8 +1303,8 @@ int q_merge(struct list_head *head, bool descend)
     // https://leetcode.com/problems/merge-k-sorted-lists/
     if (!head || list_empty(head))
         return 0;
-    q_mergeK(head->next, head, descend);
-    return list_entry(head->next, queue_contex_t, chain)->size;
+    q_mergeK(head-&gt;next, head, descend);
+    return list_entry(head-&gt;next, queue_contex_t, chain)-&gt;size;
 }
 ```
 
@@ -1314,7 +1314,7 @@ int q_merge(struct list_head *head, bool descend)
 
 ```bash
 $ ./qtest
-cmd> help
+cmd&gt; help
 Commands:
   #           ...          | Display comment
   dedup                    | Delete all nodes that have duplicate string
@@ -1325,25 +1325,25 @@ Commands:
   ...
 ```
 
-{{< admonition >}}
-- [Difference between "delete" and "remove"](https://english.stackexchange.com/questions/52508/difference-between-delete-and-remove)
+{{&lt; admonition &gt;}}
+- [Difference between &#34;delete&#34; and &#34;remove&#34;](https://english.stackexchange.com/questions/52508/difference-between-delete-and-remove)
 
 Delete and remove are defined quite similarly, but the main difference between them is that delete means erase (i.e. rendered nonexistent or nonrecoverable), while remove connotes take away and set aside (but kept in existence).
 
 In your example, if the item is existent after the removal, just say remove, but if it ceases to exist, say delete.
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 在完成 queue.c 文件中的函数功能时，可以通过使用这个命令行对参数对应的功能进行测试，例如:
 
 ```bash
 # test q_size
-> new
+&gt; new
 L = []
-> ih a
+&gt; ih a
 L = [a]
-> ih b
+&gt; ih b
 L = [b a]
-> size
+&gt; size
 2
 ```
 
@@ -1383,11 +1383,11 @@ $ sudo apt install cppcheck clang-format aspell colordiff
 - [Linux 檔案與目錄管理](https://linux.vbird.org/linux_basic/centos7/0220filemanager.php)
 - [檔案與檔案系統的壓縮、打包與備份](https://linux.vbird.org/linux_basic/centos7/0240tarcompress.php)
 
-{{< admonition success >}}
-"If I had eight hours to chop down a tree, I’d spend six hours sharpening my axe." – Abraham Lincoln
+{{&lt; admonition success &gt;}}
+&#34;If I had eight hours to chop down a tree, I’d spend six hours sharpening my axe.&#34; – Abraham Lincoln
 
 「工欲善其事，必先利其器」
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ## 取得程式码并进行开发
 
@@ -1399,9 +1399,9 @@ $ mkdir -p linux2023
 
 从 GItHub 获取 [lab-c] 程式码:
 ```bash
-$ git clone git@github.com:<username>/lab0-c
+$ git clone git@github.com:&lt;username&gt;/lab0-c
 # or
-$ git clone https://github.com/<username>/lab0-c
+$ git clone https://github.com/&lt;username&gt;/lab0-c
 ```
 
 切换的 `lab0-c` 目录并进行编译:
@@ -1452,17 +1452,17 @@ gcc -o qtest qtest.o report.o console.o harness.o queue.o
 ```bash
 $ make check
 ./qtest -v 3 -f traces/trace-eg.cmd
-cmd> 
-cmd> # Demonstration of queue testing framework
-cmd> # Use help command to see list of commands and options
-cmd> # Initial queue is NULL.
-cmd> show
+cmd&gt; 
+cmd&gt; # Demonstration of queue testing framework
+cmd&gt; # Use help command to see list of commands and options
+cmd&gt; # Initial queue is NULL.
+cmd&gt; show
 q = NULL
-cmd> # Create empty queue
-cmd> new
+cmd&gt; # Create empty queue
+cmd&gt; new
 q = []
-cmd> # Fill it with some values.  First at the head
-cmd> ih dolphin
+cmd&gt; # Fill it with some values.  First at the head
+cmd&gt; ih dolphin
 ```
 
 即将 [traces/trace-eg.cmd](https://github.com/sysprog21/lab0-c/blob/master/traces/trace-eg.cmd) 的内容作为测试命令指派给 `qtest` 执行。
@@ -1489,12 +1489,12 @@ $ make test
     #4 0x55ea51708725 in cmd_select lab0-c/console.c:568
     #5 0x55ea51708b42 in run_console lab0-c/console.c:627
     #6 0x55ea51705c7d in main lab0-c/qtest.c:700
-    #7 0x7facce0d8b96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x21b96)
-    #8 0x55ea51703819 in _start (lab0-c/qtest+0x5819)
+    #7 0x7facce0d8b96 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6&#43;0x21b96)
+    #8 0x55ea51703819 in _start (lab0-c/qtest&#43;0x5819)
 ```
 
 - [Address/Thread/Memory Sanitizer](https://www.slideshare.net/sermp/sanitizer-cppcon-russia)
-- [A look into the sanitizer family (ASAN & UBSAN) by Akul Pillai](https://www.slideshare.net/slideshow/a-look-into-the-sanitizer-family-asan-ubsan-by-akul-pillai/135506952)
+- [A look into the sanitizer family (ASAN &amp; UBSAN) by Akul Pillai](https://www.slideshare.net/slideshow/a-look-into-the-sanitizer-family-asan-ubsan-by-akul-pillai/135506952)
 
 ### clang-format 工具和一致的程序撰写风格
 
@@ -1503,13 +1503,13 @@ $ make test
 $ clang-format -i *.[ch]
 ```
 
-> 相关程序风格查看原文即可
+&gt; 相关程序风格查看原文即可
 
 ### Git Hooks 进行自动程式码排版检查
 
-第一次 make 后，Git pre-commit / pre-push hook 将被自动安装到当前的工作区 (workspace)，之后每次执行 git commit 時，[Git hook](https://www.atlassian.com/git/tutorials/git-hooks) 都会检查 C/C++ 的代码风格是否与 `.clang-format` 要求的一致，并同时通过 [Cppcheck](http://cppcheck.sourceforge.net/) 进行静态程序分析检查。
+第一次 make 后，Git pre-commit / pre-push hook 将被自动安装到当前的工作区 (workspace)，之后每次执行 git commit 時，[Git hook](https://www.atlassian.com/git/tutorials/git-hooks) 都会检查 C/C&#43;&#43; 的代码风格是否与 `.clang-format` 要求的一致，并同时通过 [Cppcheck](http://cppcheck.sourceforge.net/) 进行静态程序分析检查。
 
-{{< admonition tip >}}
+{{&lt; admonition tip &gt;}}
 tig 可以更加方便的浏览 git repository 的信息:
 ```bash
 # install
@@ -1519,7 +1519,7 @@ $ tig --help
 # or if you have installed tldr
 $ tldr tig
 ```
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 怎么写好一个 Git Commit:
 - 英文原文: [How to Write a Git Commit Message](https://cbea.ms/git-commit/)
@@ -1534,9 +1534,9 @@ The seven rules of a great Git commit message:
 6. Wrap the body at 72 characters
 7. Use the body to explain what and why vs. how
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 請避免用 `$ git commit -m`，而是透過編輯器調整 git commit message。許多網路教學為了行文便利，用 `$ git commit -m` 示範，但這樣很容易讓人留下語焉不詳的訊息，未能提升為好的 Git Commit Message。因此，從今以後，不要用 `git commit -m`, 改用 `git commit -a` (或其他參數) 並詳細查驗變更的檔案。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 设置 Git 的默认编辑器为 Vim:
 ```bash
@@ -1545,13 +1545,13 @@ $ git config --global core.editor vim
 
 ### GitHub Actions 设定
 
-> GitHub Actions 是 GitHub 提供的 CI/CD 服務，CI/CD 代表的是 Continuous Integration 持續整合與 Continuous Deployment 持續部署，簡單來說就是將程式流程自動化。lab0-c 提供幾項自動化測試，包含：檢查排版、編譯結果和自動評分等等。這裡需要注意的是 fork 完成後，預設情況下 GitHub Action 不會被啟動，所以需要 **手動開啟 GitHub Actions**，在你所 fork 出的 repository 的 Actions 內點選 `I understand my workflows, go ahead and enable them`
+&gt; GitHub Actions 是 GitHub 提供的 CI/CD 服務，CI/CD 代表的是 Continuous Integration 持續整合與 Continuous Deployment 持續部署，簡單來說就是將程式流程自動化。lab0-c 提供幾項自動化測試，包含：檢查排版、編譯結果和自動評分等等。這裡需要注意的是 fork 完成後，預設情況下 GitHub Action 不會被啟動，所以需要 **手動開啟 GitHub Actions**，在你所 fork 出的 repository 的 Actions 內點選 `I understand my workflows, go ahead and enable them`
 
-> 開啟 GitHub Actions 後，當每次 push 到遠端時，GitHub 就會自動測試作業設計的檢查項目，當有錯誤時會收到 CI failed 的 email 通知。
+&gt; 開啟 GitHub Actions 後，當每次 push 到遠端時，GitHub 就會自動測試作業設計的檢查項目，當有錯誤時會收到 CI failed 的 email 通知。
 
-> 在現有的 GitHub Actions 對應的測試項目中，一旦收到 `git push` 的事件，系統就會自動執行 `make test`，並在失敗時發信件通知學員。
+&gt; 在現有的 GitHub Actions 對應的測試項目中，一旦收到 `git push` 的事件，系統就會自動執行 `make test`，並在失敗時發信件通知學員。
 
-> 點擊信件中的 `View workflow run` 即可在 GitHub 網站中得知 GitHub Actions 的測試狀況。
+&gt; 點擊信件中的 `View workflow run` 即可在 GitHub 網站中得知 GitHub Actions 的測試狀況。
 
 ## 以 Valgrind 分析内存问题
 
@@ -1559,21 +1559,21 @@ $ git config --global core.editor vim
 
 使用方式:
 ```bash
-$ valgrind --tool=<toolname> <program>
+$ valgrind --tool=&lt;toolname&gt; &lt;program&gt;
 ```
 
 - [Valgrind is NOT a leak checker](http://maintainablecode.logdown.com/posts/245425-valgrind-is-not-a-leak-checker)
-> Valgrind is an undefined behavior checking tool first, a function and memory profiler second, a data-race detection tool third, and a leak checking tool last.
+&gt; Valgrind is an undefined behavior checking tool first, a function and memory profiler second, a data-race detection tool third, and a leak checking tool last.
 
-{{< admonition quote >}}
+{{&lt; admonition quote &gt;}}
 dynamic Binary Instrumentation (DBI) 著重於二進位執行檔的追蹤與資訊彙整，而 dynamic Binary Analysis (DBA) 則強調對收集資訊的分析。上述 Valgrind 是個 DBI 系統框架，可建構一系列 DBA 工具，藉由 shadow values 技術來實作，後者要求對所有的暫存器和使用到的主記憶體做 shadow (即自行維護的副本)，這也使得 Valgrind 相較其他分析方法會較慢。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-{{< admonition quote >}}
+{{&lt; admonition quote &gt;}}
 也就是說，[Valgrind](https://valgrind.org/) 主要的手法是將暫存器和主記憶體的內容自行維護副本，並在任何情況下都可以安全正確地使用，同時記錄程式的所有操作，在不影響程式執行結果前提下，輸出有用的資訊。為了實作功能，[Valgrind](https://valgrind.org/) 利用 [dynamic binary re-compilation](https://en.wikipedia.org/wiki/Dynamic_recompilation) 把測試程式 (稱為 client 程式) 的機械碼解析到 VEX 中間表示法 (intermediate representation，簡稱 IR，是種虛擬的指令集架構，規範在原始程式碼 [VEX/pub/libvex_ir.h](https://sourceware.org/git/?p=valgrind.git;a=blob;f=VEX/pub/libvex_ir.h))。VEX IR 在 [Valgrind](https://valgrind.org/) 採用執行導向的方式，以 just-in-time (JIT) 編譯技術動態地把機械碼轉為 IR，倘若觸發特定工具感興趣的事件 (如記憶體配置)，就會跳躍到對應的處理工具，後者會插入一些分析程式碼，再把這些程式碼轉換為機械碼，儲存到 code cache 中，以利後續需要時執行。
 
 ```
-Machine Code --> IR --> IR --> Machine Code
+Machine Code --&gt; IR --&gt; IR --&gt; Machine Code
         ^        ^      ^
         |        |      |
     translate    |      |
@@ -1582,7 +1582,7 @@ Machine Code --> IR --> IR --> Machine Code
                         |
                      translate  
 ```
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 
 Valgrind 启动后会对 client 程序进行转换，所以 Valgrind 执行的是加工后的 client 程序:
@@ -1606,7 +1606,7 @@ memory lost:
 - possibly lost
 - still readchable
 
-运行 valgrind 和 gdb 类似，都需要使用 `-g` 参数来编译 C/C++ 源程序以生成调试信息，然后还可以通过 `-q` 参数指示 valgrind 进入 quite 模式，减少启动时信息的输出。
+运行 valgrind 和 gdb 类似，都需要使用 `-g` 参数来编译 C/C&#43;&#43; 源程序以生成调试信息，然后还可以通过 `-q` 参数指示 valgrind 进入 quite 模式，减少启动时信息的输出。
 
 ```bash
 $ valgrind -q --leak-check=full ./case1
@@ -1620,7 +1620,7 @@ $ valgrind -q --leak-check=full ./case1
 
 常见错误有: `malloc` 了并 `free` 但又对这个已经被 free 的空间进行操作，即 [Use After Free](https://cwe.mitre.org/data/definitions/416.html)
 
-> valgrind 输出的报告 invalid write/read 这类的单位是 Byte，即 size of X (bytes)
+&gt; valgrind 输出的报告 invalid write/read 这类的单位是 Byte，即 size of X (bytes)
 
 #### Other
 
@@ -1630,16 +1630,16 @@ $ valgrind -q --leak-check=full ./case1
 
 程序运行时的内存布局:
 
-{{< image src="https://i.imgur.com/OhqUECc.png" >}}
+{{&lt; image src=&#34;https://i.imgur.com/OhqUECc.png&#34; &gt;}}
 
 Valgrind 配合 [Massif](https://valgrind.org/docs/manual/ms-manual.html) 可以对程序运行时的内存行为进行可视化:
 
-{{< image src="https://imgur.com/F7hbcsN.png" >}}
+{{&lt; image src=&#34;https://imgur.com/F7hbcsN.png&#34; &gt;}}
 
-{{< admonition info >}}
+{{&lt; admonition info &gt;}}
 - [Valgrind User Manual](https://valgrind.org/docs/manual/manual.html)
 - [Massif: a heap profiler](https://valgrind.org/docs/manual/ms-manual.html)
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 lab0-c 也引入了 Valgrind 来协助侦测实验过程中可能出现的内存相关问题，例如 [memory leak](https://en.wikipedia.org/wiki/Memory_leak), [buffer overflow](https://en.wikipedia.org/wiki/Buffer_overflow), [Dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer) 等等。使用方式如下:
 ```bash
@@ -1656,10 +1656,10 @@ $ make valgrind
 - [x] Wikipedia: [Hooking](https://en.wikipedia.org/wiki/Hooking)
 - [x] Wikipedia: [Test harness](https://en.wikipedia.org/wiki/Test_harness)
 - [x] GCC: [Arrays of Length Zero](https://gcc.gnu.org/onlinedocs/gcc/Zero-Length.html)
-> The alignment of a zero-length array is the same as the alignment of its elements.
+&gt; The alignment of a zero-length array is the same as the alignment of its elements.
 
-{{< image src="https://imgur-backup.hackmd.io/j1fRN0B.png" >}}
-{{< image src="https://imgur-backup.hackmd.io/nkCgAZL.png" >}}
+{{&lt; image src=&#34;https://imgur-backup.hackmd.io/j1fRN0B.png&#34; &gt;}}
+{{&lt; image src=&#34;https://imgur-backup.hackmd.io/nkCgAZL.png&#34; &gt;}}
 
 - [ ] [C Struct Hack - Structure with variable length array](https://frankchang0125.blogspot.com/2013/01/c-struct-hack-structure-with-variable.html)
 
@@ -1675,7 +1675,7 @@ typedef struct __block_element {
 } block_element_t;
 
 /* Find header of block, given its payload.
- * Signal error if doesn't seem like legitimate block
+ * Signal error if doesn&#39;t seem like legitimate block
  */
 block_element_t *find_header(void *p);
 
@@ -1693,7 +1693,7 @@ void test_free(void *p);
 
 ### qtest 命令解释器
 
-新增指令 hello，用于打印 `Hello, world"` 的信息。调用流程:
+新增指令 hello，用于打印 `Hello, world&#34;` 的信息。调用流程:
 ```
 main → run_console → cmd_select → interpret_cmd → interpret_cmda → do_hello
 ```
@@ -1723,57 +1723,57 @@ void add_param(char *name, int *valp, char *summary, setter_func_t setter);
 static bool interpret_cmda(int argc, char *argv[])
 ```
 
-{{< admonition danger >}}
+{{&lt; admonition danger &gt;}}
 原文的「命令直译器的初始化准备」部分，示例的代码片段与最新的代码有许多差别 (特别是结构体的名称)，一定要搭配阅读最新的源码，否则会十分迷糊。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ### Signal 处理和应用
 
 Linux manual page:
 
 - [signal(2)](https://man7.org/linux/man-pages/man2/signal.2.html)
-> signal() sets the disposition of the signal signum to handler, which is either SIG_IGN, SIG_DFL, or the address of a  programmer-defined  function (a "signal handler").
+&gt; signal() sets the disposition of the signal signum to handler, which is either SIG_IGN, SIG_DFL, or the address of a  programmer-defined  function (a &#34;signal handler&#34;).
 
-```c {title="qinit.c"}
+```c {title=&#34;qinit.c&#34;}
 static void q_init()
 {
     fail_count = 0;
-    INIT_LIST_HEAD(&chain.head);
+    INIT_LIST_HEAD(&amp;chain.head);
     signal(SIGSEGV, sigsegv_handler);
     signal(SIGALRM, sigalrm_handler);
 }
 ```
 
 - [alarm(2)](https://man7.org/linux/man-pages/man2/alarm.2.html)
-> alarm() arranges for a SIGALRM signal to be delivered to the calling process in seconds seconds. If seconds is zero, any pending alarm is canceled. In any event any previously set alarm() is canceled.
+&gt; alarm() arranges for a SIGALRM signal to be delivered to the calling process in seconds seconds. If seconds is zero, any pending alarm is canceled. In any event any previously set alarm() is canceled.
 
 - [setjmp(3)](https://man7.org/linux/man-pages/man3/longjmp.3.html)
-> The functions described on this page are used for performing
-> "nonlocal gotos": transferring execution from one function to a
-> predetermined location in another function.  The setjmp()
-> function dynamically establishes the target to which control will
-> later be transferred, and longjmp() performs the transfer of
-> execution.
+&gt; The functions described on this page are used for performing
+&gt; &#34;nonlocal gotos&#34;: transferring execution from one function to a
+&gt; predetermined location in another function.  The setjmp()
+&gt; function dynamically establishes the target to which control will
+&gt; later be transferred, and longjmp() performs the transfer of
+&gt; execution.
 
 - [sigsetjmp(3)](https://linux.die.net/man/3/sigsetjmp)
-> setjmp() and sigsetjmp() return 0 if returning directly, and nonzero when returning from longjmp(3) or siglongjmp(3) using the saved context.
+&gt; setjmp() and sigsetjmp() return 0 if returning directly, and nonzero when returning from longjmp(3) or siglongjmp(3) using the saved context.
 
 Why use `sigsetjmp()`/`siglongjmp()` instead of `setjmp()`/`longjmp()`? 
 
 - [The Linux Programming Interface](https://man7.org/tlpi/)
 
-> The sa_mask field allows us to specify a set of signals that aren’t permitted to interrupt execution of this handler. In addition, the signal that caused the handler to be invoked is automatically added to the process signal mask. This means that a signal handler won’t recursively interrupt itself if a second instance of the same signal arrives while the handler is executing.
+&gt; The sa_mask field allows us to specify a set of signals that aren’t permitted to interrupt execution of this handler. In addition, the signal that caused the handler to be invoked is automatically added to the process signal mask. This means that a signal handler won’t recursively interrupt itself if a second instance of the same signal arrives while the handler is executing.
 
-> However, there is a problem with using the standard longjmp() function to exit from a signal handler. We noted earlier that, upon entry to the signal handler, the kernel automatically adds the invoking signal, as well as any signals specified in the act.sa_mask field, to the process signal mask, and then removes these signals from the mask when the handler does a normal return.
-> 
-> What happens to the signal mask if we exit the signal handler using longjmp()? The answer depends on the genealogy of the particular UNIX implementation.
+&gt; However, there is a problem with using the standard longjmp() function to exit from a signal handler. We noted earlier that, upon entry to the signal handler, the kernel automatically adds the invoking signal, as well as any signals specified in the act.sa_mask field, to the process signal mask, and then removes these signals from the mask when the handler does a normal return.
+&gt; 
+&gt; What happens to the signal mask if we exit the signal handler using longjmp()? The answer depends on the genealogy of the particular UNIX implementation.
 
-{{< admonition quote >}}
+{{&lt; admonition quote &gt;}}
 簡言之，當某個 signal handler 被觸發時，該 signal 會在執行 signal handler 時會被遮罩住，並在 signal handler 回傳時恢復。而，在裡面使用 longjmp 時，解除訊號遮罩的行為有可能不會發生(是否解除則依照實作決定)。為了保證在非區域跳躍後能夠恢復，所以 POSIX 另行規範得以在 signal handler 中呼叫的 `sigsetjmp` 跟 `siglongjmp`。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 - `jmp_ready` 技巧 (用于保证在 `siglongjmp()` 之前必然执行过一次 `sigsetjmp()`):
-> Because a signal can be generated at any time, it may actually occur before the target of the goto has been set up by sigsetjmp() (or setjmp()). To prevent this possibility (which would cause the handler to perform a nonlocal goto using an uninitialized env buffer), we employ a guard variable, canJump, to indicate whether the env buffer has been initialized. If canJump is false, then instead of doing a nonlocal goto, the handler simply returns.
+&gt; Because a signal can be generated at any time, it may actually occur before the target of the goto has been set up by sigsetjmp() (or setjmp()). To prevent this possibility (which would cause the handler to perform a nonlocal goto using an uninitialized env buffer), we employ a guard variable, canJump, to indicate whether the env buffer has been initialized. If canJump is false, then instead of doing a nonlocal goto, the handler simply returns.
 
 在执行 `siglongjmp` 之前执行一次 `sigsetjmp` 是必须的，这用于保存 `sigsetjmp` 所处地方的上下文，而 `sigsetjmp` 所处地方正是 `siglongjmp` 执行时需要跳转到的地方，所以为了保证长跳转后执行符合预取，需要保存上下文。
 
@@ -1823,7 +1823,7 @@ void report_event(message_t msg, char *fmt, ...);
 
 由上面可知，当收到 `SIGSEGV` 或 `SIGALRM` 信号时，会通过 `signal handler` :arrow_right: `trigger_exception` :arrow_right: `exception_setup` 这一条链路执行。那么当 `exception_setup` 函数返回时会跳转到哪里呢？
 
-在 [qtest.c]() 的形如 `do_<operation>` 这类函数里面，都会直接或间接的包含以下的程式码:
+在 [qtest.c]() 的形如 `do_&lt;operation&gt;` 这类函数里面，都会直接或间接的包含以下的程式码:
 ```c
 if (exception_setup(true)) {
     ...
@@ -1831,7 +1831,7 @@ if (exception_setup(true)) {
 exception_cancel();
 ```
 
-> 回到稍早提及的 `if (exception_setup(true))` 敘述中，若是第一次回傳，那麼會開始測試函式。若測試函式的過程中，發生任何錯誤 (亦即觸發 `SIGSEGV` 或 SIGALRM 一類的 `signal`)，就會立刻跳回 signal handler。signal handler 會印出錯誤訊息，並進行 `siglongjmp`。由 `exception_setup` 的程式可以知道又是跳到 `exception_setup(true)` 裡面，但這時會回傳 `false`，因而跳過測試函式，直接結束測試並回傳 `ok` 內含值。換言之，`exception_cancel()` 後就算再發生 `SIGALRM` 或 `SIGSEGV`，也不會再有機會回到 exception_setup() 裡面。
+&gt; 回到稍早提及的 `if (exception_setup(true))` 敘述中，若是第一次回傳，那麼會開始測試函式。若測試函式的過程中，發生任何錯誤 (亦即觸發 `SIGSEGV` 或 SIGALRM 一類的 `signal`)，就會立刻跳回 signal handler。signal handler 會印出錯誤訊息，並進行 `siglongjmp`。由 `exception_setup` 的程式可以知道又是跳到 `exception_setup(true)` 裡面，但這時會回傳 `false`，因而跳過測試函式，直接結束測試並回傳 `ok` 內含值。換言之，`exception_cancel()` 後就算再發生 `SIGALRM` 或 `SIGSEGV`，也不會再有機會回到 exception_setup() 裡面。
 
 ## 整合网页服务器
 
@@ -1839,29 +1839,29 @@ exception_cancel();
 
 - [tiny-web-server](https://github.com/7890/tiny-web-server)
 
-{{< admonition danger >}}
+{{&lt; admonition danger &gt;}}
 原文的示例的代码片段与最新的代码有许多差别 (特别是函数的名称)，一定要搭配阅读最新的源码，否则会十分迷糊。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 程序等待输入的调用链 ([linenoise.c](https://github.com/sysprog21/lab0-c/blob/master/linenoise.c)):
 ```
-linenoise() -> line_raw() -> line_edit()
+linenoise() -&gt; line_raw() -&gt; line_edit()
 ```
 
 但 `line_edit` 中是使用 `read` 等待用户输入，所以当 `read` 阻塞时就无法接收来自 web 传来的信息。尝试使用 `select()` 来同时处理标准输入 `stdin` 和网络 `socket`。
 
 - [select(2)](https://man7.org/linux/man-pages/man2/select.2.html)
-> On success, select() and pselect() return the number of file
-> descriptors contained in the three returned descriptor sets (that
-> is, the total number of bits that are set in readfds, writefds,
-> exceptfds).  The return value may be zero if the timeout expired
-> before any file descriptors became ready.
-> 
-> On error, -1 is returned, and errno is set to indicate the error;
-> the file descriptor sets are unmodified, and timeout becomes
-> undefined.
+&gt; On success, select() and pselect() return the number of file
+&gt; descriptors contained in the three returned descriptor sets (that
+&gt; is, the total number of bits that are set in readfds, writefds,
+&gt; exceptfds).  The return value may be zero if the timeout expired
+&gt; before any file descriptors became ready.
+&gt; 
+&gt; On error, -1 is returned, and errno is set to indicate the error;
+&gt; the file descriptor sets are unmodified, and timeout becomes
+&gt; undefined.
 
-{{< image src="https://hackmd.io/_uploads/HJ0_t8Kf9.jpg" content="I/O Multiplexing Model" >}}
+{{&lt; image src=&#34;https://hackmd.io/_uploads/HJ0_t8Kf9.jpg&#34; content=&#34;I/O Multiplexing Model&#34; &gt;}}
 
 `select` 和 `poll` 都是上图所示的多路 I/O 复用的模型，优势在于可以同时处理多个 file descriptor，但缺点在于需要使用 2 次 syscall，第一次是等待 kernel 发出通知，第二次是从 kernel 拷贝数据，每次 syscall 都需要进行 context switch，导致这个模型比其他的 I/O 模型开销大 (context switch 开销是很大的)。
 
