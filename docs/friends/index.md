@@ -29,6 +29,6 @@
 
 ---
 
-> 作者:   
+> 作者: [ccrysisa](https://github.com/ccrysisa)  
 > URL: https://ccrysisa.github.io/friends/  
 

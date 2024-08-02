@@ -71,6 +71,6 @@ no sequential jump, for example, you hit step next and you go up, or you hit ste
 
 ---
 
-> 作者: [ccrysisa](https://github.com/ccrysisa)  
+> 作者: [vanJker](https://github.com/vanJker)  
 > URL: https://ccrysisa.github.io/posts/atomic-weapons/  
 
