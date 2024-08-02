@@ -4,11 +4,11 @@ subtitle:
 date: 2024-06-30T00:19:25+08:00
 slug: f341f9f
 # draft: true
-# author:
-#   name:
-#   link:
-#   email:
-#   avatar:
+author:
+  name: vanJker
+  link: https://github.com/vanJker
+  email: cjshine@foxmail.com
+  avatar: https://avatars.githubusercontent.com/u/88960102?s=96&v=4
 description:
 keywords:
 license:
@@ -69,8 +69,9 @@ As with all this-vs-that arguments, there are merits to both approaches. Modern 
 
 ## Toolchain
 
-> Wikipedia: [Toolchain](https://en.wikipedia.org/wiki/Toolchain)
+Wikipedia: [Toolchain](https://en.wikipedia.org/wiki/Toolchain)
 
+- [Compiler Exploer](https://godbolt.org/)
 - OS: Windows 10
 - IDE: [Visual Studio](https://visualstudio.microsoft.com/) 2019 Community edition
     - [MSVC](https://en.wikipedia.org/wiki/Microsoft_Visual_C%2B%2B)
@@ -149,13 +150,24 @@ Visual Studio 的错误提示中，`C` 开头的错误 (error) 表示的是编�
 
 ### Debug
 
-Breakpoint & Memory
-
 调试时相关信息的窗口在「调试 $\rightarrow$ 窗口」处可以开启显示
 
 在内存查看窗口，可以通过 `&var` (`var` 为当前上下文变量的名字) 来快速获取该变量对应的地址，以及查看该地址所所储存的值
 
 调试过程中，通过「右键 $\rightarrow$ 转到反汇编」即可查看对应的汇编代码
+
+#### Contional and Action Breakpoints
+
+Microsoft Learn: [Use breakpoints in the Visual Studio debugger](https://learn.microsoft.com/en-us/visualstudio/debugger/using-breakpoints?view=vs-2022)
+
+- **Breakpoint conditions**
+
+> You can control when and where a breakpoint executes by setting conditions. The condition can be any valid expression that the debugger recognizes.
+
+- **Breakpoint actions and tracepoints**
+
+> A tracepoint is a breakpoint that prints a message to the Output window. A tracepoint can act like a temporary trace statement in the programming language and does not pause the execution of code. You create a tracepoint by setting a special action in the Breakpoint Settings window.
+
 
 ### Projects
 
@@ -186,6 +198,25 @@ SolutionDir
                     |__ Platform
                             |__ Configuration
 ```
+
+#### Managing Multiple Projects and Libraries
+
+同一 Solution 创建多个 Project:
+
+- Solution 资源管理器 -> 右击 Solution 名称 -> Add (**New Project**)
+
+一般来说，一个 Solution 只有一个生成可运行文件的 Project，其它 Project 应该作为静态链接存在 (当然测试作用的 Project 也应该是可执行文件类型)。设定 Project 类型:
+
+右击 Project 名称 -> Properties -> Configuration Properties -> General -> Configuration Type 
+
+- 可执行 Project: **Application (.exe)**
+- 其余的 Project: **Static library (.lib)**
+
+这样即可将整个 Solution 构建成一个可执行文件，但是这样引用其它 Project 的头文件比较麻烦，我们还是需要使用真实文件系统的路径进行引用，为了避免繁杂的头文件路径以及防止路径变更导致构建失败，我们使用和上一节类似的技术：设定 Project 的属性: C/C++ -> Additional Include Directoris，在里面添加我们想要引用的 Project 头文件所在的目录路径 (一般为 `$(SolutionDir)\ProjectName\src`)。
+
+{{< admonition >}}
+这个设定 Include 目录的过程实际上也设置了 Projects 之间的依赖关系 (某种意义上的 CMake，VS 是使用 sln 来管理包和代码库的)
+{{< /admonition >}}
 
 ### Libraries
 
@@ -240,7 +271,7 @@ int main()
 C++ 在使用动态库的时候，一般提供两个文件：一个引入库 (后缀为 `dll.lib`，本质为静态链接文件) 和一个 DLL (后缀为 `.dll`，为动态链接文件)。引入库包含被 DLL 导出的函数和变量的符号名以及相应的寻址位置，而 DLL 包含实际的函数和数据。在编译链接可执行文件时，只需要链接引入库，DLL 中的函数代码和数据并不复制到可执行文件中，在运行的时候，再去加载 DLL 以访问 DLL 中导出的函数。不需要引入库也可以使用 DLL，但是效率会低，因为 **运行时** 每次访问 DLL 的资源都需要进行遍历 DLL 查询资源的具体位置 (类似于顺序遍历) 再进行链接，而如果有引入库，因为引入库记录了 DLL 所有公开资源的具体位置，可以直接在 **链接时** 在引入库查询 (类似于哈希表查找) 然后运行时直接对具体位置进行链接即可。
 {{< /admonition >}}
 
-- 以上整理自 [神经元猫](https://space.bilibili.com/364152971) 的评论
+- 以上整理自 [@神经元猫](https://space.bilibili.com/364152971) 的评论
 
 在 Linker -> input -> Addtional Dependencies 处添加相对于之前依赖库目录的动态链接引入库文件路径: `glfw3dll.lib` (注意这里的依赖项不能包含相应的静态库相关文件)
 
@@ -256,25 +287,6 @@ int main()
     std::cout << a << std::endl; // ouput 1
 }
 ```
-
-### Managing Multiple Projects and Libraries
-
-同一 Solution 创建多个 Project:
-
-- Solution 资源管理器 -> 右击 Solution 名称 -> Add (**New Project**)
-
-一般来说，一个 Solution 只有一个生成可运行文件的 Project，其它 Project 应该作为静态链接存在 (当然测试作用的 Project 也应该是可执行文件类型)。设定 Project 类型:
-
-右击 Project 名称 -> Properties -> Configuration Properties -> General -> Configuration Type 
-
-- 可执行 Project: **Application (.exe)**
-- 其余的 Project: **Static library (.lib)**
-
-这样即可将整个 Solution 构建成一个可执行文件，但是这样引用其它 Project 的头文件比较麻烦，我们还是需要使用真实文件系统的路径进行引用，为了避免繁杂的头文件路径以及防止路径变更导致构建失败，我们使用和上一节类似的技术：设定 Project 的属性: C/C++ -> Additional Include Directoris，在里面添加我们想要引用的 Project 头文件所在的目录路径 (一般为 `$(SolutionDir)\ProjectName\src`)。
-
-{{< admonition >}}
-这个设定 Include 目录的过程实际上也设置了 Projects 之间的依赖关系 (某种意义上的 CMake)
-{{< /admonition >}}
 
 ## Header File
 
@@ -379,6 +391,90 @@ int main()
     int& ref = a; // ref point to a
     ref = b;      // set a's value to be b's value (8)!!!
 }
+```
+
+## Union and Type Punning
+
+- Stack Overflow: [What is the modern, correct way to do type punning in C++?](https://stackoverflow.com/questions/67636231/what-is-the-modern-correct-way-to-do-type-punning-in-c)
+
+通过指针和引用直接操作内存来实现类型双关 (Type Punning)，可以搭配调试器的内存查看功能进行观察:
+
+```c++
+int a = 50;
+double value = *(double*)&a;    // copy
+double& value = *(double*)&a;   // in-place
+```
+
+```c++
+#include <iostream>
+class Entity
+{
+    int x, y;
+};
+int main()
+{
+    Entity e = { 5, 8 };
+    int* position = (int*)&e;
+    std::cout << position[0] << ", " << position[1] << std::endl; // [5, 8]
+    int y = *(int*)((char*)&e + 4);
+    std::cout << y << std::endl; // 8
+}
+```
+
+上面的这些代码不建议使用，除非你是研究操作系统内核这类对内存操作精度极高的领域。下面使用 `union` 来实现类型双关 (Type Punning):
+
+- cppreference: [Union declaration](https://en.cppreference.com/w/c/language/union)
+
+> Similar to struct, an unnamed member of a union whose type is a union without name is known as anonymous union. Every member of an anonymous union is considered to be a member of the enclosing struct or union keeping their union layout. This applies recursively if the enclosing struct or union is also anonymous.
+
+```c++
+struct Union
+{
+    union 
+    {
+        float a;
+        int b;
+    };
+};
+
+Union u;
+u.a = 2.0f;
+std::cout << u.b << std::endl;
+```
+
+```c++
+struct Vector2
+{
+    float x, y;
+};
+struct Vector4
+{
+    // By pointer and reference
+    float x, y, z, w;
+
+    Vector2& GetA()
+    {
+        return *(Vector*)&x;
+    }
+
+    // By union
+    union
+    {
+        struct
+        {
+            float x, y, z, w;
+        };
+        struct 
+        {
+            Vector2 a, b;
+        };
+    }
+
+    Vector2& GetA()
+    {
+        return a;
+    }
+};
 ```
 
 ## Object-Oriented Programming
@@ -651,7 +747,7 @@ public:
 ```
 {{< /admonition >}}
 
-#### Copy Constructor
+#### Copy Constructors
 
 - Stack Overflow: [What is the difference between a deep copy and a shallow copy?](https://stackoverflow.com/questions/184710/what-is-the-difference-between-a-deep-copy-and-a-shallow-copy)
 
@@ -745,6 +841,62 @@ int main() {
 {{< admonition >}}
 复制构造 (Copy Structor) 和引用 (Reference) 的联系也比较紧密，因为一般情况下进行函数调用，不使用引用的话，会进行复制操作 (可以通过观察复制构造函数的调用)，这会造成性能损耗。所以一般情况下建议使用常量引用 (`const Type&`) 以避免不必要的性能损耗 (当然这样你在函数内部也可以决定是否进行复制操作，并没有限制了不能使用复制)，但是某些场景下使用复制会更快，这时候就需要进行衡量了。
 {{< /admonition >}}
+
+#### Virtual Destructors
+
+- cppreference: [Destructors](https://en.cppreference.com/w/cpp/language/destructor) - **Virtual destructors**
+
+> Deleting an object through pointer to base invokes **undefined behavior** unless the destructor in the base class is virtual.
+
+> A common guideline is that a destructor for a base class must be either **public and virtual** or protected and nonvirtual.
+
+虚析构函数 (Virtual Destructors) 与普通的虚函数不太一样，它的意义不是覆写 (override) 虚构函数，而是加上一个析构函数 (一般是加上具体派生类型的析构函数)。如果不使用 `vittual` 进行修饰，会导致内存泄漏，因为基类的析构函数只释放了基类的拥有的数据成员，并没有释放派生类的拥有的数据成员。
+
+```c++
+#include <iostream>
+
+class Base
+{
+public:
+    Base() { std::cout << "Base Constructor\n"; }
+    virtual ~Base() { std::cout << "Base Destructor\n"; }
+};
+
+class Derived : public Base
+{
+public:
+    Derived() { m_Array = new int[5]; std::cout << "Derived Constructor\n"; }
+    ~Derived() { delete[] m_Array; std::cout << "Derived Destructor\n"; }
+private:
+    int* m_Array;
+};
+
+int main()
+{
+    Base* base = new Base();
+    // Base Constructor
+    delete base;
+    // Base Destructor
+
+    std::cout << "--------------------\n";
+
+    Derived* derived = new Derived();
+    // Base Constructor
+    // Derived Constructor
+    delete derived;
+    // Derived Destructor
+    // Base Destructor
+
+    std::cout << "--------------------\n";
+
+    Base* poly = new Derived();
+    // Base Constructor
+    // Derived Constructor
+    delete poly;
+    // Derived Destructor
+    // Base Destructor
+}
+```
 
 ### Inheritance and Polymorphism
 
@@ -2227,6 +2379,38 @@ int main()
 
 - cppreference: [std::find, std::find_if, std::find_if_not](https://en.cppreference.com/w/cpp/algorithm/find)
 
+- cppreference: [Function objects](https://en.cppreference.com/w/cpp/utility/functional)
+
+> A function object is any object for which the function call operator is defined. C++ provides many built-in function objects as well as support for creation and manipulation of new function objects.
+
+### Casting
+
+{{< link href="#explict" content="Specifiers::Explict" >}} 处有讲解了一部分隐式转换和显式转换。{{< link href="#union-and-type-punning" content="Union and Type Punning" >}} 处也对类型转换进行了一定程度的讲解。下面对 C 风格和 C++ 风格的强制类型转换 (casting) 进行详细说明。
+
+- cppreference: [Explicit type conversion](https://en.cppreference.com/w/cpp/language/explicit_cast)
+
+```c++
+double value = 5.25;
+
+// C style
+double a = (int)value + 5.3; // a == 10.3
+
+// C++ style
+double s = static_cast<int>(value) + 5.3; // a == 10.3
+```
+
+所有 C++ 风格的强制类型转换都可以使用 C 风格的强制类型转换来实现。C++ 风格只是多了些语法糖，例如 `static_cast` 会在编译时期进行一些检查 (例如检查转换的类型是否合法，这在 Linux kernel 是常有的操作)，本质一样都是从一个类型转换成另一个类型。使用 C++ 风格的类型转换还有另一个好处，就是可以在代码库检索类型转换在哪发生，这样可以针对性的禁用某些类型转换以提高性能。
+
+{{< admonition quote >}}
+* cast 分为 `static_cast`, `dynamic_cast`, `reinterpret_cast`, `const_cast`
+* [static_cast](https://en.cppreference.com/w/cpp/language/static_cast) 用于进行比较“自然”和低风险的转换，如整型和浮点型、字符型之间的互相转换，不能用于指针类型的强制转换，会在编译时进行检查
+* [reinterpret_cast](https://en.cppreference.com/w/cpp/language/reinterpret_cast) 用于进行各种不同类型的指针之间强制转换
+* [const_cast](https://en.cppreference.com/w/cpp/language/const_cast) 仅用于进行增加或去除 `const` 属性的转换
+* [dynamic_cast](https://en.cppreference.com/w/cpp/language/dynamic_cast) 不检查转换安全性，仅运行时检查，如果不能转换，返回 null (常用于多态)
+{{< /admonition >}}
+
+- 以上整理自 [@ljnelf](https://space.bilibili.com/27560356) 的评论
+
 ### Namespaces
 
 - cppreference: [Namespaces](https://en.cppreference.com/w/cpp/language/namespace)
@@ -2374,6 +2558,10 @@ int main()
         std::cout << value << std::endl;
 }
 ```
+
+- Cppreference: [std::greater](https://en.cppreference.com/w/cpp/utility/functional/greater)
+
+> Function object for performing comparisons. The main template invokes operator> on type T.
 
 ### Coding Style
 

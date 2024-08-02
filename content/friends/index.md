@@ -1,7 +1,7 @@
 ---
 title: "所有友链"
 subtitle:
-type: friends
+# type: friends
 layout: friends
 date: 2024-04-29T23:46:50+08:00
 description: "ccrysisa's friends"

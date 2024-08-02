@@ -4,11 +4,11 @@ subtitle:
 date: 2024-06-19T09:43:11+08:00
 slug: f56f311
 # draft: true
-# author:
-#   name:
-#   link:
-#   email:
-#   avatar:
+author:
+  name: vanJker
+  link: https://github.com/vanJker
+  email: cjshine@foxmail.com
+  avatar: https://avatars.githubusercontent.com/u/88960102?s=96&v=4
 description:
 keywords:
 license:
@@ -19,8 +19,8 @@ tags:
   - Concurrency
   - C++
 categories:
-  - Concurrency
   - C++
+  - Concurrency
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
