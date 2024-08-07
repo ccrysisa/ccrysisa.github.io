@@ -1,5 +1,5 @@
 ---
-title: "概率论 & 统计学"
+title: "Probability and Statistics"
 subtitle:
 date: 2024-01-20T17:20:09+08:00
 slug: 7592e7c
@@ -52,7 +52,17 @@ repost:
 
 ### Combinatorial Analysis 
 
-如果物件之间不平等，即存在 Order，此时需要使用 vector 来进行区分，反之则使用 set
+最底层结构: vector, set
+
+在其上面构造的结构:
+
+- List
+- Permutation
+- Combination
+- Partition
+- Solution of Integer
+
+如果物件之间不平等 (位置有差异)，即存在 Order，此时需要使用 vector 来进行区分，反之则使用 set
 
 除了 List 之外的模型，有时可以将 **可分配的资源** 视为资源总量，例如位于排序中的位置。从这个角度出发，会比较好的理解 Partition 和 Integer Solution 的构造 (此时可以使用 Permuatation 搭配 List 来推导出 Partition 的公式)
 
@@ -77,7 +87,7 @@ $$
 ***学习一门课，要学习其“精神”，而不是学习其方法。***
 {{< /center-quote >}}
 
-## Concepts
+### Concepts
 
 {{< admonition quote >}}
 Sample space $S$: Set of possible outcomes of a ***random experiment***.

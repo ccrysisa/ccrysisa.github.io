@@ -227,7 +227,7 @@ SolutionDir
 
 - Stack Overflow: [Static linking vs dynamic linking](https://stackoverflow.com/questions/1993390/static-linking-vs-dynamic-linking)
 
-在 GLFW 的 [Download](https://www.glfw.org/download.html) 页面有源代码、预构建好的二进制，注意这个预构建好的二进制分为 32-bit 和 64-bit，但是这个与我们使用的操作系统和 CPU 架构无关，选择它们取决于想构建 32-bit 还是 64-bit 的 **应用程序** (一般来说，构建 32-bit 的 Win 程序比较普遍)。在这个页面我们可以看到 Linux / BSD 并没有提供二进制，符合我们之前所提的 Unix 哲学 XD (事实上，使用 Unix 类的操作系统并不需要都自己手动构建，可以使用包管理器进行下载别人打好包的二进制，例如 Ubuntu / Debian 的 `apt`、openSUSE 的 `zypper`、Arch Linux 的 `pacman`)
+在 GLFW 的 [Download](https://www.glfw.org/download.html) 页面有源代码、预构建好的二进制，注意这个预构建好的二进制分为 32-bit 和 64-bit，但是这个与我们使用的操作系统和 CPU 架构无关，选择它们取决于想构建 32-bit 还是 64-bit 的 **应用程序** (CSAPP: 64-bit 结构的计算机可以运行 32-bit 或 64-bit 的应用程序，这是处出于兼容性的需要。一般来说，构建 32-bit 的 Win 程序比较普遍)。在这个页面我们可以看到 Linux / BSD 并没有提供二进制，符合我们之前所提的 Unix 哲学 XD (事实上，使用 Unix 类的操作系统并不需要都自己手动构建，可以使用包管理器进行下载别人打好包的二进制，例如 Ubuntu / Debian 的 `apt`、openSUSE 的 `zypper`、Arch Linux 的 `pacman`)
 
 库 (Library) 的组织结构为: include 目录 (包含头文件) 和 lib 目录 (包含源文件对应的二进制，分为静态库 (后缀为 `.lib`) 和动态库 (后缀为 `.dll`)，但不是每个库都会提供这两种类型 (这可能是因为受限于开源协议))。通过 include 目录下的头文件和链接器 (Linker)，我们可以使用 lib 目录对应源代码所提供的函数 (`include` 目录与项目采用何种链接方式无关，因为头文件仅仅与编译相关)。
 
@@ -1982,9 +1982,9 @@ struct Vertex
 
 现在没有复制操作了
 
-## Memory Model
+## Memory andSafety
 
-### Lifetime
+### Stack, Heap and Lifetime
 
 主要是理解 **栈 (Stack)** 和 **堆 (Heap)** 上分配的对象 (Object) 的生命周期 (Lifetime) 的机制，栈 (Stack) 上分配的对象 (Object) 的生命周期无需我们关系，超出作用域会自动销毁，这就是为什么它们被称为 **自动变量** 的原因，而堆 (Heap) 上的生命周期则需要我们手动进行管理，以决定什么时候销毁它们结束它们的生命周期，当然我们也可以使用其它程序员封装好的容器，这样手动管理这些对象的生命周期的责任就交给封装这个容器的程序员的 (但还是需要人手动管理 :rofl:)。简单来说，栈上的变量不需要人来关心 (编译器会帮我们完成)，而堆上的对象则需要人来管理 (不论是直接的还是间接的)。
 
@@ -2569,6 +2569,52 @@ int main()
 
 - 函数名: [PscalCase](https://en.wikipedia.org/wiki/Naming_convention_(programming)#Letter_case-separated_words) 命名法 e.g. `ForEach`
 - 类成员: [Hungarian](https://en.wikipedia.org/wiki/Hungarian_notation) 命名法 e.g. `m_Devices`
+
+## Gui
+
+### ImGui
+
+bilibili: [ImGui 入门到精通](https://space.bilibili.com/443124242/channel/collectiondetail?sid=824431)
+/ [项目源代码](https://www.bilibili.com/read/cv19537138/)
+
+依赖库:
+- [GLFW](https://www.glfw.org/download): 64-bit Windows binaries
+- [GLEW](https://glew.sourceforge.net/): Windows 32-bit and 64-bit Binaries
+- [imgui](https://github.com/ocornut/imgui/tree/docking): Branch docking
+
+项目组织结构按照 Cherno 推荐的进行设定:
+- C/C++ -> Additional Include Directoris
+    - `$(SolutionDir)\Dependencies\GLFW\include`
+    - `$(SolutionDir)\Dependencies\GLEW\include`
+    - `$(ProjectDir)\imgui`
+- Linker -> Additional Library Directories
+    - `glfw3.lib`
+    - `glew32s.lib`
+    - `Opengl32.lib`: 这个库是计算机自带的
+
+#### 基础控件
+
+窗口: `ImGui::Begin`
+
+文本框: `ImGui::Text`
+
+按钮: `ImGui::Button`
+
+输入文本框: `ImGui::InputText`
+列表:
+- `ImGui::BeginListBox`
+- `ImGui::Selectable`
+- `ImGui::EndListBox`
+
+下拉列表:
+- `ImGui::BeginComboBox`
+- `ImGui::Selectable`
+- `ImGui::EndComboBox`
+
+颜色选择器: `ImGui::ColorEdit4`
+
+- Issue: [Horizontal scrollbar when using ListBoxHeader](https://github.com/ocornut/imgui/issues/2510)
+> Also note that `ListBoxHeader()` was renamed to `BeginListBox()` on 2023-05-31 
 
 ## References
 
