@@ -399,36 +399,36 @@ func main() {
 package main
 
 import (
-	"io"
-	"os"
-	"strings"
+    "io"
+    "os"
+    "strings"
 )
 
 type rot13Reader struct {
-	r io.Reader
+    r io.Reader
 }
 
 func (r *rot13Reader) Read(b []byte) (n int, err error) {
-	n, err = r.r.Read(b)
-	for i := 0; i < n; i++ {
-		switch {
-		case b[i] >= 'A' && b[i] <= 'M':
-			b[i] += 13
-		case b[i] >= 'N' && b[i] <= 'Z':
-			b[i] -= 13
-		case b[i] >= 'a' && b[i] <= 'm':
-			b[i] += 13
-		case b[i] >= 'n' && b[i] <= 'z':
-			b[i] -= 13
-		}
-	}
-	return
+    n, err = r.r.Read(b)
+    for i := 0; i < n; i++ {
+        switch {
+        case b[i] >= 'A' && b[i] <= 'M':
+            b[i] += 13
+        case b[i] >= 'N' && b[i] <= 'Z':
+            b[i] -= 13
+        case b[i] >= 'a' && b[i] <= 'm':
+            b[i] += 13
+        case b[i] >= 'n' && b[i] <= 'z':
+            b[i] -= 13
+        }
+    }
+    return
 }
 
 func main() {
-	s := strings.NewReader("Lbh penpxrq gur pbqr!")
-	r := rot13Reader{s}
-	io.Copy(os.Stdout, &r)
+    s := strings.NewReader("Lbh penpxrq gur pbqr!")
+    r := rot13Reader{s}
+    io.Copy(os.Stdout, &r)
 }
 ```
 
@@ -438,34 +438,34 @@ func main() {
 package main
 
 import (
-	"image"
-	"image/color"
+    "image"
+    "image/color"
 
-	"golang.org/x/tour/pic"
+    "golang.org/x/tour/pic"
 )
 
 type Image struct {
-	w, h int
+    w, h int
 }
 
 func (i Image) ColorModel() color.Model {
-	return color.RGBAModel
+    return color.RGBAModel
 }
 
 func (i Image) Bounds() image.Rectangle {
-	return image.Rect(0, 0, i.w, i.h)
+    return image.Rect(0, 0, i.w, i.h)
 }
 
 func (i Image) At(x, y int) color.Color {
-	v := uint8((x + y) / 2)
-	// v := uint8(x * y)
-	// v := uint8(x ^ y)
-	return color.RGBA{v, v, 255, 255}
+    v := uint8((x + y) / 2)
+    // v := uint8(x * y)
+    // v := uint8(x ^ y)
+    return color.RGBA{v, v, 255, 255}
 }
 
 func main() {
-	m := Image{255, 255}
-	pic.ShowImage(m)
+    m := Image{255, 255}
+    pic.ShowImage(m)
 }
 ```
 
@@ -481,34 +481,40 @@ import "fmt"
 // List represents a singly-linked list that holds
 // values of any type.
 type List[T any] struct {
-	next *List[T]
-	val  T
+    next *List[T]
+    val  T
 }
 
 func push[T any](list List[T], val T) List[T] {
-	return List[T]{
-		next: &list,
-		val:  val,
-	}
+    return List[T]{
+        next: &list,
+        val:  val,
+    }
 }
 
 func pop[T any](list List[T]) (T, List[T]) {
-	return list.val, *list.next
+    return list.val, *list.next
 }
 
 func main() {
-	list := List[int]{nil, 1}
-	fmt.Println(list)
-	list = push(list, 2)
-	fmt.Println(list)
-	fmt.Println(list.next)
-	val, list := pop(list)
-	fmt.Println(val)
-	fmt.Println(list)
+    list := List[int]{nil, 1}
+    fmt.Println(list)
+    list = push(list, 2)
+    fmt.Println(list)
+    fmt.Println(list.next)
+    val, list := pop(list)
+    fmt.Println(val)
+    fmt.Println(list)
 }
 ```
 
 ### Concurrency
+
+> A *goroutine* is a lightweight thread managed by the Go runtime.
+
+*goroutine* 相当轻量，这也是为什么 Go 常被用于多线程、并发的场景
+
+> Channels are a typed conduit through which you can send and receive values with the channel operator, `<-`.
 
 > This allows goroutines to synchronize without explicit locks or condition variables.
 
@@ -526,20 +532,208 @@ Go 的 channel 自带锁机制，无需程序员手动使用锁来实现相应�
 
 > The `default` case in a `select` is run if no other case is ready.
 
-与 `select`, `poll`, `epoll` 相似，都是 IO 多路复用模型
+与系统调用 `select`, `poll`, `epoll` 相似，本质上都是 IO 多路复用模型
 
 #### Exercise: Equivalent Binary Trees
 
 ```go
+package main
+
+import (
+    "fmt"
+
+    "golang.org/x/tour/tree"
+)
+
+// Walk walks the tree t sending all values
+// from the tree to the channel ch.
+func Walk(t *tree.Tree, ch chan int) {
+    walk(t, ch)
+    close(ch)
+}
+
+func walk(t *tree.Tree, ch chan int) {
+    if t == nil {
+        return
+    }
+    walk(t.Left, ch)
+    ch <- t.Value
+    walk(t.Right, ch)
+}
+
+// Same determines whether the trees
+// t1 and t2 contain the same values.
+func Same(t1, t2 *tree.Tree) bool {
+    c1, c2 := make(chan int), make(chan int)
+    go Walk(t1, c1)
+    go Walk(t2, c2)
+    for {
+        v1, ok1 := <-c1
+        v2, ok2 := <-c2
+        if ok1 == false && ok2 == false {
+            return true
+        }
+        if ok1 != ok2 || v1 != v2 {
+            return false
+        }
+    }
+}
+
+func main() {
+    ch := make(chan int)
+    go Walk(tree.New(1), ch)
+    for i := range ch {
+        fmt.Println(i)
+    }
+    fmt.Println(Same(tree.New(1), tree.New(1)))
+    fmt.Println(Same(tree.New(1), tree.New(2)))
+}
 ```
+
+> This concept is called mutual exclusion, and the conventional name for the data structure that provides it is mutex.
+
+> We can also use `defer` to ensure the mutex will be unlocked as in the `Value` method.
+
+Go 中也有互斥锁 (Mutex)，锁的的释放搭配 `defer` 语法会比较简洁
 
 #### Exercise: Web Crawler
 
-```go
+与并发素数筛相似，每个 goroutine 保有两种 channel，一个是向上层发送完成信号的 channel，另一个是接收下层完成信号的 channel
+
+```goat
++-----------+        +-----------+        +-----------+        +-----------+
+| goroutine |  chan  | goroutine |  chan  | goroutine |  chan  |   main    |
+| (level 3) | -----> | (level 2) | -----> | (level 1) | -----> | (level 0) |
++-----------+        +-----------+        +-----------+        +-----------+
 ```
 
-### Blogs
+```go
+package main
 
+import (
+    "fmt"
+    "sync"
+)
+
+type Fetcher interface {
+    // Fetch returns the body of URL and
+    // a slice of URLs found on that page.
+    Fetch(url string) (body string, urls []string, err error)
+}
+
+// SafeCounter is safe to use concurrently.
+type SafeCounter struct {
+    mu sync.Mutex
+    v  map[string]bool
+}
+
+// Inc increments the counter for the given key.
+func (c *SafeCounter) Set(key string) {
+    c.mu.Lock()
+    // Lock so only one goroutine at a time can access the map c.v.
+    c.v[key] = true
+    c.mu.Unlock()
+}
+
+// Value returns the current value of the counter for the given key.
+func (c *SafeCounter) Get(key string) bool {
+    c.mu.Lock()
+    // Lock so only one goroutine at a time can access the map c.v.
+    defer c.mu.Unlock()
+    _, ok := c.v[key]
+    return ok
+}
+
+var c = SafeCounter{v: make(map[string]bool)}
+
+// Crawl uses fetcher to recursively crawl
+// pages starting with url, to a maximum of depth.
+func Crawl(url string, depth int, fetcher Fetcher, exit chan bool) {
+    // TODO: Fetch URLs in parallel.
+    // TODO: Don't fetch the same URL twice.
+    // This implementation doesn't do either:
+    if depth <= 0 || c.Get(url) {
+        exit <- true
+        return
+    }
+    body, urls, err := fetcher.Fetch(url)
+    if err != nil {
+        fmt.Println(err)
+        exit <- true
+        return
+    }
+    fmt.Printf("found: %s %q\n", url, body)
+    c.Set(url)
+    e := make(chan bool)
+    for _, u := range urls {
+        go Crawl(u, depth-1, fetcher, e)
+    }
+    for i := 0; i < len(urls); i++ {
+        <- e
+    }
+    exit <- true
+    return
+}
+
+func main() {
+    exit := make(chan bool)
+    go Crawl("https://golang.org/", 4, fetcher, exit)
+    <- exit
+}
+
+// fakeFetcher is Fetcher that returns canned results.
+type fakeFetcher map[string]*fakeResult
+
+type fakeResult struct {
+    body string
+    urls []string
+}
+
+func (f fakeFetcher) Fetch(url string) (string, []string, error) {
+    if res, ok := f[url]; ok {
+        return res.body, res.urls, nil
+    }
+    return "", nil, fmt.Errorf("not found: %s", url)
+}
+
+// fetcher is a populated fakeFetcher.
+var fetcher = fakeFetcher{
+    "https://golang.org/": &fakeResult{
+        "The Go Programming Language",
+        []string{
+            "https://golang.org/pkg/",
+            "https://golang.org/cmd/",
+        },
+    },
+    "https://golang.org/pkg/": &fakeResult{
+        "Packages",
+        []string{
+            "https://golang.org/",
+            "https://golang.org/cmd/",
+            "https://golang.org/pkg/fmt/",
+            "https://golang.org/pkg/os/",
+        },
+    },
+    "https://golang.org/pkg/fmt/": &fakeResult{
+        "Package fmt",
+        []string{
+            "https://golang.org/",
+            "https://golang.org/pkg/",
+        },
+    },
+    "https://golang.org/pkg/os/": &fakeResult{
+        "Package os",
+        []string{
+            "https://golang.org/",
+            "https://golang.org/pkg/",
+        },
+    },
+}
+```
+
+### Homework
+
+阅读相关博客:
 - [Inside the Go Playground](https://go.dev/blog/playground)
 - [Go\'s Declaration Syntax](https://go.dev/blog/declaration-syntax)
 - [Defer, Panic, and Recover](https://go.dev/blog/defer-panic-and-recover)
