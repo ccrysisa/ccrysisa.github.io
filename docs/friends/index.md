@@ -1,11 +1,11 @@
 # 所有友链
 
 
-&lt;!-- When you set data `friends.yml` in `yourProject/data/` directory, it will be automatically loaded here. --&gt;
+<!-- When you set data `friends.yml` in `yourProject/data/` directory, it will be automatically loaded here. -->
 
 ---
 
-&lt;!-- You can define additional content below for this page. --&gt;
+<!-- You can define additional content below for this page. -->
 
 ## Base info
 
@@ -13,18 +13,18 @@
 - nickname: Lruihao
   avatar: https://lruihao.cn/images/avatar.jpg
   url: https://lruihao.cn
-  description: Lruihao&#39;s Note
+  description: Lruihao's Note
 ```
 
 ## Friendly Reminder
 
-{{&lt; admonition info &#34;Notice&#34; true &gt;}}
+{{< admonition info "Notice" true >}}
 
 1. If you want to exchange link, please leave a comment in the above format. (personal non-commercial blogs / websites only)
 2. :(fa-solid fa-exclamation-triangle): Website failure, stop maintenance and improper content may be unlinked!
-3. Those websites that do not respect other people&#39;s labor achievements, reprint without source, or malicious acts, please do not come to exchange.
+3. Those websites that do not respect other people's labor achievements, reprint without source, or malicious acts, please do not come to exchange.
 
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 
 ---

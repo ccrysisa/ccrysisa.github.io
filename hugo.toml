@@ -358,7 +358,7 @@ Ko-Fi = ""
 BuyMeaCoffee = ""
 Linktree = ""
 QQ = ""
-QQGroup = ""                   # https://qun.qq.com/join.html
+QQGroup = ""                                             # https://qun.qq.com/join.html
 Diaspora = ""
 CSDN = ""
 Discord = ""
@@ -677,6 +677,7 @@ lazyLoad = true
 # 或者
 # someJavascript = "https://cdn.example.com/some.js"
 #  页面 SEO 配置
+flyfish = "/js/flyfish.js"
 [params.page.seo]
 # 图片 URL
 images = []

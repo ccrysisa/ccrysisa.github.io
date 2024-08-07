@@ -10,29 +10,34 @@
 <meta name="description" content="
 The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.
 近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。
-" /><meta name="keywords" content='RISC-V, Optimization, Architecture' /><meta itemprop="name" content="RISC-V Optimization Guide">
-<meta itemprop="description" content="
-The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.
-近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。
-"><meta itemprop="datePublished" content="2024-02-29T23:44:29+08:00" />
-<meta itemprop="dateModified" content="2024-07-31T12:50:00+08:00" />
-<meta itemprop="wordCount" content="1384"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="RISC-V,Optimization,Architecture," /><meta property="og:title" content="RISC-V Optimization Guide" />
-<meta property="og:description" content="
-The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.
-近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。
-" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ccrysisa.github.io/posts/riscv-optimization-guide/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-02-29T23:44:29+08:00" />
-<meta property="article:modified_time" content="2024-07-31T12:50:00+08:00" />
+" /><meta name="keywords" content='RISC-V, Optimization, Architecture' />
+  <meta itemprop="name" content="RISC-V Optimization Guide">
+  <meta itemprop="description" content=" The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.
+近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。">
+  <meta itemprop="datePublished" content="2024-02-29T23:44:29+08:00">
+  <meta itemprop="dateModified" content="2024-07-31T12:50:00+08:00">
+  <meta itemprop="wordCount" content="1375">
+  <meta itemprop="image" content="https://ccrysisa.github.io/logo.png">
+  <meta itemprop="keywords" content="RISC-V,Optimization,Architecture"><meta property="og:url" content="https://ccrysisa.github.io/posts/riscv-optimization-guide/">
+  <meta property="og:site_name" content="KZnight&#39;s Blog">
+  <meta property="og:title" content="RISC-V Optimization Guide">
+  <meta property="og:description" content=" The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.
+近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-02-29T23:44:29+08:00">
+    <meta property="article:modified_time" content="2024-07-31T12:50:00+08:00">
+    <meta property="article:tag" content="RISC-V">
+    <meta property="article:tag" content="Optimization">
+    <meta property="article:tag" content="Architecture">
+    <meta property="og:image" content="https://ccrysisa.github.io/logo.png">
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="RISC-V Optimization Guide"/>
-<meta name="twitter:description" content="
-The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.
-近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。
-"/>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png">
+  <meta name="twitter:title" content="RISC-V Optimization Guide">
+  <meta name="twitter:description" content=" The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.
+近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。">
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -47,7 +52,7 @@ The intention is to give specific actionable optimization recommendations for so
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/riscv-optimization-guide\/"
-    },"genre": "posts","keywords": "RISC-V, Optimization, Architecture","wordcount":  1384 ,
+    },"genre": "posts","keywords": "RISC-V, Optimization, Architecture","wordcount":  1375 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/riscv-optimization-guide\/","datePublished": "2024-02-29T23:44:29+08:00","dateModified": "2024-07-31T12:50:00+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -59,7 +64,7 @@ The intention is to give specific actionable optimization recommendations for so
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -105,7 +110,7 @@ The intention is to give specific actionable optimization recommendations for so
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -165,12 +170,18 @@ The intention is to give specific actionable optimization recommendations for so
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>RISC-V Optimization Guide</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/architecture/" class="post-category" title="分类 - Architecture"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Architecture</a></span></div><div class="post-meta-line"><span title="发布于 2024-02-29 23:44:29"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="更新于 2024-07-31 12:50:00"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-07-31">2024-07-31</time></span>&nbsp;<span title="1384 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/architecture/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Architecture</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-02-29 23:44:29"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-02-29">2024-02-29</time></span>&nbsp;<span title="更新于 2024-07-31 12:50:00"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-07-31">2024-07-31</time></span>&nbsp;<span title="1375 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 1400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 3 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -206,27 +217,27 @@ The intention is to give specific actionable optimization recommendations for so
 <li><a href="https://riscv-optimization-guide-riseproject-c94355ae3e6872252baa952524.gitlab.io/riscv-optimization-guide.pdf"target="_blank" rel="external nofollow noopener noreferrer">原文 PDF<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 <li><a href="https://www.bilibili.com/video/BV1Ft421t7PS"target="_blank" rel="external nofollow noopener noreferrer">解说录影<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
-<h2 id="相关知识" class="heading-element">
-  <a href="#%e7%9b%b8%e5%85%b3%e7%9f%a5%e8%af%86" class="heading-mark"></a>相关知识</h2><p>RISC-V ISA 规格书: <a href="https://riscv.org/technical/specifications/"target="_blank" rel="external nofollow noopener noreferrer">https://riscv.org/technical/specifications/</a></p>
+<h2 id="相关知识">相关知识</h2>
+<p>RISC-V ISA 规格书: <a href="https://riscv.org/technical/specifications/"target="_blank" rel="external nofollow noopener noreferrer">https://riscv.org/technical/specifications/</a></p>
 <p>推荐参考 <a href="https://www.bilibili.com/video/BV1a84y1S7J7"target="_blank" rel="external nofollow noopener noreferrer">体系结构如何作用于编译器后端-邱吉</a> [bilibili]</p>
 <ul>
 <li>这个讲座是关于微架构、指令集是怎样和编译器、软件相互协作、相互影响的 Overview</li>
 <li>这个讲座介绍的是通用 CPU 并不仅限于 RISC-V 上</li>
 </ul>
-<h2 id="detecting-risc-v-extensions-on-linux" class="heading-element">
-  <a href="#detecting-risc-v-extensions-on-linux" class="heading-mark"></a>Detecting RISC-V Extensions on Linux</h2><p>参考以下文章构建 Linux RISC-V 然后进行原文的 <code>riscv_hwprobe</code> 系统调用实验:</p>
+<h2 id="detecting-risc-v-extensions-on-linux">Detecting RISC-V Extensions on Linux</h2>
+<p>参考以下文章构建 Linux RISC-V 然后进行原文的 <code>riscv_hwprobe</code> 系统调用实验:</p>
 <ul>
 <li><a href="https://hackernoon.com/how-to-set-up-the-environment-for-riscv-64-linux-kernel-development-in-ubuntu-2004-si5p35kv"target="_blank" rel="external nofollow noopener noreferrer">How To Set Up The Environment for RISCV-64 Linux Kernel Development In Ubuntu 20.04</a></li>
 <li><a href="https://risc-v-getting-started-guide.readthedocs.io/en/latest/linux-qemu.html"target="_blank" rel="external nofollow noopener noreferrer">Running 64- and 32-bit RISC-V Linux on QEMU</a></li>
 </ul>
-<h3 id="multi-versioning" class="heading-element">
-  <a href="#multi-versioning" class="heading-mark"></a>Multi-versioning</h3><ul>
+<h3 id="multi-versioning">Multi-versioning</h3>
+<ul>
 <li>最新进展: <a href="https://reviews.llvm.org/D151730"target="_blank" rel="external nofollow noopener noreferrer">https://reviews.llvm.org/D151730</a></li>
 <li>相关介绍: <a href="https://maskray.me/blog/2023-02-05-function-multi-versioning"target="_blank" rel="external nofollow noopener noreferrer">https://maskray.me/blog/2023-02-05-function-multi-versioning</a></li>
 </ul>
-<h2 id="optimizing-scalar-integer" class="heading-element">
-  <a href="#optimizing-scalar-integer" class="heading-mark"></a>Optimizing Scalar Integer</h2><h3 id="materializing-constants" class="heading-element">
-  <a href="#materializing-constants" class="heading-mark"></a>Materializing Constants</h3><ul>
+<h2 id="optimizing-scalar-integer">Optimizing Scalar Integer</h2>
+<h3 id="materializing-constants">Materializing Constants</h3>
+<ul>
 <li>RV64I 5.2 Integer Computational Instructions</li>
 </ul>
 <blockquote>
@@ -274,8 +285,8 @@ The intention is to give specific actionable optimization recommendations for so
 <li>Craig Topper: <a href="https://www.youtube.com/watch?v=TmWs3QsSuUg"target="_blank" rel="external nofollow noopener noreferrer">2022 LLVM Dev Mtg: RISC-V Sign Extension Optimizations</a></li>
 <li><a href="https://www.bilibili.com/video/BV1pN411H7Y3"target="_blank" rel="external nofollow noopener noreferrer">改进RISC-V的代码生成-廖春玉</a> [bilibili]</li>
 </ul>
-<h3 id="avoid-branches-using-conditional-moves" class="heading-element">
-  <a href="#avoid-branches-using-conditional-moves" class="heading-mark"></a>Avoid branches using conditional moves</h3><p><a href="https://github.com/riscv/riscv-zicond/releases/tag/v1.0"target="_blank" rel="external nofollow noopener noreferrer">Zicond extension</a> 提供了我们在 RISC-V 上实作常数时间函数 (contant-time function) 的能力，用于避免分支预测，从而减少因分支预测失败带来的高昂代价。</p>
+<h3 id="avoid-branches-using-conditional-moves">Avoid branches using conditional moves</h3>
+<p><a href="https://github.com/riscv/riscv-zicond/releases/tag/v1.0"target="_blank" rel="external nofollow noopener noreferrer">Zicond extension</a> 提供了我们在 RISC-V 上实作常数时间函数 (contant-time function) 的能力，用于避免分支预测，从而减少因分支预测失败带来的高昂代价。</p>
 <div class="fi-row">
 $$
 a0 = 
@@ -337,21 +348,21 @@ $$
 </span></span><span class="line"><span class="cl"><span class="nf">mul</span> <span class="no">t1</span><span class="p">,</span> <span class="no">t1</span><span class="p">,</span> <span class="no">t0</span>
 </span></span><span class="line"><span class="cl"><span class="nf">xor</span> <span class="no">a0</span><span class="p">,</span> <span class="no">t1</span><span class="p">,</span> <span class="no">t3</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="padding" class="heading-element">
-  <a href="#padding" class="heading-mark"></a>Padding</h3><blockquote>
+</div><h3 id="padding">Padding</h3>
+<blockquote>
 <p>Use canonical NOPs, NOP ( ADDI X0, X0, 0 ) and C.NOP ( C.ADDI X0, 0 ), to add padding within a function. Use the canonical illegal instruction ( either 2 or 4 bytes of zeros depending on whether the C extension is supported ) to add padding between functions.</p>
 </blockquote>
 <ul>
 <li>因为在函数内部的执行频率高，使用合法的 NOPs 进行对齐 padding，防止在乱序执行时，流水线在遇见非法指令后就不再执行后续指令，造成效能损失</li>
 <li>如果控制流被传递到两个函数之间，那么加大可能是程序执行出错了，使用非法的指令进行对齐 padding 可以帮助我们更好更快地 debug</li>
 </ul>
-<h3 id="align-char-array-to-greater-alignment" class="heading-element">
-  <a href="#align-char-array-to-greater-alignment" class="heading-mark"></a>Align char array to greater alignment</h3><p>Why use wider load/store usage for memory copy?</p>
+<h3 id="align-char-array-to-greater-alignment">Align char array to greater alignment</h3>
+<p>Why use wider load/store usage for memory copy?</p>
 <ul>
 <li><a href="https://hackmd.io/@sysprog/c-memory"target="_blank" rel="external nofollow noopener noreferrer">C 语言: 内存管理、对齐及硬体特性</a></li>
 </ul>
-<h3 id="use-shifts-to-clear-leadingtrailing-bits" class="heading-element">
-  <a href="#use-shifts-to-clear-leadingtrailing-bits" class="heading-mark"></a>Use shifts to clear leading/trailing bits</h3><p>实作 64-bit 版本的原文例子 (retain the highest 12 bits):</p>
+<h3 id="use-shifts-to-clear-leadingtrailing-bits">Use shifts to clear leading/trailing bits</h3>
+<p>实作 64-bit 版本的原文例子 (retain the highest 12 bits):</p>
 <div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -367,9 +378,9 @@ $$
 <blockquote>
 <p>LUI (load upper immediate) uses the same opcode as RV32I. LUI places the 20-bit U-immediate into bits 31–12 of register rd and places zero in the lowest 12 bits. The 32-bit result is sign-extended to 64 bits.</p>
 </blockquote>
-<h2 id="optimizing-scalar-floating-point" class="heading-element">
-  <a href="#optimizing-scalar-floating-point" class="heading-mark"></a>Optimizing Scalar Floating Point</h2><h2 id="optimizing-vector" class="heading-element">
-  <a href="#optimizing-vector" class="heading-mark"></a>Optimizing Vector</h2><p>What about vector instructions?</p>
+<h2 id="optimizing-scalar-floating-point">Optimizing Scalar Floating Point</h2>
+<h2 id="optimizing-vector">Optimizing Vector</h2>
+<p>What about vector instructions?</p>
 <ul>
 <li>YouTube: <a href="https://www.youtube.com/watch?v=o_n4AKwdfiA"target="_blank" rel="external nofollow noopener noreferrer">Introduction to SIMD</a></li>
 <li><a href="https://eupilot.eu/wp-content/uploads/2022/11/RISC-V-VectorExtension-1-1.pdf"target="_blank" rel="external nofollow noopener noreferrer">Introduction to the RISC-V Vector Extension</a> [PDF]</li>
@@ -379,10 +390,11 @@ $$
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-07-31 12:50:00">更新于 2024-07-31&nbsp;</span>
-      </div></div><div class="post-info-line">
-        <div class="post-info-md"><span><a href="/posts/riscv-optimization-guide/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-        <div class="post-info-share">
-          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide" data-hashtags="RISC-V,Optimization,Architecture"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/riscv-optimization-guide/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide" data-hashtags="RISC-V,Optimization,Architecture"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-hashtag="RISC-V"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -391,11 +403,12 @@ $$
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/riscv-optimization-guide/" data-title="RISC-V Optimization Guide"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-        </div>
-      </div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/risc-v/" class="post-tag" title="标签 - RISC-V">RISC-V</a><a href="/tags/optimization/" class="post-tag" title="标签 - Optimization">Optimization</a><a href="/tags/architecture/" class="post-tag" title="标签 - Architecture">Architecture</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/risc-v/' class="post-tag">RISC-V</a><a href='/tags/optimization/' class="post-tag">Optimization</a><a href='/tags/architecture/' class="post-tag">Architecture</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -404,14 +417,11 @@ $$
   <div class="post-nav"><a href="/posts/channels/" class="post-nav-item" rel="prev" title="Crust of Rust: Channels"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Crust of Rust: Channels</a>
       <a href="/posts/linux-dev-review/" class="post-nav-item" rel="next" title="Linux 核心设计: 发展动态回顾">Linux 核心设计: 发展动态回顾<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article>
-
-  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.131.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -419,5 +429,5 @@ $$
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/js/flyfish.js" defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

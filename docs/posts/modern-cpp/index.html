@@ -23,68 +23,36 @@ roll-your-own linked lists and other data structures
 return codes as a mechanism for error handling
 one of the millions of custom string classes that aren&rsquo;t std::string
 
-As with all this-vs-that arguments, there are merits to both approaches. Modern C&#43;&#43; isn&rsquo;t universally better. Embedded enviornments, for example, often require extra restrictions that most people never need, so you&rsquo;ll see a lot of old-style code there. Overall though, I think you&rsquo;ll find that most of the modern features are worth using regularly. Moore&rsquo;s Law and compiler improvements have taken care of the majority of reasons to avoid the new stuff." /><meta name="keywords" content='C&#43;&#43;, MSVC' /><meta itemprop="name" content="Modern C&#43;&#43; (MSVC)">
-<meta itemprop="description" content="&ldquo;Modern&rdquo; C&#43;&#43; isn&rsquo;t afraid to use any or all of the following:
+As with all this-vs-that arguments, there are merits to both approaches. Modern C&#43;&#43; isn&rsquo;t universally better. Embedded enviornments, for example, often require extra restrictions that most people never need, so you&rsquo;ll see a lot of old-style code there. Overall though, I think you&rsquo;ll find that most of the modern features are worth using regularly. Moore&rsquo;s Law and compiler improvements have taken care of the majority of reasons to avoid the new stuff." /><meta name="keywords" content='C&#43;&#43;, MSVC' />
+  <meta itemprop="name" content="Modern C&#43;&#43; (MSVC)">
+  <meta itemprop="description" content="“Modern” C&#43;&#43; isn’t afraid to use any or all of the following:
+RAII standard library containers and algorithms templates metaprogramming exceptions Boost “Old” C&#43;&#43; tends to avoid these things due to a perceived lack of compiler support or run-time performance. Instead, you’ll find…
+lots of new and delete roll-your-own linked lists and other data structures return codes as a mechanism for error handling one of the millions of custom string classes that aren’t std::string As with all this-vs-that arguments, there are merits to both approaches. Modern C&#43;&#43; isn’t universally better. Embedded enviornments, for example, often require extra restrictions that most people never need, so you’ll see a lot of old-style code there. Overall though, I think you’ll find that most of the modern features are worth using regularly. Moore’s Law and compiler improvements have taken care of the majority of reasons to avoid the new stuff.">
+  <meta itemprop="datePublished" content="2024-06-30T00:19:25+08:00">
+  <meta itemprop="dateModified" content="2024-08-02T12:52:21+08:00">
+  <meta itemprop="wordCount" content="17342">
+  <meta itemprop="image" content="https://ccrysisa.github.io/logo.png">
+  <meta itemprop="keywords" content="C&#43;&#43;,MSVC"><meta property="og:url" content="https://ccrysisa.github.io/posts/modern-cpp/">
+  <meta property="og:site_name" content="KZnight&#39;s Blog">
+  <meta property="og:title" content="Modern C&#43;&#43; (MSVC)">
+  <meta property="og:description" content="“Modern” C&#43;&#43; isn’t afraid to use any or all of the following:
+RAII standard library containers and algorithms templates metaprogramming exceptions Boost “Old” C&#43;&#43; tends to avoid these things due to a perceived lack of compiler support or run-time performance. Instead, you’ll find…
+lots of new and delete roll-your-own linked lists and other data structures return codes as a mechanism for error handling one of the millions of custom string classes that aren’t std::string As with all this-vs-that arguments, there are merits to both approaches. Modern C&#43;&#43; isn’t universally better. Embedded enviornments, for example, often require extra restrictions that most people never need, so you’ll see a lot of old-style code there. Overall though, I think you’ll find that most of the modern features are worth using regularly. Moore’s Law and compiler improvements have taken care of the majority of reasons to avoid the new stuff.">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-06-30T00:19:25+08:00">
+    <meta property="article:modified_time" content="2024-08-02T12:52:21+08:00">
+    <meta property="article:tag" content="C&#43;&#43;">
+    <meta property="article:tag" content="MSVC">
+    <meta property="og:image" content="https://ccrysisa.github.io/logo.png">
 
-RAII
-standard library containers and algorithms
-templates
-metaprogramming
-exceptions
-Boost
-
-&ldquo;Old&rdquo; C&#43;&#43; tends to avoid these things due to a perceived lack of compiler support or run-time performance. Instead, you&rsquo;ll find&hellip;
-
-lots of new and delete
-roll-your-own linked lists and other data structures
-return codes as a mechanism for error handling
-one of the millions of custom string classes that aren&rsquo;t std::string
-
-As with all this-vs-that arguments, there are merits to both approaches. Modern C&#43;&#43; isn&rsquo;t universally better. Embedded enviornments, for example, often require extra restrictions that most people never need, so you&rsquo;ll see a lot of old-style code there. Overall though, I think you&rsquo;ll find that most of the modern features are worth using regularly. Moore&rsquo;s Law and compiler improvements have taken care of the majority of reasons to avoid the new stuff."><meta itemprop="datePublished" content="2024-06-30T00:19:25+08:00" />
-<meta itemprop="dateModified" content="2024-08-02T12:52:21+08:00" />
-<meta itemprop="wordCount" content="17400"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="C&#43;&#43;,MSVC," /><meta property="og:title" content="Modern C&#43;&#43; (MSVC)" />
-<meta property="og:description" content="&ldquo;Modern&rdquo; C&#43;&#43; isn&rsquo;t afraid to use any or all of the following:
-
-RAII
-standard library containers and algorithms
-templates
-metaprogramming
-exceptions
-Boost
-
-&ldquo;Old&rdquo; C&#43;&#43; tends to avoid these things due to a perceived lack of compiler support or run-time performance. Instead, you&rsquo;ll find&hellip;
-
-lots of new and delete
-roll-your-own linked lists and other data structures
-return codes as a mechanism for error handling
-one of the millions of custom string classes that aren&rsquo;t std::string
-
-As with all this-vs-that arguments, there are merits to both approaches. Modern C&#43;&#43; isn&rsquo;t universally better. Embedded enviornments, for example, often require extra restrictions that most people never need, so you&rsquo;ll see a lot of old-style code there. Overall though, I think you&rsquo;ll find that most of the modern features are worth using regularly. Moore&rsquo;s Law and compiler improvements have taken care of the majority of reasons to avoid the new stuff." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ccrysisa.github.io/posts/modern-cpp/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-06-30T00:19:25+08:00" />
-<meta property="article:modified_time" content="2024-08-02T12:52:21+08:00" />
-
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Modern C&#43;&#43; (MSVC)"/>
-<meta name="twitter:description" content="&ldquo;Modern&rdquo; C&#43;&#43; isn&rsquo;t afraid to use any or all of the following:
-
-RAII
-standard library containers and algorithms
-templates
-metaprogramming
-exceptions
-Boost
-
-&ldquo;Old&rdquo; C&#43;&#43; tends to avoid these things due to a perceived lack of compiler support or run-time performance. Instead, you&rsquo;ll find&hellip;
-
-lots of new and delete
-roll-your-own linked lists and other data structures
-return codes as a mechanism for error handling
-one of the millions of custom string classes that aren&rsquo;t std::string
-
-As with all this-vs-that arguments, there are merits to both approaches. Modern C&#43;&#43; isn&rsquo;t universally better. Embedded enviornments, for example, often require extra restrictions that most people never need, so you&rsquo;ll see a lot of old-style code there. Overall though, I think you&rsquo;ll find that most of the modern features are worth using regularly. Moore&rsquo;s Law and compiler improvements have taken care of the majority of reasons to avoid the new stuff."/>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png">
+  <meta name="twitter:title" content="Modern C&#43;&#43; (MSVC)">
+  <meta name="twitter:description" content="“Modern” C&#43;&#43; isn’t afraid to use any or all of the following:
+RAII standard library containers and algorithms templates metaprogramming exceptions Boost “Old” C&#43;&#43; tends to avoid these things due to a perceived lack of compiler support or run-time performance. Instead, you’ll find…
+lots of new and delete roll-your-own linked lists and other data structures return codes as a mechanism for error handling one of the millions of custom string classes that aren’t std::string As with all this-vs-that arguments, there are merits to both approaches. Modern C&#43;&#43; isn’t universally better. Embedded enviornments, for example, often require extra restrictions that most people never need, so you’ll see a lot of old-style code there. Overall though, I think you’ll find that most of the modern features are worth using regularly. Moore’s Law and compiler improvements have taken care of the majority of reasons to avoid the new stuff.">
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -99,7 +67,7 @@ As with all this-vs-that arguments, there are merits to both approaches. Modern 
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/modern-cpp\/"
-    },"genre": "posts","keywords": "C\u002b\u002b, MSVC","wordcount":  17400 ,
+    },"genre": "posts","keywords": "C\u002b\u002b, MSVC","wordcount":  17342 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/modern-cpp\/","datePublished": "2024-06-30T00:19:25+08:00","dateModified": "2024-08-02T12:52:21+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -111,7 +79,7 @@ As with all this-vs-that arguments, there are merits to both approaches. Modern 
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -157,7 +125,7 @@ As with all this-vs-that arguments, there are merits to both approaches. Modern 
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -217,12 +185,18 @@ As with all this-vs-that arguments, there are merits to both approaches. Modern 
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Modern C&#43;&#43; (MSVC)</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" alt="vanJker" data-title="vanJker" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/c++/" class="post-category" title="分类 - C++"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C++</a></span></div><div class="post-meta-line"><span title="发布于 2024-06-30 00:19:25"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-30">2024-06-30</time></span>&nbsp;<span title="更新于 2024-08-02 12:52:21"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-08-02">2024-08-02</time></span>&nbsp;<span title="17400 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 17500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 35 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" data-title="vanJker" data-alt="vanJker" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span>
+          <span class="post-category">收录于 <a href="/categories/c++/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C++</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-06-30 00:19:25"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-30">2024-06-30</time></span>&nbsp;<span title="更新于 2024-08-02 12:52:21"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-08-02">2024-08-02</time></span>&nbsp;<span title="17342 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 17400 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 35 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -397,8 +371,8 @@ As with all this-vs-that arguments, there are merits to both approaches. Modern 
       <div class="admonition-content">写出好的 C++ 代码，而不是炫耀你所会的 C++ 的特性。不要为了炫技而炫技！</div>
     </div>
   </div>
-<h2 id="toolchain" class="heading-element">
-  <a href="#toolchain" class="heading-mark"></a>Toolchain</h2><p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Toolchain"target="_blank" rel="external nofollow noopener noreferrer">Toolchain</a></p>
+<h2 id="toolchain">Toolchain</h2>
+<p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Toolchain"target="_blank" rel="external nofollow noopener noreferrer">Toolchain</a></p>
 <ul>
 <li><a href="https://godbolt.org/"target="_blank" rel="external nofollow noopener noreferrer">Compiler Exploer</a></li>
 <li>OS: Windows 10</li>
@@ -414,9 +388,9 @@ As with all this-vs-that arguments, there are merits to both approaches. Modern 
 <li><a href="https://cppcheck.sourceforge.io/"target="_blank" rel="external nofollow noopener noreferrer">Cppcheck</a> 2.13 Win64</li>
 <li><a href="https://mh-nexus.de/en/hxd/"target="_blank" rel="external nofollow noopener noreferrer">HxD</a> Editor</li>
 </ul>
-<h3 id="compiler" class="heading-element">
-  <a href="#compiler" class="heading-mark"></a>Compiler</h3><h4 id="preprocess" class="heading-element">
-  <a href="#preprocess" class="heading-mark"></a>Preprocess</h4><blockquote>
+<h3 id="compiler">Compiler</h3>
+<h4 id="preprocess">Preprocess</h4>
+<blockquote>
 <p>Visual Studio 2019
 $\rightarrow$
 右键项目然后 properties
@@ -426,8 +400,8 @@ $\rightarrow$
 Preprocess to File (Yes)</p>
 </blockquote>
 <p>编译 / 构建后可以得到产生后缀为 <code>.i</code> 的预处理中间文件</p>
-<h4 id="条件编译" class="heading-element">
-  <a href="#%e6%9d%a1%e4%bb%b6%e7%bc%96%e8%af%91" class="heading-mark"></a>条件编译</h4><div class="highlight" id="id-1"><div class="chroma">
+<h4 id="条件编译">条件编译</h4>
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -442,8 +416,8 @@ Preprocess to File (Yes)</p>
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>  <span class="p">...</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#endif</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="assembly" class="heading-element">
-  <a href="#assembly" class="heading-mark"></a>Assembly</h4><blockquote>
+</div><h4 id="assembly">Assembly</h4>
+<blockquote>
 <p>Visual Studio 2019
 $\rightarrow$
 右键项目然后 properties
@@ -455,8 +429,8 @@ $\rightarrow$
 Assembler Output (Assembly-Only Listing)</p>
 </blockquote>
 <p>编译 / 构建后可以得到后缀为 <code>.asm</code> 的汇编文件</p>
-<h4 id="optimization" class="heading-element">
-  <a href="#optimization" class="heading-mark"></a>Optimization</h4><blockquote>
+<h4 id="optimization">Optimization</h4>
+<blockquote>
 <p>Visual Studio 2019
 $\rightarrow$
 右键项目然后 properties
@@ -480,8 +454,8 @@ Optimization (Maximize Speed)</p>
 </div>
     </div>
   </div>
-<h3 id="linker" class="heading-element">
-  <a href="#linker" class="heading-mark"></a>Linker</h3><p>Linker 的一个重要作用是 <strong>定位程序的入口 (entry point)</strong>，所以对于单源文件的项目来说，Linker 也会起作用</p>
+<h3 id="linker">Linker</h3>
+<p>Linker 的一个重要作用是 <strong>定位程序的入口 (entry point)</strong>，所以对于单源文件的项目来说，Linker 也会起作用</p>
 <div class="details admonition note open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -491,12 +465,12 @@ Optimization (Maximize Speed)</p>
     </div>
   </div>
 <p>解决函数重复定义这个问题，可以给其中一个函数的签名加上 <code>static</code> 或 <code>inline</code> 的修饰</p>
-<h3 id="debug" class="heading-element">
-  <a href="#debug" class="heading-mark"></a>Debug</h3><p>调试时相关信息的窗口在「调试 $\rightarrow$ 窗口」处可以开启显示</p>
+<h3 id="debug">Debug</h3>
+<p>调试时相关信息的窗口在「调试 $\rightarrow$ 窗口」处可以开启显示</p>
 <p>在内存查看窗口，可以通过 <code>&amp;var</code> (<code>var</code> 为当前上下文变量的名字) 来快速获取该变量对应的地址，以及查看该地址所所储存的值</p>
 <p>调试过程中，通过「右键 $\rightarrow$ 转到反汇编」即可查看对应的汇编代码</p>
-<h4 id="contional-and-action-breakpoints" class="heading-element">
-  <a href="#contional-and-action-breakpoints" class="heading-mark"></a>Contional and Action Breakpoints</h4><p>Microsoft Learn: <a href="https://learn.microsoft.com/en-us/visualstudio/debugger/using-breakpoints?view=vs-2022"target="_blank" rel="external nofollow noopener noreferrer">Use breakpoints in the Visual Studio debugger</a></p>
+<h4 id="contional-and-action-breakpoints">Contional and Action Breakpoints</h4>
+<p>Microsoft Learn: <a href="https://learn.microsoft.com/en-us/visualstudio/debugger/using-breakpoints?view=vs-2022"target="_blank" rel="external nofollow noopener noreferrer">Use breakpoints in the Visual Studio debugger</a></p>
 <ul>
 <li><strong>Breakpoint conditions</strong></li>
 </ul>
@@ -509,8 +483,8 @@ Optimization (Maximize Speed)</p>
 <blockquote>
 <p>A tracepoint is a breakpoint that prints a message to the Output window. A tracepoint can act like a temporary trace statement in the programming language and does not pause the execution of code. You create a tracepoint by setting a special action in the Breakpoint Settings window.</p>
 </blockquote>
-<h3 id="projects" class="heading-element">
-  <a href="#projects" class="heading-mark"></a>Projects</h3><p>filter 类似于一种虚拟的文件系统组织，不过只能在 VS 才能表示为层次形式 (通过解析 XML 格式的配置文件)，在主机的文件系统上没有影响</p>
+<h3 id="projects">Projects</h3>
+<p>filter 类似于一种虚拟的文件系统组织，不过只能在 VS 才能表示为层次形式 (通过解析 XML 格式的配置文件)，在主机的文件系统上没有影响</p>
 <p>解决方案栏的「显示所有文件」可以展示当前 Project 在主机文件系统下的组织层次结构，也可以在这个视图下创建目录 / 文件，这样也会在主机文件系统创建对应的目录 / 文件</p>
 <p>主机文件系统和 VS 的虚拟项目组织是解耦的，所以在主机移动源文件并不会影响其在 VS 的虚拟项目组织所在的位置</p>
 <p>VS 默认设置是将构建 / 编译得到的中间文件放在 Project 的 Debug 目录，但是得到的可执行文件却放在 Solution 的 Debug 目录下，这十分奇怪。可以通过修改 <strong>Project 的属性</strong> (右键选择属性这一选项) 里的输出目录，使得其与中间目录一致为 <code>$(Configuration)\</code>。也可以将 Solution 内的全部 Projects 的可执行文件均放置在 Solution 下的同一目录</p>
@@ -548,8 +522,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">                    |__ Platform
 </span></span><span class="line"><span class="cl">                            |__ Configuration</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="managing-multiple-projects-and-libraries" class="heading-element">
-  <a href="#managing-multiple-projects-and-libraries" class="heading-mark"></a>Managing Multiple Projects and Libraries</h4><p>同一 Solution 创建多个 Project:</p>
+</div><h4 id="managing-multiple-projects-and-libraries">Managing Multiple Projects and Libraries</h4>
+<p>同一 Solution 创建多个 Project:</p>
 <ul>
 <li>Solution 资源管理器 -&gt; 右击 Solution 名称 -&gt; Add (<strong>New Project</strong>)</li>
 </ul>
@@ -568,8 +542,8 @@ Optimization (Maximize Speed)</p>
       <div class="admonition-content">这个设定 Include 目录的过程实际上也设置了 Projects 之间的依赖关系 (某种意义上的 CMake，VS 是使用 sln 来管理包和代码库的)</div>
     </div>
   </div>
-<h3 id="libraries" class="heading-element">
-  <a href="#libraries" class="heading-mark"></a>Libraries</h3><ul>
+<h3 id="libraries">Libraries</h3>
+<ul>
 <li>Unix 哲学: 自己编译代码进行构建 (例如 <a href="https://www.linuxfromscratch.org/lfs/"target="_blank" rel="external nofollow noopener noreferrer">LFS</a>)</li>
 <li>Windows 哲学: 能用就行，最好双击就可运行 &#x1f923;</li>
 </ul>
@@ -611,8 +585,8 @@ Optimization (Maximize Speed)</p>
 </ul>
 </li>
 </ol>
-<h4 id="static-linking" class="heading-element">
-  <a href="#static-linking" class="heading-mark"></a>Static Linking</h4><p>在 Linker -&gt; input -&gt; Addtional Dependencies 处添加相对于之前依赖库目录的静态库文件路径: <code>glfw3.lib</code> (注意这里的依赖项不能包含相应的动态库相关文件)</p>
+<h4 id="static-linking">Static Linking</h4>
+<p>在 Linker -&gt; input -&gt; Addtional Dependencies 处添加相对于之前依赖库目录的静态库文件路径: <code>glfw3.lib</code> (注意这里的依赖项不能包含相应的动态库相关文件)</p>
 <div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -634,8 +608,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="c1">// ouput 1
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="dynamic-linking" class="heading-element">
-  <a href="#dynamic-linking" class="heading-mark"></a>Dynamic Linking</h4><div class="details admonition quote open">
+</div><h4 id="dynamic-linking">Dynamic Linking</h4>
+<div class="details admonition quote open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -669,8 +643,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="c1">// ouput 1
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="header-file" class="heading-element">
-  <a href="#header-file" class="heading-mark"></a>Header File</h2><p>Header Guard:</p>
+</div><h2 id="header-file">Header File</h2>
+<p>Header Guard:</p>
 <div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -713,8 +687,8 @@ Optimization (Maximize Speed)</p>
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;../HEADER.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;../include/HEADER.h&#34;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="pointers-and-references" class="heading-element">
-  <a href="#pointers-and-references" class="heading-mark"></a>Pointers and References</h2><blockquote>
+</div><h2 id="pointers-and-references">Pointers and References</h2>
+<blockquote>
 <p><em><strong>这两大主题可以使用 VS 调试功能的查看内存窗口进行实践</strong></em></p>
 </blockquote>
 <ul>
@@ -823,8 +797,8 @@ Optimization (Maximize Speed)</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ref</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>      <span class="c1">// set a&#39;s value to be b&#39;s value (8)!!!
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="union-and-type-punning" class="heading-element">
-  <a href="#union-and-type-punning" class="heading-mark"></a>Union and Type Punning</h2><ul>
+</div><h2 id="union-and-type-punning">Union and Type Punning</h2>
+<ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/67636231/what-is-the-modern-correct-way-to-do-type-punning-in-c"target="_blank" rel="external nofollow noopener noreferrer">What is the modern, correct way to do type punning in C++?</a></li>
 </ul>
 <p>通过指针和引用直接操作内存来实现类型双关 (Type Punning)，可以搭配调试器的内存查看功能进行观察:</p>
@@ -976,9 +950,9 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="object-oriented-programming" class="heading-element">
-  <a href="#object-oriented-programming" class="heading-mark"></a>Object-Oriented Programming</h2><h3 id="class-and-struct" class="heading-element">
-  <a href="#class-and-struct" class="heading-mark"></a>Class and Struct</h3><p>C++ 的 Class 和 Struct 是相同的东西，只不过 Class 默认成员字段的外部可见性为 private，而 Struct 默认成员字段的外部可见性为 public，仅仅这个区别而已</p>
+</div><h2 id="object-oriented-programming">Object-Oriented Programming</h2>
+<h3 id="class-and-struct">Class and Struct</h3>
+<p>C++ 的 Class 和 Struct 是相同的东西，只不过 Class 默认成员字段的外部可见性为 private，而 Struct 默认成员字段的外部可见性为 public，仅仅这个区别而已</p>
 <div class="highlight" id="id-18"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1179,8 +1153,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="enum" class="heading-element">
-  <a href="#enum" class="heading-mark"></a>Enum</h3><ul>
+</div><h3 id="enum">Enum</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/enum"target="_blank" rel="external nofollow noopener noreferrer">Enumeration declaration</a></li>
 </ul>
 <div class="highlight" id="id-21"><div class="chroma">
@@ -1206,8 +1180,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">Example</span> <span class="n">value</span> <span class="o">=</span> <span class="n">B</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="visibility" class="heading-element">
-  <a href="#visibility" class="heading-mark"></a>Visibility</h3><ul>
+</div><h3 id="visibility">Visibility</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/access"target="_blank" rel="external nofollow noopener noreferrer">Access specifiers</a></li>
 </ul>
 <blockquote>
@@ -1224,8 +1198,8 @@ Optimization (Maximize Speed)</p>
 <ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/224966/what-is-the-difference-between-private-and-protected-members-of-c-classes"target="_blank" rel="external nofollow noopener noreferrer">What is the difference between private and protected members of C++ classes?</a></li>
 </ul>
-<h3 id="constructor-and-destructor" class="heading-element">
-  <a href="#constructor-and-destructor" class="heading-mark"></a>Constructor and Destructor</h3><div class="highlight" id="id-22"><div class="chroma">
+<h3 id="constructor-and-destructor">Constructor and Destructor</h3>
+<div class="highlight" id="id-22"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1372,8 +1346,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">Func</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="member-initializer-lists" class="heading-element">
-  <a href="#member-initializer-lists" class="heading-mark"></a>Member Initializer Lists</h4><ul>
+</div><h4 id="member-initializer-lists">Member Initializer Lists</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/constructor"target="_blank" rel="external nofollow noopener noreferrer">Constructors and member initializer lists</a></li>
 </ul>
 <div class="highlight" id="id-25"><div class="chroma">
@@ -1455,8 +1429,8 @@ Optimization (Maximize Speed)</p>
 </div></div>
     </div>
   </div>
-<h4 id="copy-constructors" class="heading-element">
-  <a href="#copy-constructors" class="heading-mark"></a>Copy Constructors</h4><ul>
+<h4 id="copy-constructors">Copy Constructors</h4>
+<ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/184710/what-is-the-difference-between-a-deep-copy-and-a-shallow-copy"target="_blank" rel="external nofollow noopener noreferrer">What is the difference between a deep copy and a shallow copy?</a></li>
 </ul>
 <blockquote>
@@ -1624,8 +1598,8 @@ Optimization (Maximize Speed)</p>
       <div class="admonition-content">复制构造 (Copy Structor) 和引用 (Reference) 的联系也比较紧密，因为一般情况下进行函数调用，不使用引用的话，会进行复制操作 (可以通过观察复制构造函数的调用)，这会造成性能损耗。所以一般情况下建议使用常量引用 (<code>const Type&amp;</code>) 以避免不必要的性能损耗 (当然这样你在函数内部也可以决定是否进行复制操作，并没有限制了不能使用复制)，但是某些场景下使用复制会更快，这时候就需要进行衡量了。</div>
     </div>
   </div>
-<h4 id="virtual-destructors" class="heading-element">
-  <a href="#virtual-destructors" class="heading-mark"></a>Virtual Destructors</h4><ul>
+<h4 id="virtual-destructors">Virtual Destructors</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/destructor"target="_blank" rel="external nofollow noopener noreferrer">Destructors</a> - <strong>Virtual destructors</strong></li>
 </ul>
 <blockquote>
@@ -1726,8 +1700,8 @@ Optimization (Maximize Speed)</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Base Destructor
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="inheritance-and-polymorphism" class="heading-element">
-  <a href="#inheritance-and-polymorphism" class="heading-mark"></a>Inheritance and Polymorphism</h3><ul>
+</div><h3 id="inheritance-and-polymorphism">Inheritance and Polymorphism</h3>
+<ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/6308178/what-is-the-main-difference-between-inheritance-and-polymorphism"target="_blank" rel="external nofollow noopener noreferrer">What is the main difference between Inheritance and Polymorphism?</a></li>
 </ul>
 <blockquote>
@@ -1801,8 +1775,8 @@ Optimization (Maximize Speed)</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Player</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="c1">// output 12 which equal 8 + sizeof(char*)
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="virtual-function" class="heading-element">
-  <a href="#virtual-function" class="heading-mark"></a>Virtual Function</h4><ul>
+</div><h4 id="virtual-function">Virtual Function</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/virtual"target="_blank" rel="external nofollow noopener noreferrer">virtual function specifier</a></li>
 </ul>
 <blockquote>
@@ -1911,8 +1885,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">GetClassName</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;Player&#34;</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="objects" class="heading-element">
-  <a href="#objects" class="heading-mark"></a>Objects</h3><p>将对象 Object 分配在栈 Stack 上的方式:</p>
+</div><h3 id="objects">Objects</h3>
+<p>将对象 Object 分配在栈 Stack 上的方式:</p>
 <div class="highlight" id="id-33"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -1975,8 +1949,8 @@ Optimization (Maximize Speed)</p>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/delete"target="_blank" rel="external nofollow noopener noreferrer">delete expression</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/memory/new/operator_delete"target="_blank" rel="external nofollow noopener noreferrer">operator delete, operator delete[]</a></li>
 </ul>
-<h4 id="this" class="heading-element">
-  <a href="#this" class="heading-mark"></a>this</h4><ul>
+<h4 id="this">this</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/this"target="_blank" rel="external nofollow noopener noreferrer">The this pointer</a></li>
 </ul>
 <blockquote>
@@ -2026,10 +2000,10 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="specifiers" class="heading-element">
-  <a href="#specifiers" class="heading-mark"></a>Specifiers</h2><h3 id="static" class="heading-element">
-  <a href="#static" class="heading-mark"></a>Static</h3><h4 id="static-vs-extern" class="heading-element">
-  <a href="#static-vs-extern" class="heading-mark"></a>Static vs. Extern</h4><ul>
+</div><h2 id="specifiers">Specifiers</h2>
+<h3 id="static">Static</h3>
+<h4 id="static-vs-extern">Static vs. Extern</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/keyword/static"target="_blank" rel="external nofollow noopener noreferrer">C++ keyword: static</a></li>
 </ul>
 <blockquote>
@@ -2099,8 +2073,8 @@ Optimization (Maximize Speed)</p>
       <div class="admonition-content">尽量不要使用全局变量 (Global Variable) 除非你有必要的理由，一般情况下应当使用 <code>static</code> 修饰位于文件作用域的变量 (即变量所在的作用域和函数相同)，使其仅在当前的 Transilation Unit 进行内部链接</div>
     </div>
   </div>
-<h4 id="local-static" class="heading-element">
-  <a href="#local-static" class="heading-mark"></a>Local Static</h4><ul>
+<h4 id="local-static">Local Static</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/static"target="_blank" rel="external nofollow noopener noreferrer">static members</a></li>
 </ul>
 <blockquote>
@@ -2232,8 +2206,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">Singleton</span><span class="o">::</span><span class="n">Get</span><span class="p">().</span><span class="n">Hello</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="const" class="heading-element">
-  <a href="#const" class="heading-mark"></a>Const</h3><ul>
+</div><h3 id="const">Const</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/keyword/const"target="_blank" rel="external nofollow noopener noreferrer">C++ keyword: const</a></li>
 </ul>
 <p>C++ 中的 <code>const</code> 关键字只是一种弱承诺，可以通过解引用来绕开 (不过这也取决于编译器，有些编译器会把 <code>const</code> 修饰的数据设置为只读，这样即使可以绕开但会执行时造成程序崩溃):</p>
@@ -2336,8 +2310,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">e</span><span class="p">.</span><span class="n">GetX</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="mutable" class="heading-element">
-  <a href="#mutable" class="heading-mark"></a>Mutable</h3><ul>
+</div><h3 id="mutable">Mutable</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/keyword/mutable"target="_blank" rel="external nofollow noopener noreferrer">C++ keyword: mutable</a></li>
 </ul>
 <p>在 Class 或 Struct 的 <code>const</code> 修饰的方法中使用，使得该方法能修改被 <code>mutable</code> 的成员变量</p>
@@ -2413,8 +2387,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="p">...</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="explicit" class="heading-element">
-  <a href="#explicit" class="heading-mark"></a>Explicit</h3><p>隐式转换一般不建议用，因为表达不够清晰，会造成误解，特别是用在构造函数 Constructor 上，例如下面是完全合法的 C++ 代码:</p>
+</div><h3 id="explicit">Explicit</h3>
+<p>隐式转换一般不建议用，因为表达不够清晰，会造成误解，特别是用在构造函数 Constructor 上，例如下面是完全合法的 C++ 代码:</p>
 <div class="highlight" id="id-48"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2484,8 +2458,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Entity</span> <span class="n">entity</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span>      <span class="c1">// Error! Now it is not allowed
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="auto" class="heading-element">
-  <a href="#auto" class="heading-mark"></a>Auto</h3><ul>
+</div><h3 id="auto">Auto</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/auto"target="_blank" rel="external nofollow noopener noreferrer">Placeholder type specifiers (since C++11)</a></li>
 </ul>
 <p>在函数 API 返回场景处使用，这样就不需要因为 API 改变而手动修改返回值的类型标注:</p>
@@ -2611,9 +2585,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">auto</span> <span class="nf">GetName</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="operators" class="heading-element">
-  <a href="#operators" class="heading-mark"></a>Operators</h2><h3 id="ternary-operators" class="heading-element">
-  <a href="#ternary-operators" class="heading-mark"></a>Ternary Operators</h3><p>C++ 中的 <code>?</code> 和 <code>:</code> 搭配的三元运算符存在的本质原因是，C++ 中的 if-else 控制流是语句 (statement) 而不是表达式 (expression)，所以需要功能类似于 if-else 的三元运算表达式来增强语言的表达能力 (否则表达会十分冗余，还会有额外开销，因为没有返回值优化，会产生中间临时数据)，如果是 Rust 这样的表达式为主的语言，就不需要这种三元运算符了</p>
+</div><h2 id="operators">Operators</h2>
+<h3 id="ternary-operators">Ternary Operators</h3>
+<p>C++ 中的 <code>?</code> 和 <code>:</code> 搭配的三元运算符存在的本质原因是，C++ 中的 if-else 控制流是语句 (statement) 而不是表达式 (expression)，所以需要功能类似于 if-else 的三元运算表达式来增强语言的表达能力 (否则表达会十分冗余，还会有额外开销，因为没有返回值优化，会产生中间临时数据)，如果是 Rust 这样的表达式为主的语言，就不需要这种三元运算符了</p>
 <div class="highlight" id="id-55"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -2654,8 +2628,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="mi">5</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="arrow-operator" class="heading-element">
-  <a href="#arrow-operator" class="heading-mark"></a>Arrow Operator</h3><p>可以通过 <code>-&gt;</code> 运算符来计算某个 Class / Struct 对象的成员的偏移值:</p>
+</div><h3 id="arrow-operator">Arrow Operator</h3>
+<p>可以通过 <code>-&gt;</code> 运算符来计算某个 Class / Struct 对象的成员的偏移值:</p>
 <div class="highlight" id="id-57"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2689,8 +2663,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/15832301/understanding-container-of-macro-in-the-linux-kernel"target="_blank" rel="external nofollow noopener noreferrer">Understanding container_of macro in the Linux kernel</a></li>
 </ul>
-<h3 id="overloading" class="heading-element">
-  <a href="#overloading" class="heading-mark"></a>Overloading</h3><ul>
+<h3 id="overloading">Overloading</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/operators"target="_blank" rel="external nofollow noopener noreferrer">operator overloading</a></li>
 </ul>
 <div class="highlight" id="id-58"><div class="chroma">
@@ -2838,8 +2812,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div></div>
     </div>
   </div>
-<h2 id="templates" class="heading-element">
-  <a href="#templates" class="heading-mark"></a>Templates</h2><div class="details admonition tip open">
+<h2 id="templates">Templates</h2>
+<div class="details admonition tip open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -2961,10 +2935,10 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">array</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="c1">// should be 5
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="containers" class="heading-element">
-  <a href="#containers" class="heading-mark"></a>Containers</h2><h3 id="array" class="heading-element">
-  <a href="#array" class="heading-mark"></a>Array</h3><h4 id="array-1" class="heading-element">
-  <a href="#array-1" class="heading-mark"></a>array</h4><ul>
+</div><h2 id="containers">Containers</h2>
+<h3 id="array">Array</h3>
+<h4 id="array-1">array</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/array"target="_blank" rel="external nofollow noopener noreferrer">Array declaration</a></li>
 </ul>
 <div class="highlight" id="id-63"><div class="chroma">
@@ -3027,8 +3001,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="k">delete</span><span class="p">[]</span> <span class="n">another</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="stdarray" class="heading-element">
-  <a href="#stdarray" class="heading-mark"></a>std::array</h4><ul>
+</div><h4 id="stdarray">std::array</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/container/array"target="_blank" rel="external nofollow noopener noreferrer">std::array</a></li>
 </ul>
 <blockquote>
@@ -3128,8 +3102,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
     </div>
   </div>
-<h4 id="multidimensional-arrays" class="heading-element">
-  <a href="#multidimensional-arrays" class="heading-mark"></a>Multidimensional Arrays</h4><div class="highlight" id="id-67"><div class="chroma">
+<h4 id="multidimensional-arrays">Multidimensional Arrays</h4>
+<div class="highlight" id="id-67"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -3232,8 +3206,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>尽量避免使用二维数组 (以及二维以上维度)，推荐将其转换为等价的一维数组，利用 cache 的特性增强性能。</p>
-<h3 id="string" class="heading-element">
-  <a href="#string" class="heading-mark"></a>String</h3><ul>
+<h3 id="string">String</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/string/basic_string"target="_blank" rel="external nofollow noopener noreferrer">std::basic_string</a></li>
 <li><a href="https://www.ascii-code.com/"target="_blank" rel="external nofollow noopener noreferrer">ASCII Table</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/string/basic_string/npos"target="_blank" rel="external nofollow noopener noreferrer">std::basic_string&lt;CharT,Traits,Allocator&gt;::npos</a></li>
@@ -3307,8 +3281,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
     </div>
   </div>
-<h4 id="char-types" class="heading-element">
-  <a href="#char-types" class="heading-mark"></a>Char Types</h4><ul>
+<h4 id="char-types">Char Types</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/types"target="_blank" rel="external nofollow noopener noreferrer">Fundamental types</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/keyword/wchar_t"target="_blank" rel="external nofollow noopener noreferrer">C++ keyword: wchar_t</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/keyword/char16_t"target="_blank" rel="external nofollow noopener noreferrer">C++ keyword: char16_t (since C++11)</a> / <a href="https://en.cppreference.com/w/c/string/multibyte/char16_t"target="_blank" rel="external nofollow noopener noreferrer">char16_t</a></li>
@@ -3341,8 +3315,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
       <div class="admonition-content"><code>char</code> 类型的具体字节数是由操作系统额 CPU 架构来决定的，如果需要跨系统使用固定字节数的字符类型，请按需使用 <code>wchar_t</code>, <code>char16_t</code> 和 <code>char32_t</code></div>
     </div>
   </div>
-<h4 id="string-literals" class="heading-element">
-  <a href="#string-literals" class="heading-mark"></a>String Literals</h4><ul>
+<h4 id="string-literals">String Literals</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/string_literal"target="_blank" rel="external nofollow noopener noreferrer">String literal</a></li>
 </ul>
 <blockquote>
@@ -3368,8 +3342,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">raw</span> <span class="o">=</span> <span class="s">&#34;hello</span><span class="se">\n</span><span class="s">Ap</span><span class="se">\t</span><span class="s">ple&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="vector" class="heading-element">
-  <a href="#vector" class="heading-mark"></a>Vector</h3><ul>
+</div><h3 id="vector">Vector</h3>
+<ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/581426/why-is-a-c-vector-called-a-vector"target="_blank" rel="external nofollow noopener noreferrer">Why is a C++ Vector called a Vector?</a></li>
 </ul>
 <blockquote>
@@ -3459,8 +3433,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
       <div class="admonition-content">STL 的容器，它们在被设计时，速度不是优先考虑的因素，所以我们可以设计出比 STL 里的容器性能更强的类似容器，这也是为什么很多工作室会自己设计容器库而不采用 STL，例如 <a href="https://doc.qt.io/qt-6/containers.html"target="_blank" rel="external nofollow noopener noreferrer">Qt Container Classes</a>、<a href="https://github.com/electronicarts/EASTL"target="_blank" rel="external nofollow noopener noreferrer">EASTL</a>。</div>
     </div>
   </div>
-<h4 id="optimizing-usage" class="heading-element">
-  <a href="#optimizing-usage" class="heading-mark"></a>Optimizing Usage</h4><p>一般情况下，STL 的 <code>vector</code> 是比较慢的 (因为它倾向于经常分配内存空间，这会导致大量的性能开销)，所以我们需要通过一些策略来压榨出 <code>vector</code> 的全部性能。下面通过之前的例子来展示这些优化策略。</p>
+<h4 id="optimizing-usage">Optimizing Usage</h4>
+<p>一般情况下，STL 的 <code>vector</code> 是比较慢的 (因为它倾向于经常分配内存空间，这会导致大量的性能开销)，所以我们需要通过一些策略来压榨出 <code>vector</code> 的全部性能。下面通过之前的例子来展示这些优化策略。</p>
 <p>通过复制构造函数确认什么时候发生了大量的复制，以应用相应的复制优化策略:</p>
 <div class="highlight" id="id-74"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -3548,9 +3522,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">vertices</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">Vertex</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">));</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>现在没有复制操作了</p>
-<h2 id="memory-model" class="heading-element">
-  <a href="#memory-model" class="heading-mark"></a>Memory Model</h2><h3 id="lifetime" class="heading-element">
-  <a href="#lifetime" class="heading-mark"></a>Lifetime</h3><p>主要是理解 <strong>栈 (Stack)</strong> 和 <strong>堆 (Heap)</strong> 上分配的对象 (Object) 的生命周期 (Lifetime) 的机制，栈 (Stack) 上分配的对象 (Object) 的生命周期无需我们关系，超出作用域会自动销毁，这就是为什么它们被称为 <strong>自动变量</strong> 的原因，而堆 (Heap) 上的生命周期则需要我们手动进行管理，以决定什么时候销毁它们结束它们的生命周期，当然我们也可以使用其它程序员封装好的容器，这样手动管理这些对象的生命周期的责任就交给封装这个容器的程序员的 (但还是需要人手动管理 &#x1f923;)。简单来说，栈上的变量不需要人来关心 (编译器会帮我们完成)，而堆上的对象则需要人来管理 (不论是直接的还是间接的)。</p>
+<h2 id="memory-model">Memory Model</h2>
+<h3 id="lifetime">Lifetime</h3>
+<p>主要是理解 <strong>栈 (Stack)</strong> 和 <strong>堆 (Heap)</strong> 上分配的对象 (Object) 的生命周期 (Lifetime) 的机制，栈 (Stack) 上分配的对象 (Object) 的生命周期无需我们关系，超出作用域会自动销毁，这就是为什么它们被称为 <strong>自动变量</strong> 的原因，而堆 (Heap) 上的生命周期则需要我们手动进行管理，以决定什么时候销毁它们结束它们的生命周期，当然我们也可以使用其它程序员封装好的容器，这样手动管理这些对象的生命周期的责任就交给封装这个容器的程序员的 (但还是需要人手动管理 &#x1f923;)。简单来说，栈上的变量不需要人来关心 (编译器会帮我们完成)，而堆上的对象则需要人来管理 (不论是直接的还是间接的)。</p>
 <div class="details admonition note open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -3669,8 +3643,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
     </div>
   </div>
-<h3 id="smart-pointers" class="heading-element">
-  <a href="#smart-pointers" class="heading-mark"></a>Smart Pointers</h3><ul>
+<h3 id="smart-pointers">Smart Pointers</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/memory/unique_ptr"target="_blank" rel="external nofollow noopener noreferrer">std::unique_ptr</a></li>
 </ul>
 <blockquote>
@@ -3772,10 +3746,10 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
       <div class="admonition-content">推荐使用 <code>std::make_XYZ</code> 这这种风格标准库函数来构造智能指针实例，这样你就可以在你的代码里永远摆脱 <code>new</code> 关键字了 &#x1f923;</div>
     </div>
   </div>
-<h2 id="benchmarking" class="heading-element">
-  <a href="#benchmarking" class="heading-mark"></a>Benchmarking</h2><p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Benchmark_%28computing%29"target="_blank" rel="external nofollow noopener noreferrer">Benchmark</a></p>
-<h3 id="timing" class="heading-element">
-  <a href="#timing" class="heading-mark"></a>Timing</h3><ul>
+<h2 id="benchmarking">Benchmarking</h2>
+<p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Benchmark_%28computing%29"target="_blank" rel="external nofollow noopener noreferrer">Benchmark</a></p>
+<h3 id="timing">Timing</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/chrono"target="_blank" rel="external nofollow noopener noreferrer">Date and time utilities</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/header/chrono"target="_blank" rel="external nofollow noopener noreferrer">Standard library header <chrono> (C++11)</a></li>
 </ul>
@@ -3893,9 +3867,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">Function</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="advanced-topics" class="heading-element">
-  <a href="#advanced-topics" class="heading-mark"></a>Advanced Topics</h2><h3 id="multiple-return-values" class="heading-element">
-  <a href="#multiple-return-values" class="heading-mark"></a>Multiple Return Values</h3><p>在 C++ 中，实现函数可以返回多个值有很多种方式:</p>
+</div><h2 id="advanced-topics">Advanced Topics</h2>
+<h3 id="multiple-return-values">Multiple Return Values</h3>
+<p>在 C++ 中，实现函数可以返回多个值有很多种方式:</p>
 <ul>
 <li>适用性最强的是返回自定义的结构体使用结构体包装返回的多个值)</li>
 <li>如果返回的多个值类型相同，可以返回 <code>vector</code> 或数组</li>
@@ -3907,8 +3881,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/utility/tuple"target="_blank" rel="external nofollow noopener noreferrer">std::tuple</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/utility/pair"target="_blank" rel="external nofollow noopener noreferrer">std::pair</a></li>
 </ul>
-<h3 id="macros" class="heading-element">
-  <a href="#macros" class="heading-mark"></a>Macros</h3><ul>
+<h3 id="macros">Macros</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/preprocessor/replace"target="_blank" rel="external nofollow noopener noreferrer">Replacing text macros</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/preprocessor"target="_blank" rel="external nofollow noopener noreferrer">Preprocessor</a></li>
 </ul>
@@ -3992,9 +3966,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
       <div class="admonition-content">宏常用于跟踪、调试，例如追踪内存分配 (e.g. 那哪一行、哪个函数分配了多少字节)、日志系统的输出</div>
     </div>
   </div>
-<h3 id="function-pointers" class="heading-element">
-  <a href="#function-pointers" class="heading-mark"></a>Function Pointers</h3><h4 id="pointer-to-function-in-c" class="heading-element">
-  <a href="#pointer-to-function-in-c" class="heading-mark"></a>Pointer to Function in C</h4><ul>
+<h3 id="function-pointers">Function Pointers</h3>
+<h4 id="pointer-to-function-in-c">Pointer to Function in C</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/pointer"target="_blank" rel="external nofollow noopener noreferrer">Pointer declaration</a> - <strong>Pointers to functions</strong></li>
 </ul>
 <blockquote>
@@ -4091,8 +4065,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">ForEach</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">PrintValue</span><span class="p">);</span> <span class="c1">// should print 1, 5, 4, 2, 3 line by line
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="lambdas" class="heading-element">
-  <a href="#lambdas" class="heading-mark"></a>Lambdas</h4><ul>
+</div><h4 id="lambdas">Lambdas</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/lambda"target="_blank" rel="external nofollow noopener noreferrer">Lambda expressions (since C++11)</a></li>
 </ul>
 <blockquote>
@@ -4185,8 +4159,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>A function object is any object for which the function call operator is defined. C++ provides many built-in function objects as well as support for creation and manipulation of new function objects.</p>
 </blockquote>
-<h3 id="casting" class="heading-element">
-  <a href="#casting" class="heading-mark"></a>Casting</h3><p><a href="#explict">Specifiers::Explict</a> 处有讲解了一部分隐式转换和显式转换。<a href="#union-and-type-punning">Union and Type Punning</a> 处也对类型转换进行了一定程度的讲解。下面对 C 风格和 C++ 风格的强制类型转换 (casting) 进行详细说明。</p>
+<h3 id="casting">Casting</h3>
+<p><a href="#explict">Specifiers::Explict</a> 处有讲解了一部分隐式转换和显式转换。<a href="#union-and-type-punning">Union and Type Punning</a> 处也对类型转换进行了一定程度的讲解。下面对 C 风格和 C++ 风格的强制类型转换 (casting) 进行详细说明。</p>
 <ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/explicit_cast"target="_blank" rel="external nofollow noopener noreferrer">Explicit type conversion</a></li>
 </ul>
@@ -4229,8 +4203,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <ul>
 <li>以上整理自 <a href="https://space.bilibili.com/27560356"target="_blank" rel="external nofollow noopener noreferrer">@ljnelf</a> 的评论</li>
 </ul>
-<h3 id="namespaces" class="heading-element">
-  <a href="#namespaces" class="heading-mark"></a>Namespaces</h3><ul>
+<h3 id="namespaces">Namespaces</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/namespace"target="_blank" rel="external nofollow noopener noreferrer">Namespaces</a></li>
 </ul>
 <blockquote>
@@ -4238,8 +4212,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </blockquote>
 <p>Rust 中的 <a href="https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html"target="_blank" rel="external nofollow noopener noreferrer">Module</a> 也是类似的语法</p>
 <p>类本身也是一个 namespace，所以使用类似的操作符 <code>::</code> 访问内部成员</p>
-<h4 id="dont-using-namspace-std" class="heading-element">
-  <a href="#dont-using-namspace-std" class="heading-mark"></a>Don&rsquo;t &ldquo;using namspace std&rdquo;</h4><p>不推荐使用 <code>using namespace std;</code> 类似的语句，使用 <code>std;:xxx</code> 这样的风格。因为现实中比较少用 STL，都是工作室自己开发类似 STL 的库来使用，这样可以区分代码中使用的是哪个库的 API。</p>
+<h4 id="dont-using-namspace-std">Don&rsquo;t &ldquo;using namspace std&rdquo;</h4>
+<p>不推荐使用 <code>using namespace std;</code> 类似的语句，使用 <code>std;:xxx</code> 这样的风格。因为现实中比较少用 STL，都是工作室自己开发类似 STL 的库来使用，这样可以区分代码中使用的是哪个库的 API。</p>
 <p>实作案例: EASTL <a href="https://github.com/electronicarts/EASTL/blob/master/include/EASTL/vector.h#L77"target="_blank" rel="external nofollow noopener noreferrer">vector.h</a></p>
 <div class="highlight" id="id-95"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -4327,8 +4301,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
     </div>
   </div>
-<h3 id="threads" class="heading-element">
-  <a href="#threads" class="heading-mark"></a>Threads</h3><ul>
+<h3 id="threads">Threads</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/thread"target="_blank" rel="external nofollow noopener noreferrer">Concurrency support library (since C++11)</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/thread/thread"target="_blank" rel="external nofollow noopener noreferrer">std::thread</a></li>
 </ul>
@@ -4400,15 +4374,15 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Start thread id=&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">get_id</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="algorithms" class="heading-element">
-  <a href="#algorithms" class="heading-mark"></a>Algorithms</h3><ul>
+</div><h3 id="algorithms">Algorithms</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/algorithm"target="_blank" rel="external nofollow noopener noreferrer">Algorithms library</a></li>
 </ul>
 <blockquote>
 <p>The algorithms library defines functions for a variety of purposes (e.g. searching, sorting, counting, manipulating) that operate on ranges of elements. Note that a range is defined as <strong>[<code>first</code>, <code>last</code>)</strong> where <code>last</code> refers to the element past the last element to inspect or modify.</p>
 </blockquote>
-<h4 id="sorting" class="heading-element">
-  <a href="#sorting" class="heading-mark"></a>Sorting</h4><ul>
+<h4 id="sorting">Sorting</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/algorithm/sort"target="_blank" rel="external nofollow noopener noreferrer">std::sort</a></li>
 </ul>
 <blockquote>
@@ -4476,14 +4450,14 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>Function object for performing comparisons. The main template invokes operator&gt; on type T.</p>
 </blockquote>
-<h3 id="coding-style" class="heading-element">
-  <a href="#coding-style" class="heading-mark"></a>Coding Style</h3><p>个人偏好如下:</p>
+<h3 id="coding-style">Coding Style</h3>
+<p>个人偏好如下:</p>
 <ul>
 <li>函数名: <a href="https://en.wikipedia.org/wiki/Naming_convention_%28programming%29#Letter_case-separated_words"target="_blank" rel="external nofollow noopener noreferrer">PscalCase</a> 命名法 e.g. <code>ForEach</code></li>
 <li>类成员: <a href="https://en.wikipedia.org/wiki/Hungarian_notation"target="_blank" rel="external nofollow noopener noreferrer">Hungarian</a> 命名法 e.g. <code>m_Devices</code></li>
 </ul>
-<h2 id="references" class="heading-element">
-  <a href="#references" class="heading-mark"></a>References</h2><ul>
+<h2 id="references">References</h2>
+<ul>
 <li>The Cherno: <a href="https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb"target="_blank" rel="external nofollow noopener noreferrer">C++</a> / <a href="https://space.bilibili.com/364152971/channel/collectiondetail?sid=13909"target="_blank" rel="external nofollow noopener noreferrer">中文翻译</a>: 主要介绍 C++11 及以上版本的语法</li>
 <li><a href="https://www.youtube.com/@cppweekly"target="_blank" rel="external nofollow noopener noreferrer">C++ Weekly With Jason Turner</a>: 这个博主超级猛</li>
 <li><a href="https://www.youtube.com/@CppCon"target="_blank" rel="external nofollow noopener noreferrer">CppCon</a>: 强烈推荐 <a href="https://www.youtube.com/@CppCon/search?query=Back%20to%20Basics"target="_blank" rel="external nofollow noopener noreferrer">Back To Basics</a> 专题</li>
@@ -4499,10 +4473,11 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-08-02 12:52:21">更新于 2024-08-02&nbsp;</span>
-      </div></div><div class="post-info-line">
-        <div class="post-info-md"><span><a href="/posts/modern-cpp/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-        <div class="post-info-share">
-          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/modern-cpp/" data-title="Modern C&#43;&#43; (MSVC)" data-hashtags="C&#43;&#43;,MSVC"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/modern-cpp/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/modern-cpp/" data-title="Modern C&#43;&#43; (MSVC)" data-hashtags="C&#43;&#43;,MSVC"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/modern-cpp/" data-hashtag="C&#43;&#43;"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/modern-cpp/" data-title="Modern C&#43;&#43; (MSVC)" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/modern-cpp/" data-title="Modern C&#43;&#43; (MSVC)"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -4511,11 +4486,12 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/modern-cpp/" data-title="Modern C&#43;&#43; (MSVC)" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/modern-cpp/" data-title="Modern C&#43;&#43; (MSVC)"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-        </div>
-      </div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/c&#43;&#43;/" class="post-tag" title="标签 - C&#43;&#43;">C&#43;&#43;</a><a href="/tags/msvc/" class="post-tag" title="标签 - MSVC">MSVC</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/c&#43;&#43;/' class="post-tag">C&#43;&#43;</a><a href='/tags/msvc/' class="post-tag">MSVC</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -4524,14 +4500,11 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
   <div class="post-nav"><a href="/posts/build-a-linked-hashmap-in-rust/" class="post-nav-item" rel="prev" title="Build a linked hash map in Rust"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Build a linked hash map in Rust</a>
       <a href="/posts/drop-check/" class="post-nav-item" rel="next" title="Crust of Rust: The Drop Check">Crust of Rust: The Drop Check<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article>
-
-  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.131.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -4539,5 +4512,5 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/js/flyfish.js" defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>
