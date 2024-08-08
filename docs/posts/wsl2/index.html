@@ -7,20 +7,31 @@
     <meta name="robots" content="noodp" />
     <title>Windows 10 WSL2 Ubuntu 22.04 配置指南 - KZnight&#39;s Blog</title><meta name="author" content="ccrysisa">
 <meta name="author-link" content="https://github.com/ccrysisa">
-<meta name="description" content="今日闲来无事，刷了会 B 站，突发奇想将发灰了一年多的 WSL2 找回来折腾一下 (之前为了在 VMware 中开启嵌套虚拟化，不得以将 WSL2 打入冷宫 &#x1f923;)。由于这一年内功功力大涨，很快就完成了 WLS2 的再召集启用，下面列出配置的主要步骤和相关材料。" /><meta name="keywords" content='Windows, WSL, Ubuntu' /><meta itemprop="name" content="Windows 10 WSL2 Ubuntu 22.04 配置指南">
-<meta itemprop="description" content="今日闲来无事，刷了会 B 站，突发奇想将发灰了一年多的 WSL2 找回来折腾一下 (之前为了在 VMware 中开启嵌套虚拟化，不得以将 WSL2 打入冷宫 &#x1f923;)。由于这一年内功功力大涨，很快就完成了 WLS2 的再召集启用，下面列出配置的主要步骤和相关材料。"><meta itemprop="datePublished" content="2024-04-20T12:14:18+08:00" />
-<meta itemprop="dateModified" content="2024-04-20T23:18:41+08:00" />
-<meta itemprop="wordCount" content="629"><meta itemprop="image" content="https://ccrysisa.github.io/logo.png" />
-<meta itemprop="keywords" content="Windows,WSL,Ubuntu," /><meta property="og:title" content="Windows 10 WSL2 Ubuntu 22.04 配置指南" />
-<meta property="og:description" content="今日闲来无事，刷了会 B 站，突发奇想将发灰了一年多的 WSL2 找回来折腾一下 (之前为了在 VMware 中开启嵌套虚拟化，不得以将 WSL2 打入冷宫 &#x1f923;)。由于这一年内功功力大涨，很快就完成了 WLS2 的再召集启用，下面列出配置的主要步骤和相关材料。" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://ccrysisa.github.io/posts/wsl2/" /><meta property="og:image" content="https://ccrysisa.github.io/logo.png" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2024-04-20T12:14:18+08:00" />
-<meta property="article:modified_time" content="2024-04-20T23:18:41+08:00" />
+<meta name="description" content="今日闲来无事，刷了会 B 站，突发奇想将发灰了一年多的 WSL2 找回来折腾一下 (之前为了在 VMware 中开启嵌套虚拟化，不得以将 WSL2 打入冷宫 &#x1f923;)。由于这一年内功功力大涨，很快就完成了 WLS2 的再召集启用，下面列出配置的主要步骤和相关材料。" /><meta name="keywords" content='Windows, WSL, Ubuntu' />
+  <meta itemprop="name" content="Windows 10 WSL2 Ubuntu 22.04 配置指南">
+  <meta itemprop="description" content="今日闲来无事，刷了会 B 站，突发奇想将发灰了一年多的 WSL2 找回来折腾一下 (之前为了在 VMware 中开启嵌套虚拟化，不得以将 WSL2 打入冷宫 🤣)。由于这一年内功功力大涨，很快就完成了 WLS2 的再召集启用，下面列出配置的主要步骤和相关材料。">
+  <meta itemprop="datePublished" content="2024-04-20T12:14:18+08:00">
+  <meta itemprop="dateModified" content="2024-04-20T23:18:41+08:00">
+  <meta itemprop="wordCount" content="629">
+  <meta itemprop="image" content="https://ccrysisa.github.io/logo.png">
+  <meta itemprop="keywords" content="Windows,WSL,Ubuntu"><meta property="og:url" content="https://ccrysisa.github.io/posts/wsl2/">
+  <meta property="og:site_name" content="KZnight&#39;s Blog">
+  <meta property="og:title" content="Windows 10 WSL2 Ubuntu 22.04 配置指南">
+  <meta property="og:description" content="今日闲来无事，刷了会 B 站，突发奇想将发灰了一年多的 WSL2 找回来折腾一下 (之前为了在 VMware 中开启嵌套虚拟化，不得以将 WSL2 打入冷宫 🤣)。由于这一年内功功力大涨，很快就完成了 WLS2 的再召集启用，下面列出配置的主要步骤和相关材料。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2024-04-20T12:14:18+08:00">
+    <meta property="article:modified_time" content="2024-04-20T23:18:41+08:00">
+    <meta property="article:tag" content="Windows">
+    <meta property="article:tag" content="WSL">
+    <meta property="article:tag" content="Ubuntu">
+    <meta property="og:image" content="https://ccrysisa.github.io/logo.png">
 
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://ccrysisa.github.io/logo.png" /><meta name="twitter:title" content="Windows 10 WSL2 Ubuntu 22.04 配置指南"/>
-<meta name="twitter:description" content="今日闲来无事，刷了会 B 站，突发奇想将发灰了一年多的 WSL2 找回来折腾一下 (之前为了在 VMware 中开启嵌套虚拟化，不得以将 WSL2 打入冷宫 &#x1f923;)。由于这一年内功功力大涨，很快就完成了 WLS2 的再召集启用，下面列出配置的主要步骤和相关材料。"/>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://ccrysisa.github.io/logo.png">
+  <meta name="twitter:title" content="Windows 10 WSL2 Ubuntu 22.04 配置指南">
+  <meta name="twitter:description" content="今日闲来无事，刷了会 B 站，突发奇想将发灰了一年多的 WSL2 找回来折腾一下 (之前为了在 VMware 中开启嵌套虚拟化，不得以将 WSL2 打入冷宫 🤣)。由于这一年内功功力大涨，很快就完成了 WLS2 的再召集启用，下面列出配置的主要步骤和相关材料。">
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -47,7 +58,7 @@
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -93,7 +104,7 @@
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -153,12 +164,18 @@
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Windows 10 WSL2 Ubuntu 22.04 配置指南</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/toolkit/" class="post-category" title="分类 - Toolkit"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Toolkit</a></span></div><div class="post-meta-line"><span title="发布于 2024-04-20 12:14:18"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-20">2024-04-20</time></span>&nbsp;<span title="更新于 2024-04-20 23:18:41"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-20">2024-04-20</time></span>&nbsp;<span title="629 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
+          <span class="post-category">收录于 <a href="/categories/toolkit/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Toolkit</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-04-20 12:14:18"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-20">2024-04-20</time></span>&nbsp;<span title="更新于 2024-04-20 23:18:41"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-20">2024-04-20</time></span>&nbsp;<span title="629 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 2 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -175,8 +192,8 @@
 </nav></div>
       </div><div class="content" id="content"><p>今日闲来无事，刷了会 B 站，突发奇想将发灰了一年多的 WSL2 找回来折腾一下 (之前为了在 VMware 中开启嵌套虚拟化，不得以将 WSL2 打入冷宫 &#x1f923;)。由于这一年内功功力大涨，很快就完成了 WLS2 的再召集启用，下面列出配置的主要步骤和相关材料。</p>
 <p>操作系统: Windows 10</p>
-<h2 id="安装-wsl2-和-linux-发行版" class="heading-element">
-  <a href="#%e5%ae%89%e8%a3%85-wsl2-%e5%92%8c-linux-%e5%8f%91%e8%a1%8c%e7%89%88" class="heading-mark"></a>安装 WSL2 和 Linux 发行版</h2><div class="bilibili">
+<h2 id="安装-wsl2-和-linux-发行版">安装 WSL2 和 Linux 发行版</h2>
+<div class="bilibili">
   <iframe src="//player.bilibili.com/player.html?bvid=BV1mX4y177dJ&page=1&autoplay=false&poster=true&muted=false&danmaku=true&t=0" border="0" framespacing="0" allowfullscreen="true"></iframe>
 </div>
 <ol>
@@ -239,8 +256,8 @@
 </div><blockquote>
 <p>上面以 Ubuntu2 22.04 发行版为例，你也可以安装其它的发行版。安装过程中可能会出现无法访问源 / 仓库的问题，这个是网络问题，请自行通过魔法/科学方法解决</p>
 </blockquote>
-<h2 id="迁移至非系统盘" class="heading-element">
-  <a href="#%e8%bf%81%e7%a7%bb%e8%87%b3%e9%9d%9e%e7%b3%bb%e7%bb%9f%e7%9b%98" class="heading-mark"></a>迁移至非系统盘</h2><div class="bilibili">
+<h2 id="迁移至非系统盘">迁移至非系统盘</h2>
+<div class="bilibili">
   <iframe src="//player.bilibili.com/player.html?bvid=BV1EF4m1V7pp&page=1&autoplay=false&poster=true&muted=false&danmaku=true&t=0" border="0" framespacing="0" allowfullscreen="true"></iframe>
 </div>
 <p>以管理员身份运行 PowerShell</p>
@@ -275,25 +292,26 @@
 </span></span><span class="line"><span class="cl"><span class="c1"># 设置启用子系统时的默认用户 (建议使用迁移前创建的用户)，否则启动子系统时进入的是 root 用户</span>
 </span></span><span class="line"><span class="cl">&gt; ubuntu-22.04.exe config --default-user &lt;username&gt;</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="windows-terminal-美化" class="heading-element">
-  <a href="#windows-terminal-%e7%be%8e%e5%8c%96" class="heading-mark"></a>Windows Terminal 美化</h2><div class="bilibili">
+</div><h2 id="windows-terminal-美化">Windows Terminal 美化</h2>
+<div class="bilibili">
   <iframe src="//player.bilibili.com/player.html?bvid=BV1GM4m1X7s3&page=1&autoplay=false&poster=true&muted=false&danmaku=true&t=0" border="0" framespacing="0" allowfullscreen="true"></iframe>
 </div>
-<h2 id="其它" class="heading-element">
-  <a href="#%e5%85%b6%e5%ae%83" class="heading-mark"></a>其它</h2><p>目前 Windows 10 上的 WSL2 应该都支持 WSLg (如果你一直更新的话)，可以使用 gedit 来测试一下 WLSg 的功能，可以参考微软的官方文档:</p>
+<h2 id="其它">其它</h2>
+<p>目前 Windows 10 上的 WSL2 应该都支持 WSLg (如果你一直更新的话)，可以使用 gedit 来测试一下 WLSg 的功能，可以参考微软的官方文档:</p>
 <ul>
 <li><a href="https://github.com/microsoft/wslg"target="_blank" rel="external nofollow noopener noreferrer">https://github.com/microsoft/wslg<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
-<h2 id="效果展示" class="heading-element">
-  <a href="#%e6%95%88%e6%9e%9c%e5%b1%95%e7%a4%ba" class="heading-mark"></a>效果展示</h2><a class="lightgallery" href="/images/tools/ubuntu-22.04-wsl2.png?size=large" data-thumbnail="/images/tools/ubuntu-22.04-wsl2.png?size=small" data-sub-html="<h2>/images/tools/ubuntu-22.04-wsl2.png</h2>"><img loading="lazy" src="/images/tools/ubuntu-22.04-wsl2.png" alt="/images/tools/ubuntu-22.04-wsl2.png" srcset="/images/tools/ubuntu-22.04-wsl2.png?size=small, /images/tools/ubuntu-22.04-wsl2.png?size=medium 1.5x, /images/tools/ubuntu-22.04-wsl2.png?size=large 2x" sizes="auto" data-title="/images/tools/ubuntu-22.04-wsl2.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></div><div class="post-footer" id="post-footer">
+<h2 id="效果展示">效果展示</h2>
+<a class="lightgallery" href="/images/tools/ubuntu-22.04-wsl2.png?size=large" data-thumbnail="/images/tools/ubuntu-22.04-wsl2.png?size=small" data-sub-html="<h2>/images/tools/ubuntu-22.04-wsl2.png</h2>"><img loading="lazy" src="/images/tools/ubuntu-22.04-wsl2.png" srcset="/images/tools/ubuntu-22.04-wsl2.png?size=small, /images/tools/ubuntu-22.04-wsl2.png?size=medium 1.5x, /images/tools/ubuntu-22.04-wsl2.png?size=large 2x" sizes="auto" data-title="/images/tools/ubuntu-22.04-wsl2.png" data-alt="/images/tools/ubuntu-22.04-wsl2.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-04-20 23:18:41">更新于 2024-04-20&nbsp;</span>
-      </div></div><div class="post-info-line">
-        <div class="post-info-md"><span><a href="/posts/wsl2/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-        <div class="post-info-share">
-          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/wsl2/" data-title="Windows 10 WSL2 Ubuntu 22.04 配置指南" data-hashtags="Windows,WSL,Ubuntu"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/wsl2/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/wsl2/" data-title="Windows 10 WSL2 Ubuntu 22.04 配置指南" data-hashtags="Windows,WSL,Ubuntu"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/wsl2/" data-hashtag="Windows"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/wsl2/" data-title="Windows 10 WSL2 Ubuntu 22.04 配置指南" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/wsl2/" data-title="Windows 10 WSL2 Ubuntu 22.04 配置指南"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -302,11 +320,12 @@
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/wsl2/" data-title="Windows 10 WSL2 Ubuntu 22.04 配置指南" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/wsl2/" data-title="Windows 10 WSL2 Ubuntu 22.04 配置指南"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-        </div>
-      </div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/windows/" class="post-tag" title="标签 - Windows">Windows</a><a href="/tags/wsl/" class="post-tag" title="标签 - WSL">WSL</a><a href="/tags/ubuntu/" class="post-tag" title="标签 - Ubuntu">Ubuntu</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/windows/' class="post-tag">Windows</a><a href='/tags/wsl/' class="post-tag">WSL</a><a href='/tags/ubuntu/' class="post-tag">Ubuntu</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -315,19 +334,16 @@
   <div class="post-nav"><a href="/posts/csapp-ch2/" class="post-nav-item" rel="prev" title="CS:APP 第 2 章重点提示和练习"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>CS:APP 第 2 章重点提示和练习</a>
       <a href="/posts/c-compiler-construction/" class="post-nav-item" rel="next" title="你所不知道的 C 语言: 编译器原理和案例分析">你所不知道的 C 语言: 编译器原理和案例分析<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article>
-
-  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.121.1"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.131.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
         </div></div><div id="mask"></div><noscript>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
-</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+</div><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/js/flyfish.js" defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

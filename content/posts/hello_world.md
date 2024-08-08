@@ -187,6 +187,7 @@ Talks:
 - [扩展 Shortcodes 概述](https://fixit.lruihao.cn/zh-cn/documentation/content-management/shortcodes/extended/introduction/#admonition)
 - [图表支持](https://fixit.lruihao.cn/zh-cn/documentation/content-management/diagrams/)
 - [URL management](https://gohugo.io/content-management/urls/#permalinks)
+- [分享一个 Canvas 实现的小鱼游动动画效果](https://fixit.lruihao.cn/zh-cn/guides/flyfish/)
 
 
 
