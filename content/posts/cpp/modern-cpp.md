@@ -96,7 +96,10 @@ Preprocess to File (Yes)
 
 编译 / 构建后可以得到产生后缀为 `.i` 的预处理中间文件
 
-#### 条件编译
+#### Conditional Compilation
+
+- Wikipedia: [Conditional compilation](https://en.wikipedia.org/wiki/Conditional_compilation)
+
 ```c++
 #if <condition>
   ...
@@ -321,6 +324,78 @@ GCC, Clang 和 MSVC 这些主流的编译器都支持 `#program once` 这个语�
 #include "../include/HEADER.h"
 ```
 
+### Precompiled Headers
+
+预编译头文件会使得 C++ 头文件 (特别是 STL) 达到类似模块的效果，即头文件本身也是一个编译单元，这样就不会因为我们自己编写的源文件修改了，而一遍一遍的解析其所引用的头文件然后进行全部编译，这样会提升我们项目的编译速度。如果你关心编译时间，那一定要使用预编译头文件。
+
+但是不要往预编译头文件中添加那些会被经常修改的东西，这样会导致该头文件会被重新编译，同样会延长编译时间。推荐将不常修改的东西放入至预编译头文件当中，并且是被很多源文件所需要的外部依赖，例如 STL。对于被源文件需要较少的外部依赖，例如 ImGui 需要的外部依赖 GLFW。推荐使用 Linker 设定而不是 PCH。
+
+下面这个头文件在预处理后足足有 40 万行，如果不使用预编译头文件，又被多个源文件引用了该头文件，那么编译时间会极其恐怖:
+
+```c++ {title="pch.h"}
+#pragma once
+
+// Utilities
+#include <iostream>
+#include <algorithm>
+#include <functional>
+#include <optional>
+#include <memory>
+#include <thread>
+#include <utility>
+
+// Data structures
+#include <vector>
+#include <array>
+#include <stack>
+#include <queue>
+#include <deque>
+#include <string>
+#include <set>
+#include <map>
+#include <unordered_set>
+#include <unordered_map>
+
+// Windows API
+#include <Windows.h>
+```
+
+为了避免这种情况 (被大量源文件所引用的外部依赖)，可以使用预编译头文件来处理:
+
+1. 创建一个仅引用上面头文件的源文件 `pch.cpp`:
+
+```c++ {title="pch.cpp"}
+#include "pch.h"
+```
+2. 右击该 **源文件** 并进入其属性设定: C/C++ $\rightarrow$ Precompiled Headers $\rightarrow$ Precompiled Header (**Create**)
+
+3. 右击 **项目** 并进入其属性设定: C/C++ $\rightarrow$ Precompiled Headers $\rightarrow$ Precompiled Header (**Use**) $\rightarrow$ Precompiled Header File (**pch.h**)
+
+{{< admonition tip >}}
+Visual Studio 的 Tools $\rightarrow$ Options $\rightarrow$ Projects and Solutions $\rightarrow$ Project Settings $\rightarrow$ Build Timing (**Yes**) 可以开启显示构建计时功能。
+{{< /admonition >}}
+
+g++ 也可以使用预编译头文件功能:
+
+```bash
+# without precompiled header
+$ time g++ -std=c++11 main.cpp
+
+real    0m1.257s
+user    0m0.000s
+sys     0m0.000s
+
+# build precompiled header
+$ g++ -std=c++11 pch.h
+
+# with precompiled header
+$ time g++ -std=c++11 main.cpp
+
+real    0m0.266s
+user    0m0.000s
+sys     0m0.030s
+```
+
 ## Pointers and References
 
 > ***这两大主题可以使用 VS 调试功能的查看内存窗口进行实践***
@@ -392,91 +467,6 @@ int main()
     ref = b;      // set a's value to be b's value (8)!!!
 }
 ```
-
-## Union and Type Punning
-
-- Stack Overflow: [What is the modern, correct way to do type punning in C++?](https://stackoverflow.com/questions/67636231/what-is-the-modern-correct-way-to-do-type-punning-in-c)
-
-通过指针和引用直接操作内存来实现类型双关 (Type Punning)，可以搭配调试器的内存查看功能进行观察:
-
-```c++
-int a = 50;
-double value = *(double*)&a;    // copy
-double& value = *(double*)&a;   // in-place
-```
-
-```c++
-#include <iostream>
-class Entity
-{
-    int x, y;
-};
-int main()
-{
-    Entity e = { 5, 8 };
-    int* position = (int*)&e;
-    std::cout << position[0] << ", " << position[1] << std::endl; // [5, 8]
-    int y = *(int*)((char*)&e + 4);
-    std::cout << y << std::endl; // 8
-}
-```
-
-上面的这些代码不建议使用，除非你是研究操作系统内核这类对内存操作精度极高的领域。下面使用 `union` 来实现类型双关 (Type Punning):
-
-- cppreference: [Union declaration](https://en.cppreference.com/w/c/language/union)
-
-> Similar to struct, an unnamed member of a union whose type is a union without name is known as anonymous union. Every member of an anonymous union is considered to be a member of the enclosing struct or union keeping their union layout. This applies recursively if the enclosing struct or union is also anonymous.
-
-```c++
-struct Union
-{
-    union 
-    {
-        float a;
-        int b;
-    };
-};
-
-Union u;
-u.a = 2.0f;
-std::cout << u.b << std::endl;
-```
-
-```c++
-struct Vector2
-{
-    float x, y;
-};
-struct Vector4
-{
-    // By pointer and reference
-    float x, y, z, w;
-
-    Vector2& GetA()
-    {
-        return *(Vector*)&x;
-    }
-
-    // By union
-    union
-    {
-        struct
-        {
-            float x, y, z, w;
-        };
-        struct 
-        {
-            Vector2 a, b;
-        };
-    }
-
-    Vector2& GetA()
-    {
-        return a;
-    }
-};
-```
-
 ## Object-Oriented Programming
 
 ### Class and Struct
@@ -516,8 +506,8 @@ struct Player
 
     void Move(int xa, int ya)
     {
-	    x += xa * speed;
-	    y += ya * speed;
+        x += xa * speed;
+        y += ya * speed;
     }
 };
 ```
@@ -1225,7 +1215,7 @@ const int* const a = new int; // can't modify both `*a` and `a`
 const int* const get_ptr() {}
 ```
 
-在 Class 或 Struct 中使用 `const` 关键字，在方法名的右边添加 `const` 表示该方法不能修改 Class 或 Struct 的成员，只能读取数据，即调用中国方法不会改变 Class 或 Struct 的成员数据 (类似于 Rust 的 `&self` 参数的限制)
+在 Class 或 Struct 中使用 `const` 关键字，在方法名的右边添加 `const` 表示该方法不能修改 Class 或 Struct 的成员，只能读取数据，即调用这个方法不会改变 Class 或 Struct 的成员数据 (类似于 Rust 的 `&self` 参数的限制)
 
 ```c++
 class Entity
@@ -1561,9 +1551,9 @@ e = c;          // `=` operator overloading
 ```
 {{< /admonition >}}
 
+## Templates and Containers
 
-
-## Templates
+### Templates
 
 {{< admonition tip >}}
 模板和宏类似，它允许你定义一个可以根据你的用途进行编译的蓝图。简单来说，所谓模拟，就是 **让编译器基于你给它的规则为你写代码**。
@@ -1633,11 +1623,11 @@ int main()
 }
 ```
 
-## Containers
+### Containers
 
-### Array
+#### Array
 
-#### array
+##### array
 
 - cppreference: [Array declaration](https://en.cppreference.com/w/cpp/language/array)
 
@@ -1672,7 +1662,7 @@ int main()
 }
 ```
 
-#### std::array
+##### std::array
 
 - cppreference: [std::array](https://en.cppreference.com/w/cpp/container/array)
 
@@ -1734,7 +1724,7 @@ class array...
 边界检查的具体代码实现也是类似的，是通过常量模板规则生成的
 {{< /admonition >}}
 
-#### Multidimensional Arrays
+##### Multidimensional Arrays
 
 ```c++
 int main()
@@ -1792,7 +1782,7 @@ int main()
 
 尽量避免使用二维数组 (以及二维以上维度)，推荐将其转换为等价的一维数组，利用 cache 的特性增强性能。
 
-### String
+#### String
 
 - cppreference: [std::basic_string](https://en.cppreference.com/w/cpp/string/basic_string)
 - [ASCII Table](https://www.ascii-code.com/)
@@ -1836,7 +1826,7 @@ VS 在调试模式下进行编译，会对内存分配的对象额外分配 **�
 `std::string` 在函数参数中使用时，需要特别考虑是否应该使用引用 `&` 操作，以避免无效的拷贝开销
 {{< /admonition >}}
 
-#### Char Types
+##### Char Types
 
 - cppreference: [Fundamental types](https://en.cppreference.com/w/cpp/language/types)
 - cppreference: [C++ keyword: wchar_t](https://en.cppreference.com/w/cpp/keyword/wchar_t)
@@ -1857,7 +1847,7 @@ int main()
 `char` 类型的具体字节数是由操作系统额 CPU 架构来决定的，如果需要跨系统使用固定字节数的字符类型，请按需使用 `wchar_t`, `char16_t` 和 `char32_t` 
 {{< /admonition >}}
 
-#### String Literals
+##### String Literals
 
 - cppreference: [String literal](https://en.cppreference.com/w/cpp/language/string_literal)
 
@@ -1874,7 +1864,7 @@ int main()
 }
 ```
 
-### Vector
+#### Vector
 
 - Stack Overflow: [Why is a C++ Vector called a Vector?](https://stackoverflow.com/questions/581426/why-is-a-c-vector-called-a-vector)
 
@@ -1923,7 +1913,7 @@ int main()
 STL 的容器，它们在被设计时，速度不是优先考虑的因素，所以我们可以设计出比 STL 里的容器性能更强的类似容器，这也是为什么很多工作室会自己设计容器库而不采用 STL，例如 [Qt Container Classes](https://doc.qt.io/qt-6/containers.html)、[EASTL](https://github.com/electronicarts/EASTL)。
 {{< /admonition >}}
 
-#### Optimizing Usage
+##### Optimizing Usage
 
 一般情况下，STL 的 `vector` 是比较慢的 (因为它倾向于经常分配内存空间，这会导致大量的性能开销)，所以我们需要通过一些策略来压榨出 `vector` 的全部性能。下面通过之前的例子来展示这些优化策略。
 
@@ -1982,7 +1972,52 @@ struct Vertex
 
 现在没有复制操作了
 
-## Memory andSafety
+### Algorithms
+
+- cppreference: [Algorithms library](https://en.cppreference.com/w/cpp/algorithm)
+
+> The algorithms library defines functions for a variety of purposes (e.g. searching, sorting, counting, manipulating) that operate on ranges of elements. Note that a range is defined as **[`first`, `last`)** where `last` refers to the element past the last element to inspect or modify.
+
+#### Sorting
+
+- cppreference: [std::sort](https://en.cppreference.com/w/cpp/algorithm/sort)
+
+> Sorts the elements in the range **[`first`, `last`)** in non-descending order. The order of equal elements is not guaranteed to be preserved.
+
+> **comp**	-	comparison function object (i.e. an object that satisfies the requirements of Compare) which returns `​true` if the first argument is less than (i.e. is ordered before) the second.
+
+```c++
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <functional>
+
+int main()
+{
+    std::vector<int> values = { 3, 5, 1, 4, 2 };
+    std::sort(values.begin(), values.end()); // [1, 2, 3, 4, 5]
+    std::sort(values.begin(), values.end(), std::greater<int>()); // [5, 4, 3, 2, 1]
+    std::sort(values.begin(), values.end(), [](int a, int b) {
+        return a < b;
+    }); // [1, 2, 3, 4, 5]
+    std::sort(values.begin(), values.end(), [](int a, int b) {
+        if (a == 1)
+            return false;
+        if (b == 1)
+            return true;
+        return a < b;
+    }); // [2, 3, 4, 5, 1]
+
+    for (int value : values)
+        std::cout << value << std::endl;
+}
+```
+
+- Cppreference: [std::greater](https://en.cppreference.com/w/cpp/utility/functional/greater)
+
+> Function object for performing comparisons. The main template invokes operator> on type T.
+
+## Memory and Safety
 
 ### Stack, Heap and Lifetime
 
@@ -2122,6 +2157,12 @@ int main()
 推荐使用 `std::make_XYZ` 这这种风格标准库函数来构造智能指针实例，这样你就可以在你的代码里永远摆脱 `new` 关键字了 :rofl: 
 {{< /admonition >}}
 
+### Safety
+
+安全编程的目的主要是是降低崩溃、内存泄漏、非法访问的问题 (这一点 Rust 做的比较好，但也没有解决内存泄漏的问题)，从 C++11 开始推荐使用智能指针而不是原始指针来解决内存泄漏的相关问题，这是因为基于 RAII 的自动内存管理系统。
+
+如果是生产环境则使用智能指针，如果是学习则使用原始指针。当然，如果你需要定制的话，也可以使用自己写的智能指针。
+
 ## Benchmarking
 
 Wikipedia: [Benchmark](https://en.wikipedia.org/wiki/Benchmark_(computing))
@@ -2191,6 +2232,8 @@ int main()
     Function();
 }
 ```
+
+
 
 ## Advanced Topics
 
@@ -2383,6 +2426,90 @@ int main()
 
 > A function object is any object for which the function call operator is defined. C++ provides many built-in function objects as well as support for creation and manipulation of new function objects.
 
+### Type Punning
+
+- Stack Overflow: [What is the modern, correct way to do type punning in C++?](https://stackoverflow.com/questions/67636231/what-is-the-modern-correct-way-to-do-type-punning-in-c)
+
+通过指针和引用直接操作内存来实现类型双关 (Type Punning)，可以搭配调试器的内存查看功能进行观察:
+
+```c++
+int a = 50;
+double value = *(double*)&a;    // copy
+double& value = *(double*)&a;   // in-place
+```
+
+```c++
+#include <iostream>
+class Entity
+{
+    int x, y;
+};
+int main()
+{
+    Entity e = { 5, 8 };
+    int* position = (int*)&e;
+    std::cout << position[0] << ", " << position[1] << std::endl; // [5, 8]
+    int y = *(int*)((char*)&e + 4);
+    std::cout << y << std::endl; // 8
+}
+```
+
+上面的这些代码不建议使用，除非你是研究操作系统内核这类对内存操作精度极高的领域。下面使用 `union` 来实现类型双关 (Type Punning):
+
+- cppreference: [Union declaration](https://en.cppreference.com/w/c/language/union)
+
+> Similar to struct, an unnamed member of a union whose type is a union without name is known as anonymous union. Every member of an anonymous union is considered to be a member of the enclosing struct or union keeping their union layout. This applies recursively if the enclosing struct or union is also anonymous.
+
+```c++
+struct Union
+{
+    union 
+    {
+        float a;
+        int b;
+    };
+};
+
+Union u;
+u.a = 2.0f;
+std::cout << u.b << std::endl;
+```
+
+```c++
+struct Vector2
+{
+    float x, y;
+};
+struct Vector4
+{
+    // By pointer and reference
+    float x, y, z, w;
+
+    Vector2& GetA()
+    {
+        return *(Vector*)&x;
+    }
+
+    // By union
+    union
+    {
+        struct
+        {
+            float x, y, z, w;
+        };
+        struct 
+        {
+            Vector2 a, b;
+        };
+    }
+
+    Vector2& GetA()
+    {
+        return a;
+    }
+};
+```
+
 ### Casting
 
 {{< link href="#explict" content="Specifiers::Explict" >}} 处有讲解了一部分隐式转换和显式转换。{{< link href="#union-and-type-punning" content="Union and Type Punning" >}} 处也对类型转换进行了一定程度的讲解。下面对 C 风格和 C++ 风格的强制类型转换 (casting) 进行详细说明。
@@ -2410,6 +2537,11 @@ double s = static_cast<int>(value) + 5.3; // a == 10.3
 {{< /admonition >}}
 
 - 以上整理自 [@ljnelf](https://space.bilibili.com/27560356) 的评论
+
+#### Dynamic Casting
+
+```c++
+```
 
 ### Namespaces
 
@@ -2518,50 +2650,6 @@ int main()
 }
 ```
 
-### Algorithms
-
-- cppreference: [Algorithms library](https://en.cppreference.com/w/cpp/algorithm)
-
-> The algorithms library defines functions for a variety of purposes (e.g. searching, sorting, counting, manipulating) that operate on ranges of elements. Note that a range is defined as **[`first`, `last`)** where `last` refers to the element past the last element to inspect or modify.
-
-#### Sorting
-
-- cppreference: [std::sort](https://en.cppreference.com/w/cpp/algorithm/sort)
-
-> Sorts the elements in the range **[`first`, `last`)** in non-descending order. The order of equal elements is not guaranteed to be preserved.
-
-> **comp**	-	comparison function object (i.e. an object that satisfies the requirements of Compare) which returns `​true` if the first argument is less than (i.e. is ordered before) the second.
-
-```c++
-#include <iostream>
-#include <vector>
-#include <algorithm>
-#include <functional>
-
-int main()
-{
-    std::vector<int> values = { 3, 5, 1, 4, 2 };
-    std::sort(values.begin(), values.end()); // [1, 2, 3, 4, 5]
-    std::sort(values.begin(), values.end(), std::greater<int>()); // [5, 4, 3, 2, 1]
-    std::sort(values.begin(), values.end(), [](int a, int b) {
-        return a < b;
-    }); // [1, 2, 3, 4, 5]
-    std::sort(values.begin(), values.end(), [](int a, int b) {
-        if (a == 1)
-            return false;
-        if (b == 1)
-            return true;
-        return a < b;
-    }); // [2, 3, 4, 5, 1]
-
-    for (int value : values)
-        std::cout << value << std::endl;
-}
-```
-
-- Cppreference: [std::greater](https://en.cppreference.com/w/cpp/utility/functional/greater)
-
-> Function object for performing comparisons. The main template invokes operator> on type T.
 
 ### Coding Style
 
@@ -2592,29 +2680,150 @@ bilibili: [ImGui 入门到精通](https://space.bilibili.com/443124242/channel/c
     - `glew32s.lib`
     - `Opengl32.lib`: 这个库是计算机自带的
 
+```c++
+// must keep this import order!
+#include "GL/glew.h"
+#include "GLFW/glfw3.h"
+
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+```
+
+#### 创建窗口
+
+```c++
+GLFWwindow* Windows;
+
+int main()
+{
+    // init GLFW and OpenGL
+    glfwInit();
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    // create main window
+    Windows = glfwCreateWindow(1000, 800, "ImGuiDemo", NULL, NULL);
+    // give control permission to main window
+    glfwMakeContextCurrent(Windows);
+    // disable sync
+    glfwSwapInterval(0);
+
+    // init ImGui
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext(NULL);
+    // read from io and set content of ImGui
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+    // set ImGui's style
+    ImGui::StyleColorsDark();
+    // init ImGui to window created by GLFW 
+    ImGui_ImplGlfw_InitForOpenGL(Windows, true);
+    // init ImGui to be rendered by OpenGL
+    ImGui_ImplOpenGL3_Init("#version 330");
+
+    // check the close flag (is not entered) of window
+    while (!glfwWindowShouldClose(Windows))
+    {
+        // clear rendered data
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        // ImGui init every frame with GLFW and OpenGL
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
+
+        // ImGui Demo
+        ImGui::ShowDemoWindow();
+
+        // get data to be rendered
+        ImGui::Render();
+        // draw GmGui's data got before
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+        // draw content of window
+        glfwSwapBuffers(Windows);
+        // draw events
+        glfwPollEvents();
+    }
+}
+```
+
 #### 基础控件
 
-窗口: `ImGui::Begin`
+##### 窗口
 
-文本框: `ImGui::Text`
+```c++
+ImGui::Begin("MyImGuiWindow", 0, ImGuiWindowFlags_::ImGuiWindowFlags_MenuBar);
+...
+ImGui::End();
+```
 
-按钮: `ImGui::Button`
+##### 文本框
 
-输入文本框: `ImGui::InputText`
-列表:
-- `ImGui::BeginListBox`
-- `ImGui::Selectable`
-- `ImGui::EndListBox`
+```c++
+std::string Text = "Hello, world! 123";
+ImGui::Text(Text.c_str());
+```
 
-下拉列表:
-- `ImGui::BeginComboBox`
-- `ImGui::Selectable`
-- `ImGui::EndComboBox`
+##### 按钮
 
-颜色选择器: `ImGui::ColorEdit4`
+```c++
+if (ImGui::Button("Button"))
+{
+    Text = "You click the button";
+}
+```
+
+##### 输入文本框
+
+```c++
+char  textbox[64] = "Test Text Box";
+ImGui::InputText("Test Text Box", textbox, 64);
+```
+
+##### 固定显示选项的列表
+
+```c++
+ImGui::BeginListBox("List");
+for (size_t i = 0; i < 32; i++)
+{
+    if (ImGui::Selectable(std::to_string(i).c_str()))
+    {
+        Text = std::to_string(i);
+    }
+}
+ImGui::EndListBox();
+```
 
 - Issue: [Horizontal scrollbar when using ListBoxHeader](https://github.com/ocornut/imgui/issues/2510)
 > Also note that `ListBoxHeader()` was renamed to `BeginListBox()` on 2023-05-31 
+
+##### 可展开显示选项的列表
+
+```c++
+if (ImGui::BeginCombo("Combo", Text.c_str()))
+{
+	for (size_t i = 0; i < 32; i++)
+	{
+		if (ImGui::Selectable(std::to_string(i).c_str()))
+		{
+			Text = std::to_string(i);
+		}
+	}
+	ImGui::EndCombo();
+}
+```
+
+##### 颜色选择器
+
+```c++
+ImVec4 color;
+ImGui::ColorEdit4("Color", (float*)&color, ImGuiColorEditFlags_::ImGuiColorEditFlags_AlphaBar);
+```
+
+#### 高级定制
 
 ## References
 
