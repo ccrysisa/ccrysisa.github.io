@@ -467,11 +467,129 @@ int main()
     ref = b;      // set a's value to be b's value (8)!!!
 }
 ```
+
+### Function Pointers
+
+- cppreference: [Pointer declaration](https://en.cppreference.com/w/cpp/language/pointer) - **Pointers to functions**
+
+> A pointer to function can be initialized with an address of a non-member function or a static member function. Because of the function-to-pointer implicit conversion, the address-of operator is optional
+
+```c++
+#include <iostream>
+void HelloWorld(int a) 
+{ 
+    std::cout << "Hello, world!" << << a << std::endl; 
+}
+int main()
+{
+    void(*function)(int) = HelloWorld; // C style
+    auto function = HelloWorld; // or &HelloWorld;
+    function(5); // same as call `HelloWorld(5)`
+}
+```
+
+`auto` 在推导裸函数指针 (raw function pointer) 上特别有用 (因为裸函数指针类型实在是太复杂了)。也可以使用 `using` 或 `typedef` 为函数指针取别名，增加可读性:
+
+```c++
+typedef void(*HelloWorldFunction)(int);  // by `typedef`
+using HelloWroldFunction = void(*)(int); // by `using`
+
+HelloWorldFunction function = HelloWorld;
+function(5);
+function(6);
+function(7);
+```
+
+函数指针作为函数参数传递:
+
+```c++
+#include <iostream>
+#include <vector>
+
+void PrintValue(int value)
+{
+    std::cout << "Value: " << value << std::endl;
+}
+
+void ForEach(const std::vector<int>& values, void(*func)(int))
+{
+    for (int value : values)
+        func(value);
+}
+
+int main()
+{
+    std::vector<int> values = { 1, 5, 4, 2, 3 };
+    ForEach(values, PrintValue); // should print 1, 5, 4, 2, 3 line by line
+}
+```
+
+### Lambdas
+
+- cppreference: [Lambda expressions (since C++11)](https://en.cppreference.com/w/cpp/language/lambda)
+
+> Constructs a closure: an unnamed function object capable of capturing variables in scope.
+
+只要你有一个函数指针，你都可以在 C++ 中使用 Lambda 表达式。即我们会在设置函数指针以指向函数的地方，我们都可以使用 Lambda 表达式来代替函数指针使用 (例如函数参数)。但这个规则是有前提的，仅限于非捕获类的 Lambda 表达式，如果是捕获类的 Lambda 表达式，则需要使用 `std::function`。
+
+使用 Lambda 表达式改写之前的函数指针作为函数参数的例子:
+
+```c++
+int main()
+{
+    std::vector<int> values = { 1, 5, 4, 2, 3 };
+    ForEach(values, [](int value) { std::cout << "Value: " << value << std::endl; });
+}
+```
+
+> The captures is a comma-separated list of zero or more captures, optionally beginning with the *capture-default*. The capture list defines the outside variables that are accessible from within the lambda function body. The only *capture-defaults* are
+> 
+> - `&` (implicitly capture the used variables with automatic storage duration by reference) and
+> - `=` (implicitly capture the used variables with automatic storage duration by copy).
+>
+> The syntax of an individual capture in captures is ...
+
+Lambda 表达式的捕获分为 capture-default 和 individual capture，这两者都是可选的。capture-default 指定的是该 Lambda 表达式默认的捕获规则，而 individual capture 指定的是单独变量的捕获规则。
+
+- cppreference: [std::function](https://en.cppreference.com/w/cpp/utility/functional/function)
+
+```c++
+#include <iostream>
+#include <vector>
+#include <functional>
+#include <algorithm>
+
+void ForEach(const std::vector<int>& values, const std::function<void(int)>& func)
+{
+    for (int value : values)
+        func(value);
+}
+
+int main()
+{
+    std::vector<int> values = { 1, 5, 4, 2, 3 };
+    int a = 5;
+    auto lambda = [=](int value) { std::cout << "Value: " << a << std::endl; };
+    ForEach(values, lambda); // should print 5 five times line by line
+
+    auto it = std::find_if(values.begin(), values.end(), [](int value) { return value > 3; });
+    std::cout << *it << std::endl; // should print 5
+}
+```
+
+- cppreference: [std::find, std::find_if, std::find_if_not](https://en.cppreference.com/w/cpp/algorithm/find)
+
+- cppreference: [Function objects](https://en.cppreference.com/w/cpp/utility/functional)
+
+> A function object is any object for which the function call operator is defined. C++ provides many built-in function objects as well as support for creation and manipulation of new function objects.
+
 ## Object-Oriented Programming
 
 ### Class and Struct
 
-C++ 的 Class 和 Struct 是相同的东西，只不过 Class 默认成员字段的外部可见性为 private，而 Struct 默认成员字段的外部可见性为 public，仅仅这个区别而已
+C++ 的 Class 和 Struct 是相同的东西，只不过 Class 默认成员字段的外部可见性为 private，而 Struct 默认成员字段的外部可见性为 public，仅仅只有这个区别而已。
+
+> The data members of a class are private by default and the members of a structure are public by default. 
 
 ```c++
 class Player
@@ -1662,6 +1780,27 @@ int main()
 }
 ```
 
+C++ 支持可变长的数组，但是其长度必须在运行时明确，否则会导致未定义行为:
+
+```c++
+#include <iostream>
+int main()
+{
+    std::cin << n;
+    int a[n];
+}
+```
+
+```c++
+#include <iostream>
+int main()
+{
+    int a[n];
+    std::cin << n;
+    // UB!
+}
+```
+
 ##### std::array
 
 - cppreference: [std::array](https://en.cppreference.com/w/cpp/container/array)
@@ -1864,6 +2003,26 @@ int main()
 }
 ```
 
+##### String Stream
+
+- cppreference: [std::basic_stringstream](https://en.cppreference.com/w/cpp/io/basic_stringstream)
+
+stringstream is a stream class to operate on strings. It implements input/output operations on memory (string) based streams. stringstream can be helpful in different type of parsing. The following operators/functions are commonly used here
+
+- Operator `>>` Extracts formatted data.
+- Operator `<<` Inserts formatted data.
+- Method `str()` Gets the contents of underlying string device object.
+- Method `str(string)` Sets the contents of underlying string device object.
+
+Its header file is **sstream**.
+
+```c++
+stringstream ss("23,4,56");
+char ch;
+int a, b, c;
+ss >> a >> ch >> b >> ch >> c;  // a = 23, b = 4, c = 56
+```
+
 #### Vector
 
 - Stack Overflow: [Why is a C++ Vector called a Vector?](https://stackoverflow.com/questions/581426/why-is-a-c-vector-called-a-vector)
@@ -1907,6 +2066,16 @@ int main()
 
     vertices.erase(vertices.begin() + 1);
 }
+```
+
+C++ 的 vector 的 reomve 操作需要通 **迭代器** 来操作:
+
+```c++
+// Removes the element present at position.  
+v.erase(v.begin()+4); // erases the fifth element of the vector v
+
+// Removes the elements in the range from start to end inclusive of the start and exclusive of the end.
+v.erase(v.begin()+2,v.begin()+5); // erases all the elements from the third element to the fifth element.
 ```
 
 {{< admonition >}}
@@ -2309,122 +2478,7 @@ OPEN_CURLY
 宏常用于跟踪、调试，例如追踪内存分配 (e.g. 那哪一行、哪个函数分配了多少字节)、日志系统的输出
 {{< /admonition >}}
 
-### Function Pointers
 
-#### Pointer to Function in C
-
-- cppreference: [Pointer declaration](https://en.cppreference.com/w/cpp/language/pointer) - **Pointers to functions**
-
-> A pointer to function can be initialized with an address of a non-member function or a static member function. Because of the function-to-pointer implicit conversion, the address-of operator is optional
-
-```c++
-#include <iostream>
-void HelloWorld(int a) 
-{ 
-    std::cout << "Hello, world!" << << a << std::endl; 
-}
-int main()
-{
-    void(*function)(int) = HelloWorld; // C style
-    auto function = HelloWorld; // or &HelloWorld;
-    function(5); // same as call `HelloWorld(5)`
-}
-```
-
-`auto` 在推导裸函数指针 (raw function pointer) 上特别有用 (因为裸函数指针类型实在是太复杂了)。也可以使用 `using` 或 `typedef` 为函数指针取别名，增加可读性:
-
-```c++
-typedef void(*HelloWorldFunction)(int);  // by `typedef`
-using HelloWroldFunction = void(*)(int); // by `using`
-
-HelloWorldFunction function = HelloWorld;
-function(5);
-function(6);
-function(7);
-```
-
-函数指针作为函数参数传递:
-
-```c++
-#include <iostream>
-#include <vector>
-
-void PrintValue(int value)
-{
-    std::cout << "Value: " << value << std::endl;
-}
-
-void ForEach(const std::vector<int>& values, void(*func)(int))
-{
-    for (int value : values)
-        func(value);
-}
-
-int main()
-{
-    std::vector<int> values = { 1, 5, 4, 2, 3 };
-    ForEach(values, PrintValue); // should print 1, 5, 4, 2, 3 line by line
-}
-```
-
-#### Lambdas
-
-- cppreference: [Lambda expressions (since C++11)](https://en.cppreference.com/w/cpp/language/lambda)
-
-> Constructs a closure: an unnamed function object capable of capturing variables in scope.
-
-只要你有一个函数指针，你都可以在 C++ 中使用 Lambda 表达式。即我们会在设置函数指针以指向函数的地方，我们都可以使用 Lambda 表达式来代替函数指针使用 (例如函数参数)。但这个规则是有前提的，仅限于非捕获类的 Lambda 表达式，如果是捕获类的 Lambda 表达式，则需要使用 `std::function`。
-
-使用 Lambda 表达式改写之前的函数指针作为函数参数的例子:
-
-```c++
-int main()
-{
-    std::vector<int> values = { 1, 5, 4, 2, 3 };
-    ForEach(values, [](int value) { std::cout << "Value: " << value << std::endl; });
-}
-```
-
-> The captures is a comma-separated list of zero or more captures, optionally beginning with the *capture-default*. The capture list defines the outside variables that are accessible from within the lambda function body. The only *capture-defaults* are
-> 
-> - `&` (implicitly capture the used variables with automatic storage duration by reference) and
-> - `=` (implicitly capture the used variables with automatic storage duration by copy).
->
-> The syntax of an individual capture in captures is ...
-
-Lambda 表达式的捕获分为 capture-default 和 individual capture，这两者都是可选的。capture-default 指定的是该 Lambda 表达式默认的捕获规则，而 individual capture 指定的是单独变量的捕获规则。
-
-- cppreference: [std::function](https://en.cppreference.com/w/cpp/utility/functional/function)
-
-```c++
-#include <iostream>
-#include <vector>
-#include <functional>
-#include <algorithm>
-
-void ForEach(const std::vector<int>& values, const std::function<void(int)>& func)
-{
-    for (int value : values)
-        func(value);
-}
-
-int main()
-{
-    std::vector<int> values = { 1, 5, 4, 2, 3 };
-    int a = 5;
-    auto lambda = [=](int value) { std::cout << "Value: " << a << std::endl; };
-    ForEach(values, lambda); // should print 5 five times line by line
-
-    auto it = std::find_if(values.begin(), values.end(), [](int value) { return value > 3; });
-    std::cout << *it << std::endl; // should print 5
-}
-```
-
-- cppreference: [std::find, std::find_if, std::find_if_not](https://en.cppreference.com/w/cpp/algorithm/find)
-
-- cppreference: [Function objects](https://en.cppreference.com/w/cpp/utility/functional)
-
-> A function object is any object for which the function call operator is defined. C++ provides many built-in function objects as well as support for creation and manipulation of new function objects.
 
 ### Type Punning
 
@@ -2454,7 +2508,11 @@ int main()
 }
 ```
 
-上面的这些代码不建议使用，除非你是研究操作系统内核这类对内存操作精度极高的领域。下面使用 `union` 来实现类型双关 (Type Punning):
+上面的这些代码不建议使用，除非你是研究操作系统内核这类对内存操作精度极高的领域。
+
+#### Union
+
+下面使用 `union` 来实现类型双关 (Type Punning):
 
 - cppreference: [Union declaration](https://en.cppreference.com/w/c/language/union)
 
@@ -2674,7 +2732,7 @@ bilibili: [ImGui 入门到精通](https://space.bilibili.com/443124242/channel/c
 - C/C++ -> Additional Include Directoris
     - `$(SolutionDir)\Dependencies\GLFW\include`
     - `$(SolutionDir)\Dependencies\GLEW\include`
-    - `$(ProjectDir)\imgui`
+    - `$(ProjectDir)\imgui` 或者新建一个 Project 并将其作为静态库
 - Linker -> Additional Library Directories
     - `glfw3.lib`
     - `glew32s.lib`
@@ -2830,10 +2888,11 @@ ImGui::ColorEdit4("Color", (float*)&color, ImGuiColorEditFlags_::ImGuiColorEditF
 - The Cherno: [C++](https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb) / [中文翻译](https://space.bilibili.com/364152971/channel/collectiondetail?sid=13909): 主要介绍 C++11 及以上版本的语法
 - [C++ Weekly With Jason Turner](https://www.youtube.com/@cppweekly): 这个博主超级猛
 - [CppCon](https://www.youtube.com/@CppCon): 强烈推荐 [Back To Basics](https://www.youtube.com/@CppCon/search?query=Back%20to%20Basics) 专题
+- [Learn C++](https://www.learncpp.com/)
+- [HackerRank](https://www.hackerrank.com/): 一个与 LeetCode 类似的练习网站
 - [C++ 矿坑系列](https://github.com/Mes0903/Cpp-Miner)
 - 我是龙套小果丁: [现代 C++ 基础](https://space.bilibili.com/18874763/channel/collectiondetail?sid=2192185)
 - 南方科技大学: [快速学习 C 和 C++，基础语法和优化策略](https://www.bilibili.com/video/BV1Vf4y1P7pq/)
 - 原子之音: [C++ 现代实用教程](https://space.bilibili.com/437860379/channel/seriesdetail?sid=2352475)
 / [C++ 智能指针](https://www.bilibili.com/video/BV18B4y187uL)
 / [CMake 简明教程](https://www.bilibili.com/video/BV1xa4y1R7vT)
-- [Learn C++](https://www.learncpp.com/)
