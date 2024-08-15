@@ -553,6 +553,8 @@ Lambda 表达式的捕获分为 capture-default 和 individual capture，这两�
 
 - cppreference: [std::function](https://en.cppreference.com/w/cpp/utility/functional/function)
 
+> Class template `std::function` is a general-purpose polymorphic function wrapper. Instances of `std::function` can store, copy, and invoke any CopyConstructible Callable target -- functions (via pointers thereto), lambda expressions, bind expressions, or other function objects, as well as pointers to member functions and pointers to data members.
+
 ```c++
 #include <iostream>
 #include <vector>
@@ -2332,77 +2334,47 @@ int main()
 
 如果是生产环境则使用智能指针，如果是学习则使用原始指针。当然，如果你需要定制的话，也可以使用自己写的智能指针。
 
-## Benchmarking
+## Concurrency
 
-Wikipedia: [Benchmark](https://en.wikipedia.org/wiki/Benchmark_(computing))
+### Threads
 
-### Timing
+- cppreference: [Concurrency support library (since C++11)](https://en.cppreference.com/w/cpp/thread)
+- cppreference: [std::thread](https://en.cppreference.com/w/cpp/thread/thread)
 
-- cppreference: [Date and time utilities](https://en.cppreference.com/w/cpp/chrono)
-- cppreference: [Standard library header <chrono> (C++11)](https://en.cppreference.com/w/cpp/header/chrono)
-
-chrono 是一个平台无关的计时库，如果不是特定平台高精度的计时需求，使用这个库就足够了。
+> The class `thread` represents a single thread of execution. Threads allow multiple functions to execute concurrently.
 
 ```c++
 #include <iostream>
 #include <thread>
-#include <chrono>
 
-int main()
+static bool s_Finished = false;
+
+void DoWork()
 {
     using namespace std::literals::chrono_literals;
 
-    auto start = std::chrono::high_resolution_clock::now();
-    std::this_thread::sleep_for(1s);
-    auto end = std::chrono::high_resolution_clock::now();
+    std::cout << "Start thread id=" << std::this_thread::get_id() << std::endl;
 
-    std::chrono::duration<float> duration = end - start;
-    std::cout << duration << "s" << std::endl;
-}
-```
-
-运用作用域、生命周期以及析构函数来实现自动计时:
-
-```c++
-#include <iostream>
-#include <thread>
-#include <chrono>
-
-struct Timer
-{
-    std::chrono::steady_clock::time_point start, end;
-    std::chrono::duration<float> duration;
-
-    Timer()
+    while (!s_Finished)
     {
-        start = std::chrono::high_resolution_clock::now();
+        std::cout << "Working...\n";
+        std::this_thread::sleep_for(1s);
     }
-
-    ~Timer()
-    {
-        end = std::chrono::high_resolution_clock::now();
-        duration = end - start;
-
-        float ms = duration.count() * 1000.0f;
-        std::cout << "Timer took " << ms << "ms" << std::endl;
-    }
-};
-
-void Function()
-{
-    Timer timer;
-
-    for (int i = 0; i < 100; i++)
-        std::cout << "Hello\n" /* << std::endl */;
 }
 
 int main()
 {
-    Function();
+    std::thread worker(DoWork);
+
+    std::cin.get();
+    s_Finished = true;
+
+    worker.join();
+
+    std::cout << "Finished." << std::endl;
+    std::cout << "Start thread id=" << std::this_thread::get_id() << std::endl;
 }
 ```
-
-
 
 ## Advanced Topics
 
@@ -2419,6 +2391,30 @@ int main()
 
 - cppreference: [std::tuple](https://en.cppreference.com/w/cpp/utility/tuple)
 - cppreference: [std::pair](https://en.cppreference.com/w/cpp/utility/pair)
+
+```c++
+#include <iostream>
+#include <tuple>
+#include <string>
+
+std::tuple<std::string, int> CreatePerson()
+{
+	return { "Cherno", 24 };
+}
+
+int main()
+{
+	auto person = CreatePerson();
+	std::string& name = std::get<0>(person);
+	int age = std::get<1>(person);
+	// or
+	std::string name;
+	int age;
+	std::tie(name, age) = CreatePerson();
+}
+```
+
+这个问题在 C++17 提出结构化绑定之后就得到比较好的解决了，参考 {{< link href="#structured-bindings" content="C++17::Structured-Binding" >}}
 
 ### Macros
 
@@ -2598,8 +2594,58 @@ double s = static_cast<int>(value) + 5.3; // a == 10.3
 
 #### Dynamic Casting
 
+- cppreference: [dynamic_cast conversion](https://en.cppreference.com/w/cpp/language/dynamic_cast)
+
+> Safely converts pointers and references to classes up, down, and sideways along the inheritance hierarchy.
+
 ```c++
+class Entity
+{
+};
+
+class Player : public Entity
+{
+};
+
+class Enemy : public Entity
+{
+};
+
+int main()
+{
+    Player* player = new Player();
+    Entity* e = player;
+
+    Player* p = e; // compiler error since e maybe Enemy
+}
 ```
+
+这种情况使用 C 风格的类型转换或 `static_cast` 是合法的，但可能会导致运行时错误 (除非能在编译时期时向编译器保证):
+
+```c++
+    Player* p = (Player*)e; 
+    Player* p = static_cast<Player*>(e); 
+```
+
+上面例子是可以在编译时期保证类型转换是合法的，所以使用 `static_cast` 或 `dynamic_cast` 都可以，但是更常见的情况是运行时才得知对应的具体类型 (例如根据用户输入而构造不同的具体类型)，此时就是 `dynamic_cast` 的使用场景了，根据不同的 (运行时) 类型进行不同的处理:
+
+```c++
+    Player* p = dynamic_cast<Player*>(e); 
+```
+
+```c++
+    Player* p = dynamic_cast<Player*>(e);
+    if (p)
+    {
+        // do something
+    }
+```
+
+其实作本质是根据运行时储存的 RTTI (runtime type information) 来推导实例的具体类型，从而进行合法和允许的类型转换，对于不合法的类型转换则返回 NULL。但是这个实作所依赖的 RTTI 是运行时开销 (需要空间储存表，需要时间来查表)，所以使用 `dynamic_cast` 会又额外的运行开销，注重性能的场景需要注意这一点。
+
+{{< admonition tip >}}
+VS 可以关闭 C++ 的 RTTI 开销:  Project 属性 $\rightarrow$ C/C++ $\rightarrow$ Language $\rightarrow$ Enable Run-Time Type Information (**No**)
+{{< /admonition >}}
 
 ### Namespaces
 
@@ -2668,46 +2714,128 @@ int main()
 大项目尽量将函数、类等等定义在 namspace 内，防止出现 API 冲突。
 {{< /admonition >}}
 
-### Threads
 
-- cppreference: [Concurrency support library (since C++11)](https://en.cppreference.com/w/cpp/thread)
-- cppreference: [std::thread](https://en.cppreference.com/w/cpp/thread/thread)
+### Benchmarking
 
-> The class `thread` represents a single thread of execution. Threads allow multiple functions to execute concurrently.
+Wikipedia: [Benchmark](https://en.wikipedia.org/wiki/Benchmark_(computing))
+
+#### Timing
+
+- cppreference: [Date and time utilities](https://en.cppreference.com/w/cpp/chrono)
+- cppreference: [Standard library header <chrono> (C++11)](https://en.cppreference.com/w/cpp/header/chrono)
+
+chrono 是一个平台无关的计时库，如果不是特定平台高精度的计时需求，使用这个库就足够了。
 
 ```c++
 #include <iostream>
 #include <thread>
+#include <chrono>
 
-static bool s_Finished = false;
-
-void DoWork()
+int main()
 {
     using namespace std::literals::chrono_literals;
 
-    std::cout << "Start thread id=" << std::this_thread::get_id() << std::endl;
+    auto start = std::chrono::high_resolution_clock::now();
+    std::this_thread::sleep_for(1s);
+    auto end = std::chrono::high_resolution_clock::now();
 
-    while (!s_Finished)
+    std::chrono::duration<float> duration = end - start;
+    std::cout << duration << "s" << std::endl;
+}
+```
+
+运用作用域、生命周期以及析构函数来实现自动计时:
+
+```c++
+#include <iostream>
+#include <thread>
+#include <chrono>
+
+struct Timer
+{
+    std::chrono::steady_clock::time_point start, end;
+    std::chrono::duration<float> duration;
+
+    Timer()
     {
-        std::cout << "Working...\n";
-        std::this_thread::sleep_for(1s);
+        start = std::chrono::high_resolution_clock::now();
     }
+
+    ~Timer()
+    {
+        end = std::chrono::high_resolution_clock::now();
+        duration = end - start;
+
+        float ms = duration.count() * 1000.0f;
+        std::cout << "Timer took " << ms << "ms" << std::endl;
+    }
+};
+
+void Function()
+{
+    Timer timer;
+
+    for (int i = 0; i < 100; i++)
+        std::cout << "Hello\n" /* << std::endl */;
 }
 
 int main()
 {
-    std::thread worker(DoWork);
-
-    std::cin.get();
-    s_Finished = true;
-
-    worker.join();
-
-    std::cout << "Finished." << std::endl;
-    std::cout << "Start thread id=" << std::this_thread::get_id() << std::endl;
+    Function();
 }
 ```
 
+##### 实作案例
+
+编译器最佳化对于数组遍历求和的效率影响:
+
+```c++
+int value = 0;
+{
+    Timer timer;
+    for (int i = 0; i < 1000000; i++)
+        value += 2;
+}
+
+std::cout << value << std::endl;
+```
+
+{{< admonition tip >}}
+VS 可以通过设定 Debug 或 Release 模式来设定编译器最优化等级
+{{< /admonition >}}
+
+不同的智能指针构造的效率差异:
+
+```c++
+struct Vector2
+{
+    float x, y;
+};
+
+std::cout << "Make Shared\n";
+{
+    std::array<std::shared_ptr<Vector2>, 1000> sharedPtrs;
+    Timer timer;
+    for (int i = 0; i < sharedPtrs.size(); i++)
+        sharedPtrs[i] = std::make_shared<Vector2>();
+}
+
+std::cout << "New Shared\n";
+{
+    std::array<std::shared_ptr<Vector2>, 1000> sharedPtrs;
+    Timer timer;
+    for (int i = 0; i < sharedPtrs.size(); i++)
+        sharedPtrs[i] = std::shared_ptr<Vector2>(new Vector2());
+}
+
+std::cout << "Make Unique\n";
+{
+    std::array<std::unique_ptr<Vector2>, 1000> uniquePtrs;
+    Timer timer;
+    for (int i = 0; i < uniquePtrs.size(); i++)
+        uniquePtrs[i] = std::make_unique<Vector2>();
+}
+```
 
 ### Coding Style
 
@@ -2715,6 +2843,158 @@ int main()
 
 - 函数名: [PscalCase](https://en.wikipedia.org/wiki/Naming_convention_(programming)#Letter_case-separated_words) 命名法 e.g. `ForEach`
 - 类成员: [Hungarian](https://en.wikipedia.org/wiki/Hungarian_notation) 命名法 e.g. `m_Devices`
+
+## Modern Features
+
+VS 设定 C++ 语言标准: Project 属性 $\rightarrow$ C/C++ $\rightarrow$ Language $\rightarrow$ C++ Language Standard
+
+### C++17
+
+#### Structured Bindings
+
+- cppreference: [Structured binding declaration (since C++17)](https://en.cppreference.com/w/cpp/language/structured_binding)
+
+> Binds the specified names to subobjects or elements of the initializer.
+
+```c++
+#include <iostream>
+#include <tuple>
+#include <string>
+
+std::tuple<std::string, int> CreatePerson()
+{
+	return { "Cherno", 24 };
+}
+
+int main()
+{
+	auto [name, age] = CreatePerson();
+}
+```
+
+#### Optional
+
+- cppreference: [std::optional](https://en.cppreference.com/w/cpp/utility/optional)
+
+> The class template `std::optional` manages an optional contained value, i.e. a value that may or may not be present.
+
+```c++
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <optional>
+
+std::optional<std::string> ReadFileAsString(const std::string& filepath)
+{
+	std::ifstream stream(filepath);
+	if (stream)
+	{
+		std::string result;
+		// read file
+		stream.close();
+		return result;
+	}
+	return {};
+}
+
+int main()
+{
+	std::optional<std::string> data = ReadFileAsString("data.txt");
+    std::string value = data.value_or("Not present");
+	if (data.has_value())
+	{
+		std::string& value = data.value();
+		std::cout << "File read successfully!\n";
+	}
+	else
+	{
+		std::cout << "File could not be opened!\n";
+	}
+}
+```
+
+由于 `std::optional` 重载了逻辑运算符，所以上面例子的第 23 行可以改写为:
+
+```c++
+	if (data)
+```
+
+当然这样在处理 `std::optional<bool>` 的情况时会有二义性，但是这种使用场景比较少见 (因为 optional 本身根据内部数据存在与否就表示了一种 `bool` 值)。
+
+相似实作: Rust [std::option::Option](https://doc.rust-lang.org/std/option/enum.Option.html)
+
+#### Variant
+
+- cppreference: [std::variant](https://en.cppreference.com/w/cpp/utility/variant)
+
+> The class template `std::variant` represents a type-safe `union`. An instance of std::variant at any given time either holds a value of one of its alternative types, or in the case of error - no value
+
+```c++
+#include <iostream>
+#include <string>
+#include <variant>
+
+int main()
+{
+	std::variant<std::string, int> data;
+
+	data = "Hello";
+	data.index(); // 0
+	std::cout << std::get<std::string>(data) << std::endl;
+
+	data = 10;
+	data.index(); // 1
+
+	if (auto value = std::get_if<std::string>(&data))
+	{
+		std::string& v = *value;
+	}
+}
+```
+
+`std::variant` 和 `union` 的内存布局是完全不同的，`union` 占用的内存大小等于其内存占用最大的成员类型，而 `std::variant` 占用的内存大小为列举的类型大小之和 (当然这两者实际占用的内存大小还需要考虑内存对齐):
+
+```c++
+std::variant<std::string, double> data;
+union MyUnion { std::string s; double d; };
+
+std::cout << sizeof(double) << std::endl;       // 8
+std::cout << sizeof(std::string) << std::endl;  // 28
+std::cout << sizeof(data) << std::endl;         // 40
+std::cout << sizeof(MyUnion) << std::endl;      // 32
+```
+
+所以 `variant` 会更加类型安全，因为它和 `union` 不一样，不会造成未定义行为。可以使用 `std::variant` 来实现类似于 Rust 的 `Result` 类型:
+
+```c++
+enum class ErrorCode
+{
+    None = 0,
+    NotFound = 1,
+    NoAccess = 2,
+};
+
+std::variant<std::string, ErrorCode> ReadFileAsString(const std::string& filepath)
+{
+    ...
+}
+```
+
+相似实作: Rust [Enum](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)，只是语法相似，内部实作特别是内存布局完全不同，Rust 的 Enum 内存布局更偏向于 C/C++ 的 Union。
+
+#### Any
+
+- cpprederence: [std::any](https://en.cppreference.com/w/cpp/utility/any)
+
+> The class any describes a type-safe container for single values of any copy constructible type.
+
+```c++
+std::any data;
+data = "Hello";
+data = 1;
+```
+
+这个 `std::any` 其实没啥应用场景... `std::variant` 更加安全并且性能更强 (因为 `std::any` 对于大的对象是通过动态分配的，这导致了其性能不如 `std::variant`)。除此之外，使用 `std::any` 会降低代码可读性，我个人不认为在代码中使用 `std::any` 是一种良好的编程习惯。
 
 ## Gui
 
@@ -2863,14 +3143,14 @@ ImGui::EndListBox();
 ```c++
 if (ImGui::BeginCombo("Combo", Text.c_str()))
 {
-	for (size_t i = 0; i < 32; i++)
-	{
-		if (ImGui::Selectable(std::to_string(i).c_str()))
-		{
-			Text = std::to_string(i);
-		}
-	}
-	ImGui::EndCombo();
+    for (size_t i = 0; i < 32; i++)
+    {
+        if (ImGui::Selectable(std::to_string(i).c_str()))
+        {
+            Text = std::to_string(i);
+        }
+    }
+    ImGui::EndCombo();
 }
 ```
 
@@ -2885,7 +3165,7 @@ ImGui::ColorEdit4("Color", (float*)&color, ImGuiColorEditFlags_::ImGuiColorEditF
 
 ## References
 
-- The Cherno: [C++](https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb) / [中文翻译](https://space.bilibili.com/364152971/channel/collectiondetail?sid=13909): 主要介绍 C++11 及以上版本的语法
+- The Cherno: [C++](https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb) / [中文翻译](https://space.bilibili.com/364152971/channel/collectiondetail?sid=13909): 主要介绍 C++11 及以上版本的语法 (文中未特意标注引用的部分，均出自该处)
 - [C++ Weekly With Jason Turner](https://www.youtube.com/@cppweekly): 这个博主超级猛
 - [CppCon](https://www.youtube.com/@CppCon): 强烈推荐 [Back To Basics](https://www.youtube.com/@CppCon/search?query=Back%20to%20Basics) 专题
 - [Learn C++](https://www.learncpp.com/)
