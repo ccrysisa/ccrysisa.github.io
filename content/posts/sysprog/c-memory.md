@@ -295,6 +295,10 @@ YouTube: [GC in C](https://www.youtube.com/playlist?list=PLpM-Dvs8t0VYuYxRxjfnkd
 - [Writing My Own Malloc in C](https://www.youtube.com/watch?v=sZ8GJ1TiMdk)
 - [Writing Garbage Collector in C](https://www.youtube.com/watch?v=2JgEKEd3tw8)
 
+### 内存布局
+
+{{< image src="/images/c/heap.drawio.png" >}}
+
 ### alloc & free
 
 如果允许分配 0 字节的内存空间，那么会造成分配的不同内存块的起始地址一样的情形，实作时应当避免这种情形:
