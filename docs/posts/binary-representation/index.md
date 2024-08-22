@@ -1,16 +1,16 @@
 # 解读计算机编码
 
 
-&gt; 人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 &#43; 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
-&lt;!--more--&gt;
+> 人们对数学的加减运算可轻易在脑中辨识符号并理解其结果，但电脑做任何事都受限于实体资料储存及操作方式，换言之，电脑硬体实际只认得 0 和 1，却不知道符号 + 和 - 在数学及应用场域的意义，於是工程人员引入「补数」以便在二进位系统中，表达人们认知上的正负数。但您有没有想过，为何「二补数」(2’s complement) 被电脑广泛采用呢？背後的设计考量又是什麽？本文尝试从数学观点去解读编码背後的原理，并佐以资讯安全及程式码最佳化的考量，探讨二补数这样的编码对于程式设计有何关键影响。
+<!--more-->
 
 - 原文地址：[解讀計算機編碼](https://hackmd.io/@sysprog/binary-representation)
 
-{{&lt; admonition tip &gt;}}
+{{< admonition tip >}}
 为了更好的理解本文的一些数学概念，例如群，以及后续其他关于数值系统、浮点数的讲座，Jserv 强烈建议我们去修读数学系的 ***数学导论***。笔者在这里分享一下台大齐震宇老师的 2015 年的新生营讲座，这个讲座覆盖了数学导论的内容。
 
 - YouTube: [臺大 2015 數學系新生營](https://www.youtube.com/playlist?list=PLI1jQCS-KE4zommAEqi47yVzEn552BXz8)
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ## 一补数 (Ones’ complement)
 
@@ -20,47 +20,47 @@
 
 ### 运算原理
 
-{{&lt; admonition note &gt;}}
+{{< admonition note >}}
 以一补数编码形式表示的运算子，在参与运算后，运算结果符合一补数的编码：
 
-{{&lt; raw &gt;}}
+{{< raw >}}
 $$
-[X]_{一补数} &#43; [Y]_{一补数} = [X&#43;Y]_{一补数}
+[X]_{一补数} + [Y]_{一补数} = [X+Y]_{一补数}
 $$
-{{&lt; /raw &gt;}}
-{{&lt; /admonition &gt;}}
+{{< /raw >}}
+{{< /admonition >}}
 
 接下来进行分类讨论，以 32-bit 正数 $X$, $Y$ 为例：
 
-- $X &#43; Y = X &#43; Y$ 显然运算子和运算结果都满足一补数编码。
+- $X + Y = X + Y$ 显然运算子和运算结果都满足一补数编码。
 
-- $X - Y = X &#43; (2^{32} - 1 - Y)$
+- $X - Y = X + (2^{32} - 1 - Y)$
 
-  - 如果 $X &gt; Y$，则运算结果应为 $X - Y$ 且为正数，其一补数编码为 $X - Y$。而此时 
+  - 如果 $X > Y$，则运算结果应为 $X - Y$ 且为正数，其一补数编码为 $X - Y$。而此时 
   $$
-  2^{32} - 1 &#43; X - Y
+  2^{32} - 1 + X - Y
   $$ 
-  显然会溢出，为了使运算结果对应一补数编码，所以此时循环进位对应 $&#43;\ (1 - 2_{32})$。
+  显然会溢出，为了使运算结果对应一补数编码，所以此时循环进位对应 $+\ (1 - 2_{32})$。
 
-  - 如果 $X &lt; Y$，则运算结果应为 $X - Y$ 且为负数，其一补数编码为 
+  - 如果 $X < Y$，则运算结果应为 $X - Y$ 且为负数，其一补数编码为 
   $$
   2^{32} - 1 - （Y - X） = 2_{32} - 1 - X - Y
   $$
-  而此时 $2^{32} - 1 &#43; X - Y$ 并不会溢出，并且满足运算结果的一补数编码，所以无需进行循环进位。
+  而此时 $2^{32} - 1 + X - Y$ 并不会溢出，并且满足运算结果的一补数编码，所以无需进行循环进位。
 
   - 如果 $X = Y$，显然 
   $$
-  X - Y = X &#43; 2^{32} - 1 - Y = 2^{32} - 1
+  X - Y = X + 2^{32} - 1 - Y = 2^{32} - 1
   $$
   为 0 成立。
 
-- $-X - Y = (2^{32} - 1 - X) &#43; (2^{32} - 1 - Y)$，显然会导致溢出。而 $-X - Y$ 的一补数编码为 
+- $-X - Y = (2^{32} - 1 - X) + (2^{32} - 1 - Y)$，显然会导致溢出。而 $-X - Y$ 的一补数编码为 
 $$
-2^{32} - 1 - (X &#43; Y) = 2^{32} - 1 - X - Y
+2^{32} - 1 - (X + Y) = 2^{32} - 1 - X - Y
 $$
-所以需要在溢出时循环进位 $&#43;\ (1 - 2^{32})$ 来消除运算结果中的一个 $2^{32} - 1$。
+所以需要在溢出时循环进位 $+\ (1 - 2^{32})$ 来消除运算结果中的一个 $2^{32} - 1$。
 
-## 二补数 (Two&#39;s complement)
+## 二补数 (Two's complement)
 
 ### 正负数编码表示
 
@@ -68,48 +68,48 @@ $$
 
 - 格式一：
 
-{{&lt; raw &gt;}}
+{{< raw >}}
 $$
 \begin{align*}
-A &#43; \neg A &amp;= 2^n - 1 \\
-A &#43; \neg A &#43; 1 &amp;\equiv 0 \equiv 2^n \ (\bmod 2^n) \\
--A &amp;= \neg A &#43; 1 \\ 
+A + \neg A &= 2^n - 1 \\
+A + \neg A + 1 &\equiv 0 \equiv 2^n \ (\bmod 2^n) \\
+-A &= \neg A + 1 \\ 
 \end{align*}
 $$
-{{&lt; /raw &gt;}}
+{{< /raw >}}
 
 - 格式二：
 
-{{&lt; raw &gt;}}
+{{< raw >}}
 $$
 \begin{align*}
-A &#43; \neg A &amp;= 2^n - 1 \\
-A &#43; \neg A - 1 &amp;= 2^n - 2 \\
-A - 1 &amp;= 2^n - 1 - (\neg A &#43; 1) \\ 
-\neg (A - 1) &amp;= \neg A &#43; 1 \\
-\neg (A - 1) &amp;= -A \\
+A + \neg A &= 2^n - 1 \\
+A + \neg A - 1 &= 2^n - 2 \\
+A - 1 &= 2^n - 1 - (\neg A + 1) \\ 
+\neg (A - 1) &= \neg A + 1 \\
+\neg (A - 1) &= -A \\
 \end{align*}
 $$
-{{&lt; /raw &gt;}}
+{{< /raw >}}
 
 也可以通过一补数和二补数，在时钟表上的对称轴偏差，来理解上述两种方式是等价的。
 
 - CS:APP 2.2.3 Two’s-Complement Encodings
-&gt; Note the different position of apostrophes: two’s complement versus ones’ complement. The term “two’s complement” arises from the fact that for nonnegative x we compute a w-bit representation of −x as 2w − x (a single two.) The term “ones’ complement” comes from the property that we can compute −x in this notation as [111 . . . 1] − x (multiple ones).
+> Note the different position of apostrophes: two’s complement versus ones’ complement. The term “two’s complement” arises from the fact that for nonnegative x we compute a w-bit representation of −x as 2w − x (a single two.) The term “ones’ complement” comes from the property that we can compute −x in this notation as [111 . . . 1] − x (multiple ones).
 
-{{&lt; image src=&#34;/images/git/twos_complement.png&#34; caption=&#34;Twos&#39; complement&#34; &gt;}}
+{{< image src="/images/git/twos_complement.png" caption="Twos' complement" >}}
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 在二补数编码中，将一个整数转换成其逆元，也可以依据以下的方法：
 
 以 LSB 到 MSB 的顺序，寻找第一个值为 1 的 bit，将这个 bit 以及比其更低的 bits (包含该 bit) 都保持不变，将比该 bit 更高的 bits (不包括该 bit) 进行取反操作。下面是一些例子 (以 32-bit 为例)：
 
 ```
-0x0080 &lt;-&gt; 0xff80
-0x0001 &lt;-&gt; 0xffff
-0x0002 &lt;-&gt; 0xfffe
+0x0080 <-> 0xff80
+0x0001 <-> 0xffff
+0x0002 <-> 0xfffe
 ```
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ### 加 / 减法器设计
 
@@ -121,14 +121,14 @@ $$
 
 ## 阿贝尔群及对称性
 
-{{&lt; admonition tip &gt;}}
+{{< admonition tip >}}
 群论的最大用途是关于「对称性」的研究；所有具有对称性质，群论都可派上用场。只要发生变换后仍有什么东西还维持不变，那符合对称的性质。
 
 - 一个圆左右翻转后还是圆，它在这种变换下是对称的，而这刚好与群的 **封闭性 (Closure)** 对应。
 - 一个时钟的时刻，从 0 时刻开始，两边的时刻相加模 12 的结果均为 0，这与群的 **单位元 (Identity element)** 和 **逆元 (Inverse element)** 对应。
 
 上述两个例子反映了群论的性质，对于对称性研究的重要性和原理依据。
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 科普影片: [从五次方程到伽罗瓦理论](https://www.youtube.com/playlist?list=PLYtoePJQbGmiq3lqkJcxSKW0eW5objmjQ)
 
@@ -144,11 +144,11 @@ $$
 - [x] [Cold boot attack](https://en.wikipedia.org/wiki/Cold_boot_attack)
 - [x] [Rubber-hose cryptanalysis](https://en.wikipedia.org/wiki/Rubber-hose_cryptanalysis)
 
-{{&lt; admonition info &#34;延伸阅读&#34; &gt;}}
+{{< admonition info "延伸阅读" >}}
 - [ ] [The password guessing bug in Tenex](https://www.sjoerdlangkemper.nl/2016/11/01/tenex-password-bug/)
 - [ ] [Side Channel Attack By Using Hidden Markov Model](https://www.cs.ox.ac.uk/files/271/NuffieldReport.pdf)
-- [ ] [One&amp;Done: A Single-Decryption EM-Based Attack on OpenSSL’s Constant-Time Blinded RSA](https://www.sjoerdlangkemper.nl/2016/11/01/tenex-password-bug/)
-{{&lt; /admonition &gt;}}
+- [ ] [One&Done: A Single-Decryption EM-Based Attack on OpenSSL’s Constant-Time Blinded RSA](https://www.sjoerdlangkemper.nl/2016/11/01/tenex-password-bug/)
+{{< /admonition >}}
 
 ### Constant-Time Functions
 
@@ -157,28 +157,28 @@ $$
 - C99 7.18.1.1 Exact-width integer types
 - C99 6.5.7.5 Bitwise shift operators 
 
-{{&lt; link href=&#34;https://github.com/ccrysisa/LKI/tree/main/constant-time&#34; content=&#34;Source&#34; external-icon=true &gt;}}
+{{< link href="https://github.com/ccrysisa/LKI/tree/main/constant-time" content="Source" external-icon=true >}}
 
 #### Branchless abs
 
-&gt; 如果 n 是 signed 32-bit，则 `n &gt;&gt; 31` 等价于 `n == 0 ? 0 : -1`
+> 如果 n 是 signed 32-bit，则 `n >> 31` 等价于 `n == 0 ? 0 : -1`
 
 方法一，原理为 $-A = \neg (A - 1)$:
 
 ```c
-#include &lt;stdint.h&gt;
+#include <stdint.h>
 int32_t abs(int32_t x) {
-    int32_t mask = (x &gt;&gt; 31);
-    return (x &#43; mask) ^ mask;
+    int32_t mask = (x >> 31);
+    return (x + mask) ^ mask;
 }
 ```
 
-方法二，原理为 $-A = \neg A &#43; 1$:
+方法二，原理为 $-A = \neg A + 1$:
 
 ```c
-#include &lt;stdint.h&gt;
+#include <stdint.h>
 int32_t abs(int32_t x) {
-    int32_t mask = (x &gt;&gt; 31);
+    int32_t mask = (x >> 31);
     return (x ^ mask) - mask;
 }
 ```
@@ -188,34 +188,34 @@ int32_t abs(int32_t x) {
 Min:
 
 ```c
-#include &lt;stdint.h&gt;
+#include <stdint.h>
 int32_t min(int32_t a, int32_t b) {
     int32_t diff = (a - b);
-    return b &#43; (diff &amp; (diff &gt;&gt; 31));
+    return b + (diff & (diff >> 31));
 }
 ```
-- 如果 `diff &gt; 0` 即 b 小，那么 `(diff &gt;&gt; 31) == 0`，则 `b &#43; (diff &amp; (diff &gt;&gt; 31)) == b`
-- 如果 `diff &lt; 0` 即 a 小，那么 `(diff &gt;&gt; 31) == -1`，则 `b &#43; (diff &amp; (diff &gt;&gt; 31)) == b &#43; (a - b) == a`
+- 如果 `diff > 0` 即 b 小，那么 `(diff >> 31) == 0`，则 `b + (diff & (diff >> 31)) == b`
+- 如果 `diff < 0` 即 a 小，那么 `(diff >> 31) == -1`，则 `b + (diff & (diff >> 31)) == b + (a - b) == a`
 
 Max:
 
 ```c
-#include &lt;stdint.h&gt;
+#include <stdint.h>
 int32_t max(int32_t a, int32_t b) {
     int32_t diff = (b - a);
-    return b - (diff &amp; (diff &gt;&gt; 31));
+    return b - (diff & (diff >> 31));
 }
 ```
-- 如果 `diff &gt; 0` 即 b 大, 那么 `(diff &gt;&gt; 31) == 0`，则 `b - (diff &amp; (diff &gt;&gt; 31)) == b`
-- 如果 `diff &lt; 0` 即 a 大，那么 `(diff &gt;&gt; 31) == -1`，则 `b - (diff &amp; (diff &gt;&gt; 31)) == b - (b - a) == a`
+- 如果 `diff > 0` 即 b 大, 那么 `(diff >> 31) == 0`，则 `b - (diff & (diff >> 31)) == b`
+- 如果 `diff < 0` 即 a 大，那么 `(diff >> 31) == -1`，则 `b - (diff & (diff >> 31)) == b - (b - a) == a`
 
 ---
 
-{{&lt; admonition info &gt;}}
+{{< admonition info >}}
 - [基于 C 语言标准研究与系统程序安全议题](https://hackmd.io/@sysprog/c-std-security)
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
-&lt;!-- URL --&gt;
+<!-- URL -->
 [not-just-counting-but-saving-lives-curta]: https://www.youtube.com/watch?v=kRmExkQoOPY
 [see-how-computers-add-numbers-in-one-lesson]: https://www.youtube.com/watch?v=VBDoT8o4q00
 [2xCICHh4Pas]: https://www.youtube.com/watch?v=2xCICHh4Pas

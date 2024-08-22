@@ -43,6 +43,11 @@
   url: https://jamesmcm.github.io/
   description: Rust, Linux and other curiosities
 
+- nickname: fprox
+  avatar: https://substackcdn.com/image/fetch/w_88,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F976c8d2c-5618-4f01-b50c-795ec1356aa8_144x144.png
+  url: https://fprox.substack.com/
+  description: What are you optimizing for ? (fprox's substack)
+
 - nickname: vanJker
   avatar: https://avatars.githubusercontent.com/u/88960102?s=96&v=4
   url: https://github.com/vanJker
