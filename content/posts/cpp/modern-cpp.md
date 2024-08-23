@@ -2005,24 +2005,60 @@ int main()
 }
 ```
 
-##### String Stream
+##### Optimization
 
-- cppreference: [std::basic_stringstream](https://en.cppreference.com/w/cpp/io/basic_stringstream)
-
-stringstream is a stream class to operate on strings. It implements input/output operations on memory (string) based streams. stringstream can be helpful in different type of parsing. The following operators/functions are commonly used here
-
-- Operator `>>` Extracts formatted data.
-- Operator `<<` Inserts formatted data.
-- Method `str()` Gets the contents of underlying string device object.
-- Method `str(string)` Sets the contents of underlying string device object.
-
-Its header file is **sstream**.
+C++ 的 string 低效原因主要是它会经常进行分配操作，可以通过重载 `new` 运算符来观察:
 
 ```c++
-stringstream ss("23,4,56");
-char ch;
-int a, b, c;
-ss >> a >> ch >> b >> ch >> c;  // a = 23, b = 4, c = 56
+#include <iostream>
+#include <string>
+
+static size_t s_AllocCount = 0;
+
+void* operator new(size_t size)
+{
+	s_AllocCount++;
+	std::cout << "Allocating " << size << " bytes\n";
+	return malloc(size);
+}
+
+void PrintName(const std::string& name)
+{
+	std::cout << name << std::endl;
+}
+
+int main()
+{
+	std::string name = "Hello World";
+	std::string firstName = name.substr(0, 5);
+	std::string lastName = name.substr(6, 5);
+
+	PrintName(firstName);
+	PrintName(name);
+
+	std::cout << s_AllocCount << " allocations\n";
+}
+```
+
+上面的程序一共涉及 3 次内存分配，事实上并不需要这么多次的内存分配，我们可以减少没有必要的内存分配操作。例如对于 `firstName` 和 `lastName` 这两个字符串，实际上并不需要额外分配内存空间，只需将其指向 `name` 字符串的对应部分即可:
+
+- cppreference: [std::basic_string_view](https://en.cppreference.com/w/cpp/string/basic_string_view)
+
+> The class template `basic_string_view` describes an object that can refer to a constant contiguous sequence of CharT with the first element of the sequence at position zero.
+
+```c++
+	std::string_view firstName(name.c_str(), 5);
+	std::string_view lastName(name.c_str() + 6, 5);
+```
+
+```c++
+void PrintName(std::string_view name)
+```
+
+这样就将内存分配次数减少到 1 次了。接下来我们可以将 `name` 不使用 string 进行分配，而是直接使用 `const char*` 对该常量字符串进行引用，则可以将内存分配次数降至 0 次:
+
+```c++
+	const char* name = "Hello World";
 ```
 
 #### Vector
@@ -2084,7 +2120,7 @@ v.erase(v.begin()+2,v.begin()+5); // erases all the elements from the third elem
 STL 的容器，它们在被设计时，速度不是优先考虑的因素，所以我们可以设计出比 STL 里的容器性能更强的类似容器，这也是为什么很多工作室会自己设计容器库而不采用 STL，例如 [Qt Container Classes](https://doc.qt.io/qt-6/containers.html)、[EASTL](https://github.com/electronicarts/EASTL)。
 {{< /admonition >}}
 
-##### Optimizing Usage
+##### Optimization
 
 一般情况下，STL 的 `vector` 是比较慢的 (因为它倾向于经常分配内存空间，这会导致大量的性能开销)，所以我们需要通过一些策略来压榨出 `vector` 的全部性能。下面通过之前的例子来展示这些优化策略。
 
@@ -2142,6 +2178,26 @@ struct Vertex
 ```
 
 现在没有复制操作了
+
+#### Stream
+
+- cppreference: [std::basic_stringstream](https://en.cppreference.com/w/cpp/io/basic_stringstream)
+
+stringstream is a stream class to operate on strings. It implements input/output operations on memory (string) based streams. stringstream can be helpful in different type of parsing. The following operators/functions are commonly used here
+
+- Operator `>>` Extracts formatted data.
+- Operator `<<` Inserts formatted data.
+- Method `str()` Gets the contents of underlying string device object.
+- Method `str(string)` Sets the contents of underlying string device object.
+
+Its header file is **sstream**.
+
+```c++
+stringstream ss("23,4,56");
+char ch;
+int a, b, c;
+ss >> a >> ch >> b >> ch >> c;  // a = 23, b = 4, c = 56
+```
 
 ### Algorithms
 
@@ -2375,6 +2431,48 @@ int main()
     std::cout << "Start thread id=" << std::this_thread::get_id() << std::endl;
 }
 ```
+
+### Asynchronous
+
+- cppreference: [std::async](https://en.cppreference.com/w/cpp/thread/async)
+- cppreference: [std::future](https://en.cppreference.com/w/cpp/thread/future)
+
+```c++
+// async example
+#include <iostream>       // std::cout
+#include <future>         // std::async, std::future
+
+// a non-optimized way of checking for prime numbers:
+bool is_prime(int x) {
+	std::cout << "Calculating. Please, wait...\n";
+	for (int i = 2; i < x; ++i)
+		if (x % i == 0)
+			return false;
+	return true;
+}
+
+int main()
+{
+	// call is_prime(313222313) asynchronously:
+	std::future<bool> fut = std::async(is_prime, 313222313);
+
+	std::cout << "Checking whether 313222313 is prime.\n";
+	// ...
+
+	bool ret = fut.get();      // waits for is_prime to return
+
+	if (ret) std::cout << "It is prime!\n";
+	else     std::cout << "It is not prime.\n";
+
+	return 0;
+}
+```
+
+- Stack Overflow: [When to use std::async vs std::threads?](https://stackoverflow.com/questions/25814365/when-to-use-stdasync-vs-stdthreads)
+
+> One use-case of using `std::future` over `std::thread` is you want to call a function which returns a value. When you want return value of the function, you can call `get()` method of future.
+> 
+> `std::thread` doesn't provide a direct way to get the return value of the function.
 
 ## Advanced Topics
 
@@ -2837,6 +2935,15 @@ std::cout << "Make Unique\n";
 }
 ```
 
+#### Visualization
+
+- chrome tracing: `chrome://tracing/`
+  - [A beginner’s guide to Chrome tracing](https://nolanlawson.com/2022/10/26/a-beginners-guide-to-chrome-tracing/)
+
+```c++
+```
+
+
 ### Coding Style
 
 个人偏好如下:
@@ -3000,8 +3107,15 @@ data = 1;
 
 ### ImGui
 
-bilibili: [ImGui 入门到精通](https://space.bilibili.com/443124242/channel/collectiondetail?sid=824431)
+GitHub: [Dear ImGui](https://github.com/ocornut/imgui/tree/master)
+
+> Dear ImGui is a **bloat-free graphical user interface library for C++**. It outputs optimized vertex buffers that you can render anytime in your 3D-pipeline-enabled application. It is fast, portable, renderer agnostic, and self-contained (no external dependencies).
+
+bilibili: 
+- [ImGui 入门到精通](https://space.bilibili.com/443124242/channel/collectiondetail?sid=824431)
 / [项目源代码](https://www.bilibili.com/read/cv19537138/)
+
+#### 初始设置
 
 依赖库:
 - [GLFW](https://www.glfw.org/download): 64-bit Windows binaries
@@ -3166,8 +3280,9 @@ ImGui::ColorEdit4("Color", (float*)&color, ImGuiColorEditFlags_::ImGuiColorEditF
 ## References
 
 - The Cherno: [C++](https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb) / [中文翻译](https://space.bilibili.com/364152971/channel/collectiondetail?sid=13909): 主要介绍 C++11 及以上版本的语法 (文中未特意标注引用的部分，均出自该处)
-- [C++ Weekly With Jason Turner](https://www.youtube.com/@cppweekly): 这个博主超级猛
+- [C++ Weekly With Jason Turner](https://www.youtube.com/@cppweekly): 这个博主很猛
 - [CppCon](https://www.youtube.com/@CppCon): 强烈推荐 [Back To Basics](https://www.youtube.com/@CppCon/search?query=Back%20to%20Basics) 专题
+- [javidx9](https://www.youtube.com/@javidx9): 这个频道有一些比较有意思的项目
 - [Learn C++](https://www.learncpp.com/)
 - [HackerRank](https://www.hackerrank.com/): 一个与 LeetCode 类似的练习网站
 - [C++ 矿坑系列](https://github.com/Mes0903/Cpp-Miner)
