@@ -4,7 +4,7 @@
     <link>https://ccrysisa.github.io/posts/</link>
     <description>所有文章 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 08 Jul 2024 11:21:32 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 22 Aug 2024 12:47:26 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/posts/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 核心设计/实作 (Linux Kernel Internals)</title>
   <link>https://ccrysisa.github.io/posts/linux2023/</link>
   <pubDate>Wed, 28 Feb 2024 20:46:33 &#43;0800</pubDate>
@@ -13,6 +13,22 @@
   <description><![CDATA[<blockquote>
 <p>在「Linux 核心设计/实作」Spring 2023 课程进度页面的原始档案的基础上，稍作修改以记录我的学习进度</p>
 </blockquote>]]></description>
+</item>
+<item>
+  <title>Container</title>
+  <link>https://ccrysisa.github.io/posts/container/</link>
+  <pubDate>Thu, 22 Aug 2024 12:47:26 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/container/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
+  <title>RVV: RISC-V Vector Extension</title>
+  <link>https://ccrysisa.github.io/posts/rvv/</link>
+  <pubDate>Sat, 17 Aug 2024 18:44:33 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/rvv/</guid>
+  <description><![CDATA[]]></description>
 </item>
 <item>
   <title>Crust of Rust: The Drop Check</title>
@@ -109,31 +125,6 @@
       <div class="admonition-content">目的: 检验学员对 bitwise 的认知</div>
     </div>
   </div>]]></description>
-</item>
-<item>
-  <title>Linux 核心设计: 2023q1 第一周测验题</title>
-  <link>https://ccrysisa.github.io/posts/linux2023-quiz1/</link>
-  <pubDate>Fri, 07 Jun 2024 10:33:35 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/linux2023-quiz1/</guid>
-  <description><![CDATA[<div class="details admonition abstract open">
-    <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content">目的: 检验学员对 linked list 的认知</div>
-    </div>
-  </div>]]></description>
-</item>
-<item>
-  <title>你所不知道的 C 语言: 浮点数</title>
-  <link>https://ccrysisa.github.io/posts/c-floating-point/</link>
-  <pubDate>Tue, 04 Jun 2024 23:59:50 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/c-floating-point/</guid>
-  <description><![CDATA[<blockquote>
-<p>工程領域往往是一系列的取捨結果，浮點數更是如此，在軟體發開發有太多失誤案例源自工程人員對浮點數運算的掌握不足，本議程希望藉由探討真實世界的血淋淋案例，帶著學員思考 IEEE 754 規格和相關軟硬體考量點，最後也會探討在深度學習領域為了改善資料處理效率，而引入的 BFloat16 這樣的新標準</p>
-</blockquote>]]></description>
 </item>
 </channel>
 </rss>

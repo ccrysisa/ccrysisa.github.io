@@ -53,8 +53,10 @@ repost:
 ```bash
 # Donwload latest go, then remove previous installed go and extract archive
 $ rm -rf /usr/local/go && tar -C /usr/local -xzf go1.22.5.linux-amd64.tar.gz
-# Add this path to ~/.bashrc or /etc/profile file
+# Setup these path to ~/.bashrc or /etc/profile file
+export GOPATH=~/go
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$GOPATH/bin
 # Vertify version of installed go (after refresh)
 $ go version
 ```
@@ -65,7 +67,7 @@ Install the tour locally:
 $ go install golang.org/x/website/tour@latest
 ```
 
-GOPATH 的默认路径是: `/home/user/go/`
+GOPATH 的默认路径是: `~/go`
 
 - Stack Overflow: [Go time.Now() is always 2009-11-10 23:00:00 +0000 UTC](https://stackoverflow.com/questions/24539986/go-time-now-is-always-2009-11-10-230000-0000-utc)
 
@@ -731,19 +733,59 @@ var fetcher = fakeFetcher{
 }
 ```
 
-### Homework
+### Furthermore
 
-阅读相关博客:
+Read the relevant blogs:
+
 - [Inside the Go Playground](https://go.dev/blog/playground)
 - [Go\'s Declaration Syntax](https://go.dev/blog/declaration-syntax)
 - [Defer, Panic, and Recover](https://go.dev/blog/defer-panic-and-recover)
 - [Go Slices: usage and internals](https://go.dev/blog/slices-intro)
 
-## Packages
+You can get started by [installing Go](https://go.dev/doc/install/).
 
-Go [Packages](https://pkg.go.dev/)
+Once you have Go installed, the [Go Documentation](https://go.dev/doc/) is a great place to continue. It contains references, tutorials, videos, and more.
 
-> 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
+To learn how to organize and work with Go code, read [How to Write Go Code](https://go.dev/doc/code).
+
+If you need help with the standard library, see the [package reference](https://go.dev/pkg/). For help with the language itself, you might be surprised to find the [Language Spec](https://go.dev/ref/spec) is quite readable.
+
+To further explore Go's concurrency model, watch Go [Concurrency Patterns](https://www.youtube.com/watch?v=f6kdp27TYZs) ([slides](https://go.dev/talks/2012/concurrency.slide)) and [Advanced Go Concurrency Patterns](https://www.youtube.com/watch?v=QDDwwePbDtw) ([slides](https://go.dev/talks/2013/advconc.slide)) and read the [Share Memory by Communicating](https://go.dev/doc/codewalk/sharemem/) codewalk.
+
+To get started writing web applications, watch [A simple programming environment](https://vimeo.com/53221558) ([slides](https://go.dev/talks/2012/simple.slide)) and read the [Writing Web Applications](https://go.dev/doc/articles/wiki/) tutorial.
+
+The [First Class Functions in Go](https://go.dev/doc/codewalk/functions/) codewalk gives an interesting perspective on Go's function types.
+
+The [Go Blog](https://go.dev/blog/) has a large archive of informative Go articles.
+
+Visit [the Go home page](https://go.dev/) for more.
+
+## Building Microservices with Go
+
+YouTube: [Building Microservices with Go](https://www.youtube.com/playlist?list=PLmD8u-IFdreyh6EUfevBcbiuCKzFk0EW_)
+
+> Week by week Building Microservices builds on the previous weeks code teaching you how to build a multi-tier microservice system. The code structure for the course is one of a mono repo. To make it simple to follow along, each episode has its own branch showing progress to date.
+
+### Setup
+
+Linux: WLS2
+
+```bash
+$ uname --a
+Linux cai-PC 5.15.77-amd64-desktop #2 SMP Thu Jun 15 16:06:18 CST 2023 x86_64 GNU/Linux
+```
+
+VS Code and extensions:
+- Go
+- Docker
+- Live Share
+
+Go:
+
+```bash
+$ go version
+go version go1.22.5 linux/amd64
+```
 
 ## References: 
 
