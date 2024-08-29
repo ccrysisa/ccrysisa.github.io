@@ -1185,6 +1185,70 @@ public:
 };
 ```
 
+### Singleton
+
+```c++
+#include <iostream>
+
+class Random
+{
+public:
+	Random(const Random&) = delete;
+
+	static Random& Get()
+	{
+		static Random s_Instance;
+		return s_Instance;
+	}
+
+	static float Float()
+	{
+		return Get().FloatImpl();
+	}
+
+private:
+	Random() {}
+
+	float FloatImpl()
+	{
+		return m_RandomGenerator;
+	}
+
+	float m_RandomGenerator = 0.5f;
+
+	static Random s_Instance;
+};
+
+int main()
+{
+	float number = Random::Float();
+	std::cout << number << std::endl;
+}
+```
+
+因为编译器最佳化时的内联机制，这样的函数调用并不会有额外的开销
+
+```c++
+#include <iostream>
+
+namespace RandomClass
+{
+	static float m_Instance = 0.5f;
+	static float Float()
+	{
+		return m_Instance;
+	}
+}
+
+int main()
+{
+	float number = RandomClass::Float();
+	std::cout << number << std::endl;
+}
+```
+
+使用 namepsace 也可以实现 Singleton，但是相对于 Class 方式灵活性更低，因为少了 `private`, `public` 这类可见性修饰符。
+
 ## Specifiers
 
 ### Static
@@ -2061,6 +2125,35 @@ void PrintName(std::string_view name)
 	const char* name = "Hello World";
 ```
 
+###### SSO
+
+Small String Optimization 使得标准库的 String 面对小的字符串会在 stack 上分配而不是在 heap 上分配，由此增强效能
+
+```c++
+#include <iostream>
+#include <string>
+
+static size_t s_AllocCount = 0;
+
+void* operator new(size_t size)
+{
+	s_AllocCount++;
+	std::cout << "Allocating " << size << " bytes\n";
+	return malloc(size);
+}
+
+int main()
+{
+	std::string name = "Hello";
+
+	std::cout << s_AllocCount << " allocations\n";
+}
+```
+
+VS 在默认在 Debug 下不启用 SSO 机制而在 Release 模式下启用 SSO，所以需要在 Release 模式下运行观察 (在 VS 的设定里小字符串指的是长度 $\leq 15$ 的字符串，超过这个长度就会在堆进行动态分配)
+
+- [Understanding Small String Optimization (SSO) in std::string](https://cppdepend.com/blog/understanding-small-string-optimization-sso-in-stdstring/)
+
 #### Vector
 
 - Stack Overflow: [Why is a C++ Vector called a Vector?](https://stackoverflow.com/questions/581426/why-is-a-c-vector-called-a-vector)
@@ -2812,8 +2905,7 @@ int main()
 大项目尽量将函数、类等等定义在 namspace 内，防止出现 API 冲突。
 {{< /admonition >}}
 
-
-### Benchmarking
+### Benchmarks
 
 Wikipedia: [Benchmark](https://en.wikipedia.org/wiki/Benchmark_(computing))
 
@@ -2937,12 +3029,56 @@ std::cout << "Make Unique\n";
 
 #### Visualization
 
-- chrome tracing: `chrome://tracing/`
-  - [A beginner’s guide to Chrome tracing](https://nolanlawson.com/2022/10/26/a-beginners-guide-to-chrome-tracing/)
+- [A beginner’s guide to Chrome tracing](https://nolanlawson.com/2022/10/26/a-beginners-guide-to-chrome-tracing/)
+- [Instrumentor.h](https://gist.github.com/TheCherno/31f135eea6ee729ab5f26a6908eb3a5e)
 
 ```c++
+#include "Instrumentor.h"
+
+#define PROFILE 1
+#if PROFILE
+#define PROFILE_SCOPE(name) InstrumentationTimer timer##__LINE__(name)
+#define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCSIG__)
+#else
+#define PROFILE_SCOPE(name)
+#endif
 ```
 
+```c++
+namespace Benchmarks {
+	void Function1()
+	{
+		PROFILE_FUNCTION();
+
+		for (int i = 0; i < 1000; i++)
+			std::cout << "Hello World #" << i << std::endl;
+	}
+
+	void Function2()
+	{
+		PROFILE_FUNCTION();
+
+		for (int i = 0; i < 1000; i++)
+			std::cout << "Hello World #" << sqrt(i) << std::endl;
+	}
+
+	void Benchmarks()
+	{
+		PROFILE_FUNCTION();
+
+		std::cout << "Run Benchmarks...\n";
+		Function1();
+		Function2();
+	}
+}
+
+int main()
+{
+	Instrumentor::Get().BeginSession("Profile");
+	Benchmarks::Benchmarks();
+	Instrumentor::Get().EndSession();
+}
+```
 
 ### Coding Style
 
