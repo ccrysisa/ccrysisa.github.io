@@ -14,7 +14,7 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
   <meta itemprop="description" content=" In this Crust of Rust episode, we implement some common sorting algorithms in Rust. This episode doesn&#39;t aim to explain any single concept, but rather showcase what writing “normal” Rust code is like, and explaining various “odd bits” we come across along the way. The thinking here is that sorting algorithms are both familiar and easy to compare across languages, so this might serve as a good bridge into Rust if you are familiar with other languages.">
   <meta itemprop="datePublished" content="2024-03-04T15:02:28+08:00">
   <meta itemprop="dateModified" content="2024-03-18T10:07:25+08:00">
-  <meta itemprop="wordCount" content="2042">
+  <meta itemprop="wordCount" content="2063">
   <meta itemprop="image" content="https://ccrysisa.github.io/logo.png">
   <meta itemprop="keywords" content="Rust,Sort,Algorithm"><meta property="og:url" content="https://ccrysisa.github.io/posts/orst/">
   <meta property="og:site_name" content="KZnight&#39;s Blog">
@@ -48,7 +48,7 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/orst\/"
-    },"genre": "posts","keywords": "Rust, Sort, Algorithm","wordcount":  2042 ,
+    },"genre": "posts","keywords": "Rust, Sort, Algorithm","wordcount":  2063 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/orst\/","datePublished": "2024-03-04T15:02:28+08:00","dateModified": "2024-03-18T10:07:25+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -60,7 +60,7 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -106,7 +106,7 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -166,18 +166,12 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Crust of Rust: Sorting Algorithms</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/rust/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-04 15:02:28"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="更新于 2024-03-18 10:07:25"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-18">2024-03-18</time></span>&nbsp;<span title="2042 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/rust/" class="post-category" title="分类 - Rust"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Rust</a></span></div><div class="post-meta-line"><span title="发布于 2024-03-04 15:02:28"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-04">2024-03-04</time></span>&nbsp;<span title="更新于 2024-03-18 10:07:25"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-18">2024-03-18</time></span>&nbsp;<span title="2063 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2100 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -223,9 +217,9 @@ In this Crust of Rust episode, we implement some common sorting algorithms in Ru
 </div>
     </div>
   </div>
-<h2 id="影片注解">影片注解</h2>
-<h3 id="total-order-vs-partial-order">Total order vs Partial order</h3>
-<ul>
+<h2 id="影片注解" class="heading-element">
+  <a href="#%e5%bd%b1%e7%89%87%e6%b3%a8%e8%a7%a3" class="heading-mark"></a>影片注解</h2><h3 id="total-order-vs-partial-order" class="heading-element">
+  <a href="#total-order-vs-partial-order" class="heading-mark"></a>Total order vs Partial order</h3><ul>
 <li>
 <p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Total_order"target="_blank" rel="external nofollow noopener noreferrer">Total order</a></p>
 </li>
@@ -247,8 +241,8 @@ $$
 </div>
 在 total order 中，$a, b, c$ 任意两个元素之间都必须能进行比较，而在 partial order 中没有怎么严格的要求，可能只有 $a &lt; b, b &lt; c$ 这两条比较规则。</p>
 <p>在 Rust 中，浮点数 (<code>f32</code>, <code>f64</code>) 只实现了 PartialOrd 这个 Trait 而没有实现 Ord，因为根据 <a href="https://en.wikipedia.org/wiki/IEEE_754"target="_blank" rel="external nofollow noopener noreferrer">IEEE 754</a>，浮点数中存在一些特殊值，例如 NaN，它们是没法进行比较的。出于相同原因，浮点数也只实现了 <code>PartialEq</code> 而没有实现 <code>Eq</code> trait。</p>
-<h3 id="trait--generic">Trait &amp; Generic</h3>
-<div class="highlight" id="id-1"><div class="chroma">
+<h3 id="trait--generic" class="heading-element">
+  <a href="#trait--generic" class="heading-mark"></a>Trait &amp; Generic</h3><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -301,8 +295,8 @@ $$
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>第一个表示的是有多个 tait，例如 <code>Sorter&lt;i32&gt;</code>, <code>Sorter&lt;i64&gt;</code> 等，第二个表示只有一个 trait <code>Sorter</code>，但是实现这个 trait 需要实现多个方法，例如 <code>sort&lt;i32&gt;</code>, <code>sort&lt;i64&gt;</code> 等，所以第一种写法更加普适和使用 (因为未必能完全实现第二种 trait 要求的所有方法)。</p>
-<h3 id="bubble-sort">Bubble sort</h3>
-<ul>
+<h3 id="bubble-sort" class="heading-element">
+  <a href="#bubble-sort" class="heading-mark"></a>Bubble sort</h3><ul>
 <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Bubble_sort"target="_blank" rel="external nofollow noopener noreferrer">Bubble sort</a></li>
 </ul>
 <div class="highlight" id="id-3"><div class="chroma">
@@ -334,8 +328,8 @@ $$
 </span></span><span class="line"><span class="cl">    end <span class="k">for</span>
 </span></span><span class="line"><span class="cl"><span class="k">until</span> not swapped</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="insertion-sort">Insertion sort</h3>
-<ul>
+</div><h3 id="insertion-sort" class="heading-element">
+  <a href="#insertion-sort" class="heading-mark"></a>Insertion sort</h3><ul>
 <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Insertion_sort"target="_blank" rel="external nofollow noopener noreferrer">Insertion sort</a></li>
 </ul>
 <div class="highlight" id="id-4"><div class="chroma">
@@ -388,8 +382,8 @@ $$
 </div><blockquote>
 <p><code>match</code> 的内部逻辑也可以改写为 <code>OK(i) | Err(i) =&gt; i</code></p>
 </blockquote>
-<h3 id="selection-sort">Selection sort</h3>
-<ul>
+<h3 id="selection-sort" class="heading-element">
+  <a href="#selection-sort" class="heading-mark"></a>Selection sort</h3><ul>
 <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Selection_sort"target="_blank" rel="external nofollow noopener noreferrer">Selection sort</a></li>
 </ul>
 <div class="details admonition quote open">
@@ -427,8 +421,8 @@ $$
 </span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="o">|</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">)</span><span class="o">|</span><span class="w"> </span><span class="n">unsorted</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">)</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">                </span><span class="p">.</span><span class="n">expect</span><span class="p">(</span><span class="s">&#34;slice is not empty&#34;</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="quicksort">Quicksort</h3>
-<ul>
+</div><h3 id="quicksort" class="heading-element">
+  <a href="#quicksort" class="heading-mark"></a>Quicksort</h3><ul>
 <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Quicksort"target="_blank" rel="external nofollow noopener noreferrer">Quicksort</a></li>
 </ul>
 <p>可以通过 extra allocation 和 in-place 两种方式来实现 quicksort，其中 extra allocation 比较好理解，in-place 方式的 pseudocode 如下:</p>
@@ -515,13 +509,13 @@ $$
 </div>
     </div>
   </div>
-<h3 id="benchmark">Benchmark</h3>
-<p>通过封装类型 <code>SortEvaluator</code> 及实现 trait <code>PartialEq</code>, <code>Eq</code>, <code>PartialOrd</code>, <code>Ord</code> 来统计排序过程中的比较操作 (<code>eq</code>, <code>partial_cmp</code>, <code>cmp</code>) 的次数。</p>
+<h3 id="benchmark" class="heading-element">
+  <a href="#benchmark" class="heading-mark"></a>Benchmark</h3><p>通过封装类型 <code>SortEvaluator</code> 及实现 trait <code>PartialEq</code>, <code>Eq</code>, <code>PartialOrd</code>, <code>Ord</code> 来统计排序过程中的比较操作 (<code>eq</code>, <code>partial_cmp</code>, <code>cmp</code>) 的次数。</p>
 <p>Stack Overflow: <a href="https://stackoverflow.com/questions/28387711/why-cant-the-ord-trait-provide-default-implementations-for-the-required-methods"target="_blank" rel="external nofollow noopener noreferrer">Why can't the Ord trait provide default implementations for the required methods from the inherited traits using the cmp function?</a></p>
-<p><a class="lightgallery" href="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png?size=large" data-thumbnail="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png?size=small" data-sub-html="<h2>https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png</h2>"><img loading="lazy" src="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png" srcset="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png?size=small, https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png?size=medium 1.5x, https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png?size=large 2x" sizes="auto" data-title="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png" data-alt="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
-<a class="lightgallery" href="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png?size=large" data-thumbnail="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png?size=small" data-sub-html="<h2>https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png</h2>"><img loading="lazy" src="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png" srcset="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png?size=small, https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png?size=medium 1.5x, https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png?size=large 2x" sizes="auto" data-title="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png" data-alt="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a></p>
-<h3 id="r-and-ggplot2">R and ggplot2</h3>
-<div class="highlight" id="id-8"><div class="chroma">
+<p><a class="lightgallery" href="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png?size=large" data-thumbnail="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png?size=small" data-sub-html="<h2>https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png</h2>"><img loading="lazy" src="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png" alt="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png" srcset="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png?size=small, https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png?size=medium 1.5x, https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png?size=large 2x" sizes="auto" data-title="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/comparisons.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png?size=large" data-thumbnail="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png?size=small" data-sub-html="<h2>https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png</h2>"><img loading="lazy" src="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png" alt="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png" srcset="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png?size=small, https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png?size=medium 1.5x, https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png?size=large 2x" sizes="auto" data-title="https://raw.githubusercontent.com/ccrysisa/rusty/main/sort/runtime.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></p>
+<h3 id="r-and-ggplot2" class="heading-element">
+  <a href="#r-and-ggplot2" class="heading-mark"></a>R and ggplot2</h3><div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -595,8 +589,8 @@ $$
 </div>
     </div>
   </div>
-<h2 id="homework">Homework</h2>
-<div class="details admonition info open">
+<h2 id="homework" class="heading-element">
+  <a href="#homework" class="heading-mark"></a>Homework</h2><div class="details admonition info open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-info-circle fa-fw" aria-hidden="true"></i>信息<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -616,13 +610,13 @@ $$
 </div>
     </div>
   </div>
-<h2 id="documentations">Documentations</h2>
-<p>这里列举视频中一些概念相关的 documentation</p>
+<h2 id="documentations" class="heading-element">
+  <a href="#documentations" class="heading-mark"></a>Documentations</h2><p>这里列举视频中一些概念相关的 documentation</p>
 <blockquote>
 <p>学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料</p>
 </blockquote>
-<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml">Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3>
-<blockquote>
+<h3 id="crate-stdhttpsdocrust-langorgstdindexhtml" class="heading-element">
+  <a href="#crate-stdhttpsdocrust-langorgstdindexhtml" class="heading-mark"></a>Crate <a href="https://doc.rust-lang.org/std/index.html"target="_blank" rel="external nofollow noopener noreferrer">std</a></h3><blockquote>
 <p>可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)</p>
 </blockquote>
 <ul>
@@ -681,13 +675,13 @@ $$
 </ul>
 </li>
 </ul>
-<h3 id="crate-randhttpsdocsrsrandlatestrand">Crate <a href="https://docs.rs/rand/latest/rand/"target="_blank" rel="external nofollow noopener noreferrer">rand</a></h3>
-<ul>
+<h3 id="crate-randhttpsdocsrsrandlatestrand" class="heading-element">
+  <a href="#crate-randhttpsdocsrsrandlatestrand" class="heading-mark"></a>Crate <a href="https://docs.rs/rand/latest/rand/"target="_blank" rel="external nofollow noopener noreferrer">rand</a></h3><ul>
 <li>Function <a href="https://docs.rs/rand/latest/rand/fn.thread_rng.html"target="_blank" rel="external nofollow noopener noreferrer">rand::thread_rng</a></li>
 <li>method <a href="https://docs.rs/rand/latest/rand/seq/trait.SliceRandom.html#tymethod.shuffle"target="_blank" rel="external nofollow noopener noreferrer">rand::seq::SliceRandom::shuffle</a></li>
 </ul>
-<h2 id="references">References</h2>
-<ul>
+<h2 id="references" class="heading-element">
+  <a href="#references" class="heading-mark"></a>References</h2><ul>
 <li><a href="https://github.com/jonhoo/orst"target="_blank" rel="external nofollow noopener noreferrer">orst</a> [Github]</li>
 <li><a href="https://en.wikipedia.org/wiki/Sorting_algorithm"target="_blank" rel="external nofollow noopener noreferrer">Sorting algorithm</a> [Wikipedia]</li>
 <li><a href="https://en.wikipedia.org/wiki/Timsort"target="_blank" rel="external nofollow noopener noreferrer">Timsort</a> [Wikipedia]</li>
@@ -697,11 +691,10 @@ $$
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-03-18 10:07:25">更新于 2024-03-18&nbsp;</span>
-      </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/orst/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/orst/" data-title="Crust of Rust: Sorting Algorithms" data-hashtags="Rust,Sort,Algorithm"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/orst/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/orst/" data-title="Crust of Rust: Sorting Algorithms" data-hashtags="Rust,Sort,Algorithm"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/orst/" data-hashtag="Rust"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/orst/" data-title="Crust of Rust: Sorting Algorithms" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/orst/" data-title="Crust of Rust: Sorting Algorithms"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -710,12 +703,11 @@ $$
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/orst/" data-title="Crust of Rust: Sorting Algorithms" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/orst/" data-title="Crust of Rust: Sorting Algorithms"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-      </div>
-    </div>
-  </div>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/rust/' class="post-tag">Rust</a><a href='/tags/sort/' class="post-tag">Sort</a><a href='/tags/algorithm/' class="post-tag">Algorithm</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/rust/" class="post-tag" title="标签 - Rust">Rust</a><a href="/tags/sort/" class="post-tag" title="标签 - Sort">Sort</a><a href="/tags/algorithm/" class="post-tag" title="标签 - Algorithm">Algorithm</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -724,11 +716,14 @@ $$
   <div class="post-nav"><a href="/posts/linux-dev-review/" class="post-nav-item" rel="prev" title="Linux 核心设计: 发展动态回顾"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Linux 核心设计: 发展动态回顾</a>
       <a href="/posts/c-std-security/" class="post-nav-item" rel="next" title="基于 C 语言标准研究与系统程序安全议题">基于 C 语言标准研究与系统程序安全议题<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.131.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.131.0"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -736,5 +731,5 @@ $$
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/js/flyfish.js" defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/js/flyfish.js" defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>
