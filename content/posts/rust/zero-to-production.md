@@ -63,8 +63,12 @@ repost:
 
 采用 Rust 的 stable 工具链进行编译，同时并不需要进行交叉编译，因为是在 Container 中进行开发
 
-VS Code + rust-analyzer
+我采用的方案: VS Code + rust-analyzer
 
 - [The rustup book](https://rust-lang.github.io/rustup/)
 - [The Cargo Book](https://doc.rust-lang.org/cargo/)
 - [Rust Analyzer](https://rust-analyzer.github.io/)
+
+[The developer experience and the inner dev loop](https://www.getambassador.io/docs/telepresence/latest/concepts/devloop)
+
+> The inner dev loop is the single developer workflow. A single developer should be able to set up and use an inner dev loop to code and test changes quickly.
