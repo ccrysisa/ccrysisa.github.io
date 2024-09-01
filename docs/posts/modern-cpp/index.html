@@ -30,7 +30,7 @@ RAII standard library containers and algorithms templates metaprogramming except
 lots of new and delete roll-your-own linked lists and other data structures return codes as a mechanism for error handling one of the millions of custom string classes that aren’t std::string As with all this-vs-that arguments, there are merits to both approaches. Modern C&#43;&#43; isn’t universally better. Embedded enviornments, for example, often require extra restrictions that most people never need, so you’ll see a lot of old-style code there. Overall though, I think you’ll find that most of the modern features are worth using regularly. Moore’s Law and compiler improvements have taken care of the majority of reasons to avoid the new stuff.">
   <meta itemprop="datePublished" content="2024-06-30T00:19:25+08:00">
   <meta itemprop="dateModified" content="2024-08-29T17:00:57+08:00">
-  <meta itemprop="wordCount" content="21722">
+  <meta itemprop="wordCount" content="22616">
   <meta itemprop="image" content="https://ccrysisa.github.io/logo.png">
   <meta itemprop="keywords" content="C&#43;&#43;,MSVC"><meta property="og:url" content="https://ccrysisa.github.io/posts/modern-cpp/">
   <meta property="og:site_name" content="KZnight&#39;s Blog">
@@ -67,7 +67,7 @@ lots of new and delete roll-your-own linked lists and other data structures retu
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/modern-cpp\/"
-    },"genre": "posts","keywords": "C\u002b\u002b, MSVC","wordcount":  21722 ,
+    },"genre": "posts","keywords": "C\u002b\u002b, MSVC","wordcount":  22616 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/modern-cpp\/","datePublished": "2024-06-30T00:19:25+08:00","dateModified": "2024-08-29T17:00:57+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -190,7 +190,7 @@ lots of new and delete roll-your-own linked lists and other data structures retu
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Modern C&#43;&#43; (MSVC)</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" alt="vanJker" data-title="vanJker" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/c++/" class="post-category" title="分类 - C++"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C++</a></span></div><div class="post-meta-line"><span title="发布于 2024-06-30 00:19:25"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-30">2024-06-30</time></span>&nbsp;<span title="更新于 2024-08-29 17:00:57"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-08-29">2024-08-29</time></span>&nbsp;<span title="21722 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 21800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 44 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" alt="vanJker" data-title="vanJker" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/c++/" class="post-category" title="分类 - C++"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C++</a></span></div><div class="post-meta-line"><span title="发布于 2024-06-30 00:19:25"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-30">2024-06-30</time></span>&nbsp;<span title="更新于 2024-08-29 17:00:57"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-08-29">2024-08-29</time></span>&nbsp;<span title="22616 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 22700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 46 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -322,7 +322,12 @@ lots of new and delete roll-your-own linked lists and other data structures retu
       <ul>
         <li><a href="#stack-heap-and-lifetime">Stack, Heap and Lifetime</a></li>
         <li><a href="#smart-pointers">Smart Pointers</a></li>
-        <li><a href="#safety">Safety</a></li>
+        <li><a href="#safety">Safety</a>
+          <ul>
+            <li><a href="#track-memory-allocations">Track Memory Allocations</a></li>
+          </ul>
+        </li>
+        <li><a href="#lvalue-and-rvalue">lvalue and rvalue</a></li>
       </ul>
     </li>
     <li><a href="#concurrency">Concurrency</a>
@@ -360,6 +365,7 @@ lots of new and delete roll-your-own linked lists and other data structures retu
             <li><a href="#visualization">Visualization</a></li>
           </ul>
         </li>
+        <li><a href="#continuous-integration-ci">Continuous Integration (CI)</a></li>
         <li><a href="#coding-style">Coding Style</a></li>
       </ul>
     </li>
@@ -1608,7 +1614,7 @@ Optimization (Maximize Speed)</p>
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>使用 <em>初始化参数列表</em> 会节约性能，不会丢弃默认构造的对象，具体见视频的例子。原理也很简单，初始化参数列表是在执行函数体之前进行初始化的，不会事先创建对象。而如果在函数体内对对象进行赋值，因为不论是否在初始化参数列表中是否指定了成员变量，编译器都会在执行函数体之前先对每个成员变量进行构造 (当然初始化参数列表指定的就按列表构造)，导致在函数体内对成员变量赋值时，会丢掉先前构造好的对象，从而导致性能损失。(这很好理解，因为 Rust 要求构造对象时必须指定所有成员的值，C++ 的初始化列表的作用是类似的，给对象的每个成员都分配值，这样构造函数就无需指定每个成员的值了)</p>
-<div class="highlight" id="id-140"><div class="chroma">
+<div class="highlight" id="id-146"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -3143,7 +3149,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/5368258/the-copy-constructor-and-assignment-operator"target="_blank" rel="external nofollow noopener noreferrer">The copy constructor and assignment operator</a></li>
 </ul>
-<div class="highlight" id="id-141"><div class="chroma">
+<div class="highlight" id="id-147"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -3455,7 +3461,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>这是因为常量模板规则，在编译时期即可确定 <code>size()</code> 函数的具体实现了，无需额外存储变量:</p>
-<div class="highlight" id="id-142"><div class="chroma">
+<div class="highlight" id="id-148"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -4393,6 +4399,302 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <h3 id="safety" class="heading-element">
   <a href="#safety" class="heading-mark"></a>Safety</h3><p>安全编程的目的主要是是降低崩溃、内存泄漏、非法访问的问题 (这一点 Rust 做的比较好，但也没有解决内存泄漏的问题)，从 C++11 开始推荐使用智能指针而不是原始指针来解决内存泄漏的相关问题，这是因为基于 RAII 的自动内存管理系统。</p>
 <p>如果是生产环境则使用智能指针，如果是学习则使用原始指针。当然，如果你需要定制的话，也可以使用自己写的智能指针。</p>
+<h4 id="track-memory-allocations" class="heading-element">
+  <a href="#track-memory-allocations" class="heading-mark"></a>Track Memory Allocations</h4><ul>
+<li>cppreference: <a href="https://en.cppreference.com/w/cpp/memory/new/operator_new"target="_blank" rel="external nofollow noopener noreferrer">operator new, operator new[]</a></li>
+<li>cppreference: <a href="https://en.cppreference.com/w/cpp/memory/new/operator_delete"target="_blank" rel="external nofollow noopener noreferrer">operator delete, operator delete[]</a></li>
+</ul>
+<div class="highlight" id="id-98"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span><span class="o">*</span> <span class="k">operator</span> <span class="nf">new</span><span class="p">(</span><span class="n">size_t</span> <span class="n">size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Allocating &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">size</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; bytes</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">malloc</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="k">operator</span> <span class="nf">delete</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">addr</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Freeing &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">size</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; bytes</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">free</span><span class="p">(</span><span class="n">addr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Object</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&#34;Hello&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">unique</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>通过重载 <code>new</code> 和 <code>delete</code> 运算符，以及在重载的 <code>new</code> 和 <code>delete</code> 运算符方法中进行断点，配合调试器的 <strong>调用堆栈</strong> 功能可以追踪内存分配和释放操作的来源。</p>
+<p>在此基础上可以构建一个简单快速的 <strong>内存分配跟踪器</strong> 工具:</p>
+<div class="highlight" id="id-99"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">AllocationMetrics</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">size_t</span> <span class="n">TotalAllocated</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">size_t</span> <span class="n">TotalFreed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">size_t</span> <span class="nf">CurrentUsage</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">TotalAllocated</span> <span class="o">-</span> <span class="n">TotalFreed</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="n">AllocationMetrics</span><span class="o">&amp;</span> <span class="n">Get</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="k">static</span> <span class="n">AllocationMetrics</span> <span class="n">s_AllocationMetrics</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="n">s_AllocationMetrics</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="kt">void</span> <span class="nf">PrintMemoryUsage</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Memory Usage: &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">Get</span><span class="p">().</span><span class="n">CurrentUsage</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; bytes</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span><span class="o">*</span> <span class="k">operator</span> <span class="nf">new</span><span class="p">(</span><span class="n">size_t</span> <span class="n">size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AllocationMetrics</span><span class="o">::</span><span class="n">Get</span><span class="p">().</span><span class="n">TotalAllocated</span> <span class="o">+=</span> <span class="n">size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">malloc</span><span class="p">(</span><span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="k">operator</span> <span class="nf">delete</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">addr</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AllocationMetrics</span><span class="o">::</span><span class="n">Get</span><span class="p">().</span><span class="n">TotalFreed</span> <span class="o">+=</span> <span class="n">size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">free</span><span class="p">(</span><span class="n">addr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">Object</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AllocationMetrics</span><span class="o">::</span><span class="n">PrintMemoryUsage</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&#34;Hello&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AllocationMetrics</span><span class="o">::</span><span class="n">PrintMemoryUsage</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="n">unique</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="n">AllocationMetrics</span><span class="o">::</span><span class="n">PrintMemoryUsage</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">AllocationMetrics</span><span class="o">::</span><span class="n">PrintMemoryUsage</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="lvalue-and-rvalue" class="heading-element">
+  <a href="#lvalue-and-rvalue" class="heading-mark"></a>lvalue and rvalue</h3><ul>
+<li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/value_category"target="_blank" rel="external nofollow noopener noreferrer">Value categories</a></li>
+</ul>
+<p>lvalue 是 locator value，即可以被 locate 的 value，lvalue reference 就是对 lvalue 的引用。rvalue 为除了 lvalue 之外的 value，可以理解为临时字面值 (未被存储) 和亡值 (已被存储但地址未知，或者知道地址也没用，因为它很快就被销毁了)，它们都无法被 located。</p>
+<p>一般来说不能将 rvalue 传递给 lvalue reference (因为 reference 需要以可以被 located 为前提):</p>
+<div class="highlight" id="id-100"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">int</span><span class="o">&amp;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// error
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>但可以将 rvalue 传递给 <code>const</code> 修饰的 lvalue reference:</p>
+<div class="highlight" id="id-101"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span> <span class="c1">// pass
+</span></span></span><span class="line"><span class="cl"><span class="c1">// which is actually implemented by copmpiler
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>所以函数参数常用 <code>const</code> 来修饰 reference，这样可以同时接受 lvalue 和 rvalue:</p>
+<div class="highlight" id="id-102"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">PrintName</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">firstName</span> <span class="o">=</span> <span class="s">&#34;Hello&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">lastName</span> <span class="o">=</span> <span class="s">&#34;World&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="n">firstName</span> <span class="o">+</span> <span class="n">lastName</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">PrintName</span><span class="p">(</span><span class="n">firstName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">PrintName</span><span class="p">(</span><span class="n">firstName</span> <span class="o">+</span> <span class="n">lastName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>但有时我们需要限制函数参数只接收 rvalue 而不接受 lvalue，此时就是 rvalue reference 大展身手的时机了。rvalue reference 使用 <code>&amp;&amp;</code> 来表示，其只能接收 rvalue 而不能接受 lvaue。将上面的例子改写为只接受 ravlue:</p>
+<div class="highlight" id="id-103"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">PrintName</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">)</span>   <span class="c1">// only accept lvalue reference
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;[lvalue] &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">PrintName</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&amp;&amp;</span> <span class="n">name</span><span class="p">)</span>  <span class="c1">// only accept rvalue reference
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;[ravlue] &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">firstName</span> <span class="o">=</span> <span class="s">&#34;Hello&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">lastName</span> <span class="o">=</span> <span class="s">&#34;World&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">name</span> <span class="o">=</span> <span class="n">firstName</span> <span class="o">+</span> <span class="n">lastName</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">PrintName</span><span class="p">(</span><span class="n">firstName</span><span class="p">);</span>               <span class="c1">// [lvalue] Hello
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">PrintName</span><span class="p">(</span><span class="n">firstName</span> <span class="o">+</span> <span class="n">lastName</span><span class="p">);</span>    <span class="c1">// [rvalue] HelloWorld
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>rvalue reference 对于优化比较重要，因为和 lvalue reference 不同，我们无需担心传入的 value 的生命周期问题，无需加入一些必要的生命周期检查，这样效率会很高。rvalue reference 常用于配合 move 移动语义来使用。</p>
 <h2 id="concurrency" class="heading-element">
   <a href="#concurrency" class="heading-mark"></a>Concurrency</h2><h3 id="threads" class="heading-element">
   <a href="#threads" class="heading-mark"></a>Threads</h3><ul>
@@ -4402,7 +4704,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>The class <code>thread</code> represents a single thread of execution. Threads allow multiple functions to execute concurrently.</p>
 </blockquote>
-<div class="highlight" id="id-98"><div class="chroma">
+<div class="highlight" id="id-104"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -4472,7 +4774,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/thread/async"target="_blank" rel="external nofollow noopener noreferrer">std::async</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/thread/future"target="_blank" rel="external nofollow noopener noreferrer">std::future</a></li>
 </ul>
-<div class="highlight" id="id-99"><div class="chroma">
+<div class="highlight" id="id-105"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -4554,7 +4856,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/utility/tuple"target="_blank" rel="external nofollow noopener noreferrer">std::tuple</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/utility/pair"target="_blank" rel="external nofollow noopener noreferrer">std::pair</a></li>
 </ul>
-<div class="highlight" id="id-100"><div class="chroma">
+<div class="highlight" id="id-106"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -4604,7 +4906,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/preprocessor"target="_blank" rel="external nofollow noopener noreferrer">Preprocessor</a></li>
 </ul>
 <p>宏和预处理的本质其实是文本替换:</p>
-<div class="highlight" id="id-101"><div class="chroma">
+<div class="highlight" id="id-107"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -4612,7 +4914,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#define WAIT std::cin.get()</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>&ldquo;专门从事编写迷惑性代码&rdquo;:</p>
-<div class="highlight" id="id-102"><div class="chroma">
+<div class="highlight" id="id-108"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -4629,7 +4931,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
 </div><p>比较有意义的宏使用场景: Project 属性 -&gt; C/C++ -&gt; Preprocessor -&gt; Preprocessor Definitions: 添加自定义的宏 (作用有些类似于 gcc 的 <code>-D</code> 参数)</p>
 <p>这样可以实现不同模式下日志系统的输出不相同，例如 Debug 模式下定义 <code>PR_DEBUG</code> 宏，Release 模式下定义 <code>PR_RELEASE</code> 宏。然后在日志系统针对这两个宏是否被定义进行不同的处理，以让日志系统针对不同模式进行不同处理。</p>
-<div class="highlight" id="id-103"><div class="chroma">
+<div class="highlight" id="id-109"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -4645,7 +4947,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="cp">#endif</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>ifdef</code> 在很多情况下表现比较糟糕，使用 <code>if</code> 改写上面的代码 (搭配 <code>defined</code> 进行定义判定):</p>
-<div class="highlight" id="id-104"><div class="chroma">
+<div class="highlight" id="id-110"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -4662,7 +4964,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
 </div><p><code>#if 0</code> 可以用于删除特定代码 (本质上是条件编译)</p>
 <p>可以通过 <code>\</code> 来编写多行的宏，但是注意不要在 <code>\</code> 后面多按了空格，这样会导致是对空格的转义，一点要确保 <code>\</code> 后面是换行，这才是对换行符的转义:</p>
-<div class="highlight" id="id-105"><div class="chroma">
+<div class="highlight" id="id-111"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -4688,7 +4990,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/67636231/what-is-the-modern-correct-way-to-do-type-punning-in-c"target="_blank" rel="external nofollow noopener noreferrer">What is the modern, correct way to do type punning in C++?</a></li>
 </ul>
 <p>通过指针和引用直接操作内存来实现类型双关 (Type Punning)，可以搭配调试器的内存查看功能进行观察:</p>
-<div class="highlight" id="id-106"><div class="chroma">
+<div class="highlight" id="id-112"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -4700,7 +5002,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">double</span><span class="o">&amp;</span> <span class="n">value</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">double</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">a</span><span class="p">;</span>   <span class="c1">// in-place
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight" id="id-107"><div class="chroma">
+</div><div class="highlight" id="id-113"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -4740,7 +5042,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>Similar to struct, an unnamed member of a union whose type is a union without name is known as anonymous union. Every member of an anonymous union is considered to be a member of the enclosing struct or union keeping their union layout. This applies recursively if the enclosing struct or union is also anonymous.</p>
 </blockquote>
-<div class="highlight" id="id-108"><div class="chroma">
+<div class="highlight" id="id-114"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -4769,7 +5071,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="n">u</span><span class="p">.</span><span class="n">a</span> <span class="o">=</span> <span class="mf">2.0f</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">u</span><span class="p">.</span><span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight" id="id-109"><div class="chroma">
+</div><div class="highlight" id="id-115"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -4843,7 +5145,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/explicit_cast"target="_blank" rel="external nofollow noopener noreferrer">Explicit type conversion</a></li>
 </ul>
-<div class="highlight" id="id-110"><div class="chroma">
+<div class="highlight" id="id-116"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -4889,7 +5191,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>Safely converts pointers and references to classes up, down, and sideways along the inheritance hierarchy.</p>
 </blockquote>
-<div class="highlight" id="id-111"><div class="chroma">
+<div class="highlight" id="id-117"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -4933,7 +5235,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这种情况使用 C 风格的类型转换或 <code>static_cast</code> 是合法的，但可能会导致运行时错误 (除非能在编译时期时向编译器保证):</p>
-<div class="highlight" id="id-112"><div class="chroma">
+<div class="highlight" id="id-118"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -4944,7 +5246,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>上面例子是可以在编译时期保证类型转换是合法的，所以使用 <code>static_cast</code> 或 <code>dynamic_cast</code> 都可以，但是更常见的情况是运行时才得知对应的具体类型 (例如根据用户输入而构造不同的具体类型)，此时就是 <code>dynamic_cast</code> 的使用场景了，根据不同的 (运行时) 类型进行不同的处理:</p>
-<div class="highlight" id="id-113"><div class="chroma">
+<div class="highlight" id="id-119"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -4952,7 +5254,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl">    <span class="n">Player</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="k">dynamic_cast</span><span class="o">&lt;</span><span class="n">Player</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">e</span><span class="p">);</span> 
 </span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight" id="id-114"><div class="chroma">
+</div><div class="highlight" id="id-120"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -4988,7 +5290,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <h4 id="dont-using-namspace-std" class="heading-element">
   <a href="#dont-using-namspace-std" class="heading-mark"></a>Don&rsquo;t &ldquo;using namspace std&rdquo;</h4><p>不推荐使用 <code>using namespace std;</code> 类似的语句，使用 <code>std;:xxx</code> 这样的风格。因为现实中比较少用 STL，都是工作室自己开发类似 STL 的库来使用，这样可以区分代码中使用的是哪个库的 API。</p>
 <p>实作案例: EASTL <a href="https://github.com/electronicarts/EASTL/blob/master/include/EASTL/vector.h#L77"target="_blank" rel="external nofollow noopener noreferrer">vector.h</a></p>
-<div class="highlight" id="id-115"><div class="chroma">
+<div class="highlight" id="id-121"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -4997,7 +5299,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>滥用 <code>using namespace xxx;</code> 也可能会造成 API 名字冲突，例如上面的例子如果同时使用了:</p>
-<div class="highlight" id="id-116"><div class="chroma">
+<div class="highlight" id="id-122"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -5007,7 +5309,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">eastl</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>会因为指定调用函数不明确而导致编译失败。这种会导致编译失败的情景还算比较好的了 (因为编译时期就报错了)，下面这种情景更是灾难性的:</p>
-<div class="highlight" id="id-117"><div class="chroma">
+<div class="highlight" id="id-123"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5082,7 +5384,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/header/chrono"target="_blank" rel="external nofollow noopener noreferrer">Standard library header <chrono> (C++11)</a></li>
 </ul>
 <p>chrono 是一个平台无关的计时库，如果不是特定平台高精度的计时需求，使用这个库就足够了。</p>
-<div class="highlight" id="id-118"><div class="chroma">
+<div class="highlight" id="id-124"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5118,7 +5420,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>运用作用域、生命周期以及析构函数来实现自动计时:</p>
-<div class="highlight" id="id-119"><div class="chroma">
+<div class="highlight" id="id-125"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5197,7 +5499,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
 </div><h5 id="实作案例" class="heading-element">
   <a href="#%e5%ae%9e%e4%bd%9c%e6%a1%88%e4%be%8b" class="heading-mark"></a>实作案例</h5><p>编译器最佳化对于数组遍历求和的效率影响:</p>
-<div class="highlight" id="id-120"><div class="chroma">
+<div class="highlight" id="id-126"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -5227,7 +5529,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
     </div>
   </div>
 <p>不同的智能指针构造的效率差异:</p>
-<div class="highlight" id="id-121"><div class="chroma">
+<div class="highlight" id="id-127"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5293,7 +5595,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <li><a href="https://nolanlawson.com/2022/10/26/a-beginners-guide-to-chrome-tracing/"target="_blank" rel="external nofollow noopener noreferrer">A beginner’s guide to Chrome tracing</a></li>
 <li><a href="https://gist.github.com/TheCherno/31f135eea6ee729ab5f26a6908eb3a5e"target="_blank" rel="external nofollow noopener noreferrer">Instrumentor.h</a></li>
 </ul>
-<div class="highlight" id="id-122"><div class="chroma">
+<div class="highlight" id="id-128"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -5316,7 +5618,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define PROFILE_SCOPE(name)
 </span></span></span><span class="line"><span class="cl"><span class="cp">#endif</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight" id="id-123"><div class="chroma">
+</div><div class="highlight" id="id-129"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5387,7 +5689,11 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">	<span class="n">Instrumentor</span><span class="o">::</span><span class="n">Get</span><span class="p">().</span><span class="n">EndSession</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="coding-style" class="heading-element">
+</div><h3 id="continuous-integration-ci" class="heading-element">
+  <a href="#continuous-integration-ci" class="heading-mark"></a>Continuous Integration (CI)</h3><ul>
+<li><a href="https://www.jenkins.io/"target="_blank" rel="external nofollow noopener noreferrer">Jenkins</a>: Build great things at any scale</li>
+</ul>
+<h3 id="coding-style" class="heading-element">
   <a href="#coding-style" class="heading-mark"></a>Coding Style</h3><p>个人偏好如下:</p>
 <ul>
 <li>函数名: <a href="https://en.wikipedia.org/wiki/Naming_convention_%28programming%29#Letter_case-separated_words"target="_blank" rel="external nofollow noopener noreferrer">PscalCase</a> 命名法 e.g. <code>ForEach</code></li>
@@ -5403,7 +5709,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>Binds the specified names to subobjects or elements of the initializer.</p>
 </blockquote>
-<div class="highlight" id="id-124"><div class="chroma">
+<div class="highlight" id="id-130"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5441,7 +5747,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>The class template <code>std::optional</code> manages an optional contained value, i.e. a value that may or may not be present.</p>
 </blockquote>
-<div class="highlight" id="id-125"><div class="chroma">
+<div class="highlight" id="id-131"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5511,7 +5817,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>由于 <code>std::optional</code> 重载了逻辑运算符，所以上面例子的第 23 行可以改写为:</p>
-<div class="highlight" id="id-126"><div class="chroma">
+<div class="highlight" id="id-132"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -5527,7 +5833,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>The class template <code>std::variant</code> represents a type-safe <code>union</code>. An instance of std::variant at any given time either holds a value of one of its alternative types, or in the case of error - no value</p>
 </blockquote>
-<div class="highlight" id="id-127"><div class="chroma">
+<div class="highlight" id="id-133"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5573,7 +5879,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>std::variant</code> 和 <code>union</code> 的内存布局是完全不同的，<code>union</code> 占用的内存大小等于其内存占用最大的成员类型，而 <code>std::variant</code> 占用的内存大小为列举的类型大小之和 (当然这两者实际占用的内存大小还需要考虑内存对齐):</p>
-<div class="highlight" id="id-128"><div class="chroma">
+<div class="highlight" id="id-134"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -5594,7 +5900,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>所以 <code>variant</code> 会更加类型安全，因为它和 <code>union</code> 不一样，不会造成未定义行为。可以使用 <code>std::variant</code> 来实现类似于 Rust 的 <code>Result</code> 类型:</p>
-<div class="highlight" id="id-129"><div class="chroma">
+<div class="highlight" id="id-135"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5629,7 +5935,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>The class any describes a type-safe container for single values of any copy constructible type.</p>
 </blockquote>
-<div class="highlight" id="id-130"><div class="chroma">
+<div class="highlight" id="id-136"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -5676,7 +5982,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </ul>
 </li>
 </ul>
-<div class="highlight" id="id-131"><div class="chroma">
+<div class="highlight" id="id-137"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -5696,7 +6002,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;imgui_impl_opengl3.h&#34;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="创建窗口" class="heading-element">
-  <a href="#%e5%88%9b%e5%bb%ba%e7%aa%97%e5%8f%a3" class="heading-mark"></a>创建窗口</h4><div class="highlight" id="id-132"><div class="chroma">
+  <a href="#%e5%88%9b%e5%bb%ba%e7%aa%97%e5%8f%a3" class="heading-mark"></a>创建窗口</h4><div class="highlight" id="id-138"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5813,7 +6119,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
 </div><h4 id="基础控件" class="heading-element">
   <a href="#%e5%9f%ba%e7%a1%80%e6%8e%a7%e4%bb%b6" class="heading-mark"></a>基础控件</h4><h5 id="窗口" class="heading-element">
-  <a href="#%e7%aa%97%e5%8f%a3" class="heading-mark"></a>窗口</h5><div class="highlight" id="id-133"><div class="chroma">
+  <a href="#%e7%aa%97%e5%8f%a3" class="heading-mark"></a>窗口</h5><div class="highlight" id="id-139"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -5825,7 +6131,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="n">ImGui</span><span class="o">::</span><span class="n">End</span><span class="p">();</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="文本框" class="heading-element">
-  <a href="#%e6%96%87%e6%9c%ac%e6%a1%86" class="heading-mark"></a>文本框</h5><div class="highlight" id="id-134"><div class="chroma">
+  <a href="#%e6%96%87%e6%9c%ac%e6%a1%86" class="heading-mark"></a>文本框</h5><div class="highlight" id="id-140"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -5835,7 +6141,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="n">ImGui</span><span class="o">::</span><span class="n">Text</span><span class="p">(</span><span class="n">Text</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="按钮" class="heading-element">
-  <a href="#%e6%8c%89%e9%92%ae" class="heading-mark"></a>按钮</h5><div class="highlight" id="id-135"><div class="chroma">
+  <a href="#%e6%8c%89%e9%92%ae" class="heading-mark"></a>按钮</h5><div class="highlight" id="id-141"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -5849,7 +6155,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="输入文本框" class="heading-element">
-  <a href="#%e8%be%93%e5%85%a5%e6%96%87%e6%9c%ac%e6%a1%86" class="heading-mark"></a>输入文本框</h5><div class="highlight" id="id-136"><div class="chroma">
+  <a href="#%e8%be%93%e5%85%a5%e6%96%87%e6%9c%ac%e6%a1%86" class="heading-mark"></a>输入文本框</h5><div class="highlight" id="id-142"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -5859,7 +6165,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="n">ImGui</span><span class="o">::</span><span class="n">InputText</span><span class="p">(</span><span class="s">&#34;Test Text Box&#34;</span><span class="p">,</span> <span class="n">textbox</span><span class="p">,</span> <span class="mi">64</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="固定显示选项的列表" class="heading-element">
-  <a href="#%e5%9b%ba%e5%ae%9a%e6%98%be%e7%a4%ba%e9%80%89%e9%a1%b9%e7%9a%84%e5%88%97%e8%a1%a8" class="heading-mark"></a>固定显示选项的列表</h5><div class="highlight" id="id-137"><div class="chroma">
+  <a href="#%e5%9b%ba%e5%ae%9a%e6%98%be%e7%a4%ba%e9%80%89%e9%a1%b9%e7%9a%84%e5%88%97%e8%a1%a8" class="heading-mark"></a>固定显示选项的列表</h5><div class="highlight" id="id-143"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -5889,7 +6195,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <p>Also note that <code>ListBoxHeader()</code> was renamed to <code>BeginListBox()</code> on 2023-05-31</p>
 </blockquote>
 <h5 id="可展开显示选项的列表" class="heading-element">
-  <a href="#%e5%8f%af%e5%b1%95%e5%bc%80%e6%98%be%e7%a4%ba%e9%80%89%e9%a1%b9%e7%9a%84%e5%88%97%e8%a1%a8" class="heading-mark"></a>可展开显示选项的列表</h5><div class="highlight" id="id-138"><div class="chroma">
+  <a href="#%e5%8f%af%e5%b1%95%e5%bc%80%e6%98%be%e7%a4%ba%e9%80%89%e9%a1%b9%e7%9a%84%e5%88%97%e8%a1%a8" class="heading-mark"></a>可展开显示选项的列表</h5><div class="highlight" id="id-144"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5917,7 +6223,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="颜色选择器" class="heading-element">
-  <a href="#%e9%a2%9c%e8%89%b2%e9%80%89%e6%8b%a9%e5%99%a8" class="heading-mark"></a>颜色选择器</h5><div class="highlight" id="id-139"><div class="chroma">
+  <a href="#%e9%a2%9c%e8%89%b2%e9%80%89%e6%8b%a9%e5%99%a8" class="heading-mark"></a>颜色选择器</h5><div class="highlight" id="id-145"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2

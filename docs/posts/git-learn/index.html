@@ -320,7 +320,7 @@
 <details>
   <summary>Examples</summary>
   <p>打印 master 分支的最新一个 commit：</p>
-<div class="highlight" id="id-13"><div class="chroma">
+<div class="highlight" id="id-23"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -328,7 +328,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log master -n1</span></span></code></pre></td></tr></table>
 </div>
 </div><p>打印 master 分支的最新一个 commit（仅使用一行打印 commit 信息）：</p>
-<div class="highlight" id="id-14"><div class="chroma">
+<div class="highlight" id="id-24"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -336,7 +336,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log master -n1 --oneline</span></span></code></pre></td></tr></table>
 </div>
 </div><p>打印 HEAD 所指向的 commit：</p>
-<div class="highlight" id="id-15"><div class="chroma">
+<div class="highlight" id="id-25"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -344,7 +344,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log HEAD -n1 --oneline</span></span></code></pre></td></tr></table>
 </div>
 </div><p>打印 HEAD 所指向的 commit 的前一个 commit：</p>
-<div class="highlight" id="id-16"><div class="chroma">
+<div class="highlight" id="id-26"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -352,7 +352,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log HEAD^ -n1 --oneline</span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>^</code> 可以持续使用，比如 <code>HEAD^^</code> 表示 HEAD 所指向的 commit 的前两个 commit。当 <code>^</code> 数量过多时，可以使用 <code>~</code> 搭配数字来达到相同效果。例如：</p>
-<div class="highlight" id="id-17"><div class="chroma">
+<div class="highlight" id="id-27"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -365,7 +365,7 @@
 <p>一般来说，使用 <code>^</code> 就已经足够了，几乎不会遇到使用 <code>~</code> 的场景，因为这种场景一般会去找图形化界面吧。&#x1f923;</p>
 </blockquote>
 <p>打印与文件 <code>README.md</code> 相关的 commits（仅使用一行显示）：</p>
-<div class="highlight" id="id-18"><div class="chroma">
+<div class="highlight" id="id-28"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -373,7 +373,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log --oneline README.md</span></span></code></pre></td></tr></table>
 </div>
 </div><p>打印与文件 <code>README.md</code> 相关的 commits（显示详细信息，包括文件内容的增减统计）：</p>
-<div class="highlight" id="id-19"><div class="chroma">
+<div class="highlight" id="id-29"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -381,7 +381,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log --stat README.md</span></span></code></pre></td></tr></table>
 </div>
 </div><p>打印与文件 <code>README.md</code> 相关的 commits（显示详细信息，包括文件内容的增减细节）：</p>
-<div class="highlight" id="id-20"><div class="chroma">
+<div class="highlight" id="id-30"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -389,7 +389,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git log --patch README.md</span></span></code></pre></td></tr></table>
 </div>
 </div><p>在打印的 commit 信息中抓取与 <code>README</code> 符合的信息（可以与 <code>--stat</code> 或 <code>--patch</code> 配合使用）：</p>
-<div class="highlight" id="id-21"><div class="chroma">
+<div class="highlight" id="id-31"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -442,7 +442,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git diff --staged</span></span></code></pre></td></tr></table>
 </div>
 </div><p>查看当前与指定的 commit 的差异：</p>
-<div class="highlight" id="id-1"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -454,7 +454,7 @@
 </span></span><span class="line"><span class="cl">git diff master^</span></span></code></pre></td></tr></table>
 </div>
 </div><p>查两个指定的 commit 之间的差异：</p>
-<div class="highlight" id="id-2"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -475,7 +475,7 @@
     </div>
   </div>
 <h3 id="only-add-related" class="heading-element">
-  <a href="#only-add-related" class="heading-mark"></a>Only Add Related</h3><div class="highlight" id="id-3"><div class="chroma">
+  <a href="#only-add-related" class="heading-mark"></a>Only Add Related</h3><div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -490,7 +490,7 @@
 </ul>
 <p>由于可以针对一个文件的不同 <code>section</code> 进行 review，所以在进行 <code>git add -p</code> 之后，使用 <code>git status</code> 可以发现同一个文件会同时处于两种状态。</p>
 <h3 id="checkout-also" class="heading-element">
-  <a href="#checkout-also" class="heading-mark"></a>Checkout Also</h3><div class="highlight" id="id-4"><div class="chroma">
+  <a href="#checkout-also" class="heading-mark"></a>Checkout Also</h3><div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -500,7 +500,7 @@
 </div><p>这个操作比较危险，因为这个操作的效果与 <code>git add -p</code> 相反，如果选择 <code>y</code> 的话，文件涉及的修改就会消失，如果涉及的修改没有 commit 的话，那么涉及的修改是无法救回的。但是怎么说，这个操作还是比直接使用 <code>git checkout</code> 稍微保险一点，因为会先进入 review 界面，而不是直接撤销修改。<strong>所以，请一定要使用 <code>git checkout -p</code>！</strong></p>
 <h3 id="modify-commit" class="heading-element">
   <a href="#modify-commit" class="heading-mark"></a>Modify Commit</h3><p>有两种方式来修改最新的 commit：</p>
-<div class="highlight" id="id-5"><div class="chroma">
+<div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -560,7 +560,7 @@
 <details>
   <summary>Examples</summary>
   <p>修改一个文件并恢复：</p>
-<div class="highlight" id="id-22"><div class="chroma">
+<div class="highlight" id="id-32"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -574,7 +574,7 @@
 </span></span><span class="line"><span class="cl">git status</span></span></code></pre></td></tr></table>
 </div>
 </div><p>删除一个文件并恢复：</p>
-<div class="highlight" id="id-23"><div class="chroma">
+<div class="highlight" id="id-33"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -591,7 +591,7 @@
 <p>正如上一节所说的，<code>git checkout</code> 尽量带上 <code>-p</code> 参数，因为如果一不小心输入了 <code>git checkout .</code>，那就前功尽弃了。</p>
 </blockquote>
 <p>显示分支：</p>
-<div class="highlight" id="id-24"><div class="chroma">
+<div class="highlight" id="id-34"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -605,7 +605,7 @@
 </span></span><span class="line"><span class="cl">git branch -v</span></span></code></pre></td></tr></table>
 </div>
 </div><p>切换分支：</p>
-<div class="highlight" id="id-25"><div class="chroma">
+<div class="highlight" id="id-35"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -615,7 +615,7 @@
 </span></span><span class="line"><span class="cl">git checkout main</span></span></code></pre></td></tr></table>
 </div>
 </div><p>创建分支：</p>
-<div class="highlight" id="id-26"><div class="chroma">
+<div class="highlight" id="id-36"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -633,7 +633,7 @@
 </span></span><span class="line"><span class="cl">git branch cload &lt;commit&gt;</span></span></code></pre></td></tr></table>
 </div>
 </div><p>切换到任一 commit：</p>
-<div class="highlight" id="id-27"><div class="chroma">
+<div class="highlight" id="id-37"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -647,7 +647,7 @@
 </details>
 <h3 id="view-branch" class="heading-element">
   <a href="#view-branch" class="heading-mark"></a>View Branch</h3><p>列出仓库的所有分支：</p>
-<div class="highlight" id="id-6"><div class="chroma">
+<div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -655,7 +655,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git branch</span></span></code></pre></td></tr></table>
 </div>
 </div><p>也可以通过 <code>log</code> 来查看分支：</p>
-<div class="highlight" id="id-7"><div class="chroma">
+<div class="highlight" id="id-17"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -668,7 +668,7 @@
 </ul>
 <h3 id="delete-branch" class="heading-element">
   <a href="#delete-branch" class="heading-mark"></a>Delete Branch</h3><p>删除分支：</p>
-<div class="highlight" id="id-8"><div class="chroma">
+<div class="highlight" id="id-18"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -676,7 +676,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git branch -d &lt;name&gt;</span></span></code></pre></td></tr></table>
 </div>
 </div><p>对于有没有 merge 的 commit 的分支，Git 会警告，需要使用 <code>-D</code> 来强制删除：</p>
-<div class="highlight" id="id-9"><div class="chroma">
+<div class="highlight" id="id-19"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -692,7 +692,7 @@
 </blockquote>
 <h3 id="merge" class="heading-element">
   <a href="#merge" class="heading-mark"></a>Merge</h3><p>合并分支。默认使用 fast-forward，即如果没有冲突，直接将要合并的分支提前到被合并分支的 commit 处，而不会另外生成一个 merge commit。但这样会使得被合并的分支在合并后，没有历史痕迹。可以通过 <code>--no-ff</code> (no fast forward) 来强制生成 merge commit。<strong>推荐使用 merge 时加上 <code>--no-ff</code> 这个参数。</strong></p>
-<div class="highlight" id="id-10"><div class="chroma">
+<div class="highlight" id="id-20"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -700,7 +700,7 @@
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git merge &lt;branch&gt;</span></span></code></pre></td></tr></table>
 </div>
 </div><p>通常是 main/master 这类主分支合并其它分支：</p>
-<div class="highlight" id="id-11"><div class="chroma">
+<div class="highlight" id="id-21"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -721,7 +721,7 @@
 <li>Edit &ldquo;file ro be edited&rdquo; to what is should be</li>
 </ul>
 <p><strong>Add and Commit</strong></p>
-<div class="highlight" id="id-12"><div class="chroma">
+<div class="highlight" id="id-22"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2

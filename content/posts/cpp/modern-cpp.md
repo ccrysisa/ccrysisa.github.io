@@ -2483,6 +2483,173 @@ int main()
 
 如果是生产环境则使用智能指针，如果是学习则使用原始指针。当然，如果你需要定制的话，也可以使用自己写的智能指针。
 
+#### Track Memory Allocations
+
+- cppreference: [operator new, operator new[]](https://en.cppreference.com/w/cpp/memory/new/operator_new)
+- cppreference: [operator delete, operator delete[]](https://en.cppreference.com/w/cpp/memory/new/operator_delete)
+
+```c++
+#include <iostream>
+#include <string>
+#include <memory>
+
+void* operator new(size_t size)
+{
+	std::cout << "Allocating " << size << " bytes\n";
+
+	return malloc(size);
+}
+
+void operator delete(void* addr, size_t size)
+{
+	std::cout << "Freeing " << size << " bytes\n";
+
+	free(addr);
+}
+
+struct Object
+{
+	int x, y, z;
+};
+
+int main()
+{
+	std::string str = "Hello";
+
+	{
+		std::unique_ptr<Object> unique = std::make_unique<Object>();
+	}
+}
+```
+
+通过重载 `new` 和 `delete` 运算符，以及在重载的 `new` 和 `delete` 运算符方法中进行断点，配合调试器的 **调用堆栈** 功能可以追踪内存分配和释放操作的来源。
+
+在此基础上可以构建一个简单快速的 **内存分配跟踪器** 工具:
+
+```c++
+#include <iostream>
+#include <string>
+#include <memory>
+
+struct AllocationMetrics
+{
+	size_t TotalAllocated = 0;
+	size_t TotalFreed = 0;
+
+	size_t CurrentUsage() { return TotalAllocated - TotalFreed; }
+
+	static AllocationMetrics& Get()
+	{
+		static AllocationMetrics s_AllocationMetrics;
+		return s_AllocationMetrics;
+	}
+
+	static void PrintMemoryUsage()
+	{
+		std::cout << "Memory Usage: " << Get().CurrentUsage() << " bytes\n";
+	}
+};
+
+void* operator new(size_t size)
+{
+	AllocationMetrics::Get().TotalAllocated += size;
+
+	return malloc(size);
+}
+
+void operator delete(void* addr, size_t size)
+{
+	AllocationMetrics::Get().TotalFreed += size;
+
+	free(addr);
+}
+
+struct Object
+{
+	int x, y, z;
+};
+
+int main()
+{
+	AllocationMetrics::PrintMemoryUsage();
+	std::string str = "Hello";
+	AllocationMetrics::PrintMemoryUsage();
+	{
+		std::unique_ptr<Object> unique = std::make_unique<Object>();
+		AllocationMetrics::PrintMemoryUsage();
+	}
+	AllocationMetrics::PrintMemoryUsage();
+}
+```
+
+### lvalue and rvalue
+
+- cppreference: [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
+
+lvalue 是 locator value，即可以被 locate 的 value，lvalue reference 就是对 lvalue 的引用。rvalue 为除了 lvalue 之外的 value，可以理解为临时字面值 (未被存储) 和亡值 (已被存储但地址未知，或者知道地址也没用，因为它很快就被销毁了)，它们都无法被 located。
+
+一般来说不能将 rvalue 传递给 lvalue reference (因为 reference 需要以可以被 located 为前提):
+
+```c++
+int& a = 10; // error
+```
+
+但可以将 rvalue 传递给 `const` 修饰的 lvalue reference:
+
+```c++
+const int& a = 10; // pass
+// which is actually implemented by copmpiler
+int temp = 10;
+const int& a = temp;
+```
+
+所以函数参数常用 `const` 来修饰 reference，这样可以同时接受 lvalue 和 rvalue:
+
+```c++
+void PrintName(const std::string& name)
+{
+    std::cout << name << std::endl;
+}
+
+int main()
+{
+    std::string firstName = "Hello";
+    std::string lastName = "World";
+
+    std::string name = firstName + lastName;
+
+    PrintName(firstName);
+    PrintName(firstName + lastName);
+}
+```
+
+但有时我们需要限制函数参数只接收 rvalue 而不接受 lvalue，此时就是 rvalue reference 大展身手的时机了。rvalue reference 使用 `&&` 来表示，其只能接收 rvalue 而不能接受 lvaue。将上面的例子改写为只接受 ravlue:
+
+```c++
+void PrintName(std::string& name)   // only accept lvalue reference
+{
+	std::cout << "[lvalue] " << name << std::endl;
+}
+
+void PrintName(std::string&& name)  // only accept rvalue reference
+{
+	std::cout << "[ravlue] " << name << std::endl;
+}
+
+int main()
+{
+	std::string firstName = "Hello";
+	std::string lastName = "World";
+
+	std::string name = firstName + lastName;
+
+	PrintName(firstName);               // [lvalue] Hello
+	PrintName(firstName + lastName);    // [rvalue] HelloWorld
+}
+```
+
+rvalue reference 对于优化比较重要，因为和 lvalue reference 不同，我们无需担心传入的 value 的生命周期问题，无需加入一些必要的生命周期检查，这样效率会很高。rvalue reference 常用于配合 move 移动语义来使用。
+
 ## Concurrency
 
 ### Threads
@@ -3079,6 +3246,10 @@ int main()
 	Instrumentor::Get().EndSession();
 }
 ```
+
+### Continuous Integration (CI)
+
+- [Jenkins](https://www.jenkins.io/): Build great things at any scale
 
 ### Coding Style
 

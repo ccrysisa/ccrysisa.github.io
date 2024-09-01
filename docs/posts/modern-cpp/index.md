@@ -2443,6 +2443,173 @@ int main()
 
 如果是生产环境则使用智能指针，如果是学习则使用原始指针。当然，如果你需要定制的话，也可以使用自己写的智能指针。
 
+#### Track Memory Allocations
+
+- cppreference: [operator new, operator new[]](https://en.cppreference.com/w/cpp/memory/new/operator_new)
+- cppreference: [operator delete, operator delete[]](https://en.cppreference.com/w/cpp/memory/new/operator_delete)
+
+```c&#43;&#43;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;memory&gt;
+
+void* operator new(size_t size)
+{
+	std::cout &lt;&lt; &#34;Allocating &#34; &lt;&lt; size &lt;&lt; &#34; bytes\n&#34;;
+
+	return malloc(size);
+}
+
+void operator delete(void* addr, size_t size)
+{
+	std::cout &lt;&lt; &#34;Freeing &#34; &lt;&lt; size &lt;&lt; &#34; bytes\n&#34;;
+
+	free(addr);
+}
+
+struct Object
+{
+	int x, y, z;
+};
+
+int main()
+{
+	std::string str = &#34;Hello&#34;;
+
+	{
+		std::unique_ptr&lt;Object&gt; unique = std::make_unique&lt;Object&gt;();
+	}
+}
+```
+
+通过重载 `new` 和 `delete` 运算符，以及在重载的 `new` 和 `delete` 运算符方法中进行断点，配合调试器的 **调用堆栈** 功能可以追踪内存分配和释放操作的来源。
+
+在此基础上可以构建一个简单快速的 **内存分配跟踪器** 工具:
+
+```c&#43;&#43;
+#include &lt;iostream&gt;
+#include &lt;string&gt;
+#include &lt;memory&gt;
+
+struct AllocationMetrics
+{
+	size_t TotalAllocated = 0;
+	size_t TotalFreed = 0;
+
+	size_t CurrentUsage() { return TotalAllocated - TotalFreed; }
+
+	static AllocationMetrics&amp; Get()
+	{
+		static AllocationMetrics s_AllocationMetrics;
+		return s_AllocationMetrics;
+	}
+
+	static void PrintMemoryUsage()
+	{
+		std::cout &lt;&lt; &#34;Memory Usage: &#34; &lt;&lt; Get().CurrentUsage() &lt;&lt; &#34; bytes\n&#34;;
+	}
+};
+
+void* operator new(size_t size)
+{
+	AllocationMetrics::Get().TotalAllocated &#43;= size;
+
+	return malloc(size);
+}
+
+void operator delete(void* addr, size_t size)
+{
+	AllocationMetrics::Get().TotalFreed &#43;= size;
+
+	free(addr);
+}
+
+struct Object
+{
+	int x, y, z;
+};
+
+int main()
+{
+	AllocationMetrics::PrintMemoryUsage();
+	std::string str = &#34;Hello&#34;;
+	AllocationMetrics::PrintMemoryUsage();
+	{
+		std::unique_ptr&lt;Object&gt; unique = std::make_unique&lt;Object&gt;();
+		AllocationMetrics::PrintMemoryUsage();
+	}
+	AllocationMetrics::PrintMemoryUsage();
+}
+```
+
+### lvalue and rvalue
+
+- cppreference: [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
+
+lvalue 是 locator value，即可以被 locate 的 value，lvalue reference 就是对 lvalue 的引用。rvalue 为除了 lvalue 之外的 value，可以理解为临时字面值 (未被存储) 和亡值 (已被存储但地址未知，或者知道地址也没用，因为它很快就被销毁了)，它们都无法被 located。
+
+一般来说不能将 rvalue 传递给 lvalue reference (因为 reference 需要以可以被 located 为前提):
+
+```c&#43;&#43;
+int&amp; a = 10; // error
+```
+
+但可以将 rvalue 传递给 `const` 修饰的 lvalue reference:
+
+```c&#43;&#43;
+const int&amp; a = 10; // pass
+// which is actually implemented by copmpiler
+int temp = 10;
+const int&amp; a = temp;
+```
+
+所以函数参数常用 `const` 来修饰 reference，这样可以同时接受 lvalue 和 rvalue:
+
+```c&#43;&#43;
+void PrintName(const std::string&amp; name)
+{
+    std::cout &lt;&lt; name &lt;&lt; std::endl;
+}
+
+int main()
+{
+    std::string firstName = &#34;Hello&#34;;
+    std::string lastName = &#34;World&#34;;
+
+    std::string name = firstName &#43; lastName;
+
+    PrintName(firstName);
+    PrintName(firstName &#43; lastName);
+}
+```
+
+但有时我们需要限制函数参数只接收 rvalue 而不接受 lvalue，此时就是 rvalue reference 大展身手的时机了。rvalue reference 使用 `&amp;&amp;` 来表示，其只能接收 rvalue 而不能接受 lvaue。将上面的例子改写为只接受 ravlue:
+
+```c&#43;&#43;
+void PrintName(std::string&amp; name)   // only accept lvalue reference
+{
+	std::cout &lt;&lt; &#34;[lvalue] &#34; &lt;&lt; name &lt;&lt; std::endl;
+}
+
+void PrintName(std::string&amp;&amp; name)  // only accept rvalue reference
+{
+	std::cout &lt;&lt; &#34;[ravlue] &#34; &lt;&lt; name &lt;&lt; std::endl;
+}
+
+int main()
+{
+	std::string firstName = &#34;Hello&#34;;
+	std::string lastName = &#34;World&#34;;
+
+	std::string name = firstName &#43; lastName;
+
+	PrintName(firstName);               // [lvalue] Hello
+	PrintName(firstName &#43; lastName);    // [rvalue] HelloWorld
+}
+```
+
+rvalue reference 对于优化比较重要，因为和 lvalue reference 不同，我们无需担心传入的 value 的生命周期问题，无需加入一些必要的生命周期检查，这样效率会很高。rvalue reference 常用于配合 move 移动语义来使用。
+
 ## Concurrency
 
 ### Threads
@@ -3039,6 +3206,10 @@ int main()
 	Instrumentor::Get().EndSession();
 }
 ```
+
+### Continuous Integration (CI)
+
+- [Jenkins](https://www.jenkins.io/): Build great things at any scale
 
 ### Coding Style
 
