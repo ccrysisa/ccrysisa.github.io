@@ -14,9 +14,10 @@ license:
 comment: false
 weight: 0
 tags:
-  - draft
+  - Rust
+  - Backend
 categories:
-  - draft
+  - Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -72,3 +73,33 @@ repost:
 [The developer experience and the inner dev loop](https://www.getambassador.io/docs/telepresence/latest/concepts/devloop)
 
 > The inner dev loop is the single developer workflow. A single developer should be able to set up and use an inner dev loop to code and test changes quickly.
+
+```bash
+cargo watch -x check -x test -x run
+```
+
+Continuous Integration (CI): [GitHub Actions - Rust Setup](https://gist.github.com/LukeMathWalker/5ae1107432ce283310c3e601fac915f3)
+
+- Tests: `cargo test`
+- Code Coverage: `cargo tarpaulin --ignore-tests`
+- Linting: `cargo clippy -- -D warnings`
+- Formatting: `cargo fmt -- --check`
+- Security Vulnerabilities: `cargo audit`
+
+## Building An Email Newsletter
+
+{{< admonition note "User Stories" >}}
+As a …,   
+I want to …,   
+So that …   
+{{< /admonition >}}
+
+A user story helps us to capture who we are building for (*as a*), the actions they want to perform (*want to*) as well as their motives (*so that*).
+
+---
+
+Instead of going deep on one story, we will try to build enough functionality to satisfy, to an extent, the requirements of all of our stories in our first release.
+
+We will then go back and improve: add fault-tolerance and retries for email delivery, add a confirmation email for new subscribers, etc.
+
+## Sign Up A New Subscriber
