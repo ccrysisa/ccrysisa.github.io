@@ -1,5 +1,5 @@
 ---
-title: "计算机网络"
+title: "Computer Network 101-1"
 subtitle:
 date: 2024-01-14T12:09:38+08:00
 slug: 3d012d7
@@ -18,7 +18,7 @@ tags:
   - Network
   - Security
 categories:
-  - Systems
+  - Systems Network Security
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -41,7 +41,49 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
+以清大黄能富老师主讲的计算机网路概论课程为基础，授课顺序调整为更符合直觉的 L3、L4、L2，增加 IPv6 相关内容以及 Linux network stack 有关的资料。
+
 <!--more-->
+
+- [110-1 計算機網路 (清大開放式課程)](https://hackmd.io/@0xff07/network/https%3A%2F%2Fhackmd.io%2F%400xff07%2FByADDQ57Y)
+
+## IPv4
+
+### Overview
+
+IP 层建立在 **每个 Host 只能知晓其附近 network 的状况而无法知晓 internetwork 的全貌** 的基础上 (分布式架构设计)。
+
+1. 不同 network 的 Hosts 之间的通信：Router、Routing Table 以及相关的演算法
+2. 同一 network 的 Hosts 之间的通信：IP Subnetting
+
+这两大部分构成了 IP 的主要功能。
+
+## 实作案例: Redis
+
+- [ ] [Build Your Own Redis with C/C++](https://build-your-own.org/redis/)
+
+这个教程偏向于网络的应用方面，即所谓的网络编程 (Network Programming)
+
+
+## Referenecs
+
+- [小菜学网络](https://fasionchan.com/network/)
+- [NUDT 高级计算机网络实验: 基于UDP的可靠传输](https://luzhixing12345.github.io/netlab/)
+- [可靠 UDP 的实现 (KCP over UDP)](https://sunyunqiang.com/blog/reliable_udp_protocol/) 
+- [基于 UDP 的可靠传输](https://www.bilibili.com/video/BV1di4y1z7Mn) [bilibili]
+- [实现基于 UDP 的网络文件传输器](https://www.bilibili.com/video/BV12P411T78X) [bilibili]
+- [ping 命令也可以用来通信](https://www.bilibili.com/video/BV1Wd4y1b7b4) [bilibili]
+- [Implementing TCP in Rust](https://www.youtube.com/playlist?list=PLqbS7AVVErFivDY3iKAQk3_VAm8SXwt1X) [YouTube]
+- [Let\'s code a TCP/IP stack](http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/)
+
+
+[courseinfo]: https://ocw.nthu.edu.tw/ocw/index.php?page=course&cid=291&
+[slides&hws]: https://ocw.nthu.edu.tw/ocw/index.php?page=course_news_content&cid=291&id=1015
+[playlist]: https://www.youtube.com/playlist?list=PLS0SUwlYe8cxktXNovos9xleroaWyb-z5
+
+-----
+
+{{< details "这部分内容已于 2024/8/13 起废止" >}}
 
 ## NTHU 计算机网络概论
 
@@ -246,26 +288,4 @@ CS 144 的 **拥塞控制** 讲的不是很好，科大讲的相对比较好
 
 - Professor Messer: [CompTIA Network+ N10-006 Training Course](https://www.youtube.com/playlist?list=PLG49S3nxzAnnXcPUJbwikr2xAcmKljbnQ)
 
-## CompTIA Security+
-
-## 实作案例: Build Your Own Redis with C/C++
-
-- [ ] [Build Your Own Redis with C/C++](https://build-your-own.org/redis/)
-
-这个教程偏向于网络的应用方面，即所谓的网络编程 (Network Programming)
-
-## Referenecs
-
-- [小菜学网络](https://fasionchan.com/network/)
-- [NUDT 高级计算机网络实验: 基于UDP的可靠传输](https://luzhixing12345.github.io/netlab/)
-- [可靠 UDP 的实现 (KCP over UDP)](https://sunyunqiang.com/blog/reliable_udp_protocol/) 
-- [基于 UDP 的可靠传输](https://www.bilibili.com/video/BV1di4y1z7Mn) [bilibili]
-- [实现基于 UDP 的网络文件传输器](https://www.bilibili.com/video/BV12P411T78X) [bilibili]
-- [ping 命令也可以用来通信](https://www.bilibili.com/video/BV1Wd4y1b7b4) [bilibili]
-- [Implementing TCP in Rust](https://www.youtube.com/playlist?list=PLqbS7AVVErFivDY3iKAQk3_VAm8SXwt1X) [YouTube]
-- [Let\'s code a TCP/IP stack](http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/)
-
-
-[courseinfo]: https://ocw.nthu.edu.tw/ocw/index.php?page=course&cid=291&
-[slides&hws]: https://ocw.nthu.edu.tw/ocw/index.php?page=course_news_content&cid=291&id=1015
-[playlist]: https://www.youtube.com/playlist?list=PLS0SUwlYe8cxktXNovos9xleroaWyb-z5
+{{< /details >}}

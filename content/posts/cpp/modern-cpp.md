@@ -553,6 +553,8 @@ Lambda 表达式的捕获分为 capture-default 和 individual capture，这两�
 
 - cppreference: [std::function](https://en.cppreference.com/w/cpp/utility/functional/function)
 
+> Class template `std::function` is a general-purpose polymorphic function wrapper. Instances of `std::function` can store, copy, and invoke any CopyConstructible Callable target -- functions (via pointers thereto), lambda expressions, bind expressions, or other function objects, as well as pointers to member functions and pointers to data members.
+
 ```c++
 #include <iostream>
 #include <vector>
@@ -1182,6 +1184,70 @@ public:
     }
 };
 ```
+
+### Singleton
+
+```c++
+#include <iostream>
+
+class Random
+{
+public:
+	Random(const Random&) = delete;
+
+	static Random& Get()
+	{
+		static Random s_Instance;
+		return s_Instance;
+	}
+
+	static float Float()
+	{
+		return Get().FloatImpl();
+	}
+
+private:
+	Random() {}
+
+	float FloatImpl()
+	{
+		return m_RandomGenerator;
+	}
+
+	float m_RandomGenerator = 0.5f;
+
+	static Random s_Instance;
+};
+
+int main()
+{
+	float number = Random::Float();
+	std::cout << number << std::endl;
+}
+```
+
+因为编译器最佳化时的内联机制，这样的函数调用并不会有额外的开销
+
+```c++
+#include <iostream>
+
+namespace RandomClass
+{
+	static float m_Instance = 0.5f;
+	static float Float()
+	{
+		return m_Instance;
+	}
+}
+
+int main()
+{
+	float number = RandomClass::Float();
+	std::cout << number << std::endl;
+}
+```
+
+使用 namepsace 也可以实现 Singleton，但是相对于 Class 方式灵活性更低，因为少了 `private`, `public` 这类可见性修饰符。
 
 ## Specifiers
 
@@ -2003,25 +2069,90 @@ int main()
 }
 ```
 
-##### String Stream
+##### Optimization
 
-- cppreference: [std::basic_stringstream](https://en.cppreference.com/w/cpp/io/basic_stringstream)
-
-stringstream is a stream class to operate on strings. It implements input/output operations on memory (string) based streams. stringstream can be helpful in different type of parsing. The following operators/functions are commonly used here
-
-- Operator `>>` Extracts formatted data.
-- Operator `<<` Inserts formatted data.
-- Method `str()` Gets the contents of underlying string device object.
-- Method `str(string)` Sets the contents of underlying string device object.
-
-Its header file is **sstream**.
+C++ 的 string 低效原因主要是它会经常进行分配操作，可以通过重载 `new` 运算符来观察:
 
 ```c++
-stringstream ss("23,4,56");
-char ch;
-int a, b, c;
-ss >> a >> ch >> b >> ch >> c;  // a = 23, b = 4, c = 56
+#include <iostream>
+#include <string>
+
+static size_t s_AllocCount = 0;
+
+void* operator new(size_t size)
+{
+	s_AllocCount++;
+	std::cout << "Allocating " << size << " bytes\n";
+	return malloc(size);
+}
+
+void PrintName(const std::string& name)
+{
+	std::cout << name << std::endl;
+}
+
+int main()
+{
+	std::string name = "Hello World";
+	std::string firstName = name.substr(0, 5);
+	std::string lastName = name.substr(6, 5);
+
+	PrintName(firstName);
+	PrintName(name);
+
+	std::cout << s_AllocCount << " allocations\n";
+}
 ```
+
+上面的程序一共涉及 3 次内存分配，事实上并不需要这么多次的内存分配，我们可以减少没有必要的内存分配操作。例如对于 `firstName` 和 `lastName` 这两个字符串，实际上并不需要额外分配内存空间，只需将其指向 `name` 字符串的对应部分即可:
+
+- cppreference: [std::basic_string_view](https://en.cppreference.com/w/cpp/string/basic_string_view)
+
+> The class template `basic_string_view` describes an object that can refer to a constant contiguous sequence of CharT with the first element of the sequence at position zero.
+
+```c++
+	std::string_view firstName(name.c_str(), 5);
+	std::string_view lastName(name.c_str() + 6, 5);
+```
+
+```c++
+void PrintName(std::string_view name)
+```
+
+这样就将内存分配次数减少到 1 次了。接下来我们可以将 `name` 不使用 string 进行分配，而是直接使用 `const char*` 对该常量字符串进行引用，则可以将内存分配次数降至 0 次:
+
+```c++
+	const char* name = "Hello World";
+```
+
+###### SSO
+
+Small String Optimization 使得标准库的 String 面对小的字符串会在 stack 上分配而不是在 heap 上分配，由此增强效能
+
+```c++
+#include <iostream>
+#include <string>
+
+static size_t s_AllocCount = 0;
+
+void* operator new(size_t size)
+{
+	s_AllocCount++;
+	std::cout << "Allocating " << size << " bytes\n";
+	return malloc(size);
+}
+
+int main()
+{
+	std::string name = "Hello";
+
+	std::cout << s_AllocCount << " allocations\n";
+}
+```
+
+VS 在默认在 Debug 下不启用 SSO 机制而在 Release 模式下启用 SSO，所以需要在 Release 模式下运行观察 (在 VS 的设定里小字符串指的是长度 $\leq 15$ 的字符串，超过这个长度就会在堆进行动态分配)
+
+- [Understanding Small String Optimization (SSO) in std::string](https://cppdepend.com/blog/understanding-small-string-optimization-sso-in-stdstring/)
 
 #### Vector
 
@@ -2082,7 +2213,7 @@ v.erase(v.begin()+2,v.begin()+5); // erases all the elements from the third elem
 STL 的容器，它们在被设计时，速度不是优先考虑的因素，所以我们可以设计出比 STL 里的容器性能更强的类似容器，这也是为什么很多工作室会自己设计容器库而不采用 STL，例如 [Qt Container Classes](https://doc.qt.io/qt-6/containers.html)、[EASTL](https://github.com/electronicarts/EASTL)。
 {{< /admonition >}}
 
-##### Optimizing Usage
+##### Optimization
 
 一般情况下，STL 的 `vector` 是比较慢的 (因为它倾向于经常分配内存空间，这会导致大量的性能开销)，所以我们需要通过一些策略来压榨出 `vector` 的全部性能。下面通过之前的例子来展示这些优化策略。
 
@@ -2140,6 +2271,26 @@ struct Vertex
 ```
 
 现在没有复制操作了
+
+#### Stream
+
+- cppreference: [std::basic_stringstream](https://en.cppreference.com/w/cpp/io/basic_stringstream)
+
+stringstream is a stream class to operate on strings. It implements input/output operations on memory (string) based streams. stringstream can be helpful in different type of parsing. The following operators/functions are commonly used here
+
+- Operator `>>` Extracts formatted data.
+- Operator `<<` Inserts formatted data.
+- Method `str()` Gets the contents of underlying string device object.
+- Method `str(string)` Sets the contents of underlying string device object.
+
+Its header file is **sstream**.
+
+```c++
+stringstream ss("23,4,56");
+char ch;
+int a, b, c;
+ss >> a >> ch >> b >> ch >> c;  // a = 23, b = 4, c = 56
+```
 
 ### Algorithms
 
@@ -2332,77 +2483,256 @@ int main()
 
 如果是生产环境则使用智能指针，如果是学习则使用原始指针。当然，如果你需要定制的话，也可以使用自己写的智能指针。
 
-## Benchmarking
+#### Track Memory Allocations
 
-Wikipedia: [Benchmark](https://en.wikipedia.org/wiki/Benchmark_(computing))
+- cppreference: [operator new, operator new[]](https://en.cppreference.com/w/cpp/memory/new/operator_new)
+- cppreference: [operator delete, operator delete[]](https://en.cppreference.com/w/cpp/memory/new/operator_delete)
 
-### Timing
+```c++
+#include <iostream>
+#include <string>
+#include <memory>
 
-- cppreference: [Date and time utilities](https://en.cppreference.com/w/cpp/chrono)
-- cppreference: [Standard library header <chrono> (C++11)](https://en.cppreference.com/w/cpp/header/chrono)
+void* operator new(size_t size)
+{
+	std::cout << "Allocating " << size << " bytes\n";
 
-chrono 是一个平台无关的计时库，如果不是特定平台高精度的计时需求，使用这个库就足够了。
+	return malloc(size);
+}
+
+void operator delete(void* addr, size_t size)
+{
+	std::cout << "Freeing " << size << " bytes\n";
+
+	free(addr);
+}
+
+struct Object
+{
+	int x, y, z;
+};
+
+int main()
+{
+	std::string str = "Hello";
+
+	{
+		std::unique_ptr<Object> unique = std::make_unique<Object>();
+	}
+}
+```
+
+通过重载 `new` 和 `delete` 运算符，以及在重载的 `new` 和 `delete` 运算符方法中进行断点，配合调试器的 **调用堆栈** 功能可以追踪内存分配和释放操作的来源。
+
+在此基础上可以构建一个简单快速的 **内存分配跟踪器** 工具:
+
+```c++
+#include <iostream>
+#include <string>
+#include <memory>
+
+struct AllocationMetrics
+{
+	size_t TotalAllocated = 0;
+	size_t TotalFreed = 0;
+
+	size_t CurrentUsage() { return TotalAllocated - TotalFreed; }
+
+	static AllocationMetrics& Get()
+	{
+		static AllocationMetrics s_AllocationMetrics;
+		return s_AllocationMetrics;
+	}
+
+	static void PrintMemoryUsage()
+	{
+		std::cout << "Memory Usage: " << Get().CurrentUsage() << " bytes\n";
+	}
+};
+
+void* operator new(size_t size)
+{
+	AllocationMetrics::Get().TotalAllocated += size;
+
+	return malloc(size);
+}
+
+void operator delete(void* addr, size_t size)
+{
+	AllocationMetrics::Get().TotalFreed += size;
+
+	free(addr);
+}
+
+struct Object
+{
+	int x, y, z;
+};
+
+int main()
+{
+	AllocationMetrics::PrintMemoryUsage();
+	std::string str = "Hello";
+	AllocationMetrics::PrintMemoryUsage();
+	{
+		std::unique_ptr<Object> unique = std::make_unique<Object>();
+		AllocationMetrics::PrintMemoryUsage();
+	}
+	AllocationMetrics::PrintMemoryUsage();
+}
+```
+
+### lvalue and rvalue
+
+- cppreference: [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
+
+lvalue 是 locator value，即可以被 locate 的 value，lvalue reference 就是对 lvalue 的引用。rvalue 为除了 lvalue 之外的 value，可以理解为临时字面值 (未被存储) 和亡值 (已被存储但地址未知，或者知道地址也没用，因为它很快就被销毁了)，它们都无法被 located。
+
+一般来说不能将 rvalue 传递给 lvalue reference (因为 reference 需要以可以被 located 为前提):
+
+```c++
+int& a = 10; // error
+```
+
+但可以将 rvalue 传递给 `const` 修饰的 lvalue reference:
+
+```c++
+const int& a = 10; // pass
+// which is actually implemented by copmpiler
+int temp = 10;
+const int& a = temp;
+```
+
+所以函数参数常用 `const` 来修饰 reference，这样可以同时接受 lvalue 和 rvalue:
+
+```c++
+void PrintName(const std::string& name)
+{
+    std::cout << name << std::endl;
+}
+
+int main()
+{
+    std::string firstName = "Hello";
+    std::string lastName = "World";
+
+    std::string name = firstName + lastName;
+
+    PrintName(firstName);
+    PrintName(firstName + lastName);
+}
+```
+
+但有时我们需要限制函数参数只接收 rvalue 而不接受 lvalue，此时就是 rvalue reference 大展身手的时机了。rvalue reference 使用 `&&` 来表示，其只能接收 rvalue 而不能接受 lvaue。将上面的例子改写为只接受 ravlue:
+
+```c++
+void PrintName(std::string& name)   // only accept lvalue reference
+{
+	std::cout << "[lvalue] " << name << std::endl;
+}
+
+void PrintName(std::string&& name)  // only accept rvalue reference
+{
+	std::cout << "[ravlue] " << name << std::endl;
+}
+
+int main()
+{
+	std::string firstName = "Hello";
+	std::string lastName = "World";
+
+	std::string name = firstName + lastName;
+
+	PrintName(firstName);               // [lvalue] Hello
+	PrintName(firstName + lastName);    // [rvalue] HelloWorld
+}
+```
+
+rvalue reference 对于优化比较重要，因为和 lvalue reference 不同，我们无需担心传入的 value 的生命周期问题，无需加入一些必要的生命周期检查，这样效率会很高。rvalue reference 常用于配合 move 移动语义来使用。
+
+## Concurrency
+
+### Threads
+
+- cppreference: [Concurrency support library (since C++11)](https://en.cppreference.com/w/cpp/thread)
+- cppreference: [std::thread](https://en.cppreference.com/w/cpp/thread/thread)
+
+> The class `thread` represents a single thread of execution. Threads allow multiple functions to execute concurrently.
 
 ```c++
 #include <iostream>
 #include <thread>
-#include <chrono>
 
-int main()
+static bool s_Finished = false;
+
+void DoWork()
 {
     using namespace std::literals::chrono_literals;
 
-    auto start = std::chrono::high_resolution_clock::now();
-    std::this_thread::sleep_for(1s);
-    auto end = std::chrono::high_resolution_clock::now();
+    std::cout << "Start thread id=" << std::this_thread::get_id() << std::endl;
 
-    std::chrono::duration<float> duration = end - start;
-    std::cout << duration << "s" << std::endl;
-}
-```
-
-运用作用域、生命周期以及析构函数来实现自动计时:
-
-```c++
-#include <iostream>
-#include <thread>
-#include <chrono>
-
-struct Timer
-{
-    std::chrono::steady_clock::time_point start, end;
-    std::chrono::duration<float> duration;
-
-    Timer()
+    while (!s_Finished)
     {
-        start = std::chrono::high_resolution_clock::now();
+        std::cout << "Working...\n";
+        std::this_thread::sleep_for(1s);
     }
-
-    ~Timer()
-    {
-        end = std::chrono::high_resolution_clock::now();
-        duration = end - start;
-
-        float ms = duration.count() * 1000.0f;
-        std::cout << "Timer took " << ms << "ms" << std::endl;
-    }
-};
-
-void Function()
-{
-    Timer timer;
-
-    for (int i = 0; i < 100; i++)
-        std::cout << "Hello\n" /* << std::endl */;
 }
 
 int main()
 {
-    Function();
+    std::thread worker(DoWork);
+
+    std::cin.get();
+    s_Finished = true;
+
+    worker.join();
+
+    std::cout << "Finished." << std::endl;
+    std::cout << "Start thread id=" << std::this_thread::get_id() << std::endl;
 }
 ```
 
+### Asynchronous
 
+- cppreference: [std::async](https://en.cppreference.com/w/cpp/thread/async)
+- cppreference: [std::future](https://en.cppreference.com/w/cpp/thread/future)
+
+```c++
+// async example
+#include <iostream>       // std::cout
+#include <future>         // std::async, std::future
+
+// a non-optimized way of checking for prime numbers:
+bool is_prime(int x) {
+	std::cout << "Calculating. Please, wait...\n";
+	for (int i = 2; i < x; ++i)
+		if (x % i == 0)
+			return false;
+	return true;
+}
+
+int main()
+{
+	// call is_prime(313222313) asynchronously:
+	std::future<bool> fut = std::async(is_prime, 313222313);
+
+	std::cout << "Checking whether 313222313 is prime.\n";
+	// ...
+
+	bool ret = fut.get();      // waits for is_prime to return
+
+	if (ret) std::cout << "It is prime!\n";
+	else     std::cout << "It is not prime.\n";
+
+	return 0;
+}
+```
+
+- Stack Overflow: [When to use std::async vs std::threads?](https://stackoverflow.com/questions/25814365/when-to-use-stdasync-vs-stdthreads)
+
+> One use-case of using `std::future` over `std::thread` is you want to call a function which returns a value. When you want return value of the function, you can call `get()` method of future.
+> 
+> `std::thread` doesn't provide a direct way to get the return value of the function.
 
 ## Advanced Topics
 
@@ -2419,6 +2749,30 @@ int main()
 
 - cppreference: [std::tuple](https://en.cppreference.com/w/cpp/utility/tuple)
 - cppreference: [std::pair](https://en.cppreference.com/w/cpp/utility/pair)
+
+```c++
+#include <iostream>
+#include <tuple>
+#include <string>
+
+std::tuple<std::string, int> CreatePerson()
+{
+	return { "Cherno", 24 };
+}
+
+int main()
+{
+	auto person = CreatePerson();
+	std::string& name = std::get<0>(person);
+	int age = std::get<1>(person);
+	// or
+	std::string name;
+	int age;
+	std::tie(name, age) = CreatePerson();
+}
+```
+
+这个问题在 C++17 提出结构化绑定之后就得到比较好的解决了，参考 {{< link href="#structured-bindings" content="C++17::Structured-Binding" >}}
 
 ### Macros
 
@@ -2598,8 +2952,58 @@ double s = static_cast<int>(value) + 5.3; // a == 10.3
 
 #### Dynamic Casting
 
+- cppreference: [dynamic_cast conversion](https://en.cppreference.com/w/cpp/language/dynamic_cast)
+
+> Safely converts pointers and references to classes up, down, and sideways along the inheritance hierarchy.
+
 ```c++
+class Entity
+{
+};
+
+class Player : public Entity
+{
+};
+
+class Enemy : public Entity
+{
+};
+
+int main()
+{
+    Player* player = new Player();
+    Entity* e = player;
+
+    Player* p = e; // compiler error since e maybe Enemy
+}
 ```
+
+这种情况使用 C 风格的类型转换或 `static_cast` 是合法的，但可能会导致运行时错误 (除非能在编译时期时向编译器保证):
+
+```c++
+    Player* p = (Player*)e; 
+    Player* p = static_cast<Player*>(e); 
+```
+
+上面例子是可以在编译时期保证类型转换是合法的，所以使用 `static_cast` 或 `dynamic_cast` 都可以，但是更常见的情况是运行时才得知对应的具体类型 (例如根据用户输入而构造不同的具体类型)，此时就是 `dynamic_cast` 的使用场景了，根据不同的 (运行时) 类型进行不同的处理:
+
+```c++
+    Player* p = dynamic_cast<Player*>(e); 
+```
+
+```c++
+    Player* p = dynamic_cast<Player*>(e);
+    if (p)
+    {
+        // do something
+    }
+```
+
+其实作本质是根据运行时储存的 RTTI (runtime type information) 来推导实例的具体类型，从而进行合法和允许的类型转换，对于不合法的类型转换则返回 NULL。但是这个实作所依赖的 RTTI 是运行时开销 (需要空间储存表，需要时间来查表)，所以使用 `dynamic_cast` 会又额外的运行开销，注重性能的场景需要注意这一点。
+
+{{< admonition tip >}}
+VS 可以关闭 C++ 的 RTTI 开销:  Project 属性 $\rightarrow$ C/C++ $\rightarrow$ Language $\rightarrow$ Enable Run-Time Type Information (**No**)
+{{< /admonition >}}
 
 ### Namespaces
 
@@ -2668,46 +3072,184 @@ int main()
 大项目尽量将函数、类等等定义在 namspace 内，防止出现 API 冲突。
 {{< /admonition >}}
 
-### Threads
+### Benchmarks
 
-- cppreference: [Concurrency support library (since C++11)](https://en.cppreference.com/w/cpp/thread)
-- cppreference: [std::thread](https://en.cppreference.com/w/cpp/thread/thread)
+Wikipedia: [Benchmark](https://en.wikipedia.org/wiki/Benchmark_(computing))
 
-> The class `thread` represents a single thread of execution. Threads allow multiple functions to execute concurrently.
+#### Timing
+
+- cppreference: [Date and time utilities](https://en.cppreference.com/w/cpp/chrono)
+- cppreference: [Standard library header <chrono> (C++11)](https://en.cppreference.com/w/cpp/header/chrono)
+
+chrono 是一个平台无关的计时库，如果不是特定平台高精度的计时需求，使用这个库就足够了。
 
 ```c++
 #include <iostream>
 #include <thread>
+#include <chrono>
 
-static bool s_Finished = false;
-
-void DoWork()
+int main()
 {
     using namespace std::literals::chrono_literals;
 
-    std::cout << "Start thread id=" << std::this_thread::get_id() << std::endl;
+    auto start = std::chrono::high_resolution_clock::now();
+    std::this_thread::sleep_for(1s);
+    auto end = std::chrono::high_resolution_clock::now();
 
-    while (!s_Finished)
+    std::chrono::duration<float> duration = end - start;
+    std::cout << duration << "s" << std::endl;
+}
+```
+
+运用作用域、生命周期以及析构函数来实现自动计时:
+
+```c++
+#include <iostream>
+#include <thread>
+#include <chrono>
+
+struct Timer
+{
+    std::chrono::steady_clock::time_point start, end;
+    std::chrono::duration<float> duration;
+
+    Timer()
     {
-        std::cout << "Working...\n";
-        std::this_thread::sleep_for(1s);
+        start = std::chrono::high_resolution_clock::now();
     }
+
+    ~Timer()
+    {
+        end = std::chrono::high_resolution_clock::now();
+        duration = end - start;
+
+        float ms = duration.count() * 1000.0f;
+        std::cout << "Timer took " << ms << "ms" << std::endl;
+    }
+};
+
+void Function()
+{
+    Timer timer;
+
+    for (int i = 0; i < 100; i++)
+        std::cout << "Hello\n" /* << std::endl */;
 }
 
 int main()
 {
-    std::thread worker(DoWork);
-
-    std::cin.get();
-    s_Finished = true;
-
-    worker.join();
-
-    std::cout << "Finished." << std::endl;
-    std::cout << "Start thread id=" << std::this_thread::get_id() << std::endl;
+    Function();
 }
 ```
 
+##### 实作案例
+
+编译器最佳化对于数组遍历求和的效率影响:
+
+```c++
+int value = 0;
+{
+    Timer timer;
+    for (int i = 0; i < 1000000; i++)
+        value += 2;
+}
+
+std::cout << value << std::endl;
+```
+
+{{< admonition tip >}}
+VS 可以通过设定 Debug 或 Release 模式来设定编译器最优化等级
+{{< /admonition >}}
+
+不同的智能指针构造的效率差异:
+
+```c++
+struct Vector2
+{
+    float x, y;
+};
+
+std::cout << "Make Shared\n";
+{
+    std::array<std::shared_ptr<Vector2>, 1000> sharedPtrs;
+    Timer timer;
+    for (int i = 0; i < sharedPtrs.size(); i++)
+        sharedPtrs[i] = std::make_shared<Vector2>();
+}
+
+std::cout << "New Shared\n";
+{
+    std::array<std::shared_ptr<Vector2>, 1000> sharedPtrs;
+    Timer timer;
+    for (int i = 0; i < sharedPtrs.size(); i++)
+        sharedPtrs[i] = std::shared_ptr<Vector2>(new Vector2());
+}
+
+std::cout << "Make Unique\n";
+{
+    std::array<std::unique_ptr<Vector2>, 1000> uniquePtrs;
+    Timer timer;
+    for (int i = 0; i < uniquePtrs.size(); i++)
+        uniquePtrs[i] = std::make_unique<Vector2>();
+}
+```
+
+#### Visualization
+
+- [A beginner’s guide to Chrome tracing](https://nolanlawson.com/2022/10/26/a-beginners-guide-to-chrome-tracing/)
+- [Instrumentor.h](https://gist.github.com/TheCherno/31f135eea6ee729ab5f26a6908eb3a5e)
+
+```c++
+#include "Instrumentor.h"
+
+#define PROFILE 1
+#if PROFILE
+#define PROFILE_SCOPE(name) InstrumentationTimer timer##__LINE__(name)
+#define PROFILE_FUNCTION() PROFILE_SCOPE(__FUNCSIG__)
+#else
+#define PROFILE_SCOPE(name)
+#endif
+```
+
+```c++
+namespace Benchmarks {
+	void Function1()
+	{
+		PROFILE_FUNCTION();
+
+		for (int i = 0; i < 1000; i++)
+			std::cout << "Hello World #" << i << std::endl;
+	}
+
+	void Function2()
+	{
+		PROFILE_FUNCTION();
+
+		for (int i = 0; i < 1000; i++)
+			std::cout << "Hello World #" << sqrt(i) << std::endl;
+	}
+
+	void Benchmarks()
+	{
+		PROFILE_FUNCTION();
+
+		std::cout << "Run Benchmarks...\n";
+		Function1();
+		Function2();
+	}
+}
+
+int main()
+{
+	Instrumentor::Get().BeginSession("Profile");
+	Benchmarks::Benchmarks();
+	Instrumentor::Get().EndSession();
+}
+```
+
+### Continuous Integration (CI)
+
+- [Jenkins](https://www.jenkins.io/): Build great things at any scale
 
 ### Coding Style
 
@@ -2716,12 +3258,171 @@ int main()
 - 函数名: [PscalCase](https://en.wikipedia.org/wiki/Naming_convention_(programming)#Letter_case-separated_words) 命名法 e.g. `ForEach`
 - 类成员: [Hungarian](https://en.wikipedia.org/wiki/Hungarian_notation) 命名法 e.g. `m_Devices`
 
+## Modern Features
+
+VS 设定 C++ 语言标准: Project 属性 $\rightarrow$ C/C++ $\rightarrow$ Language $\rightarrow$ C++ Language Standard
+
+### C++17
+
+#### Structured Bindings
+
+- cppreference: [Structured binding declaration (since C++17)](https://en.cppreference.com/w/cpp/language/structured_binding)
+
+> Binds the specified names to subobjects or elements of the initializer.
+
+```c++
+#include <iostream>
+#include <tuple>
+#include <string>
+
+std::tuple<std::string, int> CreatePerson()
+{
+	return { "Cherno", 24 };
+}
+
+int main()
+{
+	auto [name, age] = CreatePerson();
+}
+```
+
+#### Optional
+
+- cppreference: [std::optional](https://en.cppreference.com/w/cpp/utility/optional)
+
+> The class template `std::optional` manages an optional contained value, i.e. a value that may or may not be present.
+
+```c++
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <optional>
+
+std::optional<std::string> ReadFileAsString(const std::string& filepath)
+{
+	std::ifstream stream(filepath);
+	if (stream)
+	{
+		std::string result;
+		// read file
+		stream.close();
+		return result;
+	}
+	return {};
+}
+
+int main()
+{
+	std::optional<std::string> data = ReadFileAsString("data.txt");
+    std::string value = data.value_or("Not present");
+	if (data.has_value())
+	{
+		std::string& value = data.value();
+		std::cout << "File read successfully!\n";
+	}
+	else
+	{
+		std::cout << "File could not be opened!\n";
+	}
+}
+```
+
+由于 `std::optional` 重载了逻辑运算符，所以上面例子的第 23 行可以改写为:
+
+```c++
+	if (data)
+```
+
+当然这样在处理 `std::optional<bool>` 的情况时会有二义性，但是这种使用场景比较少见 (因为 optional 本身根据内部数据存在与否就表示了一种 `bool` 值)。
+
+相似实作: Rust [std::option::Option](https://doc.rust-lang.org/std/option/enum.Option.html)
+
+#### Variant
+
+- cppreference: [std::variant](https://en.cppreference.com/w/cpp/utility/variant)
+
+> The class template `std::variant` represents a type-safe `union`. An instance of std::variant at any given time either holds a value of one of its alternative types, or in the case of error - no value
+
+```c++
+#include <iostream>
+#include <string>
+#include <variant>
+
+int main()
+{
+	std::variant<std::string, int> data;
+
+	data = "Hello";
+	data.index(); // 0
+	std::cout << std::get<std::string>(data) << std::endl;
+
+	data = 10;
+	data.index(); // 1
+
+	if (auto value = std::get_if<std::string>(&data))
+	{
+		std::string& v = *value;
+	}
+}
+```
+
+`std::variant` 和 `union` 的内存布局是完全不同的，`union` 占用的内存大小等于其内存占用最大的成员类型，而 `std::variant` 占用的内存大小为列举的类型大小之和 (当然这两者实际占用的内存大小还需要考虑内存对齐):
+
+```c++
+std::variant<std::string, double> data;
+union MyUnion { std::string s; double d; };
+
+std::cout << sizeof(double) << std::endl;       // 8
+std::cout << sizeof(std::string) << std::endl;  // 28
+std::cout << sizeof(data) << std::endl;         // 40
+std::cout << sizeof(MyUnion) << std::endl;      // 32
+```
+
+所以 `variant` 会更加类型安全，因为它和 `union` 不一样，不会造成未定义行为。可以使用 `std::variant` 来实现类似于 Rust 的 `Result` 类型:
+
+```c++
+enum class ErrorCode
+{
+    None = 0,
+    NotFound = 1,
+    NoAccess = 2,
+};
+
+std::variant<std::string, ErrorCode> ReadFileAsString(const std::string& filepath)
+{
+    ...
+}
+```
+
+相似实作: Rust [Enum](https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html)，只是语法相似，内部实作特别是内存布局完全不同，Rust 的 Enum 内存布局更偏向于 C/C++ 的 Union。
+
+#### Any
+
+- cpprederence: [std::any](https://en.cppreference.com/w/cpp/utility/any)
+
+> The class any describes a type-safe container for single values of any copy constructible type.
+
+```c++
+std::any data;
+data = "Hello";
+data = 1;
+```
+
+这个 `std::any` 其实没啥应用场景... `std::variant` 更加安全并且性能更强 (因为 `std::any` 对于大的对象是通过动态分配的，这导致了其性能不如 `std::variant`)。除此之外，使用 `std::any` 会降低代码可读性，我个人不认为在代码中使用 `std::any` 是一种良好的编程习惯。
+
 ## Gui
 
 ### ImGui
 
-bilibili: [ImGui 入门到精通](https://space.bilibili.com/443124242/channel/collectiondetail?sid=824431)
+GitHub: [Dear ImGui](https://github.com/ocornut/imgui/tree/master)
+
+> Dear ImGui is a **bloat-free graphical user interface library for C++**. It outputs optimized vertex buffers that you can render anytime in your 3D-pipeline-enabled application. It is fast, portable, renderer agnostic, and self-contained (no external dependencies).
+
+bilibili: 
+- [ImGui 入门到精通](https://space.bilibili.com/443124242/channel/collectiondetail?sid=824431)
 / [项目源代码](https://www.bilibili.com/read/cv19537138/)
+
+#### 初始设置
 
 依赖库:
 - [GLFW](https://www.glfw.org/download): 64-bit Windows binaries
@@ -2863,14 +3564,14 @@ ImGui::EndListBox();
 ```c++
 if (ImGui::BeginCombo("Combo", Text.c_str()))
 {
-	for (size_t i = 0; i < 32; i++)
-	{
-		if (ImGui::Selectable(std::to_string(i).c_str()))
-		{
-			Text = std::to_string(i);
-		}
-	}
-	ImGui::EndCombo();
+    for (size_t i = 0; i < 32; i++)
+    {
+        if (ImGui::Selectable(std::to_string(i).c_str()))
+        {
+            Text = std::to_string(i);
+        }
+    }
+    ImGui::EndCombo();
 }
 ```
 
@@ -2885,9 +3586,10 @@ ImGui::ColorEdit4("Color", (float*)&color, ImGuiColorEditFlags_::ImGuiColorEditF
 
 ## References
 
-- The Cherno: [C++](https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb) / [中文翻译](https://space.bilibili.com/364152971/channel/collectiondetail?sid=13909): 主要介绍 C++11 及以上版本的语法
-- [C++ Weekly With Jason Turner](https://www.youtube.com/@cppweekly): 这个博主超级猛
+- The Cherno: [C++](https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb) / [中文翻译](https://space.bilibili.com/364152971/channel/collectiondetail?sid=13909): 主要介绍 C++11 及以上版本的语法 (文中未特意标注引用的部分，均出自该处)
+- [C++ Weekly With Jason Turner](https://www.youtube.com/@cppweekly): 这个博主很猛
 - [CppCon](https://www.youtube.com/@CppCon): 强烈推荐 [Back To Basics](https://www.youtube.com/@CppCon/search?query=Back%20to%20Basics) 专题
+- [javidx9](https://www.youtube.com/@javidx9): 这个频道有一些比较有意思的项目
 - [Learn C++](https://www.learncpp.com/)
 - [HackerRank](https://www.hackerrank.com/): 一个与 LeetCode 类似的练习网站
 - [C++ 矿坑系列](https://github.com/Mes0903/Cpp-Miner)

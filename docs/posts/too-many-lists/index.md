@@ -1,42 +1,42 @@
 # 手把手带你使用 Rust 实现链表
 
 
-{{< admonition abstract >}}
+{{&lt; admonition abstract &gt;}}
 其它语言：兄弟，语言学了吗？来写一个链表证明你基本掌握了语法。
 
 Rust 语言: 兄弟，语言精通了吗？来写一个链表证明你已经精通了 Rust！
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
-<!--more-->
+&lt;!--more--&gt;
 
-{{< link href="https://www.bilibili.com/video/BV1eb4y1Q7FA/" content="教学录影" external-icon=true >}}
+{{&lt; link href=&#34;https://www.bilibili.com/video/BV1eb4y1Q7FA/&#34; content=&#34;教学录影&#34; external-icon=true &gt;}}
 /
-{{< link href="https://rust-unofficial.github.io/too-many-lists/" content="原文地址" external-icon=true >}}
+{{&lt; link href=&#34;https://rust-unofficial.github.io/too-many-lists/&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
 / 
-{{< link href="https://course.rs/too-many-lists/intro.html" content="中文翻译" external-icon=true >}}
+{{&lt; link href=&#34;https://course.rs/too-many-lists/intro.html&#34; content=&#34;中文翻译&#34; external-icon=true &gt;}}
 
 ## 通过枚举实现 Lisp 风格的链表
 
 ```rs
 #[derive(Debug)]
-enum List<T> {
-    Cons(T, Box<List<T>>),
+enum List&lt;T&gt; {
+    Cons(T, Box&lt;List&lt;T&gt;&gt;),
     Nil,
 }
 
 fn main() {
-    let list: List<i32> = List::Cons(1, Box::new(List::Cons(2, Box::new(List::Nil))));
-    println!("{:?}", list);
+    let list: List&lt;i32&gt; = List::Cons(1, Box::new(List::Cons(2, Box::new(List::Nil))));
+    println!(&#34;{:?}&#34;, list);
 }
 ```
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 该实作将 **链表节点整体** 视为 **枚举** 进行区分，导致空元素也会占据内存空间
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 符号 `[]` 表示数据存放在 stack 上，`()` 则表示数据存放在 heap 上，上面例子的内存分布为:
 ```rs
-[List 1, ptr] -> (List 2, ptr) -> (Nil)
+[List 1, ptr] -&gt; (List 2, ptr) -&gt; (Nil)
 ```
 
 存在的问题:
@@ -45,56 +45,56 @@ fn main() {
 
 而我们预期的内存分布为:
 ```rs
-[ptr] -> (List 1, ptr) -> (List 2, ptr) -> (Nil)
+[ptr] -&gt; (List 1, ptr) -&gt; (List 2, ptr) -&gt; (Nil)
 ```
 
 这样的内存分布更加节省 stack 空间，并且将所有的链表节点都放置在 heap 上，这样在链表拆分和合并时就不需要对头结点进行额外考量和处理，下面是两种内存布局在链表拆分时的对比:
 ```rs
 // first entry in stack
-[List 1, ptr] -> (List 2, ptr) -> (List 3, ptr) -> (Nil)
+[List 1, ptr] -&gt; (List 2, ptr) -&gt; (List 3, ptr) -&gt; (Nil)
 split off 3:
-[List 1, ptr] -> (List 2, ptr) -> (Nil)
-[List 3, ptr] -> (Nil)
+[List 1, ptr] -&gt; (List 2, ptr) -&gt; (Nil)
+[List 3, ptr] -&gt; (Nil)
 
 // first entry in heap
-[ptr] -> (List 1, ptr) -> (List 2, ptr) -> (List 3, ptr) -> (Nil)
+[ptr] -&gt; (List 1, ptr) -&gt; (List 2, ptr) -&gt; (List 3, ptr) -&gt; (Nil)
 split off 3:
-[ptr] -> (List 1, ptr) -> (List 2, ptr) -> (Nil)
-[ptr] -> (List 3, ptr) -> (Nil)
+[ptr] -&gt; (List 1, ptr) -&gt; (List 2, ptr) -&gt; (Nil)
+[ptr] -&gt; (List 3, ptr) -&gt; (Nil)
 ```
 
 显然第一种方式在链表拆分时涉及到链表元素在 stack 和 heap 之间的位置变换，链表合并也类似，请自行思考。
 
-但是这个内存布局并不是最好的，我们想要达到类似 C/C++ 的链表的内存布局:
+但是这个内存布局并不是最好的，我们想要达到类似 C/C&#43;&#43; 的链表的内存布局:
 ```rs
-[ptr] -> (List 1, ptr) -> (List 2, ptr) -> (List 3, null)
+[ptr] -&gt; (List 1, ptr) -&gt; (List 2, ptr) -&gt; (List 3, null)
 ```
 
-## 实作 C/C++ 风格的链表
+## 实作 C/C&#43;&#43; 风格的链表
 
 ```rs
-type Link<T> = Option<Box<Node<T>>>;
+type Link&lt;T&gt; = Option&lt;Box&lt;Node&lt;T&gt;&gt;&gt;;
 
 #[derive(Debug)]
-pub struct List<T> {
-    head: Link<T>,
+pub struct List&lt;T&gt; {
+    head: Link&lt;T&gt;,
 }
 
 #[derive(Debug)]
-struct Node<T> {
+struct Node&lt;T&gt; {
     elem: T,
-    next: Link<T>,
+    next: Link&lt;T&gt;,
 }
 ```
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 该实作将 链表节点的 **next 指针部分** 视为 **枚举** 进行区分，这样空元素不会占据内存空间
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ### new
 
 ```rs
-pub fn new() -> Self {
+pub fn new() -&gt; Self {
     Self { head: None }
 }
 ```
@@ -102,7 +102,7 @@ pub fn new() -> Self {
 ### push
 
 ```rs
-pub fn push(&mut self, elem: T) {
+pub fn push(&amp;mut self, elem: T) {
     let next = Box::new(Node {
         elem,
         next: self.head.take(),
@@ -114,7 +114,7 @@ pub fn push(&mut self, elem: T) {
 ### pop
 
 ```rs
-pub fn pop(&mut self) -> Option<T> {
+pub fn pop(&amp;mut self) -&gt; Option&lt;T&gt; {
     self.head.take().map(|node| {
         self.head = node.next;
         node.elem
@@ -127,8 +127,8 @@ pub fn pop(&mut self) -> Option<T> {
 ### drop
 
 ```rs
-impl<T> Drop for List<T> {
-    fn drop(&mut self) {
+impl&lt;T&gt; Drop for List&lt;T&gt; {
+    fn drop(&amp;mut self) {
         let mut link = self.head.take();
         while let Some(mut node) = link {
             link = node.next.take();
@@ -155,32 +155,32 @@ stack
 ### peek
 
 ```rs
-pub fn peek(&self) -> Option<&T> {
-    self.head.as_ref().map(|node| &node.elem)
+pub fn peek(&amp;self) -&gt; Option&lt;&amp;T&gt; {
+    self.head.as_ref().map(|node| &amp;node.elem)
 }
 
-pub fn peek_mut(&mut self) -> Option<&mut T> {
-    self.head.as_mut().map(|node| &mut node.elem)
+pub fn peek_mut(&amp;mut self) -&gt; Option&lt;&amp;mut T&gt; {
+    self.head.as_mut().map(|node| &amp;mut node.elem)
 }
 ```
 
 ### into_iter
 
 ```rs
-impl<T> IntoIterator for List<T> {
+impl&lt;T&gt; IntoIterator for List&lt;T&gt; {
     type Item = T;
-    type IntoIter = IntoIter<T>;
+    type IntoIter = IntoIter&lt;T&gt;;
 
-    fn into_iter(self) -> Self::IntoIter {
+    fn into_iter(self) -&gt; Self::IntoIter {
         IntoIter(self)
     }
 }
 
-pub struct IntoIter<T>(List<T>);
+pub struct IntoIter&lt;T&gt;(List&lt;T&gt;);
 
-impl<T> Iterator for IntoIter<T> {
+impl&lt;T&gt; Iterator for IntoIter&lt;T&gt; {
     type Item = T;
-    fn next(&mut self) -> Option<Self::Item> {
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
         self.0.pop()
     }
 }
@@ -192,36 +192,36 @@ impl<T> Iterator for IntoIter<T> {
 ### iter
 
 ```rs
-impl<'a, T> IntoIterator for &'a List<T> {
-    type Item = &'a T;
-    type IntoIter = Iter<'a, T>;
+impl&lt;&#39;a, T&gt; IntoIterator for &amp;&#39;a List&lt;T&gt; {
+    type Item = &amp;&#39;a T;
+    type IntoIter = Iter&lt;&#39;a, T&gt;;
 
-    fn into_iter(self) -> Self::IntoIter {
+    fn into_iter(self) -&gt; Self::IntoIter {
         Iter(self.head.as_deref())
     }
 }
 
-pub struct Iter<'a, T>(Option<&'a Node<T>>);
+pub struct Iter&lt;&#39;a, T&gt;(Option&lt;&amp;&#39;a Node&lt;T&gt;&gt;);
 
-impl<'a, T> Iterator for Iter<'a, T> {
-    type Item = &'a T;
-    fn next(&mut self) -> Option<Self::Item> {
+impl&lt;&#39;a, T&gt; Iterator for Iter&lt;&#39;a, T&gt; {
+    type Item = &amp;&#39;a T;
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
         self.0.take().map(|node| {
             self.0 = node.next.as_deref();
-            &node.elem
+            &amp;node.elem
         })
     }
 }
 
-impl<T> List<T> {
-    pub fn iter(&self) -> Iter<T> {
+impl&lt;T&gt; List&lt;T&gt; {
+    pub fn iter(&amp;self) -&gt; Iter&lt;T&gt; {
         self.into_iter()
     }
 }
 ```
 
 - method [std::option::Option::as_deref](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_deref)
-> Leaves the original Option in-place, creating a new one with a reference to the original one, additionally coercing the contents via `Deref`.
+&gt; Leaves the original Option in-place, creating a new one with a reference to the original one, additionally coercing the contents via `Deref`.
 
 在这里可以一窥 `as_deref` 的作用，例如下面两条语句的作用是相同的:
 
@@ -235,37 +235,37 @@ self.0 = node.next.as_deref();
 ### iter_mut
 
 ```rs
-impl<'a, T> IntoIterator for &'a mut List<T> {
-    type Item = &'a mut T;
-    type IntoIter = IterMut<'a, T>;
+impl&lt;&#39;a, T&gt; IntoIterator for &amp;&#39;a mut List&lt;T&gt; {
+    type Item = &amp;&#39;a mut T;
+    type IntoIter = IterMut&lt;&#39;a, T&gt;;
 
-    fn into_iter(self) -> Self::IntoIter {
+    fn into_iter(self) -&gt; Self::IntoIter {
         IterMut(self.head.as_deref_mut())
     }
 }
 
-pub struct IterMut<'a, T>(Option<&'a mut Node<T>>);
+pub struct IterMut&lt;&#39;a, T&gt;(Option&lt;&amp;&#39;a mut Node&lt;T&gt;&gt;);
 
-impl<'a, T> Iterator for IterMut<'a, T> {
-    type Item = &'a mut T;
+impl&lt;&#39;a, T&gt; Iterator for IterMut&lt;&#39;a, T&gt; {
+    type Item = &amp;&#39;a mut T;
 
-    fn next(&mut self) -> Option<Self::Item> {
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
         self.0.take().map(|node| {
             self.0 = node.next.as_deref_mut();
-            &mut node.elem
+            &amp;mut node.elem
         })
     }
 }
 
-impl<T> List<T> {
-    pub fn iter_mut(&mut self) -> IterMut<T> {
+impl&lt;T&gt; List&lt;T&gt; {
+    pub fn iter_mut(&amp;mut self) -&gt; IterMut&lt;T&gt; {
         self.into_iter()
     }
 }
 ```
 
 - method [std::option::Option::as_deref_mut](https://doc.rust-lang.org/std/option/enum.Option.html#method.as_deref_mut)
-> Leaves the original Option in-place, creating a new one containing a mutable reference to the inner type’s `Deref::Target` type.
+&gt; Leaves the original Option in-place, creating a new one containing a mutable reference to the inner type’s `Deref::Target` type.
 
 ## 持久化共享节点的链表
 
@@ -273,16 +273,16 @@ impl<T> List<T> {
 
 ```rs
 // current
-list -> A -> B -> C
+list -&gt; A -&gt; B -&gt; C
 
 // expect
-list 1 -> A ---+
+list 1 -&gt; A ---&#43;
                |
                v
-list 2 -> B -> C -> D
+list 2 -&gt; B -&gt; C -&gt; D
                ^
                |
-list 3 -> X ---+
+list 3 -&gt; X ---&#43;
 
 list 1: [A, C, D]
 list 2: [B, C, D]
@@ -299,21 +299,21 @@ list 3: [X, C, D]
 ```rs
 use std::rc::Rc;
 
-type Link<T> = Option<Rc<Node<T>>>;
+type Link&lt;T&gt; = Option&lt;Rc&lt;Node&lt;T&gt;&gt;&gt;;
 
 #[derive(Debug)]
-pub struct List<T> {
-    head: Link<T>,
+pub struct List&lt;T&gt; {
+    head: Link&lt;T&gt;,
 }
 
 #[derive(Debug)]
-struct Node<T> {
+struct Node&lt;T&gt; {
     elem: T,
-    next: Link<T>,
+    next: Link&lt;T&gt;,
 }
 
-impl<T> List<T> {
-    pub fn new() -> Self {
+impl&lt;T&gt; List&lt;T&gt; {
+    pub fn new() -&gt; Self {
         Self { head: None }
     }
 }
@@ -323,7 +323,7 @@ impl<T> List<T> {
 
 ```rs
 // It takes a list and an element, and returns a List.
-pub fn prepend(&mut self, elem: T) -> Self {
+pub fn prepend(&amp;mut self, elem: T) -&gt; Self {
     Self {
         head: Some(Rc::new(Node {
             elem,
@@ -337,7 +337,7 @@ pub fn prepend(&mut self, elem: T) -> Self {
 
 ```rs
 // It takes a list and returns the whole list with the first element removed.
-pub fn tail(&mut self) -> Self {
+pub fn tail(&amp;mut self) -&gt; Self {
     Self {
         head: self.head.as_ref().and_then(|node| node.next.clone()),
     }
@@ -347,23 +347,23 @@ pub fn tail(&mut self) -> Self {
 这里可以体验 [map](https://doc.rust-lang.org/std/option/enum.Option.html#method.map) 和 [and_then](https://doc.rust-lang.org/std/option/enum.Option.html#method.and_then) 的区别，在于其接受的闭包的不同，`map` 闭包的返回值会被自动的用 `Option` 包装起来，而 `and_then` 则需要自己在闭包中手动包装:
 
 ```rs
-pub fn map<U, F>(self, f: F) -> Option<U>
+pub fn map&lt;U, F&gt;(self, f: F) -&gt; Option&lt;U&gt;
 where
-    F: FnOnce(T) -> U,
+    F: FnOnce(T) -&gt; U,
 ```
 
 ```rs
-pub fn and_then<U, F>(self, f: F) -> Option<U>
+pub fn and_then&lt;U, F&gt;(self, f: F) -&gt; Option&lt;U&gt;
 where
-    F: FnOnce(T) -> Option<U>,
+    F: FnOnce(T) -&gt; Option&lt;U&gt;,
 ```
 
 ### head
 
 ```rs
 // returns a reference to the first element.
-pub fn head(&self) -> Option<&T> {
-    self.head.as_ref().map(|node| &node.elem)
+pub fn head(&amp;self) -&gt; Option&lt;&amp;T&gt; {
+    self.head.as_ref().map(|node| &amp;node.elem)
 }
 ```
 
@@ -372,29 +372,29 @@ pub fn head(&self) -> Option<&T> {
 我们只实现 `iter` 而不是实现 `into_iter` 和 `iter_mut` 这两个方法，因为持久化共享节点的链表的某一些节点是被共享的，所以 `into_iter` 吸显然就不能被实现，假设一个链表使用了 `into_iter` 那么其他共享其节点的链表就会有一部分凭空消失了，这违反了所有权机制，而 `iter_mut` 也类似，两个链表都是使用 `iter_mut`，如果它们有共享节点，那么在共享节点上有一个迭代器就不能正常工作 (根据借用检查机制，同一时间只能存在一个可变引用)。
 
 ```rs
-impl<'a, T> IntoIterator for &'a List<T> {
-    type Item = &'a T;
-    type IntoIter = Iter<'a, T>;
+impl&lt;&#39;a, T&gt; IntoIterator for &amp;&#39;a List&lt;T&gt; {
+    type Item = &amp;&#39;a T;
+    type IntoIter = Iter&lt;&#39;a, T&gt;;
 
-    fn into_iter(self) -> Self::IntoIter {
+    fn into_iter(self) -&gt; Self::IntoIter {
         Iter(self.head.as_deref())
     }
 }
 
-pub struct Iter<'a, T>(Option<&'a Node<T>>);
+pub struct Iter&lt;&#39;a, T&gt;(Option&lt;&amp;&#39;a Node&lt;T&gt;&gt;);
 
-impl<'a, T> Iterator for Iter<'a, T> {
-    type Item = &'a T;
-    fn next(&mut self) -> Option<Self::Item> {
+impl&lt;&#39;a, T&gt; Iterator for Iter&lt;&#39;a, T&gt; {
+    type Item = &amp;&#39;a T;
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
         self.0.take().map(|node| {
             self.0 = node.next.as_deref();
-            &node.elem
+            &amp;node.elem
         })
     }
 }
 
-impl<T> List<T> {
-    pub fn iter(&self) -> Iter<T> {
+impl&lt;T&gt; List&lt;T&gt; {
+    pub fn iter(&amp;self) -&gt; Iter&lt;T&gt; {
         self.into_iter()
     }
 }
@@ -405,8 +405,8 @@ impl<T> List<T> {
 `drop` 方法将一个链表中只被该链表拥有的节点 `Node` 进行释放，对于共享的节点则不做处理。
 
 ```rs
-impl<T> Drop for List<T> {
-    fn drop(&mut self) {
+impl&lt;T&gt; Drop for List&lt;T&gt; {
+    fn drop(&amp;mut self) {
         let mut link = self.head.take();
         while let Some(node) = link {
             if let Ok(ref mut node) = Rc::try_unwrap(node) {
@@ -420,9 +420,9 @@ impl<T> Drop for List<T> {
 ```
 
 - method [std::rc::Rc::try_unwrap](https://doc.rust-lang.org/std/rc/struct.Rc.html#method.try_unwrap)
-> Returns the inner value, if the `Rc` has exactly one strong reference.
-> 
-> Otherwise, an `Err` is returned with the same `Rc` that was passed in.
+&gt; Returns the inner value, if the `Rc` has exactly one strong reference.
+&gt; 
+&gt; Otherwise, an `Err` is returned with the same `Rc` that was passed in.
 
 ### 多线程安全
 
@@ -431,10 +431,10 @@ impl<T> Drop for List<T> {
 ```rs
 use std::sync::Arc;
 
-type Link<T> = Option<Arc<Node<T>>>;
+type Link&lt;T&gt; = Option&lt;Arc&lt;Node&lt;T&gt;&gt;&gt;;
 
-impl<T> Drop for List<T> {
-    fn drop(&mut self) {
+impl&lt;T&gt; Drop for List&lt;T&gt; {
+    fn drop(&amp;mut self) {
         ...
             if let Ok(ref mut node) = Arc::try_unwrap(node) {...}
         ...
@@ -444,10 +444,10 @@ impl<T> Drop for List<T> {
 
 - method [std::sync::Arc::try_unwrap](https://doc.rust-lang.org/std/sync/struct.Arc.html#method.try_unwrap)
 
-{{< admonition info "延伸阅读" >}}
+{{&lt; admonition info &#34;延伸阅读&#34; &gt;}}
 理解多线程安全的内部机制需要了解内存模型，下面这个讲座解释得很棒！
-- Herb Sutter: [atomic Weapons: The C++ Memory Model and Modern Hardware](https://herbsutter.com/2013/02/11/atomic-weapons-the-c-memory-model-and-modern-hardware/)
-{{< /admonition >}}
+- Herb Sutter: [atomic Weapons: The C&#43;&#43; Memory Model and Modern Hardware](https://herbsutter.com/2013/02/11/atomic-weapons-the-c-memory-model-and-modern-hardware/)
+{{&lt; /admonition &gt;}}
 
 ## 双端链表
 
@@ -456,28 +456,28 @@ impl<T> Drop for List<T> {
 ```rs
 use std::{cell::RefCell, rc::Rc};
 
-type Link<T> = Option<Rc<RefCell<Node<T>>>;
+type Link&lt;T&gt; = Option&lt;Rc&lt;RefCell&lt;Node&lt;T&gt;&gt;&gt;;
 ```
 
 延伸阅读:
-- [Crust of Rust: Smart Pointers and Interior Mutability]({{< relref "./smart-pointers-and-interior-mutability.md" >}})
+- [Crust of Rust: Smart Pointers and Interior Mutability]({{&lt; relref &#34;./smart-pointers-and-interior-mutability.md&#34; &gt;}})
 
 ```rs
 #[derive(Debug)]
-pub struct List<T> {
-    head: Link<T>,
-    tail: Link<T>,
+pub struct List&lt;T&gt; {
+    head: Link&lt;T&gt;,
+    tail: Link&lt;T&gt;,
 }
 
 #[derive(Debug)]
-struct Node<T> {
+struct Node&lt;T&gt; {
     elem: T,
-    next: Link<T>,
-    prev: Link<T>,
+    next: Link&lt;T&gt;,
+    prev: Link&lt;T&gt;,
 }
 
-impl<T> Node<T> {
-    pub fn new(elem: T) -> Self {
+impl&lt;T&gt; Node&lt;T&gt; {
+    pub fn new(elem: T) -&gt; Self {
         Self {
             elem,
             next: None,
@@ -486,8 +486,8 @@ impl<T> Node<T> {
     }
 }
 
-impl<T> List<T> {
-    pub fn new() -> Self {
+impl&lt;T&gt; List&lt;T&gt; {
+    pub fn new() -&gt; Self {
         Self {
             head: None,
             tail: None,
@@ -499,30 +499,30 @@ impl<T> List<T> {
 ### push
 
 ```rs
-pub fn push_front(&mut self, elem: T) {
+pub fn push_front(&amp;mut self, elem: T) {
     let node = Rc::new(RefCell::new(Node::new(elem)));
     match self.head.take() {
-        Some(head) => {
+        Some(head) =&gt; {
             node.borrow_mut().next = Some(head.clone());
             head.borrow_mut().prev = Some(node.clone());
             self.head = Some(node.clone());
         }
-        None => {
+        None =&gt; {
             self.head = Some(node.clone());
             self.tail = Some(node.clone());
         }
     }
 }
 
-pub fn push_back(&mut self, elem: T) {
+pub fn push_back(&amp;mut self, elem: T) {
     let node = Rc::new(RefCell::new(Node::new(elem)));
     match self.tail.take() {
-        Some(tail) => {
+        Some(tail) =&gt; {
             node.borrow_mut().prev = Some(tail.clone());
             tail.borrow_mut().next = Some(node.clone());
             self.tail = Some(node.clone());
         }
-        None => {
+        None =&gt; {
             self.head = Some(node.clone());
             self.tail = Some(node.clone());
         }
@@ -535,14 +535,14 @@ pub fn push_back(&mut self, elem: T) {
 ### pop
 
 ```rs
-pub fn pop_front(&mut self) -> Option<T> {
+pub fn pop_front(&amp;mut self) -&gt; Option&lt;T&gt; {
     self.head.take().map(|node| {
         match node.borrow_mut().next.take() {
-            Some(next) => {
+            Some(next) =&gt; {
                 next.borrow_mut().prev.take();
                 self.head = Some(next.clone());
             }
-            None => {
+            None =&gt; {
                 self.tail.take();
             }
         }
@@ -550,14 +550,14 @@ pub fn pop_front(&mut self) -> Option<T> {
     })
 }
 
-pub fn pop_back(&mut self) -> Option<T> {
+pub fn pop_back(&amp;mut self) -&gt; Option&lt;T&gt; {
     self.tail.take().map(|node| {
         match node.borrow_mut().prev.take() {
-            Some(prev) => {
+            Some(prev) =&gt; {
                 prev.borrow_mut().next.take();
                 self.tail = Some(prev.clone());
             }
-            None => {
+            None =&gt; {
                 self.head.take();
             }
         }
@@ -566,7 +566,7 @@ pub fn pop_back(&mut self) -> Option<T> {
 }
 ```
 
-> Since we don't care about the case where it fails (if we wrote our program correctly, it has to succeed), we just call `unwrap` on it.
+&gt; Since we don&#39;t care about the case where it fails (if we wrote our program correctly, it has to succeed), we just call `unwrap` on it.
 
 正常情况下，我们不会对共享节点进行 `pop` 操作，防止出现数据不一致的情况，所以这里可以直接使用 `unwrap` 来获取内部数据 (因为我们通过 ***contract*** 来保住不会出现 `None` 的情况)。
 
@@ -576,16 +576,16 @@ pub fn pop_back(&mut self) -> Option<T> {
 ### peek
 
 ```rs
-pub fn peek_front(&self) -> Option<Ref<T>> {
+pub fn peek_front(&amp;self) -&gt; Option&lt;Ref&lt;T&gt;&gt; {
     self.head
         .as_ref()
-        .map(|node| Ref::map(node.borrow(), |node| &node.elem))
+        .map(|node| Ref::map(node.borrow(), |node| &amp;node.elem))
 }
 
-pub fn peek_back(&self) -> Option<Ref<T>> {
+pub fn peek_back(&amp;self) -&gt; Option&lt;Ref&lt;T&gt;&gt; {
     self.tail
         .as_ref()
-        .map(|node| Ref::map(node.borrow(), |node| &node.elem))
+        .map(|node| Ref::map(node.borrow(), |node| &amp;node.elem))
 }
 ```
 
@@ -593,16 +593,16 @@ pub fn peek_back(&self) -> Option<Ref<T>> {
 - method [std::cell::Ref::map](https://doc.rust-lang.org/std/cell/struct.Ref.html#method.map)
 
 ```rs
-pub fn peek_mut_front(&mut self) -> Option<RefMut<T>> {
+pub fn peek_mut_front(&amp;mut self) -&gt; Option&lt;RefMut&lt;T&gt;&gt; {
     self.head
         .as_ref()
-        .map(|node| RefMut::map(node.borrow_mut(), |node| &mut node.elem))
+        .map(|node| RefMut::map(node.borrow_mut(), |node| &amp;mut node.elem))
 }
 
-pub fn peek_mut_back(&mut self) -> Option<RefMut<T>> {
+pub fn peek_mut_back(&amp;mut self) -&gt; Option&lt;RefMut&lt;T&gt;&gt; {
     self.tail
         .as_ref()
-        .map(|node| RefMut::map(node.borrow_mut(), |node| &mut node.elem))
+        .map(|node| RefMut::map(node.borrow_mut(), |node| &amp;mut node.elem))
 }
 ```
 
@@ -612,32 +612,32 @@ pub fn peek_mut_back(&mut self) -> Option<RefMut<T>> {
 ### iter
 
 ```rs
-impl<T> IntoIterator for List<T> {
+impl&lt;T&gt; IntoIterator for List&lt;T&gt; {
     type Item = T;
-    type IntoIter = IntoIter<T>;
+    type IntoIter = IntoIter&lt;T&gt;;
 
-    fn into_iter(self) -> Self::IntoIter {
+    fn into_iter(self) -&gt; Self::IntoIter {
         IntoIter(self)
     }
 }
 
-pub struct IntoIter<T>(List<T>);
+pub struct IntoIter&lt;T&gt;(List&lt;T&gt;);
 
-impl<T> Iterator for IntoIter<T> {
+impl&lt;T&gt; Iterator for IntoIter&lt;T&gt; {
     type Item = T;
-    fn next(&mut self) -> Option<Self::Item> {
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
         self.0.pop_front()
     }
 }
 
-impl<T> DoubleEndedIterator for IntoIter<T> {
-    fn next_back(&mut self) -> Option<Self::Item> {
+impl&lt;T&gt; DoubleEndedIterator for IntoIter&lt;T&gt; {
+    fn next_back(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
         self.0.pop_back()
     }
 }
 
-impl<T> List<T> {
-    pub fn into_iter(self) -> IntoIter<T> {
+impl&lt;T&gt; List&lt;T&gt; {
+    pub fn into_iter(self) -&gt; IntoIter&lt;T&gt; {
         IntoIterator::into_iter(self)
     }
 }
@@ -648,40 +648,40 @@ impl<T> List<T> {
 
 ## Unsafe Rust 实作单链表
 
-我们对之前实现的 C/C++ 风格的单链表进行改进，使其为满足 **先进先出** 性质的单链表。但是如果不使用 Unsafe Rust 来实作的话，很容易就会违反 Rust 的借用规则 (因为我们需要一个 `tail` 成员来指向尾节点)，例如我们将 `List` 的 `tail` 用可变引用来表示:
+我们对之前实现的 C/C&#43;&#43; 风格的单链表进行改进，使其为满足 **先进先出** 性质的单链表。但是如果不使用 Unsafe Rust 来实作的话，很容易就会违反 Rust 的借用规则 (因为我们需要一个 `tail` 成员来指向尾节点)，例如我们将 `List` 的 `tail` 用可变引用来表示:
 
 ```rs
-pub struct List<T> {
-    head: Link<T>,
-    tail: Option<&mut Node<T>>,
+pub struct List&lt;T&gt; {
+    head: Link&lt;T&gt;,
+    tail: Option&lt;&amp;mut Node&lt;T&gt;&gt;,
 }
 ```
 
-那么对于 `List` 那些使用可变应用 `&mut self` 的方法，调用这些方法时对这个链表会存在两个可变引用，一个是 `tail` 表示可变引用，另一个则是 `&mut self` 表示的可变引用，这显然违反了 Rust 的借用检查机制，因此编译不通过。所以我们需要使用 Unsafe Rust 的裸指针 raw pointer 来实现，以避开 Rust 的借用检查机制。
+那么对于 `List` 那些使用可变应用 `&amp;mut self` 的方法，调用这些方法时对这个链表会存在两个可变引用，一个是 `tail` 表示可变引用，另一个则是 `&amp;mut self` 表示的可变引用，这显然违反了 Rust 的借用检查机制，因此编译不通过。所以我们需要使用 Unsafe Rust 的裸指针 raw pointer 来实现，以避开 Rust 的借用检查机制。
 
-{{< admonition >}}
-之所以不使用 `Link<T>` 来表示 `tail`，是因为 `Box` 指针和 `Rc` 指针不一样，它只允许一个指针指向对于的数据，所以当链表只有一个节点时，`head` 和 `tail` 都指向同一个 `Node`，但这种情况 `Box` 指针无法做到。
-{{< /admonition >}}
+{{&lt; admonition &gt;}}
+之所以不使用 `Link&lt;T&gt;` 来表示 `tail`，是因为 `Box` 指针和 `Rc` 指针不一样，它只允许一个指针指向对于的数据，所以当链表只有一个节点时，`head` 和 `tail` 都指向同一个 `Node`，但这种情况 `Box` 指针无法做到。
+{{&lt; /admonition &gt;}}
 
 ```rs
 use std::ptr;
 
-type Link<T> = Option<Box<Node<T>>>;
+type Link&lt;T&gt; = Option&lt;Box&lt;Node&lt;T&gt;&gt;&gt;;
 
 #[derive(Debug)]
-pub struct List<T> {
-    head: Link<T>,
-    tail: *mut Node<T>,
+pub struct List&lt;T&gt; {
+    head: Link&lt;T&gt;,
+    tail: *mut Node&lt;T&gt;,
 }
 
 #[derive(Debug)]
-struct Node<T> {
+struct Node&lt;T&gt; {
     elem: T,
-    next: Link<T>,
+    next: Link&lt;T&gt;,
 }
 
-impl<T> List<T> {
-    pub fn new() -> Self {
+impl&lt;T&gt; List&lt;T&gt; {
+    pub fn new() -&gt; Self {
         Self {
             head: None,
             tail: ptr::null_mut(),
@@ -693,9 +693,9 @@ impl<T> List<T> {
 ### push
 
 ```rs
-pub fn push(&mut self, elem: T) {
+pub fn push(&amp;mut self, elem: T) {
     let mut node = Box::new(Node { elem, next: None });
-    let raw_tail: *mut _ = &mut *node;
+    let raw_tail: *mut _ = &amp;mut *node;
     if self.tail.is_null() {
         self.head = Some(node);
     } else {
@@ -710,7 +710,7 @@ pub fn push(&mut self, elem: T) {
 ### pop
 
 ```rs
-pub fn pop(&mut self) -> Option<T> {
+pub fn pop(&amp;mut self) -&gt; Option&lt;T&gt; {
     self.head.take().map(|head| {
         let next = head.next;
         if next.is_none() {
@@ -725,8 +725,8 @@ pub fn pop(&mut self) -> Option<T> {
 ### drop
 
 ```rs
-impl<T> Drop for List<T> {
-    fn drop(&mut self) {
+impl&lt;T&gt; Drop for List&lt;T&gt; {
+    fn drop(&amp;mut self) {
         let mut link = self.head.take();
         while let Some(mut node) = link {
             link = node.next.take();
@@ -740,20 +740,20 @@ impl<T> Drop for List<T> {
 - into_iter
 
 ```rs
-impl<T> IntoIterator for List<T> {
+impl&lt;T&gt; IntoIterator for List&lt;T&gt; {
     type Item = T;
-    type IntoIter = IntoIter<T>;
+    type IntoIter = IntoIter&lt;T&gt;;
 
-    fn into_iter(self) -> Self::IntoIter {
+    fn into_iter(self) -&gt; Self::IntoIter {
         IntoIter(self)
     }
 }
 
-pub struct IntoIter<T>(List<T>);
+pub struct IntoIter&lt;T&gt;(List&lt;T&gt;);
 
-impl<T> Iterator for IntoIter<T> {
+impl&lt;T&gt; Iterator for IntoIter&lt;T&gt; {
     type Item = T;
-    fn next(&mut self) -> Option<Self::Item> {
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
         self.0.pop()
     }
 }
@@ -762,29 +762,29 @@ impl<T> Iterator for IntoIter<T> {
 - iter
 
 ```rs
-impl<T> List<T> {
-    pub fn iter(&self) -> Iter<T> {
+impl&lt;T&gt; List&lt;T&gt; {
+    pub fn iter(&amp;self) -&gt; Iter&lt;T&gt; {
         self.into_iter()
     }
 }
 
-impl<'a, T> IntoIterator for &'a List<T> {
-    type Item = &'a T;
-    type IntoIter = Iter<'a, T>;
+impl&lt;&#39;a, T&gt; IntoIterator for &amp;&#39;a List&lt;T&gt; {
+    type Item = &amp;&#39;a T;
+    type IntoIter = Iter&lt;&#39;a, T&gt;;
 
-    fn into_iter(self) -> Self::IntoIter {
+    fn into_iter(self) -&gt; Self::IntoIter {
         Iter(self.head.as_deref())
     }
 }
 
-pub struct Iter<'a, T>(Option<&'a Node<T>>);
+pub struct Iter&lt;&#39;a, T&gt;(Option&lt;&amp;&#39;a Node&lt;T&gt;&gt;);
 
-impl<'a, T> Iterator for Iter<'a, T> {
-    type Item = &'a T;
-    fn next(&mut self) -> Option<Self::Item> {
+impl&lt;&#39;a, T&gt; Iterator for Iter&lt;&#39;a, T&gt; {
+    type Item = &amp;&#39;a T;
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
         self.0.take().map(|node| {
             self.0 = node.next.as_deref();
-            &node.elem
+            &amp;node.elem
         })
     }
 }
@@ -793,30 +793,30 @@ impl<'a, T> Iterator for Iter<'a, T> {
 - iter_mut
 
 ```rs
-impl<T> List<T> {
-    pub fn iter_mut(&mut self) -> IterMut<T> {
+impl&lt;T&gt; List&lt;T&gt; {
+    pub fn iter_mut(&amp;mut self) -&gt; IterMut&lt;T&gt; {
         self.into_iter()
     }
 }
 
-impl<'a, T> IntoIterator for &'a mut List<T> {
-    type Item = &'a mut T;
-    type IntoIter = IterMut<'a, T>;
+impl&lt;&#39;a, T&gt; IntoIterator for &amp;&#39;a mut List&lt;T&gt; {
+    type Item = &amp;&#39;a mut T;
+    type IntoIter = IterMut&lt;&#39;a, T&gt;;
 
-    fn into_iter(self) -> Self::IntoIter {
+    fn into_iter(self) -&gt; Self::IntoIter {
         IterMut(self.head.as_deref_mut())
     }
 }
 
-pub struct IterMut<'a, T>(Option<&'a mut Node<T>>);
+pub struct IterMut&lt;&#39;a, T&gt;(Option&lt;&amp;&#39;a mut Node&lt;T&gt;&gt;);
 
-impl<'a, T> Iterator for IterMut<'a, T> {
-    type Item = &'a mut T;
+impl&lt;&#39;a, T&gt; Iterator for IterMut&lt;&#39;a, T&gt; {
+    type Item = &amp;&#39;a mut T;
 
-    fn next(&mut self) -> Option<Self::Item> {
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt; {
         self.0.take().map(|node| {
             self.0 = node.next.as_deref_mut();
-            &mut node.elem
+            &amp;mut node.elem
         })
     }
 }
@@ -828,26 +828,26 @@ impl<'a, T> Iterator for IterMut<'a, T> {
 
 - Wikipedia: [Stack (abstract data type)](https://en.wikipedia.org/wiki/Stack_(abstract_data_type))
 
-实作和之前的 C/C++ 风格的单链表类似，这里仅列出不同的函数:
+实作和之前的 C/C&#43;&#43; 风格的单链表类似，这里仅列出不同的函数:
 
 ```rs
-fn push_node(&mut self, mut node: Box<Node<T>>) {
+fn push_node(&amp;mut self, mut node: Box&lt;Node&lt;T&gt;&gt;) {
     node.next = self.head.take();
     self.head = Some(node);
 }
 
-fn pop_node(&mut self) -> Option<Box<Node<T>>> {
+fn pop_node(&amp;mut self) -&gt; Option&lt;Box&lt;Node&lt;T&gt;&gt;&gt; {
     self.head.take().map(|mut node| {
         self.head = node.next.take();
         node
     })
 }
 
-fn peek_node(&self) -> Option<&Node<T>> {
+fn peek_node(&amp;self) -&gt; Option&lt;&amp;Node&lt;T&gt;&gt; {
     self.head.as_deref()
 }
 
-fn peek_mut_node(&mut self) -> Option<&mut Node<T>> {
+fn peek_mut_node(&amp;mut self) -&gt; Option&lt;&amp;mut Node&lt;T&gt;&gt; {
     self.head.as_deref_mut()
 }
 ```
@@ -861,20 +861,20 @@ fn peek_mut_node(&mut self) -> Option<&mut Node<T>> {
 可以使用两个 `Stack` 来实作双端队列，当然这个 `Deque` 使用起来十分不便，这里仅作为展示用途:
 
 ```rs
-pub struct Deque<T> {
-    left: Stack<T>,
-    right: Stack<T>,
+pub struct Deque&lt;T&gt; {
+    left: Stack&lt;T&gt;,
+    right: Stack&lt;T&gt;,
 }
 
-impl<T> Deque<T> {
-    pub fn go_left(&mut self) -> bool {
+impl&lt;T&gt; Deque&lt;T&gt; {
+    pub fn go_left(&amp;mut self) -&gt; bool {
         self.left
             .pop_node()
             .map(|node| self.right.push_node(node))
             .is_some()
     }
 
-    pub fn go_right(&mut self) -> bool {
+    pub fn go_right(&amp;mut self) -&gt; bool {
         self.right
             .pop_node()
             .map(|node| self.left.push_node(node))
@@ -885,20 +885,20 @@ impl<T> Deque<T> {
 
 ## Homework
 
-{{< admonition info >}}
+{{&lt; admonition info &gt;}}
 - [ ] 教学录影中没有对 [Chapter 7](https://rust-unofficial.github.io/too-many-lists/sixth.html) 进行讲解，自行阅读并实作里面相应的内容。
 - [ ] 阅读原书 [8.2. The Stack-Allocated Linked List](https://rust-unofficial.github.io/too-many-lists/infinity-stack-allocated.html) 小节，并完成相应实作。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
 
-> 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
+&gt; 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
 
 ### Crate [std](https://doc.rust-lang.org/std/index.html) 
 
-> 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
+&gt; 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 
 - Function [std::mem::replace](https://doc.rust-lang.org/std/mem/fn.replace.html)
 

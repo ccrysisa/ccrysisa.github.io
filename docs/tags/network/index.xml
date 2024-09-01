@@ -2,7 +2,7 @@
   <channel>
     <title>Network - 标签 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/network/</link>
-    <description>Network - 标签 - KZnight&#39;s Blog</description>
+    <description>Network - 标签 | KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 17 Feb 2024 19:01:53 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/network/" rel="self" type="application/rss+xml" /><item>
   <title>Impl Rust: TCP/IP</title>
@@ -15,12 +15,12 @@
 </blockquote>]]></description>
 </item>
 <item>
-  <title>计算机网络</title>
+  <title>Computer Network 101-1</title>
   <link>https://ccrysisa.github.io/posts/network/</link>
   <pubDate>Sun, 14 Jan 2024 12:09:38 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/network/</guid>
-  <description><![CDATA[]]></description>
+  <description><![CDATA[<p>以清大黄能富老师主讲的计算机网路概论课程为基础，授课顺序调整为更符合直觉的 L3、L4、L2，增加 IPv6 相关内容以及 Linux network stack 有关的资料。</p>]]></description>
 </item>
 </channel>
 </rss>

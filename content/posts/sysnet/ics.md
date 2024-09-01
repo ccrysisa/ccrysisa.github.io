@@ -16,7 +16,7 @@ weight: 0
 tags:
   - Linux
 categories:
-  - Systems
+  - Systems Network Security
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
