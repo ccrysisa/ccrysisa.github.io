@@ -103,3 +103,28 @@ Instead of going deep on one story, we will try to build enough functionality to
 We will then go back and improve: add fault-tolerance and retries for email delivery, add a confirmation email for new subscribers, etc.
 
 ## Sign Up A New Subscriber
+
+{{< admonition note "User Story" >}}
+As a blog visitor,   
+I want to subscribe to the newsletter,   
+So that I can receive email updates when new content is published on the blog.
+{{< /admonition >}}
+
+Web Framework:
+
+- [Actix Web](https://actix.rs/) is a powerful, pragmatic, and extremely fast web framework for Rust
+- Crate [actix_web](https://docs.rs/actix-web/4.0.1/actix_web/index.html)
+- GitHub: [actix/examples](https://github.com/actix/examples): Community showcase and examples of Actix Web ecosystem usage.
+
+### A Basic Health Check
+
+- [curl 的用法指南](https://www.ruanyifeng.com/blog/2019/09/curl-reference.html)
+
+```goat
+   Handler              Layer       
++------------+     +-------------+
+|    App     | <-> | Application |
++------------+     +-------------+
+| HttpServer | <-> |  Transport  |
++------------+     +-------------+
+```
