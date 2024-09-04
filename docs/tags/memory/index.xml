@@ -2,7 +2,7 @@
   <channel>
     <title>Memory - 标签 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/memory/</link>
-    <description>Memory - 标签 | KZnight&#39;s Blog</description>
+    <description>Memory - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
       <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 27 Feb 2024 22:44:38 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/memory/" rel="self" type="application/rss+xml" /><item>
   <title>你所不知道的 C 语言: 记忆体管理、对齐及硬体特性</title>

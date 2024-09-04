@@ -71,6 +71,15 @@ RVV 1.0 specifies standard integer operations:
 - widening add/sub
 - add with carry / sub with borrow
 
+## Mask
+
+RVV 1.0 中只有 v0 可以作为 mask register
+
+## Permute
+
 ## References
 
+- [riscv-v-spec](https://github.com/riscv/riscv-v-spec/tree/v1.0)
 - [RISC-V Vector in a Nutshell](https://fprox.substack.com/p/risc-v-vector-in-a-nutshell)
+- [Tutorial: RISC-V Vector Extension Demystified - 2020 RISC-V Summit](https://www.youtube.com/watch?v=oTaOd8qr53U)
+- [RISC-V Vector 向量编程](https://www.bilibili.com/video/BV1VT411E7iQ/)

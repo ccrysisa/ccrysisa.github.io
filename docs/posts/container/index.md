@@ -1,7 +1,7 @@
 # Container
 
 
-&lt;!--more--&gt;
+<!--more-->
 
 ## Install
 
@@ -9,13 +9,13 @@ deepin 20.9 虽然基于 debian 10.10，但是为了适配 deepin 特色的 DDE 
 
 - [Install Docker Engine from binaries](https://docs.docker.com/engine/install/binaries/)
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 由于一些未知原因，建议使用一个 shell 启动 docker daemon 再使用另一个 shell 来运行 docker application。
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ## Configuration
 
-&gt; If you need to start the daemon with additional options, modify the above command accordingly or create and edit the file `/etc/docker/daemon.json` to add the custom configuration options.
+> If you need to start the daemon with additional options, modify the above command accordingly or create and edit the file `/etc/docker/daemon.json` to add the custom configuration options.
 
 在 `/etc/docker/daemon.json` 可以配置 docker daemon 的代理以及 docker pull 下来的 images 所在的路径:
 
@@ -24,14 +24,18 @@ deepin 20.9 虽然基于 debian 10.10，但是为了适配 deepin 特色的 DDE 
 
 ```json
 {
-  &#34;data-root&#34;: &#34;/mnt/docker-data&#34;,
-  &#34;proxies&#34;: {
-    &#34;http-proxy&#34;: &#34;http://proxy.example.com:3128&#34;,
-    &#34;https-proxy&#34;: &#34;https://proxy.example.com:3129&#34;,
-    &#34;no-proxy&#34;: &#34;*.test.example.com,.example.org,127.0.0.0/8&#34;
+  "data-root": "/mnt/docker-data",
+  "proxies": {
+    "http-proxy": "http://proxy.example.com:3128",
+    "https-proxy": "https://proxy.example.com:3129",
+    "no-proxy": "*.test.example.com,.example.org,127.0.0.0/8"
   }
 }
 ```
+
+Docker Compose 也是通过手动安装:
+
+- [Install the Compose plugin](https://docs.docker.com/compose/install/linux/#install-the-plugin-manually)
 
 ## References
 

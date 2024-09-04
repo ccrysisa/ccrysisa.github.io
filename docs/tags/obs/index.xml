@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>OBS - 标签 - KZnight&#39;s Blog</title>
+    <link>https://ccrysisa.github.io/tags/obs/</link>
+    <description>OBS - 标签 - KZnight&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 01 Sep 2024 21:51:25 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/obs/" rel="self" type="application/rss+xml" /><item>
+  <title>openSUSE: Open Build Service (OBS)</title>
+  <link>https://ccrysisa.github.io/posts/open-build-service/</link>
+  <pubDate>Sun, 01 Sep 2024 21:51:25 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/open-build-service/</guid>
+  <description><![CDATA[]]></description>
+</item>
+</channel>
+</rss>

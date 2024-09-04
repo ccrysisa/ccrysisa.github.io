@@ -2,9 +2,17 @@
   <channel>
     <title>Toolkit - 分类 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/categories/toolkit/</link>
-    <description>Toolkit - 分类 | KZnight&#39;s Blog</description>
+    <description>Toolkit - 分类 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 22 Aug 2024 12:47:26 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/toolkit/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sun, 01 Sep 2024 21:51:25 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/toolkit/" rel="self" type="application/rss+xml" /><item>
+  <title>openSUSE: Open Build Service (OBS)</title>
+  <link>https://ccrysisa.github.io/posts/open-build-service/</link>
+  <pubDate>Sun, 01 Sep 2024 21:51:25 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/open-build-service/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>Container</title>
   <link>https://ccrysisa.github.io/posts/container/</link>
   <pubDate>Thu, 22 Aug 2024 12:47:26 &#43;0800</pubDate>
@@ -58,7 +66,7 @@
   <pubDate>Thu, 04 Jan 2024 19:00:36 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/git/</guid>
-  <description><![CDATA[Git 中文教学新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout网络问题导致 22 端口被禁止，]]></description>
+  <description><![CDATA[Git 中文教学 新手入门推荐，对于 Git 的入门操作讲解十分友好。 视频地址 学习记录 Git 常见问题及解决 git pull/push 遇到 Port 22 connect timeout 网络问题导致 22 端口被禁止，无法正常使用]]></description>
 </item>
 <item>
   <title>Git 学习记录</title>
@@ -74,22 +82,7 @@
   <pubDate>Wed, 27 Dec 2023 20:35:45 &#43;0800</pubDate>
   <author>ccrysisa</author>
   <guid>https://ccrysisa.github.io/posts/ubuntu22.04lts/</guid>
-  <description><![CDATA[网络代理根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo apt install net-tools 安装并启]]></description>
-</item>
-<item>
-  <title>GNU/Linux 开发工具</title>
-  <link>https://ccrysisa.github.io/posts/gnu-linux-dev/</link>
-  <pubDate>Mon, 25 Dec 2023 15:43:50 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/gnu-linux-dev/</guid>
-  <description><![CDATA[<div class="details admonition abstract open">
-    <div class="details-summary admonition-title">
-      <i class="icon fa-solid fa-list-ul fa-fw" aria-hidden="true"></i>摘要<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
-    </div>
-    <div class="details-content">
-      <div class="admonition-content">GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而上提供各类触及“灵魂”的学习案例，让所有课程从纸上谈兵转变成沙场实战，会极大地提升工程实践的效率和技能。</div>
-    </div>
-  </div>]]></description>
+  <description><![CDATA[网络代理 根据项目 clash-for-linux-backup 来配置 Ubuntu 的网络代理。 1 $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-linux 过程当中可能需要安装 curl 和 net-tools，根据提示进行安装即可： sudo apt install curl sudo apt install net-tools 安装并启]]></description>
 </item>
 </channel>
 </rss>
