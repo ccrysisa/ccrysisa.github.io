@@ -128,3 +128,5 @@ Web Framework:
 | HttpServer | <-> |  Transport  |
 +------------+     +-------------+
 ```
+
+> This is often referred to as *black box testing*: we verify the behaviour of a system by examining its output given a set of inputs without having access to the details of its internal implementation.
