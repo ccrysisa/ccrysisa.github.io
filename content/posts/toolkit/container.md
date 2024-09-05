@@ -17,6 +17,7 @@ tags:
   - Container
   - Docker
 categories:
+  - Go
   - Toolkit
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -70,6 +71,10 @@ deepin 20.9 虽然基于 debian 10.10，但是为了适配 deepin 特色的 DDE 
   }
 }
 ```
+
+Docker Compose 也是通过手动安装:
+
+- [Install the Compose plugin](https://docs.docker.com/compose/install/linux/#install-the-plugin-manually)
 
 ## References
 
