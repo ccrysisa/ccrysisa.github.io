@@ -291,6 +291,15 @@ int main()
 }
 ```
 
+### Continuous Integration (CI)
+
+- [Jenkins](https://www.jenkins.io/): Build great things at any scale
+
+### Static Analysis
+
+- [PVS-Studio](https://pvs-studio.com/en/pvs-studio/) is a static analyzer on guard of code quality, security (SAST), and code safety
+- [Clang-Tidy](https://clang.llvm.org/extra/clang-tidy/) is a clang-based C++ “linter” tool. Its purpose is to provide an extensible framework for diagnosing and fixing typical programming errors, like style violations, interface misuse, or bugs that can be deduced via static analysis.
+
 ## Header File
 
 Header Guard:
@@ -1193,36 +1202,36 @@ public:
 class Random
 {
 public:
-	Random(const Random&) = delete;
+    Random(const Random&) = delete;
 
-	static Random& Get()
-	{
-		static Random s_Instance;
-		return s_Instance;
-	}
+    static Random& Get()
+    {
+        static Random s_Instance;
+        return s_Instance;
+    }
 
-	static float Float()
-	{
-		return Get().FloatImpl();
-	}
+    static float Float()
+    {
+        return Get().FloatImpl();
+    }
 
 private:
-	Random() {}
+    Random() {}
 
-	float FloatImpl()
-	{
-		return m_RandomGenerator;
-	}
+    float FloatImpl()
+    {
+        return m_RandomGenerator;
+    }
 
-	float m_RandomGenerator = 0.5f;
+    float m_RandomGenerator = 0.5f;
 
-	static Random s_Instance;
+    static Random s_Instance;
 };
 
 int main()
 {
-	float number = Random::Float();
-	std::cout << number << std::endl;
+    float number = Random::Float();
+    std::cout << number << std::endl;
 }
 ```
 
@@ -1233,17 +1242,17 @@ int main()
 
 namespace RandomClass
 {
-	static float m_Instance = 0.5f;
-	static float Float()
-	{
-		return m_Instance;
-	}
+    static float m_Instance = 0.5f;
+    static float Float()
+    {
+        return m_Instance;
+    }
 }
 
 int main()
 {
-	float number = RandomClass::Float();
-	std::cout << number << std::endl;
+    float number = RandomClass::Float();
+    std::cout << number << std::endl;
 }
 ```
 
@@ -2081,26 +2090,26 @@ static size_t s_AllocCount = 0;
 
 void* operator new(size_t size)
 {
-	s_AllocCount++;
-	std::cout << "Allocating " << size << " bytes\n";
-	return malloc(size);
+    s_AllocCount++;
+    std::cout << "Allocating " << size << " bytes\n";
+    return malloc(size);
 }
 
 void PrintName(const std::string& name)
 {
-	std::cout << name << std::endl;
+    std::cout << name << std::endl;
 }
 
 int main()
 {
-	std::string name = "Hello World";
-	std::string firstName = name.substr(0, 5);
-	std::string lastName = name.substr(6, 5);
+    std::string name = "Hello World";
+    std::string firstName = name.substr(0, 5);
+    std::string lastName = name.substr(6, 5);
 
-	PrintName(firstName);
-	PrintName(name);
+    PrintName(firstName);
+    PrintName(name);
 
-	std::cout << s_AllocCount << " allocations\n";
+    std::cout << s_AllocCount << " allocations\n";
 }
 ```
 
@@ -2111,8 +2120,8 @@ int main()
 > The class template `basic_string_view` describes an object that can refer to a constant contiguous sequence of CharT with the first element of the sequence at position zero.
 
 ```c++
-	std::string_view firstName(name.c_str(), 5);
-	std::string_view lastName(name.c_str() + 6, 5);
+    std::string_view firstName(name.c_str(), 5);
+    std::string_view lastName(name.c_str() + 6, 5);
 ```
 
 ```c++
@@ -2122,7 +2131,7 @@ void PrintName(std::string_view name)
 这样就将内存分配次数减少到 1 次了。接下来我们可以将 `name` 不使用 string 进行分配，而是直接使用 `const char*` 对该常量字符串进行引用，则可以将内存分配次数降至 0 次:
 
 ```c++
-	const char* name = "Hello World";
+    const char* name = "Hello World";
 ```
 
 ###### SSO
@@ -2137,16 +2146,16 @@ static size_t s_AllocCount = 0;
 
 void* operator new(size_t size)
 {
-	s_AllocCount++;
-	std::cout << "Allocating " << size << " bytes\n";
-	return malloc(size);
+    s_AllocCount++;
+    std::cout << "Allocating " << size << " bytes\n";
+    return malloc(size);
 }
 
 int main()
 {
-	std::string name = "Hello";
+    std::string name = "Hello";
 
-	std::cout << s_AllocCount << " allocations\n";
+    std::cout << s_AllocCount << " allocations\n";
 }
 ```
 
@@ -2495,30 +2504,30 @@ int main()
 
 void* operator new(size_t size)
 {
-	std::cout << "Allocating " << size << " bytes\n";
+    std::cout << "Allocating " << size << " bytes\n";
 
-	return malloc(size);
+    return malloc(size);
 }
 
 void operator delete(void* addr, size_t size)
 {
-	std::cout << "Freeing " << size << " bytes\n";
+    std::cout << "Freeing " << size << " bytes\n";
 
-	free(addr);
+    free(addr);
 }
 
 struct Object
 {
-	int x, y, z;
+    int x, y, z;
 };
 
 int main()
 {
-	std::string str = "Hello";
+    std::string str = "Hello";
 
-	{
-		std::unique_ptr<Object> unique = std::make_unique<Object>();
-	}
+    {
+        std::unique_ptr<Object> unique = std::make_unique<Object>();
+    }
 }
 ```
 
@@ -2533,56 +2542,56 @@ int main()
 
 struct AllocationMetrics
 {
-	size_t TotalAllocated = 0;
-	size_t TotalFreed = 0;
+    size_t TotalAllocated = 0;
+    size_t TotalFreed = 0;
 
-	size_t CurrentUsage() { return TotalAllocated - TotalFreed; }
+    size_t CurrentUsage() { return TotalAllocated - TotalFreed; }
 
-	static AllocationMetrics& Get()
-	{
-		static AllocationMetrics s_AllocationMetrics;
-		return s_AllocationMetrics;
-	}
+    static AllocationMetrics& Get()
+    {
+        static AllocationMetrics s_AllocationMetrics;
+        return s_AllocationMetrics;
+    }
 
-	static void PrintMemoryUsage()
-	{
-		std::cout << "Memory Usage: " << Get().CurrentUsage() << " bytes\n";
-	}
+    static void PrintMemoryUsage()
+    {
+        std::cout << "Memory Usage: " << Get().CurrentUsage() << " bytes\n";
+    }
 };
 
 void* operator new(size_t size)
 {
-	AllocationMetrics::Get().TotalAllocated += size;
+    AllocationMetrics::Get().TotalAllocated += size;
 
-	return malloc(size);
+    return malloc(size);
 }
 
 void operator delete(void* addr, size_t size)
 {
-	AllocationMetrics::Get().TotalFreed += size;
+    AllocationMetrics::Get().TotalFreed += size;
 
-	free(addr);
+    free(addr);
 }
 
 struct Object
 {
-	int x, y, z;
+    int x, y, z;
 };
 
 int main()
 {
-	AllocationMetrics::PrintMemoryUsage();
-	std::string str = "Hello";
-	AllocationMetrics::PrintMemoryUsage();
-	{
-		std::unique_ptr<Object> unique = std::make_unique<Object>();
-		AllocationMetrics::PrintMemoryUsage();
-	}
-	AllocationMetrics::PrintMemoryUsage();
+    AllocationMetrics::PrintMemoryUsage();
+    std::string str = "Hello";
+    AllocationMetrics::PrintMemoryUsage();
+    {
+        std::unique_ptr<Object> unique = std::make_unique<Object>();
+        AllocationMetrics::PrintMemoryUsage();
+    }
+    AllocationMetrics::PrintMemoryUsage();
 }
 ```
 
-### lvalue and rvalue
+### Lvalues and Rvalues
 
 - cppreference: [Value categories](https://en.cppreference.com/w/cpp/language/value_category)
 
@@ -2602,6 +2611,10 @@ const int& a = 10; // pass
 int temp = 10;
 const int& a = temp;
 ```
+
+{{< admonition >}}
+这里的底层实现很重要，后面的 Move 移动语义就是用于省略 rvalue 作为 **const lvalue reference** 参数传入使用时所产生的中间变量，以增强效能。
+{{< /admonition >}}
 
 所以函数参数常用 `const` 来修饰 reference，这样可以同时接受 lvalue 和 rvalue:
 
@@ -2628,27 +2641,209 @@ int main()
 ```c++
 void PrintName(std::string& name)   // only accept lvalue reference
 {
-	std::cout << "[lvalue] " << name << std::endl;
+    std::cout << "[lvalue] " << name << std::endl;
 }
 
 void PrintName(std::string&& name)  // only accept rvalue reference
 {
-	std::cout << "[ravlue] " << name << std::endl;
+    std::cout << "[ravlue] " << name << std::endl;
 }
 
 int main()
 {
-	std::string firstName = "Hello";
-	std::string lastName = "World";
+    std::string firstName = "Hello";
+    std::string lastName = "World";
 
-	std::string name = firstName + lastName;
+    std::string name = firstName + lastName;
 
-	PrintName(firstName);               // [lvalue] Hello
-	PrintName(firstName + lastName);    // [rvalue] HelloWorld
+    PrintName(firstName);               // [lvalue] Hello
+    PrintName(firstName + lastName);    // [rvalue] HelloWorld
 }
 ```
 
 rvalue reference 对于优化比较重要，因为和 lvalue reference 不同，我们无需担心传入的 value 的生命周期问题，无需加入一些必要的生命周期检查，这样效率会很高。rvalue reference 常用于配合 move 移动语义来使用。
+
+### Move Semantics
+
+- [C++ 移动语义 详细讲解](https://www.cnblogs.com/zhangyi1357/p/16018810.html)
+
+相似实作: Rust [Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)
+
+```c++
+#include <iostream>
+
+class String
+{
+public:
+    String() = default;
+    String(const char* string)
+    {
+        std::cout << "Created!" << std::endl;
+        m_Size = strlen(string);
+        m_Data = new char[m_Size + 1];
+        memcpy(m_Data, string, m_Size + 1);
+    }
+    String(const String& other)
+    {
+        std::cout << "Copied!" << std::endl;
+        m_Size = other.m_Size;
+        m_Data = new char[m_Size + 1];
+        memcpy(m_Data, other.m_Data, m_Size + 1);
+    }
+    ~String()
+    {
+        std::cout << "Destroyed!" << std::endl;
+        delete[] m_Data;
+    }
+    void Print() const
+    {
+        for (size_t i = 0; i < m_Size; i++)
+            std::cout << m_Data[i];
+        std::cout << std::endl;
+    }
+
+private:
+    char* m_Data;
+    size_t m_Size;
+};
+
+class Entity
+{
+public:
+    Entity(const String& name)
+        : m_Name(name)
+    {
+    }
+    void PrintName() const
+    {
+        m_Name.Print();
+    }
+
+private:
+    String m_Name;
+};
+
+int main()
+{
+    Entity entity(String("Hello"));
+    entity.PrintName();
+}
+// Created!
+// Copied!
+// Destroyed!
+// Hello
+// Destroyed!
+```
+
+使用 rvalue reference 改造上面的程式码，使得其构造函数的行为遵循所有权机制，减少拷贝行为的次数:
+
+```c++
+#include <iostream>
+
+class String
+{
+public:
+    ...
+    String(String&& other) noexcept
+    {
+        std::cout << "Moved!" << std::endl;
+        m_Size = other.m_Size;
+        m_Data = other.m_Data;
+
+        other.m_Size = 0;
+        other.m_Data = nullptr;
+    }
+    ...
+};
+
+class Entity
+{
+public:
+    ...
+    Entity(String&& name)
+        : m_Name((String&&)name)
+    {
+    }
+    ...
+};
+
+int main()
+{
+    Entity entity(String("Hello"));
+    entity.PrintName();
+}
+// Created!
+// Moved!
+// Destroyed!
+// Hello
+// Destroyed!
+```
+
+- cppreference: [C++ keyword: default](https://en.cppreference.com/w/cpp/keyword/default)
+
+#### Move Assignment
+
+上面讨论了 rvalue 的移动语义，但为了更接近 Rust 的所有权机制，我们还需要一种可以实现将现有 object 移动到目标 object 的机制:
+
+- cppreference: [std::move](https://en.cppreference.com/w/cpp/utility/move)
+
+> `std::move` is used to indicate that an object t may be "moved from", i.e. allowing the efficient transfer of resources from `t` to another object.
+> 
+> In particular, `std::move` produces an xvalue expression that identifies its argument `t`. It is exactly equivalent to a `static_cast` to an **rvalue reference** type.
+
+- cppreference: [Move assignment operator](https://en.cppreference.com/w/cpp/language/move_assignment)
+
+> A move assignment operator is a non-template non-static member function with the name operator= that can be called with an argument of the same class type and copies the content of the argument, possibly mutating the argument.
+
+即 `std::move` 可以将现有 object (lvalue) 转换成临时变量 (rvalue)，进而搭配移动赋值运算符实现移动语义。
+
+```c++
+#include <iostream>
+
+class String
+{
+public:
+    ...
+    String(String&& other) noexcept
+	{
+		std::cout << "Moved!" << std::endl;
+		m_Size = other.m_Size;
+		m_Data = other.m_Data;
+		other.m_Size = 0;
+		other.m_Data = nullptr;
+	}
+    String& operator=(String&& other) noexcept
+	{
+		std::cout << "Moved!" << std::endl;
+		if (this != &other)
+		{
+			delete[] m_Data;
+			m_Size = other.m_Size;
+			m_Data = other.m_Data;
+
+			other.m_Size = 0;
+			other.m_Data = nullptr;
+		}
+		return *this;
+	}
+    ...
+};
+
+int main()
+{
+	{
+		String s1 = "hello";
+		String s2 = std::move(s1);  // Move Constructor
+		s2.Print();                 // "hello"
+	}
+	{
+		String s1 = "hello";
+		String s2 = "world";
+		s1 = std::move(s2);         // Move Assignment
+		s1.Print();                 // "world"
+	}
+}
+```
 
 ## Concurrency
 
@@ -2704,27 +2899,27 @@ int main()
 
 // a non-optimized way of checking for prime numbers:
 bool is_prime(int x) {
-	std::cout << "Calculating. Please, wait...\n";
-	for (int i = 2; i < x; ++i)
-		if (x % i == 0)
-			return false;
-	return true;
+    std::cout << "Calculating. Please, wait...\n";
+    for (int i = 2; i < x; ++i)
+        if (x % i == 0)
+            return false;
+    return true;
 }
 
 int main()
 {
-	// call is_prime(313222313) asynchronously:
-	std::future<bool> fut = std::async(is_prime, 313222313);
+    // call is_prime(313222313) asynchronously:
+    std::future<bool> fut = std::async(is_prime, 313222313);
 
-	std::cout << "Checking whether 313222313 is prime.\n";
-	// ...
+    std::cout << "Checking whether 313222313 is prime.\n";
+    // ...
 
-	bool ret = fut.get();      // waits for is_prime to return
+    bool ret = fut.get();      // waits for is_prime to return
 
-	if (ret) std::cout << "It is prime!\n";
-	else     std::cout << "It is not prime.\n";
+    if (ret) std::cout << "It is prime!\n";
+    else     std::cout << "It is not prime.\n";
 
-	return 0;
+    return 0;
 }
 ```
 
@@ -2757,18 +2952,18 @@ int main()
 
 std::tuple<std::string, int> CreatePerson()
 {
-	return { "Cherno", 24 };
+    return { "Cherno", 24 };
 }
 
 int main()
 {
-	auto person = CreatePerson();
-	std::string& name = std::get<0>(person);
-	int age = std::get<1>(person);
-	// or
-	std::string name;
-	int age;
-	std::tie(name, age) = CreatePerson();
+    auto person = CreatePerson();
+    std::string& name = std::get<0>(person);
+    int age = std::get<1>(person);
+    // or
+    std::string name;
+    int age;
+    std::tie(name, age) = CreatePerson();
 }
 ```
 
@@ -3213,43 +3408,64 @@ std::cout << "Make Unique\n";
 
 ```c++
 namespace Benchmarks {
-	void Function1()
-	{
-		PROFILE_FUNCTION();
+    void Function1()
+    {
+        PROFILE_FUNCTION();
 
-		for (int i = 0; i < 1000; i++)
-			std::cout << "Hello World #" << i << std::endl;
-	}
+        for (int i = 0; i < 1000; i++)
+            std::cout << "Hello World #" << i << std::endl;
+    }
 
-	void Function2()
-	{
-		PROFILE_FUNCTION();
+    void Function2()
+    {
+        PROFILE_FUNCTION();
 
-		for (int i = 0; i < 1000; i++)
-			std::cout << "Hello World #" << sqrt(i) << std::endl;
-	}
+        for (int i = 0; i < 1000; i++)
+            std::cout << "Hello World #" << sqrt(i) << std::endl;
+    }
 
-	void Benchmarks()
-	{
-		PROFILE_FUNCTION();
+    void Benchmarks()
+    {
+        PROFILE_FUNCTION();
 
-		std::cout << "Run Benchmarks...\n";
-		Function1();
-		Function2();
-	}
+        std::cout << "Run Benchmarks...\n";
+        Function1();
+        Function2();
+    }
 }
 
 int main()
 {
-	Instrumentor::Get().BeginSession("Profile");
-	Benchmarks::Benchmarks();
-	Instrumentor::Get().EndSession();
+    Instrumentor::Get().BeginSession("Profile");
+    Benchmarks::Benchmarks();
+    Instrumentor::Get().EndSession();
 }
 ```
 
-### Continuous Integration (CI)
+### Argument Evaluation Order
 
-- [Jenkins](https://www.jenkins.io/): Build great things at any scale
+- cppreference: [Order of evaluation](https://en.cppreference.com/w/cpp/language/eval_order)
+
+```c++
+#include <iostream>
+
+void PrintSum(int a, int b)
+{
+    std::cout << a << " + " << b << " = " << (a + b) << std::endl;
+}
+
+int main()
+{
+    int value = 0;
+    PrintSum(value++, value++); // UB
+}
+```
+
+> When calling a function (whether or not the function is inline, and whether or not explicit function call syntax is used), every value computation and side effect associated with any argument expression, or with the postfix expression designating the called function, is sequenced before execution of every expression or statement in the body of the called function.
+
+> The value computation of the built-in post-increment and post-decrement operators is sequenced before its side effect.
+
+所以上面 `PrintSum` 的调用语句处，参数要么是 1, 0 要么是 0, 1 (因为它们的计算顺序仍然是不确定的)，但绝不可能是 0, 0。
 
 ### Coding Style
 
@@ -3277,12 +3493,12 @@ VS 设定 C++ 语言标准: Project 属性 $\rightarrow$ C/C++ $\rightarrow$ Lan
 
 std::tuple<std::string, int> CreatePerson()
 {
-	return { "Cherno", 24 };
+    return { "Cherno", 24 };
 }
 
 int main()
 {
-	auto [name, age] = CreatePerson();
+    auto [name, age] = CreatePerson();
 }
 ```
 
@@ -3300,37 +3516,37 @@ int main()
 
 std::optional<std::string> ReadFileAsString(const std::string& filepath)
 {
-	std::ifstream stream(filepath);
-	if (stream)
-	{
-		std::string result;
-		// read file
-		stream.close();
-		return result;
-	}
-	return {};
+    std::ifstream stream(filepath);
+    if (stream)
+    {
+        std::string result;
+        // read file
+        stream.close();
+        return result;
+    }
+    return {};
 }
 
 int main()
 {
-	std::optional<std::string> data = ReadFileAsString("data.txt");
+    std::optional<std::string> data = ReadFileAsString("data.txt");
     std::string value = data.value_or("Not present");
-	if (data.has_value())
-	{
-		std::string& value = data.value();
-		std::cout << "File read successfully!\n";
-	}
-	else
-	{
-		std::cout << "File could not be opened!\n";
-	}
+    if (data.has_value())
+    {
+        std::string& value = data.value();
+        std::cout << "File read successfully!\n";
+    }
+    else
+    {
+        std::cout << "File could not be opened!\n";
+    }
 }
 ```
 
 由于 `std::optional` 重载了逻辑运算符，所以上面例子的第 23 行可以改写为:
 
 ```c++
-	if (data)
+    if (data)
 ```
 
 当然这样在处理 `std::optional<bool>` 的情况时会有二义性，但是这种使用场景比较少见 (因为 optional 本身根据内部数据存在与否就表示了一种 `bool` 值)。
@@ -3350,19 +3566,19 @@ int main()
 
 int main()
 {
-	std::variant<std::string, int> data;
+    std::variant<std::string, int> data;
 
-	data = "Hello";
-	data.index(); // 0
-	std::cout << std::get<std::string>(data) << std::endl;
+    data = "Hello";
+    data.index(); // 0
+    std::cout << std::get<std::string>(data) << std::endl;
 
-	data = 10;
-	data.index(); // 1
+    data = 10;
+    data.index(); // 1
 
-	if (auto value = std::get_if<std::string>(&data))
-	{
-		std::string& v = *value;
-	}
+    if (auto value = std::get_if<std::string>(&data))
+    {
+        std::string& v = *value;
+    }
 }
 ```
 
@@ -3410,7 +3626,7 @@ data = 1;
 
 这个 `std::any` 其实没啥应用场景... `std::variant` 更加安全并且性能更强 (因为 `std::any` 对于大的对象是通过动态分配的，这导致了其性能不如 `std::variant`)。除此之外，使用 `std::any` 会降低代码可读性，我个人不认为在代码中使用 `std::any` 是一种良好的编程习惯。
 
-## Gui
+## GUI
 
 ### ImGui
 
@@ -3542,7 +3758,9 @@ char  textbox[64] = "Test Text Box";
 ImGui::InputText("Test Text Box", textbox, 64);
 ```
 
-##### 固定显示选项的列表
+##### 列表
+
+###### 固定显示选项的列表
 
 ```c++
 ImGui::BeginListBox("List");
@@ -3559,7 +3777,7 @@ ImGui::EndListBox();
 - Issue: [Horizontal scrollbar when using ListBoxHeader](https://github.com/ocornut/imgui/issues/2510)
 > Also note that `ListBoxHeader()` was renamed to `BeginListBox()` on 2023-05-31 
 
-##### 可展开显示选项的列表
+###### 可展开显示选项的列表
 
 ```c++
 if (ImGui::BeginCombo("Combo", Text.c_str()))
