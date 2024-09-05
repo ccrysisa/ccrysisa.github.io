@@ -130,3 +130,21 @@ Web Framework:
 ```
 
 > This is often referred to as *black box testing*: we verify the behaviour of a system by examining its output given a set of inputs without having access to the details of its internal implementation.
+
+
+#### Tests
+
+- next to your code in an embedded test module: 通过条件编译的方式实现
+- in an external `tests` folder 和 as part of your public documentation (doc tests): 将测试用例单独编译为独立的二进制
+
+```goat
+                  +------------+
+                  | HttpServer |
++------------+    +------------+
+| HttpServer |    |    run     |
+|------------|    |------------|
+|   closure  |    |  closure   |
++------------+    +------------+
+|    main    |    |    main    |
++------------+    +------------+
+```
