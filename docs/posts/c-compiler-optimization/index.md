@@ -1,26 +1,26 @@
 # 你所不知道的 C 语言: 编译器和最佳化原理篇
 
 
-> 編譯器最佳化篇將以 gcc / llvm 為探討對象，簡述編譯器如何運作，以及如何實現最佳化，佐以探究 C 編譯器原理和案例分析，相信可以釐清許多人對 C 編譯器的誤解，從而開發出更可靠、更高效的程式。
+&gt; 編譯器最佳化篇將以 gcc / llvm 為探討對象，簡述編譯器如何運作，以及如何實現最佳化，佐以探究 C 編譯器原理和案例分析，相信可以釐清許多人對 C 編譯器的誤解，從而開發出更可靠、更高效的程式。
 
-<!--more-->
+&lt;!--more--&gt;
 
-- {{< link href="https://hackmd.io/@sysprog/c-compiler-optimization" content="原文地址" external-icon=true >}}
+- {{&lt; link href=&#34;https://hackmd.io/@sysprog/c-compiler-optimization&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
 
 ## From Source to Binary: How A Compiler Works: GNU Toolchain
 
 - [ ] [投影片](http://www.slideshare.net/jserv/how-a-compiler-works-gnu-toolchain)
-/ {{< link href="/archives/compiler-concepts-150301184123-conversion-gate02.pdf" content="PDF" >}}
+/ {{&lt; link href=&#34;/archives/compiler-concepts-150301184123-conversion-gate02.pdf&#34; content=&#34;PDF&#34; &gt;}}
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 这里的投影片比影片中老师讲解时使用的投影片少了一部分，而原文使用的页码是老师讲解时使用的投影片的页码，需要甄别。因为我只有当前版本的投影片，所以会以当前投影片的页码作为记录，同时会将原文标注的页码转换成当前投影片的页码。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 辅助材料:
 - [ ] [Intro To Compiler Development](https://slide.logan.tw/compiler-intro/#/)
-- [ ] [The C++ Build Process Explained](https://github.com/green7ea/blog)
+- [ ] [The C&#43;&#43; Build Process Explained](https://github.com/green7ea/blog)
 
-{{< image src="/images/c/From-Source-to-Binary-3.png" >}}
+{{&lt; image src=&#34;/images/c/From-Source-to-Binary-3.png&#34; &gt;}}
 
 这个流程十分重要，不仅可以理解程序的执行流程，也可以作为理解语言设计的视角。
 
@@ -37,7 +37,7 @@
 对于软件编译器，并不是所有的编译器都会集成有图示的 compile, assemble, link 这三种功能，例如 [AMaCC](https://github.com/jserv/amacc) 只是将 C 语言源程序编译成 ARM 汇编而已。这并不难理解，因为根据编译器的定义，这是毋庸置疑的编译器:
 
 - Wikipedia: [Compiler](https://en.wikipedia.org/wiki/Compiler)
-> A compiler is ä computer program (or set of programs) that transforms source code written in a programming language (the source language) into another computer language (the target language, often having a binary form known as object code)
+&gt; A compiler is ä computer program (or set of programs) that transforms source code written in a programming language (the source language) into another computer language (the target language, often having a binary form known as object code)
 
 之所以将编译器分为上面所提的 3 大部分，主要是为了开发时验证功能时的便利，分成模块对于调试除错比较友好。
 
@@ -51,15 +51,15 @@
 程序语言的本质是编译器，所以在程序语言的起始阶段，是先有编译器再有语言，但是之后就可以通过 self-hosting 实现自举了，即程序语言编译自己的编译器。
 
 ```
-                 +----+            +---+
+                 &#43;----&#43;            &#43;---&#43;
 Source:   X      | C- |     C-     | C |     C 
-Language: C-     | C- |     C      | C |     C+
-Compiler: 1  --> | 2  | --> 3  --> | 4 | --> 5 
-                 +----+            +---+
+Language: C-     | C- |     C      | C |     C&#43;
+Compiler: 1  --&gt; | 2  | --&gt; 3  --&gt; | 4 | --&gt; 5 
+                 &#43;----&#43;            &#43;---&#43;
 ```
 
 自举 (self-hosting) 是指用某一个语言 X 写的编译器，可以编译 X 语言写的程序
-> In computer programming, self-hosting is the use of a program as part of the toolchain or operating system that produces new versions of that same program—for example, a compiler that can compile its own source code. 
+&gt; In computer programming, self-hosting is the use of a program as part of the toolchain or operating system that produces new versions of that same program—for example, a compiler that can compile its own source code. 
 
 ###### [Page 32~33]
 
@@ -67,8 +67,8 @@ SSA (Static Single Assignment): 每次赋值都会对应到一个新的变量，
 
 可以使用 GCC 来输出包含 Basic Block 的 CFG，使用范例:
 ```bash
-# <out> is the name of output file
-$ gcc -c -fdump-tree-cfg=<out> test.c
+# &lt;out&gt; is the name of output file
+$ gcc -c -fdump-tree-cfg=&lt;out&gt; test.c
 ```
 
 ###### [Page 39]
@@ -88,7 +88,7 @@ Value Range Propagation 根据 **变量的形态 (例如数值范围)** 进行�
 
 编译器最佳化总体流程大概是:
 
-{{< image src="/images/c/ssa.drawio.png" >}}
+{{&lt; image src=&#34;/images/c/ssa.drawio.png&#34; &gt;}}
 
 
 ---

@@ -16,7 +16,7 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c thread extension, defines thread creation and manipulation. This standard defines thread management, mutexes, conditions, read/write locks, barriers, etc. Except for the monitors, all features are available in Pthreads.">
   <meta itemprop="datePublished" content="2024-04-10T16:09:35+08:00">
   <meta itemprop="dateModified" content="2024-06-14T21:15:20+08:00">
-  <meta itemprop="wordCount" content="6498">
+  <meta itemprop="wordCount" content="6495">
   <meta itemprop="image" content="https://ccrysisa.github.io/logo.png">
   <meta itemprop="keywords" content="Sysprog,Linux,Concurrency"><meta property="og:url" content="https://ccrysisa.github.io/posts/posix-threads/">
   <meta property="og:site_name" content="KZnight&#39;s Blog">
@@ -52,7 +52,7 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/posix-threads\/"
-    },"genre": "posts","keywords": "Sysprog, Linux, Concurrency","wordcount":  6498 ,
+    },"genre": "posts","keywords": "Sysprog, Linux, Concurrency","wordcount":  6495 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/posix-threads\/","datePublished": "2024-04-10T16:09:35+08:00","dateModified": "2024-06-14T21:15:20+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -64,7 +64,7 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -110,7 +110,7 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -170,18 +170,12 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside>
-
-  <aside class="aside-custom">
-    </aside>
+  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>并行程序设计: POSIX Threads</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
-          <span class="post-category">收录于 <a href="/categories/concurrency/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Concurrency</a>&ensp;<a href="/categories/linux-kernel-internals/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-04-10 16:09:35"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-10">2024-04-10</time></span>&nbsp;<span title="更新于 2024-06-14 21:15:20"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-14">2024-06-14</time></span>&nbsp;<span title="6498 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 6500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 13 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" alt="ccrysisa" data-title="ccrysisa" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/concurrency/" class="post-category" title="分类 - Concurrency"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Concurrency</a>&ensp;<a href="/categories/linux-kernel-internals/" class="post-category" title="分类 - Linux Kernel Internals"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Linux Kernel Internals</a></span></div><div class="post-meta-line"><span title="发布于 2024-04-10 16:09:35"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-04-10">2024-04-10</time></span>&nbsp;<span title="更新于 2024-06-14 21:15:20"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-14">2024-06-14</time></span>&nbsp;<span title="6495 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 6500 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 13 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -235,8 +229,8 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 <ul>
 <li><a href="https://hackmd.io/@sysprog/concurrency/%2F%40sysprog%2Fposix-threads"target="_blank" rel="external nofollow noopener noreferrer">原文地址<i class="fa-solid fa-external-link-alt fa-fw fa-xs ms-1 text-secondary" aria-hidden="true"></i></a></li>
 </ul>
-<h2 id="process-vs-thread-vs-coroutines">Process vs. Thread vs. Coroutines</h2>
-<blockquote>
+<h2 id="process-vs-thread-vs-coroutines" class="heading-element">
+  <a href="#process-vs-thread-vs-coroutines" class="heading-mark"></a>Process vs. Thread vs. Coroutines</h2><blockquote>
 <ul>
 <li>
 <p>With threads, the operating system switches running tasks preemptively according to its scheduling algorithm.</p>
@@ -251,16 +245,16 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 </ul>
 </blockquote>
 <p>一图胜千语:</p>
-<a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined" data-alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined" alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615185290_undefined" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>具体一点，从函数执行流程来看:</p>
-<a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined" data-alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined" alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615014454_undefined" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>$\rightarrow$ 在使用 coroutinues 后执行流程变成 $\rightarrow$</p>
-<a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined" data-alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined" alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_K6DJ0ZtiecH_p.537916_1460615044111_undefined" class="suffix-invalid suffix-invalid__small suffix-invalid__large" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>C 语言程序中实作 coroutinue 的方法很多，例如「<a href="https://hackmd.io/@sysprog/c-control-flow"target="_blank" rel="external nofollow noopener noreferrer">C 语言: goto 和流程控制篇</a>」中提到的使用 <code>switch-case</code> 技巧进行实作。</p>
 <p>这三个概念出现的时间与它们的复杂度正好相反，最复杂的 Process 最先出现，而最轻量的 Coroutines 反而最晚出现。</p>
-<h3 id="thread--process">Thread &amp; Process</h3>
-<p><a class="lightgallery" href="https://imgur-backup.hackmd.io/QW1YWsC.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/QW1YWsC.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/QW1YWsC.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/QW1YWsC.png" srcset="https://imgur-backup.hackmd.io/QW1YWsC.png?size=small, https://imgur-backup.hackmd.io/QW1YWsC.png?size=medium 1.5x, https://imgur-backup.hackmd.io/QW1YWsC.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/QW1YWsC.png" data-alt="https://imgur-backup.hackmd.io/QW1YWsC.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
-<a class="lightgallery" href="https://imgur-backup.hackmd.io/gUF3Vz9.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/gUF3Vz9.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/gUF3Vz9.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/gUF3Vz9.png" srcset="https://imgur-backup.hackmd.io/gUF3Vz9.png?size=small, https://imgur-backup.hackmd.io/gUF3Vz9.png?size=medium 1.5x, https://imgur-backup.hackmd.io/gUF3Vz9.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/gUF3Vz9.png" data-alt="https://imgur-backup.hackmd.io/gUF3Vz9.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a></p>
+<h3 id="thread--process" class="heading-element">
+  <a href="#thread--process" class="heading-mark"></a>Thread &amp; Process</h3><p><a class="lightgallery" href="https://imgur-backup.hackmd.io/QW1YWsC.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/QW1YWsC.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/QW1YWsC.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/QW1YWsC.png" alt="https://imgur-backup.hackmd.io/QW1YWsC.png" srcset="https://imgur-backup.hackmd.io/QW1YWsC.png?size=small, https://imgur-backup.hackmd.io/QW1YWsC.png?size=medium 1.5x, https://imgur-backup.hackmd.io/QW1YWsC.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/QW1YWsC.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/gUF3Vz9.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/gUF3Vz9.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/gUF3Vz9.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/gUF3Vz9.png" alt="https://imgur-backup.hackmd.io/gUF3Vz9.png" srcset="https://imgur-backup.hackmd.io/gUF3Vz9.png?size=small, https://imgur-backup.hackmd.io/gUF3Vz9.png?size=medium 1.5x, https://imgur-backup.hackmd.io/gUF3Vz9.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/gUF3Vz9.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a></p>
 <ul>
 <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Light-weight_process"target="_blank" rel="external nofollow noopener noreferrer">Light-weight process</a></li>
 </ul>
@@ -274,8 +268,8 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 <blockquote>
 <p>On a modern machine, where multiple threads may be modifying the errno variable, a call of a system function on one thread may overwrite the value previously set by a call of a system function on a different thread, possibly before following code on that different thread could check for the error condition. The solution is to have errno be a variable that looks as if it is global, but is physically stored in a per-thread memory pool, the thread-local storage.</p>
 </blockquote>
-<h3 id="pthread-posix-threads">PThread (POSIX threads)</h3>
-<a class="lightgallery" href="https://imgur-backup.hackmd.io/0yeKpoT.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/0yeKpoT.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/0yeKpoT.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/0yeKpoT.png" srcset="https://imgur-backup.hackmd.io/0yeKpoT.png?size=small, https://imgur-backup.hackmd.io/0yeKpoT.png?size=medium 1.5x, https://imgur-backup.hackmd.io/0yeKpoT.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/0yeKpoT.png" data-alt="https://imgur-backup.hackmd.io/0yeKpoT.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<h3 id="pthread-posix-threads" class="heading-element">
+  <a href="#pthread-posix-threads" class="heading-mark"></a>PThread (POSIX threads)</h3><a class="lightgallery" href="https://imgur-backup.hackmd.io/0yeKpoT.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/0yeKpoT.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/0yeKpoT.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/0yeKpoT.png" alt="https://imgur-backup.hackmd.io/0yeKpoT.png" srcset="https://imgur-backup.hackmd.io/0yeKpoT.png?size=small, https://imgur-backup.hackmd.io/0yeKpoT.png?size=medium 1.5x, https://imgur-backup.hackmd.io/0yeKpoT.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/0yeKpoT.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>POSIX 的全称是 Portable Operating System Interfaces，结合上图，所以你明白 pthread 的 P 代表的意义了吗？<br>
 <details>
   <summary>Answer</summary>
@@ -292,8 +286,8 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 </ul></div>
     </div>
   </div>
-<h3 id="synchronizing-threads">Synchronizing Threads</h3>
-<p>3 basic synchronization primitives (为什么是这 3 个？请从 synchronized-with 关系进行思考)</p>
+<h3 id="synchronizing-threads" class="heading-element">
+  <a href="#synchronizing-threads" class="heading-mark"></a>Synchronizing Threads</h3><p>3 basic synchronization primitives (为什么是这 3 个？请从 synchronized-with 关系进行思考)</p>
 <ul>
 <li>mutex locks</li>
 <li>condition variables</li>
@@ -306,8 +300,8 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 <blockquote>
 <p>Conditions in Pthreads are usually used with a mutex to enforce mutual exclusion.</p>
 </blockquote>
-<h4 id="mutex-locks">mutex locks</h4>
-<div class="highlight" id="id-1"><div class="chroma">
+<h4 id="mutex-locks" class="heading-element">
+  <a href="#mutex-locks" class="heading-mark"></a>mutex locks</h4><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -326,9 +320,9 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">pthread_mutex_unlock</span><span class="p">(</span><span class="kt">pthread_mutex_t</span> <span class="o">*</span><span class="n">mutex</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">pthread_mutex_trylock</span><span class="p">(</span><span class="kt">pthread_mutex_t</span> <span class="o">*</span><span class="n">mutex</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><a class="lightgallery" href="https://imgur-backup.hackmd.io/mE4l7n1.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/mE4l7n1.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/mE4l7n1.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/mE4l7n1.png" srcset="https://imgur-backup.hackmd.io/mE4l7n1.png?size=small, https://imgur-backup.hackmd.io/mE4l7n1.png?size=medium 1.5x, https://imgur-backup.hackmd.io/mE4l7n1.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/mE4l7n1.png" data-alt="https://imgur-backup.hackmd.io/mE4l7n1.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+</div><a class="lightgallery" href="https://imgur-backup.hackmd.io/mE4l7n1.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/mE4l7n1.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/mE4l7n1.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/mE4l7n1.png" alt="https://imgur-backup.hackmd.io/mE4l7n1.png" srcset="https://imgur-backup.hackmd.io/mE4l7n1.png?size=small, https://imgur-backup.hackmd.io/mE4l7n1.png?size=medium 1.5x, https://imgur-backup.hackmd.io/mE4l7n1.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/mE4l7n1.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <ul>
-<li>Only the <strong id="id-32">owner</strong> can unlock a mutex. Since mutexes cannot be copied, use pointers.</li>
+<li>Only the <strong id="id-7">owner</strong> can unlock a mutex. Since mutexes cannot be copied, use pointers.</li>
 <li>If <code>pthread_mutex_trylock()</code> returns <code>EBUSY</code>, the lock is already locked. Otherwise, the calling thread becomes the owner of this lock.</li>
 <li>With <code>pthread_mutexattr_settype()</code>, the type of a mutex can be set to allow recursive locking or report deadlock if the owner locks again</li>
 </ul>
@@ -342,8 +336,8 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 </div>
     </div>
   </div>
-<h4 id="condition-variables">condition variables</h4>
-<div class="highlight" id="id-2"><div class="chroma">
+<h4 id="condition-variables" class="heading-element">
+  <a href="#condition-variables" class="heading-mark"></a>condition variables</h4><div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -374,7 +368,7 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 </ul>
 </li>
 </ul>
-<a class="lightgallery" href="https://imgur-backup.hackmd.io/9gRzRDG.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/9gRzRDG.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/9gRzRDG.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/9gRzRDG.png" srcset="https://imgur-backup.hackmd.io/9gRzRDG.png?size=small, https://imgur-backup.hackmd.io/9gRzRDG.png?size=medium 1.5x, https://imgur-backup.hackmd.io/9gRzRDG.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/9gRzRDG.png" data-alt="https://imgur-backup.hackmd.io/9gRzRDG.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://imgur-backup.hackmd.io/9gRzRDG.png?size=large" data-thumbnail="https://imgur-backup.hackmd.io/9gRzRDG.png?size=small" data-sub-html="<h2>https://imgur-backup.hackmd.io/9gRzRDG.png</h2>"><img loading="lazy" src="https://imgur-backup.hackmd.io/9gRzRDG.png" alt="https://imgur-backup.hackmd.io/9gRzRDG.png" srcset="https://imgur-backup.hackmd.io/9gRzRDG.png?size=small, https://imgur-backup.hackmd.io/9gRzRDG.png?size=medium 1.5x, https://imgur-backup.hackmd.io/9gRzRDG.png?size=large 2x" sizes="auto" data-title="https://imgur-backup.hackmd.io/9gRzRDG.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>使用 condition variables 改写之前 mutex 部分的 producer 实作 (实作是单生产者单消费者模型，且缓冲区有 <code>MAX_SIZE</code> 个元素):</p>
 <div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -403,8 +397,8 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="semaphores">semaphores</h4>
-<p>semaphores 是站在「资源的数量」的角度来看待问题，这与 condition variables 是不同的</p>
+</div><h4 id="semaphores" class="heading-element">
+  <a href="#semaphores" class="heading-mark"></a>semaphores</h4><p>semaphores 是站在「资源的数量」的角度来看待问题，这与 condition variables 是不同的</p>
 <div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -436,10 +430,10 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
       <div class="admonition-content">总结一下，<code>mutex</code> 在意的是 <strong>持有者</strong>，<code>semaphore</code> 在意的是 <strong>资源的总量</strong>，而 <code>condition variables</code> 在意的是 <strong>持有的条件</strong>。</div>
     </div>
   </div>
-<h2 id="posix-threads">POSIX Threads</h2>
-<a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg" data-alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
-<h3 id="实例-光线追踪">实例: 光线追踪</h3>
-<p>光线追踪 (Ray tracing) 相关:</p>
+<h2 id="posix-threads" class="heading-element">
+  <a href="#posix-threads" class="heading-mark"></a>POSIX Threads</h2><a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg" alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457976043696_fork-join.jpg" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
+<h3 id="实例-光线追踪" class="heading-element">
+  <a href="#%e5%ae%9e%e4%be%8b-%e5%85%89%e7%ba%bf%e8%bf%bd%e8%b8%aa" class="heading-mark"></a>实例: 光线追踪</h3><p>光线追踪 (Ray tracing) 相关:</p>
 <ul>
 <li><a href="http://wiki.csie.ncku.edu.tw/embedded/2016q1h2"target="_blank" rel="external nofollow noopener noreferrer">2016q1 Homework #2</a></li>
 <li><a href="https://web.cs.ucla.edu/classes/winter16/cs35L/"target="_blank" rel="external nofollow noopener noreferrer">UCLA Computer Science 35L, Winter 2016. Software Construction Laboratory</a></li>
@@ -465,7 +459,7 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 </span></span><span class="line"><span class="cl">$ open out.ppm</span></span></code></pre></td></tr></table>
 </div>
 </div><p>预期得到下面的图：</p>
-<a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png" data-alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png?size=large" data-thumbnail="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png?size=small" data-sub-html="<h2>https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png</h2>"><img loading="lazy" src="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png" alt="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png" srcset="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png?size=small, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png?size=medium 1.5x, https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png?size=large 2x" sizes="auto" data-title="https://hackpad-attachments.s3.amazonaws.com/embedded2016.hackpad.com_xBRCF9BsC50_p.537916_1457975632540_out.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <p>可以将上面的 <code>./srt</code> 命令后面的数字改为 1, 2, 8 之类的进行尝试，这个数字代表使用的执行绪的数量。另外，在 <code>./srt</code> 命令之前使用 <code>time</code> 命令可以计算本次进行光线追踪所使用的时间，由此可以对比不同数量执行绪下的效能差异。</p>
 <p>可以看下相关的程式码 <a href="">main.c</a>:</p>
 <div class="highlight" id="id-6"><div class="chroma">
@@ -482,28 +476,28 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">res</span> <span class="o">=</span> <span class="nf">pthread_join</span><span class="p">(</span><span class="n">threadID</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">retVal</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>显然是经典的 <strong>fork-join</strong> 模型 (<code>pthread_create</code> 进行 &ldquo;fork&rdquo;，<code>pthread_join</code> 进行 &ldquo;join&rdquo;)，注意这里并没有使用到 mutex 之类的互斥量，这是可以做到的，只要你事先区分开不相关的区域分别进行计算即可，即不会发生数据竞争，那么久没必要使用 mutex 了。</p>
-<h3 id="posix-thread">POSIX Thread</h3>
-<ul>
+<h3 id="posix-thread" class="heading-element">
+  <a href="#posix-thread" class="heading-mark"></a>POSIX Thread</h3><ul>
 <li><a href="https://hpc-tutorials.llnl.gov/posix/"target="_blank" rel="external nofollow noopener noreferrer">POSIX Threads Programming</a></li>
 </ul>
 <blockquote>
-<p>Condition variables provide yet another way for threads to synchronize. While mutexes implement synchronization by controlling thread access to data, <strong id="id-33">condition variables allow threads to synchronize based upon the actual value of data.</strong></p>
+<p>Condition variables provide yet another way for threads to synchronize. While mutexes implement synchronization by controlling thread access to data, <strong id="id-8">condition variables allow threads to synchronize based upon the actual value of data.</strong></p>
 </blockquote>
 <p>condition variables 由两种不同的初始化方式:</p>
 <ul>
 <li>静态初始化 (static): <code>PTHREAD_COND_INITIALIZER</code></li>
 <li>动态初始化 (dynamic): <code>pthread_cond_init()</code></li>
 </ul>
-<h2 id="synchronization">Synchronization</h2>
-<p>CMU 15-213: Intro to Computer Systems</p>
+<h2 id="synchronization" class="heading-element">
+  <a href="#synchronization" class="heading-mark"></a>Synchronization</h2><p>CMU 15-213: Intro to Computer Systems</p>
 <ul>
 <li>$23^{rd}$ Lecture <a href="https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/lectures/23-concprog.pdf"target="_blank" rel="external nofollow noopener noreferrer">Concurrent	Programming</a></li>
 </ul>
-<a class="lightgallery" href="/images/c/23-concprog-24.png?size=large" data-thumbnail="/images/c/23-concprog-24.png?size=small" data-sub-html="<h2>/images/c/23-concprog-24.png</h2>"><img loading="lazy" src="/images/c/23-concprog-24.png" srcset="/images/c/23-concprog-24.png?size=small, /images/c/23-concprog-24.png?size=medium 1.5x, /images/c/23-concprog-24.png?size=large 2x" sizes="auto" data-title="/images/c/23-concprog-24.png" data-alt="/images/c/23-concprog-24.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="/images/c/23-concprog-24.png?size=large" data-thumbnail="/images/c/23-concprog-24.png?size=small" data-sub-html="<h2>/images/c/23-concprog-24.png</h2>"><img loading="lazy" src="/images/c/23-concprog-24.png" alt="/images/c/23-concprog-24.png" srcset="/images/c/23-concprog-24.png?size=small, /images/c/23-concprog-24.png?size=medium 1.5x, /images/c/23-concprog-24.png?size=large 2x" sizes="auto" data-title="/images/c/23-concprog-24.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <ul>
 <li>$24^{rd}$ Lecture <a href="https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/lectures/24-sync-basic.pdf"target="_blank" rel="external nofollow noopener noreferrer">Synchroniza+on:	Basics</a></li>
 </ul>
-<a class="lightgallery" href="/images/c/24-sync-basic-17.png?size=large" data-thumbnail="/images/c/24-sync-basic-17.png?size=small" data-sub-html="<h2>/images/c/24-sync-basic-17.png</h2>"><img loading="lazy" src="/images/c/24-sync-basic-17.png" srcset="/images/c/24-sync-basic-17.png?size=small, /images/c/24-sync-basic-17.png?size=medium 1.5x, /images/c/24-sync-basic-17.png?size=large 2x" sizes="auto" data-title="/images/c/24-sync-basic-17.png" data-alt="/images/c/24-sync-basic-17.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
+<a class="lightgallery" href="/images/c/24-sync-basic-17.png?size=large" data-thumbnail="/images/c/24-sync-basic-17.png?size=small" data-sub-html="<h2>/images/c/24-sync-basic-17.png</h2>"><img loading="lazy" src="/images/c/24-sync-basic-17.png" alt="/images/c/24-sync-basic-17.png" srcset="/images/c/24-sync-basic-17.png?size=small, /images/c/24-sync-basic-17.png?size=medium 1.5x, /images/c/24-sync-basic-17.png?size=large 2x" sizes="auto" data-title="/images/c/24-sync-basic-17.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
 <div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -551,9 +545,9 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 <blockquote>
 <p>semaphore 和 spinlock 屬於不同層次的互斥手段，前者的實現仰賴於後者，可類比於 HTTP 和 TCP/IP 的關係，儘管都算是網路通訊協定，但層次截然不同</p>
 </blockquote>
-<h3 id="system-programming-wiki-book-synchronization">System Programming wiki-book: Synchronization</h3>
-<h4 id="part-1-mutex-locks">Part 1: Mutex Locks</h4>
-<ul>
+<h3 id="system-programming-wiki-book-synchronization" class="heading-element">
+  <a href="#system-programming-wiki-book-synchronization" class="heading-mark"></a>System Programming wiki-book: Synchronization</h3><h4 id="part-1-mutex-locks" class="heading-element">
+  <a href="#part-1-mutex-locks" class="heading-mark"></a>Part 1: Mutex Locks</h4><ul>
 <li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-1%3A-Mutex-Locks"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
 </ul>
 <blockquote>
@@ -579,8 +573,8 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 <li><a href="http://linux.die.net/man/3/pthread_mutex_init"target="_blank" rel="external nofollow noopener noreferrer">pthread_mutex_init</a></li>
 <li><a href="http://linux.die.net/man/3/pthread_mutex_destroy"target="_blank" rel="external nofollow noopener noreferrer">pthread_mutex_destroy</a></li>
 </ul>
-<h4 id="part-2-counting-semaphores">Part 2: Counting Semaphores</h4>
-<ul>
+<h4 id="part-2-counting-semaphores" class="heading-element">
+  <a href="#part-2-counting-semaphores" class="heading-mark"></a>Part 2: Counting Semaphores</h4><ul>
 <li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization%2C-Part-2%3A-Counting-Semaphores"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
 </ul>
 <blockquote>
@@ -630,8 +624,8 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 <li><a href="http://man7.org/linux/man-pages/man3/sem_post.3.html"target="_blank" rel="external nofollow noopener noreferrer">sem_post</a></li>
 <li><a href="http://man7.org/linux/man-pages/man3/sem_destroy.3.html"target="_blank" rel="external nofollow noopener noreferrer">sem_destroy</a></li>
 </ul>
-<h4 id="part-3-working-with-mutexes-and-semaphores">Part 3: Working with Mutexes And Semaphores</h4>
-<ul>
+<h4 id="part-3-working-with-mutexes-and-semaphores" class="heading-element">
+  <a href="#part-3-working-with-mutexes-and-semaphores" class="heading-mark"></a>Part 3: Working with Mutexes And Semaphores</h4><ul>
 <li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-3:-Working-with-Mutexes-And-Semaphores"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
 </ul>
 <blockquote>
@@ -646,8 +640,8 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 <p>However there is no mutual exclusion: Two threads can be in the critical section at the same time, which would corrupt the data structure (or least lead to data loss). The fix is to wrap a mutex around the critical section</p>
 </blockquote>
 <p>信号量只能保证资源总量的正确使用，但无法生成更小精度 (例如针对某个元素) 的互斥区，此时需要搭配 mutex 来使用，即 <strong>semaphore 用于控制资源总量，mutex 用于保证特定资源的互斥</strong>。</p>
-<h4 id="part-4-the-critical-section-problem">Part 4: The Critical Section Problem</h4>
-<ul>
+<h4 id="part-4-the-critical-section-problem" class="heading-element">
+  <a href="#part-4-the-critical-section-problem" class="heading-mark"></a>Part 4: The Critical Section Problem</h4><ul>
 <li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-4:-The-Critical-Section-Problem"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
 </ul>
 <p>插旗表示此时由自己掌控，类似社团争斗，插旗表示主权:</p>
@@ -1014,8 +1008,8 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="part-5-condition-variables">Part 5: Condition Variables</h4>
-<ul>
+</div><h4 id="part-5-condition-variables" class="heading-element">
+  <a href="#part-5-condition-variables" class="heading-mark"></a>Part 5: Condition Variables</h4><ul>
 <li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-5:-Condition-Variables"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
 </ul>
 <p>What are condition variables?</p>
@@ -1116,8 +1110,8 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
       <div class="admonition-content">可以把条件变量视为一个房子，而 signal 方可视为是房子的 <strong>主人</strong>，任意时候都可以直接进入房子，并且可以更改客人进入房子的条件；而 wait 方可视为 <strong>客人</strong>，只有在主人允许时才能被通知进入房子。</div>
     </div>
   </div>
-<h4 id="part-6-implementing-a-barrier">Part 6: Implementing a barrier</h4>
-<ul>
+<h4 id="part-6-implementing-a-barrier" class="heading-element">
+  <a href="#part-6-implementing-a-barrier" class="heading-mark"></a>Part 6: Implementing a barrier</h4><ul>
 <li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-6:-Implementing-a-barrier"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
 </ul>
 <blockquote>
@@ -1147,8 +1141,8 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 </span></span><span class="line"><span class="cl"><span class="nf">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>多线程下的条件变量的使用，其本质和之前所提的三要素是符合的，因为每个线程只可能执行 <code>if-else</code> 部分的其中一个分支，而不同分支则分别代表了 <code>post</code> 和 <code>wait</code> 方法。</p>
-<h4 id="part-7-the-reader-writer-problem">Part 7: The Reader Writer Problem</h4>
-<ul>
+<h4 id="part-7-the-reader-writer-problem" class="heading-element">
+  <a href="#part-7-the-reader-writer-problem" class="heading-mark"></a>Part 7: The Reader Writer Problem</h4><ul>
 <li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-7:-The-Reader-Writer-Problem"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
 </ul>
 <p>What is the Reader Writer Problem?</p>
@@ -1188,7 +1182,7 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 </span></span><span class="line"><span class="cl">    <span class="nf">unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">m</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight" id="id-26"><div class="chroma">
+</div><div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1223,7 +1217,7 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 <blockquote>
 <p>Our fix is to implement a bounded-wait for the writer. If a writer arrives they will still need to wait for existing readers however future readers must be placed in a &ldquo;holding pen&rdquo; and wait for the writer to finish. The &ldquo;holding pen&rdquo; can be implemented using a variable and a condition variable (so that we can wake up the threads once the writer has finished).</p>
 </blockquote>
-<div class="highlight" id="id-27"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1246,7 +1240,7 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 </span></span><span class="line"><span class="cl">  <span class="p">...</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight" id="id-28"><div class="chroma">
+</div><div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1280,12 +1274,12 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这样即使完成读操作的线程进行唤醒，在 write 线程后面抵达的 read 线程被唤醒也会因为不满足条件而进行睡眠等待，只有 write 线程才会对条件变量进行回应。</p>
-<h4 id="part-8-ring-buffer-example">Part 8: Ring Buffer Example</h4>
-<ul>
+<h4 id="part-8-ring-buffer-example" class="heading-element">
+  <a href="#part-8-ring-buffer-example" class="heading-mark"></a>Part 8: Ring Buffer Example</h4><ul>
 <li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-8:-Ring-Buffer-Example"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
 </ul>
-<a class="lightgallery" href="https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png?size=large" data-thumbnail="https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png?size=small" data-sub-html="<h2>https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png</h2>"><img loading="lazy" src="https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png" srcset="https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png?size=small, https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png?size=medium 1.5x, https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png?size=large 2x" sizes="auto" data-title="https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png" data-alt="https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/></a>
-<div class="highlight" id="id-29"><div class="chroma">
+<a class="lightgallery" href="https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png?size=large" data-thumbnail="https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png?size=small" data-sub-html="<h2>https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png</h2>"><img loading="lazy" src="https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png" alt="https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png" srcset="https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png?size=small, https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png?size=medium 1.5x, https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png?size=large 2x" sizes="auto" data-title="https://raw.githubusercontent.com/wiki/angrave/SystemProgramming/RingBuffer-Angrave2014-1024x768.png" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/></a>
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1321,7 +1315,7 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>上面这段程式码看起来可以进行如下的重写:</p>
-<div class="highlight" id="id-30"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -1339,7 +1333,7 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 <blockquote>
 <p>A compact form is correct uses bit masking provided N is 2^x (16,32,64,&hellip;)</p>
 </blockquote>
-<div class="highlight" id="id-31"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -1362,8 +1356,8 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 </div>
     </div>
   </div>
-<h4 id="part-9-synchronization-across-processes">Part 9: Synchronization Across Processes</h4>
-<ul>
+<h4 id="part-9-synchronization-across-processes" class="heading-element">
+  <a href="#part-9-synchronization-across-processes" class="heading-mark"></a>Part 9: Synchronization Across Processes</h4><ul>
 <li><a href="https://github.com/angrave/SystemProgramming/wiki/Synchronization,-Part-9:-Synchronization-Across-Processes"target="_blank" rel="external nofollow noopener noreferrer">原文地址</a></li>
 </ul>
 <blockquote>
@@ -1372,16 +1366,16 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
 <blockquote>
 <p>mutexes and other synchronization primitives can be shared across processes.</p>
 </blockquote>
-<h3 id="mutex-and-semaphore">Mutex and Semaphore</h3></div><div class="post-footer" id="post-footer">
+<h3 id="mutex-and-semaphore" class="heading-element">
+  <a href="#mutex-and-semaphore" class="heading-mark"></a>Mutex and Semaphore</h3></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
         <span title="更新于 2024-06-14 21:15:20">更新于 2024-06-14&nbsp;</span>
-      </div></div>
-    <div class="post-info-line">
-      <div class="post-info-md"><span><a href="/posts/posix-threads/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-      <div class="post-info-share">
-        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/posix-threads/" data-title="并行程序设计: POSIX Threads" data-hashtags="Sysprog,Linux,Concurrency"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+      </div></div><div class="post-info-line">
+        <div class="post-info-md"><span><a href="/posts/posix-threads/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+        <div class="post-info-share">
+          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/posix-threads/" data-title="并行程序设计: POSIX Threads" data-hashtags="Sysprog,Linux,Concurrency"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/posix-threads/" data-hashtag="Sysprog"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/posix-threads/" data-title="并行程序设计: POSIX Threads" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/posix-threads/" data-title="并行程序设计: POSIX Threads"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -1390,12 +1384,11 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/posix-threads/" data-title="并行程序设计: POSIX Threads" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/posix-threads/" data-title="并行程序设计: POSIX Threads"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-      </div>
-    </div>
-  </div>
+        </div>
+      </div></div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/sysprog/' class="post-tag">Sysprog</a><a href='/tags/linux/' class="post-tag">Linux</a><a href='/tags/concurrency/' class="post-tag">Concurrency</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/sysprog/" class="post-tag" title="标签 - Sysprog">Sysprog</a><a href="/tags/linux/" class="post-tag" title="标签 - Linux">Linux</a><a href="/tags/concurrency/" class="post-tag" title="标签 - Concurrency">Concurrency</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -1404,11 +1397,14 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
   <div class="post-nav"><a href="/posts/c-trick/" class="post-nav-item" rel="prev" title="你所不知道的 C 语言: 技巧篇"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>你所不知道的 C 语言: 技巧篇</a>
       <a href="/posts/linux-rbtree/" class="post-nav-item" rel="next" title="Linux 核心的红黑树">Linux 核心的红黑树<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.131.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.131.0"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -1416,5 +1412,5 @@ Pthreads (POSIX Threads) is a POSIX standard for threads. The standard, POSIX.1c
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/js/flyfish.js" defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><link rel="stylesheet" href="/css/0caa95.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/js/flyfish.js" defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>
