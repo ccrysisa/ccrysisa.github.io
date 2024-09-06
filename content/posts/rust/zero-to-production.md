@@ -148,3 +148,11 @@ Web Framework:
 |    main    |    |    main    |
 +------------+    +------------+
 ```
+
+#### Server
+
+- Struct [actix_web::dev::Server](https://docs.rs/actix-web/4.9.0/actix_web/dev/struct.Server.html)
+
+> The Server must be awaited or polled in order to start running. It will resolve when the server has fully shut down.
+
+即 `Server` 的作用类似一个句柄，所以在调用 [run](https://docs.rs/actix-web/4.9.0/actix_web/struct.HttpServer.html#method.run) 方法后可以通过这个句柄来选择何种 I/O 模型 (awaited or polled)。

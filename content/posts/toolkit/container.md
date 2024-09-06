@@ -17,8 +17,9 @@ tags:
   - Container
   - Docker
 categories:
-  - Go
   - Toolkit
+  - Go
+  - Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -52,6 +53,10 @@ deepin 20.9 虽然基于 debian 10.10，但是为了适配 deepin 特色的 DDE 
 由于一些未知原因，建议使用一个 shell 启动 docker daemon 再使用另一个 shell 来运行 docker application。
 {{< /admonition >}}
 
+Docker Compose 也是通过手动安装:
+
+- [Install the Compose plugin](https://docs.docker.com/compose/install/linux/#install-the-plugin-manually)
+
 ## Configuration
 
 > If you need to start the daemon with additional options, modify the above command accordingly or create and edit the file `/etc/docker/daemon.json` to add the custom configuration options.
@@ -72,10 +77,26 @@ deepin 20.9 虽然基于 debian 10.10，但是为了适配 deepin 特色的 DDE 
 }
 ```
 
-Docker Compose 也是通过手动安装:
+## Usage
 
-- [Install the Compose plugin](https://docs.docker.com/compose/install/linux/#install-the-plugin-manually)
+- [Docker and Kubernetes Tutorial for Beginners](https://www.youtube.com/playlist?list=PLy7NrYWoggjwPggqtFsI_zMAwvG0SqYCb)
+
+## Linux Containers
+
+### Writing a Container in Rust
+
+- [Writing a Container in Rust](https://litchipi.site/serie/containers_in_rust) ([older version](https://litchipi.github.io/series/container_in_rust))
+- [Linux containers in 500 lines of code](https://blog.lizzie.io/linux-containers-in-500-loc.html)
+
+#### Introduction to containers
+
+> A container is an isolated execution environment providing an abstraction between a software to be executed and the underlying operating system. It can be seen as a software virtualisation process.
+
+即以 software 为中心的虚拟化 (Virtualisation)，让 software 有一种在特定的 OS 环境下执行 / 运行的错觉。
+
+#### Starting the project
+
+
 
 ## References
 
-- [Docker and Kubernetes Tutorial for Beginners](https://www.youtube.com/playlist?list=PLy7NrYWoggjwPggqtFsI_zMAwvG0SqYCb)
