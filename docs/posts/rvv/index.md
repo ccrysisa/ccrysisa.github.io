@@ -1,7 +1,7 @@
 # RVV: RISC-V Vector Extension
 
 
-<!--more-->
+&lt;!--more--&gt;
 
 ## Introduction
 
@@ -16,15 +16,15 @@
 
 VLMAX = LMUL * VLEN / SEW
 
-> **LMUL * VLEN** 表示该 vector 的比特数，而 **SEW** 表示该 vector 的每个 element 的比特数
+&gt; **LMUL * VLEN** 表示该 vector 的比特数，而 **SEW** 表示该 vector 的每个 element 的比特数
 
-{{< image src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb664a2e5-26e2-4107-9675-e24f569493cb_591x358.jpeg" >}}
+{{&lt; image src=&#34;https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb664a2e5-26e2-4107-9675-e24f569493cb_591x358.jpeg&#34; &gt;}}
 
 ## Arithmetic
 
-{{< image src="https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3cb932c-e046-4ca6-9489-4a5c0061733e_481x372.jpeg" >}}
+{{&lt; image src=&#34;https://substackcdn.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3cb932c-e046-4ca6-9489-4a5c0061733e_481x372.jpeg&#34; &gt;}}
 
-> vstart specifies the first active vector element, vl specifies the number of element(s) in the LMUL-wide vector group affected by the operation and SEW specifies what is the actual format of the operands.
+&gt; vstart specifies the first active vector element, vl specifies the number of element(s) in the LMUL-wide vector group affected by the operation and SEW specifies what is the actual format of the operands.
 
 RVV 1.0 specifies standard integer operations:
 

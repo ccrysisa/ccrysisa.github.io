@@ -1,15 +1,15 @@
 # RISC-V Optimization Guide
 
 
-> The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.
-> 
-> 近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。
+&gt; The intention is to give specific actionable optimization recommendations for software developers writing code for RISC-V application processors.
+&gt; 
+&gt; 近日 RISE 基金会发布了一版 《RISC-V Optimization Guide》，其目的是为给 RISC-V 应用处理器编写代码的软件开发人员提供具体可行的优化建议。本次活动的主要内容是解读和讨论该文档内容。
 
-<!--more-->
+&lt;!--more--&gt;
 
-- {{< link href="https://riscv-optimization-guide-riseproject-c94355ae3e6872252baa952524.gitlab.io/riscv-optimization-guide.html" content="原文地址" external-icon=true >}}
-- {{< link href="https://riscv-optimization-guide-riseproject-c94355ae3e6872252baa952524.gitlab.io/riscv-optimization-guide.pdf" content="原文 PDF" external-icon=true >}}
-- {{< link href="https://www.bilibili.com/video/BV1Ft421t7PS" content="解说录影" external-icon=true >}}
+- {{&lt; link href=&#34;https://riscv-optimization-guide-riseproject-c94355ae3e6872252baa952524.gitlab.io/riscv-optimization-guide.html&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
+- {{&lt; link href=&#34;https://riscv-optimization-guide-riseproject-c94355ae3e6872252baa952524.gitlab.io/riscv-optimization-guide.pdf&#34; content=&#34;原文 PDF&#34; external-icon=true &gt;}}
+- {{&lt; link href=&#34;https://www.bilibili.com/video/BV1Ft421t7PS&#34; content=&#34;解说录影&#34; external-icon=true &gt;}}
 
 ## 相关知识
 
@@ -37,15 +37,15 @@ RISC-V ISA 规格书: https://riscv.org/technical/specifications/
 
 - RV64I 5.2 Integer Computational Instructions
 
-> Additional instruction variants are provided to manipulate 32-bit values in RV64I, indicated by a ‘W’ suffix to the opcode.
-> 
-> These “*W” instructions ignore the upper 32 bits of their inputs and always produce 32-bit signed values, i.e. bits XLEN-1 through 31 are equal.
+&gt; Additional instruction variants are provided to manipulate 32-bit values in RV64I, indicated by a ‘W’ suffix to the opcode.
+&gt; 
+&gt; These “*W” instructions ignore the upper 32 bits of their inputs and always produce 32-bit signed values, i.e. bits XLEN-1 through 31 are equal.
 
-> ADDIW is an RV64I instruction that adds the sign-extended 12-bit immediate to register rs1 and produces the proper sign-extension of a 32-bit result in rd.
+&gt; ADDIW is an RV64I instruction that adds the sign-extended 12-bit immediate to register rs1 and produces the proper sign-extension of a 32-bit result in rd.
 
 原文 Prefer idiomatic LUI/ADDI sequence for 32 bit constants 部分使用 `lui` 和 `addiw` 构建 0x1fffff 的说明比较晦涩难懂 (~~说实话我没看懂原文的 addiw 为什么需要减去 4096 :innocent:~~)
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 根据下面的参考文章，如果 `addiw` 的立即数的 MSB 被置为 1 时，只需在 `lui` 时多加一个 1 即可构建我们想要的 32-bit 数值。而原文中除了对 `lui` 加 1 外，还对 `addiw` 进行减去 4096 的操作:
 ```asm
 addiw a0, a0, (0xfff - 4096)  ; addiw a0, a0, -1
@@ -57,11 +57,11 @@ addiw a0, a0, -1    ; right
 addiw a0, a0, 4095  ; integer overflow
 ```
 
-- [解读计算机编码]({{< relref "../sysprog/binary-representation.md" >}})
-- [C 语言: 数值系统篇]({{< relref "../sysprog/c-numerics.md" >}})
+- [解读计算机编码]({{&lt; relref &#34;../sysprog/binary-representation.md&#34; &gt;}})
+- [C 语言: 数值系统篇]({{&lt; relref &#34;../sysprog/c-numerics.md&#34; &gt;}})
 - [RV32G 下 lui/auipc 和 addi 结合加载立即数时的补值问题](https://zhuanlan.zhihu.com/p/374235855) [zhihu]
 - [RISC-V build 32-bit constants with LUI and ADDI](https://stackoverflow.com/questions/50742420/risc-v-build-32-bit-constants-with-lui-and-addi) [Stack Overflow]
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 原文 Fold immediates into consuming instructions where possible 部分，相关的 RISC-V 的 imm 优化:
 
@@ -72,15 +72,15 @@ addiw a0, a0, 4095  ; integer overflow
 
 [Zicond extension](https://github.com/riscv/riscv-zicond/releases/tag/v1.0) 提供了我们在 RISC-V 上实作常数时间函数 (contant-time function) 的能力，用于避免分支预测，从而减少因分支预测失败带来的高昂代价。
 
-{{< raw >}}
+{{&lt; raw &gt;}}
 $$
 a0 = 
 \begin{cases}
-constant1 & \text{if } x \neq 0 \newline
-constant2 & \text{if } x = 0
+constant1 &amp; \text{if } x \neq 0 \newline
+constant2 &amp; \text{if } x = 0
 \end{cases}
 $$
-{{< /raw >}}
+{{&lt; /raw &gt;}}
 
 原文使用了 CZERO.NEZ，下面我们使用 CZERO.EQZ 来实作原文的例子:
 
@@ -116,7 +116,7 @@ xor a0, t1, t3
 
 ### Padding
 
-> Use canonical NOPs, NOP ( ADDI X0, X0, 0 ) and C.NOP ( C.ADDI X0, 0 ), to add padding within a function. Use the canonical illegal instruction ( either 2 or 4 bytes of zeros depending on whether the C extension is supported ) to add padding between functions.
+&gt; Use canonical NOPs, NOP ( ADDI X0, X0, 0 ) and C.NOP ( C.ADDI X0, 0 ), to add padding within a function. Use the canonical illegal instruction ( either 2 or 4 bytes of zeros depending on whether the C extension is supported ) to add padding between functions.
 
 - 因为在函数内部的执行频率高，使用合法的 NOPs 进行对齐 padding，防止在乱序执行时，流水线在遇见非法指令后就不再执行后续指令，造成效能损失
 - 如果控制流被传递到两个函数之间，那么加大可能是程序执行出错了，使用非法的指令进行对齐 padding 可以帮助我们更好更快地 debug
@@ -136,7 +136,7 @@ slri x7, x5, 52
 ```
 
 - RV64I 5.2 Integer Computational Instructions
-> LUI (load upper immediate) uses the same opcode as RV32I. LUI places the 20-bit U-immediate into bits 31–12 of register rd and places zero in the lowest 12 bits. The 32-bit result is sign-extended to 64 bits.
+&gt; LUI (load upper immediate) uses the same opcode as RV32I. LUI places the 20-bit U-immediate into bits 31–12 of register rd and places zero in the lowest 12 bits. The 32-bit result is sign-extended to 64 bits.
 
 ## Optimizing Scalar Floating Point
 

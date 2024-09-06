@@ -1,9 +1,9 @@
 # Impl Rust: TCP/IP
 
 
-> In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — https://tools.ietf.org/html/rfc793 — which describes the original protocol, with the goal of being able to set up and tear down a connection with a "real" TCP stack at the other end (netcat in particular). We're writing it using a user-space networking interface (see https://www.kernel.org/doc/Documentation/networking/tuntap.txt and the Rust bindings at https://docs.rs/tun-tap/).
+&gt; In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — https://tools.ietf.org/html/rfc793 — which describes the original protocol, with the goal of being able to set up and tear down a connection with a &#34;real&#34; TCP stack at the other end (netcat in particular). We&#39;re writing it using a user-space networking interface (see https://www.kernel.org/doc/Documentation/networking/tuntap.txt and the Rust bindings at https://docs.rs/tun-tap/).
 
-<!--more-->
+&lt;!--more--&gt;
 
 整理自 John Gjengset 的影片:
 
@@ -19,18 +19,18 @@
 - [Universal TUN/TAP device driver](https://www.kernel.org/doc/Documentation/networking/tuntap.txt) [Linux kernel documentation]
 
 Raw socket: 
-- Internet --> NIC --> kernel --> user space
-- Internet <-- NIC <-- kernel <-- user space
-> Host interact with other hosts in Internet.
+- Internet --&gt; NIC --&gt; kernel --&gt; user space
+- Internet &lt;-- NIC &lt;-- kernel &lt;-- user space
+&gt; Host interact with other hosts in Internet.
 
 TUN/TAP device: 
-- kernel --> | TUN/TAP | --> user space
-- kernel <-- | TUN/TAP | <-- user space
-> Kernel interact with programs in user space in the same host.
+- kernel --&gt; | TUN/TAP | --&gt; user space
+- kernel &lt;-- | TUN/TAP | &lt;-- user space
+&gt; Kernel interact with programs in user space in the same host.
 
-{{< image src="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png" >}}
+{{&lt; image src=&#34;https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png&#34; &gt;}}
 
-> 和其他物理网卡一样，用户进程创建的 TUN/TAP 设备仍然是被 kernel 所拥有的 (kernel 可以使用设备进行发送/接收)，只不过用户进程也可以像操作 **管道 (pipe)** 那样，操作所创建的 TUN/TAP 设备 (可以使用该设备进行发送/接收)，从而与 kernel 的物理网卡进行通信。
+&gt; 和其他物理网卡一样，用户进程创建的 TUN/TAP 设备仍然是被 kernel 所拥有的 (kernel 可以使用设备进行发送/接收)，只不过用户进程也可以像操作 **管道 (pipe)** 那样，操作所创建的 TUN/TAP 设备 (可以使用该设备进行发送/接收)，从而与 kernel 的物理网卡进行通信。
 
 Universal TUN/TAP device driver [Linux kernel documentation]
 
@@ -111,9 +111,9 @@ $ nc 192.168.0.2 80
 
 - [nc](https://linux.die.net/man/1/nc) [Linux man page]
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 ping, nc 这些命令使用的都是 kernel 的协议栈来实现，所以在创建虚拟设备 tun0 之后，使用以上 ping, nc 命令表示 kernel 发送相应的 ICMP, TCP 封包给创建 tun0 的进程 (process)。
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 可以使用 tshark (Terminal Wireshark) 工具来抓包，配合 ping,nc 命令可以分析 tun0 的封包传送。
 
@@ -129,32 +129,32 @@ $ sudo tshark -i tun0
 
 [RFC 793] 3.2 Terminology
 
-> The state diagram in figure 6 illustrates only state changes, together
+&gt; The state diagram in figure 6 illustrates only state changes, together
 with the causing events and resulting actions, but addresses neither
 error conditions nor actions which are not connected with state
 changes. 
 
 这里面提到的 Figure 6. TCP Connection State Diagram 在其中我们可以看到 TCP 的状态转换，非常有利于直观理解 TCP 建立连接时的三次握手过程。
 
-{{< admonition warning >}}
+{{&lt; admonition warning &gt;}}
 NOTE BENE:  this diagram is only a summary and must not be taken as the total specification.
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 [Time to live](https://en.wikipedia.org/wiki/Time_to_live#:~:text=In%20the%20IPv4%20header%2C%20TTL,recommended%20initial%20value%20is%2064.) [Wikipedia]
-> In the IPv4 header, TTL is the 9th octet of 20. In the IPv6 header, it is the 8th octet of 40. The maximum TTL value is 255, the maximum value of a single octet. A recommended initial value is 64.
+&gt; In the IPv4 header, TTL is the 9th octet of 20. In the IPv6 header, it is the 8th octet of 40. The maximum TTL value is 255, the maximum value of a single octet. A recommended initial value is 64.
 
 SND.WL1 and SND.WL2
-> Note that SND.WND is an offset from SND.UNA, that SND.WL1
-> records the sequence number of the last segment used to update
-> SND.WND, and that SND.WL2 records the acknowledgment number of
-> the last segment used to update SND.WND.  The check here
-> prevents using old segments to update the window.
+&gt; Note that SND.WND is an offset from SND.UNA, that SND.WL1
+&gt; records the sequence number of the last segment used to update
+&gt; SND.WND, and that SND.WL2 records the acknowledgment number of
+&gt; the last segment used to update SND.WND.  The check here
+&gt; prevents using old segments to update the window.
 
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
 
-> 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
+&gt; 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
 
 ### Crate [std](https://doc.rust-lang.org/std/index.html) 
 
@@ -198,7 +198,7 @@ SND.WL1 and SND.WL2
 - https://www.saminiir.com/lets-code-tcp-ip-stack-4-tcp-data-flow-socket-api/
 - https://www.saminiir.com/lets-code-tcp-ip-stack-5-tcp-retransmission/
 
-{{< admonition >}}
+{{&lt; admonition &gt;}}
 - RFC 793 描述了原始的 TCP 协议的内容 (重点阅读 3.FUNCTIONAL SPECIFICATION )
 - RFC 1122 则是对原始的 TCP 功能的一些扩展进行说明
 - RFC 7414 的 Section 2 则对 TCP 的核心功能进行了简要描述
@@ -206,7 +206,7 @@ SND.WL1 and SND.WL2
 - RFC 2525 说明了在实现 TCP 过程中可能会出现的错误，并指出可能导致错误的潜在问题
 - RFC 791 描述了 IP 协议 的内容
 - 最后 3 篇博客介绍了 TCP 协议相关术语和概念，可以搭配 RFC 793 阅读
-{{< /admonition >}}
+{{&lt; /admonition &gt;}}
 
 
 
