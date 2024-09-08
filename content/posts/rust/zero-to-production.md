@@ -131,7 +131,6 @@ Web Framework:
 
 > This is often referred to as *black box testing*: we verify the behaviour of a system by examining its output given a set of inputs without having access to the details of its internal implementation.
 
-
 #### Tests
 
 - next to your code in an embedded test module: 通过条件编译的方式实现
@@ -156,3 +155,9 @@ Web Framework:
 > The Server must be awaited or polled in order to start running. It will resolve when the server has fully shut down.
 
 即 `Server` 的作用类似一个句柄，所以在调用 [run](https://docs.rs/actix-web/4.9.0/actix_web/struct.HttpServer.html#method.run) 方法后可以通过这个句柄来选择何种 I/O 模型 (awaited or polled)。
+
+### HTML Forms
+
+> You can immediately spot a limitation of “roll-your-own” parametrised tests: as soon as one test case fails, the execution stops and we do not know the outcome for the following tests cases.
+
+手工实现的 roll-your-own 风格的 Parametrised Tests，受限于实作的 `for` 语法，只能逐个测试用例执行，一旦某个测试样例失败则会受制于 `assert` 宏的限制，不会再往下执行其他的测试用例。
