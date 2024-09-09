@@ -116,6 +116,34 @@ Web Framework:
 - Crate [actix_web](https://docs.rs/actix-web/4.0.1/actix_web/index.html)
 - GitHub: [actix/examples](https://github.com/actix/examples): Community showcase and examples of Actix Web ecosystem usage.
 
+### Infrastructure
+
+依据基础的不同，可能需要补充的相关知识:
+
+- [Rust Async 异步编程 简易教程](https://www.bilibili.com/video/BV16r4y187P4)
+- [Serde: Rust 的序列化解决方案](https://www.bilibili.com/video/BV1Nu411z7w8)
+
+异步或者并发是一种可以充分利用 CPU 的程序结构，Rust 通过异步运行时来实现对 CPU 资源的充分利用，让程序员无需关心底层采用的技术，例如采用单线程或多线程方案，这些由异步运行时来决定，即程序员无需再关心线程以及线程之间的顺序，也就是说异步在线程之上又构建了一层抽象。
+
+```goat
+ poll                         
+  +                          
+  | after one moment                    
+  +                          
+ wake                         
+```
+
+宏 `#[derive(Serialize)]` 可以生成对应的 `serialize` 方法，但该方法需要一个 `Serializer` 参数 (序列号 / 反序列化构造器)，而该 `Serializer` 并不会被该宏生成，需要我们提供 (自己写或使用第三方库)。`deserialize` 也是类似的。
+
+```rs
+pub trait Serialize {
+    // Required method
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+       where S: Serializer;
+}
+```
+
+
 ### A Basic Health Check
 
 - [curl 的用法指南](https://www.ruanyifeng.com/blog/2019/09/curl-reference.html)

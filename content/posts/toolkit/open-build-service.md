@@ -42,5 +42,20 @@ repost:
 
 <!--more-->
 
-- reddit: [How Learn to use openSUSE Build Service (OBS)](https://www.reddit.com/r/openSUSE/comments/yk1vwe/how_learn_to_use_opensuse_build_service_obs/)
+## RPM Packaging Tutorial
+
 - [RPM Packaging Tutorial](https://www.zq1.de/~bernhard/mirror/duncan.codes/tutorials/rpm-packaging/)
+
+> Features like an automatical finding of the required packages and retrieving them are implemented in higher-level tools like `zypper`.
+
+```goat
++--------+                     
+| zyyper |                     
++--------+                     
+|  rpm   |                     
++--------+                     
+```
+
+## References
+
+- reddit: [How Learn to use openSUSE Build Service (OBS)](https://www.reddit.com/r/openSUSE/comments/yk1vwe/how_learn_to_use_opensuse_build_service_obs/)
