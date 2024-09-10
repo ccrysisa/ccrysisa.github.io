@@ -122,6 +122,8 @@ Web Framework:
 
 - [Rust Async 异步编程 简易教程](https://www.bilibili.com/video/BV16r4y187P4)
 - [Serde: Rust 的序列化解决方案](https://www.bilibili.com/video/BV1Nu411z7w8)
+- Jon Gjengset: [Decrusting the serde crate](https://www.youtube.com/watch?v=BI_bHCGRgMY)
+-  Josh Mcguigan: [Understanding Serde](https://www.joshmcguigan.com/blog/understanding-serde/)
 
 异步或者并发是一种可以充分利用 CPU 的程序结构，Rust 通过异步运行时来实现对 CPU 资源的充分利用，让程序员无需关心底层采用的技术，例如采用单线程或多线程方案，这些由异步运行时来决定，即程序员无需再关心线程以及线程之间的顺序，也就是说异步在线程之上又构建了一层抽象。
 
@@ -143,6 +145,102 @@ pub trait Serialize {
 }
 ```
 
+这个 `Serializer` 是一个 trait，其具体的类型不由 serde 提供，而是由支持特定格式序列化 / 反序列化的第三方库来实现，例如 serde_json, serde_yaml 等。
+
+Example:
+
+```toml { title="Cargo.toml" }
+...
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9"
+```
+
+```json { title="data.json" }
+{
+    "name": "gshine",
+    "age": 24,
+    "phone": [
+        "123456",
+        "98765"
+    ]
+}
+```
+
+```rs { title="main.rs" }
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize, Debug)]
+struct Pay {
+    amount: i32,
+    tax_percent: f32,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+struct Person {
+    name: String,
+    age: u8,
+    phone: String,
+    pays: Vec<Pay>,
+}
+
+fn main() {
+    let ps = vec![Person {
+        name: "gshine".to_string(),
+        age: 24,
+        phone: "123456".to_string(),
+        pays: vec![
+            Pay {
+                amount: 78,
+                tax_percent: 0.3,
+            },
+            Pay {
+                amount: 128,
+                tax_percent: 0.7,
+            },
+        ],
+    }];
+
+    // Serialize
+    let json_str = serde_json::to_string_pretty(&ps).unwrap();
+    let yaml_str = serde_yaml::to_string(&ps).unwrap();
+    println!("json:\n{}", json_str);
+    println!("yaml:\n{}", yaml_str);
+
+    // Deserialize
+    let ps_json: Vec<Person> = serde_json::from_str(&json_str).unwrap();
+    let ps_yaml: Vec<Person> = serde_yaml::from_str(&yaml_str).unwrap();
+    println!("json: {:#?}", ps_json);
+    println!("yaml: {:#?}", ps_yaml);
+
+    // Modify
+    let json_data = std::fs::read_to_string("./data.json").unwrap();
+    let mut data: serde_json::Value = serde_json::from_str(&json_data).unwrap();
+    println!("before: {}", data.to_string());
+
+    // key-value
+    data["car"] = serde_json::Value::String("fd".to_string());
+    println!("after: {}", data.to_string());
+    // map
+    let mut map_value = serde_json::Map::new();
+    map_value.insert(
+        "color".to_string(),
+        serde_json::Value::String("blue".to_string()),
+    );
+    // array
+    map_value.insert(
+        "year".to_string(),
+        serde_json::Value::Array(vec![
+            serde_json::Value::String("1945".to_string()),
+            serde_json::Value::String("1950".to_string()),
+        ]),
+    );
+    data["car"] = serde_json::Value::Object(map_value);
+
+    println!("after: {}", data.to_string());
+}
+```
 
 ### A Basic Health Check
 
