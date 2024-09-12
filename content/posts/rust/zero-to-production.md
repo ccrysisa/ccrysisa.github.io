@@ -287,3 +287,15 @@ fn main() {
 > You can immediately spot a limitation of “roll-your-own” parametrised tests: as soon as one test case fails, the execution stops and we do not know the outcome for the following tests cases.
 
 手工实现的 roll-your-own 风格的 Parametrised Tests，受限于实作的 `for` 语法，只能逐个测试用例执行，一旦某个测试样例失败则会受制于 `assert` 宏的限制，不会再往下执行其他的测试用例。
+
+### Databases
+
+{{< admonition >}}
+Threads are for working in parallel, async is for waiting in parallel.
+{{< /admonition >}}
+
+- PostgreSQL: Documentation [5.9. Schemas](https://www.postgresql.org/docs/9.5/ddl-schemas.html)
+
+> A PostgreSQL database cluster contains one or more named databases. Roles and a few other object types are shared across the entire cluster. A client connection to the server can only access data in a single database, the one specified in the connection request.
+> 
+> A database contains one or more named schemas, which in turn contain tables. Schemas also contain other kinds of named objects, including data types, functions, and operators. The same object name can be used in different schemas without conflict; for example, both `schema1` and `myschema` can contain tables named `mytable`. Unlike databases, schemas are not rigidly separated: a user can access objects in any of the schemas in the database they are connected to, if they have privileges to do so.

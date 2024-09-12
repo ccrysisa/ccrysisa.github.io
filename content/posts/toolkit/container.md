@@ -77,6 +77,10 @@ Docker Compose 也是通过手动安装:
 }
 ```
 
+配置 `docker` 命令无需使用 `sudo` 提升权级:
+
+- [Linux post-installation steps for Docker Engine](https://docs.docker.com/engine/install/linux-postinstall/)
+
 ## Usage
 
 - [Docker and Kubernetes Tutorial for Beginners](https://www.youtube.com/playlist?list=PLy7NrYWoggjwPggqtFsI_zMAwvG0SqYCb)
