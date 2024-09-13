@@ -299,3 +299,17 @@ Threads are for working in parallel, async is for waiting in parallel.
 > A PostgreSQL database cluster contains one or more named databases. Roles and a few other object types are shared across the entire cluster. A client connection to the server can only access data in a single database, the one specified in the connection request.
 > 
 > A database contains one or more named schemas, which in turn contain tables. Schemas also contain other kinds of named objects, including data types, functions, and operators. The same object name can be used in different schemas without conflict; for example, both `schema1` and `myschema` can contain tables named `mytable`. Unlike databases, schemas are not rigidly separated: a user can access objects in any of the schemas in the database they are connected to, if they have privileges to do so.
+
+书中这一章节所指的 Database migration 实为 Schema migration，根据 [Wikipedia](https://en.wikipedia.org/wiki/Schema_migration) 的定义:
+
+> In software engineering, a schema migration (also database migration, database change management) refers to the management of version-controlled, incremental and sometimes reversible changes to relational database schemas. A schema migration is performed on a database whenever it is necessary to update or revert that database's schema to some newer or older version.
+
+即类似于 Git 的版本控制但是用于数据库的 Schema 的状态转换，即只有涉及 schema 的改动才需要使用该版本控制，而针对数据条目的改动并不需要。同时它也起到一个日志的功能，重新启动数据库时可以根据 migration 记录来将数据库的 schma 内容迁移到指定状态。
+
+crate.io: [sqlx](https://crates.io/crates/sqlx) - Cargo Feature Flags
+
+> Actix-web is fully compatible with Tokio and so a separate runtime feature is no longer needed.
+
+这一节有些地方需要使用 `ConfigBuilder` 进行重写，这时可以参考作者的 [zero2prod](https://github.com/LukeMathWalker/zero-to-production) 库进行观摩学习。
+
+- Struct config::builder::[ConfigBuilder](https://docs.rs/config/latest/config/builder/struct.ConfigBuilder.html)
