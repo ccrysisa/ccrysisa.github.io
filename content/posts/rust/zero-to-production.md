@@ -120,10 +120,18 @@ Web Framework:
 
 依据基础的不同，可能需要补充的相关知识:
 
+Async:
 - [Rust Async 异步编程 简易教程](https://www.bilibili.com/video/BV16r4y187P4)
+- [Rust Async 异步编程](https://www.bilibili.com/video/BV1Ki4y1C7gj/)
+- Jon Gjengset: [Crust of Rust: async/await](https://www.youtube.com/watch?v=ThjvMReOXYM&list=PLqbS7AVVErFiWDOAVrPt7aYmnuuOLYvOa&index=11&pp=iAQB)
+
+Serde:
 - [Serde: Rust 的序列化解决方案](https://www.bilibili.com/video/BV1Nu411z7w8)
 - Jon Gjengset: [Decrusting the serde crate](https://www.youtube.com/watch?v=BI_bHCGRgMY)
 -  Josh Mcguigan: [Understanding Serde](https://www.joshmcguigan.com/blog/understanding-serde/)
+
+sqlx:
+- [Rust 数据库异步解决方案: sqlx + sqlb](https://www.bilibili.com/video/BV1sL411A748/)
 
 异步或者并发是一种可以充分利用 CPU 的程序结构，Rust 通过异步运行时来实现对 CPU 资源的充分利用，让程序员无需关心底层采用的技术，例如采用单线程或多线程方案，这些由异步运行时来决定，即程序员无需再关心线程以及线程之间的顺序，也就是说异步在线程之上又构建了一层抽象。
 
