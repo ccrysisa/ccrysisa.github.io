@@ -2,9 +2,17 @@
   <channel>
     <title>Rust - 分类 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/categories/rust/</link>
-    <description>Rust - 分类 | KZnight&#39;s Blog</description>
+    <description>Rust - 分类 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Mon, 08 Jul 2024 11:21:32 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/rust/" rel="self" type="application/rss+xml" /><item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Thu, 22 Aug 2024 12:47:26 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/categories/rust/" rel="self" type="application/rss+xml" /><item>
+  <title>Container</title>
+  <link>https://ccrysisa.github.io/posts/container/</link>
+  <pubDate>Thu, 22 Aug 2024 12:47:26 &#43;0800</pubDate>
+  <author>ccrysisa</author>
+  <guid>https://ccrysisa.github.io/posts/container/</guid>
+  <description><![CDATA[]]></description>
+</item>
+<item>
   <title>Crust of Rust: The Drop Check</title>
   <link>https://ccrysisa.github.io/posts/drop-check/</link>
   <pubDate>Mon, 08 Jul 2024 11:21:32 &#43;0800</pubDate>
@@ -99,16 +107,6 @@
   <guid>https://ccrysisa.github.io/posts/smart-pointers-and-interior-mutability/</guid>
   <description><![CDATA[<blockquote>
 <p>In this fourth Crust of Rust video, we cover smart pointers and interior mutability, by re-implementing the Cell, RefCell, and Rc types from the standard library. As part of that, we cover when those types are useful, how they work, and what the equivalent thread-safe versions of these types are. In the process, we go over some of the finer details of Rust's ownership model, and the UnsafeCell type. We also dive briefly into the Drop Check rabbit hole (<a href="https://doc.rust-lang.org/nightly/nomicon/dropck.html"target="_blank" rel="external nofollow noopener noreferrer">https://doc.rust-lang.org/nightly/nomicon/dropck.html</a>) before coming back up for air.</p>
-</blockquote>]]></description>
-</item>
-<item>
-  <title>Impl Rust: TCP/IP</title>
-  <link>https://ccrysisa.github.io/posts/impl-tcp-in-rust/</link>
-  <pubDate>Sat, 17 Feb 2024 19:01:53 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/impl-tcp-in-rust/</guid>
-  <description><![CDATA[<blockquote>
-<p>In this stream, we started implementing the ubiquitous TCP protocol that underlies much of the traffic on the internet! In particular, we followed RFC 793 — <a href="https://tools.ietf.org/html/rfc793"target="_blank" rel="external nofollow noopener noreferrer">https://tools.ietf.org/html/rfc793</a> — which describes the original protocol, with the goal of being able to set up and tear down a connection with a &ldquo;real&rdquo; TCP stack at the other end (netcat in particular). We&rsquo;re writing it using a user-space networking interface (see <a href="https://www.kernel.org/doc/Documentation/networking/tuntap.txt"target="_blank" rel="external nofollow noopener noreferrer">https://www.kernel.org/doc/Documentation/networking/tuntap.txt</a> and the Rust bindings at <a href="https://docs.rs/tun-tap/%29"target="_blank" rel="external nofollow noopener noreferrer">https://docs.rs/tun-tap/)</a>.</p>
 </blockquote>]]></description>
 </item>
 </channel>

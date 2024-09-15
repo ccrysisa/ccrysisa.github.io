@@ -1,29 +1,29 @@
 # 你所不知道的 C 语言: 递归调用篇
 
 
-&gt; 在许多应用程序中，递归 (recursion) 可以简单又优雅地解决貌似繁琐的问题，也就是不断地拆解原有问题为相似的子问题，直到无法拆解为止，并且定义最简化状况的处理机制，一如数学思维。递归对 C 语言程序开发者来说，绝对不会陌生，但能掌握者却少，很多人甚至难以讲出汉诺塔之外的使用案例。
-&gt; 
-&gt; 究竟递归是如何优雅地解决真实世界的问题，又如何兼顾执行效率呢》我们从运作原理开始探讨，搭配若干 C 程序解说，并且我们将以简化过的 UNIX 工具为例，分析透过递归来大幅缩减程式码。
-&gt; 
-&gt; 或许跟你想象中不同，Linux 核心的原始程式码里头也用到递归函数呼叫，特别在较复杂的实作，例如文件系统，善用递归可大幅缩减程式码，但这也导致追踪程序运作的难度大增。
+> 在许多应用程序中，递归 (recursion) 可以简单又优雅地解决貌似繁琐的问题，也就是不断地拆解原有问题为相似的子问题，直到无法拆解为止，并且定义最简化状况的处理机制，一如数学思维。递归对 C 语言程序开发者来说，绝对不会陌生，但能掌握者却少，很多人甚至难以讲出汉诺塔之外的使用案例。
+> 
+> 究竟递归是如何优雅地解决真实世界的问题，又如何兼顾执行效率呢》我们从运作原理开始探讨，搭配若干 C 程序解说，并且我们将以简化过的 UNIX 工具为例，分析透过递归来大幅缩减程式码。
+> 
+> 或许跟你想象中不同，Linux 核心的原始程式码里头也用到递归函数呼叫，特别在较复杂的实作，例如文件系统，善用递归可大幅缩减程式码，但这也导致追踪程序运作的难度大增。
 
-&lt;!--more--&gt;
+<!--more-->
 
-- {{&lt; link href=&#34;https://hackmd.io/@sysprog/c-recursion&#34; content=&#34;原文地址&#34; external-icon=true &gt;}}
+- {{< link href="https://hackmd.io/@sysprog/c-recursion" content="原文地址" external-icon=true >}}
 
 ## Recursion
 
-&gt; To Iterate is Human, to Recurse, Divine.
+> To Iterate is Human, to Recurse, Divine.
 - [x] http://coder.aqualuna.me/2011/07/to-iterate-is-human-to-recurse-divine.html
 
-{{&lt; admonition &gt;}}
+{{< admonition >}}
 笔者的递归 (Recursion) 是通过 UC Berkeley 的 
 
 - [CS61A: Structure and Interpretation of Computer Programs](https://cs61a.org/)
 - [CS70: Discrete Mathematics and Probability Theory](https://www.eecs70.org/) 
 
 学习的，这个搭配式的学习模式使得我在实作——递归 (cs61a) 和理论——归纳法 (cs70) 上相互配合理解，从而对递归在实作和理论上都有了充分认知。
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ## 递归并没有想象的那么慢
 
@@ -57,15 +57,15 @@ unsigned gcd_itr(unsigned a, unsigned b) {
 	jne	.LBB1_2
 ```
 
-{{&lt; admonition tip &gt;}}
+{{< admonition tip >}}
 - [x] [遞迴 (Recursion)](https://notfalse.net/9/recursion)
 
 Tail recursion 可以被编译器进行k空间利用最优化，从而达到和循环一样节省空间，但这需要编译器支持，有些编译器并不支持 tail recursion 优化 :rofl:
 
 虽然如此，将一般的递归改写为 tail recursion 还是可以获得极大的效能提升。
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
-{{&lt; link href=&#34;https://github.com/ccrysisa/LKI/blob/main/c-recursion&#34; content=Source external-icon=true &gt;}}
+{{< link href="https://github.com/ccrysisa/LKI/blob/main/c-recursion" content=Source external-icon=true >}}
 
 ## 案例分析: 等效电阻
 
@@ -74,28 +74,28 @@ Tail recursion 可以被编译器进行k空间利用最优化，从而达到和�
               ----------###-------------  A          -------- A
              |                  |                    |
              #                  #                    #
-R(r, n - 1)  #                r #             ==&gt;    #  R(r, n)
+R(r, n - 1)  #                r #             ==>    #  R(r, n)
              #                  #                    #
              |                  |                    |
              ---------------------------  B          -------- B
 ```
 
-{{&lt; raw &gt;}}
+{{< raw >}}
 $$
 R(r,n)=
 \begin{cases}
-r &amp; \text{if n = 1}\\
-1 / (\frac1r &#43; \frac1{R(r, n - 1) &#43; r}) &amp; \text{if n &gt; 1}
+r & \text{if n = 1}\\
+1 / (\frac1r + \frac1{R(r, n - 1) + r}) & \text{if n > 1}
 \end{cases}
 $$
-{{&lt; /raw &gt;}}
+{{< /raw >}}
 
 ```py
 def circuit(n, r):
     if n == 1:
         return r
     else:
-        return 1 / (1 / r &#43; 1 / (circuit(n - 1, r) &#43; r))
+        return 1 / (1 / r + 1 / (circuit(n - 1, r) + r))
 ```
 
 ## 案例分析: 数列输出
@@ -139,10 +139,10 @@ User limits - limit the use of system-wide resources.
 void matrix_multiply(int a[2][2], int b[2][2], int t[2][2])
 {
     memset(t, 0, sizeof(int) * 2 * 2);
-    for (int i = 0; i &lt; 2; i&#43;&#43;)
-        for (int j = 0; j &lt; 2; j&#43;&#43;)
-            for (int k = 0; k &lt; 2; k&#43;&#43;)
-                t[i][j] &#43;= a[i][k] * b[k][j];
+    for (int i = 0; i < 2; i++)
+        for (int j = 0; j < 2; j++)
+            for (int k = 0; k < 2; k++)
+                t[i][j] += a[i][k] * b[k][j];
 }
 
 void matrix_pow(int a[2][2], int n, int t[2][2])
@@ -156,13 +156,13 @@ void matrix_pow(int a[2][2], int n, int t[2][2])
     }
     if (n % 2 == 0) {
         int t1[2][2];
-        matrix_pow(a, n &gt;&gt; 1, t1);
+        matrix_pow(a, n >> 1, t1);
         matrix_multiply(t1, t1, t);
         return;
     } else {
         int t1[2][2], t2[2][2];
-        matrix_pow(a, n &gt;&gt; 1, t1);
-        matrix_pow(a, (n &gt;&gt; 1) &#43; 1, t2);
+        matrix_pow(a, n >> 1, t1);
+        matrix_pow(a, (n >> 1) + 1, t2);
         matrix_multiply(t1, t2, t);
         return;
     }
@@ -170,7 +170,7 @@ void matrix_pow(int a[2][2], int n, int t[2][2])
 
 int fib(int n)
 {
-    if (n &lt;= 0)
+    if (n <= 0)
         return 0;
     int A1[2][2] = {{1, 1}, {1, 0}};
 
@@ -181,65 +181,65 @@ int fib(int n)
 ```
 
 Fast doubling 公式:
-{{&lt; raw &gt;}}
+{{< raw >}}
 $$
 \begin{split}
-F(2k) &amp;= F(k)[2F(k&#43;1) - F(k)] \\
-F(2k&#43;1) &amp;= F(k&#43;1)^2&#43;F(k)^2
+F(2k) &= F(k)[2F(k+1) - F(k)] \\
+F(2k+1) &= F(k+1)^2+F(k)^2
 \end{split}
 $$
-{{&lt; /raw &gt;}}
+{{< /raw >}}
 
 具体推导:
 
-{{&lt; raw &gt;}}
+{{< raw >}}
 $$
 \begin{split}
 \begin{bmatrix}
- F(2n&#43;1) \\
+ F(2n+1) \\
  F(2n)  
-\end{bmatrix} &amp;=
+\end{bmatrix} &=
 \begin{bmatrix}
- 1 &amp; 1 \\
- 1 &amp; 0  
+ 1 & 1 \\
+ 1 & 0  
 \end{bmatrix}^{2n}
 \begin{bmatrix}
  F(1) \\
  F(0) 
-\end{bmatrix}\\ \\ &amp;=
+\end{bmatrix}\\ \\ &=
 \begin{bmatrix}
- 1 &amp; 1 \\
- 1 &amp; 0  
+ 1 & 1 \\
+ 1 & 0  
 \end{bmatrix}^n
 \begin{bmatrix}
- 1 &amp; 1 \\
- 1 &amp; 0  
+ 1 & 1 \\
+ 1 & 0  
 \end{bmatrix}^n
 \begin{bmatrix}
  F(1) \\
  F(0) 
-\end{bmatrix}\\ \\ &amp;=
+\end{bmatrix}\\ \\ &=
 \begin{bmatrix}
-F(n&#43;1) &amp; F(n) \\
-F(n) &amp; F(n-1)  
+F(n+1) & F(n) \\
+F(n) & F(n-1)  
 \end{bmatrix}
 \begin{bmatrix}
-F(n&#43;1) &amp; F(n) \\
-F(n) &amp; F(n-1)  
+F(n+1) & F(n) \\
+F(n) & F(n-1)  
 \end{bmatrix}
 \begin{bmatrix}
  1 \\
  0 
-\end{bmatrix}\\ \\ &amp;=
+\end{bmatrix}\\ \\ &=
 \begin{bmatrix}
- F(n&#43;1)^2 &#43; F(n)^2\\
- F(n)F(n&#43;1) &#43; F(n-1)F(n) 
+ F(n+1)^2 + F(n)^2\\
+ F(n)F(n+1) + F(n-1)F(n) 
 \end{bmatrix}
 \end{split}
 $$
-{{&lt; /raw &gt;}}
+{{< /raw >}}
 
-然后根据 $F(k &#43; 1) = F(k) &#43; F(k - 1)$ 可得 $F(2k)$ 情况的公式。
+然后根据 $F(k + 1) = F(k) + F(k - 1)$ 可得 $F(2k)$ 情况的公式。
 
 原文中非递增情形比较晦涩，但其本质是通过累加来逼近目标值:
 
@@ -247,8 +247,8 @@ $$
 else {
     t0 = t3;       // F(n-2);
     t3 = t4;       // F(n-1);
-    t4 = t0 &#43; t4;  // F(n)
-    i&#43;&#43;;
+    t4 = t0 + t4;  // F(n)
+    i++;
 }
 ```
 
@@ -256,7 +256,7 @@ else {
 
 原文对于时间复杂度的分析貌似有些问题，下面给出本人的见解。第一种方法的时间复杂度为: 
 $$
-T(n) = 2T(n-1) &#43; T(n-2)
+T(n) = 2T(n-1) + T(n-2)
 $$
 所以第一种方法的时间复杂度为 $O(2^n)$。
 
@@ -266,10 +266,10 @@ $$
 // 返回字符串 head 的最大下标 (下标相对于 idx 偏移)，并且将字符串 head 相对于
 // 整条字符串的中间对称点进行反转
 int rev_core(char *head, int idx) {
-    if (head[idx] != &#39;\0&#39;) {
-        int end = rev_core(head, idx &#43; 1);
-        if (idx &gt; end / 2)
-            swap(head &#43; idx, head &#43; end - idx);
+    if (head[idx] != '\0') {
+        int end = rev_core(head, idx + 1);
+        if (idx > end / 2)
+            swap(head + idx, head + end - idx);
         return end;
     }
     return idx - 1;
@@ -339,7 +339,7 @@ RETURN VALUE
 ## 递归背后的理论
 
 - [x] YouTube: [Lambda Calculus - Computerphile](https://youtu.be/eis11j_iGMs)
-- YouTube: [Essentials: Functional Programming&#39;s Y Combinator - Computerphile](https://youtu.be/9T8A89jgeTI)
+- YouTube: [Essentials: Functional Programming's Y Combinator - Computerphile](https://youtu.be/9T8A89jgeTI)
 
 第一个影片相对还蛮好懂，第二个影片对于非 PL 背景的人来说完全是看不懂，所以暂时先放弃了
 
