@@ -2267,6 +2267,10 @@ ss &gt;&gt; a &gt;&gt; ch &gt;&gt; b &gt;&gt; ch &gt;&gt; c;  // a = 23, b = 4, 
 
 &gt; The algorithms library defines functions for a variety of purposes (e.g. searching, sorting, counting, manipulating) that operate on ranges of elements. Note that a range is defined as **[`first`, `last`)** where `last` refers to the element past the last element to inspect or modify.
 
+### Nostd
+
+Write our own data structures!
+
 #### Sorting
 
 - cppreference: [std::sort](https://en.cppreference.com/w/cpp/algorithm/sort)
@@ -2765,43 +2769,43 @@ class String
 public:
     ...
     String(String&amp;&amp; other) noexcept
-	{
-		std::cout &lt;&lt; &#34;Moved!&#34; &lt;&lt; std::endl;
-		m_Size = other.m_Size;
-		m_Data = other.m_Data;
-		other.m_Size = 0;
-		other.m_Data = nullptr;
-	}
+    {
+        std::cout &lt;&lt; &#34;Moved!&#34; &lt;&lt; std::endl;
+        m_Size = other.m_Size;
+        m_Data = other.m_Data;
+        other.m_Size = 0;
+        other.m_Data = nullptr;
+    }
     String&amp; operator=(String&amp;&amp; other) noexcept
-	{
-		std::cout &lt;&lt; &#34;Moved!&#34; &lt;&lt; std::endl;
-		if (this != &amp;other)
-		{
-			delete[] m_Data;
-			m_Size = other.m_Size;
-			m_Data = other.m_Data;
+    {
+        std::cout &lt;&lt; &#34;Moved!&#34; &lt;&lt; std::endl;
+        if (this != &amp;other)
+        {
+            delete[] m_Data;
+            m_Size = other.m_Size;
+            m_Data = other.m_Data;
 
-			other.m_Size = 0;
-			other.m_Data = nullptr;
-		}
-		return *this;
-	}
+            other.m_Size = 0;
+            other.m_Data = nullptr;
+        }
+        return *this;
+    }
     ...
 };
 
 int main()
 {
-	{
-		String s1 = &#34;hello&#34;;
-		String s2 = std::move(s1);  // Move Constructor
-		s2.Print();                 // &#34;hello&#34;
-	}
-	{
-		String s1 = &#34;hello&#34;;
-		String s2 = &#34;world&#34;;
-		s1 = std::move(s2);         // Move Assignment
-		s1.Print();                 // &#34;world&#34;
-	}
+    {
+        String s1 = &#34;hello&#34;;
+        String s2 = std::move(s1);  // Move Constructor
+        s2.Print();                 // &#34;hello&#34;
+    }
+    {
+        String s1 = &#34;hello&#34;;
+        String s2 = &#34;world&#34;;
+        s1 = std::move(s2);         // Move Assignment
+        s1.Print();                 // &#34;world&#34;
+    }
 }
 ```
 
@@ -3595,8 +3599,9 @@ GitHub: [Dear ImGui](https://github.com/ocornut/imgui/tree/master)
 &gt; Dear ImGui is a **bloat-free graphical user interface library for C&#43;&#43;**. It outputs optimized vertex buffers that you can render anytime in your 3D-pipeline-enabled application. It is fast, portable, renderer agnostic, and self-contained (no external dependencies).
 
 bilibili: 
-- [ImGui 入门到精通](https://space.bilibili.com/443124242/channel/collectiondetail?sid=824431)
+- 入门: [ImGui 入门到精通](https://space.bilibili.com/443124242/channel/collectiondetail?sid=824431)
 / [项目源代码](https://www.bilibili.com/read/cv19537138/)
+- 进阶: [可能是目前全網最強最好的 ImGui 教學](https://space.bilibili.com/443124242/channel/collectiondetail?sid=2917715) / [项目源代码](https://drive.google.com/file/d/1XRqDM3d_ByF5RafRG0wK1JoI6RSitAsw)
 
 #### 初始设置
 
@@ -3609,7 +3614,7 @@ bilibili:
 - C/C&#43;&#43; -&gt; Additional Include Directoris
     - `$(SolutionDir)\Dependencies\GLFW\include`
     - `$(SolutionDir)\Dependencies\GLEW\include`
-    - `$(ProjectDir)\imgui` 或者新建一个 Project 并将其作为静态库
+    - `$(ProjectDir)\imgui` (这种处理可以新建筛选器来保持项目组织) 或者新建一个 Project 并将其作为静态库
 - Linker -&gt; Additional Library Directories
     - `glfw3.lib`
     - `glew32s.lib`
@@ -3626,6 +3631,8 @@ bilibili:
 ```
 
 #### 创建窗口
+
+这是基础设施，直接复制一份即可。窗口逻辑在 `ImGui::ShowDemoWindow()` 处:
 
 ```c&#43;&#43;
 GLFWwindow* Windows;
@@ -3761,6 +3768,208 @@ ImGui::ColorEdit4(&#34;Color&#34;, (float*)&amp;color, ImGuiColorEditFlags_::ImG
 ```
 
 #### 高级定制
+
+##### 字体设置
+
+```c&#43;&#43;
+ImGuiIO&amp; io = ImGui::GetIO(); (void)io;
+io.Fonts-&gt;AddFontFromFileTTF(
+    &#34;C:\\Windows\\Fonts\\STZHONGS.TTF&#34;,     // 华文中宋
+    18,                                     // 字体大小
+    NULL,                                   // 英文字体
+    io.Fonts-&gt;GetGlyphRangesChineseFull()   // 作用范围
+);
+```
+
+##### 风格设置
+
+在启动 ImGui Demo 后，其窗口的 `tools` 栏位的 `Style Editor` 选项即为风格编辑器。主要改一下圆角之类的设定，进行拖动可以即时看到效果，后续可以根据效果对应的数值在源代码中进行设置:
+
+```c&#43;&#43;
+ImGuiStyle&amp; style = ImGui::GetStyle();
+style.WindowRounding = 6;
+style.FrameRounding = 6;
+style.GrabRounding = 6;
+style.ScrollbarSize = 10;
+style.ScrollbarRounding = 5;
+```
+
+在风格编辑器理也可切换到颜色 (Colors) 栏目对颜色进行调整并且即时看到效果，以进行相应的设置:
+
+```c&#43;&#43;
+ImVec4* colors = style.Colors;
+colors[ImGuiCol_FrameBg] = ImVec4(0.16f, 0.16f, 0.17f, 1.00f);
+colors[ImGuiCol_FrameBgHovered] = ImVec4(0.37f, 0.36f, 0.36f, 102.00f);
+colors[ImGuiCol_FrameBgActive] = ImVec4(0.10f, 0.10f, 0.10f, 171.00f);
+colors[ImGuiCol_TitleBgActive] = ImVec4(0.20f, 0.20f, 0.20f, 255.00f);
+colors[ImGuiCol_CheckMark] = ImVec4(0.61f, 0.61f, 0.61f, 1.00f);
+colors[ImGuiCol_SliderGrab] = ImVec4(0.64f, 0.64f, 0.64f, 1.00f);
+colors[ImGuiCol_SliderGrabActive] = ImVec4(0.31f, 0.31f, 0.31f, 1.00f);
+colors[ImGuiCol_Button] = ImVec4(0.22f, 0.22f, 0.22f, 0.40f);
+colors[ImGuiCol_ButtonHovered] = ImVec4(0.29f, 0.29f, 0.29f, 1.00f);
+colors[ImGuiCol_ButtonActive] = ImVec4(0.13f, 0.13f, 0.13f, 1.00f);
+colors[ImGuiCol_Header] = ImVec4(0.45f, 0.45f, 0.45f, 0.31f);
+colors[ImGuiCol_HeaderHovered] = ImVec4(0.55f, 0.55f, 0.55f, 0.80f);
+colors[ImGuiCol_HeaderActive] = ImVec4(0.09f, 0.09f, 0.09f, 1.00f);
+colors[ImGuiCol_ResizeGrip] = ImVec4(1.00f, 1.00f, 1.00f, 0.20f);
+colors[ImGuiCol_ResizeGripHovered] = ImVec4(0.46f, 0.46f, 0.46f, 0.67f);
+colors[ImGuiCol_ResizeGripActive] = ImVec4(0.17f, 0.17f, 0.17f, 0.95f);
+colors[ImGuiCol_SeparatorActive] = ImVec4(0.42f, 0.42f, 0.42f, 1.00f);
+colors[ImGuiCol_SeparatorHovered] = ImVec4(0.50f, 0.50f, 0.50f, 0.78f);
+colors[ImGuiCol_TabHovered] = ImVec4(0.45f, 0.45f, 0.45f, 0.80f);
+colors[ImGuiCol_TabActive] = ImVec4(0.28f, 0.28f, 0.28f, 1.00f);
+colors[ImGuiCol_TabUnfocusedActive] = ImVec4(0.19f, 0.19f, 0.19f, 1.00f);
+colors[ImGuiCol_DockingPreview] = ImVec4(0.51f, 0.51f, 0.51f, 0.70f);
+colors[ImGuiCol_Tab] = ImVec4(0.21f, 0.21f, 0.21f, 0.86f);
+colors[ImGuiCol_TabUnfocused] = ImVec4(0.15f, 0.15f, 0.15f, 0.97f);
+colors[ImGuiCol_NavHighlight] = ImVec4(1.00f, 0.40f, 0.13f, 1.00f);
+colors[ImGuiCol_TextSelectedBg] = ImVec4(0.45f, 1.00f, 0.85f, 0.35f);
+```
+
+##### 窗口停靠
+
+设置内部窗口可以拖拽停靠，例如可以拖拽到外部空间和拖拽到其它窗口内部停靠:
+
+```c&#43;&#43;
+// 允许窗口停靠
+io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+io.ConfigFlags |= ImGuiViewportFlags_NoDecoration;
+io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
+io.ConfigFlags |= ImGuiCol_DockingEmptyBg;
+
+while (!glfwWindowShouldClose(Windows))
+    ... // main logic
+    // 窗口移动出主窗口时创建子窗口
+    if (io.ConfigFlags &amp; ImGuiConfigFlags_ViewportsEnable)
+    {
+        GLFWwindow* backup_current_context = glfwGetCurrentContext();
+        ImGui::UpdatePlatformWindows();
+        ImGui::RenderPlatformWindowsDefault();
+        glfwMakeContextCurrent(backup_current_context);
+    }
+}
+```
+
+允许主窗口也可以作为停靠的主体:
+
+```c&#43;&#43;
+while (!glfwWindowShouldClose(Windows))
+{
+    ImGui::DockSpaceOverViewport();
+    ... // main logic
+}
+```
+
+##### 高级控件
+
+绘制队列 (Draw List) 可以绘制高级的自定义控件，常见的有矩形，圆等等:
+
+```c&#43;&#43;
+ImDrawList* DrawList = ImGui::GetForegroundDrawList(); // 获取绘制队列
+DrawList-&gt;AddRectFilled(    // 绘制填充矩形
+    ImVec2(0, 0),           // 窗口左上角
+    ImGui::GetMousePos(),   // 鼠标位置
+    ImColor(60, 255, 255)   // 颜色 RGB
+);
+```
+
+##### 事件监听
+
+可以监听键盘按键的动作，同时还可以搭配鼠标位置来限制逻辑的执行范围:
+
+```c&#43;&#43;
+// 当键盘的按键 Q 被按下，以及鼠标位于窗口的标题处，才在窗口内部生成文本框
+if (ImGui::IsKeyDown(static_cast&lt;ImGuiKey&gt;(&#39;Q&#39;)) &amp;&amp; ImGui::IsItemHovered())
+{
+	ImGui::Text(u8&#34;测试 Q&#34;);
+}
+```
+
+##### 控件拖拽
+
+与窗口拖拽类似，窗口内的控件也是可以设置为可拖拽的:
+
+```c&#43;&#43;
+#include &lt;string&gt;
+#include &lt;vector&gt;
+
+std::vector &lt;int&gt; DragList;
+
+void DrawGui()
+{
+    // 拖拽源地址窗口
+	ImGui::Begin(&#34;Drag Source&#34;);
+    ImGui::Text(&#34;Drag Source&#34;);
+	for (size_t i = 0; i &lt; 5; i&#43;&#43;)
+	{
+		ImGui::Button(std::to_string(i).c_str());
+		if (i &#43; 1 &lt; 5) ImGui::SameLine(); // 位于两个控件之间，用于设置控件横向排列，否则控件默认为纵向排列
+
+		if (ImGui::BeginDragDropSource())
+		{
+            // 拖拽时的表现内容
+			ImGui::Text(std::string(&#34;Drag : &#34;).append(std::to_string(i)).c_str());
+            // 设置拖拽控件的负载数据
+			ImGui::SetDragDropPayload(&#34;DragIndexButton&#34;, &amp;i, sizeof(int));
+
+			ImGui::EndDragDropSource();
+		}
+	}
+	ImGui::End();
+
+    // 拖拽目的地窗口
+	ImGui::Begin(&#34;Drag Window&#34;);
+    // 设置下面的文本框为控件拖拽的目的地，即该文本框可以接收被拖拽过来的控件
+	ImGui::Text(&#34;Drag Target&#34;);
+	if (ImGui::BeginDragDropTarget())
+	{
+        // 接受拖拽过来的控件，并取出其负载的数据
+		if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(&#34;DragIndexButton&#34;))
+		{
+			DragList.push_back(*(const int*)payload-&gt;Data);
+		}
+		ImGui::EndDragDropTarget();
+	}
+	for (size_t i = 0; i &lt; DragList.size(); i&#43;&#43;)
+	{
+        // 被拖拽过来安放好的按钮控件，如果被点击了就会消失
+		if (ImGui::Button(std::to_string(DragList.at(i)).c_str()))
+		{
+			DragList.erase(DragList.begin() &#43; i);
+		}
+		if (i &#43; 1 &lt; DragList.size()) ImGui::SameLine();
+	}
+	ImGui::End();
+}
+```
+
+#### 第三方库
+
+imgui 的第三方库可以在其 wiki 的 [Useful Extensions](https://github.com/ocornut/imgui/wiki/Useful-Extensions) 页面中进行查找。只需下载第三方库的源代码，然后仿照对 imgui 库的处理将其源代码进行引入 `$(Project)\&lt;lib&gt;`，或在 Visual Studio 中作为静态库进行链接即可。
+
+下面以第三方库 [ImGuiColorTextEdit](https://github.com/BalazsJako/ImGuiColorTextEdit) 为例:
+
+```c&#43;&#43; 
+#include &#34;TextEditor.h&#34;
+
+int main()
+{
+    ...
+    // define and setup editor
+    TextEditor* te = new TextEditor();
+    te-&gt;SetLanguageDefinition(TextEditor::LanguageDefinition::C());
+
+    while (!glfwWindowShouldClose(Windows))
+    {
+        ...
+        // main logic
+        ImGui::Begin(&#34;Text Editor&#34;);
+		te-&gt;Render(&#34;TextED&#34;);
+		ImGui::End(); 
+        ...
+    }
+}
+```
 
 ## References
 

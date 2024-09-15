@@ -30,7 +30,7 @@ RAII standard library containers and algorithms templates metaprogramming except
 lots of new and delete roll-your-own linked lists and other data structures return codes as a mechanism for error handling one of the millions of custom string classes that aren’t std::string As with all this-vs-that arguments, there are merits to both approaches. Modern C&#43;&#43; isn’t universally better. Embedded enviornments, for example, often require extra restrictions that most people never need, so you’ll see a lot of old-style code there. Overall though, I think you’ll find that most of the modern features are worth using regularly. Moore’s Law and compiler improvements have taken care of the majority of reasons to avoid the new stuff.">
   <meta itemprop="datePublished" content="2024-06-30T00:19:25+08:00">
   <meta itemprop="dateModified" content="2024-09-05T15:35:38+08:00">
-  <meta itemprop="wordCount" content="23619">
+  <meta itemprop="wordCount" content="24886">
   <meta itemprop="image" content="https://ccrysisa.github.io/logo.png">
   <meta itemprop="keywords" content="C&#43;&#43;,MSVC"><meta property="og:url" content="https://ccrysisa.github.io/posts/modern-cpp/">
   <meta property="og:site_name" content="KZnight&#39;s Blog">
@@ -67,7 +67,7 @@ lots of new and delete roll-your-own linked lists and other data structures retu
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/modern-cpp\/"
-    },"genre": "posts","keywords": "C\u002b\u002b, MSVC","wordcount":  23619 ,
+    },"genre": "posts","keywords": "C\u002b\u002b, MSVC","wordcount":  24886 ,
     "url": "https:\/\/ccrysisa.github.io\/posts\/modern-cpp\/","datePublished": "2024-06-30T00:19:25+08:00","dateModified": "2024-09-05T15:35:38+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
@@ -190,7 +190,7 @@ lots of new and delete roll-your-own linked lists and other data structures retu
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Modern C&#43;&#43; (MSVC)</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" alt="vanJker" data-title="vanJker" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/c++/" class="post-category" title="分类 - C++"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C++</a></span></div><div class="post-meta-line"><span title="发布于 2024-06-30 00:19:25"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-30">2024-06-30</time></span>&nbsp;<span title="更新于 2024-09-05 15:35:38"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-09-05">2024-09-05</time></span>&nbsp;<span title="23619 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 23700 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 48 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" alt="vanJker" data-title="vanJker" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/c++/" class="post-category" title="分类 - C++"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C++</a></span></div><div class="post-meta-line"><span title="发布于 2024-06-30 00:19:25"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-30">2024-06-30</time></span>&nbsp;<span title="更新于 2024-09-05 15:35:38"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-09-05">2024-09-05</time></span>&nbsp;<span title="24886 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 24900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 50 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -313,7 +313,8 @@ lots of new and delete roll-your-own linked lists and other data structures retu
             <li><a href="#stream">Stream</a></li>
           </ul>
         </li>
-        <li><a href="#algorithms">Algorithms</a>
+        <li><a href="#algorithms">Algorithms</a></li>
+        <li><a href="#nostd">Nostd</a>
           <ul>
             <li><a href="#sorting">Sorting</a></li>
           </ul>
@@ -404,7 +405,17 @@ lots of new and delete roll-your-own linked lists and other data structures retu
                 <li><a href="#颜色选择器">颜色选择器</a></li>
               </ul>
             </li>
-            <li><a href="#高级定制">高级定制</a></li>
+            <li><a href="#高级定制">高级定制</a>
+              <ul>
+                <li><a href="#字体设置">字体设置</a></li>
+                <li><a href="#风格设置">风格设置</a></li>
+                <li><a href="#窗口停靠">窗口停靠</a></li>
+                <li><a href="#高级控件">高级控件</a></li>
+                <li><a href="#事件监听">事件监听</a></li>
+                <li><a href="#控件拖拽">控件拖拽</a></li>
+              </ul>
+            </li>
+            <li><a href="#第三方库">第三方库</a></li>
           </ul>
         </li>
       </ul>
@@ -1629,7 +1640,7 @@ Optimization (Maximize Speed)</p>
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>使用 <em>初始化参数列表</em> 会节约性能，不会丢弃默认构造的对象，具体见视频的例子。原理也很简单，初始化参数列表是在执行函数体之前进行初始化的，不会事先创建对象。而如果在函数体内对对象进行赋值，因为不论是否在初始化参数列表中是否指定了成员变量，编译器都会在执行函数体之前先对每个成员变量进行构造 (当然初始化参数列表指定的就按列表构造)，导致在函数体内对成员变量赋值时，会丢掉先前构造好的对象，从而导致性能损失。(这很好理解，因为 Rust 要求构造对象时必须指定所有成员的值，C++ 的初始化列表的作用是类似的，给对象的每个成员都分配值，这样构造函数就无需指定每个成员的值了)</p>
-<div class="highlight" id="id-150"><div class="chroma">
+<div class="highlight" id="id-159"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -3164,7 +3175,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/5368258/the-copy-constructor-and-assignment-operator"target="_blank" rel="external nofollow noopener noreferrer">The copy constructor and assignment operator</a></li>
 </ul>
-<div class="highlight" id="id-151"><div class="chroma">
+<div class="highlight" id="id-160"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -3476,7 +3487,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>这是因为常量模板规则，在编译时期即可确定 <code>size()</code> 函数的具体实现了，无需额外存储变量:</p>
-<div class="highlight" id="id-152"><div class="chroma">
+<div class="highlight" id="id-161"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -4118,6 +4129,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>The algorithms library defines functions for a variety of purposes (e.g. searching, sorting, counting, manipulating) that operate on ranges of elements. Note that a range is defined as <strong>[<code>first</code>, <code>last</code>)</strong> where <code>last</code> refers to the element past the last element to inspect or modify.</p>
 </blockquote>
+<h3 id="nostd" class="heading-element">
+  <a href="#nostd" class="heading-mark"></a>Nostd</h3><p>Write our own data structures!</p>
 <h4 id="sorting" class="heading-element">
   <a href="#sorting" class="heading-mark"></a>Sorting</h4><ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/algorithm/sort"target="_blank" rel="external nofollow noopener noreferrer">std::sort</a></li>
@@ -5015,43 +5028,43 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
 </span></span><span class="line"><span class="cl">    <span class="p">...</span>
 </span></span><span class="line"><span class="cl">    <span class="n">String</span><span class="p">(</span><span class="n">String</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">noexcept</span>
-</span></span><span class="line"><span class="cl">	<span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Moved!&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		<span class="n">m_Size</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">m_Size</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		<span class="n">m_Data</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">m_Data</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		<span class="n">other</span><span class="p">.</span><span class="n">m_Size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		<span class="n">other</span><span class="p">.</span><span class="n">m_Data</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Moved!&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">m_Size</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">m_Size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">m_Data</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">m_Data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">m_Size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">other</span><span class="p">.</span><span class="n">m_Data</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="n">String</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">String</span><span class="o">&amp;&amp;</span> <span class="n">other</span><span class="p">)</span> <span class="k">noexcept</span>
-</span></span><span class="line"><span class="cl">	<span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Moved!&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">		<span class="p">{</span>
-</span></span><span class="line"><span class="cl">			<span class="k">delete</span><span class="p">[]</span> <span class="n">m_Data</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">			<span class="n">m_Size</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">m_Size</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">			<span class="n">m_Data</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">m_Data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Moved!&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="k">this</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="n">other</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">delete</span><span class="p">[]</span> <span class="n">m_Data</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">m_Size</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">m_Size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">m_Data</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">m_Data</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">			<span class="n">other</span><span class="p">.</span><span class="n">m_Size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">			<span class="n">other</span><span class="p">.</span><span class="n">m_Data</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		<span class="p">}</span>
-</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">other</span><span class="p">.</span><span class="n">m_Size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">other</span><span class="p">.</span><span class="n">m_Data</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">    <span class="p">...</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl"><span class="p">{</span>
-</span></span><span class="line"><span class="cl">	<span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&#34;hello&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		<span class="n">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>  <span class="c1">// Move Constructor
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="n">s2</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>                 <span class="c1">// &#34;hello&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
-</span></span><span class="line"><span class="cl">	<span class="p">{</span>
-</span></span><span class="line"><span class="cl">		<span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&#34;hello&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		<span class="n">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;world&#34;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">		<span class="n">s1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>         <span class="c1">// Move Assignment
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="n">s1</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>                 <span class="c1">// &#34;world&#34;
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&#34;hello&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">s1</span><span class="p">);</span>  <span class="c1">// Move Constructor
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">s2</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>                 <span class="c1">// &#34;hello&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">s1</span> <span class="o">=</span> <span class="s">&#34;hello&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">String</span> <span class="n">s2</span> <span class="o">=</span> <span class="s">&#34;world&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s1</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">s2</span><span class="p">);</span>         <span class="c1">// Move Assignment
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">s1</span><span class="p">.</span><span class="n">Print</span><span class="p">();</span>                 <span class="c1">// &#34;world&#34;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h2 id="concurrency" class="heading-element">
@@ -6350,8 +6363,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </blockquote>
 <p>bilibili:</p>
 <ul>
-<li><a href="https://space.bilibili.com/443124242/channel/collectiondetail?sid=824431"target="_blank" rel="external nofollow noopener noreferrer">ImGui 入门到精通</a>
+<li>入门: <a href="https://space.bilibili.com/443124242/channel/collectiondetail?sid=824431"target="_blank" rel="external nofollow noopener noreferrer">ImGui 入门到精通</a>
 / <a href="https://www.bilibili.com/read/cv19537138/"target="_blank" rel="external nofollow noopener noreferrer">项目源代码</a></li>
+<li>进阶: <a href="https://space.bilibili.com/443124242/channel/collectiondetail?sid=2917715"target="_blank" rel="external nofollow noopener noreferrer">可能是目前全網最強最好的 ImGui 教學</a> / <a href="https://drive.google.com/file/d/1XRqDM3d_ByF5RafRG0wK1JoI6RSitAsw"target="_blank" rel="external nofollow noopener noreferrer">项目源代码</a></li>
 </ul>
 <h4 id="初始设置" class="heading-element">
   <a href="#%e5%88%9d%e5%a7%8b%e8%ae%be%e7%bd%ae" class="heading-mark"></a>初始设置</h4><p>依赖库:</p>
@@ -6366,7 +6380,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <ul>
 <li><code>$(SolutionDir)\Dependencies\GLFW\include</code></li>
 <li><code>$(SolutionDir)\Dependencies\GLEW\include</code></li>
-<li><code>$(ProjectDir)\imgui</code> 或者新建一个 Project 并将其作为静态库</li>
+<li><code>$(ProjectDir)\imgui</code> (这种处理可以新建筛选器来保持项目组织) 或者新建一个 Project 并将其作为静态库</li>
 </ul>
 </li>
 <li>Linker -&gt; Additional Library Directories
@@ -6397,7 +6411,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;imgui_impl_opengl3.h&#34;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="创建窗口" class="heading-element">
-  <a href="#%e5%88%9b%e5%bb%ba%e7%aa%97%e5%8f%a3" class="heading-mark"></a>创建窗口</h4><div class="highlight" id="id-142"><div class="chroma">
+  <a href="#%e5%88%9b%e5%bb%ba%e7%aa%97%e5%8f%a3" class="heading-mark"></a>创建窗口</h4><p>这是基础设施，直接复制一份即可。窗口逻辑在 <code>ImGui::ShowDemoWindow()</code> 处:</p>
+<div class="highlight" id="id-142"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6629,7 +6644,354 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="n">ImGui</span><span class="o">::</span><span class="n">ColorEdit4</span><span class="p">(</span><span class="s">&#34;Color&#34;</span><span class="p">,</span> <span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">color</span><span class="p">,</span> <span class="n">ImGuiColorEditFlags_</span><span class="o">::</span><span class="n">ImGuiColorEditFlags_AlphaBar</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h4 id="高级定制" class="heading-element">
-  <a href="#%e9%ab%98%e7%ba%a7%e5%ae%9a%e5%88%b6" class="heading-mark"></a>高级定制</h4><h2 id="references" class="heading-element">
+  <a href="#%e9%ab%98%e7%ba%a7%e5%ae%9a%e5%88%b6" class="heading-mark"></a>高级定制</h4><h5 id="字体设置" class="heading-element">
+  <a href="#%e5%ad%97%e4%bd%93%e8%ae%be%e7%bd%ae" class="heading-mark"></a>字体设置</h5><div class="highlight" id="id-150"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">ImGuiIO</span><span class="o">&amp;</span> <span class="n">io</span> <span class="o">=</span> <span class="n">ImGui</span><span class="o">::</span><span class="n">GetIO</span><span class="p">();</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">io</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="p">.</span><span class="n">Fonts</span><span class="o">-&gt;</span><span class="n">AddFontFromFileTTF</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="s">&#34;C:</span><span class="se">\\</span><span class="s">Windows</span><span class="se">\\</span><span class="s">Fonts</span><span class="se">\\</span><span class="s">STZHONGS.TTF&#34;</span><span class="p">,</span>     <span class="c1">// 华文中宋
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="mi">18</span><span class="p">,</span>                                     <span class="c1">// 字体大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nb">NULL</span><span class="p">,</span>                                   <span class="c1">// 英文字体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">io</span><span class="p">.</span><span class="n">Fonts</span><span class="o">-&gt;</span><span class="n">GetGlyphRangesChineseFull</span><span class="p">()</span>   <span class="c1">// 作用范围
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="风格设置" class="heading-element">
+  <a href="#%e9%a3%8e%e6%a0%bc%e8%ae%be%e7%bd%ae" class="heading-mark"></a>风格设置</h5><p>在启动 ImGui Demo 后，其窗口的 <code>tools</code> 栏位的 <code>Style Editor</code> 选项即为风格编辑器。主要改一下圆角之类的设定，进行拖动可以即时看到效果，后续可以根据效果对应的数值在源代码中进行设置:</p>
+<div class="highlight" id="id-151"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">ImGuiStyle</span><span class="o">&amp;</span> <span class="n">style</span> <span class="o">=</span> <span class="n">ImGui</span><span class="o">::</span><span class="n">GetStyle</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="n">style</span><span class="p">.</span><span class="n">WindowRounding</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">style</span><span class="p">.</span><span class="n">FrameRounding</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">style</span><span class="p">.</span><span class="n">GrabRounding</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">style</span><span class="p">.</span><span class="n">ScrollbarSize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">style</span><span class="p">.</span><span class="n">ScrollbarRounding</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在风格编辑器理也可切换到颜色 (Colors) 栏目对颜色进行调整并且即时看到效果，以进行相应的设置:</p>
+<div class="highlight" id="id-152"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">ImVec4</span><span class="o">*</span> <span class="n">colors</span> <span class="o">=</span> <span class="n">style</span><span class="p">.</span><span class="n">Colors</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_FrameBg</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.16f</span><span class="p">,</span> <span class="mf">0.16f</span><span class="p">,</span> <span class="mf">0.17f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_FrameBgHovered</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.37f</span><span class="p">,</span> <span class="mf">0.36f</span><span class="p">,</span> <span class="mf">0.36f</span><span class="p">,</span> <span class="mf">102.00f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_FrameBgActive</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.10f</span><span class="p">,</span> <span class="mf">0.10f</span><span class="p">,</span> <span class="mf">0.10f</span><span class="p">,</span> <span class="mf">171.00f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_TitleBgActive</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.20f</span><span class="p">,</span> <span class="mf">0.20f</span><span class="p">,</span> <span class="mf">0.20f</span><span class="p">,</span> <span class="mf">255.00f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_CheckMark</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.61f</span><span class="p">,</span> <span class="mf">0.61f</span><span class="p">,</span> <span class="mf">0.61f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_SliderGrab</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.64f</span><span class="p">,</span> <span class="mf">0.64f</span><span class="p">,</span> <span class="mf">0.64f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_SliderGrabActive</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.31f</span><span class="p">,</span> <span class="mf">0.31f</span><span class="p">,</span> <span class="mf">0.31f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_Button</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.22f</span><span class="p">,</span> <span class="mf">0.22f</span><span class="p">,</span> <span class="mf">0.22f</span><span class="p">,</span> <span class="mf">0.40f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_ButtonHovered</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.29f</span><span class="p">,</span> <span class="mf">0.29f</span><span class="p">,</span> <span class="mf">0.29f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_ButtonActive</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.13f</span><span class="p">,</span> <span class="mf">0.13f</span><span class="p">,</span> <span class="mf">0.13f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_Header</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.45f</span><span class="p">,</span> <span class="mf">0.45f</span><span class="p">,</span> <span class="mf">0.45f</span><span class="p">,</span> <span class="mf">0.31f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_HeaderHovered</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.55f</span><span class="p">,</span> <span class="mf">0.55f</span><span class="p">,</span> <span class="mf">0.55f</span><span class="p">,</span> <span class="mf">0.80f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_HeaderActive</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.09f</span><span class="p">,</span> <span class="mf">0.09f</span><span class="p">,</span> <span class="mf">0.09f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_ResizeGrip</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">1.00f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">,</span> <span class="mf">0.20f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_ResizeGripHovered</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.46f</span><span class="p">,</span> <span class="mf">0.46f</span><span class="p">,</span> <span class="mf">0.46f</span><span class="p">,</span> <span class="mf">0.67f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_ResizeGripActive</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.17f</span><span class="p">,</span> <span class="mf">0.17f</span><span class="p">,</span> <span class="mf">0.17f</span><span class="p">,</span> <span class="mf">0.95f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_SeparatorActive</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.42f</span><span class="p">,</span> <span class="mf">0.42f</span><span class="p">,</span> <span class="mf">0.42f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_SeparatorHovered</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.50f</span><span class="p">,</span> <span class="mf">0.50f</span><span class="p">,</span> <span class="mf">0.50f</span><span class="p">,</span> <span class="mf">0.78f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_TabHovered</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.45f</span><span class="p">,</span> <span class="mf">0.45f</span><span class="p">,</span> <span class="mf">0.45f</span><span class="p">,</span> <span class="mf">0.80f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_TabActive</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.28f</span><span class="p">,</span> <span class="mf">0.28f</span><span class="p">,</span> <span class="mf">0.28f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_TabUnfocusedActive</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.19f</span><span class="p">,</span> <span class="mf">0.19f</span><span class="p">,</span> <span class="mf">0.19f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_DockingPreview</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.51f</span><span class="p">,</span> <span class="mf">0.51f</span><span class="p">,</span> <span class="mf">0.51f</span><span class="p">,</span> <span class="mf">0.70f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_Tab</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.21f</span><span class="p">,</span> <span class="mf">0.21f</span><span class="p">,</span> <span class="mf">0.21f</span><span class="p">,</span> <span class="mf">0.86f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_TabUnfocused</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.15f</span><span class="p">,</span> <span class="mf">0.15f</span><span class="p">,</span> <span class="mf">0.15f</span><span class="p">,</span> <span class="mf">0.97f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_NavHighlight</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">1.00f</span><span class="p">,</span> <span class="mf">0.40f</span><span class="p">,</span> <span class="mf">0.13f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_TextSelectedBg</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.45f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">,</span> <span class="mf">0.85f</span><span class="p">,</span> <span class="mf">0.35f</span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="窗口停靠" class="heading-element">
+  <a href="#%e7%aa%97%e5%8f%a3%e5%81%9c%e9%9d%a0" class="heading-mark"></a>窗口停靠</h5><p>设置内部窗口可以拖拽停靠，例如可以拖拽到外部空间和拖拽到其它窗口内部停靠:</p>
+<div class="highlight" id="id-153"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 允许窗口停靠
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">io</span><span class="p">.</span><span class="n">ConfigFlags</span> <span class="o">|=</span> <span class="n">ImGuiConfigFlags_DockingEnable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="p">.</span><span class="n">ConfigFlags</span> <span class="o">|=</span> <span class="n">ImGuiViewportFlags_NoDecoration</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="p">.</span><span class="n">ConfigFlags</span> <span class="o">|=</span> <span class="n">ImGuiConfigFlags_ViewportsEnable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">io</span><span class="p">.</span><span class="n">ConfigFlags</span> <span class="o">|=</span> <span class="n">ImGuiCol_DockingEmptyBg</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">glfwWindowShouldClose</span><span class="p">(</span><span class="n">Windows</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span> <span class="c1">// main logic
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// 窗口移动出主窗口时创建子窗口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">ConfigFlags</span> <span class="o">&amp;</span> <span class="n">ImGuiConfigFlags_ViewportsEnable</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">GLFWwindow</span><span class="o">*</span> <span class="n">backup_current_context</span> <span class="o">=</span> <span class="n">glfwGetCurrentContext</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ImGui</span><span class="o">::</span><span class="n">UpdatePlatformWindows</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ImGui</span><span class="o">::</span><span class="n">RenderPlatformWindowsDefault</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">glfwMakeContextCurrent</span><span class="p">(</span><span class="n">backup_current_context</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>允许主窗口也可以作为停靠的主体:</p>
+<div class="highlight" id="id-154"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">glfwWindowShouldClose</span><span class="p">(</span><span class="n">Windows</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ImGui</span><span class="o">::</span><span class="n">DockSpaceOverViewport</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span> <span class="c1">// main logic
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="高级控件" class="heading-element">
+  <a href="#%e9%ab%98%e7%ba%a7%e6%8e%a7%e4%bb%b6" class="heading-mark"></a>高级控件</h5><p>绘制队列 (Draw List) 可以绘制高级的自定义控件，常见的有矩形，圆等等:</p>
+<div class="highlight" id="id-155"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">ImDrawList</span><span class="o">*</span> <span class="n">DrawList</span> <span class="o">=</span> <span class="n">ImGui</span><span class="o">::</span><span class="n">GetForegroundDrawList</span><span class="p">();</span> <span class="c1">// 获取绘制队列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">DrawList</span><span class="o">-&gt;</span><span class="n">AddRectFilled</span><span class="p">(</span>    <span class="c1">// 绘制填充矩形
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ImVec2</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>           <span class="c1">// 窗口左上角
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ImGui</span><span class="o">::</span><span class="n">GetMousePos</span><span class="p">(),</span>   <span class="c1">// 鼠标位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ImColor</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>   <span class="c1">// 颜色 RGB
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">);</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="事件监听" class="heading-element">
+  <a href="#%e4%ba%8b%e4%bb%b6%e7%9b%91%e5%90%ac" class="heading-mark"></a>事件监听</h5><p>可以监听键盘按键的动作，同时还可以搭配鼠标位置来限制逻辑的执行范围:</p>
+<div class="highlight" id="id-156"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="c1">// 当键盘的按键 Q 被按下，以及鼠标位于窗口的标题处，才在窗口内部生成文本框
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="n">ImGui</span><span class="o">::</span><span class="n">IsKeyDown</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">ImGuiKey</span><span class="o">&gt;</span><span class="p">(</span><span class="sc">&#39;Q&#39;</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="n">ImGui</span><span class="o">::</span><span class="n">IsItemHovered</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ImGui</span><span class="o">::</span><span class="n">Text</span><span class="p">(</span><span class="sa">u8</span><span class="s">&#34;测试 Q&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="控件拖拽" class="heading-element">
+  <a href="#%e6%8e%a7%e4%bb%b6%e6%8b%96%e6%8b%bd" class="heading-mark"></a>控件拖拽</h5><p>与窗口拖拽类似，窗口内的控件也是可以设置为可拖拽的:</p>
+<div class="highlight" id="id-157"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">vector</span> <span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">DragList</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">DrawGui</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 拖拽源地址窗口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">ImGui</span><span class="o">::</span><span class="n">Begin</span><span class="p">(</span><span class="s">&#34;Drag Source&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ImGui</span><span class="o">::</span><span class="n">Text</span><span class="p">(</span><span class="s">&#34;Drag Source&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">ImGui</span><span class="o">::</span><span class="n">Button</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">c_str</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">)</span> <span class="n">ImGui</span><span class="o">::</span><span class="n">SameLine</span><span class="p">();</span> <span class="c1">// 位于两个控件之间，用于设置控件横向排列，否则控件默认为纵向排列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">ImGui</span><span class="o">::</span><span class="n">BeginDragDropSource</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 拖拽时的表现内容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">ImGui</span><span class="o">::</span><span class="n">Text</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">(</span><span class="s">&#34;Drag : &#34;</span><span class="p">).</span><span class="n">append</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">i</span><span class="p">)).</span><span class="n">c_str</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 设置拖拽控件的负载数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">ImGui</span><span class="o">::</span><span class="n">SetDragDropPayload</span><span class="p">(</span><span class="s">&#34;DragIndexButton&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">i</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="n">ImGui</span><span class="o">::</span><span class="n">EndDragDropSource</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ImGui</span><span class="o">::</span><span class="n">End</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 拖拽目的地窗口
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">ImGui</span><span class="o">::</span><span class="n">Begin</span><span class="p">(</span><span class="s">&#34;Drag Window&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 设置下面的文本框为控件拖拽的目的地，即该文本框可以接收被拖拽过来的控件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">ImGui</span><span class="o">::</span><span class="n">Text</span><span class="p">(</span><span class="s">&#34;Drag Target&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">ImGui</span><span class="o">::</span><span class="n">BeginDragDropTarget</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 接受拖拽过来的控件，并取出其负载的数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="k">const</span> <span class="n">ImGuiPayload</span><span class="o">*</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">ImGui</span><span class="o">::</span><span class="n">AcceptDragDropPayload</span><span class="p">(</span><span class="s">&#34;DragIndexButton&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">DragList</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="k">const</span> <span class="kt">int</span><span class="o">*</span><span class="p">)</span><span class="n">payload</span><span class="o">-&gt;</span><span class="n">Data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="n">ImGui</span><span class="o">::</span><span class="n">EndDragDropTarget</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="n">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">DragList</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 被拖拽过来安放好的按钮控件，如果被点击了就会消失
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="k">if</span> <span class="p">(</span><span class="n">ImGui</span><span class="o">::</span><span class="n">Button</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">to_string</span><span class="p">(</span><span class="n">DragList</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="n">i</span><span class="p">)).</span><span class="n">c_str</span><span class="p">()))</span>
+</span></span><span class="line"><span class="cl">		<span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">DragList</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">DragList</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl">		<span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">DragList</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="n">ImGui</span><span class="o">::</span><span class="n">SameLine</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ImGui</span><span class="o">::</span><span class="n">End</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="第三方库" class="heading-element">
+  <a href="#%e7%ac%ac%e4%b8%89%e6%96%b9%e5%ba%93" class="heading-mark"></a>第三方库</h4><p>imgui 的第三方库可以在其 wiki 的 <a href="https://github.com/ocornut/imgui/wiki/Useful-Extensions"target="_blank" rel="external nofollow noopener noreferrer">Useful Extensions</a> 页面中进行查找。只需下载第三方库的源代码，然后仿照对 imgui 库的处理将其源代码进行引入 <code>$(Project)\&lt;lib&gt;</code>，或在 Visual Studio 中作为静态库进行链接即可。</p>
+<p>下面以第三方库 <a href="https://github.com/BalazsJako/ImGuiColorTextEdit"target="_blank" rel="external nofollow noopener noreferrer">ImGuiColorTextEdit</a> 为例:</p>
+<div class="highlight" id="id-158"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;TextEditor.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// define and setup editor
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">TextEditor</span><span class="o">*</span> <span class="n">te</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TextEditor</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">te</span><span class="o">-&gt;</span><span class="n">SetLanguageDefinition</span><span class="p">(</span><span class="n">TextEditor</span><span class="o">::</span><span class="n">LanguageDefinition</span><span class="o">::</span><span class="n">C</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">glfwWindowShouldClose</span><span class="p">(</span><span class="n">Windows</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="p">...</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// main logic
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">ImGui</span><span class="o">::</span><span class="n">Begin</span><span class="p">(</span><span class="s">&#34;Text Editor&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">te</span><span class="o">-&gt;</span><span class="n">Render</span><span class="p">(</span><span class="s">&#34;TextED&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="n">ImGui</span><span class="o">::</span><span class="n">End</span><span class="p">();</span> 
+</span></span><span class="line"><span class="cl">        <span class="p">...</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="references" class="heading-element">
   <a href="#references" class="heading-mark"></a>References</h2><ul>
 <li>The Cherno: <a href="https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb"target="_blank" rel="external nofollow noopener noreferrer">C++</a> / <a href="https://space.bilibili.com/364152971/channel/collectiondetail?sid=13909"target="_blank" rel="external nofollow noopener noreferrer">中文翻译</a>: 主要介绍 C++11 及以上版本的语法 (文中未特意标注引用的部分，均出自该处)</li>
 <li><a href="https://www.youtube.com/@cppweekly"target="_blank" rel="external nofollow noopener noreferrer">C++ Weekly With Jason Turner</a>: 这个博主很猛</li>
