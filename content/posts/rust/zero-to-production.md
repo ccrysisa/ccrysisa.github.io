@@ -318,6 +318,14 @@ crate.io: [sqlx](https://crates.io/crates/sqlx) - Cargo Feature Flags
 
 > Actix-web is fully compatible with Tokio and so a separate runtime feature is no longer needed.
 
-这一节有些地方需要使用 `ConfigBuilder` 进行重写，这时可以参考作者的 [zero2prod](https://github.com/LukeMathWalker/zero-to-production) 库进行观摩学习。
+这一节有些地方需要使用 [ConfigBuilder](https://docs.rs/config/latest/config/builder/struct.ConfigBuilder.html) 进行重写，这时可以参考作者的 [zero2prod](https://github.com/LukeMathWalker/zero-to-production) 库进行观摩学习。
 
-- Struct config::builder::[ConfigBuilder](https://docs.rs/config/latest/config/builder/struct.ConfigBuilder.html)
+[app_data](https://docs.rs/actix-web/4.0.1/actix_web/struct.App.html#method.app_data):
+
+> Set application (root level) data.
+> 
+> Application data stored with `App::app_data()` method is available through the `HttpRequest::app_data` method at runtime.
+
+即是整个应用程序的所有 handlers 都共享的 application data。
+
+sqlx 允许同时读和互斥写，使用不可变引用和可变引用机制来实现则让其执行也满足了 $N: 1$ 模型。如果采用 `Mutex` 方案来获取可变引用，会导致读操作也是互斥的，这大大降低了性能。`PgPool` 采用了内部可变性机制，使得对于读写满足 $N: 1$ 模型，使得其性能不弱于采用不可变引用和可变引用机制的 `PgConnection`。

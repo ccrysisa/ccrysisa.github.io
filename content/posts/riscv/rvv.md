@@ -15,8 +15,9 @@ comment: false
 weight: 0
 tags:
   - RISC-V
+  - Architecture
 categories:
-  - RISC-V
+  - Architecture
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
