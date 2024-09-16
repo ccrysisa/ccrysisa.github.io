@@ -329,3 +329,5 @@ crate.io: [sqlx](https://crates.io/crates/sqlx) - Cargo Feature Flags
 即是整个应用程序的所有 handlers 都共享的 application data。
 
 sqlx 允许同时读和互斥写，使用不可变引用和可变引用机制来实现则让其执行也满足了 $N: 1$ 模型。如果采用 `Mutex` 方案来获取可变引用，会导致读操作也是互斥的，这大大降低了性能。`PgPool` 采用了内部可变性机制，使得对于读写满足 $N: 1$ 模型，使得其性能不弱于采用不可变引用和可变引用机制的 `PgConnection`。
+
+编写 SQL 语句时为了防止转义字符带来的麻烦，可以采用 Rust 提供的 raw literals 写法: [What is the r#""# operator in Rust?](https://stackoverflow.com/questions/26611664/what-is-the-r-operator-in-rust)。
