@@ -11,7 +11,6 @@ https://ccrysisa.github.io/posts/revolution-os/
 https://ccrysisa.github.io/posts/linux2023-quiz2/
 https://ccrysisa.github.io/posts/linux2023-quiz1/
 https://ccrysisa.github.io/posts/c-floating-point/
-https://ccrysisa.github.io/posts/learning-how-to-learn/
 https://ccrysisa.github.io/friends/
 https://ccrysisa.github.io/posts/rust-cli/
 https://ccrysisa.github.io/posts/c-compiler-optimization/
@@ -25,7 +24,6 @@ https://ccrysisa.github.io/posts/c-trick/
 https://ccrysisa.github.io/posts/lifetime-in-rust/
 https://ccrysisa.github.io/posts/c-control-flow/
 https://ccrysisa.github.io/posts/ics/
-https://ccrysisa.github.io/posts/english/
 https://ccrysisa.github.io/posts/oerv-pretask/
 https://ccrysisa.github.io/posts/deepin-kvm/
 https://ccrysisa.github.io/posts/c-preprocessor/

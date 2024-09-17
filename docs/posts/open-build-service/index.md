@@ -25,6 +25,13 @@ Repository:
 - a `noarch` directory containing architecture-independent packages (i.e. ones containing data or scripts)
 - a `repodata` directory, containing the metadata for all packages.
 
+宏参考手册: [openSUSE:Packaging Conventions RPM Macros](https://en.opensuse.org/openSUSE:Packaging_Conventions_RPM_Macros)。也可以通过 `rpm --eval "<macro>"` 命令来计算宏的值:
+
+```bash
+$ rpm --eval "%{_libdir}"
+/usr/lib64
+```
+
 ## References
 
 - reddit: [How Learn to use openSUSE Build Service (OBS)](https://www.reddit.com/r/openSUSE/comments/yk1vwe/how_learn_to_use_opensuse_build_service_obs/)

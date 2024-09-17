@@ -460,7 +460,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </div>
 </div><p>所以 <code>PRTF</code> 指令处理中的 <code>pc[1]</code> 表示的恰好是释放参数空间的 <code>ADJ</code> 指定参数，都是表示参数的个数。可以根据这个参数数量来在栈中定位函数参数，当然这里为了简化，将 <code>PRTF</code> 对应的 <code>printf</code> 参数固定为了 6 个 (这可能会有一些漏洞)。</p>
 <p>除此之外，还要注意，根据「词法分析器」章节的处理，字符串的值 (token_val) 是它的地址:</p>
-<div class="highlight" id="id-11"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -481,7 +481,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>gcc 通过 <code>-m32</code> 参数编译本节代码时可能会遇到以下报错:</p>
-<div class="highlight" id="id-12"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -489,7 +489,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 <pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fatal error: bits/wordsize.h: No such file or directory</span></span></code></pre></td></tr></table>
 </div>
 </div><p>这是因为当前安装的 gcc 只有 64 位的库而没有 32 位的库，通过以下命令安装 32 位库解决问题:</p>
-<div class="highlight" id="id-13"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -523,7 +523,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     <div class="details-content">
       <div class="admonition-content"><p>暂时没搞懂为什么要将内置函数在 symbol table 中的 <code>Value</code> 字段修改为对应的指令 (例如 <code>EXIT</code>)</p>
 <p>阅读完「表达式」一节后已理解，这样内置函数可以直接通过 symbol table 的 <code>Value</code> 字段来生成对应的指令，而不像普通函数一样搭配地址生成相关的跳转指令。</p>
-<div class="highlight" id="id-14"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -545,7 +545,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>对于关键字和内置函数的处理部分:</p>
-<div class="highlight" id="id-15"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -570,7 +570,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
       <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>current_id[Value] and address<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
-      <div class="admonition-content"><div class="highlight" id="id-16"><div class="chroma">
+      <div class="admonition-content"><div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -593,7 +593,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
     </div>
     <div class="details-content">
       <div class="admonition-content"><p><code>function_declaration</code> 中的这一部分处理，虽然逻辑是在 symbol table 中将局部变量恢复成全局变量的属性，但感觉这样会导致多出一些未定义的全局变量 (由局部变量转换时多出来):</p>
-<div class="highlight" id="id-17"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -605,7 +605,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
 </span></span><span class="line"><span class="cl"><span class="n">current_id</span><span class="p">[</span><span class="n">Value</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_id</span><span class="p">[</span><span class="n">BValue</span><span class="p">];</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>「表达式」一节中对于没有设置 <code>Class</code> 字段的标识符会判定为未定义变量:</p>
-<div class="highlight" id="id-18"><div class="chroma">
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -679,7 +679,7 @@ AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，�
       <i class="icon fa-solid fa-question-circle fa-fw" aria-hidden="true"></i>pointer type<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
     <div class="details-content">
-      <div class="admonition-content"><div class="highlight" id="id-19"><div class="chroma">
+      <div class="admonition-content"><div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
