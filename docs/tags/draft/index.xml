@@ -2,25 +2,9 @@
   <channel>
     <title>Draft - 标签 - KZnight&#39;s Blog</title>
     <link>https://ccrysisa.github.io/tags/draft/</link>
-    <description>Draft - 标签 | KZnight&#39;s Blog</description>
+    <description>Draft - 标签 - KZnight&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>caijiaxin@dragonos.org (ccrysisa)</managingEditor>
-      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Tue, 14 May 2024 18:44:37 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/draft/" rel="self" type="application/rss+xml" /><item>
-  <title>学会如何学习 Learning How to Learn</title>
-  <link>https://ccrysisa.github.io/posts/learning-how-to-learn/</link>
-  <pubDate>Tue, 14 May 2024 18:44:37 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/learning-how-to-learn/</guid>
-  <description><![CDATA[]]></description>
-</item>
-<item>
-  <title>English Everyday</title>
-  <link>https://ccrysisa.github.io/posts/english/</link>
-  <pubDate>Sat, 30 Mar 2024 12:17:31 &#43;0800</pubDate>
-  <author>ccrysisa</author>
-  <guid>https://ccrysisa.github.io/posts/english/</guid>
-  <description><![CDATA[<p>This post is used to record the process of my English learning.</p>]]></description>
-</item>
-<item>
+      <webMaster>caijiaxin@dragonos.org (ccrysisa)</webMaster><lastBuildDate>Sat, 23 Dec 2023 20:23:12 &#43;0800</lastBuildDate><atom:link href="https://ccrysisa.github.io/tags/draft/" rel="self" type="application/rss+xml" /><item>
   <title>Hello World</title>
   <link>https://ccrysisa.github.io/posts/hello_world/</link>
   <pubDate>Sat, 23 Dec 2023 20:23:12 &#43;0800</pubDate>

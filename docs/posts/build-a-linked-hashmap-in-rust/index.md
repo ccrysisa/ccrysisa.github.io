@@ -1,9 +1,9 @@
 # Build a linked hash map in Rust
 
 
-&gt; We\&#39;re writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you\&#39;d make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you\&#39;re a newcomer to the language or not.
+> We\'re writing it end-to-end in one sitting, with the hope of ending up with a decent understanding of how hash map works, and how you\'d make the interface idiomatic Rust. I have tried to make sure I introduce new concepts we come across, so it should be possible to follow whether you\'re a newcomer to the language or not.
 
-&lt;!--more--&gt;
+<!--more-->
 
 - 整理自 [John Gjengset 的影片](https://www.youtube.com/watch?v=k6xR2kf9hlA)
 
@@ -11,15 +11,15 @@
 
 ### Data structure and API
 
-&gt; Usually it is nicer tosepecify the bounds only on the places where you need them (e.g. methods) rather than on the data structure.
+> Usually it is nicer tosepecify the bounds only on the places where you need them (e.g. methods) rather than on the data structure.
 
 - Struct [std::collections::HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)
 ```rs
-pub struct HashMap&lt;K, V, S = RandomState&gt; { /* private fields */ }
+pub struct HashMap<K, V, S = RandomState> { /* private fields */ }
 
-impl&lt;K, V, S&gt; HashMap&lt;K, V, S&gt;
+impl<K, V, S> HashMap<K, V, S>
 where
-    K: Eq &#43; Hash,
+    K: Eq + Hash,
     S: BuildHasher,
 ```
 
@@ -27,21 +27,21 @@ where
 
 - Trait [std::hash\::Hash](https://doc.rust-lang.org/std/hash/trait.Hash.html)
 
-{{&lt; admonition quote &gt;}}
+{{< admonition quote >}}
 When implementing both `Hash` and `Eq`, it is important that the following property holds:
 
 ```
-k1 == k2 -&gt; hash(k1) == hash(k2)
+k1 == k2 -> hash(k1) == hash(k2)
 ```
 
 In other words, if two keys are equal, their hashes must also be equal. `HashMap` and `HashSet` both rely on this behavior.
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ### usize vs. u64
 
 ```rs
 let bucket = (hasher.finish() % self.buckets.len() as u64) as usize;
-let bucket = &amp;mut self.buckets[bucket];
+let bucket = &mut self.buckets[bucket];
 ```
 
 因为取模 `%` 运算后的数值不大于 `buckets.len()`，并且 `buckets.len()` 的类型是 `usize`，所以可以将取模运算的结果安全第转换成 `usize`，当然进行取模运算时需要将 `buckets.len()` 转换成和 `finish()` 的返回值类型 `u64` 再进行运算。
@@ -75,8 +75,8 @@ vec![a, f, c, d, e]
 ### tuple references
 
 ```rs
-(&amp;&#39;a K, &amp;&#39;a V)
-&amp;&#39;a (K, V)
+(&'a K, &'a V)
+&'a (K, V)
 ```
 
 这两种表示方式是不完全相同的，对于第二种方式，隐含了一个前提: `K, V` 是在同一个 tuple 里面，即它们在内存的位置是相邻的，这种方式表示引用的是一个 tuple。而第一种仅表示两个引用组成了一个 tuple，而对于 `K, V` 这两个数据在内存的位置关系并无限制，`K, V` 本身是否组成 tuple 也不在乎。
@@ -85,32 +85,32 @@ vec![a, f, c, d, e]
 
 - Trait [std::borrow::Borrow](https://doc.rust-lang.org/std/borrow/trait.Borrow.html)
 
-&gt; Types express that they can be borrowed as some type `T` by implementing `Borrow&lt;T&gt;`, providing a reference to a `T` in the trait’s borrow method. A type is free to borrow as several different types. If it wishes to mutably borrow as the type, allowing the underlying data to be modified, it can additionally implement `BorrowMut&lt;T&gt;`.
+> Types express that they can be borrowed as some type `T` by implementing `Borrow<T>`, providing a reference to a `T` in the trait’s borrow method. A type is free to borrow as several different types. If it wishes to mutably borrow as the type, allowing the underlying data to be modified, it can additionally implement `BorrowMut<T>`.
 
-&gt; In particular  `Eq`, `Ord` and `Hash` must be equivalent for borrowed and owned values: `x.borrow() == y.borrow()` should give the same result as `x == y`.
+> In particular  `Eq`, `Ord` and `Hash` must be equivalent for borrowed and owned values: `x.borrow() == y.borrow()` should give the same result as `x == y`.
 
-&gt; If generic code merely needs to work for all types that can provide a reference to related type `T`, it is often better to use `AsRef&lt;T&gt;` as more types can safely implement it.
+> If generic code merely needs to work for all types that can provide a reference to related type `T`, it is often better to use `AsRef<T>` as more types can safely implement it.
 
-&gt; By additionally requiring `Q: Hash &#43; Eq`, it signals the requirement that `K` and `Q` have implementations of the `Hash` and `Eq` traits that produce identical results.
+> By additionally requiring `Q: Hash + Eq`, it signals the requirement that `K` and `Q` have implementations of the `Hash` and `Eq` traits that produce identical results.
 
 - [Borrow and AsRef](https://web.mit.edu/rust-lang_v1.25/arch/amd64_ubuntu1404/share/doc/rust/html/book/first-edition/borrow-and-asref.html)
 
-{{&lt; admonition quote &gt;}}
+{{< admonition quote >}}
 We can see how they’re kind of the same: they both deal with owned and borrowed versions of some type. However, they’re a bit different.
 
 Choose `Borrow` when you want to abstract over different kinds of borrowing, or when you’re building a data structure that treats owned and borrowed values in equivalent ways, such as hashing and comparison.
 
 Choose `AsRef` when you want to convert something to a reference directly, and you’re writing generic code.
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ### entry
 
 - Enum [std::collections::hash_map::Entry](https://doc.rust-lang.org/std/collections/hash_map/enum.Entry.html)
 
 ```rs
-pub enum Entry&lt;&#39;a, K: &#39;a, V: &#39;a&gt; {
-    Occupied(OccupiedEntry&lt;&#39;a, K, V&gt;),
-    Vacant(VacantEntry&lt;&#39;a, K, V&gt;),
+pub enum Entry<'a, K: 'a, V: 'a> {
+    Occupied(OccupiedEntry<'a, K, V>),
+    Vacant(VacantEntry<'a, K, V>),
 }
 ```
 
@@ -126,20 +126,20 @@ x.or_insert_with(vec::new)
 `or_insert` 会在调用前对参数进行计算，所以不管 `x` 是哪个枚举子类型，`vec::new()` 都会被调用，而 `or_insert_with` 的参数是一个闭包，仅当 `x` 是 `Vacant` 时才会对参数进行调用操作，即 `vec::new()` 操作。
 
 ```rs
-pub fn or_insert(self, value: V) -&gt; &amp;&#39;a mut V {
+pub fn or_insert(self, value: V) -> &'a mut V {
     match self {
-        Entry::Occupied(e) =&gt; &amp;mut e.entry.1,
-        Entry::Vacant(e) =&gt; e.insert(value),
+        Entry::Occupied(e) => &mut e.entry.1,
+        Entry::Vacant(e) => e.insert(value),
     }
 }
 
-pub fn or_insert_with&lt;F&gt;(self, maker: F) -&gt; &amp;&#39;a mut V
+pub fn or_insert_with<F>(self, maker: F) -> &'a mut V
 where
-    F: FnOnce() -&gt; V,
+    F: FnOnce() -> V,
 {
     match self {
-        Entry::Occupied(e) =&gt; &amp;mut e.entry.1,
-        Entry::Vacant(e) =&gt; e.insert(maker()),
+        Entry::Occupied(e) => &mut e.entry.1,
+        Entry::Vacant(e) => e.insert(maker()),
     }
 }
 ```
@@ -147,16 +147,16 @@ where
 ### reborrow 
 
 ```rs
-pub fn entry(&amp;mut self, key: K) -&gt; Entry&lt;&#39;_, K, V&gt; {
-    let bucket = self.bucket(&amp;key);
+pub fn entry(&mut self, key: K) -> Entry<'_, K, V> {
+    let bucket = self.bucket(&key);
 
     match self.buckets[bucket]
         .items
         .iter_mut()
-        .find(|&amp;&amp; mut (ref ekey, _)| ekey == &amp;key)
+        .find(|&& mut (ref ekey, _)| ekey == &key)
     {
-        Some(index) =&gt; Entry::Occupied(OccupiedEntry { entry }),
-        None =&gt; Entry::Vacant(VacantEntry {
+        Some(index) => Entry::Occupied(OccupiedEntry { entry }),
+        None => Entry::Vacant(VacantEntry {
             key,
             map: self,
             bucket,
@@ -165,23 +165,23 @@ pub fn entry(&amp;mut self, key: K) -&gt; Entry&lt;&#39;_, K, V&gt; {
 }
 ```
 
-这个实作乍一看好像没有问题，但是注意 `match` 表达式让 `iter_mut()` 获得的可变引用的存活域为其接下来的 `{}` 内。但是需要注意的是，这个 `iter_mut()` 获得的可变引用是对该方法的 `&amp;mut self` 进行 reborrow 得来的，依据 reborrow 的规则，在 reborrow 得到的可变引用的使用范围内，不能使用被 reborrow 的可变引用 (这是为了向编译器保证同一时刻只会存在一个可变引用)。但是我们看到 `match` 表达式的 `None` 分支里，使用了被 reborrow 的可变引用 `self`，这违反了 reborrow 的规则，故而编译不通过。
+这个实作乍一看好像没有问题，但是注意 `match` 表达式让 `iter_mut()` 获得的可变引用的存活域为其接下来的 `{}` 内。但是需要注意的是，这个 `iter_mut()` 获得的可变引用是对该方法的 `&mut self` 进行 reborrow 得来的，依据 reborrow 的规则，在 reborrow 得到的可变引用的使用范围内，不能使用被 reborrow 的可变引用 (这是为了向编译器保证同一时刻只会存在一个可变引用)。但是我们看到 `match` 表达式的 `None` 分支里，使用了被 reborrow 的可变引用 `self`，这违反了 reborrow 的规则，故而编译不通过。
 
 正确实作如下，仅在 `Some` 和 `None` 分支才使用 reborrow，这样就不会违反 reborrow 的规则机制:
 
 ```rs
-pub fn entry(&amp;mut self, key: K) -&gt; Entry&lt;&#39;_, K, V&gt; {
-    let bucket = self.bucket(&amp;key);
+pub fn entry(&mut self, key: K) -> Entry<'_, K, V> {
+    let bucket = self.bucket(&key);
 
     match self.buckets[bucket]
         .items
         .iter()
-        .position(|&amp;(ref ekey, _)| ekey == &amp;key)
+        .position(|&(ref ekey, _)| ekey == &key)
     {
-        Some(index) =&gt; Entry::Occupied(OccupiedEntry {
-            entry: &amp;mut self.buckets[bucket].items[index],
+        Some(index) => Entry::Occupied(OccupiedEntry {
+            entry: &mut self.buckets[bucket].items[index],
         }),
-        None =&gt; Entry::Vacant(VacantEntry {
+        None => Entry::Vacant(VacantEntry {
             key,
             map: self,
             bucket,
@@ -196,47 +196,47 @@ pub fn entry(&amp;mut self, key: K) -&gt; Entry&lt;&#39;_, K, V&gt; {
 
 ## Homework
 
-{{&lt; admonition info &gt;}}
+{{< admonition info >}}
 
 - [x] 为 `HashMap` 实现 Trait [std::ops::Index](https://doc.rust-lang.org/std/ops/trait.Index.html)，使得下面这条语句编译通过:
 
-```rs {title=&#34;examples/std-1.rs&#34;}
-println!(&#34;Review for Jane: {}&#34;, book_reviews[&#34;Pride and Prejudice&#34;]);
+```rs {title="examples/std-1.rs"}
+println!("Review for Jane: {}", book_reviews["Pride and Prejudice"]);
 ```
 
 - [x] 为 `HashMap` 实现 method [and_modify](https://doc.rust-lang.org/std/collections/hash_map/enum.Entry.html#method.and_modify)，使得下面这条语句编译通过:
 
-```rs {title=&#34;examples/std-2.rs&#34;}
+```rs {title="examples/std-2.rs"}
 player_stats
-    .entry(&#34;mana&#34;)
-    .and_modify(|mana| *mana &#43;= 200)
+    .entry("mana")
+    .and_modify(|mana| *mana += 200)
     .or_insert(100);
 ```
 
 - [x] 为 `HashMap` 实现 Trait [std::convert::From](https://doc.rust-lang.org/std/convert/trait.From.html)，根据手册，只需要实现对数组类型 `[(K, V); N]`，使得下面的代码可以通过编译:
 
-```rs {title=&#34;examples/std-3.rs&#34;}
+```rs {title="examples/std-3.rs"}
 let vikings = HashMap::from([
-    (Viking::new(&#34;Einar&#34;, &#34;Norway&#34;), 25),
-    (Viking::new(&#34;Olaf&#34;, &#34;Denmark&#34;), 24),
-    (Viking::new(&#34;Harald&#34;, &#34;Iceland&#34;), 12),
+    (Viking::new("Einar", "Norway"), 25),
+    (Viking::new("Olaf", "Denmark"), 24),
+    (Viking::new("Harald", "Iceland"), 12),
 ]);
 ```
 
-```rs {title=&#34;examples/std-4.rs&#34;}
+```rs {title="examples/std-4.rs"}
 let solar_distance = HashMap::from([
-    (&#34;Mercury&#34;, 0.4),
-    (&#34;Venus&#34;, 0.7),
-    (&#34;Earth&#34;, 1.0),
-    (&#34;Mars&#34;, 1.5),
+    ("Mercury", 0.4),
+    ("Venus", 0.7),
+    ("Earth", 1.0),
+    ("Mars", 1.5),
 ]);
 ```
 
 - [x] 修正 `bucket` 方法，使得其对于空的 `HashMap` 也可以正常工作
 
 - [x] 在方法 [from_iter](https://doc.rust-lang.org/std/iter/trait.FromIterator.html#tymethod.from_iter) 的实作中采用对 `HashMap` 进行预分配的策略，增强该方法的效能 
-    &#43; Hint: [std::iter::Iterator::size_hint](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.size_hint)
-    &#43; Hint: [std::vec::Vec::with_capacity](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.with_capacity)
+    + Hint: [std::iter::Iterator::size_hint](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.size_hint)
+    + Hint: [std::vec::Vec::with_capacity](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.with_capacity)
 
 - [x] 为 `HashMap` 实现 [drain](https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html#method.drain) 方法
 
@@ -246,15 +246,15 @@ let solar_distance = HashMap::from([
 
 - [x] 为 `HashMap` 实现 [clear](https://doc.rust-lang.org/std/collections/hash_map/struct.HashMap.html#method.clear) 方法
 
-- [ ] 为 `HashMap` 实现 `&amp;mut` 的迭代器 ***这个很难，因为涉及到可变引用的生命周期***
+- [ ] 为 `HashMap` 实现 `&mut` 的迭代器 ***这个很难，因为涉及到可变引用的生命周期***
 
-{{&lt; /admonition &gt;}}
+{{< /admonition >}}
 
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
 
-&gt; 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
+> 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
 
 ### Crate [std](https://doc.rust-lang.org/std/index.html) 
 

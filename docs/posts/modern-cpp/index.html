@@ -29,8 +29,8 @@ As with all this-vs-that arguments, there are merits to both approaches. Modern 
 RAII standard library containers and algorithms templates metaprogramming exceptions Boost “Old” C&#43;&#43; tends to avoid these things due to a perceived lack of compiler support or run-time performance. Instead, you’ll find…
 lots of new and delete roll-your-own linked lists and other data structures return codes as a mechanism for error handling one of the millions of custom string classes that aren’t std::string As with all this-vs-that arguments, there are merits to both approaches. Modern C&#43;&#43; isn’t universally better. Embedded enviornments, for example, often require extra restrictions that most people never need, so you’ll see a lot of old-style code there. Overall though, I think you’ll find that most of the modern features are worth using regularly. Moore’s Law and compiler improvements have taken care of the majority of reasons to avoid the new stuff.">
   <meta itemprop="datePublished" content="2024-06-30T00:19:25+08:00">
-  <meta itemprop="dateModified" content="2024-09-05T15:35:38+08:00">
-  <meta itemprop="wordCount" content="24886">
+  <meta itemprop="dateModified" content="2024-09-15T19:22:05+08:00">
+  <meta itemprop="wordCount" content="24798">
   <meta itemprop="image" content="https://ccrysisa.github.io/logo.png">
   <meta itemprop="keywords" content="C&#43;&#43;,MSVC"><meta property="og:url" content="https://ccrysisa.github.io/posts/modern-cpp/">
   <meta property="og:site_name" content="KZnight&#39;s Blog">
@@ -42,7 +42,7 @@ lots of new and delete roll-your-own linked lists and other data structures retu
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-06-30T00:19:25+08:00">
-    <meta property="article:modified_time" content="2024-09-05T15:35:38+08:00">
+    <meta property="article:modified_time" content="2024-09-15T19:22:05+08:00">
     <meta property="article:tag" content="C&#43;&#43;">
     <meta property="article:tag" content="MSVC">
     <meta property="og:image" content="https://ccrysisa.github.io/logo.png">
@@ -67,8 +67,8 @@ lots of new and delete roll-your-own linked lists and other data structures retu
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/modern-cpp\/"
-    },"genre": "posts","keywords": "C\u002b\u002b, MSVC","wordcount":  24886 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/modern-cpp\/","datePublished": "2024-06-30T00:19:25+08:00","dateModified": "2024-09-05T15:35:38+08:00","publisher": {
+    },"genre": "posts","keywords": "C\u002b\u002b, MSVC","wordcount":  24798 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/modern-cpp\/","datePublished": "2024-06-30T00:19:25+08:00","dateModified": "2024-09-15T19:22:05+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -79,7 +79,7 @@ lots of new and delete roll-your-own linked lists and other data structures retu
   <body data-header-desktop="sticky" data-header-mobile="auto"><script>(window.localStorage?.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('data-theme', 'dark');</script><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
   <div class="header-wrapper">
     <div class="header-title">
-      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="KZnight&#39;s Blog" data-title="KZnight&#39;s Blog" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+      <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="KZnight&#39;s Blog" data-alt="KZnight&#39;s Blog" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
     <nav>
       <ul class="menu"><li class="menu-item">
               <a
@@ -125,7 +125,7 @@ lots of new and delete roll-your-own linked lists and other data structures retu
   <div class="header-container">
     <div class="header-wrapper">
       <div class="header-title">
-        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" alt="/fixit.min.svg" data-title="/fixit.min.svg" class="logo" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
+        <a href="/" title="KZnight&#39;s Blog"><img loading="lazy" src="/fixit.min.svg" data-title="/fixit.min.svg" data-alt="/fixit.min.svg" class="logo" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/><span class="header-title-text">KZnight&#39;s Blog</span></a><span class="header-subtitle"></span></div>
       <div class="menu-toggle" id="menu-toggle-mobile">
         <span></span><span></span><span></span>
       </div>
@@ -185,12 +185,18 @@ lots of new and delete roll-your-own linked lists and other data structures retu
   </div>
   <div class="search-dropdown mobile">
     <div id="search-dropdown-mobile"></div>
-  </div><main class="container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+  </div><main class="container"><aside class="toc" id="toc-auto"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside>
+
+  <aside class="aside-custom">
+    </aside>
 
   <article class="page single">
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span title="转载" class="icon-repost"><i class="fa-solid fa-share fa-fw" aria-hidden="true"></i></span><span>Modern C&#43;&#43; (MSVC)</span>
       </h1></div><div class="post-meta">
-      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" alt="vanJker" data-title="vanJker" class="avatar" style="background: url(/images/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;for(const i of ['style', 'data-title','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/c++/" class="post-category" title="分类 - C++"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C++</a></span></div><div class="post-meta-line"><span title="发布于 2024-06-30 00:19:25"><i class="fa-solid fa-calendar-days fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-30">2024-06-30</time></span>&nbsp;<span title="更新于 2024-09-05 15:35:38"><i class="fa-regular fa-calendar-check fa-fw me-1" aria-hidden="true"></i><time datetime="2024-09-05">2024-09-05</time></span>&nbsp;<span title="24886 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 24900 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 50 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span class="post-author"><a href="https://github.com/vanJker" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/88960102?s=96&amp;v=4" data-title="vanJker" data-alt="vanJker" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;vanJker</a></span>
+          <span class="post-category">收录于 <a href="/categories/c++/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> C++</a></span></div>
+      <div class="post-meta-line"><span title="发布于 2024-06-30 00:19:25"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-06-30">2024-06-30</time></span>&nbsp;<span title="更新于 2024-09-15 19:22:05"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-09-15">2024-09-15</time></span>&nbsp;<span title="24798 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 24800 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 50 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -451,8 +457,8 @@ lots of new and delete roll-your-own linked lists and other data structures retu
       <div class="admonition-content">写出好的 C++ 代码，而不是炫耀你所会的 C++ 的特性。不要为了炫技而炫技！</div>
     </div>
   </div>
-<h2 id="toolchain" class="heading-element">
-  <a href="#toolchain" class="heading-mark"></a>Toolchain</h2><p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Toolchain"target="_blank" rel="external nofollow noopener noreferrer">Toolchain</a></p>
+<h2 id="toolchain">Toolchain</h2>
+<p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Toolchain"target="_blank" rel="external nofollow noopener noreferrer">Toolchain</a></p>
 <ul>
 <li><a href="https://godbolt.org/"target="_blank" rel="external nofollow noopener noreferrer">Compiler Exploer</a></li>
 <li>OS: Windows 10</li>
@@ -468,9 +474,9 @@ lots of new and delete roll-your-own linked lists and other data structures retu
 <li><a href="https://cppcheck.sourceforge.io/"target="_blank" rel="external nofollow noopener noreferrer">Cppcheck</a> 2.13 Win64</li>
 <li><a href="https://mh-nexus.de/en/hxd/"target="_blank" rel="external nofollow noopener noreferrer">HxD</a> Editor</li>
 </ul>
-<h3 id="compiler" class="heading-element">
-  <a href="#compiler" class="heading-mark"></a>Compiler</h3><h4 id="preprocess" class="heading-element">
-  <a href="#preprocess" class="heading-mark"></a>Preprocess</h4><blockquote>
+<h3 id="compiler">Compiler</h3>
+<h4 id="preprocess">Preprocess</h4>
+<blockquote>
 <p>Visual Studio 2019
 $\rightarrow$
 右键项目然后 properties
@@ -480,8 +486,8 @@ $\rightarrow$
 Preprocess to File (Yes)</p>
 </blockquote>
 <p>编译 / 构建后可以得到产生后缀为 <code>.i</code> 的预处理中间文件</p>
-<h4 id="conditional-compilation" class="heading-element">
-  <a href="#conditional-compilation" class="heading-mark"></a>Conditional Compilation</h4><ul>
+<h4 id="conditional-compilation">Conditional Compilation</h4>
+<ul>
 <li>Wikipedia: <a href="https://en.wikipedia.org/wiki/Conditional_compilation"target="_blank" rel="external nofollow noopener noreferrer">Conditional compilation</a></li>
 </ul>
 <div class="highlight" id="id-1"><div class="chroma">
@@ -499,8 +505,8 @@ Preprocess to File (Yes)</p>
 </span></span></span><span class="line"><span class="cl"><span class="cp"></span>  <span class="p">...</span>
 </span></span><span class="line"><span class="cl"><span class="cp">#endif</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="assembly" class="heading-element">
-  <a href="#assembly" class="heading-mark"></a>Assembly</h4><blockquote>
+</div><h4 id="assembly">Assembly</h4>
+<blockquote>
 <p>Visual Studio 2019
 $\rightarrow$
 右键项目然后 properties
@@ -512,8 +518,8 @@ $\rightarrow$
 Assembler Output (Assembly-Only Listing)</p>
 </blockquote>
 <p>编译 / 构建后可以得到后缀为 <code>.asm</code> 的汇编文件</p>
-<h4 id="optimization" class="heading-element">
-  <a href="#optimization" class="heading-mark"></a>Optimization</h4><blockquote>
+<h4 id="optimization">Optimization</h4>
+<blockquote>
 <p>Visual Studio 2019
 $\rightarrow$
 右键项目然后 properties
@@ -537,8 +543,8 @@ Optimization (Maximize Speed)</p>
 </div>
     </div>
   </div>
-<h3 id="linker" class="heading-element">
-  <a href="#linker" class="heading-mark"></a>Linker</h3><p>Linker 的一个重要作用是 <strong>定位程序的入口 (entry point)</strong>，所以对于单源文件的项目来说，Linker 也会起作用</p>
+<h3 id="linker">Linker</h3>
+<p>Linker 的一个重要作用是 <strong>定位程序的入口 (entry point)</strong>，所以对于单源文件的项目来说，Linker 也会起作用</p>
 <div class="details admonition note open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -548,12 +554,12 @@ Optimization (Maximize Speed)</p>
     </div>
   </div>
 <p>解决函数重复定义这个问题，可以给其中一个函数的签名加上 <code>static</code> 或 <code>inline</code> 的修饰</p>
-<h3 id="debug" class="heading-element">
-  <a href="#debug" class="heading-mark"></a>Debug</h3><p>调试时相关信息的窗口在「调试 $\rightarrow$ 窗口」处可以开启显示</p>
+<h3 id="debug">Debug</h3>
+<p>调试时相关信息的窗口在「调试 $\rightarrow$ 窗口」处可以开启显示</p>
 <p>在内存查看窗口，可以通过 <code>&amp;var</code> (<code>var</code> 为当前上下文变量的名字) 来快速获取该变量对应的地址，以及查看该地址所所储存的值</p>
 <p>调试过程中，通过「右键 $\rightarrow$ 转到反汇编」即可查看对应的汇编代码</p>
-<h4 id="contional-and-action-breakpoints" class="heading-element">
-  <a href="#contional-and-action-breakpoints" class="heading-mark"></a>Contional and Action Breakpoints</h4><p>Microsoft Learn: <a href="https://learn.microsoft.com/en-us/visualstudio/debugger/using-breakpoints?view=vs-2022"target="_blank" rel="external nofollow noopener noreferrer">Use breakpoints in the Visual Studio debugger</a></p>
+<h4 id="contional-and-action-breakpoints">Contional and Action Breakpoints</h4>
+<p>Microsoft Learn: <a href="https://learn.microsoft.com/en-us/visualstudio/debugger/using-breakpoints?view=vs-2022"target="_blank" rel="external nofollow noopener noreferrer">Use breakpoints in the Visual Studio debugger</a></p>
 <ul>
 <li><strong>Breakpoint conditions</strong></li>
 </ul>
@@ -566,8 +572,8 @@ Optimization (Maximize Speed)</p>
 <blockquote>
 <p>A tracepoint is a breakpoint that prints a message to the Output window. A tracepoint can act like a temporary trace statement in the programming language and does not pause the execution of code. You create a tracepoint by setting a special action in the Breakpoint Settings window.</p>
 </blockquote>
-<h3 id="projects" class="heading-element">
-  <a href="#projects" class="heading-mark"></a>Projects</h3><p>filter 类似于一种虚拟的文件系统组织，不过只能在 VS 才能表示为层次形式 (通过解析 XML 格式的配置文件)，在主机的文件系统上没有影响</p>
+<h3 id="projects">Projects</h3>
+<p>filter 类似于一种虚拟的文件系统组织，不过只能在 VS 才能表示为层次形式 (通过解析 XML 格式的配置文件)，在主机的文件系统上没有影响</p>
 <p>解决方案栏的「显示所有文件」可以展示当前 Project 在主机文件系统下的组织层次结构，也可以在这个视图下创建目录 / 文件，这样也会在主机文件系统创建对应的目录 / 文件</p>
 <p>主机文件系统和 VS 的虚拟项目组织是解耦的，所以在主机移动源文件并不会影响其在 VS 的虚拟项目组织所在的位置</p>
 <p>VS 默认设置是将构建 / 编译得到的中间文件放在 Project 的 Debug 目录，但是得到的可执行文件却放在 Solution 的 Debug 目录下，这十分奇怪。可以通过修改 <strong>Project 的属性</strong> (右键选择属性这一选项) 里的输出目录，使得其与中间目录一致为 <code>$(Configuration)\</code>。也可以将 Solution 内的全部 Projects 的可执行文件均放置在 Solution 下的同一目录</p>
@@ -605,8 +611,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">                    |__ Platform
 </span></span><span class="line"><span class="cl">                            |__ Configuration</span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="managing-multiple-projects-and-libraries" class="heading-element">
-  <a href="#managing-multiple-projects-and-libraries" class="heading-mark"></a>Managing Multiple Projects and Libraries</h4><p>同一 Solution 创建多个 Project:</p>
+</div><h4 id="managing-multiple-projects-and-libraries">Managing Multiple Projects and Libraries</h4>
+<p>同一 Solution 创建多个 Project:</p>
 <ul>
 <li>Solution 资源管理器 -&gt; 右击 Solution 名称 -&gt; Add (<strong>New Project</strong>)</li>
 </ul>
@@ -625,8 +631,8 @@ Optimization (Maximize Speed)</p>
       <div class="admonition-content">这个设定 Include 目录的过程实际上也设置了 Projects 之间的依赖关系 (某种意义上的 CMake，VS 是使用 sln 来管理包和代码库的)</div>
     </div>
   </div>
-<h3 id="libraries" class="heading-element">
-  <a href="#libraries" class="heading-mark"></a>Libraries</h3><ul>
+<h3 id="libraries">Libraries</h3>
+<ul>
 <li>Unix 哲学: 自己编译代码进行构建 (例如 <a href="https://www.linuxfromscratch.org/lfs/"target="_blank" rel="external nofollow noopener noreferrer">LFS</a>)</li>
 <li>Windows 哲学: 能用就行，最好双击就可运行 &#x1f923;</li>
 </ul>
@@ -668,8 +674,8 @@ Optimization (Maximize Speed)</p>
 </ul>
 </li>
 </ol>
-<h4 id="static-linking" class="heading-element">
-  <a href="#static-linking" class="heading-mark"></a>Static Linking</h4><p>在 Linker -&gt; input -&gt; Addtional Dependencies 处添加相对于之前依赖库目录的静态库文件路径: <code>glfw3.lib</code> (注意这里的依赖项不能包含相应的动态库相关文件)</p>
+<h4 id="static-linking">Static Linking</h4>
+<p>在 Linker -&gt; input -&gt; Addtional Dependencies 处添加相对于之前依赖库目录的静态库文件路径: <code>glfw3.lib</code> (注意这里的依赖项不能包含相应的动态库相关文件)</p>
 <div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -691,8 +697,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="c1">// ouput 1
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="dynamic-linking" class="heading-element">
-  <a href="#dynamic-linking" class="heading-mark"></a>Dynamic Linking</h4><div class="details admonition quote open">
+</div><h4 id="dynamic-linking">Dynamic Linking</h4>
+<div class="details admonition quote open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-quote-right fa-fw" aria-hidden="true"></i>引用<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -726,17 +732,17 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="c1">// ouput 1
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="continuous-integration-ci" class="heading-element">
-  <a href="#continuous-integration-ci" class="heading-mark"></a>Continuous Integration (CI)</h3><ul>
+</div><h3 id="continuous-integration-ci">Continuous Integration (CI)</h3>
+<ul>
 <li><a href="https://www.jenkins.io/"target="_blank" rel="external nofollow noopener noreferrer">Jenkins</a>: Build great things at any scale</li>
 </ul>
-<h3 id="static-analysis" class="heading-element">
-  <a href="#static-analysis" class="heading-mark"></a>Static Analysis</h3><ul>
+<h3 id="static-analysis">Static Analysis</h3>
+<ul>
 <li><a href="https://pvs-studio.com/en/pvs-studio/"target="_blank" rel="external nofollow noopener noreferrer">PVS-Studio</a> is a static analyzer on guard of code quality, security (SAST), and code safety</li>
 <li><a href="https://clang.llvm.org/extra/clang-tidy/"target="_blank" rel="external nofollow noopener noreferrer">Clang-Tidy</a> is a clang-based C++ “linter” tool. Its purpose is to provide an extensible framework for diagnosing and fixing typical programming errors, like style violations, interface misuse, or bugs that can be deduced via static analysis.</li>
 </ul>
-<h2 id="header-file" class="heading-element">
-  <a href="#header-file" class="heading-mark"></a>Header File</h2><p>Header Guard:</p>
+<h2 id="header-file">Header File</h2>
+<p>Header Guard:</p>
 <div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -779,8 +785,8 @@ Optimization (Maximize Speed)</p>
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;../HEADER.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;../include/HEADER.h&#34;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="precompiled-headers" class="heading-element">
-  <a href="#precompiled-headers" class="heading-mark"></a>Precompiled Headers</h3><p>预编译头文件会使得 C++ 头文件 (特别是 STL) 达到类似模块的效果，即头文件本身也是一个编译单元，这样就不会因为我们自己编写的源文件修改了，而一遍一遍的解析其所引用的头文件然后进行全部编译，这样会提升我们项目的编译速度。如果你关心编译时间，那一定要使用预编译头文件。</p>
+</div><h3 id="precompiled-headers">Precompiled Headers</h3>
+<p>预编译头文件会使得 C++ 头文件 (特别是 STL) 达到类似模块的效果，即头文件本身也是一个编译单元，这样就不会因为我们自己编写的源文件修改了，而一遍一遍的解析其所引用的头文件然后进行全部编译，这样会提升我们项目的编译速度。如果你关心编译时间，那一定要使用预编译头文件。</p>
 <p>但是不要往预编译头文件中添加那些会被经常修改的东西，这样会导致该头文件会被重新编译，同样会延长编译时间。推荐将不常修改的东西放入至预编译头文件当中，并且是被很多源文件所需要的外部依赖，例如 STL。对于被源文件需要较少的外部依赖，例如 ImGui 需要的外部依赖 GLFW。推荐使用 Linker 设定而不是 PCH。</p>
 <p>下面这个头文件在预处理后足足有 40 万行，如果不使用预编译头文件，又被多个源文件引用了该头文件，那么编译时间会极其恐怖:</p>
 <div class="highlight" id="id-10"><div class="chroma">
@@ -903,8 +909,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">user    0m0.000s
 </span></span><span class="line"><span class="cl">sys     0m0.030s</span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="pointers-and-references" class="heading-element">
-  <a href="#pointers-and-references" class="heading-mark"></a>Pointers and References</h2><blockquote>
+</div><h2 id="pointers-and-references">Pointers and References</h2>
+<blockquote>
 <p><em><strong>这两大主题可以使用 VS 调试功能的查看内存窗口进行实践</strong></em></p>
 </blockquote>
 <ul>
@@ -1013,8 +1019,8 @@ Optimization (Maximize Speed)</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ref</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>      <span class="c1">// set a&#39;s value to be b&#39;s value (8)!!!
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="function-pointers" class="heading-element">
-  <a href="#function-pointers" class="heading-mark"></a>Function Pointers</h3><ul>
+</div><h3 id="function-pointers">Function Pointers</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/pointer"target="_blank" rel="external nofollow noopener noreferrer">Pointer declaration</a> - <strong>Pointers to functions</strong></li>
 </ul>
 <blockquote>
@@ -1111,8 +1117,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">ForEach</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">PrintValue</span><span class="p">);</span> <span class="c1">// should print 1, 5, 4, 2, 3 line by line
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="lambdas" class="heading-element">
-  <a href="#lambdas" class="heading-mark"></a>Lambdas</h3><ul>
+</div><h3 id="lambdas">Lambdas</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/lambda"target="_blank" rel="external nofollow noopener noreferrer">Lambda expressions (since C++11)</a></li>
 </ul>
 <blockquote>
@@ -1208,9 +1214,9 @@ Optimization (Maximize Speed)</p>
 <blockquote>
 <p>A function object is any object for which the function call operator is defined. C++ provides many built-in function objects as well as support for creation and manipulation of new function objects.</p>
 </blockquote>
-<h2 id="object-oriented-programming" class="heading-element">
-  <a href="#object-oriented-programming" class="heading-mark"></a>Object-Oriented Programming</h2><h3 id="class-and-struct" class="heading-element">
-  <a href="#class-and-struct" class="heading-mark"></a>Class and Struct</h3><p>C++ 的 Class 和 Struct 是相同的东西，只不过 Class 默认成员字段的外部可见性为 private，而 Struct 默认成员字段的外部可见性为 public，仅仅只有这个区别而已。</p>
+<h2 id="object-oriented-programming">Object-Oriented Programming</h2>
+<h3 id="class-and-struct">Class and Struct</h3>
+<p>C++ 的 Class 和 Struct 是相同的东西，只不过 Class 默认成员字段的外部可见性为 private，而 Struct 默认成员字段的外部可见性为 public，仅仅只有这个区别而已。</p>
 <blockquote>
 <p>The data members of a class are private by default and the members of a structure are public by default.</p>
 </blockquote>
@@ -1414,8 +1420,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="enum" class="heading-element">
-  <a href="#enum" class="heading-mark"></a>Enum</h3><ul>
+</div><h3 id="enum">Enum</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/enum"target="_blank" rel="external nofollow noopener noreferrer">Enumeration declaration</a></li>
 </ul>
 <div class="highlight" id="id-25"><div class="chroma">
@@ -1441,8 +1447,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">Example</span> <span class="n">value</span> <span class="o">=</span> <span class="n">B</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="visibility" class="heading-element">
-  <a href="#visibility" class="heading-mark"></a>Visibility</h3><ul>
+</div><h3 id="visibility">Visibility</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/access"target="_blank" rel="external nofollow noopener noreferrer">Access specifiers</a></li>
 </ul>
 <blockquote>
@@ -1459,8 +1465,8 @@ Optimization (Maximize Speed)</p>
 <ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/224966/what-is-the-difference-between-private-and-protected-members-of-c-classes"target="_blank" rel="external nofollow noopener noreferrer">What is the difference between private and protected members of C++ classes?</a></li>
 </ul>
-<h3 id="constructor-and-destructor" class="heading-element">
-  <a href="#constructor-and-destructor" class="heading-mark"></a>Constructor and Destructor</h3><div class="highlight" id="id-26"><div class="chroma">
+<h3 id="constructor-and-destructor">Constructor and Destructor</h3>
+<div class="highlight" id="id-26"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1607,8 +1613,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">Func</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="member-initializer-lists" class="heading-element">
-  <a href="#member-initializer-lists" class="heading-mark"></a>Member Initializer Lists</h4><ul>
+</div><h4 id="member-initializer-lists">Member Initializer Lists</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/constructor"target="_blank" rel="external nofollow noopener noreferrer">Constructors and member initializer lists</a></li>
 </ul>
 <div class="highlight" id="id-29"><div class="chroma">
@@ -1640,7 +1646,7 @@ Optimization (Maximize Speed)</p>
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>使用 <em>初始化参数列表</em> 会节约性能，不会丢弃默认构造的对象，具体见视频的例子。原理也很简单，初始化参数列表是在执行函数体之前进行初始化的，不会事先创建对象。而如果在函数体内对对象进行赋值，因为不论是否在初始化参数列表中是否指定了成员变量，编译器都会在执行函数体之前先对每个成员变量进行构造 (当然初始化参数列表指定的就按列表构造)，导致在函数体内对成员变量赋值时，会丢掉先前构造好的对象，从而导致性能损失。(这很好理解，因为 Rust 要求构造对象时必须指定所有成员的值，C++ 的初始化列表的作用是类似的，给对象的每个成员都分配值，这样构造函数就无需指定每个成员的值了)</p>
-<div class="highlight" id="id-159"><div class="chroma">
+<div class="highlight" id="id-30"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -1690,8 +1696,8 @@ Optimization (Maximize Speed)</p>
 </div></div>
     </div>
   </div>
-<h4 id="copy-constructors" class="heading-element">
-  <a href="#copy-constructors" class="heading-mark"></a>Copy Constructors</h4><ul>
+<h4 id="copy-constructors">Copy Constructors</h4>
+<ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/184710/what-is-the-difference-between-a-deep-copy-and-a-shallow-copy"target="_blank" rel="external nofollow noopener noreferrer">What is the difference between a deep copy and a shallow copy?</a></li>
 </ul>
 <blockquote>
@@ -1859,8 +1865,8 @@ Optimization (Maximize Speed)</p>
       <div class="admonition-content">复制构造 (Copy Structor) 和引用 (Reference) 的联系也比较紧密，因为一般情况下进行函数调用，不使用引用的话，会进行复制操作 (可以通过观察复制构造函数的调用)，这会造成性能损耗。所以一般情况下建议使用常量引用 (<code>const Type&amp;</code>) 以避免不必要的性能损耗 (当然这样你在函数内部也可以决定是否进行复制操作，并没有限制了不能使用复制)，但是某些场景下使用复制会更快，这时候就需要进行衡量了。</div>
     </div>
   </div>
-<h4 id="virtual-destructors" class="heading-element">
-  <a href="#virtual-destructors" class="heading-mark"></a>Virtual Destructors</h4><ul>
+<h4 id="virtual-destructors">Virtual Destructors</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/destructor"target="_blank" rel="external nofollow noopener noreferrer">Destructors</a> - <strong>Virtual destructors</strong></li>
 </ul>
 <blockquote>
@@ -1961,8 +1967,8 @@ Optimization (Maximize Speed)</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// Base Destructor
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="inheritance-and-polymorphism" class="heading-element">
-  <a href="#inheritance-and-polymorphism" class="heading-mark"></a>Inheritance and Polymorphism</h3><ul>
+</div><h3 id="inheritance-and-polymorphism">Inheritance and Polymorphism</h3>
+<ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/6308178/what-is-the-main-difference-between-inheritance-and-polymorphism"target="_blank" rel="external nofollow noopener noreferrer">What is the main difference between Inheritance and Polymorphism?</a></li>
 </ul>
 <blockquote>
@@ -2036,8 +2042,8 @@ Optimization (Maximize Speed)</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Player</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="c1">// output 12 which equal 8 + sizeof(char*)
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="virtual-function" class="heading-element">
-  <a href="#virtual-function" class="heading-mark"></a>Virtual Function</h4><ul>
+</div><h4 id="virtual-function">Virtual Function</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/virtual"target="_blank" rel="external nofollow noopener noreferrer">virtual function specifier</a></li>
 </ul>
 <blockquote>
@@ -2146,8 +2152,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">GetClassName</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="s">&#34;Player&#34;</span><span class="p">;</span> <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="objects" class="heading-element">
-  <a href="#objects" class="heading-mark"></a>Objects</h3><p>将对象 Object 分配在栈 Stack 上的方式:</p>
+</div><h3 id="objects">Objects</h3>
+<p>将对象 Object 分配在栈 Stack 上的方式:</p>
 <div class="highlight" id="id-37"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2210,8 +2216,8 @@ Optimization (Maximize Speed)</p>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/delete"target="_blank" rel="external nofollow noopener noreferrer">delete expression</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/memory/new/operator_delete"target="_blank" rel="external nofollow noopener noreferrer">operator delete, operator delete[]</a></li>
 </ul>
-<h4 id="this" class="heading-element">
-  <a href="#this" class="heading-mark"></a>this</h4><ul>
+<h4 id="this">this</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/this"target="_blank" rel="external nofollow noopener noreferrer">The this pointer</a></li>
 </ul>
 <blockquote>
@@ -2261,8 +2267,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="singleton" class="heading-element">
-  <a href="#singleton" class="heading-mark"></a>Singleton</h3><div class="highlight" id="id-40"><div class="chroma">
+</div><h3 id="singleton">Singleton</h3>
+<div class="highlight" id="id-40"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -2378,10 +2384,10 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>使用 namepsace 也可以实现 Singleton，但是相对于 Class 方式灵活性更低，因为少了 <code>private</code>, <code>public</code> 这类可见性修饰符。</p>
-<h2 id="specifiers" class="heading-element">
-  <a href="#specifiers" class="heading-mark"></a>Specifiers</h2><h3 id="static" class="heading-element">
-  <a href="#static" class="heading-mark"></a>Static</h3><h4 id="static-vs-extern" class="heading-element">
-  <a href="#static-vs-extern" class="heading-mark"></a>Static vs. Extern</h4><ul>
+<h2 id="specifiers">Specifiers</h2>
+<h3 id="static">Static</h3>
+<h4 id="static-vs-extern">Static vs. Extern</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/keyword/static"target="_blank" rel="external nofollow noopener noreferrer">C++ keyword: static</a></li>
 </ul>
 <blockquote>
@@ -2451,8 +2457,8 @@ Optimization (Maximize Speed)</p>
       <div class="admonition-content">尽量不要使用全局变量 (Global Variable) 除非你有必要的理由，一般情况下应当使用 <code>static</code> 修饰位于文件作用域的变量 (即变量所在的作用域和函数相同)，使其仅在当前的 Transilation Unit 进行内部链接</div>
     </div>
   </div>
-<h4 id="local-static" class="heading-element">
-  <a href="#local-static" class="heading-mark"></a>Local Static</h4><ul>
+<h4 id="local-static">Local Static</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/static"target="_blank" rel="external nofollow noopener noreferrer">static members</a></li>
 </ul>
 <blockquote>
@@ -2584,8 +2590,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">Singleton</span><span class="o">::</span><span class="n">Get</span><span class="p">().</span><span class="n">Hello</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="const" class="heading-element">
-  <a href="#const" class="heading-mark"></a>Const</h3><ul>
+</div><h3 id="const">Const</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/keyword/const"target="_blank" rel="external nofollow noopener noreferrer">C++ keyword: const</a></li>
 </ul>
 <p>C++ 中的 <code>const</code> 关键字只是一种弱承诺，可以通过解引用来绕开 (不过这也取决于编译器，有些编译器会把 <code>const</code> 修饰的数据设置为只读，这样即使可以绕开但会执行时造成程序崩溃):</p>
@@ -2688,8 +2694,8 @@ Optimization (Maximize Speed)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">e</span><span class="p">.</span><span class="n">GetX</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="mutable" class="heading-element">
-  <a href="#mutable" class="heading-mark"></a>Mutable</h3><ul>
+</div><h3 id="mutable">Mutable</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/keyword/mutable"target="_blank" rel="external nofollow noopener noreferrer">C++ keyword: mutable</a></li>
 </ul>
 <p>在 Class 或 Struct 的 <code>const</code> 修饰的方法中使用，使得该方法能修改被 <code>mutable</code> 的成员变量</p>
@@ -2765,8 +2771,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="p">...</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="explicit" class="heading-element">
-  <a href="#explicit" class="heading-mark"></a>Explicit</h3><p>隐式转换一般不建议用，因为表达不够清晰，会造成误解，特别是用在构造函数 Constructor 上，例如下面是完全合法的 C++ 代码:</p>
+</div><h3 id="explicit">Explicit</h3>
+<p>隐式转换一般不建议用，因为表达不够清晰，会造成误解，特别是用在构造函数 Constructor 上，例如下面是完全合法的 C++ 代码:</p>
 <div class="highlight" id="id-54"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -2836,8 +2842,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Entity</span> <span class="n">entity</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span>      <span class="c1">// Error! Now it is not allowed
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="auto" class="heading-element">
-  <a href="#auto" class="heading-mark"></a>Auto</h3><ul>
+</div><h3 id="auto">Auto</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/auto"target="_blank" rel="external nofollow noopener noreferrer">Placeholder type specifiers (since C++11)</a></li>
 </ul>
 <p>在函数 API 返回场景处使用，这样就不需要因为 API 改变而手动修改返回值的类型标注:</p>
@@ -2963,9 +2969,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="k">auto</span> <span class="nf">GetName</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="p">{}</span>
 </span></span><span class="line"><span class="cl"><span class="k">auto</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="operators" class="heading-element">
-  <a href="#operators" class="heading-mark"></a>Operators</h2><h3 id="ternary-operators" class="heading-element">
-  <a href="#ternary-operators" class="heading-mark"></a>Ternary Operators</h3><p>C++ 中的 <code>?</code> 和 <code>:</code> 搭配的三元运算符存在的本质原因是，C++ 中的 if-else 控制流是语句 (statement) 而不是表达式 (expression)，所以需要功能类似于 if-else 的三元运算表达式来增强语言的表达能力 (否则表达会十分冗余，还会有额外开销，因为没有返回值优化，会产生中间临时数据)，如果是 Rust 这样的表达式为主的语言，就不需要这种三元运算符了</p>
+</div><h2 id="operators">Operators</h2>
+<h3 id="ternary-operators">Ternary Operators</h3>
+<p>C++ 中的 <code>?</code> 和 <code>:</code> 搭配的三元运算符存在的本质原因是，C++ 中的 if-else 控制流是语句 (statement) 而不是表达式 (expression)，所以需要功能类似于 if-else 的三元运算表达式来增强语言的表达能力 (否则表达会十分冗余，还会有额外开销，因为没有返回值优化，会产生中间临时数据)，如果是 Rust 这样的表达式为主的语言，就不需要这种三元运算符了</p>
 <div class="highlight" id="id-61"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -3006,8 +3012,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="mi">5</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="arrow-operator" class="heading-element">
-  <a href="#arrow-operator" class="heading-mark"></a>Arrow Operator</h3><p>可以通过 <code>-&gt;</code> 运算符来计算某个 Class / Struct 对象的成员的偏移值:</p>
+</div><h3 id="arrow-operator">Arrow Operator</h3>
+<p>可以通过 <code>-&gt;</code> 运算符来计算某个 Class / Struct 对象的成员的偏移值:</p>
 <div class="highlight" id="id-63"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3041,8 +3047,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/15832301/understanding-container-of-macro-in-the-linux-kernel"target="_blank" rel="external nofollow noopener noreferrer">Understanding container_of macro in the Linux kernel</a></li>
 </ul>
-<h3 id="overloading" class="heading-element">
-  <a href="#overloading" class="heading-mark"></a>Overloading</h3><ul>
+<h3 id="overloading">Overloading</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/operators"target="_blank" rel="external nofollow noopener noreferrer">operator overloading</a></li>
 </ul>
 <div class="highlight" id="id-64"><div class="chroma">
@@ -3175,7 +3181,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/5368258/the-copy-constructor-and-assignment-operator"target="_blank" rel="external nofollow noopener noreferrer">The copy constructor and assignment operator</a></li>
 </ul>
-<div class="highlight" id="id-160"><div class="chroma">
+<div class="highlight" id="id-31"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -3190,9 +3196,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div></div>
     </div>
   </div>
-<h2 id="templates-and-containers" class="heading-element">
-  <a href="#templates-and-containers" class="heading-mark"></a>Templates and Containers</h2><h3 id="templates" class="heading-element">
-  <a href="#templates" class="heading-mark"></a>Templates</h3><div class="details admonition tip open">
+<h2 id="templates-and-containers">Templates and Containers</h2>
+<h3 id="templates">Templates</h3>
+<div class="details admonition tip open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-lightbulb fa-fw" aria-hidden="true"></i>技巧<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
     </div>
@@ -3314,10 +3320,10 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">array</span><span class="p">.</span><span class="n">GetSize</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span> <span class="c1">// should be 5
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="containers" class="heading-element">
-  <a href="#containers" class="heading-mark"></a>Containers</h3><h4 id="array" class="heading-element">
-  <a href="#array" class="heading-mark"></a>Array</h4><h5 id="array-1" class="heading-element">
-  <a href="#array-1" class="heading-mark"></a>array</h5><ul>
+</div><h3 id="containers">Containers</h3>
+<h4 id="array">Array</h4>
+<h5 id="array-1">array</h5>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/array"target="_blank" rel="external nofollow noopener noreferrer">Array declaration</a></li>
 </ul>
 <div class="highlight" id="id-69"><div class="chroma">
@@ -3417,8 +3423,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="c1">// UB!
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="stdarray" class="heading-element">
-  <a href="#stdarray" class="heading-mark"></a>std::array</h5><ul>
+</div><h5 id="stdarray">std::array</h5>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/container/array"target="_blank" rel="external nofollow noopener noreferrer">std::array</a></li>
 </ul>
 <blockquote>
@@ -3487,7 +3493,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>这是因为常量模板规则，在编译时期即可确定 <code>size()</code> 函数的具体实现了，无需额外存储变量:</p>
-<div class="highlight" id="id-161"><div class="chroma">
+<div class="highlight" id="id-32"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -3518,8 +3524,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
     </div>
   </div>
-<h5 id="multidimensional-arrays" class="heading-element">
-  <a href="#multidimensional-arrays" class="heading-mark"></a>Multidimensional Arrays</h5><div class="highlight" id="id-75"><div class="chroma">
+<h5 id="multidimensional-arrays">Multidimensional Arrays</h5>
+<div class="highlight" id="id-75"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -3622,8 +3628,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>尽量避免使用二维数组 (以及二维以上维度)，推荐将其转换为等价的一维数组，利用 cache 的特性增强性能。</p>
-<h4 id="string" class="heading-element">
-  <a href="#string" class="heading-mark"></a>String</h4><ul>
+<h4 id="string">String</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/string/basic_string"target="_blank" rel="external nofollow noopener noreferrer">std::basic_string</a></li>
 <li><a href="https://www.ascii-code.com/"target="_blank" rel="external nofollow noopener noreferrer">ASCII Table</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/string/basic_string/npos"target="_blank" rel="external nofollow noopener noreferrer">std::basic_string&lt;CharT,Traits,Allocator&gt;::npos</a></li>
@@ -3697,8 +3703,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
     </div>
   </div>
-<h5 id="char-types" class="heading-element">
-  <a href="#char-types" class="heading-mark"></a>Char Types</h5><ul>
+<h5 id="char-types">Char Types</h5>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/types"target="_blank" rel="external nofollow noopener noreferrer">Fundamental types</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/keyword/wchar_t"target="_blank" rel="external nofollow noopener noreferrer">C++ keyword: wchar_t</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/keyword/char16_t"target="_blank" rel="external nofollow noopener noreferrer">C++ keyword: char16_t (since C++11)</a> / <a href="https://en.cppreference.com/w/c/string/multibyte/char16_t"target="_blank" rel="external nofollow noopener noreferrer">char16_t</a></li>
@@ -3731,8 +3737,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
       <div class="admonition-content"><code>char</code> 类型的具体字节数是由操作系统额 CPU 架构来决定的，如果需要跨系统使用固定字节数的字符类型，请按需使用 <code>wchar_t</code>, <code>char16_t</code> 和 <code>char32_t</code></div>
     </div>
   </div>
-<h5 id="string-literals" class="heading-element">
-  <a href="#string-literals" class="heading-mark"></a>String Literals</h5><ul>
+<h5 id="string-literals">String Literals</h5>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/string_literal"target="_blank" rel="external nofollow noopener noreferrer">String literal</a></li>
 </ul>
 <blockquote>
@@ -3758,8 +3764,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">raw</span> <span class="o">=</span> <span class="s">&#34;hello</span><span class="se">\n</span><span class="s">Ap</span><span class="se">\t</span><span class="s">ple&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="optimization-1" class="heading-element">
-  <a href="#optimization-1" class="heading-mark"></a>Optimization</h5><p>C++ 的 string 低效原因主要是它会经常进行分配操作，可以通过重载 <code>new</code> 运算符来观察:</p>
+</div><h5 id="optimization-1">Optimization</h5>
+<p>C++ 的 string 低效原因主要是它会经常进行分配操作，可以通过重载 <code>new</code> 运算符来观察:</p>
 <div class="highlight" id="id-81"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3852,8 +3858,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&#34;Hello World&#34;</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h6 id="sso" class="heading-element">
-  <a href="#sso" class="heading-mark"></a>SSO</h6><p>Small String Optimization 使得标准库的 String 面对小的字符串会在 stack 上分配而不是在 heap 上分配，由此增强效能</p>
+</div><h6 id="sso">SSO</h6>
+<p>Small String Optimization 使得标准库的 String 面对小的字符串会在 stack 上分配而不是在 heap 上分配，由此增强效能</p>
 <div class="highlight" id="id-85"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -3899,8 +3905,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <ul>
 <li><a href="https://cppdepend.com/blog/understanding-small-string-optimization-sso-in-stdstring/"target="_blank" rel="external nofollow noopener noreferrer">Understanding Small String Optimization (SSO) in std::string</a></li>
 </ul>
-<h4 id="vector" class="heading-element">
-  <a href="#vector" class="heading-mark"></a>Vector</h4><ul>
+<h4 id="vector">Vector</h4>
+<ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/581426/why-is-a-c-vector-called-a-vector"target="_blank" rel="external nofollow noopener noreferrer">Why is a C++ Vector called a Vector?</a></li>
 </ul>
 <blockquote>
@@ -4007,8 +4013,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
       <div class="admonition-content">STL 的容器，它们在被设计时，速度不是优先考虑的因素，所以我们可以设计出比 STL 里的容器性能更强的类似容器，这也是为什么很多工作室会自己设计容器库而不采用 STL，例如 <a href="https://doc.qt.io/qt-6/containers.html"target="_blank" rel="external nofollow noopener noreferrer">Qt Container Classes</a>、<a href="https://github.com/electronicarts/EASTL"target="_blank" rel="external nofollow noopener noreferrer">EASTL</a>。</div>
     </div>
   </div>
-<h5 id="optimization-2" class="heading-element">
-  <a href="#optimization-2" class="heading-mark"></a>Optimization</h5><p>一般情况下，STL 的 <code>vector</code> 是比较慢的 (因为它倾向于经常分配内存空间，这会导致大量的性能开销)，所以我们需要通过一些策略来压榨出 <code>vector</code> 的全部性能。下面通过之前的例子来展示这些优化策略。</p>
+<h5 id="optimization-2">Optimization</h5>
+<p>一般情况下，STL 的 <code>vector</code> 是比较慢的 (因为它倾向于经常分配内存空间，这会导致大量的性能开销)，所以我们需要通过一些策略来压榨出 <code>vector</code> 的全部性能。下面通过之前的例子来展示这些优化策略。</p>
 <p>通过复制构造函数确认什么时候发生了大量的复制，以应用相应的复制优化策略:</p>
 <div class="highlight" id="id-88"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -4096,8 +4102,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">vertices</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">Vertex</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">));</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>现在没有复制操作了</p>
-<h4 id="stream" class="heading-element">
-  <a href="#stream" class="heading-mark"></a>Stream</h4><ul>
+<h4 id="stream">Stream</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/io/basic_stringstream"target="_blank" rel="external nofollow noopener noreferrer">std::basic_stringstream</a></li>
 </ul>
 <p>stringstream is a stream class to operate on strings. It implements input/output operations on memory (string) based streams. stringstream can be helpful in different type of parsing. The following operators/functions are commonly used here</p>
@@ -4122,17 +4128,17 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="n">ss</span> <span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">ch</span> <span class="o">&gt;&gt;</span> <span class="n">b</span> <span class="o">&gt;&gt;</span> <span class="n">ch</span> <span class="o">&gt;&gt;</span> <span class="n">c</span><span class="p">;</span>  <span class="c1">// a = 23, b = 4, c = 56
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="algorithms" class="heading-element">
-  <a href="#algorithms" class="heading-mark"></a>Algorithms</h3><ul>
+</div><h3 id="algorithms">Algorithms</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/algorithm"target="_blank" rel="external nofollow noopener noreferrer">Algorithms library</a></li>
 </ul>
 <blockquote>
 <p>The algorithms library defines functions for a variety of purposes (e.g. searching, sorting, counting, manipulating) that operate on ranges of elements. Note that a range is defined as <strong>[<code>first</code>, <code>last</code>)</strong> where <code>last</code> refers to the element past the last element to inspect or modify.</p>
 </blockquote>
-<h3 id="nostd" class="heading-element">
-  <a href="#nostd" class="heading-mark"></a>Nostd</h3><p>Write our own data structures!</p>
-<h4 id="sorting" class="heading-element">
-  <a href="#sorting" class="heading-mark"></a>Sorting</h4><ul>
+<h3 id="nostd">Nostd</h3>
+<p>Write our own data structures!</p>
+<h4 id="sorting">Sorting</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/algorithm/sort"target="_blank" rel="external nofollow noopener noreferrer">std::sort</a></li>
 </ul>
 <blockquote>
@@ -4200,9 +4206,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>Function object for performing comparisons. The main template invokes operator&gt; on type T.</p>
 </blockquote>
-<h2 id="memory-and-safety" class="heading-element">
-  <a href="#memory-and-safety" class="heading-mark"></a>Memory and Safety</h2><h3 id="stack-heap-and-lifetime" class="heading-element">
-  <a href="#stack-heap-and-lifetime" class="heading-mark"></a>Stack, Heap and Lifetime</h3><p>主要是理解 <strong>栈 (Stack)</strong> 和 <strong>堆 (Heap)</strong> 上分配的对象 (Object) 的生命周期 (Lifetime) 的机制，栈 (Stack) 上分配的对象 (Object) 的生命周期无需我们关系，超出作用域会自动销毁，这就是为什么它们被称为 <strong>自动变量</strong> 的原因，而堆 (Heap) 上的生命周期则需要我们手动进行管理，以决定什么时候销毁它们结束它们的生命周期，当然我们也可以使用其它程序员封装好的容器，这样手动管理这些对象的生命周期的责任就交给封装这个容器的程序员的 (但还是需要人手动管理 &#x1f923;)。简单来说，栈上的变量不需要人来关心 (编译器会帮我们完成)，而堆上的对象则需要人来管理 (不论是直接的还是间接的)。</p>
+<h2 id="memory-and-safety">Memory and Safety</h2>
+<h3 id="stack-heap-and-lifetime">Stack, Heap and Lifetime</h3>
+<p>主要是理解 <strong>栈 (Stack)</strong> 和 <strong>堆 (Heap)</strong> 上分配的对象 (Object) 的生命周期 (Lifetime) 的机制，栈 (Stack) 上分配的对象 (Object) 的生命周期无需我们关系，超出作用域会自动销毁，这就是为什么它们被称为 <strong>自动变量</strong> 的原因，而堆 (Heap) 上的生命周期则需要我们手动进行管理，以决定什么时候销毁它们结束它们的生命周期，当然我们也可以使用其它程序员封装好的容器，这样手动管理这些对象的生命周期的责任就交给封装这个容器的程序员的 (但还是需要人手动管理 &#x1f923;)。简单来说，栈上的变量不需要人来关心 (编译器会帮我们完成)，而堆上的对象则需要人来管理 (不论是直接的还是间接的)。</p>
 <div class="details admonition note open">
     <div class="details-summary admonition-title">
       <i class="icon fa-solid fa-pencil-alt fa-fw" aria-hidden="true"></i>注意<i class="details-icon fa-solid fa-angle-right fa-fw" aria-hidden="true"></i>
@@ -4321,8 +4327,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
     </div>
   </div>
-<h3 id="smart-pointers" class="heading-element">
-  <a href="#smart-pointers" class="heading-mark"></a>Smart Pointers</h3><ul>
+<h3 id="smart-pointers">Smart Pointers</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/memory/unique_ptr"target="_blank" rel="external nofollow noopener noreferrer">std::unique_ptr</a></li>
 </ul>
 <blockquote>
@@ -4424,11 +4430,11 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
       <div class="admonition-content">推荐使用 <code>std::make_XYZ</code> 这这种风格标准库函数来构造智能指针实例，这样你就可以在你的代码里永远摆脱 <code>new</code> 关键字了 &#x1f923;</div>
     </div>
   </div>
-<h3 id="safety" class="heading-element">
-  <a href="#safety" class="heading-mark"></a>Safety</h3><p>安全编程的目的主要是是降低崩溃、内存泄漏、非法访问的问题 (这一点 Rust 做的比较好，但也没有解决内存泄漏的问题)，从 C++11 开始推荐使用智能指针而不是原始指针来解决内存泄漏的相关问题，这是因为基于 RAII 的自动内存管理系统。</p>
+<h3 id="safety">Safety</h3>
+<p>安全编程的目的主要是是降低崩溃、内存泄漏、非法访问的问题 (这一点 Rust 做的比较好，但也没有解决内存泄漏的问题)，从 C++11 开始推荐使用智能指针而不是原始指针来解决内存泄漏的相关问题，这是因为基于 RAII 的自动内存管理系统。</p>
 <p>如果是生产环境则使用智能指针，如果是学习则使用原始指针。当然，如果你需要定制的话，也可以使用自己写的智能指针。</p>
-<h4 id="track-memory-allocations" class="heading-element">
-  <a href="#track-memory-allocations" class="heading-mark"></a>Track Memory Allocations</h4><ul>
+<h4 id="track-memory-allocations">Track Memory Allocations</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/memory/new/operator_new"target="_blank" rel="external nofollow noopener noreferrer">operator new, operator new[]</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/memory/new/operator_delete"target="_blank" rel="external nofollow noopener noreferrer">operator delete, operator delete[]</a></li>
 </ul>
@@ -4612,8 +4618,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">AllocationMetrics</span><span class="o">::</span><span class="n">PrintMemoryUsage</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="lvalues-and-rvalues" class="heading-element">
-  <a href="#lvalues-and-rvalues" class="heading-mark"></a>Lvalues and Rvalues</h3><ul>
+</div><h3 id="lvalues-and-rvalues">Lvalues and Rvalues</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/value_category"target="_blank" rel="external nofollow noopener noreferrer">Value categories</a></li>
 </ul>
 <p>lvalue 是 locator value，即可以被 locate 的 value，lvalue reference 就是对 lvalue 的引用。rvalue 为除了 lvalue 之外的 value，可以理解为临时字面值 (未被存储) 和亡值 (已被存储但地址未知，或者知道地址也没用，因为它很快就被销毁了)，它们都无法被 located。</p>
@@ -4731,8 +4737,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>rvalue reference 对于优化比较重要，因为和 lvalue reference 不同，我们无需担心传入的 value 的生命周期问题，无需加入一些必要的生命周期检查，这样效率会很高。rvalue reference 常用于配合 move 移动语义来使用。</p>
-<h3 id="move-semantics" class="heading-element">
-  <a href="#move-semantics" class="heading-mark"></a>Move Semantics</h3><ul>
+<h3 id="move-semantics">Move Semantics</h3>
+<ul>
 <li><a href="https://www.cnblogs.com/zhangyi1357/p/16018810.html"target="_blank" rel="external nofollow noopener noreferrer">C++ 移动语义 详细讲解</a></li>
 </ul>
 <p>相似实作: Rust <a href="https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html"target="_blank" rel="external nofollow noopener noreferrer">Ownership</a></p>
@@ -4956,8 +4962,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div><ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/keyword/default"target="_blank" rel="external nofollow noopener noreferrer">C++ keyword: default</a></li>
 </ul>
-<h4 id="move-assignment" class="heading-element">
-  <a href="#move-assignment" class="heading-mark"></a>Move Assignment</h4><p>上面讨论了 rvalue 的移动语义，但为了更接近 Rust 的所有权机制，我们还需要一种可以实现将现有 object 移动到目标 object 的机制:</p>
+<h4 id="move-assignment">Move Assignment</h4>
+<p>上面讨论了 rvalue 的移动语义，但为了更接近 Rust 的所有权机制，我们还需要一种可以实现将现有 object 移动到目标 object 的机制:</p>
 <ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/utility/move"target="_blank" rel="external nofollow noopener noreferrer">std::move</a></li>
 </ul>
@@ -5067,9 +5073,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="concurrency" class="heading-element">
-  <a href="#concurrency" class="heading-mark"></a>Concurrency</h2><h3 id="threads" class="heading-element">
-  <a href="#threads" class="heading-mark"></a>Threads</h3><ul>
+</div><h2 id="concurrency">Concurrency</h2>
+<h3 id="threads">Threads</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/thread"target="_blank" rel="external nofollow noopener noreferrer">Concurrency support library (since C++11)</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/thread/thread"target="_blank" rel="external nofollow noopener noreferrer">std::thread</a></li>
 </ul>
@@ -5141,8 +5147,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Start thread id=&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">get_id</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="asynchronous" class="heading-element">
-  <a href="#asynchronous" class="heading-mark"></a>Asynchronous</h3><ul>
+</div><h3 id="asynchronous">Asynchronous</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/thread/async"target="_blank" rel="external nofollow noopener noreferrer">std::async</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/thread/future"target="_blank" rel="external nofollow noopener noreferrer">std::future</a></li>
 </ul>
@@ -5214,9 +5220,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <p>One use-case of using <code>std::future</code> over <code>std::thread</code> is you want to call a function which returns a value. When you want return value of the function, you can call <code>get()</code> method of future.</p>
 <p><code>std::thread</code> doesn&rsquo;t provide a direct way to get the return value of the function.</p>
 </blockquote>
-<h2 id="advanced-topics" class="heading-element">
-  <a href="#advanced-topics" class="heading-mark"></a>Advanced Topics</h2><h3 id="multiple-return-values" class="heading-element">
-  <a href="#multiple-return-values" class="heading-mark"></a>Multiple Return Values</h3><p>在 C++ 中，实现函数可以返回多个值有很多种方式:</p>
+<h2 id="advanced-topics">Advanced Topics</h2>
+<h3 id="multiple-return-values">Multiple Return Values</h3>
+<p>在 C++ 中，实现函数可以返回多个值有很多种方式:</p>
 <ul>
 <li>适用性最强的是返回自定义的结构体使用结构体包装返回的多个值)</li>
 <li>如果返回的多个值类型相同，可以返回 <code>vector</code> 或数组</li>
@@ -5272,8 +5278,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这个问题在 C++17 提出结构化绑定之后就得到比较好的解决了，参考 <a href="#structured-bindings">C++17::Structured-Binding</a></p>
-<h3 id="macros" class="heading-element">
-  <a href="#macros" class="heading-mark"></a>Macros</h3><ul>
+<h3 id="macros">Macros</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/preprocessor/replace"target="_blank" rel="external nofollow noopener noreferrer">Replacing text macros</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/preprocessor"target="_blank" rel="external nofollow noopener noreferrer">Preprocessor</a></li>
 </ul>
@@ -5357,8 +5363,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
       <div class="admonition-content">宏常用于跟踪、调试，例如追踪内存分配 (e.g. 那哪一行、哪个函数分配了多少字节)、日志系统的输出</div>
     </div>
   </div>
-<h3 id="type-punning" class="heading-element">
-  <a href="#type-punning" class="heading-mark"></a>Type Punning</h3><ul>
+<h3 id="type-punning">Type Punning</h3>
+<ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/67636231/what-is-the-modern-correct-way-to-do-type-punning-in-c"target="_blank" rel="external nofollow noopener noreferrer">What is the modern, correct way to do type punning in C++?</a></li>
 </ul>
 <p>通过指针和引用直接操作内存来实现类型双关 (Type Punning)，可以搭配调试器的内存查看功能进行观察:</p>
@@ -5406,8 +5412,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>上面的这些代码不建议使用，除非你是研究操作系统内核这类对内存操作精度极高的领域。</p>
-<h4 id="union" class="heading-element">
-  <a href="#union" class="heading-mark"></a>Union</h4><p>下面使用 <code>union</code> 来实现类型双关 (Type Punning):</p>
+<h4 id="union">Union</h4>
+<p>下面使用 <code>union</code> 来实现类型双关 (Type Punning):</p>
 <ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/c/language/union"target="_blank" rel="external nofollow noopener noreferrer">Union declaration</a></li>
 </ul>
@@ -5512,8 +5518,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="casting" class="heading-element">
-  <a href="#casting" class="heading-mark"></a>Casting</h3><p><a href="#explict">Specifiers::Explict</a> 处有讲解了一部分隐式转换和显式转换。<a href="#union-and-type-punning">Union and Type Punning</a> 处也对类型转换进行了一定程度的讲解。下面对 C 风格和 C++ 风格的强制类型转换 (casting) 进行详细说明。</p>
+</div><h3 id="casting">Casting</h3>
+<p><a href="#explict">Specifiers::Explict</a> 处有讲解了一部分隐式转换和显式转换。<a href="#union-and-type-punning">Union and Type Punning</a> 处也对类型转换进行了一定程度的讲解。下面对 C 风格和 C++ 风格的强制类型转换 (casting) 进行详细说明。</p>
 <ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/explicit_cast"target="_blank" rel="external nofollow noopener noreferrer">Explicit type conversion</a></li>
 </ul>
@@ -5556,8 +5562,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <ul>
 <li>以上整理自 <a href="https://space.bilibili.com/27560356"target="_blank" rel="external nofollow noopener noreferrer">@ljnelf</a> 的评论</li>
 </ul>
-<h4 id="dynamic-casting" class="heading-element">
-  <a href="#dynamic-casting" class="heading-mark"></a>Dynamic Casting</h4><ul>
+<h4 id="dynamic-casting">Dynamic Casting</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/dynamic_cast"target="_blank" rel="external nofollow noopener noreferrer">dynamic_cast conversion</a></li>
 </ul>
 <blockquote>
@@ -5650,8 +5656,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
       <div class="admonition-content">VS 可以关闭 C++ 的 RTTI 开销:  Project 属性 $\rightarrow$ C/C++ $\rightarrow$ Language $\rightarrow$ Enable Run-Time Type Information (<strong>No</strong>)</div>
     </div>
   </div>
-<h3 id="namespaces" class="heading-element">
-  <a href="#namespaces" class="heading-mark"></a>Namespaces</h3><ul>
+<h3 id="namespaces">Namespaces</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/namespace"target="_blank" rel="external nofollow noopener noreferrer">Namespaces</a></li>
 </ul>
 <blockquote>
@@ -5659,8 +5665,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </blockquote>
 <p>Rust 中的 <a href="https://doc.rust-lang.org/book/ch07-02-defining-modules-to-control-scope-and-privacy.html"target="_blank" rel="external nofollow noopener noreferrer">Module</a> 也是类似的语法</p>
 <p>类本身也是一个 namespace，所以使用类似的操作符 <code>::</code> 访问内部成员</p>
-<h4 id="dont-using-namspace-std" class="heading-element">
-  <a href="#dont-using-namspace-std" class="heading-mark"></a>Don&rsquo;t &ldquo;using namspace std&rdquo;</h4><p>不推荐使用 <code>using namespace std;</code> 类似的语句，使用 <code>std;:xxx</code> 这样的风格。因为现实中比较少用 STL，都是工作室自己开发类似 STL 的库来使用，这样可以区分代码中使用的是哪个库的 API。</p>
+<h4 id="dont-using-namspace-std">Don&rsquo;t &ldquo;using namspace std&rdquo;</h4>
+<p>不推荐使用 <code>using namespace std;</code> 类似的语句，使用 <code>std;:xxx</code> 这样的风格。因为现实中比较少用 STL，都是工作室自己开发类似 STL 的库来使用，这样可以区分代码中使用的是哪个库的 API。</p>
 <p>实作案例: EASTL <a href="https://github.com/electronicarts/EASTL/blob/master/include/EASTL/vector.h#L77"target="_blank" rel="external nofollow noopener noreferrer">vector.h</a></p>
 <div class="highlight" id="id-124"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -5748,10 +5754,10 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
     </div>
   </div>
-<h3 id="benchmarks" class="heading-element">
-  <a href="#benchmarks" class="heading-mark"></a>Benchmarks</h3><p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Benchmark_%28computing%29"target="_blank" rel="external nofollow noopener noreferrer">Benchmark</a></p>
-<h4 id="timing" class="heading-element">
-  <a href="#timing" class="heading-mark"></a>Timing</h4><ul>
+<h3 id="benchmarks">Benchmarks</h3>
+<p>Wikipedia: <a href="https://en.wikipedia.org/wiki/Benchmark_%28computing%29"target="_blank" rel="external nofollow noopener noreferrer">Benchmark</a></p>
+<h4 id="timing">Timing</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/chrono"target="_blank" rel="external nofollow noopener noreferrer">Date and time utilities</a></li>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/header/chrono"target="_blank" rel="external nofollow noopener noreferrer">Standard library header <chrono> (C++11)</a></li>
 </ul>
@@ -5869,8 +5875,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">Function</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="实作案例" class="heading-element">
-  <a href="#%e5%ae%9e%e4%bd%9c%e6%a1%88%e4%be%8b" class="heading-mark"></a>实作案例</h5><p>编译器最佳化对于数组遍历求和的效率影响:</p>
+</div><h5 id="实作案例">实作案例</h5>
+<p>编译器最佳化对于数组遍历求和的效率影响:</p>
 <div class="highlight" id="id-129"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -5901,7 +5907,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
     </div>
   </div>
 <p>不同的智能指针构造的效率差异:</p>
-<div class="highlight" id="id-130"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5962,12 +5968,12 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">        <span class="n">uniquePtrs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">Vector2</span><span class="o">&gt;</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="visualization" class="heading-element">
-  <a href="#visualization" class="heading-mark"></a>Visualization</h4><ul>
+</div><h4 id="visualization">Visualization</h4>
+<ul>
 <li><a href="https://nolanlawson.com/2022/10/26/a-beginners-guide-to-chrome-tracing/"target="_blank" rel="external nofollow noopener noreferrer">A beginner’s guide to Chrome tracing</a></li>
 <li><a href="https://gist.github.com/TheCherno/31f135eea6ee729ab5f26a6908eb3a5e"target="_blank" rel="external nofollow noopener noreferrer">Instrumentor.h</a></li>
 </ul>
-<div class="highlight" id="id-131"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -5990,7 +5996,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define PROFILE_SCOPE(name)
 </span></span></span><span class="line"><span class="cl"><span class="cp">#endif</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight" id="id-132"><div class="chroma">
+</div><div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6061,11 +6067,11 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">Instrumentor</span><span class="o">::</span><span class="n">Get</span><span class="p">().</span><span class="n">EndSession</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="argument-evaluation-order" class="heading-element">
-  <a href="#argument-evaluation-order" class="heading-mark"></a>Argument Evaluation Order</h3><ul>
+</div><h3 id="argument-evaluation-order">Argument Evaluation Order</h3>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/eval_order"target="_blank" rel="external nofollow noopener noreferrer">Order of evaluation</a></li>
 </ul>
-<div class="highlight" id="id-133"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6101,23 +6107,23 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <p>The value computation of the built-in post-increment and post-decrement operators is sequenced before its side effect.</p>
 </blockquote>
 <p>所以上面 <code>PrintSum</code> 的调用语句处，参数要么是 1, 0 要么是 0, 1 (因为它们的计算顺序仍然是不确定的)，但绝不可能是 0, 0。</p>
-<h3 id="coding-style" class="heading-element">
-  <a href="#coding-style" class="heading-mark"></a>Coding Style</h3><p>个人偏好如下:</p>
+<h3 id="coding-style">Coding Style</h3>
+<p>个人偏好如下:</p>
 <ul>
 <li>函数名: <a href="https://en.wikipedia.org/wiki/Naming_convention_%28programming%29#Letter_case-separated_words"target="_blank" rel="external nofollow noopener noreferrer">PscalCase</a> 命名法 e.g. <code>ForEach</code></li>
 <li>类成员: <a href="https://en.wikipedia.org/wiki/Hungarian_notation"target="_blank" rel="external nofollow noopener noreferrer">Hungarian</a> 命名法 e.g. <code>m_Devices</code></li>
 </ul>
-<h2 id="modern-features" class="heading-element">
-  <a href="#modern-features" class="heading-mark"></a>Modern Features</h2><p>VS 设定 C++ 语言标准: Project 属性 $\rightarrow$ C/C++ $\rightarrow$ Language $\rightarrow$ C++ Language Standard</p>
-<h3 id="c17" class="heading-element">
-  <a href="#c17" class="heading-mark"></a>C++17</h3><h4 id="structured-bindings" class="heading-element">
-  <a href="#structured-bindings" class="heading-mark"></a>Structured Bindings</h4><ul>
+<h2 id="modern-features">Modern Features</h2>
+<p>VS 设定 C++ 语言标准: Project 属性 $\rightarrow$ C/C++ $\rightarrow$ Language $\rightarrow$ C++ Language Standard</p>
+<h3 id="c17">C++17</h3>
+<h4 id="structured-bindings">Structured Bindings</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/structured_binding"target="_blank" rel="external nofollow noopener noreferrer">Structured binding declaration (since C++17)</a></li>
 </ul>
 <blockquote>
 <p>Binds the specified names to subobjects or elements of the initializer.</p>
 </blockquote>
-<div class="highlight" id="id-134"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6148,14 +6154,14 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="k">auto</span> <span class="p">[</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">]</span> <span class="o">=</span> <span class="n">CreatePerson</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="optional" class="heading-element">
-  <a href="#optional" class="heading-mark"></a>Optional</h4><ul>
+</div><h4 id="optional">Optional</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/utility/optional"target="_blank" rel="external nofollow noopener noreferrer">std::optional</a></li>
 </ul>
 <blockquote>
 <p>The class template <code>std::optional</code> manages an optional contained value, i.e. a value that may or may not be present.</p>
 </blockquote>
-<div class="highlight" id="id-135"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6225,7 +6231,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>由于 <code>std::optional</code> 重载了逻辑运算符，所以上面例子的第 23 行可以改写为:</p>
-<div class="highlight" id="id-136"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -6234,14 +6240,14 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
 </div><p>当然这样在处理 <code>std::optional&lt;bool&gt;</code> 的情况时会有二义性，但是这种使用场景比较少见 (因为 optional 本身根据内部数据存在与否就表示了一种 <code>bool</code> 值)。</p>
 <p>相似实作: Rust <a href="https://doc.rust-lang.org/std/option/enum.Option.html"target="_blank" rel="external nofollow noopener noreferrer">std::option::Option</a></p>
-<h4 id="variant" class="heading-element">
-  <a href="#variant" class="heading-mark"></a>Variant</h4><ul>
+<h4 id="variant">Variant</h4>
+<ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/utility/variant"target="_blank" rel="external nofollow noopener noreferrer">std::variant</a></li>
 </ul>
 <blockquote>
 <p>The class template <code>std::variant</code> represents a type-safe <code>union</code>. An instance of std::variant at any given time either holds a value of one of its alternative types, or in the case of error - no value</p>
 </blockquote>
-<div class="highlight" id="id-137"><div class="chroma">
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6287,7 +6293,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>std::variant</code> 和 <code>union</code> 的内存布局是完全不同的，<code>union</code> 占用的内存大小等于其内存占用最大的成员类型，而 <code>std::variant</code> 占用的内存大小为列举的类型大小之和 (当然这两者实际占用的内存大小还需要考虑内存对齐):</p>
-<div class="highlight" id="id-138"><div class="chroma">
+<div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6308,7 +6314,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>所以 <code>variant</code> 会更加类型安全，因为它和 <code>union</code> 不一样，不会造成未定义行为。可以使用 <code>std::variant</code> 来实现类似于 Rust 的 <code>Result</code> 类型:</p>
-<div class="highlight" id="id-139"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6336,14 +6342,14 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>相似实作: Rust <a href="https://doc.rust-lang.org/book/ch06-01-defining-an-enum.html"target="_blank" rel="external nofollow noopener noreferrer">Enum</a>，只是语法相似，内部实作特别是内存布局完全不同，Rust 的 Enum 内存布局更偏向于 C/C++ 的 Union。</p>
-<h4 id="any" class="heading-element">
-  <a href="#any" class="heading-mark"></a>Any</h4><ul>
+<h4 id="any">Any</h4>
+<ul>
 <li>cpprederence: <a href="https://en.cppreference.com/w/cpp/utility/any"target="_blank" rel="external nofollow noopener noreferrer">std::any</a></li>
 </ul>
 <blockquote>
 <p>The class any describes a type-safe container for single values of any copy constructible type.</p>
 </blockquote>
-<div class="highlight" id="id-140"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6355,9 +6361,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="n">data</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>这个 <code>std::any</code> 其实没啥应用场景&hellip; <code>std::variant</code> 更加安全并且性能更强 (因为 <code>std::any</code> 对于大的对象是通过动态分配的，这导致了其性能不如 <code>std::variant</code>)。除此之外，使用 <code>std::any</code> 会降低代码可读性，我个人不认为在代码中使用 <code>std::any</code> 是一种良好的编程习惯。</p>
-<h2 id="gui" class="heading-element">
-  <a href="#gui" class="heading-mark"></a>GUI</h2><h3 id="imgui" class="heading-element">
-  <a href="#imgui" class="heading-mark"></a>ImGui</h3><p>GitHub: <a href="https://github.com/ocornut/imgui/tree/master"target="_blank" rel="external nofollow noopener noreferrer">Dear ImGui</a></p>
+<h2 id="gui">GUI</h2>
+<h3 id="imgui">ImGui</h3>
+<p>GitHub: <a href="https://github.com/ocornut/imgui/tree/master"target="_blank" rel="external nofollow noopener noreferrer">Dear ImGui</a></p>
 <blockquote>
 <p>Dear ImGui is a <strong>bloat-free graphical user interface library for C++</strong>. It outputs optimized vertex buffers that you can render anytime in your 3D-pipeline-enabled application. It is fast, portable, renderer agnostic, and self-contained (no external dependencies).</p>
 </blockquote>
@@ -6367,8 +6373,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 / <a href="https://www.bilibili.com/read/cv19537138/"target="_blank" rel="external nofollow noopener noreferrer">项目源代码</a></li>
 <li>进阶: <a href="https://space.bilibili.com/443124242/channel/collectiondetail?sid=2917715"target="_blank" rel="external nofollow noopener noreferrer">可能是目前全網最強最好的 ImGui 教學</a> / <a href="https://drive.google.com/file/d/1XRqDM3d_ByF5RafRG0wK1JoI6RSitAsw"target="_blank" rel="external nofollow noopener noreferrer">项目源代码</a></li>
 </ul>
-<h4 id="初始设置" class="heading-element">
-  <a href="#%e5%88%9d%e5%a7%8b%e8%ae%be%e7%bd%ae" class="heading-mark"></a>初始设置</h4><p>依赖库:</p>
+<h4 id="初始设置">初始设置</h4>
+<p>依赖库:</p>
 <ul>
 <li><a href="https://www.glfw.org/download"target="_blank" rel="external nofollow noopener noreferrer">GLFW</a>: 64-bit Windows binaries</li>
 <li><a href="https://glew.sourceforge.net/"target="_blank" rel="external nofollow noopener noreferrer">GLEW</a>: Windows 32-bit and 64-bit Binaries</li>
@@ -6391,7 +6397,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </ul>
 </li>
 </ul>
-<div class="highlight" id="id-141"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6410,9 +6416,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;imgui_impl_glfw.h&#34;</span><span class="cp">
 </span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;imgui_impl_opengl3.h&#34;</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="创建窗口" class="heading-element">
-  <a href="#%e5%88%9b%e5%bb%ba%e7%aa%97%e5%8f%a3" class="heading-mark"></a>创建窗口</h4><p>这是基础设施，直接复制一份即可。窗口逻辑在 <code>ImGui::ShowDemoWindow()</code> 处:</p>
-<div class="highlight" id="id-142"><div class="chroma">
+</div><h4 id="创建窗口">创建窗口</h4>
+<p>这是基础设施，直接复制一份即可。窗口逻辑在 <code>ImGui::ShowDemoWindow()</code> 处:</p>
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6527,9 +6533,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="基础控件" class="heading-element">
-  <a href="#%e5%9f%ba%e7%a1%80%e6%8e%a7%e4%bb%b6" class="heading-mark"></a>基础控件</h4><h5 id="窗口" class="heading-element">
-  <a href="#%e7%aa%97%e5%8f%a3" class="heading-mark"></a>窗口</h5><div class="highlight" id="id-143"><div class="chroma">
+</div><h4 id="基础控件">基础控件</h4>
+<h5 id="窗口">窗口</h5>
+<div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6540,8 +6546,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">...</span>
 </span></span><span class="line"><span class="cl"><span class="n">ImGui</span><span class="o">::</span><span class="n">End</span><span class="p">();</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="文本框" class="heading-element">
-  <a href="#%e6%96%87%e6%9c%ac%e6%a1%86" class="heading-mark"></a>文本框</h5><div class="highlight" id="id-144"><div class="chroma">
+</div><h5 id="文本框">文本框</h5>
+<div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6550,8 +6556,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">Text</span> <span class="o">=</span> <span class="s">&#34;Hello, world! 123&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">ImGui</span><span class="o">::</span><span class="n">Text</span><span class="p">(</span><span class="n">Text</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="按钮" class="heading-element">
-  <a href="#%e6%8c%89%e9%92%ae" class="heading-mark"></a>按钮</h5><div class="highlight" id="id-145"><div class="chroma">
+</div><h5 id="按钮">按钮</h5>
+<div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6564,8 +6570,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">Text</span> <span class="o">=</span> <span class="s">&#34;You click the button&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="输入文本框" class="heading-element">
-  <a href="#%e8%be%93%e5%85%a5%e6%96%87%e6%9c%ac%e6%a1%86" class="heading-mark"></a>输入文本框</h5><div class="highlight" id="id-146"><div class="chroma">
+</div><h5 id="输入文本框">输入文本框</h5>
+<div class="highlight" id="id-17"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6574,9 +6580,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="kt">char</span>  <span class="n">textbox</span><span class="p">[</span><span class="mi">64</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#34;Test Text Box&#34;</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">ImGui</span><span class="o">::</span><span class="n">InputText</span><span class="p">(</span><span class="s">&#34;Test Text Box&#34;</span><span class="p">,</span> <span class="n">textbox</span><span class="p">,</span> <span class="mi">64</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="列表" class="heading-element">
-  <a href="#%e5%88%97%e8%a1%a8" class="heading-mark"></a>列表</h5><h6 id="固定显示选项的列表" class="heading-element">
-  <a href="#%e5%9b%ba%e5%ae%9a%e6%98%be%e7%a4%ba%e9%80%89%e9%a1%b9%e7%9a%84%e5%88%97%e8%a1%a8" class="heading-mark"></a>固定显示选项的列表</h6><div class="highlight" id="id-147"><div class="chroma">
+</div><h5 id="列表">列表</h5>
+<h6 id="固定显示选项的列表">固定显示选项的列表</h6>
+<div class="highlight" id="id-18"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6605,8 +6611,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>Also note that <code>ListBoxHeader()</code> was renamed to <code>BeginListBox()</code> on 2023-05-31</p>
 </blockquote>
-<h6 id="可展开显示选项的列表" class="heading-element">
-  <a href="#%e5%8f%af%e5%b1%95%e5%bc%80%e6%98%be%e7%a4%ba%e9%80%89%e9%a1%b9%e7%9a%84%e5%88%97%e8%a1%a8" class="heading-mark"></a>可展开显示选项的列表</h6><div class="highlight" id="id-148"><div class="chroma">
+<h6 id="可展开显示选项的列表">可展开显示选项的列表</h6>
+<div class="highlight" id="id-19"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6633,8 +6639,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="n">ImGui</span><span class="o">::</span><span class="n">EndCombo</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="颜色选择器" class="heading-element">
-  <a href="#%e9%a2%9c%e8%89%b2%e9%80%89%e6%8b%a9%e5%99%a8" class="heading-mark"></a>颜色选择器</h5><div class="highlight" id="id-149"><div class="chroma">
+</div><h5 id="颜色选择器">颜色选择器</h5>
+<div class="highlight" id="id-20"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6643,9 +6649,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <pre tabindex="0" class="chroma"><code class="language-c++" data-lang="c++"><span class="line"><span class="cl"><span class="n">ImVec4</span> <span class="n">color</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl"><span class="n">ImGui</span><span class="o">::</span><span class="n">ColorEdit4</span><span class="p">(</span><span class="s">&#34;Color&#34;</span><span class="p">,</span> <span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">color</span><span class="p">,</span> <span class="n">ImGuiColorEditFlags_</span><span class="o">::</span><span class="n">ImGuiColorEditFlags_AlphaBar</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="高级定制" class="heading-element">
-  <a href="#%e9%ab%98%e7%ba%a7%e5%ae%9a%e5%88%b6" class="heading-mark"></a>高级定制</h4><h5 id="字体设置" class="heading-element">
-  <a href="#%e5%ad%97%e4%bd%93%e8%ae%be%e7%bd%ae" class="heading-mark"></a>字体设置</h5><div class="highlight" id="id-150"><div class="chroma">
+</div><h4 id="高级定制">高级定制</h4>
+<h5 id="字体设置">字体设置</h5>
+<div class="highlight" id="id-21"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6664,9 +6670,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">io</span><span class="p">.</span><span class="n">Fonts</span><span class="o">-&gt;</span><span class="n">GetGlyphRangesChineseFull</span><span class="p">()</span>   <span class="c1">// 作用范围
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="风格设置" class="heading-element">
-  <a href="#%e9%a3%8e%e6%a0%bc%e8%ae%be%e7%bd%ae" class="heading-mark"></a>风格设置</h5><p>在启动 ImGui Demo 后，其窗口的 <code>tools</code> 栏位的 <code>Style Editor</code> 选项即为风格编辑器。主要改一下圆角之类的设定，进行拖动可以即时看到效果，后续可以根据效果对应的数值在源代码中进行设置:</p>
-<div class="highlight" id="id-151"><div class="chroma">
+</div><h5 id="风格设置">风格设置</h5>
+<p>在启动 ImGui Demo 后，其窗口的 <code>tools</code> 栏位的 <code>Style Editor</code> 选项即为风格编辑器。主要改一下圆角之类的设定，进行拖动可以即时看到效果，后续可以根据效果对应的数值在源代码中进行设置:</p>
+<div class="highlight" id="id-22"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6684,7 +6690,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="n">style</span><span class="p">.</span><span class="n">ScrollbarRounding</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>在风格编辑器理也可切换到颜色 (Colors) 栏目对颜色进行调整并且即时看到效果，以进行相应的设置:</p>
-<div class="highlight" id="id-152"><div class="chroma">
+<div class="highlight" id="id-23"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6743,9 +6749,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_NavHighlight</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">1.00f</span><span class="p">,</span> <span class="mf">0.40f</span><span class="p">,</span> <span class="mf">0.13f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">colors</span><span class="p">[</span><span class="n">ImGuiCol_TextSelectedBg</span><span class="p">]</span> <span class="o">=</span> <span class="n">ImVec4</span><span class="p">(</span><span class="mf">0.45f</span><span class="p">,</span> <span class="mf">1.00f</span><span class="p">,</span> <span class="mf">0.85f</span><span class="p">,</span> <span class="mf">0.35f</span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="窗口停靠" class="heading-element">
-  <a href="#%e7%aa%97%e5%8f%a3%e5%81%9c%e9%9d%a0" class="heading-mark"></a>窗口停靠</h5><p>设置内部窗口可以拖拽停靠，例如可以拖拽到外部空间和拖拽到其它窗口内部停靠:</p>
-<div class="highlight" id="id-153"><div class="chroma">
+</div><h5 id="窗口停靠">窗口停靠</h5>
+<p>设置内部窗口可以拖拽停靠，例如可以拖拽到外部空间和拖拽到其它窗口内部停靠:</p>
+<div class="highlight" id="id-24"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6785,7 +6791,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>允许主窗口也可以作为停靠的主体:</p>
-<div class="highlight" id="id-154"><div class="chroma">
+<div class="highlight" id="id-25"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6800,9 +6806,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="p">...</span> <span class="c1">// main logic
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="高级控件" class="heading-element">
-  <a href="#%e9%ab%98%e7%ba%a7%e6%8e%a7%e4%bb%b6" class="heading-mark"></a>高级控件</h5><p>绘制队列 (Draw List) 可以绘制高级的自定义控件，常见的有矩形，圆等等:</p>
-<div class="highlight" id="id-155"><div class="chroma">
+</div><h5 id="高级控件">高级控件</h5>
+<p>绘制队列 (Draw List) 可以绘制高级的自定义控件，常见的有矩形，圆等等:</p>
+<div class="highlight" id="id-26"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6819,9 +6825,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">ImColor</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>   <span class="c1">// 颜色 RGB
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="事件监听" class="heading-element">
-  <a href="#%e4%ba%8b%e4%bb%b6%e7%9b%91%e5%90%ac" class="heading-mark"></a>事件监听</h5><p>可以监听键盘按键的动作，同时还可以搭配鼠标位置来限制逻辑的执行范围:</p>
-<div class="highlight" id="id-156"><div class="chroma">
+</div><h5 id="事件监听">事件监听</h5>
+<p>可以监听键盘按键的动作，同时还可以搭配鼠标位置来限制逻辑的执行范围:</p>
+<div class="highlight" id="id-27"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6836,9 +6842,9 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">	<span class="n">ImGui</span><span class="o">::</span><span class="n">Text</span><span class="p">(</span><span class="sa">u8</span><span class="s">&#34;测试 Q&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h5 id="控件拖拽" class="heading-element">
-  <a href="#%e6%8e%a7%e4%bb%b6%e6%8b%96%e6%8b%bd" class="heading-mark"></a>控件拖拽</h5><p>与窗口拖拽类似，窗口内的控件也是可以设置为可拖拽的:</p>
-<div class="highlight" id="id-157"><div class="chroma">
+</div><h5 id="控件拖拽">控件拖拽</h5>
+<p>与窗口拖拽类似，窗口内的控件也是可以设置为可拖拽的:</p>
+<div class="highlight" id="id-28"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6945,10 +6951,10 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">	<span class="n">ImGui</span><span class="o">::</span><span class="n">End</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h4 id="第三方库" class="heading-element">
-  <a href="#%e7%ac%ac%e4%b8%89%e6%96%b9%e5%ba%93" class="heading-mark"></a>第三方库</h4><p>imgui 的第三方库可以在其 wiki 的 <a href="https://github.com/ocornut/imgui/wiki/Useful-Extensions"target="_blank" rel="external nofollow noopener noreferrer">Useful Extensions</a> 页面中进行查找。只需下载第三方库的源代码，然后仿照对 imgui 库的处理将其源代码进行引入 <code>$(Project)\&lt;lib&gt;</code>，或在 Visual Studio 中作为静态库进行链接即可。</p>
+</div><h4 id="第三方库">第三方库</h4>
+<p>imgui 的第三方库可以在其 wiki 的 <a href="https://github.com/ocornut/imgui/wiki/Useful-Extensions"target="_blank" rel="external nofollow noopener noreferrer">Useful Extensions</a> 页面中进行查找。只需下载第三方库的源代码，然后仿照对 imgui 库的处理将其源代码进行引入 <code>$(Project)\&lt;lib&gt;</code>，或在 Visual Studio 中作为静态库进行链接即可。</p>
 <p>下面以第三方库 <a href="https://github.com/BalazsJako/ImGuiColorTextEdit"target="_blank" rel="external nofollow noopener noreferrer">ImGuiColorTextEdit</a> 为例:</p>
-<div class="highlight" id="id-158"><div class="chroma">
+<div class="highlight" id="id-29"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6991,8 +6997,8 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
-</div><h2 id="references" class="heading-element">
-  <a href="#references" class="heading-mark"></a>References</h2><ul>
+</div><h2 id="references">References</h2>
+<ul>
 <li>The Cherno: <a href="https://www.youtube.com/playlist?list=PLlrATfBNZ98dudnM48yfGUldqGD0S4FFb"target="_blank" rel="external nofollow noopener noreferrer">C++</a> / <a href="https://space.bilibili.com/364152971/channel/collectiondetail?sid=13909"target="_blank" rel="external nofollow noopener noreferrer">中文翻译</a>: 主要介绍 C++11 及以上版本的语法 (文中未特意标注引用的部分，均出自该处)</li>
 <li><a href="https://www.youtube.com/@cppweekly"target="_blank" rel="external nofollow noopener noreferrer">C++ Weekly With Jason Turner</a>: 这个博主很猛</li>
 <li><a href="https://www.youtube.com/@CppCon"target="_blank" rel="external nofollow noopener noreferrer">CppCon</a>: 强烈推荐 <a href="https://www.youtube.com/@CppCon/search?query=Back%20to%20Basics"target="_blank" rel="external nofollow noopener noreferrer">Back To Basics</a> 专题</li>
@@ -7009,11 +7015,12 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-09-05 15:35:38">更新于 2024-09-05&nbsp;</span>
-      </div></div><div class="post-info-line">
-        <div class="post-info-md"><span><a href="/posts/modern-cpp/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
-        <div class="post-info-share">
-          <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/modern-cpp/" data-title="Modern C&#43;&#43; (MSVC)" data-hashtags="C&#43;&#43;,MSVC"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
+        <span title="更新于 2024-09-15 19:22:05">更新于 2024-09-15&nbsp;</span>
+      </div></div>
+    <div class="post-info-line">
+      <div class="post-info-md"><span><a href="/posts/modern-cpp/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>
+      <div class="post-info-share">
+        <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://ccrysisa.github.io/posts/modern-cpp/" data-title="Modern C&#43;&#43; (MSVC)" data-hashtags="C&#43;&#43;,MSVC"><i class="fa-brands fa-twitter fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://ccrysisa.github.io/posts/modern-cpp/" data-hashtag="C&#43;&#43;"><i class="fa-brands fa-facebook-square fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ccrysisa.github.io/posts/modern-cpp/" data-title="Modern C&#43;&#43; (MSVC)" data-web><i class="fa-brands fa-whatsapp fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://ccrysisa.github.io/posts/modern-cpp/" data-title="Modern C&#43;&#43; (MSVC)"><i data-svg-src="/lib/simple-icons/icons/line.min.svg" aria-hidden="true"></i></a>
@@ -7022,11 +7029,12 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
   <a href="javascript:void(0);" title="分享到 Blogger" data-sharer="blogger" data-url="https://ccrysisa.github.io/posts/modern-cpp/" data-title="Modern C&#43;&#43; (MSVC)" data-description=""><i class="fa-brands fa-blogger fa-fw" aria-hidden="true"></i></a>
   <a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://ccrysisa.github.io/posts/modern-cpp/" data-title="Modern C&#43;&#43; (MSVC)"><i class="fa-brands fa-evernote fa-fw" aria-hidden="true"></i></a>
   </span>
-        </div>
-      </div></div>
+      </div>
+    </div>
+  </div>
 
   <div class="post-info-more">
-    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href="/tags/c&#43;&#43;/" class="post-tag" title="标签 - C&#43;&#43;">C&#43;&#43;</a><a href="/tags/msvc/" class="post-tag" title="标签 - MSVC">MSVC</a></section>
+    <section class="post-tags"><i class="fa-solid fa-tags fa-fw me-1" aria-hidden="true"></i><a href='/tags/c&#43;&#43;/' class="post-tag">C&#43;&#43;</a><a href='/tags/msvc/' class="post-tag">MSVC</a></section>
     <section>
       <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
@@ -7035,14 +7043,11 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
   <div class="post-nav"><a href="/posts/build-a-linked-hashmap-in-rust/" class="post-nav-item" rel="prev" title="Build a linked hash map in Rust"><i class="fa-solid fa-angle-left fa-fw" aria-hidden="true"></i>Build a linked hash map in Rust</a>
       <a href="/posts/drop-check/" class="post-nav-item" rel="next" title="Crust of Rust: The Drop Check">Crust of Rust: The Drop Check<i class="fa-solid fa-angle-right fa-fw" aria-hidden="true"></i></a></div>
 </div>
-</article>
-
-  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down fa-fw" aria-hidden="true"></i></h2>
-      <div class="toc-content" id="toc-content-auto"></div></aside></main><footer class="footer">
-    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.131.0"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.3.2-RC"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
+</article></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.131.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.2.18-lts.5"><img class="fixit-icon" src="/fixit.min.svg" alt="FixIt logo" />&nbsp;FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright fa-fw" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2021 - 2024</span><span class="author" itemprop="copyrightHolder">
-              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line visitor">
+              <a href="https://github.com/ccrysisa"target="_blank" rel="external nofollow noopener noreferrer">ccrysisa</a></span><span class="license footer-divider"><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span></div><div class="footer-line statistics"></div><div class="footer-line visitor">
           <span id="busuanzi_container_site_uv" title='总访客数'><i class="fa-regular fa-user fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span><span id="busuanzi_container_site_pv" class="footer-divider" title='总访问量'><i class="fa-regular fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span></span>
         </div></div>
   </footer></div><div class="widgets"><div class="fixed-buttons animate__faster d-none"><div class="fixed-button back-to-top" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up fa-fw" aria-hidden="true"></i><span class="variant-numeric d-none">0%</span>
@@ -7050,5 +7055,5 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/js/flyfish.js" defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-10":{"title":"pch.h"},"id-11":{"title":"pch.cpp"}},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/js/flyfish.js" defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

@@ -1,9 +1,9 @@
 # openEuler RISC-V 系统: QEMU 仿真
 
 
-&gt; 本文对通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统的流程进行详细介绍，以及介绍如何通过 [mugen](https://gitee.com/openeuler/mugen) 测试框架来对 RISC-V 版本的 openEuler 进行系统、软件等方面测试，并根据测试日志对错误原因进行分析。
+> 本文对通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统的流程进行详细介绍，以及介绍如何通过 [mugen](https://gitee.com/openeuler/mugen) 测试框架来对 RISC-V 版本的 openEuler 进行系统、软件等方面测试，并根据测试日志对错误原因进行分析。
 
-&lt;!--more--&gt;
+<!--more-->
 
 ## 实验环境
 
@@ -14,7 +14,7 @@
 ```bash
 $ sudo apt install qemu-system-misc
 $ qemu-system-riscv64 --version
-QEMU emulator version 5.2.0 (Debian 1:5.2&#43;dfsg-11&#43;deb11u1)
+QEMU emulator version 5.2.0 (Debian 1:5.2+dfsg-11+deb11u1)
 Copyright (c) 2003-2020 Fabrice Bellard and the QEMU Project developers
 ```
 
@@ -107,15 +107,15 @@ $ ssh -p 12055 root@localhost
 $ ssh -p 12055 openeuler@localhost
 ```
 
-通过 `exit` 命令可以退出当前登录账号，通过快捷键 `Ctrl &#43; A, X` 可以关闭 QEMU 虚拟机 (本质上是信号 signal 处理 :rofl:)
+通过 `exit` 命令可以退出当前登录账号，通过快捷键 `Ctrl + A, X` 可以关闭 QEMU 虚拟机 (本质上是信号 signal 处理 :rofl:)
 
-&gt; 建议登录后修改账号的密码 (相关命令: [passwd](https://linux.die.net/man/1/passwd))
+> 建议登录后修改账号的密码 (相关命令: [passwd](https://linux.die.net/man/1/passwd))
 
 ## Mugen 测试框架
 
-&gt; *根据 「[mugen](https://gitee.com/openeuler/mugen)」 README 的使用教程，在指定测试镜像上完成 「安装依赖软件」「配置测试套环境变量」「用例执行」这三个部分，并给出实验总结*
+> *根据 「[mugen](https://gitee.com/openeuler/mugen)」 README 的使用教程，在指定测试镜像上完成 「安装依赖软件」「配置测试套环境变量」「用例执行」这三个部分，并给出实验总结*
 
-### 安装 git &amp; 克隆 mugen 仓库
+### 安装 git & 克隆 mugen 仓库
 
 登录普通用户 openeuler 然后发现此时没有安装 git 无法克隆 mugen 仓库，先安装 git:
 
@@ -124,7 +124,7 @@ $ sudo dnf install git
 $ git clone https://gitee.com/openeuler/mugen.git
 ```
 
-&gt; 原始设定的 vim 配置不太优雅，我根据我的 vim 配置进行了设置，具体见 [「Vim 配置]({{&lt; relref &#34;../sysprog/gnu-linux-dev.md#终端和-vim&#34; &gt;}})」
+> 原始设定的 vim 配置不太优雅，我根据我的 vim 配置进行了设置，具体见 [「Vim 配置]({{< relref "../sysprog/gnu-linux-dev.md#终端和-vim" >}})」
 
 ### 安装依赖软件
 
@@ -142,11 +142,11 @@ Complete!
 $ sudo bash mugen.sh -c --ip $ip --password $passwd --user $user --port $port
 ```
 
-&gt; 这部分仓库的文档对于本机测试没有很清楚地说明，参考文章 「[基于openEuler虚拟机本地执行mugen测试脚本](http://devops-dev.com/article/438)」完成配置
+> 这部分仓库的文档对于本机测试没有很清楚地说明，参考文章 「[基于openEuler虚拟机本地执行mugen测试脚本](http://devops-dev.com/article/438)」完成配置
 
 执行完成后会多出一个环境变量文件 ./conf/env.json
 
-### 用例执行 &amp; 结果分析
+### 用例执行 & 结果分析
 
 我对于 openEuler RISC-V 是否支持了 binutils 比较感兴趣，便进行了测试:
 ```bash
@@ -169,30 +169,30 @@ INFO  - A total of 2 use cases were executed, with 1 successes 1 failures and 0 
 观察该用例对应的脚本 `testcases/cli-test/cppcheck/oe_test_cppcheck/oe_test_cppcheck.sh`，并打开对应的日志 `logs/cppcheck/oe_test_cppcheck/$(date).log` 在里面检索 `LOG_ERROR`，找到两处相关错误:
 
 ```bash
-&#43; LOG_ERROR &#39;oe_test_cppcheck.sh line 70&#39;
-&#43; LOG_ERROR &#39;oe_test_cppcheck.sh line 95&#39;
++ LOG_ERROR 'oe_test_cppcheck.sh line 70'
++ LOG_ERROR 'oe_test_cppcheck.sh line 95'
 ```
 
 比照用例脚本，对应的测试逻辑是:
 
 ```sh
         cppcheck --std=c99 --std=posix test.cpp
-70--&gt;   CHECK_RESULT $?
+70-->   CHECK_RESULT $?
 
-        if [ $VERSION_ID != &#34;22.03&#34; ]; then
-            cppcheck -DA --force file.c | grep &#34;A=1&#34;
-95--&gt;       CHECK_RESULT $? 1
+        if [ $VERSION_ID != "22.03" ]; then
+            cppcheck -DA --force file.c | grep "A=1"
+95-->       CHECK_RESULT $? 1
         else
-            cppcheck -DA --force file.c | grep &#34;A=1&#34;
+            cppcheck -DA --force file.c | grep "A=1"
             CHECK_RESULT $?
         fi
 ```
 
 - [Cppcheck manual](https://cppcheck.sourceforge.io/manual.pdf) P11
 
-&gt; The flag -D tells Cppcheck that a name is defined. There will be no Cppcheck analysis without this define.
+> The flag -D tells Cppcheck that a name is defined. There will be no Cppcheck analysis without this define.
 
-&gt; The flag --force
+> The flag --force
 and --max-configs is used to control how many combinations are checked.
 When -D is used, Cppcheck will only check 1 configuration unless these are used.
 
@@ -204,11 +204,11 @@ When -D is used, Cppcheck will only check 1 configuration unless these are used.
     mode=${3-0}
     error_log=$4
 ```
-&gt; GPT: 
-&gt; - actual_result 变量被赋值为第一个参数的值。
-&gt; - expect_result 变量被赋值为第二个参数的值，如果第二个参数不存在，则默认为 0。
-&gt; - mode 变量被赋值为第三个参数的值，如果第三个参数不存在，则默认为 0。
-&gt; - error_log 变量被赋值为第四个参数的值。
+> GPT: 
+> - actual_result 变量被赋值为第一个参数的值。
+> - expect_result 变量被赋值为第二个参数的值，如果第二个参数不存在，则默认为 0。
+> - mode 变量被赋值为第三个参数的值，如果第三个参数不存在，则默认为 0。
+> - error_log 变量被赋值为第四个参数的值。
 
 所以，涉及错误的两个测试逻辑都很好理解了:
 - `CHECK_RESULT $?` 表示上一条命令返回值的预期是 0
@@ -224,23 +224,23 @@ $ sudo dnf install cppcheck
 执行测试脚本 70 行对应的上一条命令:
 ```bash
 $ cppcheck --std=c99 --std=posix test.cpp
-cppcheck: error: unknown --std value &#39;posix&#39;
+cppcheck: error: unknown --std value 'posix'
 $ echo $?
 1
 ```
-&gt; 测试失败原因是 cppcheck risc-v 版本不支持指定 C/C&#43;&#43; 标准为 posix (同时查询了下 「[cppcheck manual](https://github.com/danmar/cppcheck/blob/main/man/manual.md)」目前 cppcheck 支持的标准里并未包括 posix)
+> 测试失败原因是 cppcheck risc-v 版本不支持指定 C/C++ 标准为 posix (同时查询了下 「[cppcheck manual](https://github.com/danmar/cppcheck/blob/main/man/manual.md)」目前 cppcheck 支持的标准里并未包括 posix)
 
 执行测试脚本 95 行对应的上一条命令:
 ```bash
-$ cppcheck -DA --force file.c | grep &#34;A=1&#34;
+$ cppcheck -DA --force file.c | grep "A=1"
 Checking file.c: A=1...
-file.c:5:6: error: Array &#39;a[10]&#39; accessed at index 10, which is out of bounds. [arrayIndexOutOfBounds]
+file.c:5:6: error: Array 'a[10]' accessed at index 10, which is out of bounds. [arrayIndexOutOfBounds]
     a[10] = 0;
      ^
 $ echo $?
 0
 ```
-&gt; 测试失败原因是 grep 在之前的 cppcheck 的输出里匹配到 `A=1`，所以导致返回值为 0。这部分测试的逻辑是: 仅对于 22.03 版本 openEuler 上的 cppcheck 在以参数 `-DA` 执行时才会输出包含 `A=1` 的信息，但是个人猜测是在比 22.03 及更高版本的 openEuler 上使用 cppcheck 搭配 `-DA` 都可以输出包含 `A=1` 的信息
+> 测试失败原因是 grep 在之前的 cppcheck 的输出里匹配到 `A=1`，所以导致返回值为 0。这部分测试的逻辑是: 仅对于 22.03 版本 openEuler 上的 cppcheck 在以参数 `-DA` 执行时才会输出包含 `A=1` 的信息，但是个人猜测是在比 22.03 及更高版本的 openEuler 上使用 cppcheck 搭配 `-DA` 都可以输出包含 `A=1` 的信息
 
 ### 实验总结和讨论
 
@@ -260,7 +260,7 @@ $ echo $?
 
 参照上面安装 QEMU 7.2 安装 QEMU 8.2，并下载 OERV 24.03 LTS RICS-V 的虚拟机 [镜像相关文件](https://repo.openeuler.org/openEuler-24.03-LTS/virtual_machine_img/riscv64/)，最终启动相应的 QEMU 虚拟机:
 
-&gt; 注意该虚拟机镜像内只预置了 `root` 用户，密码为 `openEuler12#$`
+> 注意该虚拟机镜像内只预置了 `root` 用户，密码为 `openEuler12#$`
 
 ```
 $ uname -a

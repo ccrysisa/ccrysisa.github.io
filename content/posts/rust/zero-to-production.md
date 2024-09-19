@@ -116,6 +116,142 @@ Web Framework:
 - Crate [actix_web](https://docs.rs/actix-web/4.0.1/actix_web/index.html)
 - GitHub: [actix/examples](https://github.com/actix/examples): Community showcase and examples of Actix Web ecosystem usage.
 
+### Infrastructure
+
+依据基础的不同，下面为可能需要补充的相关知识。
+
+#### Async
+
+- [Rust Async 异步编程](https://www.bilibili.com/video/BV1Ki4y1C7gj/) / [简易教程](https://www.bilibili.com/video/BV16r4y187P4) 
+- Jon Gjengset: [Crust of Rust: async/await](https://www.youtube.com/watch?v=ThjvMReOXYM&list=PLqbS7AVVErFiWDOAVrPt7aYmnuuOLYvOa&index=11&pp=iAQB)
+
+异步或者并发是一种可以充分利用 CPU 的程序结构，Rust 通过异步运行时来实现对 CPU 资源的充分利用，让程序员无需关心底层采用的技术，例如采用单线程或多线程方案，这些由异步运行时来决定，即程序员无需再关心线程以及线程之间的顺序，也就是说异步在线程之上又构建了一层抽象。
+
+```goat
+ poll                         
+  +                          
+  | after one moment                    
+  +                          
+ wake                         
+```
+
+#### Serde
+
+- [Serde: Rust 的序列化解决方案](https://www.bilibili.com/video/BV1Nu411z7w8)
+- Jon Gjengset: [Decrusting the serde crate](https://www.youtube.com/watch?v=BI_bHCGRgMY)
+-  Josh Mcguigan: [Understanding Serde](https://www.joshmcguigan.com/blog/understanding-serde/)
+
+宏 `#[derive(Serialize)]` 可以生成对应的 `serialize` 方法，但该方法需要一个 `Serializer` 参数 (序列号 / 反序列化构造器)，而该 `Serializer` 并不会被该宏生成，需要我们提供 (自己写或使用第三方库)。`deserialize` 也是类似的。
+
+```rs
+pub trait Serialize {
+    // Required method
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+       where S: Serializer;
+}
+```
+
+这个 `Serializer` 是一个 trait，其具体的类型不由 serde 提供，而是由支持特定格式序列化 / 反序列化的第三方库来实现，例如 serde_json, serde_yaml 等。
+
+Example:
+
+```toml { title="Cargo.toml" }
+...
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9"
+```
+
+```json { title="data.json" }
+{
+    "name": "gshine",
+    "age": 24,
+    "phone": [
+        "123456",
+        "98765"
+    ]
+}
+```
+
+```rs { title="main.rs" }
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize, Debug)]
+struct Pay {
+    amount: i32,
+    tax_percent: f32,
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+struct Person {
+    name: String,
+    age: u8,
+    phone: String,
+    pays: Vec<Pay>,
+}
+
+fn main() {
+    let ps = vec![Person {
+        name: "gshine".to_string(),
+        age: 24,
+        phone: "123456".to_string(),
+        pays: vec![
+            Pay {
+                amount: 78,
+                tax_percent: 0.3,
+            },
+            Pay {
+                amount: 128,
+                tax_percent: 0.7,
+            },
+        ],
+    }];
+
+    // Serialize
+    let json_str = serde_json::to_string_pretty(&ps).unwrap();
+    let yaml_str = serde_yaml::to_string(&ps).unwrap();
+    println!("json:\n{}", json_str);
+    println!("yaml:\n{}", yaml_str);
+
+    // Deserialize
+    let ps_json: Vec<Person> = serde_json::from_str(&json_str).unwrap();
+    let ps_yaml: Vec<Person> = serde_yaml::from_str(&yaml_str).unwrap();
+    println!("json: {:#?}", ps_json);
+    println!("yaml: {:#?}", ps_yaml);
+
+    // Modify
+    let json_data = std::fs::read_to_string("./data.json").unwrap();
+    let mut data: serde_json::Value = serde_json::from_str(&json_data).unwrap();
+    println!("before: {}", data.to_string());
+
+    // key-value
+    data["car"] = serde_json::Value::String("fd".to_string());
+    println!("after: {}", data.to_string());
+    // map
+    let mut map_value = serde_json::Map::new();
+    map_value.insert(
+        "color".to_string(),
+        serde_json::Value::String("blue".to_string()),
+    );
+    // array
+    map_value.insert(
+        "year".to_string(),
+        serde_json::Value::Array(vec![
+            serde_json::Value::String("1945".to_string()),
+            serde_json::Value::String("1950".to_string()),
+        ]),
+    );
+    data["car"] = serde_json::Value::Object(map_value);
+
+    println!("after: {}", data.to_string());
+}
+```
+
+#### sqlx
+
+- [Rust 数据库异步解决方案: sqlx + sqlb](https://www.bilibili.com/video/BV1sL411A748/)
+
 ### A Basic Health Check
 
 - [curl 的用法指南](https://www.ruanyifeng.com/blog/2019/09/curl-reference.html)
@@ -130,3 +266,70 @@ Web Framework:
 ```
 
 > This is often referred to as *black box testing*: we verify the behaviour of a system by examining its output given a set of inputs without having access to the details of its internal implementation.
+
+#### Tests
+
+- next to your code in an embedded test module: 通过条件编译的方式实现
+- in an external `tests` folder 和 as part of your public documentation (doc tests): 将测试用例单独编译为独立的二进制
+
+```goat
+                  +------------+
+                  | HttpServer |
++------------+    +------------+
+| HttpServer |    |    run     |
+|------------|    |------------|
+|   closure  |    |  closure   |
++------------+    +------------+
+|    main    |    |    main    |
++------------+    +------------+
+```
+
+#### Server
+
+- Struct [actix_web::dev::Server](https://docs.rs/actix-web/4.9.0/actix_web/dev/struct.Server.html)
+
+> The Server must be awaited or polled in order to start running. It will resolve when the server has fully shut down.
+
+即 `Server` 的作用类似一个句柄，所以在调用 [run](https://docs.rs/actix-web/4.9.0/actix_web/struct.HttpServer.html#method.run) 方法后可以通过这个句柄来选择何种 I/O 模型 (awaited or polled)。
+
+### HTML Forms
+
+> You can immediately spot a limitation of “roll-your-own” parametrised tests: as soon as one test case fails, the execution stops and we do not know the outcome for the following tests cases.
+
+手工实现的 roll-your-own 风格的 Parametrised Tests，受限于实作的 `for` 语法，只能逐个测试用例执行，一旦某个测试样例失败则会受制于 `assert` 宏的限制，不会再往下执行其他的测试用例。
+
+### Databases
+
+{{< admonition >}}
+Threads are for working in parallel, async is for waiting in parallel.
+{{< /admonition >}}
+
+- PostgreSQL: Documentation [5.9. Schemas](https://www.postgresql.org/docs/9.5/ddl-schemas.html)
+
+> A PostgreSQL database cluster contains one or more named databases. Roles and a few other object types are shared across the entire cluster. A client connection to the server can only access data in a single database, the one specified in the connection request.
+> 
+> A database contains one or more named schemas, which in turn contain tables. Schemas also contain other kinds of named objects, including data types, functions, and operators. The same object name can be used in different schemas without conflict; for example, both `schema1` and `myschema` can contain tables named `mytable`. Unlike databases, schemas are not rigidly separated: a user can access objects in any of the schemas in the database they are connected to, if they have privileges to do so.
+
+书中这一章节所指的 Database migration 实为 Schema migration，根据 [Wikipedia](https://en.wikipedia.org/wiki/Schema_migration) 的定义:
+
+> In software engineering, a schema migration (also database migration, database change management) refers to the management of version-controlled, incremental and sometimes reversible changes to relational database schemas. A schema migration is performed on a database whenever it is necessary to update or revert that database's schema to some newer or older version.
+
+即类似于 Git 的版本控制但是用于数据库的 Schema 的状态转换，即只有涉及 schema 的改动才需要使用该版本控制，而针对数据条目的改动并不需要。同时它也起到一个日志的功能，重新启动数据库时可以根据 migration 记录来将数据库的 schma 内容迁移到指定状态。
+
+crate.io: [sqlx](https://crates.io/crates/sqlx) - Cargo Feature Flags
+
+> Actix-web is fully compatible with Tokio and so a separate runtime feature is no longer needed.
+
+这一节有些地方需要使用 [ConfigBuilder](https://docs.rs/config/latest/config/builder/struct.ConfigBuilder.html) 进行重写，这时可以参考作者的 [zero2prod](https://github.com/LukeMathWalker/zero-to-production) 库进行观摩学习。
+
+[app_data](https://docs.rs/actix-web/4.0.1/actix_web/struct.App.html#method.app_data):
+
+> Set application (root level) data.
+> 
+> Application data stored with `App::app_data()` method is available through the `HttpRequest::app_data` method at runtime.
+
+即是整个应用程序的所有 handlers 都共享的 application data。
+
+sqlx 允许同时读和互斥写，使用不可变引用和可变引用机制来实现则让其执行也满足了 $N: 1$ 模型。如果采用 `Mutex` 方案来获取可变引用，会导致读操作也是互斥的，这大大降低了性能。`PgPool` 采用了内部可变性机制，使得对于读写满足 $N: 1$ 模型，使得其性能不弱于采用不可变引用和可变引用机制的 `PgConnection`。
+
+编写 SQL 语句时为了防止转义字符带来的麻烦，可以采用 Rust 提供的 raw literals 写法: [What is the r#""# operator in Rust?](https://stackoverflow.com/questions/26611664/what-is-the-r-operator-in-rust)。
