@@ -1,9 +1,9 @@
 ---
-title: "学会如何学习 Learning How to Learn"
+title: "C++ 类静态反射机制"
 subtitle:
-date: 2024-05-14T18:44:37+08:00
-slug: 4f5f33f
-draft: true
+date: 2024-09-19T00:12:58+08:00
+slug: 929681d
+draft: false
 # author:
 #   name:
 #   link:
@@ -15,9 +15,10 @@ license:
 comment: false
 weight: 0
 tags:
-  - draft
+  - C++
+  - Reflection
 categories:
-  - draft
+  - C++
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -29,8 +30,8 @@ resources:
   - name: featured-image-preview
     src: featured-image-preview.jpg
 toc: true
-math: false
-lightgallery: false
+math: true
+lightgallery: true
 password:
 message:
 repost:
@@ -42,8 +43,6 @@ repost:
 
 <!--more-->
 
-bilibili: [加州大学公开课——学会如何学习](https://www.bilibili.com/video/BV1cy4y1p7TC)
+## References:
 
-## P1
-
-专注模式 vs. 发散模式
+- [c++類靜態反射 (類註冊器) c++ static class reflection (class registrar)](https://www.bilibili.com/video/BV12BtYePE2p)

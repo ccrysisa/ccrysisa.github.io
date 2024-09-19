@@ -3,7 +3,7 @@ title: "Modern C++ (MSVC)"
 subtitle:
 date: 2024-06-30T00:19:25+08:00
 slug: f341f9f
-# draft: true
+draft: false
 author:
   name: vanJker
   link: https://github.com/vanJker
