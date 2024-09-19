@@ -100,7 +100,15 @@ Docker Compose 也是通过手动安装:
 
 #### Starting the project
 
+主要是解析命令行参数并根据参数设置相应的日志输出等级。
 
+## Papers
+
+- Quark: A High-Performance Secure Container Runtime for Serverless Computing
+- Performance Evaluation of Container Runtimes
+- RunD: A Lightweight Secure Container Runtime for High-density Deployment and High-concurrency Startup in Serverless Computing
+- Towards Improving Container Security by Preventing Runtime Escapes
+- Aristotle Cloud Federation: Container Runtimes Technical Report
 
 ## References
 

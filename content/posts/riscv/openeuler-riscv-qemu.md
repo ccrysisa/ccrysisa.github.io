@@ -314,6 +314,12 @@ QEMU 虚拟机很有可能出现时间日期与宿主机不同步的现象，如
 
 - [Linux 配置 NTP 时间同步服务](https://www.cnblogs.com/fanqisoft/p/17891260.html)
 
+## mugen 工作收获
+
+从 [ISSUE #1288](https://github.com/openeuler-riscv/oerv-team/issues/1288) 习得如何通过内核启动参数来判断 SELinux 是否被禁用:
+
+- [CmdLine - `file /proc/cmdline`](https://insights-core.readthedocs.io/en/latest/shared_parsers_catalog/cmdline.html)
+
 ## References
 
 - openEuler RISC-V: [通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统](https://github.com/openeuler-mirror/RISC-V/blob/master/doc/tutorials/vm-qemu-oErv.md)
