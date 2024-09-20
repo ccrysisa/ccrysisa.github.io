@@ -13,8 +13,8 @@
   <meta itemprop="name" content="openEuler RISC-V 系统: QEMU 仿真">
   <meta itemprop="description" content=" 本文对通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统的流程进行详细介绍，以及介绍如何通过 mugen 测试框架来对 RISC-V 版本的 openEuler 进行系统、软件等方面测试，并根据测试日志对错误原因进行分析。">
   <meta itemprop="datePublished" content="2024-03-07T14:48:21+08:00">
-  <meta itemprop="dateModified" content="2024-07-31T12:50:00+08:00">
-  <meta itemprop="wordCount" content="2517">
+  <meta itemprop="dateModified" content="2024-09-19T17:04:58+08:00">
+  <meta itemprop="wordCount" content="2551">
   <meta itemprop="image" content="https://ccrysisa.github.io/logo.png">
   <meta itemprop="keywords" content="RISC-V,OpenEuler,QEMU,Mugen"><meta property="og:url" content="https://ccrysisa.github.io/posts/openeuler-riscv-qemu/">
   <meta property="og:site_name" content="KZnight&#39;s Blog">
@@ -24,7 +24,7 @@
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
     <meta property="article:published_time" content="2024-03-07T14:48:21+08:00">
-    <meta property="article:modified_time" content="2024-07-31T12:50:00+08:00">
+    <meta property="article:modified_time" content="2024-09-19T17:04:58+08:00">
     <meta property="article:tag" content="RISC-V">
     <meta property="article:tag" content="OpenEuler">
     <meta property="article:tag" content="QEMU">
@@ -49,8 +49,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https:\/\/ccrysisa.github.io\/posts\/openeuler-riscv-qemu\/"
-    },"genre": "posts","keywords": "RISC-V, openEuler, QEMU, Mugen","wordcount":  2517 ,
-    "url": "https:\/\/ccrysisa.github.io\/posts\/openeuler-riscv-qemu\/","datePublished": "2024-03-07T14:48:21+08:00","dateModified": "2024-07-31T12:50:00+08:00","publisher": {
+    },"genre": "posts","keywords": "RISC-V, openEuler, QEMU, Mugen","wordcount":  2551 ,
+    "url": "https:\/\/ccrysisa.github.io\/posts\/openeuler-riscv-qemu\/","datePublished": "2024-03-07T14:48:21+08:00","dateModified": "2024-09-19T17:04:58+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -178,7 +178,7 @@
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><a href="https://github.com/ccrysisa" title="作者"target="_blank" rel="external nofollow noopener noreferrer author" class="author"><img loading="lazy" src="https://avatars.githubusercontent.com/u/133117003?s=400&amp;v=4" data-title="ccrysisa" data-alt="ccrysisa" class="avatar" style="background: url(/svg/loading.min.svg) no-repeat center;" onload="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}this.dataset.lazyloaded='';" onerror="this.title=this.dataset.title;this.alt=this.dataset.alt;for(const i of ['style', 'data-title','data-alt','onerror','onload']){this.removeAttribute(i);}"/>&nbsp;ccrysisa</a></span>
           <span class="post-category">收录于 <a href="/categories/architecture/"><i class="fa-regular fa-folder fa-fw" aria-hidden="true"></i> Architecture</a></span></div>
-      <div class="post-meta-line"><span title="发布于 2024-03-07 14:48:21"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-07">2024-03-07</time></span>&nbsp;<span title="更新于 2024-07-31 12:50:00"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-07-31">2024-07-31</time></span>&nbsp;<span title="2517 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 6 分钟</span>&nbsp;</div>
+      <div class="post-meta-line"><span title="发布于 2024-03-07 14:48:21"><i class="fa-regular fa-calendar-alt fa-fw me-1" aria-hidden="true"></i><time datetime="2024-03-07">2024-03-07</time></span>&nbsp;<span title="更新于 2024-09-19 17:04:58"><i class="fa-regular fa-edit fa-fw me-1" aria-hidden="true"></i><time datetime="2024-09-19">2024-09-19</time></span>&nbsp;<span title="2551 字"><i class="fa-solid fa-pencil-alt fa-fw me-1" aria-hidden="true"></i>约 2600 字</span>&nbsp;<span><i class="fa-regular fa-clock fa-fw me-1" aria-hidden="true"></i>预计阅读 6 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -204,6 +204,7 @@
         <li><a href="#时间同步">时间同步</a></li>
       </ul>
     </li>
+    <li><a href="#mugen-工作收获">mugen 工作收获</a></li>
     <li><a href="#references">References</a></li>
   </ul>
 </nav></div>
@@ -589,6 +590,11 @@ When -D is used, Cppcheck will only check 1 configuration unless these are used.
 <ul>
 <li><a href="https://www.cnblogs.com/fanqisoft/p/17891260.html"target="_blank" rel="external nofollow noopener noreferrer">Linux 配置 NTP 时间同步服务</a></li>
 </ul>
+<h2 id="mugen-工作收获">mugen 工作收获</h2>
+<p>从 <a href="https://github.com/openeuler-riscv/oerv-team/issues/1288"target="_blank" rel="external nofollow noopener noreferrer">ISSUE #1288</a> 习得如何通过内核启动参数来判断 SELinux 是否被禁用:</p>
+<ul>
+<li><a href="https://insights-core.readthedocs.io/en/latest/shared_parsers_catalog/cmdline.html"target="_blank" rel="external nofollow noopener noreferrer">CmdLine - <code>file /proc/cmdline</code></a></li>
+</ul>
 <h2 id="references">References</h2>
 <ul>
 <li>openEuler RISC-V: <a href="https://github.com/openeuler-mirror/RISC-V/blob/master/doc/tutorials/vm-qemu-oErv.md"target="_blank" rel="external nofollow noopener noreferrer">通过 QEMU 仿真 RISC-V 环境并启动 OpenEuler RISC-V 系统</a></li>
@@ -605,7 +611,7 @@ When -D is used, Cppcheck will only check 1 configuration unless these are used.
   <div class="post-info">
     <div class="post-info-line">
       <div class="post-info-mod">
-        <span title="更新于 2024-07-31 12:50:00">更新于 2024-07-31&nbsp;</span>
+        <span title="更新于 2024-09-19 17:04:58">更新于 2024-09-19&nbsp;</span>
       </div></div>
     <div class="post-info-line">
       <div class="post-info-md"><span><a href="/posts/openeuler-riscv-qemu/index.md" title="阅读原始文档" class="link-to-markdown">阅读原始文档</a></span></div>

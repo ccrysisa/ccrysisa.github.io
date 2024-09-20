@@ -248,7 +248,7 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>When implementing both <code>Hash</code> and <code>Eq</code>, it is important that the following property holds:</p>
-<div class="highlight" id="id-11"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -410,7 +410,7 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="reborrow">reborrow</h3>
-<div class="highlight" id="id-9"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -449,7 +449,7 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 </div>
 </div><p>这个实作乍一看好像没有问题，但是注意 <code>match</code> 表达式让 <code>iter_mut()</code> 获得的可变引用的存活域为其接下来的 <code>{}</code> 内。但是需要注意的是，这个 <code>iter_mut()</code> 获得的可变引用是对该方法的 <code>&amp;mut self</code> 进行 reborrow 得来的，依据 reborrow 的规则，在 reborrow 得到的可变引用的使用范围内，不能使用被 reborrow 的可变引用 (这是为了向编译器保证同一时刻只会存在一个可变引用)。但是我们看到 <code>match</code> 表达式的 <code>None</code> 分支里，使用了被 reborrow 的可变引用 <code>self</code>，这违反了 reborrow 的规则，故而编译不通过。</p>
 <p>正确实作如下，仅在 <code>Some</code> 和 <code>None</code> 分支才使用 reborrow，这样就不会违反 reborrow 的规则机制:</p>
-<div class="highlight" id="id-10"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -501,7 +501,7 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
       <div class="admonition-content"><ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 为 <code>HashMap</code> 实现 Trait <a href="https://doc.rust-lang.org/std/ops/trait.Index.html"target="_blank" rel="external nofollow noopener noreferrer">std::ops::Index</a>，使得下面这条语句编译通过:</li>
 </ul>
-<div class="highlight" id="id-12"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -511,7 +511,7 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 </div><ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 为 <code>HashMap</code> 实现 method <a href="https://doc.rust-lang.org/std/collections/hash_map/enum.Entry.html#method.and_modify"target="_blank" rel="external nofollow noopener noreferrer">and_modify</a>，使得下面这条语句编译通过:</li>
 </ul>
-<div class="highlight" id="id-13"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -527,7 +527,7 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 </div><ul>
 <li><i class="fa-regular fa-check-square fa-fw" aria-hidden="true"></i> 为 <code>HashMap</code> 实现 Trait <a href="https://doc.rust-lang.org/std/convert/trait.From.html"target="_blank" rel="external nofollow noopener noreferrer">std::convert::From</a>，根据手册，只需要实现对数组类型 <code>[(K, V); N]</code>，使得下面的代码可以通过编译:</li>
 </ul>
-<div class="highlight" id="id-14"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -542,7 +542,7 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">(</span><span class="n">Viking</span>::<span class="n">new</span><span class="p">(</span><span class="s">&#34;Harald&#34;</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;Iceland&#34;</span><span class="p">),</span><span class="w"> </span><span class="mi">12</span><span class="p">),</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">]);</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight" id="id-15"><div class="chroma">
+</div><div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -707,5 +707,5 @@ We&#39;re writing it end-to-end in one sitting, with the hope of ending up with 
     <div class="noscript-warning">FixIt 主题在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="preload" href="/lib/katex/katex.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/js/flyfish.js" defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-12":{"title":"examples/std-1.rs"},"id-13":{"title":"examples/std-2.rs"},"id-14":{"title":"examples/std-3.rs"},"id-15":{"title":"examples/std-4.rs"}},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
+    <noscript><link rel="stylesheet" href="/lib/katex/katex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/lunr/lunr.min.js" defer></script><script src="/lib/lunr/lunr.stemmer.support.min.js" defer></script><script src="/lib/lunr/lunr.zh.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/katex/katex.min.js" defer></script><script src="/lib/katex/auto-render.min.js" defer></script><script src="/lib/katex/mhchem.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async defer></script><script src="/js/flyfish.js" defer></script><script>window.config={"code":{"copyTitle":"复制到剪贴板","editLockTitle":"锁定可编辑代码块","editUnLockTitle":"解锁可编辑代码块","editable":true,"maxShownLines":10},"comment":{"enable":false},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验。"},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"id-4":{"title":"examples/std-1.rs"},"id-5":{"title":"examples/std-2.rs"},"id-6":{"title":"examples/std-3.rs"},"id-7":{"title":"examples/std-4.rs"}},"enablePWA":true,"lightgallery":true,"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":true,"left":"\\begin{equation}","right":"\\end{equation}"},{"display":true,"left":"\\begin{equation*}","right":"\\end{equation*}"},{"display":true,"left":"\\begin{align}","right":"\\end{align}"},{"display":true,"left":"\\begin{align*}","right":"\\end{align*}"},{"display":true,"left":"\\begin{alignat}","right":"\\end{alignat}"},{"display":true,"left":"\\begin{alignat*}","right":"\\end{alignat*}"},{"display":true,"left":"\\begin{gather}","right":"\\end{gather}"},{"display":true,"left":"\\begin{CD}","right":"\\end{CD}"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script src="/js/theme.min.js" defer></script></body>
 </html>

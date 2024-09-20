@@ -1646,7 +1646,7 @@ Optimization (Maximize Speed)</p>
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>使用 <em>初始化参数列表</em> 会节约性能，不会丢弃默认构造的对象，具体见视频的例子。原理也很简单，初始化参数列表是在执行函数体之前进行初始化的，不会事先创建对象。而如果在函数体内对对象进行赋值，因为不论是否在初始化参数列表中是否指定了成员变量，编译器都会在执行函数体之前先对每个成员变量进行构造 (当然初始化参数列表指定的就按列表构造)，导致在函数体内对成员变量赋值时，会丢掉先前构造好的对象，从而导致性能损失。(这很好理解，因为 Rust 要求构造对象时必须指定所有成员的值，C++ 的初始化列表的作用是类似的，给对象的每个成员都分配值，这样构造函数就无需指定每个成员的值了)</p>
-<div class="highlight" id="id-30"><div class="chroma">
+<div class="highlight" id="id-36"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -3181,7 +3181,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <ul>
 <li>Stack Overflow: <a href="https://stackoverflow.com/questions/5368258/the-copy-constructor-and-assignment-operator"target="_blank" rel="external nofollow noopener noreferrer">The copy constructor and assignment operator</a></li>
 </ul>
-<div class="highlight" id="id-31"><div class="chroma">
+<div class="highlight" id="id-37"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -3493,7 +3493,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
     </div>
     <div class="details-content">
       <div class="admonition-content"><p>这是因为常量模板规则，在编译时期即可确定 <code>size()</code> 函数的具体实现了，无需额外存储变量:</p>
-<div class="highlight" id="id-32"><div class="chroma">
+<div class="highlight" id="id-38"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5668,7 +5668,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <h4 id="dont-using-namspace-std">Don&rsquo;t &ldquo;using namspace std&rdquo;</h4>
 <p>不推荐使用 <code>using namespace std;</code> 类似的语句，使用 <code>std;:xxx</code> 这样的风格。因为现实中比较少用 STL，都是工作室自己开发类似 STL 的库来使用，这样可以区分代码中使用的是哪个库的 API。</p>
 <p>实作案例: EASTL <a href="https://github.com/electronicarts/EASTL/blob/master/include/EASTL/vector.h#L77"target="_blank" rel="external nofollow noopener noreferrer">vector.h</a></p>
-<div class="highlight" id="id-124"><div class="chroma">
+<div class="highlight" id="id-1"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -5677,7 +5677,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>滥用 <code>using namespace xxx;</code> 也可能会造成 API 名字冲突，例如上面的例子如果同时使用了:</p>
-<div class="highlight" id="id-125"><div class="chroma">
+<div class="highlight" id="id-2"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -5687,7 +5687,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="k">namespace</span> <span class="n">eastl</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>会因为指定调用函数不明确而导致编译失败。这种会导致编译失败的情景还算比较好的了 (因为编译时期就报错了)，下面这种情景更是灾难性的:</p>
-<div class="highlight" id="id-126"><div class="chroma">
+<div class="highlight" id="id-3"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5762,7 +5762,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/header/chrono"target="_blank" rel="external nofollow noopener noreferrer">Standard library header <chrono> (C++11)</a></li>
 </ul>
 <p>chrono 是一个平台无关的计时库，如果不是特定平台高精度的计时需求，使用这个库就足够了。</p>
-<div class="highlight" id="id-127"><div class="chroma">
+<div class="highlight" id="id-4"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5798,7 +5798,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>运用作用域、生命周期以及析构函数来实现自动计时:</p>
-<div class="highlight" id="id-128"><div class="chroma">
+<div class="highlight" id="id-5"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5877,7 +5877,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
 </div><h5 id="实作案例">实作案例</h5>
 <p>编译器最佳化对于数组遍历求和的效率影响:</p>
-<div class="highlight" id="id-129"><div class="chroma">
+<div class="highlight" id="id-6"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -5907,7 +5907,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
     </div>
   </div>
 <p>不同的智能指针构造的效率差异:</p>
-<div class="highlight" id="id-1"><div class="chroma">
+<div class="highlight" id="id-7"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -5973,7 +5973,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <li><a href="https://nolanlawson.com/2022/10/26/a-beginners-guide-to-chrome-tracing/"target="_blank" rel="external nofollow noopener noreferrer">A beginner’s guide to Chrome tracing</a></li>
 <li><a href="https://gist.github.com/TheCherno/31f135eea6ee729ab5f26a6908eb3a5e"target="_blank" rel="external nofollow noopener noreferrer">Instrumentor.h</a></li>
 </ul>
-<div class="highlight" id="id-2"><div class="chroma">
+<div class="highlight" id="id-8"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -5996,7 +5996,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span><span class="line"><span class="cl"><span class="cp">#define PROFILE_SCOPE(name)
 </span></span></span><span class="line"><span class="cl"><span class="cp">#endif</span></span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight" id="id-3"><div class="chroma">
+</div><div class="highlight" id="id-9"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6071,7 +6071,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <ul>
 <li>cppreference: <a href="https://en.cppreference.com/w/cpp/language/eval_order"target="_blank" rel="external nofollow noopener noreferrer">Order of evaluation</a></li>
 </ul>
-<div class="highlight" id="id-4"><div class="chroma">
+<div class="highlight" id="id-10"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6123,7 +6123,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>Binds the specified names to subobjects or elements of the initializer.</p>
 </blockquote>
-<div class="highlight" id="id-5"><div class="chroma">
+<div class="highlight" id="id-11"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6161,7 +6161,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>The class template <code>std::optional</code> manages an optional contained value, i.e. a value that may or may not be present.</p>
 </blockquote>
-<div class="highlight" id="id-6"><div class="chroma">
+<div class="highlight" id="id-12"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6231,7 +6231,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>由于 <code>std::optional</code> 重载了逻辑运算符，所以上面例子的第 23 行可以改写为:</p>
-<div class="highlight" id="id-7"><div class="chroma">
+<div class="highlight" id="id-13"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
@@ -6247,7 +6247,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>The class template <code>std::variant</code> represents a type-safe <code>union</code>. An instance of std::variant at any given time either holds a value of one of its alternative types, or in the case of error - no value</p>
 </blockquote>
-<div class="highlight" id="id-8"><div class="chroma">
+<div class="highlight" id="id-14"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6293,7 +6293,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p><code>std::variant</code> 和 <code>union</code> 的内存布局是完全不同的，<code>union</code> 占用的内存大小等于其内存占用最大的成员类型，而 <code>std::variant</code> 占用的内存大小为列举的类型大小之和 (当然这两者实际占用的内存大小还需要考虑内存对齐):</p>
-<div class="highlight" id="id-9"><div class="chroma">
+<div class="highlight" id="id-15"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6314,7 +6314,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>所以 <code>variant</code> 会更加类型安全，因为它和 <code>union</code> 不一样，不会造成未定义行为。可以使用 <code>std::variant</code> 来实现类似于 Rust 的 <code>Result</code> 类型:</p>
-<div class="highlight" id="id-10"><div class="chroma">
+<div class="highlight" id="id-16"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6349,7 +6349,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <blockquote>
 <p>The class any describes a type-safe container for single values of any copy constructible type.</p>
 </blockquote>
-<div class="highlight" id="id-11"><div class="chroma">
+<div class="highlight" id="id-17"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6397,7 +6397,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </ul>
 </li>
 </ul>
-<div class="highlight" id="id-12"><div class="chroma">
+<div class="highlight" id="id-18"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6418,7 +6418,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
 </div><h4 id="创建窗口">创建窗口</h4>
 <p>这是基础设施，直接复制一份即可。窗口逻辑在 <code>ImGui::ShowDemoWindow()</code> 处:</p>
-<div class="highlight" id="id-13"><div class="chroma">
+<div class="highlight" id="id-19"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6535,7 +6535,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
 </div><h4 id="基础控件">基础控件</h4>
 <h5 id="窗口">窗口</h5>
-<div class="highlight" id="id-14"><div class="chroma">
+<div class="highlight" id="id-20"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6547,7 +6547,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="n">ImGui</span><span class="o">::</span><span class="n">End</span><span class="p">();</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="文本框">文本框</h5>
-<div class="highlight" id="id-15"><div class="chroma">
+<div class="highlight" id="id-21"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6557,7 +6557,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="n">ImGui</span><span class="o">::</span><span class="n">Text</span><span class="p">(</span><span class="n">Text</span><span class="p">.</span><span class="n">c_str</span><span class="p">());</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="按钮">按钮</h5>
-<div class="highlight" id="id-16"><div class="chroma">
+<div class="highlight" id="id-22"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6571,7 +6571,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="输入文本框">输入文本框</h5>
-<div class="highlight" id="id-17"><div class="chroma">
+<div class="highlight" id="id-23"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6582,7 +6582,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
 </div><h5 id="列表">列表</h5>
 <h6 id="固定显示选项的列表">固定显示选项的列表</h6>
-<div class="highlight" id="id-18"><div class="chroma">
+<div class="highlight" id="id-24"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6612,7 +6612,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 <p>Also note that <code>ListBoxHeader()</code> was renamed to <code>BeginListBox()</code> on 2023-05-31</p>
 </blockquote>
 <h6 id="可展开显示选项的列表">可展开显示选项的列表</h6>
-<div class="highlight" id="id-19"><div class="chroma">
+<div class="highlight" id="id-25"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6640,7 +6640,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><h5 id="颜色选择器">颜色选择器</h5>
-<div class="highlight" id="id-20"><div class="chroma">
+<div class="highlight" id="id-26"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6651,7 +6651,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
 </div><h4 id="高级定制">高级定制</h4>
 <h5 id="字体设置">字体设置</h5>
-<div class="highlight" id="id-21"><div class="chroma">
+<div class="highlight" id="id-27"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6672,7 +6672,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
 </div><h5 id="风格设置">风格设置</h5>
 <p>在启动 ImGui Demo 后，其窗口的 <code>tools</code> 栏位的 <code>Style Editor</code> 选项即为风格编辑器。主要改一下圆角之类的设定，进行拖动可以即时看到效果，后续可以根据效果对应的数值在源代码中进行设置:</p>
-<div class="highlight" id="id-22"><div class="chroma">
+<div class="highlight" id="id-28"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6690,7 +6690,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="n">style</span><span class="p">.</span><span class="n">ScrollbarRounding</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>在风格编辑器理也可切换到颜色 (Colors) 栏目对颜色进行调整并且即时看到效果，以进行相应的设置:</p>
-<div class="highlight" id="id-23"><div class="chroma">
+<div class="highlight" id="id-29"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6751,7 +6751,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
 </div><h5 id="窗口停靠">窗口停靠</h5>
 <p>设置内部窗口可以拖拽停靠，例如可以拖拽到外部空间和拖拽到其它窗口内部停靠:</p>
-<div class="highlight" id="id-24"><div class="chroma">
+<div class="highlight" id="id-30"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6791,7 +6791,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>允许主窗口也可以作为停靠的主体:</p>
-<div class="highlight" id="id-25"><div class="chroma">
+<div class="highlight" id="id-31"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6808,7 +6808,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
 </div><h5 id="高级控件">高级控件</h5>
 <p>绘制队列 (Draw List) 可以绘制高级的自定义控件，常见的有矩形，圆等等:</p>
-<div class="highlight" id="id-26"><div class="chroma">
+<div class="highlight" id="id-32"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6827,7 +6827,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
 </div><h5 id="事件监听">事件监听</h5>
 <p>可以监听键盘按键的动作，同时还可以搭配鼠标位置来限制逻辑的执行范围:</p>
-<div class="highlight" id="id-27"><div class="chroma">
+<div class="highlight" id="id-33"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
@@ -6844,7 +6844,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div>
 </div><h5 id="控件拖拽">控件拖拽</h5>
 <p>与窗口拖拽类似，窗口内的控件也是可以设置为可拖拽的:</p>
-<div class="highlight" id="id-28"><div class="chroma">
+<div class="highlight" id="id-34"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -6954,7 +6954,7 @@ Cannot be used if an explicit object parameter is present.(since C++23)</p>
 </div><h4 id="第三方库">第三方库</h4>
 <p>imgui 的第三方库可以在其 wiki 的 <a href="https://github.com/ocornut/imgui/wiki/Useful-Extensions"target="_blank" rel="external nofollow noopener noreferrer">Useful Extensions</a> 页面中进行查找。只需下载第三方库的源代码，然后仿照对 imgui 库的处理将其源代码进行引入 <code>$(Project)\&lt;lib&gt;</code>，或在 Visual Studio 中作为静态库进行链接即可。</p>
 <p>下面以第三方库 <a href="https://github.com/BalazsJako/ImGuiColorTextEdit"target="_blank" rel="external nofollow noopener noreferrer">ImGuiColorTextEdit</a> 为例:</p>
-<div class="highlight" id="id-29"><div class="chroma">
+<div class="highlight" id="id-35"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
