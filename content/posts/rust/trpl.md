@@ -1,5 +1,5 @@
 ---
-title: "Rust 语言程序设计"
+title: "The Rust Programming Language"
 subtitle: Why Rust?
 date: 2023-12-28T20:18:03+08:00
 draft: false

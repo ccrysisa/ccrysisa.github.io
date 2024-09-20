@@ -83,31 +83,37 @@ Docker Compose 也是通过手动安装:
 
 ## Usage
 
-- [Docker and Kubernetes Tutorial for Beginners](https://www.youtube.com/playlist?list=PLy7NrYWoggjwPggqtFsI_zMAwvG0SqYCb)
+- Docker Docs: [Get started](https://docs.docker.com/get-started/)
+- [A Docker Tutorial for Beginners](https://docker-curriculum.com/#webapps-with-docker)
+- YouTube: [Docker and Kubernetes Tutorial for Beginners](https://www.youtube.com/playlist?list=PLy7NrYWoggjwPggqtFsI_zMAwvG0SqYCb)
 
 ## Container Runtime
-
-### Implementation
-
-- [Writing a Container in Rust](https://litchipi.site/serie/containers_in_rust) ([older version](https://litchipi.github.io/series/container_in_rust))
-- [Linux containers in 500 lines of code](https://blog.lizzie.io/linux-containers-in-500-loc.html)
 
 > A container is an isolated execution environment providing an abstraction between a software to be executed and the underlying operating system. It can be seen as a software virtualisation process.
 
 即以 software 为中心的虚拟化 (Virtualisation)，让 software 有一种在特定的 OS 环境下执行 / 运行的错觉。
 
+### Projects
+
+- [Writing a Container in Rust](https://litchipi.site/serie/containers_in_rust) ([older version](https://litchipi.github.io/series/container_in_rust))
+- [Linux containers in 500 lines of code](https://blog.lizzie.io/linux-containers-in-500-loc.html)
+- [PURA - Lightweight & OCI-compliant container runtime](https://github.com/ccrysisa/pura)
+
+### Seminars
+
+- [Building a container from scratch in Go - Liz Rice (Microscaling Systems)](https://www.youtube.com/watch?v=Utf-A4rODH8)
+- [Containers From Scratch • Liz Rice • GOTO 2018](https://www.youtube.com/watch?v=8fi7uSYlOdc)
+- [Containers from scratch: The sequel - Liz Rice (Aqua Security)](https://www.youtube.com/watch?v=_TsSmSu57Zo)
+- [Rootless Containers from Scratch - Liz Rice, Aqua Security](https://www.youtube.com/watch?v=jeTKgAEyhsA)
+- [Golang UK Conf. 2016 - Liz Rice - What is a container, really? Let's write one in Go from scratch](https://www.youtube.com/watch?v=HPuvDm8IC-4)
+- [Container Security • Liz Rice & Eoin Woods](https://www.youtube.com/watch?v=FyRbFcGygdk)
+- [Container Security • Liz Rice & Eoin Woods • GOTO 2020](https://www.youtube.com/watch?v=iXz4i2EbB4M)
+
 ### Papers
 
-主要是解析命令行参数并根据参数设置相应的日志输出等级。
-
-## Papers
-
-- CNTR: Lightweight OS Containers / [cntr](https://github.com/Mic92/cntr)
-- Quark: A High-Performance Secure Container Runtime for Serverless Computing
-- RunD: A Lightweight Secure Container Runtime for High-density Deployment and High-concurrency Startup in Serverless Computing
+- CNTR: Lightweight OS Containers ([cntr](https://github.com/Mic92/cntr))
+- Quark: A High-Performance Secure Container Runtime for Serverless Computing ([Seminar](https://www.youtube.com/watch?v=xpMPMt9JEX8))
+- RunD: A Lightweight Secure Container Runtime for High-density Deployment and High-concurrency Startup in Serverless Computing ([Artifacts](https://github.com/chengjiagan/RunD_ATC22))
 - Towards Improving Container Security by Preventing Runtime Escapes
 - Performance Evaluation of Container Runtimes
 - Aristotle Cloud Federation: Container Runtimes Technical Report
-
-## References
-
