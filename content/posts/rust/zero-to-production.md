@@ -333,3 +333,21 @@ crate.io: [sqlx](https://crates.io/crates/sqlx) - Cargo Feature Flags
 sqlx 允许同时读和互斥写，使用不可变引用和可变引用机制来实现则让其执行也满足了 $N: 1$ 模型。如果采用 `Mutex` 方案来获取可变引用，会导致读操作也是互斥的，这大大降低了性能。`PgPool` 采用了内部可变性机制，使得对于读写满足 $N: 1$ 模型，使得其性能不弱于采用不可变引用和可变引用机制的 `PgConnection`。
 
 编写 SQL 语句时为了防止转义字符带来的麻烦，可以采用 Rust 提供的 raw literals 写法: [What is the r#""# operator in Rust?](https://stackoverflow.com/questions/26611664/what-is-the-r-operator-in-rust)。
+
+## Telemetry
+
+**Known Unknowns**: shortcomings that we are aware of and we have not yet managed to investigate or we have deemed to be not relevant enough to spend time on.
+
+**Unknown Unknowns**: issues that we have not seen before and we are not expecting
+
+对抗 Unknown Unknowns 的最好方法就是把它们变成 Known Unknowns，这样我们就可以投入时间和精力来解决和预防它们。而要让 Unknown 变成 Known 需要借助日志这一工具来监控系统的状态变化 (见识过了的 Unknown 就是 Known 了 XD)
+
+> Sometimes experience is enough to transform an unknown unknown into a known unknown: if you had never worked with a database before you might have not thought about what happens when we lose connection; once you have seen it happen once, it becomes a familiar failure mode to look out for.
+
+**Telemetry Data** 对于观测 (Observability) 系统运行状况非常有效，这也是为什么 [eBPF](https://en.wikipedia.org/wiki/EBPF) 现在如此风靡，通过 [eBPF](https://en.wikipedia.org/wiki/EBPF) 可以获取 kernel 的 telemetry data。
+
+> The only thing we can rely on to understand and debug an unknown unknown is **telemetry data**: information about our running applications that is collected automatically and can be later inspected to answer questions about the state of the system at a certain point in time.
+
+{{< admonition quote >}}
+Observability is about being able to ask arbitrary questions about your environment without — and this is the key part — having to know ahead of time what you wanted to ask.
+{{< /admonition >}}
