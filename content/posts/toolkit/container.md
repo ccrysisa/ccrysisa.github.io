@@ -85,29 +85,24 @@ Docker Compose 也是通过手动安装:
 
 - [Docker and Kubernetes Tutorial for Beginners](https://www.youtube.com/playlist?list=PLy7NrYWoggjwPggqtFsI_zMAwvG0SqYCb)
 
-## Linux Containers
+## Container Runtime
 
-### Writing a Container in Rust
+### Implementation
 
 - [Writing a Container in Rust](https://litchipi.site/serie/containers_in_rust) ([older version](https://litchipi.github.io/series/container_in_rust))
 - [Linux containers in 500 lines of code](https://blog.lizzie.io/linux-containers-in-500-loc.html)
-
-#### Introduction to containers
 
 > A container is an isolated execution environment providing an abstraction between a software to be executed and the underlying operating system. It can be seen as a software virtualisation process.
 
 即以 software 为中心的虚拟化 (Virtualisation)，让 software 有一种在特定的 OS 环境下执行 / 运行的错觉。
 
-#### Starting the project
+### Papers
 
-主要是解析命令行参数并根据参数设置相应的日志输出等级。
-
-## Papers
-
+- CNTR: Lightweight OS Containers / [cntr](https://github.com/Mic92/cntr)
 - Quark: A High-Performance Secure Container Runtime for Serverless Computing
-- Performance Evaluation of Container Runtimes
 - RunD: A Lightweight Secure Container Runtime for High-density Deployment and High-concurrency Startup in Serverless Computing
 - Towards Improving Container Security by Preventing Runtime Escapes
+- Performance Evaluation of Container Runtimes
 - Aristotle Cloud Federation: Container Runtimes Technical Report
 
 ## References
