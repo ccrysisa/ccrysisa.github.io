@@ -2,7 +2,7 @@
 title: "openSUSE: Open Build Service (OBS)"
 subtitle:
 date: 2024-09-01T21:51:25+08:00
-# draft: true
+draft: false
 # author:
 #   name:
 #   link:
