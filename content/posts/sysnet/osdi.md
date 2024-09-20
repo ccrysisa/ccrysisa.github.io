@@ -2,7 +2,7 @@
 title: "操作系统: 设计与实现"
 subtitle:
 date: 2024-03-24T10:01:43+08:00
-# draft: true
+draft: true
 author:
   name: vanJker
   link: https://github.com/vanJker
@@ -17,7 +17,7 @@ tags:
   - Linux
   - OS
 categories:
-  - Systems Network Security
+  - COMPASS
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

@@ -18,7 +18,7 @@ tags:
   - Network
   - Security
 categories:
-  - Systems Network Security
+  - COMPASS
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
