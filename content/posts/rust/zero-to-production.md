@@ -2,7 +2,7 @@
 title: "Zero to Production in Rust"
 subtitle:
 date: 2024-08-28T23:29:43+08:00
-draft: true
+# draft: true
 # author:
 #   name:
 #   link:
@@ -116,7 +116,7 @@ Web Framework:
 - Crate [actix_web](https://docs.rs/actix-web/4.0.1/actix_web/index.html)
 - GitHub: [actix/examples](https://github.com/actix/examples): Community showcase and examples of Actix Web ecosystem usage.
 
-### Infrastructure
+### Infrastructures
 
 依据基础的不同，下面为可能需要补充的相关知识。
 
@@ -344,7 +344,7 @@ sqlx 允许同时读和互斥写，使用不可变引用和可变引用机制来
 
 > Sometimes experience is enough to transform an unknown unknown into a known unknown: if you had never worked with a database before you might have not thought about what happens when we lose connection; once you have seen it happen once, it becomes a familiar failure mode to look out for.
 
-**Telemetry Data** 对于观测 (Observability) 系统运行状况非常有效，这也是为什么 [eBPF](https://en.wikipedia.org/wiki/EBPF) 现在如此风靡，通过 [eBPF](https://en.wikipedia.org/wiki/EBPF) 可以获取 kernel 的 telemetry data。
+**Telemetry Data** 对于观测 (Observability) 系统运行状况非常有效，这也是为什么 [eBPF](https://en.wikipedia.org/wiki/EBPF) 现在如此风靡，因为通过 [eBPF](https://en.wikipedia.org/wiki/EBPF) 可以获取 kernel 的 telemetry data。
 
 > The only thing we can rely on to understand and debug an unknown unknown is **telemetry data**: information about our running applications that is collected automatically and can be later inspected to answer questions about the state of the system at a certain point in time.
 

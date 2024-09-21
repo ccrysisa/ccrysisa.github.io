@@ -17,6 +17,7 @@ tags:
   - openSUSE
   - Open Build Service
   - OBS
+  - OERV
 categories:
   - Toolkit
 hiddenFromHomePage: false
@@ -74,3 +75,4 @@ $ rpm --eval "%{_libdir}"
 ## References
 
 - reddit: [How Learn to use openSUSE Build Service (OBS)](https://www.reddit.com/r/openSUSE/comments/yk1vwe/how_learn_to_use_opensuse_build_service_obs/)
+- bilibili: [OERV](https://space.bilibili.com/382946288/)
