@@ -2,7 +2,7 @@
 title: "Zero to Production in Rust"
 subtitle:
 date: 2024-08-28T23:29:43+08:00
-# draft: true
+draft: true
 # author:
 #   name:
 #   link:
@@ -351,3 +351,12 @@ sqlx 允许同时读和互斥写，使用不可变引用和可变引用机制来
 {{< admonition quote >}}
 Observability is about being able to ask arbitrary questions about your environment without — and this is the key part — having to know ahead of time what you wanted to ask.
 {{< /admonition >}}
+
+### Logs
+
+Log 分为两部分:
+
+- 何时何处记录 log: `actix_web::middleware::Logger` 和 `log` 都是提供了这一功能
+- log 被处理后的记录格式: `env_logger` 提供了这一功能
+
+这二者的关系类似于 `print` 和 `write`，一个提供了输出格式的语法，另一个则提供了具体负责输出的设备功能。
