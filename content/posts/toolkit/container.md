@@ -127,3 +127,7 @@ Docker Compose 也是通过手动安装:
 - Towards Improving Container Security by Preventing Runtime Escapes
 - Performance Evaluation of Container Runtimes
 - Aristotle Cloud Federation: Container Runtimes Technical Report
+
+## CNTR: Lightweight OS Containers
+
+主要是使用轻量级的容器镜像 (去除了运行时不需要的工具) 来提升容器的性能，然后通过 FUSE 来对文件系统的调用进行重定向，使得容器可以使用主机或其他容器镜像内的工具，但并不会影响容器镜像的大小。
