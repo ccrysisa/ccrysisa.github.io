@@ -295,7 +295,7 @@ YouTube: [GC in C](https://www.youtube.com/playlist?list=PLpM-Dvs8t0VYuYxRxjfnkd
 - [Writing My Own Malloc in C](https://www.youtube.com/watch?v=sZ8GJ1TiMdk)
 - [Writing Garbage Collector in C](https://www.youtube.com/watch?v=2JgEKEd3tw8)
 
-### 内存布局
+### memory layout
 
 {{< image src="/images/c/heap.drawio.png" >}}
 
@@ -329,6 +329,10 @@ Allocated Chunks (100):
 > When two pointers are subtracted, both shall point to elements of the same array object, or one past the last element of the array object; the result is the difference of the subscripts of the two array elements. 
 
 所以只需要计算 `result - list->chunks` 即可，无需再除以 `list->chunks[0]`
+
+### data alignment
+
+- [ ] IBM: [Data alignment: Straighten up and fly right](https://developer.ibm.com/articles/pa-dalign/)
 
 ### References
 
