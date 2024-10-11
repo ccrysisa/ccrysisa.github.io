@@ -44,6 +44,8 @@ repost:
 
 <!--more-->
 
+- [The adoption of Rust in Business (2022)](https://rustmagazine.org/issue-1/2022-review-the-adoption-of-rust-in-business/)
+
 ## Rust in 100 Seconds
 
 观看短片: [Rust in 100 Seconds](https://youtu.be/5C_HPTJg5ek) :white_check_mark:
@@ -52,7 +54,7 @@ repost:
 - [x] 借用 (borrow) 
 
 {{< admonition warning >}}
-0:55 This is wrong, value mutability doesn't have anything to do with the value being stored on the stack or the heap (and the example `let mut hello = "hi mom"` will be stored on the stack since it's type is `&'static str`), it depends on the type of the value (if it's `Sized` or not).
+0:55 This is wrong, value mutability doesn\'t have anything to do with the value being stored on the stack or the heap (and the example `let mut hello = "hi mom"` will be stored on the stack since it\'s type is `&'static str`), it depends on the type of the value (if it\'s `Sized` or not).
 {{< /admonition >}}
 
 ## The adoption of Rust in Business (2022)
@@ -62,10 +64,6 @@ repost:
 Rust 目前蓬勃发展，预测未来是很难的，但是 Rust 已经是进行时的未来了 :rofl:
 
 ## The Rust Programming Language
-
-| Book | Video | Documentation | Examples |
-| :--: | :---: | :-----------: | :------: |
-| [The Book](https://doc.rust-lang.org/book/) | [教学录影](https://www.bilibili.com/video/BV1hp4y1k7SV/) | [The Standard Library](https://doc.rust-lang.org/std/index.html) | [Rust by Example](https://doc.rust-lang.org/rust-by-example/) |
 
 ### Getting Started
 
@@ -79,22 +77,17 @@ $ cargo clean             # 清除构建出来的目标文件
 $ cargo test              # 运行测试
 ```
 
-### Programming a Game
-
-- Module std::[io](https://doc.rust-lang.org/std/io/index.html)
-- Module std::[cmp](https://doc.rust-lang.org/std/cmp/index.html)
-- Crate [rand](https://docs.rs/rand/latest/rand/)
-
 ### Common Concepts
 
 变量明确区分可变和不可变，好处在于对于明确不可变的变量，使用引用时编译器可以进行更为激进的最佳化。常量必须满足可以在编译期计算出结果。
 
 shadow 可理解为变量名可以和储存数据的地址绑定、解绑，所以可以进行变量遮蔽。而 C 语言中的变量名一旦使用就和储存数据的地址绑死了，自然无法进行遮蔽。
 
-- 3.2. Data Types
+- The Book - 3.2. Data Types
+
 > When you’re compiling in release mode with the `--release` flag, Rust does not include checks for integer overflow that cause panics. Instead, if overflow occurs, Rust performs two’s complement wrapping. In short, values greater than the maximum value the type can hold “wrap around” to the minimum of the values the type can hold. In the case of a u8, the value 256 becomes 0, the value 257 becomes 1, and so on. The program won’t panic, but the variable will have a value that probably isn’t what you were expecting it to have. Relying on integer overflow’s wrapping behavior is considered an error.
 
-即当使用 `--release` 编译参数时，编译器不会将 integer overflow 视为 UB
+即当使用 `--release` 编译参数时，编译器不会将 Integer Overflow 视为 UB，所以开发时尽量使用 `--debug` 编译参数，防止上线后出现可以避免的 UB。
 
 模式匹配的语法主要是为了方便编辑器的实现，因为 `(x, y, z) = tup` 这样的词法、语法分析显然比 Python 风格的 `x, y, z = tup` 分析难度低。
 
@@ -1704,23 +1697,17 @@ pub fn some_name(input: TokenStream) -> TokenStream {
 
 ### Final Project: Web Server
 
-这部分内容推荐观看该录影 [Rust 编程小项目：Web Server](https://www.bilibili.com/video/BV177411m784/)
+## Practices
 
-Documentation:
-
-
-## Homework
-
-{{< admonition info "作业" >}}
-- [x] 完成 [rustlings](https://github.com/rust-lang/rustlings) 的全部练习题 / [参考题解](https://space.bilibili.com/50713701/channel/collectiondetail?sid=1409071) / [我的题解](https://github.com/ccrysisa/rustlings)
-- [ ] 阅读并完成 [LifetimeKata](https://github.com/tfpk/lifetimekata/) 的所有章节、练习题
-- [ ] 阅读并完成 [MacroKata](https://github.com/tfpk/macrokata) 的所有章节、练习题
-{{< /admonition >}}
+- [x] [rustlings](https://github.com/rust-lang/rustlings) / [参考题解](https://space.bilibili.com/50713701/channel/collectiondetail?sid=1409071) / [我的题解](https://github.com/ccrysisa/rustlings)
+- [ ] [LifetimeKata](https://github.com/tfpk/lifetimekata/)
+- [ ] [MacroKata](https://github.com/tfpk/macrokata)
 
 ## References
 
-- [The Rust Programming Language - Brown University](https://rust-book.cs.brown.edu/)
-- [Rust 语言圣经 (Rust Course)](https://course.rs/about-book.html)
+- [The Rust Programming Language](https://doc.rust-lang.org/book/) / [Brown University Version](https://rust-book.cs.brown.edu/)
+- [Rust 语言圣经](https://course.rs/about-book.html) (Rust Course) / [Rust 练习实践](https://practice.rs/) (Rust By Practice)
+- [How to Learn Rust in 2024: A Complete Beginner\'s Guide to Mastering Rust Programming](https://blog.jetbrains.com/rust/2024/09/20/how-to-learn-rust/)
 - Rust 编程视频教程: [基础](https://www.bilibili.com/video/BV1xJ411B79h/)、[进阶](https://www.bilibili.com/video/BV1FJ411Y71o/)
 - Visualizing memory layout of Rust\'s data types: [录影](https://www.youtube.com/watch?v=7_o-YRxf_cc&t=0s) / [中文翻译](https://www.bilibili.com/video/BV1KT4y167f1)
 - [pretzelhammer\'s Rust blog](https://github.com/pretzelhammer/rust-blog)

@@ -352,6 +352,12 @@ sqlx 允许同时读和互斥写，使用不可变引用和可变引用机制来
 Observability is about being able to ask arbitrary questions about your environment without — and this is the key part — having to know ahead of time what you wanted to ask.
 {{< /admonition >}}
 
+### Infrastructures
+
+依据基础的不同，下面为可能需要补充的相关知识
+
+- [rust-tracing-primer](https://github.com/tugglecore/rust-tracing-primer): Guide and explanation of the Tracing crate, a Rust logging crate by Tokio.
+
 ### Logs
 
 Log 分为两部分:
@@ -361,4 +367,4 @@ Log 分为两部分:
 
 这二者的关系类似于 `print` 和 `write`，一个提供了输出格式的语法，另一个则提供了具体负责输出的设备功能。
 
-并发无处不在，logs 的输出也需要考虑并发 (Concurrent): **Logs Must Be Easy To Correlate.** 但 logs 的输出并不像程序执行一样需要对顺序性有很强的的保证，只要求可以对 logs 进行集群相关区分即可，所以可以使用 id 来对乱序输出的 logs 进行相关分类。
+并发无处不在，logs 的输出也需要考虑并发 (Concurrent): **Logs Must Be Easy To Correlate.** 但 logs 的输出并不像程序执行一样需要对顺序性有很强的的保证，只要求可以对 logs 进行集群相关区分即可，所以可以使用 id 来对乱序输出的 logs 进行相关分类。但是 log 只能对线性时间结构发生的事件进行记录，对并发导致树状结构发生的事件进行记录不是特别好，即无法对日志的上下文进行结构化的跟踪 (`request_id` 是我们手动实现的一种上下文结构化跟踪，但显然它没有囊括全部的上下文)。
