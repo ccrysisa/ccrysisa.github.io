@@ -175,6 +175,10 @@ $4 = 4
 
 > Use `p/format` to instead select other formats such as `x` for hex, `t` for binary, and `c` for char.
 
+{{< admonition >}}
+`display` 命令的效果相当于，每次执行完下一个命令后，都会执行一次对应的 `p` 命令。例如 `display x` 第一次执行时等价于 `p x`，后面每次执行一个命令都会自动执行 `p x` 命令，即将 `x` 的状态常驻在 GDB 上显示。
+{{< /admonition >}}
+
 ### backtrace
 
 `backtrace (bt)` 命令用于打印当前调用栈的信息，也称为堆栈回溯 (backtrace)。它显示了程序在执行过程中经过的函数调用序列，以及每个函数调用的位置和参数，即可以获取以下信息：
@@ -288,6 +292,14 @@ type = int [12][31]
 ### x
 
 `x` 命令用于查看内存中的数据，使用 x 命令搭配不同的格式来显示内存中的数据，也可以搭配 `/` 后跟数字来指定要显示的内存单元数量。例如，`x/4 <address>` 表示显示地址 address 开始的连续 4 个内存单元的内容。
+
+### tui
+
+通过 `tui enable` 可以启动 GDB 的图形化调试界面，这样可以比照源代码以及汇编代码进行排错
+
+```bash
+(gdb) tui enable
+```
 
 ### 其他
 
