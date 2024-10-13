@@ -121,6 +121,7 @@ Docker Compose 也是通过手动安装:
 
 ### Papers
 
+- gitee: [awesome-lightweight-virtualization-papers](https://gitee.com/enfangcui/awesome-lightweight-virtualization-papers)
 - CNTR: Lightweight OS Containers ([cntr](https://github.com/Mic92/cntr))
 - Quark: A High-Performance Secure Container Runtime for Serverless Computing ([Seminar](https://www.youtube.com/watch?v=xpMPMt9JEX8))
 - RunD: A Lightweight Secure Container Runtime for High-density Deployment and High-concurrency Startup in Serverless Computing ([Artifacts](https://github.com/chengjiagan/RunD_ATC22))
