@@ -21,8 +21,9 @@ tags:
   - Container
   - chroot
   - nspawn
-categories:
   - Architecture
+categories:
+  - RISC-V
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

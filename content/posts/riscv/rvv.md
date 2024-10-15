@@ -15,9 +15,10 @@ comment: false
 weight: 0
 tags:
   - RISC-V
+  - Vector
   - Architecture
 categories:
-  - Architecture
+  - RISC-V
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
