@@ -1,5 +1,5 @@
 ---
-title: "How to make a OERV General ISO"
+title: "How to make a OERV General ISO image"
 subtitle:
 date: 2024-10-15T19:22:12+08:00
 slug: 457840c
@@ -15,6 +15,9 @@ license:
 comment: false
 weight: 0
 tags:
+  - OERV
+  - ISO
+  - image
   - RISC-V
 categories:
   - RISC-V
@@ -40,13 +43,13 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-最近接了个比较有意思的任务 **制作一个统一的 OERV ISO 镜像** [^1]，本文档是对该任务探索过程的记录。
+最近接了个比较有意思的任务 **制作一个统一的 OERV ISO 镜像** [^1]，本文档是对该任务探索过程的记录。该任务需要对 ISO 镜像的制作过程有一定的了解，这部分可以参考这两篇博文: 制作 ISO 镜像全过程 [^2]、ISO 启动原理及启动盘制作 [^3]。
 
 <!--more-->
 
 ## 磁盘扩容
 
-oemaker 要求运行镜像制作工具的临时目录或根目录空间大于 60 GB，而 OERV 使用 qemu 模拟的磁盘通常为 20 GB，所以按照以下操作为 OERV 24.09 增加一块 65 GB 的磁盘。
+oemaker [^4] 的操作手册 [^5] 指明运行该镜像制作工具的临时目录或根目录空间大于 60 GB，而 OERV 使用 qemu 模拟的磁盘通常为 20 GB，所以按照以下操作为 OERV 24.09 增加一块 65 GB 的磁盘。
 
 1. 查询当前镜像磁盘的大小:
 
@@ -113,7 +116,7 @@ vda    253:0    0   80G  0 disk
 
 ## 生成 ISO 镜像
 
-按照参考资料进行操作 [^2]:
+按照参考资料进行操作 [^6]:
 
 生成适用于 lpi4a 的 ISO 镜像:
 
@@ -143,13 +146,28 @@ vda    253:0    0   80G  0 disk
 [root@openeuler-riscv64 ~]# mv /result/openEuler-24-09-riscv64-dvd.iso ./lpi4a-iso/
 ```
 
+适用于 sg2042 的 ISO 镜像的生成操作也是类似的，除了最后新建目录移动步骤:
+
+```bash
+[root@openeuler-riscv64 ~]# mkdir sg2042-iso
+[root@openeuler-riscv64 ~]# mv /result/openEuler-24-09-riscv64-dvd.iso ./sg2042-iso/
+```
+
+## ISO 镜像裁剪拼合
+
+接下来将两个 ISO 镜像的 grub 部分进行定制化裁剪、拼合，可以参考汪流老师在 B 站上的技术分析 **使用 imageTailor 工具制作并裁剪镜像** [^7] 来了解相关原理，里面也对操作中涉及的命令 `mount` [^8], `mkisofs` [^9], `rsync` [^10] 的原理和使用进行解释说明。
+
 
 [^1]: openEuler RISC-V SIG: [制作统一 ISO](https://github.com/openeuler-riscv/oerv-team/issues/1387)
-[^2]: ouuleilei: [统一 ISO 制作](https://gitee.com/ouuleilei/working-documents/blob/master/RISC-V/openEuler/lpi4a/%E7%BB%9F%E4%B8%80ISO%E5%88%B6%E4%BD%9C.md)
-[^3]: bilibili: [使用 imageTailor 工具制作并裁剪镜像](https://www.bilibili.com/video/BV14ZyNYyEKy)
-[^4]: 帅大叔的博客: [制作iso镜像全过程](https://rstyro.github.io/blog/2021/02/04/%E5%88%B6%E4%BD%9Ciso%E9%95%9C%E5%83%8F%E5%85%A8%E8%BF%87%E7%A8%8B/)
-[^5]: Just for Coding: [ISO启动原理及启动盘制作](https://just4coding.com/2023/11/01/boot-iso/)
-[^6]: Github: [oemaker](https://github.com/openeuler-mirror/oemaker) 
-[^7]: openEuler: [oemaker 使用指南](https://docs.openeuler.org/zh/docs/22.03_LTS_SP3/docs/TailorCustom/oemaker%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.html)
+[^2]: 帅大叔的博客: [制作 ISO 镜像全过程](https://rstyro.github.io/blog/2021/02/04/%E5%88%B6%E4%BD%9Ciso%E9%95%9C%E5%83%8F%E5%85%A8%E8%BF%87%E7%A8%8B/)
+[^3]: Just for Coding: [ISO 启动原理及启动盘制作](https://just4coding.com/2023/11/01/boot-iso/)
+[^4]: Github: [oemaker](https://github.com/openeuler-mirror/oemaker) 
+[^5]: openEuler: [oemaker 使用指南](https://docs.openeuler.org/zh/docs/22.03_LTS_SP3/docs/TailorCustom/oemaker%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97.html)
+[^6]: ouuleilei: [统一 ISO 制作](https://gitee.com/ouuleilei/working-documents/blob/master/RISC-V/openEuler/lpi4a/%E7%BB%9F%E4%B8%80ISO%E5%88%B6%E4%BD%9C.md)
+[^7]: bilibili: [使用 imageTailor 工具制作并裁剪镜像](https://www.bilibili.com/video/BV14ZyNYyEKy)
 [^8]: Linux man page: [mount](https://linux.die.net/man/8/mount)
 [^9]: Linux man page: [mkisofs](https://linux.die.net/man/8/mkisofs)
+[^10]: Linux man page: [rsync](https://linux.die.net/man/1/rsync)
+[^11]: Alex Simenduev: [How to mount a qcow2 disk image](https://gist.github.com/shamil/62935d9b456a6f9877b5)
+[^12]: Baeldung Linux: [How to Mount a QCOW2 Image in Linux?](https://www.baeldung.com/linux/mount-qcow2-image)
+
