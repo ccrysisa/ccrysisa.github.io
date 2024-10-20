@@ -43,7 +43,7 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-最近接了个比较有意思的任务 **制作一个统一的 OERV ISO 镜像** [^1]，本文档是对该任务探索过程的记录。该任务需要对 ISO 镜像的制作过程有一定的了解，这部分可以参考这两篇博文: 制作 ISO 镜像全过程 [^2]、ISO 启动原理及启动盘制作 [^3]。
+最近接了个比较有意思的任务 **制作一个统一的 OERV ISO 镜像** [^1]，本文档是对该任务探索过程的记录。该任务需要对 ISO 镜像的制作过程有一定的了解，这部分可以参考这两篇博文：制作 ISO 镜像全过程 [^2]、ISO 启动原理及启动盘制作 [^3]。
 
 <!--more-->
 
@@ -157,6 +157,74 @@ vda    253:0    0   80G  0 disk
 
 接下来将两个 ISO 镜像的 grub 部分进行定制化裁剪、拼合，可以参考汪流老师在 B 站上的技术分析 **使用 imageTailor 工具制作并裁剪镜像** [^7] 来了解相关原理，里面也对操作中涉及的命令 `mount` [^8], `mkisofs` [^9], `rsync` [^10] 的原理和使用进行解释说明。
 
+这个步骤的主要原理是：以适用于 sg2042 的 ISO 镜像为基础，增加适用于 lpi4a 的 ISO 镜像的 EFI boot 数据，最后通过 `mkisofs` 进行 ISO 镜像定制。
+
+最后制作出来的 ISO 镜像大概 4.8 GB:
+
+```bash
+[root@openeuler-riscv64 ~]# ls -lh 
+-rw-r--r--  1 root root 4.8G 10月20日 18:14 openEuler-24-09-riscv64-dvd-lpi4a-sg2042.iso
+```
+
+## 挂载 qcow2 镜像
+
+由于我们是在 qemu 里启动的 oerv 24.09 并进行了上面的一系列 ISO 镜像制作操作，但是接下来我们需要使用在 Host 上使用 qemu 来测试刚刚我们所制作的 ISO 镜像是否满足我们的需求 (同时适用于 sg2042 和 lpi4a)，所以接下来我们需要参考相关文档 [^11] [^12]，在 Host 上挂载 oerv 24.09 的 qcw2 镜像，并提取出刚刚生成的 ISO 镜像到 Host 以使用 Host 上已安装的 qemu 进行相应测试。
+
+在 **Host** 上进行以下操作:
+
+1. Enable NBD on the Host
+
+```bash
+$ sudo modprobe nbd max_part=8
+```
+
+2. Connect the QCOW2 as network block device
+
+```bash
+$ sudo qemu-nbd --connect=/dev/nbd0 /path/to/openEuler-Mega_24.09-V1-base-qemu-testing.qcow2.qcow2
+```
+
+3. Find The Virtual Machine Partitions
+
+```bash
+$ sudo fdisk /dev/nbd0 -l
+Disk /dev/nbd0: 80 GiB, 85899345920 bytes, 167772160 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 17E82169-18F8-4809-840F-944E48FC6708
+
+Device        Start       End   Sectors  Size Type
+/dev/nbd0p1    2048   1050623   1048576  512M BIOS boot
+/dev/nbd0p2 1050624 167770111 166719488 79.5G Linux filesystem
+```
+
+> 这里我们只需要关心类型为 Linux filesystem 的分卷，记录下其所处的设备，这里是 `/dev/nbd0p2`
+
+4. Mount the partition from the VM
+
+```bash
+$ sudo mount /dev/nbd0p1 /mnt/
+```
+
+5. Transfer image from VM to Host
+
+```bash
+$ sudo rsync -avP /mnt/root/openEuler-24-09-riscv64-dvd-lpi4a-sg2042.iso ./iso/
+```
+
+6. After you done, check image, unmount and disconnect
+
+```bash
+$ ls ./iso/ -lh
+-rw-r--r-- 1 root root 4.8G 10月 20 18:14 openEuler-24-09-riscv64-dvd-lpi4a-sg2042.iso
+$ sudo unmount /mnt
+$ qemu-nbd --disconnect /dev/nbd0
+```
+
+## 验证镜像
+
 
 [^1]: openEuler RISC-V SIG: [制作统一 ISO](https://github.com/openeuler-riscv/oerv-team/issues/1387)
 [^2]: 帅大叔的博客: [制作 ISO 镜像全过程](https://rstyro.github.io/blog/2021/02/04/%E5%88%B6%E4%BD%9Ciso%E9%95%9C%E5%83%8F%E5%85%A8%E8%BF%87%E7%A8%8B/)
@@ -170,4 +238,3 @@ vda    253:0    0   80G  0 disk
 [^10]: Linux man page: [rsync](https://linux.die.net/man/1/rsync)
 [^11]: Alex Simenduev: [How to mount a qcow2 disk image](https://gist.github.com/shamil/62935d9b456a6f9877b5)
 [^12]: Baeldung Linux: [How to Mount a QCOW2 Image in Linux?](https://www.baeldung.com/linux/mount-qcow2-image)
-
