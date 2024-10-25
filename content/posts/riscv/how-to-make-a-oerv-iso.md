@@ -159,6 +159,27 @@ vda    253:0    0   80G  0 disk
 
 这个步骤的主要原理是：以适用于 sg2042 的 ISO 镜像为基础，增加适用于 lpi4a 的 ISO 镜像的 EFI boot 数据，最后通过 `mkisofs` 进行 ISO 镜像定制。
 
+这里面主要注意 `mkisofs` 命令以下的参数设置:
+
+```bash
+-eltorito-alt-boot -e images/lpi4a/efiboot.img  -no-emul-boot -eltorito-alt-boot -e images/efiboot.img
+```
+
+查询 man 手册得到的相关解释如下:
+
+`-eltorito-alt-boot`   
+Start with a new set of El Torito boot  parameters.   Up  to  63  El  Torito  boot
+entries may be stored on a single CD.
+
+`-e` efi_boot_file
+
+`-no-emul-boot`   
+Specifies that the boot image used to create El  Torito  bootable  CDs  is  a  "no
+emulation"  image.  The system will load and execute this image without performing
+any disk emulation.
+
+即设置了两个 EFI 分区引导启动
+
 最后制作出来的 ISO 镜像大概 4.8 GB:
 
 ```bash
@@ -225,6 +246,57 @@ $ qemu-nbd --disconnect /dev/nbd0
 
 ## 验证镜像
 
+验证脚本还需要一些额外的资源文件支持:
+
+- `RISCV_VIRT_CODE.fd` 和 `RISCV_VIRT_VARS.fd` 可以使用 OERV 24.09 的同名文件
+- `test.raw` 可以参考这个教程 [^13] 来将 OERV 24.09 的 `.qcow2` 镜像转换为 `raw` 格式
+
+接下来只需要通过 qemu 分别模拟在 lpi4a 设备和 sg2042 设备的安装即可
+
+### lpi4a 设备的安装
+
+1. 启动相应脚本
+
+{{< image src="" >}}
+
+2. 进入这个界面时按 `F2` 键进入引导启动选项 (deepin 终端的 `F2` 被设置为更改标签页的标题，最初给我造成了混淆)
+
+{{< image src="" >}}
+
+3. 通过方向键选择其中的 `Boot Mananger` 栏目并进入
+
+{{< image src="" >}}
+
+4. 通过方向键选择其中的 `EFI Internal Shell` 栏目并进入
+
+{{< image src="" >}}
+
+5. 此时便进入了 UEFI shell 界面
+
+{{< image src="" >}}
+
+6. 输入命令 `fs0:\EFI\BOOT\BOOTRISCV64.EFI` 来启动对应 lpi4a 设备的 EFI 程序进行模拟安装
+
+{{< image src="" >}}
+
+7. 选择 `Install openEuler 24-09` 开始进行模拟在 lpi4a 设备的安装
+
+{{< image src="" >}}
+
+8. 等待片刻后 qemu 窗口便会出现我们熟悉的 openEuler 通过 ISO 镜像安装的界面
+
+模拟 lpi4a 设备安装 OERV 24.09 成功
+
+### sg2042 设备的安装
+
+流程与 lpi4a 设备的安装类似，不同之处在于在 UEFI shell 输入命令时，输入 `fs1:\EFI\BOOT\BOOTRISCV64.EFI` 来启动对应 sg2042 设备的 EFI 程序进行模拟安装
+
+{{< image src="" >}}
+
+最终 qemu 窗口也会出现我们熟悉的 openEuler 通过 ISO 镜像安装的界面
+
+模拟 sg2042 设备安装 OERV 24.09 成功
+
 
 [^1]: openEuler RISC-V SIG: [制作统一 ISO](https://github.com/openeuler-riscv/oerv-team/issues/1387)
 [^2]: 帅大叔的博客: [制作 ISO 镜像全过程](https://rstyro.github.io/blog/2021/02/04/%E5%88%B6%E4%BD%9Ciso%E9%95%9C%E5%83%8F%E5%85%A8%E8%BF%87%E7%A8%8B/)
@@ -238,3 +310,4 @@ $ qemu-nbd --disconnect /dev/nbd0
 [^10]: Linux man page: [rsync](https://linux.die.net/man/1/rsync)
 [^11]: Alex Simenduev: [How to mount a qcow2 disk image](https://gist.github.com/shamil/62935d9b456a6f9877b5)
 [^12]: Baeldung Linux: [How to Mount a QCOW2 Image in Linux?](https://www.baeldung.com/linux/mount-qcow2-image)
+[^13]: [Converting the QCOW2 image to a raw file format](https://documentation.avaya.com/bundle/DeployingAvayaSBConanAWSPlatform_r102x/page/Converting_the_QCOW2_image_to_a_raw_file_format.html)
