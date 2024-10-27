@@ -49,7 +49,7 @@ repost:
 
 ## 磁盘扩容
 
-oemaker [^4] 的操作手册 [^5] 指明运行该镜像制作工具的临时目录或根目录空间大于 60 GB，而 OERV 使用 qemu 模拟的磁盘通常为 20 GB，所以按照以下操作为 OERV 24.09 增加一块 65 GB 的磁盘。
+oemaker [^4] 的操作手册 [^5] 指明运行该镜像制作工具的临时目录或根目录空间大于 60 GB，而 OERV 使用 qemu 模拟的磁盘通常为 20 GB，所以按照以下操作将 OERV 24.09 的磁盘空间扩展 60 GB。
 
 1. 查询当前镜像磁盘的大小:
 
@@ -178,7 +178,7 @@ Specifies that the boot image used to create El  Torito  bootable  CDs  is  a  "
 emulation"  image.  The system will load and execute this image without performing
 any disk emulation.
 
-即设置了两个 EFI 分区引导启动
+即设置了两个 EFI 分区分别进行不同设定下的引导启动。
 
 最后制作出来的 ISO 镜像大概 4.8 GB:
 
@@ -248,54 +248,55 @@ $ qemu-nbd --disconnect /dev/nbd0
 
 验证脚本还需要一些额外的资源文件支持:
 
-- `RISCV_VIRT_CODE.fd` 和 `RISCV_VIRT_VARS.fd` 可以使用 OERV 24.09 的同名文件
-- `test.raw` 可以参考这个教程 [^13] 来将 OERV 24.09 的 `.qcow2` 镜像转换为 `raw` 格式
+`RISCV_VIRT_CODE.fd` 和 `RISCV_VIRT_VARS.fd` 可以使用 openEuler RISC-V 24.09 的同名资源文件。
 
-接下来只需要通过 qemu 分别模拟在 lpi4a 设备和 sg2042 设备的安装即可
+~~`test.raw` 可以参考这个教程 [^13] 来将 OERV 24.09 的 `.qcow2` 镜像转换为 `raw` 格式。~~
+`test.qcow2` 可以将 openEuler RISC-V 24.09 的 qcow2 镜像文件重命名为 `test.qcow2`，也可使用 `qemu-img` 工具创建一个新的镜像。`test.raw` 可以参考该教程 [^14] 来创建一个新的 `.raw` 格式的镜像。
+
+完成上述准备后，接下来只需要通过 qemu 来分别模拟在 lpi4a 设备和 sg2042 设备上安装 openEuler RISCV 24.09 即可。
 
 ### lpi4a 设备的安装
 
-1. 启动相应脚本
+启动相应脚本
 
-{{< image src="" >}}
+{{< image src="/images/oerv/oerv-general-iso-01.png" >}}
 
-2. 进入这个界面时按 `F2` 键进入引导启动选项 (deepin 终端的 `F2` 被设置为更改标签页的标题，最初给我造成了混淆)
+进入这个界面时按 `F2` 键进入引导启动选项 (deepin 终端的 `F2` 被设置为更改标签页的标题，最初给我造成了混淆)
 
-{{< image src="" >}}
+{{< image src="/images/oerv/oerv-general-iso-02.png" >}}
 
-3. 通过方向键选择其中的 `Boot Mananger` 栏目并进入
+通过方向键选择其中的 `Boot Mananger` 栏目并进入
 
-{{< image src="" >}}
+{{< image src="/images/oerv/oerv-general-iso-03.png" >}}
 
-4. 通过方向键选择其中的 `EFI Internal Shell` 栏目并进入
+通过方向键选择其中的 `EFI Internal Shell` 栏目并进入
 
-{{< image src="" >}}
+{{< image src="/images/oerv/oerv-general-iso-04.png" >}}
 
-5. 此时便进入了 UEFI shell 界面
+此时便进入了 UEFI shell 界面，启动相应的引导程序 `fs0:\EFI\BOOT\BOOTRISCV64.EFI`
 
-{{< image src="" >}}
+{{< image src="/images/oerv/oerv-general-iso-05.png" >}}
 
-6. 输入命令 `fs0:\EFI\BOOT\BOOTRISCV64.EFI` 来启动对应 lpi4a 设备的 EFI 程序进行模拟安装
+选择 `Install openEuler 24-09` 开始进行模拟在 lpi4a 设备上安装 openEuler RISC-V 24.09
 
-{{< image src="" >}}
+{{< image src="/images/oerv/oerv-general-iso-06.png" >}}
 
-7. 选择 `Install openEuler 24-09` 开始进行模拟在 lpi4a 设备的安装
+等待片刻后 qemu 窗口便会出现我们熟悉的 openEuler 通过 ISO 镜像安装的界面
 
-{{< image src="" >}}
-
-8. 等待片刻后 qemu 窗口便会出现我们熟悉的 openEuler 通过 ISO 镜像安装的界面
-
-模拟 lpi4a 设备安装 OERV 24.09 成功
+模拟在 lpi4a 设备安装 openEuler RISC-V 24.09 验证成功！
 
 ### sg2042 设备的安装
 
-流程与 lpi4a 设备的安装类似，不同之处在于在 UEFI shell 输入命令时，输入 `fs1:\EFI\BOOT\BOOTRISCV64.EFI` 来启动对应 sg2042 设备的 EFI 程序进行模拟安装
+流程与在 lpi4a 设备的安装类似，不同之处在于
 
-{{< image src="" >}}
+1. 所使用的设定 qemu 参数的启动脚本不同
+2. 在 UEFI shell 输入 `fs1:\EFI\BOOT\BOOTRISCV64.EFI` 来启动对应 sg2042 设备的 EFI 程序进行模拟安装
+
+{{< image src="/images/oerv/oerv-general-iso-07.png" >}}
 
 最终 qemu 窗口也会出现我们熟悉的 openEuler 通过 ISO 镜像安装的界面
 
-模拟 sg2042 设备安装 OERV 24.09 成功
+模拟在 sg2042 设备上安装 openEuler RISC-V 24.09 验证成功！
 
 
 [^1]: openEuler RISC-V SIG: [制作统一 ISO](https://github.com/openeuler-riscv/oerv-team/issues/1387)
@@ -311,3 +312,4 @@ $ qemu-nbd --disconnect /dev/nbd0
 [^11]: Alex Simenduev: [How to mount a qcow2 disk image](https://gist.github.com/shamil/62935d9b456a6f9877b5)
 [^12]: Baeldung Linux: [How to Mount a QCOW2 Image in Linux?](https://www.baeldung.com/linux/mount-qcow2-image)
 [^13]: [Converting the QCOW2 image to a raw file format](https://documentation.avaya.com/bundle/DeployingAvayaSBConanAWSPlatform_r102x/page/Converting_the_QCOW2_image_to_a_raw_file_format.html)
+[^14]: QEMU QED: [Create a Raw Disk Image](https://eaasi.gitlab.io/program_docs/qemu-qed/usage/create_raw_disk_image/)
