@@ -95,10 +95,6 @@ Docker Compose 也是通过手动安装:
 
 ### Infrastructures
 
-> A container is an isolated execution environment providing an abstraction between a software to be executed and the underlying operating system. It can be seen as a software virtualisation process.
-
-即以 software 为中心的虚拟化 (Virtualisation)，让 software 有一种在特定的 OS 环境下执行 / 运行的错觉。
-
 - Wikipedia: [Linux namespaces](https://en.wikipedia.org/wiki/Linux_namespaces)
 - Linux manual page: [namespaces(7)](https://man7.org/linux/man-pages/man7/namespaces.7.html)
 - [How Docker Works - Intro to Namespaces](https://www.youtube.com/watch?v=-YnMr1lj4Z8) ([中文翻译](https://www.bilibili.com/video/BV1JZ4y1m7Pv))

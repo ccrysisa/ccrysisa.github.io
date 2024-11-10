@@ -1,5 +1,5 @@
 ---
-title: 深度操作系统 Deepin 20.9 安装配置
+title: "deepin 20.9 安装配置"
 subtitle:
 date: 2024-01-24T18:59:56+08:00
 # draft: true
@@ -47,8 +47,8 @@ repost:
 
 新手教学影片：
 
-- [深度操作系统deepin下载安装 (附双系统安装及分区指引)](https://www.bilibili.com/video/BV1ZQ4y1C7n3/?vd_source=99b5a7ef7355e5c62fe79d489b7711ca) [bilibili]
-- [安装完deepin之后该做的事情](https://www.bilibili.com/video/BV1pE411E7dL/?vd_source=99b5a7ef7355e5c62fe79d489b7711ca) [bilibili]
+- bilibili: [深度操作系统 deepin 下载安装 (附双系统安装及分区指引)](https://www.bilibili.com/video/BV1ZQ4y1C7n3/?vd_source=99b5a7ef7355e5c62fe79d489b7711ca)
+- bilibili: [安装完 deepin 之后该做的事情](https://www.bilibili.com/video/BV1pE411E7dL/?vd_source=99b5a7ef7355e5c62fe79d489b7711ca)
 
 ## 网络代理
 
@@ -68,14 +68,19 @@ repost:
 
 这里列举一下本人配置的插件：
 
-- **Even Better TOML**
-- **CodeLLDB** 用于调试 Rust
-- **Git History**
-- **Native Debug** 用于调试 C/C++
-- **rust-analyzer**
-- **Tokyo Night** 挺好看的一个主题
-- **Vim**
+- **Git History**: 可视化 git log
+- **rust-analyzer**: Rust 语法服务
+- **CodeLLDB**: 调试 Rust
+- **Even Better TOML**: toml 语法高亮
+- **Dependi**: 管理包依赖关系
+- **clangd**: C/C++ 语法服务
+- **Native Debug**: 调试 C/C++
+- **Tokyo Night**: 东京之夜 挺好看的一个主题
 - **VSCode Great Icons** 文件图标主题
+- **Error Lens**: 进一步的错误提示
+- **Todo Tree**
+- **Github Copilot**
+- **Vim**
 
 {{< admonition question >}}
 rust5-analyzer 插件可能会因为新版本要求 glibc 2.29 而导致启动失败，请参考这个 [issue](https://github.com/rust-lang/rust-analyzer/issues/11558) 来解决。
@@ -125,6 +130,8 @@ hi Pmenu ctermfg=0 ctermbg=7
 hi PmenuSel ctermfg=7 ctermbg=4
 ```
 
+也可以参考 George Hotz 的 [极简 Vim 设定](https://github.com/geohot/configuration/blob/master/.vimrc)
+
 ## 系统语言: Rust
 
 安装教程:
@@ -160,8 +167,8 @@ $ sudo apt install tldr
 
 ## 效果展示
 
-{{< image src="/images/tools/deepin-terminal-vim.png" caption="Deepin Terminial Vim" >}}
-{{< image src="/images/tools/deepin-dde-desktop.png" caption="Deepin DDE Desktop" >}}
+{{< image src="/images/tools/deepin-terminal-vim.png" caption="deepin Terminial Vim" >}}
+{{< image src="/images/tools/deepin-dde-desktop.png" caption="deepin DDE Desktop" >}}
 
 ## FAQ
 

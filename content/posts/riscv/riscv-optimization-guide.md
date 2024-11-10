@@ -18,7 +18,7 @@ tags:
   - Optimization
   - Architecture
 categories:
-  - Architecture
+  - RISC-V
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

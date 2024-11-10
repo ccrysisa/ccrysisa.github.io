@@ -18,8 +18,9 @@ tags:
   - openEuler
   - QEMU
   - Mugen
-categories:
   - Architecture
+categories:
+  - RISC-V
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

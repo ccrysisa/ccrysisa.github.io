@@ -96,9 +96,73 @@ repost:
 
 {{< image src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifha5yJnrvK51Mpal4CZX5hkw3F1LAQO5XCUEBhyphenhyphenvDfGYEFH2x5XBIVGps49SszNN5QoP1BBbtiAYdKvVQtLvsfoCNvtPtwc9czkkRc8Iz2Q2uG1n_G_xZZs4XTdKO4lK_LUaGVNkAF3NU/s1600/compiler.jpg" >}}
 
-### 手把手教你构建 C 语言编译器
+## IR (Intermediate representation)
 
-{{< link href="https://github.com/lotabout/write-a-C-interpreter" content="原文地址" external-icon=true >}}
+- Wikipedia: []()
+
+> An intermediate representation (IR) is the data structure or code used internally by a compiler or virtual machine to represent source code. 
+
+> An intermediate language is the language of an abstract machine designed to aid in the analysis of computer programs.
+
+> A popular format for intermediate languages is three-address code.
+
+> Though not explicitly designed as an intermediate language, C's nature as an abstraction of assembly and its ubiquity as the de facto system language in Unix-like and other operating systems has made it a popular intermediate language
+
+所以一般的 IR 长得和汇编语言比较像，但是比汇编高阶，因为 IR 是建立在这样的虚拟机器 (abstract machine designed to aid in the analysis of computer programs) 之上的。
+
+- [x] [Interpreter, Compiler, JIT from scratch](https://www.slideshare.net/jserv/jit-compiler)
+- [ ] [How to JIT - an introduction](https://eli.thegreenplace.net/2013/11/05/how-to-jit-an-introduction)
+- [ ] [How to write a very simple JIT compiler](https://github.com/spencertipping/jit-tutorial)
+- [x] [How to write a UNIX shell, with a lot of background](https://github.com/spencertipping/shell-tutorial)
+
+{{< admonition >}}
+JIT (Just in time) 表示“即时”，形象描述就是“及时雨” :rofl: 原理是将解释执行的“热点“编译成位于一个内存区域的 machine code，从而减轻内存的压力。因为解释执行时会在内存中跳来跳去，而一个区域的 machine code 是连续执行，内存压力没这么大并且可以充分利用 cache 从而提高效能。另一个因素可以参考 [你所不知道的 C 語言: goto 和流程控制篇](https://hackmd.io/@sysprog/c-control-flow)，从 VM 的 `swith-case` 和 `computed goto` 在效能差异的主要因素「分支预测」进行思考。
+
+最后两个链接对于提高系统编程 (System programming) 能力非常有益，Just do it!
+{{< /admonition >}}
+
+### Interpreter, Compiler, JIT from scratch
+
+{{< link href="https://www.slideshare.net/jserv/jit-compiler" content="原文地址" external-icon=true >}}
+
+{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-05.png">}}
+{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-26.png">}}
+{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-27.png">}}
+{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-28.png">}}
+{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-29.png">}}
+{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-30.png">}}
+{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-31.png">}}
+
+### How to write a UNIX shell
+
+{{< image src="/images/c/shell.drawio.svg" >}}
+
+系统编程 (System Programming) 的入门项目，阅读过程需要查询搭配 man 手册，以熟悉库函数和系统调用的原型和作用。
+
+Linux manual page: 
+[fflush](https://man7.org/linux/man-pages/man3/fflush.3.html)
+/ [elf](https://man7.org/linux/man-pages/man5/elf.5.html)
+/ [exec](https://man7.org/linux/man-pages/man3/exec.3.html)
+/ [perror](https://man7.org/linux/man-pages/man3/perror.3.html)
+/ [getline](https://man7.org/linux/man-pages/man3/getline.3.html)
+/ [strchr](https://www.man7.org/linux/man-pages/man3/strchr.3.html)
+/ [waitpid](https://man7.org/linux/man-pages/man3/waitpid.3p.html)
+/ [fprintf](https://man7.org/linux/man-pages/man3/fprintf.3p.html)
+/ [pipe](https://man7.org/linux/man-pages/man2/pipe.2.html)
+/ [dup](https://man7.org/linux/man-pages/man2/dup.2.html)
+/ [close](https://man7.org/linux/man-pages/man2/close.2.html)
+
+### 延伸阅读
+
+- Linux manual page: [bsearch](https://man7.org/linux/man-pages/man3/bsearch.3.html)
+
+## 程序语言设计和编译器考量
+
+- [ ] YouTube: [Brian Kernighan on successful language design](https://www.youtube.com/watch?v=Sg4U4r_AgJU)
+
+## 实作案例: 手把手教你构建 C 语言编译器
+
+lotabout 所写的 {{< link href="https://github.com/lotabout/write-a-C-interpreter" content="系列博文" external-icon=true >}}
 
 编译原理课程教导的是如何完成一个「编译器的编译器」，即 [Compiler-compiler](https://en.wikipedia.org/wiki/Compiler-compiler)，这个难度比较大，因为需要考虑通用性，但是实作一个简单的编译器并没有这么难。
 
@@ -423,69 +487,8 @@ sp = (int *)((int)stack + poolsize);
 
 执行完第 4 行的 `PUSH` 指令后，会接着执行第 3 行的 `EXIT` 指令，因为 (`pc` 寄存器在虚拟机运行时是递增的)，此时虚拟机将 `main` 函数的返回值作为本进程的返回值进行返回，并结束进程。
 
-## IR (Intermediate representation)
+## 实作案例: Writing Virtual Machine for Lisp in C
 
-- Wikipedia: []()
+Tsoding 上传的 {{< link href="https://www.youtube.com/playlist?list=PLpM-Dvs8t0VYbTFO5tBwxG4Q20BJuqXD_" content="系列影片" external-icon=true >}}
 
-> An intermediate representation (IR) is the data structure or code used internally by a compiler or virtual machine to represent source code. 
-
-> An intermediate language is the language of an abstract machine designed to aid in the analysis of computer programs.
-
-> A popular format for intermediate languages is three-address code.
-
-> Though not explicitly designed as an intermediate language, C's nature as an abstraction of assembly and its ubiquity as the de facto system language in Unix-like and other operating systems has made it a popular intermediate language
-
-所以一般的 IR 长得和汇编语言比较像，但是比汇编高阶，因为 IR 是建立在这样的虚拟机器 (abstract machine designed to aid in the analysis of computer programs) 之上的。
-
-- [x] [Interpreter, Compiler, JIT from scratch](https://www.slideshare.net/jserv/jit-compiler)
-- [ ] [How to JIT - an introduction](https://eli.thegreenplace.net/2013/11/05/how-to-jit-an-introduction)
-- [ ] [How to write a very simple JIT compiler](https://github.com/spencertipping/jit-tutorial)
-- [x] [How to write a UNIX shell, with a lot of background](https://github.com/spencertipping/shell-tutorial)
-
-{{< admonition >}}
-JIT (Just in time) 表示“即时”，形象描述就是“及时雨” :rofl: 原理是将解释执行的“热点“编译成位于一个内存区域的 machine code，从而减轻内存的压力。因为解释执行时会在内存中跳来跳去，而一个区域的 machine code 是连续执行，内存压力没这么大并且可以充分利用 cache 从而提高效能。另一个因素可以参考 [你所不知道的 C 語言: goto 和流程控制篇](https://hackmd.io/@sysprog/c-control-flow)，从 VM 的 `swith-case` 和 `computed goto` 在效能差异的主要因素「分支预测」进行思考。
-
-最后两个链接对于提高系统编程 (System programming) 能力非常有益，Just do it!
-{{< /admonition >}}
-
-### Interpreter, Compiler, JIT from scratch
-
-{{< link href="https://www.slideshare.net/jserv/jit-compiler" content="原文地址" external-icon=true >}}
-
----
-
-{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-05.png">}}
-
-{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-26.png">}}
-{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-27.png">}}
-{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-28.png">}}
-{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-29.png">}}
-{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-30.png">}}
-{{< image src="/images/c/jit-compiler-151016000038-lva1-app6892-31.png">}}
-
-### How to write a UNIX shell
-
-{{< image src="/images/c/shell.drawio.svg" >}}
-
-系统编程 (System Programming) 的入门项目，阅读过程需要查询搭配 man 手册，以熟悉库函数和系统调用的原型和作用。
-
-Linux manual page: 
-[fflush](https://man7.org/linux/man-pages/man3/fflush.3.html)
-/ [elf](https://man7.org/linux/man-pages/man5/elf.5.html)
-/ [exec](https://man7.org/linux/man-pages/man3/exec.3.html)
-/ [perror](https://man7.org/linux/man-pages/man3/perror.3.html)
-/ [getline](https://man7.org/linux/man-pages/man3/getline.3.html)
-/ [strchr](https://www.man7.org/linux/man-pages/man3/strchr.3.html)
-/ [waitpid](https://man7.org/linux/man-pages/man3/waitpid.3p.html)
-/ [fprintf](https://man7.org/linux/man-pages/man3/fprintf.3p.html)
-/ [pipe](https://man7.org/linux/man-pages/man2/pipe.2.html)
-/ [dup](https://man7.org/linux/man-pages/man2/dup.2.html)
-/ [close](https://man7.org/linux/man-pages/man2/close.2.html)
-
-### 延伸阅读
-
-- Linux manual page: [bsearch](https://man7.org/linux/man-pages/man3/bsearch.3.html)
-
-## 程序语言设计和编译器考量
-
-- [ ] YouTube: [Brian Kernighan on successful language design](https://www.youtube.com/watch?v=Sg4U4r_AgJU)
+> Using LLVM for developing a programming language is like using react.js for developing a website!
