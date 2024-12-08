@@ -44,7 +44,6 @@ repost:
 
 <!--more-->
 
-- {{< link href="https://hackmd.io/@sysprog/CSAPP-ch2" content="原文地址" external-icon=true >}}
 
 搭配 CMU: 15-213: Intro to Computer Systems: Schedule for Fall 2015
 - 可以在 [这里](https://www.cs.cmu.edu/afs/cs/academic/class/15213-f15/www/schedule.html) 找到相关的投影片和录影
@@ -227,3 +226,9 @@ Denormalized 的作用一是表示 0，二是配合 Normalized 在靠近 0 的�
 > 50% of the time.
 
 Round-to-even 可以让 round 后的数据在统计上的均值与原先数据的均值误差比较小
+
+## References
+
+- HackMD: {{< link href="https://hackmd.io/@sysprog/CSAPP-ch2" content=".GUST 的文字导读" external-icon=true >}}
+- bilibili: {{< link href="https://space.bilibili.com/4564101" content="yaaangmin 的讲解视频" external-icon=true >}} / {{< link href="https://github.com/yangminz/bcst_csapp" content="相关资源" external-icon=true >}}
+- bilibili: {{< link href="https://space.bilibili.com/4564101" content="Dr.Dng 陪跑 CSAPP: bigONE《深入理解计算机系统》" external-icon=true >}}
