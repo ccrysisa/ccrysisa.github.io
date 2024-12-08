@@ -1,5 +1,5 @@
 ---
-title: "deepin 20.9 安装配置"
+title: "deepin 20.9/V23 安装配置"
 subtitle:
 date: 2024-01-24T18:59:56+08:00
 # draft: true
@@ -56,6 +56,14 @@ repost:
 [Ubuntu 22.04LTS 相关配置]({{< relref "ubuntu22.04lts.md" >}})
 
 > 在境内可以使用 [gitclone](http://gitclone.com) 镜像站来加快 clone 的速度。
+
+## man 手册
+
+deepin 默认没有预装完整的 man 手册，需要手动安装:
+
+```bash
+$ sudo apt install manpages manpages-dev
+```
 
 ## 编辑器: VS Code
 
@@ -173,7 +181,7 @@ $ sudo apt install tldr
 ## FAQ
 
 {{< admonition question >}}
-重启后可能会出现，输入密码无法进入图形界面重新返回登录界面，这一循环状况。这个是 deepin 的默认 shell 是 dash 造成的，只需将默认的 shell 改为 bash 即可解决问题：
+重启后可能会出现，输入密码无法进入图形界面重新返回登录界面，这一循环状况。这个是 deepin 的默认 shell 是 dash 但 clash 脚本需要使用 bash 才能运行造成的，只需将默认的 shell 改为 bash 即可解决问题：
 
 ```bash
 $ ls -l /bin/sh
