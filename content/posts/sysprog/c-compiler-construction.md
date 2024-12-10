@@ -492,3 +492,48 @@ sp = (int *)((int)stack + poolsize);
 Tsoding 上传的 {{< link href="https://www.youtube.com/playlist?list=PLpM-Dvs8t0VYbTFO5tBwxG4Q20BJuqXD_" content="系列影片" external-icon=true >}}
 
 > Using LLVM for developing a programming language is like using react.js for developing a website!
+
+这个项目完成的是一个 [Stack-based Virtual machine](https://en.wikipedia.org/wiki/Stack_machine)
+
+### Day 1
+
+C 语言没有编译时期计算常数函数值的机制，但是可以使用宏来实现。
+
+通过 gcc 的参数，可以实现类似 Rust 的强大编译时期检查:
+
+- Stack Overflow: [GCC switch on enum, retain missing warning but use default](https://stackoverflow.com/questions/5402745/gcc-switch-on-enum-retain-missing-warning-but-use-default)
+
+原视频在大概 2:35 时左右实现了使用 VM 来计算斐波那契数列，原理是在栈中不断累积斐波那契数，并通过复制指令来进行叠加，这导致了计算第 $N$ 个斐波那契数需要栈空间至少为 $N+1$。
+
+文件相关操作需要熟读标准库手册，当然也可以配合其他资料来理解。
+
+Vim 可以通过 xxd 来将二进制文件转换为十六进制查看，但是需要系统内置有 xxd 工具 (如果没有可以通过包管理进行安装):
+
+```sh
+$ vim -b xxx.bin
+# in vim type follow command
+:%!xxd
+```
+
+C 语言的字符串打印表达能力也挺强大的:
+
+- Stack Overflow: [What is the meaning of "%-*.*s" in a printf format string?](https://stackoverflow.com/questions/23776824/what-is-the-meaning-of-s-in-a-printf-format-string)
+
+让 NOP 指令的枚举值为 0，可以让初始化为 0 的 VM 加载的程序全为 NOP 指令而不会导致其他问题出现。让 TRAP 的 OK 类型为 0 则是与 Linux 兼容 (返回 0 表示正常或成功)。
+
+连续多次使用三目运算符时必须注意判断条件是否发生来变化，事实上任意条件判断都应该注意这一点，C 语言专家应该将这个意识内化为自己的本能。
+
+并不推荐让 `make run` 接受参数:
+
+- Stack Overflow: [Passing arguments to "make run"](https://stackoverflow.com/questions/2214575/passing-arguments-to-make-run)
+
+clangd 要跳转到函数定义处需要 compile_commands.json 文件，CMake 可以直接生成这个文件，Makefile 的话可以通过 bear 这个工具来生成，操作方法如下:
+
+```sh
+# install bear
+$ sudo apt install bear
+# in you project directory
+$ bear -- make
+```
+
+目前 clangd 对于头文件经常会报 false positive，参考 clangd 的这篇 [issue](https://github.com/clangd/clangd/issues/1913) 进行解决。

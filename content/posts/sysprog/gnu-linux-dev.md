@@ -72,12 +72,6 @@ GNU/Linux 开发工具，几乎从硬件到软件，Linux 平台能够自下而�
 
 ***推荐通过 [LearnGitBranching][learn-git-branching] 来熟悉 Git 命令！！！***
 
-
-以下资源作为自学资源，用于补充自己不熟悉的操作，或者作为以上资料的补充工具手册。
-
-- [Git 中文教学 - YouTube][git-tutorials-zh] ([学习记录]({{< relref "../toolkit/git-learn.md" >}}))
-- [30 天精通 Git 版本控制 - GitHub][learn-git-in-30-days]
-
 {{< admonition warning >}}
 原文档中的将公钥复制到 clipboard 中使用了 `clip` 命令，但是这个命令在 Ubuntu 中并没有对应的命令。可以使用 `xclip` + `alias` 达到近似效果。
 

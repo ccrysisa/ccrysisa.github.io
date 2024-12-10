@@ -73,7 +73,7 @@ $ sudo apt autoremove
 
 安装必要的构建工具:
 ```bash
-$ sudo apt install build-essential git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build libslirp-dev
+$ sudo apt install build-essential git libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev ninja-build libslirp-dev python3-venv flex bison
 ```
 
 下载 QEMU 源码包 (此处以 7.2 版本为例):
@@ -91,6 +91,11 @@ $ mv qemu-7.2.0 qemu
 ```bash
 $./configure
 ```
+
+{{< admonition tip >}}
+qemu 9.12 在配置时需要额外安装 `python3-venv` 这个包。
+{{< /admonition >}}
+
 
 编译安装:
 ```bash

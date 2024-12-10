@@ -136,7 +136,7 @@ $$
 - CS:APP 2.2.3 Two’s-Complement Encodings
 > Note the different position of apostrophes: two’s complement versus ones’ complement. The term “two’s complement” arises from the fact that for nonnegative x we compute a w-bit representation of −x as 2w − x (a single two.) The term “ones’ complement” comes from the property that we can compute −x in this notation as [111 . . . 1] − x (multiple ones).
 
-{{< image src="/images/git/twos_complement.png" caption="Twos' complement" >}}
+{{< image src="https://hackmd.io/_uploads/B1WIVQTUt.png" caption="Twos' complement" >}}
 
 {{< admonition >}}
 在二补数编码中，将一个整数转换成其逆元，也可以依据以下的方法：
