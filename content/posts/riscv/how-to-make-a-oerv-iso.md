@@ -149,6 +149,14 @@ vda    253:0    0   80G  0 disk
 适用于 sg2042 的 ISO 镜像的生成操作也是类似的，除了最后新建目录移动步骤:
 
 ```bash
+[root@openeuler-riscv64 ~]# oemaker \
+  -t standard \
+  -p openEuler \
+  -v 24 \
+  -r 09 \
+  -s "https://mirrors.huaweicloud.com/openeuler/openEuler-24.09/everything/riscv64/ " \
+  > oemaker-sg2042.log \
+  2>&1
 [root@openeuler-riscv64 ~]# mkdir sg2042-iso
 [root@openeuler-riscv64 ~]# mv /result/openEuler-24-09-riscv64-dvd.iso ./sg2042-iso/
 ```

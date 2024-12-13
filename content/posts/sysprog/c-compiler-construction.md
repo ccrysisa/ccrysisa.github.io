@@ -489,13 +489,17 @@ sp = (int *)((int)stack + poolsize);
 
 ## 实作案例: Writing Virtual Machine for Lisp in C
 
-Tsoding 上传的 {{< link href="https://www.youtube.com/playlist?list=PLpM-Dvs8t0VYbTFO5tBwxG4Q20BJuqXD_" content="系列影片" external-icon=true >}}
+Tsoding 上传的 {{< link href="https://www.youtube.com/playlist?list=PLpM-Dvs8t0VY73ytTCQqgvgCWttV3m8LM" content="Virtual Machine in C" external-icon=true >}}
 
-> Using LLVM for developing a programming language is like using react.js for developing a website!
-
-这个项目完成的是一个 [Stack-based Virtual machine](https://en.wikipedia.org/wiki/Stack_machine)
+{{< timeline placement=top >}}
+events:
+  - timestamp: Day 1
+    content: 实现一个基本的 [Stack-based Virtual Machine](https://en.wikipedia.org/wiki/Stack_machine) 支持汇编和解释执行程序
+{{< /timeline >}}
 
 ### Day 1
+
+> Using LLVM for developing a programming language is like using react.js for developing a website!
 
 C 语言没有编译时期计算常数函数值的机制，但是可以使用宏来实现。
 
@@ -505,7 +509,7 @@ C 语言没有编译时期计算常数函数值的机制，但是可以使用宏
 
 原视频在大概 2:35 时左右实现了使用 VM 来计算斐波那契数列，原理是在栈中不断累积斐波那契数，并通过复制指令来进行叠加，这导致了计算第 $N$ 个斐波那契数需要栈空间至少为 $N+1$。
 
-文件相关操作需要熟读标准库手册，当然也可以配合其他资料来理解。
+C 语言 I/O 相关操作需要熟读标准库手册 (man 手册)，当然也可以配合其他资料来理解。
 
 Vim 可以通过 xxd 来将二进制文件转换为十六进制查看，但是需要系统内置有 xxd 工具 (如果没有可以通过包管理进行安装):
 
@@ -523,7 +527,7 @@ C 语言的字符串打印表达能力也挺强大的:
 
 连续多次使用三目运算符时必须注意判断条件是否发生来变化，事实上任意条件判断都应该注意这一点，C 语言专家应该将这个意识内化为自己的本能。
 
-并不推荐让 `make run` 接受参数:
+Makefile 并不推荐让 `make run` 接受参数:
 
 - Stack Overflow: [Passing arguments to "make run"](https://stackoverflow.com/questions/2214575/passing-arguments-to-make-run)
 
@@ -536,4 +540,16 @@ $ sudo apt install bear
 $ bear -- make
 ```
 
-目前 clangd 对于头文件经常会报 false positive，参考 clangd 的这篇 [issue](https://github.com/clangd/clangd/issues/1913) 进行解决。
+目前 clangd 对于头文件经常会报 false positive，参考 clangd 的这篇 [issue](https://github.com/clangd/clangd/issues/1913) 进行解决。加一个如下内容的 clangd 文件即可解决:
+
+```
+Diagnostics:
+  MissingIncludes: None
+  UnusedIncludes: None
+```
+
+### Day 2
+
+Wikipedia: [Cohesion (computer science)](https://en.wikipedia.org/wiki/Cohesion_(computer_science))
+
+实现符号跳转，必须要使用 Two pass，因为要跳转到符号也有可能在跳转指令之后。

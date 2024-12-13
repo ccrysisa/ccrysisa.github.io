@@ -268,7 +268,7 @@ enable = true
 # Gravatar 邮箱，用于优先在主页显示的头像
 gravatarEmail = ""
 # 主页显示头像的 URL
-avatarURL = "/images/avatar1.png"
+avatarURL = "/images/avatar.png"
 #  头像菜单链接的 identifier
 avatarMenu = ""
 #  主页显示的网站标题（支持 HTML 格式）
@@ -676,8 +676,8 @@ lazyLoad = true
 # 位于 "assets/"
 # 或者
 # someJavascript = "https://cdn.example.com/some.js"
-#  页面 SEO 配置
 flyfish = "/js/flyfish.js"
+#  页面 SEO 配置
 [params.page.seo]
 # 图片 URL
 images = []
