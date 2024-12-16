@@ -44,8 +44,6 @@ repost:
 <!--more-->
 
 - {{< link href="http://wiki.csie.ncku.edu.tw/linux/schedule?revision=ff44817ff7c75ed4ec0d22e6fdc3337af1f597c3" content="原始页面" >}}
-/
-{{< link href="/archives/Linux.pdf" content="PDF" >}}
 
 {{< admonition success >}}
 如果你学习时感到挫折，感到进度推进很慢，这很正常，因为 Jserv 的一个讲座，需要我们花费一个星期去消化 :rofl: 并且 Jserv 也提到前 6 周课程的密度是比较大的
