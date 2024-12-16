@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Linux 发行版使用体验"
 subtitle:
 date: 2024-01-24T18:59:56+08:00
 # draft: true
@@ -40,7 +40,7 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-记录我所使用过的 Linux 发行版的心得体会。
+记录我所使用过的 Linux 发行版的心得体会: deepin 20.9/V23。
 
 <!--more-->
 
@@ -66,6 +66,40 @@ $ sudo apt install manpages manpages-dev
 
 ```bash
 $ sudo apt install tldr
+```
+
+### Git & GitHub
+
+git:
+
+```bash
+$ git config user.name <username>
+$ git config user.email <useremail>
+# optional
+$ git config core,editor vim
+$ git config merge.tool vimdiff
+$ git config color.ui true
+$ git config alias.st status
+$ git config alias.ck checkout
+$ git config alias.rst "reset HEAD"
+$ git config init.defaultbranch main
+$ git config pull.rebase=false
+```
+
+github ssh key:
+
+```bash
+$ ssh-keygen -t rsa -C "your_email@example.com"
+...
+# enter 3 times to generate ssh key
+$ eval `ssh-agent -s`
+$ ssh-add ~/.ssh/id_rsa
+$ cat ~/.ssh/id_rsa.pub
+...
+# paste output (public key) to your github ssh key setting
+$ ssh -T git@github.com
+...
+Hi [username]! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
 ### Vim & VS Code
@@ -108,7 +142,10 @@ rust-analyzer 插件可能会因为新版本要求 glibc 2.29 而导致启动失
 
 ### 效果展示
 
+deepin 20.9/V23
+
 {{< image src="/images/tools/deepin-terminal-vim.png" caption="deepin Terminial Vim" >}}
+
 {{< image src="/images/tools/deepin-dde-desktop.png" caption="deepin DDE Desktop" >}}
 
 ## FAQ
@@ -135,3 +172,45 @@ $ sudo ln -s /bin/bash /bin/sh
 ```
 
 如果你已经处于无限登录界面循环这一状况，可以通过 `Ctrl + Alt + <F2>` 进入 tty2 界面进行修改。
+
+一些相关的便利脚本:
+
+快速启用代理:
+
+```bash {title=run.sh}
+#!/bin/bash
+sudo bash start.sh
+source /etc/profile.d/clash.sh
+proxy_on
+```
+
+快速关闭代理1:
+
+```bash {title=exit.sh}
+#!/bin/bash
+sudo bash shutdown.sh
+unset http_proxy
+unset https_proxy
+unset no_proxy
+unset HTTP_PROXY
+unset HTTPS_PROXY
+unset NO_PROXY
+echo -e "\033[31m[×] 已关闭代理\033[0m"
+```
+
+### 时间同步
+
+如果是 Windows/Linux 双系统会出现时间不同步的问题（北京时区的话会相差 8 小时），可以将 Linux 发行版的时间策略调整为与 Windows 的策略一致，即统一读取 BIOS 的 RTC 时间作为系统时间。
+
+```bash
+# check RTC status
+$ timedatectl status
+...
+RTC in local TZ: no
+# modify RTC status
+$ timedatectl set-local-rtc 1
+# RTC status has changed
+$ timedatectl status
+...
+RTC in local TZ: yes
+```
