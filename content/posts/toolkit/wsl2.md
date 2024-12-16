@@ -1,5 +1,5 @@
 ---
-title: "Windows 10 WSL2 Ubuntu 22.04 配置指南"
+title: "Windows 10/11 WSL2 配置指南"
 subtitle:
 date: 2024-04-20T12:14:18+08:00
 slug: f244d6d
@@ -18,6 +18,7 @@ tags:
   - Windows
   - WSL
   - Ubuntu
+  - Arch
 categories:
   - Toolkit
 hiddenFromHomePage: false
@@ -44,20 +45,24 @@ repost:
 
 今日闲来无事，刷了会 B 站，突发奇想将发灰了一年多的 WSL2 找回来折腾一下 (之前为了在 VMware 中开启嵌套虚拟化，不得以将 WSL2 打入冷宫 :rofl:)。由于这一年内功功力大涨，很快就完成了 WLS2 的再召集启用，下面列出配置的主要步骤和相关材料。
 
-<!--more-->
+2024/12/15 更新: 昨日由于被 Windows 10 的安全启动和 BitLocker 联手防范“自己人”导致全盘被锁，不得已只能全盘格式化重装系统，由于在 Windows 上一般情况下是使用 WSL 来进行开发，故选择对 Windows Terminal 和 WSL 支持较好的 Windows 11 进行重装。由于个人对滚动更新的 Arch Linux 比较感兴趣，所以重装后在 WSL 中装了 Arch 而不是传统的 Ubuntu。
 
-操作系统: Windows 10
+<!--more-->
 
 ## 安装 WSL2 和 Linux 发行版
 
+操作系统: Windows 10/11
+
 {{< bilibili BV1mX4y177dJ >}}
 
-1. 启用或关闭 Windows 功能
-   - [x] 适用于 Linux 的 Windows 子系统
-   - [x] 虚拟机平台
+1. 启用或关闭 Windows 功能并重启系统
+  - [x] Hyper-V
+  - [x] 适用于 Linux 的 Windows 子系统
+  - [x] 虚拟机平台
 
 2. 以管理员身份运行 PowerShell
-```bash
+
+```powershell
 > bcdedit /v
 ...
 hypervisorlaunchtype    Auto
@@ -65,8 +70,9 @@ hypervisorlaunchtype    Auto
 > bcdedit /set hypervisorlaunchtype auto
 ```
 
-3. 在 PowerShell 中安装 wsl2
-```bash
+3. 以管理员身份打开 PowerShell 安装 WSL2
+
+```powershell
 > wsl --update
 > wsl --set-default-version 2
 > wsl -l -o
@@ -80,15 +86,15 @@ Ubuntu-22.04                           Ubuntu 22.04 LTS
 # 后面需要创建用户和密码，自行设置
 ```
 
-> 上面以 Ubuntu 22.04 发行版为例，你也可以安装其它的发行版。安装过程中可能会出现无法访问源 / 仓库的问题，这个是网络问题，请自行通过魔法/科学方法解决
+> 上面以 Ubuntu 22.04 发行版为例，你也可以安装其它的发行版。安装过程中可能会出现无法访问软件源的问题，这个是网络问题，请自行通过魔法/科学方法解决。
 
 ## 迁移至非系统盘
 
 {{< bilibili BV1EF4m1V7pp >}}
 
-以管理员身份运行 PowerShell
+如果是通过 wsl 的 install 来安装，那么会默认安装到 C 盘，如果想迁移到其他盘例如 D 盘，先以管理员身份运行 PowerShell:
 
-```bash
+```powershell
 # 查看已安装的 Linux 发行版
 > wsl -l- v
 # 停止正在运行的发行版
@@ -108,12 +114,63 @@ Ubuntu-22.04                           Ubuntu 22.04 LTS
 
 {{< bilibili BV1GM4m1X7s3 >}}
 
-## 其它
+主要是给 Quake 模式和专注模式设置一下快捷键。
+
+## 图形化支持
 
 目前 Windows 10 上的 WSL2 应该都支持 WSLg (如果你一直更新的话)，可以使用 gedit 来测试一下 WLSg 的功能，可以参考微软的官方文档:
 
 - {{< link href="https://github.com/microsoft/wslg" content="https://github.com/microsoft/wslg" external-icon=true >}}
 
+Windows 11 的 WSL 则默认支持 WSLg 图形化。
+
+## ArchWSL
+
+仓库地址: https://github.com/yuk7/ArchWSL
+
+根据相关的指引文档操作即可，这个比起通过 wsl 直接安装的方式，可以自定义存储位置而不需要手动进行数据迁移。
+
+设置完成后得安装一些必备软件包:
+
+```sh
+$ sudo pacman -S coreutils binutils man-db man-pages gcc clang
+```
+
+关于 pacman 的用法可以参考 B 站 TheCW 的讲解视频:
+
+{{< bilibili BV1o4411N7oH >}}
+
+```sh
+# -S: you can combine subflags like `y` and `u` used in one command
+$ sudo pacman -S <package(s)>   # install package(s)
+$ sudo pacman -Sy               # update sources
+$ sudo pacman -Syy              # update sources compulsorily
+$ sudo pacman -Su               # update local packages
+$ sudo pacman -Ss <package(s)>  # search package(s)
+$ sudo pacman -Sc               # clean packages cache
+
+# -R
+$ sudo pacman -R <package(s)>   # remove package only
+$ sudo pacman -Rs <package(s)>  # remove package and its dependencies
+$ sudo pacman -Rns <package(s)> # remove package and its dependencies, global configurations
+
+# -Q
+$ sudo pacman -Q                # list local installed packages
+$ sudo pacman -Qe               # list local installed packages by user
+$ sudo pacman -Qe [package]     # list installed packages with version
+```
+
+我个人比较推荐在 Arch Linux 下使用 fish，因为它速度快且功能多，非常强大！因为 fish 和 /dash/bash/zsh 这些传统的 shell 的语法不兼容，建议按照 Arch Wiki 的 [fish 文档](https://wiki.archlinux.org/title/Fish) 来安装和启用 fish:
+
+```sh
+$ sudo pacman -S fish
+# edit your shell configure file, e.g. in /etc/bash.bashrc, add the line:
+exec fish
+```
+
 ## 效果展示
 
 {{< image src="/images/tools/ubuntu-22.04-wsl2.png" >}}
+
+{{< image src="/images/tools/ArchWSL.png" >}}
+
