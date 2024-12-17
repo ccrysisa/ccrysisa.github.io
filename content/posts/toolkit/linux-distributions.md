@@ -142,7 +142,7 @@ rust-analyzer 插件可能会因为新版本要求 glibc 2.29 而导致启动失
 
 ### 效果展示
 
-deepin 20.9/V23
+deepin 20.9/V23 的用户指导做的很好，每个内置应用程序都有相应的帮助手册。
 
 {{< image src="/images/tools/deepin-terminal-vim.png" caption="deepin Terminial Vim" >}}
 
@@ -214,3 +214,13 @@ $ timedatectl status
 ...
 RTC in local TZ: yes
 ```
+
+### 编程字体
+
+可以尝试使用 **[Sarasa Gothic (更纱黑体 / 更紗黑體)](https://github.com/be5invis/Sarasa-Gothic)** 或微软家的 **[Cascadia Code](https://github.com/microsoft/cascadia-code)**。
+
+个人 VS Code 字体设置:
+
+- Windows: Cascadia Code
+- deepin: Noto Sans Mono
+- Ubuntu: 待补充

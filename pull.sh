@@ -1,4 +1,7 @@
 #!/bin/bash
 
 git pull
-git submodule foreach git pull origin master
+
+if [[ "$#" -eq 1 && "$1" == "-t" ]]; then
+    git submodule foreach git pull origin master
+fi

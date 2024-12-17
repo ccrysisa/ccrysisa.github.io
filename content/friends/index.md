@@ -1,6 +1,6 @@
 ---
 title: "所有友链"
-subtitle:
+subtitle: 记录一些时时观摩学习的博客
 layout: friends
 date: 2024-04-29T23:46:50+08:00
 description: "ccrysisa's friends"
@@ -20,10 +20,10 @@ comment: false
 ## Base info
 
 ```yaml
-- nickname: Lruihao
-  avatar: https://lruihao.cn/images/avatar.jpg
-  url: https://lruihao.cn
-  description: Lruihao's Note
+- nickname: KZnight
+  avatar: https://ccrysisa.github.io/images/avatar.png
+  url: https://ccrysisa.github.io/
+  description: KZnight's Blog
 ```
 
 ## Friendly Reminder
