@@ -133,8 +133,10 @@ Windows 11 的 WSL 则默认支持 WSLg 图形化。
 设置完成后得安装一些必备软件包:
 
 ```sh
-$ sudo pacman -S coreutils binutils man-db man-pages gcc clang
+$ sudo pacman -S coreutils binutils man-db man-pages gcc git
 ```
+
+> clang 太大了个人不推荐在 WSL 上使用
 
 关于 pacman 的用法可以参考 B 站 TheCW 的讲解视频:
 
@@ -168,9 +170,15 @@ $ sudo pacman -S fish
 exec fish
 ```
 
+## LinuxmintWSL2
+
+仓库地址: https://github.com/sileshn/LinuxmintWSL2 
+
+操作与 ArchWSL 大同小异，其实这种自定义发行版的 WSL 都差不多
+
 ## 效果展示
 
-{{< image src="/images/tools/ubuntu-22.04-wsl2.png" >}}
+{{< image src="/images/tools/ubuntu-22.04-wsl2.png" caption="Ubuntu 22.04" >}}
 
-{{< image src="/images/tools/ArchWSL.png" >}}
+{{< image src="/images/tools/ArchWSL.png" caption="Arch Linux" >}}
 
