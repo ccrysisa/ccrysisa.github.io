@@ -40,7 +40,7 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-记录我所使用过的 Linux 发行版的心得体会: deepin 20.9/V23。
+记录我所使用过的 Linux 发行版的心得体会: deepin 20.9/V23, Ubuntu 22.04/24.04, openSUSE Tumbleweed。
 
 <!--more-->
 
@@ -214,6 +214,10 @@ $ timedatectl status
 ...
 RTC in local TZ: yes
 ```
+
+### su
+
+deepin 没法直接使用 `su` 命令，而是需要使用 `sudo su` 命令来进入 root 用户。
 
 ### 编程字体
 

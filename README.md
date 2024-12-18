@@ -17,8 +17,9 @@ $ ./run.sh
 ```bash
 # Run the blog
 $ ./run.sh
-# Commit all changes
-$ ./commit
-# Fetch and merge latest commit of blog and theme Fixit
-$ ./pull.sh
+# Commit all changes [with ammend]
+$ ./commit [-a]
+# Update by pulling latest commit of blog [and theme Fixit]
+$ ./update.sh [-t]
 ```
+
