@@ -136,7 +136,26 @@ Windows 11 的 WSL 则默认支持 WSLg 图形化。
 $ sudo pacman -S coreutils binutils man-db man-pages gcc git
 ```
 
-> clang 太大了个人不推荐在 WSL 上使用
+clang 太大了个人不推荐在 WSL 上使用，如果要使用 clang-format 推荐下载单独的 [AUR 包](https://aur.archlinux.org/packages/clang-format-static-bin) (pacman 源中没有单独的 clamg-format 包，而是被包含在 clang 这个超打包里面)。
+
+Install:
+
+```sh
+$ git clone https://aur.archlinux.org/clang-format-static-bin.git
+$ cd clang-format-static-bin/
+$ makepkg -si 
+...
+# install path is /opt/archlinux-clang-format/, you can get more infomation 
+# by type `archlinux-clang-format --help`
+$ sudo ln -s /opt/archlinux-clang-format/clang-format /usr/sbin/
+```
+
+Remove:
+
+```sh
+$ sudo rm -rf /usr/sbin/clang-format
+$ sudo rm -rf /opt/
+```
 
 关于 pacman 的用法可以参考 B 站 TheCW 的讲解视频:
 
