@@ -102,7 +102,7 @@ qemu 9.12 在配置时需要额外安装 `python3-venv` 这个包。
 $ sudo make -j$(nproc)
 ```
 
-在 ~/.bashrc 中添加环境变量:
+在 ~/.bashrc 或 /etc/bash.bashrc 中添加环境变量:
 ```bash
 export PATH=$PATH:/path/to/qemu/build
 ```

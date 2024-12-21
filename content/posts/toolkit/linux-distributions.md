@@ -44,7 +44,7 @@ repost:
 
 <!--more-->
 
-## 物理机
+## 系统通用配置
 
 ### 安装与配置
 
@@ -60,12 +60,18 @@ deepin 默认没有预装完整的 man 手册，需要手动安装:
 $ sudo apt install manpages manpages-dev
 ```
 
+但是有些程序的 `man` 手册页是无法被安装的，例如 gcc，这是因为 deepin 软件仓里没有相应的包，可以考虑使用 tldr 来进行部分替代。
+
+[tldr pages](https://tldr.sh/):
+
 > The tldr-pages project is a collection of community-maintained help pages for command-line tools, that aims to be a simpler, more approachable complement to traditional man pages.
 
-安装 tldr:
+安装 [tldr](https://github.com/tldr-pages/tldr) / [tlrc](https://github.com/tldr-pages/tlrc):
 
 ```bash
-$ sudo apt install tldr
+$ cargo install tlrc
+...
+Installed package `tlrc v1.9.3` (executable `tldr`)
 ```
 
 ### Git & GitHub
@@ -132,7 +138,7 @@ map <F4> : set nu!<BAR>set nonu?<CR>
 - **clangd**: C/C++ 语法服务
 - **Native Debug**: 调试 C/C++
 - **rust-analyzer**: Rust 语法服务
-- **CodeLLDB**: 调试 Rust
+- **CodeLLDB**: 调试 C++/Rust
 - **Dependi**: 管理包依赖关系
 - **Error Lens**: 更强大的错误提示
 
@@ -140,7 +146,27 @@ map <F4> : set nu!<BAR>set nonu?<CR>
 rust-analyzer 插件可能会因为新版本要求 glibc 2.29 而导致启动失败，请参考这个 [issue](https://github.com/rust-lang/rust-analyzer/issues/11558) 来解决。
 {{< /admonition >}}
 
-### 效果展示
+## deepin
+
+### 系统库
+
+deepin 预装的系统库比较陈旧（沿袭自“侏罗纪”时代的 Debian），特别是 `libstdc++`，如果你想使用 LLVM 的产品，预装的版本根本不满足，需要手动安装较新版本的包（`libstd++-12-dev` 及以上的版本）:
+
+```bash
+$ sudo apt install libstdc++-13-dev
+```
+
+另外为了获得更好的 LLVM/Clang 产品体验，建议手动安装全家桶（同时将 VS Code 的 clangd 扩展的可执行文件的路径改为相应的安装路径，一般为 `/usr/bin/clangd`，可以通过 `which` 命令查询）:
+
+```bash
+$ sudo apt install llvm clang clangd
+```
+
+### 根用户
+
+deepin 没法直接使用 `su` 命令，而是需要使用 `sudo su` 命令来进入 root 用户。
+
+## 效果展示
 
 deepin 20.9/V23 的用户指导做的很好，每个内置应用程序都有相应的帮助手册。
 
@@ -175,7 +201,7 @@ $ sudo ln -s /bin/bash /bin/sh
 
 一些相关的便利脚本:
 
-快速启用代理:
+快速启用代理脚本:
 
 ```bash {title=run.sh}
 #!/bin/bash
@@ -184,7 +210,7 @@ source /etc/profile.d/clash.sh
 proxy_on
 ```
 
-快速关闭代理1:
+快速关闭代理脚本:
 
 ```bash {title=exit.sh}
 #!/bin/bash
@@ -214,10 +240,6 @@ $ timedatectl status
 ...
 RTC in local TZ: yes
 ```
-
-### su
-
-deepin 没法直接使用 `su` 命令，而是需要使用 `sudo su` 命令来进入 root 用户。
 
 ### 编程字体
 
