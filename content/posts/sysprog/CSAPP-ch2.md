@@ -17,7 +17,6 @@ tags:
   - Sysprog
   - CSAPP
 categories:
-  - CSAPP
   - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false

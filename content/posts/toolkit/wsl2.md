@@ -18,7 +18,8 @@ tags:
   - Windows
   - WSL
   - Ubuntu
-  - Arch
+  - Arch Linux
+  - Linux Mint
 categories:
   - Toolkit
 hiddenFromHomePage: false
@@ -32,8 +33,8 @@ resources:
   - name: featured-image-preview
     src: featured-image-preview.jpg
 toc: true
-math: false
-lightgallery: false
+math: true
+lightgallery: true
 password:
 message:
 repost:

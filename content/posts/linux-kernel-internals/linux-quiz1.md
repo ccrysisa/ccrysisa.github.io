@@ -2,7 +2,7 @@
 title: "Linux 核心设计: 第 1 周测验题 linked list"
 subtitle:
 date: 2024-02-16T14:59:25+08:00
-# draft: true
+draft: true
 # author:
 #   name:
 #   link:

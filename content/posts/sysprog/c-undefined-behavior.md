@@ -16,10 +16,9 @@ weight: 0
 tags:
   - Sysprog
   - C
-categories:
-  - C
   - C++
-  - Linux Kernel Internals
+categories:
+  - 你所不知道的 C 语言
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

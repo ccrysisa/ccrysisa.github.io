@@ -1,5 +1,5 @@
 ---
-title: 基于 C 语言标准研究与系统程序安全议题
+title: "基于 C 语言标准研究与系统程序安全议题"
 subtitle:
 date: 2024-03-05T16:32:40+08:00
 # draft: true
@@ -18,7 +18,6 @@ tags:
   - C
   - Security
 categories:
-  - C
   - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false

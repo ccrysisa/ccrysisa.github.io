@@ -3,7 +3,7 @@ title: "Probability and Statistics"
 subtitle:
 date: 2024-01-20T17:20:09+08:00
 slug: 7592e7c
-# draft: true
+draft: true
 author:
   name: vanJker
   link: https://github.com/vanJker

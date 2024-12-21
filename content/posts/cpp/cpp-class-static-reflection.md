@@ -18,7 +18,7 @@ tags:
   - C++
   - Reflection
 categories:
-  - C++
+  - CPP
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

@@ -1697,7 +1697,7 @@ pub fn some_name(input: TokenStream) -> TokenStream {
 
 ### Final Project: Web Server
 
-## Practices
+## Exercises
 
 - [x] [rustlings](https://github.com/rust-lang/rustlings) / [参考题解](https://space.bilibili.com/50713701/channel/collectiondetail?sid=1409071) / [我的题解](https://github.com/ccrysisa/rustlings)
 - [ ] [LifetimeKata](https://github.com/tfpk/lifetimekata/)

@@ -15,7 +15,7 @@ comment: false
 weight: 0
 tags:
   - Rust
-  - Drop
+  - Drop Check
 categories:
   - Rust
 hiddenFromHomePage: false

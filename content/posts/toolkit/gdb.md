@@ -17,11 +17,10 @@ tags:
   - Debug
   - GDB
   - Rust
-  - C/C++
-  - Sysprog
+  - C
+  - C++
 categories:
   - Toolkit
-  - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -32,8 +31,8 @@ resources:
   - name: featured-image-preview
     src: featured-image-preview.jpg
 toc: true
-math: false
-lightgallery: false
+math: true
+lightgallery: true
 password:
 message:
 repost:

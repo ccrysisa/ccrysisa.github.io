@@ -16,9 +16,9 @@ weight: 0
 tags:
   - Sysprog
   - Linux
+  - Kernel
 categories:
-  - Linux
-  - Linux Kernel Internals
+  - Linux 核心设计
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

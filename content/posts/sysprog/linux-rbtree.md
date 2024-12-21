@@ -16,9 +16,9 @@ weight: 0
 tags:
   - Sysprog
   - Linux
+  - Kernel
   - Red Black Tree
 categories:
-  - Linux
   - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false

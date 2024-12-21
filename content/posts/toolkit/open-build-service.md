@@ -16,8 +16,6 @@ weight: 0
 tags:
   - openSUSE
   - Open Build Service
-  - OBS
-  - OERV
 categories:
   - Toolkit
 hiddenFromHomePage: false

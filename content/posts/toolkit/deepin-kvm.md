@@ -1,5 +1,5 @@
 ---
-title: "Deepin 20.9 KVM 安装和管理"
+title: "deepin 20.9 KVM 安装和管理"
 subtitle:
 date: 2024-03-28T12:21:48+08:00
 # draft: true

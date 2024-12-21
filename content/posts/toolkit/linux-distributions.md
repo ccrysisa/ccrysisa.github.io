@@ -48,9 +48,8 @@ repost:
 
 ### 安装与配置
 
-新手教学影片：
-
-bilibili: [深度操作系统 deepin 下载安装 (附双系统安装及分区指引)](https://www.bilibili.com/video/BV1ZQ4y1C7n3/?vd_source=99b5a7ef7355e5c62fe79d489b7711ca)
+- [新手教程: Ubuntu 24.04 LTS 和 Windows 10/11 双系统安装指南](https://www.bilibili.com/video/BV1Xkm2Y2EJE/?vd_source=99b5a7ef7355e5c62fe79d489b7711ca)
+- [深度操作系统 deepin 下载安装 (附双系统安装及分区指引)](https://www.bilibili.com/video/BV1ZQ4y1C7n3/?vd_source=99b5a7ef7355e5c62fe79d489b7711ca)
 
 ### man & tldr
 
@@ -69,6 +68,7 @@ $ sudo apt install manpages manpages-dev
 安装 [tldr](https://github.com/tldr-pages/tldr) / [tlrc](https://github.com/tldr-pages/tlrc):
 
 ```bash
+# install tldr/tlrc by cargo
 $ cargo install tlrc
 ...
 Installed package `tlrc v1.9.3` (executable `tldr`)

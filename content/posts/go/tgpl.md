@@ -1,5 +1,5 @@
 ---
-title: "Let's Go"
+title: "The Go Programming Language"
 subtitle:
 date: 2024-03-25T10:16:26+08:00
 # draft: true
@@ -37,6 +37,12 @@ repost:
 
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
+
+{{< image src="https://go.dev/images/gophers/ladder.svg" caption="Gopher" >}}
+
+{{< center-quote >}}
+**Build simple, secure, scalable systems with Go**
+{{< /center-quote >}}
 
 <!--more-->
 
@@ -742,6 +748,8 @@ Read the relevant blogs:
 - [Defer, Panic, and Recover](https://go.dev/blog/defer-panic-and-recover)
 - [Go Slices: usage and internals](https://go.dev/blog/slices-intro)
 
+{{< admonition quote "Where to Go from here..." >}}
+
 You can get started by [installing Go](https://go.dev/doc/install/).
 
 Once you have Go installed, the [Go Documentation](https://go.dev/doc/) is a great place to continue. It contains references, tutorials, videos, and more.
@@ -760,35 +768,18 @@ The [Go Blog](https://go.dev/blog/) has a large archive of informative Go articl
 
 Visit [the Go home page](https://go.dev/) for more.
 
-## Building Microservices with Go
+{{< /admonition >}}
 
-YouTube: [Building Microservices with Go](https://www.youtube.com/playlist?list=PLmD8u-IFdreyh6EUfevBcbiuCKzFk0EW_)
+## Project: Building Microservices with Go
+
+YouTube:  Nic Jackson 制作的 [Building Microservices with Go](https://www.youtube.com/playlist?list=PLmD8u-IFdreyh6EUfevBcbiuCKzFk0EW_) 系列影片
 
 > Week by week Building Microservices builds on the previous weeks code teaching you how to build a multi-tier microservice system. The code structure for the course is one of a mono repo. To make it simple to follow along, each episode has its own branch showing progress to date.
 
-### Setup
-
-Linux: WLS2
-
-```bash
-$ uname --a
-Linux cai-PC 5.15.77-amd64-desktop #2 SMP Thu Jun 15 16:06:18 CST 2023 x86_64 GNU/Linux
-```
-
-VS Code and extensions:
-- Go
-- Docker
-- Live Share
-
-Go:
-
-```bash
-$ go version
-go version go1.22.5 linux/amd64
-```
-
 ## References: 
 
-- Matt KØDVB: [Go Class](https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6): 作为深入理解 Go 语言机制的参考材料
+- [A tour of Go](https://go.dev/tour/list)
+- Matt KØDVB\'s [Go Class](https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6): 作为深入理解 Go 语言机制的参考材料
+- Nic Jackson\'s [Building Microservices with Go](https://www.youtube.com/playlist?list=PLmD8u-IFdreyh6EUfevBcbiuCKzFk0EW_): 一个不错的 Go 练习项目
 - [Learn Go with Tests](https://quii.gitbook.io/learn-go-with-tests)
 - [Go by Example](https://gobyexample.com/)

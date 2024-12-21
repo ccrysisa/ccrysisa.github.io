@@ -16,10 +16,9 @@ weight: 0
 tags:
   - Container
   - Docker
+  - Kubernetes
 categories:
   - Toolkit
-  - Go
-  - Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -49,7 +48,7 @@ repost:
 
 ## Install
 
-deepin 20.9/V23 虽然基于 Debian，但是为了适配 deepin 特色的 DDE (Deepin Desktop Environment) 而进行了大量的魔改，所以按照 Docker 官方文档的 debian 安装一节是无法成功安装的。鉴于此，建议使用编译好的二进制 (Binaries) 在 deepin 上安装 Docker。
+deepin 20.9/V23 虽然基于 Debian，但是为了适配 deepin 特色的 DDE (Deepin Desktop Environment) 而进行了大量的魔改，所以按照 Docker 官方文档的 Debian 安装一节是无法成功安装的。鉴于此，建议使用编译好的二进制 (Binaries) 在 deepin 上安装 Docker。
 
 - [Install Docker Engine from binaries](https://docs.docker.com/engine/install/binaries/)
 
@@ -126,4 +125,27 @@ $ sudo rm -rf /usr/local/lib/docker/
 - [A Docker Tutorial for Beginners](https://docker-curriculum.com/#webapps-with-docker)
 - YouTube: [Docker and Kubernetes Tutorial for Beginners](https://www.youtube.com/playlist?list=PLy7NrYWoggjwPggqtFsI_zMAwvG0SqYCb)
 
-清理不需要使用的 container(s)、image(s) 等资源: [Prune unused Docker objects](https://docs.docker.com/engine/manage-resources/pruning/)
+> 清理不需要使用的 container(s)、image(s) 等资源: [Prune unused Docker objects](https://docs.docker.com/engine/manage-resources/pruning/)
+
+```sh
+$ sudo docker image prune
+$ sudo docker container prune
+$ sudo docker volume prune
+$ sudo docker network prune
+# purn everying including images, containers, and networks, but volumes aren't pruned by default.
+$ sudo docker system prune
+```
+
+## Concepts
+
+Stack Overflow: [What is the difference between a Docker image and a container?](https://stackoverflow.com/questions/23735149/what-is-the-difference-between-a-docker-image-and-a-container)
+
+{{< admonition quote >}}
+**Dockerfile** → (Build) → **Image** → (Run) → **Container**.
+
+- **Dockerfile**: contains a set of Docker instructions that provisions your operating system the way you like, and installs/configure all your software.
+
+- **Image**: compiled Dockerfile. Saves you time from rebuilding the Dockerfile every time you need to run a container. And it's a way to hide your provision code.
+
+- **Container**: the virtual operating system itself. You can ssh into it and run any commands you wish, as if it's a real environment. You can run 1000+ containers from the same Image.
+{{< /admonition >}}

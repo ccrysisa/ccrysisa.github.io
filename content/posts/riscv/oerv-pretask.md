@@ -17,10 +17,7 @@ tags:
   - RISC-V
   - openEuler
   - QEMU
-  - Neofetch
   - Container
-  - chroot
-  - nspawn
   - Architecture
 categories:
   - RISC-V

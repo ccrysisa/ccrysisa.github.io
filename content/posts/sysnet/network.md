@@ -3,7 +3,7 @@ title: "Computer Network 101-1"
 subtitle:
 date: 2024-01-14T12:09:38+08:00
 slug: 3d012d7
-draft: false
+draft: true
 author:
   name: vanJker
   link: https://github.com/vanJker
@@ -81,7 +81,7 @@ IP 层建立在 **每个 Host 只能知晓其附近 network 的状况而无法�
 [slides&hws]: https://ocw.nthu.edu.tw/ocw/index.php?page=course_news_content&cid=291&id=1015
 [playlist]: https://www.youtube.com/playlist?list=PLS0SUwlYe8cxktXNovos9xleroaWyb-z5
 
------
+----
 
 {{< details "这部分内容已于 2024/8/13 起废止" >}}
 

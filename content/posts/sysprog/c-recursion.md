@@ -18,8 +18,7 @@ tags:
   - C
   - Recursion
 categories:
-  - C
-  - Linux Kernel Internals
+  - 你所不知道的 C 语言
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

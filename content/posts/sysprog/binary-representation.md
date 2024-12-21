@@ -15,8 +15,7 @@ comment: false
 weight: 0
 tags:
   - Sysprog
-  - Numerics
-  - Bitwise
+  - Binary
 categories:
   - Linux Kernel Internals
 hiddenFromHomePage: false

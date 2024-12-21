@@ -16,9 +16,9 @@ weight: 0
 tags:
   - Sysprog
   - Linux
-  - Hash
+  - Kernel
+  - Hash Table
 categories:
-  - Linux
   - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false

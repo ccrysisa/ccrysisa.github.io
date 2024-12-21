@@ -18,7 +18,7 @@ tags:
   - C++
   - MSVC
 categories:
-  - C++
+  - CPP
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

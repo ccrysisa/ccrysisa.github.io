@@ -2,7 +2,7 @@
 title: 数学开放式课程学习指引
 subtitle:
 date: 2023-12-23T21:35:47+08:00
-draft: false
+draft: true
 author:
   name: vanJker
   link: https://github.com/vanJker

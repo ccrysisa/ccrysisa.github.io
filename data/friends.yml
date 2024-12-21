@@ -1,59 +1,59 @@
 - nickname: jserv
   avatar: https://avatars.githubusercontent.com/u/478921?v=4
   url: http://wiki.csie.ncku.edu.tw/User/jserv
-  description: Participating in system software programming for more than 20 years.
+  description: A hacker, a lecturer, a father. Adjunct faculty at @NCKU_official.
 
 - nickname: Jon Gjengset
   avatar: https://avatars.githubusercontent.com/u/176295?v=4
   url: https://thesquareplanet.com/
-  description: PhD student & Software Engineer
+  description: Hi there! I'm a Principal Engineer at Helsing, author of Rust for Rustaceans, an avid Rust educator, and a general open-source ethusiast. I have a PhD from the Parallel and Distributed Operating Systems group at MIT, where I was supervised by Robert Morris in my work on Noria, which today continues in the form of a start-up I co-founded called ReadySet.
 
 - nickname: Eli Bendersky
   avatar: https://avatars.githubusercontent.com/u/1130906?v=4
   url: https://eli.thegreenplace.net/
-  description: Eli Bendersky's website
+  description: This blog began in 2003 as a personal online journal; in the past few years it became mostly an outlet for technical, programming-related posts. It's my way to document things I find interesting for my future self.
 
 - nickname: L. Pereira
   avatar: https://tia.mat.br/temp/img/acidx.jpg
   url: https://tia.mat.br/posts/
-  description: L. is a software engineer working on the Compute platform at Fastly.
+  description: In her free time, she likes to work on personal Free and Open Source Projects; this blog documents some of this work. Here's a curated list of projects she has worked on over the years. (Current hobbies outside programming include painting 3D-printed objects, electronics, and occasionaly, playing video games.)
 
 - nickname: John Regehr
   avatar: https://files.mastodon.social/accounts/avatars/000/147/970/original/8dd7e7e6a7ea9f95.png
   url: https://blog.regehr.org/
-  description: Embedded in Academia
+  description: The part of the solution to the software problem that I am most interested in is using software tools to make it easier to develop correct and efficient software. Basically, we can create programs to show us possibilities inherent in our software -- such as crashes -- that we did not know about, or better yet create programs to verify that such possibilities do not exist. Similarly, good abstractions such as high-level programming languages make it easier to express our intent, and then we can offload to software tools the problem of making programs run quickly.
 
 - nickname: Justine Tunney
   avatar: https://avatars.githubusercontent.com/u/49262?v=4
   url: https://justine.lol/
-  description: Justine Tunney's Web Page
-
-- nickname: Lawrence Angrave
-  avatar: https://avatars.githubusercontent.com/u/4468456?v=4
-  url: https://github.com/angrave/SystemProgramming/wiki
-  description: Angrave's crowd-sourced System Programming wiki-book
+  description: I built a C library that lets you compile 12kb static binaries that run natively on Linux, Mac, Windows, FreeBSD, OpenBSD, NetBSD and BIOS using just GCC/Clang.
 
 - nickname: Herb Sutter
   avatar: https://herbsutter.com/wp-content/uploads/2024/03/herb-cppcon-2021.jpg
   url: https://herbsutter.com/
-  description: Herb Sutter on software development
+  description: I'm an author and speaker, and a programming language nerd whose focus is on enabling our program code to be both clean and fast. I've been writing about programming since 1993, usually about C++ or about concurrency and parallelism. I'm the designer or co-designer of a number of standardized ISO C++ language and library features. I've served as the chair of the ISO C++ standards committee since 2002, and as the chair of the Standard C++ Foundation since 2012. I'm a technical fellow at Citadel Securities. This personal website expresses the opinions of none of those organizations.
 
-- nickname: Herb Sutter
+- nickname: James McMurray
   avatar: https://avatars.githubusercontent.com/u/54889?v=4
   url: https://jamesmcm.github.io/
-  description: Rust, Linux and other curiosities
+  description: Welcome to my personal website and blog. I'm a Data Engineer interested in Rust, Linux and Free Software, and primarily blog about FOSS contributions and other technical topics.
 
-- nickname: fprox
-  avatar: https://substackcdn.com/image/fetch/w_88,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F976c8d2c-5618-4f01-b50c-795ec1356aa8_144x144.png
-  url: https://fprox.substack.com/
-  description: What are you optimizing for ? (fprox's substack)
-
-- nickname: matklad
+- nickname: Alex Kladov
   avatar: https://avatars.githubusercontent.com/u/1711539?v=4
   url: https://matklad.github.io/
-  description: a programmer who loves simple code and programming languages.
+  description: I am Alex Kladov, a programmer who loves simple code and programming languages.
+
+- nickname: Andrew Kelley
+  avatar: https://andrewkelley.me/img/profile-flowers.jpg
+  url: https://andrewkelley.me/
+  description: President and Lead Developer of Zig Software Foundation. Jack of all trades, master of one.
 
 - nickname: Ludwig
   avatar: https://pbs.twimg.com/profile_images/1753215006697459712/n76_qnTj_400x400.jpg
   url: https://ludwigabap.bearblog.dev/
   description: swe at [redacted] -- currently building large-scale distributed systems
+
+- nickname: Ivon
+  avatar: https://ivonblog.com/img/avatar_ivonhuang.png
+  url: https://ivonblog.com/
+  description: 歡迎來到Ivon的部落格，這裡是分享GNU/Linux情報、自由開源軟體、電腦手機資訊、人文思辨的所在。在這裡你會看到許多自由軟體的實際操作心得，以及將其運用在生活中的各種可能性。

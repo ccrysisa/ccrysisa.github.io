@@ -16,8 +16,8 @@ weight: 0
 tags:
   - Sysprog
   - Linux
+  - Kernel
 categories:
-  - Linux
   - Linux Kernel Internals
 hiddenFromHomePage: false
 hiddenFromSearch: false

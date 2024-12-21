@@ -19,8 +19,7 @@ tags:
   - Concurrency
   - C++
 categories:
-  - C++
-  - Concurrency
+  - CPP
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false

@@ -18,8 +18,7 @@ tags:
   - Linux
   - Concurrency
 categories:
-  - Concurrency
-  - Linux Kernel Internals
+  - 并行程序设计
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
