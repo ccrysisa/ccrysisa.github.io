@@ -62,10 +62,9 @@ $ sudo apt install iptables git ps xz
 $ sudo bash cgroupfs-mount
 
 # Download sepcific version of docker engine from https://download.docker.com/linux/static/stable/
-# Then unzip since sudo coundl only execute bin which belong to root
-$ tar xzvf /path/to/FILE.tar.gz 
+$ tar xzvf /path/to/FILE.tar.gz
 $ sudo cp docker/* /usr/bin/
-# now you can remove tar and it's unzip directory
+# now you can remove tar and it's unzip directory and files
 
 # Run and test docker engine
 $ sudo dockerd
@@ -85,15 +84,8 @@ $ docker compose version
 ```
 
 {{< admonition tip >}}
-对于二进制文件的安装方法，建议使用一个 shell 启动 docker daemon，再使用另一个 shell 来运行 docker application，这样能确保退出 docker daemon 而不是放任其一直在后台运行。
+对于二进制文件的安装方法，建议使用一个 shell 启动 docker daemon，再使用另一个 shell 来运行 docker application，这样能确保退出 docker daemon 而不是放任其一直在后台运行。当然你也可以通过 `ps` 方法找到 docker daemon 进程然后 kill 掉，只不过比较繁琐。
 {{< /admonition >}}
-
-如果是按照上面的方法安装的 docker 以及相关套件，那么 uninstall 它们的命令为:
-
-```sh
-$ sudo rm -rf containerd containerd-shim-runc-v2 ctr docker dockerd docker-init docker-proxy runc
-$ sudo rm -rf /usr/local/lib/docker/
-```
 
 ## Configuration
 
@@ -119,6 +111,16 @@ $ sudo rm -rf /usr/local/lib/docker/
 
 - [Linux post-installation steps for Docker Engine](https://docs.docker.com/engine/install/linux-postinstall/)
 
+## Uninstall
+
+如果是按照上面的方法安装配置的 docker 以及相关套件，那么 uninstall 它们的命令为:
+
+```sh
+$ cd /usr/bin/
+$ sudo rm -rf containerd containerd-shim-runc-v2 ctr docker dockerd docker-init docker-proxy runc
+$ sudo rm -rf /usr/local/lib/docker/ /etc/docker/ /mnt/docker-data/
+```
+
 ## Usage
 
 - Docker Docs: [Get started](https://docs.docker.com/get-started/)
@@ -138,14 +140,40 @@ $ sudo docker system prune
 
 ## Concepts
 
-Stack Overflow: [What is the difference between a Docker image and a container?](https://stackoverflow.com/questions/23735149/what-is-the-difference-between-a-docker-image-and-a-container)
+Wkipedia: [LXC](https://en.wikipedia.org/wiki/LXC), [Docker](https://en.wikipedia.org/wiki/Docker_(software))
+
+> **Linux Containers (LXC)** is an operating system-level virtualization method for running multiple isolated Linux systems (containers) on a control host using a single Linux kernel.
+
+> **Docker** is a set of platform as a service (PaaS) products that use OS-level virtualization to deliver software in packages called containers.
+
+Stack Overflow: 
+
+[What is the difference between a Docker image and a container?](https://stackoverflow.com/questions/23735149/what-is-the-difference-between-a-docker-image-and-a-container)
 
 {{< admonition quote >}}
 **Dockerfile** → (Build) → **Image** → (Run) → **Container**.
 
 - **Dockerfile**: contains a set of Docker instructions that provisions your operating system the way you like, and installs/configure all your software.
 
-- **Image**: compiled Dockerfile. Saves you time from rebuilding the Dockerfile every time you need to run a container. And it's a way to hide your provision code.
+- **Image**: compiled Dockerfile. Saves you time from rebuilding the Dockerfile every time you need to run a container. And it\'s a way to hide your provision code.
 
-- **Container**: the virtual operating system itself. You can ssh into it and run any commands you wish, as if it's a real environment. You can run 1000+ containers from the same Image.
+- **Container**: the virtual operating system itself. You can ssh into it and run any commands you wish, as if it\'s a real environment. You can run 1000+ containers from the same Image.
+{{< /admonition >}}
+
+[Does the code gets copied from docker image to docker container](https://stackoverflow.com/questions/72820548/does-the-code-gets-copied-from-docker-image-to-docker-container)
+
+{{< admonition quote >}}
+Does everything in the image get copied over to the container?
+> Yes. A container is like an instance of the image.
+
+If the same image is used among all the containers, then how does docker handle when a file is changed in a container?
+> The change will only affect the container in which the change was made. It does not affect the image nor any other containers using the same image (unless the change was made to a file on a volume that multiple containers share).
+{{< /admonition >}}
+
+[Difference between KVM and LXC](https://stackoverflow.com/questions/20578039/difference-between-kvm-and-lxc)
+
+{{< admonition quote >}}
+LXC, or Linux Containers are the lightweight and portable OS based virtualization units which share the base operating system\'s kernel, but at same time act as an isolated environments with its own filesystem, processes and TCP/IP stack. They can be compared to Solaris Zones or Jails on FreeBSD. As there is no virtualization overhead they perform much better then virtual machines.
+
+KVM represents the virtualization capabilities built in the own Linux kernel. As already stated in the previous answers, it\'s the hypervisor of type 2, i.e. it\'s not running on a bare metal.
 {{< /admonition >}}

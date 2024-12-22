@@ -224,6 +224,16 @@ unset NO_PROXY
 echo -e "\033[31m[×] 已关闭代理\033[0m"
 ```
 
+因为涉及到要继承使用 `export` 命令设置的临时环境变量 (`http_proxy` 和 `https_proxy`)，所以使用如下格式执行上述脚本:
+
+```sh
+$ . ./[run.sh|exit.sh]
+```
+
+> The first `.` stands for current shell and the second `.` for current directory.
+
+- Stack Overflow: [How to execute bash script in same shell](https://stackoverflow.com/questions/44122714/how-to-execute-bash-script-in-same-shell)
+
 ### 时间同步
 
 如果是 Windows/Linux 双系统会出现时间不同步的问题（北京时区的话会相差 8 小时），可以将 Linux 发行版的时间策略调整为与 Windows 的策略一致，即统一读取 BIOS 的 RTC 时间作为系统时间。

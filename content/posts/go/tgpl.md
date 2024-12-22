@@ -779,7 +779,6 @@ YouTube:  Nic Jackson 制作的 [Building Microservices with Go](https://www.you
 ## References: 
 
 - [A tour of Go](https://go.dev/tour/list)
-- Matt KØDVB\'s [Go Class](https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6): 作为深入理解 Go 语言机制的参考材料
 - Nic Jackson\'s [Building Microservices with Go](https://www.youtube.com/playlist?list=PLmD8u-IFdreyh6EUfevBcbiuCKzFk0EW_): 一个不错的 Go 练习项目
 - [Learn Go with Tests](https://quii.gitbook.io/learn-go-with-tests)
 - [Go by Example](https://gobyexample.com/)
