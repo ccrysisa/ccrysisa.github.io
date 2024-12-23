@@ -166,6 +166,18 @@ $ sudo apt install llvm clang clangd
 
 deepin 没法直接使用 `su` 命令，而是需要使用 `sudo su` 命令来进入 root 用户。
 
+## Ubuntu
+
+安装 tweaks 以获得对 GNOME 桌面的更多设置:
+
+```bash
+$ sudo apt install gnome-tweaks
+```
+
+参考下面链接安装 fcitx5 输入法框架:
+
+- [Ubuntu 22.04 Chinese (simplified) pinyin input support](https://askubuntu.com/questions/1408873/ubuntu-22-04-chinese-simplified-pinyin-input-support)
+
 ## 效果展示
 
 deepin 20.9/V23 的用户指导做的很好，每个内置应用程序都有相应的帮助手册。
@@ -188,16 +200,7 @@ $ git clone https://github.com/Elegybackup/clash-for-linux-backup.git clash-for-
 
 安装并启动完成后，可以通过 `localhost:9090/ui` 来访问 Dashboard。
 
-重启后可能会出现，输入密码无法进入图形界面重新返回登录界面，这一循环状况。这个是 Linux 发行版默认的 shell 是 dash，但位于 `/etc/` 路径下的 clash 服务脚本需要使用 bash 才能运行造成的，只需将默认的 shell 改为 bash 即可解决问题：
-
-```bash
-$ ls -l /bin/sh
-lrwxrwxrwx 1 root root 9 xx月  xx xx:xx /bin/sh -> /bin/dash
-$ sudo rm /bin/sh
-$ sudo ln -s /bin/bash /bin/sh
-```
-
-如果你已经处于无限登录界面循环这一状况，可以通过 `Ctrl + Alt + <F2>` 进入 tty2 界面进行修改。
+{{< admonition tip >}}
 
 一些相关的便利脚本:
 
@@ -234,6 +237,31 @@ $ . ./[run.sh|exit.sh]
 
 - Stack Overflow: [How to execute bash script in same shell](https://stackoverflow.com/questions/44122714/how-to-execute-bash-script-in-same-shell)
 
+{{< /admonition >}}
+
+如果你没有关闭 clash 服务就关机，那么重启后可能会出现，输入密码无法进入图形界面重新返回登录界面，这一循环状况。这个是有些 Linux 发行版默认的 shell 是 dash，但位于 `/etc/` 路径下的 clash 服务脚本需要使用 bash 才能运行造成的，有几种方式可以解决该问题。
+
+> 目前只在 deepin 上发现该问题，至于 Ubuntu 并没有影响
+
+第一种方法，也是最简单的方法，每次关机前都关闭掉 clash 服务即可:
+
+```bash
+$ sudo bash shutdown.sh
+# or
+$ . ./exit.sh
+```
+
+第二种方法，只需将默认的 shell 改为 bash 即可解决问题：
+
+```bash
+$ ls -l /usr/bin/sh
+lrwxrwxrwx 1 root root 9 xx月  xx xx:xx /usr/bin/sh -> dash
+$ sudo rm /usr/bin/sh
+$ sudo ln -s /usr/bin/bash /usr/bin/sh
+```
+
+如果你已经处于无限登录界面循环这一状况，可以通过 `Ctrl + Alt + <F3>/<F2>` 切换进入 TTY/GUI 界面进行修改。
+
 ### 时间同步
 
 如果是 Windows/Linux 双系统会出现时间不同步的问题（北京时区的话会相差 8 小时），可以将 Linux 发行版的时间策略调整为与 Windows 的策略一致，即统一读取 BIOS 的 RTC 时间作为系统时间。
@@ -259,4 +287,4 @@ RTC in local TZ: yes
 
 - Windows: Cascadia Code
 - deepin: Noto Sans Mono
-- Ubuntu: 待补充
+- Ubuntu: DejaVu Sans Mono
