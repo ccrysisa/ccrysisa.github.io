@@ -132,7 +132,6 @@ map <F4> : set nu!<BAR>set nonu?<CR>
 
 - **Vim**
 - **VSCode Great Icons**
-- **Tokyo Night**
 - **Git History**
 - **Even Better TOML**: toml 语法高亮
 - **clangd**: C/C++ 语法服务
@@ -144,6 +143,8 @@ map <F4> : set nu!<BAR>set nonu?<CR>
 
 {{< admonition question >}}
 rust-analyzer 插件可能会因为新版本要求 glibc 2.29 而导致启动失败，请参考这个 [issue](https://github.com/rust-lang/rust-analyzer/issues/11558) 来解决。
+
+clangd 建议先手动通过包管理器安装（一般情况下路径为 `/usr/bin/clangd`，可以通过 `which` 命令查询具体路径），然后再设置 VS Code 里 clangd 插件对应的 clangd 可执行文件路径。
 {{< /admonition >}}
 
 ## deepin
@@ -168,15 +169,35 @@ deepin 没法直接使用 `su` 命令，而是需要使用 `sudo su` 命令来�
 
 ## Ubuntu
 
-安装 tweaks 以获得对 GNOME 桌面的更多设置:
+安装 tweaks 以获得对 GNOME 桌面的更多设置（例如字体设置）:
 
 ```bash
 $ sudo apt install gnome-tweaks
 ```
 
+> 如果是笔记本的小尺寸屏幕，在 tweaks 里面字体 (font) 设置处将 font size 缩放至 1.25 即可
+
 参考下面链接安装 fcitx5 输入法框架:
 
 - [Ubuntu 22.04 Chinese (simplified) pinyin input support](https://askubuntu.com/questions/1408873/ubuntu-22-04-chinese-simplified-pinyin-input-support)
+
+安装完成后在 fcitx5 里面搜索安装 Pinyin 即可，然后还得在设置里边安装一下简体中文语言包，要不然没有 CJK 支持汉字渲染很怪异。
+
+### fish
+
+个人在 Ubuntu 处采用 [fish](https://github.com/fish-shell/fish-shell) 作为 shell，可以直接通过 apt 进行安装。因为 fish 和 bash 语法不兼容，最合适的方法是在 `/etc/bash.bashrc` 文件末尾处加上下面这行代码:
+
+```sh
+exec fish
+```
+
+fish 可以通过 `fish_config` 命令来设置主题等样式，非常方便。
+
+### tmux
+
+个人的终端方案是 [tmux](https://github.com/tmux/tmux)，也是可以通过 apt 进行安装，参考 [这个链接](https://stackoverflow.com/questions/21115370/how-to-launch-tmux-automatically-when-konsole-yakuake-start/) 来让终端默认启动 tmux。
+
+bilibili: [终端神器 tmux：多任务管理大师](https://www.bilibili.com/video/BV1ML411h7tF)
 
 ## 效果展示
 
@@ -224,6 +245,7 @@ unset no_proxy
 unset HTTP_PROXY
 unset HTTPS_PROXY
 unset NO_PROXY
+sudo rm /etc/profile.d/clash.sh
 echo -e "\033[31m[×] 已关闭代理\033[0m"
 ```
 
@@ -262,6 +284,34 @@ $ sudo ln -s /usr/bin/bash /usr/bin/sh
 
 如果你已经处于无限登录界面循环这一状况，可以通过 `Ctrl + Alt + <F3>/<F2>` 切换进入 TTY/GUI 界面进行修改。
 
+{{< admonition type=todo open=false >}}
+
+进阶可以尝试基于 [v2ray](https://www.v2ray.com/) 的 [v2raya](https://github.com/v2rayA/v2rayA)，安装完后所有软件处会出现启动管理面板的图标，常用的指令如下:
+
+systemd 服务:
+
+```sh
+# 首次启动 v2rayA 的命令，它同时设置了相应的启动服务
+$ sudo systemctl start v2raya.service
+# 设置开机自动启动
+$ sudo systemctl enable v2raya.service
+# 设置开机不自动启动
+$ sudo systemctl disable v2raya.service
+```
+
+启动、停止、查询服务:
+
+```sh
+# 启动 v2rayA 服务
+$ sudo service v2raya start
+# 停止 v2rayA 服务
+$ sudo service v2raya stop
+# 查看 v2rayA 状态
+$ sudo service v2raya status
+```
+
+{{< /admonition >}}
+
 ### 时间同步
 
 如果是 Windows/Linux 双系统会出现时间不同步的问题（北京时区的话会相差 8 小时），可以将 Linux 发行版的时间策略调整为与 Windows 的策略一致，即统一读取 BIOS 的 RTC 时间作为系统时间。
@@ -281,10 +331,9 @@ RTC in local TZ: yes
 
 ### 编程字体
 
-可以尝试使用 **[Sarasa Gothic (更纱黑体 / 更紗黑體)](https://github.com/be5invis/Sarasa-Gothic)** 或微软家的 **[Cascadia Code](https://github.com/microsoft/cascadia-code)**。
+可以尝试使用 **[Sarasa Gothic (更纱黑体 / 更紗黑體)](https://github.com/be5invis/Sarasa-Gothic)**、**[Fira Code](https://github.com/tonsky/FiraCode)** 或微软家的 **[Cascadia Code](https://github.com/microsoft/cascadia-code)**。
 
 个人 VS Code 字体设置:
 
 - Windows: Cascadia Code
-- deepin: Noto Sans Mono
-- Ubuntu: DejaVu Sans Mono
+- deepin/Ubuntu: Fira Code
