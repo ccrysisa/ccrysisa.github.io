@@ -3,7 +3,7 @@ title: "How to make a OERV General ISO image"
 subtitle:
 date: 2024-10-15T19:22:12+08:00
 slug: 457840c
-draft: false
+draft: true
 # author:
 #   name:
 #   link:

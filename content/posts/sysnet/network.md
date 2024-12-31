@@ -67,14 +67,15 @@ IP 层建立在 **每个 Host 只能知晓其附近 network 的状况而无法�
 
 ## Referenecs
 
+- [Inter-process communication in Linux: Sockets and signals](https://opensource.com/article/19/4/interprocess-communication-linux-networking)
+- [Let\'s code a TCP/IP stack](http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/)
+- [Implementing TCP in Rust](https://www.youtube.com/playlist?list=PLqbS7AVVErFivDY3iKAQk3_VAm8SXwt1X) [YouTube]
 - [小菜学网络](https://fasionchan.com/network/)
 - [NUDT 高级计算机网络实验: 基于UDP的可靠传输](https://luzhixing12345.github.io/netlab/)
 - [可靠 UDP 的实现 (KCP over UDP)](https://sunyunqiang.com/blog/reliable_udp_protocol/) 
 - [基于 UDP 的可靠传输](https://www.bilibili.com/video/BV1di4y1z7Mn) [bilibili]
 - [实现基于 UDP 的网络文件传输器](https://www.bilibili.com/video/BV12P411T78X) [bilibili]
 - [ping 命令也可以用来通信](https://www.bilibili.com/video/BV1Wd4y1b7b4) [bilibili]
-- [Implementing TCP in Rust](https://www.youtube.com/playlist?list=PLqbS7AVVErFivDY3iKAQk3_VAm8SXwt1X) [YouTube]
-- [Let\'s code a TCP/IP stack](http://www.saminiir.com/lets-code-tcp-ip-stack-1-ethernet-arp/)
 
 
 [courseinfo]: https://ocw.nthu.edu.tw/ocw/index.php?page=course&cid=291&

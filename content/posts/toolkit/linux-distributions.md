@@ -157,6 +157,10 @@ deepin 预装的系统库比较陈旧（沿袭自“侏罗纪”时代的 Debian
 $ sudo apt install libstdc++-13-dev
 ```
 
+{{< admonition >}}
+2024/12/25 更新：可以直接安装 `build-essential` 包，里面有包含最新版本的 `libstdc++` 等系统库和 `gcc` 等常用工具。
+{{< /admonition >}}
+
 另外为了获得更好的 LLVM/Clang 产品体验，建议手动安装全家桶（同时将 VS Code 的 clangd 扩展的可执行文件的路径改为相应的安装路径，一般为 `/usr/bin/clangd`，可以通过 `which` 命令查询）:
 
 ```bash
@@ -175,13 +179,15 @@ deepin 没法直接使用 `su` 命令，而是需要使用 `sudo su` 命令来�
 $ sudo apt install gnome-tweaks
 ```
 
-> 如果是笔记本的小尺寸屏幕，在 tweaks 里面字体 (font) 设置处将 font size 缩放至 1.25 即可
+> 如果是笔记本的小尺寸屏幕，在 tweaks 里面字体 (font) 设置处将 font size 缩放至 1.25 即可；或者在显示 (Display) 设置中开启分数缩放，调成至 125% 即可。
 
 参考下面链接安装 fcitx5 输入法框架:
 
 - [Ubuntu 22.04 Chinese (simplified) pinyin input support](https://askubuntu.com/questions/1408873/ubuntu-22-04-chinese-simplified-pinyin-input-support)
 
 安装完成后在 fcitx5 里面搜索安装 Pinyin 即可，然后还得在设置里边安装一下简体中文语言包，要不然没有 CJK 支持汉字渲染很怪异。
+
+Ubuntu 预装的终端主题个人认为 GET 不到美感，可以在 [Goph](https://github.com/Gogh-Co/Gogh) 挑一款自己喜欢的主题，笔者用的是 Tokyo Night 这款主题。
 
 ### fish
 
@@ -261,6 +267,8 @@ $ . ./[run.sh|exit.sh]
 
 {{< /admonition >}}
 
+然后可以进一步地在 `~/.bashrc`、`~/.bash_aliases` 文件中设置快速启动/关闭的命令别名。 
+
 如果你没有关闭 clash 服务就关机，那么重启后可能会出现，输入密码无法进入图形界面重新返回登录界面，这一循环状况。这个是有些 Linux 发行版默认的 shell 是 dash，但位于 `/etc/` 路径下的 clash 服务脚本需要使用 bash 才能运行造成的，有几种方式可以解决该问题。
 
 > 目前只在 deepin 上发现该问题，至于 Ubuntu 并没有影响
@@ -310,6 +318,8 @@ $ sudo service v2raya stop
 $ sudo service v2raya status
 ```
 
+v2raya 若采用全局透明代理方案，则无需设置系统代理和某些软件的代理。
+
 {{< /admonition >}}
 
 ### 时间同步
@@ -337,3 +347,17 @@ RTC in local TZ: yes
 
 - Windows: Cascadia Code
 - deepin/Ubuntu: Fira Code
+
+### 声音增强
+
+Linux 发行版大多都没有安装声音增强工具，使得通过电脑本身的音量设备输出的声音是原生的，音量会比较小，相对于预装音量增强工具的 Windows 而言，可以参考 [这篇文章](https://linuxhint.com/pulseeffects-equalizer-audio-enhancer/) 来开启音量增强。需要注意有线耳机和蓝牙无线耳机则不受影响，因为这些设备的输出取决于这些设备，而不是电脑自身。
+
+### 软件包
+
+除了系统自带的包管理之外，Debian/Ubuntu 可以尝试 Flatpak 包管理器。
+
+如果是自己手动编译安装软件包的二进制，则主要有三种将编译后的二进制文件引入 `PATH` 的方法:
+
+1. 在 `~/.bashrc` / `/etc/bash.bashrc` 或使用的 shell 对应的配置文件中加入形如 `export PATH=$PATH:/path/to/package` 的语法，可以将 `package` 下的所有可执行文件都加入到 `PATH` 中。笔者对于 qemu 采用该设定进行引入。
+2. 直接将编译完成的二进制可执行文件丢进 `/usr/bin` 或 `/usr/local/bin` 之中，这个方法十分简单易用，但如果 `/` 和 `/home` 分开挂载，可能会导致 `/` 空间被占用过多。
+3. 将编译完成的二进制可执行文件通过符号链接 (symbol link) 至 `/usr/bin` 或 `/usr/local/bin`，这个就相当于将第二种方法实际占用空间的分区由 `/` 移动至用户指定的地方。

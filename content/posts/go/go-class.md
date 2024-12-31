@@ -95,7 +95,7 @@ Output of command `go help gopath`:
 如果你是按照上面方法安装配置的 go，可以通过下面这条命令来进行删除:
 
 ```sh
-$ sudo rm -rf /usr/local/bin/go* /path/to/go/ $HOME/.go/ $HOME/.config/go/
+$ sudo rm -rf /usr/local/bin/go* $HOME/.go/ $HOME/.config/go/ /path/to/go/
 ```
 
 ## References

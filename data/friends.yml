@@ -8,6 +8,11 @@
   url: https://thesquareplanet.com/
   description: Hi there! I'm a Principal Engineer at Helsing, author of Rust for Rustaceans, an avid Rust educator, and a general open-source ethusiast. I have a PhD from the Parallel and Distributed Operating Systems group at MIT, where I was supervised by Robert Morris in my work on Noria, which today continues in the form of a start-up I co-founded called ReadySet.
 
+- nickname: Ivon
+  avatar: https://ivonblog.com/img/avatar_ivonhuang.png
+  url: https://ivonblog.com/
+  description: 歡迎來到Ivon的部落格，這裡是分享GNU/Linux情報、自由開源軟體、電腦手機資訊、人文思辨的所在。在這裡你會看到許多自由軟體的實際操作心得，以及將其運用在生活中的各種可能性。
+
 - nickname: Eli Bendersky
   avatar: https://avatars.githubusercontent.com/u/1130906?v=4
   url: https://eli.thegreenplace.net/
@@ -52,8 +57,3 @@
   avatar: https://pbs.twimg.com/profile_images/1753215006697459712/n76_qnTj_400x400.jpg
   url: https://ludwigabap.bearblog.dev/
   description: swe at [redacted] -- currently building large-scale distributed systems
-
-- nickname: Ivon
-  avatar: https://ivonblog.com/img/avatar_ivonhuang.png
-  url: https://ivonblog.com/
-  description: 歡迎來到Ivon的部落格，這裡是分享GNU/Linux情報、自由開源軟體、電腦手機資訊、人文思辨的所在。在這裡你會看到許多自由軟體的實際操作心得，以及將其運用在生活中的各種可能性。

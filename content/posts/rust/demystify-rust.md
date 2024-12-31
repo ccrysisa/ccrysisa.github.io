@@ -62,7 +62,7 @@ repost:
 
 ### 基本类型
 
-在 Rust 使用浮点数 (f32, f64, Nan) 时，受制于浮点数的精度，应当避免对浮点数进行等价性比较。Rust 并没有像 C 语言一样，位运算的取反操作和逻辑运算的否操作采用不同的运算符，而是统一采用 `!` 运算符来表示。Rust 将 C 语言中返回类型为 `void` 的函数细化为两种，一种是返回值无意义的函数，返回类型（和值）为 `()`，并且不占用内存（这个类型在编译时期就处理完毕了，所以不涉及内存占用,它本质上就是个 0 长度的元组，根据排列组合也只有一个值）；另一种是永不返回的函数，称为发散函数，常用于函数体为无限循环的场景（例如嵌入式系统的主函数），返回类型为 `!`。发散函数不会返回任何值，可以用于替代需要任何返回任何值的地方，所以它的一大作用是在 `match` 表达式中用于替代任何类型的值，极大方便了 `panic` 宏的使用。
+在 Rust 使用浮点数 (f32, f64, Nan) 时，受制于浮点数的精度，应当避免对浮点数进行等价性比较。Rust 并没有像 C 语言一样，位运算的取反操作和逻辑运算的否操作采用不同的运算符，而是统一采用 `!` 运算符来表示。Rust 将 C 语言中返回类型为 `void` 的函数细化为两种，一种是返回值无意义的函数，返回类型（和值）为 `()`，并且不占用内存（这个类型在编译时期就处理完毕了，所以不涉及内存占用,它本质上就是个 0 长度的元组，根据排列组合也只有一个值）；另一种是永不返回的函数，称为发散函数，常用于函数体为无限循环的场景（例如嵌入式系统的主函数），返回类型为 `!`。发散函数不会返回任何值，可以用于替代需要任何返回任何值的地方，所以它的一大作用是在 `match` 表达式中用于替代任何类型的值，极大方便了 `panic` 宏的使用。另外 `return` 也可以在 `match` 表达式中替代任意类型的值，原理类似。
 
 Rust 的语句 (statement) 和表达式 (expression) 与 Python 划分类似，毕竟都支持函数式编程风格。语句会执行一些操作但是不会返回一个值（但可能会有副作用），而表达式总是会在求值后返回一个值，同时表达式可以成为语句的一部分。Rust 的函数本质上也是表达式（与函数式编程风格兼容），准确来说是有参数签注的 `{}` 表达式（其它使用 `{}` 表达式的语句也是表达式，例如 `if` 表达式, `for` 表达式，这一点与 C 语言不同，C 语言对应的应该是 `()` 表达式），但可能会有副作用（与 C 语言风格兼容），相比于 C 语言，Rust 赋予 `()` 类型比 C 的 `void` 更强大的表达能力。**TLDR: 有分号可以认为是语句，其他都是表达式。**
 
@@ -77,7 +77,7 @@ let a = let x = 1 + 2;; // compile error
 
 Rust 的函数名和变量名采用蛇形命名法 (snake case)，例如 `fn add_two(x: i32, y: i32) -> i32`。
 
-## 所有权和借用
+### 所有权和借用
 
 Rust 的所有权系统为其提供了高性能的内存安全方案，而不是垃圾回收机制 (GC) 这种性能稍有欠缺的内存安全方案。这是因为所有权机制检查只发生在编译期，因此对于程序运行期，不会有任何性能上的损失。
 
@@ -124,22 +124,51 @@ let y = x; // copy x to y, both x and y can be accessed!
 
 自定义的结构体类型默认是上面的第一种类型（无论你的成员是否有引用其它数据），可以使用 `Copy` Trait 来将其行为变为第二种类型。元组 (tuple) 类型则默认是上面的第二种类型，除非元组成员有包含第一种类型，此时则会转变为第一种类型的行为。可变引用虽然没有所有权，但因为同时只能存在一个，所以行为与第一种类型一致。
 
+**Rust 的默认行为是 Move，而 C++ 默认行为则是 Copy。**
+
 {{< /admonition >}}
 
 借用和引用（包括不可变引用和可变引用）针对的是上面的第一种类型，因为其他两种类型默认行的是拷贝而不是转移所有权，转移所有权的代价太大了需要一种轻量级的替代方案。Rust 的内存安全的一个方面体现在，它不会编译通过存在数据竞争的代码，即一个作用域存在多个可变引用或同时存在可变引用和不可变引用的代码，这种代码是不符合 Rust 的语法规范的（因为这种代码没有同步机制来防止未定义行为）。Rust 的编译器优化后 ([Non-Lexical Lifetimes (NLL)](https://blog.rust-lang.org/2022/08/05/nll-by-default.html))，引用作用域的结束位置从花括号（与变量相同）变成引用最后一次被使用的位置，这极大便利了引用在程序中的使用。引用与指针不同，它没有空的状态，必须总是有效的（索引了某个东西才能叫引用嘛）。
 
 `ref` 与 `&` 类似，可以用来获取一个值的引用，但是它们的用法有所不同，e.g. `let ref r = x;` 等价于 `let r = &x`，可变引用的话加一个 `mut` 修饰即可。`ref` 常用于模式匹配中获取结构体的特定成员的引用。
 
+## Tips
+
+stdout 中的非换行输出会被暂时存放于缓冲区（例如 `print!`），这样处理一般没有问题，但如果采用这种缓冲策略的输出语句后，接的是等待用户输入，然后输出用户输入内容并换行（此时会将输出缓冲区的内容全部打印出来，例如 `println!`），会导致输出与与其不符。尝试下面两段代码:
+
+```rs
+print!("> ");
+for line in io::stdin().lock().lines() {
+    println!("{}", line.unwrap());
+    print!("> ");
+}
+```
+
+```rs
+print!("> ");
+let _ = io::stdout().flush();
+for line in io::stdin().lock().lines() {
+    println!("{}", line.unwrap());
+    print!("> ");
+    let _ = io::stdout().flush();
+}
+```
+
+可见性是针对外部的模块访问而言的，对于同一模块不需要过多考虑可见性。
+
 ## References
 
 - [Rust 语言圣经 (Rust Course)](https://course.rs/)
-- bilibili: [Golden Rust](https://space.bilibili.com/504069720/channel/collectiondetail?sid=3642485)
+- bilibili: [The Golden Rust](https://space.bilibili.com/504069720/channel/collectiondetail?sid=3642485)
 - [Programming Rust, 2nd Edition](https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/)
-- Cliffle: [Learn Rust the Dangerous Way](https://cliffle.com/p/dangerust/)
+- [pretzelhammer's Rust blog](https://github.com/pretzelhammer/rust-blog)
+- [Learn Rust the Dangerous Way](https://cliffle.com/p/dangerust/)
 - [The Rustonomicon](https://doc.rust-lang.org/nomicon/)
 - [CodeCrafters](https://app.codecrafters.io/)
 - [Rust Playground](https://play.rust-lang.org/)
 - [Command line apps in Rust](https://rust-cli.github.io/book/index.html)
+- [Achieving warp speed with Rust](https://gist.github.com/jFransham/369a86eff00e5f280ed25121454acec1)
+- [The Rust Performance Book](https://nnethercote.github.io/perf-book/introduction.html)
 
 ---
 
