@@ -2,7 +2,7 @@
 title: "你所不知道的 C 语言: 指针篇"
 subtitle:
 date: 2024-01-14T22:41:38+08:00
-# draft: true
+draft: false
 # author:
 #   name:
 #   link:
@@ -40,10 +40,13 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-> *「指针」 扮演 「记忆体」 和 「物件」 之间的桥梁*
+指针 扮演着 内存 (Memory) 和 物件 (Object) 之间的桥梁
 
-- {{< link href="https://hackmd.io/@sysprog/c-pointer" content="原文地址" external-icon=true >}}   
 <!--more-->
+
+## 基本概念
+
+Pointers --- variables store address of another variable
 
 ## 前言杂谈
 
@@ -385,3 +388,8 @@ C99 6.3.2.1 footnote
 > The name “lvalue” comes originally from the assignment expression E1 = E2, in which the left operand E1 is required to be a (modifiable) lvalue. It is perhaps better considered as representing an object “locator value”. What is sometimes called “rvalue” is in this International Standard described as the “value of an expression”. An obvious example of an lvalue is an identifier of an object. As a further example, if E is a unary expression that is a pointer to an object, *E is an lvalue that designates the object to which E points.
 
 即在 C 语言中 lvalue 是必须能在内存 (memory) 中可以定位 (locator) 的东西，因为可以定位 (locator) 所以才可以在表达式左边从而修改值。想像一下，在 C 语言中修改一个常数的值显然是不可能的，因为常数无法在内存 (memory) 定位 (locator) 所以常数在 C 语言中不是 lvalue。C 语言中除了 lvalue 之外的 value 都是 rvalue (这与 C++ 有些不同，C++ 的 lvalue 和 rvalue 的定义请参考 C++ 的规格书)。
+
+## References
+
+- {{< link href="https://hackmd.io/@sysprog/c-pointer" content="你所不知道的 C 语言: 指针篇" external-icon=true >}}   
+- {{< link href="https://www.bilibili.com/video/BV1bo4y1Z7xf" content="4小时彻底掌握C指针" external-icon=true >}}   

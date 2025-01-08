@@ -254,6 +254,8 @@ $ R
 > install.packages("ggplot2")
 ```
 
+> 通过上面方式安装的 R 语言包，如果系统路径的存储库没有权限写入，会将包安装到用户下的 `$HOME/R/` 路径。
+
 - [Are there Unix-like binaries for R?](https://cran.r-project.org/doc/FAQ/R-FAQ.html#Are-there-Unix_002dlike-binaries-for-R_003f)
 - https://ggplot2.tidyverse.org/
 

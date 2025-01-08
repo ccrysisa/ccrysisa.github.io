@@ -494,6 +494,8 @@ Tsoding 上传的 {{< link href="https://www.youtube.com/playlist?list=PLpM-Dvs8
 events:
   - timestamp: Day 1
     content: 实现一个基本的 [Stack-based Virtual Machine](https://en.wikipedia.org/wiki/Stack_machine) 支持汇编和解释执行程序
+  - timestamp: Day 2
+    content: 实现反汇编器、支持符号跳转以及使用 [NaN-boxing](https://en.wikipedia.org/wiki/NaN#Canonical_NaN) 来支持动态类型
 {{< /timeline >}}
 
 ### Day 1
@@ -528,7 +530,9 @@ C 语言的字符串打印表达能力也挺强大的:
 
 Makefile 并不推荐让 `make run` 接受参数:
 
-- Stack Overflow: [Passing arguments to "make run"](https://stackoverflow.com/questions/2214575/passing-arguments-to-make-run)
+Stack Overflow:
+- [Passing arguments to "make run"](https://stackoverflow.com/questions/2214575/passing-arguments-to-make-run)
+- [No GCC warning for function with declaration different from definition](https://stackoverflow.com/questions/49624771/no-gcc-warning-for-function-with-declaration-different-from-definition)
 
 clangd 要跳转到函数定义处需要 compile_commands.json 文件，CMake 可以直接生成这个文件，Makefile 的话可以通过 bear 这个工具来生成，操作方法如下:
 
@@ -551,4 +555,40 @@ Diagnostics:
 
 Wikipedia: [Cohesion (computer science)](https://en.wikipedia.org/wiki/Cohesion_(computer_science))
 
-实现符号跳转，必须要使用 Two pass，因为要跳转到符号也有可能在跳转指令之后。
+实现符号跳转，必须要使用 Two pass，因为符号的声明也有可能在跳转指令之后。同时支持符号跳转和地址跳转，可以通过判断跳转指令的操作数是否为数字来区分。
+
+Rust 的借用检查 (Borrow Check) 机制不会允许形如以下的未定义行为 (Undefined Behavior, a.k.a. UB) 出现:
+
+```c
+Inst lim_translate_line(const Lim *lim, String_View line)
+{
+    ...
+}
+
+size_t lim_translate_source(Lim *lim, String_View source)
+{
+    ...
+    lim->program[lim->program_size++] = lim_translate_line(lim, line);
+    ...
+}
+```
+
+因为不能同时存在可变引用和不可变引用。
+
+因为浮点数的 NaN 的形式如下:
+
+```
+s111 1111 1xxx xxxx xxxx xxxx xxxx xxxx
+```
+
+即 fraction 部分不重要 / 无关，所以可以将一些信息例如类型存储在这一部分，这就是所谓的 **NaN Boxing** 技术。动态语言经常使用这个技术，例如 Python、JavaScript，将类型信息存储在 NaN 的 fraction 部分以此来表示动态类型。例如在 64 位浮点数 `double` 中，fraction 部分共有 52 位，使用其中的 4 位来表示类型，剩下的 48 位可以存储一个指针，这样就实现了动态类型。使用 48 位表示指针利用了 x86_64 下虚拟地址空间的一个技巧:
+
+- Wikipedia: [x86-64](https://en.wikipedia.org/wiki/X86-64)
+
+> The AMD64 architecture defines a 64-bit virtual address format, of which the low-order 48 bits are used in current implementations.
+
+JavaScript V8 也使用到了这个技巧，非常的实用。
+
+C 语言的 `inline` 关键字的作用是由编译器 implementation define 的:
+
+- Stack Overflow: [https://stackoverflow.com/questions/31108159/what-is-the-use-of-the-inline-keyword-in-c](https://stackoverflow.com/questions/31108159/what-is-the-use-of-the-inline-keyword-in-c)
