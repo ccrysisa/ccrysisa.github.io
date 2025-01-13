@@ -198,7 +198,23 @@ exec fish
 
 ## 效果展示
 
-{{< image src="/images/tools/ubuntu-22.04-wsl2.png" caption="Ubuntu 22.04" >}}
+{{< image src="/images/tools/ubuntu-22.04-wsl2.png" caption="Ubuntu 22.04 LTS" >}}
 
 {{< image src="/images/tools/ArchWSL.png" caption="Arch Linux" >}}
+
+{{< image src="/images/tools/LinuxmintWSL2.png" caption="Linux Mint" >}}
+
+## FAQ
+
+Windows 11 专业版默认开启了 GPU 硬件加速计划，这有利于游戏娱乐的性能提升，VS Code 也默认开启了 GPU 加速，但仅对高性能显卡友好，集显或轻量级独显在使用时屏幕会掉帧，参考 [这篇博客](https://softwaremagic.lushan.tech/Software/Tools/IDE/VSCode/) 解决。
+
+```sh
+# In VS Code, type `Ctrl + Shift + P`
+# Then search `Preferences: Configure Runtime Arguments`
+# In the open file, add this line
+disable-hardware-acceleration": true
+# Finally, restart VS Code
+```
+
+> 也可以在计算机设置中关闭 GPU 硬件加速计划
 
