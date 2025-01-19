@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Go Class"
+title: "Go Class"
 subtitle:
 date: 2024-12-22T23:23:53+08:00
 slug: 60f4958
@@ -53,27 +53,35 @@ repost:
 
 ## Hello world!
 
+### Install
+
 Installation: [Download and install](https://go.dev/doc/install)
 
 ```sh
-# Select the version for your computer's operating system
-# Then remove any previous go and create a fresh Go tree in `/usr/local/`
-$ tar -zxvf /path/to/go<version>.<os>-<arch>.tar.gz
-# Create symbol links of programs (go and gofmt) in `go/bin/`
-$ sudo ln -s /path/to/go/bin/* /usr/local/bin/
+# Uninstall previous go
+$ rm -rf /usr/local/go
+
+# Install go
+$ tar -C /usr/local -xzf go<version>.<os>-<arch>.tar.gz
+
+# Add path in config of shell e.g. ~/.bashrc or /etc/bash.bashrc
+export PATH=$PATH:/usr/local/go/bin
+
 # Test go version
 $ go version
 go version go<version> <os>/<Arch>
 ```
 
-接下来运用 `go env` 命令找到那些设定在 $HOME 目录下的环境变量，将其修改为指定地址:
+### Configuration
+
+接下来运用 `go env` 命令找到那些设定在 `$HOME` 目录下的环境变量，将其修改为指定地址:
 
 ```sh
 $ go env | grep "$HOME/go"
-GOMODCACHE='<$HOME>/go/pkg/mod'
-GOPATH='<$HOME>/go'
-$ go env -w GOMODCACHE='<$HOME>/.go/pkg/mod'
-$ go env -w GOPATH='<$HOME>/.go'
+GOMODCACHE='$HOME/go/pkg/mod'
+GOPATH='$HOME/go'
+$ go env -w GOMODCACHE='$HOME/.go/pkg/mod'
+$ go env -w GOPATH='$HOME/.go'
 ```
 
 使用 `$HOME/.go` 使 go 包管理的内容像 cargo 指定的路径 `$HOME/.cargo` 一般默认在 HOME 目录不显示。然后设置 `GO111MODULE` 环境变量为 `on`，启用模块功能后 `go install` 命令使用的也是模块进行下载安装。
@@ -92,17 +100,30 @@ Output of command `go help gopath`:
 
 > If the `GOBIN` environment variable is set, commands are installed to the directory it names instead of `DIR/bin`. `GOBIN` must be an absolute path.
 
+VS Code 的 Go 插件需要 `gopls` 包，当然 VS Code 可以自动下载，但是和 `clangd` 类似，自己下载比较好:
+
+```sh
+$ go install golang.org/x/tools/gopls@latest
+$ ln -l $GOPATH/bin/gopls /usr/local/go/bin/
+```
+
+### Upgrade
+
+升级 go 版本的话只需下载最新的压缩包，然后根据 Install 过程更新一下二进制包即可。
+
+### Uninstall
+
 如果你是按照上面方法安装配置的 go，可以通过下面这条命令来进行删除:
 
 ```sh
-$ sudo rm -rf /usr/local/bin/go* $HOME/.go/ $HOME/.config/go/ /path/to/go/
+$ sudo rm -rf /usr/local/go/ $HOME/.go/ $HOME/.config/go/ $HOME/.cache/go-build
 ```
 
 ## References
 
 - Matt Holiday\'s [Go Class](https://www.youtube.com/playlist?list=PLoILbKo9rG3skRCj37Kn5Zj803hhiuRK6)
 - Go [Documentation](https://go.dev/doc/)
-- Go [Playground](https://go.dev/play/#)
 - Go [Packages](https://pkg.go.dev/)
 - Go [Environment variables](https://pkg.go.dev/cmd/go#hdr-Environment_variables)
 - Stack Overflow: [Where are the golang environment variables stored?](https://stackoverflow.com/questions/40825613/where-are-the-golang-environment-variables-stored)
+- [AI Icon Generator](https://perchance.org/ai-icon-generator)

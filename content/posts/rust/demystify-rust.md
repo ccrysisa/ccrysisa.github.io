@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Rust Language Demystified"
+title: "Rust Language Demystified"
 subtitle:
 date: 2024-04-05T17:52:13+08:00
 # draft: true
