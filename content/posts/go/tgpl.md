@@ -769,7 +769,9 @@ Visit [the Go home page](https://go.dev/) for more.
 
 {{< /admonition >}}
 
-## 实作案例: Go + Fyne => Markdown Editor
+## 实作案例: Go + Fyne = Markdown Editor
+
+bilibili: InkkaPlum 频道制作的 [Go 教程](https://space.bilibili.com/290859233/channel/seriesdetail?sid=4242123) 系列影片
 
 `go mod init` 在创建项目时类似于 `cargo init`，而 `go get` 类似于在 cargo 项目的 `Cargo.toml` 中加入相应的依赖；可以将 `go.mod` 文件认为功能类似于 `Cargo.toml`，`go.sum` 文件功能类似于 `Cargo.lock`。`go mod tidy` 用于更新项目 (模块) 的依赖情况，使用该命令后，VS Code 的 Go 插件需要一段时间才能更新完成代码分析的缓存，不再报错。
 
@@ -794,5 +796,6 @@ YouTube:  Nic Jackson 制作的 [Building Microservices with Go](https://www.you
 - [A tour of Go](https://go.dev/tour/list)
 - InkkaPlum 频道: [Go 教程](https://space.bilibili.com/290859233/channel/seriesdetail?sid=4242123)
 - Nic Jackson\'s [Building Microservices with Go](https://www.youtube.com/playlist?list=PLmD8u-IFdreyh6EUfevBcbiuCKzFk0EW_): 一个不错的 Go 练习项目
+- [极客兔兔](https://geektutu.com/)
 - [Learn Go with Tests](https://quii.gitbook.io/learn-go-with-tests)
 - [Go by Example](https://gobyexample.com/)

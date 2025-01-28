@@ -82,6 +82,9 @@ GOMODCACHE='$HOME/go/pkg/mod'
 GOPATH='$HOME/go'
 $ go env -w GOMODCACHE='$HOME/.go/pkg/mod'
 $ go env -w GOPATH='$HOME/.go'
+
+# Add GOPATH/bin in config of shell e.g. ~/.bashrc or /etc/bash.bashrc
+export PATH=$GOPATH/bin
 ```
 
 使用 `$HOME/.go` 使 go 包管理的内容像 cargo 指定的路径 `$HOME/.cargo` 一般默认在 HOME 目录不显示。然后设置 `GO111MODULE` 环境变量为 `on`，启用模块功能后 `go install` 命令使用的也是模块进行下载安装。

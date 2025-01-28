@@ -1,5 +1,5 @@
 ---
-title: "Rust Language Demystified"
+title: "Rust Demystified"
 subtitle:
 date: 2024-04-05T17:52:13+08:00
 # draft: true
