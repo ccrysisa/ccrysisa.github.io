@@ -1705,10 +1705,6 @@ pub fn some_name(input: TokenStream) -> TokenStream {
 
 ## References
 
-- [The Rust Programming Language](https://doc.rust-lang.org/book/) / [Brown University Version](https://rust-book.cs.brown.edu/)
-- [Rust 语言圣经](https://course.rs/about-book.html) (Rust Course) / [Rust 练习实践](https://practice.rs/) (Rust By Practice)
+- [The Rust Programming Language](https://doc.rust-lang.org/book/) ([Brown University Version](https://rust-book.cs.brown.edu/))
 - [How to Learn Rust in 2024: A Complete Beginner\'s Guide to Mastering Rust Programming](https://blog.jetbrains.com/rust/2024/09/20/how-to-learn-rust/)
-- Rust 编程视频教程: [基础](https://www.bilibili.com/video/BV1xJ411B79h/)、[进阶](https://www.bilibili.com/video/BV1FJ411Y71o/)
 - Visualizing memory layout of Rust\'s data types: [录影](https://www.youtube.com/watch?v=7_o-YRxf_cc&t=0s) / [中文翻译](https://www.bilibili.com/video/BV1KT4y167f1)
-- [pretzelhammer\'s Rust blog](https://github.com/pretzelhammer/rust-blog)
-- [Learn Rust the Dangerous Way](https://cliffle.com/p/dangerust/)
