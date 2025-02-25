@@ -9,7 +9,7 @@ hasCJKLanguage = true
 # 更改使用 Hugo 构建网站时使用的默认主题
 theme = "FixIt"
 # default amount of posts in each pages
-paginate = 12
+pagination.pagerSize = 12
 # copyright description used only for seo schema
 copyright = ""
 # whether to use robots.txt
@@ -229,7 +229,7 @@ beian = 0
 #  Section（所有文章）页面配置
 [params.section]
 # section 页面每页显示文章数量
-paginate = 20
+pagination.pagerSize = 20
 # 日期格式（月和日）
 dateFormat = "01-02"
 # RSS 文章数目
@@ -244,7 +244,7 @@ maxCount = 10
 #  List（目录或标签）页面配置
 [params.list]
 # list 页面每页显示文章数量
-paginate = 20
+pagination.pagerSize = 20
 # 日期格式（月和日）
 dateFormat = "01-02"
 # RSS 文章数目
@@ -286,7 +286,7 @@ disclaimer = ""
 [params.home.posts]
 enable = true
 # 主页每页显示文章数量
-paginate = 6
+pagination.pagerSize = 6
 
 #  作者的社交信息设置
 [params.social]
