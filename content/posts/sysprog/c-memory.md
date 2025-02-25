@@ -291,53 +291,49 @@ typedef struct node {
 ## 实作案例: GC in C
 
 YouTube: [GC in C](https://www.youtube.com/playlist?list=PLpM-Dvs8t0VYuYxRxjfnkdHvosHH8faqc)
-- [Writing My Own Malloc in C](https://www.youtube.com/watch?v=sZ8GJ1TiMdk)
-- [Writing Garbage Collector in C](https://www.youtube.com/watch?v=2JgEKEd3tw8)
 
-### memory layout
+### Writing My Own Malloc in C
 
 {{< image src="/images/c/heap.drawio.png" >}}
 
-### alloc & free
+`heap_alloc` 的作用是收集在 heap 中 allocated 的块能索引到的块，如果在 collect 后 heap 存在不能被索引到的块，则对这些块进行 free 操作；但是这个 GC 操作也依赖于 free 操作，因为没法对 stack 进行 collect 操作而 stack 的变量可以索引 heap 的块，即 stack 可以索引 heap 的块，heap 的块也可以索引其它 heap 的块，`heap_collect` 针对的是后者，而被 stack 索引的 heap 的块必须通过 `heap_free` 手动进行释放 (`heap_collect` 防止了因为 `heap_free` 而导致的 [Dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer))。
 
 如果允许分配 0 字节的内存空间，那么会造成分配的不同内存块的起始地址一样的情形，实作时应当避免这种情形:
 
-```bash
+```sh
 Allocated Chunks (100):
   start: 0x648cadc3c040, size: 0
   start: 0x648cadc3c040, size: 1
   ...
 ```
 
-- man 3 malloc
+[malloc(3) — Linux manual page](https://man7.org/linux/man-pages/man3/free.3.html):
 
-> If size is 0, then malloc() returns either NULL, or a unique pointer value that can  later be successfully passed to free().
+> If size is 0, then `malloc()` returns either `NULL`, or a unique pointer value that can later be successfully passed to free().
 
-### function name
-
-- C99/C11 6.4.2.2
+C99/C11 6.4.2.2:
 
 > The identifier `__func__` shall be implicitly declared by the translator as if, immediately following the opening brace of each function definition
 
-### pointer substraction
+[bsearch(3) — Linux manual page](https://man7.org/linux/man-pages/man3/bsearch.3.html):
+
+> The `bsearch()` function returns a pointer to a matching member of the array, or `NULL` if no match is found.  If there are multiple elements that match the key, the element returned is unspecified.
 
 影片最后 `chunk_list_find` 没有起到预期的作用，但这个和 `bsearch` 无关，原因为影片博主未掌握指针减法的定义，在最后进行了错误的运算
 
-- C11 6.5.6
+C11 6.5.6:
 
 > When two pointers are subtracted, both shall point to elements of the same array object, or one past the last element of the array object; the result is the difference of the subscripts of the two array elements. 
 
 所以只需要计算 `result - list->chunks` 即可，无需再除以 `list->chunks[0]`
 
-### data alignment
+### Writing Garbage Collector in C
 
 - [ ] IBM: [Data alignment: Straighten up and fly right](https://developer.ibm.com/articles/pa-dalign/)
 
 ### References
 
-- Wikipedia: [XOR linked list](https://en.wikipedia.org/wiki/XOR_linked_list)
-- Wikipedia: [Binary search](https://en.wikipedia.org/wiki/Binary_search)
-- Linux manual page: [memmove(3)](https://man7.org/linux/man-pages/man3/memmove.3.html)
-- Linux manual page: [bsearch(3)](https://www.man7.org/linux/man-pages/man3/bsearch.3.html)
-- GitHub: [nothings/stb](https://github.com/nothings/stb)
-- GitHub: [gcc-mirror/gcc](https://github.com/gcc-mirror/gcc)
+- Wikipedia: [XOR linked list](https://en.wikipedia.org/wiki/XOR_linked_list), [Binary search](https://en.wikipedia.org/wiki/Binary_search)
+- Stack Overflow: [Is there any difference between using char (plain char) or signed/unsigned char to store characters in C?](https://stackoverflow.com/questions/74766608/is-there-any-difference-between-using-char-plain-char-or-signed-unsigned-char)
+- Linux manual page: [memmove(3)](https://man7.org/linux/man-pages/man3/memmove.3.html), [bsearch(3)](https://www.man7.org/linux/man-pages/man3/bsearch.3.html)
+- GitHub: [nothings/stb](https://github.com/nothings/stb), [gcc-mirror/gcc](https://github.com/gcc-mirror/gcc)
