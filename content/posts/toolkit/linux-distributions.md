@@ -17,6 +17,7 @@ tags:
   - Linux
   - deepin
   - Ubuntu
+  - openSUSE
 categories:
   - Toolkit
 hiddenFromHomePage: false
@@ -76,29 +77,29 @@ Installed package `tlrc v1.9.3` (executable `tldr`)
 
 ### Git & GitHub
 
-git:
+Git:
 
-```bash
-$ git config user.name <username>
-$ git config user.email <useremail>
-# optional
-$ git config core,editor vim
-$ git config merge.tool vimdiff
-$ git config color.ui true
-$ git config alias.st status
-$ git config alias.ck checkout
-$ git config alias.rst "reset HEAD"
-$ git config init.defaultbranch main
-$ git config pull.rebase=false
+```sh
+$ git config --list
+user.name=<username>
+user.email=<email>
+core.editor=vim
+merge.tool=vimdiff
+color.ui=true
+alias.st=status
+alias.ck=checkout
+alias.rst=reset HEAD
+init.defaultbranch=main
+pull.rebase=false
 ```
 
-github ssh key:
+GitHub ssh key:
 
-```bash
+```sh
 $ ssh-keygen -t rsa -C "your_email@example.com"
 ...
 # enter 3 times to generate ssh key
-$ eval `ssh-agent -s`
+$ eval ssh-agent -s
 $ ssh-add ~/.ssh/id_rsa
 $ cat ~/.ssh/id_rsa.pub
 ...
@@ -110,7 +111,7 @@ Hi [username]! You've successfully authenticated, but GitHub does not provide sh
 
 ### Vim & VS Code
 
-```bash {title="~/.vimrc"}
+```sh {title="~/.vimrc"}
 syntax on
 set relativenumber
 set number
