@@ -134,10 +134,11 @@ map <F4> : set nu!<BAR>set nonu?<CR>
 - **Vim**
 - **VSCode Great Icons**
 - **Git History**
+- **clangd**: C/C++ 语法服务 (LSP)
+- **rust-analyzer**: Rust 语法服务 (LSP)
+- **Go**: Go 语法服务 (LSP)
 - **Even Better TOML**: toml 语法高亮
-- **clangd**: C/C++ 语法服务
 - **Native Debug**: 调试 C/C++
-- **rust-analyzer**: Rust 语法服务
 - **CodeLLDB**: 调试 C++/Rust
 - **Dependi**: 管理包依赖关系
 - **Error Lens**: 更强大的错误提示

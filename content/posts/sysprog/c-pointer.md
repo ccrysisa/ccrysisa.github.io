@@ -392,4 +392,4 @@ C99 6.3.2.1 footnote
 ## References
 
 - {{< link href="https://hackmd.io/@sysprog/c-pointer" content="你所不知道的 C 语言: 指针篇" external-icon=true >}}   
-- {{< link href="https://www.bilibili.com/video/BV1bo4y1Z7xf" content="4小时彻底掌握C指针" external-icon=true >}}   
+- {{< link href="https://www.bilibili.com/video/BV1bo4y1Z7xf" content="4 小时彻底掌握 C 指针" external-icon=true >}}   

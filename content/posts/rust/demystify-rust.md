@@ -1,5 +1,5 @@
 ---
-title: "Tutorial: Rust Language Demystified"
+title: "Rust Demystified"
 subtitle:
 date: 2024-04-05T17:52:13+08:00
 # draft: true
@@ -81,7 +81,7 @@ Rust 的函数名和变量名采用蛇形命名法 (snake case)，例如 `fn add
 
 Rust 的所有权系统为其提供了高性能的内存安全方案，而不是垃圾回收机制 (GC) 这种性能稍有欠缺的内存安全方案。这是因为所有权机制检查只发生在编译期，因此对于程序运行期，不会有任何性能上的损失。
 
-栈 (stack) 与堆 (heap) 灵活性的差异在与：栈的操作方式过于单一，只能后进先出，不能灵活使用空闲空间；而堆支持任意访问 (random access)，所以可以灵活使用空闲空间，但也导致堆是缺乏组织的结构，而 Rust 的所有权机制就是对这一缺乏组织的结构采用类似栈的方式（作用域判定）进行检查管理。但堆的数据需要被栈上数据所引用才能被程序所使用（需要先索引才能使用），因而让栈上的数据都被所有权系统认为是堆的索引，导致了性能问题，从而引出了 `Copy` 这个 Trait。
+栈 (stack) 与堆 (heap) 灵活性的差异在与：栈的操作方式过于单一，只能后进先出，不能灵活使用空闲空间；而堆支持任意访问 (random access)，所以可以灵活使用空闲空间，但也导致堆是缺乏组织的结构，而 Rust 的所有权机制就是对这一缺乏组织的结构采用类似栈的方式（作用域判定）进行检查管理。但堆的数据需要被栈上数据所引用才能被程序所使用（需要先索引才能使用），因而让栈上的数据都被所有权系统认为是堆的索引，导致了性能问题，从而引出了 `Copy` 这个 Trait。另外，程序员只能直接操作栈上的内存，对于堆上的内存是通过栈上变量来间接操作的。
 
 ```rs
 struct StringView {
@@ -132,6 +132,27 @@ let y = x; // copy x to y, both x and y can be accessed!
 
 `ref` 与 `&` 类似，可以用来获取一个值的引用，但是它们的用法有所不同，e.g. `let ref r = x;` 等价于 `let r = &x`，可变引用的话加一个 `mut` 修饰即可。`ref` 常用于模式匹配中获取结构体的特定成员的引用。
 
+### 复合类型
+
+编程语言只使用基本类型的局限性：无法从更高的抽象层次去简化代码，但引入复合类型加重的只是编译器的负担（和方便人类程序员在抽象层次组织代码），即在编译时期处理复合类型及其相关操作，而在执行时期的处理器看来，只使用基本类型的程序和使用复合类型的程序，二者编译后的二进制代码并无明显差异。
+
+下图的 `world` 表示的即为切片的内存结构（拥有地址和长度两个字段，比 `Vector` 和 `String` 这种容器少一个 `capacity` 字段）:
+
+{{< image src="https://pic1.zhimg.com/80/v2-69da917741b2c610732d8526a9cc86f5_1440w.jpg" >}}
+
+个人认为切片 (slice) 相当于编译时期检查更加宽松的数组 (array)，例如切片类型不包括长度，允许接受任意长度的切片，但数组的类型包括长度，这使得其在编译时期检查更加严格，因此切片更加通用。
+
+Rust 中的字符是 Unicode 类型，因此每个字符占据 4 个字节内存空间，但是在字符串（Rust 的字符串类型主要指 `&str` 和 `String`）中不一样，字符串是 UTF-8 编码，也就是字符串中的字符所占的字节数是变化的(1 - 4)，但无论字符串中的字符占字节数多少，字符串的底层的数据存储格式实际上都是 `[u8]`，即字节数组 (Byte array)。这个特性也导致了 Rust 不允许去索引字符串：因为索引操作，我们总是期望它的性能表现是 $\Omicron(1)$，然而对于字符串类型来说，无法保证这一点，因为 Rust 可能需要从 0 开始去遍历字符串来定位合法的字符。
+
+如果字符串包含双引号，可以使用 raw string (该字符串默认不开启转义功能) 并在开头和结尾加 `#`；如果字符串中包含 # 号，可以在开头和结尾加多个 # 号，最多加255个，只需保证与字符串中连续 # 号的个数不超过开头和结尾的 # 号的个数即可。
+
+```rs
+let quotes = r#"And then I said: "There is no escape!""#;
+let longer_delimiter = r###"A string with "# in it. And even "##!"###;
+```
+
+元组 (Tuple) 中是多个不同类型的元素的组合，数组 (Array) 是多个相同类型元素的组合，这两复合类型的抽象层次都比较低，因为不具备自定义名称的能力，所以基本不会给它们定义并实现方法，而结构体 (Struct) 因为具备自定义名称的能力，它的抽象层次就相对比较高了。形如 `let (x, y, z);` 这种语句 (statemen) 会被编译器特殊对待，会绑定 `x`, `y`, `z` 这三个变量而不是绑定一个元组变量。
+
 ## Tips
 
 stdout 中的非换行输出会被暂时存放于缓冲区（例如 `print!`），这样处理一般没有问题，但如果采用这种缓冲策略的输出语句后，接的是等待用户输入，然后输出用户输入内容并换行（此时会将输出缓冲区的内容全部打印出来，例如 `println!`），会导致输出与与其不符。尝试下面两段代码:
@@ -156,12 +177,14 @@ for line in io::stdin().lock().lines() {
 
 可见性是针对外部的模块访问而言的，对于同一模块不需要过多考虑可见性。
 
+`#![allow(unused_variables)]` 属性标记会告诉编译器忽略未使用的变量，不要抛出 warning 警告。
+
 ## References
 
 - [Rust 语言圣经 (Rust Course)](https://course.rs/)
 - bilibili: [The Golden Rust](https://space.bilibili.com/504069720/channel/collectiondetail?sid=3642485)
 - [Programming Rust, 2nd Edition](https://www.oreilly.com/library/view/programming-rust-2nd/9781492052586/)
-- [pretzelhammer's Rust blog](https://github.com/pretzelhammer/rust-blog)
+- [pretzelhammer\'s Rust blog](https://github.com/pretzelhammer/rust-blog)
 - [Learn Rust the Dangerous Way](https://cliffle.com/p/dangerust/)
 - [The Rustonomicon](https://doc.rust-lang.org/nomicon/)
 - [CodeCrafters](https://app.codecrafters.io/)

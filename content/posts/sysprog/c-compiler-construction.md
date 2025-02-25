@@ -486,7 +486,7 @@ sp = (int *)((int)stack + poolsize);
 
 执行完第 4 行的 `PUSH` 指令后，会接着执行第 3 行的 `EXIT` 指令，因为 (`pc` 寄存器在虚拟机运行时是递增的)，此时虚拟机将 `main` 函数的返回值作为本进程的返回值进行返回，并结束进程。
 
-## 实作案例: Writing Virtual Machine for Lisp in C
+## 实作案例: Virtual Machine in C
 
 Tsoding 上传的 {{< link href="https://www.youtube.com/playlist?list=PLpM-Dvs8t0VY73ytTCQqgvgCWttV3m8LM" content="Virtual Machine in C" external-icon=true >}}
 
@@ -495,7 +495,7 @@ events:
   - timestamp: Day 1
     content: 实现一个基本的 [Stack-based Virtual Machine](https://en.wikipedia.org/wiki/Stack_machine) 支持汇编和解释执行程序
   - timestamp: Day 2
-    content: 实现反汇编器、支持符号跳转以及使用 [NaN-boxing](https://en.wikipedia.org/wiki/NaN#Canonical_NaN) 来支持动态类型
+    content: 实现反汇编器、支持符号跳转以及 [NaN-boxing](https://en.wikipedia.org/wiki/NaN#Canonical_NaN) 以便后续支持动态类型
 {{< /timeline >}}
 
 ### Day 1
@@ -592,3 +592,7 @@ JavaScript V8 也使用到了这个技巧，非常的实用。
 C 语言的 `inline` 关键字的作用是由编译器 implementation define 的:
 
 - Stack Overflow: [https://stackoverflow.com/questions/31108159/what-is-the-use-of-the-inline-keyword-in-c](https://stackoverflow.com/questions/31108159/what-is-the-use-of-the-inline-keyword-in-c)
+
+### Day 3
+
+不需要 NaN boxing 这么麻烦的做法，在 C 语言直接使用 `union` 即可实现同一字段不同解释来 XD
