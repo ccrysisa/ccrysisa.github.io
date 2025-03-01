@@ -1,5 +1,5 @@
 ---
-title: "deepin 20.9 KVM 安装和管理"
+title: "Linux 安装和使用 QEMU/KVM"
 subtitle:
 date: 2024-03-28T12:21:48+08:00
 # draft: true
@@ -15,10 +15,8 @@ comment: false
 weight: 0
 tags:
   - Linux
-  - deepin
   - KVM
   - QEMU
-  - openEuler
 categories:
   - Toolkit
 hiddenFromHomePage: false
@@ -42,30 +40,42 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-本篇主要介绍在 deepin20.9 操作系统平台下，使用 KVM 虚拟化技术来创建和安装 Linux 发行版，并以创建安装 openEuler 22.03 LTS SP3 的 KVM 虚拟机作为示范，让学员领略 KVM 虚拟化技术的强大魅力。
+本文介绍如何在 Linux 上安装 QEMU/KVM 和 Virt Manager。
 
 <!--more-->
 
 ## 什么是虚拟化?
 
-什么是虚拟化技术？KVM 虚拟化和 Virtual Box、VMware 这类虚拟机软件的区别是什么？请阅读下面的这篇文章。
-
-- [KVM 与 VMware 的区别盘点](https://www.redhat.com/zh/topics/virtualization/kvm-vs-vmware-comparison)
+什么是虚拟化技术？KVM 虚拟化和 Virtual Box、VMware 这类虚拟机软件的区别是什么？可以参考文章 [KVM 与 VMware 的区别盘点](https://www.redhat.com/zh/topics/virtualization/kvm-vs-vmware-comparison)。
 
 ## 配置虚拟化环境
 
-首先需要检查 CPU 是否支持虚拟化 (以 Intel 处理器为例):
+### 检查硬件和系统的兼容性
 
-```bash
-# intel vmx，amd svm
-$ egrep '(vmx|svm)' /proc/cpuinfo
-...vmx...
+1. 首先需要检查 CPU 是否支持虚拟化，回传值不应为 0:
 
+```sh
+$ sudo grep -E -c '(vmx|svm)' /proc/cpuinfo
+```
+
+2. 使用 CPU-checker 检查 KVM 是否可用:
+
+```sh
+$ sudo apt install cpu-checker && kvm-ok
+INFO: /dev/kvm exists
+KVM acceleration can be used
+```
+
+软件仓若没有 cpu-checker 软件包，可以去镜像站下载，例如 [上海交通大学镜像站](https://ftp.sjtu.edu.cn/ubuntu/pool/main/c/cpu-checker/)
+
+或通过 `lscpu` 命令:
+
+```sh
 $ lscpu | grep Virtualization
 Virtualization:        VT-x
 ```
 
-检查 KVM 模块是否已加载:
+**可选:** 检查 KVM 模块是否已加载:
 
 ```bash
 $ lsmod | grep -i kvm
@@ -73,27 +83,72 @@ kvm_intel             278528  11
 kvm                   901120  1 kvm_intel
 ```
 
-确保 CPU 支持虚拟化并且 KVM 模块已被加载，接下来是安装 QEMU 和 virt-manager (虚拟系统管理器)。直接通过 apt 安装的 QEMU 版本过低，而通过 GitHub 下载最新的 QEMU 源码编译安装需要Python3.9，而 deepin 20.9 的 Python 3 版本是 3.7 (保险起见不要随便升级)，所以折中一下，编译安装   QEMU 7.2.0 :rofl:
+### 安装 QEMU 和 Virt Manager
 
-安装 QEMU:
+1. 安装 QEMU (以 7.2.0 为例，可自行安装其他版本的 QEMU):
 
-```bash
+```sh
 $ wget https://download.qemu.org/qemu-7.2.0.tar.xz
 $ tar xvJf qemu-7.2.0.tar.xz
 $ mv qemu-7.2.0 qemu
 $./configure
 $ sudo make -j$(nproc)
-# in ~/.bashrc
+# append in ~/.bashrc
 export PATH=$PATH:/path/to/qemu/build
 ```
 
-安装 virt-manager:
+也可以通过软件仓来安装 QEMU，但版本可能会比较低（除非你用的是 Arch 这类滚动发行版）
 
-```bash
-$ sudo apt install virt-manager
+2. 安装 virt-manager:
+
+```sh
+$ sudo apt update
+$ sudo apt install libvirt-clients libvirt-daemon-system bridge-utils virt-manager
 ```
 
-## 安装 openEuler KVM 虚拟机
+3. 将用户加入 libvirt 和 kvm 的群，这样不用 root 也能启动 QEMU/KVM 虚拟机:
+
+```sh
+$ sudo usermod -a -G libvirt $USER
+$ sudo usermod -a -G kvm $USER
+$ sudo usermod -a -G input $USER
+```
+
+4. 启动 libvirtd 服务 (这个服务类似于 dockerd，本质上也是 daemon):
+
+```sh
+$ sudo systemctl enable libvirtd
+$ sudo systemctl start libvirtd
+```
+
+5. 设定开机自动启用虚拟机网卡:
+
+```sh
+$ sudo virsh net-start default
+$ sudo virsh net-autostart default
+```
+
+此时使用 `ip addr` 查看虚拟机网卡已被启用:
+
+```sh
+$ ip addr
+...
+3: virbr0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default qlen 1000
+    link/ether 52:54:00:c5:3f:83 brd ff:ff:ff:ff:ff:ff
+    inet 192.168.122.1/24 brd 192.168.122.255 scope global virbr0
+       valid_lft forever preferred_lft forever
+```
+
+## 安装虚拟机
+
+### 安装 EndeavourOS 虚拟机
+
+参考 Ivon 的部落格里的两篇相关文章进行安装即可: 
+
+- [如何在 Linux 安装 Bliss OS，支援 GPU 加速的 Android-x86 虚擬机，可玩手游](https://ivonblog.com/posts/blissos-qemu-installation/)
+- [Linux QEMU/KVM 透过 virtio-gpu 启用虚擬机 3D 加速，免 GPU 直通](https://ivonblog.com/posts/linux-qemu-virglrenderer/)
+
+### 安装 openEuler 虚拟机
 
 可以在启动器看到一个虚拟机管理应用图标，如下:
 
@@ -144,7 +199,7 @@ $ sudo apt install virt-manager
 
 首先先检查 Guest OS 上 ssh 服务是否开启 (一般是开启的):
 
-```bash
+```sh
 $ sudo systemctl status sshd
 sshd.service - OpenSSH server daemon
      Loaded: loaded (/usr/lib/systemd/system/sshd.service; enabled; vendor preset: enabled)
@@ -154,40 +209,21 @@ sshd.service - OpenSSH server daemon
 
 然后在 Guest OS 上获取其 IP 地址 (ens3 的 inet 后的数字即是，openEuler 启动时也会输出一下 IP 地址):
 
-```bash
+```sh
 $ ip addr
 ```
 
 在 Host OS 上通过 ssh 连接登录 GuestOS:
 
-```bash
+```sh
 $ ssh user@ip
 # user: user name in the guest os
 # ip ip addr of guest os
 ```
 
-## Development Tools
-
-由于是最小安装，很多趁手的工具都没有，俗话说“工欲善其事，必先利其器”，所以先安装必要的开发工具。幸好 openEuler 提供了整合包 Development Tools，直接安装即可:
-
-```bash
-$ sudo yum group install -y "Development Tools"
-```
-
-## Neofetch
-
-安装 neofetch 来酷炫地输出一下系统信息:
-
-```bash
-$ git clone https://github.com/dylanaraps/neofetch
-$ cd neofetch
-$ make install
-$ neofetch
-```
-
-{{< image src="/images/oerv/openEuler-22.03-LTS-SP3-neofetch.png" >}}
-
 ## References
+
+- Ivon的部落格: [Ubuntu 安装 QEMU/KVM 和 Virt Manager 虚擬机管理员](https://ivonblog.com/posts/ubuntu-virt-manager/)
 
 - [使用 KVM 安装和管理 deepin](https://wiki.deepin.org/zh/04_%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8kvm%E5%AE%89%E8%A3%85%E5%92%8C%E7%AE%A1%E7%90%86deepin)
 - [Linux 下使用 KVM 虚拟机安装 OpenEuler 系统](https://blog.51cto.com/zounan/4931973)

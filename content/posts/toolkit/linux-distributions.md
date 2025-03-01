@@ -217,6 +217,10 @@ deepin 20.9/V23 的用户指导做的很好，每个内置应用程序都有相�
 
 ## FAQ
 
+### 中文语言
+
+- [Ubuntu 维持中文界面，將家目录下的资料夹改成英文 (xdg-user-dirs-update 用法)](https://ivonblog.com/posts/linux-xdg-user-dirs/)
+
 ### 网络代理
 
 使用项目 [clash-for-linux-backup](https://github.com/Elegybackup/clash-for-linux-backup) 来配置 Linux 发行版的网络代理。
