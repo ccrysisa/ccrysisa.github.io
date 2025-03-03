@@ -43,7 +43,7 @@ repost:
 
 <!--more-->
 
-## The Beginner's Guide to eBPF
+## The Beginner\'s Guide to eBPF
 
 [BCC](https://github.com/iovisor/bcc/tree/master) 要求的内核编译参数 Ubuntu 24.04 全部满足，根据安装说明进行手动编译安装，仓库的 [doc](https://github.com/iovisor/bcc/blob/master/docs) 目录下有相关教程和手册供参阅。
 
@@ -53,7 +53,9 @@ Kernel 中的 verifier 主要是负责检查 eBPF program 的非法行为，例�
 
 [bpftrace](https://github.com/bpftrace/bpftrace) is a high-level tracing language for Linux. 主要用于让 bpf scripts 快速便捷地执行。
 
-## eBPF 开发实践教程
+## eunomia eBPF 开发实践教程
+
+### Install
 
 安装好 ecc 之后，还需要设置环境变量 `EUNOMIA_HOME` 才可以正常工作，以下为源代码中的处理逻辑:
 
@@ -110,8 +112,45 @@ export EUNOMIA_HOME=$HOME/Packages/eunomia/data
 ```
 {{< /admonition >}}
 
+### tracepoint, kprobe and fentry
+
+跟踪点 (tracepoints) 是内核静态插桩技术，在技术上只是放置在内核源代码中的跟踪函数，实际上就是在源码中插入的一些带有控制条件的探测点，这些探测点允许事后再添加处理函数。
+
+kprobes:
+
+- kprobe: 最基本的探测方式，是实现后两种的基础，它可以在任意的位置放置探测点（就连函数内部的某条指令处也可以）
+  - pre_handler: 探测点的调用前的回调方式
+  - post_handler: 探测点的调用后的回调方式
+  - fault_handler: 内存访问出错时的回调方式
+- jprobe: 获取被探测函数的入参值
+- kretprobe: 获取被探测函数的返回值
+
+{{< admonition quote >}}
+
+kprobes 的技术原理并不仅仅包含纯软件的实现方案，它也需要硬件架构提供支持。其中涉及硬件架构相关的是 CPU 的异常处理和单步调试技术，前者用于让程序的执行流程陷入到用户注册的回调函数中去，而后者则用于单步执行被探测点指令，因此并不是所有的架构均支持 kprobes。
+
+一个探测点的回调函数可能会修改被探测函数的运行上下文，例如通过修改内核的数据结构或者保存与 `struct pt_regs` 结构体中的触发探测器之前寄存器信息。因此 kprobes 可以被用来安装 bug 修复代码或者注入故障测试代码；
+
+如果一个函数的调用次数和返回次数不相等，则在类似这样的函数上注册 kretprobe 将可能不会达到预期的效果，例如 `do_exit()` 函数会存在问题，而 `do_execve()` 函数和 `do_fork()` 函数不会；
+
+当在进入和退出一个函数时，如果 CPU 运行在非当前任务所有的栈上，那么往该函数上注册 kretprobe 可能会导致不可预料的后果，因此，kprobes 不支持在 X86_64 的结构下为 `__switch_to()` 函数注册 kretprobe，将直接返回 `-EINVAL`。
+
+{{< /admonition >}}
+
+fentry (function entry) 和 fexit (function exit) 用于在 Linux 内核函数的入口和退出处进行跟踪，与 kprobes 相比，fentry 和 fexit 程序有更高的性能和可用性，例如可以直接访问函数的指针参数，就像在普通的 C 代码中一样，而不需要使用各种读取帮助程序 (例如不需要 `BPF_CORE_READ` 宏来读取函数参数的字段)。
+
+### uprobe
+
+uprobe 是一种用户空间探针，它允许在用户空间程序中动态插桩，插桩位置包括：函数入口、特定偏移处，以及函数返回处。定义 uprobe 时，内核会在附加的指令上创建快速断点指令（x86 机器上为 int3 指令），当程序执行到该指令时，内核将触发事件，程序陷入到内核态，并以回调函数的方式调用探针函数，执行完探针函数再返回到用户态继续执行后序的指令。所以 uprobe 是基于文件的，即当一个二进制文件中的一个函数被跟踪时，所有使用到或将会使用到这个文件的进程都会被插桩，从而在全系统范围内跟踪该函数调用。
+
+
+### eBPF program
+
+全局变量在 eBPF 程序中充当一种数据共享机制，它们允许用户态程序与 eBPF 程序之间进行数据交互，这在过滤特定条件或修改 eBPF 程序行为时非常有用 (与 map 作用类似)。
+
 ## References
 
 - Linux 核心設計: [透過 eBPF 觀察作業系統行為](https://hackmd.io/@sysprog/linux-ebpf?type=view)
 - Liz Rice: [ebpf-beginners](https://github.com/lizrice/ebpf-beginners)
 - Eunomia eBPF: [eBPF 开发实践教程：基于 CO-RE，通过小工具快速上手 eBPF 开发](https://eunomia.dev/zh/tutorials/)
+- [eBPF Docs](https://docs.ebpf.io/)

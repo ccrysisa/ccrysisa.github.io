@@ -596,3 +596,11 @@ C 语言的 `inline` 关键字的作用是由编译器 implementation define 的
 ### Day 3
 
 不需要 NaN boxing 这么麻烦的做法，在 C 语言直接使用 `union` 即可实现同一字段不同解释来 XD
+
+## 实作案例: 6.5h Megaproject: Coding a Virtual Machine from scratch in C
+
+> In this extremely exciting new project we will be coding our own Virtual Machine. That means creating our own virtual CPU with registers and our own simple Assembly language. We will also have virtual memory (a stack and a code segment) and possibly some IO in form of a virtual serial port or a floppy drive.
+
+- [YouTube](https://www.youtube.com/watch?v=vymrj-2YD64)
+
+这个作者用了一些自己的库，但问题不大，都可以通过标准库和自己手搓来达到小腿效果。
