@@ -224,7 +224,6 @@ $ ssh user@ip
 ## References
 
 - Ivon的部落格: [Ubuntu 安装 QEMU/KVM 和 Virt Manager 虚擬机管理员](https://ivonblog.com/posts/ubuntu-virt-manager/)
-
 - [使用 KVM 安装和管理 deepin](https://wiki.deepin.org/zh/04_%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98FAQ/%E8%99%9A%E6%8B%9F%E6%9C%BA/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8kvm%E5%AE%89%E8%A3%85%E5%92%8C%E7%AE%A1%E7%90%86deepin)
 - [Linux 下使用 KVM 虚拟机安装 OpenEuler 系统](https://blog.51cto.com/zounan/4931973)
 - [KVM 更改虚拟机默认存储路径](https://www.cnblogs.com/hahaha111122222/p/15538763.html)

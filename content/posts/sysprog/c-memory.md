@@ -329,11 +329,11 @@ C11 6.5.6:
 
 ### Writing Garbage Collector in C
 
-- [ ] IBM: [Data alignment: Straighten up and fly right](https://developer.ibm.com/articles/pa-dalign/)
+参考文献中的 IBM 的 文章值得一看，它打通了 Programming 和真实硬件运作之间的桥梁。
 
 ### References
 
+- IBM: [Data alignment: Straighten up and fly right](https://developer.ibm.com/articles/pa-dalign/)
+- Linux manual page: [memmove(3)](https://man7.org/linux/man-pages/man3/memmove.3.html), [bsearch(3)](https://www.man7.org/linux/man-pages/man3/bsearch.3.html)
 - Wikipedia: [XOR linked list](https://en.wikipedia.org/wiki/XOR_linked_list), [Binary search](https://en.wikipedia.org/wiki/Binary_search)
 - Stack Overflow: [Is there any difference between using char (plain char) or signed/unsigned char to store characters in C?](https://stackoverflow.com/questions/74766608/is-there-any-difference-between-using-char-plain-char-or-signed-unsigned-char)
-- Linux manual page: [memmove(3)](https://man7.org/linux/man-pages/man3/memmove.3.html), [bsearch(3)](https://www.man7.org/linux/man-pages/man3/bsearch.3.html)
-- GitHub: [nothings/stb](https://github.com/nothings/stb), [gcc-mirror/gcc](https://github.com/gcc-mirror/gcc)

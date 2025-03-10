@@ -328,6 +328,8 @@ v2raya 若采用全局透明代理方案，则无需设置系统代理和某些�
 
 {{< /admonition >}}
 
+2025/3/9 更新: 可以考虑使用 [Clash Verge](https://github.com/clash-verge-rev/clash-verge-rev)，类似于 Clash for  Windows 的操作逻辑，直观清晰。
+
 ### 时间同步
 
 如果是 Windows/Linux 双系统会出现时间不同步的问题（北京时区的话会相差 8 小时），可以将 Linux 发行版的时间策略调整为与 Windows 的策略一致，即统一读取 BIOS 的 RTC 时间作为系统时间。
