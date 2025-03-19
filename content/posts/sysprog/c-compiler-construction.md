@@ -159,6 +159,16 @@ Linux manual page:
 
 - [ ] YouTube: [Brian Kernighan on successful language design](https://www.youtube.com/watch?v=Sg4U4r_AgJU)
 
+## 实作案例: 6.5h Megaproject: Coding a Virtual Machine from scratch in C
+
+[YouTube](https://www.youtube.com/watch?v=vymrj-2YD64):
+
+> In this extremely exciting new project we will be coding our own Virtual Machine. That means creating our own virtual CPU with registers and our own simple Assembly language. We will also have virtual memory (a stack and a code segment) and possibly some IO in form of a virtual serial port or a floppy drive.
+
+这个作者用了一些自己的库，但问题不大，都可以通过标准库和自己手搓来达到小腿效果。
+
+- Stack Overflow: [What is a flexible array member in a struct?](https://stackoverflow.com/questions/68769314/what-is-a-flexible-array-member-in-a-struct)
+
 ## 实作案例: 手把手教你构建 C 语言编译器
 
 lotabout 所写的 {{< link href="https://github.com/lotabout/write-a-C-interpreter" content="系列博文" external-icon=true >}}
@@ -496,6 +506,8 @@ events:
     content: 实现一个基本的 [Stack-based Virtual Machine](https://en.wikipedia.org/wiki/Stack_machine) 支持汇编和解释执行程序
   - timestamp: Day 2
     content: 实现反汇编器、支持符号跳转以及 [NaN-boxing](https://en.wikipedia.org/wiki/NaN#Canonical_NaN) 以便后续支持动态类型
+  - timestamp: Day 3
+    content: TODO
 {{< /timeline >}}
 
 ### Day 1
@@ -597,12 +609,11 @@ C 语言的 `inline` 关键字的作用是由编译器 implementation define 的
 
 不需要 NaN boxing 这么麻烦的做法，在 C 语言直接使用 `union` 即可实现同一字段不同解释来 XD
 
-## 实作案例: 6.5h Megaproject: Coding a Virtual Machine from scratch in C
+但如果要了解 NaN boxing 的细节，推荐看一下 [NaN boxing or how to make the world dynamic](https://piotrduperas.com/posts/nan-boxing/) 这篇文章
 
-[YouTube](https://www.youtube.com/watch?v=vymrj-2YD64):
+编译时期的 assert 检查: [Static assert in C](https://stackoverflow.com/questions/3385515/static-assert-in-c). C11 standard adds the `_Static_assert` keyword and `static_assert` in `assert.h`
 
-> In this extremely exciting new project we will be coding our own Virtual Machine. That means creating our own virtual CPU with registers and our own simple Assembly language. We will also have virtual memory (a stack and a code segment) and possibly some IO in form of a virtual serial port or a floppy drive.
-
-这个作者用了一些自己的库，但问题不大，都可以通过标准库和自己手搓来达到小腿效果。
-
-- Stack Overflow: [What is a flexible array member in a struct?](https://stackoverflow.com/questions/68769314/what-is-a-flexible-array-member-in-a-struct)
+```c
+# define static_assert _Static_assert
+```
+ 

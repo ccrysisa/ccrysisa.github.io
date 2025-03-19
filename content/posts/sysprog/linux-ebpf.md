@@ -1,5 +1,5 @@
 ---
-title: "Linux 核心设计: 透过 eBPF 观察操作系统"
+title: "Linux 核心设计: 透过 BPF 观察操作系统"
 subtitle:
 date: 2025-02-18T17:01:30+08:00
 slug: b8b13cc

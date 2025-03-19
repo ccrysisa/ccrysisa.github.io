@@ -329,7 +329,7 @@ C11 6.5.6:
 
 ### Writing Garbage Collector in C
 
-参考文献中的 IBM 的 文章值得一看，它打通了 Programming 和真实硬件运作之间的桥梁。
+参考文献中的 IBM 的 文章值得一看，它打通了 Programming 和真实硬件运作之间的桥梁。data alignment 不仅可以提高效能，还保证了 atomic instructions 的正确性，因为如果是 unalignemnt 的话就必须要进行步骤分解才能实现数据读取，而 atomic instructions 不允许步骤分解，更别说 unalignment 可能导致的 page fault 了。
 
 ### References
 
