@@ -43,7 +43,7 @@ repost:
 
 <!--more-->
 
-## 实作案例: Build a Markdown Editor with Go and Fyne
+## 实作案例: Build a App with Go and Fyne
 
 bilibili:
 
@@ -67,6 +67,8 @@ Go 语言的模块管理和 Rust 大不相同，更偏向 C 语言的多文件�
 Go 的测试也挺精简的: [Add a test](https://go.dev/doc/tutorial/add-a-test)
 
 > Ending a file's name with _test.go tells the go test command that this file contains test functions.
+
+[Air](https://github.com/air-verse/air) 热重载 fyne 和 gin 的逻辑是检测当前 module 的源文件是否被修改，若被修改则重新编译运行（因为 go 是编译型语言，只能实现这种程度的热重载来）。
 
 ## 实作案例: Building Microservices with Go
 

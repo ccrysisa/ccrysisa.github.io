@@ -173,6 +173,15 @@ $ sudo apt install llvm clang clangd
 
 deepin 没法直接使用 `su` 命令，而是需要使用 `sudo su` 命令来进入 root 用户。
 
+### 自定义
+
+本人的配置:
+
+- [壁纸](https://haowallpaper.com/homeViewLook/16358558967713152)
+- [图标](https://www.gnome-look.org/p/1340791)
+
+deepin 若使用自定义的壁纸，因为该壁纸没有预先的虚化效果，所以会导致使用多视角视图时背景是纯黑的，但是 deepin 生成的虚化背景位于路径 `/var/cache/image-blur/` 下，可以将设置自定义壁纸后新生成的那个图片文件（内容一般是纯色）替换成所要设置的自定义壁纸，这样多任务视角下的背景和自定义背景就是一致的了。
+
 ## Ubuntu
 
 安装 tweaks 以获得对 GNOME 桌面的更多设置（例如字体设置）:
@@ -214,6 +223,8 @@ deepin 20.9/V23 的用户指导做的很好，每个内置应用程序都有相�
 {{< image src="/images/tools/deepin-terminal-vim.png" caption="deepin Terminial Vim" >}}
 
 {{< image src="/images/tools/deepin-dde-desktop.png" caption="deepin DDE Desktop" >}}
+
+{{< image src="/images/tools/deepin-v23.png" caption="deepin V23" >}}
 
 ## FAQ
 
