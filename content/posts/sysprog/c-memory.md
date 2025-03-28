@@ -296,7 +296,7 @@ YouTube: [GC in C](https://www.youtube.com/playlist?list=PLpM-Dvs8t0VYuYxRxjfnkd
 
 {{< image src="/images/c/heap.drawio.png" >}}
 
-`heap_alloc` 的作用是收集在 heap 中 allocated 的块能索引到的块，如果在 collect 后 heap 存在不能被索引到的块，则对这些块进行 free 操作；但是这个 GC 操作也依赖于 free 操作，因为没法对 stack 进行 collect 操作而 stack 的变量可以索引 heap 的块，即 stack 可以索引 heap 的块，heap 的块也可以索引其它 heap 的块，`heap_collect` 针对的是后者，而被 stack 索引的 heap 的块必须通过 `heap_free` 手动进行释放 (`heap_collect` 防止了因为 `heap_free` 而导致的 [Dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer))。
+`heap_alloc` 的作用是收集在 heap 中 allocated 的块能索引到的块，如果在 collect 后 heap 存在不能被索引到的块，则对这些块进行 free 操作；但是这个 GC 操作也依赖于 free 操作，因为没法对 stack 进行 collect 操作而 stack 的变量可以索引 heap 的块，即 stack 可以索引 heap 的块，heap 的块也可以索引其它 heap 的块，`heap_collect` 针对的是后者，而被 stack 索引的 heap 的块必须通过 `heap_free` 手动进行释放 (`heap_collect` 防止了因为 `heap_free` 而导致的 [Dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer))，即将 stack 作为 Garbage collections 的 root。
 
 如果允许分配 0 字节的内存空间，那么会造成分配的不同内存块的起始地址一样的情形，实作时应当避免这种情形:
 
@@ -329,7 +329,16 @@ C11 6.5.6:
 
 ### Writing Garbage Collector in C
 
-参考文献中的 IBM 的 文章值得一看，它打通了 Programming 和真实硬件运作之间的桥梁。data alignment 不仅可以提高效能，还保证了 atomic instructions 的正确性，因为如果是 unalignemnt 的话就必须要进行步骤分解才能实现数据读取，而 atomic instructions 不允许步骤分解，更别说 unalignment 可能导致的 page fault 了。
+参考文献中的 IBM 的 文章值得一看，它打通了 Programming 和真实硬件运作之间的桥梁。data alignment 不仅可以提高效能，还保证了 atomic instructions 的正确性，因为如果是 unalignemnt 的话就必须要进行步骤分解才能实现数据读取，而 atomic instructions 不允许步骤分解，更别说 unalignment 可能导致的 page fault 了。 除此之外，unaligned 内存访问也会导致 SIMD 指令行为异常，若考虑修正 unaligned 地址则会降低 SIMD 的效率。
+
+指针的内存对齐分为两大部分:
+
+```c
+void *p = malloc(size);
+// 1. address &p must be aligned since sizeof(void *) equals 4 or 8 bytes
+// 2. address p must be aligned since may write 4 or 8 bytes to address p
+//    e.g. *(uint64_t *)p = 64;
+```
 
 ### References
 

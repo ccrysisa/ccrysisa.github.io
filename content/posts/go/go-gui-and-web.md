@@ -1,5 +1,5 @@
 ---
-title: "Go Web"
+title: "Build gui and web applications in Go"
 subtitle:
 date: 2025-03-19T16:19:33+08:00
 slug: 8a02991
@@ -16,7 +16,6 @@ comment: false
 weight: 0
 tags:
   - Go
-  - Web
 categories:
   - Go
 hiddenFromHomePage: false
@@ -43,7 +42,7 @@ repost:
 
 <!--more-->
 
-## 实作案例: Build a App with Go and Fyne
+## Build an App with Go and Fyne
 
 bilibili:
 
@@ -58,7 +57,10 @@ bilibili:
 
 > 注意使用 `go mod tidy` 命令后，VS Code 的 Go 插件需要一段时间才能更新完成代码分析的缓存，不再报错。go.mod 文件认为功能类似于 Cargo.toml，go.sum 文件功能类似于 Cargo.lock。
 
-- Stack Overflow: [Difference between go mod download and go mod tidy](https://stackoverflow.com/questions/71495619/difference-between-go-mod-download-and-go-mod-tidy)
+{{< admonition type=quote title="[Difference between go mod download and go mod tidy](https://stackoverflow.com/questions/71495619/difference-between-go-mod-download-and-go-mod-tidy)" >}}
+- **go mod download**: Downloads modules without modifying `go.mod` or `go.sum`.
+- **go mod tidy**: Cleans and updates `go.mod` and `go.sum` by ensuring they reflect the actual dependencies required by the code.
+{{< /admonition >}}
 
 [fyne](https://fyne.io/) 写 GUI 的思路是：使用控件 (widget) 来显示，绑定回调函数 (callback) 来设置控件动作，最后通无限循环的事件监听来实时更新图形界面。
 
@@ -66,7 +68,7 @@ Go 语言的模块管理和 Rust 大不相同，更偏向 C 语言的多文件�
 
 Go 的测试也挺精简的: [Add a test](https://go.dev/doc/tutorial/add-a-test)
 
-> Ending a file's name with _test.go tells the go test command that this file contains test functions.
+> Ending a file\'s name with `_test.go` tells the go test command that this file contains test functions.
 
 [Air](https://github.com/air-verse/air) 热重载 fyne 和 gin 的逻辑是检测当前 module 的源文件是否被修改，若被修改则重新编译运行（因为 go 是编译型语言，只能实现这种程度的热重载来）。
 

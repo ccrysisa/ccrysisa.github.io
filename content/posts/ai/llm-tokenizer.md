@@ -1,5 +1,5 @@
 ---
-title: "LLM Tokenizer"
+title: "Build a LLM Tokenizer in C"
 subtitle:
 date: 2025-03-19T11:04:23+08:00
 slug: 4570c47

@@ -159,15 +159,6 @@ Linux manual page:
 
 - [ ] YouTube: [Brian Kernighan on successful language design](https://www.youtube.com/watch?v=Sg4U4r_AgJU)
 
-## 实作案例: 6.5h Megaproject: Coding a Virtual Machine from scratch in C
-
-[YouTube](https://www.youtube.com/watch?v=vymrj-2YD64):
-
-> In this extremely exciting new project we will be coding our own Virtual Machine. That means creating our own virtual CPU with registers and our own simple Assembly language. We will also have virtual memory (a stack and a code segment) and possibly some IO in form of a virtual serial port or a floppy drive.
-
-这个作者用了一些自己的库，但问题不大，都可以通过标准库和自己手搓来达到小腿效果。
-
-- Stack Overflow: [What is a flexible array member in a struct?](https://stackoverflow.com/questions/68769314/what-is-a-flexible-array-member-in-a-struct)
 
 ## 实作案例: 手把手教你构建 C 语言编译器
 
@@ -543,6 +534,7 @@ C 语言的字符串打印表达能力也挺强大的:
 Makefile 并不推荐让 `make run` 接受参数:
 
 Stack Overflow:
+
 - [Passing arguments to "make run"](https://stackoverflow.com/questions/2214575/passing-arguments-to-make-run)
 - [No GCC warning for function with declaration different from definition](https://stackoverflow.com/questions/49624771/no-gcc-warning-for-function-with-declaration-different-from-definition)
 
@@ -616,4 +608,8 @@ C 语言的 `inline` 关键字的作用是由编译器 implementation define 的
 ```c
 # define static_assert _Static_assert
 ```
+
+Stack Overflow:
+
+- [What is a flexible array member in a struct?](https://stackoverflow.com/questions/68769314/what-is-a-flexible-array-member-in-a-struct)
  

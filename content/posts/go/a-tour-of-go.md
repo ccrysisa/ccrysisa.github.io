@@ -1,5 +1,5 @@
 ---
-title: "The Go Programming Language"
+title: "A tour of Go"
 subtitle:
 date: 2024-03-25T10:16:26+08:00
 # draft: true
@@ -762,7 +762,7 @@ The [Go Blog](https://go.dev/blog/) has a large archive of informative Go articl
 
 Visit [the Go home page](https://go.dev/) for more.
 
-## References: 
+## References
 
 - [A tour of Go](https://go.dev/tour/list)
 - [Go by Example](https://gobyexample.com/)

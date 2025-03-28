@@ -143,16 +143,15 @@ fentry (function entry) 和 fexit (function exit) 用于在 Linux 内核函数�
 
 uprobe 是一种用户空间探针，它允许在用户空间程序中动态插桩，插桩位置包括：函数入口、特定偏移处，以及函数返回处。定义 uprobe 时，内核会在附加的指令上创建快速断点指令（x86 机器上为 int3 指令），当程序执行到该指令时，内核将触发事件，程序陷入到内核态，并以回调函数的方式调用探针函数，执行完探针函数再返回到用户态继续执行后序的指令。所以 uprobe 是基于文件的，即当一个二进制文件中的一个函数被跟踪时，所有使用到或将会使用到这个文件的进程都会被插桩，从而在全系统范围内跟踪该函数调用。
 
-
 ### types
 
 全局变量在 eBPF 程序中充当一种数据共享机制，它们允许用户态程序与 eBPF 程序之间进行数据交互，这在过滤特定条件或修改 eBPF 程序行为时非常有用 (与 map 作用类似)。
 
-eBPF 提供了两个环形缓冲区，可以用来将信息从 eBPF 程序传输到用户空间。第一个是 perf 环形缓冲区 (perf event array)，它至少从内核 4.15 开始就存在了；第二个是后来引入的 BPF 环形缓冲区。
+eBPF 提供了两种环形缓冲区，可以用来将信息从 eBPF 程序传输到用户空间。第一个是 perf 环形缓冲区 (perf event array)，它至少从内核 4.15 开始就存在了；第二个是后来引入的 eBPF 环形缓冲区 (eBPF ring buffer)，它在兼容的同时解决了 BPF perf buffer 内存效率和事件重排问题，建议作为 BPF 程序向用户空间发送数据的默认选择。
 
 ## References
 
 - Linux 核心設計: [透過 eBPF 觀察作業系統行為](https://hackmd.io/@sysprog/linux-ebpf?type=view)
 - Liz Rice: [ebpf-beginners](https://github.com/lizrice/ebpf-beginners)
-- Eunomia eBPF: [eBPF 开发实践教程：基于 CO-RE，通过小工具快速上手 eBPF 开发](https://eunomia.dev/zh/tutorials/)
+- Eunomia eBPF: [基于 CO-RE，通过小工具快速上手 eBPF 开发](https://eunomia.dev/zh/tutorials/)
 - [eBPF Docs](https://docs.ebpf.io/)

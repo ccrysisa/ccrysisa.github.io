@@ -1,6 +1,6 @@
 ---
 title: "所有友链"
-subtitle: 记录一些时时观摩学习的博客
+subtitle: 一些比较推荐的博客
 layout: friends
 date: 2024-04-29T23:46:50+08:00
 description: "ccrysisa's friends"
@@ -28,7 +28,7 @@ comment: false
 
 ## Friendly Reminder
 
-{{< admonition info "Notice" true >}}
+{{< admonition type=info title="Notice" open=true >}}
 
 1. If you want to exchange link, please leave a comment in the above format. (personal non-commercial blogs / websites only)
 2. :(fa-solid fa-exclamation-triangle): Website failure, stop maintenance and improper content may be unlinked!

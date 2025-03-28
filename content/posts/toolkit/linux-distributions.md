@@ -45,7 +45,7 @@ repost:
 
 <!--more-->
 
-## 系统通用配置
+## 系统配置
 
 ### 安装与配置
 
@@ -182,6 +182,14 @@ deepin 没法直接使用 `su` 命令，而是需要使用 `sudo su` 命令来�
 
 deepin 若使用自定义的壁纸，因为该壁纸没有预先的虚化效果，所以会导致使用多视角视图时背景是纯黑的，但是 deepin 生成的虚化背景位于路径 `/var/cache/image-blur/` 下，可以将设置自定义壁纸后新生成的那个图片文件（内容一般是纯色）替换成所要设置的自定义壁纸，这样多任务视角下的背景和自定义背景就是一致的了。
 
+### 效果展示
+
+deepin 20.9/V23 的用户指导做的很好，每个内置应用程序都有相应的帮助手册。
+
+{{< image src="/images/tools/deepin-20-9.png" caption="deepin 20.9" >}}
+
+{{< image src="/images/tools/deepin-v23.png" caption="deepin V23" >}}
+
 ## Ubuntu
 
 安装 tweaks 以获得对 GNOME 桌面的更多设置（例如字体设置）:
@@ -216,15 +224,13 @@ fish 可以通过 `fish_config` 命令来设置主题等样式，非常方便。
 
 bilibili: [终端神器 tmux：多任务管理大师](https://www.bilibili.com/video/BV1ML411h7tF)
 
-## 效果展示
+## 应用软件
 
-deepin 20.9/V23 的用户指导做的很好，每个内置应用程序都有相应的帮助手册。
-
-{{< image src="/images/tools/deepin-terminal-vim.png" caption="deepin Terminial Vim" >}}
-
-{{< image src="/images/tools/deepin-dde-desktop.png" caption="deepin DDE Desktop" >}}
-
-{{< image src="/images/tools/deepin-v23.png" caption="deepin V23" >}}
+- kitty: [BV1WJ4m1w7ms](https://www.bilibili.com/video/BV1WJ4m1w7ms/)
+- tmux: [BV12y421h7rH](https://www.bilibili.com/video/BV12y421h7rH/), [BV1ML411h7tF](https://www.bilibili.com/video/BV1ML411h7tF/)
+- neovim: [BV1FYtee4EaS](https://www.bilibili.com/video/BV1FYtee4EaS/)
+- fish: [BV1dfRVYGEPz](https://www.bilibili.com/video/BV1dfRVYGEPz/)
+- yazi: [BV1yRkCYVEUT](https://www.bilibili.com/video/BV1yRkCYVEUT/)
 
 ## FAQ
 
@@ -284,7 +290,7 @@ $ . ./[run.sh|exit.sh]
 
 {{< /admonition >}}
 
-然后可以进一步地在 `~/.bashrc`、`~/.bash_aliases` 文件中设置快速启动/关闭的命令别名。 
+然后可以进一步地在 `~/.bashrc` 或 `~/.bash_aliases` 文件中设置快速启动/关闭的命令别名。 
 
 如果你没有关闭 clash 服务就关机，那么重启后可能会出现，输入密码无法进入图形界面重新返回登录界面，这一循环状况。这个是有些 Linux 发行版默认的 shell 是 dash，但位于 `/etc/` 路径下的 clash 服务脚本需要使用 bash 才能运行造成的，有几种方式可以解决该问题。
 
@@ -380,3 +386,4 @@ Linux 发行版大多都没有安装声音增强工具，使得通过电脑本�
 1. 在 `~/.bashrc` / `/etc/bash.bashrc` 或使用的 shell 对应的配置文件中加入形如 `export PATH=$PATH:/path/to/package` 的语法，可以将 `package` 下的所有可执行文件都加入到 `PATH` 中。笔者对于 qemu 采用该设定进行引入。
 2. 直接将编译完成的二进制可执行文件丢进 `/usr/bin` 或 `/usr/local/bin` 之中，这个方法十分简单易用，但如果 `/` 和 `/home` 分开挂载，可能会导致 `/` 空间被占用过多。
 3. 将编译完成的二进制可执行文件通过符号链接 (symbol link) 至 `/usr/bin` 或 `/usr/local/bin`，这个就相当于将第二种方法实际占用空间的分区由 `/` 移动至用户指定的地方。
+
