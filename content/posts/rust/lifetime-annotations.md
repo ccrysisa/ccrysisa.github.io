@@ -17,7 +17,7 @@ tags:
   - Rust
   - Lifetime
 categories:
-  - Rust
+  - Crust of Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -54,7 +54,21 @@ C11 [6.2.4] **Storage durations of objects**
 > An object has a storage duration that determines its lifetime. There are four storage
 durations: static, thread, automatic, and allocated.
 
+## Rust 中的 lifetime
+
+推荐观看 YouTube 上的视频 [but what is 'a lifetime?](https://www.youtube.com/watch?v=gRAVZv7V91Q) 从不同的视角来重新认识 Rust 中的生命周期。
+
 ## 影片注解
+
+### comparsion
+
+迭代器 (iterators) 如果类型相同 (指实现的 `type Item` 相同)，可以进行比较而无需将迭代器 collect 为指定的相同容器。
+
+```rs
+let haystack = "a b c d e";
+let letters = StrSplit::new(haystack, " ");
+assert!(letters.eq(vec!["a", "b", "c", "d", "e"].into_iter()));
+```
 
 ### cargo check
 
@@ -135,11 +149,15 @@ pun fn func(&self) -> Apple<'_, T> {
 }
 ```
 
+## References
+
+- HackMD: [Crust of Rust: 筆記說明](https://hackmd.io/T6jGyghMS-Wq6F3ymCFJMg)
+
 ## Documentations
 
 这里列举视频中一些概念相关的 documentation 
 
-> 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
+**学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料**
 
 ### Crate [std](https://doc.rust-lang.org/std/index.html) 
 

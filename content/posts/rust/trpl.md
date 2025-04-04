@@ -1,6 +1,6 @@
 ---
 title: "The Rust Programming Language"
-subtitle: Why Rust?
+subtitle:
 date: 2023-12-28T20:18:03+08:00
 draft: false
 # author:
@@ -17,7 +17,6 @@ tags:
   - Rust
   - Sysprog
 categories:
-  - Linux Kernel Internals
   - Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -46,28 +45,25 @@ repost:
 
 - [The adoption of Rust in Business (2022)](https://rustmagazine.org/issue-1/2022-review-the-adoption-of-rust-in-business/)
 
-## Rust in 100 Seconds
+## Getting Started
 
-观看短片: [Rust in 100 Seconds](https://youtu.be/5C_HPTJg5ek) :white_check_mark:
-- [x] 了解 Rust，初步了解其安全性原理
-- [x] 所有权 (ownership)
-- [x] 借用 (borrow) 
+观看短片: [Rust in 100 Seconds](https://youtu.be/5C_HPTJg5ek):
+
+- 了解 Rust，初步了解其安全性原理
+- 所有权 (ownership)
+- 借用 (borrow) 
 
 {{< admonition warning >}}
 0:55 This is wrong, value mutability doesn\'t have anything to do with the value being stored on the stack or the heap (and the example `let mut hello = "hi mom"` will be stored on the stack since it\'s type is `&'static str`), it depends on the type of the value (if it\'s `Sized` or not).
 {{< /admonition >}}
 
-## The adoption of Rust in Business (2022)
-
 阅读报告: [The adoption of Rust in Business (2022)](https://rustmagazine.org/issue-1/2022-review-the-adoption-of-rust-in-business/) :white_check_mark:
 
 Rust 目前蓬勃发展，预测未来是很难的，但是 Rust 已经是进行时的未来了 :rofl:
 
-## The Rust Programming Language
+常用命令如下:
 
-### Getting Started
-
-```bash
+```sh
 $ cargo new <package>     # 创建项目
 $ cargo build             # 编译、构建、调试版本
 $ cargo build --release   # 编译优化、发布版本
@@ -77,7 +73,7 @@ $ cargo clean             # 清除构建出来的目标文件
 $ cargo test              # 运行测试
 ```
 
-### Common Concepts
+## Common Concepts
 
 变量明确区分可变和不可变，好处在于对于明确不可变的变量，使用引用时编译器可以进行更为激进的最佳化。常量必须满足可以在编译期计算出结果。
 
@@ -126,9 +122,9 @@ shadow 可理解为变量名可以和储存数据的地址绑定、解绑，所�
 > `Range`, provided by the standard library, which generates all numbers in sequence starting from one number and ending before another number.
 > `rev`, to reverse the range.
 
-### Ownership
+## Ownership
 
-#### What is Ownership?
+### What is Ownership?
 
 > Rust uses a third approach: memory is managed through a system of ownership with a set of rules that the **compiler checks**. If any of the rules are violated, the program won\'t **compile**. None of the features of ownership will slow down your program while it\'s running.
 
@@ -164,7 +160,7 @@ shadow 可理解为变量名可以和储存数据的地址绑定、解绑，所�
 
 > Rust won’t let us annotate a type with Copy if the type, or any of its parts, has implemented the Drop trait. If the type needs something special to happen when the value goes out of scope and we add the Copy annotation to that type, we’ll get a compile-time error. 
 
-#### References and Borrowing
+### References and Borrowing
 
 从内存角度来看，reference 常用的场景为:
 ```
@@ -192,7 +188,7 @@ Reference            Owner
 - At any given time, you can have either one mutable reference or any number of immutable references.
 - References must always be valid.
 
-#### The Slice Type
+### The Slice Type
 
 > Slices let you reference a contiguous sequence of elements in a collection rather than the whole collection. **A slice is a kind of reference, so it does not have ownership.**
 
@@ -220,7 +216,7 @@ Documentation:
 - method std::iter::Iterator::[enumerate](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.enumerate)
 - Module std::[iter](https://doc.rust-lang.org/std/iter/index.html)
 
-### Structs
+## Structs
 
 Rust 不允许结构体初始化时只指定一部分字段的值，这防止了 UB 相关问题的触发。
 
@@ -251,7 +247,7 @@ Rust 中 struct 默认是进行移动 (Move) 操作，而 tuple 默认是进行�
 
 这个 `Self` 关键字语法在后面“附魔”上泛型和生命周期时就十分有用了 :rofl:
 
-### Enums and Pattern Matching
+## Enums and Pattern Matching
 
 这部分内容因为是从函数式编程演化而来的，可能会比较难理解。
 
@@ -297,7 +293,7 @@ Rust 的 `Option<T>` 的设计避免了其它语言中可能会出现的 UB，�
 - Keyword [ref](https://doc.rust-lang.org/std/keyword.ref.html)
 {{< /admonition >}}
 
-### Packages, Crates, and Modules
+## Packages, Crates, and Modules
 
 - **Packages**: A Cargo feature that lets you build, test, and share crates
 - **Crates**: A tree of modules that produces a library or executable
@@ -372,7 +368,7 @@ Rust 中也有类似于 Linux 系统的别名技巧，那就是使用 `as` 关�
 Rust 对于模块的分离语法的文件管理也类似于文件系统树。可以将 `src/` 目录视为 crate (root module)，然后举个例子，对于 crate 下的模块 `horse`，如果采用分离文件写法，这个模块的内容就是 `src/horse.rs` 文件的内容；对于 `horse` 模块下的 `small_horse` 模块，该模块的内容就是 `src/horse/small_horse.rs` 文件的内容。显然这些源目录、文件之间的关系，与模块之间的父子关系相符合。
 {{< /admonition >}}
 
-### Common Collections
+## Common Collections
 
 {{< admonition info "Documentation" >}}
 - Struct std::vec::[Vec](https://doc.rust-lang.org/std/vec/struct.Vec.html)
@@ -380,7 +376,7 @@ Rust 对于模块的分离语法的文件管理也类似于文件系统树。可
 - Struct std::collections::[HashMap](https://doc.rust-lang.org/std/collections/struct.HashMap.html)
 {{< /admonition >}}
 
-#### Vector
+### Vector
 
 > Like any other struct, a vector is freed when it goes out of scope
 
@@ -422,7 +418,7 @@ for i in &mut v {
 
 运用枚举 (enum) 搭配 vector 可以实作出比泛型更具表达力的 vector，即 vector 中的每个元素的类型可以不相同 (通过 enum 的大小类型机制即可实作)。
 
-#### String
+### String
 
 > Rust has only one string type in the core language, which is the string slice `str` that is usually seen in its borrowed form `&str`. 
 
@@ -452,7 +448,7 @@ Rust 对于字符串处理的哲学 (我个人认为这样处理并不是特别�
 
 > Rust has chosen to make the correct handling of `String` data the default behavior for all Rust programs, which means programmers have to put more thought into handling UTF-8 data upfront. This trade-off exposes more of the complexity of strings than is apparent in other programming languages, but it prevents you from having to handle errors involving non-ASCII characters later in your development life cycle.
 
-#### Hash Map
+### Hash Map
 
 > Note that we need to first `use` the `HashMap` from the collections portion of the standard library. Of our three common collections, this one is the least often used, so it’s not included in the features brought into scope automatically in the prelude. Hash maps also have less support from the standard library; there’s no built-in macro to construct them, for example.
 
@@ -508,7 +504,7 @@ for word in text.split_whitespace() {
 }
 ```
 
-### Error Handling
+## Error Handling
 
 > Rust groups errors into two major categories: *recoverable* and *unrecoverable* errors. For a recoverable error, such as a file not found error, we most likely just want to report the problem to the user and retry the operation. Unrecoverable errors are always symptoms of bugs, like trying to access a location beyond the end of an array, and so we want to immediately stop the program.
 
@@ -552,7 +548,7 @@ $ RUST_BACKTRACE=full cargo run
 
 定义一个可能会失败的函数时 (即预期计划处理错误)，应该使用 `Result` 进行错误处理，其它时候一般使用 `panic!` 处理即可 (因为预期就没打算处理错误)。
 
-### Generic, Traits, and Lifetimes
+## Generic, Traits, and Lifetimes
 
 {{< admonition quote >}}
 Removing Duplication by Extracting a Function:
@@ -561,7 +557,7 @@ Removing Duplication by Extracting a Function:
 3. Update the two instances of duplicated code to call the function instead.
 {{< /admonition >}}
 
-#### Generic Data Types
+### Generic Data Types
 
 {{< admonition >}}
 泛型 (generic) 和函数消除重复代码的逻辑类似，区别在于函数是在 **运行时期** 调用时才针对传入参数的 **数值** 进行实例化，而泛型是在 **编译时期** 针对涉及的调用的 **类型** (调用时涉及的类型是参数的类型，返回类型暂时无法使用泛型) 进行实例化。
@@ -577,7 +573,7 @@ Removing Duplication by Extracting a Function:
 
 泛型在编译时期而不是运行时期进行单例化，并不影响效能
 
-#### Traits: Defining Shared Behavior
+### Traits: Defining Shared Behavior
 
 > A type’s behavior consists of the methods we can call on that type. Different types share the same behavior if we can call the same methods on all of those types. Trait definitions are a way to group method signatures together to define a set of behaviors necessary to accomplish some purpose.
 
@@ -637,7 +633,7 @@ impl<T: Display> ToString for T {}
 
 一样的还是 Trait Bound 的 **泛型搭配具体类型限制** 的思想
 
-#### Validating References with Lifetimes
+### Validating References with Lifetimes
 
 > The main aim of lifetimes is to prevent *dangling references*, which cause a program to reference data other than the data it’s intended to reference.
 
@@ -709,7 +705,7 @@ fn fun(s: &'a str) -> &'b str {
 涉及到生命周期的程序，编写代码时先不需要考虑生命周期，先将代码逻辑写好，然后从防止 ***dangling reference*** 这个 UB 以及 **子类型** 的角度对生命周期进行标注。
 {{< /admonition >}}
 
-### Automated Tests
+## Automated Tests
 
 - 11.1. How to Write Tests
 > Tests are Rust functions that verify that the non-test code is functioning in the expected manner. The bodies of test functions typically perform these three actions:
@@ -887,7 +883,7 @@ Files in subdirectories of the tests directory don’t get compiled as separate 
 
 > Only library crates expose functions that other crates can use; binary crates are meant to be run on their own.
 
-### An I/O Project: minigrep
+## An I/O Project: minigrep
 
 - 12.3. Refactoring to Improve Modularity and Error Handling
 
@@ -915,7 +911,7 @@ Documentation:
 - method str::[to_lowercase](https://doc.rust-lang.org/std/primitive.str.html#method.to_lowercase)
 - method std::result::Result::[is_err](https://doc.rust-lang.org/std/result/enum.Result.html#method.is_err)
 
-### Iterators and Closures
+## Iterators and Closures
 
 > Rust’s design has taken inspiration from many existing languages and techniques, and one significant influence is functional programming. 
 
@@ -923,7 +919,7 @@ Documentation:
 这一章是关于函数式编程的，Rust 吸收了很多编程范式的精华，所以也可以使用函数式编程风格。关于函数式编程的资料，可以参考康奈尔大学的 [OCaml Programming: Correct + Efficient + Beautiful](https://www.youtube.com/playlist?list=PLre5AT9JnKShBOPeuiD9b-I4XROIJhkIU) 和斯坦福大学的编程范式 [CS107](https://www.bilibili.com/video/BV1Cx411S7HJ/)，以及最出名的麻省理工学院的 [SICP](https://www.bilibili.com/video/BV1Xx41117tr/) (这个版本是给 IBM 工程师培训的，MIT 还有一个 [2004 年的版本](https://www.youtube.com/playlist?list=PL7BcsI5ueSNFPCEisbaoQ0kXIDX9rR5FF) 是给学生上课的)。
 {{< /admonition >}}
 
-#### Closures: Anonymous Functions that Capture Their Environment
+### Closures: Anonymous Functions that Capture Their Environment
 
 > Rust’s closures are anonymous functions you can save in a variable or pass as arguments to other functions. 
 > You can create the closure in one place and then call the closure elsewhere to evaluate it in a different context. 
@@ -991,7 +987,7 @@ impl<T> Option<T> {
 
 多线程编程时使用 `move` 关键字可以强制将一个变量的所有权交给另一个线程。
 
-#### Processing a Series of Items with Iterators
+### Processing a Series of Items with Iterators
 
 {{< admonition >}}
 这一节简单介绍了下迭代器是什么以及迭代器的功能，如果想更进一步地了解迭代器的实作，建议观看 John Gjengset 的影片 [Crust of Rust: Iterators](https://www.youtube.com/watch?v=yozQ9C69pNs)，本人也有写相关的 [笔记]({{< relref "./Iterators.md" >}}) 来对影片内容进行解释和扩展。
@@ -1043,13 +1039,13 @@ Using Closures that Capture Their Environment
 `collect()` can also create instances of types that are not typical collections. For example, a `String` can be built from `char`s, and an iterator of `Result<T, E>` items can be collected into `Result<Collection<T>, E>`.
 {{< /admonition >}}
 
-#### Comparing Performance: Loops vs. Iterators
+### Comparing Performance: Loops vs. Iterators
 
 > The point is this: iterators, although a high-level abstraction, get compiled down to roughly the same code as if you’d written the lower-level code yourself. Iterators are one of Rust’s zero-cost abstractions, by which we mean using the abstraction imposes no additional runtime overhead.
 
 零开销抽象 (Zero-Aost Abstractions): 使用抽象时不会引入额外的运行时开销，所以尽量使用 Rust 提供的抽象语法，因为其底层实现大概率进行了相应的优化，比自己手写的底层代码高效不少。
 
-### Cargo and Crates.io
+## Cargo and Crates.io
 
 - 14.1. Customizing Builds with Release Profiles
 
@@ -1112,7 +1108,7 @@ $ cargo new adder
 add_one = { path = "../add_one" }
 ```
 
-### Smart Pointers
+## Smart Pointers
 
 > Rust, with its concept of ownership and borrowing, has an additional difference between references and smart pointers: while references only borrow data, in many cases, smart pointers own the data they point to.
 
@@ -1125,7 +1121,7 @@ add_one = { path = "../add_one" }
 - Trait [std::ops::Drop](https://doc.rust-lang.org/std/ops/trait.Drop.html)
 > The `Drop` trait allows you to customize the code that’s run when an instance of the smart pointer goes out of scope.
 
-#### `Box<T>`
+### `Box<T>`
 
 > Boxes allow you to store data on the heap rather than the stack.
 
@@ -1135,7 +1131,7 @@ add_one = { path = "../add_one" }
 
 `Box<T>` 这种功能简单的指针也是智能指针的原因在于，它实现了必要的两个 Trait: `Deref` 和 `Drop`，使得其核心行为和其他智能指针一致
 
-#### `Deref` Trait
+### `Deref` Trait
 
 > Implementing the `Deref` trait allows you to customize the behavior of the dereference operator `*` (not to be confused with the multiplication or glob operator). By implementing `Deref` in such a way that a smart pointer can be treated like a regular reference, you can write code that operates on references and use that code with smart pointers too.
 
@@ -1179,17 +1175,17 @@ Rust does deref coercion when it finds types and trait implementations in three 
 - From `&mut T` to `&mut U` when `T`: `DerefMut<Target=U>`
 - From `&mut T` to `&U` when `T`: `Deref<Target=U>`
 
-#### `Drop` Trait
+### `Drop` Trait
 
 > Rust automatically called `drop` for us when our instances went out of scope, calling the code we specified. 
 
 > call the `std::mem::drop` function provided by the standard library if you want to force a value to be dropped before the end of its scope.
 
-#### `Rc<T>`
+### `Rc<T>`
 
 > The `Rc<T>` type keeps track of the number of references to a value to determine whether or not the value is still in use. If there are zero references to a value, the value can be cleaned up without any references becoming invalid.
 
-#### `RefCell<T>`
+### `RefCell<T>`
 
 > But we can use the methods on `RefCell<T>` that provide access to its interior mutability so we can modify our data when we need to. The runtime checks of the borrowing rules protect us from data races, and it’s sometimes worth trading a bit of speed for this flexibility in our data structures.
 
@@ -1199,9 +1195,9 @@ Rust does deref coercion when it finds types and trait implementations in three 
 - [Rust 智能指针教程](https://www.bilibili.com/video/BV1Lg4y1w7aL/)
 {{< /admonition >}}
 
-### Fearless Concurrency
+## Fearless Concurrency
 
-### Object-Oriented Programming
+## Object-Oriented Programming
 
 - 17.1. Characteristics of Object-Oriented Languages
 
@@ -1250,7 +1246,7 @@ Vec<T> where T: Trait
 
 > When we use trait objects, Rust must use dynamic dispatch. The compiler doesn’t know all the types that might be used with the code that’s using trait objects, so it doesn’t know which method implemented on which type to call.
 
-### Patterns and Matching
+## Patterns and Matching
 
 {{< admonition >}}
 这一章建议搭配之前的 [6. Enums and Pattern Matching](https://doc.rust-lang.org/book/ch06-00-enums.html) 来阅读，本章是对其的扩展。
@@ -1419,9 +1415,9 @@ match msg {
 let ((feet, inches), Point { x, y }) = ((3, 10), Point { x: 3, y: -10 });
 ```
 
-### Advanced Features
+## Advanced Features
 
-#### Unsafe Rust
+### Unsafe Rust
 
 > Unsafe Rust exists because, by nature, static analysis is conservative. When the compiler tries to determine whether or not code upholds the guarantees, it’s better for it to reject some valid programs than to accept some invalid programs. 
 
@@ -1487,7 +1483,7 @@ Rust 中的裸指针和 C/C++ 中的原始指针类型比较相似。而 Rust �
 
 通过 `extern` 关键字指定汇编层面使用的 ABI，可以使 Rust 程序和其他语言编写的程序进行通讯，这部分在 Rust 中叫 FFI
 
-#### Advanced Traits
+### Advanced Traits
 
 > ***Associated types*** connect a type placeholder with a trait such that the trait method definitions can use these placeholder types in their signatures. 
 
@@ -1588,7 +1584,7 @@ impl std::fmt::Display for Wrapper {
 }
 ```
 
-#### Advanced Types
+### Advanced Types
 
 > Rust provides the ability to declare a type alias to give an existing type another name. 
 
@@ -1632,7 +1628,7 @@ fn generic<T: ?Sized>(t: &T) {...}
 
 也就是说，我们需要手动标注的只有 `?Sized` 这个 Trait (用于标识该类型不是编译时期可以确定的，而是动态类型)，`Sized` 这个 Trait 编译器会帮我们自动默认加上标注，一般不需要特别关心
 
-#### Advanced Functions and Closures
+### Advanced Functions and Closures
 
 > The `fn` type is called a function pointer. Passing functions with function pointers will allow you to use functions as arguments to other functions.
 
@@ -1654,7 +1650,7 @@ fn do_twice(f: fn(i32) -> i32, arg: i32) -> i32 {
 
 所以使用类似的技巧来返回闭包，即通过 `Box` 来包装返回的闭包
 
-#### Macros
+### Macros
 
 > Fundamentally, macros are a way of writing code that writes other code, which is known as metaprogramming.
 
@@ -1695,13 +1691,13 @@ pub fn some_name(input: TokenStream) -> TokenStream {
 延伸阅读: [Procedural Macros](https://www.youtube.com/playlist?list=PLqbS7AVVErFgwC_HByFYblghsDsD5wZDv)
 {{< /admonition >}}
 
-### Final Project: Web Server
+## Final Project: Web Server
 
 ## Exercises
 
-- [x] [rustlings](https://github.com/rust-lang/rustlings) / [参考题解](https://space.bilibili.com/50713701/channel/collectiondetail?sid=1409071) / [我的题解](https://github.com/ccrysisa/rustlings)
-- [ ] [LifetimeKata](https://github.com/tfpk/lifetimekata/)
-- [ ] [MacroKata](https://github.com/tfpk/macrokata)
+- [rustlings](https://github.com/rust-lang/rustlings) / [参考题解](https://space.bilibili.com/50713701/channel/collectiondetail?sid=1409071) / [我的题解](https://github.com/ccrysisa/rustlings)
+- [LifetimeKata](https://github.com/tfpk/lifetimekata/)
+- [MacroKata](https://github.com/tfpk/macrokata)
 
 ## References
 
