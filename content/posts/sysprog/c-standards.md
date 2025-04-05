@@ -49,104 +49,97 @@ repost:
 
 C 语言规格演化过程: C89/[C90](https://www.iso.org/standard/17782.html) -> [C99](https://www.iso.org/standard/29237.html) -> [C11](https://www.iso.org/standard/57853.html) -> C17/[C18](https://www.iso.org/standard/74528.html) -> C2x
 
-TODO: YouTube: [Why C is so Influential](https://www.youtube.com/watch?v=ci1PJexnfNE)
-
-## C vs C++
+YouTube: [Why C is so Influential](https://www.youtube.com/watch?v=ci1PJexnfNE)
 
 C 语言圣经:
 
 {{< image src="https://imgur-backup.hackmd.io/1gWHzfd.png" >}}
 
-Linus Torvalds 对于 C++ 的看法以及为什么不将 C++ 纳入内核: [C++ in linux kernel](https://www.realworldtech.com/forum/?threadid=104196&curpostid=104208)
+> In C, everything is a representation (unsigned char [sizeof(TYPE)]).
 
-> And I really do dislike C++. It's a really bad language, in my opinion. It tries to solve all the wrong problems, and does not tackle the right ones. The things C++ "solves" are trivial things, almost purely syntactic extensions to C rather than fixing some true deep problem.
+## Why not C++?
 
-相对于 C 语言，C++ 标准更新飞快，从 C11 开始一大批新特性进入标准:
+{{< admonition type=quote title="Linus Torvalds 在 [2010 年针对 c++ in linux kernel 的回答](http://www.realworldtech.com/forum/?threadid=104196&curpostid=104208)" >}}
+And I really do dislike C++. It\'s a really bad language, in my opinion. It tries to solve all the wrong problems, and does not tackle the right ones. The things C++ \"solves\" are trivial things, almost purely syntactic extensions to C rather than fixing some true deep problem.
+
+(The C++ objects, templates and function overloading are all just syntactic sugar. And generally bad syntax at that. And C++ actually makes the C type system actively worse.)
+{{< /admonition >}}
+
+相对于 C 语言，C++ 标准更新飞快，从 C++11 开始一大批新特性进入标准:
 
 {{< image src="https://i.imgur.com/ITVm6gI.png" >}}
 
 甚至 C++ 之父 Bjarne Stroustrup 开始倡导 [Learning Standard C++ as a New Language](http://www.stroustrup.com/new_learning.pdf)
 
-并且从几乎同一时期发布的 C99、C++98 标准开始，C 语言和 C++ 分道扬镳，即再也没有 C++ 是 C 语言的说法了。
+并且从几乎同一时期发布的 C99、C++98 标准开始，C 语言和 C++ 分道扬镳，即再也没有 C++ 是 C 语言的超集说法了。举个例子，下面这个结构体成员赋值方法在 C++ 中是不支持的:
 
----
+```c
+struct Foo {
+    char x;
+    int y;
+}
 
-- [x] [第一個 C 語言編譯器是怎樣編寫的？](https://kknews.cc/zh-tw/tech/bx2r3j.html)
-> 介绍了自举 (sel-hosting/compiling) 以及 C0, C1, C2, C3, ... 等的演化过程
+struct Foo foo = {
+    .x = 'a',
+    .y = 32,
+};
+```
 
-## C 语言规格书
+## 标准 / 规格书
 
-### main
+阅读 C 语言规格书可以让你洞察本质，不在没意义的事情上浪费时间，例如在某乎大肆讨论的 [C 语言中 int main() 和 void main() 有何区别？](https://www.zhihu.com/question/60047465)
 
-阅读 C 语言规格书可以让你洞察本质，不在没意义的事情上浪费时间，例如在某乎大肆讨论的 `void main()` 和 `int main()` [问题](https://www.zhihu.com/question/60047465) :rofl:
-
-- C99/C11 5.1.2.2.1 Program startup
-
-The function called at program startup is named `main`. The implementation declares no
-prototype for this function. It shall be defined with a return type of `int` and with no
-parameters:
+{{< admonition type=quote title="C99/C11 5.1.2.2.1 Program startup">}}
+The function called at program startup is named `main`. The implementation declares no prototype for this function. It shall be defined with a return type of `int` and with no parameters:
 
 ```c
 int main(void) { /* ... */ }
 ```
 
-or with two parameters (referred to here as `argc` and `argv`, though any names may be
-used, as they are local to the function in which they are declared):
+or with two parameters (referred to here as `argc` and `argv`, though any names may be used, as they are local to the function in which they are declared):
 
 ```c
 int main(int argc, char *argv[]) { /* ... */ }
 ```
 
-or equivalent; or in some other implementation-defined manner.
+or equivalent; or in some other implementation-defined manner. Thus, int can be replaced by a typedef name defined as `int`, or the type of `argv` can be written as `char ** argv`, and so on.
+{{< /admonition >}}
 
-> Thus, int can be replaced by a typedef name defined as `int`, or the type of `argv` can be written as `char ** argv`, and so on.
+C 语言中的 pointer 很重要，但 object 也很重要，这两个概念是一体两面的。注意 object != object-oriented，前者的重点在于 **数据的表示方法**，而后者的重点在于 **everything is object**，是一种思维范式。
 
-### incomplete type
+{{< admonition type=quote title="C99 3.14 object" >}}
+region of data storage in the execution environment, the contents of which can represent values
+{{< /admonition >}}
 
-- C99 6.2.5 Types
-> *incomplete types* (types that describe objects but lack information needed to determine their sizes).
+即 C 语言的 object 是指在执行时期，数据存储的区域，其内容可以明确地表示为数值。了解这个概念之后，就可以清晰地认知到在 C 语言中 (int)7 和 (float)7.0 是不等价的，具体解释可以延伸阅读 CSAPP 的第二章。
 
-例如指针类型暗示的就是 incomplete type，通过 `struct data *` 这个指针类型无法得知 `struct data` 这个型态所需要占用的空间大小。
+## cdecl
 
-### 规格不仅要看最新的，过往的也要熟悉
+英文很重要，因为 `cdecl` 可以通过英文来帮助产生 C语言的声明或者对声明进行解释:
 
-因为很多 (嵌入式) 设备上运行的 Linux 可能是很旧的版本，那时 Linux 使用的是更旧的 C 语言规格。例如空中巴士 330 客机的娱乐系统里执行的是十几年前的 Red Hat Linux，总有人要为这些“古董”负责 :rofl:
+```sh
+$ sudo apt-get install cdecl
+```
+
+使用案例:
+
+```sh
+$ cdecl
+cdecl> declare a as array of pointer to function returning pointer to function returning pointer to char
+char *(*(*a[])())()
+cdecl> explain char *(*fptab[])(int)
+declare fptab as array of pointer to function (int) returning pointer to char
+```
 
 ## GDB
 
-使用 GDB 这类调试工具可以大幅度提升我们编写代码、除错的能力 :dog:
-
-- video: [Linux basic anti-debug](https://www.youtube.com/watch?v=UTVp4jpJoyc)
-- video: [C Programming, Disassembly, Debugging, Linux, GDB](https://www.youtube.com/watch?v=twxEVeDceGw)
-- [rr](http://rr-project.org/) (Record and Replay Framework)
-  - video: [Quick demo](https://www.youtube.com/watch?v=hYsLBcTX00I)
-  - video: [Record and replay debugging with "rr"](https://www.youtube.com/watch?v=ytNlefY8PIE)
+- slideshare: [GDB Rocks!](http://www.slideshare.net/chenkaie/gdb-rocks-16951548)
+- slideshare: [Introduction to gdb](https://www.slideshare.net/slideshow/introduction-to-gdb-3790833/3790833)
+- IBM: [Kernel command using Linux system calls](http://www.staroceans.org/kernel-and-driver/%5BIBM%5D%20Kernel%20command%20using%20Linux%20system%20calls%20%5B2007%5D.pdf)
 
 ## C23
 
-上一个 C 语言标准是 C17，正式名称为 ISO/IEC 9899:2018，是 2017 年准备，2018年正式发布的标准规范。C23 则是目前正在开发的规格，其预计新增特性如下:
-
-- `typeof`: 由 GNU extension 转正，用于实作 `container_of` 宏
-- `call_once`: 保证在 concurrent 环境中，某段程式码只会执行 1 次
-- `char8_t`: Unicode friendly `u8"💣"[0]`
-- `unreachable()`: 由 GNU extension 转正，提示允许编译器对某段程式码进行更激进的最佳化
-- `= {}`: 取代 `memset` 函数调用
-- ISO/IEC 60559:2020: 最新的 IEEE 754 浮点数运算标准
-- `_Static_assert`: 扩充 C11 允许单一参数
-- 吸收 C++11 风格的 attribute 语法，例如 `nodiscard`, `maybe_unused`, `deprecated`, `fallthrough`
-- 新的函数: `memccpy()`, `strdup()`, `strndup()` ——— 类似于 POSIX、SVID中 C 函数库的扩充
-- 强制规范使用二补数表示整数
-- 不支援 [K&R 风格的函数定义](https://stackoverflow.com/questions/3092006/function-declaration-kr-vs-ansi)
-- 二进制表示法: `0b10101010` 以及对应 printf() 的 `%b` (在此之前 C 语言是不支援二进制表示法的 :rofl:)
-- Type generic functions for performing checked integer arithmetic (Integer overflow)
-- `_BitInt(N)` and `UnsignedBitInt(N)` types for bit-precise integers
-- `#elifdef` and `#elifndef`
-- 支持在数值中间加入分隔符，易于阅读，例如 `0xFFFF'FFFF`
-
-{{< admonition info >}}
-- [Ever Closer - C23 Draws Nearer](https://thephd.dev/ever-closer-c23-improvements)
-- [C23 is Finished: Here is What is on the Menu](https://thephd.dev/c23-is-coming-here-is-what-is-on-the-menu)
-{{< /admonition >}}
+- [A cheatsheet of modern C language and library features.](https://github.com/AnthonyCalandra/modern-c-features)
 
 ## References
 

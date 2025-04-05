@@ -62,17 +62,47 @@ durations: static, thread, automatic, and allocated.
 
 ### comparsion
 
-迭代器 (iterators) 如果类型相同 (指实现的 `type Item` 相同)，可以进行比较而无需将迭代器 collect 为指定的相同容器。
+迭代器 (iterators) 如果类型相同 (指实现的 `type Item` 相同)，可以进行比较而无需将迭代器 collect 为指定的相同容器。但这要求迭代器实现了 `==` 运算符，所以更通用的方法是使用迭代器的 [eq](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.eq) 方法。
 
 ```rs
 let haystack = "a b c d e";
 let letters = StrSplit::new(haystack, " ");
-assert!(letters.eq(vec!["a", "b", "c", "d", "e"].into_iter()));
+assert!(letters, vec!["a", "b", "c", "d", "e"].into_iter());
 ```
 
 ### cargo check
 
 cargo check 可以给出更简洁的提示，例如相对于编译器给出的错误信息，它会整合相同的错误信息，从而提供简洁切要的提示信息。而且它是一个静态分析工具，不需要进行编译即可给出提示，所以速度会比编译快很多，在大型项目上尤为明显。
+
+### _
+
+`_` 即占位符，仅当编译器拥有唯一的推断时，用于让编译器使用推断结果进行替换，用于类型和生命周期的推断。
+
+```rs
+struct Foo<'a> {
+    s: &'a str,
+}
+
+impl Foo<'_> {
+    ...
+}
+
+let xs: Vec<_> = [7u8; 5];
+```
+
+### impl
+
+在 impl 后需要进行生命周期标注的理由与泛型相同，因为生命周期也是一种类型系统。
+
+```rs
+// generic
+struct Foo<T> {...}
+impl<T> Foo<T> {...}
+
+// lifetime
+struct Foo<'a> {...}
+impl<'a> Foo<'a> {...}
+```
 
 ### ref
 
@@ -84,7 +114,7 @@ if let Some(ref mut remainder) = self.remainder {...}
 
 `ref` 的作用配合 `if let` 语句体的逻辑可以体会到 pointer of pointer 的美妙之处。
 
-因为在 pattern match 中形如 `&mut` 这类也是用于 pattern match 的，不能用于获取 reference，这也是为什么需要使用 `ref mut` 这类语法来获取 reference 的原因。
+因为在 pattern match 中形如 `&mut` 这种类型是用于 pattern match 的 (在模式匹配中只有值才能被绑定)，不能用于获取 reference，这也是为什么需要使用 `ref mut` 这类语法来获取模式中值的引用 (reference)。
 
 ### operator ?
 

@@ -296,7 +296,9 @@ YouTube: [GC in C](https://www.youtube.com/playlist?list=PLpM-Dvs8t0VYuYxRxjfnkd
 
 {{< image src="/images/c/heap.drawio.png" >}}
 
-`heap_alloc` 的作用是收集在 heap 中 allocated 的块能索引到的块，如果在 collect 后 heap 存在不能被索引到的块，则对这些块进行 free 操作；但是这个 GC 操作也依赖于 free 操作，因为没法对 stack 进行 collect 操作而 stack 的变量可以索引 heap 的块，即 stack 可以索引 heap 的块，heap 的块也可以索引其它 heap 的块，`heap_collect` 针对的是后者，而被 stack 索引的 heap 的块必须通过 `heap_free` 手动进行释放 (`heap_collect` 防止了因为 `heap_free` 而导致的 [Dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer))，即将 stack 作为 Garbage collections 的 root。
+`heap_alloc` 的作用是收集在 heap 中 allocated 的块能索引到的块，如果在 collect 后 heap 存在不能被索引到的块，则对这些块进行 free 操作；~~但是这个 GC 操作也依赖于 free 操作，因为没法对 stack 进行 collect 操作而 stack 的变量可以索引 heap 的块，即 stack 可以索引 heap 的块，heap 的块也可以索引其它 heap 的块，`heap_collect` 针对的是后者，而被 stack 索引的 heap 的块必须通过 `heap_free` 手动进行释放 (`heap_collect` 防止了因为 `heap_free` 而导致的 [Dangling pointer](https://en.wikipedia.org/wiki/Dangling_pointer))，即将 stack 作为 Garbage collections 的 root。~~
+
+`heap_collect` 可以对 stack 和 heap 上的指针进行 collect，并通过递归实现可抵达内存区域的记录（本质上是 DFS），进而对无法抵达的被分配的内存区域进行释放。
 
 如果允许分配 0 字节的内存空间，那么会造成分配的不同内存块的起始地址一样的情形，实作时应当避免这种情形:
 
@@ -340,6 +342,8 @@ void *p = malloc(size);
 //    e.g. *(uint64_t *)p = 64;
 ```
 
+使用 GCC 的内置函数 `__builtin_frame_address()` 对栈上的内容进行 collect，但这也导致了需要使用 GCC 才能构建这个项目。
+
 ### References
 
 - IBM: [Data alignment: Straighten up and fly right](https://developer.ibm.com/articles/pa-dalign/)
@@ -347,3 +351,4 @@ void *p = malloc(size);
 - Wikipedia: [XOR linked list](https://en.wikipedia.org/wiki/XOR_linked_list), [Binary search](https://en.wikipedia.org/wiki/Binary_search)
 - Stack Overflow: [Is there any difference between using char (plain char) or signed/unsigned char to store characters in C?](https://stackoverflow.com/questions/74766608/is-there-any-difference-between-using-char-plain-char-or-signed-unsigned-char)
 - Stack Overflow: [What does "jq" stand for?](https://stackoverflow.com/questions/56111140/what-does-jq-stand-for)
+- Stack Overflow: [Print out value of stack pointer](https://stackoverflow.com/questions/20059673/print-out-value-of-stack-pointer)
