@@ -14,7 +14,6 @@ license:
 comment: false
 weight: 0
 tags:
-  - Sysprog
   - C
 categories:
   - 你所不知道的 C 语言
@@ -39,9 +38,11 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-> If I had eight hours to chop down a tree, I’d spend six hours sharpening my axe.
+{{< admonition type=abstract title="Abstract" >}}
+If I had eight hours to chop down a tree, I\'d spend six hours sharpening my axe.
 
-> 工欲善其事，必先利其器
+工欲善其事，必先利其器
+{{< /admonition >}}
 
 <!--more-->
 
@@ -86,6 +87,8 @@ struct Foo foo = {
 ```
 
 ## 标准 / 规格书
+
+规格书 (PDF): [C99](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf) -> [C11](https://www.open-std.org/jtc1/sc22/WG14/www/docs/n1570.pdf)
 
 阅读 C 语言规格书可以让你洞察本质，不在没意义的事情上浪费时间，例如在某乎大肆讨论的 [C 语言中 int main() 和 void main() 有何区别？](https://www.zhihu.com/question/60047465)
 

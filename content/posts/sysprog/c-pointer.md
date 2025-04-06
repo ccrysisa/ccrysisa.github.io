@@ -14,7 +14,6 @@ license:
 comment: false
 weight: 0
 tags:
-  - Sysprog
   - C
   - Pointer
 categories:
@@ -40,20 +39,17 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-指针 扮演着 内存 (Memory) 和 物件 (Object) 之间的桥梁
+{{< admonition type=abstract title="Abstract" >}}
+「指针 (Pointer)」扮演着「内存 (Memory)」和「物件 (Object)」之间的桥梁
+{{< /admonition >}}
 
 <!--more-->
 
-## 基本概念
-
-Pointers --- variables store address of another variable
-
 ## 前言杂谈
 
-[Let’s learn programming by inventing it](https://www.youtube.com/watch?v=l5Mp_DEn4bs) [CppCon 2018] :white_check_mark:
+Ólafur Waage 在 CppCon 2018 的 5 分钟演讲 [Let\'s learn programming by inventing it](https://www.youtube.com/watch?v=l5Mp_DEn4bs) 借用 K&R C 的目录告诉我们即使不会指针，亦可掌握 C 语言的大部分功能。在 K&R 一书中，直到 93 页才开始谈论指针 (Pointer)，而全书总计 185 页，所以大概是在全书 $50.27\\%$ 的位置才开始讲指针 (Pointer)。所以即使不学指针 (Pointer)，你还是能够掌握 C 语言的一半内容，但是 C 语言的核心正是指针 (Pointer) 因为其通过指针 (Pointer) 打通了高级程序语言和机器硬件的通道。
 
-> 在 K&R 一书中，直到 93 页才开始谈论 pointer，而全书总计 185 页，所以大概是在全书 $50.27\\%$ 的位置才开始讲 pointer。所以即使不学 pointer，你还是能够掌握 $~50\\%$ 的 C 语言的内容，但是 C 语言的核心正是 pointer，所以 Good Luck :rofl:
-
+---
 
 [godbolt](http://gcc.godbolt.org/) 可以直接在网页上看到，源代码由各类 compiler 生成的 Assembly Code
 
@@ -391,5 +387,5 @@ C99 6.3.2.1 footnote
 
 ## References
 
-- {{< link href="https://hackmd.io/@sysprog/c-pointer" content="你所不知道的 C 语言: 指针篇" external-icon=true >}}   
-- {{< link href="https://www.bilibili.com/video/BV1bo4y1Z7xf" content="4 小时彻底掌握 C 指针" external-icon=true >}}   
+- 你所不知道的 C 语言: [指针篇](https://hackmd.io/@sysprog/c-pointer)
+- bilibili: [4 小时彻底掌握 C 指针](https://www.bilibili.com/video/BV1bo4y1Z7xf)

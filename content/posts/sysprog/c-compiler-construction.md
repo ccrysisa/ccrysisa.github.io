@@ -489,7 +489,7 @@ sp = (int *)((int)stack + poolsize);
 
 ## 实作案例: Virtual Machine in C
 
-Tsoding 上传的 {{< link href="https://www.youtube.com/playlist?list=PLpM-Dvs8t0VY73ytTCQqgvgCWttV3m8LM" content="Virtual Machine in C" external-icon=true >}}
+Tsoding 上传的 [Virtual Machine in C](https://www.youtube.com/playlist?list=PLpM-Dvs8t0VY73ytTCQqgvgCWttV3m8LM) 系列视频。
 
 {{< timeline placement=top >}}
 events:
@@ -612,4 +612,13 @@ C 语言的 `inline` 关键字的作用是由编译器 implementation define 的
 Stack Overflow:
 
 - [What is a flexible array member in a struct?](https://stackoverflow.com/questions/68769314/what-is-a-flexible-array-member-in-a-struct)
- 
+
+## 实作案例: Creating a Compiler
+
+Pixeled 上传的 [Creating a Compiler](https://www.youtube.com/playlist?list=PLUDlas_Zy_qC7c5tCgTMYq2idyyT241qs) 系列视频。
+
+{{< image src="/images/c/compiler.drawio.png" >}}
+
+### References
+
+- [Why would I use NASM over GNU Assembler (GAS)?](https://stackoverflow.com/questions/65436403/why-would-i-use-nasm-over-gnu-assembler-gas)

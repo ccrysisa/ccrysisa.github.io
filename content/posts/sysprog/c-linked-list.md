@@ -1,5 +1,5 @@
 ---
-title: "你所不知道的 C 语言: linked list 和非连续记忆体"
+title: "你所不知道的 C 语言: linked list 和非连续内存"
 subtitle:
 date: 2024-02-03T10:44:56+08:00
 # draft: true
@@ -14,9 +14,8 @@ license:
 comment: false
 weight: 0
 tags:
-  - Sysprog
   - C
-  - Linked List
+  - List
 categories:
   - 你所不知道的 C 语言
 hiddenFromHomePage: false
@@ -40,11 +39,10 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-> 无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。
+无论是操作系统核心、C 语言函数库内部、程序开发框架，到应用程序，都不难见到 linked list 的身影，包含多种针对性能和安全议题所做的 linked list 变形，又还要考虑应用程序的泛用性 (generic programming)，是很好的进阶题材。
 
 <!--more-->
 
-- {{< link href="https://hackmd.io/@sysprog/c-linked-list" content="原文地址" external-icon=true >}}   
 
 ## Linux 核心的艺术
 
@@ -400,3 +398,7 @@ void shuffle(node_t **head)
 ```
 
 主要是修改了新链表 `new` 那一部分，只需要一个 pointer to pinter `new_tail` 就可以避免条件判断。
+
+## References
+
+- 你所不知道的 C 語言: [linked list 和非连续内存](https://hackmd.io/@sysprog/c-linked-list)
