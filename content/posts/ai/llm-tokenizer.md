@@ -116,9 +116,14 @@ index      content
 
 某一个模式 (pattern) 在表中所对应的下标 (index) 与其 `l` 字段数值相同，则表示该模式不可分解，是语法树的叶子节点，而该模式的 `r` 字段并不重要，可忽略该字段的数值。
 
+### Graphviz
+
+使用 Graphviz 对 BPE 算法在压缩过程中隐式产生的规则 (Rule) 生成有向图。
+
 ## References
 
 - Tsoding: [LLM Tokenizer in C (BPE)](https://www.youtube.com/playlist?list=PLpM-Dvs8t0VaIVKmfGBztiqaIyMHIH-3Y)
 - Wikipedia: [Byte pair encoding (BPE)](https://en.wikipedia.org/wiki/Byte_pair_encoding)
 - Wikipedia: [Backus–Naur form (BNF)](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form)
 - GitHub: [stb](https://github.com/nothings/stb)
+- [Graphviz](https://graphviz.org/)

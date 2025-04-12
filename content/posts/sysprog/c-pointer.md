@@ -45,98 +45,105 @@ repost:
 
 <!--more-->
 
-## 前言杂谈
+## 基本概念
 
 Ólafur Waage 在 CppCon 2018 的 5 分钟演讲 [Let\'s learn programming by inventing it](https://www.youtube.com/watch?v=l5Mp_DEn4bs) 借用 K&R C 的目录告诉我们即使不会指针，亦可掌握 C 语言的大部分功能。在 K&R 一书中，直到 93 页才开始谈论指针 (Pointer)，而全书总计 185 页，所以大概是在全书 $50.27\\%$ 的位置才开始讲指针 (Pointer)。所以即使不学指针 (Pointer)，你还是能够掌握 C 语言的一半内容，但是 C 语言的核心正是指针 (Pointer) 因为其通过指针 (Pointer) 打通了高级程序语言和机器硬件的通道。
 
----
+Stack Overflow 上一个关于指针操作的基本问题: [How to increment a pointer address and pointer\'s value?](https://stackoverflow.com/questions/8208021/how-to-increment-a-pointer-address-and-pointers-value/8208106#8208106)
 
-[godbolt](http://gcc.godbolt.org/) 可以直接在网页上看到，源代码由各类 compiler 生成的 Assembly Code
+{{< admonition todo >}}
 
-[How to read this prototype?](https://stackoverflow.com/questions/15739500/how-to-read-this-prototype) [Stack Overflow] :white_check_mark:
-{{< details "Note" >}}
-
-这个问题是关于 `signal` 系统调用的函数原型解读，里面的回答页给出了很多对于指针，特别是 *函数指针* 的说明，下面节选一些特别有意思的回答：
-
-{{< admonition quote >}}
-The whole thing declares a function called `signal`:
-- `signal` takes an int and a function pointer
-  - this function pointer takes an `int` and returns `void`
-- `signal` returns a function pointer
-  - `this function pointer takes an `int` and returns a `void`
-That's where the last int comes in.
-
-You can use [the spiral rule](https://c-faq.com/decl/spiral.anderson.html) to make sense of such declarations, or the program `cdecl(1)`.
-{{< /admonition >}}
-
-The whole thing declares a function called `signal`:
-这里面提到了 [the spiral rule](https://c-faq.com/decl/spiral.anderson.html) 这是一个用于解析 C 语言中声明 (declaration) 的方法；另外还提到了 `cdecl` 这一程序，它也有类似的作用，可以使用英文进行声明或者解释。
-
-{{< admonition quote >}}
-Find the leftmost identifier and work your way out, remembering that `[]` and `()` bind before `*`; IOW, `*a[]` is an array of pointers, `(*a)[]` is a pointer to an array, `*f()` is a function returning a pointer, and `(*f)()` is a pointer to a function. Thus,
+搭配 [godbolt](http://gcc.godbolt.org/) 解读指针操作对应的汇编指令:
 
 ```c
-void ( *signal(int sig, void (*handler)(int)) ) (int);
+(*(void(*)())0)();
+// or equal
+typedef void (*funcptr)();
+(* (funcptr) 0)();
 ```
 
-breaks down as
-
-```c
-        signal                                          -- signal
-        signal(                               )         -- is a function
-        signal(    sig                        )         -- with a parameter named sig
-        signal(int sig,                       )         --   of type int
-        signal(int sig,        handler        )         -- and a parameter named handler
-        signal(int sig,       *handler        )         --   which is a pointer
-        signal(int sig,      (*handler)(   )) )         --   to a function
-        signal(int sig,      (*handler)(int)) )         --   taking an int parameter
-        signal(int sig, void (*handler)(int)) )         --   and returning void
-       *signal(int sig, void (*handler)(int)) )         -- returning a pointer
-     ( *signal(int sig, void (*handler)(int)) )(   )    -- to a function
-     ( *signal(int sig, void (*handler)(int)) )(int)    --   taking an int parameter
-void ( *signal(int sig, void (*handler)(int)) )(int);   --   and returning void
-```
 {{< /admonition >}}
 
-这一回答强调了 `*` 和 `[]`、`()` 优先级的关系，这在判断数组指针、函数指针时是个非常好用的技巧。
-{{< /details >}}
+公司的类型体操面试题: 解释下面代码的类型声明
 
-Rob Pike 于 2009/10/30 的 [Golang Talk](https://talks.golang.org/2009/go_talk-20091030.pdf) [PDF]
+```c++
+void **(*d) (int &, char **(*)(char *, char **));
+```
 
-David Brailsford 教授解说影片 [Essentials: Pointer Power! - Computerphile](https://www.youtube.com/watch?v=t5NszbIerYc) [YouTube]
-
-## 阅读 C 语言规格书
-
-一手资料的重要性毋庸置疑，对于 C 语言中的核心概念 ***指针***，借助官方规格书清晰概念是非常重要的。
-
-C99 [6.2.5] ***Types***
-
-> An array type of unknown size is an incomplete type. It is completed, for an identifier of that type, by specifying the size in a later declaration (with internal or external linkage). A structure or union type of unknown content is an incomplete type. It is completed, for all declarations of that type, by declaring the same structure or union tag with its defining content later in the same scope.
-
-*incomplete type* 和 *linkage* 配合可以进行 forward declaration，如果搭配 pointer 则可以进一步，在无需知道 object 内部细节即可进行程序开发。
-
-> Array, function, and pointer types are collectively called derived declarator types. A declarator type derivation from a type T is the construction of a derived declarator type from T by the application of an array-type, a function-type, or a pointer-type derivation to T.
-
+[signal](http://man7.org/linux/man-pages/man2/signal.2.html) 系统调用也用到了函数指针来简化类型声明，Stack Overflow 上的问题 [How to read this prototype?](https://stackoverflow.com/questions/15739500/how-to-read-this-prototype) 提供来许多视角来解读指针相关的类型声明。
 
 {{< admonition >}}
-*derived declarator types*  表示衍生的声明类型，因为 array, function, pointer 本质都是地址，而它们的类型都是由其它类型衍生而来的，所以可以使用这些所谓的 *derived declarator types* 来提前声明 object，表示在某个地址会存储一个 object，这也是为什么这些类型被规格书定义为 *derived declarator types*。
+C 语言中关于指针的类型声明让人头脑发昏的原因是，在 C 语言中函数和数组的类型声明，存在参数位于函数名或变量名的右侧，导致对这函数或数组使用指针引用时，这些指针类型的右侧也存在参数。若是将类型的相关参数全部置于函数名或变量名的左侧那么解读指针类型相对而言会更简单清晰一些。例如:
+
+```c
+void ( *signal(int sig, void (*handler)(int)) ) (int)
+// swap parameter lists and array declarators with the thing to their left 
+// and then read the declaration backwards
+void (int)( *(int sig, void (int)(*handler))signal )
+```
+
+[the spiral rule](https://c-faq.com/decl/spiral.anderson.html) 是一个用于解析 C 语言中声明 (declaration) 的方法， `cdecl` 这一程序使用的就是类似的方法对 C 语言中的类型声明进行解释。这个规则对理解 `const char *p` 和 `char *const p` 十分有帮助。可以对照 [K&R 2nd](http://cslabcms.nju.edu.cn/problem_solving/images/c/cc/The_C_Programming_Language_%282nd_Edition_Ritchie_Kernighan%29.pdf) 的 5.12 Complicated Declaration 所给的例子进行练习该声明解析规则。
 {{< /admonition >}}
 
-- **lvalue**: Locator value
+David Brailsford 教授解说影片 [Essentials: Pointer Power!](https://www.youtube.com/watch?v=t5NszbIerYc) 和文章 [Everything you need to know about pointers in C](https://boredzo.org/pointers/) 可以用于补充指针的基本知识。
 
-{{< admonition danger >}}
-C 语言里只有 ***call by value***
+## 语言规格
+
+规格书 (PDF): [C99](https://www.open-std.org/jtc1/sc22/wg14/www/docs/n1256.pdf) -> [C11](https://www.open-std.org/jtc1/sc22/WG14/www/docs/n1570.pdf)
+
+C 语言中的 pointer 很重要，但 object 也很重要，这两个概念是一体两面的。注意 object != object-oriented，前者的重点在于 **数据的表示方法**，而后者的重点在于 **everything is object**，是一种思维范式。
+
+{{< admonition type=quote title="C99 3.14 - *object*" >}}
+region of data storage in the execution environment, the contents of which can represent values
 {{< /admonition >}}
 
-## void & void *
+即 C 语言的 object 是指在执行时期，数据存储的区域，其内容可以明确地表示为数值。了解这个概念之后，就可以清晰地认知到在 C 语言中 (int)7 和 (float)7.0 是不等价的，具体解释可以延伸阅读 CSAPP 的第二章。
 
-C89 之前，函数如果没有标注返回类型，则默认返回类型 `int`，返回值 0。但由于这样既可以表示返回值不重要，也可以表示返回值为 0，这会造成歧义，所以引进了 `void`。
+{{< admonition type=quote title="C99 6.2.4 - *Storage durations of objects*" >}}
+- An object has a storage duration that determines its lifetime. There are three storage durations: static, automatic, and allocated.
 
-`void *` 只能表示地址，而不能对所指向的地址区域的内容进行操作。因为通过 `void *` 无法知道所指向区域的 size，所以无法对区域的内容进行操作，必须对 `void *` 进行 ***显示转换*** 才能操作指向的内容。（除此之外，**针对于 gcc**，对于指针本身的操作，`void *` 与 `char *` 是等价的，即对于 `+/- 1` 这类的操作，二者的偏移量是一致的 (这是 GNU extensions 并不是 C 语言标准)；对于其它的编译器，建议将 `void *` 转换成 `char *` 再进行指针的加减运算）
+- The lifetime of an object is the portion of program execution during which storage is guaranteed to be reserved for it. An object exists, has a constant address and retains its last-stored value throughout its lifetime. If an object is referred to outside of its lifetime, the behavior is undefined.
 
-### Alignment
+- The value of a pointer becomes indeterminate when the object it points to reaches the end of its lifetime.
 
-这部分原文描述不是很清晰，`2-byte aligned` 图示如下：
+- An object whose identifier is declared with no linkage and without the storage-class specifier static has automatic storage duration.
+{{< /admonition >}}
+
+C 语言中的 object 也具备生命周期 (lifetime)，但比较简单，就是存放在数据段的全局变量、栈上变量和堆上变量这三种，另外需要注意在 C 语言中只有 **call-by-value** 的操作。
+
+{{< admonition type=quote title="C99 6.2.5 - *Types*" >}}
+- A pointer type may be derived from a function type, an object type, or an incomplete type, called the referenced type. A pointer type describes an object whose value provides a reference to an entity of the referenced type. A pointer type derived from the referenced type T is sometimes called \"pointer to T\". The construction of a pointer type from a referenced type is called \"pointer type derivation\".
+
+- Arithmetic types and pointer types are collectively called scalar types. Array and structure types are collectively called aggregate types.
+
+- An array type of unknown size is an incomplete type. It is completed, for an identifier of that type, by specifying the size in a later declaration (with internal or external linkage). A structure or union type of unknown content is an incomplete type. It is completed, for all declarations of that type, by declaring the same structure or union tag with its defining content later in the same scope.
+
+- Array, function, and pointer types are collectively called derived declarator types. A declarator type derivation from a type T is the construction of a derived declarator type from T by the application of an array-type, a function-type, or a pointer-type derivation to T.
+
+- A pointer to void shall have the same representation and alignment requirements as a pointer to a character type.
+{{< /admonition >}}
+
+算术操作例如 `++`, `--`, `+=`, `-=` 等都是针对 scalar types 而言的，所以指针的 `++` 操作有其自己的含义，表示后移一个单位，而不是直接对其数值加一。
+
+Incomplete Type 指的是不能明确占用空间大小的类型，类似于 Rust 中的切片类型 `T[]`，类似的，没法建立实例因为大小未知，但是可以使用指针对其进行引用，因为指针的大小是已知的，另外还可以在 C/C++ 中使用 Incomplete Type 来使用 forward declaration 技巧，使用该技巧可以兼顾二进制的相容性 (binary compatibility)，因为结构体类型的变化并不会影响作为函数参数的指针类型的变化，因此该函数在二进制层面得以保持不变。
+
+array、function 以及 pointer 这三者在 C 语言中都属于 derived declarator types，因为它们的重点都在于对地址的操作。另外 `void *` 和 `char *` 属于可以互换的表述，即这两个指针类型作为 object 的内容是一致的（此外在 GNU C 中，`void *` 除了并不能使用 `*` 解引用运算之外，其它操作均与 `char *` 相同，包括 `++`, `--`, `+=` 等操作，后面会说）。`void *` 的优势在于其天然地表示以字节 (Byte) 为单位的内存地址，并且仅能表示地址，不能进行解引用操作。
+
+{{< admonition tip >}}
+在 21 世纪，`(*p).x` 和 `p->x` 效果等同，跟 `i++` 和 `++i` 类似，都只是之前处理器和编译器性能有限时的妥协产物。
+{{< /admonition >}}
+
+## 与生俱来的机制
+
+由于通用计算机是由处理器和内存组成的 **存取——执行** 的计算模型，所以其天然的需要指针，以在内存和寄存器之间进行存取操作，所以 C 语言天然地就与通用计算机适配，也因此是汇编语言的简化，因为它延续了对机器直接操作的汇编语言的逻辑。
+
+> ***指標，不僅是 C 語言的靈魂，更是儲存-執行模型中不可或缺的存在。***
+
+{{< admonition type=quote title="GNU C Language Manual 14.10 - *Pointer Arithmetic*" >}}
+In standard C, addition and subtraction are not allowed on `void *`, since the target type\'s size is not defined in that case. Likewise, they are not allowed on pointers to function types. However, these operations work in GNU C, and the \"size of the target type\" is taken as 1 byte.
+{{< /admonition >}}
+
+指针操作还可以帮忙解决某些架构因为内存对齐而导致的异常，并且与汇编语言的思路一致。`2-byte aligned` 图示如下：
 
 {{< image src="/images/c/2-byte-aligned.svg" caption="Alignment" >}}
 
@@ -161,29 +168,23 @@ uint32_t value = *(uint8_t *) ptr
                  | ((*(uint8_t *) (ptr + 3)) << 24);
 ```
 
-{{< admonition info >}}
-- [ ] [The Lost Art of Structure Packing](http://www.catb.org/esr/structure-packing/)
+## void 和 void *
+
+C89 之前，函数如果没有标注返回类型，则默认返回类型 `int`，返回值 0。但由于这样既可以表示返回值不重要，也可以表示返回值为 0，这会造成歧义，所以引进了 `void`，方便使用函数声明对函数的使用 (特别是返回值) 进行检查。
+
+`void *` 只能表示地址，而不能对所指向的地址区域的内容进行操作。因为通过 `void *` 无法知道所指向区域的 size，所以无法对区域的内容进行操作，必须对 `void *` 进行 ***显示转换*** 才能操作指向的内容以及对指针自身进行递增或递减操作。在 GNU C 中，`void *` 除了并不能使用 `*` 解引用运算之外，其它操作均与 `char *` 相同，包括 `++`, `--`, `+=` 等操作。
+
+`void *` 作为指针表示地址也不是万能的:
+
+{{< admonition type=quote title="C99 6.3.2.3 - *Pointers*" >}}
+A pointer to a function of one type may be converted to a pointer to a function of another type and back again; the result shall compare equal to the original pointer. If a converted pointer is used to call a function whose type is not compatible with the pointed-to type, the behavior is undefined.
 {{< /admonition >}}
 
-### 规格书中的 Pointer
+C99/C11 均不保证 pointers to data 例如 `void *` 或 `char *` 与 pointers to functions 之间的转换是正确的，这种转换操作反而属于 undefined behavior (UB)，所以在 C 语言程序中使用 `void *` 来存放函数的地址，然后通过指针类型转换为函数指针再进行调用的结果是未定义的，不建议这么做，推荐直接使用与函数声明兼容的函数指针来存放函数的地址，并进行调用。
 
-C99 [6.3.2.3] ***Pointers***
+导致这个的原因之一是之前所提的 Alignment，转换后的指针类型不一定满足原有类型的 Alignment 要求，这种情况下进行 dereference 会导致异常。例如将一个 `char *` 指针转换成 `int *` 指针，然后进行 deference 在某些架构有可能会产生异常，而程序语言是架构无关的，所以没有将这种指针类型之间转换合法列入语言标准。
 
-> A pointer to a function of one type may be converted to a pointer to a function of another
-type and back again; the result shall compare equal to the original pointer. Ifaconverted
-pointer is used to call a function whose type is not compatible with the pointed-to type,
-the behavior is undefined.
-
-C11 [6.3.2.3] ***Pointers***
-
->  A pointer to a function of one type may be converted to a pointer to a function of another
-type and back again; the result shall compare equal to the original pointer. If a converted
-pointer is used to call a function whose type is not compatible with the referenced type,
-the behavior is undefined.
-
-**C99 和 C11 都不保证 pointers (whose type is not compatible with the *pointed-to / referenced* type) 之间的转换是正确的。**
-
-导致这个的原因正是之前所提的 Alignment，转换后的指针类型不一定满足原有类型的 Alignment 要求，这种情况下进行 dereference 会导致异常。例如将一个 `char *` 指针转换成 `int *` 指针，然后进行 deference 有可能会产生异常。
+---
 
 ## Pointers vs. Arrays
 

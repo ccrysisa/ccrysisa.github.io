@@ -342,6 +342,8 @@ void *p = malloc(size);
 //    e.g. *(uint64_t *)p = 64;
 ```
 
+使用 Tsoding 的 [jim](https://github.com/tsoding/jim) 库来对二叉树结构进行 JSON 格式的可视化。
+
 使用 GCC 的内置函数 `__builtin_frame_address()` 对栈上的内容进行 collect，但这也导致了需要使用 GCC 才能构建这个项目。
 
 ### References

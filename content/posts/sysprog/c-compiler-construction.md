@@ -489,7 +489,7 @@ sp = (int *)((int)stack + poolsize);
 
 ## 实作案例: Virtual Machine in C
 
-Tsoding 上传的 [Virtual Machine in C](https://www.youtube.com/playlist?list=PLpM-Dvs8t0VY73ytTCQqgvgCWttV3m8LM) 系列视频。
+Tsoding 上传的 [Virtual Machine in C](https://www.youtube.com/playlist?list=PLpM-Dvs8t0VY73ytTCQqgvgCWttV3m8LM) 系列视频:
 
 {{< timeline placement=top >}}
 events:
@@ -498,6 +498,8 @@ events:
   - timestamp: Day 2
     content: 实现反汇编器、支持符号跳转以及 [NaN-boxing](https://en.wikipedia.org/wiki/NaN#Canonical_NaN) 以便后续支持动态类型
   - timestamp: Day 3
+    content: 使用 `union` 支持浮点数存放、支持解析汇编的浮点数以及使用汇编计算 [Euler\'s Number](https://en.wikipedia.org/wiki/E_(mathematical_constant)) 的近似值
+  - timestamp: Day 4
     content: TODO
 {{< /timeline >}}
 
@@ -507,9 +509,7 @@ events:
 
 C 语言没有编译时期计算常数函数值的机制，但是可以使用宏来实现。
 
-通过 gcc 的参数，可以实现类似 Rust 的强大编译时期检查:
-
-- Stack Overflow: [GCC switch on enum, retain missing warning but use default](https://stackoverflow.com/questions/5402745/gcc-switch-on-enum-retain-missing-warning-but-use-default)
+通过 gcc 的参数，可以实现类似 Rust 的强大编译时期检查: [GCC switch on enum, retain missing warning but use default](https://stackoverflow.com/questions/5402745/gcc-switch-on-enum-retain-missing-warning-but-use-default)
 
 原视频在大概 2:35 时左右实现了使用 VM 来计算斐波那契数列，原理是在栈中不断累积斐波那契数，并通过复制指令来进行叠加，这导致了计算第 $N$ 个斐波那契数需要栈空间至少为 $N+1$。
 
@@ -523,9 +523,7 @@ $ vim -b xxx.bin
 :%!xxd
 ```
 
-C 语言的字符串打印表达能力也挺强大的:
-
-- Stack Overflow: [What is the meaning of "%-*.*s" in a printf format string?](https://stackoverflow.com/questions/23776824/what-is-the-meaning-of-s-in-a-printf-format-string)
+C 语言的字符串打印表达能力也挺强大的: [What is the meaning of "%-*.*s" in a printf format string?](https://stackoverflow.com/questions/23776824/what-is-the-meaning-of-s-in-a-printf-format-string)
 
 让 NOP 指令的枚举值为 0，可以让初始化为 0 的 VM 加载的程序全为 NOP 指令而不会导致其他问题出现。让 TRAP 的 OK 类型为 0 则是与 Linux 兼容 (返回 0 表示正常或成功)。
 
@@ -587,15 +585,13 @@ s111 1111 1xxx xxxx xxxx xxxx xxxx xxxx
 
 即 fraction 部分不重要 / 无关，所以可以将一些信息例如类型存储在这一部分，这就是所谓的 **NaN Boxing** 技术。动态语言经常使用这个技术，例如 Python、JavaScript，将类型信息存储在 NaN 的 fraction 部分以此来表示动态类型。例如在 64 位浮点数 `double` 中，fraction 部分共有 52 位，使用其中的 4 位来表示类型，剩下的 48 位可以存储一个指针，这样就实现了动态类型。使用 48 位表示指针利用了 x86_64 下虚拟地址空间的一个技巧:
 
-- Wikipedia: [x86-64](https://en.wikipedia.org/wiki/X86-64)
+Wikipedia: [x86-64](https://en.wikipedia.org/wiki/X86-64)
 
 > The AMD64 architecture defines a 64-bit virtual address format, of which the low-order 48 bits are used in current implementations.
 
 JavaScript V8 也使用到了这个技巧，非常的实用。
 
-C 语言的 `inline` 关键字的作用是由编译器 implementation define 的:
-
-- Stack Overflow: [https://stackoverflow.com/questions/31108159/what-is-the-use-of-the-inline-keyword-in-c](https://stackoverflow.com/questions/31108159/what-is-the-use-of-the-inline-keyword-in-c)
+C 语言的 `inline` 关键字的作用是由编译器 implementation define 的: [https://stackoverflow.com/questions/31108159/what-is-the-use-of-the-inline-keyword-in-c](https://stackoverflow.com/questions/31108159/what-is-the-use-of-the-inline-keyword-in-c)
 
 ### Day 3
 
@@ -609,9 +605,33 @@ C 语言的 `inline` 关键字的作用是由编译器 implementation define 的
 # define static_assert _Static_assert
 ```
 
+因为 `strtol` 这类函数不会解析与整数格式相关之外的字符，例如浮点 `.` 和次方标识 `E`，所以可以根据是否对字符串的字符完全解析完成来判断是否应该对字符串进行浮点数解析。
+
+```c
+char *endptr = NULL;
+long x = strtol(cstr, &endptr);
+if (endptr - cstr != strlen(cstr)) {
+    double y = strtod(cstr, &endptr);
+}
+```
+
+单纯的 stack-based 架构会导致只能使用存放在栈顶的那个变量，如果增加寄存器或类似作用的 `swap` 指令，则可以使用更多的变量。使用 `swap` 指令虽然可以使用更多变量，但是计算的主要变量还是存放在栈顶的那个变量。
+
+Wikipedia: [e (mathematical constant)](https://en.wikipedia.org/wiki/E_(mathematical_constant))
+
 Stack Overflow:
 
 - [What is a flexible array member in a struct?](https://stackoverflow.com/questions/68769314/what-is-a-flexible-array-member-in-a-struct)
+- [How to produce an approximation for "e" of user-defined decimal places](https://stackoverflow.com/questions/52725111/how-to-produce-an-approximation-for-e-of-user-defined-decimal-places)
+- [Approximate pi using series](https://stackoverflow.com/questions/59903586/approximate-pi-using-series)
+
+Linux manual page:
+
+- [strchr](https://man7.org/linux/man-pages/man3/strchr.3.html)
+- [strtod](https://man7.org/linux/man-pages/man3/strtod.3.html)
+- [strtol](https://man7.org/linux/man-pages/man3/strtol.3.html)
+
+### Day 4
 
 ## 实作案例: Creating a Compiler
 
@@ -622,3 +642,4 @@ Pixeled 上传的 [Creating a Compiler](https://www.youtube.com/playlist?list=PL
 ### References
 
 - [Why would I use NASM over GNU Assembler (GAS)?](https://stackoverflow.com/questions/65436403/why-would-i-use-nasm-over-gnu-assembler-gas)
+- [Linux System Call Table](https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md)

@@ -110,7 +110,7 @@ or equivalent; or in some other implementation-defined manner. Thus, int can be 
 
 C 语言中的 pointer 很重要，但 object 也很重要，这两个概念是一体两面的。注意 object != object-oriented，前者的重点在于 **数据的表示方法**，而后者的重点在于 **everything is object**，是一种思维范式。
 
-{{< admonition type=quote title="C99 3.14 object" >}}
+{{< admonition type=quote title="C99 3.14 - *object*" >}}
 region of data storage in the execution environment, the contents of which can represent values
 {{< /admonition >}}
 
