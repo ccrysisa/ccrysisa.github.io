@@ -13,6 +13,16 @@
   url: https://ivonblog.com/
   description: 歡迎來到Ivon的部落格，這裡是分享GNU/Linux情報、自由開源軟體、電腦手機資訊、人文思辨的所在。在這裡你會看到許多自由軟體的實際操作心得，以及將其運用在生活中的各種可能性。
 
+- nickname: matklad
+  avatar: https://avatars.githubusercontent.com/u/1711539?v=4
+  url: https://matklad.github.io/
+  description: I am Alex Kladov, a programmer who loves simple code and programming languages.
+
+- nickname: Phil Eaton
+  avatar: https://avatars.githubusercontent.com/u/3925912?v=4
+  url: https://eatonphil.com/
+  description: Hey! I'm Phil (he/him). In the past I've been a developer, a manager, and a cofounder. At companies as large as Oracle and as small as TigerBeetle. Today I'm a staff engineer working on Postgres products at EnterpriseDB.
+
 - nickname: Eli Bendersky
   avatar: https://avatars.githubusercontent.com/u/1130906?v=4
   url: https://eli.thegreenplace.net/
@@ -42,11 +52,6 @@
   avatar: https://avatars.githubusercontent.com/u/54889?v=4
   url: https://jamesmcm.github.io/
   description: Welcome to my personal website and blog. I'm a Data Engineer interested in Rust, Linux and Free Software, and primarily blog about FOSS contributions and other technical topics.
-
-- nickname: Alex Kladov
-  avatar: https://avatars.githubusercontent.com/u/1711539?v=4
-  url: https://matklad.github.io/
-  description: I am Alex Kladov, a programmer who loves simple code and programming languages.
 
 - nickname: Andrew Kelley
   avatar: https://andrewkelley.me/img/profile-flowers.jpg

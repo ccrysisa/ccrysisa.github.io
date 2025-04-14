@@ -500,7 +500,7 @@ events:
   - timestamp: Day 3
     content: 使用 `union` 支持浮点数存放、支持解析汇编的浮点数以及使用汇编计算 [Euler\'s Number](https://en.wikipedia.org/wiki/E_(mathematical_constant)) 的近似值
   - timestamp: Day 4
-    content: TODO
+    content: 支持函数调用，以及 TODO
 {{< /timeline >}}
 
 ### Day 1
@@ -632,6 +632,22 @@ Linux manual page:
 - [strtol](https://man7.org/linux/man-pages/man3/strtol.3.html)
 
 ### Day 4
+
+高级程序语言有语法机制来保证程序不会对机器进行破坏，但是接近机器码的汇编语言可以做到，例如在函数调用时往栈上加入变量，并且在函数调用结束后不将这些变量弹出栈 (即违背了栈上变量的生命周期)。
+
+Wikipedia: [x86 calling conventions](https://en.wikipedia.org/wiki/X86_calling_conventions)
+
+> In the context of the language C, function arguments are pushed on the stack in the right-to-left (RTL) order, i.e. the last argument is pushed first.
+
+Wikipedia: [Linear interpolation](https://en.wikipedia.org/wiki/Linear_interpolation)
+
+Wikipedia: [Foreign Function Interface (FFI)](https://en.wikipedia.org/wiki/Foreign_function_interface)
+
+{{< image src="/images/c/native-function-call.drawio.svg" >}}
+
+在这个项目中，一个虚拟机指令对应一块 C 语言代码 (进行解释执行)，而一个虚拟机汇编语言编写的函数对应一块虚拟机指令，所以如果使用虚拟机的汇编语言来实现 `malloc` 或 `free` 这样的复杂函数，会生成相当多的虚拟机指令 (对应相当多块的 C 语言代码)，导致解释执行效率很低，相反使用 native function call，将这些复杂函数对应于特殊的虚拟机指令，可以使得调用一次这些函数仅对应一个虚拟机指令，进而仅对应一块 C 语言代码。除此之外还避免了解释执行时因为分支预测导致的效能降低的问题，这部分的原理与 JIT 类似。
+
+Stack Overflow: [What is PRIu64 in C?](https://stackoverflow.com/questions/16859500/what-is-priu64-in-c)
 
 ## 实作案例: Creating a Compiler
 

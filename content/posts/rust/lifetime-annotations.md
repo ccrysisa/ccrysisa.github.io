@@ -56,7 +56,7 @@ An object has a storage duration that determines its lifetime. There are four st
 
 ## Rust 中的 lifetime
 
-推荐观看 YouTube 上的视频 [but what is 'a lifetime?](https://www.youtube.com/watch?v=gRAVZv7V91Q) 从不同的视角来重新认识 Rust 中的生命周期。
+推荐观看 YouTube 上的视频 [but what is \'a lifetime?](https://www.youtube.com/watch?v=gRAVZv7V91Q) 从不同的视角来重新认识 Rust 中的生命周期。
 
 ## 影片注解
 
@@ -180,9 +180,9 @@ impl<T> Apple<'_, T> {
 
 ## References
 
-- YouTube: [Crust of Rust: Lifetime Annotations](https://www.youtube.com/watch?v=rAl-9HwD858)
+- Jon Gjengset: [Crust of Rust: Lifetime Annotations](https://www.youtube.com/watch?v=rAl-9HwD858)
 - HackMD: [Crust of Rust: 筆記說明](https://hackmd.io/T6jGyghMS-Wq6F3ymCFJMg) / [Crust of Rust: Lifetime Annotations](https://hackmd.io/F8zEmei9Q6KmwOnQ5H1Vug)
-- bilibili: [Rust 生命周期专题 由浅入深理解 Rust lifetime](https://space.bilibili.com/50713701/lists/1453665)
+- bilibili: [Rust 生命周期专题 - 由浅入深理解 Rust lifetime](https://space.bilibili.com/50713701/lists/1453665)
 
 ## Appendix
 
