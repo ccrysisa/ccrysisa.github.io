@@ -149,6 +149,12 @@ uprobe 是一种用户空间探针，它允许在用户空间程序中动态插�
 
 eBPF 提供了两种环形缓冲区，可以用来将信息从 eBPF 程序传输到用户空间。第一个是 perf 环形缓冲区 (perf event array)，它至少从内核 4.15 开始就存在了；第二个是后来引入的 eBPF 环形缓冲区 (eBPF ring buffer)，它在兼容的同时解决了 BPF perf buffer 内存效率和事件重排问题，建议作为 BPF 程序向用户空间发送数据的默认选择。
 
+## BTF
+
+eBPF 程序依赖于 `vmlinux.h` 头文件，但是有些发行版的内核编译时并没有设定相应选项来生成该头文件，会导致在运行 eBPF 程序时遭遇错误: [[BUG]使用ecli运行时提示找不到 vmlinux BTF](https://github.com/eunomia-bpf/bpf-developer-tutorial/issues/118)
+
+此时需要参考文章 [Building the Linux kernel with BTF](https://medium.com/@suruti94/building-the-linux-kernel-with-btf-1a617cfb4a24) 和 [编译 deepin 主线内核](https://bbs.deepin.org/en/post/262451) 来重新编译 Linux 内核，使其支持 BTF 来运行 eBPF 程序。
+
 ## References
 
 - Linux 核心設計: [透過 eBPF 觀察作業系統行為](https://hackmd.io/@sysprog/linux-ebpf?type=view)

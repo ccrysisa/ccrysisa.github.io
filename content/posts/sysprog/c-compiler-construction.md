@@ -500,7 +500,9 @@ events:
   - timestamp: Day 3
     content: 使用 `union` 支持浮点数存放、支持解析汇编的浮点数以及使用汇编计算 [Euler\'s Number](https://en.wikipedia.org/wiki/E_(mathematical_constant)) 的近似值
   - timestamp: Day 4
-    content: 支持函数调用，以及 TODO
+    content: 支持函数调用，以及通过 [FFI](https://en.wikipedia.org/wiki/Foreign_function_interface) 来支持 native function call 以提升效率
+  - timestamp: Day 5
+    content: TODO
 {{< /timeline >}}
 
 ### Day 1
@@ -645,9 +647,34 @@ Wikipedia: [Foreign Function Interface (FFI)](https://en.wikipedia.org/wiki/Fore
 
 {{< image src="/images/c/native-function-call.drawio.svg" >}}
 
-在这个项目中，一个虚拟机指令对应一块 C 语言代码 (进行解释执行)，而一个虚拟机汇编语言编写的函数对应一块虚拟机指令，所以如果使用虚拟机的汇编语言来实现 `malloc` 或 `free` 这样的复杂函数，会生成相当多的虚拟机指令 (对应相当多块的 C 语言代码)，导致解释执行效率很低，相反使用 native function call，将这些复杂函数对应于特殊的虚拟机指令，可以使得调用一次这些函数仅对应一个虚拟机指令，进而仅对应一块 C 语言代码。除此之外还避免了解释执行时因为分支预测导致的效能降低的问题，这部分的原理与 JIT 类似。
+在这个项目中，一个虚拟机指令对应一块 C 语言代码 (进行解释执行)，而一个虚拟机汇编语言编写的函数对应一块虚拟机指令，所以如果使用虚拟机的汇编语言来实现 `malloc` 或 `free` 这样的复杂函数，会生成相当多的虚拟机指令 (对应相当多块的 C 语言代码)，导致解释执行效率很低，相反使用 native function call，将这些复杂函数的 C 语言实现对应于特殊的虚拟机指令，可以使得调用一次这些函数仅对应一个虚拟机指令，进而仅对应一块 C 语言代码。除此之外还避免了解释执行时因为分支预测导致的效能降低的问题 (这部分的原理与 JIT 类似)，以及让虚拟机语言可以使用其不具备但实现虚拟机的语言所拥有的特性，例如打印功能。
 
 Stack Overflow: [What is PRIu64 in C?](https://stackoverflow.com/questions/16859500/what-is-priu64-in-c)
+
+
+最后的计算由于浮点数的精度有限，所以只能近似等于其结果，可以用下面的 C 程序来验证:
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    double x = 69.0;
+    double y = 420.0;
+    double t = 0.0;
+
+    double step = 1.0 / 32.0;
+    while (t <= 1.0) {
+        double result = x + (y - x) * t;
+        printf("%lf\n", result);
+        t += step;
+    }
+
+    return 0;
+}
+```
+
+### Day 5
 
 ## 实作案例: Creating a Compiler
 

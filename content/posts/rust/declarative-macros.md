@@ -16,7 +16,6 @@ weight: 0
 tags:
   - Rust
   - Macro
-  - Declarative Macros
 categories:
   - Rust
 hiddenFromHomePage: false

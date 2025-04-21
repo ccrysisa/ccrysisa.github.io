@@ -1,9 +1,9 @@
 ---
-title: Svelte
+title: Raycasting
 subtitle:
-date: 2025-04-04T18:12:28+08:00
-slug: 10d6121
-draft: true
+date: 2025-04-21T11:21:08+08:00
+slug: 1056664
+# draft: true
 # author:
 #   name:
 #   link:
@@ -15,8 +15,8 @@ license:
 comment: false
 weight: 0
 tags:
-  - Web
-  - Svelte
+  - Raycasting
+  - Graphics
 categories:
   - Web
 hiddenFromHomePage: false
@@ -43,6 +43,4 @@ repost:
 
 <!--more-->
 
-## References
-
-- [[NodeJS] npx 是什麼? 跟 npm 差在哪?](https://medium.com/itsems-frontend/whats-npx-e83400efe7f8)
+## 项目准备

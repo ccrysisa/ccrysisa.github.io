@@ -39,10 +39,9 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-## Git 常见问题及解决
+## FAQ
 
-### git pull/push 遇到 Port 22 connect timeout
-
+{{< admonition type=question title="git pull/push 遇到 Port 22 connect timeout" >}}
 网络问题导致 22 端口被禁止，无法正常使用 ssh。切换成 443 端口并且编写配置文件即可：
 
 ```bash
@@ -52,10 +51,33 @@ Host github.com
 HostName ssh.github.com
 Port 443
 ```
+{{< /admonition >}}
 
-### GitHub 支持多个账户通过 ssh 连接
+{{< admonition type=question type="ssh: connect to host ssh.github.com port 443: Connection refused" >}}
+使用 `ssh` 进一步确认是否为 DNS 的解析问题:
 
-- [Using multiple github accounts with ssh keys](https://gist.github.com/oanhnn/80a89405ab9023894df7)
+```sh
+$ ssh -vT -p 443 git@ssh.github.com
+...
+debug1: Connecting to ssh.github.com [::1] port 443.
+debug1: connect to address ::1 port 443: Connection refused
+debug1: Connecting to ssh.github.com [127.0.0.1] port 443.
+debug1: connect to address 127.0.0.1 port 443: Connection refused
+ssh: connect to host ssh.github.com port 443: Connection refused
+```
+
+如果出现以上输出，则表示 github.com 已被 DNS 解析为 localhost，通过在 `/etc/resolv.conf` 处加入可信的 DNS 服务器即可解决:
+
+```sh
+$ vim /etc/resolv.conf
+nameserver 8.8.8.8
+...
+```
+{{< /admonition >}}
+
+{{< admonition type=question type="GitHub 支持多个账户通过 ssh 连接" >}}
+[Using multiple github accounts with ssh keys](https://gist.github.com/oanhnn/80a89405ab9023894df7)
+{{< /admonition >}}
 
 ## Resources
 
