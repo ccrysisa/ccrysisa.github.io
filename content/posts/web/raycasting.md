@@ -44,3 +44,8 @@ repost:
 <!--more-->
 
 ## 项目准备
+
+## References
+
+- [TypeScript](https://www.typescriptlang.org): JavaScript With Syntax For Types.
+- Tsoding: [Koil](https://www.youtube.com/playlist?list=PLpM-Dvs8t0VZ08cYW6yqNTWLKqLssw0nm)

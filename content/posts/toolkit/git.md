@@ -53,7 +53,7 @@ Port 443
 ```
 {{< /admonition >}}
 
-{{< admonition type=question type="ssh: connect to host ssh.github.com port 443: Connection refused" >}}
+{{< admonition type=question title="ssh: connect to host ssh.github.com port 443: Connection refused" >}}
 使用 `ssh` 进一步确认是否为 DNS 的解析问题:
 
 ```sh
@@ -75,7 +75,7 @@ nameserver 8.8.8.8
 ```
 {{< /admonition >}}
 
-{{< admonition type=question type="GitHub 支持多个账户通过 ssh 连接" >}}
+{{< admonition type=question title="GitHub 支持多个账户通过 ssh 连接" >}}
 [Using multiple github accounts with ssh keys](https://gist.github.com/oanhnn/80a89405ab9023894df7)
 {{< /admonition >}}
 
