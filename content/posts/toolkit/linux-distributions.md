@@ -315,37 +315,11 @@ $ sudo ln -s /usr/bin/bash /usr/bin/sh
 
 如果你已经处于无限登录界面循环这一状况，可以通过 `Ctrl + Alt + <F3>/<F2>` 切换进入 TTY/GUI 界面进行修改。
 
-{{< admonition type=todo open=false >}}
+透明代理可采用 [dae](https://github.com/daeuniverse/dae) 这个软件:
 
-进阶可以尝试基于 [v2ray](https://www.v2ray.com/) 的 [v2raya](https://github.com/v2rayA/v2rayA)，安装完后所有软件处会出现启动管理面板的图标，常用的指令如下:
-
-systemd 服务:
-
-```sh
-# 首次启动 v2rayA 的命令，它同时设置了相应的启动服务
-$ sudo systemctl start v2raya.service
-# 设置开机自动启动
-$ sudo systemctl enable v2raya.service
-# 设置开机不自动启动
-$ sudo systemctl disable v2raya.service
-```
-
-启动、停止、查询服务:
-
-```sh
-# 启动 v2rayA 服务
-$ sudo service v2raya start
-# 停止 v2rayA 服务
-$ sudo service v2raya stop
-# 查看 v2rayA 状态
-$ sudo service v2raya status
-```
-
-v2raya 若采用全局透明代理方案，则无需设置系统代理和某些软件的代理。
-
-{{< /admonition >}}
-
-2025/3/9 更新: 可以考虑使用 [Clash Verge](https://github.com/clash-verge-rev/clash-verge-rev)，类似于 Clash for  Windows 的操作逻辑，直观清晰。
+- [archlinux 透明代理](https://arch.icekylin.online/guide/rookie/transparent)
+- [Dae 代理软件的配置](https://blog.hellowood.dev/posts/dae-%E4%BB%A3%E7%90%86%E8%BD%AF%E4%BB%B6%E7%9A%84%E9%85%8D%E7%BD%AE/)
+- [dae: 网卡级代理工具](https://blog.skyju.cc/post/dae-docker-full-proxy/)
 
 ### 时间同步
 
@@ -387,3 +361,49 @@ Linux 发行版大多都没有安装声音增强工具，使得通过电脑本�
 2. 直接将编译完成的二进制可执行文件丢进 `/usr/bin` 或 `/usr/local/bin` 之中，这个方法十分简单易用，但如果 `/` 和 `/home` 分开挂载，可能会导致 `/` 空间被占用过多。
 3. 将编译完成的二进制可执行文件通过符号链接 (symbol link) 至 `/usr/bin` 或 `/usr/local/bin`，这个就相当于将第二种方法实际占用空间的分区由 `/` 移动至用户指定的地方。
 
+### 引导项
+
+对于一块硬盘安装多个 Linux 发行版并且这些发行版的 `/boot/efi` 分区都挂载在同一个硬盘分区的情况，可以通过 `efibootmgr` 这个工具来删除或增加引导项。
+
+假设 `/boot/efi` 结构如下:
+
+```sh
+/boot/efi/EFI
+├── opensuse
+│   └── grubx64.efi
+├── endeavouros
+│   └── grubx64.efi
+└── ubuntu
+    ├── grubx64.efi
+    └── shimx64.efi
+```
+
+查询引导项:
+
+```sh
+$ efibootmgr
+...
+Boot0000* opensuse HD(...)/File(\EFI\opensuse\grubx64.efi)
+Boot0002* ubuntu   HD(...)/File(\EFI\ubuntu\shimx64.efi)
+```
+
+删除引导项 (以 openSUSE 为例):
+
+```sh
+$ efibootmgr -b 0 -B
+```
+
+> **如果已经卸载来了 openSUSE 系统，可以在 `/boot/efi` 里手动删除 `opensuse` 这个对应的目录来彻底删除 openSUSE 的相关文件。**
+
+增加引导项 (以 EndeavourOS 为例):
+
+```sh
+$ efibootmgr -c -d /dev/sdb -p 2 -L "endeavouros" -l '\EFI\endeavouros\grubx64.efi'
+```
+
+> 笔者的 `/boot/efi` 位于 sdb2
+
+#### 延伸阅读
+
+- Gentoo Wiki: [efibootmgr](https://wiki.gentoo.org/wiki/Efibootmgr)
+- Arch Wiki: [UEFI](https://wiki.archlinuxcn.org/wiki/UEFI)
