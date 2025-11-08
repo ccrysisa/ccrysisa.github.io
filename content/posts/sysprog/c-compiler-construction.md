@@ -676,13 +676,18 @@ int main()
 
 ### Day 5
 
+- [cpp(1) — Linux manual page](https://www.man7.org/linux/man-pages/man1/cpp.1.html)
+- [Shell Scripting – Set Command](https://www.geeksforgeeks.org/shell-scripting-set-command/)
+
 ## 实作案例: Creating a Compiler
 
 Pixeled 上传的 [Creating a Compiler](https://www.youtube.com/playlist?list=PLUDlas_Zy_qC7c5tCgTMYq2idyyT241qs) 系列视频。
 
 {{< image src="/images/c/compiler.drawio.png" >}}
 
-### References
+### Let\'s Create a Compiler
 
-- [Why would I use NASM over GNU Assembler (GAS)?](https://stackoverflow.com/questions/65436403/why-would-i-use-nasm-over-gnu-assembler-gas)
+- Stack Overflow: [Why would I use NASM over GNU Assembler (GAS)?](https://stackoverflow.com/questions/65436403/why-would-i-use-nasm-over-gnu-assembler-gas)
 - [Linux System Call Table](https://chromium.googlesource.com/chromiumos/docs/+/master/constants/syscalls.md)
+- Wikipedia: [Lexical analysis](https://en.wikipedia.org/wiki/Lexical_analysis)
+- cppreference: [EXIT_SUCCESS, EXIT_FAILURE](https://en.cppreference.com/w/cpp/utility/program/EXIT_status)
