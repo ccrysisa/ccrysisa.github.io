@@ -23,3 +23,7 @@ $ ./commit [-a]
 $ ./update.sh [-t]
 ```
 
+## References
+
+- [Hugo](https://gohugo.io/)
+- [FixIt](https://fixit.lruihao.cn/)

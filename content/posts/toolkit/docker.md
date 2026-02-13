@@ -43,9 +43,16 @@ repost:
 
 <!--more-->
 
-- Wikipedia: [Containerization (computing)](https://en.wikipedia.org/wiki/Containerization_(computing))
+- Wikipedia: [Containerization (computing)](<https://en.wikipedia.org/wiki/Containerization_(computing)>)
 
 ## Install
+
+**2026/2/13** 更新: 在 deepin V23 上可以参考以下两篇文章，实现通过 apt 包管理器来安装 docker。
+
+- [Installing Docker on Linux: Deepin 23: an update to Francisco Dara’s guide.](https://medium.com/@kbooster17/installing-docker-on-linux-deepin-23-an-update-to-francisco-daras-guide-cbbeb119f1c2)
+- [Deepin V23 系统下 Docker 安装与配置全流程指南](https://comate.baidu.com/zh/page/tj3s8xpc4v0)
+
+---
 
 deepin 20.9/V23 虽然基于 Debian，但是为了适配 deepin 特色的 DDE (Deepin Desktop Environment) 而进行了大量的魔改，所以按照 Docker 官方文档的 Debian 安装一节是无法成功安装的。鉴于此，建议使用编译好的二进制 (Binaries) 在 deepin 上安装 Docker。
 
@@ -55,7 +62,7 @@ deepin 20.9/V23 虽然基于 Debian，但是为了适配 deepin 特色的 DDE (D
 # Install and setup prerequisites
 $ sudo apt update
 $ sudo apt install iptables git ps xz
-# Download properly mounted `cgroupfs` hierarchy from 
+# Download properly mounted `cgroupfs` hierarchy from
 # https://github.com/tianon/cgroupfs-mount/blob/master/cgroupfs-mount
 # Then execute this script
 $ sudo bash cgroupfs-mount
@@ -132,7 +139,7 @@ Wkipedia:
 **Docker** is a set of platform as a service (PaaS) products that use OS-level virtualization to deliver software in packages called containers.
 {{< /admonition >}}
 
-Stack Overflow: 
+Stack Overflow:
 
 {{< admonition type=question title="[What is the difference between a Docker image and a container?](https://stackoverflow.com/questions/23735149/what-is-the-difference-between-a-docker-image-and-a-container)" open=false >}}
 **Dockerfile** → (Build) → **Image** → (Run) → **Container**.
@@ -142,15 +149,17 @@ Stack Overflow:
 - **Image**: compiled Dockerfile. Saves you time from rebuilding the Dockerfile every time you need to run a container. And it\'s a way to hide your provision code.
 
 - **Container**: the virtual operating system itself. You can ssh into it and run any commands you wish, as if it\'s a real environment. You can run 1000+ containers from the same Image.
-{{< /admonition >}}
+  {{< /admonition >}}
 
 {{< admonition type=question title="[Does the code gets copied from docker image to docker container](https://stackoverflow.com/questions/72820548/does-the-code-gets-copied-from-docker-image-to-docker-container)" open=false >}}
 Does everything in the image get copied over to the container?
+
 > Yes. A container is like an instance of the image.
 
 If the same image is used among all the containers, then how does docker handle when a file is changed in a container?
+
 > The change will only affect the container in which the change was made. It does not affect the image nor any other containers using the same image (unless the change was made to a file on a volume that multiple containers share).
-{{< /admonition >}}
+> {{< /admonition >}}
 
 {{< admonition type=question title="[Difference between KVM and LXC](https://stackoverflow.com/questions/20578039/difference-between-kvm-and-lxc)" open=false >}}
 LXC, or Linux Containers are the lightweight and portable OS based virtualization units which share the base operating system\'s kernel, but at same time act as an isolated environments with its own filesystem, processes and TCP/IP stack. They can be compared to Solaris Zones or Jails on FreeBSD. As there is no virtualization overhead they perform much better then virtual machines.
@@ -163,6 +172,7 @@ KVM represents the virtualization capabilities built in the own Linux kernel. As
 ### 基本指令
 
 {{< admonition >}}
+
 - 获取镜像: `docker pull [Registry]Repo Name[:Tag]`
 
 - 新建并启动容器: `docker run [-d] [--name <Name>] [-p <host port>:<conatiner port>] Image Name[:Tag]`
@@ -180,7 +190,7 @@ KVM represents the virtualization capabilities built in the own Linux kernel. As
 - 删除指定镜像: `docker rmi <IMAGE_ID or REPO:TAG>`
 
 - 删除指定容器: `docker rm <CONTAINER_ID or CONATINER_NAME>`
-{{< /admonition >}}
+  {{< /admonition >}}
 
 docker 的端口映射的作用是让主机和容器之间有一条通信的桥梁，以实现通过主机被映射的端口来访问容器内的本地服务,例如将主机的 12345 端口和容器的 1313 端口相映射，可以在主机上通过 `localhost:12345` 来访问在容器内运行的 hugo 实例。
 
@@ -202,7 +212,7 @@ $ docker system prune
 
 The `FROM` instruction initializes a new build stage and sets the base image for subsequent instructions. As such, a valid Dockerfile must start with a `FROM` instruction. The image can be any valid image.
 
-The `RUN` instruction will execute any commands to create a new layer on top of the current image. The added layer is used in the next step in the Dockerfile. 
+The `RUN` instruction will execute any commands to create a new layer on top of the current image. The added layer is used in the next step in the Dockerfile.
 
 The purpose of a `CMD` is to provide defaults for an executing container. These defaults can include an executable, or they can omit the executable, in which case you must specify an `ENTRYPOINT` instruction as well.
 
@@ -223,6 +233,7 @@ $ docker build [-t <name[:tag]>] path
 ```
 
 {{< admonition example >}}
+
 ```dockerfile
 FROM golang:1.23-alpine
 WORKDIR /app
@@ -231,6 +242,7 @@ COPY main.go .
 RUN go build -o main .
 ENTRYPOINT ./main
 ```
+
 {{< /admonition >}}
 
 ### Docker compose
