@@ -40,7 +40,6 @@ repost:
 # See details front matter: https://fixit.lruihao.cn/documentation/content-management/introduction/#front-matter
 ---
 
-{{< image src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Go_Logo_Blue.svg/322px-Go_Logo_Blue.svg.png" >}}
 {{< image src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Golang.png/330px-Golang.png" >}}
 
 <!--more-->
