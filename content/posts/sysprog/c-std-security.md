@@ -80,29 +80,25 @@ int main() {
 #### (1) Integer Conversion
 
 - C11 6.3.1.1 Boolean, characters, and integers
-> Every integer type has an integer conversion rank defined as follows:
-> 
-> - No two signed integer types shall have the same rank, even if they hav e the same
-> representation.
-> 
-> - The rank of a signed integer type shall be greater than the rank of any signed integer
-> type with less precision.
-> 
-> - The rank of long long int shall be greater than the rank of long int, which
-> shall be greater than the rank of int, which shall be greater than the rank of short
-> int, which shall be greater than the rank of signed char.
-> 
-> - The rank of any unsigned integer type shall equal the rank of the corresponding
-> signed integer type, if any.
-> 
-> - The rank of any standard integer type shall be greater than the rank of any extended
-> integer type with the same width.
-> 
-> - The rank of any extended signed integer type relative to another extended signed
-> integer type with the same precision is implementation-defined, but still subject to the
-> other rules for determining the integer conversion rank.
+  > Every integer type has an integer conversion rank defined as follows:
+  >
+  > - No two signed integer types shall have the same rank, even if they hav e the same
+  >   representation.
+  > - The rank of a signed integer type shall be greater than the rank of any signed integer
+  >   type with less precision.
+  > - The rank of long long int shall be greater than the rank of long int, which
+  >   shall be greater than the rank of int, which shall be greater than the rank of short
+  >   int, which shall be greater than the rank of signed char.
+  > - The rank of any unsigned integer type shall equal the rank of the corresponding
+  >   signed integer type, if any.
+  > - The rank of any standard integer type shall be greater than the rank of any extended
+  >   integer type with the same width.
+  > - The rank of any extended signed integer type relative to another extended signed
+  >   integer type with the same precision is implementation-defined, but still subject to the
+  >   other rules for determining the integer conversion rank.
 
 依据上述标准可排出 integer 的 rank:
+
 - long long int > long int > int > short int > signed char
 - unsigned int == signed int, if they are both in same precision and same size
 
@@ -111,29 +107,26 @@ int main() {
 当 integer 进行通常的算数运算 (Usual arithmetic) 时，会先进行 integer promotions 转换成 `int` 或 `unsigned int` 或者保持不变 (转换后的运算子被称为 promoted operands)，然后 promoted operands 再根据自身类型以及对应的 rank 进行 arithmetic conversions，最终得到结果的类型。
 
 - C11 6.3.1.1 Boolean, characters, and integers
-> If an int can represent all values of the original type (as restricted by the width, for a bit-field), the value is converted to an int; otherwise, it is converted to an unsigned int. These are called the integer promotions. All other types are unchanged by the integer promotions.
+
+  > If an int can represent all values of the original type (as restricted by the width, for a bit-field), the value is converted to an int; otherwise, it is converted to an unsigned int. These are called the integer promotions. All other types are unchanged by the integer promotions.
 
 - C11 6.3.1.8 Usual arithmetic conversions
-> Otherwise, the integer promotions are performed on both operands. Then the following rules are applied to the promoted operands:
-> 
-> - If both operands have the same type, then no further conversion is needed.
-> 
-> - Otherwise, if both operands have signed integer types or both have unsigned
-> integer types, the operand with the type of lesser integer conversion rank is
-> converted to the type of the operand with greater rank.
-> 
-> - Otherwise, if the operand that has unsigned integer type has rank greater or
-> equal to the rank of the type of the other operand, then the operand with
-> signed integer type is converted to the type of the operand with unsigned
-> integer type.
-> 
-> - Otherwise, if the type of the operand with signed integer type can represent
-> all of the values of the type of the operand with unsigned integer type, then
-> the operand with unsigned integer type is converted to the type of the
-> operand with signed integer type.
-> 
-> - Otherwise, both operands are converted to the unsigned integer type
-> corresponding to the type of the operand with signed integer type.
+  > Otherwise, the integer promotions are performed on both operands. Then the following rules are applied to the promoted operands:
+  >
+  > - If both operands have the same type, then no further conversion is needed.
+  > - Otherwise, if both operands have signed integer types or both have unsigned
+  >   integer types, the operand with the type of lesser integer conversion rank is
+  >   converted to the type of the operand with greater rank.
+  > - Otherwise, if the operand that has unsigned integer type has rank greater or
+  >   equal to the rank of the type of the other operand, then the operand with
+  >   signed integer type is converted to the type of the operand with unsigned
+  >   integer type.
+  > - Otherwise, if the type of the operand with signed integer type can represent
+  >   all of the values of the type of the operand with unsigned integer type, then
+  >   the operand with unsigned integer type is converted to the type of the
+  >   operand with signed integer type.
+  > - Otherwise, both operands are converted to the unsigned integer type
+  >   corresponding to the type of the operand with signed integer type.
 
 ```c
 /* In the case that the rank is smaller than int */
@@ -157,23 +150,24 @@ int result = si + ui; // si is converted to unsigned int, result is unsigned
 ### I. Dangling Pointer
 
 - C11 6.2.4 Storage durations of objects (2)
-> The lifetime of an object is the portion of program execution during which storage is
-> guaranteed to be reserved for it. An object exists, has a constant address, and retains
-> its last-stored value throughout its lifetime. If an object is referred to outside of its
-> lifetime, the behavior is undefined. The value of a pointer becomes indeterminate when
-> the object it points to (or just past) reaches the end of its lifetime.
+
+  > The lifetime of an object is the portion of program execution during which storage is
+  > guaranteed to be reserved for it. An object exists, has a constant address, and retains
+  > its last-stored value throughout its lifetime. If an object is referred to outside of its
+  > lifetime, the behavior is undefined. The value of a pointer becomes indeterminate when
+  > the object it points to (or just past) reaches the end of its lifetime.
 
 - Stack Overflow: [What is a dangling pointer?](https://stackoverflow.com/questions/17997228/what-is-a-dangling-pointer)
-> When a pointer is pointing at the memory address of a variable but after some time that variable is deleted from that memory location while the pointer is still pointing to it, then such a pointer is known as a dangling pointer and this problem is known as the dangling pointer problem.
+  > When a pointer is pointing at the memory address of a variable but after some time that variable is deleted from that memory location while the pointer is still pointing to it, then such a pointer is known as a dangling pointer and this problem is known as the dangling pointer problem.
 
 所以在 object 的生命周期结束后，应将指向 object 原本处于的内存空间的指针置为 NULL，避免 dangling pointer。
 
 ### II. CWE-416 Use After Free
 
 - [x] OWASP: [Using freed memory](https://owasp.org/www-community/vulnerabilities/Using_freed_memory#)
-> Referencing memory after it has been freed can cause a program to crash.
-> 
-> The use of heap allocated memory after it has been freed or deleted leads to undefined system behavior and, in many cases, to a write-what-where condition.
+  > Referencing memory after it has been freed can cause a program to crash.
+  >
+  > The use of heap allocated memory after it has been freed or deleted leads to undefined system behavior and, in many cases, to a write-what-where condition.
 
 ### III. 案例探讨: CVE-2017-16943 Abusing UAF leads to Exim RCE
 
@@ -186,6 +180,7 @@ int result = si + ui; // si is converted to unsigned int, result is unsigned
 ### (ㄧ) Integer Promotion 验证
 
 测试程式码:
+
 ```c { title="integer-promotion.c" }
 #include <stdint.h>
 #include <stdio.h>
@@ -200,16 +195,18 @@ int main() {
 ```
 
 验证结果:
+
 ```bash
-$ gcc -g -o integer-promotion.o integer-promotion.c 
-$ ./integer-promotion.o 
+$ gcc -g -o integer-promotion.o integer-promotion.c
+$ ./integer-promotion.o
 4294967295 -1
 ```
 
 ### (二) Object 生命周期
 
 测试程式码:
-```c  { title="uaf.c" }
+
+```c { title="uaf.c" }
 #include <inttypes.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -238,23 +235,23 @@ int main(int argc, char *argv[]) {
 ```
 
 验证结果:
+
 ```bash
-$ gcc -g -o uaf.o uaf.c 
-$ ./uaf.o 
+$ gcc -g -o uaf.o uaf.c
+$ ./uaf.o
 Surprise!
 
 $ gcc -g -o uaf.o uaf.c -fsanitize-address-use-after-scope
-$ ./uaf.o 
+$ ./uaf.o
 0x7ffca405c596 is different from 0x7ffca405c597
 7ffca405c596 is not the same as 7ffca405c597
 
-$ clang -g -o uaf.o uaf.c 
-$ ./uaf.o 
+$ clang -g -o uaf.o uaf.c
+$ ./uaf.o
 0x7fff86b298ff is different from 0x7fff86b298fe
 7fff86b298ff is not the same as 7fff86b298fe
 ```
 
 gcc 可以通过显式指定参数 `-fsanitize-address-use-after-scope` 来避免 Use-After-Scope 的问题，否则在 scope 结束后，接下来的其他 scope 会使用之前已结束的 scope 的内存空间，从而造成 Use-After-Scope 问题 (使用 GDB 在上面两种不同的情况下，查看变量 `a`, `b` 所在的地址)，而 clang 则是默认开启相关保护。
-
 
 [^1]: ["OpenSSL Heartbleed", Synopsys](http://heartbleed.com/)

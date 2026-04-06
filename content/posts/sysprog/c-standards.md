@@ -16,6 +16,7 @@ weight: 0
 tags:
   - C
 categories:
+collections:
   - 你所不知道的 C 语言
 hiddenFromHomePage: false
 hiddenFromSearch: false

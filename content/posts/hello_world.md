@@ -55,14 +55,17 @@ repost:
 公式块：
 
 {{< raw >}}
+
 $$
 \int_{a}^{b}x(t)dt =
 \dfrac{b - a}{N} \\
 =\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N}
 $$
+
 {{< /raw >}}
 
 {{< raw >}}
+
 $$
 \begin{aligned}
 \int_{a}^{b}x(t)dt &=
@@ -70,36 +73,43 @@ $$
 &=\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N} \\
 \end{aligned}
 $$
+
 {{< /raw >}}
 
 {{< raw >}}
+
 $$
-\mathrm{Integrals\ are\ numerically\ approximated\ as\ finite\ series}:\\ 
+\mathrm{Integrals\ are\ numerically\ approximated\ as\ finite\ series}:\\
 \begin{split}
 \int_{a}^{b}x(t)dt &=
 \dfrac{b - a}{N} \\
 &=\sum_{k=1}^{N}x(t_k)\cdot\dfrac{b-a}{N}
-\end{split} \\ 
+\end{split} \\
 where\ t_k = a + (b-a)\cdot k/N
 $$
+
 {{< /raw >}}
 
 {{< raw>}}
+
 $$
 \begin{align*}
 p(x) = 3x^6 + 14x^5y &+ 590x^4y^2 + 19x^3y^3 \\
 &- 12x^2y^4 - 12xy^5 + 2y^6 - a^3b^3 - a^2b - ab + c^5d^3 + c^4d^3 - cd
 \end{align*}
 $$
+
 {{< /raw >}}
 
 {{< raw >}}
+
 $$
 \begin{split}
 &(X \in B) = X^{-1}(B) = {s \in S: X(s) \in B} \subset S \\
 &\Rightarrow P(x \in B) = P({s \in S: X(s) \in B})
 \end{split}
 $$
+
 {{< /raw >}}
 
 ## Blocks
@@ -121,36 +131,40 @@ typedef struct Block_t {
 
 ## Admonitions
 
-{{< admonition >}} 
+{{< admonition >}}
 [111年度資工所心得](https://hackmd.io/@ygb5JBlmSc-8GJtxiMg5Fw/B1-rO9vb9)
 {{< /admonition >}}
 
-{{< admonition abstract >}} 
+{{< admonition abstract >}}
 Udacity (Georgia Tech):
 
 - Advanced Operating Systems:
-[Part 1](https://www.youtube.com/playlist?list=PLAwxTw4SYaPkKfusBLVfklgfdcB3BNpwX) /
-[Part 2](https://www.youtube.com/playlist?list=PLAwxTw4SYaPm4vV1XbFV93ZuT2saSq1hO) /
-[Part 3](https://www.youtube.com/playlist?list=PLAwxTw4SYaPk5-YaXFkWY4UXdv6pVdiYg) /
-[Part 4](https://www.youtube.com/playlist?list=PLAwxTw4SYaPmfaiuzJcK3tNoeKlvRR990)
+  [Part 1](https://www.youtube.com/playlist?list=PLAwxTw4SYaPkKfusBLVfklgfdcB3BNpwX) /
+  [Part 2](https://www.youtube.com/playlist?list=PLAwxTw4SYaPm4vV1XbFV93ZuT2saSq1hO) /
+  [Part 3](https://www.youtube.com/playlist?list=PLAwxTw4SYaPk5-YaXFkWY4UXdv6pVdiYg) /
+  [Part 4](https://www.youtube.com/playlist?list=PLAwxTw4SYaPmfaiuzJcK3tNoeKlvRR990)
 - High Performance Computer Architecture:
-[Part 1](https://www.youtube.com/playlist?list=PLAwxTw4SYaPmqpjgrmf4-DGlaeV0om4iP) /
-[Part 2](https://www.youtube.com/playlist?list=PLAwxTw4SYaPkNw98-MFodLzKgi6bYGjZs) /
-[Part 3](https://www.youtube.com/playlist?list=PLAwxTw4SYaPnhRXZ6wuHnnclMLfg_yjHs) /
-[Part 4](https://www.youtube.com/playlist?list=PLAwxTw4SYaPn79fsplIuZG34KwbkYSedj) /
-[Part 5](https://www.youtube.com/playlist?list=PLAwxTw4SYaPkr-vo9gKBTid_BWpWEfuXe) /
-[Part 6](https://www.youtube.com/playlist?list=PLAwxTw4SYaPndXEsI4kAa6BDSTRbkCKJN)
-{{< /admonition >}}
+  [Part 1](https://www.youtube.com/playlist?list=PLAwxTw4SYaPmqpjgrmf4-DGlaeV0om4iP) /
+  [Part 2](https://www.youtube.com/playlist?list=PLAwxTw4SYaPkNw98-MFodLzKgi6bYGjZs) /
+  [Part 3](https://www.youtube.com/playlist?list=PLAwxTw4SYaPnhRXZ6wuHnnclMLfg_yjHs) /
+  [Part 4](https://www.youtube.com/playlist?list=PLAwxTw4SYaPn79fsplIuZG34KwbkYSedj) /
+  [Part 5](https://www.youtube.com/playlist?list=PLAwxTw4SYaPkr-vo9gKBTid_BWpWEfuXe) /
+  [Part 6](https://www.youtube.com/playlist?list=PLAwxTw4SYaPndXEsI4kAa6BDSTRbkCKJN)
+  {{< /admonition >}}
 
-{{< admonition info >}} 
+{{< admonition info >}}
 Reddit: [Best book to learn in-depth knowledge about the Linux Kernel?](https://www.reddit.com/r/linux/comments/z26h5h/best_book_to_learn_indepth_knowledge_about_the/)
+
 - Project: [Linux From Scratch](https://www.linuxfromscratch.org/)
 - Book: [Linux Kernel Development](https://www.amazon.com/Linux-Kernel-Development-Robert-Love/dp/0672329468)
 - Video: [Steven Rostedt - Learning the Linux Kernel with tracing](https://www.youtube.com/watch?v=JRyrhsx-L5Y)
+  {{< /admonition >}}
+
+{{< admonition todo >}}
 {{< /admonition >}}
 
-{{< admonition tip >}} 
-Wikipedia: 
+{{< admonition tip >}}
+Wikipedia:
 [Xenix](https://en.wikipedia.org/wiki/Xenix) /
 [Multics](https://en.wikipedia.org/wiki/Multics) /
 [Plan9](https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs) /
@@ -163,12 +177,13 @@ Talks:
 - [Developing Kernel Drivers with Modern C++ - Pavel Yosifovich](https://www.youtube.com/watch?v=AsSMKL5vaXw)
 - [Containers From Scratch • Liz Rice • GOTO 2018](https://www.youtube.com/watch?v=8fi7uSYlOdc)
 - [Rich Hickey Talks](https://www.youtube.com/playlist?list=PLZdCLR02grLrEwKaZv-5QbUzK0zGKOOcr)
-{{< /admonition >}}
+  {{< /admonition >}}
 
 {{< admonition question >}}
+
 - OSDI
 - PLDI
-{{< /admonition >}}
+  {{< /admonition >}}
 
 {{< admonition warning >}} 一个 警告 横幅 {{< /admonition >}}
 

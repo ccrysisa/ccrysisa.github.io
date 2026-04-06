@@ -2,7 +2,7 @@
 title: "Impl Rust: TCP/IP"
 subtitle:
 date: 2024-02-17T19:01:53+08:00
-draft: true
+# draft: true
 # author:
 #   name:
 #   link:
@@ -57,15 +57,17 @@ repost:
 - [Raw socket vs TUN device](https://stackoverflow.com/questions/41343802/raw-socket-vs-tun-device) [Stack Overflow]
 - [Universal TUN/TAP device driver](https://www.kernel.org/doc/Documentation/networking/tuntap.txt) [Linux kernel documentation]
 
-Raw socket: 
+Raw socket:
+
 - Internet --> NIC --> kernel --> user space
 - Internet <-- NIC <-- kernel <-- user space
-> Host interact with other hosts in Internet.
+  > Host interact with other hosts in Internet.
 
-TUN/TAP device: 
+TUN/TAP device:
+
 - kernel --> | TUN/TAP | --> user space
 - kernel <-- | TUN/TAP | <-- user space
-> Kernel interact with programs in user space in the same host.
+  > Kernel interact with programs in user space in the same host.
 
 {{< image src="https://upload.wikimedia.org/wikipedia/commons/a/af/Tun-tap-osilayers-diagram.png" >}}
 
@@ -74,11 +76,11 @@ TUN/TAP device:
 Universal TUN/TAP device driver [Linux kernel documentation]
 
 ```
-3.2 Frame format:   
-If flag IFF_NO_PI is not set each frame format is:   
-    Flags [2 bytes]   
-    Proto [2 bytes]   
-    Raw protocol(IP, IPv6, etc) frame.   
+3.2 Frame format:
+If flag IFF_NO_PI is not set each frame format is:
+    Flags [2 bytes]
+    Proto [2 bytes]
+    Raw protocol(IP, IPv6, etc) frame.
 ```
 
 通过 TUN/TAP 设备接收的封包，会拥有 Flags 和 Proto 这两个字段 (共 4 个字节，这也是 iface 的 `without_packet_info` 和 `recv` 方法所描述的 prepended packet info)，然后才是原始协议的 frame。其中的 Proto 字段是 [EtherType](https://en.wikipedia.org/wiki/EtherType) [Wikipedia]，可以根据里面的 values 来判断接受封包的协议类型 (0x0800 表示 IPv4，0x86DD 表示 IPv6)。
@@ -139,7 +141,7 @@ ping 命令使用的是 Network layer 上的 ICMP 协议，可以用于测试 TU
 $ ping -I tun0 192.168.0.2
 ```
 
-- [ping (networking utility)](https://en.wikipedia.org/wiki/Ping_(networking_utility)) [Wikipedia]
+- [ping (networking utility)](<https://en.wikipedia.org/wiki/Ping_(networking_utility)>) [Wikipedia]
 - [ping](https://linux.die.net/man/8/ping) [Linux man page]
 
 nc 命令用于发送 TCP 封包
@@ -169,33 +171,35 @@ $ sudo tshark -i tun0
 [RFC 793] 3.2 Terminology
 
 > The state diagram in figure 6 illustrates only state changes, together
-with the causing events and resulting actions, but addresses neither
-error conditions nor actions which are not connected with state
-changes. 
+> with the causing events and resulting actions, but addresses neither
+> error conditions nor actions which are not connected with state
+> changes.
 
 这里面提到的 Figure 6. TCP Connection State Diagram 在其中我们可以看到 TCP 的状态转换，非常有利于直观理解 TCP 建立连接时的三次握手过程。
 
 {{< admonition warning >}}
-NOTE BENE:  this diagram is only a summary and must not be taken as the total specification.
+NOTE BENE: this diagram is only a summary and must not be taken as the total specification.
 {{< /admonition >}}
 
 [Time to live](https://en.wikipedia.org/wiki/Time_to_live#:~:text=In%20the%20IPv4%20header%2C%20TTL,recommended%20initial%20value%20is%2064.) [Wikipedia]
+
 > In the IPv4 header, TTL is the 9th octet of 20. In the IPv6 header, it is the 8th octet of 40. The maximum TTL value is 255, the maximum value of a single octet. A recommended initial value is 64.
 
 SND.WL1 and SND.WL2
+
 > Note that SND.WND is an offset from SND.UNA, that SND.WL1
 > records the sequence number of the last segment used to update
 > SND.WND, and that SND.WL2 records the acknowledgment number of
-> the last segment used to update SND.WND.  The check here
+> the last segment used to update SND.WND. The check here
 > prevents using old segments to update the window.
 
 ## Documentations
 
-这里列举视频中一些概念相关的 documentation 
+这里列举视频中一些概念相关的 documentation
 
 > 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
 
-### Crate [std](https://doc.rust-lang.org/std/index.html) 
+### Crate [std](https://doc.rust-lang.org/std/index.html)
 
 - Module [std::io](https://doc.rust-lang.org/std/io/index.html)
   - Type Alias [std::io::Result](https://doc.rust-lang.org/std/io/type.Result.html)
@@ -230,7 +234,7 @@ SND.WL1 and SND.WL2
 - https://datatracker.ietf.org/doc/html/rfc793
 - https://datatracker.ietf.org/doc/html/rfc1122
 - https://datatracker.ietf.org/doc/html/rfc7414#section-2
-- https://datatracker.ietf.org/doc/html/rfc2398 
+- https://datatracker.ietf.org/doc/html/rfc2398
 - https://datatracker.ietf.org/doc/html/rfc2525
 - https://datatracker.ietf.org/doc/html/rfc791
 - https://www.saminiir.com/lets-code-tcp-ip-stack-3-tcp-handshake/
@@ -238,6 +242,7 @@ SND.WL1 and SND.WL2
 - https://www.saminiir.com/lets-code-tcp-ip-stack-5-tcp-retransmission/
 
 {{< admonition >}}
+
 - RFC 793 描述了原始的 TCP 协议的内容 (重点阅读 3.FUNCTIONAL SPECIFICATION )
 - RFC 1122 则是对原始的 TCP 功能的一些扩展进行说明
 - RFC 7414 的 Section 2 则对 TCP 的核心功能进行了简要描述
@@ -245,5 +250,4 @@ SND.WL1 and SND.WL2
 - RFC 2525 说明了在实现 TCP 过程中可能会出现的错误，并指出可能导致错误的潜在问题
 - RFC 791 描述了 IP 协议 的内容
 - 最后 3 篇博客介绍了 TCP 协议相关术语和概念，可以搭配 RFC 793 阅读
-{{< /admonition >}}
-
+  {{< /admonition >}}

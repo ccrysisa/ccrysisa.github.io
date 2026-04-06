@@ -17,6 +17,7 @@ tags:
   - Sysprog
   - C
 categories:
+collections:
   - 你所不知道的 C 语言
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -76,6 +77,7 @@ Stack Overflow 上的相关讨论:
 - [x] [Using goto for error handling in C](http://eli.thegreenplace.net/2009/04/27/using-goto-for-error-handling-in-c)
 
 Wikipedia: [RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization)
+
 > C requires significant administrative code since it doesn't support exceptions, try-finally blocks, or RAII at all. A typical approach is to separate releasing of resources at the end of the function and jump there with gotos in the case of error. This way the cleanup code need not be duplicated.
 
 相关实作:
@@ -87,6 +89,7 @@ Wikipedia: [RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initiali
 > 以 `goto` 为关键字进行检索
 
 Wikipedia: [Common usage patterns of Goto](https://en.wikipedia.org/wiki/Goto#Common_usage_patterns)
+
 - To make the code more readable and easier to follow
 - Error handling (in absence of exceptions), particularly cleanup code such as resource deallocation.
 
@@ -95,23 +98,25 @@ Wikipedia: [Common usage patterns of Goto](https://en.wikipedia.org/wiki/Goto#Co
 `switch` 通过 jump table 的内部实作可以比大量的 `if-else` 效率更高。
 
 - [x] GCC: [6.3 Labels as Values](https://gcc.gnu.org/onlinedocs/gcc/Labels-as-Values.html)
-> You can get the address of a label defined in the current function (or a containing function) with the unary operator ‘&&’. The value has type void *.
-> 
-> To use these values, you need to be able to jump to one. This is done with the computed goto statement6, goto *exp;.
+  > You can get the address of a label defined in the current function (or a containing function) with the unary operator ‘&&’. The value has type void \*.
+  >
+  > To use these values, you need to be able to jump to one. This is done with the computed goto statement6, goto \*exp;.
 
-下面这篇文章以 VM 为例子对 `computed goto`  和 `switch` 的效能进行了对比 (之前学的 RISC-V 模拟器派上用场了hhh):
+下面这篇文章以 VM 为例子对 `computed goto` 和 `switch` 的效能进行了对比 (之前学的 RISC-V 模拟器派上用场了hhh):
 
 - [x] [Computed goto for efficient dispatch tables](https://eli.thegreenplace.net/2012/07/12/computed-goto-for-efficient-dispatch-tables)
-> the condition serves as an offset into a lookup table that says where to jump next.
-> 
-> To anyone with a bit of experience with assembly language programming, the computed goto immediately makes sense because it just exposes a common instruction that most modern CPU architectures have - jump through a register (aka. indirect jump).
+  > the condition serves as an offset into a lookup table that says where to jump next.
+  >
+  > To anyone with a bit of experience with assembly language programming, the computed goto immediately makes sense because it just exposes a common instruction that most modern CPU architectures have - jump through a register (aka. indirect jump).
 
-`computed goto`  比 `switch` 效能更高的原因:
+`computed goto` 比 `switch` 效能更高的原因:
+
 1. The switch does a bit more per iteration because of bounds checking.
 2. The effects of hardware branch prediction.
 
 C99:
-> If no converted case constant expression matches and there is no default label, no part of the switch body is executed. 
+
+> If no converted case constant expression matches and there is no default label, no part of the switch body is executed.
 
 因为标准的这个要求，所以编译器对于 `switch` 会生成额外的 safe 检查代码，以符合上面情形的 "no part of the switch body is executed" 的要求。
 
@@ -125,17 +130,19 @@ C99:
 
 {{< admonition quote >}}
 How did I figure out which part of the code handles which opcode? Note that the "table jump" is done with:
+
 ```
 jmpq   *0x400b20(,%rdx,8)
 ```
-{{< /admonition >}}
 
+{{< /admonition >}}
 
 > bounds checking 是在 switch 中執行的一個環節，每次迴圈中檢查是否有 default case 的狀況，即使程式中的 switch 沒有用到 default case，編譯期間仍會產生強制檢查的程式，所以 switch 會較 computed goto 多花一個 bounds checking 的步驟
 
 > branch prediction 的部分，switch 需要預測接下來跳到哪個分支 case，而 computed goto 則是在每個 instruction 預測下一個 instruction，這之中比較直覺的想法是 computed goto 的prediction可以根據上個指令來預測，但是 switch 的prediction每次預測沒辦法根據上個指令，因此在 branch prediction accuracy 上 computed goto 會比較高。
 
 所以在实际中大部分也是采取 computed goto 来实作 VM:
+
 - Ruby 1.9 (YARV): also uses computed goto.
 - Dalvik (the Android Java VM): computed goto
 - Lua 5.2: uses a switch
@@ -151,30 +158,33 @@ jmpq   *0x400b20(,%rdx,8)
 ## 用 goto 实作 RAII 开发风格
 
 - [x] [RAII in C](https://vilimpoc.org/research/raii-in-c/)
-> If you have functions or control flows that allocate resources and a 
-> failure occurs, then goto turns out to be one of the nicest ways to 
-> unwind all resources allocated before the point of failure. 
+  > If you have functions or control flows that allocate resources and a
+  > failure occurs, then goto turns out to be one of the nicest ways to
+  > unwind all resources allocated before the point of failure.
 
 Linux 核心中的实作:
+
 - [shmem.c](https://github.com/torvalds/linux/blob/master/mm/shmem.c)
-> 以 `goto` 为关键字进行检索
+  > 以 `goto` 为关键字进行检索
 
 ## 检阅 C 语言规格书
 
 - [ISO/IEC 9899:201x Committee Draft](http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1548.pdf) 6.8.6 Jump statements
-> A jump statement causes an unconditional jump to another place.
-> 
-> The identifier in a goto statement shall name a label located somewhere in the enclosing function. A goto statement shall not jump from outside the scope of an identifier having a variably modified type to inside the scope of that identifier.
+  > A jump statement causes an unconditional jump to another place.
+  >
+  > The identifier in a goto statement shall name a label located somewhere in the enclosing function. A goto statement shall not jump from outside the scope of an identifier having a variably modified type to inside the scope of that identifier.
 
 规格书后面的例子也值得一看 (特别是当你看不懂规格书严格的英语语法想表达什么的时候 :rofl:)
 
 从规格书中也可以得知，`goto` 虽然是无条件跳转 (对应汇编语言的 `jmp` 这类无条件跳转指令)，但它的跳转范围是有限制的 (jump to another place)，而不是可以跳转到任意程式码 (这也是为什么 `setjmp/longjmp` 被称为「长跳转」的原因，与 `goto` 这类「短跳转」相对应)。
 
 相关实作:
-- CPython 的 [Modules/_asynciomodule.c](https://github.com/python/cpython/blob/main/Modules/_asynciomodule.c#L1711)
-> 以 `goto` 为关键字进行检索
+
+- CPython 的 [Modules/\_asynciomodule.c](https://github.com/python/cpython/blob/main/Modules/_asynciomodule.c#L1711)
+  > 以 `goto` 为关键字进行检索
 
 [Modern C](https://gustedt.gitlabpages.inria.fr/modern-c/) 作者也总结了 3 项和 `goto` 相关的规范 (大可不必视 `goto` 为洪水猛兽，毕竟我们有规范作为指导是不是):
+
 - Rule 2.15.0.1: Labels for goto are visible in the whole function that contains them.
 - Rule 2.15.0.2: goto can only jump to a label inside the same function.
 - Rule 2.15.0.3: goto should not jump over variable initializations.
@@ -224,7 +234,7 @@ end:
 这个技巧常用于内存数据的复制，类似于 `memcpy`。主要思路类似于在数值系统篇提到的 `strcpy`，针对 alignment 和 unalignment 的情况分别进行相应的处理，但效能比不上优化过的 `memcpy`。
 
 - [x] Wikipedia: [Duff's Device](https://en.wikipedia.org/wiki/Duff%27s_device)
-> To handle cases where the number of iterations is not divisible by the unrolled-loop increments, a common technique among assembly language programmers is to jump directly into the middle of the unrolled loop body to handle the remainder. Duff implemented this technique in C by using C's case label fall-through feature to jump into the unrolled body.
+  > To handle cases where the number of iterations is not divisible by the unrolled-loop increments, a common technique among assembly language programmers is to jump directly into the middle of the unrolled loop body to handle the remainder. Duff implemented this technique in C by using C's case label fall-through feature to jump into the unrolled body.
 
 Linux 核心中的实作运用:
 
@@ -270,7 +280,7 @@ void dsend(int count) {
 
 - 使用 Duff's Device 的 sys_fillrect(): 166,603 cycles
 - 運用已最佳化 memcpy 的 sys_fillrect(): 26,586 cycles
-{{< /admonition >}}
+  {{< /admonition >}}
 
 ## co-routine 应用
 
@@ -278,7 +288,7 @@ Wikipedia: [Coroutine](https://en.wikipedia.org/wiki/Coroutine)
 
 不借助操作系统也可以实作出多工交执行的 illusion (通过 `switch-case` 黑魔法来实现 :rofl:)
 
-- [x] PuTTY 作者 Simon Tatham: [Coroutines in C](https://www.chiark.greenend.org.uk/~sgtatham/coroutines.html) 
+- [x] PuTTY 作者 Simon Tatham: [Coroutines in C](https://www.chiark.greenend.org.uk/~sgtatham/coroutines.html)
 
 {{< admonition >}}
 这是一篇好文章，下面我对文章画一些重点
@@ -355,12 +365,12 @@ int function(void) {
 
 > The only snag remaining is the first parameter to crReturn. Just as when we invented a new label in the previous section we had to avoid it colliding with existing label names, now we must ensure all our state parameters to crReturn are different. The consequences will be fairly benign - the compiler will catch it and not let it do horrible things at run time - but we still need to avoid doing it.
 
-> Even this can be solved. ANSI C provides the special macro name __LINE__, which expands to the current source line number. So we can rewrite crReturn as
+> Even this can be solved. ANSI C provides the special macro name **LINE**, which expands to the current source line number. So we can rewrite crReturn as
 
 ```c
 #define crReturn(x) do { state=__LINE__; return x; \
                          case __LINE__:; } while (0)
-```                        
+```
 
 这个实作手法本质上和 Knuth 所提的机制相同，将函数的状态存储在其它地方而不是存放在 stack 上，这里存储的地方就是之前所提的那些被 `static` 修饰的变量 (因为 `static` 修饰的变量存储在 data 段而不在栈上)，事实上这些 `static` 变量实现了一个小型的状态机。
 
@@ -375,11 +385,13 @@ int function(void) {
 > It's a little bit ugly, because suddenly you have to use ctx->i as a loop counter where you would previously just have used i; virtually all your serious variables become elements of the coroutine context structure. But it removes the problems with re-entrancy, and still hasn't impacted the structure of the routine.
 
 作者最后提供了相关实作:
+
 - [coroutine.h](https://www.chiark.greenend.org.uk/~sgtatham/coroutine.h)
 
 ---
 
 在 PuTTY 里的相关实作:
+
 - [ssh.c](https://github.com/Yasushi/putty/blob/31a2ad775f393aad1c31a983b0baea205d48e219/ssh.c#L414)
 
 将原文的「合作式多工」中的 `cr_yield` 宏使用 `do { ... } while (0)` 手法改写：
@@ -395,5 +407,6 @@ int function(void) {
 ```
 
 延伸阅读:
+
 - [x] [深入了解 switch-case](https://airfishqi.blogspot.com/2016/11/switch-case.html)
 - [x] [Protothreads](https://dunkels.com/adam/pt/)

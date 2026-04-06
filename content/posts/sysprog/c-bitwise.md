@@ -18,6 +18,7 @@ tags:
   - C
   - Binary
 categories:
+collections:
   - 你所不知道的 C 语言
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -48,7 +49,7 @@ repost:
 
 ## 复习数值系统
 
-- [x] YouTube: [十进制，十二进制，六十进制从何而来？阿拉伯人成就了文艺复兴？[数学大师]](https://www.youtube.com/watch?v=8J7sAYoG50A) 
+- [x] YouTube: [十进制，十二进制，六十进制从何而来？阿拉伯人成就了文艺复兴？[数学大师]](https://www.youtube.com/watch?v=8J7sAYoG50A)
 - [x] [你所不知道的 C 语言: 数值系统](https://hackmd.io/@sysprog/c-numerics)
 - [x] [解读计算机编码](https://hackmd.io/@sysprog/binary-representation)
 
@@ -57,12 +58,12 @@ repost:
 一些位元组合表示特定的意义，而不是表示数值，这些组合被称为 **trap representation**
 
 - C11 6.2.6.2 Integer types
-> For unsigned integer types other than unsigned char, the bits of the object representation shall be divided into two groups: value bits and padding bits (there need not be any of the latter). If there are N value bits, each bit shall represent a different power of 2 between 1 and 2N−1, so that objects of that type shall be capable of representing values from 0 to 2N−1 using a pure binary representation; this shall be known as the value representation. The values of any padding bits are unspecified.
+  > For unsigned integer types other than unsigned char, the bits of the object representation shall be divided into two groups: value bits and padding bits (there need not be any of the latter). If there are N value bits, each bit shall represent a different power of 2 between 1 and 2N−1, so that objects of that type shall be capable of representing values from 0 to 2N−1 using a pure binary representation; this shall be known as the value representation. The values of any padding bits are unspecified.
 
 `uintN_t` 和 `intN_t` 保证没有填充位元 (padding bits)，且 `intN_t` 是二补数编码，所以对这两种类型进行位操作是安全的。
 
 - C99 7.18.1.1 Exact-width integer types
-> The typedef name intN_t designates a signed integer type with width N, no padding bits, and a two’s complement representation.
+  > The typedef name intN_t designates a signed integer type with width N, no padding bits, and a two’s complement representation.
 
 {{< admonition info >}}
 有符号整数上也有可能产生陷阱表示法 (trap representation)
@@ -77,17 +78,18 @@ repost:
 **C99 6.5.7 Bitwise shift operators**
 
 - 左移超过变量长度，则运算结果未定义
-> If the value of the right operand is negative or is greater than or equal to the width of the promoted left operand, the behavior is undefined.
+
+  > If the value of the right operand is negative or is greater than or equal to the width of the promoted left operand, the behavior is undefined.
 
 - 对一个负数进行右移，C 语言规格未定义，作为 implementation-defined，GCC 实作为算术位移 (arithmetic shift)
-> If E1 has a signed type and a negative value, the resulting value is implementation-defined.
+  > If E1 has a signed type and a negative value, the resulting value is implementation-defined.
 
 ### Signed & Unsigned
 
 当 Unsigned 和 Signed 混合在同一表达式时，Signed 会被转换成 Unsigned，运算结果可能不符合我们的预期 (这里大赞 Rust，这种情况会编译失败:rofl:)。案例请参考原文，这里举一个比较常见的例子:
 
 ```c
-int n = 10; 
+int n = 10;
 for (int i = n - 1 ; i - sizeof(char) >= 0; i--)
     printf("i: 0x%x\n",i);
 ```
@@ -95,16 +97,18 @@ for (int i = n - 1 ; i - sizeof(char) >= 0; i--)
 这段程式码会导致无限循环，因为条件判断语句 `i - sizeof(char) >= 0` 恒为真 (变量 i 被转换成 Unsigned 了)。
 
 - 6.5.3.4 The sizeof operator
-> The value of the result is implementation-defined, and its type (an unsigned integer type) is size_t, defined in <stddef.h> (and other headers).
+
+  > The value of the result is implementation-defined, and its type (an unsigned integer type) is size_t, defined in <stddef.h> (and other headers).
 
 - 7.17 Common definitions <stddef.h>
-> `size_t` which is the unsigned integer type of the result of the sizeof operator
+  > `size_t` which is the unsigned integer type of the result of the sizeof operator
 
 ### Sign Extension
 
 将 w bit signed integer 扩展为 w+k bit signed integer，只需将 sign bit 补充至扩展的 bits。
 
 数值等价性推导:
+
 - positive: 显然是正确的，sign bit 为 0，扩展后数值仍等于原数值
 - negitive: 将 w bit 情形时的除开 sign bit 的数值设为 U，则原数值为 $2^{-(w-1)} + U$，则扩展为 w+k bit 后数值为 $2^{-(w+k-1)} + 2^{w+k-2} + ... + 2^{-(w-1)} + U$，因为 $2^{-(w+k-1)} + 2^{w+k-2} + ... + 2^{w-1} = 2^{-(w-1)}$，所以数值依然等价。
 
@@ -152,7 +156,7 @@ if (list_empty(head) || !head)
 逻辑运算符 `!` 相当有效，C99 并没有完全支持 bool 类型，对于整数，它是将非零整数视为 true，零视为 false。所以如果你需要保证某一表达式的结果不仅是 true of false，还要求对应 0 or 1 时，可以使用 `!!(expr)` 来实现。
 
 - C99 6.5.3.3 Unary arithmetic operators
-> The result of the logical negation operator ! is 0 if the value of its operand compares unequal to 0, 1 if the value of its operand compares equal to 0. The result has type int. The expression !E is equivalent to (0==E).
+  > The result of the logical negation operator ! is 0 if the value of its operand compares unequal to 0, 1 if the value of its operand compares equal to 0. The result has type int. The expression !E is equivalent to (0==E).
 
 所以 `!!(expr)` 的结果为 `int` 并且数值只有 0 或 1。
 
@@ -171,7 +175,7 @@ if (list_empty(head) || !head)
 ## bitwise 实作
 
 - Vi/Vim 为什么使用 hjkl 作为移动字符?
-> 當我們回顧 1967 年 ASCII 的編碼規範，可發現前 32 個字元都是控制碼，讓人們得以透過這些特別字元來控制畫面和相關 I/O，早期鍵盤的 "control" 按鍵就搭配這些特別字元使用。"control" 組合按鍵會將原本字元的第 1 個 bit 進行 XOR，於是 H 字元對應 ASCII 編碼為 100_1000 (過去僅用 7 bit 編碼)，組合 "control" 後 (即 Ctrl+H) 會得到 000_1000，也就是 backspace 的編碼，這也是為何在某些程式中按下 backspace 按鍵會得到 ^H 輸出的原因。相似地，當按下 Ctrl+J 時會得到 000_1010，即 linefeed
+  > 當我們回顧 1967 年 ASCII 的編碼規範，可發現前 32 個字元都是控制碼，讓人們得以透過這些特別字元來控制畫面和相關 I/O，早期鍵盤的 "control" 按鍵就搭配這些特別字元使用。"control" 組合按鍵會將原本字元的第 1 個 bit 進行 XOR，於是 H 字元對應 ASCII 編碼為 100_1000 (過去僅用 7 bit 編碼)，組合 "control" 後 (即 Ctrl+H) 會得到 000_1000，也就是 backspace 的編碼，這也是為何在某些程式中按下 backspace 按鍵會得到 ^H 輸出的原因。相似地，當按下 Ctrl+J 時會得到 000_1010，即 linefeed
 
 {{< admonition >}}
 where n is the bit number, and 0 is the least significant bit
@@ -268,9 +272,10 @@ bwPixel = (a << 24) + (bw << 16) + (bw << 8) + bw;
 ## 案例探讨
 
 {{< admonition info >}}
+
 - [位元旋转实作和 Linux 核心案例](https://hackmd.io/@sysprog/bitwise-rotation)
 - [reverse bit 原理和案例分析](https://hackmd.io/@sysprog/bitwise-reverse)
-{{< /admonition >}}
+  {{< /admonition >}}
 
 ## 类神经网络的 ReLU 极其常数时间复杂度实作
 
@@ -278,13 +283,15 @@ bwPixel = (a << 24) + (bw << 16) + (bw << 8) + bw;
 
 ReLU 定义如下:
 {{< raw >}}
+
 $$
-ReLU(x) = 
+ReLU(x) =
 \begin{cases}
 x & \text{if } x \geq 0 \newline
 0 & \text{if } x \lt 0
 \end{cases}
 $$
+
 {{< /raw >}}
 
 显然如果 $x$ 是 32-bit 的二补数，可以使用上面提到的 `x >> 31` 的技巧来实作 constant-time function:
@@ -298,12 +305,12 @@ int32_t ReLU(int32_t x) {
 但是在深度学习中，浮点数使用更加常见，对于浮点数进行位移运算是不允许的
 
 - C99 6.5.7 Bitwise shift operators
-> Each of the operands shall have integer type.
+  > Each of the operands shall have integer type.
 
 所以这里以 32-bit float 浮点数类型为例，利用 32-bit 二补数和 32-bit float 的 MSB 都是 sign bit，以及 C 语言类型 union 的特性
 
-- C99 6.5.2.3 
-> (82) If the member used to access the contents of a union object is not the same as the member last used to store a value in the object, the appropriate part of the object representation of the value is reinterpreted as an object representation in the new type as described in 6.2.6 (a process sometimes called "type punning"). This might be a trap representation.
+- C99 6.5.2.3
+  > (82) If the member used to access the contents of a union object is not the same as the member last used to store a value in the object, the appropriate part of the object representation of the value is reinterpreted as an object representation in the new type as described in 6.2.6 (a process sometimes called "type punning"). This might be a trap representation.
 
 即 union 所有成员是共用一块内存的，所以访问成员时会将这块内存存储的 object 按照成员的类型进行解释。利用 `int32_t` 和 `float` 的 MSB 都是 sign bit 的特性，可以巧妙绕开对浮点数进行位移运算的限制，并且因为 union 成员内存的共用性质，保证结果的数值符合预期。
 
@@ -348,24 +355,29 @@ double ReLU(float x) {
 可以通过「十分逼近法」来求得近似精确的 $\sqrt 2$ 的数值，这也是「数值计算/分析」领域的一个应用，除此之外还可以使用「二分逼近法」进行求值。十分逼近法和二分逼近法的主要区别在于：十分逼近法的收敛速度比二分逼近法快很多，即会更快求得理想范围精度对应的数值。
 
 在数组方法的分析中，主要关心两件事:
+
 - 收敛速度
 - 误差分析
 
 由逼近法的过程不难看出，它们非常适合使用递归来实作:
+
 - [x] YouTube: [二分逼近法和十分逼近法求平方根](https://www.youtube.com/watch?v=PHPj0jLhcnM)
 
 ### 固定点和牛顿法
 
 固定点定理相关的证明挺有意思的 (前提是你修过数学导论这类具备现代数学观点和思维的课 :rofl:):
+
 - 存在性 (分类讨论)
 - 唯一性 (反证法)
 - 固定点定理 (逻辑推理)
 
 可以将求方程的根转换成求固定点的问题，然后利用收敛数列进行求解:
+
 - $f(x) = 0$
 - $g(x) = p - f(x)$ and $g(p) = p$
 
 牛顿法公式:
+
 $$
 p \approx p_0 -\dfrac{f(p_0)}{f'(p_0)}
 $$
@@ -373,6 +385,7 @@ $$
 后面利用 $f(x) = x^2 - N = 0$ 求平方根的公式可以根据这个推导而来的，图形化解释 (切线) 也符合这个公式，自行推导:
 
 {{< raw >}}
+
 $$
 \begin{split}
 f(x) &= x^2-N = 0 \\
@@ -380,6 +393,7 @@ b &= a - \frac{f(a)}{f'(a)} = a - \frac{a^2 - N}{2a} \\
   &= \frac{a^2+N}{2a} = (a+\frac{N}{a}) \div 2
 \end{split}
 $$
+
 {{< /raw >}}
 
 ```c
@@ -393,7 +407,7 @@ int mySqrt(int n)
     unsigned int ans = n / 2;
     if (ans > 65535)  // 65535 = 2^16 - 1
         ans = 65535;
-    
+
     while (ans * ans > n  || (ans + 1) * (ans + 1) <= n)
         ans = (ans + n / ans) / 2;
     return ans;
@@ -411,6 +425,7 @@ int mySqrt(int n)
 在使用位运算计算平方根的程式码中，我们又见到了的 `union` 和 `do {...} whil (0)` 的运用。位运算求解平方根的核心在于: $n$ 可以根据 IEEE 754 表示为 $S\times1.Frac\times2^{127+E}$，这种表示法下求解平方根只需计算 $\sqrt{1.Frac}$ 和 $\sqrt{2^{(127+E)}}$ 两部分 (只考虑非负数的平方根)。虽然描述起来简单，但由于 IEEE 754 编码的复杂性，需要考虑很多情况，例如 $E$ 全 0 或全 1，因为此时对应的数值就不是之前表示的那样了 (指 $S\times1.Frac\times2^{127+E}$)，需要额外考量。
 
 {{< image src="https://hackmd.io/_uploads/Hymhown-9.png" >}}
+
 - sign: 1 bit `0x80000000`
 - exponent: 8 bits `0x7f800000`
 - fraction: 23 bits `0x007fffff`
@@ -436,6 +451,7 @@ int mySqrt(int n)
 使用 IEEE 754 表示任意单精度浮点数为: $x = (1 + \frac{M}{2^{23}}) \times 2^{E-127}$，则该 $x$ 对应的对数为
 
 {{< raw >}}
+
 $$
 \begin{split}
 \log x &= \log{(1 + \frac{M}{2^{23}}) \times 2^{E-127}} \\
@@ -445,6 +461,7 @@ $$
        & = \frac{1}{2^{23}}X - 127
 \end{split}
 $$
+
 {{< /raw >}}
 
 注意上面处理 $\log{(1 + \frac{M}{2^{23}})}$ 部分时使用近似函数 $f(x) = x$ 代替了，当然会有一些误差，但由于我们后面计算的是平方根倒数的近似值，所以有一些误差没有关系。最后的 $2^{23} \times E + M$ 部分只和浮点数的表示域相关，并且 **这个运算的结果值和以二补数编码解释浮点数的数值相同** (参考上面的 IEEE 754 浮点数结构图，以及二补数的数值计算规则)，我们用一个大写标识 $X$ 来标记其只与浮点数编码相关，并且对应二补数编码下的数值。
@@ -452,6 +469,7 @@ $$
 推导出对数的通用公式后，接下来就可以推导 **平方根倒数的近似值** 了，即求得对应数值的 $-\frac{1}{2}$ 次方。假设 $a$ 是 $y$ 的平方根倒数，则有等式:
 
 {{< raw >}}
+
 $$
 \begin{split}
 \log a &= \log{y^{-\frac{1}{2}}} \\
@@ -460,14 +478,15 @@ $$
 A &= 381 \times 2^{22} - \frac{1}{2} Y
 \end{split}
 $$
+
 {{< /raw >}}
 
 中间将数值由浮点数转换成二补数编码表示，并求得最终的浮点数表示为 $381 \times 2^{22} - \frac{1}{2} Y$，其中的 $381 \times 2^{22}$ 对应的 16 进制恰好为 `0x5f400000`，这已经很接近我们看到的魔数了，但还有一点偏差。
 这是因为在计算 $\log{(1 + \frac{M}{2^{23}})}$ 时直接使用 $f(x) = x$ 导致的总体误差还是较大，但是只需要将其稍微往 $y$ 轴正方向偏移一些就可以减少总体误差 (机器学习中常用的技巧 :rofl:)，所以使用 $\frac{M}{2^{23}} + \lambda$ 代替原先的 $\frac{M}{2^{23}}$ ($\lambda$ 为修正的误差且 $\lambda > 0$)，这会导致最终结果的 381 发生稍微一些变化 (因为二补数编码解释浮点数格式部分 $X$ 不能动，只能影响常数 $127$，而常数 $127$ 又直接影响最终结果的 $381$ 这类常数部分)，进而产生魔数 `0x5f3759df`。
- 
+
 ```c
 float InvSqrt(float x)
-{  
+{
     float xhalf = 0.5f * x;
     int i = *(int *) &x;
     i = 0x5f3759df - (i >> 1);
@@ -494,7 +513,7 @@ int main() {
 
 - C99 6.7.2.1 Structure and union specifiers
 
-> A bit-field shall have a type that is a qualified or unqualified version of `_Bool`, `signed int`, `unsigned int`, or some other implementation-defined type. 
+> A bit-field shall have a type that is a qualified or unqualified version of `_Bool`, `signed int`, `unsigned int`, or some other implementation-defined type.
 
 > A bit-field is interpreted as a signed or unsigned integer type consisting of the specified number of bits.
 
@@ -515,6 +534,7 @@ int main() {
 这个宏运用了上面所说的 `!!` 技巧将 `-!!(e)` 的数值限定在 0 和 -1。
 
 这个宏的功能是:
+
 - 当 `e` 为 true 时，`-!!(e)` 为 -1，即 bit-field 的 size 为负数
 - 当 `e` 为 false 时，`-!!(e)` 为 0，即 bit-field 的 size 为 0
 
@@ -563,14 +583,13 @@ padding & start from here
 zero size bit-field 使得这里在 `a`, `b` 和 `c`, `d` 之间进行 `sizeof(int)` 的 alignment，所以 `c`, `d` 位于 `i` 这个 object 范围之外，因此 `c`, `d` 每次执行时的数值是不确定的，当然这也依赖于编译器，可以使用 gcc 和 clang 进行测试 :rofl:
 
 - C11 3.14 1 memory location
-> (*NOTE 2*) A bit-field and an adjacent non-bit-field member are in separate memory locations. The same
-> applies to two bit-fields, if one is declared inside a nested structure declaration and the other is not, or if the
-> two are separated by a zero-length bit-field declaration, or if they are separated by a non-bit-field member
-> declaration. It is not safe to concurrently update two non-atomic bit-fields in the same structure if all
-> members declared between them are also (non-zero-length) bit-fields, no matter what the sizes of those
-> intervening bit-fields happen to be.
+  > (_NOTE 2_) A bit-field and an adjacent non-bit-field member are in separate memory locations. The same
+  > applies to two bit-fields, if one is declared inside a nested structure declaration and the other is not, or if the
+  > two are separated by a zero-length bit-field declaration, or if they are separated by a non-bit-field member
+  > declaration. It is not safe to concurrently update two non-atomic bit-fields in the same structure if all
+  > members declared between them are also (non-zero-length) bit-fields, no matter what the sizes of those
+  > intervening bit-fields happen to be.
 
 所以 `BUILD_BUG_ON_ZERO` 宏相当于编译时期的 `assert`，因为 `assert` 是在执行时期才会触发的，对于 Linux 核心来说代价太大了 (想象一下核心运行着突然触发一个 `assert` 导致当掉 :rofl:)，所以采用了 `BUILD_BUG_ON_ZERO` 宏在编译时期就进行检查 (莫名有一种 Rust 的风格 :rofl:)
 
-对于 `BUILD_BUG_ON_ZERO` 这个宏，C11 提供了 [_Static_assert](https://en.cppreference.com/w/c/language/_Static_assert) 语法达到相同效果，但是 Linux kernel 自己维护了一套编译工具链 (这个工具链 gcc 版本可能还没接纳 C11 :rofl:)，所以还是使用自己编写的 `BUILD_BUG_ON_ZERO` 宏。
- 
+对于 `BUILD_BUG_ON_ZERO` 这个宏，C11 提供了 [\_Static_assert](https://en.cppreference.com/w/c/language/_Static_assert) 语法达到相同效果，但是 Linux kernel 自己维护了一套编译工具链 (这个工具链 gcc 版本可能还没接纳 C11 :rofl:)，所以还是使用自己编写的 `BUILD_BUG_ON_ZERO` 宏。

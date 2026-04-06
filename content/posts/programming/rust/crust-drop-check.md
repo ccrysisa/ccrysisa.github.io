@@ -1,5 +1,5 @@
 ---
-title: "Crust of Rust: The Drop Check" 
+title: "Crust of Rust: The Drop Check"
 subtitle:
 date: 2024-07-08T11:21:32+08:00
 # draft: true
@@ -17,7 +17,8 @@ tags:
   - Rust
   - Drop Check
 categories:
-  - Rust
+collections:
+  - Crust of Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -66,10 +67,11 @@ impl<T> Drop for Boks<T> {
 直接使用 `drop_in_place` 只会 drop 被 `p` 指向的那部分数据 (位于 heap 中)，而不会 drop `Boks` 本身 (即成员 `p` 没被 drop)，而使用 `from_raw` 则两者都可以 drop 掉。
 
 - Function [std::ptr::drop_in_place](https://doc.rust-lang.org/std/ptr/fn.drop_in_place.html)
-> Executes the destructor (if any) of the pointed-to value.
+
+  > Executes the destructor (if any) of the pointed-to value.
 
 - method [std::boxed::Box::from_raw](https://doc.rust-lang.org/std/boxed/struct.Box.html#method.from_raw)
-> After calling this function, the raw pointer is owned by the resulting Box. Specifically, the Box destructor will call the destructor of T and free the allocated memory. 
+  > After calling this function, the raw pointer is owned by the resulting Box. Specifically, the Box destructor will call the destructor of T and free the allocated memory.
 
 ### drop check and eyepatch
 
@@ -94,11 +96,11 @@ And what this tells the compiler is that even though `Boks` holds a `T`, and the
 
 ## Documentations
 
-这里列举视频中一些概念相关的 documentation 
+这里列举视频中一些概念相关的 documentation
 
 > 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
 
-### Crate [std](https://doc.rust-lang.org/std/index.html) 
+### Crate [std](https://doc.rust-lang.org/std/index.html)
 
 > 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 

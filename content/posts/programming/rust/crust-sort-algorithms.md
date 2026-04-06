@@ -18,7 +18,8 @@ tags:
   - Sort
   - Algorithm
 categories:
-  - Rust
+collections:
+  - Crust of Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -47,7 +48,7 @@ repost:
 - 整理自 [John Gjengset 的影片](https://www.youtube.com/watch?v=h4RkCyJyXmM)
 
 {{< admonition question >}}
-You may note that the url of this posy is "orst". Why was it given this name? 
+You may note that the url of this posy is "orst". Why was it given this name?
 
 Since "sort" when sorted becomes "orst". :rofl:
 {{< /admonition >}}
@@ -61,13 +62,15 @@ Since "sort" when sorted becomes "orst". :rofl:
 - Wikipedia: [Partial order](https://en.wikipedia.org/wiki/Partially_ordered_set#Partial_order)
 
 - Stack Overflow: [What does it mean by "partial ordering" and "total ordering" in the discussion of Lamport\'s synchronization Algorithm?](https://stackoverflow.com/questions/55889912/what-does-it-mean-by-partial-ordering-and-total-ordering-in-the-discussion-o)
-> This definition says that in a total order any two things are comparable. Wheras in a partial order a thing needs neither to be "smaller" than an other nor the other way around, in a total order each thing is either "smaller" than an other or the other way around.
+  > This definition says that in a total order any two things are comparable. Wheras in a partial order a thing needs neither to be "smaller" than an other nor the other way around, in a total order each thing is either "smaller" than an other or the other way around.
 
 简单来说，在 total order 中任意两个元素都可以进行比较，而在 partial order 中则不一定满足。例如对于集合
 {{< raw >}}
+
 $$
 S = \{a,\ b,\ c\}
 $$
+
 {{< /raw >}}
 在 total order 中，$a, b, c$ 任意两个元素之间都必须能进行比较，而在 partial order 中没有怎么严格的要求，可能只有 $a < b, b < c$ 这两条比较规则。
 
@@ -164,12 +167,13 @@ slice[i..=unsorted].rotate_right(1);
 
 {{< admonition quote >}}
 There are many different ways to sort the cards. Here's a simple one, called selection sort, possibly similar to how you sorted the cards above:
+
 1. Find the smallest card. Swap it with the first card.
 2. Find the second-smallest card. Swap it with the second card.
 3. Find the third-smallest card. Swap it with the third card.
 4. Repeat finding the next-smallest card, and swapping it into the correct position until the array is sorted.
-{{< /admonition >}}
-> [source](https://www.khanacademy.org/computing/computer-science/algorithms/sorting-algorithms/a/selection-sort-pseudocode)
+   {{< /admonition >}}
+   > [source](https://www.khanacademy.org/computing/computer-science/algorithms/sorting-algorithms/a/selection-sort-pseudocode)
 
 使用函数式编程可以写成相当 readable 的程式码，以下为获取 slice 最小值对应的 index:
 
@@ -210,11 +214,13 @@ Partition(A,p,r)
     }
 }
 ```
+
 > [source](https://sites.cc.gatech.edu/classes/cs3158_98_fall/quicksort.html)
 
 - method [slice::split_at_mut](https://doc.rust-lang.org/std/primitive.slice.html#method.split_at_mut)
 
 实现 Quick sort 时使用了 `split_at_mut` 来绕开引用检查，因为如果你此时拥有一个指向 pivot 的不可变引用，就无法对 slice 剩余的部分使用可变引用，而 `split_at_mut` 则使得原本的 slice 被分为两个可变引用，从而绕开了之前的单一引用检查。
+
 > 后面发现可以使用更符合语义的 `split_first_mut`，当然思路还是一样的
 
 {{< admonition >}}
@@ -263,12 +269,14 @@ $ R
 deepin 软件源下载的 R 语言包可能版本过低 (3.5)，可以通过添加库源的方式来下载高版本的 R 语言包:
 
 1.添加 Debian buster (oldstable) 库源到 /etc/apt/sourcelist 里:
+
 ```bash
 # https://mirrors.tuna.tsinghua.edu.cn/CRAN/
 deb http://cloud.r-project.org/bin/linux/debian buster-cran40/
 ```
 
 2.更新软件，可能会遇到没有公钥的问题 (即出现下方的 NO_PUBKEY):
+
 ```bash
 $ sudo apt update
 ...
@@ -277,6 +285,7 @@ $ sudo apt update
 ```
 
 此时可以 NO_PUBKEY 后的 XXXXXX 就是公钥，我们只需要将其添加一下即可:
+
 ```bash
 $ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys XXXXXX
 ```
@@ -284,6 +293,7 @@ $ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys XXXXXX
 添加完公钥后再重新更新一次软件源
 
 3.通过指定库源的方式来安装 R (如果未指定库源则还是从默认源进行下载 3.5 版本):
+
 ```bash
 $ sudo apt install buster-cran40 r-base
 $ R --version
@@ -297,23 +307,25 @@ R version 4.3.3 (2024-02-29)
 
 {{< admonition info >}}
 实作说明:
+
 - [x] 添加标准库的 sort_unstable 进入基准测试
 - [ ] 将交换操作 (swap) 纳入基准测试
 - [x] 尝试实现 Merge sort
 - [x] 尝试实现 Heap sort
 
 参考资料:
+
 - Wikipedia: [Merge sort](https://en.wikipedia.org/wiki/Merge_sort)
 - Wikipedia: [Heapsort](https://en.wikipedia.org/wiki/Heapsort)
-{{< /admonition >}}
+  {{< /admonition >}}
 
 ## Documentations
 
-这里列举视频中一些概念相关的 documentation 
+这里列举视频中一些概念相关的 documentation
 
 > 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
 
-### Crate [std](https://doc.rust-lang.org/std/index.html) 
+### Crate [std](https://doc.rust-lang.org/std/index.html)
 
 > 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 

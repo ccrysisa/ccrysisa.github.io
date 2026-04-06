@@ -218,6 +218,8 @@ exec fish
 
 fish 可以通过 `fish_config` 命令来设置主题等样式，非常方便。
 
+相关的插件管理器和插件: [fisher](https://github.com/jorgebucaran/fisher), [bass](https://github.com/edc/bass)
+
 ### tmux
 
 个人的终端方案是 [tmux](https://github.com/tmux/tmux)，也是可以通过 apt 进行安装，参考 [这个链接](https://stackoverflow.com/questions/21115370/how-to-launch-tmux-automatically-when-konsole-yakuake-start/) 来让终端默认启动 tmux。
@@ -290,7 +292,7 @@ $ . ./[run.sh|exit.sh]
 
 {{< /admonition >}}
 
-然后可以进一步地在 `~/.bashrc` 或 `~/.bash_aliases` 文件中设置快速启动/关闭的命令别名。 
+然后可以进一步地在 `~/.bashrc` 或 `~/.bash_aliases` 文件中设置快速启动/关闭的命令别名。
 
 如果你没有关闭 clash 服务就关机，那么重启后可能会出现，输入密码无法进入图形界面重新返回登录界面，这一循环状况。这个是有些 Linux 发行版默认的 shell 是 dash，但位于 `/etc/` 路径下的 clash 服务脚本需要使用 bash 才能运行造成的，有几种方式可以解决该问题。
 

@@ -18,6 +18,7 @@ tags:
   - Linux
   - Concurrency
 categories:
+collections:
   - 并行程序设计
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -134,7 +135,7 @@ int pthread_mutex_trylock(pthread_mutex_t *mutex);
 {{< admonition >}}
 单纯的 Mutex 无法应对复杂情形的「生产者-消费者」问题，例如单生产者单消费者、多生产者单消费者、单生产者多消费者，甚至是多生产者多消费者 :dizzy_face: 需要配合 condition variables
 
-我有用 Rust 写过一个「多生产者单消费者」的程序，相关的博客解说在 [这里]({{< relref "../programming/channels" >}})
+John Gjengset 使用 Rust 写过一个「多生产者单消费者」的程序: {{< link "https://www.youtube.com/watch?v=b4mS5UPHh20" >}}
 {{< /admonition >}}
 
 #### condition variables

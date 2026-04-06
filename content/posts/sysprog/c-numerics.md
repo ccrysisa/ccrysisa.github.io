@@ -18,6 +18,7 @@ tags:
   - C
   - Binary
 categories:
+collections:
   - 你所不知道的 C 语言
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -80,9 +81,10 @@ An example of a layout for 32-bit floating point is
 单精度浮点数相对于整数 **在某些情況下不满足結合律和交换律**，所以不构成 **阿贝尔群**，在编写程序时需要注意这一点。即使编写程序时谨慎处理了单精度浮点数运算，但是编译器优化可能会将我们的处理破划掉。所以涉及到单精度浮点数，都需要注意其运算。
 
 {{< admonition info >}}
+
 - 你所不知道的 C 语言: [浮点数运算](https://hackmd.io/@sysprog/c-floating-point)
 - 你所不知道的 C 语言: [编译器和最佳化原理篇](https://hackmd.io/@sysprog/c-compiler-optimization)
-{{< /admonition >}}
+  {{< /admonition >}}
 
 ## Integer Overflow
 
@@ -98,7 +100,7 @@ int copy_from_kernel(void *user_dest, int maxlen) {
 }
 ```
 
-假设将“负”的数值带入 `maxlen`，那么在上述的程式码第 4 行时 `len` 会被赋值为 `maxlen`，在第 5 行中，根据 
+假设将“负”的数值带入 `maxlen`，那么在上述的程式码第 4 行时 `len` 会被赋值为 `maxlen`，在第 5 行中，根据
 
 - `memcpy` 的原型声明
 
@@ -109,7 +111,7 @@ void *memcpy(void *dest, const void *src, size_t n);
 会将 `len (=maxlen)` 解释为 `size_t` 类型，关于 `size_t` 类型
 
 - C99 [7.17 Common definitions <stddef.h>]
-> **size_t** which is the unsigned integer type of the result of the sizeof operator;
+  > **size_t** which is the unsigned integer type of the result of the sizeof operator;
 
 所以在 5 行中 `memcpy` 会将 `len` 这个“负“的数值按照无符号数的编码进行解释，这会导致将 `len` 解释为一个超级大的无符号数，可能远比 `KSIZE` 这个限制大。`copy_from_kernel` 这个函数是运行在 kernel 中的，这样可能会造成潜在的 kernel 信息数据泄露问题。
 
@@ -147,8 +149,9 @@ void *malloc(size_t size);
 > 本质上是使用无符号数的二进制编码来进行计数，将手指/脚趾视为数值的 bit
 
 {{< admonition info >}}
+
 - [解读计算机编码](https://hackmd.io/@sysprog/binary-representation)
-{{< /admonition >}}
+  {{< /admonition >}}
 
 ### Power of two
 
@@ -206,7 +209,7 @@ void xorSwap(int *x, int *y) {
 (x & y) + (x ^ y) >> 1
 ```
 
-使用加法器来思考: 对于 `x + y`，`x & y` 表示进位，`x ^ y` 表示位元和，所以 `x + y` 等价于 
+使用加法器来思考: 对于 `x + y`，`x & y` 表示进位，`x ^ y` 表示位元和，所以 `x + y` 等价于
 
 ```c
 (x & y) << 1 + (x ^ y)

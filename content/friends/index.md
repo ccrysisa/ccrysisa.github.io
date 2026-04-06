@@ -5,8 +5,8 @@ layout: friends
 date: 2024-04-29T23:46:50+08:00
 description: "ccrysisa's friends"
 keywords:
-  - 'Hugo FixIt'
-  - 'friends template'
+  - "Hugo FixIt"
+  - "friends template"
   - 友情链接
 comment: false
 ---

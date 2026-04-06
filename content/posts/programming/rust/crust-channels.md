@@ -17,7 +17,8 @@ tags:
   - Rust
   - Channel
 categories:
-  - Rust
+collections:
+  - Crust of Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -47,15 +48,16 @@ repost:
 
 ## Channel
 
-- Wikipedia: [Channel](https://en.wikipedia.org/wiki/Channel_(programming))
+- Wikipedia: [Channel](<https://en.wikipedia.org/wiki/Channel_(programming)>)
 
 {{< admonition quote >}}
-In computing, a **channel** is a model for [interprocess communication](https://en.wikipedia.org/wiki/Interprocess_communication) and [synchronization](https://en.wikipedia.org/wiki/Synchronization) via [message passing](https://en.wikipedia.org/wiki/Message_passing). A message may be sent over a channel, and another process or thread is able to receive messages sent over a channel it has a [reference](https://en.wikipedia.org/wiki/Reference_(computer_science)) to, as a [stream](https://en.wikipedia.org/wiki/Stream_(computing)). 
+In computing, a **channel** is a model for [interprocess communication](https://en.wikipedia.org/wiki/Interprocess_communication) and [synchronization](https://en.wikipedia.org/wiki/Synchronization) via [message passing](https://en.wikipedia.org/wiki/Message_passing). A message may be sent over a channel, and another process or thread is able to receive messages sent over a channel it has a [reference](<https://en.wikipedia.org/wiki/Reference_(computer_science)>) to, as a [stream](<https://en.wikipedia.org/wiki/Stream_(computing)>).
 {{< /admonition >}}
 
 - YouTube: [Channels in Rust](https://www.youtube.com/watch?v=vFCTpxuGwpw)
 
 {{< image src="https://marketsplash.com/content/images/2023/09/rust-channels.png" >}}
+
 > [Source](https://marketsplash.com/tutorials/rust/rust-channels/)
 
 ### Concurrency vs Parallelism
@@ -70,20 +72,22 @@ In computing, a **channel** is a model for [interprocess communication](https://
 {{< image src="/images/rust/mpsc.drawio.svg" caption="multi-produce/single-consumer (mpsc)" >}}
 
 - Why does the recevier type need to have an arc protected by mutex if the channel may only have a single consumer thread?
-> Because a send and a recevie might happen at the same time, and they need to be mutually exclusive to each other as well.
+
+  > Because a send and a recevie might happen at the same time, and they need to be mutually exclusive to each other as well.
 
 - Why not use a boolean semaphore over the implementation in mutex?
-> A boolean semaphore is basically a boolean flag that you check and atomically update. 
-> The problem there is if the flag is currently set (someone else is in the critical section), with a boolean semaphore, you have to spin, you have to repeatedly check it. 
-> Whereas with a mutex, the operating system can put the thread to sleep and wake it back up when the mutex is available, which is generally more efficient although adds a little bit of latency.
+  > A boolean semaphore is basically a boolean flag that you check and atomically update.
+  > The problem there is if the flag is currently set (someone else is in the critical section), with a boolean semaphore, you have to spin, you have to repeatedly check it.
+  > Whereas with a mutex, the operating system can put the thread to sleep and wake it back up when the mutex is available, which is generally more efficient although adds a little bit of latency.
 
 ### Condition Variable
 
 - method [std::sync::Condvar::wait](https://doc.rust-lang.org/std/sync/struct.Condvar.html#method.wait)
-> This function will atomically unlock the mutex specified (represented by guard) and block the current thread. This means that any calls to notify_one or notify_all which happen logically after the mutex is unlocked are candidates to wake this thread up. When this function call returns, the lock specified will have been re-acquired.
+
+  > This function will atomically unlock the mutex specified (represented by guard) and block the current thread. This means that any calls to notify_one or notify_all which happen logically after the mutex is unlocked are candidates to wake this thread up. When this function call returns, the lock specified will have been re-acquired.
 
 - method [std::sync::Condvar::notify_one](https://doc.rust-lang.org/std/sync/struct.Condvar.html#method.notify_one)
-> If there is a blocked thread on this condition variable, then it will be woken up from its call to wait or wait_timeout. Calls to notify_one are not buffered in any way.
+  > If there is a blocked thread on this condition variable, then it will be woken up from its call to wait or wait_timeout. Calls to notify_one are not buffered in any way.
 
 {{< image src="/images/rust/send_recv.drawio.svg" caption="wait & notify" >}}
 
@@ -131,7 +135,7 @@ The macro works by using the Debug implementation of the type of the given expre
 ### Performance optimization
 
 > Every operation takes the lock and that\'s fine if you have a channel that is not very high performance, but if you wanted like super high performance, like you have a lot of sends that compete with each other, then you might not want the sends to contend with one another.
-> 
+>
 > Image that you have 10 threads are trying to send at the same time, you could perhaps write an implementation that allows them to do that. The only thing that really needs to be synchronized is the senders with the receivers, as opposed to the senders with one another, whereas we\'re actually locking all of them.
 
 使用 `VecDeque` 作为缓冲区，会导致 send 时的效能问题。因为 send 是使用 `push_back` 方法来将 object 加入到 `VecDeque` 中，这个过程 `VecDeque` 可能会发生 resize 操作，这会花费较长时间并且在这个过程时 sender 仍然持有 Mutex，所以导致其他 sender 和 recevier 并不能使用 `VecDeque`，所以在实作中并不使用 `VecDeque` 以避免相应的效能损失。
@@ -141,11 +145,10 @@ The macro works by using the Debug implementation of the type of the given expre
 ### Synchronous channels
 
 - Module [std::sync::mpsc](https://doc.rust-lang.org/std/sync/mpsc/index.html)
-> These channels come in two flavors:
-> 
-> 1. An asynchronous, infinitely buffered channel. The `channel` function will return a `(Sender, Receiver)` tuple where all sends will be **asynchronous** (they never block). The channel conceptually has an infinite buffer.
-> 
-> 2. A synchronous, bounded channel. The `sync_channel` function will return a (SyncSender, Receiver) tuple where the storage for pending messages is a pre-allocated buffer of a fixed size. All sends will be **synchronous** by blocking until there is buffer space available. Note that a bound of 0 is allowed, causing the channel to become a "rendezvous" channel where each sender atomically hands off a message to a receiver.
+  > These channels come in two flavors:
+  >
+  > 1. An asynchronous, infinitely buffered channel. The `channel` function will return a `(Sender, Receiver)` tuple where all sends will be **asynchronous** (they never block). The channel conceptually has an infinite buffer.
+  > 2. A synchronous, bounded channel. The `sync_channel` function will return a (SyncSender, Receiver) tuple where the storage for pending messages is a pre-allocated buffer of a fixed size. All sends will be **synchronous** by blocking until there is buffer space available. Note that a bound of 0 is allowed, causing the channel to become a "rendezvous" channel where each sender atomically hands off a message to a receiver.
 
 ### Channel flavors
 
@@ -170,7 +173,8 @@ The macro works by using the Debug implementation of the type of the given expre
 
 {{< admonition info >}}
 实作说明:
-- [ ] 尝试实现 Synchronous channels 
+
+- [ ] 尝试实现 Synchronous channels
   - 使用 Atomic 存储 senders 以提高效能
   - 使用两个 ConVar 来指示 sender 和 receiver 进行 block 和 wake up
   - receiver 被 drop 时需要通知所有 senders 以释放资源
@@ -179,19 +183,20 @@ The macro works by using the Debug implementation of the type of the given expre
   - 对比阅读其他库关于 channel 的实现: [crossbeam](https://github.com/crossbeam-rs/crossbeam), [flume](https://github.com/zesterer/flume)
 
 参考资料:
+
 - Module [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html)
 - Module [std::sync::mpsc](https://doc.rust-lang.org/src/std/sync/mpsc/mod.rs.html#1-1246https://doc.rust-lang.org/src/std/sync/mpsc/mod.rs.html#1-1246)
 - Crate [crossbeam](https://docs.rs/crossbeam/latest/crossbeam/)
 - Crate [flume](https://docs.rs/flume/latest/flume/)
-{{< /admonition >}}
+  {{< /admonition >}}
 
 ## Documentations
 
-这里列举视频中一些概念相关的 documentation 
+这里列举视频中一些概念相关的 documentation
 
 > 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
 
-### Crate [std](https://doc.rust-lang.org/std/index.html) 
+### Crate [std](https://doc.rust-lang.org/std/index.html)
 
 > 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 

@@ -15,8 +15,8 @@ $ ./run.sh
 ## Usage
 
 ```bash
-# Run the blog
-$ ./run.sh
+# Run the blog [with FastRender disabled]
+$ ./run.sh [-d]
 # Commit all changes [with ammend]
 $ ./commit [-a]
 # Update by pulling latest commit of blog [and theme Fixit]

@@ -18,6 +18,7 @@ tags:
   - C
   - Floating Point
 categories:
+collections:
   - 你所不知道的 C 语言
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -45,4 +46,3 @@ repost:
 <!--more-->
 
 - {{< link href="https://hackmd.io/@sysprog/c-floating-point" content="原文地址" external-icon=true >}}
-

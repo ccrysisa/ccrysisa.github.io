@@ -19,6 +19,7 @@ tags:
   - Atomic
   - Memory Order
 categories:
+collections:
   - Crust of Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -123,11 +124,11 @@ pub struct $atomic_type {
 
 ## Appendix
 
-这里列举视频中一些概念相关的 documentation 
+这里列举视频中一些概念相关的 documentation
 
 **学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料**
 
-### Crate [std](https://doc.rust-lang.org/std/index.html) 
+### Crate [std](https://doc.rust-lang.org/std/index.html)
 
 > 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 
@@ -140,7 +141,6 @@ pub struct $atomic_type {
 - Struct [std::cell::UnsafeCell](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html)
 
 - Struct [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html)
-
 
 - Trait [std::marker::Send](https://doc.rust-lang.org/std/marker/trait.Send.html)
 

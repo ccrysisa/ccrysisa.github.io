@@ -18,6 +18,7 @@ tags:
   - C
   - Compiler
 categories:
+collections:
   - 你所不知道的 C 语言
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -41,7 +42,7 @@ repost:
 ---
 
 > AMaCC 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。
-> 
+>
 > 預期會接觸到 IR (Intermediate representation), dynamic linking, relocation, symbol table, parsing tree, language frontend, Arm 指令編碼和 ABI 等等。
 
 <!--more-->
@@ -52,7 +53,7 @@ repost:
 
 - [x] [用十分鐘 向 jserv 學習作業系統設計](https://www.slideshare.net/ccckmit/jserv#22)
 - [x] [用1500 行建構可自我編譯的 C 編譯器](https://hackmd.io/coscup18-source-c-compiler)
-/ [投影片](https://drive.google.com/file/d/1-0QGf2JSni-CwYigaEORW6JUehS8LS79/view)
+      / [投影片](https://drive.google.com/file/d/1-0QGf2JSni-CwYigaEORW6JUehS8LS79/view)
 
 [AMaCC](https://github.com/jserv/amacc) 是由成功大學師生開發的 self-compiling 的 C 語言編譯器，可產生 Arm 架構的執行檔 (ELF 格式，運作在 GNU/Linux)、也支援 just-in-time (JIT) 編譯和執行，原始程式碼僅 1500 行，在這次講座中，我們就來揭開 AMaCC 背後的原理和實作議題。
 
@@ -62,6 +63,7 @@ repost:
 - GitHub: [mini-riscv-os](https://github.com/cccriscv/mini-riscv-os)
 
 这个专案是对 Jserv 的 700 行系列的致敬，启发自 [mini-arm-os](https://github.com/jserv/mini-arm-os) 专案:
+
 > Build a minimal multi-tasking OS kernel for RISC-V from scratch. Mini-riscv-os was inspired by jserv's mini-arm-os project. However, ccckmit rewrite the project for RISC-V, and run on Win10 instead of Linux.
 
 ## 编译器和软件工业强度息息相关
@@ -88,7 +90,7 @@ repost:
 - [Write your Own Virtual Machine](https://www.jmeiners.com/lc3-vm/) / [中文翻译](https://arthurchiao.art/blog/write-your-own-virtual-machine-zh/)
 
 {{< admonition >}}
-上面的第一个链接是关于 c4 的教程，非常值得一看和一做 (*Make your hands dirty!*)，同时它也是 AMaCC 的基础 (AMaCC 在这个基础上进行了重写和扩展)。
+上面的第一个链接是关于 c4 的教程，非常值得一看和一做 (_Make your hands dirty!_)，同时它也是 AMaCC 的基础 (AMaCC 在这个基础上进行了重写和扩展)。
 
 最后一个关于虚拟机器的讲座也不错，对于各类虚拟机器都进行了介绍和说明，并搭配了相关实作 [RTMux](https://github.com/rtmux/rtmux) 进行了讲解。
 {{< /admonition >}}
@@ -99,7 +101,7 @@ repost:
 
 - Wikipedia: []()
 
-> An intermediate representation (IR) is the data structure or code used internally by a compiler or virtual machine to represent source code. 
+> An intermediate representation (IR) is the data structure or code used internally by a compiler or virtual machine to represent source code.
 
 > An intermediate language is the language of an abstract machine designed to aid in the analysis of computer programs.
 
@@ -138,7 +140,7 @@ JIT (Just in time) 表示“即时”，形象描述就是“及时雨” :rofl:
 
 系统编程 (System Programming) 的入门项目，阅读过程需要查询搭配 man 手册，以熟悉库函数和系统调用的原型和作用。
 
-Linux manual page: 
+Linux manual page:
 [fflush](https://man7.org/linux/man-pages/man3/fflush.3.html)
 / [elf](https://man7.org/linux/man-pages/man5/elf.5.html)
 / [exec](https://man7.org/linux/man-pages/man3/exec.3.html)
@@ -159,7 +161,6 @@ Linux manual page:
 
 - [ ] YouTube: [Brian Kernighan on successful language design](https://www.youtube.com/watch?v=Sg4U4r_AgJU)
 
-
 ## 实作案例: 手把手教你构建 C 语言编译器
 
 lotabout 所写的 {{< link href="https://github.com/lotabout/write-a-C-interpreter" content="系列博文" external-icon=true >}}
@@ -170,21 +171,25 @@ lotabout 所写的 {{< link href="https://github.com/lotabout/write-a-C-interpre
 
 {{< admonition >}}
 这篇教程里面会有一些比较奇怪古板的写法，例如:
+
 ```c
 int i; i = 0; // instead of `int i = 0;`
 a = a + 1;    // instead of `a += 1;`
 ```
+
 这都是为了实现这个编译器的自举 (self-host)，所以在语法上没有太大的灵活性 (因为这个编译器不支持这么灵活的语法 :rofl:)
 {{< /admonition >}}
 
 #### 设计
 
 一般而言，编译器的编写分为 3 个步骤：
+
 1. 词法分析器，用于将字符串转化成内部的表示结构。
 2. 语法分析器，将词法分析得到的标记流（token）生成一棵语法树。
 3. 目标代码的生成，将语法树转化成目标代码。
 
 {{< admonition question "argc & argv" false >}}
+
 ```c
 argc--;
 argv++;
@@ -230,10 +235,11 @@ sub_function(arg1, arg2, arg3);
 - Wikipedia: [x86 calling conventions](https://en.wikipedia.org/wiki/X86_calling_conventions)
 
 {{< admonition question "PRTF" false >}}
+
 ```c
-else if (op == PRTF) { 
-  tmp = sp + pc[1]; 
-  ax = printf((char *)tmp[-1], tmp[-2], tmp[-3], tmp[-4], tmp[-5], tmp[-6]); 
+else if (op == PRTF) {
+  tmp = sp + pc[1];
+  ax = printf((char *)tmp[-1], tmp[-2], tmp[-3], tmp[-4], tmp[-5], tmp[-6]);
 }
 ```
 
@@ -293,13 +299,15 @@ fatal error: bits/wordsize.h: No such file or directory
 $ sudo apt install gcc-multilib
 ```
 
-Stack Overflow: 
+Stack Overflow:
+
 - ["fatal error: bits/libc-header-start.h: No such file or directory" while compiling HTK](https://stackoverflow.com/questions/54082459/fatal-error-bits-libc-header-start-h-no-such-file-or-directory-while-compili)
-{{< /admonition >}}
+  {{< /admonition >}}
 
 #### 词法分析器
 
 我们并不会一次性地将所有源码全部转换成标记流，原因有二：
+
 1. 字符串转换成标记流有时是有状态的，即与代码的上下文是有关系的。
 2. 保存所有的标记流没有意义且浪费空间。
 
@@ -308,6 +316,7 @@ Stack Overflow:
 上面这一技巧依赖于这一事实：字符 `0-9` 对应的十六进制为 `0x30 - 0x39`，字符 `A-F` 对应的十六进制为 `0x41 - 0x46`，字符 `a-f` 对应的十六进制为 `0x61 - 0x66`。
 
 对于「关键字与内置函数」的处理:
+
 - **关键字**: 首先使用词法分析器将其识别为 identifier，然后将 symbol table 中的 token 类型改为对应的关键字
 - **内置函数**: 类似的先进行词法分析识别为 identifier，然后在 symbol table 中修改其 Class, Type, Value 字段的值
 
@@ -322,14 +331,17 @@ if (id[Class] == Sys) {
     *++text = id[Value];
 }
 ```
+
 {{< /admonition >}}
 
 {{< admonition danger >}}
 对于关键字和内置函数的处理部分:
+
 ```c
 src = "char else enum if int return sizeof while "
       "open read close printf malloc memset memcmp exit void main";
 ```
+
 一定要注意第一行最后的 `while` 后面有一个 **空格**，这是保证字符串拼接后可以被词法分析器识别为两个 token。如果不加空格，字符串会把这一部分拼接成 `... whileopen ...`，这样就不符合我们的预期了，进而导致程序出错。
 {{< /admonition >}}
 
@@ -344,6 +356,7 @@ src = "char else enum if int return sizeof while "
 #### 变量定义
 
 {{< admonition question "current_id[Value] and address" false >}}
+
 ```c
 current_id[Value] = (int)(text + 1); // the memory address of function
 current_id[Value] = (int)data; // assign memory address
@@ -379,6 +392,7 @@ if (id[Class] == Loc) {
     exit(-1);
 }
 ```
+
 {{< /admonition >}}
 
 #### 语句
@@ -421,13 +435,14 @@ expression()  // 一元运算符: Num
 根据词法分析器 `next()` 字符串部分的逻辑，扫描到字符串时对应的 token 是 `"`。
 
 {{< admonition question "pointer type" false >}}
+
 ```c
 data = (char *)(((int)data + sizeof(int)) & (-sizeof(int)));
 ```
 
 这段代码的含义是，递增数据段指针 `data` 并将该指针进行 `sizeof(int)` 粒度的 data alignment，至于为什么这么处理，个人暂时猜测是和 pinter type 的类型有关，可能 c4 编译器的 pointer type 都是 `int *`，需要进行相关的 data alignment，否则虚拟机取字符串时会触发 exception。
 
-确实如此，后面自增自减时对于指针的处理是 `*++text = (expr_type > PTR) ? sizeof(int) : sizeof(char);` ~~显然指针被认为是 int * 类型~~。
+确实如此，后面自增自减时对于指针的处理是 `*++text = (expr_type > PTR) ? sizeof(int) : sizeof(char);` ~~显然指针被认为是 int \* 类型~~。
 
 上面说的有误，`(expr_type > PTR)` 表示的是除 `char *` 之外的指针类型 (因为 `CHAR` 值为 0)。
 {{< /admonition >}}
@@ -465,6 +480,7 @@ expression(Inc);
 处理 `||` 和 `&&` 时，对于右边的 operand 的处理分别是 `expression(Lan)` 和 `expression(Or)`，限制的优先级刚好比当前的运算符高一级，使得遇到同级运算符时会返回，从而让外部的 `while` 循环来处理，这样可以保证生成正确的指令序列。
 
 一篇关于表达式优先级爬山的博文:
+
 - [Parsing expressions by precedence climbing](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing/)
 
 ##### 初始化栈
@@ -493,17 +509,18 @@ Tsoding 上传的 [Virtual Machine in C](https://www.youtube.com/playlist?list=P
 
 {{< timeline placement=top >}}
 events:
-  - timestamp: Day 1
-    content: 实现一个基本的 [Stack-based Virtual Machine](https://en.wikipedia.org/wiki/Stack_machine) 支持汇编和解释执行程序
-  - timestamp: Day 2
-    content: 实现反汇编器、支持符号跳转以及 [NaN-boxing](https://en.wikipedia.org/wiki/NaN#Canonical_NaN) 以便后续支持动态类型
-  - timestamp: Day 3
-    content: 使用 `union` 支持浮点数存放、支持解析汇编的浮点数以及使用汇编计算 [Euler\'s Number](https://en.wikipedia.org/wiki/E_(mathematical_constant)) 的近似值
-  - timestamp: Day 4
-    content: 支持函数调用，以及通过 [FFI](https://en.wikipedia.org/wiki/Foreign_function_interface) 来支持 native function call 以提升效率
-  - timestamp: Day 5
-    content: TODO
-{{< /timeline >}}
+
+- timestamp: Day 1
+  content: 实现一个基本的 [Stack-based Virtual Machine](https://en.wikipedia.org/wiki/Stack_machine) 支持汇编和解释执行程序
+- timestamp: Day 2
+  content: 实现反汇编器、支持符号跳转以及 [NaN-boxing](https://en.wikipedia.org/wiki/NaN#Canonical_NaN) 以便后续支持动态类型
+- timestamp: Day 3
+  content: 使用 `union` 支持浮点数存放、支持解析汇编的浮点数以及使用汇编计算 [Euler\'s Number](<https://en.wikipedia.org/wiki/E_(mathematical_constant)>) 的近似值
+- timestamp: Day 4
+  content: 支持函数调用，以及通过 [FFI](https://en.wikipedia.org/wiki/Foreign_function_interface) 来支持 native function call 以提升效率
+- timestamp: Day 5
+  content: TODO
+  {{< /timeline >}}
 
 ### Day 1
 
@@ -557,7 +574,7 @@ Diagnostics:
 
 ### Day 2
 
-Wikipedia: [Cohesion (computer science)](https://en.wikipedia.org/wiki/Cohesion_(computer_science))
+Wikipedia: [Cohesion (computer science)](<https://en.wikipedia.org/wiki/Cohesion_(computer_science)>)
 
 实现符号跳转，必须要使用 Two pass，因为符号的声明也有可能在跳转指令之后。同时支持符号跳转和地址跳转，可以通过判断跳转指令的操作数是否为数字来区分。
 
@@ -619,7 +636,7 @@ if (endptr - cstr != strlen(cstr)) {
 
 单纯的 stack-based 架构会导致只能使用存放在栈顶的那个变量，如果增加寄存器或类似作用的 `swap` 指令，则可以使用更多的变量。使用 `swap` 指令虽然可以使用更多变量，但是计算的主要变量还是存放在栈顶的那个变量。
 
-Wikipedia: [e (mathematical constant)](https://en.wikipedia.org/wiki/E_(mathematical_constant))
+Wikipedia: [e (mathematical constant)](<https://en.wikipedia.org/wiki/E_(mathematical_constant)>)
 
 Stack Overflow:
 
@@ -650,7 +667,6 @@ Wikipedia: [Foreign Function Interface (FFI)](https://en.wikipedia.org/wiki/Fore
 在这个项目中，一个虚拟机指令对应一块 C 语言代码 (进行解释执行)，而一个虚拟机汇编语言编写的函数对应一块虚拟机指令，所以如果使用虚拟机的汇编语言来实现 `malloc` 或 `free` 这样的复杂函数，会生成相当多的虚拟机指令 (对应相当多块的 C 语言代码)，导致解释执行效率很低，相反使用 native function call，将这些复杂函数的 C 语言实现对应于特殊的虚拟机指令，可以使得调用一次这些函数仅对应一个虚拟机指令，进而仅对应一块 C 语言代码。除此之外还避免了解释执行时因为分支预测导致的效能降低的问题 (这部分的原理与 JIT 类似)，以及让虚拟机语言可以使用其不具备但实现虚拟机的语言所拥有的特性，例如打印功能。
 
 Stack Overflow: [What is PRIu64 in C?](https://stackoverflow.com/questions/16859500/what-is-priu64-in-c)
-
 
 最后的计算由于浮点数的精度有限，所以只能近似等于其结果，可以用下面的 C 程序来验证:
 

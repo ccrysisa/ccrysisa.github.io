@@ -18,6 +18,7 @@ tags:
   - Linux
   - Concurrency
 categories:
+collections:
   - 并行程序设计
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -41,7 +42,7 @@ repost:
 ---
 
 > 多執行緒環境下，程式會出問題，往往在於執行順序的不確定性。一旦顧及分散式系統 (distributed systems)，執行順序和衍生的時序 (timing) 問題更加複雜。
-> 
+>
 > 我們將從如何定義程式執行的順序開始說起，為了簡單起見，我們先從單執行緒的觀點來看執行順序這件事，其中最關鍵知識就是 Sequenced-before，你將會發現就連單執行緒的程式，也可能會產生不確定的執行順序。
 
 <!--more-->
@@ -86,6 +87,7 @@ sequenced-before 的规范缺失导致了 [partial order](https://en.wikipedia.o
 ## Happens-before
 
 短片:
+
 - [x] [Happened Before Relationship](https://youtu.be/gGilgOSYbaI)
 - [x] [Happened Before Relation (cont)](https://youtu.be/q-CwESo9UsM)
 
@@ -96,6 +98,7 @@ sequenced-before 的规范缺失导致了 [partial order](https://en.wikipedia.o
 > 图中的 concurrent events 其实就是多执行绪下没有先后次序的情形
 
 Java 规格书 [17.4.5. Happens-before Order](https://docs.oracle.com/javase/specs/jls/se17/html/jls-17.html#jls-17.4.5) 也能佐证我们的观点:
+
 > If one action happens-before another, then the first is visible to and ordered before the second.
 
 {{< admonition quote >}}
@@ -109,15 +112,17 @@ Java 规格书 [17.4.5. Happens-before Order](https://docs.oracle.com/javase/spe
 {{< /admonition >}}
 
 C11 正式将并行和 memory order 相关的规范引入到语言的标准:
+
 - 5.1.2.4 Multi-threaded executions and data races
-> All modifications to a particular atomic object M occur in some particular total order,
-> called the modification order of M. If A and B are modifications of an atomic object M,
-> and A happens before B, then A shall precede B in the modification order of M, which is
-> defined below.
+  > All modifications to a particular atomic object M occur in some particular total order,
+  > called the modification order of M. If A and B are modifications of an atomic object M,
+  > and A happens before B, then A shall precede B in the modification order of M, which is
+  > defined below.
 
 cppreference [std::memory_order](http://en.cppreference.com/w/cpp/atomic/memory_order#Happens-before)
+
 > Regardless of threads, evaluation A happens-before evaluation B if any of the following is true:
-> 
+>
 > 1. A is sequenced-before B
 > 2. A inter-thread happens before B
 
@@ -147,7 +152,7 @@ int counter = 0;
 
 Happens-Before Does Not Imply Happening Before
 
-> In this case, though, the store to A doesn’t actually influence the store to B. (2) still behaves the same as it would have even if the effects of (1) had been visible, which is effectively the same as (1)’s effects being visible. Therefore, this doesn’t count as a violation of the happens-before rule. 
+> In this case, though, the store to A doesn’t actually influence the store to B. (2) still behaves the same as it would have even if the effects of (1) had been visible, which is effectively the same as (1)’s effects being visible. Therefore, this doesn’t count as a violation of the happens-before rule.
 
 Happening Before Does Not Imply Happens-Before
 
@@ -168,10 +173,10 @@ synchronized-with 是個發生在二個不同執行緒間的同步行為，當 A
 - synchronized 关键字
 
 {{< admonition quote >}}
-**Mutual Exclusive**   
+**Mutual Exclusive**  
 對同一個物件而言，不可能有二個前綴 synchronized 的方法同時交錯執行，當一個執行緒正在執行前綴 synchronized 的方法時，其他想執行 synchronized 方法的執行緒會被阻擋 (block)。
 
-**確立 Happens-before 關係**   
+**確立 Happens-before 關係**  
 對同一個物件而言，當一個執行緒離開 synchronized 方法時，會自動對接下來呼叫 synchronized 方法的執行緒建立一個 Happens-before 關係，前一個 synchronized 的方法對該物件所做的修改，保證對接下來進入 synchronized 方法的執行緒可見。
 {{< /admonition >}}
 
@@ -231,8 +236,9 @@ int main () {
 
 {{< admonition tip >}}
 相关论文 / 技术报告 (可以用来参考理解):
+
 - [ ] [Shared Memory Consistency Models: A Tutorial 1995 Sarita V. Adve, Kourosh Gharachorloo](https://inst.eecs.berkeley.edu/~cs252/sp17/papers/consistency-tutorial-1995.pdf)
-{{< /admonition >}}
+      {{< /admonition >}}
 
 > 這樣的幻象要成立，在於程式設計師和該系統（硬體、編譯器等產生、執行程式的平台）達成一致的協定，系統保證程式設計師只要照著規則走，程式執行結果會是正確的。
 
@@ -243,7 +249,7 @@ int main () {
 ### Sequential Consistency
 
 - [Leslie Lamport](https://en.wikipedia.org/wiki/Leslie_Lamport)
-> A multiprocessor system is sequentially consistent if the result of any execution is the same as if the operations of all the processors were executed in some sequential order, and the operations of each individual processor appear in this sequence in the order specified by its program.
+  > A multiprocessor system is sequentially consistent if the result of any execution is the same as if the operations of all the processors were executed in some sequential order, and the operations of each individual processor appear in this sequence in the order specified by its program.
 
 1. 对于每个独立的处理单元，执行时都维持程序的顺序 (Program Order)
 2. 整个程序以某种顺序在所有处理器上执行
@@ -251,4 +257,3 @@ int main () {
 > Lamport 的定義相當洗鍊：第一點言明程式在處理器內會照順序執行，第二點則說所有處理器會以某種順序執行程式。看似平實的話語，但真實世界卻可能不是這樣。
 
 ### Weak Memory Model vs. Strong Memory Model
-

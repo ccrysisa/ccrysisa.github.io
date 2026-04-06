@@ -18,7 +18,8 @@ tags:
   - Smart pointer
   - Interior Mutability
 categories:
-  - Rust
+collections:
+  - Crust of Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -53,25 +54,26 @@ repost:
 Module [std::cell](https://doc.rust-lang.org/std/cell/index.html)
 
 > Rust memory safety is based on this rule: Given an object T, it is only possible to have one of the following:
-> 
+>
 > - Having several immutable references (&T) to the object (also known as aliasing).
 > - Having one mutable reference (&mut T) to the object (also known as mutability).
 
 > Values of the `Cell<T>`, `RefCell<T>`, and `OnceCell<T>` types may be mutated through shared references (i.e. the common &T type), whereas most Rust types can only be mutated through unique (&mut T) references. We say these cell types provide ‘interior mutability’ (mutable via &T), in contrast with typical Rust types that exhibit ‘inherited mutability’ (mutable only via &mut T).
 
 - We can use (several) immutable references of a cell to mutate the thing inside of the cell.
-- There is (virtually) no way for you to get a reference to the thing inside of a cell. 
+- There is (virtually) no way for you to get a reference to the thing inside of a cell.
 - **Because if no one else has a pointer to it (the thing inside of a cell), the changing it is fine.**
 
 Struct [std::cell::UnsafeCell](https://doc.rust-lang.org/std/cell/struct.UnsafeCell.html)
 
 > If you have a reference &T, then normally in Rust the compiler performs optimizations based on the knowledge that &T points to immutable data. Mutating that data, for example through an alias or by transmuting an &T into an &mut T, is considered undefined behavior. `UnsafeCell<T>` opts-out of the immutability guarantee for &T: a shared reference &`UnsafeCell<T>` may point to data that is being mutated. This is called “interior mutability”.
 
-> The UnsafeCell API itself is technically very simple: .get() gives you a raw pointer *mut T to its contents. It is up to you as the abstraction designer to use that raw pointer correctly.
+> The UnsafeCell API itself is technically very simple: .get() gives you a raw pointer \*mut T to its contents. It is up to you as the abstraction designer to use that raw pointer correctly.
 
 ### Cell
 
-Module [std::cell Cell\<T\>](https://doc.rust-lang.org/std/cell/index.html#cellt) 
+Module [std::cell Cell\<T\>](https://doc.rust-lang.org/std/cell/index.html#cellt)
+
 > `Cell<T>` implements interior mutability by moving values in and out of the cell. That is, an &mut T to the inner value can never be obtained, and the value itself cannot be directly obtained without replacing it with something else. Both of these rules ensure that there is never more than one reference pointing to the inner value. This type provides the following methods:
 
 {{< image src="/images/rust/cell.drawio.svg" caption="Cell" >}}
@@ -112,31 +114,33 @@ unsafe { println!("{}", *uc.get()); }
 
 ### RefCell
 
-Module [std::cell RefCell\<T\>](https://doc.rust-lang.org/std/cell/index.html#refcellt) 
+Module [std::cell RefCell\<T\>](https://doc.rust-lang.org/std/cell/index.html#refcellt)
+
 > `RefCell<T>` uses Rust\’s lifetimes to implement "dynamic borrowing", a process whereby one can claim temporary, exclusive, mutable access to the inner value. Borrows for `RefCell<T>\`s are tracked at runtime, unlike Rust’s native reference types which are entirely tracked statically, at compile time.
 
 - **Runtime Borrow Check**
 
 {{< image src="/images/rust/refcell.drawio.svg" caption="RefCell" >}}
 
-`RefCell` 也提供了之前所提的“内部可变性”机制，但是是通过提供 ***引用*** 而不是转移所有权来实现。所以它常用于 Tree, Graph 这类数据结构，因为这些数据结构的节点 "很大"，不大可能实现 Copy 的 Trait (因为开销太大了)，所以一般使用 `RefCell` 来实现节点的相互引用关系。
+`RefCell` 也提供了之前所提的“内部可变性”机制，但是是通过提供 **_引用_** 而不是转移所有权来实现。所以它常用于 Tree, Graph 这类数据结构，因为这些数据结构的节点 "很大"，不大可能实现 Copy 的 Trait (因为开销太大了)，所以一般使用 `RefCell` 来实现节点的相互引用关系。
 
 ### Rc
 
 method [std::boxed::Box::into_raw](https://doc.rust-lang.org/std/boxed/struct.Box.html#method.into_raw)
+
 > After calling this function, the caller is responsible for the memory previously managed by the Box. In particular, the caller should properly destroy T and release the memory, taking into account the memory layout used by Box. The easiest way to do this is to convert the raw pointer back into a Box with the Box::from_raw function, allowing the Box destructor to perform the cleanup.
 
 {{< image src="/images/rust/rc.drawio.svg" caption="Rc" >}}
 
 ### Raw pointers vs references
 
-`* mut` and `* const` are not references, they are raw pointers. In Rust, there are a bunch of semantics you have to follow when you using references. 
+`* mut` and `* const` are not references, they are raw pointers. In Rust, there are a bunch of semantics you have to follow when you using references.
 
 Like if you use `&` symbol, an `&` alone means a shared reference, and you have to guarantee that there are no exclusive references to that thing. And similarly, if you have a `&mut`, a exclusive reference, you know that there are not shared references.
 
 The `*` version of these, like `* mut` and `* const`, do not have these guarantees. If you have a `* mut`, there may be other `* mut`s to the same thing. There might be `* const` to the same thing.
 
-You have no guarantee, but you also cann\'t do much with a `*`. If you have a raw pointer, the only thing you can really do to it is use an **unsafe** block to dereference it and turn it into reference. But that is unsafe, *you need to document wht it is safe.* 
+You have no guarantee, but you also cann\'t do much with a `*`. If you have a raw pointer, the only thing you can really do to it is use an **unsafe** block to dereference it and turn it into reference. But that is unsafe, _you need to document wht it is safe._
 
 You\'re not able to go from a const pointer to an exclusive reference. But you can go from a mutable pointer to an exclusive reference.
 
@@ -171,23 +175,27 @@ fn main() {
 ### Thread Safety
 
 - Cell
-> Because even though you\'re not giving out references to things, having two threads modify the same value at the same time is just not okay. There actually is o thread-safe version of `Cell`. (*Think it as pointer in C* :rofl:)
+
+  > Because even though you\'re not giving out references to things, having two threads modify the same value at the same time is just not okay. There actually is o thread-safe version of `Cell`. (_Think it as pointer in C_ :rofl:)
 
 - RefCell
-> You could totally implement a thread-safe version of RefCell, one that uses an atomic counter instead of `Cell` for these numbers. So it turns out that the CPU has built-in instructions that can, in a thread-safe way, increment and decrement counters.
+
+  > You could totally implement a thread-safe version of RefCell, one that uses an atomic counter instead of `Cell` for these numbers. So it turns out that the CPU has built-in instructions that can, in a thread-safe way, increment and decrement counters.
 
 - Rc
-> The thread-safe version of `Rc` is `Arc`, or Atomic Reference Count.
+  > The thread-safe version of `Rc` is `Arc`, or Atomic Reference Count.
 
 ### Copy-on-Write (COW)
 
 Struct [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html#)
+
 > The type `Cow` is a smart pointer providing clone-on-write functionality: it can enclose and provide immutable access to borrowed data, and clone the data lazily when mutation or ownership is required. The type is designed to work with general borrowed data via the `Borrow` trait.
 
 ## Homework
 
 {{< admonition info >}}
 实作说明:
+
 - [ ] 尝试使用 RefCell 和 Rc 来实现 Linux kernel 风格的 linked list
   - 数据结构为 circular doubly linked list
   - 实现 insert_head, remove_head 方法
@@ -196,17 +204,18 @@ Struct [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html#)
   - 实现迭代器 (Iterator)，支持双向迭代 (DoubleEndedIterator)
 
 参考资料:
+
 - [sysprog21/linux-list](https://github.com/sysprog21/linux-list/blob/master/include/list.h#L94)
 - [linux/list.h](https://github.com/torvalds/linux/blob/master/include/linux/list.h#L84)
-{{< /admonition >}}
+  {{< /admonition >}}
 
 ## Documentations
 
-这里列举视频中一些概念相关的 documentation 
+这里列举视频中一些概念相关的 documentation
 
 > 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
 
-### Crate [std](https://doc.rust-lang.org/std/index.html) 
+### Crate [std](https://doc.rust-lang.org/std/index.html)
 
 > 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 

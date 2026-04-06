@@ -18,6 +18,7 @@ tags:
   - C
   - Function
 categories:
+collections:
   - 你所不知道的 C 语言
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -49,11 +50,11 @@ repost:
 ## function prototype
 
 - [ ] [Very early C compilers and language](https://www.bell-labs.com/usr/dmr/www/primevalC.html)
-> 一个小故事，可以解释 C 语言的一些设计理念，例如 `switch-case` 中每个 case 都需要 `break`
+  > 一个小故事，可以解释 C 语言的一些设计理念，例如 `switch-case` 中每个 case 都需要 `break`
 - [ ] [The Development of the C Language](https://www.bell-labs.com/usr/dmr/www/chist.html)
-> Dennis M. Ritchie 讲述 C 语言漫长的发展史，并搭配程式码来说明当初为何如此设计、取舍考量。了解这些历史背景可以让我们成为更专业的 C 语言 Programmer
+  > Dennis M. Ritchie 讲述 C 语言漫长的发展史，并搭配程式码来说明当初为何如此设计、取舍考量。了解这些历史背景可以让我们成为更专业的 C 语言 Programmer
 - [ ] [Rationale for International Standard – Programming Languages – C](https://pllab.cs.nthu.edu.tw/cs340402/readings/c/c9x_standard.pdf)
-> 讲述 C 语言标准的变更，并搭配程式码解释变更的原理和考量
+  > 讲述 C 语言标准的变更，并搭配程式码解释变更的原理和考量
 
 在早期的 C 语言中，并不需要 function prototype，因为当编译器发现一个函数名出现在表达式并且后面跟着左括号 `(`，例如 `a = func(...)`，就会将该函数解读为：返回值类型预设为 `int`，参数类型和个数由调用者提供来决定，按照这样规则编写程式码，可以在无需事先定义函数即可先写调用函数的逻辑。但是这样设计也会造成潜在问题：程序员在调用函数时需要谨慎处理，需要自己检查调用时的参数类型和个数符合函数定义 (因为当时的编译器无法正确判断调用函数时的参数是否符合预期的类型和个数，当时编译器的能力与先前提到的规则是一体两面)，并且返回值类型预设为 `int` (当时还没有 `void` 类型)，所以对于函数返回值，也需要谨慎处理。
 
@@ -86,12 +87,12 @@ C 语言不允许 nested function 以简化编译器的设计 (当然现在的 g
 
 ## Process 与 C 程序
 
-***程序存放在磁盘时叫 Program，加载到内存后叫 "Process"***
+**_程序存放在磁盘时叫 Program，加载到内存后叫 "Process"_**
 
 {{< image src="https://imgur-backup.hackmd.io/DpZOmhb.png" >}}
 
 - Wikipedia: [Application binary interface](https://en.wikipedia.org/wiki/Application_binary_interface)
-> In computer software, an application binary interface (ABI) is an interface between two binary program modules. Often, one of these modules is a library or operating system facility, and the other is a program that is being run by a user.
+  > In computer software, an application binary interface (ABI) is an interface between two binary program modules. Often, one of these modules is a library or operating system facility, and the other is a program that is being run by a user.
 
 在 Intel x86 架构中，当返回值可以放在寄存器时就放在寄存器中返回，以提高效能，如果放不下，则将返回值的起始地址放在寄存器中返回。
 
@@ -139,7 +140,8 @@ int main() {
 ## stack-based buffer overflow
 
 - [CVE-2015-7547](https://access.redhat.com/security/cve/cve-2015-7547) / [解说](http://thehackernews.com/2016/02/glibc-linux-flaw.html)
-> vulnerability in glibc’s DNS client-side resolver that is used to translate human-readable domain names, like google.com, into a network IP address.
+
+  > vulnerability in glibc’s DNS client-side resolver that is used to translate human-readable domain names, like google.com, into a network IP address.
 
 - Wikipedia: [Buffer overflow](https://en.wikipedia.org/wiki/Buffer_overflow)
 
@@ -183,11 +185,11 @@ $ gcc -o bof -fno-stack-protector -g -no-pie bof.c
 ## setjmp & longjmp
 
 - [setjmp(3) — Linux manual page](https://man7.org/linux/man-pages/man3/longjmp.3.html)
-> The functions described on this page are used for performing
-> "nonlocal gotos": transferring execution from one function to a
-> predetermined location in another function.  The setjmp()
-> function dynamically establishes the target to which control will
-> later be transferred, and longjmp() performs the transfer of
-> execution.
+  > The functions described on this page are used for performing
+  > "nonlocal gotos": transferring execution from one function to a
+  > predetermined location in another function. The setjmp()
+  > function dynamically establishes the target to which control will
+  > later be transferred, and longjmp() performs the transfer of
+  > execution.
 
 具体解说可以阅读 [lab0-c](https://hackmd.io/@sysprog/linux2023-lab0) 的「自動測試程式」部分

@@ -18,6 +18,7 @@ tags:
   - C
   - Recursion
 categories:
+collections:
   - 你所不知道的 C 语言
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -41,9 +42,9 @@ repost:
 ---
 
 > 在许多应用程序中，递归 (recursion) 可以简单又优雅地解决貌似繁琐的问题，也就是不断地拆解原有问题为相似的子问题，直到无法拆解为止，并且定义最简化状况的处理机制，一如数学思维。递归对 C 语言程序开发者来说，绝对不会陌生，但能掌握者却少，很多人甚至难以讲出汉诺塔之外的使用案例。
-> 
+>
 > 究竟递归是如何优雅地解决真实世界的问题，又如何兼顾执行效率呢》我们从运作原理开始探讨，搭配若干 C 程序解说，并且我们将以简化过的 UNIX 工具为例，分析透过递归来大幅缩减程式码。
-> 
+>
 > 或许跟你想象中不同，Linux 核心的原始程式码里头也用到递归函数呼叫，特别在较复杂的实作，例如文件系统，善用递归可大幅缩减程式码，但这也导致追踪程序运作的难度大增。
 
 <!--more-->
@@ -53,13 +54,14 @@ repost:
 ## Recursion
 
 > To Iterate is Human, to Recurse, Divine.
+
 - [x] http://coder.aqualuna.me/2011/07/to-iterate-is-human-to-recurse-divine.html
 
 {{< admonition >}}
-笔者的递归 (Recursion) 是通过 UC Berkeley 的 
+笔者的递归 (Recursion) 是通过 UC Berkeley 的
 
 - [CS61A: Structure and Interpretation of Computer Programs](https://cs61a.org/)
-- [CS70: Discrete Mathematics and Probability Theory](https://www.eecs70.org/) 
+- [CS70: Discrete Mathematics and Probability Theory](https://www.eecs70.org/)
 
 学习的，这个搭配式的学习模式使得我在实作——递归 (cs61a) 和理论——归纳法 (cs70) 上相互配合理解，从而对递归在实作和理论上都有了充分认知。
 {{< /admonition >}}
@@ -97,6 +99,7 @@ unsigned gcd_itr(unsigned a, unsigned b) {
 ```
 
 {{< admonition tip >}}
+
 - [x] [遞迴 (Recursion)](https://notfalse.net/9/recursion)
 
 Tail recursion 可以被编译器进行k空间利用最优化，从而达到和循环一样节省空间，但这需要编译器支持，有些编译器并不支持 tail recursion 优化 :rofl:
@@ -120,6 +123,7 @@ R(r, n - 1)  #                r #             ==>    #  R(r, n)
 ```
 
 {{< raw >}}
+
 $$
 R(r,n)=
 \begin{cases}
@@ -127,6 +131,7 @@ r & \text{if n = 1}\\
 1 / (\frac1r + \frac1{R(r, n - 1) + r}) & \text{if n > 1}
 \end{cases}
 $$
+
 {{< /raw >}}
 
 ```py
@@ -140,6 +145,7 @@ def circuit(n, r):
 ## 案例分析: 数列输出
 
 - man 3 printf
+
 ```
 RETURN VALUE
       Upon successful return, these functions return the number of characters
@@ -149,6 +155,7 @@ RETURN VALUE
 可以通过 `ulimit -s` 来改 stack size，预设为 8MB
 
 - ulimit
+
 ```
 User limits - limit the use of system-wide resources.
    -s   The maximum stack size.
@@ -159,18 +166,18 @@ User limits - limit the use of system-wide resources.
 ## 递归程序设计
 
 - [Recursive Programming](https://web.archive.org/web/20191228141133/http://www.cs.cmu.edu:80/~adamchik/15-121/lectures/Recursions/recursions.html)
- 
+
 ## Fibonacci sequence
 
 使用矩阵配合快速幂算法，可以将时间复杂度从 $O(n)$ 降低到 $O(\\log n)$
 
-| 方法 | 时间复杂度 | 空间复杂度 |
-| -------------- | ------------ | ------------ |
-| Rcursive       | $O(2^n)$     | $O(n)$       |
-| Iterative      | $O(n)$       | $O(1)$       |
-| Tail recursion | $O(n)$       | $O(1)$       |
-| Q-Matrix       | $O(\\log n)$ | $O(n)$       |
-| Fast doubling  | $O(\\log n)$ | $O(1)$       |
+| 方法           | 时间复杂度   | 空间复杂度 |
+| -------------- | ------------ | ---------- |
+| Rcursive       | $O(2^n)$     | $O(n)$     |
+| Iterative      | $O(n)$       | $O(1)$     |
+| Tail recursion | $O(n)$       | $O(1)$     |
+| Q-Matrix       | $O(\\log n)$ | $O(n)$     |
+| Fast doubling  | $O(\\log n)$ | $O(1)$     |
 
 原文的 Q-Matrix 实作挺多漏洞的，下面为修正后的实作 (注意矩阵乘法的 `memset` 是必须的，否则会使用到栈上超出生命周期的 obeject):
 
@@ -221,61 +228,65 @@ int fib(int n)
 
 Fast doubling 公式:
 {{< raw >}}
+
 $$
 \begin{split}
 F(2k) &= F(k)[2F(k+1) - F(k)] \\
 F(2k+1) &= F(k+1)^2+F(k)^2
 \end{split}
 $$
+
 {{< /raw >}}
 
 具体推导:
 
 {{< raw >}}
+
 $$
 \begin{split}
 \begin{bmatrix}
  F(2n+1) \\
- F(2n)  
+ F(2n)
 \end{bmatrix} &=
 \begin{bmatrix}
  1 & 1 \\
- 1 & 0  
+ 1 & 0
 \end{bmatrix}^{2n}
 \begin{bmatrix}
  F(1) \\
- F(0) 
+ F(0)
 \end{bmatrix}\\ \\ &=
 \begin{bmatrix}
  1 & 1 \\
- 1 & 0  
+ 1 & 0
 \end{bmatrix}^n
 \begin{bmatrix}
  1 & 1 \\
- 1 & 0  
+ 1 & 0
 \end{bmatrix}^n
 \begin{bmatrix}
  F(1) \\
- F(0) 
+ F(0)
 \end{bmatrix}\\ \\ &=
 \begin{bmatrix}
 F(n+1) & F(n) \\
-F(n) & F(n-1)  
+F(n) & F(n-1)
 \end{bmatrix}
 \begin{bmatrix}
 F(n+1) & F(n) \\
-F(n) & F(n-1)  
+F(n) & F(n-1)
 \end{bmatrix}
 \begin{bmatrix}
  1 \\
- 0 
+ 0
 \end{bmatrix}\\ \\ &=
 \begin{bmatrix}
  F(n+1)^2 + F(n)^2\\
- F(n)F(n+1) + F(n-1)F(n) 
+ F(n)F(n+1) + F(n-1)F(n)
 \end{bmatrix}
 \end{split}
 $$
+
 {{< /raw >}}
 
 然后根据 $F(k + 1) = F(k) + F(k - 1)$ 可得 $F(2k)$ 情况的公式。
@@ -293,10 +304,12 @@ else {
 
 ## 案例分析: 字符串反转
 
-原文对于时间复杂度的分析貌似有些问题，下面给出本人的见解。第一种方法的时间复杂度为: 
+原文对于时间复杂度的分析貌似有些问题，下面给出本人的见解。第一种方法的时间复杂度为:
+
 $$
 T(n) = 2T(n-1) + T(n-2)
 $$
+
 所以第一种方法的时间复杂度为 $O(2^n)$。
 
 第二种方法只是列出了程式码，而没有说明递归函数的作用，在本人看来，递归函数一定要明确说明其目的，才能比较好理解递归的作用，所以下面给出递归函数 `rev_core` 的功能说明:
@@ -325,8 +338,9 @@ char *reverse(char *s) {
 ## 案例分析: 建立目录
 
 [mkdir](https://man7.org/linux/man-pages/man2/mkdir.2.html) [Linux manual page (2)]
+
 ```
-DESCRIPTION         
+DESCRIPTION
        Create the DIRECTORY(ies), if they do not already exist.
 ```
 
@@ -340,16 +354,18 @@ int mkdir_r(const char *path, int level);
 ## 案例分析: 类似 find 的程序
 
 [opendir](https://man7.org/linux/man-pages/man3/opendir.3.html) [Linux manual page (3)]
+
 ```
-RETURN VALUE         
+RETURN VALUE
        The opendir() and fdopendir() functions return a pointer to the
        directory stream.  On error, NULL is returned, and errno is set
        to indicate the error.
 ```
 
 [readdir](https://man7.org/linux/man-pages/man3/readdir.3.html) [Linux manual page (3)]
+
 ```
-RETURN VALUE         
+RETURN VALUE
        On success, readdir() returns a pointer to a dirent structure.
        (This structure may be statically allocated; do not attempt to
        free(3) it.)
@@ -384,23 +400,23 @@ RETURN VALUE
 
 第一个影片主要介绍函数式编程的核心概念: 函数可以像其它 object 一样被传递使用，没有额外的限制，并且 object 是可以由函数来定义、构建的，例如我们可以定义 true 和 false:
 
-TRUE:  $\lambda x.\ \lambda y.\ x$   
-FALSE: $\lambda x.\ \lambda y.\ y$   
+TRUE: $\lambda x.\ \lambda y.\ x$  
+FALSE: $\lambda x.\ \lambda y.\ y$
 
 因为 true 和 false 就是用来控制流程的，为 true 时我们 do somthing，为 false 我们 do other，所以上面这种定义是有意义的，当然你也可以定义为其它，毕竟函数式编程让我们可以定义任意我们想定义的东西 :rofl:
 
 接下来我们就可以通过先前定义的 TRUE 和 FALSE 来实现 NOT, AND, OR 这类操作了:
 
-NOT: $\lambda b.\ b.$ FALSE TRUE   
+NOT: $\lambda b.\ b.$ FALSE TRUE  
 AND: $\lambda x.\ \lambda y.\ x.\ y.\$ FALSE   
-OR:  $\lambda x.\ \lambda y.\ x$ TRUE $y.$   
+OR:  $\lambda x.\ \lambda y.\ x$ TRUE $y.$
 
 乍一看这个挺抽象的，其实上面的实现正体现了函数式编程的威力，我们以 NOT TRUE 的推导带大家体会一下:
 
-NOT TRUE   
-$\ \ \ \ $ $b.$ FALSE TRUE   
+NOT TRUE  
+$\ \ \ \ $ $b.$ FALSE TRUE  
 $\ \ \ \ $ TRUE FALSE TRUE   
-$\ \ \ \ $ TRUE (FALSE TRUE)   
-$\ \ \ \ $ FALSE  
+$\ \ \ \ $ TRUE (FALSE TRUE)  
+$\ \ \ \ $ FALSE
 
 其余推导同理

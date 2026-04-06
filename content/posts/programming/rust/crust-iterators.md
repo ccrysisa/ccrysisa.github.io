@@ -17,7 +17,8 @@ tags:
   - Rust
   - Iterator
 categories:
-  - Rust
+collections:
+  - Crust of Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -64,7 +65,7 @@ trait Iterator<Item> {
 
 ```rs
 for v in vs.iter() {
-    // borrow vs, & to v  
+    // borrow vs, & to v
 }
 
 for v in &vs {
@@ -77,8 +78,9 @@ for v in &vs {
 ### Iterator::flatten
 
 method [std::iter::Iterator::flatten](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flatten)
+
 > Creates an iterator that flattens nested structure.
-> 
+>
 > This is useful when you have an iterator of iterators or an iterator of things that can be turned into iterators and you want to remove one level of indirection.
 
 `flatten()` 的本质是将一种 Iterator 类型转换成另一种 Iterator 类型，所以调用者和返回值 `Flatten` 都满足 trait Iterator，因为都是迭代器，只是将原先的 n-level 压扁为 1-level 的 Iterator 了。录影视频里只考虑 2-level 的情况。
@@ -86,6 +88,7 @@ method [std::iter::Iterator::flatten](https://doc.rust-lang.org/std/iter/trait.I
 ### DoubleEndedIterator
 
 Trait [std::iter::DoubleEndedIterator](https://doc.rust-lang.org/std/iter/trait.DoubleEndedIterator.html)
+
 > It is important to note that both back and forth work on the same range, and do not cross: iteration is over when they meet in the middle.
 
 也就是说，back 和 front 的迭代器类似于双指针，但是这两个迭代器并不会越过对方。
@@ -94,20 +97,22 @@ Trait [std::iter::DoubleEndedIterator](https://doc.rust-lang.org/std/iter/trait.
 
 {{< admonition info >}}
 实作说明:
+
 - [x] 尝试实现 Iterator 的 `flat_map` 方法 (Github: [My Implementation](https://github.com/ccrysisa/rusty/blob/main/iterators/src/flatmap.rs))
 
 参考资料:
+
 - method [std::iter::Iterator::flat_map](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flat_map)
 - struct [std::iter::FlatMap](https://doc.rust-lang.org/std/iter/struct.FlatMap.html)
-{{< /admonition >}}
+  {{< /admonition >}}
 
 ## Documentations
 
-这里列举视频中一些概念相关的 documentation 
+这里列举视频中一些概念相关的 documentation
 
 > 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
 
-### Crate [std](https://doc.rust-lang.org/std/index.html) 
+### Crate [std](https://doc.rust-lang.org/std/index.html)
 
 > 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 

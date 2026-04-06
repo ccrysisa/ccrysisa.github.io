@@ -18,7 +18,8 @@ tags:
   - Subtying
   - Variance
 categories:
-  - Rust
+collections:
+  - Crust of Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
 hiddenFromRss: false
@@ -125,9 +126,9 @@ foo(&'static str) -> x = &'static str
 
 - Contravariance
 
-| Type          | Variance in `T` |
+|     Type      | Variance in `T` |
 | :-----------: | :-------------: |
-| `fn(T) -> ()`	|	contravariant   |
+| `fn(T) -> ()` |  contravariant  |
 
 The only contravariance in Rust now (2024/6/25).
 
@@ -151,10 +152,10 @@ Fn(&'a T) <: Fn(&'static T)
 
 - Invariance
 
-| Type	      | Variance in `'a` |	Variance in `T` |
-| :---------: | :--------------: | :--------------: |
-| `&'a T`	    | covariant	       | covariant        |
-| `&'a mut T` |	covariant	       | invariant        |
+|    Type     | Variance in `'a` | Variance in `T` |
+| :---------: | :--------------: | :-------------: |
+|   `&'a T`   |    covariant     |    covariant    |
+| `&'a mut T` |    covariant     |    invariant    |
 
 ```rs
 fn foo(s: &mut &'a str, x: &'a str) {
@@ -173,7 +174,7 @@ println("{}", z); // should compiler error!
 
 `&'a mut T` 是 Invariant，如果它是 Covariant 的话，上面例子会造成 `x` 的生命周期缩短 (因为 `&mut` 可以改变值，这可能会导致原预定生命周期内出现了悬垂引用)，这不符合我们的预期，所以需要将函数参数的 `&mut` 设置为 Invariant，即只能传入和原先生命周期完全一致的才行，more useful 或 less useful 都不行。而 `&` 并不能改变值，并不会隐形被引用部分的生命周期，所以是 Covariant。
 
-***Invariant 也是编译器推导未知生命周期的一个主要理论依据***，此时可以运用该规则去思考一下之前 `strtok` 的错误。
+**_Invariant 也是编译器推导未知生命周期的一个主要理论依据_**，此时可以运用该规则去思考一下之前 `strtok` 的错误。
 
 注意上面表格规定的是 `&'a mut T` 里的 `'a` 是 Covariant:
 
@@ -198,6 +199,7 @@ pub fn bar() {
 ### 再看 strtok
 
 分析 `check_is_static()` 这个函数对生命周期的影响:
+
 - 当没有调用 `check_is_static(x)` 时，编译器会认为 `x` 所指向的字符串的生命周期为当前这个函数范围 (`'x`)，所以只要 `strtok` 调用后没有使用任意 `x` 的引用都不会出现问题
 - 当调用了 `check_is_static(x)` 后，编译器只能认为 `x` 所指向的字符串的生命周期为 `'static` 了，这就导致了 `x` 在超过这个函数后就被 drop 了 (`'x`)，但是 `&mut x` 这个引用被编译器推导为 `'static`，会出现 `&mut x` 这个引用 (`'static`) 超过了 `x` 的作用域 (`'x`) 的错误 =
 
@@ -297,10 +299,10 @@ struct Deserializer4<T> {
 
 使用可变裸指针 `*mut`，这是因为如果使用可变引用 `&mut` 的话需要引入生命周期标注，而使用可变裸指针 `*mut` 也可以达到 Invariance 的效果又无需添加生命周期标注。
 
-| Type          | Variance in `T` |
-| :-----------: | :-------------: |
-| `*const T`		| covariant       |
-| `*mut T`		  | invariant       |
+|    Type    | Variance in `T` |
+| :--------: | :-------------: |
+| `*const T` |    covariant    |
+|  `*mut T`  |    invariant    |
 
 {{< admonition >}}
 关于 drop check 这部分的内容，下一期会特别针对性的讲解，这里有个大概印象即可。
@@ -309,16 +311,17 @@ struct Deserializer4<T> {
 ## Homework
 
 {{< admonition info >}}
+
 - [x] 完善 `strtok` 函数使其可以接受多个分隔符作为参数 / [我的题解](https://github.com/ccrysisa/rusty/blob/main/strtok/src/lib.rs#L20)
-{{< /admonition >}}
+      {{< /admonition >}}
 
 ## Documentations
 
-这里列举视频中一些概念相关的 documentation 
+这里列举视频中一些概念相关的 documentation
 
 > 学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料
 
-### Crate [std](https://doc.rust-lang.org/std/index.html) 
+### Crate [std](https://doc.rust-lang.org/std/index.html)
 
 > 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 

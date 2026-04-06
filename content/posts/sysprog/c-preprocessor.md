@@ -19,6 +19,7 @@ tags:
   - Preprocessor
   - Macro
 categories:
+collections:
   - 你所不知道的 C 语言
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -84,7 +85,9 @@ repost:
 > Rust 的过程宏 (procedural macros) 进一步强化了这一目的，可以自定义语法树进行代码生成。
 
 可以 `gcc -E -P` 来观察预处理后的输出:
+
 - man gcc
+
 ```
 -E  Stop after the preprocessing stage; do not run the compiler proper.
     The output is in the form of preprocessed source code, which is
@@ -99,29 +102,31 @@ repost:
 ```
 
 可以依据不同时期的标准来对 C 源程序编译生成目标文件:
+
 - [x] [Feature Test Macros](https://www.gnu.org/software/libc/manual/html_node/Feature-Test-Macros.html)
-> The exact set of features available when you compile a source file is controlled by which feature test macros you define.
+  > The exact set of features available when you compile a source file is controlled by which feature test macros you define.
 
 使用 `gcc -E -P` 观察 objects.h 预处理后的输出，透过 `make` 和 `make check` 玩一下这个最简单光线追踪引擎
-- [x] GitHub: [raytracing](https://github.com/embedded2016/raytracing) 
+
+- [x] GitHub: [raytracing](https://github.com/embedded2016/raytracing)
 
 object oriented programming 不等于 class based programming, 只需要满足 Object-oriented programming (OOP) is a computer programming model that organizes software design around data, or objects, rather than functions and logic. 这个概念的就是 OOP。
 
 {{< link href="https://github.com/ccrysisa/LKI/blob/main/c-recursion" content=Source external-icon=true >}}
 
-## C11: _Generic
+## C11: \_Generic
 
 - [x] 阅读 [C11 规格书](https://www.open-std.org/jtc1/sc22/WG14/www/docs/n1570.pdf) 6.5.1.1 Generic selection
-> The controlling expression of a generic selection is not evaluated. If a generic selection
-> has a generic association with a type name that is compatible with the type of the
-> controlling expression, then the result expression of the generic selection is the
-> expression in that generic association. Otherwise, the result expression of the generic
-> selection is the expression in the default generic association. None of the expressions
-> from any other generic association of the generic selection is evaluated.
+  > The controlling expression of a generic selection is not evaluated. If a generic selection
+  > has a generic association with a type name that is compatible with the type of the
+  > controlling expression, then the result expression of the generic selection is the
+  > expression in that generic association. Otherwise, the result expression of the generic
+  > selection is the expression in the default generic association. None of the expressions
+  > from any other generic association of the generic selection is evaluated.
 
 ```c
 #define cbrt(X) \
-    _Generic((X), \     
+    _Generic((X), \
              long double: cbrtl, \
              default: cbrt,  \
              const float: cbrtf, \
@@ -131,12 +136,12 @@ object oriented programming 不等于 class based programming, 只需要满足 O
 
 经过 func.c/func.cpp 的输出对比，C++ 模版在字符类型的的判定比较准确，C11 的 `_Generic` 会先将 `char` 转换成 `int` 导致结果稍有瑕疵，这是因为在 C 语言中字符常量 (例如 'a') 的类型是 `int` 而不是 `char`。
 
-- Stack Overflow: [What to do to make '_Generic('a', char : 1, int : 2) == 1' true](https://stackoverflow.com/questions/76701502/what-to-do-to-make-generica-char-1-int-2-1-true)
+- Stack Overflow: [What to do to make '\_Generic('a', char : 1, int : 2) == 1' true](https://stackoverflow.com/questions/76701502/what-to-do-to-make-generica-char-1-int-2-1-true)
 
 ## Block
 
-- Wikipedia: [Blocks (C language extension)](https://en.wikipedia.org/wiki/Blocks_(C_language_extension))
-> Blocks are a non-standard extension added by Apple Inc. to Clang's implementations of the C, C++, and Objective-C programming languages that uses a lambda expression-like syntax to create closures within these languages. 
+- Wikipedia: [Blocks (C language extension)](<https://en.wikipedia.org/wiki/Blocks_(C_language_extension)>)
+  > Blocks are a non-standard extension added by Apple Inc. to Clang's implementations of the C, C++, and Objective-C programming languages that uses a lambda expression-like syntax to create closures within these languages.
 
 > Like function definitions, blocks can take arguments, and declare their own variables internally. Unlike ordinary C function definitions, their value can capture state from their surrounding context. A block definition produces an opaque value which contains both a reference to the code within the block and a snapshot of the current state of local stack variables at the time of its definition. The block may be later invoked in the same manner as a function pointer. The block may be assigned to variables, passed to functions, and otherwise treated like a normal function pointer, although the application programmer (or the API) must mark the block with a special operator (Block_copy) if it's to be used outside the scope in which it was defined.
 
@@ -184,7 +189,7 @@ $ sudo ./installlib
 阅读以下博客以理解 Linux 核心的 `ARRAY_SIZE` 原理机制和实作手法:
 
 - [x] [Linux Kernel: ARRAY_SIZE()](https://frankchang0125.blogspot.tw/2012/10/linux-kernel-arraysize.html)
-{{< /admonition >}}
+      {{< /admonition >}}
 
 Linux 核心的 `ARRAY_SIZE` 宏在上面那个简陋版的宏的基础上，加上了类型检查，保证传入的是数组而不是指针：
 
@@ -205,17 +210,18 @@ Linux 核心的 `ARRAY_SIZE` 宏在上面那个简陋版的宏的基础上，加
 ```
 
 - [6.54 Other built-in functions provided by GCC](https://gcc.gnu.org/onlinedocs/gcc-4.7.2/gcc/Other-Builtins.html#Other-Builtins)
-> You can use the built-in function __builtin_types_compatible_p to determine whether two types are the same.
-> 
-> This built-in function returns 1 if the unqualified versions of the types *type1* and *type2* (which are types, not expressions) are compatible, 0 otherwise. The result of this built-in function can be used in integer constant expressions.
+
+  > You can use the built-in function \_\_builtin_types_compatible_p to determine whether two types are the same.
+  >
+  > This built-in function returns 1 if the unqualified versions of the types _type1_ and _type2_ (which are types, not expressions) are compatible, 0 otherwise. The result of this built-in function can be used in integer constant expressions.
 
 - [6.6 Referring to a Type with typeof](https://gcc.gnu.org/onlinedocs/gcc-4.7.2/gcc/Typeof.html#Typeof)
-> Another way to refer to the type of an expression is with typeof. The syntax of using of this keyword looks like sizeof, but the construct acts semantically like a type name defined with typedef.
+  > Another way to refer to the type of an expression is with typeof. The syntax of using of this keyword looks like sizeof, but the construct acts semantically like a type name defined with typedef.
 
 所以 Linux 核心的 `ARRAY_SIZE` 宏额外加上了 `__must_be_array` 宏，但是这个宏在编译成功时会返回 0，编译失败自然就不需要考虑返回值了 :rofl: 所以它起到的作用是之前提到的类型检查，透过 `BUILD_BUG_ON_ZERO` 宏和 `__same_type` 宏。
 
 - [x] 从 Linux 核心 「提炼」 出的 [array_size](http://ccodearchive.net/info/array_size.html)
-- [x] [_countof Macro](https://msdn.microsoft.com/en-us/library/ms175773.aspx)
+- [x] [\_countof Macro](https://msdn.microsoft.com/en-us/library/ms175773.aspx)
 
 ## do { ... } while (0) 宏
 
@@ -248,7 +254,7 @@ else
 下面的讨论是关于为什么要使用 `do {...} while(0)` 而不是 `{}`，非常值得一读:
 
 - [x] Stack Overflow: [C multi-line macro: do/while(0) vs scope block](https://stackoverflow.com/questions/1067226/c-multi-line-macro-do-while0-vs-scope-block)
-{{< /admonition >}}
+      {{< /admonition >}}
 
 > The more elegant solution is to make sure that macro expand into a regular statement, not into a compound one.
 
@@ -290,18 +296,19 @@ else
 静态的 linked list 初始化需要使用到 **compound literal**:
 
 - [x] C99 6.5.2.5 Compound literals
-> - The type name shall specify an object type or an array of unknown size, but not a variable length array type.
-> - A postfix expression that consists of a parenthesized type name followed by a braceenclosed list of initializers is a compound literal. It provides an unnamed object whose value is given by the initializer list.
-> - If the type name specifies an array of unknown size, the size is determined by the initializer list as specified in 6.7.8, and the type of the compound literal is that of the completed array type. Otherwise (when the type name specifies an object type), the type of the compound literal is that specified by the type name. In either case, the result is an lvalue.
+
+  > - The type name shall specify an object type or an array of unknown size, but not a variable length array type.
+  > - A postfix expression that consists of a parenthesized type name followed by a braceenclosed list of initializers is a compound literal. It provides an unnamed object whose value is given by the initializer list.
+  > - If the type name specifies an array of unknown size, the size is determined by the initializer list as specified in 6.7.8, and the type of the compound literal is that of the completed array type. Otherwise (when the type name specifies an object type), the type of the compound literal is that specified by the type name. In either case, the result is an lvalue.
 
 - [x] C99 6.7.8 Initialization
-> Each brace-enclosed initializer list has an associated current object. When no
-> designations are present, subobjects of the current object are initialized in order according
-> to the type of the current object: array elements in increasing subscript order, structure
-> members in declaration order, and the first named member of a union. In contrast, a
-> designation causes the following initializer to begin initialization of the subobject
-> described by the designator. Initialization then continues forward in order, beginning
-> with the next subobject after that described by the designator.
+  > Each brace-enclosed initializer list has an associated current object. When no
+  > designations are present, subobjects of the current object are initialized in order according
+  > to the type of the current object: array elements in increasing subscript order, structure
+  > members in declaration order, and the first named member of a union. In contrast, a
+  > designation causes the following initializer to begin initialization of the subobject
+  > described by the designator. Initialization then continues forward in order, beginning
+  > with the next subobject after that described by the designator.
 
 ## 其它应用
 

@@ -17,6 +17,7 @@ tags:
   - Rust
   - Lifetime
 categories:
+collections:
   - Crust of Rust
 hiddenFromHomePage: false
 hiddenFromSearch: false
@@ -44,7 +45,6 @@ We\'re going to investigate a case where you need multiple explicit lifetime ann
 {{< /admonition >}}
 
 <!--more-->
-
 
 ## C 语言中的 lifetime
 
@@ -74,7 +74,7 @@ assert!(letters, vec!["a", "b", "c", "d", "e"].into_iter());
 
 cargo check 可以给出更简洁的提示，例如相对于编译器给出的错误信息，它会整合相同的错误信息，从而提供简洁切要的提示信息。而且它是一个静态分析工具，不需要进行编译即可给出提示，所以速度会比编译快很多，在大型项目上尤为明显。
 
-### _
+### \_
 
 `_` 即占位符，仅当编译器拥有唯一的推断时，用于让编译器使用推断结果进行替换，用于类型和生命周期的推断。
 
@@ -109,7 +109,7 @@ impl<'a> Foo<'a> {...}
 影片大概 49 分时提到了
 
 ```rs
-if let Some(ref mut remainder) = self.remainder {...} 
+if let Some(ref mut remainder) = self.remainder {...}
 ```
 
 `ref` 的作用配合 `if let` 语句体的逻辑可以体会到 pointer of pointer 的美妙之处。
@@ -155,7 +155,6 @@ String -> &str (cheap -- AsRef)
 
 当在实现结构体的方法或 Trait 时，如果在实现方法时无需使用 lifetime 的名称，则可以使用匿名 lifetime `'_`，或者在编译器可以推推导出 lifetime 时也可以使用匿名 lifetime `'_`。
 
-
 ```rs
 // lifetime and generic
 struct Apple<'a, T> {
@@ -186,11 +185,11 @@ impl<T> Apple<'_, T> {
 
 ## Appendix
 
-这里列举视频中一些概念相关的 documentation 
+这里列举视频中一些概念相关的 documentation
 
 **学习的一手资料是官方文档，请务必自主学会阅读规格书之类的资料**
 
-### Crate [std](https://doc.rust-lang.org/std/index.html) 
+### Crate [std](https://doc.rust-lang.org/std/index.html)
 
 > 可以使用这里提供的搜素栏进行搜索 (BTW 不要浪费时间在 Google 搜寻上！)
 
