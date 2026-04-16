@@ -482,6 +482,7 @@ collectionNavigation = true
 [params.page.repost]
 enable = false
 url = ""
+
 #  目录配置
 [params.page.toc]
 # 是否使用目录
@@ -492,6 +493,7 @@ keepStatic = false
 auto = true
 #  目录位置 ["left", "right"]
 position = "right"
+
 #  在文章开头显示提示信息，提醒读者文章内容可能过时
 [params.page.expirationReminder]
 enable = false
@@ -501,6 +503,7 @@ reminder = 90
 warning = 180
 # 如果文章到期是否关闭评论
 closeComment = false
+
 #  代码配置
 [params.page.code]
 # 是否显示代码块的复制按钮
@@ -509,6 +512,7 @@ copy = true
 edit = true
 # 默认展开显示的代码行数
 maxShownLines = 10
+
 #  文章编辑
 [params.page.edit]
 enable = false
@@ -516,19 +520,86 @@ enable = false
 # url = "/edit/branch-name/subdirectory-name" # 相对于 `params.gitRepo`
 # url = "https://github.com/user-name/repo-name/edit/branch-name/subdirectory-name" # 完整链接
 url = ""
-#  KaTeX 数学公式 (https://katex.org)
+
+# #  KaTeX 数学公式 (https://katex.org)
+# [params.page.math]
+# enable = true
+# # 默认行内定界符是 $ ... $ 和 \( ... \)
+# inlineLeftDelimiter = ""
+# inlineRightDelimiter = ""
+# # 默认块定界符是 $$ ... $$, \[ ... \],  \begin{equation} ... \end{equation} 和一些其它的函数
+# blockLeftDelimiter = ""
+# blockRightDelimiter = ""
+# # KaTeX 插件 copy_tex
+# copyTex = true
+# # KaTeX 插件 mhchem
+# mhchem = true
+
+# FixIt 0.4.0 | 更改 数学公式配置
+# See http://fixit.lruihao.cn/documentation/content-management/markdown-syntax/extended/#formula
 [params.page.math]
 enable = true
-# 默认行内定界符是 $ ... $ 和 \( ... \)
-inlineLeftDelimiter = ""
-inlineRightDelimiter = ""
-# 默认块定界符是 $$ ... $$, \[ ... \],  \begin{equation} ... \end{equation} 和一些其它的函数
-blockLeftDelimiter = ""
-blockRightDelimiter = ""
-# KaTeX 插件 copy_tex
+# 数学公式渲染引擎，可选值：["katex", "mathjax"]
+# type = "katex"
+type = "mathjax"
+
+# KaTeX server-side rendering (https://katex.org)
+# KaTeX partial config: https://gohugo.io/functions/transform/tomath/#options
+[params.page.math.katex]
+# KaTeX extension copy-tex
 copyTex = true
-# KaTeX 插件 mhchem
-mhchem = true
+throwOnError = false
+errorColor = "#ff4949"
+
+# custom macros map
+# syntax: <macro> = <definition>
+[params.page.math.katex.macros]
+# "\\f" = "#1f(#2)"  # usage: $\f{a}{b}$
+
+# MathJax server-side rendering (https://www.mathjax.org)
+# MathJax config: https://docs.mathjax.org/en/latest/options/index.html
+[params.page.math.mathjax]
+cdn = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+
+[params.page.math.mathjax.packages]
+# "[+]" = ["configmacros"]
+
+# custom macros map
+# syntax: <macro> = <definition>
+[params.page.math.mathjax.macros]
+# bold = ["{\\bf #1}", 1] # usage: $\bold{math}$
+
+[params.page.math.mathjax.loader]
+load = [ "ui/safe" ]
+
+[params.page.math.mathjax.loader.paths]
+# custom = "https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/"
+
+# more loader config e.g source, dependencies, provides etc.
+[params.page.math.mathjax.options]
+enableMenu = true
+# HTML tags that won't be searched for math
+skipHtmlTags = [
+  "script",
+  "noscript",
+  "style",
+  "textarea",
+  "pre",
+  "code",
+  "math",
+  "select",
+  "option",
+  "mjx-container"
+]
+# class that marks tags not to search
+ignoreHtmlClass = "mathjax_ignore"
+
+# HTML tags that can appear within math
+[params.page.math.mathjax.options.includeHtmlTags]
+# "#comment" = ""
+# br = "\n"
+# wbr = ""
+
 #  Mapbox GL JS 配置 (https://docs.mapbox.com/mapbox-gl-js)
 [params.page.mapbox]
 # Mapbox GL JS 的 access token
@@ -545,6 +616,7 @@ geolocate = true
 scale = true
 # 是否添加 FullscreenControl
 fullscreen = true
+
 #  赞赏设置
 [params.page.reward]
 enable = false
@@ -559,6 +631,7 @@ mode = "static"
 # alipay = "/images/alipay.png"
 # paypal = "/images/paypal.png"
 # bitcoin = "/images/bitcoin.png"
+
 #  文章页面的分享信息设置
 [params.page.share]
 enable = true
@@ -586,6 +659,7 @@ Evernote = true
 Skype = false
 Trello = false
 Mix = false
+
 #  评论系统设置
 [params.page.comment]
 enable = false
@@ -723,6 +797,7 @@ inputPosition = "bottom" # ["top", "bottom"]
 lightTheme = "light"
 darkTheme = "dark"
 lazyLoad = true
+
 #  第三方库配置
 [params.page.library]
 [params.page.library.css]
@@ -928,65 +1003,210 @@ type = "vConsole"
 # Hugo 解析文档的配置
 [markup]
 _merge = "shallow"
+
 # 语法高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
 [markup.highlight]
 ################## 必要的配置 ##################
 # https://github.com/hugo-fixit/FixIt/issues/43
 codeFences = true
-lineNos = true
-lineNumbersInTable = true
 noClasses = false
 ################## 必要的配置 ##################
+anchorLineNos = false
 guessSyntax = true
+lineNos = true
+lineNumbersInTable = true
+
 # Goldmark 是 Hugo 0.60 以来的默认 Markdown 解析库
+# See: https://gohugo.io/configuration/markup/#goldmark
 [markup.goldmark]
+duplicateResourceFiles = false
+
 [markup.goldmark.extensions]
 definitionList = true
 footnote = true
 linkify = true
-strikethrough = true
+linkifyProtocol = 'https'
+# strikethrough = true
+strikethrough = false
 table = true
 taskList = true
 typographer = true
+
+# See: https://gohugo.io/configuration/markup/#extras
+[markup.goldmark.extensions.extras]
+
+[markup.goldmark.extensions.extras.delete]
+enable = true
+
+[markup.goldmark.extensions.extras.insert]
+enable = true
+
+[markup.goldmark.extensions.extras.mark]
+enable = true
+
+[markup.goldmark.extensions.extras.subscript]
+enable = true
+
+[markup.goldmark.extensions.extras.superscript]
+enable = true
+
+# https://gohugo.io/content-management/mathematics/
+[markup.goldmark.extensions.passthrough]
+enable = true
+
+[markup.goldmark.extensions.passthrough.delimiters]
+block = [
+  [
+    '\[',
+    '\]'
+  ],
+  [
+    '$$',
+    '$$'
+  ]
+]
+inline = [
+  [
+    '\(',
+    '\)'
+  ],
+  [
+    '$',
+    '$'
+  ]
+]
+
+[markup.goldmark.parser]
+
+[markup.goldmark.parser.attribute]
+block = true
+title = true
+
 [markup.goldmark.renderer]
+hardWraps = false
 # 是否在文档中直接使用 HTML 标签
 unsafe = true
+xhtml = false
 # hardWraps = true
-# 目录设置
-[markup.tableOfContents]
-startLevel = 2
-endLevel = 5
 
-# 网站地图配置
+# # 目录设置
+# [markup.tableOfContents]
+# startLevel = 2
+# endLevel = 5
+
+# -------------------------------------------------------------------------------------
+# Sitemap Configuration
+# See: https://gohugo.io/templates/sitemap/#configuration
+# -------------------------------------------------------------------------------------
+
 [sitemap]
 changefreq = "weekly"
+disable = false
 filename = "sitemap.xml"
 priority = 0.5
 
-# Permalinks 配置 (https://gohugo.io/content-management/urls#permalinks)
+# -------------------------------------------------------------------------------------
+# Permalinks Configuration
+# See: https://gohugo.io/content-management/urls/#permalinks
+# -------------------------------------------------------------------------------------
+
 [Permalinks]
 # posts = ":year/:month/:contentbasename"
 # posts = ":contentbasename"
 posts = ":sections/:contentbasename"
 
-# 隐私信息配置 (https://gohugo.io/about/hugo-and-gdpr/)
+[permalinks.page]
+# posts = "/p/:slugorcontentbasename"
+
+[permalinks.section]
+# posts = "/posts/:slugorcontentbasename"
+
+[permalinks.taxonomy]
+
+[permalinks.term]
+
+# -------------------------------------------------------------------------------------
+# Privacy Configuration
+# See: https://gohugo.io/configuration/privacy/
+# -------------------------------------------------------------------------------------
+
 [privacy]
+
 [privacy.x]
 enableDNT = true
+
 [privacy.youtube]
 privacyEnhanced = true
 
-# 
+# -------------------------------------------------------------------------------------
+# Media Types Configuration
+# See: https://gohugo.io/configuration/media-types/
+# -------------------------------------------------------------------------------------
+
 [mediaTypes]
+# [mediaTypes."application/feed+json"]
+# suffixes = ["json"]
+
 # 用于输出 Markdown 格式文档的设置
 [mediaTypes."text/markdown"]
 suffixes = ["md"]
+
 # 用于输出 txt 格式文档的设置
 [mediaTypes."text/plain"]
 suffixes = ["txt"]
 
-# 
+# -------------------------------------------------------------------------------------
+# Output Format Configuration
+# See: https://gohugo.io/configuration/output-formats/
+# -------------------------------------------------------------------------------------
+
 [outputFormats]
+
+# fixit 0.3.0 | new options to make output /archives/index.html file
+[outputformats.archives]
+path = "archives"
+basename = "index"
+mediatype = "text/html"
+isplaintext = false
+ishtml = true
+permalinkable = true
+notalternative = true
+
+# fixit 0.3.0 | new options to make output /offline/index.html file
+[outputformats.offline]
+path = "offline"
+basename = "index"
+mediatype = "text/html"
+isplaintext = false
+ishtml = true
+permalinkable = true
+notalternative = true
+
+# fixit 0.3.0 | new options to make output readme.md file
+[outputformats.readme]
+basename = "readme"
+mediatype = "text/markdown"
+isplaintext = true
+ishtml = false
+notalternative = true
+
+# fixit 0.3.0 | changed options to make output baidu_urls.txt file
+[outputformats.baidu_urls]
+basename = "baidu_urls"
+mediatype = "text/plain"
+isplaintext = true
+ishtml = false
+notalternative = true
+
+# fixit 0.3.10 | new options to make output search.json file
+[outputformats.search]
+basename = "search"
+mediatype = "application/json"
+rel = "search"
+isplaintext = true
+ishtml = false
+permalinkable = true
+
 # 用于输出 Markdown 格式文档的设置
 [outputFormats.MarkDown]
 mediaType = "text/markdown"
@@ -999,14 +1219,39 @@ mediaType = "text/plain"
 isPlainText = true
 isHTML = false
 
-#  用于 Hugo 输出文档的设置
+# -------------------------------------------------------------------------------------
+# Output Configuration
+# See: https://gohugo.io/configuration/outputs/
+# -------------------------------------------------------------------------------------
+
+# Options to make hugo output files, the optional values are below:
+# home = ["html", "rss", "archives", "offline", "readme", "baidu_urls", "search"]
+# page = ["html", "markdown"]
+# section = ["html", "rss"]
+# taxonomy = ["html"]
+# term = ["html", "rss"]
 [outputs]
 _merge = "shallow"
-home = ["HTML", "RSS", "JSON", "BaiduUrls"]
-page = ["HTML", "MarkDown"]
-section = ["HTML", "RSS"]
-taxonomy = ["HTML"]
-term = ["HTML", "RSS"]
+home = [
+  "html",
+  "rss",
+  "archives",
+  "offline",
+  "search"
+]
+page = [
+  "html",
+  "markdown"
+]
+section = [
+  "html",
+  "rss"
+]
+taxonomy = [ "html" ]
+term = [
+  "html",
+  "rss"
+]
 
 # -------------------------------------------------------------------------------------
 # Taxonomies Configuration
